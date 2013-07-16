@@ -31,6 +31,10 @@ namespace Atlantis.Framework.Providers.PlaceHolder
           {
             renderContent = cdsContentProvider.GetContent(app, location).Content;  
           }
+          else
+          {
+            throw new Exception(string.Format("Attributes {0} and {1} are required", PlaceHolderAttributes.Application, PlaceHolderAttributes.Location));
+          }
         }
         catch (Exception ex)
         {

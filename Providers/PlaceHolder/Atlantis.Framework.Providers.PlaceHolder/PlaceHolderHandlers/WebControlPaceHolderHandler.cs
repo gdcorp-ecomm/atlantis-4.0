@@ -2,8 +2,6 @@
 using Atlantis.Framework.Providers.PlaceHolder.Interface;
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Text;
 using System.Web;
 using System.Web.UI;
 
@@ -25,7 +23,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder
         
         placeHolderSharedData[webControl.ID] = placeHolderData;
         
-        renderContent = RenderControlToHtml(webControl);
+        renderContent = RenderControlManager.ToHtml(webControl);
       }
       catch (Exception ex)
       {
@@ -44,13 +42,16 @@ namespace Atlantis.Framework.Providers.PlaceHolder
 
       try
       {
-        Page currentPage = HttpContext.Current.Handler == null ? new Page() : (Page)HttpContext.Current.Handler;
         string assemblyName;
         string typeName;
+        
         if (placeHolderData.TryGetAttribute(PlaceHolderAttributes.Assembly, out assemblyName) &&
             placeHolderData.TryGetAttribute(PlaceHolderAttributes.Type, out typeName))
         {
           Type type = WebControlTypeManager.GetType(assemblyName, typeName);
+
+          Page currentPage = HttpContext.Current.Handler == null ? new Page() : (Page)HttpContext.Current.Handler;
+
           webControl = currentPage.LoadControl(type, null);
 
           if (webControl == null)
@@ -72,24 +73,6 @@ namespace Atlantis.Framework.Providers.PlaceHolder
       }
 
       return webControl;
-    }
-
-    private string RenderControlToHtml(Control webControl)
-    {
-      string html = string.Empty;
-
-      if (webControl != null)
-      {
-        StringBuilder htmlStringBuilder = new StringBuilder();
-        StringWriter stringWriter = new StringWriter(htmlStringBuilder);
-        HtmlTextWriter htmlTextWriter = new HtmlTextWriter(stringWriter);
-
-        webControl.RenderControl(htmlTextWriter);
-
-        html = htmlStringBuilder.ToString();
-      }
-
-      return html;
     }
   }
 }

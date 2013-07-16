@@ -49,11 +49,11 @@ namespace Atlantis.Framework.Providers.PlaceHolder
 
       if (keyValuePairs != null)
       {
-        foreach (KeyValuePair<string, string> attribute in keyValuePairs)
+        foreach (KeyValuePair<string, string> keyValuePair in keyValuePairs)
         {
-          if (attribute.Key != null && attribute.Value != null)
+          if (keyValuePair.Key != null && keyValuePair.Value != null)
           {
-            dictionary[attribute.Key] = attribute.Value;
+            dictionary[keyValuePair.Key] = keyValuePair.Value;
           }
         }
       }

@@ -7,20 +7,6 @@ namespace Atlantis.Framework.Providers.PlaceHolder
   {
     private static readonly TypeCache _webControlTypeCache = new TypeCache();
 
-    public static Type GetType(string assembly, string typeName)
-    {
-      string key = assembly + typeName;
-      Type type;
-
-      if (!_webControlTypeCache.TryGetType(key, out type))
-      {
-        type = LoadType(assembly, typeName);
-        _webControlTypeCache.SetType(key, type);
-      }
-
-      return type;
-    }
-
     private static Type LoadType(string assembly, string typeName)
     {
       Type type;
@@ -32,6 +18,20 @@ namespace Atlantis.Framework.Providers.PlaceHolder
       catch (Exception ex)
       {
         throw new Exception(string.Format("Error finding the type {0}. {1}", typeName, ex.Message));
+      }
+
+      return type;
+    }
+
+    internal static Type GetType(string assembly, string typeName)
+    {
+      string key = assembly + typeName;
+      Type type;
+
+      if (!_webControlTypeCache.TryGetType(key, out type))
+      {
+        type = LoadType(assembly, typeName);
+        _webControlTypeCache.SetType(key, type);
       }
 
       return type;

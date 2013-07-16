@@ -47,6 +47,7 @@
     <Compile Include="Caches\TypeCache.cs" />
     <Compile Include="Caches\WebControlTypeManager.cs" />
     <Compile Include="ErrorLogger.cs" />
+    <Compile Include="PlaceHolderHandlers\RenderControlManager.cs" />
     <Compile Include="PlaceHolders\CDSDocumentPlaceHolder.cs" />
     <Compile Include="PlaceHolders\PlaceHolderAttributes.cs" />
     <Compile Include="PlaceHolders\UserControlPlaceHolder.cs" />

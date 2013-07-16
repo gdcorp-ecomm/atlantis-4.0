@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Text;
 using System.Web;
 using System.Web.UI;
 using Atlantis.Framework.Interface;
@@ -25,7 +23,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder
 
         placeHolderSharedData[userControl.ID] = placeHolderData;
 
-        renderContent = RenderControlToHtml(userControl);
+        renderContent = RenderControlManager.ToHtml(userControl);
       }
       catch (Exception ex)
       {
@@ -67,24 +65,6 @@ namespace Atlantis.Framework.Providers.PlaceHolder
       }
 
       return userControl;
-    }
-
-    private string RenderControlToHtml(Control userControl)
-    {
-      string html = string.Empty;
-
-      if (userControl != null)
-      {
-        StringBuilder htmlStringBuilder = new StringBuilder();
-        StringWriter stringWriter = new StringWriter(htmlStringBuilder);
-        HtmlTextWriter htmlTextWriter = new HtmlTextWriter(stringWriter);
-
-        userControl.RenderControl(htmlTextWriter);
-
-        html = htmlStringBuilder.ToString();
-      }
-
-      return html;
     }
   }
 }

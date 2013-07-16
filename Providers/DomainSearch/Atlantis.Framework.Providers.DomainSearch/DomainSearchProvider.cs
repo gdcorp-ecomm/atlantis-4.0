@@ -123,7 +123,13 @@ namespace Atlantis.Framework.Providers.DomainSearch
           {
            var domainResult =  GroupDomainResponse(response);
 
-            domainSearchResult = new DomainSearchResult(domainResult, response.ToJson());
+            var rawResponse = string.Empty;
+            if (_siteContext.Value.IsRequestInternal)
+            {
+              rawResponse = response.ToJson();
+            }
+
+            domainSearchResult = new DomainSearchResult(domainResult, rawResponse);
             success = true;
           }
           else

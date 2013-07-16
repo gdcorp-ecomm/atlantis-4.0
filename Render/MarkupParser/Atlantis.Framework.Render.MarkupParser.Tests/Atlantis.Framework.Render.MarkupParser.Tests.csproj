@@ -59,6 +59,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="ConditionHandlers\ParameterWhitespaceValidatorConditionHandler.cs" />
     <Compile Include="ConditionHandlers\TargetedMessageIdConditionHandler.cs" />
     <Compile Include="ConditionHandlers\CountrySiteContextConditionHandler.cs" />
     <Compile Include="ConditionHandlers\DataCenterCondtionHandler.cs" />

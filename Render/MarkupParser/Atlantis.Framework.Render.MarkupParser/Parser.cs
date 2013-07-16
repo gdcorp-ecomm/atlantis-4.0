@@ -222,7 +222,7 @@ namespace Atlantis.Framework.Render.MarkupParser
       }
       catch (Exception ex)
       {
-        ExceptionHelper.ThrowParseError(string.Format("Error evaluation expression. " + ex.Message), _currentLineNumber, _currentLine);
+        ExceptionHelper.ThrowParseError(string.Format("Error evaluating expression. " + ex.Message), _currentLineNumber, _currentLine);
       }
 
       return expressionResult;

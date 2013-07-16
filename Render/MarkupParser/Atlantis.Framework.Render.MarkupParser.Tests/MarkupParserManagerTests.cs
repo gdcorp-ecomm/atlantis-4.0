@@ -120,6 +120,61 @@ namespace Atlantis.Framework.Render.MarkupParser.Tests
     }
 
     [TestMethod]
+    public void WhiteSpaceTrimParamTest()
+    {
+      string markup = @"Hi my name is
+                        ##if(parameterWhitespaceValidator(AP    ,       [United States],   [China]))
+                        Timbo
+                        ##endif";
+
+      string parsedMarkup = MarkupParserManager.ParseAndEvaluate(markup, PRE_PROCESSOR_PREFIX, ExpressionParserManager.EvaluateExpression);
+
+      WriteOutput(parsedMarkup);
+
+      Assert.IsTrue(parsedMarkup.Contains("Timbo"));
+    }
+
+    [TestMethod]
+    public void WhiteSpaceBadSyntax()
+    {
+      string markup = @"Hi my name is
+                        ##if(parameterWhitespaceValidator(AP    ,   [United States],   [China]))
+                        Timbo
+                        ##endif";
+
+      try
+      {
+        MarkupParserManager.ParseAndEvaluate(markup,
+                                             PRE_PROCESSOR_PREFIX,
+                                             ExpressionParserManager.EvaluateExpression);
+      }
+      catch (Exception ex)
+      {
+        Assert.IsTrue(ex is InvalidExpressionException, "Expected \"InvalidExpressionException\" exception but got: \"" + ex.Message + "\"");
+      }
+    }
+
+    [TestMethod]
+    public void BadExpressionSyntax()
+    {
+      string markup = @"Hi my name is
+                        ##if(sdfdssf%^*(AP    ,   [United States],   [China]))
+                        Timbo
+                        ##endif";
+
+      try
+      {
+        MarkupParserManager.ParseAndEvaluate(markup,
+                                             PRE_PROCESSOR_PREFIX,
+                                             ExpressionParserManager.EvaluateExpression);
+      }
+      catch (Exception ex)
+      {
+        Assert.IsTrue(ex is InvalidExpressionException, "Expected \"InvalidExpressionException\" exception but got: \"" + ex.Message + "\"");
+      }
+    }
+
+    [TestMethod]
     public void SimpleMarkupTestIfElseCondition()
     {
       string markup = @"Hi my name is

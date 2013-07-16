@@ -23,7 +23,7 @@ namespace Atlantis.Framework.DomainSearch.Interface
     double CommissionPercentage { get; }
     int Price { get; }
 
-    string VendorId { get; }
+    int VendorId { get; }
     string AuctionId { get; }
     string AuctionType { get; }
     string AuctionTypeId { get; }

@@ -29,7 +29,10 @@ namespace Atlantis.Framework.DomainSearch.Interface
           switch (domainTokenData["Name"].ToString())
           {
             case "vendorid":
-              VendorId = domainTokenValue;
+              if (int.TryParse(domainTokenValue, out intValue))
+              {
+                VendorId = intValue;
+              }
               break;
             case "commissionpct":
               double commissionPercentage;
@@ -174,7 +177,7 @@ namespace Atlantis.Framework.DomainSearch.Interface
     
     public double CommissionPercentage { get; private set; }
 
-    public string VendorId { get; private set; }
+    public int VendorId { get; private set; }
 
     public string Language { get; private set; }
 

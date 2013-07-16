@@ -88,7 +88,7 @@ namespace Atlantis.Framework.CH.Geo.Tests
     [TestMethod]
     public void ClientCityAny()
     {
-      string expression = "clientCityAny(Scottsdale,KansasCity)";
+      string expression = "clientCityAny([Kansas City],Scottsdale)";
       ExpressionParserManager parser = CreateGeoProvider("97.74.104.201", false);
       bool result = parser.EvaluateExpression(expression);
       Assert.IsTrue(result);

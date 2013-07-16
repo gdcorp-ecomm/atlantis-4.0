@@ -5,8 +5,9 @@ namespace Atlantis.Framework.Providers.DomainSearch.Interface
 {
   public interface IDomainSearchResult
   {
-    Dictionary<string, IEnumerable<IFindResponseDomain>> AllDomains { get; }
-    bool GetDomains(string domainGroupType, out IEnumerable<IFindResponseDomain> domains);
-    string ToJson();
+    bool IsSuccess { get; }
+    Dictionary<string, IList<IFindResponseDomain>> FindResponseDomains { get; }
+    IList<IFindResponseDomain> GetDomainsByGroup(string domainGroupType);
+    string JsonResponse { get;set; }
   }
 }

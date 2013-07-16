@@ -6,39 +6,52 @@ namespace Atlantis.Framework.Providers.DomainSearch
 {
   public class DomainSearchResult : IDomainSearchResult
   {
-    private readonly string _jsonResponse;
-    private Dictionary<string, IEnumerable<IFindResponseDomain>> _searchResultDomains;
+    private static readonly IList<IFindResponseDomain> _emptyDomains = new List<IFindResponseDomain>(0); 
 
-    public DomainSearchResult(Dictionary<string, IEnumerable<IFindResponseDomain>> searchResultDomains, string jsonResponse)
+    private Dictionary<string, IList<IFindResponseDomain>> _searchResultDomains;
+
+    public DomainSearchResult(bool isSuccess, Dictionary<string, IList<IFindResponseDomain>> searchResultDomains)
     {
-      _jsonResponse = jsonResponse;
+      _isSuccess = isSuccess;
       _searchResultDomains = searchResultDomains;
     }
 
-    public Dictionary<string, IEnumerable<IFindResponseDomain>> AllDomains
+    public Dictionary<string, IList<IFindResponseDomain>> FindResponseDomains
     {
       get
       {
         if (_searchResultDomains == null)
         {
-          _searchResultDomains = new Dictionary<string, IEnumerable<IFindResponseDomain>>();
+          _searchResultDomains = new Dictionary<string, IList<IFindResponseDomain>>();
         }
 
         return _searchResultDomains;
       }
     }
 
-    public bool GetDomains(string domainGroupType, out IEnumerable<IFindResponseDomain> domains)
+    public IList<IFindResponseDomain> GetDomainsByGroup(string domainGroupType)
     {
-      var success = AllDomains.TryGetValue(domainGroupType, out domains);
+      IList<IFindResponseDomain> domains;
+      if (!FindResponseDomains.TryGetValue(domainGroupType, out domains))
+      {
+        domains = _emptyDomains;
+      }
 
-      return success;
+      return domains;
     }
 
-
-    public string ToJson()
+    private string _jsonResponse;
+    public string JsonResponse 
     {
-      return _jsonResponse ?? string.Empty;
+      get { return _jsonResponse ?? string.Empty; }
+      set { _jsonResponse = null; }
+    }
+
+    
+    private readonly bool _isSuccess;
+    public bool IsSuccess
+    {
+      get { return _isSuccess; }
     }
   }
 }

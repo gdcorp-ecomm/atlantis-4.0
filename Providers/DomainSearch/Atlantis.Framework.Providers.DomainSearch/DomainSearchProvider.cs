@@ -10,6 +10,8 @@ namespace Atlantis.Framework.Providers.DomainSearch
 {
   public class DomainSearchProvider : ProviderBase, IDomainSearchProvider 
   {
+    private Dictionary<string, IList<IFindResponseDomain>> _emptyResponse = new Dictionary<string, IList<IFindResponseDomain>>(0); 
+
     private readonly Lazy<ISiteContext> _siteContext;
     private readonly Lazy<IShopperContext> _shopperContext;
 
@@ -41,9 +43,9 @@ namespace Atlantis.Framework.Providers.DomainSearch
       }
     }
 
-    private static Dictionary<string, IEnumerable<IFindResponseDomain>> GroupDomainResponse(DomainSearchResponseData responseData)
+    private static Dictionary<string, IList<IFindResponseDomain>> GroupDomainResponse(DomainSearchResponseData responseData)
     {
-     var domainResult = new Dictionary<string, IEnumerable<IFindResponseDomain>>(responseData.Domains.Count);
+     var domainResult = new Dictionary<string, IList<IFindResponseDomain>>(responseData.Domains.Count);
       if (responseData.ExactMatchDomains != null)
       {
         domainResult.Add(DomainGroupTypes.EXACT_MATCH, responseData.ExactMatchDomains);
@@ -92,10 +94,9 @@ namespace Atlantis.Framework.Providers.DomainSearch
       return domainResult;
     }
 
-    public bool SearchDomain(string searchPhrase, string sourceCode, string sourceUrl, out IDomainSearchResult domainSearchResult)
+    public IDomainSearchResult SearchDomain(string searchPhrase, string sourceCode, string sourceUrl)
     {
-      var success = false;
-      domainSearchResult = null;
+      IDomainSearchResult domainSearchResult = null;
 
       try
       {
@@ -121,16 +122,13 @@ namespace Atlantis.Framework.Providers.DomainSearch
 
           if (exception == null)
           {
-           var domainResult =  GroupDomainResponse(response);
-
-            var rawResponse = string.Empty;
+            var domainResult =  GroupDomainResponse(response);
+            domainSearchResult = new DomainSearchResult(true, domainResult);
+            
             if (_siteContext.Value.IsRequestInternal)
             {
-              rawResponse = response.ToJson();
+              domainSearchResult.JsonResponse = response.ToJson();
             }
-
-            domainSearchResult = new DomainSearchResult(domainResult, rawResponse);
-            success = true;
           }
           else
           {
@@ -140,14 +138,21 @@ namespace Atlantis.Framework.Providers.DomainSearch
       }
       catch (Exception ex)
       {
+        domainSearchResult = null;
+
         var message = ex.Message + Environment.NewLine + ex.StackTrace;
         var data = string.Format("searchPhrase:{0}, sourceCode:{1}, sourceUrl:{2}", searchPhrase, sourceCode, sourceUrl);
-        var aex = new AtlantisException("Atlantis.Framework.Providers.DomainSearch.SearchDomain", "0", message, data, _siteContext.Value, _shopperContext.Value);
+        var aex = new AtlantisException("Atlantis.Framework.Providers.DomainSearch.TrySearchDomain", "0", message, data, _siteContext.Value, _shopperContext.Value);
         Engine.Engine.LogAtlantisException(aex);
 
       }
 
-      return success;
+      if (domainSearchResult == null)
+      {
+        domainSearchResult = new DomainSearchResult(false, _emptyResponse);
+      }
+
+      return domainSearchResult;
     }
   }
 }

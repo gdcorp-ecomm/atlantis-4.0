@@ -11,10 +11,12 @@ namespace Atlantis.Framework.DomainSearch.Interface
   public class DomainSearchResponseData : IResponseData
   {
     readonly AtlantisException _exception;
-    
+    private readonly string _rawJsonResponse;
+
     private DomainSearchResponseData(string rawJson)
     {
-      ParseRawJsonReponse(rawJson);
+      _rawJsonResponse = rawJson;
+      ParseRawJsonReponse();
     }
     
     private DomainSearchResponseData(AtlantisException exception)
@@ -42,16 +44,16 @@ namespace Atlantis.Framework.DomainSearch.Interface
       return domains;
     }
 
-    private void ParseRawJsonReponse(string rawJsonReponse)
+    private void ParseRawJsonReponse()
     {
       ExactMatchDomains = new List<IFindResponseDomain>(0);
       Domains = new List<IFindResponseDomain>(0);
 
-      if (!string.IsNullOrEmpty(rawJsonReponse))
+      if (!string.IsNullOrEmpty(_rawJsonResponse))
       {
         try
         {
-          var reader = new JsonTextReader(new StringReader(rawJsonReponse));
+          var reader = new JsonTextReader(new StringReader(_rawJsonResponse));
           var jsonData = new JsonSerializer().Deserialize(reader) as JObject;
           if (jsonData != null)
           {
@@ -61,7 +63,7 @@ namespace Atlantis.Framework.DomainSearch.Interface
         }
         catch (Exception ex)
         {
-          var aex = new AtlantisException("DomainSearchResponseData.ParseRawJsonReponse", "0", ex.ToString(), rawJsonReponse, null, null);
+          var aex = new AtlantisException("DomainSearchResponseData.ParseRawJsonReponse", "0", ex.ToString(), _rawJsonResponse, null, null);
            Engine.Engine.LogAtlantisException(aex);        }
       }
     }
@@ -82,6 +84,11 @@ namespace Atlantis.Framework.DomainSearch.Interface
     public string ToXML()
     {
       return string.Empty;
+    }
+
+    public string ToJson()
+    {
+      return _rawJsonResponse ?? string.Empty;
     }
 
     public AtlantisException GetException()

@@ -65,12 +65,12 @@ namespace Atlantis.Framework.Providers.DomainSearch.Tests
     {
       const string searchPhrase = "spoonymac.com";
 
-      Dictionary<string, IEnumerable<IFindResponseDomain>> domainSearchResult;
+      IDomainSearchResult domainSearchResult;
 
       var success = DomainSearch.SearchDomain(searchPhrase, SOURCE_CODE, string.Empty, out domainSearchResult);
      
       Assert.IsTrue(success);
-      Assert.IsTrue(domainSearchResult.Count != 0);
+      Assert.IsTrue(domainSearchResult.AllDomains.Count != 0);
     }
 
     [TestMethod]
@@ -78,13 +78,14 @@ namespace Atlantis.Framework.Providers.DomainSearch.Tests
     {
       const string searchPhrase = "spoonymac.com";
 
-      Dictionary<string, IEnumerable<IFindResponseDomain>> domainSearchResult;
+      IDomainSearchResult domainSearchResult;
+      IEnumerable<IFindResponseDomain> domains;
 
       var success = DomainSearch.SearchDomain(searchPhrase, SOURCE_CODE, string.Empty, out domainSearchResult);
      
       Assert.IsTrue(success);
-      Assert.IsTrue(domainSearchResult[DomainGroupTypes.EXACT_MATCH].Count() != 0);
-      Assert.IsTrue(domainSearchResult[DomainGroupTypes.EXACT_MATCH].Any(d => d.Domain.DomainName.ToLowerInvariant() == searchPhrase));
+      Assert.IsTrue(domainSearchResult.GetDomains(DomainGroupTypes.EXACT_MATCH, out domains));
+      Assert.IsTrue(domains.Any(d => d.Domain.DomainName.ToLowerInvariant() == searchPhrase));
     }
 
     [TestMethod]
@@ -92,12 +93,13 @@ namespace Atlantis.Framework.Providers.DomainSearch.Tests
     {
       const string searchPhrase = "spoonymacou812.com";
 
-      Dictionary<string, IEnumerable<IFindResponseDomain>> domainSearchResult;
-
+      IDomainSearchResult domainSearchResult;
+      IEnumerable<IFindResponseDomain> domains;
       var success = DomainSearch.SearchDomain(searchPhrase, SOURCE_CODE, string.Empty, out domainSearchResult);
-     
+
       Assert.IsTrue(success);
-      var isAvailable = domainSearchResult[DomainGroupTypes.EXACT_MATCH].Any(d => d.IsAvailable && d.Domain.DomainName == searchPhrase);
+      Assert.IsTrue(domainSearchResult.GetDomains(DomainGroupTypes.EXACT_MATCH, out domains));
+      var isAvailable = domains.Any(d => d.IsAvailable && d.Domain.DomainName == searchPhrase);
       Assert.IsTrue(isAvailable);
     }
 
@@ -106,14 +108,17 @@ namespace Atlantis.Framework.Providers.DomainSearch.Tests
     {
       const string searchPhrase = "spoonymacou812.com,maseratii8a4re.net";
 
-      Dictionary<string, IEnumerable<IFindResponseDomain>> domainSearchResult;
-
+      IDomainSearchResult domainSearchResult;
+      IEnumerable<IFindResponseDomain> domains;
       var success = DomainSearch.SearchDomain(searchPhrase, SOURCE_CODE, string.Empty, out domainSearchResult);
-     
+
       Assert.IsTrue(success);
-      Assert.IsTrue(domainSearchResult[DomainGroupTypes.EXACT_MATCH].Count() == 2);
-      var searchPhrase1 = domainSearchResult[DomainGroupTypes.EXACT_MATCH].Any(d => d.IsAvailable && d.Domain.DomainName == "spoonymacou812.com");
-      var searchPhrase2 = domainSearchResult[DomainGroupTypes.EXACT_MATCH].Any(d => d.IsAvailable && d.Domain.DomainName == "maseratii8a4re.net");
+      Assert.IsTrue(domainSearchResult.GetDomains(DomainGroupTypes.EXACT_MATCH, out domains));
+
+      Assert.IsTrue(domains.Count() == 2);
+
+      var searchPhrase1 = domains.Any(d => d.IsAvailable && d.Domain.DomainName == "spoonymacou812.com");
+      var searchPhrase2 = domains.Any(d => d.IsAvailable && d.Domain.DomainName == "maseratii8a4re.net");
 
       Assert.IsTrue(searchPhrase1);
       Assert.IsTrue(searchPhrase2);
@@ -124,12 +129,14 @@ namespace Atlantis.Framework.Providers.DomainSearch.Tests
     {
       const string searchPhrase = "google.com";
 
-      Dictionary<string, IEnumerable<IFindResponseDomain>> domainSearchResult;
-
+      IDomainSearchResult domainSearchResult;
+      IEnumerable<IFindResponseDomain> domains;
       var success = DomainSearch.SearchDomain(searchPhrase, SOURCE_CODE, string.Empty, out domainSearchResult);
-     
+
       Assert.IsTrue(success);
-      var searchPhrase1 = domainSearchResult[DomainGroupTypes.EXACT_MATCH].Any(d => !d.IsAvailable && d.Domain.DomainName == searchPhrase);
+      Assert.IsTrue(domainSearchResult.GetDomains(DomainGroupTypes.EXACT_MATCH, out domains));
+
+      var searchPhrase1 = domains.Any(d => !d.IsAvailable && d.Domain.DomainName == searchPhrase);
 
       Assert.IsTrue(searchPhrase1);
     }
@@ -139,12 +146,14 @@ namespace Atlantis.Framework.Providers.DomainSearch.Tests
     {
       const string searchPhrase = "easy-domain-premium-test.com";
 
-      Dictionary<string, IEnumerable<IFindResponseDomain>> domainSearchResult;
-
+      IDomainSearchResult domainSearchResult;
+      IEnumerable<IFindResponseDomain> domains;
       var success = DomainSearch.SearchDomain(searchPhrase, SOURCE_CODE, string.Empty, out domainSearchResult);
-     
+
       Assert.IsTrue(success);
-      var hasAvailblePremiums = domainSearchResult[DomainGroupTypes.PREMIUM].Any(d => d.DomainSearchDataBase == DomainGroupTypes.PREMIUM);
+      Assert.IsTrue(domainSearchResult.GetDomains(DomainGroupTypes.PREMIUM, out domains));
+
+      var hasAvailblePremiums = domains.Any(d => d.DomainSearchDataBase == DomainGroupTypes.PREMIUM);
 
       Assert.IsTrue(hasAvailblePremiums);
     }
@@ -154,12 +163,14 @@ namespace Atlantis.Framework.Providers.DomainSearch.Tests
     {
       const string searchPhrase = "dogs-cats-canine-feline.com";
 
-      Dictionary<string, IEnumerable<IFindResponseDomain>> domainSearchResult;
-
+      IDomainSearchResult domainSearchResult;
+      IEnumerable<IFindResponseDomain> domains;
       var success = DomainSearch.SearchDomain(searchPhrase, SOURCE_CODE, string.Empty, out domainSearchResult);
-     
+
       Assert.IsTrue(success);
-      var hasSimiliar = domainSearchResult[DomainGroupTypes.SIMILIAR].Any(d => d.DomainSearchDataBase == DomainGroupTypes.SIMILIAR);
+      Assert.IsTrue(domainSearchResult.GetDomains(DomainGroupTypes.SIMILIAR, out domains));
+
+      var hasSimiliar = domains.Any(d => d.DomainSearchDataBase == DomainGroupTypes.SIMILIAR);
 
       Assert.IsTrue(hasSimiliar);
     }
@@ -169,12 +180,14 @@ namespace Atlantis.Framework.Providers.DomainSearch.Tests
     {
       const string searchPhrase = "dogs-cats-canine";
 
-      Dictionary<string, IEnumerable<IFindResponseDomain>> domainSearchResult;
-
+      IDomainSearchResult domainSearchResult;
+      IEnumerable<IFindResponseDomain> domains;
       var success = DomainSearch.SearchDomain(searchPhrase, SOURCE_CODE, string.Empty, out domainSearchResult);
-     
+
       Assert.IsTrue(success);
-      var hasAffix = domainSearchResult[DomainGroupTypes.AFFIX].Any(d => d.DomainSearchDataBase == DomainGroupTypes.AFFIX);
+      Assert.IsTrue(domainSearchResult.GetDomains(DomainGroupTypes.AFFIX, out domains));
+
+      var hasAffix = domains.Any(d => d.DomainSearchDataBase == DomainGroupTypes.AFFIX);
 
       Assert.IsTrue(hasAffix);
     }
@@ -184,12 +197,14 @@ namespace Atlantis.Framework.Providers.DomainSearch.Tests
     {
       const string searchPhrase = "dogs-cats-canine-feline.uk";
 
-      Dictionary<string, IEnumerable<IFindResponseDomain>> domainSearchResult;
-
+      IDomainSearchResult domainSearchResult;
+      IEnumerable<IFindResponseDomain> domains;
       var success = DomainSearch.SearchDomain(searchPhrase, SOURCE_CODE, string.Empty, out domainSearchResult);
-     
+
       Assert.IsTrue(success);
-      var hasCcTld = domainSearchResult[DomainGroupTypes.COUNTRY_CODE_TLD].Any(d => d.DomainSearchDataBase == DomainGroupTypes.COUNTRY_CODE_TLD);
+      Assert.IsTrue(domainSearchResult.GetDomains(DomainGroupTypes.COUNTRY_CODE_TLD, out domains));
+
+      var hasCcTld = domains.Any(d => d.DomainSearchDataBase == DomainGroupTypes.COUNTRY_CODE_TLD);
 
       Assert.IsTrue(hasCcTld);
     }
@@ -201,12 +216,14 @@ namespace Atlantis.Framework.Providers.DomainSearch.Tests
     {
       const string searchPhrase = "dogs-cats-canine-feline";
 
-      Dictionary<string, IEnumerable<IFindResponseDomain>> domainSearchResult;
-
+      IDomainSearchResult domainSearchResult;
+      IEnumerable<IFindResponseDomain> domains;
       var success = DomainSearch.SearchDomain(searchPhrase, SOURCE_CODE, string.Empty, out domainSearchResult);
-     
+
       Assert.IsTrue(success);
-      var hasPrivates = domainSearchResult[DomainGroupTypes.PRIVATE].Any(d => d.DomainSearchDataBase == DomainGroupTypes.PRIVATE);
+      Assert.IsTrue(domainSearchResult.GetDomains(DomainGroupTypes.PRIVATE, out domains));
+
+      var hasPrivates = domains.Any(d => d.DomainSearchDataBase == DomainGroupTypes.PRIVATE);
 
       Assert.IsTrue(hasPrivates);
     }
@@ -217,12 +234,14 @@ namespace Atlantis.Framework.Providers.DomainSearch.Tests
     {
       const string searchPhrase = "dogs-cats-canine-feline";
 
-      Dictionary<string, IEnumerable<IFindResponseDomain>> domainSearchResult;
-
+      IDomainSearchResult domainSearchResult;
+      IEnumerable<IFindResponseDomain> domains;
       var success = DomainSearch.SearchDomain(searchPhrase, SOURCE_CODE, string.Empty, out domainSearchResult);
-     
+
       Assert.IsTrue(success);
-      var hasAuctions = domainSearchResult[DomainGroupTypes.AUCTIONS].Any(d => d.DomainSearchDataBase == DomainGroupTypes.AUCTIONS);
+      Assert.IsTrue(domainSearchResult.GetDomains(DomainGroupTypes.AUCTIONS, out domains));
+
+      var hasAuctions = domains.Any(d => d.DomainSearchDataBase == DomainGroupTypes.AUCTIONS);
 
       Assert.IsTrue(hasAuctions);
     }

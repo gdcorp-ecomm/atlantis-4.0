@@ -8,10 +8,10 @@ using Atlantis.Framework.Providers.Localization.Interface;
 
 namespace Atlantis.Framework.Providers.DomainSearch
 {
-  public class DomainSearchProvider : ProviderBase, IDomainSearchProvider // Framework providers should implement a corresponding interface
+  public class DomainSearchProvider : ProviderBase, IDomainSearchProvider 
   {
-    private Lazy<ISiteContext> _siteContext;
-    private Lazy<IShopperContext> _shopperContext;
+    private readonly Lazy<ISiteContext> _siteContext;
+    private readonly Lazy<IShopperContext> _shopperContext;
 
     private readonly IList<string> _domainSearchDatabases = new List<string> { "affix,auctions,cctld,private,premium,similar" };
     private const bool INCLUDE_SPINS = true;
@@ -19,8 +19,6 @@ namespace Atlantis.Framework.Providers.DomainSearch
     public DomainSearchProvider(IProviderContainer container)
       : base(container)
     {
-      // creating Lazys is ok here 
-      // sample only - remove if this provider doesn't need ISiteContext
       _siteContext = new Lazy<ISiteContext>(() => Container.Resolve<ISiteContext>());
       _shopperContext = new Lazy<IShopperContext>(() => Container.Resolve<IShopperContext>());
     }
@@ -94,10 +92,10 @@ namespace Atlantis.Framework.Providers.DomainSearch
       return domainResult;
     }
 
-    public bool SearchDomain(string searchPhrase, string sourceCode, string sourceUrl, out Dictionary<string, IEnumerable<IFindResponseDomain>> domainResult)
+    public bool SearchDomain(string searchPhrase, string sourceCode, string sourceUrl, out IDomainSearchResult domainSearchResult)
     {
       var success = false;
-      domainResult = null;
+      domainSearchResult = null;
 
       try
       {
@@ -123,16 +121,9 @@ namespace Atlantis.Framework.Providers.DomainSearch
 
           if (exception == null)
           {
-            //domainResult = new Dictionary<string, IEnumerable<IFindResponseDomain>>(64);
-            //if (response.ExactMatchDomains != null)
-            //{
-            //  domainResult.Add(DomainGroupTypes.EXACT_MATCH, response.ExactMatchDomains);
-            //}
+           var domainResult =  GroupDomainResponse(response);
 
-            //var responseDomainList = response.Domains.ToList();
-
-           domainResult =  GroupDomainResponse(response);
-
+            domainSearchResult = new DomainSearchResult(domainResult, response.ToJson());
             success = true;
           }
           else
@@ -152,7 +143,5 @@ namespace Atlantis.Framework.Providers.DomainSearch
 
       return success;
     }
-
-
   }
 }

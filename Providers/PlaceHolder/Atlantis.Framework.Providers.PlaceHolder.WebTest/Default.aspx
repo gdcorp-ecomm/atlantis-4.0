@@ -8,24 +8,24 @@
 </head>
 <body>
   <div>
-    [@P[userControl:<Data id="banner" location="~/controls/banner.ascx"><Parameters><Parameter key="Title" value="Attention!" /><Parameter key="Text" value="Scheduled maintenance underway." /></Parameters></Data>]@P]
+    [@P[userControl:<Data location="~/controls/banner.ascx"><Parameters><Parameter key="Title" value="Attention!" /><Parameter key="Text" value="Scheduled maintenance underway." /></Parameters></Data>]@P]
     <hr />
-    [@P[userControl:<Data id="banner1" location="~/controls/banner.ascx"><Parameters><Parameter key="Title" value="Attention 1 !" /><Parameter key="Text" value="Scheduled maintenance underway." /></Parameters></Data>]@P]
+    [@P[userControl:<Data location="~/controls/banner.ascx"><Parameters><Parameter key="Title" value="Attention 1 !" /><Parameter key="Text" value="Scheduled maintenance underway." /></Parameters></Data>]@P]
     <hr />
-    [@P[userControl:<Data id="banner2" location="~/controls/banner.ascx"><Parameters><Parameter key="Title" value="Attention 2 !" /><Parameter key="Text" value="Scheduled maintenance underway." /></Parameters></Data>]@P]
-    <hr />
-  </div>
-  <div>
-    [@P[userControl:<Data id="content" location="~/controls/content.ascx" />]@P]
+    [@P[userControl:<Data location="~/controls/banner.ascx"><Parameters><Parameter key="Title" value="Attention 2 !" /><Parameter key="Text" value="Scheduled maintenance underway." /></Parameters></Data>]@P]
     <hr />
   </div>
   <div>
-    [@P[cdsDocument:<Data id="cdstest" app="sales" location="document/location/test" />]@P]
+    [@P[userControl:<Data location="~/controls/content.ascx" />]@P]
     <hr />
   </div>
-  [@P[webControl:<Data id="one" assembly="App_Code" type="WebControls.WebControlOne"><Parameters><Parameter key="Text" value="Web control one" /></Parameters></Data>]@P]
+  <div>
+    [@P[cdsDocument:<Data app="sales" location="document/location/test" />]@P]
+    <hr />
+  </div>
+  [@P[webControl:<Data assembly="App_Code" type="WebControls.WebControlOne"><Parameters><Parameter key="Text" value="Web control one" /></Parameters></Data>]@P]
   <hr />
-  [@P[webControl:<Data id="two" assembly="App_Code" type="WebControls.WebControlTwo"><Parameters><Parameter key="Text" value="Web control two" /></Parameters></Data>]@P]
+  [@P[webControl:<Data assembly="App_Code" type="WebControls.WebControlTwo"><Parameters><Parameter key="Text" value="Web control two" /></Parameters></Data>]@P]
   <hr />
 </body>
 </html>

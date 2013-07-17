@@ -17,10 +17,11 @@ namespace Atlantis.Framework.Providers.PlaceHolder
       try
       {
         PlaceHolderData placeHolderData = new PlaceHolderData(data);
-        
-        Control webControl = InitializeWebControl(placeHolderData);
-        
-        renderContent = WebControlManager.ToHtml(webControl);
+
+        using (Control webControl = InitializeWebControl(placeHolderData))
+        {
+          renderContent = WebControlManager.ToHtml(webControl);
+        }
       }
       catch (Exception ex)
       {

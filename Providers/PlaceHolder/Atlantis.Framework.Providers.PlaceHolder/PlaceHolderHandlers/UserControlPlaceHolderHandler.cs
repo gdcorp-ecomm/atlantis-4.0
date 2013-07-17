@@ -18,9 +18,10 @@ namespace Atlantis.Framework.Providers.PlaceHolder
       {
         PlaceHolderData placeHolderData = new PlaceHolderData(data);
 
-        Control userControl = InitializeUserControl(placeHolderData);
-
-        renderContent = WebControlManager.ToHtml(userControl);
+        using (Control userControl = InitializeUserControl(placeHolderData))
+        {
+          renderContent = WebControlManager.ToHtml(userControl);
+        }
       }
       catch (Exception ex)
       {

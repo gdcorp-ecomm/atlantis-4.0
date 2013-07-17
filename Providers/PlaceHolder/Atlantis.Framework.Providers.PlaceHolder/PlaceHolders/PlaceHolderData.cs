@@ -12,10 +12,10 @@ namespace Atlantis.Framework.Providers.PlaceHolder
     private const string KEY_ATTRIBUTE_NAME = "key";
     private const string VALUE_ATTRIBUTE_NAME = "value";
 
-    private Dictionary<string, string> _attributesDictionary;
-    
-    private Dictionary<string, string> _parametersDictionary;
-    internal Dictionary<string, string>  ParametersDictionary
+    private IDictionary<string, string> _attributesDictionary;
+
+    private IDictionary<string, string> _parametersDictionary;
+    internal IDictionary<string, string> ParametersDictionary
     {
       get { return _parametersDictionary; }
     }
@@ -47,7 +47,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder
       BuildDictionary(parameters, out _parametersDictionary);
     }
 
-    private void BuildDictionary(IList<KeyValuePair<string, string>> keyValuePairs, out Dictionary<string, string> dictionary)
+    private void BuildDictionary(IList<KeyValuePair<string, string>> keyValuePairs, out IDictionary<string, string> dictionary)
     {
       dictionary = new Dictionary<string, string>(keyValuePairs != null ? keyValuePairs.Count : 0);
 

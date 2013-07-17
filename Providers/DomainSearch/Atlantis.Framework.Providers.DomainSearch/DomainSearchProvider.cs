@@ -10,7 +10,7 @@ namespace Atlantis.Framework.Providers.DomainSearch
 {
   public class DomainSearchProvider : ProviderBase, IDomainSearchProvider 
   {
-    private Dictionary<string, IList<IFindResponseDomain>> _emptyResponse = new Dictionary<string, IList<IFindResponseDomain>>(0); 
+    private readonly Dictionary<string, IList<IFindResponseDomain>> _emptyResponse = new Dictionary<string, IList<IFindResponseDomain>>(0); 
 
     private readonly Lazy<ISiteContext> _siteContext;
     private readonly Lazy<IShopperContext> _shopperContext;
@@ -96,23 +96,28 @@ namespace Atlantis.Framework.Providers.DomainSearch
 
     public IDomainSearchResult SearchDomain(string searchPhrase, string sourceCode, string sourceUrl)
     {
+      return SearchDomain(searchPhrase, sourceCode, sourceUrl, new List<string>(0));
+    }
+
+    public IDomainSearchResult SearchDomain(string searchPhrase, string sourceCode, string sourceUrl, IList<string> tldsToSearch)
+    {
       IDomainSearchResult domainSearchResult = null;
 
       try
       {
         var request = new DomainSearchRequestData(_shopperContext.Value.ShopperId, sourceUrl, string.Empty, _siteContext.Value.Pathway, 0)
-                                          {
-                                            ClientIp = Proxy.OriginIP,
-                                            CountrySite = Localization.CountrySite,
-                                            DomainSearchDataBases = _domainSearchDatabases,
-                                            IncludeSpins = INCLUDE_SPINS,
-                                            Language = Localization.ShortLanguage,
-                                            PrivateLabelId = _siteContext.Value.PrivateLabelId,
-                                            SearchPhrase = searchPhrase,
-                                            ShopperStatus = _shopperContext.Value.ShopperStatus,
-                                            SourceCode = sourceCode
-
-                                          };
+                        {
+                          ClientIp = Proxy.OriginIP,
+                          CountrySite = Localization.CountrySite,
+                          DomainSearchDataBases = _domainSearchDatabases,
+                          IncludeSpins = INCLUDE_SPINS,
+                          Language = Localization.ShortLanguage,
+                          PrivateLabelId = _siteContext.Value.PrivateLabelId,
+                          SearchPhrase = searchPhrase,
+                          ShopperStatus = _shopperContext.Value.ShopperStatus,
+                          SourceCode = sourceCode,
+                          Tlds = tldsToSearch
+                        };
 
         var response = Engine.Engine.ProcessRequest(request, 714) as DomainSearchResponseData;
 

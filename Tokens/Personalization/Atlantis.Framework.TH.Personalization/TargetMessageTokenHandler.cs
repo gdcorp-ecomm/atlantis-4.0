@@ -5,13 +5,13 @@ using Atlantis.Framework.Tokens.Interface;
 namespace Atlantis.Framework.TH.Personalization
 {
   /// <summary>
-  /// Example token: [@T[targetmessageid:<messagetag name="EngmtActNewCustSurveyMobileDLP" appid="2" interactionpoint="Homepage"></messagetag>]@T]
+  /// Example token: [@T[targetmessagename:<messagetag name="EngmtActNewCustSurveyMobileDLP" appid="2" interactionpoint="Homepage"></messagetag>]@T]
   /// </summary>
   public class TargetMessageTokenHandler : XmlTokenHandlerBase
   {
     public override string TokenKey
     {
-      get { return "targetmessageid"; }
+      get { return "targetmessagename"; }
     }
 
     public override IToken CreateToken(string tokenData, string fullTokenString)

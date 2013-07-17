@@ -13,7 +13,7 @@ namespace Atlantis.Framework.TH.Personalization.Tests
   [DeploymentItem("Atlantis.Framework.Personalization.Impl.dll")]
   public class TargetMessageTests
   {
-    private const string _tokenFormat = "[@T[targetmessageid:{0}]@T]";
+    private const string _tokenFormat = "[@T[targetmessagename:{0}]@T]";
 
     [TestInitialize]
     public void InitializeTests()

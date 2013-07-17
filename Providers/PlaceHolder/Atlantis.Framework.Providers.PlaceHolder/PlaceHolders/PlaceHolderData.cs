@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Xml.Linq;
-using Atlantis.Framework.Providers.PlaceHolder.Interface;
 
 namespace Atlantis.Framework.Providers.PlaceHolder
 {
-  public class PlaceHolderData : IPlaceHolderData
+  internal class PlaceHolderData
   {
     private const string DATA_ELEMENT_NAME = "Data";
     private const string PARAMETERS_ELEMENT_NAME = "Parameters";
@@ -13,8 +12,13 @@ namespace Atlantis.Framework.Providers.PlaceHolder
     private const string KEY_ATTRIBUTE_NAME = "key";
     private const string VALUE_ATTRIBUTE_NAME = "value";
 
-    private IDictionary<string, string> _attributesDictionary;
-    private IDictionary<string, string> _parametersDictionary;
+    private Dictionary<string, string> _attributesDictionary;
+    
+    private Dictionary<string, string> _parametersDictionary;
+    internal Dictionary<string, string>  ParametersDictionary
+    {
+      get { return _parametersDictionary; }
+    }
 
     internal PlaceHolderData()
     {
@@ -43,7 +47,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder
       BuildDictionary(parameters, out _parametersDictionary);
     }
 
-    private void BuildDictionary(IList<KeyValuePair<string, string>> keyValuePairs, out IDictionary<string, string> dictionary)
+    private void BuildDictionary(IList<KeyValuePair<string, string>> keyValuePairs, out Dictionary<string, string> dictionary)
     {
       dictionary = new Dictionary<string, string>(keyValuePairs != null ? keyValuePairs.Count : 0);
 
@@ -145,11 +149,6 @@ namespace Atlantis.Framework.Providers.PlaceHolder
     internal bool TryGetAttribute(string name, out string value)
     {
       return _attributesDictionary.TryGetValue(name, out value);
-    }
-
-    public bool TryGetParameter(string key, out string value)
-    {
-      return _parametersDictionary.TryGetValue(key, out value);
     }
 
     public override string ToString()

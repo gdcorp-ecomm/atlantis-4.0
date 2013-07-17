@@ -110,12 +110,12 @@ namespace Atlantis.Framework.Providers.PlaceHolder.Tests
     [TestMethod]
     public void CreateUserControlPlaceHolderValid()
     {
-      IPlaceHolder placeHolder = new UserControlPlaceHolder("someId", "~/somepath/control.ascx", new List<KeyValuePair<string, string>>(0));
+      IPlaceHolder placeHolder = new UserControlPlaceHolder("~/somepath/control.ascx", new List<KeyValuePair<string, string>>(0));
 
       string markup = placeHolder.ToMarkup();
 
       WriteOutput(markup);
-      Assert.IsTrue(markup.Equals("[@P[" + PlaceHolderTypes.UserControl + ":<Data id=\"someId\" location=\"~/somepath/control.ascx\" />]@P]"));
+      Assert.IsTrue(markup.Equals("[@P[" + PlaceHolderTypes.UserControl + ":<Data location=\"~/somepath/control.ascx\" />]@P]"));
     }
 
     [TestMethod]
@@ -125,37 +125,36 @@ namespace Atlantis.Framework.Providers.PlaceHolder.Tests
       parameters.Add(new KeyValuePair<string, string>("title", "Hello World!"));
       parameters.Add(new KeyValuePair<string, string>("text", "My Name Is Timbo"));
 
-      IPlaceHolder placeHolder = new UserControlPlaceHolder("someId", "~/somepath/control.ascx", parameters);
+      IPlaceHolder placeHolder = new UserControlPlaceHolder("~/somepath/control.ascx", parameters);
 
       string markup = placeHolder.ToMarkup();
 
       WriteOutput(markup);
-      Assert.IsTrue(markup.Equals("[@P[" + PlaceHolderTypes.UserControl + ":<Data id=\"someId\" location=\"~/somepath/control.ascx\"><Parameters><Parameter key=\"title\" value=\"Hello World!\" /><Parameter key=\"text\" value=\"My Name Is Timbo\" /></Parameters></Data>]@P]"));
+      Assert.IsTrue(markup.Equals("[@P[" + PlaceHolderTypes.UserControl + ":<Data location=\"~/somepath/control.ascx\"><Parameters><Parameter key=\"title\" value=\"Hello World!\" /><Parameter key=\"text\" value=\"My Name Is Timbo\" /></Parameters></Data>]@P]"));
     }
 
     [TestMethod]
     public void CreateUserControlPlaceHolderWithNullParams()
     {
-      IPlaceHolder placeHolder = new UserControlPlaceHolder("someId", "~/somepath/control.ascx", null);
+      IPlaceHolder placeHolder = new UserControlPlaceHolder("~/somepath/control.ascx", null);
 
       string markup = placeHolder.ToMarkup();
 
       WriteOutput(markup);
-      Assert.IsTrue(markup.Equals("[@P[" + PlaceHolderTypes.UserControl + ":<Data id=\"someId\" location=\"~/somepath/control.ascx\" />]@P]"));
+      Assert.IsTrue(markup.Equals("[@P[" + PlaceHolderTypes.UserControl + ":<Data location=\"~/somepath/control.ascx\" />]@P]"));
     }
 
     [TestMethod]
     public void CreateWebControlPlaceHolderValid()
     {
-      IPlaceHolder placeHolder = new WebControlPlaceHolder("someId", 
-                                                           Assembly.GetExecutingAssembly().FullName,
+      IPlaceHolder placeHolder = new WebControlPlaceHolder(Assembly.GetExecutingAssembly().FullName,
                                                            "Atlantis.Framework.Providers.PlaceHolder.Tests.WebControls.WebControlOne",
                                                            new List<KeyValuePair<string, string>>(0));
 
       string markup = placeHolder.ToMarkup();
 
       WriteOutput(markup);
-      Assert.IsTrue(markup.Equals("[@P[" + PlaceHolderTypes.WebControl + ":<Data id=\"someId\" assembly=\"" + Assembly.GetExecutingAssembly().FullName + "\" type=\"Atlantis.Framework.Providers.PlaceHolder.Tests.WebControls.WebControlOne\" />]@P]"));
+      Assert.IsTrue(markup.Equals("[@P[" + PlaceHolderTypes.WebControl + ":<Data assembly=\"" + Assembly.GetExecutingAssembly().FullName + "\" type=\"Atlantis.Framework.Providers.PlaceHolder.Tests.WebControls.WebControlOne\" />]@P]"));
     }
 
     [TestMethod]
@@ -165,36 +164,33 @@ namespace Atlantis.Framework.Providers.PlaceHolder.Tests
       parameters.Add(new KeyValuePair<string, string>("title", "Hello World!"));
       parameters.Add(new KeyValuePair<string, string>("text", "My Name Is Timbo"));
 
-      IPlaceHolder placeHolder = new WebControlPlaceHolder("someId",
-                                                           Assembly.GetExecutingAssembly().FullName,
+      IPlaceHolder placeHolder = new WebControlPlaceHolder(Assembly.GetExecutingAssembly().FullName,
                                                            "Atlantis.Framework.Providers.PlaceHolder.Tests.WebControls.WebControlOne",
                                                            parameters);
 
       string markup = placeHolder.ToMarkup();
 
       WriteOutput(markup);
-      Assert.IsTrue(markup.Equals("[@P[" + PlaceHolderTypes.WebControl + ":<Data id=\"someId\" assembly=\"" + Assembly.GetExecutingAssembly().FullName + "\" type=\"Atlantis.Framework.Providers.PlaceHolder.Tests.WebControls.WebControlOne\"><Parameters><Parameter key=\"title\" value=\"Hello World!\" /><Parameter key=\"text\" value=\"My Name Is Timbo\" /></Parameters></Data>]@P]"));
+      Assert.IsTrue(markup.Equals("[@P[" + PlaceHolderTypes.WebControl + ":<Data assembly=\"" + Assembly.GetExecutingAssembly().FullName + "\" type=\"Atlantis.Framework.Providers.PlaceHolder.Tests.WebControls.WebControlOne\"><Parameters><Parameter key=\"title\" value=\"Hello World!\" /><Parameter key=\"text\" value=\"My Name Is Timbo\" /></Parameters></Data>]@P]"));
     }
 
     [TestMethod]
     public void CreateWebControlPlaceHolderWithNullParams()
     {
-      IPlaceHolder placeHolder = new WebControlPlaceHolder("someId",
-                                                           Assembly.GetExecutingAssembly().FullName,
+      IPlaceHolder placeHolder = new WebControlPlaceHolder(Assembly.GetExecutingAssembly().FullName,
                                                            "Atlantis.Framework.Providers.PlaceHolder.Tests.WebControls.WebControlOne",
                                                            null);
 
       string markup = placeHolder.ToMarkup();
 
       WriteOutput(markup);
-      Assert.IsTrue(markup.Equals("[@P[" + PlaceHolderTypes.WebControl + ":<Data id=\"someId\" assembly=\"" + Assembly.GetExecutingAssembly().FullName + "\" type=\"Atlantis.Framework.Providers.PlaceHolder.Tests.WebControls.WebControlOne\" />]@P]"));
+      Assert.IsTrue(markup.Equals("[@P[" + PlaceHolderTypes.WebControl + ":<Data assembly=\"" + Assembly.GetExecutingAssembly().FullName + "\" type=\"Atlantis.Framework.Providers.PlaceHolder.Tests.WebControls.WebControlOne\" />]@P]"));
     }
 
     [TestMethod]
     public void RenderWebControlPlaceHolderValid()
     {
-      IPlaceHolder placeHolder = new WebControlPlaceHolder("someId",
-                                                           Assembly.GetExecutingAssembly().FullName,
+      IPlaceHolder placeHolder = new WebControlPlaceHolder(Assembly.GetExecutingAssembly().FullName,
                                                            "Atlantis.Framework.Providers.PlaceHolder.Tests.WebControls.WebControlOne",
                                                            new List<KeyValuePair<string, string>>(0));
 
@@ -209,11 +205,10 @@ namespace Atlantis.Framework.Providers.PlaceHolder.Tests
     public void RenderWebControlWithParametersValid()
     {
       IList<KeyValuePair<string, string>> parameters = new List<KeyValuePair<string, string>>(2);
-      parameters.Add(new KeyValuePair<string, string>("title", "Hello World!"));
-      parameters.Add(new KeyValuePair<string, string>("text", "My Name Is Timbo"));
+      parameters.Add(new KeyValuePair<string, string>("Title", "Hello World!"));
+      parameters.Add(new KeyValuePair<string, string>("Text", "My Name Is Timbo"));
 
-      IPlaceHolder placeHolder = new WebControlPlaceHolder("someId",
-                                                           Assembly.GetExecutingAssembly().FullName,
+      IPlaceHolder placeHolder = new WebControlPlaceHolder(Assembly.GetExecutingAssembly().FullName,
                                                            "Atlantis.Framework.Providers.PlaceHolder.Tests.WebControls.WebControlOne",
                                                            parameters);
 
@@ -227,8 +222,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder.Tests
     [TestMethod]
     public void RenderWebControlTwiceForTypeCache()
     {
-      IPlaceHolder placeHolder = new WebControlPlaceHolder("someId",
-                                                           Assembly.GetExecutingAssembly().FullName,
+      IPlaceHolder placeHolder = new WebControlPlaceHolder(Assembly.GetExecutingAssembly().FullName,
                                                            "Atlantis.Framework.Providers.PlaceHolder.Tests.WebControls.WebControlOne",
                                                            new List<KeyValuePair<string, string>>(0));
 

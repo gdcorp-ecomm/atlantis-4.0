@@ -1,29 +1,14 @@
-﻿using Atlantis.Framework.Providers.PlaceHolder.Interface;
-using System.Web.UI;
+﻿using System.Web.UI;
 
-namespace Atlantis.Framework.Providers.PlaceHolder.WebTest.WebControls
+namespace WebControls
 {
   public class WebControlOne : Control
   {
-    private IPlaceHolderData _placeHolderData;
-    protected IPlaceHolderData PlaceHolderData
-    {
-      get
-      {
-        if (_placeHolderData == null)
-        {
-          IPlaceHolderProvider placeHolderProvider = ProviderContainerHelper.Instance.Resolve<IPlaceHolderProvider>();
-          _placeHolderData = placeHolderProvider.GetPlaceHolderData(ID);
-        }
-
-        return _placeHolderData;
-      }
-    }
+    public string Text { get; set; }
 
     protected override void Render(HtmlTextWriter writer)
     {
-      string text;
-      writer.WriteLine("<h1>{0}</h1>", PlaceHolderData.TryGetParameter("text", out text) ? text : "Failed to retreive \"text\" parameter.");
+      writer.WriteLine("<h1>{0}</h1>", !string.IsNullOrEmpty(Text) ? Text : "ERROR: \"Text\" parameter not found.");
     }
   }
 }

@@ -44,7 +44,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IPlaceHolder.cs" />
-    <Compile Include="IPlaceHolderData.cs" />
     <Compile Include="IPlaceHolderEncoding.cs" />
     <Compile Include="IPlaceHolderHandler.cs" />
     <Compile Include="IPlaceHolderParameter.cs" />

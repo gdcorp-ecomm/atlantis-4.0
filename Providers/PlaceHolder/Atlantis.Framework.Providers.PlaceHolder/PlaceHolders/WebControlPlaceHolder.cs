@@ -9,10 +9,9 @@ namespace Atlantis.Framework.Providers.PlaceHolder
 
     private readonly PlaceHolderData _placeHolderData;
 
-    public WebControlPlaceHolder(string id, string assembly, string typeName, IList<KeyValuePair<string, string>> parameters)
+    public WebControlPlaceHolder(string assembly, string typeName, IList<KeyValuePair<string, string>> parameters)
     {
       IList<KeyValuePair<string, string>> attributes = new List<KeyValuePair<string, string>>(3);
-      attributes.Add(new KeyValuePair<string, string>(PlaceHolderAttributes.Id, id));
       attributes.Add(new KeyValuePair<string, string>(PlaceHolderAttributes.Assembly, assembly));
       attributes.Add(new KeyValuePair<string, string>(PlaceHolderAttributes.Type, typeName));
 

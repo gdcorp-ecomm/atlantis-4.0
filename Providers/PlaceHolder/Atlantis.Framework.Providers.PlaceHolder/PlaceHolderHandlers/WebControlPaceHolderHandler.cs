@@ -2,7 +2,6 @@
 using Atlantis.Framework.Providers.PlaceHolder.Interface;
 using System;
 using System.Collections.Generic;
-using System.Web;
 using System.Web.UI;
 
 namespace Atlantis.Framework.Providers.PlaceHolder
@@ -11,7 +10,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder
   {
     public string Type { get { return PlaceHolderTypes.WebControl; } }
 
-    public string GetPlaceHolderContent(string type, string data, IDictionary<string, IPlaceHolderData> placeHolderSharedData, ICollection<string> debugContextErrors, IProviderContainer providerContainer)
+    public string GetPlaceHolderContent(string type, string data, ICollection<string> debugContextErrors, IProviderContainer providerContainer)
     {
       string renderContent = string.Empty;
 
@@ -21,9 +20,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder
         
         Control webControl = InitializeWebControl(placeHolderData);
         
-        placeHolderSharedData[webControl.ID] = placeHolderData;
-        
-        renderContent = RenderControlManager.ToHtml(webControl);
+        renderContent = WebControlManager.ToHtml(webControl);
       }
       catch (Exception ex)
       {
@@ -50,17 +47,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder
         {
           Type type = WebControlTypeManager.GetType(assemblyName, typeName);
 
-          Page currentPage = HttpContext.Current.Handler == null ? new Page() : (Page)HttpContext.Current.Handler;
-
-          webControl = currentPage.LoadControl(type, null);
-
-          if (webControl == null)
-          {
-            throw new Exception("Unable to load web control.");
-          }
-
-          string id;
-          webControl.ID = placeHolderData.TryGetAttribute(PlaceHolderAttributes.Id, out id) ? id : webControl.GetType().ToString();
+          webControl = WebControlManager.LoadControl(type, placeHolderData);
         }
         else
         {

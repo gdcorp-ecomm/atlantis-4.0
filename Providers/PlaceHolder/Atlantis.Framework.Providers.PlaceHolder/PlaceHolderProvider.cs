@@ -16,7 +16,6 @@ namespace Atlantis.Framework.Providers.PlaceHolder
     private static readonly Regex _placeHolderRegex = new Regex(@"\[@P\[(?<placeholdertype>[a-zA-z0-9]*?):(?<placeholderdata>.*?)\]@P\]", RegexOptions.Compiled | RegexOptions.Singleline);
     private static readonly IDictionary<string, IPlaceHolderHandler> _placeHolderHandlers = new Dictionary<string, IPlaceHolderHandler>(StringComparer.OrdinalIgnoreCase);
 
-    private readonly IDictionary<string, IPlaceHolderData> _placeHolderSharedData = new Dictionary<string, IPlaceHolderData>(256);
     private readonly ICollection<string> _debugContextErrors = new Collection<string>(); 
 
     static PlaceHolderProvider()
@@ -37,18 +36,6 @@ namespace Atlantis.Framework.Providers.PlaceHolder
 
     public PlaceHolderProvider(IProviderContainer container) : base(container)
     {
-    }
-
-    public IPlaceHolderData GetPlaceHolderData(string id)
-    {
-      IPlaceHolderData placeHolderData;
-      
-      if (!_placeHolderSharedData.TryGetValue(id, out placeHolderData))
-      {
-        placeHolderData = new PlaceHolderData();
-      }
-
-      return placeHolderData;
     }
 
     public string ReplacePlaceHolders(string content)
@@ -95,7 +82,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder
 
       IPlaceHolderHandler placeHolderHandler = DeterminePlaceHolderHandler(placeHolderType);
 
-      string content = placeHolderHandler.GetPlaceHolderContent(placeHolderType, placeHolderDataString, _placeHolderSharedData, _debugContextErrors, Container);
+      string content = placeHolderHandler.GetPlaceHolderContent(placeHolderType, placeHolderDataString, _debugContextErrors, Container);
 
       contentBuilder.Replace(matchValue, content);
     }

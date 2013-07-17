@@ -7,6 +7,6 @@ namespace Atlantis.Framework.Providers.PlaceHolder.Interface
   {
     string Type { get; }
 
-    string GetPlaceHolderContent(string type, string data, IDictionary<string, IPlaceHolderData> placeHolderSharedData, ICollection<string> debugContextErrors, IProviderContainer providerContainer);
+    string GetPlaceHolderContent(string type, string data, ICollection<string> debugContextErrors, IProviderContainer providerContainer);
   }
 }

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Web;
 using System.Web.UI;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.PlaceHolder.Interface;
@@ -11,7 +10,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder
   {
     public string Type { get { return PlaceHolderTypes.UserControl; } }
 
-    public string GetPlaceHolderContent(string type, string data, IDictionary<string, IPlaceHolderData> placeHolderSharedData, ICollection<string> debugContextErrors, IProviderContainer providerContainer)
+    public string GetPlaceHolderContent(string type, string data, ICollection<string> debugContextErrors, IProviderContainer providerContainer)
     {
       string renderContent = string.Empty;
 
@@ -21,9 +20,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder
 
         Control userControl = InitializeUserControl(placeHolderData);
 
-        placeHolderSharedData[userControl.ID] = placeHolderData;
-
-        renderContent = RenderControlManager.ToHtml(userControl);
+        renderContent = WebControlManager.ToHtml(userControl);
       }
       catch (Exception ex)
       {
@@ -48,16 +45,9 @@ namespace Atlantis.Framework.Providers.PlaceHolder
           throw new Exception("Attribute \"" + PlaceHolderAttributes.Location + "\" is required.");
         }
 
-        Page currentPage = HttpContext.Current.Handler == null ? new Page() : (Page)HttpContext.Current.Handler;
-        userControl = currentPage.LoadControl(location);
-        
-        if (userControl == null)
-        {
-          throw new Exception("Unhandled exception loading user control.");
-        }
+        Type type = UserControlTypeManager.GetType(location);
 
-        string id;
-        userControl.ID = placeHolderData.TryGetAttribute(PlaceHolderAttributes.Id, out id) ? id : userControl.GetType().ToString();
+        userControl = WebControlManager.LoadControl(type, placeHolderData);
       }
       catch (Exception ex)
       {

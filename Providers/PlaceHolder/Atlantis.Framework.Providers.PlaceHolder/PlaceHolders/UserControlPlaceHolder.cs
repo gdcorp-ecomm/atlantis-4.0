@@ -9,10 +9,9 @@ namespace Atlantis.Framework.Providers.PlaceHolder
 
     private readonly PlaceHolderData _placeHolderData;
 
-    public UserControlPlaceHolder(string id, string location, IList<KeyValuePair<string, string>> parameters)
+    public UserControlPlaceHolder(string location, IList<KeyValuePair<string, string>> parameters)
     {
       IList<KeyValuePair<string, string>> attributes = new List<KeyValuePair<string, string>>(2);
-      attributes.Add(new KeyValuePair<string, string>(PlaceHolderAttributes.Id, id));
       attributes.Add(new KeyValuePair<string, string>(PlaceHolderAttributes.Location, location));
 
       _placeHolderData = new PlaceHolderData(attributes, parameters);

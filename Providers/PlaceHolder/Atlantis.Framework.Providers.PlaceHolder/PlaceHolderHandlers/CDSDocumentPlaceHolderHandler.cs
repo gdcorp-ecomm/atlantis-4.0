@@ -13,7 +13,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder
       get { return PlaceHolderTypes.CDSDocument; }
     }
 
-    public string GetPlaceHolderContent(string type, string data, IDictionary<string, IPlaceHolderData> placeHolderSharedData, ICollection<string> debugContextErrors, IProviderContainer providerContainer)
+    public string GetPlaceHolderContent(string type, string data, ICollection<string> debugContextErrors, IProviderContainer providerContainer)
     {
       string renderContent = string.Empty;
       ICDSContentProvider cdsContentProvider;

@@ -53,7 +53,7 @@ namespace Atlantis.Framework.TH.Personalization
             {
               if (String.Compare(token.MessageTagName, tag.Name, StringComparison.OrdinalIgnoreCase) == 0)
               {
-                tokenResult = message.MessageId;
+                tokenResult = message.MessageName;
                 break;
               }
 

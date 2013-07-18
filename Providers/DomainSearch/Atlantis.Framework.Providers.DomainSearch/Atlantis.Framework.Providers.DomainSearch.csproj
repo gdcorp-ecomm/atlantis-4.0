@@ -35,6 +35,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -43,12 +44,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="RequestTypeLookUp.cs" />
     <Compile Include="DomainGroupTypes.cs" />
     <Compile Include="DomainSearchProvider.cs" />
     <Compile Include="DomainSearchResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Atlantis.Framework.DataCache\Atlantis.Framework.DataCache\Atlantis.Framework.DataCache.csproj">
+      <Project>{7f2738f8-683c-49e7-88cd-e986c70f0321}</Project>
+      <Name>Atlantis.Framework.DataCache</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj">
       <Project>{d30157b2-c1b3-4073-ba5e-632e2337a997}</Project>
       <Name>Atlantis.Framework.Engine</Name>

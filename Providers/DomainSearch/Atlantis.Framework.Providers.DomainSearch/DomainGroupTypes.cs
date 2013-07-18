@@ -40,5 +40,7 @@ namespace Atlantis.Framework.Providers.DomainSearch
     public const string EXACT_MATCH = "exactmatch";
 
     public const string All_DOMAINS = "alldomains";
+
+    public const string CROSS_CHECK = "crosscheck";
   }
 }

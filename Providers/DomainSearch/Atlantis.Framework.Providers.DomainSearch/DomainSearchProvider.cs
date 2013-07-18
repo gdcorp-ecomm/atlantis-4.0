@@ -15,7 +15,7 @@ namespace Atlantis.Framework.Providers.DomainSearch
     private readonly Lazy<ISiteContext> _siteContext;
     private readonly Lazy<IShopperContext> _shopperContext;
 
-    private readonly IList<string> _domainSearchDatabases = new List<string> { "affix,auctions,cctld,private,premium,similar" };
+    private readonly IList<string> _domainSearchDatabases = new List<string> { "affix,auctions,cctld,private,premium,similar,crosscheck" };
     private const bool INCLUDE_SPINS = true;
 
     public DomainSearchProvider(IProviderContainer container)
@@ -91,6 +91,12 @@ namespace Atlantis.Framework.Providers.DomainSearch
         domainResult.Add(DomainGroupTypes.SIMILIAR, similiarDomains);
       }
 
+       var crossCheckDomains = responseDomainList.FindAll(d => d.DomainSearchDataBase != null && d.DomainSearchDataBase.ToLowerInvariant() == DomainGroupTypes.CROSS_CHECK);
+      if (crossCheckDomains.Count != 0)
+      {
+        domainResult.Add(DomainGroupTypes.CROSS_CHECK, crossCheckDomains);
+      }
+
       return domainResult;
     }
 
@@ -119,7 +125,9 @@ namespace Atlantis.Framework.Providers.DomainSearch
                           Tlds = tldsToSearch
                         };
 
-        var response = Engine.Engine.ProcessRequest(request, 714) as DomainSearchResponseData;
+        var requestType = RequestTypeLookUp.GetCurrentRequestType();
+
+        var response = Engine.Engine.ProcessRequest(request, requestType) as DomainSearchResponseData;
 
         if (response != null)
         {

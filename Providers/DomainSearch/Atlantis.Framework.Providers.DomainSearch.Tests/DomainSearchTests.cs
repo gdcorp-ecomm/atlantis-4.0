@@ -10,7 +10,9 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Atlantis.Framework.Providers.DomainSearch.Tests
 {
   [TestClass]
+   [DeploymentItem("App.config")]
   [DeploymentItem("atlantis.config")]
+  [DeploymentItem("Atlantis.Framework.AppSettings.Impl.dll")]
   [DeploymentItem("Atlantis.Framework.DomainSearch.Impl.dll")]
   [DeploymentItem("Atlantis.Framework.Providers.DomainSearch.dll")]
   public class DomainSearchTests
@@ -57,6 +59,7 @@ namespace Atlantis.Framework.Providers.DomainSearch.Tests
         return _domainSearch;
       }
     }
+
 
     [TestMethod]
     public void DomainSearchResultTest()
@@ -157,7 +160,7 @@ namespace Atlantis.Framework.Providers.DomainSearch.Tests
     [TestMethod]
     public void DomainSearchAffixTest()
     {
-      const string searchPhrase = "dogs-cats-canine";
+      const string searchPhrase = "SPOONYMAC-HELLO-WORLD.com";
 
       var domainSearchResult = DomainSearch.SearchDomain(searchPhrase, SOURCE_CODE, string.Empty);
       Assert.IsTrue(domainSearchResult.IsSuccess);
@@ -210,6 +213,20 @@ namespace Atlantis.Framework.Providers.DomainSearch.Tests
       var hasAuctions = domains.Any(d => d.DomainSearchDataBase == DomainGroupTypes.AUCTIONS);
 
       Assert.IsTrue(hasAuctions);
+    }
+    
+    [TestMethod]
+    public void DomainSearchCrossCheckTest()
+    {
+      const string searchPhrase = "SPOONYMAC-HELLO-WORLD.com";
+
+      var domainSearchResult = DomainSearch.SearchDomain(searchPhrase, SOURCE_CODE, string.Empty);
+      Assert.IsTrue(domainSearchResult.IsSuccess);
+
+      var domains = domainSearchResult.GetDomainsByGroup(DomainGroupTypes.CROSS_CHECK);
+      var hasCrossCheck = domains.Any(d => d.DomainSearchDataBase == DomainGroupTypes.CROSS_CHECK);
+
+      Assert.IsTrue(hasCrossCheck);
     }
   }
 }

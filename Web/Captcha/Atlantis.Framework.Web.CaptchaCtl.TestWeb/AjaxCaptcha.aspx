@@ -101,7 +101,7 @@
         <div>
             <h1>Custom Ajax Validation 4th Instance of captcha on same page</h1>
         </div>
-        <atlantis:CaptchaTemplateControl ID="CaptchaTemplateControl2" runat="server" CaptchaID="instance4" SaveValidationDataInSession="true" CaptchaImagePlaceHolderID="plcCaptchaLocation4" ReloadLinkID="change_code_instance4" PlaySoundLinkID="speak_code_instance4" StashRenderLocation="javascriptStash" CaptchaValueID="cart_captcha_value_instance4"  AutoClearInput="true" AutoFocusInput="true" >
+        <atlantis:CaptchaTemplateControl ID="CaptchaTemplateControl2" runat="server" CaptchaID="instance4" SaveValidationDataInSession="true" CaptchaImagePlaceHolderID="plcCaptchaLocation4" ReloadLinkID="change_code_instance4" PlaySoundLinkID="speak_code_instance4" StashRenderLocation="javascriptStash" CaptchaValueID="cart_captcha_value_instance4" AutoClearInput="true" AutoFocusInput="true">
             <Template>
                 <div style="width: 500px;">
                     <div style="float: left; padding-bottom: 10px;">
@@ -127,12 +127,29 @@
                 </div>
             </Template>
         </atlantis:CaptchaTemplateControl>
-         <div class="g-buttonpane">
-                <span id="validateCaptcha4" class="g-btn-lg g-btn-prg">Validate Captcha</span>
+        <div class="g-buttonpane">
+            <span id="validateCaptcha4" class="g-btn-lg g-btn-prg">Validate Captcha</span>
+        </div>
+
+        <div style="padding-top:20px;">
+            <div>
+                <h1>Default template - no code/html required</h1>
             </div>
+            <atlantis:CaptchaTemplateControl ID="CaptchaTemplateControl3" runat="server" CaptchaID="instance5" StashRenderLocation="javascriptStash">
+            </atlantis:CaptchaTemplateControl>
+        </div>
     </div>
 
     <script type="text/javascript">
+        function CaptchaDefaultAthentication(result) {
+            $('#defaultcaptchaError').hide();
+            if (!result) {
+                $('#defaultcaptchaError').show();
+            }
+            else {
+                alert(result);
+            }
+        }
         function AjaxAuthenticationResults(result) {
             $('#captchaError').hide();
             if (!result) {

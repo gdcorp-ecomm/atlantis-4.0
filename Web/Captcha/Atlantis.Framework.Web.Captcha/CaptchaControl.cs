@@ -80,7 +80,7 @@ ToolboxData(
       _audioContainer.ID = CaptchaID + "_AudioPlaceholder";
     }
 
-    [Description("image placeholder in the template"), Category("ChildControls")] 
+    [Description("image placeholder in the template"), Category("ChildControls")]
     public HtmlGenericControl LoadingImagePlaceHolder
     {
       get
@@ -89,7 +89,7 @@ ToolboxData(
       }
     }
 
-    [Description("reload image"), Category("ChildControls")] 
+    [Description("reload image"), Category("ChildControls")]
     public HtmlImage ReloadImage
     {
       get
@@ -97,7 +97,7 @@ ToolboxData(
         return _reloadImage;
       }
     }
-    [Description("play sound image"), Category("ChildControls")] 
+    [Description("play sound image"), Category("ChildControls")]
     public HtmlImage PlaySoundImage
     {
       get
@@ -106,7 +106,7 @@ ToolboxData(
       }
     }
 
-    [Description("stash content"), Category("ChildControls")] 
+    [Description("stash content"), Category("ChildControls")]
     public StashContent StashContentControl
     {
       get
@@ -115,7 +115,7 @@ ToolboxData(
       }
     }
 
-    [Description("is sound enabled"), Category("Behavior")] 
+    [Description("is sound enabled"), Category("Behavior")]
     private bool IsSoundEnabled
     {
       get
@@ -496,6 +496,44 @@ ToolboxData(
       return validated;
     }
 
+    private void RecursiveCheck(Control parentControl)
+    {
+      try
+      {
+        if (parentControl.Controls.Count > 0)
+        {
+          foreach (Control childControl in parentControl.Controls)
+          {
+            try
+            {
+              RecursiveCheck(childControl);
+            }
+            catch { }
+          }
+        }
+        if (parentControl.ID != null)
+        {
+          if (parentControl.ID.Equals(CaptchaImagePlaceHolderID, StringComparison.OrdinalIgnoreCase))
+          {
+            parentControl.Controls.Add(CaptchaControl);
+          }
+          else if (parentControl.ID.Equals(ImageReloadPlaceHolderID, StringComparison.OrdinalIgnoreCase))
+          {
+            parentControl.Controls.Add(_reloadImage);
+          }
+          else if (parentControl.ID.Equals(PlaySoundPlaceHolderID, StringComparison.OrdinalIgnoreCase))
+          {
+            parentControl.Controls.Add(_playSound);
+          }
+          else if (parentControl.ID.Equals(LoadingImageContainerPlaceHolderID, StringComparison.OrdinalIgnoreCase))
+          {
+            parentControl.Controls.Add(_loadingPlaceHolder);
+          }
+        }
+      }
+      catch { }
+    }
+
     protected override void CreateChildControls()
     {
 
@@ -506,31 +544,14 @@ ToolboxData(
       if (temp == null)
       {
         temp = new DefaultTemplate();
+        SetupDefaultProperites();
       }
 
       temp.InstantiateIn(ownerValue);
 
       foreach (Control currentcontrol in ownerValue.Controls)
       {
-        if (currentcontrol.ID != null)
-        {
-          if (currentcontrol.ID.Equals(CaptchaImagePlaceHolderID, StringComparison.OrdinalIgnoreCase))
-          {
-            currentcontrol.Controls.Add(CaptchaControl);
-          }
-          else if (currentcontrol.ID.Equals(ImageReloadPlaceHolderID, StringComparison.OrdinalIgnoreCase))
-          {
-            currentcontrol.Controls.Add(_reloadImage);
-          }
-          else if (currentcontrol.ID.Equals(PlaySoundPlaceHolderID, StringComparison.OrdinalIgnoreCase))
-          {
-            currentcontrol.Controls.Add(_playSound);
-          }
-          else if (currentcontrol.ID.Equals(LoadingImageContainerPlaceHolderID, StringComparison.OrdinalIgnoreCase))
-          {
-            currentcontrol.Controls.Add(_loadingPlaceHolder);
-          }
-        }
+        RecursiveCheck(currentcontrol);
       }
       this.Controls.Add(ownerValue);
       if (!string.IsNullOrEmpty(StashRenderLocation) && AutoBindEvents)
@@ -575,7 +596,7 @@ ToolboxData(
     }
 
     private bool _saveValidationDataInSession = false;
-   [Description("use session during custom validation"), Category("Behavior")]
+    [Description("use session during custom validation"), Category("Behavior")]
     public bool SaveValidationDataInSession
     {
       get
@@ -649,6 +670,19 @@ ToolboxData(
       base.DataBind();
     }
 
+    private void SetupDefaultProperites()
+    {
+      CaptchaImagePlaceHolderID = "plcCaptchaDefault";
+      StashRenderLocation = "javascriptStash";
+      CaptchaValidateSelector = ".defaultcaptchaValidate";
+      CaptchaValueID = "defaultCaptchainput";
+      ImageReloadPlaceHolderID = "plcCaptchaImageReload";
+      PlaySoundPlaceHolderID = "plcCaptchaPlaySound";
+      AjaxAuthentication = true;
+      AjaxAuthenticationCallback = "CaptchaDefaultAthentication";
+      AutoClearInput = true;
+      AutoFocusInput = false;
+    }
   }
 
   [
@@ -672,6 +706,7 @@ ToolboxData(
         return HtmlTextWriterTag.Div;
       }
     }
+
   }
 
   #region DefaultTemplate
@@ -679,11 +714,70 @@ ToolboxData(
   {
     void ITemplate.InstantiateIn(Control owner)
     {
-      Label title = new Label();
 
-      LiteralControl linebreak = new LiteralControl("<br/>");
+      HtmlGenericControl outerContainer = new HtmlGenericControl();
+      outerContainer.TagName = "div";
 
-      Label caption = new Label();
+
+      HtmlGenericControl containerDiv = new HtmlGenericControl();
+      containerDiv.TagName = "div";
+      containerDiv.Style.Add(HtmlTextWriterStyle.Width, "350px");
+      containerDiv.Style.Add(HtmlTextWriterStyle.BackgroundColor, "blue");
+
+      HtmlGenericControl containerDiv1 = new HtmlGenericControl();
+      containerDiv1.TagName = "div";
+      containerDiv1.Style.Add("float", "left");
+      containerDiv1.Style.Add(HtmlTextWriterStyle.PaddingBottom, "10px");
+
+      LiteralControl captchaLable = new LiteralControl("<span style=\"padding-right: 10px;\">Access Code:</span>");
+
+      containerDiv1.Controls.Add(captchaLable);
+      PlaceHolder plcCaptchaLoc = new PlaceHolder();
+      plcCaptchaLoc.ID = "plcCaptchaDefault";
+      containerDiv1.Controls.Add(plcCaptchaLoc);
+
+      containerDiv.Controls.Add(containerDiv1);
+
+      HtmlGenericControl containerDiv2 = new HtmlGenericControl();
+      containerDiv2.TagName = "div";
+      containerDiv2.Style.Add("float", "right");
+      containerDiv2.Style.Add(HtmlTextWriterStyle.PaddingRight, "20px");
+      containerDiv2.Style.Add(HtmlTextWriterStyle.PaddingTop, "20px");
+
+      PlaceHolder plcImageReload = new PlaceHolder();
+      plcImageReload.ID = "plcCaptchaImageReload";
+      containerDiv2.Controls.Add(plcImageReload);
+      LiteralControl spacer = new LiteralControl("<br />");
+      containerDiv2.Controls.Add(spacer);
+      PlaceHolder plcPlaySound = new PlaceHolder();
+      plcPlaySound.ID = "plcCaptchaPlaySound";
+      containerDiv2.Controls.Add(plcPlaySound);
+
+      containerDiv.Controls.Add(containerDiv2);
+      outerContainer.Controls.Add(containerDiv);
+
+      HtmlGenericControl inputcontainerDiv = new HtmlGenericControl();
+      inputcontainerDiv.TagName = "div";
+      inputcontainerDiv.Style.Add("clear", "both");
+      LiteralControl inputLable = new LiteralControl("<span style=\"padding-right: 10px;\">Please Enter the Access Code:</span>");
+      LiteralControl inputBox = new LiteralControl("<input type=\"text\" name=\"defaultCaptchainput\" id=\"defaultCaptchainput\" maxlength=\"90\" style=\"width: 180px;\" />");
+      LiteralControl spacer1 = new LiteralControl("<br />");
+      inputcontainerDiv.Controls.Add(inputLable);
+      inputcontainerDiv.Controls.Add(spacer1);
+      inputcontainerDiv.Controls.Add(inputBox);
+
+      LiteralControl errorMessage = new LiteralControl("<div id=\"defaultcaptchaError\" style=\"display: none; width: 200px; text-align: center; padding-top: 5px;\"><span class=\"bodyText\" style=\"color: #cc0000\"><b>Authentication failed.&nbsp;Please try again.</b></span></div>");
+
+      inputcontainerDiv.Controls.Add(errorMessage);
+      LiteralControl spacer2 = new LiteralControl("<br />");
+      inputcontainerDiv.Controls.Add(spacer2);
+
+      LiteralControl validateButton = new LiteralControl("<div class=\"g-btn-lg g-btn-prg defaultcaptchaValidate\" style=\"border: none; cursor: pointer\">Validate</div>");
+      inputcontainerDiv.Controls.Add(validateButton);
+      
+      outerContainer.Controls.Add(inputcontainerDiv);
+
+      owner.Controls.Add(outerContainer);
 
     }
 

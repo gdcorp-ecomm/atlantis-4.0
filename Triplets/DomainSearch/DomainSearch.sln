@@ -19,22 +19,22 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Domains.
 EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 7
+		SccNumberOfProjects = 8
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
-		SccProjectUniqueName0 = ..\\..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
-		SccProjectTopLevelParentUniqueName0 = DomainSearch.sln
-		SccProjectName0 = ../../Atlantis.Framework.Engine/Atlantis.Framework.Engine
-		SccLocalPath0 = ..\\..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
-		SccProjectUniqueName1 = ..\\..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ..\\..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
 		SccProjectTopLevelParentUniqueName1 = DomainSearch.sln
-		SccProjectName1 = ../../Atlantis.Framework.Engine/Atlantis.Framework.Interface
-		SccLocalPath1 = ..\\..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
-		SccProjectUniqueName2 = ..\\..\\Atlantis.Framework.Testing\\Atlantis.Framework.Testing.MockHttpContext\\Atlantis.Framework.Testing.MockHttpContext.csproj
+		SccProjectName1 = ../../Atlantis.Framework.Engine/Atlantis.Framework.Engine
+		SccLocalPath1 = ..\\..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
+		SccProjectUniqueName2 = ..\\..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
 		SccProjectTopLevelParentUniqueName2 = DomainSearch.sln
-		SccProjectName2 = ../../Atlantis.Framework.Testing/Atlantis.Framework.Testing.MockHttpContext
-		SccLocalPath2 = ..\\..\\Atlantis.Framework.Testing\\Atlantis.Framework.Testing.MockHttpContext
-		SccLocalPath3 = .
+		SccProjectName2 = ../../Atlantis.Framework.Engine/Atlantis.Framework.Interface
+		SccLocalPath2 = ..\\..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
+		SccProjectUniqueName3 = ..\\..\\Atlantis.Framework.Testing\\Atlantis.Framework.Testing.MockHttpContext\\Atlantis.Framework.Testing.MockHttpContext.csproj
+		SccProjectTopLevelParentUniqueName3 = DomainSearch.sln
+		SccProjectName3 = ../../Atlantis.Framework.Testing/Atlantis.Framework.Testing.MockHttpContext
+		SccLocalPath3 = ..\\..\\Atlantis.Framework.Testing\\Atlantis.Framework.Testing.MockHttpContext
 		SccProjectUniqueName4 = Atlantis.Framework.DomainSearch.Impl\\Atlantis.Framework.DomainSearch.Impl.csproj
 		SccProjectName4 = Atlantis.Framework.DomainSearch.Impl
 		SccLocalPath4 = Atlantis.Framework.DomainSearch.Impl
@@ -44,6 +44,10 @@ Global
 		SccProjectUniqueName6 = Atlantis.Framework.DomainSearch.Tests\\Atlantis.Framework.DomainSearch.Tests.csproj
 		SccProjectName6 = Atlantis.Framework.DomainSearch.Tests
 		SccLocalPath6 = Atlantis.Framework.DomainSearch.Tests
+		SccProjectUniqueName7 = ..\\..\\Domains\\Atlantis.Framework.Domains.Interface\\Atlantis.Framework.Domains.Interface.csproj
+		SccProjectTopLevelParentUniqueName7 = DomainSearch.sln
+		SccProjectName7 = ../../Domains/Atlantis.Framework.Domains.Interface
+		SccLocalPath7 = ..\\..\\Domains\\Atlantis.Framework.Domains.Interface
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

@@ -1,20 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Atlantis.Framework.DataCache;
 
 namespace Atlantis.Framework.Providers.PlaceHolder
 {
-  internal class TypeCache
+  internal class GenericCache<T>
   {
-    private volatile IDictionary<string, Type> _typeCache = new Dictionary<string, Type>(1024);
+    private volatile IDictionary<string, T> _cache = new Dictionary<string, T>(1024);
     private readonly SlimLock _cacheLock;
 
-    internal TypeCache()
+    internal GenericCache()
     {
       _cacheLock = new SlimLock();
     }
 
-    ~TypeCache()
+    ~GenericCache()
     {
       if (_cacheLock != null)
       {
@@ -22,19 +21,19 @@ namespace Atlantis.Framework.Providers.PlaceHolder
       }
     }
 
-    internal void SetType(string key, Type value)
+    internal void Set(string key, T value)
     {
       using(_cacheLock.GetWriteLock())
       {
-        _typeCache[key] = value;
+        _cache[key] = value;
       }
     }
 
-    internal bool TryGetType(string key, out Type value)
+    internal bool TryGet(string key, out T value)
     {
       using(_cacheLock.GetReadLock())
       {
-        return _typeCache.TryGetValue(key, out value);
+        return _cache.TryGetValue(key, out value);
       }
     }
   }

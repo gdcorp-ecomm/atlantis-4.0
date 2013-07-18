@@ -6,7 +6,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder
 {
   internal class UserControlTypeManager
   {
-    private static readonly TypeCache _userControlTypeCache = new TypeCache();
+    private static readonly GenericCache<Type> _userControlTypeCache = new GenericCache<Type>();
 
     private static Type LoadType(string location)
     {
@@ -29,10 +29,10 @@ namespace Atlantis.Framework.Providers.PlaceHolder
     {
       Type type;
 
-      if (!_userControlTypeCache.TryGetType(location, out type))
+      if (!_userControlTypeCache.TryGet(location, out type))
       {
         type = LoadType(location);
-        _userControlTypeCache.SetType(location, type);
+        _userControlTypeCache.Set(location, type);
       }
 
       return type;

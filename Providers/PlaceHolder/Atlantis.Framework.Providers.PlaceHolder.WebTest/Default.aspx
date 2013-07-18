@@ -10,9 +10,9 @@
   <div>
     [@P[userControl:<Data location="~/controls/banner.ascx"><Parameters><Parameter key="Title" value="Attention!" /><Parameter key="Text" value="Scheduled maintenance underway." /></Parameters></Data>]@P]
     <hr />
-    [@P[userControl:<Data location="~/controls/banner.ascx"><Parameters><Parameter key="Title" value="Attention 1 !" /><Parameter key="Text" value="Scheduled maintenance underway." /></Parameters></Data>]@P]
+    [@P[userControl:<Data location="~/controls/banner.ascx"><Parameters><Parameter key="Title" value="Attention 1!" /><Parameter key="Text" value="Scheduled maintenance underway." /></Parameters></Data>]@P]
     <hr />
-    [@P[userControl:<Data location="~/controls/banner.ascx"><Parameters><Parameter key="Title" value="Attention 2 !" /><Parameter key="Text" value="Scheduled maintenance underway." /></Parameters></Data>]@P]
+    [@P[userControl:<Data location="~/controls/banner.ascx"><Parameters><Parameter key="Title" value="Attention 2!" /><Parameter key="Text" value="Scheduled maintenance underway." /></Parameters></Data>]@P]
     <hr />
   </div>
   <div>

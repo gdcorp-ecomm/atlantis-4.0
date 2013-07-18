@@ -7,8 +7,10 @@ using System.Web.UI;
 
 namespace Atlantis.Framework.Providers.PlaceHolder
 {
-  internal static class WebControlManager
+  internal static class ControlManager
   {
+    private static readonly ControlMethodInfoManager ControlMethodInfoManager = new ControlMethodInfoManager();
+
     private static void SetControlProperties(Control control, Type type, PlaceHolderData placeHolderData)
     {
       if (placeHolderData != null)
@@ -37,6 +39,11 @@ namespace Atlantis.Framework.Providers.PlaceHolder
       SetControlProperties(control, type, placeHolderData);
 
       return control;
+    }
+
+    internal static void FireControlEvents(Control control)
+    {
+      ControlMethodInfoManager.FireControlEvents(control);
     }
 
     internal static string ToHtml(Control control)

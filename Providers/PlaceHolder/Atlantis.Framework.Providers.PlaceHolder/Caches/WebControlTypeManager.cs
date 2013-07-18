@@ -5,7 +5,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder
 {
   internal class WebControlTypeManager
   {
-    private static readonly TypeCache _webControlTypeCache = new TypeCache();
+    private static readonly GenericCache<Type> _webControlTypeCache = new GenericCache<Type>();
 
     private static Type LoadType(string assembly, string typeName)
     {
@@ -28,10 +28,10 @@ namespace Atlantis.Framework.Providers.PlaceHolder
       string key = assembly + typeName;
       Type type;
 
-      if (!_webControlTypeCache.TryGetType(key, out type))
+      if (!_webControlTypeCache.TryGet(key, out type))
       {
         type = LoadType(assembly, typeName);
-        _webControlTypeCache.SetType(key, type);
+        _webControlTypeCache.Set(key, type);
       }
 
       return type;

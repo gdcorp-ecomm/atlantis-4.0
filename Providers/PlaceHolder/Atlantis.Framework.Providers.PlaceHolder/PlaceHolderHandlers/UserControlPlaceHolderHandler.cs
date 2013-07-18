@@ -20,7 +20,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder
 
         using (Control userControl = InitializeUserControl(placeHolderData))
         {
-          renderContent = WebControlManager.ToHtml(userControl);
+          renderContent = ControlManager.ToHtml(userControl);
         }
       }
       catch (Exception ex)
@@ -48,7 +48,8 @@ namespace Atlantis.Framework.Providers.PlaceHolder
 
         Type type = UserControlTypeManager.GetType(location);
 
-        userControl = WebControlManager.LoadControl(type, placeHolderData);
+        userControl = ControlManager.LoadControl(type, placeHolderData);
+        ControlManager.FireControlEvents(userControl);
       }
       catch (Exception ex)
       {

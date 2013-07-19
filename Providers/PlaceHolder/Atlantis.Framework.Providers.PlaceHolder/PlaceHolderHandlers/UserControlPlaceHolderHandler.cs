@@ -29,7 +29,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder
 
         Type type = UserControlTypeCache.GetType(location);
 
-        control = WebControlManager.Contruct(type, placeHolderData);
+        control = WebControlManager.Construct(type, placeHolderData);
       }
       catch (Exception ex)
       {

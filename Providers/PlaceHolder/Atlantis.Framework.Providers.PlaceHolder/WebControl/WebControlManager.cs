@@ -46,7 +46,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder
       }
     }
 
-    internal static Control Contruct(Type type, PlaceHolderData placeHolderData)
+    internal static Control Construct(Type type, PlaceHolderData placeHolderData)
     {
       Page currentPage = HttpContext.Current.Handler == null ? new Page() : (Page) HttpContext.Current.Handler;
       

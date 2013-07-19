@@ -22,7 +22,7 @@ namespace Atlantis.Framework.Providers.DomainSearch.Tests
     [TestInitialize]
     public void Initialize()
     {
-      var request = new MockHttpRequest("http://spoonymac.com");
+      var request = new MockHttpRequest("http://spoonymac.com/");
       MockHttpContext.SetFromWorkerRequest(request);
     }
 
@@ -59,7 +59,6 @@ namespace Atlantis.Framework.Providers.DomainSearch.Tests
         return _domainSearch;
       }
     }
-
 
     [TestMethod]
     public void DomainSearchResultTest()

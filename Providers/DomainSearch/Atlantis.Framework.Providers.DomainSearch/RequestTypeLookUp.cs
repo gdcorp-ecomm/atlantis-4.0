@@ -4,7 +4,7 @@ using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.Providers.DomainSearch
 {
-  public class RequestTypeLookUp
+  internal class RequestTypeLookUp
   {
     private const int DEFAULT_REQUEST_TYPE = 714;
     private const string SITE_DATA_CENTER_APPSETTING = "Atlantis.Framework.DataCenter";

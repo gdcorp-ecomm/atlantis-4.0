@@ -10,6 +10,7 @@ namespace Atlantis.Framework.Providers.CDSContent
   class ProcessQuery
   {
     public string Query { get; set; }
+
     public bool BypassCache { get; set; }
 
     public ProcessQuery(IProviderContainer container, string query)

@@ -41,16 +41,19 @@ namespace Atlantis.Framework.Providers.CDSContent
 
     public IWhitelistResult CheckWhiteList(string appName, string relativePath)
     {
-      IWhitelistResult result = UrlWhitelistResponseData.NullWhielistResult;
+      IWhitelistResult result = UrlWhitelistResponseData.DefaultWhitelistResult;
 
       if (!string.IsNullOrEmpty(appName) && !string.IsNullOrEmpty(relativePath))
       {
         string cdsPath = string.Format(WhiteListFormat, appName);
         ProcessQuery cdsQuery = new ProcessQuery(_container, null);
-        var requestData = new CDSRequestData(_shopperContext.ShopperId, string.Empty, string.Empty, _siteContext.Pathway, _siteContext.PageCount, cdsPath);
+
+        CDSRequestData requestData = new CDSRequestData(_shopperContext.ShopperId, string.Empty, string.Empty, _siteContext.Pathway, _siteContext.PageCount, cdsPath);
+        
         try
         {
           UrlWhitelistResponseData responseData = cdsQuery.BypassCache ? (UrlWhitelistResponseData)Engine.Engine.ProcessRequest(requestData, CDSProviderEngineRequests.UrlWhitelistRequestType) : (UrlWhitelistResponseData)DataCache.DataCache.GetProcessRequest(requestData, CDSProviderEngineRequests.UrlWhitelistRequestType);
+          
           if (responseData != null && responseData.IsSuccess)
           {
             result = responseData.CheckWhitelist(relativePath);

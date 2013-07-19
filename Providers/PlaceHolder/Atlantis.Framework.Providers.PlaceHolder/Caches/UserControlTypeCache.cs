@@ -4,7 +4,7 @@ using System.Web.UI;
 
 namespace Atlantis.Framework.Providers.PlaceHolder
 {
-  internal class UserControlTypeManager
+  internal class UserControlTypeCache
   {
     private static readonly GenericCache<Type> _userControlTypeCache = new GenericCache<Type>();
 

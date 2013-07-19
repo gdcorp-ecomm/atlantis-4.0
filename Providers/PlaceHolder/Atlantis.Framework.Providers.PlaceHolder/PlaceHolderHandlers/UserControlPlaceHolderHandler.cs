@@ -1,62 +1,43 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Web.UI;
-using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.PlaceHolder.Interface;
 
 namespace Atlantis.Framework.Providers.PlaceHolder
 {
-  internal class UserControlPlaceHolderHandler : IPlaceHolderHandler
+  internal class UserControlPlaceHolderHandler : WebControlPlaceHolderHandlerBase
   {
-    public string Type { get { return PlaceHolderTypes.UserControl; } }
+    public override string Type { get { return PlaceHolderTypes.UserControl; } }
 
-    public string GetPlaceHolderContent(string type, string data, ICollection<string> debugContextErrors, IProviderContainer providerContainer)
+    internal UserControlPlaceHolderHandler(string placeHolderDataRaw, ICollection<string> debugContextErrors) : base(placeHolderDataRaw, debugContextErrors)
     {
-      string renderContent = string.Empty;
-
-      try
-      {
-        PlaceHolderData placeHolderData = new PlaceHolderData(data);
-
-        using (Control userControl = InitializeUserControl(placeHolderData))
-        {
-          renderContent = ControlManager.ToHtml(userControl);
-        }
-      }
-      catch (Exception ex)
-      {
-        string errorMessage = string.Format("{0} place holder error. {1}", Type, ex.Message);
-
-        debugContextErrors.Add(errorMessage);
-        ErrorLogger.LogException(errorMessage, "UserControlPlaceHolderHandler.GetPlaceHolderContent()", data);
-      }
-
-      return renderContent;
     }
 
-    private Control InitializeUserControl(PlaceHolderData placeHolderData)
+    protected override Control InitializeControl(string placeHolderDataRaw)
     {
-      Control userControl;
+      Control control = null;
 
       try
       {
+        PlaceHolderData placeHolderData = new PlaceHolderData(placeHolderDataRaw);
+
         string location;
         if (!placeHolderData.TryGetAttribute(PlaceHolderAttributes.Location, out location))
         {
           throw new Exception("Attribute \"" + PlaceHolderAttributes.Location + "\" is required.");
         }
 
-        Type type = UserControlTypeManager.GetType(location);
+        Type type = UserControlTypeCache.GetType(location);
 
-        userControl = ControlManager.LoadControl(type, placeHolderData);
-        ControlManager.FireControlEvents(userControl);
+        control = WebControlManager.Contruct(type, placeHolderData);
       }
       catch (Exception ex)
       {
-        throw new Exception(string.Format("Error loading user control. {0}.", ex.Message));
+        HandleError(string.Format("PlaceHolder error loading control. Type: {0}, Message: {1}", Type, ex.Message),
+                    "UserControlPlaceHolderHandler.InitializeControl()");
       }
 
-      return userControl;
+      return control;
     }
   }
 }

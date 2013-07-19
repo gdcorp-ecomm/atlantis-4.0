@@ -44,17 +44,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Caches\ControlMethodInfoManager.cs" />
     <Compile Include="Caches\GenericCache.cs" />
-    <Compile Include="Caches\UserControlTypeManager.cs" />
-    <Compile Include="Caches\WebControlTypeManager.cs" />
+    <Compile Include="Caches\UserControlTypeCache.cs" />
+    <Compile Include="Caches\WebControlTypeCache.cs" />
+    <Compile Include="Constants\WebControlEvents.cs" />
     <Compile Include="ErrorLogger.cs" />
-    <Compile Include="PlaceHolderHandlers\ControlManager.cs" />
+    <Compile Include="PlaceHolderHandlers\WebControlPlaceHolderHandlerBase.cs" />
+    <Compile Include="WebControl\WebControlManager.cs" />
+    <Compile Include="PlaceHolderHandlers\PlaceHolderHandlerHandlerFactory.cs" />
     <Compile Include="PlaceHolders\CDSDocumentPlaceHolder.cs" />
     <Compile Include="PlaceHolders\PlaceHolderAttributes.cs" />
     <Compile Include="PlaceHolders\UserControlPlaceHolder.cs" />
     <Compile Include="PlaceHolderHandlers\CDSDocumentPlaceHolderHandler.cs" />
-    <Compile Include="PlaceHolderHandlers\CompositionContainer.cs" />
     <Compile Include="PlaceHolderHandlers\WebControlPaceHolderHandler.cs" />
     <Compile Include="PlaceHolders\PlaceHolderData.cs" />
     <Compile Include="PlaceHolderHandlers\NullPlaceHolderHandler.cs" />
@@ -94,6 +95,7 @@
       <Name>Atlantis.Framework.Providers.PlaceHolder.Interface</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

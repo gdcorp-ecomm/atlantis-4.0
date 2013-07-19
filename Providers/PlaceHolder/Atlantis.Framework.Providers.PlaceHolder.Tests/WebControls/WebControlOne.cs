@@ -29,7 +29,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder.Tests.WebControls
 
     protected override void OnInit(EventArgs e)
     {
-      _textSetOnInit = "Init event Fired!!!";
+      _textSetOnInit = "Init event fired!!!";
     }
 
     protected override void OnLoad(EventArgs e)
@@ -44,12 +44,12 @@ namespace Atlantis.Framework.Providers.PlaceHolder.Tests.WebControls
 
     protected override void Render(HtmlTextWriter writer)
     {
-      writer.WriteLine("Web Control One!");
-      writer.WriteLine(Title ?? string.Empty);
-      writer.WriteLine(Text ?? string.Empty);
-      writer.WriteLine(TextSetOnInit);
-      writer.WriteLine(TextSetOnLoad);
-      writer.WriteLine(TextSetOnPreRender);
+      writer.Write("Web Control One!");
+      writer.Write(Title ?? string.Empty);
+      writer.Write(Text ?? string.Empty);
+      writer.Write(TextSetOnInit);
+      writer.Write(TextSetOnLoad);
+      writer.Write(TextSetOnPreRender);
     }
   }
 }

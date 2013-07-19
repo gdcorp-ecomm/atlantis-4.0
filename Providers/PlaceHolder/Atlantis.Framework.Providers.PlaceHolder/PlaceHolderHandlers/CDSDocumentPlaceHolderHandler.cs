@@ -8,28 +8,51 @@ namespace Atlantis.Framework.Providers.PlaceHolder
 {
   internal class CDSDocumentPlaceHolderHandler : IPlaceHolderHandler
   {
+    private string _placeHolderDataRaw;
+    private ICollection<string> _debugContextErrors; 
+    private IProviderContainer _providerContainer;
+
     public string Type
     {
       get { return PlaceHolderTypes.CDSDocument; }
     }
 
-    public string GetPlaceHolderContent(string type, string data, ICollection<string> debugContextErrors, IProviderContainer providerContainer)
+    internal CDSDocumentPlaceHolderHandler(string placeHolderDataRaw, ICollection<string> debugContextErrors, IProviderContainer providerContainer)
+    {
+      _placeHolderDataRaw = placeHolderDataRaw;
+      _debugContextErrors = debugContextErrors;
+      _providerContainer = providerContainer;
+    }
+
+    public void RaiseInitEvent()
+    {
+    }
+
+    public void RaiseLoadEvent()
+    {
+    }
+
+    public void RaisePreRenderEvent()
+    {
+    }
+
+    public string Render()
     {
       string renderContent = string.Empty;
       ICDSContentProvider cdsContentProvider;
 
-      if (providerContainer.TryResolve(out cdsContentProvider))
+      if (_providerContainer.TryResolve(out cdsContentProvider))
       {
         try
         {
-          PlaceHolderData placeHolderData = new PlaceHolderData(data);
+          PlaceHolderData placeHolderData = new PlaceHolderData(_placeHolderDataRaw);
 
           string app;
           string location;
           if (placeHolderData.TryGetAttribute(PlaceHolderAttributes.Application, out app) &&
               placeHolderData.TryGetAttribute(PlaceHolderAttributes.Location, out location))
           {
-            renderContent = cdsContentProvider.GetContent(app, location).Content;  
+            renderContent = cdsContentProvider.GetContent(app, location).Content;
           }
           else
           {
@@ -38,10 +61,10 @@ namespace Atlantis.Framework.Providers.PlaceHolder
         }
         catch (Exception ex)
         {
-          string errorMessage = string.Format("{0} place holder error. {1}", Type, ex.Message);
+          string errorMessage = string.Format("PlaceHolder render error. Type: {0}, Message: {1}", Type, ex.Message);
 
-          debugContextErrors.Add(errorMessage);
-          ErrorLogger.LogException(errorMessage, "CDSDocumentPlaceHolderHandler.GetPlaceHolderContent()", data);
+          _debugContextErrors.Add(errorMessage);
+          ErrorLogger.LogException(errorMessage, "CDSDocumentPlaceHolderHandler.Render()", _placeHolderDataRaw);
         }
       }
 

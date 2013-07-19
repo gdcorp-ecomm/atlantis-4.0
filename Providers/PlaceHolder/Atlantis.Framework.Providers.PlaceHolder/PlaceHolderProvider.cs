@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
 using System.Text.RegularExpressions;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.PlaceHolder.Interface;
+using Atlantis.Framework.Providers.PlaceHolder.PlaceHolderHandlers;
 
 namespace Atlantis.Framework.Providers.PlaceHolder
 {
@@ -14,25 +14,8 @@ namespace Atlantis.Framework.Providers.PlaceHolder
     private const string PLACE_HOLDER_DATA = "placeholderdata";
 
     private static readonly Regex _placeHolderRegex = new Regex(@"\[@P\[(?<placeholdertype>[a-zA-z0-9]*?):(?<placeholderdata>.*?)\]@P\]", RegexOptions.Compiled | RegexOptions.Singleline);
-    private static readonly IDictionary<string, IPlaceHolderHandler> _placeHolderHandlers = new Dictionary<string, IPlaceHolderHandler>(StringComparer.OrdinalIgnoreCase);
-
+    
     private readonly ICollection<string> _debugContextErrors = new Collection<string>(); 
-
-    static PlaceHolderProvider()
-    {
-      InitializePlaceHolders();
-    }
-
-    private static void InitializePlaceHolders()
-    {
-      IPlaceHolderHandler userControlPlaceHolderHandler = new UserControlPlaceHolderHandler();
-      IPlaceHolderHandler cdsDocumentPlaceHolderHandler = new CDSDocumentPlaceHolderHandler();
-      IPlaceHolderHandler webControlPlaceHolderHandler = new WebControlPaceHolderHandler();
-
-      _placeHolderHandlers[userControlPlaceHolderHandler.Type] = userControlPlaceHolderHandler;
-      _placeHolderHandlers[cdsDocumentPlaceHolderHandler.Type] = cdsDocumentPlaceHolderHandler;
-      _placeHolderHandlers[webControlPlaceHolderHandler.Type] = webControlPlaceHolderHandler;
-    }
 
     public PlaceHolderProvider(IProviderContainer container) : base(container)
     {
@@ -59,14 +42,8 @@ namespace Atlantis.Framework.Providers.PlaceHolder
 
       if (placeHolderMatches.Count > 0)
       {
-        StringBuilder contentBuilder = new StringBuilder(originalContent);
-
-        foreach (Match placeHolderMatch in placeHolderMatches)
-        {
-          ProcessPlaceHolderMatch(placeHolderMatch, contentBuilder);
-        }
-
-        finalContent = contentBuilder.ToString();
+        IList<KeyValuePair<string, IPlaceHolderHandler>> placeHolderHandlers = GetPlaceHolderHandlers(placeHolderMatches);
+        finalContent = ProcessPlaceHolderHandlers(placeHolderHandlers, originalContent);
 
         LogDebugContextData();
       }
@@ -74,29 +51,59 @@ namespace Atlantis.Framework.Providers.PlaceHolder
       return finalContent;
     }
 
-    private void ProcessPlaceHolderMatch(Match placeHolderMatch, StringBuilder contentBuilder)
+    private IList<KeyValuePair<string, IPlaceHolderHandler>> GetPlaceHolderHandlers(MatchCollection placeHolderMatches)
     {
-      string matchValue = placeHolderMatch.Value;
-      string placeHolderType = placeHolderMatch.Groups[PLACE_HOLDER_TYPE].Captures[0].Value;
-      string placeHolderDataString = placeHolderMatch.Groups[PLACE_HOLDER_DATA].Captures[0].Value;
+      IList<KeyValuePair<string, IPlaceHolderHandler>> placeHolderHandlers = new List<KeyValuePair<string, IPlaceHolderHandler>>(placeHolderMatches.Count);
+      IPlaceHolderHandlerFactory placeHolderHandlerFactory = new PlaceHolderHandlerHandlerFactory();
 
-      IPlaceHolderHandler placeHolderHandler = DeterminePlaceHolderHandler(placeHolderType);
-
-      string content = placeHolderHandler.GetPlaceHolderContent(placeHolderType, placeHolderDataString, _debugContextErrors, Container);
-
-      contentBuilder.Replace(matchValue, content);
-    }
-
-    private IPlaceHolderHandler DeterminePlaceHolderHandler(string placeHolderKey)
-    {
-      IPlaceHolderHandler placeHolderHandler;
-      
-      if (!_placeHolderHandlers.TryGetValue(placeHolderKey, out placeHolderHandler))
+      foreach (Match placeHolderMatch in placeHolderMatches)
       {
-        placeHolderHandler = new NullPlaceHolderHandler();
+        string matchValue = placeHolderMatch.Value;
+        string placeHolderType = placeHolderMatch.Groups[PLACE_HOLDER_TYPE].Captures[0].Value;
+        string placeHolderDataRaw = placeHolderMatch.Groups[PLACE_HOLDER_DATA].Captures[0].Value;
+
+        IPlaceHolderHandler placeHolderHandler = placeHolderHandlerFactory.ConstructHandler(placeHolderType, placeHolderDataRaw, _debugContextErrors, Container);
+
+        placeHolderHandlers.Add(new KeyValuePair<string, IPlaceHolderHandler>(matchValue, placeHolderHandler));
       }
 
-      return placeHolderHandler;
+      return placeHolderHandlers;
+    }
+
+    private string ProcessPlaceHolderHandlers(IList<KeyValuePair<string, IPlaceHolderHandler>> placeHolderHandlers, string originalContent)
+    {
+      RaisePlaceHolderEvents(placeHolderHandlers);
+      return RenderPlaceHolders(placeHolderHandlers, originalContent);
+    }
+
+    private void RaisePlaceHolderEvents(IList<KeyValuePair<string, IPlaceHolderHandler>> placeHolderHandlers)
+    {
+      foreach (KeyValuePair<string, IPlaceHolderHandler> placeHolderHandler in placeHolderHandlers)
+      {
+        placeHolderHandler.Value.RaiseInitEvent();
+      }
+
+      foreach (KeyValuePair<string, IPlaceHolderHandler> placeHolderHandler in placeHolderHandlers)
+      {
+        placeHolderHandler.Value.RaiseLoadEvent();
+      }
+
+      foreach (KeyValuePair<string, IPlaceHolderHandler> placeHolderHandler in placeHolderHandlers)
+      {
+        placeHolderHandler.Value.RaisePreRenderEvent();
+      }
+    }
+
+    private string RenderPlaceHolders(IList<KeyValuePair<string, IPlaceHolderHandler>> placeHolderHandlers, string originalContent)
+    {
+      StringBuilder contentBuilder = new StringBuilder(originalContent);
+
+      foreach (KeyValuePair<string, IPlaceHolderHandler> placeHolderHandler in placeHolderHandlers)
+      {
+        contentBuilder.Replace(placeHolderHandler.Key, placeHolderHandler.Value.Render());
+      }
+
+      return contentBuilder.ToString();
     }
 
     private void LogDebugContextData()

@@ -3,7 +3,7 @@ using System.Reflection;
 
 namespace Atlantis.Framework.Providers.PlaceHolder
 {
-  internal class WebControlTypeManager
+  internal class WebControlTypeCache
   {
     private static readonly GenericCache<Type> _webControlTypeCache = new GenericCache<Type>();
 

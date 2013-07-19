@@ -198,7 +198,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder.Tests
       string renderedContent = placeHolderProvider.ReplacePlaceHolders(placeHolder.ToMarkup());
       
       WriteOutput(renderedContent);
-      Assert.IsTrue(renderedContent.Equals("Web Control One!"));
+      Assert.IsTrue(renderedContent.Equals("Web Control One!" + "Init event fired!!!" + "Load event fired!!!" + "PreRender event fired!!!"));
     }
 
     [TestMethod]
@@ -216,7 +216,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder.Tests
       string renderedContent = placeHolderProvider.ReplacePlaceHolders(placeHolder.ToMarkup());
 
       WriteOutput(renderedContent);
-      Assert.IsTrue(renderedContent.Equals("Web Control One!Hello World!My Name Is Timbo"));
+      Assert.IsTrue(renderedContent.Equals("Web Control One!" + "Hello World!" + "My Name Is Timbo"  + "Init event fired!!!" + "Load event fired!!!" + "PreRender event fired!!!"));
     }
 
     [TestMethod]
@@ -230,7 +230,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder.Tests
       string renderedContent = placeHolderProvider.ReplacePlaceHolders(placeHolder.ToMarkup() + Environment.NewLine + placeHolder.ToMarkup());
 
       WriteOutput(renderedContent);
-      Assert.IsTrue(renderedContent.Equals("Web Control One!" + Environment.NewLine + "Web Control One!"));
+      Assert.IsTrue(renderedContent.Equals("Web Control One!" + "Init event fired!!!" + "Load event fired!!!" + "PreRender event fired!!!" + Environment.NewLine + "Web Control One!" + "Init event fired!!!" + "Load event fired!!!" + "PreRender event fired!!!"));
     }
 
     [TestMethod]

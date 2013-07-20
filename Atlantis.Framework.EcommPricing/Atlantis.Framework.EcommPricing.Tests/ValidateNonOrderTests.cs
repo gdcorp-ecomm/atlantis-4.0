@@ -53,7 +53,7 @@ namespace Atlantis.Framework.EcommPricing.Tests
     public void RequestBadPrivateLabelId()
     {
       var request = new ValidateNonOrderRequestData(-123, "GDPROMOIPO");
-      var response = (ValidateNonOrderResponseData)DataCache.DataCache.GetProcessRequest(request, _REQUESTTYPE);
+      var response = (ValidateNonOrderResponseData)Engine.Engine.ProcessRequest(request, _REQUESTTYPE);
       Assert.AreEqual(ValidateNonOrderResponseData.InActiveResponse, response);
     }
 
@@ -158,7 +158,7 @@ namespace Atlantis.Framework.EcommPricing.Tests
     public void InActiveResponse()
     {
       var request = new ValidateNonOrderRequestData(1, "GDPROMOIP0");
-      var response = (ValidateNonOrderResponseData)DataCache.DataCache.GetProcessRequest(request, _REQUESTTYPE);
+      var response = (ValidateNonOrderResponseData)Engine.Engine.ProcessRequest(request, _REQUESTTYPE);
       Assert.IsFalse(response.IsActive);
     }
 
@@ -166,7 +166,7 @@ namespace Atlantis.Framework.EcommPricing.Tests
     public void ActiveResponse()
     {
       var request = new ValidateNonOrderRequestData(1, "GDPROMOIPO");
-      var response = (ValidateNonOrderResponseData)DataCache.DataCache.GetProcessRequest(request, _REQUESTTYPE);
+      var response = (ValidateNonOrderResponseData)Engine.Engine.ProcessRequest(request, _REQUESTTYPE);
       Assert.IsTrue(response.IsActive);
     }
 
@@ -174,7 +174,7 @@ namespace Atlantis.Framework.EcommPricing.Tests
     public void ResponseToXml()
     {
       var request = new ValidateNonOrderRequestData(1, "GDPROMOIPO");
-      var response = (ValidateNonOrderResponseData)DataCache.DataCache.GetProcessRequest(request, _REQUESTTYPE);
+      var response = (ValidateNonOrderResponseData)Engine.Engine.ProcessRequest(request, _REQUESTTYPE);
       XElement parsed = XElement.Parse(response.ToXML());
     }
 
@@ -183,7 +183,7 @@ namespace Atlantis.Framework.EcommPricing.Tests
     public void ExceptionInRequest()
     {
       var request = new WrongRequestType();
-      var response = (ValidateNonOrderResponseData)DataCache.DataCache.GetProcessRequest(request, _REQUESTTYPE);
+      var response = (ValidateNonOrderResponseData)Engine.Engine.ProcessRequest(request, _REQUESTTYPE);
     }
 
     private class WrongRequestType : RequestData

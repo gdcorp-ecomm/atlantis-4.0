@@ -16,6 +16,7 @@ namespace Atlantis.Framework.Web.CDSContent
   public abstract class CDSContentPageControllerBase : RenderPipelineBasePage
   {
     private static readonly IList<IPlaceHolder> _emptyPlaceHolderList = new List<IPlaceHolder>(0);
+    private IWhitelistResult _whitelistResult;
  
     private ICDSContentProvider _cdsContentProvider;
     protected ICDSContentProvider CdsContentProvider
@@ -39,16 +40,25 @@ namespace Atlantis.Framework.Web.CDSContent
 
     protected virtual IList<IPlaceHolder> BodyEndPlaceHolders { get { return _emptyPlaceHolderList; } }
 
-    private bool _useInjectionRenderHandler;
-    protected virtual bool UseInjectionRenderHandler
+    private bool _useInjectionRenderHandler = true;
+    protected bool UseInjectionRenderHandler
     {
       get { return _useInjectionRenderHandler; }
+      set { _useInjectionRenderHandler = value; }
     }
 
     private void ProcessContent()
     {
       IRenderContent renderContent = CdsContentProvider.GetContent(ApplicationName, DocumentRoute);
-      Controls.Add(new LiteralControl(renderContent.Content));
+
+      if (string.IsNullOrEmpty(renderContent.Content) && _whitelistResult == UrlWhitelistResponseData.DefaultWhitelistResult)
+      {
+        HandleDocumentNotFound();
+      }
+      else
+      {
+        Controls.Add(new LiteralControl(renderContent.Content)); 
+      }
     }
 
     private bool RedirectRequest()
@@ -75,10 +85,9 @@ namespace Atlantis.Framework.Web.CDSContent
 
     private bool WhiteListCheck()
     {
-      IWhitelistResult whitelistResult = CdsContentProvider.CheckWhiteList(ApplicationName, DocumentRoute);
-      _useInjectionRenderHandler = whitelistResult.UrlData.Style.Equals("f", StringComparison.OrdinalIgnoreCase);
+      _whitelistResult = CdsContentProvider.CheckWhiteList(ApplicationName, DocumentRoute);
 
-      return HandleWhiteListResult(whitelistResult);
+      return HandleWhiteListResult(_whitelistResult);
     }
 
     private void ConfigureRenderPipeline()

@@ -1,11 +1,9 @@
 ﻿using Atlantis.Framework.CDS.Interface;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.CDSContent.Interface;
-using Atlantis.Framework.Providers.Interface.ProviderContainer;
 using Atlantis.Framework.Testing.MockHttpContext;
 using Atlantis.Framework.Testing.MockProviders;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Diagnostics;
 
 namespace Atlantis.Framework.Providers.CDSContent.Tests
 {
@@ -49,11 +47,13 @@ namespace Atlantis.Framework.Providers.CDSContent.Tests
     {
       string appName = "blah blah";
       string relativePath = "/hosting/email-hosting";
+      
       ICDSContentProvider provider = ProviderContainer.Resolve<ICDSContentProvider>();
       IWhitelistResult whiteListResult = provider.CheckWhiteList(appName, relativePath);
-      Assert.IsFalse(whiteListResult.Exists);
+
+      Assert.IsTrue(whiteListResult.Exists);
       Assert.IsNotNull(whiteListResult.UrlData);
-      Assert.IsTrue(whiteListResult.UrlData.Style == string.Empty);
+      Assert.IsTrue(whiteListResult.UrlData.Style == DocumentStyles.Unknown);
     }
 
     [TestMethod]
@@ -61,31 +61,13 @@ namespace Atlantis.Framework.Providers.CDSContent.Tests
     {
       string appName = "blah blah";
       string relativePath = null;
+      
       ICDSContentProvider provider = ProviderContainer.Resolve<ICDSContentProvider>();
       IWhitelistResult whiteListResult = provider.CheckWhiteList(appName, relativePath);
-      Assert.IsFalse(whiteListResult.Exists);
-      Assert.IsNotNull(whiteListResult.UrlData);
-      Assert.IsTrue(whiteListResult.UrlData.Style == string.Empty);
-    }
-
-    [TestMethod]
-    public void UrlExists_WhitelistTests()
-    {
-      string appName = "sales";
-      string relativePath = "robots.txt";
-      ICDSContentProvider provider = ProviderContainer.Resolve<ICDSContentProvider>();
-      IWhitelistResult whiteListResult = provider.CheckWhiteList(appName, relativePath);
+      
       Assert.IsTrue(whiteListResult.Exists);
-    }
-
-    [TestMethod]
-    public void UrlDoesNotExist_WhitelistTests()
-    {
-      string appName = "sales/unittest";
-      string relativePath = "hosting/email-hosting";
-      ICDSContentProvider provider = ProviderContainer.Resolve<ICDSContentProvider>();
-      IWhitelistResult whiteListResult = provider.CheckWhiteList(appName, relativePath);
-      Assert.IsFalse(whiteListResult.Exists);
+      Assert.IsNotNull(whiteListResult.UrlData);
+      Assert.IsTrue(whiteListResult.UrlData.Style == DocumentStyles.Unknown);
     }
 
     [TestMethod]
@@ -93,20 +75,77 @@ namespace Atlantis.Framework.Providers.CDSContent.Tests
     {
       string appName = "sales/unittest";
       string relativePath = "/default.aspx";
+      
       ICDSContentProvider provider = ProviderContainer.Resolve<ICDSContentProvider>();
       IWhitelistResult whiteListResult = provider.CheckWhiteList(appName, relativePath);
+      
       Assert.IsTrue(whiteListResult.Exists);
-      Assert.IsTrue(whiteListResult.UrlData.Style == "w");
+      Assert.IsTrue(whiteListResult.UrlData.Style == DocumentStyles.Widget);
     }
 
+    [TestMethod]
     public void StyleIsIncorrect_WhitelistTests()
     {
       string appName = "sales/unittest";
       string relativePath = "/hosting/email-hosting";
+      
       ICDSContentProvider provider = ProviderContainer.Resolve<ICDSContentProvider>();
       IWhitelistResult whiteListResult = provider.CheckWhiteList(appName, relativePath);
+      
       Assert.IsTrue(whiteListResult.Exists);
-      Assert.IsFalse(whiteListResult.UrlData.Style == "w");
+      Assert.IsFalse(whiteListResult.UrlData.Style == DocumentStyles.Widget);
+    }
+
+    [TestMethod]
+    public void BadJson_WhitelistTests()
+    {
+      string appName = "atlantis/_unittests/whitelistbadjson";
+      string relativePath = "home";
+
+      ICDSContentProvider provider = ProviderContainer.Resolve<ICDSContentProvider>();
+      IWhitelistResult whiteListResult = provider.CheckWhiteList(appName, relativePath);
+
+      Assert.IsTrue(whiteListResult.Exists);
+      Assert.IsTrue(whiteListResult.UrlData.Style == DocumentStyles.Unknown);
+    }
+
+    [TestMethod]
+    public void Empty_WhitelistTests()
+    {
+      string appName = "atlantis/_unittests/whitelistempty";
+      string relativePath = "home";
+
+      ICDSContentProvider provider = ProviderContainer.Resolve<ICDSContentProvider>();
+      IWhitelistResult whiteListResult = provider.CheckWhiteList(appName, relativePath);
+
+      Assert.IsTrue(whiteListResult.Exists);
+      Assert.IsTrue(whiteListResult.UrlData.Style == DocumentStyles.Unknown);
+    }
+
+    [TestMethod]
+    public void ItemNotFound_WhitelistTests()
+    {
+      string appName = "atlantis/_unittests/whitelistoneitem";
+      string relativePath = "home2";
+
+      ICDSContentProvider provider = ProviderContainer.Resolve<ICDSContentProvider>();
+      IWhitelistResult whiteListResult = provider.CheckWhiteList(appName, relativePath);
+
+      Assert.IsFalse(whiteListResult.Exists);
+      Assert.IsTrue(whiteListResult.UrlData.Style == DocumentStyles.Unknown);
+    }
+
+    [TestMethod]
+    public void ItemFound_WhitelistTests()
+    {
+      string appName = "atlantis/_unittests/whitelistoneitem";
+      string relativePath = "home";
+
+      ICDSContentProvider provider = ProviderContainer.Resolve<ICDSContentProvider>();
+      IWhitelistResult whiteListResult = provider.CheckWhiteList(appName, relativePath);
+
+      Assert.IsTrue(whiteListResult.Exists);
+      Assert.IsTrue(whiteListResult.UrlData.Style == DocumentStyles.FlatPage);
     }
   }
 }

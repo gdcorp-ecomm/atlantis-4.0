@@ -5,9 +5,9 @@ namespace Atlantis.Framework.CDS.Interface
 {
   public class CDSResponseData : IResponseData
   {
-    private AtlantisException _exception = null;
-    private bool _success = false;
-    private string _responseData = null;
+    private readonly AtlantisException _exception;
+    private readonly bool _success;
+    private readonly string _responseData;
 
     public CDSResponseData(string responseData)
     {
@@ -24,7 +24,7 @@ namespace Atlantis.Framework.CDS.Interface
 
     public CDSResponseData(RequestData requestData, Exception exception)
     {
-      _exception = new AtlantisException(requestData, this.GetType().Name, exception.Message + exception.StackTrace, requestData.ToXML());
+      _exception = new AtlantisException(requestData, exception.Source, exception.Message + exception.StackTrace, requestData.ToXML());
       _success = false;
     }
 
@@ -44,8 +44,6 @@ namespace Atlantis.Framework.CDS.Interface
       }
     }
 
-    #region IResponseData Members
-
     public string ToXML()
     {
       return string.Empty;
@@ -55,8 +53,5 @@ namespace Atlantis.Framework.CDS.Interface
     {
       return _exception;
     }
-
-    #endregion
-
   }
 }

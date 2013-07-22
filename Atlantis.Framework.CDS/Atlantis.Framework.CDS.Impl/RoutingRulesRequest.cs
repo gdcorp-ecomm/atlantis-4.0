@@ -1,36 +1,27 @@
 ﻿using Atlantis.Framework.CDS.Interface;
 using Atlantis.Framework.Interface;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Text;
 
 namespace Atlantis.Framework.CDS.Impl
 {
   public class RoutingRulesRequest : IRequest
   {
-    const string ApplicationNameKey = "ApplicationName";
-
     public IResponseData RequestHandler(RequestData requestData, ConfigElement config)
     {
-      RoutingRulesResponseData result = null;
-      CDSRequestData cdsRequestData = requestData as CDSRequestData;
+      RoutingRulesResponseData result;
+
+      CDSRequestData cdsRequestData = (CDSRequestData)requestData;
+
       WsConfigElement wsConfig = (WsConfigElement)config;
-      cdsRequestData.AppName = wsConfig.GetConfigValue(ApplicationNameKey); //used to identify the App in the errorlog entry
 
       CDSService service = new CDSService(wsConfig.WSURL + cdsRequestData.Query);
+
       try
       {
         string responseText = service.GetWebResponse();
-        if (!string.IsNullOrEmpty(responseText))
-        {
-          result = new RoutingRulesResponseData(responseText);
-        }
-        else
-        {
-          result = new RoutingRulesResponseData(cdsRequestData, new Exception("Empty response from the CDS service."));
-        }
+
+        result = !string.IsNullOrEmpty(responseText) ? new RoutingRulesResponseData(responseText) : new RoutingRulesResponseData(cdsRequestData, new Exception("Empty response from the CDS service."));
       }
       catch (WebException ex)
       {
@@ -40,7 +31,6 @@ namespace Atlantis.Framework.CDS.Impl
         }
         else
         {
-          result = new RoutingRulesResponseData(cdsRequestData, ex);
           throw;
         }
       }

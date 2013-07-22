@@ -18,8 +18,6 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCopyright("Copyright © GoDaddy 2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
-
-//What does this do? Look here to find out... http://msdn.microsoft.com/en-us/library/system.runtime.compilerservices.internalsvisibletoattribute.aspx
 [assembly: InternalsVisibleTo("Atlantis.Framework.Providers.CDSContent.Tests")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 
@@ -41,4 +39,4 @@ using System.Runtime.InteropServices;
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("4.0.0.0")]
-[assembly: AssemblyFileVersion("4.13.7.19")]
+[assembly: AssemblyFileVersion("4.13.7.21")]

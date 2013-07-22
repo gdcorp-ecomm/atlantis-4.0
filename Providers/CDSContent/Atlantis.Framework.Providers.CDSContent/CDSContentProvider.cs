@@ -14,63 +14,64 @@ namespace Atlantis.Framework.Providers.CDSContent
 {
   public class CDSContentProvider : ProviderBase, ICDSContentProvider
   {
-    const string WhiteListFormat = "content/{0}/whitelist";
-    const string RulesDocFormat = "content/{0}/{1}.rule";
-    const string DefaultContentPathFormat = "content/{0}/{1}";
-    const string ContentPathFormat = "content/{0}";
+    private const string WhiteListFormat = "content/{0}/whitelist";
+    private const string RulesDocFormat = "content/{0}/{1}.rule";
+    private const string DefaultContentPathFormat = "content/{0}/{1}";
+    private const string ContentPathFormat = "content/{0}";
 
-    private static readonly IRedirectResult NullRedirectResult = new RedirectResult(false, null);
-    private static readonly IRenderContent NullRenderContent = new ContentVersionResponseData(null);
+    private static readonly IRedirectResult _nullRedirectResult = new RedirectResult(false, null);
+    private static readonly IRenderContent _nullRenderContent = new ContentVersionResponseData(null);
 
-    private IProviderContainer _container;
-    private readonly ISiteContext _siteContext;
-    private readonly IShopperContext _shopperContext;
-    private ExpressionParserManager _expressionParser;
-    
-    public CDSContentProvider(IProviderContainer container)
-      : base(container)
+    private ExpressionParserManager _expressionParserManager;
+    private ExpressionParserManager ExpressionParserManager
     {
-      _container = container;
-      _siteContext = container.Resolve<ISiteContext>();
-      _shopperContext = container.Resolve<IShopperContext>();
-      _expressionParser = new ExpressionParserManager(_container);
-      _expressionParser.EvaluateExpressionHandler += ConditionHandlerManager.EvaluateCondition;
+      get
+      {
+        if (_expressionParserManager == null)
+        {
+          _expressionParserManager = new ExpressionParserManager(Container);
+          _expressionParserManager.EvaluateExpressionHandler += ConditionHandlerManager.EvaluateCondition;
+        }
+        return _expressionParserManager;
+      }
     }
-
-    #region ICDSContentProvider Members
+    
+    public CDSContentProvider(IProviderContainer container) : base(container)
+    {
+    }
 
     public IWhitelistResult CheckWhiteList(string appName, string relativePath)
     {
-      IWhitelistResult result = UrlWhitelistResponseData.DefaultWhitelistResult;
+      IWhitelistResult whitelistResult;
 
-      if (!string.IsNullOrEmpty(appName) && !string.IsNullOrEmpty(relativePath))
-      {
-        string cdsPath = string.Format(WhiteListFormat, appName);
-        ProcessQuery cdsQuery = new ProcessQuery(_container, null);
+      string cdsPath = string.Format(WhiteListFormat, appName);
 
-        CDSRequestData requestData = new CDSRequestData(_shopperContext.ShopperId, string.Empty, string.Empty, _siteContext.Pathway, _siteContext.PageCount, cdsPath);
+      CDSRequestData requestData = new CDSRequestData(cdsPath);
         
-        try
-        {
-          UrlWhitelistResponseData responseData = cdsQuery.BypassCache ? (UrlWhitelistResponseData)Engine.Engine.ProcessRequest(requestData, CDSProviderEngineRequests.UrlWhitelistRequestType) : (UrlWhitelistResponseData)DataCache.DataCache.GetProcessRequest(requestData, CDSProviderEngineRequests.UrlWhitelistRequestType);
-          
-          if (responseData != null && responseData.IsSuccess)
-          {
-            result = responseData.CheckWhitelist(relativePath);
-          }
-        }
-        catch (Exception ex)
-        {
-          Engine.Engine.LogAtlantisException(new AtlantisException(ex.Source, string.Empty, "0", ex.Message, cdsPath, string.Empty, string.Empty, string.Empty, string.Empty, 0));
-        }
+      try
+      {
+        UrlWhitelistResponseData responseData = (UrlWhitelistResponseData)DataCache.DataCache.GetProcessRequest(requestData, CDSProviderEngineRequests.UrlWhitelistRequestType);
+        whitelistResult = responseData.CheckWhitelist(relativePath);
+      }
+      catch (Exception ex)
+      {
+        whitelistResult = UrlWhitelistResponseData.NullWhitelistResult;
+
+        Engine.Engine.LogAtlantisException(new AtlantisException("CDSContentProvider.CheckWhiteList()", 
+                                                                 "0", 
+                                                                 "CDSContentProvider whitelist error. " + ex.Message, 
+                                                                 cdsPath,
+                                                                 null,
+                                                                 null));
       }
 
-      return result;
+      return whitelistResult;
     }
 
     public IRedirectResult CheckRedirectRules(string appName, string relativePath)
     {
-      IRedirectResult redirectResult = NullRedirectResult;
+      IRedirectResult redirectResult = _nullRedirectResult;
+
       ReadOnlyCollection<IRoutingRule> redirectRules = GetRoutingRules(appName, relativePath, RoutingRuleTypes.Redirect);
 
       if (redirectRules != null)
@@ -78,21 +79,28 @@ namespace Atlantis.Framework.Providers.CDSContent
         try
         {
           string ruleData = GetRuleData(redirectRules);
-          if (!string.IsNullOrEmpty(ruleData))
 
+          if (!string.IsNullOrEmpty(ruleData))
           {
             RedirectData rawRedirectData = JsonConvert.DeserializeObject<RedirectData>(ruleData);
+
             if (!string.IsNullOrEmpty(rawRedirectData.Location))
             {
               string resultText;
-              TokenManager.ReplaceTokens(rawRedirectData.Location, _container, out resultText);
+              TokenManager.ReplaceTokens(rawRedirectData.Location, Container, out resultText);
+
               redirectResult = new RedirectResult(true, new RedirectData(rawRedirectData.Type, resultText));
             }
           }
         }
         catch (Exception ex)
         {
-          Engine.Engine.LogAtlantisException(new AtlantisException(ex.Source, string.Empty, "0", ex.Message, appName + "-" + relativePath, string.Empty, string.Empty, string.Empty, string.Empty, 0));
+          Engine.Engine.LogAtlantisException(new AtlantisException("CDSContentProvider.CheckRedirectRules()", 
+                                                                   "0", 
+                                                                   "CDSContentProvider redirect rule error. " + ex.Message,
+                                                                   appName + relativePath,
+                                                                   null,
+                                                                   null));
         }
       }
 
@@ -101,34 +109,38 @@ namespace Atlantis.Framework.Providers.CDSContent
 
     public IRenderContent GetContent(string appName, string relativePath)
     {
-      IRenderContent contentVersion = NullRenderContent;
+      IRenderContent contentVersion = _nullRenderContent;
 
       string contentPath = GetContentPath(appName, relativePath);
+
       if (!string.IsNullOrEmpty(contentPath))
       {
-        ProcessQuery cdsQuery = new ProcessQuery(_container, contentPath);
-        var requestData = new CDSRequestData(_shopperContext.ShopperId, string.Empty, string.Empty, _siteContext.Pathway, _siteContext.PageCount, cdsQuery.Query);
+        ProcessQuery cdsQuery = new ProcessQuery(Container, contentPath);
+        var requestData = new CDSRequestData(cdsQuery.Query);
+
         try
         {
           ContentVersionResponseData responseData = cdsQuery.BypassCache ? (ContentVersionResponseData)Engine.Engine.ProcessRequest(requestData, CDSProviderEngineRequests.ContentVersionRequestType) : (ContentVersionResponseData)DataCache.DataCache.GetProcessRequest(requestData, CDSProviderEngineRequests.ContentVersionRequestType);
-          if (responseData != null && responseData.IsSuccess && !string.IsNullOrEmpty(responseData.Content))
+          
+          if (responseData.IsSuccess && !string.IsNullOrEmpty(responseData.Content))
           {
             contentVersion = responseData;
           }
         }
         catch (Exception ex)
         {
-          Engine.Engine.LogAtlantisException(new AtlantisException(ex.Source, string.Empty, "0", ex.Message, cdsQuery.Query, string.Empty, string.Empty, string.Empty, string.Empty, 0));
+          Engine.Engine.LogAtlantisException(new AtlantisException("CDSContentProvider.GetContent()", 
+                                                                   "0", 
+                                                                   "CDSContentProvider error getting content. " + ex.Message,
+                                                                   contentPath,
+                                                                   null,
+                                                                   null));
         }
       }
 
       return contentVersion;
     }
     
-    #endregion
-
-    #region Private
-
     private ReadOnlyCollection<IRoutingRule> GetRoutingRules(string appName, string relativePath, string type)
     {
       ReadOnlyCollection<IRoutingRule> routingRules = null;
@@ -136,19 +148,27 @@ namespace Atlantis.Framework.Providers.CDSContent
       if (!string.IsNullOrEmpty(appName) && !string.IsNullOrEmpty(relativePath))
       {
         string cdsPath = string.Format(RulesDocFormat, appName, relativePath);
-        ProcessQuery cdsQuery = new ProcessQuery(_container, null);
-        var requestData = new CDSRequestData(_shopperContext.ShopperId, string.Empty, string.Empty, _siteContext.Pathway, _siteContext.PageCount, cdsPath);
+        ProcessQuery cdsQuery = new ProcessQuery(Container, null);
+
+        var requestData = new CDSRequestData(cdsPath);
+
         try
         {
           RoutingRulesResponseData responseData = cdsQuery.BypassCache ? (RoutingRulesResponseData)Engine.Engine.ProcessRequest(requestData, CDSProviderEngineRequests.RoutingRulesRequestType) : (RoutingRulesResponseData)DataCache.DataCache.GetProcessRequest(requestData, CDSProviderEngineRequests.RoutingRulesRequestType);
-          if (responseData != null && responseData.IsSuccess)
+          
+          if (responseData.IsSuccess)
           {
             responseData.TryGetValue(type, out routingRules);
           }
         }
         catch (Exception ex)
         {
-          Engine.Engine.LogAtlantisException(new AtlantisException(ex.Source, string.Empty, "0", ex.Message, cdsPath, string.Empty, string.Empty, string.Empty, string.Empty, 0));
+          Engine.Engine.LogAtlantisException(new AtlantisException("CDSContentProvider.GetRoutingRules()", 
+                                                                   "0", 
+                                                                   "CDSContentProvider error getting route rules. " + ex.Message,
+                                                                   cdsPath,
+                                                                   null,
+                                                                   null));
         }
       }
 
@@ -168,11 +188,16 @@ namespace Atlantis.Framework.Providers.CDSContent
           {
             try
             {
-              result = _expressionParser.EvaluateExpression(rule.Condition);
+              result = ExpressionParserManager.EvaluateExpression(rule.Condition);
             }
             catch (Exception ex)
             {
-              Engine.Engine.LogAtlantisException(new AtlantisException("Error evaluating condition: " + ex.Source, string.Empty, "0", ex.Message, "Condition: " + rule.Condition, string.Empty, string.Empty, string.Empty, string.Empty, 0));
+              Engine.Engine.LogAtlantisException(new AtlantisException("CDSContentProvider.GetRuleData()", 
+                                                                       "0", 
+                                                                       "CDSContentProvider error evaluating rule condition. " + ex.Message,
+                                                                       "Condition: " + rule.Condition,
+                                                                       null,
+                                                                       null));
               result = false;
             }
             if (result && !string.IsNullOrEmpty(rule.Data))
@@ -196,30 +221,36 @@ namespace Atlantis.Framework.Providers.CDSContent
         contentPath = string.Format(DefaultContentPathFormat, appName, relativePath);
 
         ReadOnlyCollection<IRoutingRule> routeRules = GetRoutingRules(appName, relativePath, RoutingRuleTypes.Route);
+        
         if (routeRules != null)
         {
           string ruleData = GetRuleData(routeRules);
+          
           if (!string.IsNullOrEmpty(ruleData))
           {
             try
             {
               RouteData rawRouteData = JsonConvert.DeserializeObject<RouteData>(ruleData);
+              
               if (!string.IsNullOrEmpty(rawRouteData.Location))
               {
                 contentPath = string.Format(ContentPathFormat, rawRouteData.Location);
               }
-
             }
             catch (Exception ex)
             {
-              Engine.Engine.LogAtlantisException(new AtlantisException("Error deserializing rule data: " + ex.Source, string.Empty, "0", ex.Message, appName + "-" + relativePath + " - RuleDataString: " + ruleData, string.Empty, string.Empty, string.Empty, string.Empty, 0));
+              Engine.Engine.LogAtlantisException(new AtlantisException("CDSContentProvider.GetContentPath()", 
+                                                                       "0", 
+                                                                       "CDSContentProvider error deserializing rule data. " + ex.Message,
+                                                                       contentPath,
+                                                                       null,
+                                                                       null));
             }
           }
         }
       }
+
       return contentPath;
     }
-
-    #endregion
   }
 }

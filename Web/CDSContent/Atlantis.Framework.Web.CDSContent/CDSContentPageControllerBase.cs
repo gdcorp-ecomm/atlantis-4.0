@@ -51,7 +51,7 @@ namespace Atlantis.Framework.Web.CDSContent
     {
       IRenderContent renderContent = CdsContentProvider.GetContent(ApplicationName, DocumentRoute);
 
-      if (string.IsNullOrEmpty(renderContent.Content) && _whitelistResult == UrlWhitelistResponseData.DefaultWhitelistResult)
+      if (string.IsNullOrEmpty(renderContent.Content))
       {
         HandleDocumentNotFound();
       }

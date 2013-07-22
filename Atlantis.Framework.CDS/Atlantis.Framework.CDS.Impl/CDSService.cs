@@ -17,28 +17,23 @@ namespace Atlantis.Framework.CDS.Impl
     {
       string responseText = string.Empty;
 
-      HttpWebResponse webResponse = null;
-      WebRequest webRequest = WebRequest.Create(Url) as HttpWebRequest;
+      WebRequest webRequest = WebRequest.Create(Url);
 
-      if (webRequest != null)
+      webRequest.Method = "GET";
+      webRequest.CachePolicy = new RequestCachePolicy(RequestCacheLevel.BypassCache);
+      
+      using (HttpWebResponse webResponse = (HttpWebResponse)webRequest.GetResponse())
       {
-        webRequest.Method = "GET";
-        webRequest.CachePolicy = new RequestCachePolicy(RequestCacheLevel.BypassCache);
-        webResponse = webRequest.GetResponse() as HttpWebResponse;
-
-        if (webResponse != null)
+        if (webResponse.StatusCode == HttpStatusCode.OK)
         {
-          if (webResponse.StatusCode == HttpStatusCode.OK)
+          using (Stream webResponseData = webResponse.GetResponseStream())
           {
-            using (Stream webResponseData = webResponse.GetResponseStream())
+            if (webResponseData != null)
             {
-              if (webResponseData != null)
+              using (StreamReader responseReader = new StreamReader(webResponseData))
               {
-                using (StreamReader responseReader = new StreamReader(webResponseData))
-                {
-                  responseText = responseReader.ReadToEnd();
-                  responseReader.Close();
-                }
+                responseText = responseReader.ReadToEnd();
+                responseReader.Close();
               }
             }
           }

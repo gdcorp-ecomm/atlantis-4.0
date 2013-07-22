@@ -1,18 +1,11 @@
 ﻿using Atlantis.Framework.Conditions.Interface;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.CDSContent.Interface;
-using Atlantis.Framework.Providers.CDSContent.Tests.RenderHandlers;
 using Atlantis.Framework.Providers.Containers;
-using Atlantis.Framework.Render.Pipeline;
 using Atlantis.Framework.Testing.MockHttpContext;
 using Atlantis.Framework.Testing.MockProviders;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Atlantis.Framework.Providers.CDSContent.Tests
 {

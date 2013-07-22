@@ -9,16 +9,16 @@ namespace Atlantis.Framework.CDS.Impl
 {
   public class CDSRequest : IRequest
   {
-    const string ApplicationNameKey = "ApplicationName";
-
     public IResponseData RequestHandler(RequestData requestData, ConfigElement config)
     {
-      CDSResponseData result = null;
-      CDSRequestData cdsRequestData = requestData as CDSRequestData;
+      CDSResponseData result;
+
+      CDSRequestData cdsRequestData = (CDSRequestData)requestData;
+
       WsConfigElement wsConfig = (WsConfigElement)config;
-      cdsRequestData.AppName = wsConfig.GetConfigValue(ApplicationNameKey); //used to identify the App in the errorlog entry
 
       CDSService service = new CDSService(wsConfig.WSURL + cdsRequestData.Query);
+
       try
       {
         string responseText = service.GetWebResponse();
@@ -26,21 +26,20 @@ namespace Atlantis.Framework.CDS.Impl
       }
       catch (WebException ex)
       {
-        if (ex.Response != null && ex.Response is HttpWebResponse && ((HttpWebResponse)ex.Response).StatusCode == HttpStatusCode.NotFound)
+        if (ex.Response is HttpWebResponse && ((HttpWebResponse)ex.Response).StatusCode == HttpStatusCode.NotFound)
         {
           result = new CDSResponseData(ex.Message, false);
         }
         else
         {
-          result = new CDSResponseData(cdsRequestData, ex);
           throw;
         }        
       }
       catch (Exception ex)
       {
         result = new CDSResponseData(cdsRequestData, ex);
-        throw;
       }
+
       return result;
     }
   }

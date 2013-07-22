@@ -20,30 +20,6 @@ namespace Atlantis.Framework.PixelsGet.Interface.PixelObjects.Triggers
       return PixelXmlNames.TriggerTypeOrderDetail;
     }
 
-    public static ICurrencyPrice ConvertTransactionalToUSD(ICurrencyPrice transactionalPrice)
-    {
-      ICurrencyPrice result = transactionalPrice;
-      if (transactionalPrice != null && transactionalPrice.Type == CurrencyPriceType.Transactional)
-      {
-        ICurrencyInfo transactionalInfo = transactionalPrice.CurrencyInfo;
-        ICurrencyInfo usdInfo = CurrencyData.GetCurrencyInfo("USD");
-        if (usdInfo != null)
-        {
-          if ((!transactionalPrice.CurrencyInfo.Equals(usdInfo)) && (transactionalInfo.ExchangeRatePricing > 0))
-          {
-            double convertedDouble = Math.Round(transactionalPrice.Price * transactionalInfo.ExchangeRatePricing);
-            int convertedPrice = Int32.MaxValue;
-            if (convertedDouble < Int32.MaxValue)
-            {
-              convertedPrice = Convert.ToInt32(convertedDouble);
-            }
-            result = new CurrencyPrice(convertedPrice, usdInfo, CurrencyPriceType.Transactional);
-          }
-        }
-      }
-      return result;
-    }
-
     public override bool ShouldFirePixel(bool isPixelAlreadyTriggered, List<Pixel> alreadyFiredPixels, ref string triggerReturn)
     {
       bool shouldFirePixel = false;
@@ -74,64 +50,55 @@ namespace Atlantis.Framework.PixelsGet.Interface.PixelObjects.Triggers
       return shouldFirePixel;
     }
 
-
     private bool ShouldFireOnPriceTrigger(string priceAttributeName, XmlNode orderDetail, XElement triggerElement)
     {
-      var shouldFirePixel = false;
-
-      #region Get attributes from orderdetail element
-      string orderDetailAttributeValue = GetStringAttribute(orderDetail, priceAttributeName, "0");
-      string transactionCurrency = GetStringAttribute(orderDetail, "transactioncurrency", "USD");
+      bool shouldFirePixel = false;
 
       string relationalOperator = System.Web.HttpUtility.HtmlDecode(triggerElement.Attribute(PixelXmlNames.Comparison).Value);
+      string orderDetailAttributeValue = GetStringAttribute(orderDetail, priceAttributeName, "0");
+      string conversionRateToUsdAttribute = GetStringAttribute(orderDetail, "conversionratet2u", "1.0");
       string targetValue = triggerElement.Attribute(PixelXmlNames.Value).Value;
-      string targetCurrency = triggerElement.Attribute(PixelXmlNames.Currency).Value;
-      if (string.IsNullOrEmpty(targetCurrency))
+
+      double conversionRateToUsd = 1.0;
+      double orderDetailValueDouble;
+      double targetValueDouble;
+
+      if (double.TryParse(orderDetailAttributeValue, out orderDetailValueDouble) &&
+          double.TryParse(targetValue, out targetValueDouble) &&
+          double.TryParse(conversionRateToUsdAttribute, out conversionRateToUsd))
       {
-        targetCurrency = "USD";
-      }
-      #endregion
-      int orderDetailValueInt;
-      int targetValueInt;
-
-      if (int.TryParse(orderDetailAttributeValue, out orderDetailValueInt) &&
-          int.TryParse(targetValue, out targetValueInt))
-      {
-        #region Convert to usable price objects
-
-        ICurrencyInfo transactionCurrencyInfo = CurrencyData.GetCurrencyInfo(transactionCurrency);
-        ICurrencyPrice transactionalPrice = new CurrencyPrice(orderDetailValueInt, transactionCurrencyInfo, CurrencyPriceType.Transactional);
-        ICurrencyInfo targetCurrencyInfo = CurrencyData.GetCurrencyInfo(targetCurrency);
-        ICurrencyPrice targetPrice = new CurrencyPrice(targetValueInt, targetCurrencyInfo, CurrencyPriceType.Transactional);
-        ICurrencyPrice convertedTransactionPrice = ConvertTransactionalToUSD(transactionalPrice);
-        ICurrencyPrice convertedTargetPrice = ConvertTransactionalToUSD(targetPrice);
-
-        #endregion
-
-        #region Handle value comparisons
-
-        switch (relationalOperator)
-        {
-          case PixelXmlNames.ComparisonGreaterThan:
-            shouldFirePixel = (convertedTransactionPrice.Price > convertedTargetPrice.Price);
-            break;
-          case PixelXmlNames.ComparisonGreaterThanOrEqual:
-            shouldFirePixel = (convertedTransactionPrice.Price >= convertedTargetPrice.Price);
-            break;
-          case PixelXmlNames.ComparisonLessThan:
-            shouldFirePixel = (convertedTransactionPrice.Price < convertedTargetPrice.Price);
-            break;
-          case PixelXmlNames.ComparisonLessThanOrEqual:
-            shouldFirePixel = (convertedTransactionPrice.Price <= convertedTargetPrice.Price);
-            break;
-          case PixelXmlNames.ComparisonEquals:
-            shouldFirePixel = (convertedTransactionPrice.Price == convertedTargetPrice.Price);
-            break;
-        }
-
-        #endregion
+        double convertedTransactionPrice = conversionRateToUsd*orderDetailValueDouble;
+        shouldFirePixel = CompareValues(relationalOperator, convertedTransactionPrice, targetValueDouble);
       }
       return shouldFirePixel;
+    }
+
+    private static bool CompareValues(string relationalOperator, double sourceValue, double targetValue)
+    {
+      bool result = true;
+
+      switch (relationalOperator)
+      {
+        case PixelXmlNames.ComparisonGreaterThan:
+          result = (sourceValue > targetValue);
+          break;
+        case PixelXmlNames.ComparisonGreaterThanOrEqual:
+          result = (sourceValue >= targetValue);
+          break;
+        case PixelXmlNames.ComparisonLessThan:
+          result = (sourceValue < targetValue);
+          break;
+        case PixelXmlNames.ComparisonLessThanOrEqual:
+          result = (sourceValue <= targetValue);
+          break;
+        case PixelXmlNames.ComparisonEquals:
+          result = (sourceValue.Equals(targetValue));
+          break;
+        default:
+          result = false;
+          break;
+      }
+      return result;
     }
 
     private string GetStringAttribute(XmlNode currentNode, string attributeName, string defaultValue)
@@ -144,27 +111,6 @@ namespace Atlantis.Framework.PixelsGet.Interface.PixelObjects.Triggers
           if (currentNode.Attributes[attributeName] != null)
           {
             result = currentNode.Attributes[attributeName].Value;
-          }
-        }
-      }
-      return result;
-    }
-
-    private int GetIntAttribute(XmlNode currentNode, string attributeName, int defaultValue)
-    {
-      int result = defaultValue;
-      if (currentNode != null)
-      {
-        if (currentNode.Attributes != null)
-        {
-          if (currentNode.Attributes[attributeName] != null)
-          {
-            int tempVal;
-            string currAtt = currentNode.Attributes[attributeName].Value;
-            if (int.TryParse(currAtt, out tempVal))
-            {
-              result = tempVal;
-            }
           }
         }
       }

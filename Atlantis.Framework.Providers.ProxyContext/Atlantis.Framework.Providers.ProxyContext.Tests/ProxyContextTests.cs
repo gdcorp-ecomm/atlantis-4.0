@@ -464,6 +464,57 @@ namespace Atlantis.Framework.Providers.ProxyContext.Tests
     }
 
     [TestMethod]
+    public void AkamaiDSADuplicatedHeaders()
+    {
+      const string AKAMAIORIGINIP = "44.44.44.44";
+
+      Dictionary<string, string> headers = new Dictionary<string, string>();
+      AppendAkamaiSiteHeaders(headers, AKAMAIORIGINIP);
+
+      List<KeyValuePair<string, string>> headersList = new List<KeyValuePair<string, string>>(headers);
+      headersList.Add(new KeyValuePair<string, string>("X-DSA-Secret", "DSADEBUG"));
+
+      MockHttpRequest request = new MockHttpRequest(_NONPROXIEDURL);
+      request.MockHeaderValues(headersList);
+      MockHttpContext.SetFromWorkerRequest(request);
+
+      HttpProviderContainer.Instance.RegisterProvider<IProxyContext, WebProxyContext>();
+      IProxyContext context = HttpProviderContainer.Instance.Resolve<IProxyContext>();
+
+      Assert.AreEqual(ProxyStatusType.Valid, context.Status);
+      Assert.IsTrue(context.IsProxyActive(ProxyTypes.AkamaiDSA));
+
+      IProxyData akamaiData;
+      context.TryGetActiveProxy(ProxyTypes.AkamaiDSA, out akamaiData);
+
+      Assert.AreEqual(AKAMAIORIGINIP, context.OriginIP);
+      Assert.AreEqual(AKAMAIORIGINIP, akamaiData.OriginalIP);
+
+      Assert.AreEqual(_AKAMAIHOST, context.OriginHost);
+      Assert.AreEqual(_AKAMAIHOST, context.ContextHost);
+    }
+
+    [TestMethod]
+    public void AkamaiDSADelimitedHeaders()
+    {
+      const string AKAMAIORIGINIP = "44.44.44.44";
+
+      Dictionary<string, string> headers = new Dictionary<string, string>();
+      AppendAkamaiSiteHeaders(headers, AKAMAIORIGINIP);
+      headers["X-DSA-Secret"] = "DSADEBUG, DSADEBUG";
+
+      MockHttpRequest request = new MockHttpRequest(_NONPROXIEDURL);
+      request.MockHeaderValues(headers);
+      MockHttpContext.SetFromWorkerRequest(request);
+
+      HttpProviderContainer.Instance.RegisterProvider<IProxyContext, WebProxyContext>();
+      IProxyContext context = HttpProviderContainer.Instance.Resolve<IProxyContext>();
+
+      Assert.AreEqual(ProxyStatusType.Invalid, context.Status);
+      Assert.IsFalse(context.IsProxyActive(ProxyTypes.AkamaiDSA));
+    }
+
+    [TestMethod]
     public void AkamaiARR()
     {
       const string ARRORIGINIP = "127.0.0.1";

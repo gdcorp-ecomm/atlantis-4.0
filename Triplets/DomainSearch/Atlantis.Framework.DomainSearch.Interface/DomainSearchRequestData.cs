@@ -10,7 +10,7 @@ namespace Atlantis.Framework.DomainSearch.Interface
     public DomainSearchRequestData(string shopperId, string sourceUrl, string orderId, string pathway, int pageCount)
       : base(shopperId, sourceUrl, orderId, pathway, pageCount)
     {
-      RequestTimeout = TimeSpan.FromSeconds(5);
+      RequestTimeout = TimeSpan.FromSeconds(20);
     }
     
     public string SearchPhrase { get; set; }

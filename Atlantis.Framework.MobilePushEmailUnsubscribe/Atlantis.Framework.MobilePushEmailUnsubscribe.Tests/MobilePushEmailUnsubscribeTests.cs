@@ -8,14 +8,15 @@ namespace Atlantis.Framework.MobilePushEmailUnsubscribe.Tests
   [TestClass]
   public class MobilePushEmailUnsubscribeTests
   {
-    private const string EMAIL_VALID = "test1@smccoyforever.com";
+    private const string EMAIL_VALID = "andy2@123-weight.com";
     private const string EMAIL_INVALID = "timbo@notvalid.com";
 
-    private const long SUBSCRIPTION_ID_VALID = 482;
+    private const long SUBSCRIPTION_ID_VALID = 518;
     private const long SUBSCRIPTION_ID_INVALID = -2;
 
     [TestMethod]
     [DeploymentItem("atlantis.config")]
+    [DeploymentItem("Atlantis.Framework.MobilePushEmailUnsubscribe.Impl.dll")]
     public void UnsubscribeValid()
     {
       // NOTE: You have to do a subscribe before running this to get a valid subscriptionId
@@ -27,6 +28,7 @@ namespace Atlantis.Framework.MobilePushEmailUnsubscribe.Tests
 
     [TestMethod]
     [DeploymentItem("atlantis.config")]
+    [DeploymentItem("Atlantis.Framework.MobilePushEmailUnsubscribe.Impl.dll")]
     public void UnsubscribeInValidEmail()
     {
       try
@@ -44,6 +46,7 @@ namespace Atlantis.Framework.MobilePushEmailUnsubscribe.Tests
 
     [TestMethod]
     [DeploymentItem("atlantis.config")]
+    [DeploymentItem("Atlantis.Framework.MobilePushEmailUnsubscribe.Impl.dll")]
     public void UnsubscribeInValidSubscriptionId()
     {
       try
@@ -61,6 +64,7 @@ namespace Atlantis.Framework.MobilePushEmailUnsubscribe.Tests
 
     [TestMethod]
     [DeploymentItem("atlantis.config")]
+    [DeploymentItem("Atlantis.Framework.MobilePushEmailUnsubscribe.Impl.dll")]
     public void UnsubscribeEmptyEmail()
     {
       try

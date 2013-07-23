@@ -81,12 +81,12 @@ Unsubscribe an Email Address from RIM
       const int resultsPerPage = 100000;
       const string requestMethod = "removeRIMAccount";
 
-      string requestKey = "tH15!zt433Cc@P1*";
-      string authName = "GDMobile201111";
-      string authToken = "DgD11M0b!l32o!1";
+      string requestKey; //= "tH15!zt433Cc@P1*";
+      string authName; // = "GDMobile201111";
+      string authToken;// = "DgD11M0b!l32o!1";
 
-      //string nimitzAuthXml = NetConnect.LookupConnectInfo(oConfig, ConnectLookupType.Xml);
-      //NimitzAuthHelper.GetConnectionCredentials(nimitzAuthXml, out requestKey, out authName, out authToken);
+      string nimitzAuthXml = NetConnect.LookupConnectInfo(oConfig, ConnectLookupType.Xml);
+      NimitzAuthHelper.GetConnectionCredentials(nimitzAuthXml, out requestKey, out authName, out authToken);
 
       try
       {

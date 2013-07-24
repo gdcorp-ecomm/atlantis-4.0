@@ -61,8 +61,8 @@ if (typeof (AtlantisCaptcha) == "undefined") { // start single inclusion guard
             CaptchaInput.bind(_stopAutoReload, function () {
                 window.clearInterval(_reloadIntervalTimer);
             });
-            _autofocusInput = autoFocusInput;
-            _autoClearInput = autoClearInput;
+            _autofocusInput = autoFocusInput.toLowerCase() == 'true';
+            _autoClearInput = autoClearInput.toLowerCase() == 'true';
             PlaySoundLink.bind(_clickEvent, function () {
                 _currentInstance.PlaySound();
             });

@@ -24,6 +24,14 @@ public partial class ValidateCaptchaAction : System.Web.UI.Page
       set { _valid = value; }
     }
 
+    private string _extraData = string.Empty;
+    [DataMember]
+    public string ExtraData
+    {
+      get { return _extraData; }
+      set { _extraData = value; }
+    }
+
     private string _newImage = string.Empty;
     [DataMember]
     public string NewImage
@@ -54,6 +62,8 @@ public partial class ValidateCaptchaAction : System.Web.UI.Page
   {
     string captchaValue = Request.QueryString["captchaValue"] as string;
     string instanceID = Request.QueryString["instanceID"] as string;
+    string extraData = Request.QueryString["extraInfo"] as string;
+    currentDataObject.ExtraData = extraData;
     bool isValid = CaptchaTemplateControl.IsCaptchaValid(captchaValue, instanceID);
     currentDataObject.Valid = isValid;
   }

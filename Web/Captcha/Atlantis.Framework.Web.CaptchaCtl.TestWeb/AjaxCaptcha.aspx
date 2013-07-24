@@ -15,9 +15,9 @@
 <body>
     <div style="padding-left: 100px;">
         <div style="height: 30px; padding-top: 10px;">
-            <h1>Standard Ajax Validation with 10 second auto reload</h1>
+            <h1>Standard Ajax Validation with 20 second auto reload</h1>
         </div>
-        <atlantis:CaptchaTemplateControl ID="captchaTemplate1" runat="server" CaptchaImagePlaceHolderID="plcCaptchaLocation" StashRenderLocation="javascriptStash" CaptchaValidateSelector=".captchaValidate" CaptchaValueID="captchaTextBox" ImageReloadPlaceHolderID="plcImageReload" PlaySoundPlaceHolderID="plcPlaySound" CaptchaID="standardAjaxValidation" AjaxAuthentication="true" AjaxAuthenticationCallback="AjaxAuthenticationResults" AutoClearInput="true" AutoFocusInput="false" LoadingText="Loading..." AutoReloadImage="true">
+        <atlantis:CaptchaTemplateControl ID="captchaTemplate1" runat="server" CaptchaImagePlaceHolderID="plcCaptchaLocation" StashRenderLocation="javascriptStash" CaptchaValidateSelector=".captchaValidate" CaptchaValueID="captchaTextBox" ImageReloadPlaceHolderID="plcImageReload" PlaySoundPlaceHolderID="plcPlaySound" CaptchaID="standardAjaxValidation" AjaxAuthentication="true" AjaxAuthenticationCallback="AjaxAuthenticationResults" AutoClearInput="true" AutoFocusInput="false" LoadingText="Loading..." AutoReloadImage="true" AutoReloadMiliSeconds="20000">
             <Template>
                 <div style="border: solid; border-color: black; border-width: 1px; width: 400px; padding: 20px;">
                     <div style="width: 330px;">

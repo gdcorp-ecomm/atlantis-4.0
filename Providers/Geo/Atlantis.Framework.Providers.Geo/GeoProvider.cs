@@ -2,6 +2,7 @@
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.Geo.Interface;
 using System;
+using System.Collections.Generic;
 using System.Web;
 
 namespace Atlantis.Framework.Providers.Geo
@@ -11,8 +12,8 @@ namespace Atlantis.Framework.Providers.Geo
     Lazy<ISiteContext> _siteContext;
     Lazy<IProxyContext> _proxyContext;
     Lazy<string> _requestCountryCode;
-    Lazy<CountryResponseData> _countries;
     Lazy<string> _ipAddress;
+    Lazy<GeoCountryData> _geoCountryData;
 
     IGeoLocation _requestLocation = null;
 
@@ -22,8 +23,8 @@ namespace Atlantis.Framework.Providers.Geo
       _siteContext = new Lazy<ISiteContext>(() => { return Container.Resolve<ISiteContext>(); });
       _proxyContext = new Lazy<IProxyContext>(() => { return LoadProxyContext(); });
       _requestCountryCode = new Lazy<string>(() => { return DetermineRequestCountryCode(); });
-      _countries = new Lazy<CountryResponseData>(() => { return LoadCountries(); });
       _ipAddress = new Lazy<string>(() => { return GetRequestIP(); });
+      _geoCountryData = new Lazy<GeoCountryData>(() => { return new GeoCountryData(Container); });
     }
 
     private IProxyContext LoadProxyContext()
@@ -154,8 +155,8 @@ namespace Atlantis.Framework.Providers.Geo
 
       try
       {
-        Country country = _countries.Value.FindCountryByCode(_requestCountryCode.Value);
-        if (country != null)
+        IGeoCountry country;
+        if (_geoCountryData.Value.TryGetGeoCountry(_requestCountryCode.Value, out country))
         {
           var regionRequest = new RegionRequestData(regionTypeId, regionName);
           var regionResponse = (RegionResponseData)DataCache.DataCache.GetProcessRequest(regionRequest, GeoProviderEngineRequests.Regions);
@@ -209,6 +210,16 @@ namespace Atlantis.Framework.Providers.Geo
       }
 
       return result;
+    }
+
+    public IEnumerable<IGeoCountry> Countries
+    {
+      get { return _geoCountryData.Value.Countries; }
+    }
+
+    public bool TryGetCountryByCode(string countryCode, out IGeoCountry country)
+    {
+      return _geoCountryData.Value.TryGetGeoCountry(countryCode, out country);
     }
   }
 }

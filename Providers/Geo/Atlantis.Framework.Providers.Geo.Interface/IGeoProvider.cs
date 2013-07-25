@@ -1,4 +1,5 @@
-﻿namespace Atlantis.Framework.Providers.Geo.Interface
+﻿using System.Collections.Generic;
+namespace Atlantis.Framework.Providers.Geo.Interface
 {
   /// <summary>
   /// Provides functionality related to GeoLocation, countrys, states, and regions
@@ -31,5 +32,19 @@
     /// Requires the GeoIPLocation.dat city database
     /// </summary>
     IGeoLocation RequestGeoLocation { get; }
+
+    /// <summary>
+    /// Returns a collection of IGeoCountry objects
+    /// </summary>
+    IEnumerable<IGeoCountry> Countries { get; }
+
+    /// <summary>
+    /// Attempts to get the country by countryCode
+    /// </summary>
+    /// <param name="countryCode">countryCode</param>
+    /// <param name="country">IGeoCountry object if found</param>
+    /// <returns>true if found</returns>
+    bool TryGetCountryByCode(string countryCode, out IGeoCountry country);
+
   }
 }

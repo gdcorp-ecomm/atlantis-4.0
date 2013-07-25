@@ -43,8 +43,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IGeoCountry.cs" />
     <Compile Include="IGeoLocation.cs" />
     <Compile Include="IGeoProvider.cs" />
+    <Compile Include="IGeoState.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

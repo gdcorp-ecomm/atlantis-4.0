@@ -44,9 +44,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GeoCountry.cs" />
+    <Compile Include="GeoCountryData.cs" />
     <Compile Include="GeoLocation.cs" />
     <Compile Include="GeoProvider.cs" />
     <Compile Include="GeoProviderEngineRequests.cs" />
+    <Compile Include="GeoState.cs" />
+    <Compile Include="GeoStateData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

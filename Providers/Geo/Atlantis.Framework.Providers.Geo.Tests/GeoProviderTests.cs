@@ -5,6 +5,7 @@ using Atlantis.Framework.Testing.MockHttpContext;
 using Atlantis.Framework.Testing.MockProviders;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Linq;
 using System.Net;
 using System.Reflection;
 
@@ -156,6 +157,75 @@ namespace Atlantis.Framework.Providers.Geo.Tests
       Assert.AreEqual(string.Empty, newNotFound.City);
     }
 
+    [TestMethod]
+    public void Countries()
+    {
+      IGeoProvider geoProvider = CreateGeoProvider("1.179.3.3", false);
+      int count = geoProvider.Countries.Count();
+      Assert.AreNotEqual(0, count);
+    }
 
+    [TestMethod]
+    public void TryGetMissingCountry()
+    {
+      IGeoProvider geoProvider = CreateGeoProvider("1.179.3.3", false);
+      IGeoCountry country;
+      bool result = geoProvider.TryGetCountryByCode("zz", out country);
+      Assert.IsFalse(result);
+    }
+
+    [TestMethod]
+    public void TryGetCountry()
+    {
+      IGeoProvider geoProvider = CreateGeoProvider("1.179.3.3", false);
+      IGeoCountry country;
+      bool result = geoProvider.TryGetCountryByCode("fr", out country);
+      Assert.IsTrue(result);
+
+      Assert.AreEqual("fr", country.Code);
+      Assert.IsNotNull(country.CallingCode);
+      Assert.AreNotEqual(0, country.Id);
+      Assert.IsNotNull(country.Name);
+    }
+
+    [TestMethod]
+    public void States()
+    {
+      IGeoProvider geoProvider = CreateGeoProvider("1.179.3.3", false);
+      IGeoCountry country;
+      bool result = geoProvider.TryGetCountryByCode("us", out country);
+
+      Assert.IsTrue(country.HasStates);
+
+      int stateCount = country.States.Count();
+      Assert.AreNotEqual(0, stateCount);
+    }
+
+    [TestMethod]
+    public void TryGetMissingState()
+    {
+      IGeoProvider geoProvider = CreateGeoProvider("1.179.3.3", false);
+      IGeoCountry country;
+      bool result = geoProvider.TryGetCountryByCode("us", out country);
+
+      IGeoState state;
+      result = country.TryGetStateByCode("zz", out state);
+      Assert.IsFalse(result);
+    }
+
+    [TestMethod]
+    public void TryGetKansas()
+    {
+      IGeoProvider geoProvider = CreateGeoProvider("1.179.3.3", false);
+      IGeoCountry country;
+      bool result = geoProvider.TryGetCountryByCode("us", out country);
+
+      IGeoState state;
+      result = country.TryGetStateByCode("ks", out state);
+      Assert.IsTrue(result);
+      Assert.IsNotNull(state.Code);
+      Assert.IsNotNull(state.Name);
+      Assert.AreNotEqual(0, state.Id);
+    }
   }
 }

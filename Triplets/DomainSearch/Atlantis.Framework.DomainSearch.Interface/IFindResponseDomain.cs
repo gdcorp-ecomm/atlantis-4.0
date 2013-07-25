@@ -13,9 +13,13 @@ namespace Atlantis.Framework.DomainSearch.Interface
     bool IsBackOrderAvailable { get; }
     bool IsTypo { get; }
     bool IsDomainUsingSynonym { get; }
+    bool IsInternalTransfer { get; }
+    bool IsPremium { get; }
+    bool IsAuction { get; }
 
     DateTime AuctionEndTimeStamp { get; }
     DateTime LastUpdateTimeStamp { get; }
+    DateTime WhoIsExpiration { get; }
 
     int DatabasePercentileRank { get; }
     int LengthOfSld { get; }
@@ -31,6 +35,7 @@ namespace Atlantis.Framework.DomainSearch.Interface
     string CurrencyType { get; }
     string AvailCheckTypePerformed { get; }
     string DomainSearchDataBase { get; }
+
 
     IDomain Domain { get; }
   }

@@ -174,7 +174,7 @@ namespace Atlantis.Framework.DomainSearch.Interface
         }
       }
     }
-    
+
     public double CommissionPercentage { get; private set; }
 
     public int VendorId { get; private set; }
@@ -182,7 +182,7 @@ namespace Atlantis.Framework.DomainSearch.Interface
     public string Language { get; private set; }
 
     public bool IsAvailable { get; private set; }
-    
+
     public int Price { get; private set; }
 
     public bool IsBadWord { get; private set; }
@@ -223,7 +223,7 @@ namespace Atlantis.Framework.DomainSearch.Interface
     public int LengthOfSld { get; private set; }
 
     public int NumberOfKeywordsInDomain { get; private set; }
-    
+
     public string AuctionId { get; private set; }
 
     public string AuctionType { get; private set; }
@@ -237,6 +237,7 @@ namespace Atlantis.Framework.DomainSearch.Interface
     public string AuctionTypeId { get; private set; }
 
     private IEnumerable<string> _cartAttributes;
+
     /// <summary>
     /// List of attributes and values that should be passed on to the Cart for down stream systems use (example values: isoingo=true).
     /// </summary>
@@ -255,9 +256,28 @@ namespace Atlantis.Framework.DomainSearch.Interface
     }
 
     private readonly IDomain _responseDomain;
+
     public IDomain Domain
     {
       get { return _responseDomain; }
+    }
+
+    public bool IsPremium
+    {
+      get
+      {
+        var isPremium = AuctionType == "premium"; // See Mikhail or Doug. We need to change this before this goes out.
+
+        return isPremium;
+      }
+    }
+
+    public bool IsAuction
+    {
+      get
+      {
+        return DomainSearchDataBase == "auctions"; // See Mikhail or Doug. We need to change this before this goes out.
+      }
     }
   }
 }

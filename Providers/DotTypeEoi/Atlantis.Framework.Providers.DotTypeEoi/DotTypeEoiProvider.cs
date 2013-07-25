@@ -13,6 +13,7 @@ namespace Atlantis.Framework.Providers.DotTypeEoi
     private const string SPANISH = "sp";
 
     private readonly Lazy<IShopperContext> _shopperContext;
+    private readonly Lazy<IManagerContext> _managerContext;
     private readonly IList<ICategoryData> _categoryList = new List<ICategoryData>();
 
     private string _fullLanguage;
@@ -33,6 +34,7 @@ namespace Atlantis.Framework.Providers.DotTypeEoi
     public DotTypeEoiProvider(IProviderContainer container) : base(container)
     {
       _shopperContext = new Lazy<IShopperContext>(() => Container.Resolve<IShopperContext>());
+      _managerContext = new Lazy<IManagerContext>(() => Container.Resolve<IManagerContext>());
     }
 
     private string DetermineFullLanguage()
@@ -266,11 +268,12 @@ namespace Atlantis.Framework.Providers.DotTypeEoi
       var success = false;
       shopperWatchListResponse = null;
 
-      if (IsAuthenticated)
+      if (_managerContext.Value.IsManager || IsAuthenticated)
       {
         try
         {
-          var request = new ShopperWatchListJsonRequestData(_shopperContext.Value.ShopperId, FullLanguage);
+          string shopperId = _managerContext.Value.IsManager ? _managerContext.Value.ManagerShopperId : _shopperContext.Value.ShopperId;
+          var request = new ShopperWatchListJsonRequestData(shopperId, FullLanguage);
           var response = (ShopperWatchListResponseData)Engine.Engine.ProcessRequest(request, DotTypeEoiEngineRequests.ShopperWatchListJsonRequest);
           if (response.IsSuccess)
           {
@@ -293,15 +296,14 @@ namespace Atlantis.Framework.Providers.DotTypeEoi
       var success = false;
       responseMessage = string.Empty;
 
-      if (IsAuthenticated)
+      if (_managerContext.Value.IsManager || IsAuthenticated)
       {
         try
         {
-          var request = new AddToShopperWatchListRequestData(_shopperContext.Value.ShopperId, displayTime, gTlds,
-                                                             FullLanguage);
-          var response =
-            (AddToShopperWatchListResponseData)
-            Engine.Engine.ProcessRequest(request, DotTypeEoiEngineRequests.AddToShopperWatchListRequest);
+          string shopperId = _managerContext.Value.IsManager ? _managerContext.Value.ManagerShopperId : _shopperContext.Value.ShopperId;
+          var request = new AddToShopperWatchListRequestData(shopperId, displayTime, gTlds, FullLanguage);
+          var response = (AddToShopperWatchListResponseData)Engine.Engine.ProcessRequest(request, DotTypeEoiEngineRequests.AddToShopperWatchListRequest);
+
           if (response.IsSuccess)
           {
             success = true;
@@ -324,14 +326,14 @@ namespace Atlantis.Framework.Providers.DotTypeEoi
       var success = false;
       responseMessage = string.Empty;
 
-      if (IsAuthenticated)
+      if (_managerContext.Value.IsManager || IsAuthenticated)
       {
         try
         {
-          var request = new RemoveFromShopperWatchListRequestData(_shopperContext.Value.ShopperId, gTlds);
-          var response =
-            (RemoveFromShopperWatchListResponseData)
-            Engine.Engine.ProcessRequest(request, DotTypeEoiEngineRequests.RemoveFromShopperWatchListRequest);
+          string shopperId = _managerContext.Value.IsManager ? _managerContext.Value.ManagerShopperId : _shopperContext.Value.ShopperId;
+          var request = new RemoveFromShopperWatchListRequestData(shopperId, gTlds);
+          var response = (RemoveFromShopperWatchListResponseData)Engine.Engine.ProcessRequest(request, DotTypeEoiEngineRequests.RemoveFromShopperWatchListRequest);
+
           if (response.IsSuccess)
           {
             success = true;
@@ -351,7 +353,7 @@ namespace Atlantis.Framework.Providers.DotTypeEoi
 
     private void AddGtldButtonStatus(IEnumerable<IDotTypeEoiCategory> categories)
     {
-      if (IsAuthenticated)
+      if (_managerContext.Value.IsManager || IsAuthenticated)
       {
         IShopperWatchListResponse shopperWatchListResponse;
         if (GetShopperWatchList(out shopperWatchListResponse))
@@ -380,7 +382,7 @@ namespace Atlantis.Framework.Providers.DotTypeEoi
 
     private void AddGtldButtonStatus(IEnumerable<IDotTypeEoiGtld> gtlds)
     {
-      if (IsAuthenticated)
+      if (_managerContext.Value.IsManager || IsAuthenticated)
       {
         IShopperWatchListResponse shopperWatchListResponse;
         if (GetShopperWatchList(out shopperWatchListResponse))

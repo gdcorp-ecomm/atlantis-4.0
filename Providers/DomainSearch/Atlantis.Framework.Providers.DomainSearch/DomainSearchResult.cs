@@ -44,7 +44,7 @@ namespace Atlantis.Framework.Providers.DomainSearch
     public string JsonResponse 
     {
       get { return _jsonResponse ?? string.Empty; }
-      set { _jsonResponse = null; }
+      set { _jsonResponse = value; }
     }
 
     

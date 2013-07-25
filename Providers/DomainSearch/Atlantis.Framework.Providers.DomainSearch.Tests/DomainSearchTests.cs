@@ -34,11 +34,13 @@ namespace Atlantis.Framework.Providers.DomainSearch.Tests
         if (_providerContainer == null)
         {
           _providerContainer = new MockProviderContainer();
+          ((MockProviderContainer)_providerContainer).SetMockSetting(MockSiteContextSettings.IsRequestInternal, true);
+
           _providerContainer.RegisterProvider<ISiteContext, MockSiteContext>();
           _providerContainer.RegisterProvider<IShopperContext, MockShopperContext>();
           _providerContainer.RegisterProvider<IManagerContext, MockNoManagerContext>();
           _providerContainer.RegisterProvider<IProxyContext, ProxyContext.WebProxyContext>();
-          _providerContainer.RegisterProvider<ILocalizationProvider, CountryCookieLocalizationProvider>();
+          _providerContainer.RegisterProvider<ILocalizationProvider, LocalizationProviderTestProxy>();
           _providerContainer.RegisterProvider<IDomainSearchProvider, DomainSearchProvider>();
         }
 

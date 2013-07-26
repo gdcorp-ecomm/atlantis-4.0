@@ -37,6 +37,7 @@ namespace Atlantis.Framework.DomainSearch.Interface
     string AvailCheckTypePerformed { get; }
     string DomainSearchDataBase { get; }
 
+    string GetCartAttributeValue(string attribute);
 
     IDomain Domain { get; }
   }

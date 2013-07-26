@@ -155,7 +155,17 @@ namespace Atlantis.Framework.DomainSearch.Interface
             case "cartattributes":
               if (!string.IsNullOrEmpty(domainTokenValue))
               {
-                CartAttributes = domainTokenValue.Split(new char[','], StringSplitOptions.RemoveEmptyEntries).ToArray();
+                var attributes = domainTokenValue.Split(new char[','], StringSplitOptions.RemoveEmptyEntries).ToArray();
+
+                foreach (var a in attributes)
+                {
+                  var attribute = a.Split(new char[':'], StringSplitOptions.RemoveEmptyEntries);
+
+                  if(attribute.Length == 2)
+                  {
+                    _cartAttributes[attribute[0]] = attribute[1];
+                  }
+                }
               }
               break;
             case "isinternaltransfer":
@@ -236,18 +246,18 @@ namespace Atlantis.Framework.DomainSearch.Interface
 
     public string AuctionTypeId { get; private set; }
 
-    private IEnumerable<string> _cartAttributes;
+    private IDictionary<string, string> _cartAttributes;
 
     /// <summary>
     /// List of attributes and values that should be passed on to the Cart for down stream systems use (example values: isoingo=true).
     /// </summary>
-    public IEnumerable<string> CartAttributes
+    public IDictionary<string, string> CartAttributes
     {
       get
       {
         if (_cartAttributes == null)
         {
-          _cartAttributes = new string[0];
+          _cartAttributes = new Dictionary<string, string>();
         }
 
         return _cartAttributes;
@@ -292,6 +302,18 @@ namespace Atlantis.Framework.DomainSearch.Interface
       {
         return DomainSearchDataBase == "private";
       }
+    }
+
+    public string GetCartAttributeValue(string attribute)
+    {
+      string value;
+
+      if (!_cartAttributes.TryGetValue(attribute, out value))
+      {
+        value = string.Empty;
+      }
+
+      return value;
     }
   }
 }

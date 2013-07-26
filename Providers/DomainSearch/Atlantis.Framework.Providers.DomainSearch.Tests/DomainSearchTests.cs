@@ -229,5 +229,23 @@ namespace Atlantis.Framework.Providers.DomainSearch.Tests
 
       Assert.IsTrue(hasCrossCheck);
     }
+
+    [TestMethod]
+    public void DomainSearchGetAttributeTest()
+    {
+      const string searchPhrase = "SPOONYMAC-HELLO-WORLD.com";
+      var isoingo = string.Empty;
+      var domainSearchResult = DomainSearch.SearchDomain(searchPhrase, SOURCE_CODE, string.Empty);
+      Assert.IsTrue(domainSearchResult.IsSuccess);
+
+      var domains = domainSearchResult.GetDomainsByGroup(DomainGroupTypes.CROSS_CHECK);
+
+      if(domains.Count > 0)
+      {
+        isoingo = domains[0].GetCartAttributeValue("isoingo");
+      }
+
+      Assert.IsTrue(!string.IsNullOrEmpty(isoingo));
+    }
   }
 }

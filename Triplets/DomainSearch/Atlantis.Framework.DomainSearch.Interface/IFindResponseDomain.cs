@@ -16,6 +16,7 @@ namespace Atlantis.Framework.DomainSearch.Interface
     bool IsInternalTransfer { get; }
     bool IsPremium { get; }
     bool IsAuction { get; }
+    bool IsCloseOutAuction { get; }
 
     DateTime AuctionEndTimeStamp { get; }
     DateTime LastUpdateTimeStamp { get; }

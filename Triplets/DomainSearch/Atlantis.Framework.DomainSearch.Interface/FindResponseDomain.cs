@@ -266,9 +266,7 @@ namespace Atlantis.Framework.DomainSearch.Interface
     {
       get
       {
-        var isPremium = AuctionType == "premium"; // See Mikhail or Doug. We need to change this before this goes out.
-
-        return isPremium;
+        return AuctionType == "premium";
       }
     }
 
@@ -276,7 +274,23 @@ namespace Atlantis.Framework.DomainSearch.Interface
     {
       get
       {
-        return DomainSearchDataBase == "auctions"; // See Mikhail or Doug. We need to change this before this goes out.
+        return DomainSearchDataBase == "auctions";
+      }
+    }
+
+    public bool IsCloseOutAuction
+    {
+      get
+      {
+        return AuctionType == "closeout";
+      }
+    }
+
+    public bool IsPrivateSale
+    {
+      get
+      {
+        return DomainSearchDataBase == "private";
       }
     }
   }

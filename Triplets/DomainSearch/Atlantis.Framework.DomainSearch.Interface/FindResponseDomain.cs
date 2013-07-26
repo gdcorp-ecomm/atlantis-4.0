@@ -155,17 +155,7 @@ namespace Atlantis.Framework.DomainSearch.Interface
             case "cartattributes":
               if (!string.IsNullOrEmpty(domainTokenValue))
               {
-                var attributes = domainTokenValue.Split(new char[','], StringSplitOptions.RemoveEmptyEntries).ToArray();
-
-                foreach (var a in attributes)
-                {
-                  var attribute = a.Split(new char[':'], StringSplitOptions.RemoveEmptyEntries);
-
-                  if(attribute.Length == 2)
-                  {
-                    _cartAttributes[attribute[0]] = attribute[1];
-                  }
-                }
+                _cartAttributes = domainTokenValue.Split(new char[','], StringSplitOptions.RemoveEmptyEntries).ToArray();
               }
               break;
             case "isinternaltransfer":
@@ -246,23 +236,22 @@ namespace Atlantis.Framework.DomainSearch.Interface
 
     public string AuctionTypeId { get; private set; }
 
-    private IDictionary<string, string> _cartAttributes;
+    private IEnumerable<string> _cartAttributes;
 
     /// <summary>
     /// List of attributes and values that should be passed on to the Cart for down stream systems use (example values: isoingo=true).
     /// </summary>
-    public IDictionary<string, string> CartAttributes
+    public IEnumerable<string> CartAttributes
     {
       get
       {
         if (_cartAttributes == null)
         {
-          _cartAttributes = new Dictionary<string, string>();
+          _cartAttributes = new string[0];
         }
 
         return _cartAttributes;
       }
-      private set { _cartAttributes = value; }
     }
 
     private readonly IDomain _responseDomain;
@@ -302,18 +291,6 @@ namespace Atlantis.Framework.DomainSearch.Interface
       {
         return DomainSearchDataBase == "private";
       }
-    }
-
-    public string GetCartAttributeValue(string attribute)
-    {
-      string value;
-
-      if (!_cartAttributes.TryGetValue(attribute, out value))
-      {
-        value = string.Empty;
-      }
-
-      return value;
     }
   }
 }

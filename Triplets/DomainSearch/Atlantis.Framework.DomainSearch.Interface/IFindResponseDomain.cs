@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Atlantis.Framework.Domains.Interface;
 
 namespace Atlantis.Framework.DomainSearch.Interface
@@ -36,9 +37,7 @@ namespace Atlantis.Framework.DomainSearch.Interface
     string CurrencyType { get; }
     string AvailCheckTypePerformed { get; }
     string DomainSearchDataBase { get; }
-
-    string GetCartAttributeValue(string attribute);
-
+    IEnumerable<string> CartAttributes { get; }
     IDomain Domain { get; }
   }
 }

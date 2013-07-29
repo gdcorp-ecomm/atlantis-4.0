@@ -1,8 +1,9 @@
-﻿using Atlantis.Framework.Language.Impl.Data;
-using Atlantis.Framework.Language.Interface;
+﻿using Atlantis.Framework.Language.Interface;
+using Atlantis.Framework.Parsers.LanguageFile;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Xml.Linq;
 using System.Linq;
+using PhraseFileInfo = Atlantis.Framework.Language.Impl.Data.PhraseFileInfo;
 
 namespace Atlantis.Framework.Language.Tests
 {
@@ -12,6 +13,7 @@ namespace Atlantis.Framework.Language.Tests
     const string _SIMPLEPHRASE = "The quick brown fox jumped over the lazy dog.";
     const string _NULLPHRASE = null;
     const string _TOKENPHRASE = "The quick brown fox jumped over the lazy dog for a price of [@T[productprice:<list productId=\"58\" />]@T].";
+    const int _REQUESTTYPE = 681;
 
     [TestMethod]
     public void ResponseDataValid()
@@ -132,8 +134,6 @@ namespace Atlantis.Framework.Language.Tests
       Assert.AreNotEqual(request.GetCacheMD5(), requestDifferentContext.GetCacheMD5());
     }
 
-    const int _REQUESTTYPE = 681;
-
     [TestMethod]
     public void RequestDefaultAll()
     {
@@ -150,6 +150,15 @@ namespace Atlantis.Framework.Language.Tests
       var response = (LanguagePhraseResponseData)Engine.Engine.ProcessRequest(request, _REQUESTTYPE);
       Assert.IsFalse(string.IsNullOrEmpty(response.LanguagePhrase));
       Assert.IsTrue(response.LanguagePhrase.StartsWith("Purple River"));
+    }
+
+    [TestMethod]
+    public void RequestDefaultAllDict2Malformed()
+    {
+      var request = new LanguagePhraseRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "dict2", "keyparseinbetweenbadxml", "en", "www", 1);
+      var response = (LanguagePhraseResponseData)Engine.Engine.ProcessRequest(request, _REQUESTTYPE);
+      Assert.IsFalse(string.IsNullOrEmpty(response.LanguagePhrase));
+      Assert.IsTrue(response.LanguagePhrase.StartsWith("Does this phrase parse after a malformed phrase key?"));
     }
 
     [TestMethod]

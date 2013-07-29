@@ -41,9 +41,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Render.P
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Providers.Interface", "..\..\Atlantis.Framework.Providers.Interface\Atlantis.Framework.Providers.Interface\Atlantis.Framework.Providers.Interface.csproj", "{6CC33C6B-FAA7-4B6A-8C3B-BFE94A1A65DE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Parsers.LanguageFile", "..\..\Parsers\Atlantis.Framework.Parsers.LanguageFile\Atlantis.Framework.Parsers.LanguageFile.csproj", "{B6BEEC29-3FD3-4B07-A8F1-32CB789B0EC8}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 20
+		SccNumberOfProjects = 21
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
 		SccLocalPath0 = .
@@ -120,6 +122,10 @@ Global
 		SccProjectTopLevelParentUniqueName19 = Language.sln
 		SccProjectName19 = ../../Atlantis.Framework.Providers.Interface/Atlantis.Framework.Providers.Interface
 		SccLocalPath19 = ..\\..\\Atlantis.Framework.Providers.Interface\\Atlantis.Framework.Providers.Interface
+		SccProjectUniqueName20 = ..\\..\\Parsers\\Atlantis.Framework.Parsers.LanguageFile\\Atlantis.Framework.Parsers.LanguageFile.csproj
+		SccProjectTopLevelParentUniqueName20 = Language.sln
+		SccProjectName20 = ../../Parsers/Atlantis.Framework.Parsers.LanguageFile
+		SccLocalPath20 = ..\\..\\Parsers\\Atlantis.Framework.Parsers.LanguageFile
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -202,6 +208,10 @@ Global
 		{6CC33C6B-FAA7-4B6A-8C3B-BFE94A1A65DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6CC33C6B-FAA7-4B6A-8C3B-BFE94A1A65DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6CC33C6B-FAA7-4B6A-8C3B-BFE94A1A65DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B6BEEC29-3FD3-4B07-A8F1-32CB789B0EC8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6BEEC29-3FD3-4B07-A8F1-32CB789B0EC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6BEEC29-3FD3-4B07-A8F1-32CB789B0EC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6BEEC29-3FD3-4B07-A8F1-32CB789B0EC8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -223,5 +233,6 @@ Global
 		{638F2820-0CA4-43C1-8712-1823704389D3} = {8CDA229A-DA28-4CDD-B7DE-D9C0D1D591C9}
 		{68764D92-7CD9-45FB-B650-1429656DCF14} = {8CDA229A-DA28-4CDD-B7DE-D9C0D1D591C9}
 		{6CC33C6B-FAA7-4B6A-8C3B-BFE94A1A65DE} = {8CDA229A-DA28-4CDD-B7DE-D9C0D1D591C9}
+		{B6BEEC29-3FD3-4B07-A8F1-32CB789B0EC8} = {8CDA229A-DA28-4CDD-B7DE-D9C0D1D591C9}
 	EndGlobalSection
 EndGlobal

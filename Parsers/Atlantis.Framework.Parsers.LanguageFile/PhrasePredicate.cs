@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
-namespace Atlantis.Framework.Language.Impl.Data
+namespace Atlantis.Framework.Parsers.LanguageFile
 {
-  internal class PhrasePredicate
+  public class PhrasePredicate
   {
     const string _DEFAULTCOUNTRYSITE = "www";
     const string _DEFAULTLANGUAGE = "en";
@@ -16,7 +18,7 @@ namespace Atlantis.Framework.Language.Impl.Data
 
     List<string> _phraseKeys;
 
-    internal PhrasePredicate(int contextId, string countrySite, string language)
+    public PhrasePredicate(int contextId, string countrySite, string language)
     {
       if (string.IsNullOrEmpty(countrySite))
       {
@@ -91,7 +93,7 @@ namespace Atlantis.Framework.Language.Impl.Data
       }
     }
 
-    internal IEnumerable<string> PhraseKeys
+    public IEnumerable<string> PhraseKeys
     {
       get { return _phraseKeys; }
     }

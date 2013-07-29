@@ -4,17 +4,18 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{B1C3A5A6-BDB8-42B6-9BDB-061CD1B71125}</ProjectGuid>
+    <ProjectGuid>{B6BEEC29-3FD3-4B07-A8F1-32CB789B0EC8}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Atlantis.Framework.Language.Impl</RootNamespace>
-    <AssemblyName>Atlantis.Framework.Language.Impl</AssemblyName>
+    <RootNamespace>Atlantis.Framework.Parsers.LanguageFile</RootNamespace>
+    <AssemblyName>Atlantis.Framework.Parsers.LanguageFile</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>
     <SccLocalPath>SAK</SccLocalPath>
     <SccAuxPath>SAK</SccAuxPath>
     <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -34,9 +35,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\..\..\Atlantis.Framework.CDS\Atlantis.Framework.CDS.References\Json.net\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -46,40 +44,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CDSLanguageRequest.cs" />
-    <Compile Include="Data\CDSContentVersion.cs" />
-    <Compile Include="Data\LanguageData.cs" />
-    <Compile Include="Data\Logging.cs" />
-    <Compile Include="Data\PhraseData.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Data\PhraseFileInfo.cs" />
-    <Compile Include="LanguagePhraseRequest.cs" />
+    <Compile Include="LanguageFile.cs" />
+    <Compile Include="Phrase.cs" />
+    <Compile Include="PhraseDictionary.cs" />
+    <Compile Include="PhraseFileInfo.cs" />
+    <Compile Include="PhraseGroup.cs" />
+    <Compile Include="PhrasePredicate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj">
-      <Project>{d30157b2-c1b3-4073-ba5e-632e2337a997}</Project>
-      <Name>Atlantis.Framework.Engine</Name>
+    <ProjectReference Include="..\..\Extensions\Atlantis.Framework.Extensions\Atlantis.Framework.Extensions.csproj">
+      <Project>{6d705d02-5b4f-4a37-b5bf-8af47075908c}</Project>
+      <Name>Atlantis.Framework.Extensions</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj">
-      <Project>{a083a52e-c3c3-42e0-8dfd-54719e4c3b25}</Project>
-      <Name>Atlantis.Framework.Interface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Parsers\Atlantis.Framework.Parsers.LanguageFile\Atlantis.Framework.Parsers.LanguageFile.csproj">
-      <Project>{b6beec29-3fd3-4b07-a8f1-32cb789b0ec8}</Project>
-      <Name>Atlantis.Framework.Parsers.LanguageFile</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Atlantis.Framework.Language.Interface\Atlantis.Framework.Language.Interface.csproj">
-      <Project>{11a7884c-71b6-41cd-824f-0f22797d417d}</Project>
-      <Name>Atlantis.Framework.Language.Interface</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Data\dict2-en.language" />
-    <None Include="Data\testdictionary-en.language" />
-    <None Include="Data\testdictionary-es-mx.language" />
-    <None Include="Data\testdictionary-es.language" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

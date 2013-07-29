@@ -1,5 +1,5 @@
 ﻿using Atlantis.Framework.Interface;
-using Atlantis.Framework.Language.Interface;
+using Atlantis.Framework.Providers.Language.Handlers;
 using Atlantis.Framework.Providers.Language.Interface;
 using Atlantis.Framework.Providers.Localization.Interface;
 using System;
@@ -12,52 +12,45 @@ namespace Atlantis.Framework.Providers.Language
     const string _DEFAULTLANGUAGE = "en";
     const string _QALANGUAGESHOW = "qa-qa";
 
-    Lazy<ISiteContext> _siteContext;
-    Lazy<string> _language;
-    Lazy<string> _countrySite;
+    readonly ISiteContext _siteContext;
+    readonly ILocalizationProvider _localization;
+    readonly bool _isInternal;
+    readonly LanguageData _languageData = new LanguageData { ContextId = 0, CountrySite = _DEFAULTCOUNTRYSITE, DefaultLanguage = _DEFAULTLANGUAGE, FullLanguage = _DEFAULTLANGUAGE, ShortLanguage = _DEFAULTLANGUAGE };
 
     public LanguageProvider(IProviderContainer container)
       :base(container)
     {
-      _siteContext = new Lazy<ISiteContext>(() => { return Container.Resolve<ISiteContext>(); });
-      _language = new Lazy<string>(() => { return LoadLanguage(); });
-      _countrySite = new Lazy<string>(() => { return LoadCountrySite(); });
+      if (Container.TryResolve(out _siteContext))
+      {
+        _languageData.ContextId = _siteContext.ContextId;
+        _isInternal = _siteContext.IsRequestInternal;
+      }
+
+      if(Container.TryResolve(out _localization)){
+        _languageData.FullLanguage = _localization.FullLanguage;
+        _languageData.ShortLanguage = _localization.ShortLanguage;
+        _languageData.CountrySite = _localization.CountrySite;
+      }
     }
 
-    private string LoadCountrySite()
-    {
-      string result = _DEFAULTCOUNTRYSITE;
-      ILocalizationProvider localization;
-      if (Container.TryResolve(out localization))
-      {
-        result = localization.CountrySite;
-      }
-      return result;
-    }
-
-    private string LoadLanguage()
-    {
-      string result = _DEFAULTLANGUAGE;
-      ILocalizationProvider localization;
-      if (Container.TryResolve(out localization))
-      {
-        result = localization.FullLanguage;
-      }
-      return result;
-    }
 
     public string GetLanguagePhrase(string dictionaryName, string phraseKey)
+    {      
+      ILanguagePhraseHandler handler = GetLanguagePhraseHandler(dictionaryName);
+      return handler.GetLanguagePhrase(dictionaryName, phraseKey, _languageData);
+    }
+   
+    private ILanguagePhraseHandler GetLanguagePhraseHandler(string dictionaryName)
     {
       if (ShowDictionaryAndKeyRaw)
       {
-        return GetQALanguagePhrase(dictionaryName, phraseKey);
+        return new QAPhraseHandler();
       }
-      else
+      if (dictionaryName.StartsWith("cds.", StringComparison.OrdinalIgnoreCase))
       {
-        var request = new LanguagePhraseRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, dictionaryName, phraseKey, _language.Value, _countrySite.Value, _siteContext.Value.ContextId);
-        var response = (LanguagePhraseResponseData)DataCache.DataCache.GetProcessRequest(request, LanguageProviderEngineRequests.LanguagePhrase);
-        return response.LanguagePhrase;
+        return new CDSPhraseHandler();
       }
+      return new FilePhraseHandler();
     }
 
     private bool? _showDictionaryAndKeyRaw;
@@ -70,7 +63,7 @@ namespace Atlantis.Framework.Providers.Language
           _showDictionaryAndKeyRaw = false;
           ILocalizationProvider localization;
 
-          if ((_siteContext.Value.IsRequestInternal) && (Container.TryResolve(out localization)))
+          if ((_isInternal) && (Container.TryResolve(out localization)))
           {
             _showDictionaryAndKeyRaw = localization.IsActiveLanguage(_QALANGUAGESHOW);
           }
@@ -78,11 +71,5 @@ namespace Atlantis.Framework.Providers.Language
         return _showDictionaryAndKeyRaw.Value;
       }
     }
-
-    private string GetQALanguagePhrase(string dictionaryName, string phraseKey)
-    {
-      return string.Concat("[", dictionaryName, ":", phraseKey, "]");
-    }
-
   }
 }

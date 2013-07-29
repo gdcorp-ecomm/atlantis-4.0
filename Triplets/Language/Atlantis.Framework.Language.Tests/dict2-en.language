@@ -4,4 +4,7 @@ Purple River
 My dog is not chasing
 the rabbits out of my yard.
 <phrase blah="">
+<phrase key="keyparseinbetweenbadxml" />
+Does this phrase parse after a malformed phrase key?
+<phrase blah2="">
   

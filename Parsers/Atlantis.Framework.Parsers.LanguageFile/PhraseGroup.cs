@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace Atlantis.Framework.Language.Impl.Data
+namespace Atlantis.Framework.Parsers.LanguageFile
 {
-  internal class PhraseGroup
+  public class PhraseGroup
   {
     private Dictionary<string, Phrase> _phrases = new Dictionary<string, Phrase>(10, StringComparer.OrdinalIgnoreCase);
 
@@ -44,5 +47,4 @@ namespace Atlantis.Framework.Language.Impl.Data
       }
     }
   }
-
 }

@@ -1,28 +1,20 @@
-﻿using System;
+﻿using Atlantis.Framework.Extensions;
+using System;
 using System.Xml.Linq;
 
-namespace Atlantis.Framework.Language.Impl.Data
+namespace Atlantis.Framework.Parsers.LanguageFile
 {
-  internal class Phrase
+  public class Phrase
   {
-    internal static Phrase FromPhraseElementLine(string phraseElementLine, PhraseFileInfo fileInfo)
+    public static Phrase FromPhraseElementLine(string phraseElementLine, string dictionaryName, string language)
     {
       Phrase result = null;
-
-      try
-      {
-        // <phrase key="testkey" countrysite="uk" contextid="6" />
-        XElement phraseElement = XElement.Parse(phraseElementLine);
-        string key = phraseElement.GetAttributeValue("key", string.Empty);
-        string countrysite = phraseElement.GetAttributeValue("countrysite", "www");
-        int contextId = phraseElement.GetAttributeValueInt("contextid", 0);
-        result = new Phrase(fileInfo.DictionaryName, key, fileInfo.Language, countrysite, contextId);
-      }
-      catch (Exception ex)
-      {
-        Logging.LogException("FromPhraseElementLine", ex.Message + ex.StackTrace, phraseElementLine);
-      }
-
+      // <phrase key="testkey" countrysite="uk" contextid="6" />
+      XElement phraseElement = XElement.Parse(phraseElementLine);
+      string key = phraseElement.GetAttributeValue("key", string.Empty);
+      string countrysite = phraseElement.GetAttributeValue("countrysite", "www");
+      int contextId = phraseElement.GetAttributeValueInt("contextid", 0);
+      result = new Phrase(dictionaryName, key, language, countrysite, contextId);
       return result;
     }
 
@@ -43,7 +35,7 @@ namespace Atlantis.Framework.Language.Impl.Data
       PhraseText = string.Empty;
     }
 
-    internal bool IsValid
+    public bool IsValid
     {
       get
       {
@@ -55,7 +47,7 @@ namespace Atlantis.Framework.Language.Impl.Data
       }
     }
 
-    internal void AddTextLine(string textLine)
+    public void AddTextLine(string textLine)
     {
       if (PhraseText.Length == 0)
       {
@@ -67,5 +59,4 @@ namespace Atlantis.Framework.Language.Impl.Data
       }
     }
   }
-
 }

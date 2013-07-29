@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Atlantis.Framework.Parsers.LanguageFile;
 
 namespace Atlantis.Framework.Language.Impl.Data
 {

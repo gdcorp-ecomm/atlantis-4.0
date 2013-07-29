@@ -3,12 +3,12 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{3FA72244-485D-43CB-B82B-1054BC784D19}</ProjectGuid>
+    <ProjectGuid>{5556C6A2-02EB-4C2F-8CFD-64F6FC5E4790}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Atlantis.Framework.Language.Tests</RootNamespace>
-    <AssemblyName>Atlantis.Framework.Language.Tests</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <RootNamespace>Atlantis.Framework.Parsers.LanguageFile.Tests</RootNamespace>
+    <AssemblyName>Atlantis.Framework.Parsers.LanguageFile.Tests</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -40,11 +40,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.Core">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.XML" />
-    <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -59,55 +54,14 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="LanguagePhraseTests.cs" />
+    <Compile Include="LanguageFileParserTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="CDSLanguagePhraseTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj">
-      <Project>{d30157b2-c1b3-4073-ba5e-632e2337a997}</Project>
-      <Name>Atlantis.Framework.Engine</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj">
-      <Project>{a083a52e-c3c3-42e0-8dfd-54719e4c3b25}</Project>
-      <Name>Atlantis.Framework.Interface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Extensions\Atlantis.Framework.Extensions\Atlantis.Framework.Extensions.csproj">
-      <Project>{6d705d02-5b4f-4a37-b5bf-8af47075908c}</Project>
-      <Name>Atlantis.Framework.Extensions</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Parsers\Atlantis.Framework.Parsers.LanguageFile\Atlantis.Framework.Parsers.LanguageFile.csproj">
+    <ProjectReference Include="..\Atlantis.Framework.Parsers.LanguageFile\Atlantis.Framework.Parsers.LanguageFile.csproj">
       <Project>{b6beec29-3fd3-4b07-a8f1-32cb789b0ec8}</Project>
       <Name>Atlantis.Framework.Parsers.LanguageFile</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Atlantis.Framework.Language.Impl\Atlantis.Framework.Language.Impl.csproj">
-      <Project>{b1c3a5a6-bdb8-42b6-9bdb-061cd1b71125}</Project>
-      <Name>Atlantis.Framework.Language.Impl</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Atlantis.Framework.Language.Interface\Atlantis.Framework.Language.Interface.csproj">
-      <Project>{11a7884c-71b6-41cd-824f-0f22797d417d}</Project>
-      <Name>Atlantis.Framework.Language.Interface</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="a.language">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="atlantis.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="dict2-en.language">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="testdictionary-en.language">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="testdictionary-es-mx.language">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="testdictionary-es.language">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

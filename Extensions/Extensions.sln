@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Extensions", "Atlantis.Framework.Extensions\Atlantis.Framework.Extensions.csproj", "{6D705D02-5B4F-4A37-B5BF-8AF47075908C}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 2
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
+		SccProjectUniqueName0 = Atlantis.Framework.Extensions\\Atlantis.Framework.Extensions.csproj
+		SccProjectName0 = Atlantis.Framework.Extensions
+		SccLocalPath0 = Atlantis.Framework.Extensions
+		SccLocalPath1 = .
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6D705D02-5B4F-4A37-B5BF-8AF47075908C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D705D02-5B4F-4A37-B5BF-8AF47075908C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D705D02-5B4F-4A37-B5BF-8AF47075908C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D705D02-5B4F-4A37-B5BF-8AF47075908C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

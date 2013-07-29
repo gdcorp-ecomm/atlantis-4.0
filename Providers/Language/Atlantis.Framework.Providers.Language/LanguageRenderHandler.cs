@@ -12,7 +12,7 @@ namespace Atlantis.Framework.Providers.Language
   {
     const string _DICTIONARYKEY = "dictionary";
     const string _PHRASEKEY = "phrasekey";
-    const string _DEFAULTTOKENPATTERN = @"\[@L\[(?<dictionary>[a-zA-z0-9\.\-]*?):(?<phrasekey>[a-zA-z0-9\.\-]*?)\]@L\]";
+    const string _DEFAULTTOKENPATTERN = @"\[@L\[(?<dictionary>[a-zA-z0-9\.\-\/]*?):(?<phrasekey>[a-zA-z0-9\.\-]*?)\]@L\]";
     private static Regex _languagePhraseTokenPattern;
 
     static LanguageRenderHandler()

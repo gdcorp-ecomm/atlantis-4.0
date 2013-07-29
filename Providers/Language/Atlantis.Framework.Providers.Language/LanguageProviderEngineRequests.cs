@@ -4,9 +4,11 @@
   {
     static LanguageProviderEngineRequests()
     {
-      LanguagePhrase = 681;
+      FileLanguagePhrase = 681;
+      CDSLanguagePhrase = 721;
     }
 
-    public static int LanguagePhrase { get; private set; }
+    public static int FileLanguagePhrase { get; private set; }
+    public static int CDSLanguagePhrase { get; private set; }
   }
 }

@@ -1,8 +1,8 @@
 ﻿using System.Xml.Linq;
 
-namespace Atlantis.Framework.Language.Impl.Data
+namespace Atlantis.Framework.Extensions
 {
-  internal static class XElementExtensions
+  public static class XElementExtensions
   {
     public static string GetAttributeValue(this XElement element, string attributeName, string defaultValue)
     {

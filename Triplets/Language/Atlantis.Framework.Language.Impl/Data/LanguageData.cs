@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using Atlantis.Framework.Parsers.LanguageFile;
 
 namespace Atlantis.Framework.Language.Impl.Data
 {
@@ -45,19 +46,26 @@ namespace Atlantis.Framework.Language.Impl.Data
 
       foreach (string dataLine in dataLines)
       {
-        bool isPhraseElement = (dataLine.StartsWith("<phrase ", StringComparison.OrdinalIgnoreCase));
-        if (isPhraseElement)
+        try
         {
-          if (currentPhrase != null)
+          bool isPhraseElement = (dataLine.StartsWith("<phrase ", StringComparison.OrdinalIgnoreCase));
+          if (isPhraseElement)
           {
-            StorePhrase(currentPhrase);
-          }
+            if (currentPhrase != null)
+            {
+              StorePhrase(currentPhrase);
+            }
 
-          currentPhrase = Phrase.FromPhraseElementLine(dataLine, fileInfo);
+            currentPhrase = Phrase.FromPhraseElementLine(dataLine, fileInfo.DictionaryName, fileInfo.Language);
+          }
+          else if (currentPhrase != null)
+          {
+            currentPhrase.AddTextLine(dataLine);
+          }
         }
-        else if (currentPhrase != null)
+        catch (Exception ex)
         {
-          currentPhrase.AddTextLine(dataLine);
+          Logging.LogException("ParseLanguageFile", ex.Message + ex.StackTrace, dataLine);
         }
       }
 

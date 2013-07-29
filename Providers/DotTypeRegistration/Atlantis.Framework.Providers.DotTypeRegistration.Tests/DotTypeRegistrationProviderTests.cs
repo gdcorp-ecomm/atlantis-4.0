@@ -27,7 +27,7 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration.Tests
     public void DotTypeFormsSchemaSuccess()
     {
       IDotTypeRegistrationProvider provider = NewDotTypeRegistrationProvider();
-      IDictionary<string, IList<IFormField>> formFieldsByDomain;
+      IDictionary<string, IList<IList<IFormField>>> formFieldsByDomain;
       string[] domains = { "domain1.shop", "domain2.shop" };
       bool isSuccess = provider.GetDotTypeFormSchemas(1640, "MOBILE", "GA", "EN", domains, out formFieldsByDomain);
       Assert.AreEqual(true, isSuccess);
@@ -38,7 +38,7 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration.Tests
     public void DotTypeFormsSchemaFailure()
     {
       IDotTypeRegistrationProvider provider = NewDotTypeRegistrationProvider();
-      IDictionary<string, IList<IFormField>> formFieldsByDomain;
+      IDictionary<string, IList<IList<IFormField>>> formFieldsByDomain;
       string[] domains = { "domain1.shop", "domain2.shop" };
       bool isSuccess = provider.GetDotTypeFormSchemas(-1, "name of placement", "GA", "EN", domains, out formFieldsByDomain);
       Assert.AreEqual(false, isSuccess);

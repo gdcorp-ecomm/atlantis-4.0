@@ -43,10 +43,10 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration
       return success;
     }
 
-    public bool GetDotTypeFormSchemas(int tldId, string placement, string phase, string language, string[] domains, out IDictionary<string, IList<IFormField>> formFieldsByDomain)
+    public bool GetDotTypeFormSchemas(int tldId, string placement, string phase, string language, string[] domains, out IDictionary<string, IList<IList<IFormField>>> formFieldsByDomain)
     {
       var success = false;
-      formFieldsByDomain = new Dictionary<string, IList<IFormField>>(StringComparer.OrdinalIgnoreCase);
+      formFieldsByDomain = new Dictionary<string, IList<IList<IFormField>>>(StringComparer.OrdinalIgnoreCase);
 
       try
       {
@@ -94,10 +94,10 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration
       return success;
     }
 
-    private bool TransformFormSchemaToFormFields(IEnumerable<string> domains, IDotTypeFormsSchema formSchema, out IDictionary<string, IList<IFormField>> formFieldsByDomain)
+    private bool TransformFormSchemaToFormFields(IEnumerable<string> domains, IDotTypeFormsSchema formSchema, out IDictionary<string, IList<IList<IFormField>>> formFieldsByDomain)
     {
       bool success = false;
-      formFieldsByDomain = new Dictionary<string, IList<IFormField>>(StringComparer.OrdinalIgnoreCase);
+      formFieldsByDomain = new Dictionary<string, IList<IList<IFormField>>>(StringComparer.OrdinalIgnoreCase);
 
       try
       {
@@ -108,7 +108,7 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration
 
           foreach (var domain in domains)
           {
-            IList<IFormField> formFieldsForDomain = new List<IFormField>();
+            var formFieldsListForDomain = new List<IList<IFormField>>();
             foreach (var field in fields)
             {
               var formFieldType = TransformHandlerHelper.GetFormFieldType(field.FieldType);
@@ -122,9 +122,9 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration
                     IList<IFormField> formFieldList;
                     if (fieldTypeHandler.RenderDotTypeFormField(formFieldType, Container, out formFieldList))
                     {
-                      foreach (var formField in formFieldList)
+                      if (formFieldList.Count > 0)
                       {
-                        formFieldsForDomain.Add(formField);
+                        formFieldsListForDomain.Add(formFieldList);
                       }
                     }
                   }
@@ -136,7 +136,7 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration
                 Engine.Engine.LogAtlantisException(exception);
               }
             }
-            formFieldsByDomain[domain] = formFieldsForDomain;
+            formFieldsByDomain[domain] = formFieldsListForDomain;
           }
 
           if (formFieldsByDomain.Count > 0)

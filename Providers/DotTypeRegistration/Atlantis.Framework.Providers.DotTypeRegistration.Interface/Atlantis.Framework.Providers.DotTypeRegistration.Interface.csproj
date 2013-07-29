@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="FormFieldTypes.cs" />
     <Compile Include="DotTypeFormFieldTypes.cs" />
+    <Compile Include="Handlers\IFormFieldHandler.cs" />
     <Compile Include="Handlers\IDotTypeFormFieldTypeHandler.cs" />
     <Compile Include="IDotTypeClaimsSchema.cs" />
     <Compile Include="IDotTypeFormsItem.cs" />

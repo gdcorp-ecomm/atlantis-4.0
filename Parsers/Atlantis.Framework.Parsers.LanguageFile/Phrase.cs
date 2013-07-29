@@ -1,5 +1,4 @@
-﻿using Atlantis.Framework.Extensions;
-using System;
+﻿using System;
 using System.Xml.Linq;
 
 namespace Atlantis.Framework.Parsers.LanguageFile

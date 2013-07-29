@@ -13,8 +13,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Language
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Language.Tests", "Atlantis.Framework.Language.Tests\Atlantis.Framework.Language.Tests.csproj", "{3FA72244-485D-43CB-B82B-1054BC784D19}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Extensions", "..\..\Extensions\Atlantis.Framework.Extensions\Atlantis.Framework.Extensions.csproj", "{6D705D02-5B4F-4A37-B5BF-8AF47075908C}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Parsers.LanguageFile", "..\..\Parsers\Atlantis.Framework.Parsers.LanguageFile\Atlantis.Framework.Parsers.LanguageFile.csproj", "{B6BEEC29-3FD3-4B07-A8F1-32CB789B0EC8}"
 EndProject
 Global
@@ -73,10 +71,6 @@ Global
 		{3FA72244-485D-43CB-B82B-1054BC784D19}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3FA72244-485D-43CB-B82B-1054BC784D19}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3FA72244-485D-43CB-B82B-1054BC784D19}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6D705D02-5B4F-4A37-B5BF-8AF47075908C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6D705D02-5B4F-4A37-B5BF-8AF47075908C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6D705D02-5B4F-4A37-B5BF-8AF47075908C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6D705D02-5B4F-4A37-B5BF-8AF47075908C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B6BEEC29-3FD3-4B07-A8F1-32CB789B0EC8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B6BEEC29-3FD3-4B07-A8F1-32CB789B0EC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B6BEEC29-3FD3-4B07-A8F1-32CB789B0EC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -88,7 +82,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {F326D42D-1D35-4AFD-B7DA-23DDBFBD6E0B}
 		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {F326D42D-1D35-4AFD-B7DA-23DDBFBD6E0B}
-		{6D705D02-5B4F-4A37-B5BF-8AF47075908C} = {F326D42D-1D35-4AFD-B7DA-23DDBFBD6E0B}
 		{B6BEEC29-3FD3-4B07-A8F1-32CB789B0EC8} = {F326D42D-1D35-4AFD-B7DA-23DDBFBD6E0B}
 	EndGlobalSection
 EndGlobal

@@ -51,12 +51,7 @@
     <Compile Include="PhraseGroup.cs" />
     <Compile Include="PhrasePredicate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Extensions\Atlantis.Framework.Extensions\Atlantis.Framework.Extensions.csproj">
-      <Project>{6d705d02-5b4f-4a37-b5bf-8af47075908c}</Project>
-      <Name>Atlantis.Framework.Extensions</Name>
-    </ProjectReference>
+    <Compile Include="XElementExtensions.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

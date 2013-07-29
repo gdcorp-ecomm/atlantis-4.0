@@ -72,10 +72,6 @@
       <Project>{a083a52e-c3c3-42e0-8dfd-54719e4c3b25}</Project>
       <Name>Atlantis.Framework.Interface</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Extensions\Atlantis.Framework.Extensions\Atlantis.Framework.Extensions.csproj">
-      <Project>{6d705d02-5b4f-4a37-b5bf-8af47075908c}</Project>
-      <Name>Atlantis.Framework.Extensions</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\..\Parsers\Atlantis.Framework.Parsers.LanguageFile\Atlantis.Framework.Parsers.LanguageFile.csproj">
       <Project>{b6beec29-3fd3-4b07-a8f1-32cb789b0ec8}</Project>
       <Name>Atlantis.Framework.Parsers.LanguageFile</Name>

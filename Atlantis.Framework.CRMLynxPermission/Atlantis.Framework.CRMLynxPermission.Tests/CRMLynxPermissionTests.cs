@@ -24,6 +24,7 @@ namespace Atlantis.Framework.CRMLynxPermission.Tests
 
     [TestMethod]
     [DeploymentItem("atlantis.config")]
+    [DeploymentItem("Atlantis.Framework.CRMLynxPermission.Impl.dll")]
     public void CRMLynxPermissionTest()
     {
       var request = new CRMLynxPermissionRequestData(_shopperId
@@ -42,6 +43,7 @@ namespace Atlantis.Framework.CRMLynxPermission.Tests
 
     [TestMethod]
     [DeploymentItem("atlantis.config")]
+    [DeploymentItem("Atlantis.Framework.CRMLynxPermission.Impl.dll")]
     public void SerializeTest()
     {
       MockHttpContext.SetMockHttpContext(string.Empty, "http://localhost", string.Empty);

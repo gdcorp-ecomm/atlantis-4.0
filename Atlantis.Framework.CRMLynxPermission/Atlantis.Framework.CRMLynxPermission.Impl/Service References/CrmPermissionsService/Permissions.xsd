@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/GoDaddy.CRM.Services.DataAccess" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/GoDaddy.CRM.Services.DataAccess" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:simpleType name="PermissionLevel">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Default" />
+      <xs:enumeration value="Restricted" />
+      <xs:enumeration value="ReadOnly" />
+      <xs:enumeration value="ModifyWithPartialValidation" />
+      <xs:enumeration value="ModifyWithValidation" />
+      <xs:enumeration value="Modify" />
+      <xs:enumeration value="FullAccess" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="PermissionLevel" nillable="true" type="tns:PermissionLevel" />
+</xs:schema>

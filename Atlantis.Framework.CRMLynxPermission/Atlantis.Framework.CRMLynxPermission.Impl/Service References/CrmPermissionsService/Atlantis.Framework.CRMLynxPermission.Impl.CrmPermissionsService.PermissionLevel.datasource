@@ -6,5 +6,5 @@
     cause the file to be unrecognizable by the program.
 -->
 <GenericObjectDataSource DisplayName="PermissionLevel" Version="1.0" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
-   <TypeInfo>Atlantis.Framework.CRMLynxPermission.Impl.LynxPermissionService.PermissionLevel</TypeInfo>
+   <TypeInfo>Atlantis.Framework.CRMLynxPermission.Impl.CrmPermissionsService.PermissionLevel</TypeInfo>
 </GenericObjectDataSource>

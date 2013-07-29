@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://godaddy.com/CRMClientAPI" elementFormDefault="qualified" targetNamespace="http://godaddy.com/CRMClientAPI" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="https://crmclient-api.dev.int.godaddy.com/Permissions.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/GoDaddy.CRM.Services.DataAccess" />
+  <xs:element name="mgrUserId" type="xs:int" />
+  <xs:element name="permissionKey" nillable="true" type="xs:string" />
+  <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/GoDaddy.CRM.Services.DataAccess" name="Permission" type="q1:PermissionLevel" />
+  <xs:element name="Result" type="xs:boolean" />
+</xs:schema>

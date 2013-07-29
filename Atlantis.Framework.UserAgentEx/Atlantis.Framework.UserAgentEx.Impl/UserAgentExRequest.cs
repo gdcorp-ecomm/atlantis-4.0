@@ -9,7 +9,7 @@ namespace Atlantis.Framework.UserAgentEx.Impl
 {
   public class UserAgentExRequest : IRequest
   {
-    const string _USERAGENTEXREQUEST = "<GetUserAgentExpressionByTypeID><param name=\"n_userAgent_expressionTypeID\" value=\"{0}\"/></GetUserAgentExpressionByTypeID>";
+    private const string USER_AGENT_EX_REQUEST_XML_FORMAT = "<GetUserAgentExpressionByTypeID><param name=\"n_userAgent_expressionTypeID\" value=\"{0}\"/></GetUserAgentExpressionByTypeID>";
 
     public IResponseData RequestHandler(RequestData requestData, ConfigElement config)
     {
@@ -18,7 +18,7 @@ namespace Atlantis.Framework.UserAgentEx.Impl
       try
       {
         UserAgentExRequestData request = (UserAgentExRequestData)requestData;
-        string cacheRequest = string.Format(_USERAGENTEXREQUEST, request.ExpressionType.ToString());
+        string cacheRequest = string.Format(USER_AGENT_EX_REQUEST_XML_FORMAT, request.ExpressionType.ToString());
         string resultXml = DataCache.DataCache.GetCacheData(cacheRequest);
 
         List<Regex> expressions = new List<Regex>(25);

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text;
-using System.Web;
 using Atlantis.Framework.Conditions.Interface;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.SplitTest;
@@ -17,16 +16,10 @@ namespace Atlantis.Framework.Providers.SplitTesting
   {
     private const string NOT_ELIGIBLE_SIDE_ID = "0";
     private static readonly Random rand = new Random();
-    private static readonly IActiveSplitTestSide _defaultSideA = new ActiveSplitTestSide { Allocation = 100D, Name = "A", SideId = -1 };
+    private static readonly IActiveSplitTestSide _zeroSideInstance = new ActiveSplitTestSide {SideId = 0, Name = "0", Allocation = 0D};
 
     private readonly IProviderContainer _container;
     private Lazy<SplitTestingState> _splitTestingState;
-
-    private ISiteContext _siteContext;
-    private ISiteContext SiteContext
-    {
-      get { return _siteContext ?? (_siteContext = _container.Resolve<ISiteContext>()); }
-    }
 
     private readonly Lazy<ActiveSplitTestsResponseData> _activeSplitTestsResponse;
 
@@ -101,25 +94,15 @@ namespace Atlantis.Framework.Providers.SplitTesting
             string.IsNullOrEmpty(activeSplitTest.EligibilityRules);
     }
 
-
-
     public IActiveSplitTestSide GetSplitTestingSide(int splitTestId)
     {
-      #region Check for querystring override
-      string overrideSide;
-      if (SiteContext.IsRequestInternal && SplitTestingHelper.GetOverrideSide(splitTestId, HttpContext.Current.Request["QA--SPLIT_TESTING_PROVIDER_SIDE"], out overrideSide))
-      {
-        return new ActiveSplitTestSide { Allocation = -1D, Name = overrideSide, SideId = -1 };
-      }
-      #endregion
-
       IActiveSplitTestSide splitTestSide = null;
 
       IActiveSplitTest activeSplitTest;
       if (IsActiveTest(splitTestId, out activeSplitTest) && activeSplitTest != null && activeSplitTest.VersionNumber > 0)
       {
-
         var key = string.Format("{0}-{1}", splitTestId.ToString(CultureInfo.InvariantCulture), activeSplitTest.VersionNumber.ToString(CultureInfo.InvariantCulture));
+
         string sideId = GetSplitSideFromState(key);
         if (sideId != NOT_ELIGIBLE_SIDE_ID)
         {
@@ -156,10 +139,6 @@ namespace Atlantis.Framework.Providers.SplitTesting
         splitTestSide = GetActiveSplitTestSide(splitTestId, sideId);
 
       }
-      else
-      {
-        splitTestSide = _defaultSideA;
-      }
 
       return splitTestSide;
     }
@@ -192,7 +171,7 @@ namespace Atlantis.Framework.Providers.SplitTesting
         }
         else
         {
-          splitTestSide = _defaultSideA;
+          splitTestSide = _zeroSideInstance;
         }
       }
       return splitTestSide;

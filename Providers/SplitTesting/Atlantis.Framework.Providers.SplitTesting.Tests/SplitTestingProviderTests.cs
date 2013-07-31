@@ -5,6 +5,7 @@ using Atlantis.Framework.Conditions.Interface;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.Containers;
 using Atlantis.Framework.Providers.SplitTesting.Interface;
+using Atlantis.Framework.SplitTesting.Interface;
 using Atlantis.Framework.Testing.MockHttpContext;
 using Atlantis.Framework.Testing.MockProviders;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -57,8 +58,7 @@ namespace Atlantis.Framework.Providers.SplitTesting.Tests
       Assert.IsNotNull(splitProvider);
 
       var side1 = splitProvider.GetSplitTestingSide(9999);
-      var expected = "A";
-      Assert.AreEqual(expected, side1.Name);
+      Assert.IsTrue(side1 == null);
     }
 
     [TestMethod]

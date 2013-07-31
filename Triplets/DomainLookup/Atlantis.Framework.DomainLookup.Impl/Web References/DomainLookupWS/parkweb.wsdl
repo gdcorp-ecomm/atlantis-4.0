@@ -1,0 +1,950 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://cmpapp-v01.prod.mesa1.gdg:80/CMPWebServices/ParkWeb.asmx" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:s1="http://cmpapp-v01.prod.mesa1.gdg:80/CMPWebServices/ParkWeb.asmx/AbstractTypes" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://cmpapp-v01.prod.mesa1.gdg:80/CMPWebServices/ParkWeb.asmx" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://cmpapp-v01.prod.mesa1.gdg:80/CMPWebServices/ParkWeb.asmx">
+      <s:element name="GetParkedTemplateRecord">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="iRecurringID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetParkedTemplateRecordResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetParkedTemplateRecordResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateTemplateByReccuringID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="piRecurringID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="wsLocation" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="psNameValuePairs" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="UpdateTemplateByReccuringIDResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetDomainExpirationDate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="domainname" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDomainExpirationDateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetDomainExpirationDateResult" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="IsSmartDomain">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sDomainName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="IsSmartDomainResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="IsSmartDomainResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDomainInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sDomainName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDomainInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetDomainInfoResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="IsMobilizedDomain">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sDomainName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="IsMobilizedDomainResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="IsMobilizedDomainResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDomainTemplateRecord">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sDomainName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDomainTemplateRecordResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetDomainTemplateRecordResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetParkPageInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="domainname" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetParkPageInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetParkPageInfoResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getSubCategoryThemeData">
+        <s:complexType />
+      </s:element>
+      <s:element name="getSubCategoryThemeDataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getSubCategoryThemeDataResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getThemeConfigData">
+        <s:complexType />
+      </s:element>
+      <s:element name="getThemeConfigDataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getThemeConfigDataResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCashParkingDomainInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="domainname" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCashParkingDomainInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCashParkingDomainInfoResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getLegacyThemeCPData">
+        <s:complexType />
+      </s:element>
+      <s:element name="getLegacyThemeCPDataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getLegacyThemeCPDataResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCategoryKeywords">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetCategoryKeywordsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCategoryKeywordsResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="performAvailCheck">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="domain" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="tlds" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="performAvailCheckResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="performAvailCheckResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DataSet" nillable="true">
+        <s:complexType>
+          <s:sequence>
+            <s:element ref="s:schema" />
+            <s:any />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="dateTime" type="s:dateTime" />
+      <s:element name="boolean" type="s:boolean" />
+      <s:element name="string" nillable="true" type="s:string" />
+    </s:schema>
+    <s:schema targetNamespace="http://cmpapp-v01.prod.mesa1.gdg:80/CMPWebServices/ParkWeb.asmx/AbstractTypes">
+      <s:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+      <s:complexType name="StringArray">
+        <s:complexContent mixed="false">
+          <s:restriction base="soapenc:Array">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="unbounded" name="String" type="s:string" />
+            </s:sequence>
+          </s:restriction>
+        </s:complexContent>
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetParkedTemplateRecordSoapIn">
+    <wsdl:part name="parameters" element="tns:GetParkedTemplateRecord" />
+  </wsdl:message>
+  <wsdl:message name="GetParkedTemplateRecordSoapOut">
+    <wsdl:part name="parameters" element="tns:GetParkedTemplateRecordResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateTemplateByReccuringIDSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateTemplateByReccuringID" />
+  </wsdl:message>
+  <wsdl:message name="UpdateTemplateByReccuringIDSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateTemplateByReccuringIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetDomainExpirationDateSoapIn">
+    <wsdl:part name="parameters" element="tns:GetDomainExpirationDate" />
+  </wsdl:message>
+  <wsdl:message name="GetDomainExpirationDateSoapOut">
+    <wsdl:part name="parameters" element="tns:GetDomainExpirationDateResponse" />
+  </wsdl:message>
+  <wsdl:message name="IsSmartDomainSoapIn">
+    <wsdl:part name="parameters" element="tns:IsSmartDomain" />
+  </wsdl:message>
+  <wsdl:message name="IsSmartDomainSoapOut">
+    <wsdl:part name="parameters" element="tns:IsSmartDomainResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetDomainInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:GetDomainInfo" />
+  </wsdl:message>
+  <wsdl:message name="GetDomainInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:GetDomainInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IsMobilizedDomainSoapIn">
+    <wsdl:part name="parameters" element="tns:IsMobilizedDomain" />
+  </wsdl:message>
+  <wsdl:message name="IsMobilizedDomainSoapOut">
+    <wsdl:part name="parameters" element="tns:IsMobilizedDomainResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetDomainTemplateRecordSoapIn">
+    <wsdl:part name="parameters" element="tns:GetDomainTemplateRecord" />
+  </wsdl:message>
+  <wsdl:message name="GetDomainTemplateRecordSoapOut">
+    <wsdl:part name="parameters" element="tns:GetDomainTemplateRecordResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetParkPageInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:GetParkPageInfo" />
+  </wsdl:message>
+  <wsdl:message name="GetParkPageInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:GetParkPageInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="getSubCategoryThemeDataSoapIn">
+    <wsdl:part name="parameters" element="tns:getSubCategoryThemeData" />
+  </wsdl:message>
+  <wsdl:message name="getSubCategoryThemeDataSoapOut">
+    <wsdl:part name="parameters" element="tns:getSubCategoryThemeDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="getThemeConfigDataSoapIn">
+    <wsdl:part name="parameters" element="tns:getThemeConfigData" />
+  </wsdl:message>
+  <wsdl:message name="getThemeConfigDataSoapOut">
+    <wsdl:part name="parameters" element="tns:getThemeConfigDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetCashParkingDomainInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCashParkingDomainInfo" />
+  </wsdl:message>
+  <wsdl:message name="GetCashParkingDomainInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:GetCashParkingDomainInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="getLegacyThemeCPDataSoapIn">
+    <wsdl:part name="parameters" element="tns:getLegacyThemeCPData" />
+  </wsdl:message>
+  <wsdl:message name="getLegacyThemeCPDataSoapOut">
+    <wsdl:part name="parameters" element="tns:getLegacyThemeCPDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetCategoryKeywordsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCategoryKeywords" />
+  </wsdl:message>
+  <wsdl:message name="GetCategoryKeywordsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetCategoryKeywordsResponse" />
+  </wsdl:message>
+  <wsdl:message name="performAvailCheckSoapIn">
+    <wsdl:part name="parameters" element="tns:performAvailCheck" />
+  </wsdl:message>
+  <wsdl:message name="performAvailCheckSoapOut">
+    <wsdl:part name="parameters" element="tns:performAvailCheckResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetParkedTemplateRecordHttpPostIn">
+    <wsdl:part name="iRecurringID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetParkedTemplateRecordHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="UpdateTemplateByReccuringIDHttpPostIn">
+    <wsdl:part name="piRecurringID" type="s:string" />
+    <wsdl:part name="wsLocation" type="s:string" />
+    <wsdl:part name="psNameValuePairs" type="s1:StringArray" />
+  </wsdl:message>
+  <wsdl:message name="UpdateTemplateByReccuringIDHttpPostOut" />
+  <wsdl:message name="GetDomainExpirationDateHttpPostIn">
+    <wsdl:part name="domainname" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetDomainExpirationDateHttpPostOut">
+    <wsdl:part name="Body" element="tns:dateTime" />
+  </wsdl:message>
+  <wsdl:message name="IsSmartDomainHttpPostIn">
+    <wsdl:part name="sDomainName" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="IsSmartDomainHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="GetDomainInfoHttpPostIn">
+    <wsdl:part name="sDomainName" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetDomainInfoHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="IsMobilizedDomainHttpPostIn">
+    <wsdl:part name="sDomainName" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="IsMobilizedDomainHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="GetDomainTemplateRecordHttpPostIn">
+    <wsdl:part name="sDomainName" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetDomainTemplateRecordHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="GetParkPageInfoHttpPostIn">
+    <wsdl:part name="domainname" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetParkPageInfoHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="getSubCategoryThemeDataHttpPostIn" />
+  <wsdl:message name="getSubCategoryThemeDataHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="getThemeConfigDataHttpPostIn" />
+  <wsdl:message name="getThemeConfigDataHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="GetCashParkingDomainInfoHttpPostIn">
+    <wsdl:part name="domainname" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetCashParkingDomainInfoHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="getLegacyThemeCPDataHttpPostIn" />
+  <wsdl:message name="getLegacyThemeCPDataHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="GetCategoryKeywordsHttpPostIn" />
+  <wsdl:message name="GetCategoryKeywordsHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="performAvailCheckHttpPostIn">
+    <wsdl:part name="domain" type="s:string" />
+    <wsdl:part name="tlds" type="s1:StringArray" />
+  </wsdl:message>
+  <wsdl:message name="performAvailCheckHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:portType name="ParkWebSoap">
+    <wsdl:operation name="GetParkedTemplateRecord">
+      <wsdl:input message="tns:GetParkedTemplateRecordSoapIn" />
+      <wsdl:output message="tns:GetParkedTemplateRecordSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateTemplateByReccuringID">
+      <wsdl:input message="tns:UpdateTemplateByReccuringIDSoapIn" />
+      <wsdl:output message="tns:UpdateTemplateByReccuringIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDomainExpirationDate">
+      <wsdl:input message="tns:GetDomainExpirationDateSoapIn" />
+      <wsdl:output message="tns:GetDomainExpirationDateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="IsSmartDomain">
+      <wsdl:input message="tns:IsSmartDomainSoapIn" />
+      <wsdl:output message="tns:IsSmartDomainSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDomainInfo">
+      <wsdl:input message="tns:GetDomainInfoSoapIn" />
+      <wsdl:output message="tns:GetDomainInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="IsMobilizedDomain">
+      <wsdl:input message="tns:IsMobilizedDomainSoapIn" />
+      <wsdl:output message="tns:IsMobilizedDomainSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDomainTemplateRecord">
+      <wsdl:input message="tns:GetDomainTemplateRecordSoapIn" />
+      <wsdl:output message="tns:GetDomainTemplateRecordSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetParkPageInfo">
+      <wsdl:input message="tns:GetParkPageInfoSoapIn" />
+      <wsdl:output message="tns:GetParkPageInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getSubCategoryThemeData">
+      <wsdl:input message="tns:getSubCategoryThemeDataSoapIn" />
+      <wsdl:output message="tns:getSubCategoryThemeDataSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getThemeConfigData">
+      <wsdl:input message="tns:getThemeConfigDataSoapIn" />
+      <wsdl:output message="tns:getThemeConfigDataSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCashParkingDomainInfo">
+      <wsdl:input message="tns:GetCashParkingDomainInfoSoapIn" />
+      <wsdl:output message="tns:GetCashParkingDomainInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getLegacyThemeCPData">
+      <wsdl:input message="tns:getLegacyThemeCPDataSoapIn" />
+      <wsdl:output message="tns:getLegacyThemeCPDataSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCategoryKeywords">
+      <wsdl:input message="tns:GetCategoryKeywordsSoapIn" />
+      <wsdl:output message="tns:GetCategoryKeywordsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="performAvailCheck">
+      <wsdl:input message="tns:performAvailCheckSoapIn" />
+      <wsdl:output message="tns:performAvailCheckSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="ParkWebHttpPost">
+    <wsdl:operation name="GetParkedTemplateRecord">
+      <wsdl:input message="tns:GetParkedTemplateRecordHttpPostIn" />
+      <wsdl:output message="tns:GetParkedTemplateRecordHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateTemplateByReccuringID">
+      <wsdl:input message="tns:UpdateTemplateByReccuringIDHttpPostIn" />
+      <wsdl:output message="tns:UpdateTemplateByReccuringIDHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDomainExpirationDate">
+      <wsdl:input message="tns:GetDomainExpirationDateHttpPostIn" />
+      <wsdl:output message="tns:GetDomainExpirationDateHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="IsSmartDomain">
+      <wsdl:input message="tns:IsSmartDomainHttpPostIn" />
+      <wsdl:output message="tns:IsSmartDomainHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDomainInfo">
+      <wsdl:input message="tns:GetDomainInfoHttpPostIn" />
+      <wsdl:output message="tns:GetDomainInfoHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="IsMobilizedDomain">
+      <wsdl:input message="tns:IsMobilizedDomainHttpPostIn" />
+      <wsdl:output message="tns:IsMobilizedDomainHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDomainTemplateRecord">
+      <wsdl:input message="tns:GetDomainTemplateRecordHttpPostIn" />
+      <wsdl:output message="tns:GetDomainTemplateRecordHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetParkPageInfo">
+      <wsdl:input message="tns:GetParkPageInfoHttpPostIn" />
+      <wsdl:output message="tns:GetParkPageInfoHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getSubCategoryThemeData">
+      <wsdl:input message="tns:getSubCategoryThemeDataHttpPostIn" />
+      <wsdl:output message="tns:getSubCategoryThemeDataHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getThemeConfigData">
+      <wsdl:input message="tns:getThemeConfigDataHttpPostIn" />
+      <wsdl:output message="tns:getThemeConfigDataHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCashParkingDomainInfo">
+      <wsdl:input message="tns:GetCashParkingDomainInfoHttpPostIn" />
+      <wsdl:output message="tns:GetCashParkingDomainInfoHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getLegacyThemeCPData">
+      <wsdl:input message="tns:getLegacyThemeCPDataHttpPostIn" />
+      <wsdl:output message="tns:getLegacyThemeCPDataHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCategoryKeywords">
+      <wsdl:input message="tns:GetCategoryKeywordsHttpPostIn" />
+      <wsdl:output message="tns:GetCategoryKeywordsHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="performAvailCheck">
+      <wsdl:input message="tns:performAvailCheckHttpPostIn" />
+      <wsdl:output message="tns:performAvailCheckHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ParkWebSoap" type="tns:ParkWebSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetParkedTemplateRecord">
+      <soap:operation soapAction="http://cmpapp-v01.prod.mesa1.gdg:80/CMPWebServices/ParkWeb.asmx/GetParkedTemplateRecord" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateTemplateByReccuringID">
+      <soap:operation soapAction="http://cmpapp-v01.prod.mesa1.gdg:80/CMPWebServices/ParkWeb.asmx/UpdateTemplateByReccuringID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDomainExpirationDate">
+      <soap:operation soapAction="http://cmpapp-v01.prod.mesa1.gdg:80/CMPWebServices/ParkWeb.asmx/GetDomainExpirationDate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsSmartDomain">
+      <soap:operation soapAction="http://cmpapp-v01.prod.mesa1.gdg:80/CMPWebServices/ParkWeb.asmx/IsSmartDomain" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDomainInfo">
+      <soap:operation soapAction="http://cmpapp-v01.prod.mesa1.gdg:80/CMPWebServices/ParkWeb.asmx/GetDomainInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsMobilizedDomain">
+      <soap:operation soapAction="http://cmpapp-v01.prod.mesa1.gdg:80/CMPWebServices/ParkWeb.asmx/IsMobilizedDomain" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDomainTemplateRecord">
+      <soap:operation soapAction="http://cmpapp-v01.prod.mesa1.gdg:80/CMPWebServices/ParkWeb.asmx/GetDomainTemplateRecord" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetParkPageInfo">
+      <soap:operation soapAction="http://cmpapp-v01.prod.mesa1.gdg:80/CMPWebServices/ParkWeb.asmx/GetParkPageInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getSubCategoryThemeData">
+      <soap:operation soapAction="http://cmpapp-v01.prod.mesa1.gdg:80/CMPWebServices/ParkWeb.asmx/getSubCategoryThemeData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getThemeConfigData">
+      <soap:operation soapAction="http://cmpapp-v01.prod.mesa1.gdg:80/CMPWebServices/ParkWeb.asmx/getThemeConfigData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCashParkingDomainInfo">
+      <soap:operation soapAction="http://cmpapp-v01.prod.mesa1.gdg:80/CMPWebServices/ParkWeb.asmx/GetCashParkingDomainInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getLegacyThemeCPData">
+      <soap:operation soapAction="http://cmpapp-v01.prod.mesa1.gdg:80/CMPWebServices/ParkWeb.asmx/getLegacyThemeCPData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCategoryKeywords">
+      <soap:operation soapAction="http://cmpapp-v01.prod.mesa1.gdg:80/CMPWebServices/ParkWeb.asmx/GetCategoryKeywords" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="performAvailCheck">
+      <soap:operation soapAction="http://cmpapp-v01.prod.mesa1.gdg:80/CMPWebServices/ParkWeb.asmx/performAvailCheck" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ParkWebSoap12" type="tns:ParkWebSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetParkedTemplateRecord">
+      <soap12:operation soapAction="http://cmpapp-v01.prod.mesa1.gdg:80/CMPWebServices/ParkWeb.asmx/GetParkedTemplateRecord" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateTemplateByReccuringID">
+      <soap12:operation soapAction="http://cmpapp-v01.prod.mesa1.gdg:80/CMPWebServices/ParkWeb.asmx/UpdateTemplateByReccuringID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDomainExpirationDate">
+      <soap12:operation soapAction="http://cmpapp-v01.prod.mesa1.gdg:80/CMPWebServices/ParkWeb.asmx/GetDomainExpirationDate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsSmartDomain">
+      <soap12:operation soapAction="http://cmpapp-v01.prod.mesa1.gdg:80/CMPWebServices/ParkWeb.asmx/IsSmartDomain" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDomainInfo">
+      <soap12:operation soapAction="http://cmpapp-v01.prod.mesa1.gdg:80/CMPWebServices/ParkWeb.asmx/GetDomainInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsMobilizedDomain">
+      <soap12:operation soapAction="http://cmpapp-v01.prod.mesa1.gdg:80/CMPWebServices/ParkWeb.asmx/IsMobilizedDomain" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDomainTemplateRecord">
+      <soap12:operation soapAction="http://cmpapp-v01.prod.mesa1.gdg:80/CMPWebServices/ParkWeb.asmx/GetDomainTemplateRecord" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetParkPageInfo">
+      <soap12:operation soapAction="http://cmpapp-v01.prod.mesa1.gdg:80/CMPWebServices/ParkWeb.asmx/GetParkPageInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getSubCategoryThemeData">
+      <soap12:operation soapAction="http://cmpapp-v01.prod.mesa1.gdg:80/CMPWebServices/ParkWeb.asmx/getSubCategoryThemeData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getThemeConfigData">
+      <soap12:operation soapAction="http://cmpapp-v01.prod.mesa1.gdg:80/CMPWebServices/ParkWeb.asmx/getThemeConfigData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCashParkingDomainInfo">
+      <soap12:operation soapAction="http://cmpapp-v01.prod.mesa1.gdg:80/CMPWebServices/ParkWeb.asmx/GetCashParkingDomainInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getLegacyThemeCPData">
+      <soap12:operation soapAction="http://cmpapp-v01.prod.mesa1.gdg:80/CMPWebServices/ParkWeb.asmx/getLegacyThemeCPData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCategoryKeywords">
+      <soap12:operation soapAction="http://cmpapp-v01.prod.mesa1.gdg:80/CMPWebServices/ParkWeb.asmx/GetCategoryKeywords" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="performAvailCheck">
+      <soap12:operation soapAction="http://cmpapp-v01.prod.mesa1.gdg:80/CMPWebServices/ParkWeb.asmx/performAvailCheck" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ParkWebHttpPost" type="tns:ParkWebHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="GetParkedTemplateRecord">
+      <http:operation location="/GetParkedTemplateRecord" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateTemplateByReccuringID">
+      <http:operation location="/UpdateTemplateByReccuringID" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="GetDomainExpirationDate">
+      <http:operation location="/GetDomainExpirationDate" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsSmartDomain">
+      <http:operation location="/IsSmartDomain" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDomainInfo">
+      <http:operation location="/GetDomainInfo" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsMobilizedDomain">
+      <http:operation location="/IsMobilizedDomain" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDomainTemplateRecord">
+      <http:operation location="/GetDomainTemplateRecord" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetParkPageInfo">
+      <http:operation location="/GetParkPageInfo" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getSubCategoryThemeData">
+      <http:operation location="/getSubCategoryThemeData" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getThemeConfigData">
+      <http:operation location="/getThemeConfigData" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCashParkingDomainInfo">
+      <http:operation location="/GetCashParkingDomainInfo" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getLegacyThemeCPData">
+      <http:operation location="/getLegacyThemeCPData" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCategoryKeywords">
+      <http:operation location="/GetCategoryKeywords" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="performAvailCheck">
+      <http:operation location="/performAvailCheck" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ParkWeb">
+    <wsdl:port name="ParkWebSoap" binding="tns:ParkWebSoap">
+      <soap:address location="https://cmpapp.dev.int.godaddy.com/parkwebws/parkweb.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ParkWebSoap12" binding="tns:ParkWebSoap12">
+      <soap12:address location="https://cmpapp.dev.int.godaddy.com/parkwebws/parkweb.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ParkWebHttpPost" binding="tns:ParkWebHttpPost">
+      <http:address location="https://cmpapp.dev.int.godaddy.com/parkwebws/parkweb.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

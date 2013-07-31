@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<discovery xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/disco/">
+  <contractRef ref="https://cmpapp.dev.int.godaddy.com/parkwebws/parkweb.asmx?wsdl" docRef="https://cmpapp.dev.int.godaddy.com/parkwebws/parkweb.asmx" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
+  <soap address="https://cmpapp.dev.int.godaddy.com/parkwebws/parkweb.asmx" xmlns:q1="http://cmpapp-v01.prod.mesa1.gdg:80/CMPWebServices/ParkWeb.asmx" binding="q1:ParkWebSoap" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+  <soap address="https://cmpapp.dev.int.godaddy.com/parkwebws/parkweb.asmx" xmlns:q2="http://cmpapp-v01.prod.mesa1.gdg:80/CMPWebServices/ParkWeb.asmx" binding="q2:ParkWebSoap12" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+</discovery>

@@ -61,6 +61,7 @@
     <Compile Include="ConditionHandlers\DataCenterConditionHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SplitTestingProviderTests.cs" />
+    <Compile Include="SplitTestingHelperTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Atlantis.Framework.DataCache\Atlantis.Framework.DataCache\Atlantis.Framework.DataCache.csproj">

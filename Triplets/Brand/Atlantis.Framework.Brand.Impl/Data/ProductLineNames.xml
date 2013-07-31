@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ProductLineNames>
+  <ProductLineName Id="AccountExec" Value="AccountExec" GDValue="AccountExec" />
+  <ProductLineName Id="AdSpace" Value="AdSpace" GDValue="AdSpace" />
+  <ProductLineName Id="Auctions" Value="Domain Auctions" GDValue="GoDaddy Auctions" />
+  <ProductLineName Id="AutoRenewProtection" Value="Auto Renew Protection" GDValue="Auto Renew Protection" />
+  <ProductLineName Id="BulkDomain" Value="Bulk Domain Discounts" GDValue="Bulk Domain Discounts" />
+  <ProductLineName Id="BusinessRegistration" Value="Business Registration" GDValue="Business Registration" />
+  <ProductLineName Id="Calendar" Value="Online Group Calendar" GDValue="Online Group Calendar" />
+  <ProductLineName Id="CashParking" Value="CashParking" GDValue="CashParking" />
+  <ProductLineName Id="CertifiedDomain" Value="Certified Domain" GDValue="Certified Domain" />
+  <ProductLineName Id="Community" Value="Support" GDValue="GoDaddy Support" />
+  <ProductLineName Id="CustomLogoDesign" Value="Custom Logo Design" GDValue="Custom Logo Design" />
+  <ProductLineName Id="DeluxeRegistration" Value="Deluxe Registration" GDValue="Deluxe Registration" />
+  <ProductLineName Id="DiscountDomainClub" Value="Discount Domain Club" GDValue="Discount Domain Club" />
+  <ProductLineName Id="DomainBackorders" Value="Domain Backorders" GDValue="Domain Backorders" />
+  <ProductLineName Id="DomainBuyService" Value="Domain Buy Service" GDValue="Domain Buy Service" />
+  <ProductLineName Id="DomainForward" Value="Domain Forwarding and Masking" GDValue="Domain Forwarding and Masking" />
+  <ProductLineName Id="DomainLocking" Value="Domain Locking" GDValue="Domain Locking" />
+  <ProductLineName Id="DomainOwnershipProtection" Value="Domain Ownership Protection" GDValue="Domain Ownership Protection" />
+  <ProductLineName Id="DomainTransfers" Value="Domain Transfers" GDValue="Domain Transfers" />
+  <ProductLineName Id="EmailMarketingTool" Value="Express Email Marketing" GDValue="Express Email Marketing" />
+  <ProductLineName Id="FaxThruEmail" Value="Fax Thru Email" GDValue="Fax Thru Email" />
+  <ProductLineName Id="FreeEmail" Value="Personalized Email" GDValue="Personalized Email" />
+  <ProductLineName Id="FreeEmailForwarding" Value="100-Pack Email Forwarding" GDValue="100-Pack Email Forwarding" />
+  <ProductLineName Id="FreeInstantPage" Value="Hosting with Website Builder" GDValue="Hosting with Website Builder" />
+  <ProductLineName Id="FreeParked" Value="'Parked Page' w/Domain" GDValue="'Parked Page' w/Domain" />
+  <ProductLineName Id="FreeWST" Value="5-page website with hosting" GDValue="5-page website with hosting" />
+  <ProductLineName Id="FreeStarter" Value="Starter Web page" GDValue="Starter Web page" />
+  <ProductLineName Id="FreeForSale" Value="'For Sale' Page" GDValue="'For Sale' Page" />
+  <ProductLineName Id="FreeGettingStarted" Value="Getting Started Guides" GDValue="Getting Started Guides" />
+  <ProductLineName Id="GeoDomainMap" Value="GeoDomainMap Tool" GDValue="GeoDomainMap Tool" />
+  <ProductLineName Id="HostingConnection" Value="Value Applications" GDValue="GoDaddy Hosting Connection" />
+  <ProductLineName Id="InstantPage" Value="InstantPage" GDValue="InstantPage" />
+  <ProductLineName Id="IntDomainNames" Value="Internationalized Domain Names (IDN)" GDValue="Internationalized Domain Names (IDN)" />
+  <ProductLineName Id="MySpaceMyAds" Value="MySpace&#174; myAds" GDValue="MySpace&#174; myAds" />
+  <ProductLineName Id="OnlineFileFolder" Value="Online Storage" GDValue="Online Storage" />
+  <ProductLineName Id="OnlinePhotoFiler" Value="Photo Album" GDValue="Photo Album" />
+  <ProductLineName Id="PrivateRegistration" Value="Private Registration" GDValue="Private Registration" />
+  <ProductLineName Id="ProtectedRegistration" Value="Protected Registration" GDValue="Protected Registration" />
+  <ProductLineName Id="ProtectMe" Value="Website Protection" GDValue="Website Protection" />
+  <ProductLineName Id="QuickBlogcast" Value="Quick Blogcast" GDValue="Quick Blogcast" />
+  <ProductLineName Id="RegistrationChange" Value="Change of Registration" GDValue="Change of Registration" />
+  <ProductLineName Id="SearchEngineVisibility" Value="Search Engine Visibility" GDValue="Search Engine Visibility" />
+  <ProductLineName Id="ShoppingCart" Value="Quick Shopping Cart" GDValue="Quick Shopping Cart" />
+  <ProductLineName Id="SocialNetworking" Value="Social Visibility" GDValue="Social Visibility" />
+  <ProductLineName Id="StatusAlerts" Value="Status Alerts" GDValue="Status Alerts" />
+  <ProductLineName Id="TotalDNSControl" Value="Total DNS Control" GDValue="Total DNS Control" />
+  <ProductLineName Id="TrafficBlazer" Value="Search Engine Visibility" GDValue="Search Engine Visibility" />
+  <ProductLineName Id="TrafficFacts" Value="Site Analytics" GDValue="Site Analytics" />
+  <ProductLineName Id="VirtualDataCenter" Value="" GDValue="GoDaddy Cloud Servers" />
+  <ProductLineName Id="TransferConcierge" Value="Transfer Concierge&#174;" GDValue="Transfer Concierge&#174;" />
+  <ProductLineName Id="WebsiteBuilder" Value="Website Builder" GDValue="GoDaddy Website Builder&#174;" />
+  <ProductLineName Id="WordPress" Value="WordPress" GDValue="WordPress" />
+  <ProductLineName Id="PremiumDNS" Value="Premium DNS" GDValue="Premium DNS" />
+  <ProductLineName Id="WebHosting" Value="Web Hosting" GDValue="GoDaddy Web Hosting" />
+</ProductLineNames>

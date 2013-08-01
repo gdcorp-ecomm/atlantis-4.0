@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.IO;
 using System.Net;
 using System.Text;
@@ -9,14 +10,34 @@ namespace Atlantis.Framework.Testing.MockHttpContext
 {
   public class MockHttpRequest : HttpWorkerRequest
   {
-    Uri _uri;
-    TextWriter _outputWriter;
-    List<KeyValuePair<string,string>> _mockHeaders = new List<KeyValuePair<string,string>>();
-    IPAddress _remoteAddress = null;
+    private Uri _uri;
+    private TextWriter _outputWriter;
+    private List<KeyValuePair<string, string>> _mockHeaders = new List<KeyValuePair<string, string>>();
+    private IPAddress _remoteAddress;
+    private string _userAgent;
+    private string _cookieHeaderValue;
 
     public void MockRemoteAddress(IPAddress address)
     {
       _remoteAddress = address;
+    }
+
+    public void MockUserAgent(string userAgent)
+    {
+      _userAgent = userAgent;
+    }
+
+    public void MockCookies(NameValueCollection cookies)
+    {
+      StringBuilder cookieHeaderBuilder = new StringBuilder();
+
+      foreach (string cookieName in cookies.AllKeys)
+      {
+        string cookieValue = cookies[cookieName];
+        cookieHeaderBuilder.AppendFormat("{0}={1}; ", cookieName, cookieValue);
+      }
+
+      _cookieHeaderValue = cookieHeaderBuilder.ToString();
     }
 
     public void MockHeaderValues(IEnumerable<KeyValuePair<string, string>> headerValues)
@@ -142,6 +163,26 @@ namespace Atlantis.Framework.Testing.MockHttpContext
 
     public override void SendUnknownResponseHeader(string name, string value)
     {
+    }
+
+    public override string GetKnownRequestHeader(int index)
+    {
+      string headerValue;
+
+      if (index == HeaderUserAgent)
+      {
+        headerValue = _userAgent;
+      }
+      else if (index == HeaderCookie)
+      {
+        headerValue = _cookieHeaderValue;
+      }
+      else
+      {
+        headerValue = base.GetKnownRequestHeader(index);
+      }
+
+      return headerValue;
     }
 
     public override string GetUnknownRequestHeader(string name)

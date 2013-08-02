@@ -10,7 +10,6 @@ namespace Atlantis.Framework.Geo.Tests
   [TestClass]
   [DeploymentItem("atlantis.config")]
   [DeploymentItem("Atlantis.Framework.Geo.Impl.dll")]
-  [DeploymentItem("Interop.gdDataCacheLib.dll")]
   public class CountryTests
   {
     const int _COUNTRYREQUESTTYPE = 664;

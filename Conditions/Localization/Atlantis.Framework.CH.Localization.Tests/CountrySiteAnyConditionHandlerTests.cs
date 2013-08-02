@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Reflection;
 using Atlantis.Framework.Conditions.Interface;
 using Atlantis.Framework.Interface;
@@ -12,6 +13,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Atlantis.Framework.CH.Localization.Tests
 {
   [TestClass]
+  [DeploymentItem("Atlantis.Framework.CH.Localization.dll")]
   public class CountrySiteAnyConditionHandlerTests
   {
     private IProviderContainer _providerContainer;
@@ -73,7 +75,7 @@ namespace Atlantis.Framework.CH.Localization.Tests
     [TestMethod]
     public void OneConditionExpression()
     {
-      string expression = "countrySiteAny(us)";
+      string expression = "countrySiteAny(www)";
       bool result = ExpressionParserManager.EvaluateExpression(expression);
       Assert.IsTrue(result);
     }
@@ -81,7 +83,7 @@ namespace Atlantis.Framework.CH.Localization.Tests
     [TestMethod]
     public void MultipleConditionExpression()
     {
-      string expression = "countrySiteAny(us) && !countrySiteAny(in)";
+      string expression = "countrySiteAny(www) && !countrySiteAny(in)";
       bool result = ExpressionParserManager.EvaluateExpression(expression);
       Assert.IsTrue(result);
     }

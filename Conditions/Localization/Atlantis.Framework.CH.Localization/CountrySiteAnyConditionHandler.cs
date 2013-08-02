@@ -16,7 +16,7 @@ namespace Atlantis.Framework.CH.Localization
 
       ILocalizationProvider localizationProvider = providerContainer.Resolve<ILocalizationProvider>();
 
-      string currentCountrySiteValue = localizationProvider.IsGlobalSite() ? "us" : localizationProvider.CountrySite;
+      string currentCountrySiteValue = localizationProvider.CountrySite;
 
       foreach (string countrySiteValue in parameters)
       {

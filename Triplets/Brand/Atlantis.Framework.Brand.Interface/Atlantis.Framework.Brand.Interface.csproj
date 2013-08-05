@@ -42,7 +42,6 @@
   <ItemGroup>
     <Compile Include="CompanyNameRequestData.cs" />
     <Compile Include="CompanyNameResponseData.cs" />
-    <Compile Include="ProductLineName.cs" />
     <Compile Include="ProductLineNameRequestData.cs" />
     <Compile Include="ProductLineNameResponseData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -55,6 +54,10 @@
     <ProjectReference Include="..\..\..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj">
       <Project>{a083a52e-c3c3-42e0-8dfd-54719e4c3b25}</Project>
       <Name>Atlantis.Framework.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\DataCacheGeneric\Atlantis.Framework.DataCacheGeneric.Interface\Atlantis.Framework.DataCacheGeneric.Interface.csproj">
+      <Project>{cbfe3b17-5d0f-481a-8ebe-f2493ec96637}</Project>
+      <Name>Atlantis.Framework.DataCacheGeneric.Interface</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

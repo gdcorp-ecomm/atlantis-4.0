@@ -78,6 +78,10 @@
       <Project>{af7389f6-2167-4503-974e-42139638a9cc}</Project>
       <Name>Atlantis.Framework.PrivateLabel.Interface</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\Atlantis.Framework.Providers.Preferences\Atlantis.Framework.Providers.Preferences.Interface\Atlantis.Framework.Providers.Preferences.Interface.csproj">
+      <Project>{1a50e3b8-4a5c-4e48-bad4-17c5092f0dde}</Project>
+      <Name>Atlantis.Framework.Providers.Preferences.Interface</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\Atlantis.Framework.Testing\Atlantis.Framework.Testing.MockHttpContext\Atlantis.Framework.Testing.MockHttpContext.csproj">
       <Project>{2f8983b4-801b-461a-9d76-26a58a496261}</Project>
       <Name>Atlantis.Framework.Testing.MockHttpContext</Name>

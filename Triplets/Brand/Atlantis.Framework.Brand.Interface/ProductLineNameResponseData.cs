@@ -1,26 +1,61 @@
 ﻿using System.Collections.Generic;
-using Atlantis.Framework.Interface;
 using System.Xml.Linq;
+using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.Brand.Interface
 {
   public class ProductLineNameResponseData : IResponseData
   {
     private AtlantisException _exception;
-    private List<ProductLineName> _productLineList;
+    private Dictionary<string, Dictionary<string, string>> _productNameDict;
 
     public static ProductLineNameResponseData Empty { get; private set; }
 
-    public static ProductLineNameResponseData FromProductLineNameXml(string productLineXml)
+    public static ProductLineNameResponseData FromProductLineNameXml(string productLineXml,  int contextId)
     {
-      XDocument productLineNamesDoc = XDocument.Parse(productLineXml);
-      List<ProductLineName> productLineList = new List<ProductLineName>();
+      var productLineNamesDoc = XDocument.Parse(productLineXml);
+      var productLineList = new Dictionary<string, Dictionary<string, string>>();
 
-      foreach (XElement productLineNamesElement in productLineNamesDoc.Descendants("ProductLineName"))
+      foreach (var productLineNamesElement in productLineNamesDoc.Descendants("ProductLineName"))
       {
-        ProductLineName productLine = ProductLineName.FromCacheXml(productLineNamesElement);
+        var productNameDictionary = new Dictionary<string, string>();
 
-        productLineList.Add(productLine);
+        var keyAttribute = productLineNamesElement.Attribute("Key");
+        var valueAttribute = productLineNamesElement.Attribute("Value");
+
+        if ((keyAttribute == null) || (valueAttribute == null)) continue;
+
+        var key = keyAttribute.Value;
+        var value = valueAttribute.Value;
+        productNameDictionary.Add("default", value);
+
+        var overrideProductLine = productLineNamesElement.Descendants("OverrideName");
+
+        if (overrideProductLine.Elements() != null)
+        {
+          foreach (var overrideElement in overrideProductLine)
+          {
+            var contextidAttribute = overrideElement.Attribute("ContextId");
+            int xmlContextId;
+
+            if (int.TryParse(contextidAttribute.Value, out xmlContextId))
+            {
+              if (xmlContextId == contextId)
+              {
+                XAttribute overrideAttribute;
+                overrideAttribute = overrideElement.Attribute("Value");
+
+                if (overrideAttribute != null)
+                {
+
+                  var ovverideValue = overrideAttribute.Value;
+                  productNameDictionary.Add("override", ovverideValue);
+                }
+              }
+            }
+          }
+        }
+        productLineList.Add(key, productNameDictionary);
       }
 
       return new ProductLineNameResponseData(productLineList);
@@ -28,17 +63,17 @@ namespace Atlantis.Framework.Brand.Interface
 
     static ProductLineNameResponseData()
     {
-      Empty = new ProductLineNameResponseData(new List<ProductLineName>());
+      Empty = new ProductLineNameResponseData(new Dictionary<string, Dictionary<string, string>>());
     }
 
-    public IEnumerable<ProductLineName> ProductLineNames
+    public Dictionary<string, Dictionary<string, string>> ProductLineNames
     {
-      get { return _productLineList; }
+      get { return _productNameDict; }
     }
 
-    private ProductLineNameResponseData(List<ProductLineName> productLineList)
+    private ProductLineNameResponseData(Dictionary<string, Dictionary<string, string>> productLineList)
     {
-      _productLineList = productLineList;
+      _productNameDict = productLineList;
     }
 
     public static ProductLineNameResponseData FromException(AtlantisException exception)

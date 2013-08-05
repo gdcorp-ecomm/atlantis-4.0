@@ -1,32 +1,30 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <CompanyNames>
-  <CompanyName Name="GoDaddy" Value="GoDaddy" />
-  <CompanyName Name="GoDaddyDotCom" Value="GoDaddy.com" />
-  <CompanyName Name="GoDaddyLegal" Value="GoDaddy.com, LLC" />
-  <CompanyName Name="GoDaddyTrademarked" Value="GoDaddy&#174;" />
-  <CompanyName Name="GoDaddyDotComTrademarked" Value="GoDaddy.com&#174;" />
+  <CompanyName ContextId="0">
+    <Name Key="NameDBP" Value="Domains By Proxy" />
+    <Name Key="NameDBPDotCom" Value="DomainsByProxy.com" />
+    <Name Key="NameDBPLegal" Value="Domains By Proxy, LLC" />
+    <Name Key="NameParentCompanyLegal" Value="GoDaddy Operating Company, LLC" />
+  </CompanyName>
 
-  <CompanyName Name="BlueRazor" Value="Blue Razor" />
-  <CompanyName Name="BlueRazorDotCom" Value="BlueRazor.com" />
-  <CompanyName Name="BlueRazorLegal" Value="Blue Razor Domains, LLC" />
-  <CompanyName Name="BlueRazorTrademarked" Value="Blue Razor&#174;" />
+  <CompanyName ContextId="1">
+    <Name Key="Name" Value="GoDaddy" />
+    <Name Key="NameDotCom" Value="GoDaddy.com" />
+    <Name Key="NameLegal" Value="GoDaddy, LLC" />
+    <Name Key="NameParentCompany" Value="The GoDaddy Group" />
+    <Name Key="NameTwitter" Value="@Godaddy" />
+  </CompanyName>
 
-  <CompanyName Name="WildWest" Value="Wild West" />
-  <CompanyName Name="WildWestDomains" Value="Wild West Domains" />
-  <CompanyName Name="WildWestDotCom" Value="WildWestDomains.com" />
-  <CompanyName Name="WildWestLegal" Value="Wild West Domains, LLC" />
-  <CompanyName Name="WildWestTrademarked" Value="Wild West&#174;" />
+  <CompanyName ContextId="2">
+    <Name Key="ShortName" Value="Wild West" />
+    <Name Key="Name" Value="Wild West Domains" />
+    <Name Key="NameDotCom" Value="WildWestDomains.com" />
+    <Name Key="NameLegal" Value="Wild West Domains, LLC" />
+  </CompanyName>
 
-  <CompanyName Name="DomainsByProxy" Value="Domains By Proxy" />
-  <CompanyName Name="DomainsByProxyDotCom" Value="DomainsByProxy.com" />
-  <CompanyName Name="DomainsByProxyInc" Value="Domains By Proxy, LLC" />
-  <CompanyName Name="DBPTrademarked" Value="Domains By Proxy&#174;" />
-
-  <CompanyName Name="StarfieldTech" Value="Starfield Technologies" />
-  <CompanyName Name="StarfieldTechDotCom" Value="StarfieldTech.com" />
-  <CompanyName Name="StarfieldTechInc" Value="Starfield Technologies, LLC" />
-  <CompanyName Name="StarfieldTechTrademarked" Value="Starfield Technologies&#174;" />
-
-  <CompanyName Name="ParentCompany" Value="The GoDaddy Group" />
-  <CompanyName Name="ParentCompanyCopyright" Value="GoDaddy Operating Company, LLC" />
+  <CompanyName ContextId="5">
+    <Name Key="Name" Value="Blue Razor" />
+    <Name Key="NameDotCom" Value="BlueRazor.com" />
+    <Name Key="NameLegal" Value="Blue Razor Domains, LLC" />
+  </CompanyName>
 </CompanyNames>

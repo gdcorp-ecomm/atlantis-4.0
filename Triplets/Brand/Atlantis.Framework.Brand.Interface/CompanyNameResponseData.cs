@@ -7,7 +7,7 @@ namespace Atlantis.Framework.Brand.Interface
   public class CompanyNameResponseData : IResponseData
   {
     private AtlantisException _exception;
-    private List<CompanyName> _companyList;
+    private Dictionary<string, string> _companyDict;
 
     private const int ResellerContextId = 6;
     private const int SiteName = 0;
@@ -16,40 +16,87 @@ namespace Atlantis.Framework.Brand.Interface
 
     public static CompanyNameResponseData FromCompanyNameXml(string companyNameXml, int contextId, int privateLabelId)
     {
-      XDocument companyNamesDoc = XDocument.Parse(companyNameXml);
-      List<CompanyName> companyList = new List<CompanyName>();
+      var companyNamesDoc = XDocument.Parse(companyNameXml);
+      var companyDict = new Dictionary<string, string>();
 
-      foreach (XElement companyNamesElement in companyNamesDoc.Descendants("CompanyName"))
+      foreach (var companyNameElement in companyNamesDoc.Descendants("CompanyName"))
       {
-        CompanyName company = CompanyName.FromCacheXml(companyNamesElement);
+        var companyContextId = companyNameElement.Attribute("ContextId");
 
-        companyList.Add(company);
+        if (companyContextId != null)
+        {
+          int xmlContextId;
+
+          if (int.TryParse(companyContextId.Value, out xmlContextId))
+          {
+            XAttribute valueAttribute;
+            XAttribute keyAttribute;
+
+            if (xmlContextId == 0)
+            {
+              foreach (var element in companyNameElement.Descendants("Name"))
+              {
+                keyAttribute = element.Attribute("Key");
+                valueAttribute = element.Attribute("Value");
+
+                if ((keyAttribute == null) || (valueAttribute == null)) continue;
+
+                var key = keyAttribute.Value;
+                var value = valueAttribute.Value;
+
+                companyDict.Add(key, value);
+              }
+            }
+            else if (xmlContextId == contextId)
+            {
+              foreach (var element in companyNameElement.Descendants("Name"))
+              {
+                keyAttribute = element.Attribute("Key");
+                valueAttribute = element.Attribute("Value");
+
+                if ((keyAttribute == null) || (valueAttribute == null)) continue;
+
+                var key = keyAttribute.Value;
+                var value = valueAttribute.Value;
+
+                companyDict.Add(key, value);
+              }
+            }
+          }
+        }
       }
 
       if (contextId == ResellerContextId)
       {
-        string siteName = DataCache.DataCache.GetPLData(privateLabelId, SiteName);
+        var siteName = DataCache.DataCache.GetPLData(privateLabelId, SiteName);
 
-        CompanyName plCompany = CompanyName.FromDataCache("SiteName", siteName);
-        companyList.Add(plCompany);
+        companyDict.Add("Name", siteName);
+        companyDict.Add("NameDotCom", siteName);
+        companyDict.Add("NameLegal", siteName);
+        companyDict.Add("NameParentCompany", siteName);
       }
 
-      return new CompanyNameResponseData(companyList);
-    }
+      return new CompanyNameResponseData(companyDict);
+      }
 
     static CompanyNameResponseData()
     {
-      Empty = new CompanyNameResponseData(new List<CompanyName>());
+      Empty = new CompanyNameResponseData(new Dictionary<string, string>());
     }
 
-    private CompanyNameResponseData(List<CompanyName> companyList)
+    private CompanyNameResponseData(Dictionary<string, string> companyDict)
     {
-      _companyList = companyList;
+      _companyDict = companyDict;
+    }
+
+    public Dictionary<string, string> CompanyDict
+    {
+      get { return _companyDict; }
     }
 
     public string ToXML()
     {
-      XElement element = new XElement("CompanyNameResponseData");
+      var element = new XElement("CompanyNameResponseData");
       return element.ToString(SaveOptions.DisableFormatting);
     }
 
@@ -66,11 +113,6 @@ namespace Atlantis.Framework.Brand.Interface
     private CompanyNameResponseData(AtlantisException exception)
     {
       _exception = exception;
-    }
-
-    public IEnumerable<CompanyName> CompanyList
-    {
-      get { return _companyList; }
     }
   }
 }

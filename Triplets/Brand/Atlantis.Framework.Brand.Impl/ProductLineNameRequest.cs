@@ -16,7 +16,7 @@ namespace Atlantis.Framework.Brand.Impl
         ProductLineNameRequestData productLineNameRequest = (ProductLineNameRequestData) requestData;
         string productLineNameXml = ProductLineNamesData.ProductLineNamesXml;
 
-        result = ProductLineNameResponseData.FromProductLineNameXml(productLineNameXml);
+        result = ProductLineNameResponseData.FromProductLineNameXml(productLineNameXml, productLineNameRequest.ContextId);
       }
       catch (Exception ex)
       {

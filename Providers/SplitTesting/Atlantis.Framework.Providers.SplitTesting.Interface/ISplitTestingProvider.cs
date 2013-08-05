@@ -8,5 +8,6 @@ namespace Atlantis.Framework.Providers.SplitTesting.Interface
     IEnumerable<IActiveSplitTest> GetAllActiveTests { get; }
     string GetTrackingData { get; }
     Dictionary<IActiveSplitTest, IActiveSplitTestSide> GetTrackingDictionary { get; }
+    bool SetOverrideSide(int splitTestId, string overrideSideName);
   }
 }

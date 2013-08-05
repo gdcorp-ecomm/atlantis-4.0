@@ -1,11 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Reflection;
+﻿using System.Reflection;
 using System.Web;
 using Atlantis.Framework.Conditions.Interface;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.Containers;
 using Atlantis.Framework.Providers.SplitTesting.Interface;
-using Atlantis.Framework.SplitTesting.Interface;
 using Atlantis.Framework.Testing.MockHttpContext;
 using Atlantis.Framework.Testing.MockProviders;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -15,6 +13,7 @@ namespace Atlantis.Framework.Providers.SplitTesting.Tests
   [TestClass]
   [DeploymentItem("atlantis.config")]
   [DeploymentItem("Atlantis.Framework.SplitTesting.Impl.dll")]
+  [DeploymentItem("Interop.gdDataCacheLib.dll")]
   public class SplitTestingProviderTests
   {
     private bool _conditionHandlersRegistered;
@@ -58,7 +57,8 @@ namespace Atlantis.Framework.Providers.SplitTesting.Tests
       Assert.IsNotNull(splitProvider);
 
       var side1 = splitProvider.GetSplitTestingSide(9999);
-      Assert.IsTrue(side1 == null);
+      var expected = "A";
+      Assert.AreEqual(expected, side1.Name);
     }
 
     [TestMethod]
@@ -121,6 +121,25 @@ namespace Atlantis.Framework.Providers.SplitTesting.Tests
 
       var side2 = splitProvider.GetSplitTestingSide(1010);
       Assert.IsTrue(side2 != null && side1.Name == side2.Name);
+    }
+
+    [TestMethod]
+    public void SetOverrideSide()
+    {
+
+      var mockHttpRequest = new MockHttpRequest("http://www.debug.godaddy-com.ide/");
+      MockHttpContext.SetFromWorkerRequest(mockHttpRequest);
+
+      ISplitTestingProvider splitProvider = InitializeProvidersAndReturnSplitTestProvider(1, "858884");
+
+      Assert.IsNotNull(splitProvider);
+
+      var success = splitProvider.SetOverrideSide(1009433, "A");
+
+      Assert.IsTrue(success);
+
+
+
     }
   }
 }

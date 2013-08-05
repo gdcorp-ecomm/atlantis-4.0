@@ -58,12 +58,8 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Atlantis.Framework.DataCache\Atlantis.Framework.DataCache\Atlantis.Framework.DataCache.csproj">
-      <Project>{7F2738F8-683C-49E7-88CD-E986C70F0321}</Project>
-      <Name>Atlantis.Framework.DataCache</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj">
-      <Project>{D30157B2-C1B3-4073-BA5E-632E2337A997}</Project>
+      <Project>{d30157b2-c1b3-4073-ba5e-632e2337a997}</Project>
       <Name>Atlantis.Framework.Engine</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj">
@@ -71,7 +67,7 @@
       <Name>Atlantis.Framework.Interface</Name>
     </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.LinkInfo.Impl\Atlantis.Framework.LinkInfo.Impl.csproj">
-      <Project>{7D677835-485C-4E30-BAC3-DEFCDB0BDA92}</Project>
+      <Project>{7d677835-485c-4e30-bac3-defcdb0bda92}</Project>
       <Name>Atlantis.Framework.LinkInfo.Impl</Name>
     </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.LinkInfo.Interface\Atlantis.Framework.LinkInfo.Interface.csproj">

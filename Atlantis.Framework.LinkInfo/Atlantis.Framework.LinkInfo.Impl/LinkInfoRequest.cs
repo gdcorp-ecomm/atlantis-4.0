@@ -13,17 +13,21 @@ namespace Atlantis.Framework.LinkInfo.Impl
     public IResponseData RequestHandler(RequestData oRequestData, ConfigElement oConfig)
     {
       IResponseData oResponseData = null;
-      Dictionary<string, string> dictResult = new Dictionary<string, string>();
+      var dictResult = new Dictionary<string, string>();
 
       try
       {
-        LinkInfoRequestData oGetLinkInfoRequestData = (LinkInfoRequestData)oRequestData;
-        string xmlLinkInfo = DataCache.DataCache.GetCacheData(oRequestData.ToXML());
+        var oGetLinkInfoRequestData = (LinkInfoRequestData)oRequestData;
+        string xmlLinkInfo;
+        using (var dc = DataCacheService.GdDataCacheOutOfProcess.CreateDisposable())
+        {
+          xmlLinkInfo = dc.GetCacheData(oRequestData.ToXML());
+        }
 
-        XmlDocument linkInfoDoc = new XmlDocument();
+        var linkInfoDoc = new XmlDocument();
         linkInfoDoc.LoadXml(xmlLinkInfo);
 
-        XmlNodeList itemNodes = linkInfoDoc.SelectNodes("//item");
+        var itemNodes = linkInfoDoc.SelectNodes("//item");
         foreach (XmlElement itemElement in itemNodes)
         {
           if (itemElement != null)

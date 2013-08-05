@@ -12,8 +12,8 @@ namespace Atlantis.Framework.LinkInfo.Tests
     [TestMethod]
     public void LinkInfoBasic()
     {
-      LinkInfoRequestData request = new LinkInfoRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, 1);
-      LinkInfoResponseData response = (LinkInfoResponseData)DataCache.DataCache.GetProcessRequest(request, 12);
+      var request = new LinkInfoRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, 1);
+      var response = (LinkInfoResponseData)Engine.Engine.ProcessRequest(request, 12);
       Assert.AreNotEqual(0, response.Links.Count);
     }
 
@@ -21,38 +21,33 @@ namespace Atlantis.Framework.LinkInfo.Tests
     [ExpectedException(typeof(AtlantisException))]
     public void LinkInfoMissingCacheEmpty()
     {
-      DataCache.DataCache.ClearInProcessCachedData("GetProcessRequest" + 12.ToString());
-      LinkInfoRequestData request = new LinkInfoRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, -1);
-      LinkInfoResponseData response = (LinkInfoResponseData)DataCache.DataCache.GetProcessRequest(request, 12);
+      var request = new LinkInfoRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, -1);
+      var response = (LinkInfoResponseData)Engine.Engine.ProcessRequest(request, 12);
       Assert.AreNotEqual(0, response.Links.Count);
     }
 
     [TestMethod]
     public void LinkInfoMissingCacheEmptyAllowed()
     {
-      DataCache.DataCache.ClearInProcessCachedData("GetProcessRequest" + 12.ToString());
-      LinkInfoRequestData request = new LinkInfoRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, -1);
+      var request = new LinkInfoRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, -1);
       request.AllowEmptyLinkSet = true;
-      LinkInfoResponseData response = (LinkInfoResponseData)DataCache.DataCache.GetProcessRequest(request, 12);
+      var response = (LinkInfoResponseData)Engine.Engine.ProcessRequest(request, 12);
       Assert.AreEqual(0, response.Links.Count);
     }
 
     [TestMethod]
     public void LinkInfoSoilTheCache()
     {
-      DataCache.DataCache.ClearInProcessCachedData("GetProcessRequest" + 12.ToString());
-      LinkInfoRequestData request = new LinkInfoRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, 1);
-      LinkInfoResponseData response = (LinkInfoResponseData)DataCache.DataCache.GetProcessRequest(request, 12);
+      var request = new LinkInfoRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, 1);
+      var response = (LinkInfoResponseData)Engine.Engine.ProcessRequest(request, 12);
 
       response.Links["SITEURL"] = "www.micco.name";
 
-      LinkInfoRequestData request2 = new LinkInfoRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, 1);
-      LinkInfoResponseData response2 = (LinkInfoResponseData)DataCache.DataCache.GetProcessRequest(request, 12);
+      var request2 = new LinkInfoRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, 1);
+      var response2 = (LinkInfoResponseData)Engine.Engine.ProcessRequest(request, 12);
 
       Assert.AreNotEqual("www.micco.name", response2.Links["SITEURL"]);
     }
-
-    
 
   }
 }

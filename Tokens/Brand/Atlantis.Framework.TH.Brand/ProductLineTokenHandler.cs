@@ -33,7 +33,19 @@ namespace Atlantis.Framework.TH.Brand
           try
           {
             IProductLineProvider productLineProvider = container.Resolve<IProductLineProvider>();
-            tokenResult = productLineProvider.GetProductLineName(simpleToken.RawTokenData);
+
+            var tokenDataFromRaw = simpleToken.RawTokenData.Split(':');
+
+            int overrideFlag;
+            if (tokenDataFromRaw.Length > 1 && int.TryParse(tokenDataFromRaw[1], out overrideFlag))
+            {
+              tokenResult = productLineProvider.GetProductLineName(tokenDataFromRaw[0], overrideFlag);
+            }
+            else
+            {
+              tokenResult = productLineProvider.GetProductLineName(tokenDataFromRaw[0]);
+            }
+
             result = TokenEvaluationResult.Success;
           }
           catch (Exception)

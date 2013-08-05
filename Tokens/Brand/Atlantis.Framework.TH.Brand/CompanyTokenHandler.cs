@@ -9,9 +9,10 @@ using Atlantis.Framework.Tokens.Interface;
 namespace Atlantis.Framework.TH.Brand
 {
   // [@T[company:TextTokenData]@T]
+  // [@T[company:TextTokenData:override]@T]
   public class CompanyTokenHandler : SimpleTokenHandlerBase
   {
-    private const string TOKEN_KEY = "company";
+    private const string TOKEN_KEY = "companyname";
 
     public override string TokenKey
     {

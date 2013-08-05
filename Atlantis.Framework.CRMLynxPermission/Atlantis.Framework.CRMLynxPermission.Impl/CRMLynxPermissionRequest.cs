@@ -74,7 +74,7 @@ namespace Atlantis.Framework.CRMLynxPermission.Impl
 
       var pc = new PermissionsClient(basicBinding, endpointAddressBuilder.ToEndpointAddress());
       if (pc.ClientCredentials != null)
-        pc.ClientCredentials.ClientCertificate.SetCertificate(StoreLocation.CurrentUser, StoreName.My, X509FindType.FindBySubjectName, webServiceConfig.GetConfigValue("CertificateName"));
+        pc.ClientCredentials.ClientCertificate.SetCertificate(StoreLocation.LocalMachine, StoreName.My, X509FindType.FindBySubjectName, webServiceConfig.GetConfigValue("CertificateName"));
 
       return pc;
     }

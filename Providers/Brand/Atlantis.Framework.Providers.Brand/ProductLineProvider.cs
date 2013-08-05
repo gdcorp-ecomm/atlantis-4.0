@@ -36,7 +36,7 @@ namespace Atlantis.Framework.Providers.Brand
 
     }
 
-    public string GetProductLineName(string productLineKey)
+    public string GetProductLineName(string productLineKey, int overrideDefault = 0)
     {
       string productLineName = String.Empty;
 
@@ -46,12 +46,21 @@ namespace Atlantis.Framework.Providers.Brand
 
       if (productLineValueDict != null && productLineValueDict.Count > 0)
       {
-        productLineValueDict.TryGetValue("override", out productLineName);
+        if (overrideDefault != 0)
+        {
+          productLineValueDict.TryGetValue("override", out productLineName);
 
-        if (String.IsNullOrEmpty(productLineName))
+          if (String.IsNullOrEmpty(productLineName))
+          {
+            productLineValueDict.TryGetValue("default", out productLineName);
+          }
+        }
+
+        else
         {
           productLineValueDict.TryGetValue("default", out productLineName);
         }
+
       }
 
       return productLineName ?? String.Empty;

@@ -35,15 +35,15 @@ namespace Atlantis.Framework.Providers.Brand.Tests
       _container.SetMockSetting(MockSiteContextSettings.PrivateLabelId, "1");
       _productLineProvider = _container.Resolve<IProductLineProvider>();
 
-      Assert.AreEqual(_productLineProvider.GetProductLineName("Auctions"), "GoDaddy Auctions");
+      Assert.AreEqual(_productLineProvider.GetProductLineName("Auctions", 1), "GoDaddy Auctions");
+      Assert.AreEqual(_productLineProvider.GetProductLineName("Auctions"), "Domain Auctions");
+      Assert.AreEqual(_productLineProvider.GetProductLineName("WebsiteBuilder", 1), "GoDaddy Website Builder");
+      Assert.AreEqual(_productLineProvider.GetProductLineName("WebsiteBuilder"), "Website Builder");
       Assert.AreEqual(_productLineProvider.GetProductLineName("BusinessRegistration"), "Business Registration");
       Assert.AreEqual(_productLineProvider.GetProductLineName("DomainBackorders"), "Domain Backorders");
       Assert.AreEqual(_productLineProvider.GetProductLineName("FaxThruEmail"), "Fax Thru Email");
       Assert.AreEqual(_productLineProvider.GetProductLineName("ProtectedRegistration"), "Protected Registration");
-      Assert.AreEqual(_productLineProvider.GetProductLineName("WebsiteBuilder"), "GoDaddy Website Builder");
-
-      Assert.AreNotEqual(_productLineProvider.GetProductLineName("Auctions"), "Domain Auctions");
-      Assert.AreNotEqual(_productLineProvider.GetProductLineName("HostingConnection"), "Value Applications");
+      Assert.AreEqual(_productLineProvider.GetProductLineName("HostingConnection"), "Value Applications");
     }
 
     [TestMethod]

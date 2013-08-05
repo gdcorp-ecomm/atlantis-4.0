@@ -154,5 +154,31 @@ namespace Atlantis.Framework.Providers.Language.Tests
       Assert.AreEqual("<div>Purple River</div>", processedContent.Content);
     }
 
+    [TestMethod]
+    public void ValidLanguagePhraseReplacementInShortLanguageCDS()
+    {
+      IProviderContainer container = NewLanguageProviderContainer(1, "www", "en-US");
+      TestContent content = new TestContent("<div>[@L[cds.sales/integrationtests/hosting/web-hosting:testkey]@L]</div>");
+
+      var pipeline = new RenderPipelineManager();
+      pipeline.AddRenderHandler(new LanguageRenderHandler());
+      IProcessedRenderContent processedContent = pipeline.RenderContent(content, container);
+
+      Assert.AreEqual("<div>Purple River</div>", processedContent.Content);
+    }
+
+    [TestMethod]
+    public void ValidLanguagePhraseReplacementNotValidLanguageCDS()
+    {
+      IProviderContainer container = NewLanguageProviderContainer(1, "www", "es-mx");
+      TestContent content = new TestContent("<div>[@L[cds.sales/integrationtests/hosting/web-hosting:testkey]@L]</div>");
+
+      var pipeline = new RenderPipelineManager();
+      pipeline.AddRenderHandler(new LanguageRenderHandler());
+      IProcessedRenderContent processedContent = pipeline.RenderContent(content, container);
+
+      Assert.AreEqual("<div>Purple River</div>", processedContent.Content);
+    }
+
   }
 }

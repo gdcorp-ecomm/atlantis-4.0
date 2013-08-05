@@ -5,24 +5,17 @@ namespace Atlantis.Framework.Parsers.LanguageFile
 {
   public class Phrase
   {
-    public static Phrase FromPhraseElementLine(string phraseElementLine, string dictionaryName, string language)
-    {
-      Phrase result = null;
-      // <phrase key="testkey" countrysite="uk" contextid="6" />
-      XElement phraseElement = XElement.Parse(phraseElementLine);
-      string key = phraseElement.GetAttributeValue("key", string.Empty);
-      string countrysite = phraseElement.GetAttributeValue("countrysite", "www");
-      int contextId = phraseElement.GetAttributeValueInt("contextid", 0);
-      result = new Phrase(dictionaryName, key, language, countrysite, contextId);
-      return result;
-    }
-
     public string Dictionary { get; private set; }
     public string Key { get; private set; }
     public string Language { get; private set; }
     public string CountrySite { get; private set; }
     public int ContextId { get; private set; }
     public string PhraseText { get; private set; }
+
+    public bool IsValid
+    {
+      get { return (Dictionary != null) && (Key != null) && (Language != null) && (CountrySite != null); }
+    }
 
     private Phrase(string dictionary, string key, string language, string countrySite, int contextId)
     {
@@ -34,17 +27,26 @@ namespace Atlantis.Framework.Parsers.LanguageFile
       PhraseText = string.Empty;
     }
 
-    public bool IsValid
+    public static Phrase FromPhraseElementLine(string phraseElementLine, string dictionaryName, string language)
     {
-      get
+      Phrase result = null;
+      try
       {
-        return
-          (Dictionary != null) &&
-          (Key != null) &&
-          (Language != null) &&
-          (CountrySite != null);
+        // <phrase key="testkey" countrysite="uk" contextid="6" />
+        XElement phraseElement = XElement.Parse(phraseElementLine);
+        string key = phraseElement.GetAttributeValue("key", string.Empty);
+        string countrysite = phraseElement.GetAttributeValue("countrysite", "www");
+        int contextId = phraseElement.GetAttributeValueInt("contextid", 0);
+        result = new Phrase(dictionaryName, key, language, countrysite, contextId);
       }
+      catch (Exception ex)
+      {
+        //if this isnt caught here then the files stop parsing with invalid xml - log here or figure a way to bubble
+      }
+      return result;
     }
+
+   
 
     public void AddTextLine(string textLine)
     {

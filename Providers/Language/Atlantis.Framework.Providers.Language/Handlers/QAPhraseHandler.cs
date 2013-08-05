@@ -1,10 +1,8 @@
-﻿using Atlantis.Framework.Providers.Language.Interface;
-
-namespace Atlantis.Framework.Providers.Language.Handlers
+﻿namespace Atlantis.Framework.Providers.Language.Handlers
 {
-  public class QAPhraseHandler : ILanguagePhraseHandler
+  internal class QAPhraseHandler : ILanguagePhraseHandler
   {
-    public string GetLanguagePhrase(string dictionaryName, string phraseKey, LanguageData data)
+    public string GetLanguagePhrase(string dictionaryName, string phraseKey)
     {
       return string.Concat("[", dictionaryName, ":", phraseKey, "]");
     }

@@ -1,48 +1,62 @@
-﻿using Atlantis.Framework.Language.Interface;
-using Atlantis.Framework.Providers.Language.Interface;
+﻿using Atlantis.Framework.Interface;
+using Atlantis.Framework.Language.Interface;
+using Atlantis.Framework.Providers.Localization.Interface;
+using System;
 
 namespace Atlantis.Framework.Providers.Language.Handlers
 {
-  class CDSPhraseHandler : ILanguagePhraseHandler
+  internal class CDSPhraseHandler : ILanguagePhraseHandler
   {
-    public string GetLanguagePhrase(string dictionaryName, string phraseKey, LanguageData languageData)
+    private readonly Lazy<ISiteContext> _siteContext;
+    private readonly Lazy<ILocalizationProvider> _localization;
+    private const string _defaultLanguage = "en";
+
+    public CDSPhraseHandler(IProviderContainer container)
     {
-      PhraseDictionaryResult dictionaryResult;
+      _siteContext = new Lazy<ISiteContext>(container.Resolve<ISiteContext>);
+      _localization = new Lazy<ILocalizationProvider>(container.Resolve<ILocalizationProvider>);
+    }
+
+    public string GetLanguagePhrase(string dictionaryName, string phraseKey)
+    {
       dictionaryName = dictionaryName.Substring(4);
-      var phraseText = string.Empty;
-      if (!GetPhraseDictionary(dictionaryName, languageData.FullLanguage, out dictionaryResult))
+      string phraseText;
+      var fullLanguage = _localization.Value.FullLanguage;
+      var fullLanguageDictionary = GetLanguageResponse(dictionaryName, fullLanguage);
+      if (!TryGetPhraseText(fullLanguageDictionary, phraseKey, fullLanguage, out phraseText) && fullLanguage != _defaultLanguage)
       {
-        if (!GetPhraseDictionary(dictionaryName, languageData.ShortLanguage, out dictionaryResult))
+        var shortLanguage = _localization.Value.ShortLanguage;
+        var shortLanguageDictionary = GetLanguageResponse(dictionaryName, shortLanguage);
+        if (!TryGetPhraseText(shortLanguageDictionary, phraseKey, shortLanguage, out phraseText) && shortLanguage != _defaultLanguage)
         {
-          GetPhraseDictionary(dictionaryName, languageData.DefaultLanguage, out dictionaryResult);
+          var defaultLanguageDictionary = GetLanguageResponse(dictionaryName, _defaultLanguage);
+          TryGetPhraseText(defaultLanguageDictionary, phraseKey, _defaultLanguage, out phraseText);
         }
       }
-      if (dictionaryResult != null)
+      return phraseText;
+      
+    }
+
+    private static CDSLanguageResponseData GetLanguageResponse(string dictionaryName, string language)
+    {
+      var request = new CDSLanguageRequestData(dictionaryName, language);
+      return (CDSLanguageResponseData)DataCache.DataCache.GetProcessRequest(request, LanguageProviderEngineRequests.CDSLanguagePhrase);
+    }
+
+    private bool TryGetPhraseText(CDSLanguageResponseData response, string phraseKey, string language, out string phraseText)
+    {
+      var phrase = response.Phrases.FindPhrase(phraseKey, _siteContext.Value.ContextId, _localization.Value.CountrySite, language);
+      phraseText = string.Empty;
+      var exists = false;
+      if (phrase != null)
       {
-        var phrase = dictionaryResult.Dictionary.FindPhrase(phraseKey, languageData.ContextId, languageData.CountrySite, dictionaryResult.CurrentLanguage);
-        if (phrase != null)
+        exists = true;
+        if (phrase.PhraseText != null)
         {
           phraseText = phrase.PhraseText;
         }
       }
-      return phraseText;
-    }
-
-    private static bool GetPhraseDictionary(string dictionaryName, string language, out PhraseDictionaryResult phraseDictionaryResult)
-    {
-      var hasDictionary = false;
-      phraseDictionaryResult = new PhraseDictionaryResult();
-
-      var request = new CDSLanguageRequestData { DictionaryName = dictionaryName, Language = language, };
-      var response = (CDSLanguageResponseData)DataCache.DataCache.GetProcessRequest(request, LanguageProviderEngineRequests.CDSLanguagePhrase);
-
-      if (response.GetException() == null)
-      {
-        phraseDictionaryResult.Dictionary = response.Phrases;
-        phraseDictionaryResult.CurrentLanguage = language;
-        hasDictionary = phraseDictionaryResult.Dictionary.phraseGroups.Count > 0;
-      }
-      return hasDictionary;
+      return exists;
     }
   }
 }

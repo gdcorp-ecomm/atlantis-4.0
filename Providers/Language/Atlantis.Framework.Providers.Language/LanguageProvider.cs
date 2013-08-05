@@ -8,49 +8,54 @@ namespace Atlantis.Framework.Providers.Language
 {
   public class LanguageProvider : ProviderBase, ILanguageProvider
   {
-    const string _DEFAULTCOUNTRYSITE = "www";
-    const string _DEFAULTLANGUAGE = "en";
     const string _QALANGUAGESHOW = "qa-qa";
 
-    readonly ISiteContext _siteContext;
-    readonly ILocalizationProvider _localization;
-    readonly bool _isInternal;
-    readonly LanguageData _languageData = new LanguageData { ContextId = 0, CountrySite = _DEFAULTCOUNTRYSITE, DefaultLanguage = _DEFAULTLANGUAGE, FullLanguage = _DEFAULTLANGUAGE, ShortLanguage = _DEFAULTLANGUAGE };
+    private readonly Lazy<ISiteContext> _siteContext;
+    private readonly Lazy<QAPhraseHandler> _qaPhraseHandler;
+    private readonly Lazy<CDSPhraseHandler> _cdsPhraseHandler;
+    private readonly Lazy<FilePhraseHandler> _filePhraseHandler; 
 
     public LanguageProvider(IProviderContainer container)
       :base(container)
     {
-      if (Container.TryResolve(out _siteContext))
-      {
-        _languageData.ContextId = _siteContext.ContextId;
-        _isInternal = _siteContext.IsRequestInternal;
-      }
-
-      if(Container.TryResolve(out _localization)){
-        _languageData.FullLanguage = _localization.FullLanguage;
-        _languageData.ShortLanguage = _localization.ShortLanguage;
-        _languageData.CountrySite = _localization.CountrySite;
-      }
+      _qaPhraseHandler = new Lazy<QAPhraseHandler>(() => new QAPhraseHandler());
+      _cdsPhraseHandler = new Lazy<CDSPhraseHandler>(() => new CDSPhraseHandler(Container));
+      _filePhraseHandler = new Lazy<FilePhraseHandler>(() => new FilePhraseHandler(Container));
+      _siteContext = new Lazy<ISiteContext>(() => Container.Resolve<ISiteContext>());
     }
 
 
     public string GetLanguagePhrase(string dictionaryName, string phraseKey)
-    {      
-      ILanguagePhraseHandler handler = GetLanguagePhraseHandler(dictionaryName);
-      return handler.GetLanguagePhrase(dictionaryName, phraseKey, _languageData);
+    {
+      var phrase = string.Empty;
+      try
+      {
+        ILanguagePhraseHandler handler = GetLanguagePhraseHandler(dictionaryName);
+        phrase = handler.GetLanguagePhrase(dictionaryName, phraseKey);
+      }
+      catch (Exception ex)
+      {
+        var exception = new AtlantisException("LanguageProvider.GetLanguagePhrase", "0", ex.Message + ex.StackTrace, phraseKey, null, null);
+        Engine.Engine.LogAtlantisException(exception);
+      }
+      return phrase;
     }
+
+    
    
     private ILanguagePhraseHandler GetLanguagePhraseHandler(string dictionaryName)
     {
       if (ShowDictionaryAndKeyRaw)
       {
-        return new QAPhraseHandler();
+        return _qaPhraseHandler.Value;
       }
+
       if (dictionaryName.StartsWith("cds.", StringComparison.OrdinalIgnoreCase))
       {
-        return new CDSPhraseHandler();
+        return _cdsPhraseHandler.Value;
       }
-      return new FilePhraseHandler();
+
+      return _filePhraseHandler.Value;
     }
 
     private bool? _showDictionaryAndKeyRaw;
@@ -63,7 +68,7 @@ namespace Atlantis.Framework.Providers.Language
           _showDictionaryAndKeyRaw = false;
           ILocalizationProvider localization;
 
-          if ((_isInternal) && (Container.TryResolve(out localization)))
+          if ((_siteContext.Value.IsRequestInternal) && (Container.TryResolve(out localization)))
           {
             _showDictionaryAndKeyRaw = localization.IsActiveLanguage(_QALANGUAGESHOW);
           }

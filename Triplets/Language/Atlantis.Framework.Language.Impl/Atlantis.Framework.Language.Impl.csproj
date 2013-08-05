@@ -38,7 +38,9 @@
       <HintPath>..\..\..\Atlantis.Framework.CDS\Atlantis.Framework.CDS.References\Json.net\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -49,11 +51,6 @@
     <Compile Include="CDSLanguageRequest.cs" />
     <Compile Include="Data\CDSContentVersion.cs" />
     <Compile Include="Data\LanguageData.cs" />
-    <Compile Include="Data\Logging.cs" />
-    <Compile Include="Data\PhraseData.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Data\PhraseFileInfo.cs" />
     <Compile Include="LanguagePhraseRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -74,12 +71,6 @@
       <Project>{11a7884c-71b6-41cd-824f-0f22797d417d}</Project>
       <Name>Atlantis.Framework.Language.Interface</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Data\dict2-en.language" />
-    <None Include="Data\testdictionary-en.language" />
-    <None Include="Data\testdictionary-es-mx.language" />
-    <None Include="Data\testdictionary-es.language" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

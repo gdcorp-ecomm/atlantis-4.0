@@ -1,20 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.IO;
 
 namespace Atlantis.Framework.Parsers.LanguageFile
 {
   public class PhraseFileInfo
   {
-    private FileInfo _fileInfo;
-
+    private readonly FileInfo _fileInfo;
     public string DictionaryName { get; private set; }
     public string Language { get; private set; }
 
-    internal PhraseFileInfo(string fullFileName)
+    public PhraseFileInfo(string fullFileName)
     {
       _fileInfo = new FileInfo(fullFileName);
       ParseFileName();

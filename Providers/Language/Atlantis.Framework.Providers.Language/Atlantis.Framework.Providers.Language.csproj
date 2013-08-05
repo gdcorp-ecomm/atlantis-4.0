@@ -45,7 +45,7 @@
   <ItemGroup>
     <Compile Include="Handlers\CDSPhraseHandler.cs" />
     <Compile Include="Handlers\FilePhraseHandler.cs" />
-    <Compile Include="PhraseDictionaryResult.cs" />
+    <Compile Include="Handlers\ILanguagePhraseHandler.cs" />
     <Compile Include="Handlers\QAPhraseHandler.cs" />
     <Compile Include="LanguageProvider.cs" />
     <Compile Include="LanguageProviderEngineRequests.cs" />

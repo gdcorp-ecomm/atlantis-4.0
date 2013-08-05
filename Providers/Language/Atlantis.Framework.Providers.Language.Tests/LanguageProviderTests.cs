@@ -70,6 +70,5 @@ namespace Atlantis.Framework.Providers.Language.Tests
       string phrase = language.GetLanguagePhrase("testdictionary", "testkey");
       Assert.AreEqual("[testdictionary:testkey]", phrase);
     }
-
   }
 }

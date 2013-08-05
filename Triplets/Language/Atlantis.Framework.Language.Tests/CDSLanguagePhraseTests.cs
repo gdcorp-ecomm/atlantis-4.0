@@ -1,4 +1,6 @@
-﻿using Atlantis.Framework.Language.Interface;
+﻿using System;
+using Atlantis.Framework.Interface;
+using Atlantis.Framework.Language.Interface;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Net;
 
@@ -11,11 +13,7 @@ namespace Atlantis.Framework.Language.Tests
     public void Valid_Url_Returns_Data()
     {
       //Arrange
-      var requestData = new CDSLanguageRequestData
-      {
-        DictionaryName = "sales/integrationtests/hosting/web-hosting",
-        Language = "en"
-      };
+      var requestData = new CDSLanguageRequestData("sales/integrationtests/hosting/web-hosting", "en");
 
       //Act
       var response = (CDSLanguageResponseData)Engine.Engine.ProcessRequest(requestData, 682);
@@ -32,18 +30,35 @@ namespace Atlantis.Framework.Language.Tests
     public void InValid_Url_Returns_Missing_Document_Response()
     {
       //Arrange
-      var requestData = new CDSLanguageRequestData
-      {
-        DictionaryName = "sales/integrationtests!/hosting/web-hosting",
-        Language = "en"
-      };
+      var requestData = new CDSLanguageRequestData("sales/integrationtests!/hosting/web-hosting", "en");
 
       //Act
       var response = (CDSLanguageResponseData)Engine.Engine.ProcessRequest(requestData, 682);
 
       //Assert
       Assert.IsNotNull(response);
-      Assert.AreEqual(HttpStatusCode.NotFound, response.StatusCode);
+      Assert.AreEqual(0, response.Phrases.phraseGroups.Count);
+    }
+
+    [TestMethod, TestCategory("Integration Test"), TestCategory("Triplet")]
+    [ExpectedException(typeof(AtlantisException))]
+    public void Error_Call_To_Service_Throws_Exception()
+    {
+      //Arrange
+      var requestData = new CDSLanguageRequestData("sales/integrationtests!/hosting/web-hosting", "en");
+      
+      try
+      {
+        //Act
+        var response = (CDSLanguageResponseData)Engine.Engine.ProcessRequest(requestData, 000);
+      }
+      catch (Exception ex)
+      {
+        //Assert
+        Assert.AreEqual("The remote name could not be resolved: 'cms.devtestingstuff.glbt1.gdg'", ex.Message);
+        throw;
+      }
+
     }
   }
 }

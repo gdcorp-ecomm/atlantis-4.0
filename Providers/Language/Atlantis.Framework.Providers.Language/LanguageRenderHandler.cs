@@ -37,18 +37,10 @@ namespace Atlantis.Framework.Providers.Language
             {
               string replacement = string.Empty;
 
-              try
-              {
-                string dictionary = phraseMatch.Groups[_DICTIONARYKEY].Captures[0].Value;
-                string phrasekey = phraseMatch.Groups[_PHRASEKEY].Captures[0].Value;
+              string dictionary = phraseMatch.Groups[_DICTIONARYKEY].Captures[0].Value;
+              string phrasekey = phraseMatch.Groups[_PHRASEKEY].Captures[0].Value;
 
-                replacement = languageProvider.GetLanguagePhrase(dictionary, phrasekey);
-              }
-              catch (Exception ex)
-              {
-                AtlantisException exception = new AtlantisException("LanguageRenderHandler.ProcessContent", "0", ex.Message + ex.StackTrace, phraseMatch.Value, null, null);
-                Engine.Engine.LogAtlantisException(exception);
-              }
+              replacement = languageProvider.GetLanguagePhrase(dictionary, phrasekey);
 
               contentBuilder.Replace(phraseMatch.Value, replacement);
               alreadyReplaced.Add(phraseMatch.Value);

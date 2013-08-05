@@ -11,6 +11,15 @@ namespace Atlantis.Framework.Language.Interface
     public string FullLanguage { get; private set; }
     public string CountrySite { get; private set; }
 
+    public LanguagePhraseRequestData(string dictionaryName, string phraseKey, string fullLanguage, string countrySite, int contextId)
+    {
+      DictionaryName = dictionaryName ?? string.Empty;
+      PhraseKey = phraseKey ?? string.Empty;
+      FullLanguage = fullLanguage ?? string.Empty;
+      CountrySite = countrySite ?? string.Empty;
+      ContextId = contextId;
+    }
+
     public LanguagePhraseRequestData(string shopperId, string sourceURL, string orderId, string pathway, int pageCount, string dictionaryName, string phraseKey, string fullLanguage, string countrySite, int contextId)
       : base(shopperId, sourceURL, orderId, pathway, pageCount)
     {
@@ -28,7 +37,7 @@ namespace Atlantis.Framework.Language.Interface
 
     public override string ToXML()
     {
-      XElement element = new XElement("LanguagePhraseRequestData");
+      var element = new XElement("LanguagePhraseRequestData");
       element.Add(
         new XAttribute("dictionary", DictionaryName),
         new XAttribute("phrasekey", PhraseKey),

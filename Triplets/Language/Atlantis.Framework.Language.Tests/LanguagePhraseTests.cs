@@ -3,7 +3,8 @@ using Atlantis.Framework.Parsers.LanguageFile;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Xml.Linq;
 using System.Linq;
-using PhraseFileInfo = Atlantis.Framework.Language.Impl.Data.PhraseFileInfo;
+using Atlantis.Framework.Language.Impl.Data;
+
 
 namespace Atlantis.Framework.Language.Tests
 {
@@ -138,6 +139,15 @@ namespace Atlantis.Framework.Language.Tests
     public void RequestDefaultAll()
     {
       var request = new LanguagePhraseRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "testdictionary", "testkey", "en", "www", 1);
+      var response = (LanguagePhraseResponseData)Engine.Engine.ProcessRequest(request, _REQUESTTYPE);
+      Assert.IsFalse(string.IsNullOrEmpty(response.LanguagePhrase));
+      Assert.IsTrue(response.LanguagePhrase.StartsWith("GoDaddy Green River"));
+    }
+
+    [TestMethod]
+    public void RequestDefaultAllOverloadedContructor()
+    {
+      var request = new LanguagePhraseRequestData("testdictionary", "testkey", "en", "www", 1);
       var response = (LanguagePhraseResponseData)Engine.Engine.ProcessRequest(request, _REQUESTTYPE);
       Assert.IsFalse(string.IsNullOrEmpty(response.LanguagePhrase));
       Assert.IsTrue(response.LanguagePhrase.StartsWith("GoDaddy Green River"));
@@ -310,5 +320,25 @@ namespace Atlantis.Framework.Language.Tests
       Assert.IsFalse(string.IsNullOrEmpty(response.LanguagePhrase));
       Assert.IsFalse(response.LanguagePhrase.Contains("chasingthe"));
     }
+
+    [TestMethod]
+    public void CDSResponseToXml()
+    {
+      var response = new CDSLanguageResponseData(new PhraseDictionary());
+      Assert.AreEqual(string.Empty, response.ToXML());
+    }
+
+    [TestMethod]
+    public void CDSRequestHash()
+    {
+      var request = new CDSLanguageRequestData("testdictionary", "en");
+      Assert.AreEqual("07-0E-7A-14-D1-8C-07-D7-8E-48-1F-0F-16-1A-3E-F3", request.GetCacheMD5());
+    }
+
+    //public void GetFilesFromDirectoryReturns0LengthStringWhenInvalid()
+    //{
+    //  LanguageData data = new LanguageData();
+    //  data.
+    //}
   }
 }

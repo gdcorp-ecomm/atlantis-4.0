@@ -1,24 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Atlantis.Framework.Parsers.LanguageFile
 {
   public class PhraseGroup
   {
-    private Dictionary<string, Phrase> _phrases = new Dictionary<string, Phrase>(10, StringComparer.OrdinalIgnoreCase);
+    public Dictionary<string, Phrase> Phrases = new Dictionary<string, Phrase>(10, StringComparer.OrdinalIgnoreCase);
 
-    internal Phrase FindPhrase(PhrasePredicate predicate)
+    public Phrase FindPhrase(PhrasePredicate predicate)
     {
       Phrase result = null;
 
       foreach (string key in predicate.PhraseKeys)
       {
-        if (_phrases.ContainsKey(key))
+        if (Phrases.ContainsKey(key))
         {
-          result = _phrases[key];
+          result = Phrases[key];
           break;
         }
       }
@@ -26,10 +23,10 @@ namespace Atlantis.Framework.Parsers.LanguageFile
       return result;
     }
 
-    internal void Add(Phrase phrase)
+    public void Add(Phrase phrase)
     {
       string key = PhrasePredicate.BuildKey(phrase.ContextId, phrase.CountrySite, phrase.Language);
-      _phrases[key] = phrase;
+      Phrases[key] = phrase;
 
       // if the phrase is for a full language and short langugage key is not yet in the dictionary
       // then store this phrase as the short language phrase
@@ -40,9 +37,9 @@ namespace Atlantis.Framework.Parsers.LanguageFile
       {
         string shortLanguage = phrase.Language.Substring(0, dashLocation);
         key = PhrasePredicate.BuildKey(phrase.ContextId, phrase.CountrySite, shortLanguage);
-        if (!_phrases.ContainsKey(key))
+        if (!Phrases.ContainsKey(key))
         {
-          _phrases[key] = phrase;
+          Phrases[key] = phrase;
         }
       }
     }

@@ -1,9 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Atlantis.Framework.Parsers.LanguageFile
 {
@@ -47,5 +43,53 @@ namespace Atlantis.Framework.Parsers.LanguageFile
 
       return result;
     }
+
+    public static PhraseDictionary Parse(string str, string dictionaryName, string language)
+    {
+      string[] lines = str.Split(new string[] { "\r\n", "\n" }, StringSplitOptions.None);
+      return Parse(lines, dictionaryName, language);
+    }
+
+    public static PhraseDictionary Parse(IEnumerable<string> lines, string dictionaryName, string language)
+    {
+      var phraseDictionary = new PhraseDictionary();
+
+      return Parse(phraseDictionary, lines, dictionaryName, language);
+    }
+
+    public static PhraseDictionary Parse(PhraseDictionary dictionary, IEnumerable<string> lines, string dictionaryName,
+                                         string language)
+    {
+      Phrase currentPhrase = null;
+
+      foreach (var dataLine in lines)
+      {
+        var isPhraseElement = (dataLine.StartsWith("<phrase ", StringComparison.OrdinalIgnoreCase));
+        if (isPhraseElement)
+        {
+          if (currentPhrase != null && currentPhrase.IsValid)
+          {
+
+            dictionary.Add(currentPhrase);
+
+          }
+
+          currentPhrase = Phrase.FromPhraseElementLine(dataLine, dictionaryName, language);
+        }
+        else if (currentPhrase != null)
+        {
+          currentPhrase.AddTextLine(dataLine);
+        }
+      }
+
+      // Done, but we may have one more phrase to save
+      if (currentPhrase != null && currentPhrase.IsValid)
+      {
+        dictionary.Add(currentPhrase);
+      }
+      return dictionary;
+    }
+
+
   }
 }

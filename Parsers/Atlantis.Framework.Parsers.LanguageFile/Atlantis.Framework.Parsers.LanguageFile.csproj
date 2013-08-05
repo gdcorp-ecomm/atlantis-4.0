@@ -44,7 +44,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="LanguageFile.cs" />
     <Compile Include="Phrase.cs" />
     <Compile Include="PhraseDictionary.cs" />
     <Compile Include="PhraseFileInfo.cs" />

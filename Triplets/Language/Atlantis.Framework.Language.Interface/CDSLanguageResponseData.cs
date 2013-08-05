@@ -1,15 +1,29 @@
-﻿using System.Net;
-using Atlantis.Framework.Interface;
+﻿using Atlantis.Framework.Interface;
 using Atlantis.Framework.Parsers.LanguageFile;
 
 namespace Atlantis.Framework.Language.Interface
 {
   public class CDSLanguageResponseData : IResponseData
   {
-    public AtlantisException Exception { get; set; }
-    public bool Exists { get; set; }
-    public PhraseDictionary Phrases { get; set; }
-    public HttpStatusCode StatusCode { get; set; }
+    private readonly AtlantisException _exception = null;
+    public PhraseDictionary Phrases { get; private set; }
+    public static CDSLanguageResponseData NotFound { get; private set; }
+
+    static CDSLanguageResponseData()
+    {
+      NotFound = new CDSLanguageResponseData(new PhraseDictionary());
+    }
+
+    public CDSLanguageResponseData(PhraseDictionary phrases)
+    {
+      Phrases = phrases;
+    }
+
+    //do i need this if I am just throwing the exception?
+    //public CDSLanguageResponseData(AtlantisException exception)
+    //{
+    //  _exception = exception;
+    //}
 
     public string ToXML()
     {
@@ -18,7 +32,7 @@ namespace Atlantis.Framework.Language.Interface
 
     public AtlantisException GetException()
     {
-      return Exception;
+      return _exception;
     }
   }
 }

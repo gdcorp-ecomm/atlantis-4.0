@@ -9,6 +9,9 @@ namespace Atlantis.Framework.MyaMirageData.Tests
   /// Summary description for UnitTest1
   /// </summary>
   [TestClass]
+  [DeploymentItem("atlantis.config")]
+  [DeploymentItem("Atlantis.Framework.MyaMirageData.Interface.dll")]
+  [DeploymentItem("Atlantis.Framework.MyaMirageData.Impl.dll")]
   public class MyaMirageDataTests
   {
     public MyaMirageDataTests()

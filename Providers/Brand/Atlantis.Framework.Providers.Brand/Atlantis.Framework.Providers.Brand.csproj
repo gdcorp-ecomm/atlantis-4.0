@@ -43,8 +43,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CompanyName.cs" />
-    <Compile Include="CompanyNameData.cs" />
+    <Compile Include="BrandEngineRequests.cs" />
+    <Compile Include="CompanyProvider.cs" />
+    <Compile Include="ProductLineProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -55,6 +56,14 @@
     <ProjectReference Include="..\..\..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj">
       <Project>{a083a52e-c3c3-42e0-8dfd-54719e4c3b25}</Project>
       <Name>Atlantis.Framework.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Triplets\Brand\Atlantis.Framework.Brand.Interface\Atlantis.Framework.Brand.Interface.csproj">
+      <Project>{8fb0c2ac-03ca-471b-a247-648cdbf4c645}</Project>
+      <Name>Atlantis.Framework.Brand.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.Providers.Brand.Interface\Atlantis.Framework.Providers.Brand.Interface.csproj">
+      <Project>{b5faaf02-c192-49cd-853c-a897235314f4}</Project>
+      <Name>Atlantis.Framework.Providers.Brand.Interface</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

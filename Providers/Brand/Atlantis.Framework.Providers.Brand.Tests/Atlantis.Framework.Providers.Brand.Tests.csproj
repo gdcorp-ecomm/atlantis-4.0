@@ -43,6 +43,7 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Xml" />
   </ItemGroup>
@@ -59,10 +60,16 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="LibraryTests.cs" />
+    <Compile Include="BrandKeyConstants.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="CompanyProviderTests.cs" />
+    <Compile Include="ProductLineProviderTests.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Atlantis.Framework.AppSettings\Atlantis.Framework.AppSettings.Interface\Atlantis.Framework.AppSettings.Interface.csproj">
+      <Project>{638f2820-0ca4-43c1-8712-1823704389d3}</Project>
+      <Name>Atlantis.Framework.AppSettings.Interface</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj">
       <Project>{d30157b2-c1b3-4073-ba5e-632e2337a997}</Project>
       <Name>Atlantis.Framework.Engine</Name>
@@ -71,6 +78,43 @@
       <Project>{a083a52e-c3c3-42e0-8dfd-54719e4c3b25}</Project>
       <Name>Atlantis.Framework.Interface</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\Atlantis.Framework.PrivateLabel\Atlantis.Framework.PrivateLabel.Impl\Atlantis.Framework.PrivateLabel.Impl.csproj">
+      <Project>{dda75fcc-711e-4fa7-a688-adb2d17ccccd}</Project>
+      <Name>Atlantis.Framework.PrivateLabel.Impl</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Atlantis.Framework.PrivateLabel\Atlantis.Framework.PrivateLabel.Interface\Atlantis.Framework.PrivateLabel.Interface.csproj">
+      <Project>{af7389f6-2167-4503-974e-42139638a9cc}</Project>
+      <Name>Atlantis.Framework.PrivateLabel.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Atlantis.Framework.Testing\Atlantis.Framework.Testing.MockHttpContext\Atlantis.Framework.Testing.MockHttpContext.csproj">
+      <Project>{2f8983b4-801b-461a-9d76-26a58a496261}</Project>
+      <Name>Atlantis.Framework.Testing.MockHttpContext</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Atlantis.Framework.Testing\Atlantis.Framework.Testing.MockProviders\Atlantis.Framework.Testing.MockProviders.csproj">
+      <Project>{5487def2-0fa7-4b77-9aad-0355784589d6}</Project>
+      <Name>Atlantis.Framework.Testing.MockProviders</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Triplets\Brand\Atlantis.Framework.Brand.Impl\Atlantis.Framework.Brand.Impl.csproj">
+      <Project>{fa13a484-a152-4f8f-a4ca-41d6e48dc1ef}</Project>
+      <Name>Atlantis.Framework.Brand.Impl</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Triplets\Brand\Atlantis.Framework.Brand.Interface\Atlantis.Framework.Brand.Interface.csproj">
+      <Project>{8fb0c2ac-03ca-471b-a247-648cdbf4c645}</Project>
+      <Name>Atlantis.Framework.Brand.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.Providers.Brand.Interface\Atlantis.Framework.Providers.Brand.Interface.csproj">
+      <Project>{b5faaf02-c192-49cd-853c-a897235314f4}</Project>
+      <Name>Atlantis.Framework.Providers.Brand.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.Providers.Brand\Atlantis.Framework.Providers.Brand.csproj">
+      <Project>{9bd5bf70-4601-4b89-af18-4264c818213c}</Project>
+      <Name>Atlantis.Framework.Providers.Brand</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="atlantis.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

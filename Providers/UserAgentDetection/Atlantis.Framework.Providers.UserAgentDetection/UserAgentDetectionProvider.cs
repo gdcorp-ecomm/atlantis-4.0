@@ -68,7 +68,7 @@ namespace Atlantis.Framework.Providers.UserAgentDetection
 
     public bool IsSearchEngineBot(string userAgent)
     {
-      return IsUserAgentMatch(userAgent, SEARCH_ENGINE_BOT_EXPRESSION_TYPE, true);
+      return IsUserAgentMatch(userAgent, SEARCH_ENGINE_BOT_EXPRESSION_TYPE, false);
     }
   }
 }

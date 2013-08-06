@@ -87,7 +87,7 @@ namespace Atlantis.Framework.Providers.UserAgentDetection.Tests
       Assert.IsFalse(isMobileDevice);
       Assert.IsTrue(isNoRedirectBrowser);
       Assert.IsFalse(isOutDatedBrowser);
-      Assert.IsTrue(isSearchEngineBot);
+      Assert.IsFalse(isSearchEngineBot);
     }
 
     [TestMethod]
@@ -103,7 +103,7 @@ namespace Atlantis.Framework.Providers.UserAgentDetection.Tests
       Assert.IsFalse(isMobileDevice);
       Assert.IsTrue(isNoRedirectBrowser);
       Assert.IsFalse(isOutDatedBrowser);
-      Assert.IsTrue(isSearchEngineBot);
+      Assert.IsFalse(isSearchEngineBot);
     }
 
     [TestMethod]

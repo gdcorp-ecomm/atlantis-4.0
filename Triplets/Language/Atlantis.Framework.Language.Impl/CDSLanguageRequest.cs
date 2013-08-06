@@ -42,9 +42,10 @@ namespace Atlantis.Framework.Language.Impl
                 {
                   var content = JsonConvert.DeserializeObject<CDSContentVersion>(responseReader.ReadToEnd());
                   responseReader.Close();
-                  var phrases = PhraseDictionary.Parse(content.Content, cdsRequestData.DictionaryName,
+                  var dictionary = new PhraseDictionary(false);
+                  PhraseDictionary.Parse(dictionary,content.Content, cdsRequestData.DictionaryName,
                                                    cdsRequestData.Language);
-                  result = new CDSLanguageResponseData(phrases);
+                  result = new CDSLanguageResponseData(dictionary);
                 }
               }
             }

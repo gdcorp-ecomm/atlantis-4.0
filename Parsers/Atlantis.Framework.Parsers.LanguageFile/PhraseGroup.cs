@@ -6,6 +6,12 @@ namespace Atlantis.Framework.Parsers.LanguageFile
   public class PhraseGroup
   {
     public Dictionary<string, Phrase> Phrases = new Dictionary<string, Phrase>(10, StringComparer.OrdinalIgnoreCase);
+    private readonly bool AutoHandleShortLanguage;
+
+    public PhraseGroup(bool autoHandleShortLanguage = true)
+    {
+      AutoHandleShortLanguage = autoHandleShortLanguage;
+    }
 
     public Phrase FindPhrase(PhrasePredicate predicate)
     {
@@ -32,14 +38,17 @@ namespace Atlantis.Framework.Parsers.LanguageFile
       // then store this phrase as the short language phrase
       // first one wins. This can only be replaced later if there is a short language key
       // in the data for the same country site
-      int dashLocation = phrase.Language.IndexOf('-');
-      if (dashLocation > 1)
+      if (AutoHandleShortLanguage)
       {
-        string shortLanguage = phrase.Language.Substring(0, dashLocation);
-        key = PhrasePredicate.BuildKey(phrase.ContextId, phrase.CountrySite, shortLanguage);
-        if (!Phrases.ContainsKey(key))
+        int dashLocation = phrase.Language.IndexOf('-');
+        if (dashLocation > 1)
         {
-          Phrases[key] = phrase;
+          string shortLanguage = phrase.Language.Substring(0, dashLocation);
+          key = PhrasePredicate.BuildKey(phrase.ContextId, phrase.CountrySite, shortLanguage);
+          if (!Phrases.ContainsKey(key))
+          {
+            Phrases[key] = phrase;
+          }
         }
       }
     }

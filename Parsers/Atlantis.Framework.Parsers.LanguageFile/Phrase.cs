@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Xml.Linq;
+using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.Parsers.LanguageFile
 {
@@ -11,6 +12,7 @@ namespace Atlantis.Framework.Parsers.LanguageFile
     public string CountrySite { get; private set; }
     public int ContextId { get; private set; }
     public string PhraseText { get; private set; }
+    private const string InvalidDictionary = "invalidDictionary";
 
     public bool IsValid
     {
@@ -29,19 +31,22 @@ namespace Atlantis.Framework.Parsers.LanguageFile
 
     public static Phrase FromPhraseElementLine(string phraseElementLine, string dictionaryName, string language)
     {
-      Phrase result = null;
+      Phrase result;
+      var countrysite = "www";
+      var contextId = 0;
       try
       {
         // <phrase key="testkey" countrysite="uk" contextid="6" />
         XElement phraseElement = XElement.Parse(phraseElementLine);
         string key = phraseElement.GetAttributeValue("key", string.Empty);
-        string countrysite = phraseElement.GetAttributeValue("countrysite", "www");
-        int contextId = phraseElement.GetAttributeValueInt("contextid", 0);
+        countrysite = phraseElement.GetAttributeValue("countrysite", "www");
+        contextId = phraseElement.GetAttributeValueInt("contextid", 0);
         result = new Phrase(dictionaryName, key, language, countrysite, contextId);
       }
       catch (Exception ex)
       {
-        //if this isnt caught here then the files stop parsing with invalid xml - log here or figure a way to bubble
+        result = new Phrase(InvalidDictionary, Guid.NewGuid().ToString(), language, countrysite, contextId);
+        Engine.Engine.LogAtlantisException(new AtlantisException("Phrase.FromPhraseElement",0,"Language Parser Issue: " + ex.StackTrace,phraseElementLine));
       }
       return result;
     }

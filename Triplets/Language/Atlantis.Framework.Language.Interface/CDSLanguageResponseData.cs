@@ -5,7 +5,6 @@ namespace Atlantis.Framework.Language.Interface
 {
   public class CDSLanguageResponseData : IResponseData
   {
-    private readonly AtlantisException _exception = null;
     public PhraseDictionary Phrases { get; private set; }
     public static CDSLanguageResponseData NotFound { get; private set; }
 
@@ -19,12 +18,6 @@ namespace Atlantis.Framework.Language.Interface
       Phrases = phrases;
     }
 
-    //do i need this if I am just throwing the exception?
-    //public CDSLanguageResponseData(AtlantisException exception)
-    //{
-    //  _exception = exception;
-    //}
-
     public string ToXML()
     {
       return string.Empty;
@@ -32,7 +25,7 @@ namespace Atlantis.Framework.Language.Interface
 
     public AtlantisException GetException()
     {
-      return _exception;
+      return null;
     }
   }
 }

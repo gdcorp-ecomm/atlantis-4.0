@@ -8,13 +8,11 @@ using System.Linq;
 
 namespace Atlantis.Framework.Language.Impl.Data
 {
-
-  //refactor this to use the parser
   internal class LanguageData
   {
     private readonly Dictionary<string, PhraseDictionary> _phraseData = new Dictionary<string, PhraseDictionary>();
     private const string _searchPattern = "*.language";
-    private const string _appSettingKey = "LanguageFileLocation";
+    private const string _LanguageDataLocation = "Atlantis.Framework.Language.LanguageDataLocation";
     private const string _appDataLocation = "~/App_Data/Language";
 
     internal LanguageData()
@@ -32,42 +30,48 @@ namespace Atlantis.Framework.Language.Impl.Data
           var fileInfo = new PhraseFileInfo(languageFile);
           if (fileInfo.IsLanguageDataValid)
           {
-              IEnumerable<string> dataLines = File.ReadAllLines(languageFile);
-              PhraseDictionary dictionary;
-              if (!_phraseData.TryGetValue(fileInfo.DictionaryName, out dictionary))
-              {
-                var pd = PhraseDictionary.Parse(dataLines, fileInfo.DictionaryName, fileInfo.Language);
-                _phraseData.Add(fileInfo.DictionaryName, pd);
-              }
-              else
-              {
-                PhraseDictionary.Parse(dictionary, dataLines, fileInfo.DictionaryName, fileInfo.Language);
-              }
-
+            IEnumerable<string> dataLines = File.ReadAllLines(languageFile);
+            PhraseDictionary dictionary;
+            if (!_phraseData.TryGetValue(fileInfo.DictionaryName, out dictionary))
+            {
+              dictionary = new PhraseDictionary();
+              PhraseDictionary.Parse(dictionary, dataLines, fileInfo.DictionaryName, fileInfo.Language);
+              _phraseData.Add(fileInfo.DictionaryName, dictionary);
             }
+            else
+            {
+              PhraseDictionary.Parse(dictionary, dataLines, fileInfo.DictionaryName, fileInfo.Language);
+            }
+
           }
         }
       }
+    }
 
     private IEnumerable<string> GetLanguageFileNames()
     {
       var pathUri = new Uri(Path.GetDirectoryName(GetType().Assembly.CodeBase));
       var assemblyPath = pathUri.LocalPath;
-      var configPath = ConfigurationManager.AppSettings[_appSettingKey];
-      var appFiles = new List<string>();
-        
-      if (HttpContext.Current != null)
-      {
-        appFiles = !string.IsNullOrEmpty(configPath) ? GetFilesFromDirectory(HttpContext.Current.Server.MapPath(configPath)).ToList() : GetFilesFromDirectory(HttpContext.Current.Server.MapPath(_appDataLocation)).ToList();
-      }
-
       var assemblyFiles = GetFilesFromDirectory(assemblyPath);
+      var appFiles = GetFilesFromConfiguration();
       return assemblyFiles.Union(appFiles);
+    }
+
+    private static IEnumerable<string> GetFilesFromConfiguration()
+    {
+      var configPath = ConfigurationManager.AppSettings[_LanguageDataLocation];
+      var path = (!string.IsNullOrEmpty(configPath)) ? configPath : _appDataLocation;
+      var useHttp = path.StartsWith("~");
+
+      var appFiles = (useHttp && HttpContext.Current != null)
+                        ? GetFilesFromDirectory(HttpContext.Current.Server.MapPath(path)).ToList()
+                        : GetFilesFromDirectory(path).ToList();
+      return appFiles;
     }
 
     private static IEnumerable<string> GetFilesFromDirectory(string path)
     {
-      return (!string.IsNullOrEmpty(path) && Directory.Exists(path)) ? Directory.GetFiles(path, _searchPattern, SearchOption.AllDirectories) : new string[0];
+      return (Directory.Exists(path)) ? Directory.GetFiles(path, _searchPattern, SearchOption.AllDirectories) : new string[0];
     }
 
     internal string FindPhrase(string dictionary, string phraseKey, int contextId, string countrySite, string language)

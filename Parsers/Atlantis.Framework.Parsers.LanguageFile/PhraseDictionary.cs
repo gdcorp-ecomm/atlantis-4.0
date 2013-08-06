@@ -6,13 +6,18 @@ namespace Atlantis.Framework.Parsers.LanguageFile
   public class PhraseDictionary
   {
     public Dictionary<string, PhraseGroup> phraseGroups = new Dictionary<string, PhraseGroup>(1000, StringComparer.OrdinalIgnoreCase);
+    private readonly bool AutoHandleShortLanguage;
+    public PhraseDictionary(bool autoHandleShortLanguage = true)
+    {
+      AutoHandleShortLanguage = autoHandleShortLanguage;
+    }
 
     public void Add(Phrase phrase)
     {
       PhraseGroup phraseGroup;
       if (!phraseGroups.TryGetValue(phrase.Key, out phraseGroup))
       {
-        phraseGroup = new PhraseGroup();
+        phraseGroup = new PhraseGroup(AutoHandleShortLanguage);
         phraseGroups[phrase.Key] = phraseGroup;
       }
 
@@ -44,20 +49,13 @@ namespace Atlantis.Framework.Parsers.LanguageFile
       return result;
     }
 
-    public static PhraseDictionary Parse(string str, string dictionaryName, string language)
+    public static void Parse(PhraseDictionary dictionary, string multilineString, string dictionaryName, string language)
     {
-      string[] lines = str.Split(new string[] { "\r\n", "\n" }, StringSplitOptions.None);
-      return Parse(lines, dictionaryName, language);
+      string[] lines = multilineString.Split(new[] { "\r\n", "\n" }, StringSplitOptions.None);
+      Parse(dictionary,lines, dictionaryName, language);
     }
 
-    public static PhraseDictionary Parse(IEnumerable<string> lines, string dictionaryName, string language)
-    {
-      var phraseDictionary = new PhraseDictionary();
-
-      return Parse(phraseDictionary, lines, dictionaryName, language);
-    }
-
-    public static PhraseDictionary Parse(PhraseDictionary dictionary, IEnumerable<string> lines, string dictionaryName,
+    public static void Parse(PhraseDictionary dictionary, IEnumerable<string> lines, string dictionaryName,
                                          string language)
     {
       Phrase currentPhrase = null;
@@ -87,7 +85,6 @@ namespace Atlantis.Framework.Parsers.LanguageFile
       {
         dictionary.Add(currentPhrase);
       }
-      return dictionary;
     }
 
 

@@ -40,8 +40,6 @@ namespace Atlantis.Framework.Providers.Language
       }
       return phrase;
     }
-
-    
    
     private ILanguagePhraseHandler GetLanguagePhraseHandler(string dictionaryName)
     {

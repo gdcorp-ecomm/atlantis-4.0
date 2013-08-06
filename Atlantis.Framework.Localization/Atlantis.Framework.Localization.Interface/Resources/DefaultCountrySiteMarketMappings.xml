@@ -1,0 +1,10 @@
+<data count="8">
+	<item catalog_countrySite="www" marketID="en-US" languageUrlSegment="en" isActive="-1" internalOnly="0" />
+	<item catalog_countrySite="www" marketID="es-US" languageUrlSegment="es" isActive="-1" internalOnly="0" />
+  <item catalog_countrySite="www" marketID="qa-QA" languageUrlSegment="qa-qa" isActive="-1" internalOnly="-1" />
+  <item catalog_countrySite="www" marketID="qa-PS" languageUrlSegment="qa-ps" isActive="-1" internalOnly="-1" />
+	<item catalog_countrySite="ca" marketID="en-CA" languageUrlSegment="en" isActive="-1" internalOnly="0" />
+	<item catalog_countrySite="uk" marketID="en-GB" languageUrlSegment="en" isActive="-1" internalOnly="0" />
+	<item catalog_countrySite="au" marketID="en-AU" languageUrlSegment="en" isActive="-1" internalOnly="0" />
+	<item catalog_countrySite="in" marketID="en-IN" languageUrlSegment="en" isActive="-1" internalOnly="0" />
+</data>

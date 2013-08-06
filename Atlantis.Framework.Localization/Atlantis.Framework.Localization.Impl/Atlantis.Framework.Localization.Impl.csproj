@@ -43,7 +43,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ValidCountrySubdomainsRequest.cs" />
+    <Compile Include="CountrySiteMarketMappingsRequest.cs" />
+    <Compile Include="MarketsActiveRequest.cs" />
+    <Compile Include="CountrySitesActiveRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

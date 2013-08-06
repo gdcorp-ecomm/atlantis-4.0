@@ -62,7 +62,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="controls\banner.ascx" />
+    <Content Include="controls\banner2.ascx" />
+    <Content Include="controls\child1.ascx" />
+    <Content Include="controls\child2.ascx" />
     <Content Include="controls\content.ascx" />
+    <Content Include="controls\parent.ascx" />
     <Content Include="Default.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -76,12 +80,40 @@
     <Compile Include="controls\banner.ascx.designer.cs">
       <DependentUpon>banner.ascx</DependentUpon>
     </Compile>
+    <Compile Include="controls\banner2.ascx.cs">
+      <DependentUpon>banner2.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="controls\banner2.ascx.designer.cs">
+      <DependentUpon>banner2.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="controls\child1.ascx.cs">
+      <DependentUpon>child1.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="controls\child1.ascx.designer.cs">
+      <DependentUpon>child1.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="controls\child2.ascx.cs">
+      <DependentUpon>child2.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="controls\child2.ascx.designer.cs">
+      <DependentUpon>child2.ascx</DependentUpon>
+    </Compile>
     <Compile Include="controls\content.ascx.cs">
       <DependentUpon>content.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="controls\content.ascx.designer.cs">
       <DependentUpon>content.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="controls\parent.ascx.cs">
+      <DependentUpon>parent.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="controls\parent.ascx.designer.cs">
+      <DependentUpon>parent.ascx</DependentUpon>
     </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>

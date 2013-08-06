@@ -13,11 +13,21 @@ namespace Atlantis.Framework.Providers.PlaceHolder
 
       try
       {
-        type = Assembly.Load(assembly).GetType(typeName);
+        Assembly loadedAssembly = Assembly.Load(assembly);
+        if (loadedAssembly == null)
+        {
+          throw new Exception("Assembly not found");
+        }
+
+        type = loadedAssembly.GetType(typeName);
+        if (type == null)
+        {
+          throw new Exception("Type not found in assembly");
+        }
       }
       catch (Exception ex)
       {
-        throw new Exception(string.Format("Error finding the type {0}. {1}", typeName, ex.Message));
+        throw new Exception(string.Format("{0}. Assembly: {1}, Type: {2}", ex.Message, assembly, typeName));
       }
 
       return type;
@@ -31,6 +41,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder
       if (!_webControlTypeCache.TryGet(key, out type))
       {
         type = LoadType(assembly, typeName);
+
         _webControlTypeCache.Set(key, type);
       }
 

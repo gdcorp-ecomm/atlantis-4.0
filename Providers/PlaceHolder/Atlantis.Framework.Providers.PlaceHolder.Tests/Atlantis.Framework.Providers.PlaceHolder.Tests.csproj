@@ -64,6 +64,8 @@
   <ItemGroup>
     <Compile Include="PlaceHolderProviderTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WebControls\Child.cs" />
+    <Compile Include="WebControls\Parent.cs" />
     <Compile Include="WebControls\WebControlOne.cs" />
   </ItemGroup>
   <ItemGroup>

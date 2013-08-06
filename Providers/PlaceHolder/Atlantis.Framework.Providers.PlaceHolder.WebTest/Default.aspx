@@ -14,9 +14,15 @@
     <hr />
     [@P[userControl:<Data location="~/controls/banner.ascx"><Parameters><Parameter key="Title" value="Attention 2!" /><Parameter key="Text" value="Scheduled maintenance underway." /></Parameters></Data>]@P]
     <hr />
+    [@P[userControl:<Data location="~/controls/banner2.ascx" />]@P]
+    <hr />
   </div>
   <div>
     [@P[userControl:<Data location="~/controls/content.ascx" />]@P]
+    <hr />
+  </div>
+   <div>
+    [@P[userControl:<Data location="~/controls/parent.ascx" />]@P]
     <hr />
   </div>
   <div>

@@ -70,6 +70,14 @@ namespace Atlantis.Framework.Providers.PlaceHolder
         if (TryGetEvent(eventName, out methodInfo) && methodInfo != null)
         {
           methodInfo.Invoke(control, new object[] { EventArgs.Empty });
+
+          if (control.HasControls())
+          {
+            foreach (Control childControl in control.Controls)
+            {
+              methodInfo.Invoke(childControl, new object[] { EventArgs.Empty });
+            }
+          }
         }
       }
     }

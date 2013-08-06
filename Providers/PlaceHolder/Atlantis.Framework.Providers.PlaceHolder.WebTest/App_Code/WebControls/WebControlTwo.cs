@@ -8,7 +8,7 @@ namespace WebControls
 
     protected override void Render(HtmlTextWriter writer)
     {
-      writer.WriteLine("<h1>{0}</h1>", !string.IsNullOrEmpty(Text) ? Text : "ERROR: \"Text\" parameter not found.");
+      writer.WriteLine("<h1>{0}</h1>", !string.IsNullOrEmpty(Text) ? Text : "ERROR: \"PageLoadText\" parameter not found.");
     }
   }
 }

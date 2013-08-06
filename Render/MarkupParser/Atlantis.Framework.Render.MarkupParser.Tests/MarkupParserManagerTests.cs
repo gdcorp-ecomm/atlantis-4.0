@@ -75,6 +75,30 @@ namespace Atlantis.Framework.Render.MarkupParser.Tests
     }
 
     [TestMethod]
+    public void NullMarkup()
+    {
+      string markup = null;
+
+      string parsedMarkup = MarkupParserManager.ParseAndEvaluate(markup, PRE_PROCESSOR_PREFIX, ExpressionParserManager.EvaluateExpression);
+
+      WriteOutput(parsedMarkup);
+
+      Assert.IsTrue(parsedMarkup == null);
+    }
+
+    [TestMethod]
+    public void EmptyMarkup()
+    {
+      string markup = string.Empty;
+
+      string parsedMarkup = MarkupParserManager.ParseAndEvaluate(markup, PRE_PROCESSOR_PREFIX, ExpressionParserManager.EvaluateExpression);
+
+      WriteOutput(parsedMarkup);
+
+      Assert.IsTrue(parsedMarkup.Equals(string.Empty));
+    }
+
+    [TestMethod]
     public void SimpleMarkupTestIfCondition()
     {
       string markup = @"Hi my name is
@@ -87,6 +111,18 @@ namespace Atlantis.Framework.Render.MarkupParser.Tests
       WriteOutput(parsedMarkup);
 
       Assert.IsTrue(parsedMarkup.Contains("Timbo"));
+    }
+
+    [TestMethod]
+    public void SimpleMarkupNoConditions()
+    {
+      string markup = @"Hi my name is Timbo";
+
+      string parsedMarkup = MarkupParserManager.ParseAndEvaluate(markup, PRE_PROCESSOR_PREFIX, ExpressionParserManager.EvaluateExpression);
+
+      WriteOutput(parsedMarkup);
+
+      Assert.IsTrue(parsedMarkup.Equals("Hi my name is Timbo"));
     }
 
     [TestMethod]

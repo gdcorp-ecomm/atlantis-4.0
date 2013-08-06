@@ -8,69 +8,65 @@ using Atlantis.Framework.Tokens.Interface;
 
 namespace Atlantis.Framework.TH.Brand
 {
-  public class ProductLineTokenHandler : SimpleTokenHandlerBase
+  // [@T[productline:<auctions contextid="GD"/>]@T]
+  // [@T[productline:<auctions />]@T]
+  public class ProductLineTokenHandler : XmlTokenHandlerBase
   {
-    // [@T[productline:TextTokenData]@T]
-    private const string TOKEN_KEY = "productline";
-
     public override string TokenKey
     {
-      get { return TOKEN_KEY; }
+      get { return "productline"; }
+    }
+
+    public override IToken CreateToken(string tokenData, string fullTokenString)
+    {
+      return new ProductLineToken(TokenKey, tokenData, fullTokenString);
     }
 
     public override TokenEvaluationResult EvaluateTokens(IEnumerable<IToken> tokens, IProviderContainer container)
     {
-      TokenEvaluationResult result = TokenEvaluationResult.Errors;
-      const string errorSource = "ProductLine.EvaluateTokens";
+      var result = TokenEvaluationResult.Errors;
 
       foreach (var token in tokens)
       {
         string tokenResult = null;
-        var simpleToken = token as SimpleToken;
+        var productLineToken = token as ProductLineToken;
 
-        if (simpleToken != null && !String.IsNullOrEmpty(simpleToken.RawTokenData))
+        if (productLineToken != null && !String.IsNullOrEmpty(productLineToken.RawTokenData))
         {
-          try
+          var brandProvider = container.Resolve<IBrandProvider>();
+          int contextId = 0;
+
+          if (!String.IsNullOrEmpty(productLineToken.ContextId))
           {
-            IProductLineProvider productLineProvider = container.Resolve<IProductLineProvider>();
-
-            var tokenDataFromRaw = simpleToken.RawTokenData.Split(':');
-
-            int overrideFlag;
-            if (tokenDataFromRaw.Length > 1 && int.TryParse(tokenDataFromRaw[1], out overrideFlag))
+            switch (productLineToken.ContextId.ToUpperInvariant())
             {
-              tokenResult = productLineProvider.GetProductLineName(tokenDataFromRaw[0], overrideFlag);
-            }
-            else
-            {
-              tokenResult = productLineProvider.GetProductLineName(tokenDataFromRaw[0]);
+              case "GD":
+              case "1":
+                contextId = 1;
+                break;
+              case "WWD":
+              case "2":
+                contextId = 2;
+                break;
+              case "BR":
+              case "5":
+                contextId = 5;
+                break;
             }
 
-            result = TokenEvaluationResult.Success;
+            tokenResult = brandProvider.GetProductLineName(productLineToken.RenderType, contextId);
           }
-          catch (Exception)
+          else
           {
-            result = TokenEvaluationResult.Errors;
-            LogDebugMessage(container, "Could not deserialize token data.  Token: " + token.FullTokenString, errorSource);
+            tokenResult = brandProvider.GetProductLineName(productLineToken.RenderType);
           }
-
         }
 
-        token.TokenResult = tokenResult ?? string.Empty;
+        token.TokenResult = tokenResult ?? String.Empty;
+        result = TokenEvaluationResult.Success;
       }
 
       return result;
     }
-
-    private void LogDebugMessage(IProviderContainer container, string message, string errorSource)
-    {
-      IDebugContext debugContext = null;
-      if (container.CanResolve<IDebugContext>())
-      {
-        debugContext = container.Resolve<IDebugContext>();
-        debugContext.LogDebugTrackingData(errorSource, message);
-      }
-    }
-
   }
 }

@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CompanyTokenHandler.cs" />
+    <Compile Include="ProductLineToken.cs" />
     <Compile Include="ProductLineTokenHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -30,8 +30,7 @@ namespace Atlantis.Framework.TH.Brand.Tests
     {
       _container.RegisterProvider<ISiteContext, MockSiteContext>();
       _container.RegisterProvider<IManagerContext, MockNoManagerContext>();
-      _container.RegisterProvider<ICompanyProvider, CompanyProvider>();
-      _container.RegisterProvider<IProductLineProvider,ProductLineProvider>();
+      _container.RegisterProvider<IBrandProvider, BrandProvider>();
       _siteContext = _container.Resolve<ISiteContext>();
 
       TokenManager.RegisterTokenHandler(new CompanyTokenHandler());
@@ -121,12 +120,10 @@ namespace Atlantis.Framework.TH.Brand.Tests
       Assert.AreEqual(GetTokenString(String.Format(_companyTokenFormat, BrandKeyConstants.NAME_DBP_LEGAL)), "Domains By Proxy, LLC");
       Assert.AreEqual(GetTokenString(String.Format(_companyTokenFormat, BrandKeyConstants.NAME_DBP_PARENT_COMPANY_LEGAL)), "GoDaddy Operating Company, LLC");
 
-      Assert.AreEqual(GetTokenString(String.Format(_companyTokenFormat, BrandKeyConstants.NAME_SHORT)), String.Empty);
       Assert.AreEqual(GetTokenString(String.Format(_companyTokenFormat, BrandKeyConstants.NAME_COMPANY)), "Domains Priced Right");
       Assert.AreEqual(GetTokenString(String.Format(_companyTokenFormat, BrandKeyConstants.NAME_COMPANY_DOT_COM)), "Domains Priced Right");
       Assert.AreEqual(GetTokenString(String.Format(_companyTokenFormat, BrandKeyConstants.NAME_COMPANY_LEGAL)), "Domains Priced Right");
       Assert.AreEqual(GetTokenString(String.Format(_companyTokenFormat, BrandKeyConstants.NAME_COMPANY_PARENT_COMPANY)), "Domains Priced Right");
-      Assert.AreEqual(GetTokenString(String.Format(_companyTokenFormat, BrandKeyConstants.NAME_COMPANY_TWITTER)), String.Empty);
     }
 
     [TestMethod]
@@ -136,12 +133,12 @@ namespace Atlantis.Framework.TH.Brand.Tests
       MockHttpContext.SetFromWorkerRequest(mockHttpRequest);
       _container.SetMockSetting(MockSiteContextSettings.PrivateLabelId, "1");
 
-      Assert.AreEqual(GetTokenString(String.Format(_productLineCompanyTokenFormat, "Auctions:1")), "GoDaddy Auctions");
-      Assert.AreEqual(GetTokenString(String.Format(_productLineCompanyTokenFormat, "Auctions:a")), "Domain Auctions");
-      Assert.AreEqual(GetTokenString(String.Format(_productLineCompanyTokenFormat, "WebsiteBuilder:1")), "GoDaddy Website Builder");
-      Assert.AreEqual(GetTokenString(String.Format(_productLineCompanyTokenFormat, "WebsiteBuilder")), "Website Builder");
-      Assert.AreEqual(GetTokenString(String.Format(_productLineCompanyTokenFormat, "BusinessRegistration")), "Business Registration");
-      Assert.AreEqual(GetTokenString(String.Format(_productLineCompanyTokenFormat, "DomainBackorders")), "Domain Backorders");
+      Assert.AreEqual(GetTokenString(String.Format(_productLineCompanyTokenFormat, "<Auctions contextid=\"GD\" />")), "GoDaddy Auctions");
+      Assert.AreEqual(GetTokenString(String.Format(_productLineCompanyTokenFormat, "<Auctions contextid=\"Invalid\"/>")), "Domain Auctions");
+      Assert.AreEqual(GetTokenString(String.Format(_productLineCompanyTokenFormat, "<WebsiteBuilder contextid=\"1\"/>")), "GoDaddy Website Builder");
+      Assert.AreEqual(GetTokenString(String.Format(_productLineCompanyTokenFormat, "<WebsiteBuilder />")), "Website Builder");
+      Assert.AreEqual(GetTokenString(String.Format(_productLineCompanyTokenFormat, "<BusinessRegistration />")), "Business Registration");
+      Assert.AreEqual(GetTokenString(String.Format(_productLineCompanyTokenFormat, "<DomainBackorders />")), "Domain Backorders");
 
     }
 
@@ -152,10 +149,10 @@ namespace Atlantis.Framework.TH.Brand.Tests
       MockHttpContext.SetFromWorkerRequest(mockHttpRequest);
       _container.SetMockSetting(MockSiteContextSettings.PrivateLabelId, "1592");
 
-      Assert.AreEqual(GetTokenString(String.Format(_productLineCompanyTokenFormat, "Auctions:1")), "Domain Auctions");
-      Assert.AreEqual(GetTokenString(String.Format(_productLineCompanyTokenFormat, "BusinessRegistration")), "Business Registration");
-      Assert.AreEqual(GetTokenString(String.Format(_productLineCompanyTokenFormat, "DomainBackorders")), "Domain Backorders");
-      Assert.AreEqual(GetTokenString(String.Format(_productLineCompanyTokenFormat, "WebsiteBuilder")), "Website Builder");
+      Assert.AreEqual(GetTokenString(String.Format(_productLineCompanyTokenFormat, "<Auctions contextid=\"GD\" />")), "Domain Auctions");
+      Assert.AreEqual(GetTokenString(String.Format(_productLineCompanyTokenFormat, "<BusinessRegistration />")), "Business Registration");
+      Assert.AreEqual(GetTokenString(String.Format(_productLineCompanyTokenFormat, "<DomainBackorders />")), "Domain Backorders");
+      Assert.AreEqual(GetTokenString(String.Format(_productLineCompanyTokenFormat, "<WebsiteBuilder />")), "Website Builder");
     }
   }
 }

@@ -9,7 +9,6 @@ using Atlantis.Framework.Tokens.Interface;
 namespace Atlantis.Framework.TH.Brand
 {
   // [@T[company:TextTokenData]@T]
-  // [@T[company:TextTokenData:override]@T]
   public class CompanyTokenHandler : SimpleTokenHandlerBase
   {
     private const string TOKEN_KEY = "companyname";
@@ -33,8 +32,8 @@ namespace Atlantis.Framework.TH.Brand
         {
           try
           {
-            ICompanyProvider productLineProvider = container.Resolve<ICompanyProvider>();
-            tokenResult = productLineProvider.GetCompanyPropertyValue(simpleToken.RawTokenData);
+            var productLineProvider = container.Resolve<IBrandProvider>();
+            tokenResult = productLineProvider.GetCompanyName(simpleToken.RawTokenData);
             result = TokenEvaluationResult.Success;
           }
           catch (Exception)

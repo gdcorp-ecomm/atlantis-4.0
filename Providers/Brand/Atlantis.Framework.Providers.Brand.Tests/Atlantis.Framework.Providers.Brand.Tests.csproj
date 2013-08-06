@@ -60,10 +60,8 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="BrandKeyConstants.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="CompanyProviderTests.cs" />
-    <Compile Include="ProductLineProviderTests.cs" />
+    <Compile Include="BrandProviderTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Atlantis.Framework.AppSettings\Atlantis.Framework.AppSettings.Interface\Atlantis.Framework.AppSettings.Interface.csproj">

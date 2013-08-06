@@ -44,9 +44,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ICountrySite.cs" />
+    <Compile Include="ILanguageUrlRewriteProvider.cs" />
     <Compile Include="ILocalizationRedirectProvider.cs" />
     <Compile Include="ILocalizationRedirectResult.cs" />
     <Compile Include="ILocalizationProvider.cs" />
+    <Compile Include="IMarket.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

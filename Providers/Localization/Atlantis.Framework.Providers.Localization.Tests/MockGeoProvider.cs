@@ -35,5 +35,25 @@ namespace Atlantis.Framework.Providers.Localization.Tests
     public void SpoofUserIPAddress(string spoofIpAddress)
     {
     }
+
+    #region IGeoProvider Members
+
+
+    public IGeoLocation RequestGeoLocation
+    {
+      get { throw new NotImplementedException(); }
+    }
+
+    public System.Collections.Generic.IEnumerable<IGeoCountry> Countries
+    {
+      get { throw new NotImplementedException(); }
+    }
+
+    public bool TryGetCountryByCode(string countryCode, out IGeoCountry country)
+    {
+      throw new NotImplementedException();
+    }
+
+    #endregion
   }
 }

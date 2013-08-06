@@ -1,10 +1,10 @@
-﻿using Atlantis.Framework.Interface;
-using Atlantis.Framework.Localization.Interface;
-using Atlantis.Framework.Providers.Localization.Interface;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using Atlantis.Framework.Interface;
+using Atlantis.Framework.Localization.Interface;
+using Atlantis.Framework.Providers.Localization.Interface;
 
 namespace Atlantis.Framework.Providers.Localization
 {
@@ -12,42 +12,126 @@ namespace Atlantis.Framework.Providers.Localization
   {
     protected const string _WWW = "WWW";
 
-    private readonly Lazy<string> _countrySite;
-    private readonly Lazy<ValidCountrySubdomainsResponseData> _validCountrySubdomains;
+    private readonly Lazy<ICountrySite> _countrySite; 
+    private readonly Lazy<IEnumerable<string>> _validCountrySubdomains;
+    private readonly Lazy<CountrySitesActiveResponseData> _countrySitesActive;
+    private readonly Lazy<MarketsActiveResponseData> _marketsActive; 
     protected Lazy<CountrySiteCookie> CountrySiteCookie;
-
-    private LanguageLocale _languageLocale = null;
+    private readonly Lazy<string> _proxyLanguage;
+    private string _rewrittenUrlLanguage;
+    private IMarket _market;
+    private string _shortLanguage = null;
     private CultureInfo _cultureInfo = null;
 
     public LocalizationProvider(IProviderContainer container)
       : base(container)
     {
-      _countrySite = new Lazy<string>(DetermineCountrySite);
-      _validCountrySubdomains = new Lazy<ValidCountrySubdomainsResponseData>(LoadValidCountrySubdomains);
+      _countrySite = new Lazy<ICountrySite>(LoadCountrySiteInfo);
+      _validCountrySubdomains = new Lazy<IEnumerable<string>>(LoadValidCountrySubdomains);
+      _countrySitesActive = new Lazy<CountrySitesActiveResponseData>(LoadActiveCountrySites);
+      _marketsActive = new Lazy<MarketsActiveResponseData>(LoadActiveMarkets);
+      _rewrittenUrlLanguage = string.Empty;
       CountrySiteCookie = new Lazy<CountrySiteCookie>(() => new CountrySiteCookie(Container));
+      _proxyLanguage = new Lazy<string>(GetProxyLanguage);
     }
 
     protected abstract string DetermineCountrySite();
 
-    private ValidCountrySubdomainsResponseData LoadValidCountrySubdomains()
+    private ICountrySite LoadCountrySiteInfo()
     {
-      var request = new ValidCountrySubdomainsRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0);
-      return (ValidCountrySubdomainsResponseData)DataCache.DataCache.GetProcessRequest(request, LocalizationProviderEngineRequests.ValidCountrySubdomains);
+      ICountrySite result;
+      if (!_countrySitesActive.Value.TryGetCountrySiteById(DetermineCountrySite(), out result))
+      {
+        result = CountrySitesActiveResponseData.DefaultCountrySiteInfo;
+      }
+      return result;
+    }
+
+    private CountrySitesActiveResponseData LoadActiveCountrySites()
+    {
+      CountrySitesActiveResponseData result;
+
+      var request = new CountrySitesActiveRequestData();
+      try
+      {
+        result =
+          (CountrySitesActiveResponseData)
+          DataCache.DataCache.GetProcessRequest(request, LocalizationProviderEngineRequests.CountrySitesActiveRequest);
+      }
+      catch
+      {
+        result = CountrySitesActiveResponseData.DefaultCountrySites;
+      }
+
+      return result;
+    }
+
+    private MarketsActiveResponseData LoadActiveMarkets()
+    {
+      MarketsActiveResponseData result;
+
+      var request = new MarketsActiveRequestData();
+      try
+      {
+        result =
+          (MarketsActiveResponseData)
+          DataCache.DataCache.GetProcessRequest(request, LocalizationProviderEngineRequests.MarketsActiveRequest);
+      }
+      catch
+      {
+        result = MarketsActiveResponseData.DefaultMarkets;
+      }
+
+      return result;
+    }
+
+    private IEnumerable<string> LoadValidCountrySubdomains()
+    {
+      var countrySites = new List<string>();
+      foreach (ICountrySite countrySite in _countrySitesActive.Value.CountrySites)
+      {
+        countrySites.Add(countrySite.Id);
+      }
+      return countrySites;
     }
 
     public bool IsValidCountrySubdomain(string countryCode)
     {
-      return _validCountrySubdomains.Value.IsValidCountrySubdomain(countryCode);
+      return _countrySitesActive.Value.IsValidCountrySite(countryCode);
     }
 
     public IEnumerable<string> ValidCountrySiteSubdomains
     {
-      get { return _validCountrySubdomains.Value.ValidCountrySubdomains; }
+      get { return _validCountrySubdomains.Value; }
+    }
+
+    public ICountrySite CountrySiteInfo
+    {
+      get { return _countrySite.Value; }
     }
 
     public string CountrySite
     {
-      get { return _countrySite.Value; }
+      get { return CountrySiteInfo.Id.ToUpperInvariant(); }
+    }
+
+    public IMarket MarketInfo
+    {
+      get
+      {
+        if (_market == null)
+        {
+          IMarket defaultMarket;
+          string marketId = (ProxyLanguage == "es" || ProxyLanguage == "es-US" ? "es-US" : CountrySiteInfo.DefaultMarketId);
+          if (!_marketsActive.Value.TryGetMarketById(marketId, out defaultMarket))
+          {
+            defaultMarket = MarketsActiveResponseData.DefaultMarketInfo;
+          }
+          _market = defaultMarket;
+        }
+        
+        return _market;
+      }
     }
 
     public bool IsGlobalSite()
@@ -57,83 +141,58 @@ namespace Atlantis.Framework.Providers.Localization
 
     public bool IsCountrySite(string countryCode)
     {
-      return _countrySite.Value.Equals(countryCode, StringComparison.OrdinalIgnoreCase);
+      return _countrySite.Value.Id.Equals(countryCode, StringComparison.OrdinalIgnoreCase);
     }
 
     public bool IsAnyCountrySite(HashSet<string> countryCodes)
     {
-      return countryCodes.Contains(_countrySite.Value, StringComparer.OrdinalIgnoreCase);
+      return countryCodes.Contains(CountrySite, StringComparer.OrdinalIgnoreCase);
     }
 
     public string GetCountrySiteLinkType(string baseLinkType)
     {
       string result = baseLinkType;
-      if (!_WWW.Equals(_countrySite.Value))
+      if (!_WWW.Equals(CountrySite))
       {
-        result = string.Concat(baseLinkType, ".", _countrySite.Value.ToUpperInvariant());
+        result = string.Concat(baseLinkType, ".", CountrySite.ToUpperInvariant());
       }
 
       return result;
     }
 
-    private LanguageLocale Language
+    internal string ProxyLanguage
     {
-      get
-      {
-        if (_languageLocale == null)
-        {
-          string shortLanguage = "en";
-
-          IProxyContext proxyContext;
-          if (Container.TryResolve(out proxyContext))
-          {
-            IProxyData languageProxy;
-            if (proxyContext.TryGetActiveProxy(ProxyTypes.TransPerfectTranslation, out languageProxy))
-            {
-              string language;
-              if (languageProxy.TryGetExtendedData("language", out language))
-              {
-                shortLanguage = language;
-              }
-            }
-            else if (proxyContext.TryGetActiveProxy(ProxyTypes.SmartlingTranslation, out languageProxy))
-            {
-              string language;
-              if (languageProxy.TryGetExtendedData("language", out language))
-              {
-                shortLanguage = language;
-              }
-            }
-          }
-
-          _languageLocale = LanguageLocale.FromLanguageAndCountrySite(shortLanguage, _countrySite.Value);
-        }
-
-        return _languageLocale;
-      }
+      get { return _proxyLanguage.Value; }
     }
 
     public string FullLanguage
     {
-      get 
-      {
-        return Language.FullLanguage;
-      }
+      get { return MarketInfo.Id; }
     }
 
     public string ShortLanguage
     {
-      get 
+      get
       {
-        return Language.ShortLanguage;
+        if (_shortLanguage == null)
+        {
+          _shortLanguage = MarketInfo.Id.Split('-')[0]; 
+        }
+        return _shortLanguage;
       }
+    }
+
+    public string RewrittenUrlLanguage
+    {
+      get { return _rewrittenUrlLanguage; }
+      set { _rewrittenUrlLanguage = value; }
     }
 
     public bool IsActiveLanguage(string language)
     {
       bool result =
-        (language.Equals(Language.ShortLanguage, StringComparison.OrdinalIgnoreCase)) ||
-        (language.Equals(Language.FullLanguage, StringComparison.OrdinalIgnoreCase));
+        (language.Equals(ShortLanguage, StringComparison.OrdinalIgnoreCase)) ||
+        (language.Equals(FullLanguage, StringComparison.OrdinalIgnoreCase));
 
       return result;
     }
@@ -152,10 +211,15 @@ namespace Atlantis.Framework.Providers.Localization
       }
     }
 
-    public void SetLanguage(string language)
+    public void SetMarket(string marketId)
     {
-      _languageLocale = LanguageLocale.FromLanguageAndCountrySite(language, _countrySite.Value);
-      _cultureInfo = null;
+      IMarket market;
+      if (_marketsActive.Value.TryGetMarketById(marketId, out market))
+      {
+        _market = market;
+        _cultureInfo = null;
+        _shortLanguage = null;
+      }
     }
 
     public CultureInfo CurrentCultureInfo
@@ -164,28 +228,31 @@ namespace Atlantis.Framework.Providers.Localization
       {
         if (_cultureInfo == null)
         {
-          _cultureInfo = DetermineCultureInfo();
+          _cultureInfo = CultureInfo.GetCultureInfo(MarketInfo.MsCulture);
         }
         return _cultureInfo;
       }
     }
 
-    private CultureInfo DetermineCultureInfo()
+    private string GetProxyLanguage()
     {
-      CultureInfo result = CultureInfo.CurrentCulture;
+      string result = string.Empty;
 
-      try
+      IProxyContext proxyContext;
+      if (Container.TryResolve(out proxyContext))
       {
-        CultureInfo localizedCulture = CultureInfo.GetCultureInfo(Language.FullLanguage);
-        result = localizedCulture;
-      }
-      catch (CultureNotFoundException ex)
-      {
-        AtlantisException aex = new AtlantisException("LocalizationProvider.DetermineCultureInfo", 0, ex.Message + ex.StackTrace, Language.FullLanguage);
-        Engine.Engine.LogAtlantisException(aex);
+        IProxyData languageProxy;
+        if (proxyContext.TryGetActiveProxy(ProxyTypes.TransPerfectTranslation, out languageProxy))
+        {
+          string language;
+          if (languageProxy.TryGetExtendedData("language", out language))
+          {
+            result = language;
+          }
+        }
       }
 
-      return result;
+      return (result == "es" ? "es-US" : result);
     }
   }
 }

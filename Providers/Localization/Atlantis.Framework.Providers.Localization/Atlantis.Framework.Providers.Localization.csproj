@@ -46,7 +46,8 @@
   <ItemGroup>
     <Compile Include="CountryCookieLocalizationProvider.cs" />
     <Compile Include="CountrySiteCookie.cs" />
-    <Compile Include="LanguageLocale.cs" />
+    <Compile Include="HttpContextFactory.cs" />
+    <Compile Include="LanguageUrlRewriteProvider.cs" />
     <Compile Include="LocalizationRedirectProvider\LocalizationRedirectProvider.cs" />
     <Compile Include="LocalizationRedirectProvider\LocalizationRedirectResponse.cs" />
     <Compile Include="LocalizationRedirectProvider\RuleEngineModel.cs" />
@@ -91,6 +92,7 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

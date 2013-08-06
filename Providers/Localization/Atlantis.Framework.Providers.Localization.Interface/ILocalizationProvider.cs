@@ -20,6 +20,12 @@ namespace Atlantis.Framework.Providers.Localization.Interface
     string ShortLanguage { get; }
 
     /// <summary>
+    /// Returns the language code found and removed by the ILanguageUrlRewriteProvider instance.
+    /// This can be used for downstream processing and link building.
+    /// </summary>
+    string RewrittenUrlLanguage { get; set; }
+
+    /// <summary>
     /// Will evaluate the given language versus the language of the request.
     /// If you pass only a short language, it will return true for any dialect of that langauge
     /// If you pass a full language (like en-us) it will only return true if it is an exact match
@@ -30,10 +36,21 @@ namespace Atlantis.Framework.Providers.Localization.Interface
     bool IsActiveLanguage(string language);
 
     /// <summary>
+    /// Returns the ICountrySite object for the request.  Depending on which provider implementation you use this will be
+    /// based on either the cookie value or the subdomain on the request.
+    /// </summary>
+    ICountrySite CountrySiteInfo { get; }
+
+    /// <summary>
     /// Returns the country site of the request. Depending on which provider implementation you use this will be
     /// based on either the cookie value or the subdomain on the request.
     /// </summary>
     string CountrySite { get; }
+
+    /// <summary>
+    /// Returns the IMarket object that represents the Market for the request
+    /// </summary>
+    IMarket MarketInfo { get; }
 
     /// <summary>
     /// Returns true if the request is on the global (non-country) site. This will return www if you are on the "es" site
@@ -84,10 +101,10 @@ namespace Atlantis.Framework.Providers.Localization.Interface
     bool IsValidCountrySubdomain(string countryCode);
 
     /// <summary>
-    /// Sets the language for the request
+    /// Sets the Market for the request
     /// </summary>
-    /// <param name="language">langage to set as the language for the request</param>
-    void SetLanguage(string language);
+    /// <param name="language">Market ID to set as the Market for the request</param>
+    void SetMarket(string marketId);
 
     /// <summary>
     /// Returns the CultureInfo of the current request.

@@ -14,8 +14,7 @@ namespace Atlantis.Framework.Providers.Localization.Tests
   {
     public CountrySiteCookieTests()
     {
-      // This line ensures the Localization Provider assembly is loaded 
-      int requestType = LocalizationProviderEngineRequests.ValidCountrySubdomains;
+      
     }
 
     private PrivateObject NewCountrySiteCookieClass(object[] constructorArgs)

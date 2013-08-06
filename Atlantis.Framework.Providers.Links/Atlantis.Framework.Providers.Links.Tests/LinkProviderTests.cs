@@ -1,6 +1,7 @@
 ﻿using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.Interface.Links;
 using Atlantis.Framework.Providers.Interface.ProviderContainer;
+using Atlantis.Framework.Providers.Localization.Interface;
 using Atlantis.Framework.Testing.MockHttpContext;
 using Atlantis.Framework.Testing.MockProviders;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -9,6 +10,7 @@ using System.Collections.Specialized;
 using System.Linq;
 using System.Net;
 using System.Web;
+using Atlantis.Framework.Providers.Links.Tests.Mocks;
 
 namespace Atlantis.Framework.Providers.Links.Tests
 {
@@ -16,6 +18,8 @@ namespace Atlantis.Framework.Providers.Links.Tests
   [DeploymentItem("atlantis.config")]
   [DeploymentItem("Interop.gdDataCacheLib.dll")]
   [DeploymentItem("Atlantis.Framework.LinkInfo.Impl.dll")]
+  [DeploymentItem("Atlantis.Framework.DataCacheGeneric.Impl.dll")]
+  [DeploymentItem("Atlantis.Framework.AppSettings.Impl.dll")]
   public class LinkProviderTests
   {
     private ILinkProvider NewLinkProvider(string url, int privateLabelId, string shopperId, bool isInternal = false, bool isManager = false, IPAddress userHostAddress = null)
@@ -41,6 +45,7 @@ namespace Atlantis.Framework.Providers.Links.Tests
       HttpProviderContainer.Instance.RegisterProvider<ISiteContext, MockSiteContext>();
       HttpProviderContainer.Instance.RegisterProvider<IShopperContext, MockShopperContext>();
       HttpProviderContainer.Instance.RegisterProvider<IManagerContext, MockManagerContext>();
+      HttpProviderContainer.Instance.RegisterProvider<ILocalizationProvider, MockLocalizationProvider>();
       HttpProviderContainer.Instance.RegisterProvider<ILinkProvider, LinkProvider>();
 
       if (!isManager)
@@ -53,6 +58,11 @@ namespace Atlantis.Framework.Providers.Links.Tests
       return linkProvider;
     }
 
+    private ILocalizationProvider LocalizationProvider
+    {
+      get { return HttpProviderContainer.Instance.Resolve<ILocalizationProvider>(); }
+    }
+
     [TestMethod]
     public void LowerCaseForSEOFullUrlIgnored()
     {
@@ -61,6 +71,10 @@ namespace Atlantis.Framework.Providers.Links.Tests
 
       string mixedCaseLink = links.GetUrl("SITEROOT", "TEST.AsPx");
       Assert.AreNotEqual(mixedCaseLink.ToLowerInvariant(), mixedCaseLink);
+
+      LocalizationProvider.RewrittenUrlLanguage = "es";
+      mixedCaseLink = links.GetUrl("SITEROOT", "TEST.AsPx");
+      Assert.IsFalse(mixedCaseLink.ToLowerInvariant().Contains("/es/"));
     }
 
     [TestMethod]
@@ -71,13 +85,32 @@ namespace Atlantis.Framework.Providers.Links.Tests
 
       string mixedCaseLink = links.GetRelativeUrl("/tesT.aspx");
       Assert.AreNotEqual(mixedCaseLink.ToLowerInvariant(), mixedCaseLink);
+      Assert.IsFalse(mixedCaseLink.ToLowerInvariant().Contains("/es/"));
 
       LinkProvider.LowerCaseRelativeUrlsForSEO = true;
       string lowerCaseLink = links.GetRelativeUrl("/tesT.aspx");
       Assert.AreEqual(lowerCaseLink.ToLowerInvariant(), lowerCaseLink);
+      Assert.IsFalse(lowerCaseLink.ToLowerInvariant().Contains("/es/"));
 
       string mixedCaseQuery = links.GetRelativeUrl("/test.aspx", "ISC", "Blue");
       Assert.IsTrue(mixedCaseQuery.Contains("ISC=Blue"));
+      Assert.IsFalse(mixedCaseQuery.ToLowerInvariant().Contains("/es/"));
+
+      LinkProvider.LowerCaseRelativeUrlsForSEO = false;
+      LocalizationProvider.RewrittenUrlLanguage = "es";
+
+      mixedCaseLink = links.GetRelativeUrl("/tesT.aspx");
+      Assert.AreNotEqual(mixedCaseLink.ToLowerInvariant(), mixedCaseLink);
+      Assert.IsTrue(mixedCaseLink.ToLowerInvariant().Contains("/es/"));
+
+      LinkProvider.LowerCaseRelativeUrlsForSEO = true;
+      lowerCaseLink = links.GetRelativeUrl("/tesT.aspx");
+      Assert.AreEqual(lowerCaseLink.ToLowerInvariant(), lowerCaseLink);
+      Assert.IsTrue(lowerCaseLink.ToLowerInvariant().Contains("/es/"));
+
+      mixedCaseQuery = links.GetRelativeUrl("/test.aspx", "ISC", "Blue");
+      Assert.IsTrue(mixedCaseQuery.Contains("ISC=Blue"));
+      Assert.IsTrue(mixedCaseQuery.ToLowerInvariant().Contains("/es/"));
     }
 
 
@@ -115,6 +148,38 @@ namespace Atlantis.Framework.Providers.Links.Tests
       url = links.GetRelativeUrl("/test.aspx");
       Assert.IsFalse(url.Contains("prog_id="));
       LinkProviderCommonParameters.HandleProgId = true;
+
+      links = NewLinkProvider("http://siteadmin.debug.intranet.gdg/default.aspx?prog_id=hunter", 1724, string.Empty);
+      LocalizationProvider.RewrittenUrlLanguage = "es";
+      url = links.GetRelativeUrl("/test.aspx");
+      Assert.IsTrue(url.Contains("prog_id="));
+      Assert.IsTrue(url.Contains("/es/"));
+
+      links = NewLinkProvider("http://siteadmin.debug.intranet.gdg/default.aspx?prog_id=hunter", 1, string.Empty);
+      LocalizationProvider.RewrittenUrlLanguage = "es";
+      url = links.GetRelativeUrl("/test.aspx");
+      Assert.IsFalse(url.Contains("prog_id="));
+      Assert.IsTrue(url.Contains("/es/"));
+
+      links = NewLinkProvider("http://siteadmin.debug.intranet.gdg/default.aspx?prog_id=hunter", 2, string.Empty);
+      LocalizationProvider.RewrittenUrlLanguage = "es";
+      url = links.GetRelativeUrl("/test.aspx");
+      Assert.IsFalse(url.Contains("prog_id="));
+      Assert.IsTrue(url.Contains("/es/"));
+
+      links = NewLinkProvider("http://siteadmin.debug.intranet.gdg/default.aspx?prog_id=hunter", 1387, string.Empty);
+      LocalizationProvider.RewrittenUrlLanguage = "es";
+      url = links.GetRelativeUrl("/test.aspx");
+      Assert.IsFalse(url.Contains("prog_id="));
+      Assert.IsTrue(url.Contains("/es/"));
+
+      LinkProviderCommonParameters.HandleProgId = false;
+      links = NewLinkProvider("http://siteadmin.debug.intranet.gdg/default.aspx?prog_id=hunter", 1724, string.Empty);
+      LocalizationProvider.RewrittenUrlLanguage = "es";
+      url = links.GetRelativeUrl("/test.aspx");
+      Assert.IsFalse(url.Contains("prog_id="));
+      LinkProviderCommonParameters.HandleProgId = true;
+      Assert.IsTrue(url.Contains("/es/"));
     }
 
     [TestMethod]
@@ -123,6 +188,12 @@ namespace Atlantis.Framework.Providers.Links.Tests
       ILinkProvider links = NewLinkProvider("http://siteadmin.debug.intranet.gdg/default.aspx", 1724, string.Empty);
       string url = links.GetFullUrl("/test.aspx");
       Assert.IsTrue(url.Contains("prog_id="));
+
+      LocalizationProvider.RewrittenUrlLanguage = "es";
+
+      url = links.GetFullUrl("/test.aspx");
+      Assert.IsTrue(url.Contains("prog_id="));
+      Assert.IsTrue(url.Contains("/es/"));
     }
 
     [TestMethod]
@@ -141,6 +212,21 @@ namespace Atlantis.Framework.Providers.Links.Tests
       Assert.IsFalse(url.Contains("isc="));
 
       LinkProviderCommonParameters.HandleISC = true;
+
+      LocalizationProvider.RewrittenUrlLanguage = "es";
+
+      url = links.GetRelativeUrl("/test.aspx");
+      Assert.IsTrue(url.Contains("isc=blue"));
+      Assert.IsTrue(url.Contains("/es/"));
+
+      url = links.GetRelativeUrl("/test.aspx", "isc", "green");
+      Assert.IsTrue(url.Contains("isc=green"));
+      Assert.IsTrue(url.Contains("/es/"));
+
+      LinkProviderCommonParameters.HandleISC = false;
+      url = links.GetRelativeUrl("/test.aspx");
+      Assert.IsFalse(url.Contains("isc="));
+      Assert.IsTrue(url.Contains("/es/"));
     }
 
     private static bool _handleActive = false;
@@ -163,6 +249,10 @@ namespace Atlantis.Framework.Providers.Links.Tests
       string url = links.GetRelativeUrl("/test.aspx");
       Assert.IsTrue(url.Contains("extra=true"));
 
+      LocalizationProvider.RewrittenUrlLanguage = "es";
+
+      url = links.GetRelativeUrl("/test.aspx");
+      Assert.IsTrue(url.Contains("/es/"));
     }
 
     [TestMethod]
@@ -172,6 +262,12 @@ namespace Atlantis.Framework.Providers.Links.Tests
       _handleActive = true;
       string url = links.GetRelativeUrl("/test.aspx", HttpContext.Current.Request.QueryString);
       Assert.IsFalse(url.Contains('<'));
+
+      LocalizationProvider.RewrittenUrlLanguage = "es";
+
+      url = links.GetRelativeUrl("/test.aspx", HttpContext.Current.Request.QueryString);
+      Assert.IsFalse(url.Contains('<'));
+      Assert.IsTrue(url.Contains("/es/"));
     }
 
     [TestMethod]
@@ -182,6 +278,12 @@ namespace Atlantis.Framework.Providers.Links.Tests
 
       string doubleLink = links.GetUrl("SITEROOT", "/default.aspx");
       Assert.AreEqual(doubleLink.ToLowerInvariant(), homePage.ToLowerInvariant());
+
+      LocalizationProvider.RewrittenUrlLanguage = "es";
+
+      doubleLink = links.GetUrl("SITEROOT", "/default.aspx");
+      Assert.AreEqual(doubleLink.ToLowerInvariant(), homePage.ToLowerInvariant());
+      Assert.IsFalse(doubleLink.Contains("/es/"));
     }
 
     void ValidateUseC3ImageUrlsIsOn()
@@ -208,6 +310,29 @@ namespace Atlantis.Framework.Providers.Links.Tests
 
       ValidateUseC3ImageUrlsIsOn();
       Assert.IsTrue(c3url.Contains(managerUrl));
+
+      links = NewLinkProvider("http://www.godaddy.com/default.aspx", 1, string.Empty, true);
+
+      LocalizationProvider.RewrittenUrlLanguage = "es";
+
+      nonManagerUrl = links["EXTERNALIMAGEURL"];
+      Assert.IsFalse(nonManagerUrl.Contains("/es/"));
+      managerUrl = links["EXTERNALIMAGEURL.C3"];
+      Assert.IsFalse(managerUrl.Contains("/es/"));
+
+      Assert.AreNotEqual(nonManagerUrl, managerUrl);
+
+      url = links.ImageRoot;
+      Assert.IsTrue(url.Contains(nonManagerUrl));
+      Assert.IsFalse(url.Contains("/es/"));
+
+      links = NewLinkProvider("http://www.godaddy.com/default.aspx", 1, string.Empty, true, true);
+      LocalizationProvider.RewrittenUrlLanguage = "es";
+      c3url = links.ImageRoot;
+      Assert.IsFalse(url.Contains("/es/"));
+
+      ValidateUseC3ImageUrlsIsOn();
+      Assert.IsTrue(c3url.Contains(managerUrl));
     }
 
     [TestMethod]
@@ -225,6 +350,25 @@ namespace Atlantis.Framework.Providers.Links.Tests
 
       links = NewLinkProvider("http://www.godaddy.com/default.aspx", 1, string.Empty, true, true);
       string c3url = links.CssRoot;
+
+      ValidateUseC3ImageUrlsIsOn();
+      Assert.IsTrue(c3url.Contains(managerUrl));
+
+      links = NewLinkProvider("http://www.godaddy.com/default.aspx", 1, string.Empty, true);
+      LocalizationProvider.RewrittenUrlLanguage = "es";
+
+      nonManagerUrl = links["EXTERNALCSSURL"];
+      managerUrl = links["EXTERNALCSSURL.C3"];
+
+      Assert.AreNotEqual(nonManagerUrl, managerUrl);
+
+      url = links.CssRoot;
+      Assert.IsTrue(url.Contains(nonManagerUrl));
+
+      links = NewLinkProvider("http://www.godaddy.com/default.aspx", 1, string.Empty, true, true);
+      LocalizationProvider.RewrittenUrlLanguage = "es";
+
+      c3url = links.CssRoot;
 
       ValidateUseC3ImageUrlsIsOn();
       Assert.IsTrue(c3url.Contains(managerUrl));
@@ -248,6 +392,24 @@ namespace Atlantis.Framework.Providers.Links.Tests
 
       ValidateUseC3ImageUrlsIsOn();
       Assert.IsTrue(c3url.Contains(managerUrl));
+
+      links = NewLinkProvider("http://www.godaddy.com/default.aspx", 1, string.Empty, true);
+      LocalizationProvider.RewrittenUrlLanguage = "es";
+
+      nonManagerUrl = links["EXTERNALJSURL"];
+      managerUrl = links["EXTERNALJSURL.C3"];
+
+      Assert.AreNotEqual(nonManagerUrl, managerUrl);
+
+      url = links.JavascriptRoot;
+      Assert.IsTrue(url.Contains(nonManagerUrl));
+
+      links = NewLinkProvider("http://www.godaddy.com/default.aspx", 1, string.Empty, true, true);
+      LocalizationProvider.RewrittenUrlLanguage = "es";
+      c3url = links.JavascriptRoot;
+
+      ValidateUseC3ImageUrlsIsOn();
+      Assert.IsTrue(c3url.Contains(managerUrl));
     }
 
     [TestMethod]
@@ -265,6 +427,24 @@ namespace Atlantis.Framework.Providers.Links.Tests
 
       links = NewLinkProvider("http://www.godaddy.com/default.aspx", 1, string.Empty, true, true);
       string c3url = links.LargeImagesRoot;
+
+      ValidateUseC3ImageUrlsIsOn();
+      Assert.IsTrue(c3url.Contains(managerUrl));
+
+      links = NewLinkProvider("http://www.godaddy.com/default.aspx", 1, string.Empty, true);
+      LocalizationProvider.RewrittenUrlLanguage = "es";
+
+      nonManagerUrl = links["EXTERNALBIGIMAGE1URL"];
+      managerUrl = links["EXTERNALBIGIMAGE1URL.C3"];
+
+      Assert.AreNotEqual(nonManagerUrl, managerUrl);
+
+      url = links.LargeImagesRoot;
+      Assert.IsTrue(url.Contains(nonManagerUrl));
+
+      links = NewLinkProvider("http://www.godaddy.com/default.aspx", 1, string.Empty, true, true);
+      LocalizationProvider.RewrittenUrlLanguage = "es";
+      c3url = links.LargeImagesRoot;
 
       ValidateUseC3ImageUrlsIsOn();
       Assert.IsTrue(c3url.Contains(managerUrl));
@@ -288,6 +468,24 @@ namespace Atlantis.Framework.Providers.Links.Tests
 
       ValidateUseC3ImageUrlsIsOn();
       Assert.IsTrue(c3url.Contains(managerUrl));
+
+      links = NewLinkProvider("http://www.godaddy.com/default.aspx", 1, string.Empty, true);
+      LocalizationProvider.RewrittenUrlLanguage = "es";
+
+      nonManagerUrl = links["EXTERNALBIGIMAGE2URL"];
+      managerUrl = links["EXTERNALBIGIMAGE2URL.C3"];
+
+      Assert.AreNotEqual(nonManagerUrl, managerUrl);
+
+      url = links.PresentationCentralImagesRoot;
+      Assert.IsTrue(url.Contains(nonManagerUrl));
+
+      links = NewLinkProvider("http://www.godaddy.com/default.aspx", 1, string.Empty, true, true);
+      LocalizationProvider.RewrittenUrlLanguage = "es";
+      c3url = links.PresentationCentralImagesRoot;
+
+      ValidateUseC3ImageUrlsIsOn();
+      Assert.IsTrue(c3url.Contains(managerUrl));
     }
 
     [TestMethod]
@@ -306,6 +504,23 @@ namespace Atlantis.Framework.Providers.Links.Tests
       IPAddress indiaP3VMwareAddress = IPAddress.Parse("172.29.33.45");
       links = NewLinkProvider("http://www.godaddy.com/default.aspx", 1, string.Empty, true, true, indiaP3VMwareAddress);
       string c3url = links.CssRoot;
+      Assert.AreNotEqual(url, c3url);
+
+      links = NewLinkProvider("http://www.godaddy.com/default.aspx", 1, string.Empty, true);
+      LocalizationProvider.RewrittenUrlLanguage = "es";
+
+      nonManagerUrl = links["EXTERNALCSSURL"];
+      managerUrl = links["EXTERNALCSSURL.C3"];
+
+      Assert.AreNotEqual(nonManagerUrl, managerUrl);
+
+      url = links.CssRoot;
+      Assert.IsTrue(url.Contains(nonManagerUrl));
+
+      indiaP3VMwareAddress = IPAddress.Parse("172.29.33.45");
+      links = NewLinkProvider("http://www.godaddy.com/default.aspx", 1, string.Empty, true, true, indiaP3VMwareAddress);
+      LocalizationProvider.RewrittenUrlLanguage = "es";
+      c3url = links.CssRoot;
       Assert.AreNotEqual(url, c3url);
     }
 

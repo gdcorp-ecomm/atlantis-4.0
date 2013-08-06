@@ -6,12 +6,14 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Text;
 using System.Web;
+using Atlantis.Framework.Providers.Localization.Interface;
 
 namespace Atlantis.Framework.Providers.Links
 {
   public class LinkProvider : ProviderBase, ILinkProvider
   {
     private static bool _allowRelativeUrls = false;
+
     /// <summary>
     /// Setting this to true will allow the GetRelativeUrl methods to return relative urls "/example.aspx" instead of fully qualified urls
     /// </summary>
@@ -55,6 +57,8 @@ namespace Atlantis.Framework.Providers.Links
     private readonly Dictionary<int, Dictionary<string, string>> _linkMaps;
     private readonly ISiteContext _siteContext;
     private Lazy<bool> _useC3ImageUrls;
+    private Lazy<ILocalizationProvider> _localizationProvider;
+    //private Lazy<string> _urlLanguagePath; 
 
     private enum UrlRootMode
     {
@@ -70,6 +74,9 @@ namespace Atlantis.Framework.Providers.Links
       _linkMaps = new Dictionary<int, Dictionary<string, string>>(1);
       _siteContext = container.Resolve<ISiteContext>();
       _useC3ImageUrls = new Lazy<bool>(() => { return GetUseC3ImageUrls(); });
+      _localizationProvider = new Lazy<ILocalizationProvider>(
+        () => { return Container.CanResolve<ILocalizationProvider>() ? Container.Resolve<ILocalizationProvider>() : null; });
+      //_urlLanguagePath = new Lazy<string>(GetUrlLanguagePath);
     }
 
     private bool GetUseC3ImageUrls()
@@ -100,6 +107,11 @@ namespace Atlantis.Framework.Providers.Links
     {
       return _siteContext.IsRequestInternal &&
              (ContextHost.Contains(".debug.") || ContextHost.StartsWith("debug."));
+    }
+
+    private bool IsLocalImageServerUrl(string relativePath)
+    {
+      return (IsDebugInternal() && relativePath.StartsWith("~/_ImageServer/"));
     }
 
     private bool IsSecureConnection
@@ -235,8 +247,20 @@ namespace Atlantis.Framework.Providers.Links
         urlStringBuilder.Append(DefaultRootLink);
       }
 
+      AppendUrlLanguage(urlStringBuilder, relativePath);
+
       urlStringBuilder.Append(ResolveUrl(relativePath));
+
       return urlStringBuilder;
+    }
+
+    private void AppendUrlLanguage(StringBuilder urlStringBuilder, string relativePath)
+    {
+      if (_localizationProvider.Value != null && _localizationProvider.Value.RewrittenUrlLanguage != String.Empty && !IsLocalImageServerUrl(relativePath)) 
+      {
+        urlStringBuilder.Append("/");
+        urlStringBuilder.Append(_localizationProvider.Value.RewrittenUrlLanguage);
+      }
     }
 
     private static string ResolveUrl(string url)

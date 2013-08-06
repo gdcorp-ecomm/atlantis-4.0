@@ -10,6 +10,7 @@ using System.Text;
 using System.Web;
 using Atlantis.Framework.EcommPricing.Interface;
 using Atlantis.Framework.Currency.Interface;
+using Atlantis.Framework.Providers.Localization.Interface;
 
 namespace Atlantis.Framework.Providers.Currency
 {
@@ -43,6 +44,7 @@ namespace Atlantis.Framework.Providers.Currency
     private Lazy<IShopperPreferencesProvider> _shopperPreferences;
     private Lazy<CurrencyTypesResponseData> _currencyData;
     private Lazy<MultiCurrencyContextsResponseData> _multiCurrencyContexts;
+    private Lazy<int> _priceGroupId; 
 
     private ISiteContext SiteContext
     {
@@ -58,7 +60,7 @@ namespace Atlantis.Framework.Providers.Currency
     {
       get { return _shopperPreferences.Value; }
     }
-
+    
     private readonly Dictionary<string, string> _priceFormatCache;
 
     private ICurrencyInfo _selectedDisplayCurrencyInfo;
@@ -74,13 +76,15 @@ namespace Atlantis.Framework.Providers.Currency
       _siteContext = new Lazy<ISiteContext>(() => { return Container.Resolve<ISiteContext>(); });
       _shopperContext = new Lazy<IShopperContext>(() => { return Container.Resolve<IShopperContext>(); });      
       _shopperPreferences = new Lazy<IShopperPreferencesProvider>(
-        () => { return Container.CanResolve<IShopperPreferencesProvider>() ? Container.Resolve<IShopperPreferencesProvider>() : null; });
-      
+        () => { return Container.CanResolve<IShopperPreferencesProvider>() ? Container.Resolve<IShopperPreferencesProvider>() : null; });      
+
       _USDInfo = new Lazy<ICurrencyInfo>(
         () => { return _currencyData.Value[CURRENCY_TYPE_USD]; });
 
       _currencyData = new Lazy<CurrencyTypesResponseData>(GetCurrencyTypes);
       _multiCurrencyContexts = new Lazy<MultiCurrencyContextsResponseData>(GetMultiCurrencyContexts);
+
+      _priceGroupId = new Lazy<int>(GetPriceGroupId);
     }
 
     #region Selected Currency Settings
@@ -246,6 +250,32 @@ namespace Atlantis.Framework.Providers.Currency
 
     #region Pricing Functions
 
+    //private PriceGroupsByCountrySiteResponseData GetPriceGroupsByCountrySite()
+    //{
+    //  PriceGroupsByCountrySiteResponseData result = null;
+    //  var requestData = new PriceGroupsByCountrySiteRequestData();
+    //  var responseData = (PriceGroupsByCountrySiteResponseData)DataCache.DataCache.GetProcessRequest(requestData, CurrencyProviderEngineRequests.PriceGroupsyCountrySiteRequest);
+    //  result = responseData;
+    //  return result;
+    //}
+
+    public int PriceGroupId
+    {
+      get { return _priceGroupId.Value; }
+    }
+
+    private int GetPriceGroupId()
+    {
+      int result = 0;
+      ILocalizationProvider localizationProvider = Container.CanResolve<ILocalizationProvider>() ? Container.Resolve<ILocalizationProvider>() : null;
+
+      if (localizationProvider != null)
+      {
+        result = localizationProvider.CountrySiteInfo != null ? localizationProvider.CountrySiteInfo.PriceGroupId : 0;
+      }
+      return result;
+    }
+
     #region Logging Missing Prices
 
     private void LogMissingCatalogPrice(string call, int unifiedProductId, int shopperPriceType, int quantity, int privateLabelId, string currencyType)
@@ -275,7 +305,7 @@ namespace Atlantis.Framework.Providers.Currency
 
     private ICurrencyPrice LookupListPriceInt(int unifiedProductId, int shopperPriceType, ICurrencyInfo transactionalCurrencyInfo)
     {
-      var listPriceRequestData = new ListPriceRequestData(unifiedProductId, SiteContext.PrivateLabelId, shopperPriceType, transactionalCurrencyInfo.CurrencyType);
+      var listPriceRequestData = new ListPriceRequestData(unifiedProductId, SiteContext.PrivateLabelId, shopperPriceType, transactionalCurrencyInfo.CurrencyType, PriceGroupId);
       var listPriceResponseData = (ListPriceResponseData)DataCache.DataCache.GetProcessRequest(listPriceRequestData, CurrencyProviderEngineRequests.ListPriceRequest);
 
       CurrencyPriceType currencyPriceType = CurrencyPriceType.Transactional;
@@ -350,7 +380,7 @@ namespace Atlantis.Framework.Providers.Currency
         int pricingProviderPrice;
 
         if (pricingProvider.GetCurrentPrice(unifiedProductId, shopperPriceType, transactionCurrency.CurrencyType,
-                                            out pricingProviderPrice, isc))
+                                            out pricingProviderPrice, isc, PriceGroupId))
         {
           currentPrice = new CurrencyPrice(pricingProviderPrice, transactionCurrency, CurrencyPriceType.Transactional);
         }
@@ -371,7 +401,7 @@ namespace Atlantis.Framework.Providers.Currency
 
     private ICurrencyPrice LookupCurrentPriceByQuantityInt(int unifiedProductId, int quantity, int shopperPriceType, ICurrencyInfo transactionalCurrencyInfo)
     {
-      var requestData = new PromoPriceRequestData(unifiedProductId, SiteContext.PrivateLabelId, quantity, shopperPriceType, transactionalCurrencyInfo.CurrencyType);
+      var requestData = new PromoPriceRequestData(unifiedProductId, SiteContext.PrivateLabelId, quantity, shopperPriceType, transactionalCurrencyInfo.CurrencyType, PriceGroupId);
       var responseData = (PromoPriceResponseData)DataCache.DataCache.GetProcessRequest(requestData, CurrencyProviderEngineRequests.PromoPriceRequest);
 
       CurrencyPriceType currencyPriceType = CurrencyPriceType.Transactional;
@@ -437,7 +467,7 @@ namespace Atlantis.Framework.Providers.Currency
         isc = _siteContext.Value.ISC;
       }
 
-      var requestData = new ProductIsOnSaleRequestData(unifiedProductId, SiteContext.PrivateLabelId, shopperPriceType, transactionCurrency.CurrencyType);
+      var requestData = new ProductIsOnSaleRequestData(unifiedProductId, SiteContext.PrivateLabelId, shopperPriceType, transactionCurrency.CurrencyType, PriceGroupId);
       var responseData = (ProductIsOnSaleResponseData)DataCache.DataCache.GetProcessRequest(requestData, CurrencyProviderEngineRequests.ProductIsOnSaleRequest);
       bool result = responseData.IsOnSale;
       
@@ -445,7 +475,7 @@ namespace Atlantis.Framework.Providers.Currency
       if (Container.TryResolve(out pricingProvider) && pricingProvider.DoesIscAffectPricing(isc))
       {
         int pricingProviderPrice;
-        bool foundIscBasedPrice = pricingProvider.GetCurrentPrice(unifiedProductId, shopperPriceType, transactionCurrency.CurrencyType, out pricingProviderPrice, isc);
+        bool foundIscBasedPrice = pricingProvider.GetCurrentPrice(unifiedProductId, shopperPriceType, transactionCurrency.CurrencyType, out pricingProviderPrice, isc, PriceGroupId);
         
         if (foundIscBasedPrice && pricingProviderPrice > 0)
         {

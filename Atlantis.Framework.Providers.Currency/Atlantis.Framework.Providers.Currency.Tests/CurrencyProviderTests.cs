@@ -7,6 +7,7 @@ using Atlantis.Framework.Providers.Interface.Preferences;
 using Atlantis.Framework.Providers.Interface.Pricing;
 using Atlantis.Framework.Providers.Interface.PromoData;
 using Atlantis.Framework.Providers.Interface.ProviderContainer;
+using Atlantis.Framework.Providers.Interface;
 using Atlantis.Framework.Providers.PromoData;
 using Atlantis.Framework.Testing.MockHttpContext;
 using Atlantis.Framework.Testing.MockProviders;
@@ -14,6 +15,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Web;
 using System.Xml.Linq;
+using Atlantis.Framework.Providers.Localization.Interface;
+using Atlantis.Framework.Providers.Localization;
 
 namespace Atlantis.Framework.Providers.Currency.Tests
 {
@@ -31,11 +34,16 @@ namespace Atlantis.Framework.Providers.Currency.Tests
       return SetContexts(privateLabelId, shopperId, true, false);
     }
 
-    private IProviderContainer SetContexts(int privateLabelId, string shopperId, bool includeShopperPreferences, bool includePromoData, bool includeIscPricing = false)
+    private IProviderContainer SetContexts(int privateLabelId, string shopperId, bool includeShopperPreferences, bool includePromoData, bool includeIscPricing = false, bool includeLocalizationProvider = false)
+    {
+      return SetContexts("http://localhost/default.aspx", privateLabelId, shopperId, includeShopperPreferences, includePromoData, includeIscPricing, includeLocalizationProvider);      
+    }
+
+    private IProviderContainer SetContexts(string url, int privateLabelId, string shopperId, bool includeShopperPreferences, bool includePromoData, bool includeIscPricing = false, bool includeLocalizationProvider = false)
     {
       MockProviderContainer result = new MockProviderContainer();
 
-      MockHttpRequest request = new MockHttpRequest("http://localhost/default.aspx");
+      MockHttpRequest request = new MockHttpRequest(url);
       MockHttpContext.SetFromWorkerRequest(request);
 
       result.RegisterProvider<ISiteContext, MockSiteContext>();
@@ -46,6 +54,8 @@ namespace Atlantis.Framework.Providers.Currency.Tests
       if (includeIscPricing)
       {
         result.RegisterProvider<IPricingProvider, IscPricingProvider>();
+        IPricingProvider provider = result.Resolve<IPricingProvider>();
+        provider.Enabled = true;
       }
 
       if (includeShopperPreferences)
@@ -56,6 +66,11 @@ namespace Atlantis.Framework.Providers.Currency.Tests
       if (includePromoData)
       {
         result.RegisterProvider<IPromoDataProvider, PromoDataProvider>();
+      }
+
+      if (includeLocalizationProvider)
+      {
+        result.RegisterProvider<ILocalizationProvider, CountrySubdomainLocalizationProvider>();
       }
 
       result.SetMockSetting(MockSiteContextSettings.PrivateLabelId, privateLabelId);
@@ -1029,6 +1044,68 @@ namespace Atlantis.Framework.Providers.Currency.Tests
 
       ICurrencyPrice fakePrice = currency.GetCurrentPriceByQuantity(101, 1111, 1, fakeCurrencyInfo);
       Assert.AreEqual(usdPrice.Price, fakePrice.Price);
-    }    
+    }
+
+    [TestMethod]
+    public void PriceGroupsNoLocalizationProviderReturnsZeroPriceGroupIdPricing()
+    {
+      var container = SetContexts(1, "833437");
+      
+      ICurrencyProvider currency = container.Resolve<ICurrencyProvider>();
+      currency.SelectedDisplayCurrencyType = "USD";
+
+      ICurrencyInfo usdInfo = currency.GetCurrencyInfo("USD");
+      ICurrencyInfo euroInfo = currency.GetCurrencyInfo("EUR");
+
+      ICurrencyPrice euroPrice = currency.GetListPrice(101, transactionCurrency: euroInfo);
+      ICurrencyPrice usdPrice = currency.GetListPrice(101);
+
+      ICurrencyPrice euroPriceDDC = currency.GetListPrice(101, 8, euroInfo);
+      ICurrencyPrice usdPriceDDC = currency.GetListPrice(101, 8);
+
+      Assert.IsTrue(euroPrice.CurrencyInfo.Equals(euroInfo));
+      Assert.IsTrue(usdPrice.CurrencyInfo.Equals(usdInfo));
+
+      var requestData = new ListPriceRequestData(101, 1, 0, "USD");
+      var responseData = (ListPriceResponseData)Engine.Engine.ProcessRequest(requestData, CurrencyProviderEngineRequests.ListPriceRequest);
+      Assert.AreEqual(responseData.Price, usdPrice.Price);
+
+      requestData = new ListPriceRequestData(101, 1, 0, "EUR");
+      responseData = (ListPriceResponseData)Engine.Engine.ProcessRequest(requestData, CurrencyProviderEngineRequests.ListPriceRequest);
+      Assert.AreEqual(responseData.Price, euroPrice.Price);
+    }
+
+    [TestMethod]
+    public void PriceGroupsInvalidCountrySiteReturnsZeroPriceGroupIdPricing()
+    {
+      MockProviderContainer container = (MockProviderContainer)SetContexts(1, "833437");
+
+      container.SetMockSetting("Localization.CountrySiteInfo", null);
+
+      container.RegisterProvider<ILocalizationProvider, MockLocalizationProvider>();
+
+      ICurrencyProvider currency = container.Resolve<ICurrencyProvider>();
+      currency.SelectedDisplayCurrencyType = "USD";
+
+      ICurrencyInfo usdInfo = currency.GetCurrencyInfo("USD");
+      ICurrencyInfo euroInfo = currency.GetCurrencyInfo("EUR");
+
+      ICurrencyPrice euroPrice = currency.GetListPrice(101, transactionCurrency: euroInfo);
+      ICurrencyPrice usdPrice = currency.GetListPrice(101);
+
+      ICurrencyPrice euroPriceDDC = currency.GetListPrice(101, 8, euroInfo);
+      ICurrencyPrice usdPriceDDC = currency.GetListPrice(101, 8);
+
+      Assert.IsTrue(euroPrice.CurrencyInfo.Equals(euroInfo));
+      Assert.IsTrue(usdPrice.CurrencyInfo.Equals(usdInfo));
+
+      var requestData = new ListPriceRequestData(101, 1, 0, "USD");
+      var responseData = (ListPriceResponseData)Engine.Engine.ProcessRequest(requestData, CurrencyProviderEngineRequests.ListPriceRequest);
+      Assert.AreEqual(responseData.Price, usdPrice.Price);
+
+      requestData = new ListPriceRequestData(101, 1, 0, "EUR");
+      responseData = (ListPriceResponseData)Engine.Engine.ProcessRequest(requestData, CurrencyProviderEngineRequests.ListPriceRequest);
+      Assert.AreEqual(responseData.Price, euroPrice.Price);
+    }
   }
 }

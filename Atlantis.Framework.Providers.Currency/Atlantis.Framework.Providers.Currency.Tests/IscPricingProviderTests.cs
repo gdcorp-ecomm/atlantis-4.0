@@ -31,6 +31,9 @@ namespace Atlantis.Framework.Providers.Currency.Tests
       HttpProviderContainer.Instance.RegisterProvider<IManagerContext, MockNoManagerContext>();
       HttpProviderContainer.Instance.RegisterProvider<IPricingProvider, IscPricingProvider>();
 
+      IPricingProvider provider = HttpProviderContainer.Instance.Resolve<IPricingProvider>();
+      provider.Enabled = true;
+
       if (includeShopperPreferences)
       {
         HttpProviderContainer.Instance.RegisterProvider<IShopperPreferencesProvider, MockShopperPreference>();
@@ -108,6 +111,25 @@ namespace Atlantis.Framework.Providers.Currency.Tests
       try
       {
         Assert.IsFalse(provider.DoesIscAffectPricing("expired"));
+      }
+      finally
+      {
+        CurrencyProviderEngineRequests.ValidateNonOrderRequest = originalRequestTypeId;
+      }
+    }
+
+    [TestMethod]
+    public void IscPricing()
+    {
+      SetContexts(1, "833437");
+      int originalRequestTypeId = CurrencyProviderEngineRequests.PriceEstimateRequest;
+      IPricingProvider provider = HttpProviderContainer.Instance.Resolve<IPricingProvider>();
+      try
+      {
+        Assert.IsTrue(provider.DoesIscAffectPricing("gfnomeac01"));
+        int price;
+        provider.GetCurrentPrice(101, 0, "USD", out price, "gfnomeac01");
+        Assert.AreEqual(599,price);
       }
       finally
       {

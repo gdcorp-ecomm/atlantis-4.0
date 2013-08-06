@@ -29,7 +29,17 @@ namespace Atlantis.Framework.Providers.Currency.Tests.Mocks
       if (requestData is ProductIsOnSaleRequestData)
         return ProductIsOnSaleHandleRequest(requestData, config);
 
+      if (requestData is PriceGroupsByCountrySiteRequestData)
+        return PriceGroupsByCountrySiteHandleRequest(requestData, config);
+
       return null;
+    }
+
+    private IResponseData PriceGroupsByCountrySiteHandleRequest(RequestData requestData, ConfigElement config)
+    {
+      string mapping = "|US:1||UK:|:99|PH:2|IN:BAD|CA:3|AU:4|XXXX:-99";
+      var response = PriceGroupsByCountrySiteResponseData.FromCountrySiteMapping(mapping);
+      return response;
     }
 
     private IResponseData ProductIsOnSaleHandleRequest(RequestData requestData, ConfigElement config)
@@ -40,7 +50,7 @@ namespace Atlantis.Framework.Providers.Currency.Tests.Mocks
 
     private IResponseData PromoPriceHandleRequest(RequestData requestData, ConfigElement config)
     {
-      var handler = new ProductIsOnSaleRequest();
+      var handler = new PromoPriceRequest();
       return handler.RequestHandler(requestData, config);
     }
 

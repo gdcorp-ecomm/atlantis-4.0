@@ -16,7 +16,7 @@ namespace Atlantis.Framework.Brand.Tests
     [TestMethod]
     public void SimpleGetCompanyNames()
     {
-      CompanyNameRequestData request = new CompanyNameRequestData(GDContextID, 1);
+      CompanyNameRequestData request = new CompanyNameRequestData(GDContextID);
 
       CompanyNameResponseData response = (CompanyNameResponseData)Engine.Engine.ProcessRequest(request, 726);
 
@@ -26,7 +26,7 @@ namespace Atlantis.Framework.Brand.Tests
     [TestMethod]
     public void PrivateLabelCompanyNames()
     {
-      CompanyNameRequestData request = new CompanyNameRequestData(PLContextID, PrivateLabelID);
+      CompanyNameRequestData request = new CompanyNameRequestData(PLContextID);
 
       CompanyNameResponseData response = (CompanyNameResponseData)Engine.Engine.ProcessRequest(request, 726);
 

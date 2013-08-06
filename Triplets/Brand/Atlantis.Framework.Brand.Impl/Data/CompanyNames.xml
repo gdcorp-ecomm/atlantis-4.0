@@ -1,30 +1,30 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <CompanyNames>
   <CompanyName ContextId="0">
-    <Name Key="NameDBP" Value="Domains By Proxy" />
-    <Name Key="NameDBPDotCom" Value="DomainsByProxy.com" />
-    <Name Key="NameDBPLegal" Value="Domains By Proxy, LLC" />
-    <Name Key="NameParentCompanyLegal" Value="GoDaddy Operating Company, LLC" />
+    <Name Key="dbpname" Value="Domains By Proxy" />
+    <Name Key="dbpdotcom" Value="DomainsByProxy.com" />
+    <Name Key="dbplegal" Value="Domains By Proxy, LLC" />
+    <Name Key="parentcompanylegal" Value="GoDaddy Operating Company, LLC" />
   </CompanyName>
 
   <CompanyName ContextId="1">
-    <Name Key="Name" Value="GoDaddy" />
-    <Name Key="NameDotCom" Value="GoDaddy.com" />
-    <Name Key="NameLegal" Value="GoDaddy, LLC" />
-    <Name Key="NameParentCompany" Value="The GoDaddy Group" />
-    <Name Key="NameTwitter" Value="@Godaddy" />
+    <Name Key="name" Value="GoDaddy" />
+    <Name Key="dotcom" Value="GoDaddy.com" />
+    <Name Key="legal" Value="GoDaddy, LLC" />
+    <Name Key="parentcompany" Value="The GoDaddy Group" />
+    <Name Key="twitter" Value="@Godaddy" />
   </CompanyName>
 
   <CompanyName ContextId="2">
-    <Name Key="ShortName" Value="Wild West" />
-    <Name Key="Name" Value="Wild West Domains" />
-    <Name Key="NameDotCom" Value="WildWestDomains.com" />
-    <Name Key="NameLegal" Value="Wild West Domains, LLC" />
+    <Name Key="shortname" Value="Wild West" />
+    <Name Key="name" Value="Wild West Domains" />
+    <Name Key="dotcom" Value="WildWestDomains.com" />
+    <Name Key="legal" Value="Wild West Domains, LLC" />
   </CompanyName>
 
   <CompanyName ContextId="5">
-    <Name Key="Name" Value="Blue Razor" />
-    <Name Key="NameDotCom" Value="BlueRazor.com" />
-    <Name Key="NameLegal" Value="Blue Razor Domains, LLC" />
+    <Name Key="name" Value="Blue Razor" />
+    <Name Key="dotcom" Value="BlueRazor.com" />
+    <Name Key="legal" Value="Blue Razor Domains, LLC" />
   </CompanyName>
 </CompanyNames>

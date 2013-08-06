@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Xml.Linq;
 using Atlantis.Framework.Interface;
 
@@ -69,6 +70,35 @@ namespace Atlantis.Framework.Brand.Interface
     public Dictionary<string, Dictionary<string, string>> ProductLineNames
     {
       get { return _productNameDict; }
+    }
+
+    public string GetName(string productLineKey, int contextId)
+    {
+      string productLineName = String.Empty;
+
+      Dictionary<string, string> productLineValueDict;
+
+      ProductLineNames.TryGetValue(productLineKey, out productLineValueDict);
+
+      if (productLineValueDict != null && productLineValueDict.Count > 0)
+      {
+        if (contextId != 0)
+        {
+          productLineValueDict.TryGetValue("override", out productLineName);
+
+          if (String.IsNullOrEmpty(productLineName))
+          {
+            productLineValueDict.TryGetValue("default", out productLineName);
+          }
+        }
+
+        else
+        {
+          productLineValueDict.TryGetValue("default", out productLineName);
+        }
+      }
+
+      return productLineName ?? String.Empty;
     }
 
     private ProductLineNameResponseData(Dictionary<string, Dictionary<string, string>> productLineList)

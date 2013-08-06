@@ -9,12 +9,9 @@ namespace Atlantis.Framework.Brand.Interface
     private AtlantisException _exception;
     private Dictionary<string, string> _companyDict;
 
-    private const int ResellerContextId = 6;
-    private const int SiteName = 0;
-
     public static CompanyNameResponseData Empty { get; private set; }
 
-    public static CompanyNameResponseData FromCompanyNameXml(string companyNameXml, int contextId, int privateLabelId)
+    public static CompanyNameResponseData FromCompanyNameXml(string companyNameXml, int contextId)
     {
       var companyNamesDoc = XDocument.Parse(companyNameXml);
       var companyDict = new Dictionary<string, string>();
@@ -66,16 +63,6 @@ namespace Atlantis.Framework.Brand.Interface
         }
       }
 
-      if (contextId == ResellerContextId)
-      {
-        var siteName = DataCache.DataCache.GetPLData(privateLabelId, SiteName);
-
-        companyDict.Add("Name", siteName);
-        companyDict.Add("NameDotCom", siteName);
-        companyDict.Add("NameLegal", siteName);
-        companyDict.Add("NameParentCompany", siteName);
-      }
-
       return new CompanyNameResponseData(companyDict);
       }
 
@@ -84,14 +71,17 @@ namespace Atlantis.Framework.Brand.Interface
       Empty = new CompanyNameResponseData(new Dictionary<string, string>());
     }
 
-    private CompanyNameResponseData(Dictionary<string, string> companyDict)
-    {
-      _companyDict = companyDict;
-    }
-
     public Dictionary<string, string> CompanyDict
     {
       get { return _companyDict; }
+    }
+
+    public string GetName(string companyPropertyKey)
+    {
+      string companyValue;
+      CompanyDict.TryGetValue(companyPropertyKey, out companyValue);
+
+      return companyValue ?? string.Empty;
     }
 
     public string ToXML()
@@ -110,9 +100,15 @@ namespace Atlantis.Framework.Brand.Interface
       return _exception;
     }
 
+    private CompanyNameResponseData(Dictionary<string, string> companyDict)
+    {
+      _companyDict = companyDict;
+    }
+
     private CompanyNameResponseData(AtlantisException exception)
     {
       _exception = exception;
     }
+
   }
 }

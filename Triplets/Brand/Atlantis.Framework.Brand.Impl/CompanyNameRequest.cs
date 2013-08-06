@@ -13,10 +13,10 @@ namespace Atlantis.Framework.Brand.Impl
 
       try
       {
-        CompanyNameRequestData compnayNameRequest = (CompanyNameRequestData)requestData;
+        CompanyNameRequestData companyNameRequest = (CompanyNameRequestData)requestData;
         string companyNamesXml = CompanyNamesData.CompanyNamesXml;
 
-        result = CompanyNameResponseData.FromCompanyNameXml(companyNamesXml, compnayNameRequest.ContextId, compnayNameRequest.PrivateLabelId);
+        result = CompanyNameResponseData.FromCompanyNameXml(companyNamesXml, companyNameRequest.ContextId);
       }
       catch (Exception ex)
       {

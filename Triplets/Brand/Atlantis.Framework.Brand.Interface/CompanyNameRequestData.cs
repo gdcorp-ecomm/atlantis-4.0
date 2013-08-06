@@ -1,21 +1,20 @@
-﻿using Atlantis.Framework.Interface;
+﻿using System.Globalization;
+using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.Brand.Interface
 {
   public class CompanyNameRequestData : RequestData
   {
     public int ContextId { get; private set; }
-    public int PrivateLabelId { get; private set; }
 
-    public CompanyNameRequestData(int contextId, int privateLabelId)
+    public CompanyNameRequestData(int contextId)
     {
       ContextId = contextId;
-      PrivateLabelId = privateLabelId;
     }
 
     public override string GetCacheMD5()
     {
-      return "companyNames";
+      return ContextId.ToString(CultureInfo.InvariantCulture);
     }
 
     public override string ToXML()

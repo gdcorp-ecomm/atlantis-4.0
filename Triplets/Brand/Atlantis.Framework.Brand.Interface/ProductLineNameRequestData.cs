@@ -1,4 +1,5 @@
-﻿using Atlantis.Framework.Interface;
+﻿using System.Globalization;
+using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.Brand.Interface
 {
@@ -13,7 +14,7 @@ namespace Atlantis.Framework.Brand.Interface
 
     public override string GetCacheMD5()
     {
-      return "productLineNames";
+      return ContextId.ToString(CultureInfo.InvariantCulture);
     }
 
     public override string ToXML()

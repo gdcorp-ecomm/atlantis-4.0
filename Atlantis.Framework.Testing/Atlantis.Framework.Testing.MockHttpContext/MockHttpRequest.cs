@@ -40,6 +40,11 @@ namespace Atlantis.Framework.Testing.MockHttpContext
       _cookieHeaderValue = cookieHeaderBuilder.ToString();
     }
 
+    public override bool IsSecure()
+    {
+      return _uri.Scheme == "https";
+    }
+
     public void MockHeaderValues(IEnumerable<KeyValuePair<string, string>> headerValues)
     {
       _mockHeaders = new List<KeyValuePair<string, string>>(headerValues);

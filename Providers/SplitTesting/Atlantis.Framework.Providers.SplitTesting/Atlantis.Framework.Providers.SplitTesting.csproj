@@ -51,6 +51,7 @@
     <Compile Include="SplitTestingProvider.cs" />
     <Compile Include="SplitTestingEngineRequests.cs" />
     <Compile Include="SplitTestingState.cs" />
+    <Compile Include="SplitTestingUserAgent.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Atlantis.Framework.DataCache\Atlantis.Framework.DataCache\Atlantis.Framework.DataCache.csproj">
@@ -80,6 +81,10 @@
     <ProjectReference Include="..\..\..\Triplets\SplitTesting\Atlantis.Framework.SplitTesting.Interface\Atlantis.Framework.SplitTesting.Interface.csproj">
       <Project>{3c889792-7183-4648-8031-418bae99c76b}</Project>
       <Name>Atlantis.Framework.SplitTesting.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\UserAgentDetection\Atlantis.Framework.Providers.UserAgentDetection.Interface\Atlantis.Framework.Providers.UserAgentDetection.Interface.csproj">
+      <Project>{38fa2893-690d-40ee-b840-f7a93850e32d}</Project>
+      <Name>Atlantis.Framework.Providers.UserAgentDetection.Interface</Name>
     </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.Providers.SplitTesting.Interface\Atlantis.Framework.Providers.SplitTesting.Interface.csproj">
       <Project>{3f43b620-addb-41dd-826c-b565d8157b28}</Project>

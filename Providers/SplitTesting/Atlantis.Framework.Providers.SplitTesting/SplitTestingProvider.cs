@@ -7,6 +7,7 @@ using Atlantis.Framework.Conditions.Interface;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.SplitTest;
 using Atlantis.Framework.Providers.SplitTesting.Interface;
+using Atlantis.Framework.Providers.UserAgentDetection.Interface;
 using Atlantis.Framework.Render.ExpressionParser;
 using Atlantis.Framework.SplitTesting.Interface;
 
@@ -17,12 +18,14 @@ namespace Atlantis.Framework.Providers.SplitTesting
     private const string NOT_ELIGIBLE_SIDE_ID = "0";
     private static readonly Random rand = new Random();
     private static readonly IActiveSplitTestSide _defaultSideA = new ActiveSplitTestSide {Allocation = 100D, Name = "A", SideId = -1};
+    private static readonly IActiveSplitTestSide _defaultSideBot = new ActiveSplitTestSide { Allocation = 100D, Name = "A", SideId = -2 };
 
     private readonly IProviderContainer _container;
     private Lazy<SplitTestingState> _splitTestingState;
 
     private readonly Lazy<ActiveSplitTestsResponseData> _activeSplitTestsResponse;
     private readonly Lazy<SplitTestingCookieOverride> _splitTestCookieOverride;
+    private readonly Lazy<IUserAgentDetectionProvider> _splitTestUserAgentDetection;
 
     private readonly Dictionary<IActiveSplitTest, IActiveSplitTestSide> _sidesByTestsForRequest;
 
@@ -32,6 +35,8 @@ namespace Atlantis.Framework.Providers.SplitTesting
             : base(container)
     {
       _container = container;
+
+      _splitTestUserAgentDetection = new Lazy<IUserAgentDetectionProvider>(() => _container.Resolve<IUserAgentDetectionProvider>());
 
       _activeSplitTestsResponse = new Lazy<ActiveSplitTestsResponseData>(LoadActiveTests);
       _splitTestCookieOverride = new Lazy<SplitTestingCookieOverride>(() => new SplitTestingCookieOverride(container));
@@ -107,6 +112,11 @@ namespace Atlantis.Framework.Providers.SplitTesting
             return new ActiveSplitTestSide {Allocation = 100D, Name = overrideSide.Value.ToUpper(), SideId = -1};
           }
         }
+      }
+
+      if (_splitTestUserAgentDetection.Value.IsSearchEngineBot(SplitTestingUserAgent.UserAgent))
+      {
+        return _defaultSideBot;
       }
 
       IActiveSplitTestSide splitTestSide = null;

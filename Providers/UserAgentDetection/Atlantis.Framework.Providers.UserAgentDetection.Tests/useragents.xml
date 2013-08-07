@@ -6,10 +6,10 @@
   <UserAgent name="Gomez Agent" type="internal"><![CDATA[Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; GomezAgent 3.0)]]></UserAgent>
   <UserAgent name="Service Up Time" type="internal"><![CDATA[ServiceUptime.robot]]></UserAgent>
   <UserAgent name="IP Monitor" type="internal"><![CDATA[Mozilla/5.0 (Windows; U; Windows NT 5.0; en-US; rv:1.8a) Gecko/20040416 ipMonitor/9.0]]></UserAgent>
+  <UserAgent name="Internal Warmup Script" type="noredirect"><![CDATA[]]></UserAgent> <!-- Our warmup script passes an empty user agent -->
   <!-- END INTERNAL -->
 
   <!-- START BOTS -->
-  <UserAgent name="Internal Warmup Script" type="bot"><![CDATA[]]></UserAgent><!-- Our warmup script passes an empty user agent -->
   <UserAgent name="Search Engine Visibility (Traffic Blazer)" type="bot"><![CDATA[Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; TrafficBlazer 6.0)]]></UserAgent>
   <UserAgent name="GoogleBot 2.X" type="bot"><![CDATA[Googlebot/2.X (http://www.googlebot.com/bot.html)]]></UserAgent>
   <UserAgent name="Googlebot 2.1" type="bot"><![CDATA[Googlebot/2.1 (http://www.google.com/bot.html)]]></UserAgent>

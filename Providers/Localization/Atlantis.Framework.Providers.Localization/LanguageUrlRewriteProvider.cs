@@ -58,24 +58,33 @@ namespace Atlantis.Framework.Providers.Localization
 
     public void ProcessLanguageUrl()
     {
-      if (IsTransperfectProxyActive() || _localizationProvider.Value == null)
+      try
       {
-        return;
-      }
+        if (IsTransperfectProxyActive() || _localizationProvider.Value == null)
+        {
+          return;
+        }
 
-      string urlLanguage = GetUrlLanguage();
+        string urlLanguage = GetUrlLanguage();
 
-      if (String.IsNullOrEmpty(urlLanguage))
-      {
-        _localizationProvider.Value.SetMarket(_localizationProvider.Value.CountrySiteInfo.DefaultMarketId);
+        if (String.IsNullOrEmpty(urlLanguage))
+        {
+          _localizationProvider.Value.SetMarket(_localizationProvider.Value.CountrySiteInfo.DefaultMarketId);
+        }
+        else if (IsDefaultLanguageUrl(urlLanguage) && HttpContextFactory.GetHttpContext().Request.HttpMethod == "GET")
+        {
+          RedirectToDefaultUrl(urlLanguage);
+        }
+        else
+        {
+          RewriteRequestUrl(urlLanguage);
+        }
       }
-      else if (IsDefaultLanguageUrl(urlLanguage) && HttpContextFactory.GetHttpContext().Request.HttpMethod == "GET")
+      catch (Exception ex)
       {
-        RedirectToDefaultUrl(urlLanguage);
-      }
-      else
-      {
-        RewriteRequestUrl(urlLanguage);
+        string message = ex.Message + Environment.NewLine + ex.StackTrace;
+        var aex = new AtlantisException("LanguageUrlRewriteProvider.ProcessLanguageUrl", "0", "Error processing language url.", message, null, null);
+        Engine.EngineLogging.EngineLogger.LogAtlantisException(aex);
       }
     }
 
@@ -90,7 +99,6 @@ namespace Atlantis.Framework.Providers.Localization
       string newPath = RemoveLanguageCodeFromUrlPath(urlLanguage);
       _localizationProvider.Value.RewrittenUrlLanguage = urlLanguage;
       HttpContextFactory.GetHttpContext().RewritePath(newPath);
-
       string marketId;
       if (_countrySiteMarketMappings.Value.TryGetMarketIdByCountrySiteAndUrlLanguage(urlLanguage, out marketId))
       {

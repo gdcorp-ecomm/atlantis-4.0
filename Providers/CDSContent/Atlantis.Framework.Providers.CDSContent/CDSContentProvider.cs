@@ -14,8 +14,6 @@ namespace Atlantis.Framework.Providers.CDSContent
 {
   public class CDSContentProvider : ProviderBase, ICDSContentProvider
   {
-    private const string WhiteListFormat = "content/{0}/whitelist";
-    private const string RulesDocFormat = "content/{0}/{1}.rule";
     private const string DefaultContentPathFormat = "content/{0}/{1}";
     private const string ContentPathFormat = "content/{0}";
 
@@ -44,13 +42,11 @@ namespace Atlantis.Framework.Providers.CDSContent
     {
       IWhitelistResult whitelistResult;
 
-      string cdsPath = string.Format(WhiteListFormat, appName);
-
-      CDSRequestData requestData = new CDSRequestData(cdsPath);
-        
+      WhitelistDocument whitelist = new WhitelistDocument(Container, appName);
       try
       {
-        UrlWhitelistResponseData responseData = (UrlWhitelistResponseData)DataCache.DataCache.GetProcessRequest(requestData, CDSProviderEngineRequests.UrlWhitelistRequestType);
+        CDSRequestData requestData = new CDSRequestData(whitelist.ProcessedPath);
+        UrlWhitelistResponseData responseData = whitelist.ByPassDataCache ? (UrlWhitelistResponseData) Engine.Engine.ProcessRequest(requestData, whitelist.EngineRequestId) : (UrlWhitelistResponseData)DataCache.DataCache.GetProcessRequest(requestData, whitelist.EngineRequestId);
         whitelistResult = responseData.CheckWhitelist(relativePath);
       }
       catch (Exception ex)
@@ -60,7 +56,7 @@ namespace Atlantis.Framework.Providers.CDSContent
         Engine.Engine.LogAtlantisException(new AtlantisException("CDSContentProvider.CheckWhiteList()", 
                                                                  "0", 
                                                                  "CDSContentProvider whitelist error. " + ex.Message, 
-                                                                 cdsPath,
+                                                                 whitelist.ProcessedPath,
                                                                  null,
                                                                  null));
       }
@@ -115,12 +111,12 @@ namespace Atlantis.Framework.Providers.CDSContent
 
       if (!string.IsNullOrEmpty(contentPath))
       {
-        ProcessQuery cdsQuery = new ProcessQuery(Container, contentPath);
-        var requestData = new CDSRequestData(cdsQuery.Query);
+        ContentDocument contentDoc = new ContentDocument(Container, contentPath);
 
         try
         {
-          ContentVersionResponseData responseData = cdsQuery.BypassCache ? (ContentVersionResponseData)Engine.Engine.ProcessRequest(requestData, CDSProviderEngineRequests.ContentVersionRequestType) : (ContentVersionResponseData)DataCache.DataCache.GetProcessRequest(requestData, CDSProviderEngineRequests.ContentVersionRequestType);
+          var requestData = new CDSRequestData(contentDoc.ProcessedPath);
+          ContentVersionResponseData responseData = contentDoc.ByPassDataCache ? (ContentVersionResponseData)Engine.Engine.ProcessRequest(requestData, contentDoc.EngineRequestId) : (ContentVersionResponseData)DataCache.DataCache.GetProcessRequest(requestData, contentDoc.EngineRequestId);
           
           if (responseData.IsSuccess && !string.IsNullOrEmpty(responseData.Content))
           {
@@ -132,7 +128,7 @@ namespace Atlantis.Framework.Providers.CDSContent
           Engine.Engine.LogAtlantisException(new AtlantisException("CDSContentProvider.GetContent()", 
                                                                    "0", 
                                                                    "CDSContentProvider error getting content. " + ex.Message,
-                                                                   contentPath,
+                                                                   contentDoc.ProcessedPath,
                                                                    null,
                                                                    null));
         }
@@ -147,15 +143,12 @@ namespace Atlantis.Framework.Providers.CDSContent
 
       if (!string.IsNullOrEmpty(appName) && !string.IsNullOrEmpty(relativePath))
       {
-        string cdsPath = string.Format(RulesDocFormat, appName, relativePath);
-        ProcessQuery cdsQuery = new ProcessQuery(Container, null);
-
-        var requestData = new CDSRequestData(cdsPath);
-
+        RulesDocument rulesDoc = new RulesDocument(Container, appName, relativePath);
+        var requestData = new CDSRequestData(rulesDoc.ProcessedPath);
         try
         {
-          RoutingRulesResponseData responseData = cdsQuery.BypassCache ? (RoutingRulesResponseData)Engine.Engine.ProcessRequest(requestData, CDSProviderEngineRequests.RoutingRulesRequestType) : (RoutingRulesResponseData)DataCache.DataCache.GetProcessRequest(requestData, CDSProviderEngineRequests.RoutingRulesRequestType);
-          
+          RoutingRulesResponseData responseData = rulesDoc.ByPassDataCache ? (RoutingRulesResponseData)Engine.Engine.ProcessRequest(requestData, rulesDoc.EngineRequestId) : (RoutingRulesResponseData)DataCache.DataCache.GetProcessRequest(requestData, rulesDoc.EngineRequestId);
+
           if (responseData.IsSuccess)
           {
             responseData.TryGetValue(type, out routingRules);
@@ -163,10 +156,10 @@ namespace Atlantis.Framework.Providers.CDSContent
         }
         catch (Exception ex)
         {
-          Engine.Engine.LogAtlantisException(new AtlantisException("CDSContentProvider.GetRoutingRules()", 
-                                                                   "0", 
+          Engine.Engine.LogAtlantisException(new AtlantisException("CDSContentProvider.GetRoutingRules()",
+                                                                   "0",
                                                                    "CDSContentProvider error getting route rules. " + ex.Message,
-                                                                   cdsPath,
+                                                                   rulesDoc.ProcessedPath,
                                                                    null,
                                                                    null));
         }
@@ -252,5 +245,6 @@ namespace Atlantis.Framework.Providers.CDSContent
 
       return contentPath;
     }
+     
   }
 }

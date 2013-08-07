@@ -65,6 +65,7 @@
     <Compile Include="RenderHandlers\RenderHandlerThree.cs" />
     <Compile Include="RenderHandlers\RenderHandlerTwo.cs" />
     <Compile Include="RenderHandlers\TargetedMessageRenderHandler.cs" />
+    <Compile Include="SpoofedWhitelistTests.cs" />
     <Compile Include="TokenHandlers\DataCenterToken.cs" />
     <Compile Include="WhitelistTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

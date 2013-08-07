@@ -49,8 +49,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CDSContentProvider.cs" />
-    <Compile Include="ProcessQuery.cs" />
-    <Compile Include="CDSProviderEngineRequests.cs" />
+    <Compile Include="CDSDocument.cs" />
+    <Compile Include="ContentDocument.cs" />
+    <Compile Include="RulesDocument.cs" />
+    <Compile Include="WhitelistDocument.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

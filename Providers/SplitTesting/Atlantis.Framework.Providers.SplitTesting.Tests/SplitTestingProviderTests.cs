@@ -34,7 +34,7 @@ namespace Atlantis.Framework.Providers.SplitTesting.Tests
         _conditionHandlersRegistered = true;
       }
 
-      SplitTestingConfiguration.DefaultCategoryName = "test";
+      SplitTestingConfiguration.DefaultCategoryName = "Sales";
     }
 
     public TestContext TestContext { get; set; }
@@ -211,6 +211,21 @@ namespace Atlantis.Framework.Providers.SplitTesting.Tests
       Assert.AreEqual(-2, side.SideId);
     }
 
+    [TestMethod]
+    public void GetActiveTests()
+    {
+      var mockHttpRequest = new MockHttpRequest("http://www.debug.godaddy-com.ide/");
+      MockHttpContext.SetFromWorkerRequest(mockHttpRequest);
 
+      ISplitTestingProvider splitProvider = InitializeProvidersAndReturnSplitTestProvider(1, "858884");
+
+      Assert.IsNotNull(splitProvider);
+
+      var tests = splitProvider.GetAllActiveTests;
+
+      Assert.IsNotNull(tests);
+      var iter = tests.GetEnumerator();
+      Assert.IsTrue(iter.MoveNext(), "Check admin to see if there is at least one active test.");
+    }
   }
 }

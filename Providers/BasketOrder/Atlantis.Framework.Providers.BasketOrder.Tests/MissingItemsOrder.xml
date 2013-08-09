@@ -1,0 +1,52 @@
+﻿<ORDER>
+
+  <ORDERDETAIL currencydisplay="GBP" _injectedfairmarketvaluetotal_operating="0" from_app="" fairmarketvaluetotal="9776" _pipeline_error_level="1" _pipeline_success="1" _old_spend="8767" gdshop_purchaserequesttypeid="1" prepaid_discount_total="0" overridepricingvar="0.1500" purchaserequestid="556700" entered_by="customer" payment_gateway_raw="no charge attempt: FAITH" _total_total_display="351256" _tax_total_usd="0" fltr_run_time="0" transactioncurrency="GBP" item_id_start="9" _oadjust_subtotal="351256" source_code="MBR1499" _commserver="G1TWGDCOMM001" createdate="7/31/2013 10:43:54 AM" payment_response_code="1" payment_auth_code="FAITH" _purchase_gateway_action="3" ship_to_email="32of230ijf32ij23i@asdf.com" _product_promo_list="7502,7509,101,1866,844,805,780,779,7002" _tax_total_operating="0" original_order_id="-1" mktg_partner="no" bill_to_last_name="ofkj32okjf32okj32f" pathway="95d51c28-a981-44fb-849e-8e73c2099a4a" foreign_ip_status="0" bill_to_state="AL" basketid="556700" _promo_run_time="94" conversionratet2o="1.5303" _shipping_total_display="0" remote_host="172.17.251.244" _total_total="351256" _purchase_hash="ledipioawaacwimbmipiuffibewgvcnifhhhvbsjmiejhgxegbmheawhhitbocxf" repversion="0" _fairmarketvaluetotal_operating="14961" _tax_included="0" _tax_type="0" _shipping_total_operating="0" shopper_id="225606" _old_discount="4750" _injectedfairmarketvaluetotal="0" thirdpartyshippingamount="0" gdshop_receiptapplicationid="0" _total_total_usd="537527" _fairmarketvaluetotal_usd="14961" operatingcurrency="USD" _shipping_total_usd="0" pp_shopperprofileid="42150" _handling_total_usd="0" _shopper_source_code="MBR1499" _payment_auth_code="FAITH" payment="credit_card" order_id="556700" basket_type="gdshop" bill_to_phone1="8383838383" domaincount="1" create_backup_payment="2" _tax_total_display="0" _oadjust_subtotal_operating="537527" bill_to_street2="" date_changed="7/31/2013 10:43:00 AM" shippable="0" remote_addr="172.17.251.244" _shopper_shopper_id="225606" loginname="32of230ijf32ij23i" _oadjust_subtotal_usd="537527" authonly="0" bill_to_first_name="o3f2kjo23kjfo32kj" _handling_total="0" payment_processor="1" conversionratet2d="1.0000" _handling_total_display="0" cc_expyear="2020" _handling_total_operating="0" date_entered="7/31/2013 10:43:54 AM" total="351256" payment_auth_type="FAITH" currencyxchangerate="1.0000" order_billing="domestic" payment_gateway_response_time="0" translationlanguage="en" _total_total_operating="537527" conversionratet2u="1.5303" promocheckstatus="invalid|7/31/2013 11:35:13 AM|MBR1499" _injectedfairmarketvaluetotal_usd="0" bill_to_street1="of3kj2ofk3j2o32kjf" payment_method_bank="Bank of DC" card_issuer_id="" payment_response_sub_code="0" bill_to_zip="83838" payment_reason_code="1" bill_to_country="US" _webserver="G1TWCARTWEB001" cc_expmonth="6" _shipping_total="0" payment_method_country="US" cc_type="Visa" privatelabelid="1" basket_paymenttype="-1" order_source="Online" _oadjust_subtotal_display="351256" bill_to_email="32of230ijf32ij23i@asdf.com" conversionrateo2u="1" _fairmarketvaluetotal="9776" _repversion="" bar_restricted_payment_type="" shipping_price="0" itemcount="9" _restricted_payment_type="" _base_subtotal="357343" ip_country_code="--" merchantaccountid="1" accountingcompanyid="1" _purchase_pipeline_name="D:\gdComponents\Pipelines\plan_receipt.xml" membershiplevel="0" bill_to_city="fo3kj2o32kfj3o2kjf" _tax_total="0" status="active" type="credit_card" cc_name="f3o2jo2k3fjo32kjfok3j2" cc_number="############1111" firstname="o3f2kjo23kjfo32kj" lastname="ofkj32okjf32okj32f" street1="of3kj2ofk3j2o32kjf" city="fo3kj2o32kfj3o2kjf" state="AL" country="US" postal_code="83838" phone1="8383838383" email="32of230ijf32ij23i@asdf.com" currency="GBP">
+
+    <DOMAINCONTACTXML>
+
+      <domainContacts>
+
+        <contacts crc32="1149058004">
+
+          <contact fname="o3f2kjo23kjfo32kj" lname="ofkj32okjf32okj32f" email="32of230ijf32ij23i@asdf.com" co="" org="" sa1="of3kj2ofk3j2o32kjf" sa2="" city="fo3kj2o32kfj3o2kjf" sp="AL" pc="83838" cc="US" phone="8383838383" fax="" contactType="0"/>
+
+          <contact fname="o3f2kjo23kjfo32kj" lname="ofkj32okjf32okj32f" email="32of230ijf32ij23i@asdf.com" co="" org="" sa1="of3kj2ofk3j2o32kjf" sa2="" city="fo3kj2o32kfj3o2kjf" sp="AL" pc="83838" cc="US" phone="8383838383" fax="" contactType="1"/>
+
+          <contact fname="o3f2kjo23kjfo32kj" lname="ofkj32okjf32okj32f" email="32of230ijf32ij23i@asdf.com" co="" org="" sa1="of3kj2ofk3j2o32kjf" sa2="" city="fo3kj2o32kfj3o2kjf" sp="AL" pc="83838" cc="US" phone="8383838383" fax="" contactType="2"/>
+
+          <contact fname="o3f2kjo23kjfo32kj" lname="ofkj32okjf32okj32f" email="32of230ijf32ij23i@asdf.com" co="" org="" sa1="of3kj2ofk3j2o32kjf" sa2="" city="fo3kj2o32kfj3o2kjf" sp="AL" pc="83838" cc="US" phone="8383838383" fax="" contactType="3"/>
+
+        </contacts>
+
+        <contacts crc32="-1265646505">
+
+          <contact fname="o3f2kjo23kjfo32kj" lname="ofkj32okjf32okj32f" email="32of230ijf32ij23i@asdf.com" sa1="of3kj2ofk3j2o32kjf" sa2="" city="fo3kj2o32kfj3o2kjf" pc="83838" phone="8383838383" cc="United States" sp="Alabama" contactType="0"/>
+
+          <contact fname="o3f2kjo23kjfo32kj" lname="ofkj32okjf32okj32f" email="32of230ijf32ij23i@asdf.com" sa1="of3kj2ofk3j2o32kjf" sa2="" city="fo3kj2o32kfj3o2kjf" pc="83838" phone="8383838383" cc="United States" sp="Alabama" contactType="1"/>
+
+          <contact fname="o3f2kjo23kjfo32kj" lname="ofkj32okjf32okj32f" email="32of230ijf32ij23i@asdf.com" sa1="of3kj2ofk3j2o32kjf" sa2="" city="fo3kj2o32kfj3o2kjf" pc="83838" phone="8383838383" cc="United States" sp="Alabama" contactType="2"/>
+
+          <contact fname="o3f2kjo23kjfo32kj" lname="ofkj32okjf32okj32f" email="32of230ijf32ij23i@asdf.com" sa1="of3kj2ofk3j2o32kjf" sa2="" city="fo3kj2o32kfj3o2kjf" pc="83838" phone="8383838383" cc="United States" sp="Alabama" contactType="3"/>
+
+        </contacts>
+
+      </domainContacts>
+
+    </DOMAINCONTACTXML>
+
+    <PAYMENTXML>
+
+      <Payments>
+
+        <Payment index="0" amount="351256" type="credit_card" subtype="VISA" paymentMethodID="61" xindex="0" gateway_progid="FAITH" processor="1" auth_code="FAITH" response_code="1" response_sub_code="0" reason_code="1" gateway_raw="no charge attempt: FAITH" gateway_response_time="0" auth_type="FAITH" total="351256" gateway_action="3" destination_queue="receipt" amount_usd="537527" amount_display="351256" amount_operating="537527" pp_shopperProfileID="42150"/>
+
+      </Payments>
+    </PAYMENTXML>
+
+  </ORDERDETAIL>
+
+  <BASKETERRORS/>
+
+  <PURCHASEERRORS/>
+
+</ORDER>

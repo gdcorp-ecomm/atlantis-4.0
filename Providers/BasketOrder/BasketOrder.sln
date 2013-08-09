@@ -1,0 +1,50 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{27DC88D4-1618-493B-835B-EAF192592826}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine", "..\..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj", "{D30157B2-C1B3-4073-BA5E-632E2337A997}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "..\..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Providers.BasketOrder", "Atlantis.Framework.Providers.BasketOrder\Atlantis.Framework.Providers.BasketOrder.csproj", "{6AE0C74B-78E4-4B5A-B225-165526F56686}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Providers.BasketOrder.Interface", "Atlantis.Framework.Providers.BasketOrder.Interface\Atlantis.Framework.Providers.BasketOrder.Interface.csproj", "{9F871127-456A-439A-B743-BD23E91F21E6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Providers.BasketOrder.Tests", "Atlantis.Framework.Providers.BasketOrder.Tests\Atlantis.Framework.Providers.BasketOrder.Tests.csproj", "{77BCDA92-BED8-4698-84DF-3F23D3FA0DAB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6AE0C74B-78E4-4B5A-B225-165526F56686}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6AE0C74B-78E4-4B5A-B225-165526F56686}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6AE0C74B-78E4-4B5A-B225-165526F56686}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6AE0C74B-78E4-4B5A-B225-165526F56686}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F871127-456A-439A-B743-BD23E91F21E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F871127-456A-439A-B743-BD23E91F21E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F871127-456A-439A-B743-BD23E91F21E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F871127-456A-439A-B743-BD23E91F21E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{77BCDA92-BED8-4698-84DF-3F23D3FA0DAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77BCDA92-BED8-4698-84DF-3F23D3FA0DAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77BCDA92-BED8-4698-84DF-3F23D3FA0DAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77BCDA92-BED8-4698-84DF-3F23D3FA0DAB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {27DC88D4-1618-493B-835B-EAF192592826}
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {27DC88D4-1618-493B-835B-EAF192592826}
+	EndGlobalSection
+EndGlobal

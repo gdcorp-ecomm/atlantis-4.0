@@ -2,9 +2,13 @@
 using Atlantis.Framework.Conditions.Interface;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.CDSContent.Interface;
+using Atlantis.Framework.Providers.CDSContent.Tests.RenderHandlers;
 using Atlantis.Framework.Providers.Containers;
+using Atlantis.Framework.Render.Pipeline;
+using Atlantis.Framework.Render.Pipeline.Interface;
 using Atlantis.Framework.Testing.MockHttpContext;
 using Atlantis.Framework.Testing.MockProviders;
+using Atlantis.Framework.Tokens.Interface;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Reflection;
 
@@ -13,7 +17,7 @@ namespace Atlantis.Framework.Providers.CDSContent.Tests
   [TestClass]
   [DeploymentItem("atlantis.config")]
   [DeploymentItem("Atlantis.Framework.CDS.Impl.dll")]
-  public class SpoofedWhitelistTests
+  public class ContentDocumentTests
   {
     private IProviderContainer _objectProviderContainer;
     private IProviderContainer ObjectProviderContainer
@@ -43,11 +47,6 @@ namespace Atlantis.Framework.Providers.CDSContent.Tests
       }
     }
 
-    private void RegisterConditions()
-    {
-      ConditionHandlerManager.AutoRegisterConditionHandlers(Assembly.GetExecutingAssembly());
-    }
-
     private void RegisterProviders()
     {
       ObjectProviderContainer.RegisterProvider<ISiteContext, MockSiteContext>();
@@ -57,7 +56,7 @@ namespace Atlantis.Framework.Providers.CDSContent.Tests
 
     private void SetupHttpContext()
     {
-      MockHttpRequest mockHttpRequest = new MockHttpRequest("http://www.debug.godaddy-com.ide/?whitelist=5202d051f778fc20bcb6c12a");
+      MockHttpRequest mockHttpRequest = new MockHttpRequest("http://www.debug.godaddy-com.ide");
       MockHttpContext.SetFromWorkerRequest(mockHttpRequest);
     }
 
@@ -65,7 +64,6 @@ namespace Atlantis.Framework.Providers.CDSContent.Tests
     {
       SetupHttpContext();
       RegisterProviders();
-      RegisterConditions();
     }
 
     [TestInitialize]
@@ -75,30 +73,20 @@ namespace Atlantis.Framework.Providers.CDSContent.Tests
     }
 
     [TestMethod]
-    public void ItemNotFound_SpoofedWhitelistTests()
+    public void CDT_PublishedDocNotFound()
     {
-      string appName = "atlantis/_unittests/whitelistoneitem";
-      string relativePath = "homexyz2";
-
-      ICDSContentProvider provider = ProviderContainer.Resolve<ICDSContentProvider>();
-      IWhitelistResult whiteListResult = provider.CheckWhiteList(appName, relativePath);
-
-      Assert.IsFalse(whiteListResult.Exists);
-      Assert.IsTrue(whiteListResult.UrlData.Style == DocumentStyles.Unknown);
+      string rawPath = "content/blah blah/hosting/email-hosting";
+      ContentDocument contentDoc = new ContentDocument(ObjectProviderContainer, rawPath);
+      Assert.IsTrue(contentDoc.GetContent() == ContentDocument.NullRenderContent);
     }
 
     [TestMethod]
-    public void ItemFound_SpoofedWhitelistTests()
+    public void CDT_PublishedDocFound()
     {
-      string appName = "atlantis/_unittests/whitelistoneitem";
-      string relativePath = "homexyz";
-
-      ICDSContentProvider provider = ProviderContainer.Resolve<ICDSContentProvider>();
-      IWhitelistResult whiteListResult = provider.CheckWhiteList(appName, relativePath);
-
-      Assert.IsTrue(whiteListResult.Exists);
-      Assert.IsTrue(whiteListResult.UrlData.Style == DocumentStyles.FlatPage);
+      string rawPath = "content/sales/unittest/defaultcontentpath_getcontenttests";
+      ContentDocument contentDoc = new ContentDocument(ObjectProviderContainer, rawPath);
+      IRenderContent renderContent = contentDoc.GetContent();
+      Assert.IsTrue(renderContent.Content.Contains("Current DataCenter:"));
     }
   }
-
 }

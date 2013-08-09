@@ -18,8 +18,7 @@ namespace Atlantis.Framework.Providers.CDSContent
     private const string ContentPathFormat = "content/{0}";
 
     private static readonly IRedirectResult _nullRedirectResult = new RedirectResult(false, null);
-    private static readonly IRenderContent _nullRenderContent = new ContentVersionResponseData(null);
-
+    
     private ExpressionParserManager _expressionParserManager;
     private ExpressionParserManager ExpressionParserManager
     {
@@ -40,35 +39,17 @@ namespace Atlantis.Framework.Providers.CDSContent
 
     public IWhitelistResult CheckWhiteList(string appName, string relativePath)
     {
-      IWhitelistResult whitelistResult;
-
       WhitelistDocument whitelist = new WhitelistDocument(Container, appName);
-      try
-      {
-        CDSRequestData requestData = new CDSRequestData(whitelist.ProcessedPath);
-        UrlWhitelistResponseData responseData = whitelist.ByPassDataCache ? (UrlWhitelistResponseData) Engine.Engine.ProcessRequest(requestData, whitelist.EngineRequestId) : (UrlWhitelistResponseData)DataCache.DataCache.GetProcessRequest(requestData, whitelist.EngineRequestId);
-        whitelistResult = responseData.CheckWhitelist(relativePath);
-      }
-      catch (Exception ex)
-      {
-        whitelistResult = UrlWhitelistResponseData.NullWhitelistResult;
-
-        Engine.Engine.LogAtlantisException(new AtlantisException("CDSContentProvider.CheckWhiteList()", 
-                                                                 "0", 
-                                                                 "CDSContentProvider whitelist error. " + ex.Message, 
-                                                                 whitelist.ProcessedPath,
-                                                                 null,
-                                                                 null));
-      }
-
-      return whitelistResult;
+      return whitelist.CheckWhiteList(relativePath);
     }
 
     public IRedirectResult CheckRedirectRules(string appName, string relativePath)
     {
       IRedirectResult redirectResult = _nullRedirectResult;
 
-      ReadOnlyCollection<IRoutingRule> redirectRules = GetRoutingRules(appName, relativePath, RoutingRuleTypes.Redirect);
+      RulesDocument rulesDoc = new RulesDocument(Container, appName, relativePath);
+
+      ReadOnlyCollection<IRoutingRule> redirectRules = rulesDoc.GetRoutingRules(RoutingRuleTypes.Redirect);
 
       if (redirectRules != null)
       {
@@ -105,69 +86,19 @@ namespace Atlantis.Framework.Providers.CDSContent
 
     public IRenderContent GetContent(string appName, string relativePath)
     {
-      IRenderContent contentVersion = _nullRenderContent;
-
+      IRenderContent contentVersion = ContentDocument.NullRenderContent;
+      
       string contentPath = GetContentPath(appName, relativePath);
 
       if (!string.IsNullOrEmpty(contentPath))
       {
         ContentDocument contentDoc = new ContentDocument(Container, contentPath);
-
-        try
-        {
-          var requestData = new CDSRequestData(contentDoc.ProcessedPath);
-          ContentVersionResponseData responseData = contentDoc.ByPassDataCache ? (ContentVersionResponseData)Engine.Engine.ProcessRequest(requestData, contentDoc.EngineRequestId) : (ContentVersionResponseData)DataCache.DataCache.GetProcessRequest(requestData, contentDoc.EngineRequestId);
-          
-          if (responseData.IsSuccess && !string.IsNullOrEmpty(responseData.Content))
-          {
-            contentVersion = responseData;
-          }
-        }
-        catch (Exception ex)
-        {
-          Engine.Engine.LogAtlantisException(new AtlantisException("CDSContentProvider.GetContent()", 
-                                                                   "0", 
-                                                                   "CDSContentProvider error getting content. " + ex.Message,
-                                                                   contentDoc.ProcessedPath,
-                                                                   null,
-                                                                   null));
-        }
+        contentVersion = contentDoc.GetContent();        
       }
 
       return contentVersion;
     }
-    
-    private ReadOnlyCollection<IRoutingRule> GetRoutingRules(string appName, string relativePath, string type)
-    {
-      ReadOnlyCollection<IRoutingRule> routingRules = null;
-
-      if (!string.IsNullOrEmpty(appName) && !string.IsNullOrEmpty(relativePath))
-      {
-        RulesDocument rulesDoc = new RulesDocument(Container, appName, relativePath);
-        var requestData = new CDSRequestData(rulesDoc.ProcessedPath);
-        try
-        {
-          RoutingRulesResponseData responseData = rulesDoc.ByPassDataCache ? (RoutingRulesResponseData)Engine.Engine.ProcessRequest(requestData, rulesDoc.EngineRequestId) : (RoutingRulesResponseData)DataCache.DataCache.GetProcessRequest(requestData, rulesDoc.EngineRequestId);
-
-          if (responseData.IsSuccess)
-          {
-            responseData.TryGetValue(type, out routingRules);
-          }
-        }
-        catch (Exception ex)
-        {
-          Engine.Engine.LogAtlantisException(new AtlantisException("CDSContentProvider.GetRoutingRules()",
-                                                                   "0",
-                                                                   "CDSContentProvider error getting route rules. " + ex.Message,
-                                                                   rulesDoc.ProcessedPath,
-                                                                   null,
-                                                                   null));
-        }
-      }
-
-      return routingRules;
-    }
-
+   
     private string GetRuleData(IEnumerable<IRoutingRule> rules)
     {
       string ruleData = null;
@@ -213,7 +144,9 @@ namespace Atlantis.Framework.Providers.CDSContent
       {
         contentPath = string.Format(DefaultContentPathFormat, appName, relativePath);
 
-        ReadOnlyCollection<IRoutingRule> routeRules = GetRoutingRules(appName, relativePath, RoutingRuleTypes.Route);
+        RulesDocument rulesDoc = new RulesDocument(Container, appName, relativePath);
+
+        ReadOnlyCollection<IRoutingRule> routeRules = rulesDoc.GetRoutingRules(RoutingRuleTypes.Route);
         
         if (routeRules != null)
         {

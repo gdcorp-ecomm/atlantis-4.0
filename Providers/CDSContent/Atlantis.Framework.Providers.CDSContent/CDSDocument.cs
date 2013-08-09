@@ -1,18 +1,39 @@
-﻿using System.Collections.Specialized;
+﻿using Atlantis.Framework.Interface;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Web;
 
 namespace Atlantis.Framework.Providers.CDSContent
 {
   internal abstract class CDSDocument
   {
-    public abstract int EngineRequestId { get; }
+    protected IProviderContainer Container { get; set; }
+    protected string RawPath { get; set; }
+    protected string ProcessedPath { get; private set; }
+    protected bool ByPassDataCache { get; private set; }
 
-    public string RawPath { get; set; }
-    public string ProcessedPath { get; set; }
-    public bool ByPassDataCache { get; set; }
+    protected void AddDocIdParam(string queryStringParamName)
+    {
+      ProcessedPath = RawPath;
 
-    public static bool IsValidContentId(string text)
+      if (HttpContext.Current != null)
+      {
+        var queryString = HttpContext.Current.Request.QueryString;
+        var docId = queryString[queryStringParamName];
+        ISiteContext siteContext = Container.Resolve<ISiteContext>();
+        if (IsValidContentId(docId) && siteContext.IsRequestInternal)
+        {
+          ByPassDataCache = true;
+          var queryParams = new NameValueCollection();
+          queryParams.Add("docid", docId);
+          string appendChar = ProcessedPath.Contains("?") ? "&" : "?";
+          ProcessedPath += string.Concat(appendChar, ToQueryString(queryParams));
+        }
+      }
+    }
+
+    private bool IsValidContentId(string text)
     {
       bool result = false;
       if (text != null)
@@ -23,7 +44,7 @@ namespace Atlantis.Framework.Providers.CDSContent
       return result;
     }
 
-    public static string ToQueryString(NameValueCollection nvc)
+    private string ToQueryString(NameValueCollection nvc)
     {
       return string.Join("&", nvc.AllKeys.SelectMany(key => nvc.GetValues(key).Select(value => string.Format("{0}={1}", key, value))).ToArray());
     }

@@ -1,6 +1,6 @@
-﻿using Atlantis.Framework.Interface;
-using System.Collections.Specialized;
-using System.Web;
+﻿using Atlantis.Framework.CDS.Interface;
+using Atlantis.Framework.Interface;
+using System;
 
 namespace Atlantis.Framework.Providers.CDSContent
 {
@@ -8,31 +8,41 @@ namespace Atlantis.Framework.Providers.CDSContent
   {
     private const string WhiteListFormat = "content/{0}/whitelist";
     public const int UrlWhitelistRequestType = 688;
+    public const string VersionIDQueryStringParamName = "whitelist";
 
     public WhitelistDocument(IProviderContainer container, string appName)
     {
+      Container = container;
       RawPath = string.Format(WhiteListFormat, appName);
-      ProcessedPath = RawPath;
-
-      if (HttpContext.Current != null)
-      {
-        var queryString = HttpContext.Current.Request.QueryString;
-        var docId = queryString["whitelist"];
-        ISiteContext siteContext = container.Resolve<ISiteContext>();
-        if (IsValidContentId(docId) && siteContext.IsRequestInternal)
-        {
-          ByPassDataCache = true;
-          var queryParams = new NameValueCollection();
-          queryParams.Add("docid", docId);
-          string appendChar = ProcessedPath.Contains("?") ? "&" : "?";
-          ProcessedPath += string.Concat(appendChar, ToQueryString(queryParams));
-        }
-      }
+      AddDocIdParam(VersionIDQueryStringParamName);
     }
+       
 
-    public override int EngineRequestId
+    public IWhitelistResult CheckWhiteList(string relativePath)
     {
-      get { return UrlWhitelistRequestType; }
+      IWhitelistResult whitelistResult;
+
+      try
+      {
+        CDSRequestData requestData = new CDSRequestData(ProcessedPath);
+        UrlWhitelistResponseData responseData = ByPassDataCache ? (UrlWhitelistResponseData)Engine.Engine.ProcessRequest(requestData, UrlWhitelistRequestType) : (UrlWhitelistResponseData)DataCache.DataCache.GetProcessRequest(requestData, UrlWhitelistRequestType);
+        whitelistResult = responseData.CheckWhitelist(relativePath);
+      }
+      catch (Exception ex)
+      {
+        whitelistResult = UrlWhitelistResponseData.NullWhitelistResult;
+
+        Engine.Engine.LogAtlantisException(new AtlantisException("WhitelistDocument.CheckWhiteList()",
+                                                                 "0",
+                                                                 "CDSContentProvider whitelist error. " + ex.Message,
+                                                                 ProcessedPath,
+                                                                 null,
+                                                                 null));
+      }
+
+      return whitelistResult;
     }
+
+
   }
 }

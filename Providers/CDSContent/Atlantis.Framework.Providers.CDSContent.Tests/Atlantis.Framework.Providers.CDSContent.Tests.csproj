@@ -58,6 +58,7 @@
     <Compile Include="ConditionHandlers\CountrySiteContextConditionHandler.cs" />
     <Compile Include="ConditionHandlers\DataCenterCondtionHandler.cs" />
     <Compile Include="ConditionHandlers\TargetedMessageIdConditionHandler.cs" />
+    <Compile Include="ContentDocumentTests.cs" />
     <Compile Include="GetContentPathTests.cs" />
     <Compile Include="RedirectRuleTests.cs" />
     <Compile Include="GetContentTests.cs" />
@@ -65,7 +66,6 @@
     <Compile Include="RenderHandlers\RenderHandlerThree.cs" />
     <Compile Include="RenderHandlers\RenderHandlerTwo.cs" />
     <Compile Include="RenderHandlers\TargetedMessageRenderHandler.cs" />
-    <Compile Include="SpoofedWhitelistTests.cs" />
     <Compile Include="TokenHandlers\DataCenterToken.cs" />
     <Compile Include="WhitelistTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

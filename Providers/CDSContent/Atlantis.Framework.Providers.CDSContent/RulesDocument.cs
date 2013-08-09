@@ -1,7 +1,7 @@
-﻿using Atlantis.Framework.Interface;
+﻿using Atlantis.Framework.CDS.Interface;
+using Atlantis.Framework.Interface;
 using System;
-using System.Collections.Specialized;
-using System.Web;
+using System.Collections.ObjectModel;
 
 namespace Atlantis.Framework.Providers.CDSContent
 {
@@ -9,31 +9,40 @@ namespace Atlantis.Framework.Providers.CDSContent
   {
     public const int RoutingRulesRequestType = 696;
     private const string RulesDocFormat = "content/{0}/{1}.rule";
+    public const string VersionIDQueryStringParamName = "rules";
 
     public RulesDocument(IProviderContainer container, string appName, string relativePath)
     {
+      Container = container;
       RawPath = string.Format(RulesDocFormat, appName, relativePath);
-      ProcessedPath = RawPath;
-
-      if (HttpContext.Current != null)
-      {
-        var queryString = HttpContext.Current.Request.QueryString;
-        var docId = queryString["rules"];
-        ISiteContext siteContext = container.Resolve<ISiteContext>();
-        if (IsValidContentId(docId) && siteContext.IsRequestInternal)
-        {
-          ByPassDataCache = true;
-          var queryParams = new NameValueCollection();
-          queryParams.Add("docid", docId);
-          string appendChar = ProcessedPath.Contains("?") ? "&" : "?";
-          ProcessedPath += string.Concat(appendChar, ToQueryString(queryParams));
-        }
-      }
+      AddDocIdParam(VersionIDQueryStringParamName);
     }
 
-    public override int EngineRequestId
+    public ReadOnlyCollection<IRoutingRule> GetRoutingRules(string type)
     {
-      get { return RoutingRulesRequestType; }
+      ReadOnlyCollection<IRoutingRule> routingRules = null;
+
+      var requestData = new CDSRequestData(ProcessedPath);
+      try
+      {
+        RoutingRulesResponseData responseData = ByPassDataCache ? (RoutingRulesResponseData)Engine.Engine.ProcessRequest(requestData, RoutingRulesRequestType) : (RoutingRulesResponseData)DataCache.DataCache.GetProcessRequest(requestData, RoutingRulesRequestType);
+
+        if (responseData.IsSuccess)
+        {
+          responseData.TryGetValue(type, out routingRules);
+        }
+      }
+      catch (Exception ex)
+      {
+        Engine.Engine.LogAtlantisException(new AtlantisException("RulesDocument.GetRoutingRules()",
+                                                                 "0",
+                                                                 "CDSContentProvider error getting route rules. " + ex.Message,
+                                                                 ProcessedPath,
+                                                                 null,
+                                                                 null));
+      }
+
+      return routingRules;
     }
   }
 }

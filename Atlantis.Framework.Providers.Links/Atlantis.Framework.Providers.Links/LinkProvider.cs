@@ -111,7 +111,7 @@ namespace Atlantis.Framework.Providers.Links
 
     private bool IsLocalImageServerUrl(string relativePath)
     {
-      return (IsDebugInternal() && relativePath.StartsWith("~/_ImageServer/"));
+      return (IsDebugInternal() && relativePath.Contains("/_ImageServer/"));
     }
 
     private bool IsSecureConnection
@@ -247,20 +247,30 @@ namespace Atlantis.Framework.Providers.Links
         urlStringBuilder.Append(DefaultRootLink);
       }
 
-      AppendUrlLanguage(urlStringBuilder, relativePath);
-
-      urlStringBuilder.Append(ResolveUrl(relativePath));
+      urlStringBuilder.Append(ResolveUrl(AppendUrlLanguage(relativePath)));
 
       return urlStringBuilder;
     }
 
-    private void AppendUrlLanguage(StringBuilder urlStringBuilder, string relativePath)
+    private string AppendUrlLanguage(string relativePath)
     {
-      if (_localizationProvider.Value != null && _localizationProvider.Value.RewrittenUrlLanguage != String.Empty && !IsLocalImageServerUrl(relativePath)) 
+      if (_localizationProvider.Value == null || _localizationProvider.Value.RewrittenUrlLanguage == String.Empty ||
+          IsLocalImageServerUrl(relativePath))
       {
-        urlStringBuilder.Append("/");
-        urlStringBuilder.Append(_localizationProvider.Value.RewrittenUrlLanguage);
+        return relativePath;
       }
+
+      if (relativePath.StartsWith("~"))
+      {
+        return relativePath.Insert(1, String.Format("/{0}",_localizationProvider.Value.RewrittenUrlLanguage));
+      }
+
+      if (relativePath.StartsWith("/"))
+      {
+        return String.Format("/{0}{1}", _localizationProvider.Value.RewrittenUrlLanguage, relativePath);
+      }
+
+      return String.Format("{0}/{1}", _localizationProvider.Value.RewrittenUrlLanguage, relativePath);
     }
 
     private static string ResolveUrl(string url)

@@ -1,4 +1,5 @@
-﻿using Atlantis.Framework.Interface;
+﻿using System.Reflection;
+using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.Interface.Links;
 using Atlantis.Framework.Providers.Interface.ProviderContainer;
 using Atlantis.Framework.Providers.Localization.Interface;
@@ -524,6 +525,70 @@ namespace Atlantis.Framework.Providers.Links.Tests
       Assert.AreNotEqual(url, c3url);
     }
 
+    [TestMethod]
+    public void TestRelativeUrlWithLeadingSlashArguments()
+    {
+      ILinkProvider links = NewLinkProvider("http://siteadmin.debug.intranet.gdg/default.aspx", 1, string.Empty);
+      string url = links.GetRelativeUrl("/hosting/hosting.aspx");
+      Assert.AreEqual("http://siteadmin.debug.intranet.gdg/hosting/hosting.aspx", url);
 
+      url = links.GetRelativeUrl("/");
+      Assert.AreEqual("http://siteadmin.debug.intranet.gdg/", url);
+
+      LocalizationProvider.RewrittenUrlLanguage = "es";
+
+      url = links.GetRelativeUrl("/hosting/hosting.aspx");
+      Assert.AreEqual("http://siteadmin.debug.intranet.gdg/es/hosting/hosting.aspx", url);
+
+      url = links.GetRelativeUrl("/");
+      Assert.AreEqual("http://siteadmin.debug.intranet.gdg/es/", url);
+    }
+
+    /// <summary>
+    /// Cannot test this unless we can set HttpRuntime.AppDomainAppVirtualPath
+    /// </summary>
+    public void TestRelativeUrlWithLeadingTildeArguments()
+    {
+      ILinkProvider links = NewLinkProvider("http://siteadmin.debug.intranet.gdg/default.aspx", 1, string.Empty);
+      string url = links.GetRelativeUrl("~/hosting/hosting.aspx");
+      Assert.AreEqual("http://siteadmin.debug.intranet.gdg/hosting/hosting.aspx", url);
+
+      url = links.GetRelativeUrl("~/");
+      Assert.AreEqual("http://siteadmin.debug.intranet.gdg/", url);
+
+      LocalizationProvider.RewrittenUrlLanguage = "es";
+
+      url = links.GetRelativeUrl("~/hosting/hosting.aspx");
+      Assert.AreEqual("http://siteadmin.debug.intranet.gdg/es/hosting/hosting.aspx", url);
+
+      url = links.GetRelativeUrl("~/");
+      Assert.AreEqual("http://siteadmin.debug.intranet.gdg/es/", url);
+    }
+
+    [TestMethod]
+    public void TestRelativeUrlWithNoLeadingCharacterArguments()
+    {
+      ILinkProvider links = NewLinkProvider("http://siteadmin.debug.intranet.gdg/default.aspx", 1, string.Empty);
+      string url = links.GetRelativeUrl("hosting/hosting.aspx");
+      Assert.AreEqual("http://siteadmin.debug.intranet.gdghosting/hosting.aspx", url);  //  No slash added between host and relative path argument
+
+      url = links.GetRelativeUrl("");
+      Assert.AreEqual("http://siteadmin.debug.intranet.gdg", url);
+
+      LocalizationProvider.RewrittenUrlLanguage = "es";
+
+      url = links.GetRelativeUrl("hosting/hosting.aspx");
+      Assert.AreEqual("http://siteadmin.debug.intranet.gdges/hosting/hosting.aspx", url);
+
+      url = links.GetRelativeUrl("");
+      Assert.AreEqual("http://siteadmin.debug.intranet.gdges/", url);  //  No slash added between host and relative path argument
+    }
+
+    private MethodInfo GetPrivateMethod(string methodName)
+    {
+      Type requestType = typeof(LinkProvider);
+      MethodInfo method = requestType.GetMethod(methodName, BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.OptionalParamBinding);
+      return method;
+    }
   }
 }

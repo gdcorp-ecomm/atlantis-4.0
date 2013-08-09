@@ -44,8 +44,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MockCountrySiteInfo.cs" />
     <Compile Include="MockLocalizationProvider.cs" />
     <Compile Include="MockLocalizationProviderSettings.cs" />
+    <Compile Include="MockMarketInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

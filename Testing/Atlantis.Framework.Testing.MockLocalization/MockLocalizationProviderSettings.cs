@@ -4,5 +4,7 @@
   {
     public const string CountrySite = "MockLocalizationProvider.CountrySite";
     public const string FullLanguage = "MockLocalizationProvider.FullLanguage";
+    public const string CountrySiteInfo = "MockLocalizationProvider.CountrySiteInfo";
+    public const string MarketInfo = "MockLocalizationProvider.MarketInfo";
   }
 }

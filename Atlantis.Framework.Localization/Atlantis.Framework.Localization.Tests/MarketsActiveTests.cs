@@ -30,42 +30,42 @@ namespace Atlantis.Framework.Localization.Tests
         switch (m.Id)
         {
           case "en-US":
-            Assert.AreEqual("English - United States", m.Description);
+            Assert.AreEqual("English (United States)", m.Description);
             Assert.AreEqual("en-US", m.MsCulture);
             Assert.AreEqual(false, m.IsInternalOnly);
             break;
           case "es-US":
-            Assert.AreEqual("Spanish - United States", m.Description);
+            Assert.AreEqual("Spanish (United States)", m.Description);
             Assert.AreEqual("es-US", m.MsCulture);
             Assert.AreEqual(false, m.IsInternalOnly);
             break;
           case "en-CA":
-            Assert.AreEqual("English - Canada", m.Description);
+            Assert.AreEqual("English (Canada)", m.Description);
             Assert.AreEqual("en-CA", m.MsCulture);
             Assert.AreEqual(false, m.IsInternalOnly);
             break;
           case "en-GB":
-            Assert.AreEqual("English - United Kingdom", m.Description);
+            Assert.AreEqual("English (United Kingdom)", m.Description);
             Assert.AreEqual("en-GB", m.MsCulture);
             Assert.AreEqual(false, m.IsInternalOnly);
             break;
           case "en-AU":
-            Assert.AreEqual("English - Australia", m.Description);
+            Assert.AreEqual("English (Australia)", m.Description);
             Assert.AreEqual("en-AU", m.MsCulture);
             Assert.AreEqual(false, m.IsInternalOnly);
             break;
           case "en-IN":
-            Assert.AreEqual("English - India", m.Description);
+            Assert.AreEqual("English (India)", m.Description);
             Assert.AreEqual("en-IN", m.MsCulture);
             Assert.AreEqual(false, m.IsInternalOnly);
             break;
           case "qa-QA":
-            Assert.AreEqual("QA - Show Tags", m.Description);
+            Assert.AreEqual("QA (Show Tags)", m.Description);
             Assert.AreEqual("en-US", m.MsCulture);
             Assert.AreEqual(true, m.IsInternalOnly);
             break;
           case "qa-PS":
-            Assert.AreEqual("QA - Pseudo", m.Description);
+            Assert.AreEqual("QA (Pseudo)", m.Description);
             Assert.AreEqual("en-US", m.MsCulture);
             Assert.AreEqual(true, m.IsInternalOnly);
             break;

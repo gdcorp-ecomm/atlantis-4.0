@@ -1,4 +1,5 @@
-﻿using System.Collections.Specialized;
+﻿using System;
+using System.Collections.Specialized;
 using System.Diagnostics;
 using System.Reflection;
 using System.Web;
@@ -28,40 +29,36 @@ namespace Atlantis.Framework.Providers.SplitTesting.Tests
     [TestInitialize]
     public void InitializeTests()
     {
-      if (!_conditionHandlersRegistered)
-      {
-        ConditionHandlerManager.AutoRegisterConditionHandlers(Assembly.GetExecutingAssembly());
-        _conditionHandlersRegistered = true;
-      }
-
-      SplitTestingConfiguration.DefaultCategoryName = "Sales";
     }
 
     public TestContext TestContext { get; set; }
 
-    private ISplitTestingProvider InitializeProvidersAndReturnSplitTestProvider(int privateLabelId, string shopperId)
+    private void InitializeProviders(int privateLabelId, string shopperId)
     {
       HttpProviderContainer.Instance.RegisterProvider<ISiteContext, MockSiteContext>();
       HttpProviderContainer.Instance.RegisterProvider<IShopperContext, MockShopperContext>();
       HttpProviderContainer.Instance.RegisterProvider<IManagerContext, MockNoManagerContext>();
       HttpProviderContainer.Instance.RegisterProvider<ISplitTestingProvider, SplitTestingProvider>();
       HttpProviderContainer.Instance.RegisterProvider<IUserAgentDetectionProvider, UserAgentDetectionProvider>();
-
       HttpContext.Current.Items[MockSiteContextSettings.PrivateLabelId] = privateLabelId;
       var shopperContext = HttpProviderContainer.Instance.Resolve<IShopperContext>();
       shopperContext.SetNewShopper(shopperId);
-
-      var splitProvider = HttpProviderContainer.Instance.Resolve<ISplitTestingProvider>();
-      return splitProvider;
+      if (!_conditionHandlersRegistered)
+      {
+        ConditionHandlerManager.AutoRegisterConditionHandlers(Assembly.GetExecutingAssembly());
+        _conditionHandlersRegistered = true;
+      }
     }
 
     [TestMethod]
     public void GetSplitTestSideForInvalidTestId()
     {
+      SplitTestingConfiguration.DefaultCategoryName = "Sales";
       var mockHttpRequest = new MockHttpRequest("http://www.debug.godaddy-com.ide/");
       MockHttpContext.SetFromWorkerRequest(mockHttpRequest);
 
-      ISplitTestingProvider splitProvider = InitializeProvidersAndReturnSplitTestProvider(1, "858884");
+      InitializeProviders(1, "858884");
+      var splitProvider = HttpProviderContainer.Instance.Resolve<ISplitTestingProvider>();
       Assert.IsNotNull(splitProvider);
 
       var side1 = splitProvider.GetSplitTestingSide(9999);
@@ -72,10 +69,12 @@ namespace Atlantis.Framework.Providers.SplitTesting.Tests
     [TestMethod]
     public void GetSplitTestSideForValidTestIdNoEligibilityRules()
     {
+      SplitTestingConfiguration.DefaultCategoryName = "Sales";
       var mockHttpRequest = new MockHttpRequest("http://www.debug.godaddy-com.ide/");
       MockHttpContext.SetFromWorkerRequest(mockHttpRequest);
 
-      ISplitTestingProvider splitProvider = InitializeProvidersAndReturnSplitTestProvider(1, "858884");
+      InitializeProviders(1, "858884");
+      var splitProvider = HttpProviderContainer.Instance.Resolve<ISplitTestingProvider>();
 
       Assert.IsNotNull(splitProvider);
 
@@ -86,10 +85,12 @@ namespace Atlantis.Framework.Providers.SplitTesting.Tests
     [TestMethod]
     public void GetSplitTestSideForValidTestIdsNoEligibilityRulesFromSameRequest()
     {
+      SplitTestingConfiguration.DefaultCategoryName = "Sales";
       var mockHttpRequest = new MockHttpRequest("http://www.debug.godaddy-com.ide/");
       MockHttpContext.SetFromWorkerRequest(mockHttpRequest);
 
-      ISplitTestingProvider splitProvider = InitializeProvidersAndReturnSplitTestProvider(1, "858884");
+      InitializeProviders(1, "858884");
+      var splitProvider = HttpProviderContainer.Instance.Resolve<ISplitTestingProvider>();
 
       Assert.IsNotNull(splitProvider);
 
@@ -103,10 +104,12 @@ namespace Atlantis.Framework.Providers.SplitTesting.Tests
     [TestMethod]
     public void GetSplitTestSideForValidTestIdWithEligibilityRules()
     {
+      SplitTestingConfiguration.DefaultCategoryName = "Sales";
       var mockHttpRequest = new MockHttpRequest("http://www.debug.godaddy-com.ide/");
       MockHttpContext.SetFromWorkerRequest(mockHttpRequest);
 
-      ISplitTestingProvider splitProvider = InitializeProvidersAndReturnSplitTestProvider(1, "858884");
+      InitializeProviders(1, "858884");
+      var splitProvider = HttpProviderContainer.Instance.Resolve<ISplitTestingProvider>();
 
       Assert.IsNotNull(splitProvider);
 
@@ -117,10 +120,12 @@ namespace Atlantis.Framework.Providers.SplitTesting.Tests
     [TestMethod]
     public void GetSplitTestSideForValidTestIdsWithEligibilityRulesFromSameRequest()
     {
+      SplitTestingConfiguration.DefaultCategoryName = "Sales";
       var mockHttpRequest = new MockHttpRequest("http://www.debug.godaddy-com.ide/");
       MockHttpContext.SetFromWorkerRequest(mockHttpRequest);
 
-      ISplitTestingProvider splitProvider = InitializeProvidersAndReturnSplitTestProvider(1, "858884");
+      InitializeProviders(1, "858884");
+      var splitProvider = HttpProviderContainer.Instance.Resolve<ISplitTestingProvider>();
 
       Assert.IsNotNull(splitProvider);
 
@@ -134,12 +139,14 @@ namespace Atlantis.Framework.Providers.SplitTesting.Tests
     [TestMethod]
     public void SetOverrideSide()
     {
+      SplitTestingConfiguration.DefaultCategoryName = "Sales";
       var mockHttpRequest = new MockHttpRequest("http://www.debug.godaddy-com.ide/");
       MockHttpContext.SetFromWorkerRequest(mockHttpRequest);
       string shopperId = "858884";
       int privateLabelId = 1;
 
-      ISplitTestingProvider splitProvider = InitializeProvidersAndReturnSplitTestProvider(privateLabelId, shopperId );
+      InitializeProviders(privateLabelId, shopperId );
+      var splitProvider = HttpProviderContainer.Instance.Resolve<ISplitTestingProvider>();
 
       Assert.IsNotNull(splitProvider);
       int testIdNotActive = -99;
@@ -157,12 +164,14 @@ namespace Atlantis.Framework.Providers.SplitTesting.Tests
     [TestMethod]
     public void SideSelectedViaOverrideCookie()
     {
+      SplitTestingConfiguration.DefaultCategoryName = "Sales";
       var mockHttpRequest = new MockHttpRequest("http://www.debug.godaddy-com.ide/");
       MockHttpContext.SetFromWorkerRequest(mockHttpRequest);
       string shopperId = "858884";
       int privateLabelId = 1;
 
-      ISplitTestingProvider splitProvider = InitializeProvidersAndReturnSplitTestProvider(privateLabelId, shopperId);
+      InitializeProviders(privateLabelId, shopperId);
+      var splitProvider = HttpProviderContainer.Instance.Resolve<ISplitTestingProvider>();
 
       Assert.IsNotNull(splitProvider);
       int testIdNotActive = 989858;
@@ -178,15 +187,16 @@ namespace Atlantis.Framework.Providers.SplitTesting.Tests
       Assert.AreEqual(-1, side1.SideId);
     }
 
-
     [TestMethod]
     public void BotDetectTest_Browser()
     {
+      SplitTestingConfiguration.DefaultCategoryName = "Sales";
       var mockHttpRequest = new MockHttpRequest("http://www.debug.godaddy-com.ide/");
       MockHttpContext.SetFromWorkerRequest(mockHttpRequest);
       mockHttpRequest.MockUserAgent(@"Mozilla/5.0 (Windows NT 6.0; rv:14.0) Gecko/20100101 Firefox/14.0.1");
 
-      ISplitTestingProvider splitProvider = InitializeProvidersAndReturnSplitTestProvider(1, "858884");
+      InitializeProviders(1, "858884");
+      var splitProvider = HttpProviderContainer.Instance.Resolve<ISplitTestingProvider>();
 
       Assert.IsNotNull(splitProvider);
 
@@ -198,11 +208,13 @@ namespace Atlantis.Framework.Providers.SplitTesting.Tests
     [TestMethod]
     public void BotDetectTest_Bot()
     {
+      SplitTestingConfiguration.DefaultCategoryName = "Sales";
       var mockHttpRequest = new MockHttpRequest("http://www.debug.godaddy-com.ide/");
       MockHttpContext.SetFromWorkerRequest(mockHttpRequest);
       mockHttpRequest.MockUserAgent(@"googlebot");
 
-      ISplitTestingProvider splitProvider = InitializeProvidersAndReturnSplitTestProvider(1, "858884");
+      InitializeProviders(1, "858884");
+      var splitProvider = HttpProviderContainer.Instance.Resolve<ISplitTestingProvider>();
 
       Assert.IsNotNull(splitProvider);
 
@@ -214,10 +226,12 @@ namespace Atlantis.Framework.Providers.SplitTesting.Tests
     [TestMethod]
     public void GetActiveTests()
     {
+      SplitTestingConfiguration.DefaultCategoryName = "Test";
       var mockHttpRequest = new MockHttpRequest("http://www.debug.godaddy-com.ide/");
       MockHttpContext.SetFromWorkerRequest(mockHttpRequest);
 
-      ISplitTestingProvider splitProvider = InitializeProvidersAndReturnSplitTestProvider(1, "858884");
+      InitializeProviders(1, "858884");
+      var splitProvider = HttpProviderContainer.Instance.Resolve<ISplitTestingProvider>();
 
       Assert.IsNotNull(splitProvider);
 
@@ -225,7 +239,90 @@ namespace Atlantis.Framework.Providers.SplitTesting.Tests
 
       Assert.IsNotNull(tests);
       var iter = tests.GetEnumerator();
-      Assert.IsTrue(iter.MoveNext(), "Check admin to see if there is at least one active test.");
+      Assert.IsTrue(iter.MoveNext(), "Check admin to see if there is at least one active test in TEST category");
     }
+
+    [TestMethod]
+    public void TestAllocation_50_50()
+    {
+      SplitTestingConfiguration.DefaultCategoryName = "Test";
+      var mockHttpRequest = new MockHttpRequest("http://www.debug.godaddy-com.ide/");
+      MockHttpContext.SetFromWorkerRequest(mockHttpRequest);
+
+      int testId = 1011;
+      double aLowerLimit = .48d;
+      double aUpperLimit = .52d;
+      double bLowerLimit = .48d;
+      double bUpperLimit = .52d;
+
+      TestAllocationTwoSides(testId, aLowerLimit, aUpperLimit, bLowerLimit, bUpperLimit);
+    }
+
+    [TestMethod]
+    public void TestAllocation_0_100()
+    {
+      SplitTestingConfiguration.DefaultCategoryName = "Test";
+      var mockHttpRequest = new MockHttpRequest("http://www.debug.godaddy-com.ide/");
+      MockHttpContext.SetFromWorkerRequest(mockHttpRequest);
+
+      int testId = 1012;
+      double aLowerLimit = 0.0d;
+      double aUpperLimit = 0.0d;
+      double bLowerLimit = 1.0d;
+      double bUpperLimit = 1.0d;
+
+      TestAllocationTwoSides(testId, aLowerLimit, aUpperLimit, bLowerLimit, bUpperLimit);
+    }
+
+    [TestMethod]
+    public void TestAllocation_80_20()
+    {
+      SplitTestingConfiguration.DefaultCategoryName = "Test";
+      var mockHttpRequest = new MockHttpRequest("http://www.debug.godaddy-com.ide/");
+      MockHttpContext.SetFromWorkerRequest(mockHttpRequest);
+
+      int testId = 1013;
+      double aLowerLimit = 0.78d;
+      double aUpperLimit = 0.82d;
+      double bLowerLimit = 0.18d;
+      double bUpperLimit = 0.22d;
+
+      TestAllocationTwoSides(testId, aLowerLimit, aUpperLimit, bLowerLimit, bUpperLimit);
+    }
+
+    private void TestAllocationTwoSides(int testId, double aLowerLimit, double aUpperLimit, double bLowerLimit, double bUpperLimit)
+    {
+      int totalCount = 5000;
+      double countSideA = 0;
+      double countSideB = 0;
+      for (int i = 0; i < totalCount; i++)
+      {
+        HttpContext.Current.Items.Remove(
+                "Atlantis.Framework.Interface.HttpProviderContainer.Atlantis.Framework.Providers.SplitTesting.Interface.ISplitTestingProvider");
+        HttpContext.Current.Request.Cookies.Clear();
+        InitializeProviders(1, "858884");
+        var splitProvider = HttpProviderContainer.Instance.Resolve<ISplitTestingProvider>();
+        
+        var side = splitProvider.GetSplitTestingSide(testId);
+        switch (side.Name.ToUpper())
+        {
+          case "A":
+            countSideA++;
+            break;
+          case "B":
+            countSideB++;
+            break;
+        }
+      }
+      Assert.IsTrue(countSideA + countSideB == totalCount, "count of sides do not equal number of requests");
+      double aPercent = countSideA / totalCount;
+      double bPercent = countSideB / totalCount;
+      Assert.IsTrue(aPercent >= aLowerLimit && aPercent <= aUpperLimit, "A was " + aPercent);
+      Assert.IsTrue(bPercent >= bLowerLimit && bPercent <= bUpperLimit, "B was " + bPercent);
+    }
+
+
+
+
   }
 }

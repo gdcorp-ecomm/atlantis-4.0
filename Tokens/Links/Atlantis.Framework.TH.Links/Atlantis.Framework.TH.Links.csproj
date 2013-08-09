@@ -47,6 +47,9 @@
     <Compile Include="LinkRenderContext.cs" />
     <Compile Include="LinkToken.cs" />
     <Compile Include="LinkTokenHandler.cs" />
+    <Compile Include="MobileRedirectLinkRenderContext.cs" />
+    <Compile Include="MobileRedirectLinkToken.cs" />
+    <Compile Include="MobileRedirectLinkTokenHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -65,6 +68,14 @@
     <ProjectReference Include="..\..\..\Atlantis.Framework.Tokens\Atlantis.Framework.Tokens.Interface\Atlantis.Framework.Tokens.Interface.csproj">
       <Project>{79189505-c1c8-4282-83e2-0140a2635624}</Project>
       <Name>Atlantis.Framework.Tokens.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Atlantis.Framework.UserAgentEx\Atlantis.Framework.UserAgentEx.Interface\Atlantis.Framework.UserAgentEx.Interface.csproj">
+      <Project>{08b1219f-fd25-46ba-8240-f706d533fc7a}</Project>
+      <Name>Atlantis.Framework.UserAgentEx.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Providers\MobileRedirectProvider\Atlantis.Framework.Providers.MobileRedirect.Interface\Atlantis.Framework.Providers.MobileRedirect.Interface.csproj">
+      <Project>{1e1fa7c9-f3c2-4d06-be83-a2aafd170505}</Project>
+      <Name>Atlantis.Framework.Providers.MobileRedirect.Interface</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,5 +1,5 @@
-﻿using System.Web;
-
+﻿using System;
+using System.Web;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.Interface.Links;
 using Atlantis.Framework.Tokens.Interface;
@@ -8,20 +8,19 @@ namespace Atlantis.Framework.TH.Links
 {
   internal class LinkRenderContext
   {
-    ISiteContext _siteContext;
-    ILinkProvider _linkProvider;
+    private Lazy<ILinkProvider> _linkProvider;
 
     internal LinkRenderContext(IProviderContainer container)
     {
-      _siteContext = container.Resolve<ISiteContext>();
-      _linkProvider = container.Resolve<ILinkProvider>();
+      _linkProvider = new Lazy<ILinkProvider>(container.Resolve<ILinkProvider>);
     }
 
     internal bool RenderToken(IToken token)
     {
-      bool result = true;
+      bool result;
 
       LinkToken linkToken = token as LinkToken;
+
       if (linkToken != null)
       {
         switch (linkToken.RenderType.ToLowerInvariant())
@@ -29,13 +28,13 @@ namespace Atlantis.Framework.TH.Links
           case "imageroot":
           case "cssroot":
           case "javascriptroot":
-            result = this.GetNamedRoot(linkToken);
+            result = GetNamedRoot(linkToken);
             break;
           case "relative":
-            this.GetRelativeUrl(linkToken);
+            result = GetRelativeUrl(linkToken);
             break;
           case "external":
-            this.GetExternalUrl(linkToken);
+            result = GetExternalUrl(linkToken);
             break;
           default:
             result = false;
@@ -47,8 +46,8 @@ namespace Atlantis.Framework.TH.Links
       else
       {
         result = false;
-        linkToken.TokenError = "Cannot convert IToken to LinkToken";
-        linkToken.TokenResult = string.Empty;
+        token.TokenError = "Cannot convert IToken to LinkToken";
+        token.TokenResult = string.Empty;
       }
 
       return result;
@@ -63,13 +62,13 @@ namespace Atlantis.Framework.TH.Links
       switch (token.RenderType.ToLowerInvariant())
       {
         case "imageroot":
-          namedRoot = _linkProvider.ImageRoot;
+          namedRoot = _linkProvider.Value.ImageRoot;
           break;
         case "cssroot":
-          namedRoot = _linkProvider.CssRoot;
+          namedRoot = _linkProvider.Value.CssRoot;
           break;
         case "javascriptroot":
-          namedRoot = _linkProvider.JavascriptRoot;
+          namedRoot = _linkProvider.Value.JavascriptRoot;
           break;
       }
 
@@ -85,23 +84,29 @@ namespace Atlantis.Framework.TH.Links
     private bool GetRelativeUrl(LinkToken token)
     {
       bool result = false;
-      string relativeUrl = string.Empty;
+      string relativeUrl;
 
       if (token.Params == null)
       {
-        relativeUrl = _linkProvider.GetRelativeUrl(token.Path, token.ParamMode);
+        relativeUrl = _linkProvider.Value.GetRelativeUrl(token.Path, token.ParamMode);
       }
       else
       {
-        relativeUrl = _linkProvider.GetRelativeUrl(token.Path, token.ParamMode, token.Params);
+        relativeUrl = _linkProvider.Value.GetRelativeUrl(token.Path, token.ParamMode, token.Params);
       }
 
       if (!string.IsNullOrEmpty(relativeUrl))
       {
         result = true;
       }
+      else
+      {
+        token.TokenError = "GetRelativeUrl came back empty.";
+        token.TokenResult = string.Empty;
+      }
 
       token.TokenResult = relativeUrl;
+
       return result;
     }
 
@@ -114,11 +119,11 @@ namespace Atlantis.Framework.TH.Links
       {
         if (token.Params == null)
         {
-          relativeUrl = _linkProvider.GetUrl(token.LinkType, token.Path, token.ParamMode, token.Secure.Value);
+          relativeUrl = _linkProvider.Value.GetUrl(token.LinkType, token.Path, token.ParamMode, token.Secure.Value);
         }
         else
         {
-          relativeUrl = _linkProvider.GetUrl(token.LinkType, token.Path, token.ParamMode, token.Secure.Value, token.Params);
+          relativeUrl = _linkProvider.Value.GetUrl(token.LinkType, token.Path, token.ParamMode, token.Secure.Value, token.Params);
         }
       }
       else
@@ -127,11 +132,11 @@ namespace Atlantis.Framework.TH.Links
         {
           if (token.Params == null)
           {
-            relativeUrl = _linkProvider.GetUrl(token.LinkType, token.Path, token.ParamMode, HttpContext.Current.Request.IsSecureConnection);
+            relativeUrl = _linkProvider.Value.GetUrl(token.LinkType, token.Path, token.ParamMode, HttpContext.Current.Request.IsSecureConnection);
           }
           else
           {
-            relativeUrl = _linkProvider.GetUrl(token.LinkType, token.Path, token.ParamMode, HttpContext.Current.Request.IsSecureConnection, token.Params);
+            relativeUrl = _linkProvider.Value.GetUrl(token.LinkType, token.Path, token.ParamMode, HttpContext.Current.Request.IsSecureConnection, token.Params);
           }
         }
       }
@@ -141,8 +146,14 @@ namespace Atlantis.Framework.TH.Links
       {
         result = true;
       }
+      else
+      {
+        token.TokenError = "GetExternalUrl came back empty. LinkType: " + token.LinkType;
+        token.TokenResult = string.Empty;
+      }
 
       token.TokenResult = relativeUrl;
+
       return result;
     }
   }

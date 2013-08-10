@@ -21,9 +21,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Provider
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.SplitTesting.Impl", "..\..\Triplets\SplitTesting\Atlantis.Framework.SplitTesting.Impl\Atlantis.Framework.SplitTesting.Impl.csproj", "{1DCCCFDF-B22E-4E29-924D-FC1E0DB7FEAF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.SplitTesting.Interface", "..\..\Triplets\SplitTesting\Atlantis.Framework.SplitTesting.Interface\Atlantis.Framework.SplitTesting.Interface.csproj", "{3C889792-7183-4648-8031-418BAE99C76B}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 10
+		SccNumberOfProjects = 11
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
 		SccLocalPath0 = .
@@ -61,6 +63,10 @@ Global
 		SccProjectTopLevelParentUniqueName9 = SplitTesting.sln
 		SccProjectName9 = ../../Triplets/SplitTesting/Atlantis.Framework.SplitTesting.Impl
 		SccLocalPath9 = ..\\..\\Triplets\\SplitTesting\\Atlantis.Framework.SplitTesting.Impl
+		SccProjectUniqueName10 = ..\\..\\Triplets\\SplitTesting\\Atlantis.Framework.SplitTesting.Interface\\Atlantis.Framework.SplitTesting.Interface.csproj
+		SccProjectTopLevelParentUniqueName10 = SplitTesting.sln
+		SccProjectName10 = ../../Triplets/SplitTesting/Atlantis.Framework.SplitTesting.Interface
+		SccLocalPath10 = ..\\..\\Triplets\\SplitTesting\\Atlantis.Framework.SplitTesting.Interface
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -103,6 +109,10 @@ Global
 		{1DCCCFDF-B22E-4E29-924D-FC1E0DB7FEAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1DCCCFDF-B22E-4E29-924D-FC1E0DB7FEAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1DCCCFDF-B22E-4E29-924D-FC1E0DB7FEAF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C889792-7183-4648-8031-418BAE99C76B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C889792-7183-4648-8031-418BAE99C76B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C889792-7183-4648-8031-418BAE99C76B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C889792-7183-4648-8031-418BAE99C76B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -115,5 +125,6 @@ Global
 		{C333E679-494E-422D-AB5E-E4C0EC94ACD5} = {DA199D07-5266-4254-990C-22C70151A3CA}
 		{A8D37308-91EF-4D98-B22D-F3BE709CF685} = {DA199D07-5266-4254-990C-22C70151A3CA}
 		{1DCCCFDF-B22E-4E29-924D-FC1E0DB7FEAF} = {DA199D07-5266-4254-990C-22C70151A3CA}
+		{3C889792-7183-4648-8031-418BAE99C76B} = {DA199D07-5266-4254-990C-22C70151A3CA}
 	EndGlobalSection
 EndGlobal

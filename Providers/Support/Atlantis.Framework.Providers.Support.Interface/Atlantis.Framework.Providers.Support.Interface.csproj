@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{36BF7B2D-17A8-4BCA-8A61-5DCE8C75DE4E}</ProjectGuid>
+    <ProjectGuid>{8EF69837-5224-4910-BC70-F837975D689D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Atlantis.Framework.Support.Interface</RootNamespace>
-    <AssemblyName>Atlantis.Framework.Support.Interface</AssemblyName>
+    <RootNamespace>Atlantis.Framework.Providers.Support.Interface</RootNamespace>
+    <AssemblyName>Atlantis.Framework.Providers.Support.Interface</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>
@@ -43,16 +43,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ISupportPhoneData.cs" />
-    <Compile Include="SupportPhoneData.cs" />
-    <Compile Include="SupportPhoneRequestData.cs" />
-    <Compile Include="SupportPhoneResponseData.cs" />
+    <Compile Include="ISupportProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SupportPhoneType.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj">
-      <Project>{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}</Project>
-      <Name>Atlantis.Framework.Interface</Name>
+    <ProjectReference Include="..\..\..\Triplets\Support\Atlantis.Framework.Support.Interface\Atlantis.Framework.Support.Interface.csproj">
+      <Project>{36BF7B2D-17A8-4BCA-8A61-5DCE8C75DE4E}</Project>
+      <Name>Atlantis.Framework.Support.Interface</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

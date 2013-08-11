@@ -6,9 +6,23 @@ namespace Atlantis.Framework.Support.Interface
 {
   public class SupportPhoneResponseData : IResponseData
   {
-    private AtlantisException _exception;
+    private static readonly ISupportPhoneData _emptySupportPhoneData = new SupportPhoneData(string.Empty, false);
 
-    public SupportPhone SupportPhone {get; private set;}
+    private readonly AtlantisException _exception;
+
+    private ISupportPhoneData _supportPhoneData;
+    public ISupportPhoneData SupportPhoneData
+    {
+      get
+      {
+        if (_supportPhoneData == null)
+        {
+          _supportPhoneData = _emptySupportPhoneData;
+        }
+
+        return _supportPhoneData;
+      }
+    }
 
     private SupportPhoneResponseData(string responseXml, string countryCode)
     {
@@ -18,7 +32,6 @@ namespace Atlantis.Framework.Support.Interface
     private SupportPhoneResponseData(AtlantisException ex)
     {
       _exception = ex;
-      SupportPhone = null;
     }
 
     public static SupportPhoneResponseData FromException(AtlantisException ex)
@@ -33,9 +46,9 @@ namespace Atlantis.Framework.Support.Interface
 
     public string ToXML()
     {
-      XElement element = new XElement("SupportPhone");
-      element.Add(new XAttribute("supportPhone", SupportPhone.TechnicalSupportPhone));
-      element.Add(new XAttribute("isInternational", SupportPhone.SupportPhoneIsInternational));
+      XElement element = new XElement("SupportPhoneData");
+      element.Add(new XAttribute("number", SupportPhoneData.Number));
+      element.Add(new XAttribute("isInternational", SupportPhoneData.IsInternational));
       return element.ToString(SaveOptions.DisableFormatting);
     }
 
@@ -51,18 +64,18 @@ namespace Atlantis.Framework.Support.Interface
         XmlElement nodeElement = node as XmlElement;
         if (nodeElement != null)
         {
-          SupportPhone = new SupportPhone(nodeElement.GetAttribute("supportPhone"), !countryCode.Equals("us"));
+          _supportPhoneData = new SupportPhoneData(nodeElement.GetAttribute("supportPhone"), !countryCode.Equals("us"));
         }
       }
       else
       {
-        node = doc.SelectSingleNode("//item [@isActive='1' and @flagCode='" + "us" + "']");
+        node = doc.SelectSingleNode("//item [@isActive='1' and @flagCode='us']");
         if (node != null)
         {
           XmlElement nodeElement = node as XmlElement;
           if (nodeElement != null)
           {
-            SupportPhone = new SupportPhone(nodeElement.GetAttribute("supportPhone"), false);
+            _supportPhoneData = new SupportPhoneData(nodeElement.GetAttribute("supportPhone"), false);
           }
         }
       }

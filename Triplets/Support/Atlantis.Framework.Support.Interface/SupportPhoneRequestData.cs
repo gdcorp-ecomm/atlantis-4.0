@@ -25,9 +25,9 @@ namespace Atlantis.Framework.Support.Interface
 
     public override string ToXML()
     {
-      XElement element = new XElement("SupportSettingsRequestData");
-      element.Add(new XAttribute("id", ResellerTypeId));
-      element.Add(new XAttribute("countryCode", CountryCode));
+      XElement element = new XElement("SupportPhoneRequestData");
+      element.Add(new XAttribute("ResellerTypeId", ResellerTypeId));
+      element.Add(new XAttribute("CountryCode", CountryCode));
       return element.ToString(SaveOptions.DisableFormatting);
     }
   }

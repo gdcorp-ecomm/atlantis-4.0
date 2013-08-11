@@ -65,9 +65,9 @@ namespace Atlantis.Framework.Support.Tests
     {
       SupportPhoneRequestData request = new SupportPhoneRequestData(1, "us");
       SupportPhoneResponseData response = (SupportPhoneResponseData)Engine.Engine.ProcessRequest(request, SUPPORTPHONEREQUESTTYPE);
-      Assert.IsFalse(string.IsNullOrEmpty(response.SupportPhone.TechnicalSupportPhone));
-      Assert.IsFalse(response.SupportPhone.SupportPhoneIsInternational);
-      Assert.AreEqual(response.SupportPhone.TechnicalSupportPhone, "(480) 505-8877");
+      Assert.IsFalse(string.IsNullOrEmpty(response.SupportPhoneData.Number));
+      Assert.IsFalse(response.SupportPhoneData.IsInternational);
+      Assert.AreEqual(response.SupportPhoneData.Number, "(480) 505-8877");
     }
 
     [TestMethod]
@@ -75,9 +75,9 @@ namespace Atlantis.Framework.Support.Tests
     {
       SupportPhoneRequestData request = new SupportPhoneRequestData(1, "au");
       SupportPhoneResponseData response = (SupportPhoneResponseData)Engine.Engine.ProcessRequest(request, SUPPORTPHONEREQUESTTYPE);
-      Assert.IsFalse(string.IsNullOrEmpty(response.SupportPhone.TechnicalSupportPhone));
-      Assert.IsTrue(response.SupportPhone.SupportPhoneIsInternational);
-      Assert.AreEqual(response.SupportPhone.TechnicalSupportPhone, "02 8023 8592");
+      Assert.IsFalse(string.IsNullOrEmpty(response.SupportPhoneData.Number));
+      Assert.IsTrue(response.SupportPhoneData.IsInternational);
+      Assert.AreEqual(response.SupportPhoneData.Number, "02 8023 8592");
     }
 
     [TestMethod]
@@ -85,9 +85,9 @@ namespace Atlantis.Framework.Support.Tests
     {
       SupportPhoneRequestData request = new SupportPhoneRequestData(5, "us");
       SupportPhoneResponseData response = (SupportPhoneResponseData)Engine.Engine.ProcessRequest(request, SUPPORTPHONEREQUESTTYPE);
-      Assert.IsFalse(string.IsNullOrEmpty(response.SupportPhone.TechnicalSupportPhone));
-      Assert.IsFalse(response.SupportPhone.SupportPhoneIsInternational);
-      Assert.AreEqual(response.SupportPhone.TechnicalSupportPhone, "(480) 624-2500");
+      Assert.IsFalse(string.IsNullOrEmpty(response.SupportPhoneData.Number));
+      Assert.IsFalse(response.SupportPhoneData.IsInternational);
+      Assert.AreEqual(response.SupportPhoneData.Number, "(480) 624-2500");
     }
 
     [TestMethod]
@@ -95,9 +95,9 @@ namespace Atlantis.Framework.Support.Tests
     {
       SupportPhoneRequestData request = new SupportPhoneRequestData(5, "in");
       SupportPhoneResponseData response = (SupportPhoneResponseData)Engine.Engine.ProcessRequest(request, SUPPORTPHONEREQUESTTYPE);
-      Assert.IsFalse(string.IsNullOrEmpty(response.SupportPhone.TechnicalSupportPhone));
-      Assert.IsTrue(response.SupportPhone.SupportPhoneIsInternational);
-      Assert.AreEqual(response.SupportPhone.TechnicalSupportPhone, "1-800-121-0120");
+      Assert.IsFalse(string.IsNullOrEmpty(response.SupportPhoneData.Number));
+      Assert.IsTrue(response.SupportPhoneData.IsInternational);
+      Assert.AreEqual(response.SupportPhoneData.Number, "1-800-121-0120");
     }
   }
 }

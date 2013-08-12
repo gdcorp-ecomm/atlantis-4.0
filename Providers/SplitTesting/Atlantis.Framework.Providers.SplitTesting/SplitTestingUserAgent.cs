@@ -2,7 +2,7 @@
 
 namespace Atlantis.Framework.Providers.SplitTesting
 {
-  public class SplitTestingUserAgent
+  internal class SplitTestingUserAgent
   {
     internal static string UserAgent 
     {

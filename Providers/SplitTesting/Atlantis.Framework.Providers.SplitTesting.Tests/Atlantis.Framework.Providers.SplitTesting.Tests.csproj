@@ -64,8 +64,15 @@
   </Choose>
   <ItemGroup>
     <Compile Include="ConditionHandlers\DataCenterConditionHandler.cs" />
+    <Compile Include="Mocks\MockAppSettingRequest_ATLANTIS_SPLITPROVIDER_COOKIELIFE_HOURS_24Hours.cs" />
+    <Compile Include="SplitTestingCookieTests.cs" />
+    <Compile Include="Mocks\ActiveSplitTestsRequest_NoTests.cs" />
+    <Compile Include="Mocks\BotUserAgentProvider.cs" />
+    <Compile Include="Mocks\NoBotUserAgentProvider.cs" />
+    <Compile Include="Mocks\MockEngineRequests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SplitTestingProviderTests.cs" />
+    <Compile Include="SplitTestingCookieOverrideTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Atlantis.Framework.AppSettings\Atlantis.Framework.AppSettings.Impl\Atlantis.Framework.AppSettings.Impl.csproj">
@@ -178,10 +185,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="atlantis.config">
+    <Content Include="atlantis.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>
-    </None>
+    </Content>
   </ItemGroup>
   <ItemGroup />
   <Choose>

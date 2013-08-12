@@ -33,13 +33,13 @@ namespace Atlantis.Framework.Providers.SplitTesting
       set
       {
         _splitTestingStateData = value;
-        _splitTestCookie.Value.Value = value;
+        _splitTestCookie.Value.CookieValues = value;
       }
     }
     
     private void RefreshData()
     {
-      _splitTestingStateData = _splitTestCookie.Value.Value;
+      _splitTestingStateData = _splitTestCookie.Value.CookieValues;
 
       if (_splitTestingStateData != null &&
           _activeSplitTestsResponse != null && _activeSplitTestsResponse.SplitTests.Any())
@@ -56,14 +56,14 @@ namespace Atlantis.Framework.Providers.SplitTesting
             _splitTestingStateData.Remove(item);
           }
 
-          _splitTestCookie.Value.Value = _splitTestingStateData;
+          _splitTestCookie.Value.CookieValues = _splitTestingStateData;
         }
       }
     }
 
     private void GetCookieDataKeysToRemove(List<IActiveSplitTest> activeTests, ICollection<string> keysToRemove)
     {
-      var cookieData = _splitTestCookie.Value.Value;
+      var cookieData = _splitTestCookie.Value.CookieValues;
 
       foreach (var data in cookieData)
       {

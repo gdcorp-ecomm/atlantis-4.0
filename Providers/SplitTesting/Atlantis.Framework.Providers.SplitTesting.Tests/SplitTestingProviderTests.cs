@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Specialized;
-using System.Diagnostics;
+﻿using System.Collections.Specialized;
 using System.Reflection;
 using System.Web;
 using Atlantis.Framework.Conditions.Interface;
 using Atlantis.Framework.Interface;
-using Atlantis.Framework.Providers.Containers;
 using Atlantis.Framework.Providers.SplitTesting.Interface;
-using Atlantis.Framework.Providers.UserAgentDetection;
+using Atlantis.Framework.Providers.SplitTesting.Tests.Mocks;
 using Atlantis.Framework.Providers.UserAgentDetection.Interface;
 using Atlantis.Framework.Testing.MockHttpContext;
 using Atlantis.Framework.Testing.MockProviders;
@@ -33,21 +30,36 @@ namespace Atlantis.Framework.Providers.SplitTesting.Tests
 
     public TestContext TestContext { get; set; }
 
-    private void InitializeProviders(int privateLabelId, string shopperId)
+    private ISplitTestingProvider InitializeProviders(int privateLabelId, string shopperId, bool isBotUserAgent = false, bool isInternal = false)
     {
-      HttpProviderContainer.Instance.RegisterProvider<ISiteContext, MockSiteContext>();
-      HttpProviderContainer.Instance.RegisterProvider<IShopperContext, MockShopperContext>();
-      HttpProviderContainer.Instance.RegisterProvider<IManagerContext, MockNoManagerContext>();
-      HttpProviderContainer.Instance.RegisterProvider<ISplitTestingProvider, SplitTestingProvider>();
-      HttpProviderContainer.Instance.RegisterProvider<IUserAgentDetectionProvider, UserAgentDetectionProvider>();
+      var container = new MockProviderContainer();
+
+      container.RegisterProvider<ISiteContext, MockSiteContext>();
+      container.RegisterProvider<IShopperContext, MockShopperContext>();
+      container.RegisterProvider<IManagerContext, MockNoManagerContext>();
+      container.RegisterProvider<ISplitTestingProvider, SplitTestingProvider>();
+      if (isBotUserAgent)
+      {
+        container.RegisterProvider<IUserAgentDetectionProvider, BotUserAgentProvider>();
+      }
+      else
+      {
+        container.RegisterProvider<IUserAgentDetectionProvider, NoBotUserAgentProvider>();
+      }
+      container.SetMockSetting(MockSiteContextSettings.IsRequestInternal, isInternal);
       HttpContext.Current.Items[MockSiteContextSettings.PrivateLabelId] = privateLabelId;
-      var shopperContext = HttpProviderContainer.Instance.Resolve<IShopperContext>();
+      var shopperContext = container.Resolve<IShopperContext>();
       shopperContext.SetNewShopper(shopperId);
       if (!_conditionHandlersRegistered)
       {
         ConditionHandlerManager.AutoRegisterConditionHandlers(Assembly.GetExecutingAssembly());
         _conditionHandlersRegistered = true;
       }
+
+      SplitTestingEngineRequests.ActiveSplitTests = 684;
+      SplitTestingEngineRequests.ActiveSplitTestDetails = 685;
+
+      return container.Resolve<ISplitTestingProvider>();
     }
 
     [TestMethod]
@@ -56,14 +68,15 @@ namespace Atlantis.Framework.Providers.SplitTesting.Tests
       SplitTestingConfiguration.DefaultCategoryName = "Sales";
       var mockHttpRequest = new MockHttpRequest("http://www.debug.godaddy-com.ide/");
       MockHttpContext.SetFromWorkerRequest(mockHttpRequest);
-
-      InitializeProviders(1, "858884");
-      var splitProvider = HttpProviderContainer.Instance.Resolve<ISplitTestingProvider>();
-      Assert.IsNotNull(splitProvider);
+      
+      SplitTestingEngineRequests.ActiveSplitTests = MockEngineRequests.ActiveSplitTests_NoTests;
+      var splitProvider = InitializeProviders(1, "858884");
 
       var side1 = splitProvider.GetSplitTestingSide(9999);
-      var expected = "A";
-      Assert.AreEqual(expected, side1.Name);
+      var expectedName = "A";
+      var expectedSideId = -1;
+      Assert.AreEqual(expectedName, side1.Name);
+      Assert.AreEqual(expectedSideId, side1.SideId);
     }
 
     [TestMethod]
@@ -73,10 +86,7 @@ namespace Atlantis.Framework.Providers.SplitTesting.Tests
       var mockHttpRequest = new MockHttpRequest("http://www.debug.godaddy-com.ide/");
       MockHttpContext.SetFromWorkerRequest(mockHttpRequest);
 
-      InitializeProviders(1, "858884");
-      var splitProvider = HttpProviderContainer.Instance.Resolve<ISplitTestingProvider>();
-
-      Assert.IsNotNull(splitProvider);
+      var splitProvider = InitializeProviders(1, "858884");
 
       var side1 = splitProvider.GetSplitTestingSide(1009);
       Assert.IsTrue(side1 != null && !string.IsNullOrEmpty(side1.Name));
@@ -89,10 +99,7 @@ namespace Atlantis.Framework.Providers.SplitTesting.Tests
       var mockHttpRequest = new MockHttpRequest("http://www.debug.godaddy-com.ide/");
       MockHttpContext.SetFromWorkerRequest(mockHttpRequest);
 
-      InitializeProviders(1, "858884");
-      var splitProvider = HttpProviderContainer.Instance.Resolve<ISplitTestingProvider>();
-
-      Assert.IsNotNull(splitProvider);
+      var splitProvider = InitializeProviders(1, "858884");
 
       var side1 = splitProvider.GetSplitTestingSide(1009);
       Assert.IsTrue(side1 != null);
@@ -107,11 +114,8 @@ namespace Atlantis.Framework.Providers.SplitTesting.Tests
       SplitTestingConfiguration.DefaultCategoryName = "Sales";
       var mockHttpRequest = new MockHttpRequest("http://www.debug.godaddy-com.ide/");
       MockHttpContext.SetFromWorkerRequest(mockHttpRequest);
-
-      InitializeProviders(1, "858884");
-      var splitProvider = HttpProviderContainer.Instance.Resolve<ISplitTestingProvider>();
-
-      Assert.IsNotNull(splitProvider);
+      
+      var splitProvider = InitializeProviders(1, "858884");
 
       var side1 = splitProvider.GetSplitTestingSide(1010);
       Assert.IsTrue(side1 != null);
@@ -123,11 +127,8 @@ namespace Atlantis.Framework.Providers.SplitTesting.Tests
       SplitTestingConfiguration.DefaultCategoryName = "Sales";
       var mockHttpRequest = new MockHttpRequest("http://www.debug.godaddy-com.ide/");
       MockHttpContext.SetFromWorkerRequest(mockHttpRequest);
-
-      InitializeProviders(1, "858884");
-      var splitProvider = HttpProviderContainer.Instance.Resolve<ISplitTestingProvider>();
-
-      Assert.IsNotNull(splitProvider);
+      
+      var splitProvider = InitializeProviders(1, "858884");
 
       var side1 = splitProvider.GetSplitTestingSide(1010);
       Assert.IsTrue(side1 != null);
@@ -145,10 +146,9 @@ namespace Atlantis.Framework.Providers.SplitTesting.Tests
       string shopperId = "858884";
       int privateLabelId = 1;
 
-      InitializeProviders(privateLabelId, shopperId );
-      var splitProvider = HttpProviderContainer.Instance.Resolve<ISplitTestingProvider>();
 
-      Assert.IsNotNull(splitProvider);
+      var splitProvider = InitializeProviders(privateLabelId, shopperId);
+
       int testIdNotActive = -99;
       string sideName = "A";
       var success = splitProvider.SetOverrideSide(testIdNotActive, sideName);
@@ -170,10 +170,8 @@ namespace Atlantis.Framework.Providers.SplitTesting.Tests
       string shopperId = "858884";
       int privateLabelId = 1;
 
-      InitializeProviders(privateLabelId, shopperId);
-      var splitProvider = HttpProviderContainer.Instance.Resolve<ISplitTestingProvider>();
 
-      Assert.IsNotNull(splitProvider);
+      var splitProvider = InitializeProviders(privateLabelId, shopperId, isInternal:true);
       int testIdNotActive = 989858;
       string sideName = "W";
 
@@ -188,38 +186,14 @@ namespace Atlantis.Framework.Providers.SplitTesting.Tests
     }
 
     [TestMethod]
-    public void BotDetectTest_Browser()
-    {
-      SplitTestingConfiguration.DefaultCategoryName = "Sales";
-      var mockHttpRequest = new MockHttpRequest("http://www.debug.godaddy-com.ide/");
-      MockHttpContext.SetFromWorkerRequest(mockHttpRequest);
-      mockHttpRequest.MockUserAgent(@"Mozilla/5.0 (Windows NT 6.0; rv:14.0) Gecko/20100101 Firefox/14.0.1");
-
-      InitializeProviders(1, "858884");
-      var splitProvider = HttpProviderContainer.Instance.Resolve<ISplitTestingProvider>();
-
-      Assert.IsNotNull(splitProvider);
-
-      var side = splitProvider.GetSplitTestingSide(1010);
-
-      Assert.AreNotEqual(-2, side.SideId);
-    }
-
-    [TestMethod]
     public void BotDetectTest_Bot()
     {
       SplitTestingConfiguration.DefaultCategoryName = "Sales";
       var mockHttpRequest = new MockHttpRequest("http://www.debug.godaddy-com.ide/");
       MockHttpContext.SetFromWorkerRequest(mockHttpRequest);
-      mockHttpRequest.MockUserAgent(@"googlebot");
 
-      InitializeProviders(1, "858884");
-      var splitProvider = HttpProviderContainer.Instance.Resolve<ISplitTestingProvider>();
-
-      Assert.IsNotNull(splitProvider);
-
+      var splitProvider = InitializeProviders(1, "858884", isBotUserAgent: true);
       var side = splitProvider.GetSplitTestingSide(1010);
-
       Assert.AreEqual(-2, side.SideId);
     }
 
@@ -230,13 +204,8 @@ namespace Atlantis.Framework.Providers.SplitTesting.Tests
       var mockHttpRequest = new MockHttpRequest("http://www.debug.godaddy-com.ide/");
       MockHttpContext.SetFromWorkerRequest(mockHttpRequest);
 
-      InitializeProviders(1, "858884");
-      var splitProvider = HttpProviderContainer.Instance.Resolve<ISplitTestingProvider>();
-
-      Assert.IsNotNull(splitProvider);
-
+      var splitProvider = InitializeProviders(1, "858884");
       var tests = splitProvider.GetAllActiveTests;
-
       Assert.IsNotNull(tests);
       var iter = tests.GetEnumerator();
       Assert.IsTrue(iter.MoveNext(), "Check admin to see if there is at least one active test in TEST category");
@@ -250,12 +219,7 @@ namespace Atlantis.Framework.Providers.SplitTesting.Tests
       MockHttpContext.SetFromWorkerRequest(mockHttpRequest);
 
       int testId = 1011;
-      double aLowerLimit = .48d;
-      double aUpperLimit = .52d;
-      double bLowerLimit = .48d;
-      double bUpperLimit = .52d;
-
-      TestAllocationTwoSides(testId, aLowerLimit, aUpperLimit, bLowerLimit, bUpperLimit);
+      TestAllocationTwoSides(testId, 50d, 50d, 2d);
     }
 
     [TestMethod]
@@ -266,12 +230,7 @@ namespace Atlantis.Framework.Providers.SplitTesting.Tests
       MockHttpContext.SetFromWorkerRequest(mockHttpRequest);
 
       int testId = 1012;
-      double aLowerLimit = 0.0d;
-      double aUpperLimit = 0.0d;
-      double bLowerLimit = 1.0d;
-      double bUpperLimit = 1.0d;
-
-      TestAllocationTwoSides(testId, aLowerLimit, aUpperLimit, bLowerLimit, bUpperLimit);
+      TestAllocationTwoSides(testId, 0d, 100d, 2d);
     }
 
     [TestMethod]
@@ -282,15 +241,10 @@ namespace Atlantis.Framework.Providers.SplitTesting.Tests
       MockHttpContext.SetFromWorkerRequest(mockHttpRequest);
 
       int testId = 1013;
-      double aLowerLimit = 0.78d;
-      double aUpperLimit = 0.82d;
-      double bLowerLimit = 0.18d;
-      double bUpperLimit = 0.22d;
-
-      TestAllocationTwoSides(testId, aLowerLimit, aUpperLimit, bLowerLimit, bUpperLimit);
+      TestAllocationTwoSides(testId, 80d, 20d, 2d);
     }
 
-    private void TestAllocationTwoSides(int testId, double aLowerLimit, double aUpperLimit, double bLowerLimit, double bUpperLimit)
+    private void TestAllocationTwoSides(int testId, double aTarget, double bTarget, double allowableDelta)
     {
       int totalCount = 5000;
       double countSideA = 0;
@@ -300,9 +254,9 @@ namespace Atlantis.Framework.Providers.SplitTesting.Tests
         HttpContext.Current.Items.Remove(
                 "Atlantis.Framework.Interface.HttpProviderContainer.Atlantis.Framework.Providers.SplitTesting.Interface.ISplitTestingProvider");
         HttpContext.Current.Request.Cookies.Clear();
-        InitializeProviders(1, "858884");
-        var splitProvider = HttpProviderContainer.Instance.Resolve<ISplitTestingProvider>();
-        
+
+        var splitProvider = InitializeProviders(1, "858884");
+
         var side = splitProvider.GetSplitTestingSide(testId);
         switch (side.Name.ToUpper())
         {
@@ -315,13 +269,11 @@ namespace Atlantis.Framework.Providers.SplitTesting.Tests
         }
       }
       Assert.IsTrue(countSideA + countSideB == totalCount, "count of sides do not equal number of requests");
-      double aPercent = countSideA / totalCount;
-      double bPercent = countSideB / totalCount;
-      Assert.IsTrue(aPercent >= aLowerLimit && aPercent <= aUpperLimit, "A was " + aPercent);
-      Assert.IsTrue(bPercent >= bLowerLimit && bPercent <= bUpperLimit, "B was " + bPercent);
+      double aPercent = countSideA / totalCount * 100;
+      double bPercent = countSideB / totalCount * 100;
+      Assert.AreEqual(aTarget, aPercent, allowableDelta);
+      Assert.AreEqual(bTarget, bPercent, allowableDelta);
     }
-
-
 
 
   }

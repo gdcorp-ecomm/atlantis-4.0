@@ -1,4 +1,4 @@
-﻿namespace Atlantis.Framework.Providers.SplitTest
+﻿namespace Atlantis.Framework.Providers.SplitTesting
 {
   public static class SplitTestingEngineRequests
   {

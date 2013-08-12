@@ -46,7 +46,7 @@ namespace Atlantis.Framework.Providers.SplitTesting
       }
     }
 
-    internal Dictionary<string, string> Value
+    internal Dictionary<string, string> CookieValues
     {
       get
       {

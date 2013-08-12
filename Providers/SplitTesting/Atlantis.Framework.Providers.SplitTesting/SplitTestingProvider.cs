@@ -5,7 +5,6 @@ using System.Linq;
 using System.Text;
 using Atlantis.Framework.Conditions.Interface;
 using Atlantis.Framework.Interface;
-using Atlantis.Framework.Providers.SplitTest;
 using Atlantis.Framework.Providers.SplitTesting.Interface;
 using Atlantis.Framework.Providers.UserAgentDetection.Interface;
 using Atlantis.Framework.Render.ExpressionParser;
@@ -21,6 +20,8 @@ namespace Atlantis.Framework.Providers.SplitTesting
     private static readonly IActiveSplitTestSide _defaultSideBot = new ActiveSplitTestSide { Allocation = 100D, Name = "A", SideId = -2 };
 
     private readonly IProviderContainer _container;
+    private readonly Lazy<ISiteContext> _siteContext;
+    private readonly Lazy<IShopperContext> _shopperContext;
     private Lazy<SplitTestingState> _splitTestingState;
 
     private readonly Lazy<ActiveSplitTestsResponseData> _activeSplitTestsResponse;
@@ -35,6 +36,8 @@ namespace Atlantis.Framework.Providers.SplitTesting
             : base(container)
     {
       _container = container;
+      _siteContext = new Lazy<ISiteContext>(() => _container.Resolve<ISiteContext>());
+      _shopperContext = new Lazy<IShopperContext>(() => _container.Resolve<IShopperContext>());
 
       _splitTestUserAgentDetection = new Lazy<IUserAgentDetectionProvider>(() => _container.Resolve<IUserAgentDetectionProvider>());
 
@@ -103,67 +106,72 @@ namespace Atlantis.Framework.Providers.SplitTesting
 
     public IActiveSplitTestSide GetSplitTestingSide(int splitTestId)
     {
-      if (_splitTestCookieOverride.Value != null)
-      {
-        foreach (var overrideSide in _splitTestCookieOverride.Value.Value)
+      IActiveSplitTestSide splitTestSide = null;
+      try {
+        if (_siteContext.Value.IsRequestInternal)
         {
-          if (overrideSide.Key == splitTestId.ToString())
+          foreach (var overrideSide in _splitTestCookieOverride.Value.CookieValues)
           {
-            return new ActiveSplitTestSide {Allocation = 100D, Name = overrideSide.Value.ToUpper(), SideId = -1};
+            if (overrideSide.Key == splitTestId.ToString())
+            {
+              return new ActiveSplitTestSide {Allocation = 100D, Name = overrideSide.Value.ToUpper(), SideId = -1};
+            }
           }
         }
-      }
 
-      if (_splitTestUserAgentDetection.Value.IsSearchEngineBot(SplitTestingUserAgent.UserAgent))
-      {
-        return _defaultSideBot;
-      }
-
-      IActiveSplitTestSide splitTestSide = null;
-      IActiveSplitTest activeSplitTest;
-      if (IsActiveTest(splitTestId, out activeSplitTest) && activeSplitTest != null && activeSplitTest.VersionNumber > 0)
-      {
-        var key = CreateStateKey(splitTestId, activeSplitTest);
-        string sideId = GetSplitSideFromState(key);
-        if (sideId != NOT_ELIGIBLE_SIDE_ID)
+        if (_splitTestUserAgentDetection.Value.IsSearchEngineBot(SplitTestingUserAgent.UserAgent))
         {
-          if (!IsEligibleTest(activeSplitTest))
+          return _defaultSideBot;
+        }
+
+        IActiveSplitTest activeSplitTest;
+        if (IsActiveTest(splitTestId, out activeSplitTest) && activeSplitTest != null && activeSplitTest.VersionNumber > 0)
+        {
+          var key = CreateStateKey(splitTestId, activeSplitTest);
+          string sideId = GetSplitSideFromState(key);
+          if (sideId != NOT_ELIGIBLE_SIDE_ID)
           {
-            if (!string.IsNullOrEmpty(sideId))
+            if (!IsEligibleTest(activeSplitTest))
             {
-              UpdateRequestCache(activeSplitTest, NOT_ELIGIBLE_SIDE_ID);
-              UpdateState(key, NOT_ELIGIBLE_SIDE_ID);
+              if (!string.IsNullOrEmpty(sideId))
+              {
+                UpdateRequestCache(activeSplitTest, NOT_ELIGIBLE_SIDE_ID);
+                UpdateState(key, NOT_ELIGIBLE_SIDE_ID);
+              }
+              else
+              {
+                sideId = NOT_ELIGIBLE_SIDE_ID;
+              }
             }
             else
             {
-              sideId = NOT_ELIGIBLE_SIDE_ID;
-            }
-          }
-          else
-          {
-            if (!string.IsNullOrEmpty(sideId))
-            {
-              UpdateRequestCache(activeSplitTest, sideId);
-            }
-            else
-            {
-              sideId = GetSplitSideFromTriplet(activeSplitTest);
               if (!string.IsNullOrEmpty(sideId))
               {
                 UpdateRequestCache(activeSplitTest, sideId);
-                UpdateState(key, sideId);
+              }
+              else
+              {
+                sideId = GetSplitSideFromTriplet(activeSplitTest);
+                if (!string.IsNullOrEmpty(sideId))
+                {
+                  UpdateRequestCache(activeSplitTest, sideId);
+                  UpdateState(key, sideId);
+                }
               }
             }
           }
+          splitTestSide = GetActiveSplitTestSide(splitTestId, sideId);
         }
-
-        splitTestSide = GetActiveSplitTestSide(splitTestId, sideId);
+        else
+        {
+          splitTestSide = _defaultSideA;
+        }
       }
-      else
+      catch (Exception ex)
       {
+        Engine.Engine.LogAtlantisException(new AtlantisException("SplitTestingProvider.GetSplitTestingSide", string.Empty, ex.Message, ex.StackTrace, _siteContext.Value, _shopperContext.Value));
         splitTestSide = _defaultSideA;
       }
-
       return splitTestSide;
     }
 
@@ -331,7 +339,7 @@ namespace Atlantis.Framework.Providers.SplitTesting
     private bool SetOverrideCookie(int splitTestId, string overrideSideName)
     {
       var v = new Dictionary<string, string> {{splitTestId.ToString(), overrideSideName}};
-      _splitTestCookieOverride.Value.Value = v;
+      _splitTestCookieOverride.Value.CookieValues = v;
       return true;
     }
   }

@@ -13,7 +13,7 @@ namespace Atlantis.Framework.Providers.SplitTesting
     readonly Lazy<ISiteContext> _siteContext;
     readonly Lazy<IShopperContext> _shopperContext;
 
-    public SplitTestingCookieOverride(IProviderContainer container)
+    internal SplitTestingCookieOverride(IProviderContainer container)
     {
       _container = container;
 
@@ -41,7 +41,7 @@ namespace Atlantis.Framework.Providers.SplitTesting
       }
     }
 
-    public Dictionary<string, string> Value
+    public Dictionary<string, string> CookieValues
     {
       get
       {

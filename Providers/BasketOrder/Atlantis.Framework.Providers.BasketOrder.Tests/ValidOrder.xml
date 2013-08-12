@@ -1,0 +1,79 @@
+﻿<ORDER>
+
+  <ORDERDETAIL currencydisplay="USD" _injectedfairmarketvaluetotal_operating="0" from_app="" fairmarketvaluetotal="5388" _pipeline_error_level="1" _pipeline_success="1" _old_spend="5388" gdshop_purchaserequesttypeid="1" prepaid_discount_total="0" overridepricingvar="0.0000" purchaserequestid="558091" entered_by="customer" payment_gateway_raw="no charge attempt: FAITH" _total_total_display="5406" _tax_total_usd="0" fltr_run_time="0" transactioncurrency="USD" item_id_start="2" _oadjust_subtotal="5406" _commserver="G1TWGDCOMM001" source_code="???" createdate="8/9/2013 1:59:39 PM" payment_response_code="1" payment_auth_code="FAITH" _purchase_gateway_action="3" ship_to_email="aheuertz@godaddy.com" _product_promo_list="7509,101" _tax_total_operating="0" original_order_id="-1" mktg_partner="no" bill_to_last_name="kof3j2kofj23koj" pathway="1a3e284a-ddca-4a0d-9f33-bc599d015035" foreign_ip_status="0" bill_to_state="AL" basketid="558091" _promo_run_time="78" conversionratet2o="1" _shipping_total_display="0" remote_host="172.17.250.63" _total_total="5406" _purchase_hash="nddghgafwiaehikbgbxfdhcegenfofqfsekavhrgyhgcpjndsfafwdmcsgsfrglg" repversion="0" _fairmarketvaluetotal_operating="5388" _tax_included="0" _tax_type="0" _shipping_total_operating="0" shopper_id="226109" _old_discount="0" _injectedfairmarketvaluetotal="0" thirdpartyshippingamount="0" gdshop_receiptapplicationid="0" _total_total_usd="5406" _fairmarketvaluetotal_usd="5388" operatingcurrency="USD" _shipping_total_usd="0" pp_shopperprofileid="42215" _handling_total_usd="0" _payment_auth_code="FAITH" payment="credit_card" order_id="558091" basket_type="gdshop" bill_to_phone1="8383838383" domaincount="1" create_backup_payment="2" _tax_total_display="0" _oadjust_subtotal_operating="5406" bill_to_street2="" date_changed="8/9/2013 1:59:00 PM" shippable="0" remote_addr="172.17.250.63" _shopper_shopper_id="226109" loginname="secondfakefo32jkfo32jk3o2kj" _oadjust_subtotal_usd="5406" authonly="0" bill_to_first_name="fkj3o2jf3kojf32o" _handling_total="0" payment_processor="1" conversionratet2d="1.0000" _handling_total_display="0" cc_expyear="2030" _handling_total_operating="0" date_entered="8/9/2013 1:59:38 PM" total="5406" payment_auth_type="FAITH" currencyxchangerate="1.0000" order_billing="domestic" payment_gateway_response_time="0" translationlanguage="en" _total_total_operating="5406" conversionratet2u="1" _injectedfairmarketvaluetotal_usd="0" bill_to_street1="fokj32fkoj23" payment_method_bank="Bank of DC" card_issuer_id="" payment_response_sub_code="0" bill_to_zip="83838" payment_reason_code="1" bill_to_country="US" _webserver="G1TWCARTWEB001" cc_expmonth="6" _shipping_total="0" payment_method_country="US" cc_type="Visa" privatelabelid="1" basket_paymenttype="-1" order_source="Online" _oadjust_subtotal_display="5406" bill_to_email="aheuertz@godaddy.com" conversionrateo2u="1" _fairmarketvaluetotal="5388" _repversion="" bar_restricted_payment_type="" shipping_price="0" itemcount="2" _restricted_payment_type="" _base_subtotal="12305" ip_country_code="--" merchantaccountid="1" accountingcompanyid="1" _purchase_pipeline_name="D:\gdComponents\Pipelines\plan_receipt.xml" membershiplevel="0" bill_to_city="2ok3jf3okj" _tax_total="0" status="active" type="credit_card" cc_name="o2j3fokj23ko23j" cc_number="############1111" firstname="fkj3o2jf3kojf32o" lastname="kof3j2kofj23koj" street1="fokj32fkoj23" city="2ok3jf3okj" state="AL" country="US" postal_code="83838" phone1="8383838383" email="aheuertz@godaddy.com" currency="USD">
+
+    <DOMAINCONTACTXML>
+
+      <domainContacts>
+
+        <contacts crc32="1768884030">
+
+          <contact fname="fkj3o2jf3kojf32o" lname="kof3j2kofj23koj" email="aheuertz@godaddy.com" co="" org="" sa1="fokj32fkoj23" sa2="" city="2ok3jf3okj" sp="AL" pc="83838" cc="US" phone="8383838383" fax="" contactType="0"/>
+
+          <contact fname="fkj3o2jf3kojf32o" lname="kof3j2kofj23koj" email="aheuertz@godaddy.com" co="" org="" sa1="fokj32fkoj23" sa2="" city="2ok3jf3okj" sp="AL" pc="83838" cc="US" phone="8383838383" fax="" contactType="1"/>
+
+          <contact fname="fkj3o2jf3kojf32o" lname="kof3j2kofj23koj" email="aheuertz@godaddy.com" co="" org="" sa1="fokj32fkoj23" sa2="" city="2ok3jf3okj" sp="AL" pc="83838" cc="US" phone="8383838383" fax="" contactType="2"/>
+
+          <contact fname="fkj3o2jf3kojf32o" lname="kof3j2kofj23koj" email="aheuertz@godaddy.com" co="" org="" sa1="fokj32fkoj23" sa2="" city="2ok3jf3okj" sp="AL" pc="83838" cc="US" phone="8383838383" fax="" contactType="3"/>
+
+        </contacts>
+
+      </domainContacts>
+
+    </DOMAINCONTACTXML>
+
+    <PAYMENTXML>
+
+      <Payments>
+
+        <Payment index="0" amount="5406" displayed_merchant_country="US" type="credit_card" subtype="VISA" paymentMethodID="61" xindex="0" gateway_progid="FAITH" processor="1" auth_code="FAITH" response_code="1" response_sub_code="0" reason_code="1" gateway_raw="no charge attempt: FAITH" gateway_response_time="0" auth_type="FAITH" total="5406" gateway_action="3" destination_queue="receipt" amount_usd="5406" amount_display="5406" amount_operating="5406" pp_shopperProfileID="42215"/>
+
+      </Payments>
+    </PAYMENTXML>
+
+  </ORDERDETAIL>
+
+  <ITEMS>
+    <ITEM marketplacecommissionrate="0" refundbitmask="0" product_bulk_year="1" _iadjust_regularprice_operating="10788" _product_sale_start="11/21/2012" coupon_group_id="" externalresourceid="99d82604-0136-11e3-9a27-005056953ce3" gdshop_product_refundbasisid="2" _fairmarketvalue_operating="4730" dept_id="22" _product_defaultdurationvalue="1" entered_by="customer" acct_glchartiddeferredrevenue="40203-0000-101" adjusted_actualcost="84" _icann_fee="0" _product_sale_price="5388" gdshop_free_product_packageid="45" _icann_fee_adjusted_display="0" _fairmarketvalue_usd="4730" source_code="???" acct_glchartid="40203-0000-100" adjusted_price="5388" list_price="10788" _gdshop_product_domain_discountexists="0" _product_sku="7509-1" _glrevenueaccount="40203-0000-100" _isdomaindiscounteligible="1" _oadjust_discount="0" bari_restricted_payment_type="" original_row_id="-1" gdshop_item_trackingcode="mbl_wsb_lp" original_order_id="-1" pathway="1a3e284a-ddca-4a0d-9f33-bc599d015035" commissionjunctiontype="CJC" _placed_price="0" _product_taxtypebit="2" fairmarketvalue="4730" isrenewalpricelocked="0" icannfee_adjusted="0" _gdshop_orderleveldiscounttypeid="3" list_price_display="10788" estimated_revenue="0" _description2="Business Website Builder" estimated_cost="0" product_isbundle="0" _product_is_renewal_price_locked="0" _fairmarketvalue="4730" pf_id="7509" shopper_id="226109" shoprevenue="0" _base_pf_id="7502" _iadjust_currentprice_operating="5388" ff_expiration_date="2014-08-09" _actual_pricegroupid="0" _iadjust_regularprice="10788" refundliabilityamount="0" recurring_payment="annual" item_id="1" trans_method="service" _gdshop_product_type_fulfillmentmethodid="2" gdshop_variant_price_type_id="0" processctrl="{00000000-0000-0000-0000-000000000000}" _row_id="0" row_id="0" _transaction_currency_lockprice="10788" adjusted_wholesaleprice="0" _pre_allocated_account="1" zero="0" _product_dept_id="22" originallistprice="10788" _product_defaultquantityvalue="1" order_id="558091" _product_list_price_display="10788" min_shipping="650" _product_prepaiddiscountlevel="0" _distribute_eligible_list="5388" marketplacecommission="0" list_price_usd="10788" _iadjust_currentprice_display="5388" resource_id="2352462" status_id="1" createcosentry="0" _oadjust_adjustedprice_operating="5388" _product_list_price_usd="10788" _oadjust_adjustedprice_display="5388" _base_adjustedprice="10788" period_description="Period(s)" duration="1" gdshop_product_typeid="130" _old_list_price="10788" date_entered="8/9/2013 1:59:38 PM" _n_unadjusted="1" shopreserve="0" _is_base_on_sale="0" product_isbulk="0" commission_amount="0" product_list_price="10788" _tax_amount="0" _product_sale_end="9/1/2013" _product_list_price_operating="10788" periodsperduration="12" date_added="8/9/2013 1:58:20 PM" _product_basketlocked="3" _product_defaultdurationtypeid="1" product_basketlocked="3" _product_defaultquantitytypeid="2" unifiedproductid="7509" _iadjust_regularprice_usd="10788" _oadjust_adjustedprice_usd="5388" name="Website Builder Business - 10 Page Website - 1 year (recurring)" _product_unifiedproductid="7509" privatelabelid="1" _product_pf_id="7509" _product_trans_method="service" _iadjust_currentprice_usd="5388" gdshop_deferrmentconfigurationtypeid="6" _product_price_locked="0" placed_price="5388" sku="7509-1" numberofperiods="1" _gdshop_variant_price_type_id="0" _productpurchasetype="1" quantitydescription="plan(s)" bronsondiscount="0" _oadjust_adjustedprice="5388" _product_list_price="10788" _promo_conditions="5011825,1" product_hasfreedependentresource="0" _iadjust_currentprice="5388" overridepricerequired="0" _product_name="Website Builder Business - 10 Page Website - 1 year (recurring)" _icann_fee_adjusted_usd="0" _icann_fee_adjusted_operating="0" isplcommissionable="1" _icann_fee_usd="0" list_price_operating="10788" accountingcompanyid="1" _icann_fee_adjusted="0" itemtrackingcode="mbl_wsb_lp" quantity="1" _base_price="10788" _iadjust_regularprice_display="10788">
+
+      <CANCELITEMSXML>
+
+        <CANCELITEM resourceid="2352462" namespace="wst" isactive="1">
+
+          <CANCELDETAIL desc1="Website Builder for New Account"/>
+
+        </CANCELITEM>
+
+      </CANCELITEMSXML>
+
+    </ITEM>
+    <ITEM marketplacecommissionrate="0" refundbitmask="0" product_bulk_year="1" _iadjust_regularprice_operating="1499" _product_sale_start="1/31/2012" coupon_group_id="" gdshop_product_refundbasisid="1" _fairmarketvalue_operating="658" dept_id="8" _product_defaultdurationvalue="1" entered_by="customer" acct_glchartiddeferredrevenue="40099-0000-001" _product_file_size="1" adjusted_actualcost="686" _icann_fee="18" _product_sale_price="1299" gdshop_free_product_packageid="1621" _icann_fee_adjusted_display="18" _fairmarketvalue_usd="658" source_code="???" cicode="80079" acct_glchartid="40001-0000-000" adjusted_price="18" list_price="1499" _gdshop_product_domain_discountexists="1" _product_sku="101-1" _glrevenueaccount="40001-0000-000" acct_glchartidcos="50001-0000-000" _isdomaindiscounteligible="0" _oadjust_discount="1299" bari_restricted_payment_type="" original_row_id="-1" gdshop_item_trackingcode="mbl_xsell_freedomain_wst_exp1" acct_glchartidbs="13040-0000-000" original_order_id="-1" pathway="1a3e284a-ddca-4a0d-9f33-bc599d015035" commissionjunctiontype="CJC" _placed_price="0" _product_taxtypebit="0" fairmarketvalue="658" isrenewalpricelocked="1" icannfee_adjusted="18" _gdshop_orderleveldiscounttypeid="3" list_price_display="1499" estimated_revenue="0" _description2=".COM Domain Registration" estimated_cost="0" product_isbundle="0" _product_is_renewal_price_locked="1" _fairmarketvalue="658" pf_id="101" shopper_id="226109" shoprevenue="0" _product_basketagelimit="2" _base_pf_id="101" _iadjust_currentprice_operating="1299" _actual_pricegroupid="0" _iadjust_regularprice="1499" refundliabilityamount="0" recurring_payment="annual" item_id="2" trans_method="service" _gdshop_product_type_fulfillmentmethodid="1" gdshop_variant_price_type_id="0" processctrl="{00000000-0000-0000-0000-000000000000}" _row_id="1" row_id="1" _transaction_currency_lockprice="1499" adjusted_wholesaleprice="100" zero="0" _product_dept_id="8" originallistprice="1499" order_id="558091" _product_list_price_display="1499" min_shipping="650" _product_prepaiddiscountlevel="0" _distribute_eligible_list="0" marketplacecommission="0" list_price_usd="1499" _iadjust_currentprice_display="1299" status_id="1" createcosentry="-1" _oadjust_adjustedprice_operating="18" _product_list_price_usd="1499" _oadjust_adjustedprice_display="18" _base_adjustedprice="1517" period_description="Year(s)" duration="1" gdshop_product_typeid="2" _old_list_price="1499" domain="DFJKOFJKO2JKO3F2JKO3FJKO2F3JKO2.COM" date_entered="8/9/2013 1:59:38 PM" _bsaccount="13040-0000-000" _n_unadjusted="0" shopreserve="0" _cosaccount="50001-0000-000" _is_base_on_sale="0" product_isbulk="1" commission_amount="0" product_list_price="1499" _tax_amount="0" _product_sale_end="1/1/2014" _product_list_price_operating="1499" periodsperduration="12" date_added="8/9/2013 1:58:56 PM" _product_basketlocked="3" _product_defaultdurationtypeid="1" product_basketlocked="3" unifiedproductid="101" _iadjust_regularprice_usd="1499" _oadjust_adjustedprice_usd="18" name=".COM Domain Name Registration - 1 Year (recurring)" _product_unifiedproductid="101" privatelabelid="1" _product_pf_id="101" _product_trans_method="service" _iadjust_currentprice_usd="1299" gdshop_deferrmentconfigurationtypeid="7" _product_price_locked="0" placed_price="1299" sku="101-1" numberofperiods="1" _gdshop_variant_price_type_id="0" _productpurchasetype="1" quantitydescription="domain(s)" bronsondiscount="0" _oadjust_adjustedprice="18" _product_list_price="1499" product_hasfreedependentresource="0" _iadjust_currentprice="1299" _promo_awards="5011825,1,1299.000" _icann_fee_adjusted_operating="18" acct_glchartiddeferredcos="50099-0000-001" _icann_fee_adjusted_usd="18" _product_name=".COM Domain Name Registration - 1 Year (recurring)" overridepricerequired="0" isplcommissionable="1" _icann_fee_usd="18" _buycomdiscountprice="-20" list_price_operating="1499" accountingcompanyid="1" _icann_fee_adjusted="18" itemtrackingcode="mbl_xsell_freedomain_wst_exp1" quantity="1" _base_price="1499" _iadjust_regularprice_display="1499">
+
+      <CUSTOMXML>
+
+        <domainBulkRegistration>
+
+          <domain sld="DFJKOFJKO2JKO3F2JKO3FJKO2F3JKO2" tld="COM" isoingo="10" agreements="|1_" period="1" ns="testparkdns01.sdl1.secureserver.net testparkdns02.sdl1.secureserver.net" autorenewflag="1" isProxy="0" crc32="1768884030"/>
+
+        </domainBulkRegistration>
+
+      </CUSTOMXML>
+
+      <CANCELITEMSXML>
+
+        <CANCELITEM resourceid="4998802" namespace="domain" isactive="1">
+
+          <CANCELDETAIL desc1="DFJKOFJKO2JKO3F2JKO3FJKO2F3JKO2.COM"/>
+
+        </CANCELITEM>
+
+      </CANCELITEMSXML>
+
+    </ITEM>
+  </ITEMS>
+
+  <BASKETERRORS/>
+
+  <PURCHASEERRORS/>
+
+</ORDER>

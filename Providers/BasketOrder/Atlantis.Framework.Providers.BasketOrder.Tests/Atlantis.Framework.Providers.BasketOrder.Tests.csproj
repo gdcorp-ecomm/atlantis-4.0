@@ -11,6 +11,10 @@
     <AssemblyName>Atlantis.Framework.Providers.BasketOrder.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -30,9 +34,23 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Atlantis.Framework.GetBasketPrice.Impl">
+      <HintPath>..\..\..\Atlantis.Framework.GetBasketPrice\Atlantis.Framework.GetBasketPrice.Impl\bin\Debug\Atlantis.Framework.GetBasketPrice.Impl.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.GetBasketPrice.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Atlantis.Framework.GetBasketPrice\Atlantis.Framework.GetBasketPrice.Interface\bin\Debug\Atlantis.Framework.GetBasketPrice.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Testing.MockHttpContext">
+      <HintPath>..\..\..\Atlantis.Framework.Testing\Atlantis.Framework.Testing.MockHttpContext\bin\Debug\Atlantis.Framework.Testing.MockHttpContext.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Testing.MockProviders">
+      <HintPath>..\..\..\Atlantis.Framework.Testing\Atlantis.Framework.Testing.MockProviders\bin\Debug\Atlantis.Framework.Testing.MockProviders.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -40,6 +58,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BasketOrderProviderTests.cs" />
     <Compile Include="BasketOrderTests.cs" />
     <Compile Include="BasketOrderTrackingDataTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -63,7 +82,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="atlantis.config" />
+    <None Include="atlantis.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="EmptyItemsOrder.xml">
@@ -89,6 +110,13 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="SimpleValidOrder.xml" />
+    <Content Include="ValidOrder.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="BrokenOrder.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

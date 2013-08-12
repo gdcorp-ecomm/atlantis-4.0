@@ -30,7 +30,7 @@ namespace Atlantis.Framework.Providers.CDSContent
         if (responseData.IsSuccess && !string.IsNullOrEmpty(responseData.Content))
         {
           contentVersion = responseData;
-          LoadCDSDebugInfo(responseData);
+          LogCDSDebugInfo(responseData);
         }
       }
       catch (Exception ex)
@@ -46,7 +46,7 @@ namespace Atlantis.Framework.Providers.CDSContent
       return contentVersion;
     }
 
-    private void LoadCDSDebugInfo(ContentVersionResponseData cv)
+    private void LogCDSDebugInfo(ContentVersionResponseData cv)
     {
       try
       {

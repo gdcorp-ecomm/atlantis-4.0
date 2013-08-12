@@ -1,5 +1,6 @@
 ﻿using Atlantis.Framework.CDS.Interface;
 using Atlantis.Framework.Interface;
+using Atlantis.Framework.Providers.CDSContent.Interface;
 using System;
 using System.Collections.ObjectModel;
 
@@ -30,6 +31,10 @@ namespace Atlantis.Framework.Providers.CDSContent
         if (responseData.IsSuccess)
         {
           responseData.TryGetValue(type, out routingRules);
+          if (type == RoutingRuleTypes.Redirect)
+          {
+            LogCDSDebugInfo(responseData.Id);
+          }
         }
       }
       catch (Exception ex)
@@ -43,6 +48,19 @@ namespace Atlantis.Framework.Providers.CDSContent
       }
 
       return routingRules;
+    }
+
+    private void LogCDSDebugInfo(ContentId id)
+    {
+      try
+      {
+        IDebugContext dc;
+        if (Container.TryResolve<IDebugContext>(out dc))
+        {
+          dc.LogDebugTrackingData("Rules Version Id", id.oid);
+        }
+      }
+      catch { }
     }
   }
 }

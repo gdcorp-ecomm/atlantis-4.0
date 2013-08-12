@@ -27,6 +27,7 @@ namespace Atlantis.Framework.Providers.CDSContent
         CDSRequestData requestData = new CDSRequestData(ProcessedPath);
         UrlWhitelistResponseData responseData = ByPassDataCache ? (UrlWhitelistResponseData)Engine.Engine.ProcessRequest(requestData, UrlWhitelistRequestType) : (UrlWhitelistResponseData)DataCache.DataCache.GetProcessRequest(requestData, UrlWhitelistRequestType);
         whitelistResult = responseData.CheckWhitelist(relativePath);
+        LogCDSDebugInfo(responseData.Id);
       }
       catch (Exception ex)
       {
@@ -43,6 +44,17 @@ namespace Atlantis.Framework.Providers.CDSContent
       return whitelistResult;
     }
 
-
+    private void LogCDSDebugInfo(ContentId id)
+    {
+      try
+      {
+        IDebugContext dc;
+        if (Container.TryResolve<IDebugContext>(out dc))
+        {
+          dc.LogDebugTrackingData("Whitelist Version Id", id.oid);
+        }
+      }
+      catch { }
+    }
   }
 }

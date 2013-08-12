@@ -57,7 +57,7 @@ namespace Atlantis.Framework.Providers.CDSContent
         IDebugContext dc;
         if (Container.TryResolve<IDebugContext>(out dc))
         {
-          dc.LogDebugTrackingData("Rules Version Id", id.oid);
+          dc.LogDebugTrackingData("CDS Rules Version Id", id.oid);
         }
       }
       catch { }

@@ -51,7 +51,7 @@ namespace Atlantis.Framework.Providers.CDSContent
         IDebugContext dc;
         if (Container.TryResolve<IDebugContext>(out dc))
         {
-          dc.LogDebugTrackingData("Whitelist Version Id", id.oid);
+          dc.LogDebugTrackingData("CDS Whitelist Version Id", id.oid);
         }
       }
       catch { }

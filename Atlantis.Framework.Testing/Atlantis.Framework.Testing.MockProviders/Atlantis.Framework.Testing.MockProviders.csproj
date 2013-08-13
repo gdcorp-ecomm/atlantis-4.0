@@ -49,7 +49,6 @@
     <Compile Include="MockManagerContext.cs" />
     <Compile Include="MockManagerContextSettings.cs" />
     <Compile Include="MockNoManagerContext.cs" />
-    <Compile Include="MockProviderBase.cs" />
     <Compile Include="MockProviderContainer.cs" />
     <Compile Include="MockProviderContainerData.cs" />
     <Compile Include="MockShopperContext.cs" />

@@ -5,7 +5,7 @@ using System.Web;
 
 namespace Atlantis.Framework.Testing.MockProviders
 {
-  public class MockSiteContext : MockProviderBase, ISiteContext
+  public class MockSiteContext : ProviderBase, ISiteContext
   {
     public MockSiteContext(IProviderContainer container)
       : base(container)
@@ -46,7 +46,7 @@ namespace Atlantis.Framework.Testing.MockProviders
     {
       get
       {
-        int result = KnownPrivateLabelIds.GoDaddy;
+        int result;
 
         if ((IsManagerAvailable) && (Manager.IsManager))
         {
@@ -54,11 +54,7 @@ namespace Atlantis.Framework.Testing.MockProviders
         }
         else
         {
-          object mockPrivateLabelId = GetMockSetting(MockSiteContextSettings.PrivateLabelId);
-          if (mockPrivateLabelId != null)
-          {
-            result = Convert.ToInt32(mockPrivateLabelId);
-          }
+          result = Container.GetData(MockSiteContextSettings.PrivateLabelId, KnownPrivateLabelIds.GoDaddy);
         }
         return result;
       }
@@ -79,48 +75,31 @@ namespace Atlantis.Framework.Testing.MockProviders
       }
     }
 
-    public System.Web.HttpCookie NewCrossDomainCookie(string cookieName, DateTime expiration)
+    public HttpCookie NewCrossDomainCookie(string cookieName, DateTime expiration)
     {
-      HttpCookie result = new System.Web.HttpCookie(cookieName);
-      result.Expires = expiration;
+      var result = new HttpCookie(cookieName) {Expires = expiration};
       return result;
     }
 
-    public System.Web.HttpCookie NewCrossDomainMemCookie(string cookieName)
+    public HttpCookie NewCrossDomainMemCookie(string cookieName)
     {
-      HttpCookie result = new System.Web.HttpCookie(cookieName);
+      var result = new HttpCookie(cookieName);
       return result;
     }
 
     public int PageCount
     {
-      get 
+      get
       {
-        int result = 0;
-
-        object mockPageCount = GetMockSetting(MockSiteContextSettings.PageCount);
-        if (mockPageCount != null)
-        {
-          result = Convert.ToInt32(mockPageCount);
-        }
-
-        return result;
+        return Container.GetData(MockSiteContextSettings.PageCount, 0);
       }
     }
 
     public string Pathway
     {
-      get 
+      get
       {
-        string result = string.Empty;
-
-        string mockPathway = GetMockSetting(MockSiteContextSettings.Pathway) as string;
-        if (mockPathway != null)
-        {
-          result = mockPathway;
-        }
-
-        return result;
+        return Container.GetData(MockSiteContextSettings.Pathway, string.Empty);
       }
     }
 
@@ -154,17 +133,9 @@ namespace Atlantis.Framework.Testing.MockProviders
 
     public bool IsRequestInternal
     {
-      get 
+      get
       {
-        bool result = false;
-
-        object mockIsRequestInternal = GetMockSetting(MockSiteContextSettings.IsRequestInternal);
-        if (mockIsRequestInternal != null)
-        {
-          result = Convert.ToBoolean(mockIsRequestInternal);
-        }
-
-        return result;
+        return Container.GetData(MockSiteContextSettings.IsRequestInternal, false);
       }
     }
 
@@ -172,15 +143,7 @@ namespace Atlantis.Framework.Testing.MockProviders
     {
       get
       {
-        ServerLocationType result = ServerLocationType.Dev;
-
-        object mockServerLocation = GetMockSetting(MockSiteContextSettings.ServerLocation);
-        if (mockServerLocation != null)
-        {
-          result = (ServerLocationType)mockServerLocation;
-        }
-
-        return result;
+        return Container.GetData(MockSiteContextSettings.ServerLocation, ServerLocationType.Dev);
       }
     }
 

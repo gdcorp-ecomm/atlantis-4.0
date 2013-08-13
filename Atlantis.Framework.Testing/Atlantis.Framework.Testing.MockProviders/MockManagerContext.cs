@@ -1,12 +1,11 @@
-﻿using System;
-using Atlantis.Framework.Interface;
+﻿using Atlantis.Framework.Interface;
 using System.Collections.Specialized;
 
 namespace Atlantis.Framework.Testing.MockProviders
 {
-  public class MockManagerContext : MockProviderBase, IManagerContext
+  public class MockManagerContext : ProviderBase, IManagerContext
   {
-    NameValueCollection _managerQuery = new NameValueCollection();
+    readonly NameValueCollection _managerQuery = new NameValueCollection();
 
     public MockManagerContext(IProviderContainer container)
       : base(container)
@@ -15,17 +14,9 @@ namespace Atlantis.Framework.Testing.MockProviders
 
     public bool IsManager
     {
-      get 
+      get
       {
-        bool result = false;
-
-        object isManager = GetMockSetting(MockManagerContextSettings.IsManager);
-        if (isManager != null)
-        {
-          result = Convert.ToBoolean(isManager);
-        }
-
-        return result;
+        return Container.GetData(MockManagerContextSettings.IsManager, false);
       }
     }
 
@@ -33,15 +24,7 @@ namespace Atlantis.Framework.Testing.MockProviders
     {
       get
       {
-        string result = string.Empty;
-
-        string userId = GetMockSetting(MockManagerContextSettings.UserId) as string;
-        if (userId != null)
-        {
-          result = userId;
-        }
-
-        return result;
+        return Container.GetData(MockManagerContextSettings.UserId, string.Empty);
       }
     }
 
@@ -49,19 +32,11 @@ namespace Atlantis.Framework.Testing.MockProviders
     {
       get
       {
-        string result = string.Empty;
-
-        string userName = GetMockSetting(MockManagerContextSettings.UserName) as string;
-        if (userName != null)
-        {
-          result = userName;
-        }
-
-        return result;
+        return Container.GetData(MockManagerContextSettings.UserName, string.Empty);
       }
     }
 
-    public System.Collections.Specialized.NameValueCollection ManagerQuery
+    public NameValueCollection ManagerQuery
     {
       get { return _managerQuery; }
     }
@@ -70,15 +45,7 @@ namespace Atlantis.Framework.Testing.MockProviders
     {
       get
       {
-        string result = string.Empty;
-
-        string shopperId = GetMockSetting(MockManagerContextSettings.ShopperId) as string;
-        if (shopperId != null)
-        {
-          result = shopperId;
-        }
-
-        return result;
+        return Container.GetData(MockManagerContextSettings.ShopperId, string.Empty);
       }
     }
 
@@ -86,14 +53,7 @@ namespace Atlantis.Framework.Testing.MockProviders
     {
       get
       {
-        int result = 0;
-
-        object privateLabelId = GetMockSetting(MockManagerContextSettings.PrivateLabelId);
-        if (privateLabelId != null)
-        {
-          result = Convert.ToInt32(privateLabelId);
-        }
-        return result;
+        return Container.GetData(MockManagerContextSettings.PrivateLabelId, 1);
       }
     }
 

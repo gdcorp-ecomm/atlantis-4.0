@@ -197,19 +197,16 @@ namespace Atlantis.Framework.Testing.MockProviders
       }
     }
 
+    [Obsolete("Use IProviderContainer.GetData directly.")]
     public object GetMockSetting(string name)
     {
-      object result = null;
-      if (_mockProviderSettings.ContainsKey(name))
-      {
-        result = _mockProviderSettings[name];
-      }
-      return result;
+      return GetData(name, (string) null);
     }
 
+    [Obsolete("Use IProviderContainer.SetData directly.")]
     public void SetMockSetting(string name, object value)
     {
-      _mockProviderSettings[name] = value;
+      SetData(name, value);
     }
 
   }

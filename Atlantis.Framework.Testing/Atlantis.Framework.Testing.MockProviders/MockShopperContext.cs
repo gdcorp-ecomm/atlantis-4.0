@@ -3,14 +3,14 @@ using System;
 
 namespace Atlantis.Framework.Testing.MockProviders
 {
-  public class MockShopperContext : MockProviderBase, IShopperContext
+  public class MockShopperContext : ProviderBase, IShopperContext
   {
-    Lazy<ISiteContext> _siteContext;
+    readonly Lazy<ISiteContext> _siteContext;
 
     public MockShopperContext(IProviderContainer container)
       : base(container)
     {
-      _siteContext = new Lazy<ISiteContext>(() => { return Container.Resolve<ISiteContext>(); });
+      _siteContext = new Lazy<ISiteContext>(() => Container.Resolve<ISiteContext>());
     }
 
     private string _shopperId = string.Empty;
@@ -18,31 +18,27 @@ namespace Atlantis.Framework.Testing.MockProviders
 
     public string ShopperId
     {
-      get 
+      get
       {
         if (_siteContext.Value.Manager.IsManager)
         {
           return _siteContext.Value.Manager.ManagerShopperId;
         }
-        else
-        {
-          return _shopperId; 
-        }
+
+        return _shopperId;
       }
     }
 
     public ShopperStatusType ShopperStatus
     {
-      get 
+      get
       {
         if (_siteContext.Value.Manager.IsManager)
         {
           return ShopperStatusType.Manager;
         }
-        else
-        {
-          return _shopperStatus; 
-        }
+
+        return _shopperStatus;
       }
     }
 
@@ -50,15 +46,7 @@ namespace Atlantis.Framework.Testing.MockProviders
     {
       get
       {
-        int result = 0;
-
-        object priceType = GetMockSetting(MockShopperContextSettings.PriceType);
-        if ((priceType != null) && (priceType is int))
-        {
-          result = (int)priceType;
-        }
-
-        return result;
+        return Container.GetData(MockShopperContextSettings.PriceType, 0);
       }
     }
 

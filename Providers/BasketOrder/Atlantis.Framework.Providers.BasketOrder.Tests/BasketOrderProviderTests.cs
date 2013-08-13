@@ -56,6 +56,8 @@ namespace Atlantis.Framework.Providers.BasketOrder.Tests
       container.RegisterProvider<IShopperContext, MockShopperContext>();
       container.RegisterProvider<IBasketOrderProvider, BasketOrderProvider>();
 
+      container.Resolve<IShopperContext>().SetLoggedInShopper("904783");
+
       return container.Resolve<IBasketOrderProvider>();
     }
 
@@ -177,10 +179,22 @@ namespace Atlantis.Framework.Providers.BasketOrder.Tests
     {
       var basketOrderProvider = NewBasketOrderProvider();
       IBasketOrderTrackingData orderData;
-      basketOrderProvider.TryGetBasketOrderTrackingData("1484167", out orderData);
+      basketOrderProvider.TryGetBasketOrderTrackingData("1484187", out orderData);
 
       CheckNullAsserts(orderData);
       CheckOrderItemsNotEmpty(orderData);
+    }
+
+    [TestMethod]
+    public void OldOrderTest()
+    {
+      
+    }
+
+    [TestMethod]
+    public void NewOrderTest()
+    {
+      
     }
   }
 }

@@ -34,7 +34,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Atlantis.Framework.GetBasketPrice.Impl">
+    <Reference Include="Atlantis.Framework.GetBasketPrice.Impl, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\Atlantis.Framework.GetBasketPrice\Atlantis.Framework.GetBasketPrice.Impl\bin\Debug\Atlantis.Framework.GetBasketPrice.Impl.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.GetBasketPrice.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">

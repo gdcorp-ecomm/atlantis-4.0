@@ -15,24 +15,26 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Provider
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.GetBasketPrice.Interface", "..\..\Atlantis.Framework.GetBasketPrice\Atlantis.Framework.GetBasketPrice.Interface\Atlantis.Framework.GetBasketPrice.Interface.csproj", "{0F29FE8F-6B5B-4484-8ED6-F799C256FBCF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.GetBasketPrice.Impl", "..\..\Atlantis.Framework.GetBasketPrice\Atlantis.Framework.GetBasketPrice.Impl\Atlantis.Framework.GetBasketPrice.Impl.csproj", "{B03F9052-91C7-4E1A-805D-FF1572EFE1F3}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 7
+		SccNumberOfProjects = 8
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
-		SccProjectUniqueName0 = ..\\..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
-		SccProjectTopLevelParentUniqueName0 = BasketOrder.sln
-		SccProjectName0 = ../../Atlantis.Framework.Engine/Atlantis.Framework.Interface
-		SccLocalPath0 = ..\\..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
-		SccProjectUniqueName1 = ..\\..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ..\\..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
 		SccProjectTopLevelParentUniqueName1 = BasketOrder.sln
-		SccProjectName1 = ../../Atlantis.Framework.Engine/Atlantis.Framework.Engine
-		SccLocalPath1 = ..\\..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
-		SccProjectUniqueName2 = ..\\..\\Atlantis.Framework.GetBasketPrice\\Atlantis.Framework.GetBasketPrice.Interface\\Atlantis.Framework.GetBasketPrice.Interface.csproj
+		SccProjectName1 = ../../Atlantis.Framework.Engine/Atlantis.Framework.Interface
+		SccLocalPath1 = ..\\..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
+		SccProjectUniqueName2 = ..\\..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
 		SccProjectTopLevelParentUniqueName2 = BasketOrder.sln
-		SccProjectName2 = ../../Atlantis.Framework.GetBasketPrice/Atlantis.Framework.GetBasketPrice.Interface
-		SccLocalPath2 = ..\\..\\Atlantis.Framework.GetBasketPrice\\Atlantis.Framework.GetBasketPrice.Interface
-		SccLocalPath3 = .
+		SccProjectName2 = ../../Atlantis.Framework.Engine/Atlantis.Framework.Engine
+		SccLocalPath2 = ..\\..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
+		SccProjectUniqueName3 = ..\\..\\Atlantis.Framework.GetBasketPrice\\Atlantis.Framework.GetBasketPrice.Interface\\Atlantis.Framework.GetBasketPrice.Interface.csproj
+		SccProjectTopLevelParentUniqueName3 = BasketOrder.sln
+		SccProjectName3 = ../../Atlantis.Framework.GetBasketPrice/Atlantis.Framework.GetBasketPrice.Interface
+		SccLocalPath3 = ..\\..\\Atlantis.Framework.GetBasketPrice\\Atlantis.Framework.GetBasketPrice.Interface
 		SccProjectUniqueName4 = Atlantis.Framework.Providers.BasketOrder\\Atlantis.Framework.Providers.BasketOrder.csproj
 		SccProjectName4 = Atlantis.Framework.Providers.BasketOrder
 		SccLocalPath4 = Atlantis.Framework.Providers.BasketOrder
@@ -42,6 +44,10 @@ Global
 		SccProjectUniqueName6 = Atlantis.Framework.Providers.BasketOrder.Tests\\Atlantis.Framework.Providers.BasketOrder.Tests.csproj
 		SccProjectName6 = Atlantis.Framework.Providers.BasketOrder.Tests
 		SccLocalPath6 = Atlantis.Framework.Providers.BasketOrder.Tests
+		SccProjectUniqueName7 = ..\\..\\Atlantis.Framework.GetBasketPrice\\Atlantis.Framework.GetBasketPrice.Impl\\Atlantis.Framework.GetBasketPrice.Impl.csproj
+		SccProjectTopLevelParentUniqueName7 = BasketOrder.sln
+		SccProjectName7 = ../../Atlantis.Framework.GetBasketPrice/Atlantis.Framework.GetBasketPrice.Impl
+		SccLocalPath7 = ..\\..\\Atlantis.Framework.GetBasketPrice\\Atlantis.Framework.GetBasketPrice.Impl
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -72,6 +78,10 @@ Global
 		{0F29FE8F-6B5B-4484-8ED6-F799C256FBCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0F29FE8F-6B5B-4484-8ED6-F799C256FBCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0F29FE8F-6B5B-4484-8ED6-F799C256FBCF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B03F9052-91C7-4E1A-805D-FF1572EFE1F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B03F9052-91C7-4E1A-805D-FF1572EFE1F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B03F9052-91C7-4E1A-805D-FF1572EFE1F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B03F9052-91C7-4E1A-805D-FF1572EFE1F3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -80,5 +90,6 @@ Global
 		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {27DC88D4-1618-493B-835B-EAF192592826}
 		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {27DC88D4-1618-493B-835B-EAF192592826}
 		{0F29FE8F-6B5B-4484-8ED6-F799C256FBCF} = {27DC88D4-1618-493B-835B-EAF192592826}
+		{B03F9052-91C7-4E1A-805D-FF1572EFE1F3} = {27DC88D4-1618-493B-835B-EAF192592826}
 	EndGlobalSection
 EndGlobal

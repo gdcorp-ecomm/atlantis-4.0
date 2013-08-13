@@ -27,7 +27,7 @@ namespace Atlantis.Framework.Providers.BasketOrder
                                                   HttpContext.Current.Request.Url.ToString(), string.Empty,
                                                   _siteContext.Value.Pathway, _siteContext.Value.PageCount)
         {
-          BasketType = basketType ?? BasketTypes.GoDaddy
+          BasketType = BasketTypes.GoDaddy
         };
 
       try
@@ -66,9 +66,9 @@ namespace Atlantis.Framework.Providers.BasketOrder
         var request = new GetBasketPriceRequestData(_shopperContext.Value.ShopperId,
                                                     HttpContext.Current.Request.Url.ToString(), string.Empty,
                                                     _siteContext.Value.Pathway, _siteContext.Value.PageCount)
-          {
-            BasketType = basketType ?? BasketTypes.GoDaddy
-          };
+        {
+          BasketType = BasketTypes.GoDaddy
+        };
 
         var response =
           (GetBasketPriceResponseData) Engine.Engine.ProcessRequest(request, BasketOrderEngineRequests.BasketGetPrice);

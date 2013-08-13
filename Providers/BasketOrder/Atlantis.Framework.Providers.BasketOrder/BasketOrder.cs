@@ -45,7 +45,14 @@ namespace Atlantis.Framework.Providers.BasketOrder
 
     internal BasketOrder(string orderXml)
     {
-      OrderXml = orderXml == null ? XDocument.Parse(EMPTY_ORDER_ELEMENT) : XDocument.Parse(orderXml);
+      try
+      {
+        OrderXml = XDocument.Parse(orderXml);
+      }
+      catch
+      {
+        OrderXml = XDocument.Parse(EMPTY_ORDER_ELEMENT);
+      }
     }
 
     private void InitializeFromOrderXml()
@@ -182,7 +189,7 @@ namespace Atlantis.Framework.Providers.BasketOrder
           else
           {
             double totalPrice;
-            _totalPrice = double.TryParse(totalTotalAttribute.Value, out totalPrice) ? totalPrice : DEFAULT_TOTAL_PRICE;
+            _totalPrice = double.TryParse(totalTotalAttribute.Value, out totalPrice) ? totalPrice * 0.01 : DEFAULT_TOTAL_PRICE;
           }
         }
         return _totalPrice.Value;
@@ -217,7 +224,7 @@ namespace Atlantis.Framework.Providers.BasketOrder
           else
           {
             double taxTotal;
-            _taxTotal = double.TryParse(taxTotalAttribute.Value, out taxTotal) ? taxTotal : DEFAULT_TAX_TOTAL;
+            _taxTotal = double.TryParse(taxTotalAttribute.Value, out taxTotal) ? taxTotal * 0.01 : DEFAULT_TAX_TOTAL;
           }
         }
         return _taxTotal.Value;
@@ -253,7 +260,7 @@ namespace Atlantis.Framework.Providers.BasketOrder
           else
           {
             double shippingTotal;
-            _shippingTotal = double.TryParse(shippingTotalAttribute.Value, out shippingTotal) ? shippingTotal : DEFAULT_SHIPPING_TOTAL;
+            _shippingTotal = double.TryParse(shippingTotalAttribute.Value, out shippingTotal) ? shippingTotal * 0.01 : DEFAULT_SHIPPING_TOTAL;
           }
         }
         return _shippingTotal.Value;

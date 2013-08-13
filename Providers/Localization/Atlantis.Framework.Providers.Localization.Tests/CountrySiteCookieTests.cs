@@ -32,7 +32,7 @@ namespace Atlantis.Framework.Providers.Localization.Tests
 
       MockProviderContainer container = new MockProviderContainer();
       container.RegisterProvider<ISiteContext, MockSiteContext>();
-      container.SetMockSetting(MockSiteContextSettings.PrivateLabelId, privateLabelId);
+      container.SetData(MockSiteContextSettings.PrivateLabelId, privateLabelId);
 
       object[] constructorParams = new object[1] { container };
       return NewCountrySiteCookieClass(constructorParams);

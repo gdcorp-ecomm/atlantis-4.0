@@ -5,7 +5,7 @@ using Atlantis.Framework.Testing.MockProviders;
 
 namespace Atlantis.Framework.Providers.Localization.Tests
 {
-  public class MockGeoProvider : MockProviderBase, IGeoProvider 
+  public class MockGeoProvider : ProviderBase, IGeoProvider 
   {
     public const string REQUEST_COUNTRY_SETTING_NAME = "MockGeoProvider.RequestCountry";
 
@@ -17,8 +17,7 @@ namespace Atlantis.Framework.Providers.Localization.Tests
     {
       get
       {
-        var result = GetMockSetting(REQUEST_COUNTRY_SETTING_NAME) as string;
-        return result ?? "us";
+        return Container.GetData(REQUEST_COUNTRY_SETTING_NAME, "us");
       }
     }
 

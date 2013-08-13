@@ -27,7 +27,7 @@ namespace Atlantis.Framework.Providers.Localization.Tests
       result.RegisterProvider<ILocalizationRedirectProvider, LocalizationRedirectProvider>();
       result.RegisterProvider<IProxyContext, ProxyContext.WebProxyContext>();
       result.RegisterProvider<IGeoProvider, MockGeoProvider>();
-      result.SetMockSetting(MockGeoProvider.REQUEST_COUNTRY_SETTING_NAME, ipCountry);
+      result.SetData(MockGeoProvider.REQUEST_COUNTRY_SETTING_NAME, ipCountry);
       
       return result;
     }

@@ -64,9 +64,13 @@
   </Choose>
   <ItemGroup>
     <Compile Include="ConditionHandlers\DataCenterConditionHandler.cs" />
+    <Compile Include="Mocks\MockActiveSplitTestDetailsRequest_A.cs" />
+    <Compile Include="Mocks\MockActiveSplitTestDetailsRequest_AB.cs" />
+    <Compile Include="Mocks\MockActiveSplitTestsRequest_3Tests.cs" />
+    <Compile Include="Mocks\MockActiveSplitTestsRequest_1Tests.cs" />
     <Compile Include="Mocks\MockAppSettingRequest_ATLANTIS_SPLITPROVIDER_COOKIELIFE_HOURS_24Hours.cs" />
     <Compile Include="SplitTestingCookieTests.cs" />
-    <Compile Include="Mocks\ActiveSplitTestsRequest_NoTests.cs" />
+    <Compile Include="Mocks\MockActiveSplitTestsRequest_NoTests.cs" />
     <Compile Include="Mocks\BotUserAgentProvider.cs" />
     <Compile Include="Mocks\NoBotUserAgentProvider.cs" />
     <Compile Include="Mocks\MockEngineRequests.cs" />

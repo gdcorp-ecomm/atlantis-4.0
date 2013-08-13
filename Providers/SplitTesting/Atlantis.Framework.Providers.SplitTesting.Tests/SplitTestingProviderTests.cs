@@ -1,11 +1,14 @@
-﻿using System.Collections.Specialized;
+﻿using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Reflection;
 using System.Web;
+using System.Linq;
 using Atlantis.Framework.Conditions.Interface;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.SplitTesting.Interface;
 using Atlantis.Framework.Providers.SplitTesting.Tests.Mocks;
 using Atlantis.Framework.Providers.UserAgentDetection.Interface;
+using Atlantis.Framework.SplitTesting.Interface;
 using Atlantis.Framework.Testing.MockHttpContext;
 using Atlantis.Framework.Testing.MockProviders;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -275,6 +278,128 @@ namespace Atlantis.Framework.Providers.SplitTesting.Tests
       Assert.AreEqual(bTarget, bPercent, allowableDelta);
     }
 
+
+    #region GetTrackingData tests
+
+    [TestMethod]
+    public void GetTrackingData_NoTestRequested()
+    {
+      SplitTestingConfiguration.DefaultCategoryName = "Test";
+      var mockHttpRequest = new MockHttpRequest("http://www.debug.godaddy-com.ide/");
+      MockHttpContext.SetFromWorkerRequest(mockHttpRequest);
+
+      var expected = string.Empty;
+
+      var splitProvider = InitializeProviders(1, "858884");
+      SplitTestingEngineRequests.ActiveSplitTests = MockEngineRequests.ActiveSplitTests_3Tests;
+      SplitTestingEngineRequests.ActiveSplitTestDetails = MockEngineRequests.ActiveSplitTestDetails_AB;
+
+      var actual = splitProvider.GetTrackingData;
+
+      Assert.AreEqual(expected, actual);
+    }
+
+    [TestMethod]
+    public void GetTrackingData_1TestRequested()
+    {
+      SplitTestingConfiguration.DefaultCategoryName = "Test";
+      var mockHttpRequest = new MockHttpRequest("http://www.debug.godaddy-com.ide/");
+      MockHttpContext.SetFromWorkerRequest(mockHttpRequest);
+
+      var expected = string.Format("{0}.{1}.{2}.{3}", 1, 1, 1, 1);
+
+      var splitProvider = InitializeProviders(1, "858884");
+      SplitTestingEngineRequests.ActiveSplitTests = MockEngineRequests.ActiveSplitTests_3Tests;
+      SplitTestingEngineRequests.ActiveSplitTestDetails = MockEngineRequests.ActiveSplitTestDetails_A;
+
+      splitProvider.GetSplitTestingSide(1);
+      var actual = splitProvider.GetTrackingData;
+
+      Assert.AreEqual(expected, actual);
+    }
+
+    [TestMethod]
+    public void GetTrackingData_2TestsRequested()
+    {
+      SplitTestingConfiguration.DefaultCategoryName = "Test";
+      var mockHttpRequest = new MockHttpRequest("http://www.debug.godaddy-com.ide/");
+      MockHttpContext.SetFromWorkerRequest(mockHttpRequest);
+
+      var expected = string.Format("{0}.{1}.{2}.{3}", 1, 1, 1, 1);
+      expected += "^";
+      expected += string.Format("{0}.{1}.{2}.{3}", 3, 3, 3, 1);
+
+      var splitProvider = InitializeProviders(1, "858884");
+      SplitTestingEngineRequests.ActiveSplitTests = MockEngineRequests.ActiveSplitTests_3Tests;
+      SplitTestingEngineRequests.ActiveSplitTestDetails = MockEngineRequests.ActiveSplitTestDetails_A;
+
+      splitProvider.GetSplitTestingSide(1);
+      splitProvider.GetSplitTestingSide(3);
+      var actual = splitProvider.GetTrackingData;
+
+      Assert.AreEqual(expected, actual);
+
+    }
+
+    #endregion
+
+    #region GetTrackingDictionary Tests
+
+    [TestMethod]
+    public void GetTrackingDictionary_NoTestsRequested()
+    {
+
+      SplitTestingConfiguration.DefaultCategoryName = "Test";
+      var mockHttpRequest = new MockHttpRequest("http://www.debug.godaddy-com.ide/");
+      MockHttpContext.SetFromWorkerRequest(mockHttpRequest);
+
+      var splitProvider = InitializeProviders(1, "858884");
+      SplitTestingEngineRequests.ActiveSplitTests = MockEngineRequests.ActiveSplitTests_3Tests;
+      SplitTestingEngineRequests.ActiveSplitTestDetails = MockEngineRequests.ActiveSplitTestDetails_A;
+
+      var actual = splitProvider.GetTrackingDictionary;
+
+      Assert.AreEqual(0, actual.Count);
+    }
+    
+    [TestMethod]
+    public void GetTrackingDictionary_2TestsRequested()
+    {
+
+      SplitTestingConfiguration.DefaultCategoryName = "Test";
+      var mockHttpRequest = new MockHttpRequest("http://www.debug.godaddy-com.ide/");
+      MockHttpContext.SetFromWorkerRequest(mockHttpRequest);
+
+      var splitProvider = InitializeProviders(1, "858884");
+      SplitTestingEngineRequests.ActiveSplitTests = MockEngineRequests.ActiveSplitTests_3Tests;
+      SplitTestingEngineRequests.ActiveSplitTestDetails = MockEngineRequests.ActiveSplitTestDetails_A;
+
+      splitProvider.GetSplitTestingSide(1);
+      splitProvider.GetSplitTestingSide(3);
+
+      var actual = splitProvider.GetTrackingDictionary;
+
+      Assert.AreEqual(2, actual.Count);
+
+      IActiveSplitTest test1 = actual.Keys.Single(a => a.TestId == 1);
+      Assert.AreEqual(1, test1.TestId);
+      Assert.AreEqual(1, test1.VersionNumber);
+      Assert.AreEqual(1, test1.RunId);
+      IActiveSplitTestSide side1 = actual[test1];
+      Assert.AreEqual(1, side1.SideId);
+      Assert.AreEqual("A", side1.Name);
+      
+      IActiveSplitTest test2 = actual.Keys.Single(a => a.TestId == 3);
+      Assert.AreEqual(3, test2.TestId);
+      Assert.AreEqual(3, test2.VersionNumber);
+      Assert.AreEqual(3, test2.RunId);
+      IActiveSplitTestSide side2 = actual[test1];
+      Assert.AreEqual(1, side2.SideId);
+      Assert.AreEqual("A", side2.Name);
+
+    }
+
+    #endregion
 
   }
 }

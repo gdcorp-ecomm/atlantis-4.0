@@ -24,7 +24,7 @@ namespace Atlantis.Framework.CH.Localization.Tests
         if (_providerContainer == null)
         {
           MockProviderContainer mockProviderContainer = new MockProviderContainer();
-          mockProviderContainer.SetMockSetting(MockLocalizationProviderSettings.CountrySite, "www");
+          mockProviderContainer.SetData(MockLocalizationProviderSettings.CountrySite, "www");
 
           _providerContainer = mockProviderContainer;
           _providerContainer.RegisterProvider<ISiteContext, MockSiteContext>();

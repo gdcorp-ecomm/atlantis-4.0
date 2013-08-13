@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace Atlantis.Framework.Testing.MockLocalization
 {
-  public class MockLocalizationProvider : MockProviderBase, ILocalizationProvider
+  public class MockLocalizationProvider : ProviderBase, ILocalizationProvider
   {
     const string _DEFAULTCOUNTRYSITE = "www";
     const string _DEFAULTLANGUAGE = "en";
@@ -31,64 +31,32 @@ namespace Atlantis.Framework.Testing.MockLocalization
 
     private ICountrySite LoadCountySiteInfo()
     {
-      ICountrySite result = null;
-
-      ICountrySite countrySite = GetMockSetting(MockLocalizationProviderSettings.CountrySiteInfo) as ICountrySite;
-      if (countrySite != null)
-      {
-        result = countrySite;
-      }
-
-      return result;
+      return Container.GetData<ICountrySite>(MockLocalizationProviderSettings.CountrySiteInfo, null);
     }
 
     private IMarket LoadMarketInfo()
     {
-      IMarket result = null;
-
-      IMarket marketInfo = GetMockSetting(MockLocalizationProviderSettings.MarketInfo) as IMarket;
-      if (marketInfo != null)
-      {
-        result = marketInfo;
-      }
-
-      return result;
+      return Container.GetData<IMarket>(MockLocalizationProviderSettings.MarketInfo, null);
     }
 
     private string LoadFullLanguage()
     {
-      string result = _DEFAULTLANGUAGE;
-
       if (MarketInfo != null)
       {
         return MarketInfo.Id;
       }
 
-      string fullLanguage = GetMockSetting(MockLocalizationProviderSettings.FullLanguage) as string;
-      if (fullLanguage != null)
-      {
-        result = fullLanguage;
-      }
-
-      return result;
+      return Container.GetData(MockLocalizationProviderSettings.FullLanguage, _DEFAULTLANGUAGE);
     }
 
     private string LoadMockCountrySite()
     {
-      string result = _DEFAULTCOUNTRYSITE;
-
       if (CountrySiteInfo != null)
       {
         return CountrySiteInfo.Id;
       }
 
-      string countrySite = GetMockSetting(MockLocalizationProviderSettings.CountrySite) as string;
-      if (countrySite != null)
-      {
-        result = countrySite;
-      }
-
-      return result;
+      return Container.GetData(MockLocalizationProviderSettings.CountrySite, _DEFAULTCOUNTRYSITE);
     }
 
     public string FullLanguage

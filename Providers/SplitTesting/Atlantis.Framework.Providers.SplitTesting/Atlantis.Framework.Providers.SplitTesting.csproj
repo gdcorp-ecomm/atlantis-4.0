@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="SplitTestingRequestCache.cs" />
     <Compile Include="SplitTestingCookieOverride.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SplitTestingCookie.cs" />

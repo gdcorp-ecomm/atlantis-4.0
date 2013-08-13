@@ -28,7 +28,7 @@ namespace Atlantis.Framework.Providers.SplitTesting
     private readonly Lazy<SplitTestingCookieOverride> _splitTestCookieOverride;
     private readonly Lazy<IUserAgentDetectionProvider> _splitTestUserAgentDetection;
 
-    private readonly Dictionary<IActiveSplitTest, IActiveSplitTestSide> _sidesByTestsForRequest;
+    private readonly Lazy<SplitTestingRequestCache> _requestCache;
 
     private readonly ExpressionParserManager _expressionParserManager;
 
@@ -44,7 +44,7 @@ namespace Atlantis.Framework.Providers.SplitTesting
       _activeSplitTestsResponse = new Lazy<ActiveSplitTestsResponseData>(LoadActiveTests);
       _splitTestCookieOverride = new Lazy<SplitTestingCookieOverride>(() => new SplitTestingCookieOverride(container));
 
-      _sidesByTestsForRequest = new Dictionary<IActiveSplitTest, IActiveSplitTestSide>();
+      _requestCache = new Lazy<SplitTestingRequestCache>(() => new SplitTestingRequestCache(container));
 
       _expressionParserManager = new ExpressionParserManager(Container);
       _expressionParserManager.EvaluateExpressionHandler += ConditionHandlerManager.EvaluateCondition;
@@ -137,6 +137,7 @@ namespace Atlantis.Framework.Providers.SplitTesting
               {
                 UpdateRequestCache(activeSplitTest, NOT_ELIGIBLE_SIDE_ID);
                 UpdateState(key, NOT_ELIGIBLE_SIDE_ID);
+                
               }
               else
               {
@@ -211,32 +212,51 @@ namespace Atlantis.Framework.Providers.SplitTesting
 
     public Dictionary<IActiveSplitTest, IActiveSplitTestSide> GetTrackingDictionary
     {
-      get { return _sidesByTestsForRequest; }
+      get
+      {
+        var dict = new Dictionary<IActiveSplitTest, IActiveSplitTestSide>();
+        foreach (var info in _requestCache.Value.GetCacheValues())
+        {
+          var splitInfo = info.Split('.');
+          var testId = Convert.ToInt32(splitInfo[0]);
+          IActiveSplitTest test;
+          if (_activeSplitTestsResponse.Value.TryGetSplitTestByTestId(testId, out test))
+          {
+            var side = GetActiveSplitTestSide(testId, splitInfo[3]);
+            if (side != null)
+            {
+              dict.Add(test, side);
+            }
+          }
+        }
+        return dict;
+      }
     }
 
     public string GetTrackingData
     {
       get
       {
-        const string format = "{0}.{1}.{2}.{3}";
         const string separator = "^";
-
+        
         var result = new StringBuilder();
-        foreach (var info in _sidesByTestsForRequest)
+        foreach (var info in _requestCache.Value.GetCacheValues())
         {
-          var splitTest = info.Key;
-          var sideId = info.Value.SideId;
-
-          if (result.Length > 0)
-          {
-            result.Append(separator);
-          }
-          result.Append(string.Format(format, splitTest.TestId, splitTest.VersionNumber, splitTest.RunId, sideId));
+          result.Append(info).Append(separator);
         }
+        if (result.Length > 1)
+        {
+          result.Remove(result.Length - 1, 1);
+        }
+
+        _requestCache.Value.ClearCache();
         return result.ToString();
       }
     }
 
+    /// <summary>
+    /// Returns all active tests for the default category as set by <code>SplitTestingConfiguration.DefaultCategoryName</code>
+    /// </summary>
     public IEnumerable<IActiveSplitTest> GetAllActiveTests
     {
       get
@@ -293,8 +313,9 @@ namespace Atlantis.Framework.Providers.SplitTesting
 
     private void UpdateRequestCache(IActiveSplitTest splitTest, string sideId)
     {
-      IActiveSplitTestSide splitTestSide = GetActiveSplitTestSide(splitTest.TestId, sideId);
-      _sidesByTestsForRequest[splitTest] = splitTestSide;
+      const string template = "{0}.{1}.{2}.{3}";
+      var value = string.Format(template, splitTest.TestId, splitTest.VersionNumber, splitTest.RunId, sideId);
+      _requestCache.Value.AddCacheValues(value);
     }
 
     private static string CreateStateKey(int splitTestId, IActiveSplitTest activeSplitTest)

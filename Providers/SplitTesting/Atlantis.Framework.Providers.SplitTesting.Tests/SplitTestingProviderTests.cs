@@ -297,6 +297,8 @@ namespace Atlantis.Framework.Providers.SplitTesting.Tests
       var actual = splitProvider.GetTrackingData;
 
       Assert.AreEqual(expected, actual);
+
+      
     }
 
     [TestMethod]
@@ -316,6 +318,9 @@ namespace Atlantis.Framework.Providers.SplitTesting.Tests
       var actual = splitProvider.GetTrackingData;
 
       Assert.AreEqual(expected, actual);
+
+      Assert.IsNull(HttpContext.Current.Session[LoadCookieName("SplitTestingRequestCache", "858884", "1")]);
+
     }
 
     [TestMethod]
@@ -338,6 +343,32 @@ namespace Atlantis.Framework.Providers.SplitTesting.Tests
       var actual = splitProvider.GetTrackingData;
 
       Assert.AreEqual(expected, actual);
+
+
+      Assert.IsNull(HttpContext.Current.Session[LoadCookieName("SplitTestingRequestCache", "858884", "1")]);
+
+    }
+
+    [TestMethod]
+    public void GetTrackingData_DuplicateCalls()
+    {
+      SplitTestingConfiguration.DefaultCategoryName = "Test";
+      var mockHttpRequest = new MockHttpRequest("http://www.debug.godaddy-com.ide/");
+      MockHttpContext.SetFromWorkerRequest(mockHttpRequest);
+
+      var expected = string.Format("{0}.{1}.{2}.{3}", 1, 1, 1, 1);
+
+      var splitProvider = InitializeProviders(1, "858884");
+      SplitTestingEngineRequests.ActiveSplitTests = MockEngineRequests.ActiveSplitTests_3Tests;
+      SplitTestingEngineRequests.ActiveSplitTestDetails = MockEngineRequests.ActiveSplitTestDetails_A;
+
+      splitProvider.GetSplitTestingSide(1);
+      splitProvider.GetSplitTestingSide(1);
+      var actual = splitProvider.GetTrackingData;
+
+      Assert.AreEqual(expected, actual);
+
+      Assert.IsNull(HttpContext.Current.Session[LoadCookieName("SplitTestingRequestCache", "858884", "1")]);
 
     }
 
@@ -400,6 +431,11 @@ namespace Atlantis.Framework.Providers.SplitTesting.Tests
     }
 
     #endregion
+
+
+    private string LoadCookieName(string cookiePrefix, string shopperId, string privatelableId) { return cookiePrefix + privatelableId + "_" + shopperId; }
+
+
 
   }
 }

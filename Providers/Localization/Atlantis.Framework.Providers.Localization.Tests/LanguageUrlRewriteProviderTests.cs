@@ -163,7 +163,6 @@ namespace Atlantis.Framework.Providers.Localization.Tests
 
       urlRewriteProvider.ProcessLanguageUrl();
       Assert.AreEqual("http://ca.godaddy.com/es/path2/file.aspx?key1=value1&key2=value2", HttpContext.Current.Request.Url.ToString());
-      Assert.AreEqual(null, HttpContextFactory.GetHttpContext().Items[LanguageUrlRewriteProvider.URL_LANGUAGE_CONTEXT_KEY]);
       Assert.AreEqual("en-ca", localizationProvider.FullLanguage.ToLowerInvariant());
 
       uri = new Uri("http://ca.godaddy.com/somepath/path2/file.aspx?key1=value1&key2=value2");
@@ -173,7 +172,6 @@ namespace Atlantis.Framework.Providers.Localization.Tests
 
       urlRewriteProvider.ProcessLanguageUrl();
       Assert.AreEqual("http://ca.godaddy.com/somepath/path2/file.aspx?key1=value1&key2=value2", HttpContext.Current.Request.Url.ToString());
-      Assert.AreEqual(null, HttpContextFactory.GetHttpContext().Items[LanguageUrlRewriteProvider.URL_LANGUAGE_CONTEXT_KEY]);
       Assert.AreEqual("en-ca", localizationProvider.FullLanguage.ToLowerInvariant());
     }
 
@@ -187,7 +185,6 @@ namespace Atlantis.Framework.Providers.Localization.Tests
 
       urlRewriteProvider.ProcessLanguageUrl();
       Assert.AreEqual("http://ca.godaddy.com/somepath/path2/file.aspx?key1=value1&key2=value2", HttpContext.Current.Request.Url.ToString());
-      Assert.AreEqual(null, HttpContextFactory.GetHttpContext().Items[LanguageUrlRewriteProvider.URL_LANGUAGE_CONTEXT_KEY]);
       Assert.AreEqual("en-ca", localizationProvider.FullLanguage.ToLowerInvariant());
     }
 
@@ -201,7 +198,6 @@ namespace Atlantis.Framework.Providers.Localization.Tests
 
       urlRewriteProvider.ProcessLanguageUrl();
       Assert.AreEqual("http://idp.debug.m.godaddy-com.ide/login.aspx?spkey=GDMDOTMYANET-G1MYAWEB&target=default.aspx", HttpContext.Current.Request.Url.ToString());
-      Assert.AreEqual(null, HttpContextFactory.GetHttpContext().Items[LanguageUrlRewriteProvider.URL_LANGUAGE_CONTEXT_KEY]);
       Assert.AreEqual("en-us", localizationProvider.FullLanguage.ToLowerInvariant());
     }
 
@@ -234,6 +230,32 @@ namespace Atlantis.Framework.Providers.Localization.Tests
     }
 
     [TestMethod]
+    public void ProcessLanguageUrl_GlobalUrlWithNonDefaultLanguageAndNoFilenamel_ResultsChangedUrlWithDefaultAndUpatedFullLanguage()
+    {
+      Uri uri = new Uri("http://idp.debug.m.godaddy-com.ide/es/");
+      IProviderContainer container = SetCountrySubdomainContext(uri.ToString());
+      LanguageUrlRewriteProvider urlRewriteProvider = (LanguageUrlRewriteProvider)container.Resolve<ILanguageUrlRewriteProvider>();
+      ILocalizationProvider localizationProvider = container.Resolve<ILocalizationProvider>();
+
+      Assert.AreEqual("en-us", localizationProvider.FullLanguage.ToLowerInvariant());
+      urlRewriteProvider.ProcessLanguageUrl();
+      Assert.AreEqual("http://idp.debug.m.godaddy-com.ide/default.aspx", HttpContext.Current.Request.Url.ToString());
+      Assert.AreEqual("es", localizationProvider.RewrittenUrlLanguage);
+      Assert.AreEqual("es-us", localizationProvider.FullLanguage.ToLowerInvariant());
+
+      uri = new Uri("http://idp.debug.m.godaddy-com.ide/es");
+      container = SetCountrySubdomainContext(uri.ToString());
+      urlRewriteProvider = (LanguageUrlRewriteProvider)container.Resolve<ILanguageUrlRewriteProvider>();
+      localizationProvider = container.Resolve<ILocalizationProvider>();
+
+      Assert.AreEqual("en-us", localizationProvider.FullLanguage.ToLowerInvariant());
+      urlRewriteProvider.ProcessLanguageUrl();
+      Assert.AreEqual("http://idp.debug.m.godaddy-com.ide/default.aspx", HttpContext.Current.Request.Url.ToString());
+      Assert.AreEqual("es", localizationProvider.RewrittenUrlLanguage);
+      Assert.AreEqual("es-us", localizationProvider.FullLanguage.ToLowerInvariant());
+    }
+
+    [TestMethod]
     public void ProcessLanguageUrl_GlobalUrlWithInvalidLanguageUrl_ResultsInUnchangedUrlAnd_DefaultFullLanguage()
     {
       Uri uri = new Uri("http://idp.debug.m.godaddy-com.ide/xx/login.aspx?spkey=GDMDOTMYANET-G1MYAWEB&target=default.aspx");
@@ -244,7 +266,6 @@ namespace Atlantis.Framework.Providers.Localization.Tests
       Assert.AreEqual("en-us", localizationProvider.FullLanguage.ToLowerInvariant());
       urlRewriteProvider.ProcessLanguageUrl();
       Assert.AreEqual("http://idp.debug.m.godaddy-com.ide/xx/login.aspx?spkey=GDMDOTMYANET-G1MYAWEB&target=default.aspx", HttpContext.Current.Request.Url.ToString());
-      Assert.AreEqual(null, HttpContextFactory.GetHttpContext().Items[LanguageUrlRewriteProvider.URL_LANGUAGE_CONTEXT_KEY]);
       Assert.AreEqual("en-us", localizationProvider.FullLanguage.ToLowerInvariant());
     }
 
@@ -260,7 +281,6 @@ namespace Atlantis.Framework.Providers.Localization.Tests
       Assert.AreEqual("en-ca", localizationProvider.FullLanguage.ToLowerInvariant());
       urlRewriteProvider.ProcessLanguageUrl();
       Assert.AreEqual("http://idp.debug.m.godaddy-com.ide/login.aspx?spkey=GDMDOTMYANET-G1MYAWEB&target=default.aspx", HttpContext.Current.Request.Url.ToString());
-      Assert.AreEqual(null, HttpContextFactory.GetHttpContext().Items[LanguageUrlRewriteProvider.URL_LANGUAGE_CONTEXT_KEY]);
       Assert.AreEqual("en-ca", localizationProvider.FullLanguage.ToLowerInvariant());
     }
 
@@ -344,6 +364,54 @@ namespace Atlantis.Framework.Providers.Localization.Tests
       provider = (LanguageUrlRewriteProvider)container.Resolve<ILanguageUrlRewriteProvider>();
       result = (string)method.Invoke(provider, new object[] { "en" });
       Assert.AreEqual("/va/path2/file.aspx", result);
+    }
+
+    [TestMethod]
+    public void RemoveLanguageCodeFromUrlPath_NoFilename_RemovedFromUrl()
+    {
+      Uri uri = new Uri("https://whois.godaddy.com/en/?key1=value1&key2=value2");
+      IProviderContainer container = SetCountrySubdomainContext(uri.ToString());
+      LanguageUrlRewriteProvider provider = (LanguageUrlRewriteProvider)container.Resolve<ILanguageUrlRewriteProvider>();
+
+      MethodInfo method = GetPrivateMethod("RemoveLanguageCodeFromUrlPath");
+      string result = (string)method.Invoke(provider, new object[] { "en" });
+      Assert.AreEqual("/", result);
+
+      uri = new Uri("https://whois.godaddy.com/en?key1=value1&key2=value2");
+      container = SetCountrySubdomainContext(uri.ToString(), virtualDirectoryName: "va");
+      provider = (LanguageUrlRewriteProvider)container.Resolve<ILanguageUrlRewriteProvider>();
+      result = (string)method.Invoke(provider, new object[] { "en" });
+      Assert.AreEqual("", result);
+
+      uri = new Uri("https://whois.godaddy.com/en/");
+      container = SetCountrySubdomainContext(uri.ToString());
+      provider = (LanguageUrlRewriteProvider)container.Resolve<ILanguageUrlRewriteProvider>();
+      result = (string)method.Invoke(provider, new object[] { "en" });
+      Assert.AreEqual("/", result);
+
+      uri = new Uri("https://whois.godaddy.com/en");
+      container = SetCountrySubdomainContext(uri.ToString());
+      provider = (LanguageUrlRewriteProvider)container.Resolve<ILanguageUrlRewriteProvider>();
+      result = (string)method.Invoke(provider, new object[] { "en" });
+      Assert.AreEqual("", result);
+
+      uri = new Uri("https://whois.godaddy.com/qa-qa?key1=value1&key2=value2");
+      container = SetCountrySubdomainContext(uri.ToString(), virtualDirectoryName: "va");
+      provider = (LanguageUrlRewriteProvider)container.Resolve<ILanguageUrlRewriteProvider>();
+      result = (string)method.Invoke(provider, new object[] { "qa-qa" });
+      Assert.AreEqual("", result);
+
+      uri = new Uri("https://whois.godaddy.com/qa-qa/");
+      container = SetCountrySubdomainContext(uri.ToString());
+      provider = (LanguageUrlRewriteProvider)container.Resolve<ILanguageUrlRewriteProvider>();
+      result = (string)method.Invoke(provider, new object[] { "qa-qa" });
+      Assert.AreEqual("/", result);
+
+      uri = new Uri("https://whois.godaddy.com/qa-qa");
+      container = SetCountrySubdomainContext(uri.ToString());
+      provider = (LanguageUrlRewriteProvider)container.Resolve<ILanguageUrlRewriteProvider>();
+      result = (string)method.Invoke(provider, new object[] { "qa-qa" });
+      Assert.AreEqual("", result);
     }
 
     [TestMethod]
@@ -446,6 +514,39 @@ namespace Atlantis.Framework.Providers.Localization.Tests
 
       result = (string)method.Invoke(provider, null);
       Assert.AreEqual(string.Empty, result);      
+    }
+
+    [TestMethod]
+    public void GetUrlLanguage_UrlWithNoPage_ReturnsLanguage()
+    {
+      Uri uri = new Uri("https://whois.godaddy.com/qa-qa");
+      IProviderContainer container = SetCountrySubdomainContext(uri.ToString());
+      LanguageUrlRewriteProvider provider = (LanguageUrlRewriteProvider)container.Resolve<ILanguageUrlRewriteProvider>();
+
+      MethodInfo method = GetPrivateMethod("GetUrlLanguage");
+      string result = (string)method.Invoke(provider, null);
+      Assert.AreEqual("qa-qa", result);
+
+      uri = new Uri("https://whois.godaddy.com/qa-qa/");
+      container = SetCountrySubdomainContext(uri.ToString());
+      provider = (LanguageUrlRewriteProvider)container.Resolve<ILanguageUrlRewriteProvider>();
+
+      result = (string)method.Invoke(provider, null);
+      Assert.AreEqual("qa-qa", result);
+
+      uri = new Uri("https://whois.godaddy.com/qa-qa/path");
+      container = SetCountrySubdomainContext(uri.ToString());
+      provider = (LanguageUrlRewriteProvider)container.Resolve<ILanguageUrlRewriteProvider>();
+
+      result = (string)method.Invoke(provider, null);
+      Assert.AreEqual("qa-qa", result);
+
+      uri = new Uri("https://whois.godaddy.com/qa-qa/path/");
+      container = SetCountrySubdomainContext(uri.ToString());
+      provider = (LanguageUrlRewriteProvider)container.Resolve<ILanguageUrlRewriteProvider>();
+
+      result = (string)method.Invoke(provider, null);
+      Assert.AreEqual("qa-qa", result);
     }
 
     #endregion

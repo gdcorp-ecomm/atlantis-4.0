@@ -8,7 +8,7 @@ namespace Atlantis.Framework.Providers.Localization
 {
   public class LanguageUrlRewriteProvider : ProviderBase, ILanguageUrlRewriteProvider
   {
-    public static string URL_LANGUAGE_CONTEXT_KEY = "ATLANTIS_URL_LANGUAGE";
+    public static string ROOT_DEFAULT_DOCUMENT = "default.aspx";
 
     private Lazy<ISiteContext> _siteContext;
     private Lazy<CountrySiteMarketMappingsResponseData> _countrySiteMarketMappings;
@@ -96,8 +96,12 @@ namespace Atlantis.Framework.Providers.Localization
 
     private void RewriteRequestUrl(string urlLanguage)
     {
-      string newPath = RemoveLanguageCodeFromUrlPath(urlLanguage);
       _localizationProvider.Value.RewrittenUrlLanguage = urlLanguage;
+      string newPath = RemoveLanguageCodeFromUrlPath(urlLanguage);
+      if (newPath == String.Empty || newPath == "/")
+      {
+        newPath += ROOT_DEFAULT_DOCUMENT;
+      }
       HttpContextFactory.GetHttpContext().RewritePath(newPath);
       string marketId;
       if (_countrySiteMarketMappings.Value.TryGetMarketIdByCountrySiteAndUrlLanguage(urlLanguage, out marketId))
@@ -155,8 +159,8 @@ namespace Atlantis.Framework.Providers.Localization
         return path;
       }
 
-      Regex re = new Regex("/" + languageCode + "/", RegexOptions.IgnoreCase);
-      return re.Replace(path, "/", 1);
+      Regex re = new Regex("/" + languageCode + "\\b", RegexOptions.IgnoreCase);
+      return re.Replace(path, "", 1);
     }
 
     private string RemoveLanguageCodeFromUrlPath(string languageCode = null)

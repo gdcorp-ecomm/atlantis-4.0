@@ -176,6 +176,7 @@ namespace Atlantis.Framework.Providers.BasketOrder.Tests
     }
 
     [TestMethod]
+    [ExpectedException(typeof(ArgumentNullException), "A null orderXml was inappropriately allowed.")]
     public void NullOrderXDocumentTest()
     {
       var gaOrderData = new BasketOrder(null as XDocument);
@@ -184,6 +185,7 @@ namespace Atlantis.Framework.Providers.BasketOrder.Tests
     }
 
     [TestMethod]
+    [ExpectedException(typeof(ArgumentException), "A null orderXml was inappropriately allowed.")]
     public void NullOrderStringTest()
     {
       var gaOrderData = new BasketOrder(null as string);

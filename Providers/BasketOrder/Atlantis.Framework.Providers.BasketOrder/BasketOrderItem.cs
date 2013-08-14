@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Xml.Linq;
@@ -11,15 +12,17 @@ namespace Atlantis.Framework.Providers.BasketOrder
   {
     private const string EmptyItemXml = "<ITEM></ITEM>";
 
-    internal BasketOrderItem(XElement itemElement)
+    internal BasketOrderItem(XElement itemElement, double conversionRateToUsd)
     {
+      ConversionRateToUsd = conversionRateToUsd;
       ItemElement = itemElement ?? XElement.Parse(EmptyItemXml);
 
       InitializeFirstItem();
     }
 
-    public BasketOrderItem(string itemElementXml)
+    public BasketOrderItem(string itemElementXml, double conversionRateToUsd)
     {
+      ConversionRateToUsd = conversionRateToUsd;
       if (itemElementXml == null)
       {
         itemElementXml = EmptyItemXml;
@@ -113,6 +116,45 @@ namespace Atlantis.Framework.Providers.BasketOrder
 
         return _unitPrice.Value;
       }
+    }
+
+    private double? _unitPriceUsd;
+    public double UnitPriceUsd
+    {
+      get
+      {
+        if (_unitPriceUsd == null)
+        {
+          _unitPriceUsd = ConvertPriceToUsd(UnitPrice);
+        }
+        return _unitPriceUsd.Value;
+      }
+    }
+
+    private string _unitPriceUsdFormatted;
+    public string UnitPriceUsdFormatted
+    {
+      get
+      {
+        if (_unitPriceUsdFormatted == null)
+        {
+          var nfi = new NumberFormatInfo { CurrencyDecimalDigits = 2 };
+          _unitPriceUsdFormatted = UnitPriceUsd.ToString(nfi);
+        }
+        return _unitPriceUsdFormatted;
+      }
+    }
+
+    protected double ConvertPriceToUsd(double price)
+    {
+      return ConversionRateToUsd * price;
+    }
+
+    private double? _conversionRateToUsd;
+    private double ConversionRateToUsd
+    {
+      get { return _conversionRateToUsd.Value; }
+      set { _conversionRateToUsd = value; }
     }
 
     private int? _quantity;

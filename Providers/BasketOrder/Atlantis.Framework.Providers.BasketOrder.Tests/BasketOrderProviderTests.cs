@@ -56,7 +56,7 @@ namespace Atlantis.Framework.Providers.BasketOrder.Tests
       container.RegisterProvider<IShopperContext, MockShopperContext>();
       container.RegisterProvider<IBasketOrderProvider, BasketOrderProvider>();
 
-      container.Resolve<IShopperContext>().SetLoggedInShopper("904783");
+      //container.Resolve<IShopperContext>().SetLoggedInShopper(shopperId);
 
       return container.Resolve<IBasketOrderProvider>();
     }
@@ -174,27 +174,99 @@ namespace Atlantis.Framework.Providers.BasketOrder.Tests
       Assert.AreNotEqual(orderData.OrderItems.Count(), 0);
     }
 
-    [TestMethod]
-    public void OrderXmlTest()
+
+    // BrokenOrderXml
+    // EmptyItemsOrderXml
+    // EmptyOrderXml
+    // EmptyOrderDetailOrderXml
+    // MissingItemsOrderXml
+    // MissingOrderDetailOrderXml
+    // OverlappingItemsOrderXml
+    // ValidOrderXml
+
+    private void CheckValidDataWithItems(string orderXml)
     {
       var basketOrderProvider = NewBasketOrderProvider();
       IBasketOrderTrackingData orderData;
-      basketOrderProvider.TryGetBasketOrderTrackingData("1484187", out orderData);
+      var success = basketOrderProvider.TryGetBasketOrderTrackingDataFromReceiptXml(out orderData, orderXml);
+      Assert.IsTrue(success);
 
       CheckNullAsserts(orderData);
       CheckOrderItemsNotEmpty(orderData);
     }
 
-    [TestMethod]
-    public void OldOrderTest()
+    private void CheckValidDataWithoutItems(string orderXml)
     {
-      
+      var basketOrderProvider = NewBasketOrderProvider();
+      IBasketOrderTrackingData orderData;
+      var success = basketOrderProvider.TryGetBasketOrderTrackingDataFromReceiptXml(out orderData, orderXml);
+      Assert.IsTrue(success);
+
+      CheckNullAsserts(orderData);
+      CheckOrderItemsEmpty(orderData);
+    }
+
+    private void CheckInvalidData(string orderXml)
+    {
+      var basketOrderProvider = NewBasketOrderProvider();
+      IBasketOrderTrackingData orderData;
+      var success = basketOrderProvider.TryGetBasketOrderTrackingDataFromReceiptXml(out orderData, orderXml);
+      Assert.IsFalse(success);
+
+      CheckNullAsserts(orderData);
+      CheckOrderItemsEmpty(orderData);
+    }
+
+    #region Test Methods
+
+    [TestMethod]
+    public void TrackingData_BrokenOrderXml_Test()
+    {
+      CheckInvalidData(BrokenOrderXml);
     }
 
     [TestMethod]
-    public void NewOrderTest()
+    public void TrackingData_EmptyItemsOrderXml_Test()
     {
-      
+      CheckValidDataWithoutItems(EmptyItemsOrderXml);
     }
+
+    [TestMethod]
+    public void TrackingData_EmptyOrderXml_Test()
+    {
+      CheckValidDataWithoutItems(EmptyOrderXml);
+    }
+
+    [TestMethod]
+    public void TrackingData_EmptyOrderDetailOrderXml_Test()
+    {
+      CheckValidDataWithItems(EmptyOrderDetailOrderXml);
+    }
+
+    [TestMethod]
+    public void TrackingData_MissingItemsOrderXml_Test()
+    {
+      CheckValidDataWithoutItems(MissingItemsOrderXml);
+    }
+    
+    [TestMethod]
+    public void TrackingData_MissingOrderDetailOrderXml_Test()
+    {
+      CheckValidDataWithItems(MissingOrderDetailOrderXml);
+    }
+
+    [TestMethod]
+    public void TrackingData_OverlappingItemsOrderXml_Test()
+    {
+      CheckValidDataWithItems(OverlappingItemsOrderXml);
+    }
+
+    [TestMethod]
+    public void TrackingData_ValidOrderXml_Test()
+    {
+      CheckValidDataWithItems(ValidOrderXml);
+    }
+
+    #endregion
   }
 }

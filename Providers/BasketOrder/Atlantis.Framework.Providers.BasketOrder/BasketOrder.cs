@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Xml.Linq;
+using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.BasketOrder.Interface;
 
 namespace Atlantis.Framework.Providers.BasketOrder
@@ -40,11 +41,23 @@ namespace Atlantis.Framework.Providers.BasketOrder
 
     internal BasketOrder(XDocument orderXml)
     {
-      OrderXml = orderXml ?? XDocument.Parse(EMPTY_ORDER_ELEMENT);
+      if (orderXml == null)
+      {
+        OrderXml = XDocument.Parse(EMPTY_ORDER_ELEMENT);
+        throw new ArgumentNullException();
+      }
+
+      OrderXml = orderXml;
     }
 
     internal BasketOrder(string orderXml)
     {
+      if (string.IsNullOrEmpty(orderXml))
+      {
+        OrderXml = XDocument.Parse(EMPTY_ORDER_ELEMENT);
+        throw new ArgumentException();
+      }
+
       try
       {
         OrderXml = XDocument.Parse(orderXml);
@@ -52,6 +65,7 @@ namespace Atlantis.Framework.Providers.BasketOrder
       catch
       {
         OrderXml = XDocument.Parse(EMPTY_ORDER_ELEMENT);
+        throw;
       }
     }
 
@@ -61,7 +75,7 @@ namespace Atlantis.Framework.Providers.BasketOrder
       _orderItemsDictionary = new Dictionary<string, IBasketOrderItem>(4);
       foreach (var itemElement in itemElements)
       {
-        var orderItem = new BasketOrderItem(itemElement);
+        var orderItem = new BasketOrderItem(itemElement, ConversionRateToUsd);
         if (OrderItemsDictionary.Keys.Contains(orderItem.SKU))
         {
           OrderItemsDictionary[orderItem.SKU].AddItem(orderItem.Quantity, orderItem.UnitPrice);

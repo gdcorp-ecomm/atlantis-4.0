@@ -1,4 +1,5 @@
-﻿using Atlantis.Framework.GetBasketPrice.Interface;
+﻿using System.Xml.Linq;
+using Atlantis.Framework.GetBasketPrice.Interface;
 using Atlantis.Framework.Interface;
 using System;
 using System.Web;
@@ -18,60 +19,34 @@ namespace Atlantis.Framework.Providers.BasketOrder
       _shopperContext = new Lazy<IShopperContext>(() => Container.Resolve<IShopperContext>());
     }
 
-    public bool TryGetBasketOrderTrackingData(string orderId, out IBasketOrderTrackingData basketOrder,
-                                              string basketType = null)
+    private void LogException(string message, string data, string sourceFunction)
     {
-      var success = false;
-
-      var request = new GetBasketPriceRequestData(_shopperContext.Value.ShopperId,
-                                                  HttpContext.Current.Request.Url.ToString(), string.Empty,
-                                                  _siteContext.Value.Pathway, _siteContext.Value.PageCount)
-        {
-          BasketType = BasketTypes.GoDaddy
-        };
-
       try
       {
-        var response =
-          (GetBasketPriceResponseData) Engine.Engine.ProcessRequest(request, BasketOrderEngineRequests.BasketGetPrice);
-        if (response.IsSuccess)
-        {
-          var orderXml = response.ToXML();
-          basketOrder = new BasketOrderTrackingData(orderXml);
-          success = true;
-        }
-        else
-        {
-          basketOrder = BasketOrderTrackingData.EmptyBasketOrder;
-          success = false;
-        }
+        Engine.Engine.LogAtlantisException(new AtlantisException(sourceFunction, "0", message, data, null, null));
       }
-      catch (Exception ex)
+      catch
       {
-        LogException("Error retrieving or initializing BasketOrderTrackingData", string.Format("Order ID: {0}", orderId),
-                     "BasketOrderProvider.TryGetBasketOrderTrackingData");
-        basketOrder = BasketOrderTrackingData.EmptyBasketOrder;
-        success = false;
       }
-
-      return success;
     }
 
-    public bool TryGetBasketOrder(string orderId, out IBasketOrder basketOrder, string basketType = null)
+    #region IBasketOrderProvider Members
+
+    public bool TryGetBasketOrder(out IBasketOrder basketOrder, string orderId = "")
     {
       var success = false;
 
       try
       {
         var request = new GetBasketPriceRequestData(_shopperContext.Value.ShopperId,
-                                                    HttpContext.Current.Request.Url.ToString(), string.Empty,
+                                                    HttpContext.Current.Request.Url.ToString(), orderId,
                                                     _siteContext.Value.Pathway, _siteContext.Value.PageCount)
         {
           BasketType = BasketTypes.GoDaddy
         };
 
         var response =
-          (GetBasketPriceResponseData) Engine.Engine.ProcessRequest(request, BasketOrderEngineRequests.BasketGetPrice);
+          (GetBasketPriceResponseData)Engine.Engine.ProcessRequest(request, BasketOrderEngineRequests.BasketGetPrice);
         if (response.IsSuccess)
         {
           var orderXml = response.ToXML();
@@ -86,7 +61,7 @@ namespace Atlantis.Framework.Providers.BasketOrder
       }
       catch (Exception ex)
       {
-        LogException("Error retrieving or initializing BasketOrder", string.Format("Order ID: {0}", orderId),
+        LogException("Error retrieving or initializing BasketOrder", string.Format("Order ID: {0}", orderId ?? "none"),
                      "BasketOrderProvider.TryGetBasketOrder");
         basketOrder = BasketOrder.EmptyBasketOrder;
         success = false;
@@ -95,15 +70,121 @@ namespace Atlantis.Framework.Providers.BasketOrder
       return success;
     }
 
-    private void LogException(string message, string data, string sourceFunction)
+    public bool TryGetBasketOrderFromReceiptXml(out IBasketOrder basketOrder, string orderXml)
     {
+      var success = false;
+
       try
       {
-        Engine.Engine.LogAtlantisException(new AtlantisException(sourceFunction, "0", message, data, null, null));
+        basketOrder = new BasketOrder(orderXml);
+        success = true;
       }
-      catch
+      catch (Exception ex)
       {
+        LogException("Error initializing BasketOrder from receipt XML (string)", string.Empty,
+                     "BasketOrderProvider.TryGetBasketOrderFromReceiptXml");
+        basketOrder = BasketOrderTrackingData.EmptyBasketOrder;
+        success = false;
       }
+
+      return success;
     }
+
+    public bool TryGetBasketOrderFromReceiptXml(out IBasketOrder basketOrder, XDocument orderXml)
+    {
+      var success = false;
+
+      try
+      {
+        basketOrder = new BasketOrder(orderXml);
+        success = true;
+      }
+      catch (Exception ex)
+      {
+        LogException("Error initializing BasketOrder from receipt XML (XDocument)", string.Empty,
+                     "BasketOrderProvider.TryGetBasketOrderFromReceiptXml");
+        basketOrder = BasketOrderTrackingData.EmptyBasketOrder;
+        success = false;
+      }
+
+      return success;
+    }
+
+    public bool TryGetBasketOrderTrackingData(out IBasketOrderTrackingData basketOrder, string orderId = "")
+    {
+      var success = false;
+
+      var request = new GetBasketPriceRequestData(_shopperContext.Value.ShopperId,
+                                                  HttpContext.Current.Request.Url.ToString(), orderId,
+                                                  _siteContext.Value.Pathway, _siteContext.Value.PageCount);
+
+      try
+      {
+        var response = (GetBasketPriceResponseData)Engine.Engine.ProcessRequest(request, BasketOrderEngineRequests.BasketGetPrice);
+
+        if (response.IsSuccess)
+        {
+          var orderXml = response.ToXML();
+          basketOrder = new BasketOrderTrackingData(orderXml);
+          success = true;
+        }
+        else
+        {
+          basketOrder = BasketOrderTrackingData.EmptyBasketOrder;
+          success = false;
+        }
+      }
+      catch (Exception ex)
+      {
+        LogException("Error retrieving or initializing BasketOrderTrackingData", string.Format("Order ID: {0}", orderId ?? "none"),
+                     "BasketOrderProvider.TryGetBasketOrderTrackingData");
+        basketOrder = BasketOrderTrackingData.EmptyBasketOrder;
+        success = false;
+      }
+
+      return success;
+    }
+
+    public bool TryGetBasketOrderTrackingDataFromReceiptXml(out IBasketOrderTrackingData basketOrder, string orderXml)
+    {
+      var success = false;
+
+      try
+      {
+        basketOrder = new BasketOrderTrackingData(orderXml);
+        success = true;
+      }
+      catch (Exception ex)
+      {
+        LogException("Error initializing BasketOrderTrackingData from receipt XML (string)", string.Empty,
+                     "BasketOrderProvider.TryGetBasketOrderTrackingDataFromReceiptXml");
+        basketOrder = BasketOrderTrackingData.EmptyBasketOrder;
+        success = false;
+      }
+
+      return success;
+    }
+
+    public bool TryGetBasketOrderTrackingDataFromReceiptXml(out IBasketOrderTrackingData basketOrder, XDocument orderXml)
+    {
+      var success = false;
+
+      try
+      {
+        basketOrder = new BasketOrderTrackingData(orderXml);
+        success = true;
+      }
+      catch (Exception ex)
+      {
+        LogException("Error initializing BasketOrderTrackingData from receipt XML (XDocument)", string.Empty,
+                     "BasketOrderProvider.TryGetBasketOrderTrackingDataFromReceiptXml");
+        basketOrder = BasketOrderTrackingData.EmptyBasketOrder;
+        success = false;
+      }
+
+      return success;
+    }
+
+    #endregion
   }
 }

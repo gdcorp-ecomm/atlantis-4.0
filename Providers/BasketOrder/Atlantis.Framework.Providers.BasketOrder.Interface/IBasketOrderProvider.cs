@@ -1,8 +1,14 @@
-﻿namespace Atlantis.Framework.Providers.BasketOrder.Interface
+﻿using System.Xml.Linq;
+namespace Atlantis.Framework.Providers.BasketOrder.Interface
 {
   public interface IBasketOrderProvider
   {
-    bool TryGetBasketOrder(string orderId, out IBasketOrder basketOrder, string basketType = null);
-    bool TryGetBasketOrderTrackingData(string orderId, out IBasketOrderTrackingData basketOrder, string basketType = null);
+    bool TryGetBasketOrder(out IBasketOrder basketOrder, string orderId = "");
+    bool TryGetBasketOrderFromReceiptXml(out IBasketOrder basketOrder, string orderXml);
+    bool TryGetBasketOrderFromReceiptXml(out IBasketOrder basketOrder, XDocument orderXml);
+
+    bool TryGetBasketOrderTrackingData(out IBasketOrderTrackingData basketOrder, string orderId = "");
+    bool TryGetBasketOrderTrackingDataFromReceiptXml(out IBasketOrderTrackingData basketOrder, string orderXml);
+    bool TryGetBasketOrderTrackingDataFromReceiptXml(out IBasketOrderTrackingData basketOrder, XDocument orderXml);
   }
 }

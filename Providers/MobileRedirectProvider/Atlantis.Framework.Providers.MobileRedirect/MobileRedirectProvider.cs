@@ -132,23 +132,28 @@ namespace Atlantis.Framework.Providers.MobileRedirect
 
     private void SetIsRedirectBrowserCookie(bool isRedirectUserAgent)
     {
-      bool didCookieExist = true;
+      bool didCookieChange;
+      string cookieSetValue = isRedirectUserAgent ? "1" : "0";
 
       if (RedirectBrowserCookie == null)
       {
-        didCookieExist = false;
         RedirectBrowserCookie = SiteContext.NewCrossDomainMemCookie(CookieNames.MobileRedirectBrowser);
-      }
-
-      RedirectBrowserCookie.Value = isRedirectUserAgent ? "1" : "0";
-
-      if (didCookieExist)
-      {
-        HttpContext.Current.Response.Cookies.Set(RedirectBrowserCookie);
+        didCookieChange = true;
       }
       else
       {
-        HttpContext.Current.Response.Cookies.Add(RedirectBrowserCookie);
+        didCookieChange = RedirectBrowserCookie.Value != cookieSetValue;
+      }
+
+      if (didCookieChange)
+      {
+        RedirectBrowserCookie.Value = cookieSetValue;
+
+        HttpCookie responseCookie = HttpContext.Current.Response.Cookies.Get(CookieNames.MobileRedirectBrowser) ?? SiteContext.NewCrossDomainMemCookie(CookieNames.MobileRedirectBrowser);
+
+        responseCookie.Value = RedirectBrowserCookie.Value;
+
+        HttpContext.Current.Response.Cookies.Set(responseCookie);
       }
     }
 

@@ -249,12 +249,25 @@ namespace Atlantis.Framework.Engine
     #endregion
 
     /// <summary>
+    /// Clears the cache of loaded <c>IRequest</c> handlers and reloads the specified atlantis.config
+    /// </summary>
+    public static void ReloadConfig(string configFilename)
+    {
+      if (!String.IsNullOrEmpty(configFilename))
+      {
+        Config.ConfigName = configFilename;
+      }
+
+      Config.Load();
+      ClearAssemblyCache();
+    }
+
+    /// <summary>
     /// Clears the cache of loaded <c>IRequest</c> handlers and reloads the atlantis.config
     /// </summary>
     public static void ReloadConfig()
     {
-      Config.Load();
-      ClearAssemblyCache();
+      ReloadConfig(null);
     }
 
     /// <summary>

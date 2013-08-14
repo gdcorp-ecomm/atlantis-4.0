@@ -10,7 +10,6 @@ namespace Atlantis.Framework.Engine
 {
   class EngineConfig
   {
-    string _configFileName = "atlantis.config";
     string _assemblyPath;
     Dictionary<int, ConfigElement> _configItems = new Dictionary<int, ConfigElement>();
 
@@ -19,8 +18,11 @@ namespace Atlantis.Framework.Engine
 
     public EngineConfig()
     {
+      ConfigName = "atlantis.config";
       Load();
     }
+
+    public string ConfigName { get; set; }
 
     private void LogError(string sourceFunction, string input, string errorMessage)
     {
@@ -63,7 +65,7 @@ namespace Atlantis.Framework.Engine
 
       try
       {
-        configFilePath = Path.Combine(AssemblyPath, _configFileName);
+        configFilePath = Path.Combine(AssemblyPath, ConfigName);
 
         if (!File.Exists(configFilePath))
         {

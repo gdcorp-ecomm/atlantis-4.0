@@ -72,10 +72,10 @@ namespace Atlantis.Framework.Web.CDSContent
         switch (redirectResult.RedirectData.Type)
         {
           case "301":
-            Response.Redirect(redirectResult.RedirectData.Location, true);
+            Response.RedirectPermanent(redirectResult.RedirectData.Location, true);
             break;
           case "302":
-            Response.RedirectPermanent(redirectResult.RedirectData.Location, true);
+            Response.Redirect(redirectResult.RedirectData.Location, true);
             break;
         }
       }

@@ -5,10 +5,10 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Atlantis.Framework.PromoToolGetProdPromo.Impl")]
-[assembly: AssemblyCompany("GoDaddy.com")]
-[assembly: AssemblyProduct("Atlantis.Framework.PromoToolGetProdPromo.Impl")]
-[assembly: AssemblyCopyright("Copyright © GoDaddy.com 2012")]
+[assembly: AssemblyTitle("Atlantis.Framework.PromoToolGetProdPromo")]
+[assembly: AssemblyCompany("GoDaddy LLC")]
+[assembly: AssemblyProduct("Atlantis.Framework.PromoToolGetProdPromo")]
+[assembly: AssemblyCopyright("Copyright © GoDaddy LLC 2012-2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

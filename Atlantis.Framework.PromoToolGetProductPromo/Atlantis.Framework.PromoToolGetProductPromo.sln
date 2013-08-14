@@ -1,12 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{849A88BA-AC4E-4700-9D40-9FD775079DD0}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine", "..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj", "{D30157B2-C1B3-4073-BA5E-632E2337A997}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}"
-EndProject
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PromoToolGetProductPromoTests", "PromoToolGetProductPromoTests\PromoToolGetProductPromoTests.csproj", "{6EE0D70E-6AC6-4493-8ABE-2778FFEBC28B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{27C9BD60-5EED-4734-9A49-A568E3A2A378}"
@@ -22,27 +16,19 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.PromoToo
 EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 6
+		SccNumberOfProjects = 4
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
 		SccLocalPath0 = .
-		SccProjectUniqueName1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
-		SccProjectTopLevelParentUniqueName1 = Atlantis.Framework.PromoToolGetProductPromo.sln
-		SccProjectName1 = ../Atlantis.Framework.Engine/Atlantis.Framework.Engine
-		SccLocalPath1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
-		SccProjectUniqueName2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
-		SccProjectTopLevelParentUniqueName2 = Atlantis.Framework.PromoToolGetProductPromo.sln
-		SccProjectName2 = ../Atlantis.Framework.Engine/Atlantis.Framework.Interface
-		SccLocalPath2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
-		SccProjectUniqueName3 = PromoToolGetProductPromoTests\\PromoToolGetProductPromoTests.csproj
-		SccProjectName3 = PromoToolGetProductPromoTests
-		SccLocalPath3 = PromoToolGetProductPromoTests
-		SccProjectUniqueName4 = Atlantis.Framework.PromoToolGetProdPromo.Impl\\Atlantis.Framework.PromoToolGetProdPromo.Impl.csproj
-		SccProjectName4 = Atlantis.Framework.PromoToolGetProdPromo.Impl
-		SccLocalPath4 = Atlantis.Framework.PromoToolGetProdPromo.Impl
-		SccProjectUniqueName5 = Atlantis.Framework.PromoToolGetProdPromo.Interface\\Atlantis.Framework.PromoToolGetProdPromo.Interface.csproj
-		SccProjectName5 = Atlantis.Framework.PromoToolGetProdPromo.Interface
-		SccLocalPath5 = Atlantis.Framework.PromoToolGetProdPromo.Interface
+		SccProjectUniqueName1 = PromoToolGetProductPromoTests\\PromoToolGetProductPromoTests.csproj
+		SccProjectName1 = PromoToolGetProductPromoTests
+		SccLocalPath1 = PromoToolGetProductPromoTests
+		SccProjectUniqueName2 = Atlantis.Framework.PromoToolGetProdPromo.Impl\\Atlantis.Framework.PromoToolGetProdPromo.Impl.csproj
+		SccProjectName2 = Atlantis.Framework.PromoToolGetProdPromo.Impl
+		SccLocalPath2 = Atlantis.Framework.PromoToolGetProdPromo.Impl
+		SccProjectUniqueName3 = Atlantis.Framework.PromoToolGetProdPromo.Interface\\Atlantis.Framework.PromoToolGetProdPromo.Interface.csproj
+		SccProjectName3 = Atlantis.Framework.PromoToolGetProdPromo.Interface
+		SccLocalPath3 = Atlantis.Framework.PromoToolGetProdPromo.Interface
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = Atlantis.Framework.PromoToolGetProductPromo.vsmdi
@@ -52,14 +38,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6EE0D70E-6AC6-4493-8ABE-2778FFEBC28B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6EE0D70E-6AC6-4493-8ABE-2778FFEBC28B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6EE0D70E-6AC6-4493-8ABE-2778FFEBC28B}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -75,9 +53,5 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {849A88BA-AC4E-4700-9D40-9FD775079DD0}
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {849A88BA-AC4E-4700-9D40-9FD775079DD0}
 	EndGlobalSection
 EndGlobal

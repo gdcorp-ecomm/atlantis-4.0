@@ -156,7 +156,11 @@ namespace Atlantis.Framework.Testing.MockProviders
     {
       get 
       {
-        return Container.Resolve<IManagerContext>();
+        if (IsManagerAvailable)
+        {
+          return Container.Resolve<IManagerContext>();
+        }
+        return null;
       }
     }
   }

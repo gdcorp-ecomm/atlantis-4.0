@@ -20,11 +20,10 @@ namespace Atlantis.Framework.Testing.MockProviders
     {
       get
       {
-        if (_siteContext.Value.Manager.IsManager)
+        if (_siteContext.Value.Manager != null && _siteContext.Value.Manager.IsManager)
         {
           return _siteContext.Value.Manager.ManagerShopperId;
         }
-
         return _shopperId;
       }
     }

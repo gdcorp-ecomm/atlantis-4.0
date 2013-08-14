@@ -19,6 +19,7 @@ namespace Atlantis.Framework.EcommPricing.Interface
     public string DiscountCode { get; set; }
     public int PriceGroupId { get; set; }
     public int UnifiedProductId { get; set; }
+    public int YARD { get; set; }
 
     public PriceEstimateRequestData(int privateLabelId, int shopperPriceType, string currencyType, string promoCode, int priceGroupId, int unifiedProductId)
     {
@@ -29,6 +30,7 @@ namespace Atlantis.Framework.EcommPricing.Interface
       DiscountCode = string.Empty;
       PriceGroupId = priceGroupId;
       UnifiedProductId = unifiedProductId;
+      YARD = -1;
       RequestTimeout = _requestTimeout;
     }
 
@@ -42,6 +44,7 @@ namespace Atlantis.Framework.EcommPricing.Interface
       PriceGroupId = priceGroupId;
       UnifiedProductId = unifiedProductId;
       RequestTimeout = _requestTimeout;
+      YARD = -1;
     }
 
     private string PreValidatePromoCode(string promoCode)
@@ -64,7 +67,7 @@ namespace Atlantis.Framework.EcommPricing.Interface
 
     public override string GetCacheMD5()
     {
-      return BuildHashFromStrings(PrivateLabelId.ToString(), ShopperPriceType.ToString(), CurrencyType, PromoCode, PriceGroupId.ToString(), UnifiedProductId.ToString(), DiscountCode);
+      return BuildHashFromStrings(PrivateLabelId.ToString(), ShopperPriceType.ToString(), CurrencyType, PromoCode, PriceGroupId.ToString(), UnifiedProductId.ToString(), DiscountCode, YARD.ToString());
     }
 
     public override string ToXML()
@@ -77,6 +80,7 @@ namespace Atlantis.Framework.EcommPricing.Interface
       element.Add(new XAttribute("PriceGroupId", PriceGroupId.ToString()));
       element.Add(new XAttribute("UnifiedProductId", UnifiedProductId.ToString()));
       element.Add(new XAttribute("DiscountCode", DiscountCode));
+      element.Add(new XAttribute("YARD", YARD.ToString()));
       return element.ToString();
     }
   }

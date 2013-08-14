@@ -58,13 +58,15 @@ namespace Atlantis.Framework.Providers.Currency.Tests
       IPricingProvider provider = HttpProviderContainer.Instance.Resolve<IPricingProvider>();
       try
       {
-        Assert.IsTrue(provider.DoesIscAffectPricing("valid"));
+        int yard = -1;
+        Assert.IsTrue(provider.DoesIscAffectPricing("valid", out yard));
       }
       finally
       {
         CurrencyProviderEngineRequests.ValidateNonOrderRequest = originalRequestTypeId;
       }
     }
+
 
     [TestMethod]
     public void DoesIscAffectPricingInvalidReturnsFalse()
@@ -75,7 +77,8 @@ namespace Atlantis.Framework.Providers.Currency.Tests
       IPricingProvider provider = HttpProviderContainer.Instance.Resolve<IPricingProvider>();
       try
       {
-        Assert.IsFalse(provider.DoesIscAffectPricing("invalid"));
+        int yard = -1;
+        Assert.IsFalse(provider.DoesIscAffectPricing("invalid", out yard));
       }
       finally
       {
@@ -93,7 +96,8 @@ namespace Atlantis.Framework.Providers.Currency.Tests
       IPricingProvider provider = HttpProviderContainer.Instance.Resolve<IPricingProvider>();
       try
       {
-        Assert.IsFalse(provider.DoesIscAffectPricing("inactive"));
+        int yard = -1;
+        Assert.IsFalse(provider.DoesIscAffectPricing("inactive", out yard));
       }
       finally
       {
@@ -110,7 +114,8 @@ namespace Atlantis.Framework.Providers.Currency.Tests
       IPricingProvider provider = HttpProviderContainer.Instance.Resolve<IPricingProvider>();
       try
       {
-        Assert.IsFalse(provider.DoesIscAffectPricing("expired"));
+        int yard = -1;
+        Assert.IsFalse(provider.DoesIscAffectPricing("expired", out yard));
       }
       finally
       {
@@ -126,7 +131,8 @@ namespace Atlantis.Framework.Providers.Currency.Tests
       IPricingProvider provider = HttpProviderContainer.Instance.Resolve<IPricingProvider>();
       try
       {
-        Assert.IsTrue(provider.DoesIscAffectPricing("gfnomeac01"));
+        int yard = -1;
+        Assert.IsTrue(provider.DoesIscAffectPricing("gfnomeac01", out yard));
         int price;
         provider.GetCurrentPrice(101, 0, "USD", out price, "gfnomeac01");
         Assert.AreEqual(599,price);
@@ -136,5 +142,42 @@ namespace Atlantis.Framework.Providers.Currency.Tests
         CurrencyProviderEngineRequests.ValidateNonOrderRequest = originalRequestTypeId;
       }
     }
+
+    [TestMethod]
+    public void IscPricingReturnsYard()
+    {
+      SetContexts(1, "833437");
+      int originalRequestTypeId = CurrencyProviderEngineRequests.PriceEstimateRequest;
+      IPricingProvider provider = HttpProviderContainer.Instance.Resolve<IPricingProvider>();
+      try
+      {
+        int yard = -1;
+        Assert.IsTrue(provider.DoesIscAffectPricing("gofd1001ac", out yard));
+        Assert.IsTrue(yard >= 1);        
+      }
+      finally
+      {
+        CurrencyProviderEngineRequests.ValidateNonOrderRequest = originalRequestTypeId;
+      }
+    }
+
+    [TestMethod]
+    public void IscPricingReturnsEmptyYard()
+    {
+      SetContexts(1, "833437");
+      int originalRequestTypeId = CurrencyProviderEngineRequests.PriceEstimateRequest;
+      IPricingProvider provider = HttpProviderContainer.Instance.Resolve<IPricingProvider>();
+      try
+      {
+        int yard = -1;
+        Assert.IsTrue(provider.DoesIscAffectPricing("gfnomeac01", out yard));
+        Assert.IsTrue(yard < 1);
+      }
+      finally
+      {
+        CurrencyProviderEngineRequests.ValidateNonOrderRequest = originalRequestTypeId;
+      }
+    }
+
   }
 }

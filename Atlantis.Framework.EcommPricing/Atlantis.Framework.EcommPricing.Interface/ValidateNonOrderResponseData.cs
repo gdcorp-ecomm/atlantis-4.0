@@ -36,6 +36,8 @@ namespace Atlantis.Framework.EcommPricing.Interface
       XAttribute isActiveAtt = item.Attribute("isActive");
       XAttribute startDateAtt = item.Attribute("startDate");
       XAttribute endDateAtt = item.Attribute("endDate");
+      XAttribute yardAtt = item.Attribute("requiredYard");
+
 
       bool isActive = "1".Equals(isActiveAtt.Value);
       DateTime startDate;
@@ -50,7 +52,14 @@ namespace Atlantis.Framework.EcommPricing.Interface
         endDate = DateTime.MaxValue;
       }
 
-      return new ValidateNonOrderResponseData(isActive, startDate, endDate);
+      int yard = -1;
+
+      if (yardAtt != null)
+      {
+        int.TryParse(yardAtt.Value, out yard);
+      }
+
+      return new ValidateNonOrderResponseData(isActive, startDate, endDate, yard);
     }
 
     public static ValidateNonOrderResponseData FromException(AtlantisException exception)
@@ -65,6 +74,7 @@ namespace Atlantis.Framework.EcommPricing.Interface
       IsActive = false;
       StartDate = DateTime.MinValue;
       EndDate = DateTime.MaxValue;
+      YARD = -1;
     }
 
     private ValidateNonOrderResponseData(AtlantisException exception)
@@ -73,16 +83,18 @@ namespace Atlantis.Framework.EcommPricing.Interface
       _exception = exception;
     }
 
-    private ValidateNonOrderResponseData(bool isActive, DateTime startDate, DateTime endDate)
+    private ValidateNonOrderResponseData(bool isActive, DateTime startDate, DateTime endDate, int yard = -1)
     {
       IsActive = isActive;
       StartDate = startDate;
       EndDate = endDate;
+      YARD = yard;
     }
 
     public bool IsActive {get; private set;}
     public DateTime StartDate {get; private set;}
     public DateTime EndDate {get; private set;}
+    public int YARD { get; private set; }
 
     public string ToXML()
     {
@@ -90,7 +102,8 @@ namespace Atlantis.Framework.EcommPricing.Interface
       element.Add(
         new XAttribute("isactive", IsActive.ToString()),
         new XAttribute("startdate", StartDate.ToShortDateString()),
-        new XAttribute("enddate", EndDate.ToShortDateString()));
+        new XAttribute("enddate", EndDate.ToShortDateString()),
+        new XAttribute("yard", YARD.ToString()));
 
       return element.ToString(SaveOptions.DisableFormatting);
     }

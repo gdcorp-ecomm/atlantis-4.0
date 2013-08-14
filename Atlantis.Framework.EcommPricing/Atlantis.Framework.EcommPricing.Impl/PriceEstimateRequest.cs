@@ -7,8 +7,10 @@ namespace Atlantis.Framework.EcommPricing.Impl
 {
     public class PriceEstimateRequest : IRequest
     {
-      private const string _REQUESTFORMAT = "<PriceEstimateRequest privateLabelID=\"{0}\" membershipLevel=\"{1}\" transactionCurrency=\"{2}\" source_code=\"{3}\"><Item unifiedProductID=\"{4}\" priceGroupID=\"{5}\"/></PriceEstimateRequest>";
-      private const string _REQUESTFORMATDISCOUNT = "<PriceEstimateRequest privateLabelID=\"{0}\" membershipLevel=\"{1}\" transactionCurrency=\"{2}\"><Item unifiedProductID=\"{4}\" discount_code=\"{3}\"/></PriceEstimateRequest>";
+      private const string _REQUESTFORMAT = "<PriceEstimateRequest privateLabelID=\"{0}\" membershipLevel=\"{1}\" transactionCurrency=\"{2}\" source_code=\"{3}\"><Item unifiedProductID=\"{5}\" priceGroupID=\"{6}\"/></PriceEstimateRequest>";
+      private const string _REQUESTFORMATYARD = "<PriceEstimateRequest privateLabelID=\"{0}\" membershipLevel=\"{1}\" transactionCurrency=\"{2}\" source_code=\"{3}\" YARD=\"{7}\"><Item unifiedProductID=\"{5}\" priceGroupID=\"{6}\" /></PriceEstimateRequest>";
+      private const string _REQUESTFORMATDISCOUNT = "<PriceEstimateRequest privateLabelID=\"{0}\" membershipLevel=\"{1}\" transactionCurrency=\"{2}\"><Item unifiedProductID=\"{5}\" discount_code=\"{4}\"/></PriceEstimateRequest>";
+      private const string _REQUESTFORMATDISCOUNTYARD = "<PriceEstimateRequest privateLabelID=\"{0}\" membershipLevel=\"{1}\" transactionCurrency=\"{2}\" YARD=\"{7}\"><Item unifiedProductID=\"{5}\" discount_code=\"{4}\"/></PriceEstimateRequest>";
 
       public IResponseData RequestHandler(RequestData requestData, ConfigElement config)
       {
@@ -19,26 +21,26 @@ namespace Atlantis.Framework.EcommPricing.Impl
           var priceEstimateRequest = (PriceEstimateRequestData)requestData;
           
           string serviceRequest = string.Empty;
+          string formattedXML = string.Empty;
+
           if (!string.IsNullOrEmpty(priceEstimateRequest.DiscountCode))
           {
-            serviceRequest = string.Format(_REQUESTFORMATDISCOUNT,
-                                              priceEstimateRequest.PrivateLabelId,
-                                              priceEstimateRequest.ShopperPriceType,
-                                              priceEstimateRequest.CurrencyType,
-                                              priceEstimateRequest.DiscountCode,
-                                              priceEstimateRequest.UnifiedProductId,
-                                              priceEstimateRequest.PriceGroupId);
+            formattedXML = priceEstimateRequest.YARD < 1 ? _REQUESTFORMATDISCOUNT :  _REQUESTFORMATDISCOUNTYARD;
           }
           else
           {
-            serviceRequest = string.Format(_REQUESTFORMAT,
+            formattedXML = priceEstimateRequest.YARD < 1 ? _REQUESTFORMAT : _REQUESTFORMATYARD;
+          }
+          
+          serviceRequest = string.Format(formattedXML,
                                               priceEstimateRequest.PrivateLabelId,
                                               priceEstimateRequest.ShopperPriceType,
                                               priceEstimateRequest.CurrencyType,
                                               priceEstimateRequest.PromoCode,
+                                              priceEstimateRequest.DiscountCode,
                                               priceEstimateRequest.UnifiedProductId,
-                                              priceEstimateRequest.PriceGroupId);
-          }
+                                              priceEstimateRequest.PriceGroupId,
+                                              priceEstimateRequest.YARD);          
 
           string pricingResponse;
 

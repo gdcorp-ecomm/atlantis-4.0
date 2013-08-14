@@ -207,6 +207,48 @@ namespace Atlantis.Framework.EcommPricing.Tests
       Assert.IsNotNull(response1);
       Assert.IsTrue(response1.IsPriceFound);
     }
+
+    [TestMethod]
+    public void ValidRequestWithDiscountCodeAndYard()
+    {
+      var request1 = new PriceEstimateRequestData(1, 1, "USD", string.Empty, 1, 54, "cbwsp01");
+      request1.YARD = 1209;
+      var response1 = (PriceEstimateResponseData)Engine.Engine.ProcessRequest(request1, _REQUESTTYPE);
+      Assert.IsNotNull(response1);
+      Assert.IsTrue(response1.IsPriceFound);
+    }
+
+    [TestMethod]
+    public void ValidateRequestWithYardIsDifferent()
+    {
+
+      string promoCode = "gofd1001ac";
+      var yardRequest = new ValidateNonOrderRequestData(1, promoCode);
+      var yardResponse = (ValidateNonOrderResponseData)Engine.Engine.ProcessRequest(yardRequest, 644);
+
+      var request1 = new PriceEstimateRequestData(1, 1, "USD", "gofd1001ac", 1, 101);
+      var request2 = new PriceEstimateRequestData(1, 1, "USD", "gofd1001ac", 1, 101);
+      request2.YARD = yardResponse.YARD;
+
+      var response1 = (PriceEstimateResponseData)Engine.Engine.ProcessRequest(request1, _REQUESTTYPE);
+      var response2 = (PriceEstimateResponseData)Engine.Engine.ProcessRequest(request2, _REQUESTTYPE);
+      Assert.IsTrue(response1.AdjustedPrice > response2.AdjustedPrice);
+      Assert.AreNotEqual(request1.GetCacheMD5(), request2.GetCacheMD5());
+
+    }
+    
+
+    [TestMethod]
+    public void ValidateRequestWithYard()
+    {
+
+      var request1 = new PriceEstimateRequestData(1, 1, "USD", "gofdms809", 1, 101);
+      request1.YARD = 1209;
+      var response1 = (PriceEstimateResponseData)Engine.Engine.ProcessRequest(request1, _REQUESTTYPE);
+      Assert.IsNotNull(response1);      
+      Assert.IsTrue(response1.IsPriceFound);
+      //
+    }
         
     // Test the ToXml method on the response object
     [TestMethod]

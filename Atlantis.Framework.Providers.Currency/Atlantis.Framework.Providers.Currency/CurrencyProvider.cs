@@ -373,14 +373,15 @@ namespace Atlantis.Framework.Providers.Currency
       }
 
       IPricingProvider pricingProvider;
-      ICurrencyPrice currentPrice = null;  
+      ICurrencyPrice currentPrice = null;
 
-      if (Container.TryResolve(out pricingProvider) && pricingProvider.DoesIscAffectPricing(isc))
+      int yard = -1;
+      if (Container.TryResolve(out pricingProvider) && pricingProvider.DoesIscAffectPricing(isc, out yard))
       {
         int pricingProviderPrice;
 
         if (pricingProvider.GetCurrentPrice(unifiedProductId, shopperPriceType, transactionCurrency.CurrencyType,
-                                            out pricingProviderPrice, isc, PriceGroupId))
+                                            out pricingProviderPrice, isc, PriceGroupId, yard))
         {
           currentPrice = new CurrencyPrice(pricingProviderPrice, transactionCurrency, CurrencyPriceType.Transactional);
         }
@@ -472,10 +473,11 @@ namespace Atlantis.Framework.Providers.Currency
       bool result = responseData.IsOnSale;
       
       IPricingProvider pricingProvider;
-      if (Container.TryResolve(out pricingProvider) && pricingProvider.DoesIscAffectPricing(isc))
+      int yard = -1;
+      if (Container.TryResolve(out pricingProvider) && pricingProvider.DoesIscAffectPricing(isc, out yard))
       {
         int pricingProviderPrice;
-        bool foundIscBasedPrice = pricingProvider.GetCurrentPrice(unifiedProductId, shopperPriceType, transactionCurrency.CurrencyType, out pricingProviderPrice, isc, PriceGroupId);
+        bool foundIscBasedPrice = pricingProvider.GetCurrentPrice(unifiedProductId, shopperPriceType, transactionCurrency.CurrencyType, out pricingProviderPrice, isc, PriceGroupId, yard);
         
         if (foundIscBasedPrice && pricingProviderPrice > 0)
         {

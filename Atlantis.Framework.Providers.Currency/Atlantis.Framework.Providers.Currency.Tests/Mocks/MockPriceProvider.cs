@@ -17,12 +17,13 @@ namespace Atlantis.Framework.Providers.Currency.Tests.Mocks
       Enabled = true;
     }
 
-    public bool DoesIscAffectPricing(string iscCode)
+    public bool DoesIscAffectPricing(string iscCode, out int yard)
     {
+      yard = -1;
       return iscCode == "valid";
     }
 
-    public bool GetCurrentPrice(int unifiedProductId, int shopperPriceType, string currencyType, out int price, string isc = "", int catalogId = 0)
+    public bool GetCurrentPrice(int unifiedProductId, int shopperPriceType, string currencyType, out int price, string isc = "", int catalogId = 0, int yard = -1)
     {
       bool success = false;
       price = 0;
@@ -73,5 +74,6 @@ namespace Atlantis.Framework.Providers.Currency.Tests.Mocks
     }
 
     public bool Enabled { get; set; }
+    public int YARD { get; private set; }
   }
 }

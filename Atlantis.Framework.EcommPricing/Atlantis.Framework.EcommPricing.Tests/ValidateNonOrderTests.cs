@@ -111,6 +111,24 @@ namespace Atlantis.Framework.EcommPricing.Tests
     }
 
     [TestMethod]
+    public void ValidateRequiredYardIsReturned()
+    {
+      string promoCode = "gofd1001ac";
+      var request = new ValidateNonOrderRequestData(1, promoCode);
+      var response = (ValidateNonOrderResponseData)Engine.Engine.ProcessRequest(request, _REQUESTTYPE);
+      Assert.IsTrue(response.YARD >= 1);
+    }
+
+    [TestMethod]
+    public void ValidateRequiredYardIsEmpty()
+    {
+      string promoCode = "gofa1234";
+      var request = new ValidateNonOrderRequestData(1, promoCode);
+      var response = (ValidateNonOrderResponseData)Engine.Engine.ProcessRequest(request, _REQUESTTYPE);      
+      Assert.IsTrue(response.YARD < 1);        
+    }
+
+    [TestMethod]
     public void FromException()
     {
       AtlantisException aex = new AtlantisException("ValidateNonOrderTests.FromException", "0", "TestException", "TestData", null, null);

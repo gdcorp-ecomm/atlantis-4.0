@@ -4,10 +4,10 @@ namespace Atlantis.Framework.DCCGetTransfersInProgress.Interface
 {
   public sealed class DomainTransferCollection
   {
-    bool _status;
-    int _resultCount;
-    int _totalPages;
-    List<DomainTransfer> _domainTransferList;
+    private readonly bool _status;
+    private readonly int _resultCount;
+    private readonly int _totalPages;
+    private readonly List<DomainTransfer> _domainTransferList;
 
     public int ResultCount { get { return _resultCount; } }
     public int TotalPages { get { return _totalPages; } }
@@ -18,7 +18,6 @@ namespace Atlantis.Framework.DCCGetTransfersInProgress.Interface
       _status = callStatus;
       _resultCount = resultCount;
       _totalPages = totalPages;
-
       _domainTransferList = new List<DomainTransfer>();
     }
 

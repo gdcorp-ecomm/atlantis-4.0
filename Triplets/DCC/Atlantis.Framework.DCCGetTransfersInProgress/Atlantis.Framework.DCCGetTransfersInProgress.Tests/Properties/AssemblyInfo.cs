@@ -4,12 +4,17 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Atlantis.Framework.DCCGetTransfersInProgress.Interface")]
-[assembly: AssemblyDescription("")]
-[assembly: AssemblyConfiguration("")]
+[assembly: AssemblyTitle("Atlantis.Framework.DCCGetTransfersInProgress.Tests")]
+#if DEBUG
+[assembly: AssemblyDescription("Debug Build")]
+[assembly: AssemblyConfiguration("Debug Build")]
+#else
+[assembly: AssemblyDescription("Release Build")]
+[assembly: AssemblyConfiguration("Release Build")]
+#endif
 [assembly: AssemblyCompany("GoDaddy")]
-[assembly: AssemblyProduct("Atlantis.Framework.DCCGetTransfersInProgress.Interface")]
-[assembly: AssemblyCopyright("Copyright © GoDaddy.com 2011")]
+[assembly: AssemblyProduct("Atlantis.Framework.DCCGetTransfersInProgress.Tests")]
+[assembly: AssemblyCopyright("Copyright © GoDaddy 2011-2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -19,7 +24,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("2fda5682-1007-4f58-9e2a-bf5c4ac36219")]
+[assembly: Guid("6337bd65-7aa5-4cbb-991e-61386dd4492f")]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -30,6 +35,5 @@ using System.Runtime.InteropServices;
 //
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
-// [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("4.0.0.0")]
-[assembly: AssemblyFileVersion("4.11.11.8")]
+[assembly: AssemblyFileVersion("4.13.8.14")]

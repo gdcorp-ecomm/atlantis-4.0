@@ -8,18 +8,18 @@ namespace Atlantis.Framework.DCCGetTransfersInProgress.Impl
   {
     #region IRequest Members
 
-    public IResponseData RequestHandler(RequestData oRequestData, ConfigElement oConfig)
+    public IResponseData RequestHandler(RequestData requestData, ConfigElement config)
     {
       DCCGetTransfersInProgressResponseData responseData;
       string responseXml = string.Empty;
       try
       {
-        using(DomainStatusWebServiceSupport.RegCheckDomainStatusWebSvcService transferService = new DomainStatusWebServiceSupport.RegCheckDomainStatusWebSvcService())
+        var request = (DCCGetTransfersInProgressRequestData)requestData;
+        using(var transferService = new DomainStatusWebServiceSupport.RegCheckDomainStatusWebSvcService())
         {
-          DCCGetTransfersInProgressRequestData oRequest = (DCCGetTransfersInProgressRequestData)oRequestData;
-          transferService.Url = ((WsConfigElement)oConfig).WSURL;
-          transferService.Timeout = (int)oRequest.RequestTimeout.TotalMilliseconds;
-          responseXml = transferService.GetDCCTransfersInProgress(oRequest.ToXML());
+          transferService.Url = ((WsConfigElement)config).WSURL;
+          transferService.Timeout = (int)request.RequestTimeout.TotalMilliseconds;
+          responseXml = transferService.GetDCCTransfersInProgress(request.ToXML());
         }
         responseData = new DCCGetTransfersInProgressResponseData(responseXml);
       }
@@ -29,7 +29,7 @@ namespace Atlantis.Framework.DCCGetTransfersInProgress.Impl
       }
       catch (Exception ex)
       {
-        responseData = new DCCGetTransfersInProgressResponseData(responseXml, oRequestData, ex);
+        responseData = new DCCGetTransfersInProgressResponseData(responseXml, requestData, ex);
       }
 
       return responseData;

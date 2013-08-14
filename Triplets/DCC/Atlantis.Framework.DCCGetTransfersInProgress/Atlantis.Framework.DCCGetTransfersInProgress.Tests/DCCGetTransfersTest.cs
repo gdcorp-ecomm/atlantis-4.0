@@ -1,7 +1,4 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Atlantis.Framework.DCCGetTransfersInProgress.Interface;
 
@@ -13,30 +10,7 @@ namespace Atlantis.Framework.DCCGetTransfersInProgress.Tests
   [TestClass]
   public class DCCGetTransfersTest
   {
-    public DCCGetTransfersTest()
-    {
-      //
-      // TODO: Add constructor logic here
-      //
-    }
-
-    private TestContext testContextInstance;
-
-    /// <summary>
-    ///Gets or sets the test context which provides
-    ///information about and functionality for the current test run.
-    ///</summary>
-    public TestContext TestContext
-    {
-      get
-      {
-        return testContextInstance;
-      }
-      set
-      {
-        testContextInstance = value;
-      }
-    }
+    public TestContext TestContext { get; set; }
 
     #region Additional test attributes
     //
@@ -62,11 +36,12 @@ namespace Atlantis.Framework.DCCGetTransfersInProgress.Tests
 
     [TestMethod]
     [DeploymentItem("atlantis.config")]
+    [DeploymentItem("Atlantis.Framework.DCCGetTransfersInProgress.Impl.dll")]
     public void GetTransfers()
     {
 
-      DCCGetTransfersInProgressRequestData request = new DCCGetTransfersInProgressRequestData("856907", string.Empty, string.Empty, string.Empty, 0, 5, "sthota");
-      DCCGetTransfersInProgressResponseData response = (DCCGetTransfersInProgressResponseData)Engine.Engine.ProcessRequest(request, 445);
+      var request = new DCCGetTransfersInProgressRequestData("856907", 5, "sthota");
+      var response = (DCCGetTransfersInProgressResponseData)Engine.Engine.ProcessRequest(request, 445);
 
       string xml = response.ResponseXml;
       DomainTransferCollection xferCol = response.TransferCollection;
@@ -78,7 +53,6 @@ namespace Atlantis.Framework.DCCGetTransfersInProgress.Tests
       }
       Assert.IsTrue(response.IsSuccess);
       
-
     }
   }
 }

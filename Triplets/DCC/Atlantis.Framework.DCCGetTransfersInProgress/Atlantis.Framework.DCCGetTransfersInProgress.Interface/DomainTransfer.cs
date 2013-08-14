@@ -1,5 +1,4 @@
-﻿
-namespace Atlantis.Framework.DCCGetTransfersInProgress.Interface
+﻿namespace Atlantis.Framework.DCCGetTransfersInProgress.Interface
 {
   public class DomainTransfer
   {

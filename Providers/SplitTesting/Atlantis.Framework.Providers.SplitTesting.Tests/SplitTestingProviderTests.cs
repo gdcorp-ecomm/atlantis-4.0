@@ -33,23 +33,37 @@ namespace Atlantis.Framework.Providers.SplitTesting.Tests
 
     public TestContext TestContext { get; set; }
 
-    private ISplitTestingProvider InitializeProviders(int privateLabelId, string shopperId, bool isBotUserAgent = false, bool isInternal = false)
+    private ISplitTestingProvider InitializeProviders(int privateLabelId, string shopperId, bool isBotUserAgent = false, bool isInternal = false, 
+      bool isManager = false, bool noUserAgentProvider = false, bool noManagerContext = false)
     {
       var container = new MockProviderContainer();
 
       container.RegisterProvider<ISiteContext, MockSiteContext>();
       container.RegisterProvider<IShopperContext, MockShopperContext>();
-      container.RegisterProvider<IManagerContext, MockNoManagerContext>();
+      if (!noManagerContext)
+      {
+        container.RegisterProvider<IManagerContext, MockManagerContext>();
+        if (isManager)
+        {
+          container.SetMockSetting(MockManagerContextSettings.IsManager, true);
+        }
+      }
       container.RegisterProvider<ISplitTestingProvider, SplitTestingProvider>();
-      if (isBotUserAgent)
+      if (!noUserAgentProvider)
       {
-        container.RegisterProvider<IUserAgentDetectionProvider, BotUserAgentProvider>();
+        if (isBotUserAgent)
+        {
+          container.RegisterProvider<IUserAgentDetectionProvider, BotUserAgentProvider>();
+        }
+        else
+        {
+          container.RegisterProvider<IUserAgentDetectionProvider, NoBotUserAgentProvider>();
+        }
       }
-      else
+      if (isInternal)
       {
-        container.RegisterProvider<IUserAgentDetectionProvider, NoBotUserAgentProvider>();
+        container.SetMockSetting(MockSiteContextSettings.IsRequestInternal, isInternal);
       }
-      container.SetMockSetting(MockSiteContextSettings.IsRequestInternal, isInternal);
       HttpContext.Current.Items[MockSiteContextSettings.PrivateLabelId] = privateLabelId;
       var shopperContext = container.Resolve<IShopperContext>();
       shopperContext.SetNewShopper(shopperId);
@@ -164,6 +178,8 @@ namespace Atlantis.Framework.Providers.SplitTesting.Tests
       Assert.AreEqual(sideName, cookieValue[1]);
     }
 
+    #region GetSplitTestSide Override Cookie tests
+
     [TestMethod]
     public void SideSelectedViaOverrideCookie()
     {
@@ -172,7 +188,6 @@ namespace Atlantis.Framework.Providers.SplitTesting.Tests
       MockHttpContext.SetFromWorkerRequest(mockHttpRequest);
       string shopperId = "858884";
       int privateLabelId = 1;
-
 
       var splitProvider = InitializeProviders(privateLabelId, shopperId, isInternal:true);
       int testIdNotActive = 989858;
@@ -186,7 +201,38 @@ namespace Atlantis.Framework.Providers.SplitTesting.Tests
       Assert.IsNotNull(side1);
       Assert.AreEqual(sideName, side1.Name);
       Assert.AreEqual(-1, side1.SideId);
+  
     }
+
+    [TestMethod]
+    public void SideSelectedViaOverrideCookie_IgnoreCookieWhenNotInternal()
+    {
+      SplitTestingConfiguration.DefaultCategoryName = "Sales";
+      var mockHttpRequest = new MockHttpRequest("http://www.debug.godaddy-com.ide/");
+      MockHttpContext.SetFromWorkerRequest(mockHttpRequest);
+      string shopperId = "858884";
+      int privateLabelId = 1;
+
+      var splitProvider = InitializeProviders(privateLabelId, shopperId, isInternal: false);
+      SplitTestingEngineRequests.ActiveSplitTests = MockEngineRequests.ActiveSplitTests_3Tests;
+      SplitTestingEngineRequests.ActiveSplitTestDetails = MockEngineRequests.ActiveSplitTestDetails_A;
+      int testIdNotActive = 989858;
+      string sideName = "W";
+
+      string expectedSideName = "A";
+      int expectedSideId = 1;
+
+      var cookies = new NameValueCollection();
+      cookies.Add(string.Format("SplitTestingOverride{0}_{1}", privateLabelId, shopperId), testIdNotActive + "=" + sideName);
+      mockHttpRequest.MockCookies(cookies);
+
+      var side1 = splitProvider.GetSplitTestingSide(testIdNotActive);
+      Assert.IsNotNull(side1);
+      Assert.AreEqual(expectedSideName, side1.Name);
+      Assert.AreNotEqual(expectedSideId, side1.SideId);
+    }
+
+    #endregion
 
     [TestMethod]
     public void BotDetectTest_Bot()
@@ -198,6 +244,18 @@ namespace Atlantis.Framework.Providers.SplitTesting.Tests
       var splitProvider = InitializeProviders(1, "858884", isBotUserAgent: true);
       var side = splitProvider.GetSplitTestingSide(1010);
       Assert.AreEqual(-2, side.SideId);
+    }
+
+    [TestMethod]
+    public void BotDetectTest_NoUserAgent()
+    {
+      SplitTestingConfiguration.DefaultCategoryName = "Sales";
+      var mockHttpRequest = new MockHttpRequest("http://www.debug.godaddy-com.ide/");
+      MockHttpContext.SetFromWorkerRequest(mockHttpRequest);
+
+      var splitProvider = InitializeProviders(1, "858884", noUserAgentProvider: true);
+      var side = splitProvider.GetSplitTestingSide(1010);
+      Assert.AreNotSame(-2, side.SideId);
     }
 
     [TestMethod]
@@ -213,6 +271,8 @@ namespace Atlantis.Framework.Providers.SplitTesting.Tests
       var iter = tests.GetEnumerator();
       Assert.IsTrue(iter.MoveNext(), "Check admin to see if there is at least one active test in TEST category");
     }
+
+    #region Allocation distribution tests
 
     [TestMethod]
     public void TestAllocation_50_50()
@@ -278,7 +338,8 @@ namespace Atlantis.Framework.Providers.SplitTesting.Tests
       Assert.AreEqual(bTarget, bPercent, allowableDelta);
     }
 
-
+    #endregion
+    
     #region GetTrackingData tests
 
     [TestMethod]
@@ -432,6 +493,37 @@ namespace Atlantis.Framework.Providers.SplitTesting.Tests
 
     #endregion
 
+    #region IsManager related tests
+
+    [TestMethod]
+    public void GetSplitTestingSide_IsManager()
+    {
+      SplitTestingConfiguration.DefaultCategoryName = "Sales";
+      var mockHttpRequest = new MockHttpRequest("http://www.debug.godaddy-com.ide/");
+      MockHttpContext.SetFromWorkerRequest(mockHttpRequest);
+
+      var splitProvider = InitializeProviders(1, "858884", isManager: true);
+      SplitTestingEngineRequests.ActiveSplitTests = MockEngineRequests.ActiveSplitTests_3Tests;
+      SplitTestingEngineRequests.ActiveSplitTestDetails = MockEngineRequests.ActiveSplitTestDetails_A;
+      var side = splitProvider.GetSplitTestingSide(1);
+      Assert.AreEqual(-1, side.SideId);
+    }
+
+    [TestMethod]
+    public void GetSplitTestingSide_NoManagerContext()
+    {
+      SplitTestingConfiguration.DefaultCategoryName = "Sales";
+      var mockHttpRequest = new MockHttpRequest("http://www.debug.godaddy-com.ide/");
+      MockHttpContext.SetFromWorkerRequest(mockHttpRequest);
+
+      var splitProvider = InitializeProviders(1, "858884", noManagerContext:true);
+      SplitTestingEngineRequests.ActiveSplitTests = MockEngineRequests.ActiveSplitTests_3Tests;
+      SplitTestingEngineRequests.ActiveSplitTestDetails = MockEngineRequests.ActiveSplitTestDetails_A;
+      var side = splitProvider.GetSplitTestingSide(1);
+      Assert.AreEqual(1, side.SideId);
+    }
+
+    #endregion
 
     private string LoadCookieName(string cookiePrefix, string shopperId, string privatelableId) { return cookiePrefix + privatelableId + "_" + shopperId; }
 

@@ -82,7 +82,15 @@ namespace Atlantis.Framework.Providers.SplitTesting
     private DateTime CookieExpirationDate()
     {
       int expiration;
-      string expirationHours = DataCache.DataCache.GetAppSetting(CookielifeHours);
+      string expirationHours = null;
+      try
+      {
+        expirationHours = DataCache.DataCache.GetAppSetting(CookielifeHours);
+      }
+      catch (Exception)
+      { //ignore and allow use of default 
+      }
+
       if (int.TryParse(expirationHours, out expiration))
       {
         expiration = expiration > MaxExpirationHours ? MaxExpirationHours : expiration;

@@ -39,7 +39,10 @@ namespace Atlantis.Framework.Providers.SplitTesting
       _siteContext = new Lazy<ISiteContext>(() => _container.Resolve<ISiteContext>());
       _shopperContext = new Lazy<IShopperContext>(() => _container.Resolve<IShopperContext>());
 
-      _splitTestUserAgentDetection = new Lazy<IUserAgentDetectionProvider>(() => _container.Resolve<IUserAgentDetectionProvider>());
+      if (_container.CanResolve<IUserAgentDetectionProvider>())
+      {
+        _splitTestUserAgentDetection = new Lazy<IUserAgentDetectionProvider>(() => _container.Resolve<IUserAgentDetectionProvider>());
+      }
 
       _activeSplitTestsResponse = new Lazy<ActiveSplitTestsResponseData>(LoadActiveTests);
       _splitTestCookieOverride = new Lazy<SplitTestingCookieOverride>(() => new SplitTestingCookieOverride(container));
@@ -119,7 +122,12 @@ namespace Atlantis.Framework.Providers.SplitTesting
           }
         }
 
-        if (_splitTestUserAgentDetection.Value.IsSearchEngineBot(SplitTestingUserAgent.UserAgent))
+        if (_siteContext.Value.Manager != null && _siteContext.Value.Manager.IsManager)
+        {
+          return _defaultSideA;
+        }
+
+        if (_splitTestUserAgentDetection != null && _splitTestUserAgentDetection.Value.IsSearchEngineBot(SplitTestingUserAgent.UserAgent))
         {
           return _defaultSideBot;
         }

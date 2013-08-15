@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<PaymentInformation pathway="fa5bd197-a254-47d9-b985-54de1dfd90be" translationLanguage="en">
+  <BillingInfo street1="addr3" street2="adress23" city="city3" email="tbird3@godaddy.com" first_name="theron3" last_name="bird3" phone1="303-333-4443" zip="80013" country="us" state="AC" />
+  <PaymentOrigin order_billing="domestic" _repversion="" entered_by="customer" _webserver="LT127323-TBIRD" from_app="" order_source="Online" remote_addr="127.0.0.1" remote_host="127.0.0.1" currencyDisplay="USD" />
+  <Payments>
+    <Profile pp_shopperProfileID="39565" />
+    <ISCPayment />
+  </Payments>
+</PaymentInformation>

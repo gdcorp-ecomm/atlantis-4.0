@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Xml;
 
 namespace Atlantis.Framework.PurchaseBasket.Interface
 {
@@ -6,6 +7,13 @@ namespace Atlantis.Framework.PurchaseBasket.Interface
   {
     public abstract string ElementName { get; }
 
+    public void PopulateFromXML(XmlNode Element)
+    {
+      foreach (XmlAttribute xmlAttr in Element.Attributes)
+      {
+        this[xmlAttr.Name] = xmlAttr.Value;
+      }
+    }
     public virtual string GetStringProperty(string key, string defaultValue)
     {
       string result;

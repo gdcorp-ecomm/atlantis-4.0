@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine", "..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj", "{D30157B2-C1B3-4073-BA5E-632E2337A997}"
@@ -11,11 +11,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Purchase
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{BEEACD0C-E43C-4F72-89A3-8DB74A5028C3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.PurchaseBasket.Tests", "Atlantis.Framework.PurchaseBasket.Tests\Atlantis.Framework.PurchaseBasket.Tests.csproj", "{2FC9FDA4-7F9C-44C3-827C-B85A15DEF25C}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 5
+		SccNumberOfProjects = 6
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = http://tfs:8080/
+		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
 		SccLocalPath0 = .
 		SccProjectUniqueName1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
 		SccProjectTopLevelParentUniqueName1 = Atlantis.Framework.PurchaseBasket.sln
@@ -31,6 +33,9 @@ Global
 		SccProjectUniqueName4 = Atlantis.Framework.PurchaseBasket.Impl\\Atlantis.Framework.PurchaseBasket.Impl.csproj
 		SccProjectName4 = Atlantis.Framework.PurchaseBasket.Impl
 		SccLocalPath4 = Atlantis.Framework.PurchaseBasket.Impl
+		SccProjectUniqueName5 = Atlantis.Framework.PurchaseBasket.Tests\\Atlantis.Framework.PurchaseBasket.Tests.csproj
+		SccProjectName5 = Atlantis.Framework.PurchaseBasket.Tests
+		SccLocalPath5 = Atlantis.Framework.PurchaseBasket.Tests
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,6 +58,10 @@ Global
 		{1A7D58B9-7B24-40CD-9572-16E562C8615F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1A7D58B9-7B24-40CD-9572-16E562C8615F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1A7D58B9-7B24-40CD-9572-16E562C8615F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2FC9FDA4-7F9C-44C3-827C-B85A15DEF25C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2FC9FDA4-7F9C-44C3-827C-B85A15DEF25C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2FC9FDA4-7F9C-44C3-827C-B85A15DEF25C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2FC9FDA4-7F9C-44C3-827C-B85A15DEF25C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -24,6 +24,30 @@ namespace Atlantis.Framework.PurchaseBasket.Interface
     {
     }
 
+    public Dictionary<string, string> RequestAttributes
+    {
+      get
+      {
+        return _requestAttributes;
+      }
+    }
+
+    public List<PurchaseElement> PurchaseElements
+    {
+      get
+      {
+        return _purchaseElements;
+      }
+    }
+    
+    public List<PaymentElement> PaymentElements
+    {
+      get
+      {
+        return _paymentElements;
+      }
+    }
+
     public void AddPurchaseInfo(PurchaseElement purchaseElement)
     {
       if (purchaseElement != null)
@@ -50,6 +74,65 @@ namespace Atlantis.Framework.PurchaseBasket.Interface
       if (!string.IsNullOrEmpty(name))
       {
         _requestAttributes[name] = value;
+      }
+    }
+
+    private List<PaymentElement> AllPaymentTypes()
+    {
+      List<PaymentElement> allElements = new List<PaymentElement>();
+      allElements.Add(new PaymentUseACHBusiness());
+      allElements.Add(new PaymentUseACHPersonal());
+      allElements.Add(new PaymentUseCreditCard());
+      allElements.Add(new PaymentUseGiftCard());
+      allElements.Add(new PaymentUseInStoreCredit());
+      allElements.Add(new PaymentUseLineOfCredit());
+      allElements.Add(new PaymentUseNetGiro());
+      allElements.Add(new PaymentUsePaypal());
+      allElements.Add(new PaymentUsePaypal());
+      allElements.Add(new PaymentUseProfile());
+      allElements.Add(new PaymentUsePrepaid());
+      allElements.Add(new PaymentUseThirdPartyCard());
+      allElements.Add(new PaymentUseZero());
+      return allElements;
+    }
+
+    public void PopulateRequestFromXML(string purchaseXML)
+    {      
+      XmlDocument purchaseDoc = new XmlDocument();
+      purchaseDoc.LoadXml(purchaseXML);
+      //Parse-process Purchase Nodes
+      XmlNode attributes = purchaseDoc.SelectSingleNode("/PaymentInformation");
+      foreach (XmlAttribute xmlAttr in attributes.Attributes)
+      {
+        _requestAttributes[xmlAttr.Name] = xmlAttr.Value;
+      }
+
+      XmlNode billingInfo = purchaseDoc.SelectSingleNode("/PaymentInformation/BillingInfo");
+      PurchaseBillingInfo oBilling = new PurchaseBillingInfo();
+      oBilling.PopulateFromXML(billingInfo);
+      _purchaseElements.Add(oBilling);
+
+      XmlNode purchaseInfo = purchaseDoc.SelectSingleNode("/PaymentInformation/PaymentOrigin");
+      PurchasePaymentOrigin origin = new PurchasePaymentOrigin();
+      origin.PopulateFromXML(purchaseInfo);
+      _purchaseElements.Add(origin);     
+
+      XmlNode payments = purchaseDoc.SelectSingleNode("/PaymentInformation/Payments");
+      List<PaymentElement> allPaymentTypes=AllPaymentTypes();
+
+      foreach (XmlNode currentNode in payments.ChildNodes)
+      {
+        foreach (PaymentElement currentElement in allPaymentTypes)
+        {
+          if (currentElement.ElementName == currentNode.Name)
+          {
+            currentElement.Clear();
+            currentElement.PopulateFromXML(currentNode);
+            PaymentElement newElement=currentElement.Clone();
+            _paymentElements.Add(newElement);
+            break;
+          }
+        }
       }
     }
 

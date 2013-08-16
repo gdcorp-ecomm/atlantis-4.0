@@ -15,6 +15,9 @@ namespace Atlantis.Framework.Engine
 
     string _logWebServiceUrl;
 
+    /// <summary>
+    /// The default logger for the engine.
+    /// </summary>
     public DefaultEngineLogger()
     {
       _logWebServiceUrl = GetLogWebServiceUrl();

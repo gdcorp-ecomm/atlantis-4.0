@@ -66,6 +66,10 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Atlantis.Framework.PromoToolGetProdPromo.Impl.nuspec" />
+    <None Include="bin\atlantis.config.transform" />
+    <None Include="bin\atlantis.prod.config.transform" />
+    <None Include="bin\atlantis.test.config.transform" />
     <None Include="packages.config" />
     <None Include="Service References\Svc\Atlantis.Framework.PromoToolGetProdPromo.Impl.Svc.ChangeSetEntry.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>

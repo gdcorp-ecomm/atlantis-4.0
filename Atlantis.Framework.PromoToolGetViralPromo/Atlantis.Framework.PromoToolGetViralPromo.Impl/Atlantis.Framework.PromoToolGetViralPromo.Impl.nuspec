@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <projectUrl>https://confluence.int.godaddy.com/display/ATLANTIS/Atlantis+Framework+Home</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes></releaseNotes>
+    <copyright>$copyright$</copyright>
+    <tags>Atlantis Framework PromoToolGetViralPromo</tags>
+    <dependencies>
+      <dependency id="Atlantis.Framework.Engine" version="4.0.0.0" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="bin\atlantis.config.transform" target="content\bin\atlantis.config.transform" />
+    <file src="bin\atlantis.prod.config.transform" target="content\bin\atlantis.prod.config.transform" />
+    <file src="bin\atlantis.test.config.transform" target="content\bin\atlantis.test.config.transform" />
+  </files>
+</package>

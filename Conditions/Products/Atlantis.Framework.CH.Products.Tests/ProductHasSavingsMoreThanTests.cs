@@ -16,6 +16,7 @@ namespace Atlantis.Framework.CH.Products.Tests
   [DeploymentItem("Atlantis.Framework.DataCacheGeneric.Impl.dll")]
   [DeploymentItem("Atlantis.Framework.Currency.Impl.dll")]
   [DeploymentItem("Atlantis.Framework.EcommPricing.Impl.dll")]
+  [DeploymentItem("Atlantis.Framework.CH.Products.dll")]
   public class ProductHasSavingsMoreThanTests
   {
     private bool _conditionHandlersRegistered;

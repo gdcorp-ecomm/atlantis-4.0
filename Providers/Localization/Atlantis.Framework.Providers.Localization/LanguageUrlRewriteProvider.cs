@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text.RegularExpressions;
+using System.Web;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Localization.Interface;
 using Atlantis.Framework.Providers.Localization.Interface;
@@ -11,6 +12,7 @@ namespace Atlantis.Framework.Providers.Localization
     public static string ROOT_DEFAULT_DOCUMENT = "default.aspx";
 
     private Lazy<ISiteContext> _siteContext;
+    private Lazy<MarketsActiveResponseData> _activeMarkets; 
     private Lazy<CountrySiteMarketMappingsResponseData> _countrySiteMarketMappings;
     private Lazy<ILocalizationProvider> _localizationProvider;
 
@@ -18,19 +20,34 @@ namespace Atlantis.Framework.Providers.Localization
       :base(container)
     {
       _siteContext = new Lazy<ISiteContext>(() => Container.Resolve<ISiteContext>());
-     _localizationProvider = new Lazy<ILocalizationProvider>(
+      _localizationProvider = new Lazy<ILocalizationProvider>(
         () => { return Container.CanResolve<ILocalizationProvider>() ? Container.Resolve<ILocalizationProvider>() : null; });
       _countrySiteMarketMappings = new Lazy<CountrySiteMarketMappingsResponseData>(LoadCountrySiteMarketMappings);
-    }
-
-    protected ILocalizationProvider LocalizationProvider
-    {
-      get { return _localizationProvider.Value; }
+      _activeMarkets = new Lazy<MarketsActiveResponseData>(LoadActiveMarkets);
     }
 
     protected ISiteContext SiteContext
     {
       get { return _siteContext.Value; }
+    }
+
+    private MarketsActiveResponseData LoadActiveMarkets()
+    {
+      MarketsActiveResponseData result;
+
+      var request = new MarketsActiveRequestData();
+      try
+      {
+        result =
+          (MarketsActiveResponseData)
+          DataCache.DataCache.GetProcessRequest(request, LocalizationProviderEngineRequests.MarketsActiveRequest);
+      }
+      catch
+      {
+        result = MarketsActiveResponseData.DefaultMarkets;
+      }
+
+      return result;
     }
 
     private CountrySiteMarketMappingsResponseData LoadCountrySiteMarketMappings()
@@ -65,11 +82,19 @@ namespace Atlantis.Framework.Providers.Localization
           return;
         }
 
-        string urlLanguage = GetUrlLanguage();
+        string validMarketId;
+        string urlLanguage = GetUrlLanguage(out validMarketId);
 
         if (String.IsNullOrEmpty(urlLanguage))
         {
-          _localizationProvider.Value.SetMarket(_localizationProvider.Value.CountrySiteInfo.DefaultMarketId);
+          if (!string.IsNullOrEmpty(validMarketId))
+          {
+            RedirectToDefaultUrl(validMarketId);
+          }
+          else
+          {
+            _localizationProvider.Value.SetMarket(_localizationProvider.Value.CountrySiteInfo.DefaultMarketId);
+          }
         }
         else if (IsDefaultLanguageUrl(urlLanguage) && HttpContextFactory.GetHttpContext().Request.HttpMethod == "GET")
         {
@@ -91,23 +116,37 @@ namespace Atlantis.Framework.Providers.Localization
     private void RedirectToDefaultUrl(string urlLanguage)
     {
       string newUrl = GetPermanentRedirectUrl(urlLanguage);
-      HttpContextFactory.GetHttpContext().Response.RedirectPermanent(newUrl);
+      HttpContextFactory.GetHttpContext().Response.Cache.SetCacheability(HttpCacheability.NoCache);
+      HttpContextFactory.GetHttpContext().Response.RedirectPermanent(newUrl, false);
+      HttpContextFactory.GetHttpContext().ApplicationInstance.CompleteRequest();
     }
 
     private void RewriteRequestUrl(string urlLanguage)
     {
       _localizationProvider.Value.RewrittenUrlLanguage = urlLanguage;
-      string newPath = RemoveLanguageCodeFromUrlPath(urlLanguage);
-      if (newPath == String.Empty || newPath == "/")
-      {
-        newPath += ROOT_DEFAULT_DOCUMENT;
-      }
-      HttpContextFactory.GetHttpContext().RewritePath(newPath);
+      string newPath = GetLanguageFreeUrlPath(urlLanguage);
+      HttpContextFactory.GetHttpContext().RewritePath(AdjustForDefaultDocument(newPath));
+      
       string marketId;
       if (_countrySiteMarketMappings.Value.TryGetMarketIdByCountrySiteAndUrlLanguage(urlLanguage, out marketId))
       {
         _localizationProvider.Value.SetMarket(marketId);
       }
+    }
+
+    private string AdjustForDefaultDocument(string newPath)
+    {
+      if (newPath == "/" || newPath.Equals(HttpContextFactory.GetHttpContext().Request.ApplicationPath + "/", StringComparison.OrdinalIgnoreCase))
+      {
+        return string.Format("{0}{1}", newPath, ROOT_DEFAULT_DOCUMENT);
+      }
+      
+      if (newPath == String.Empty || newPath.Equals(HttpContextFactory.GetHttpContext().Request.ApplicationPath, StringComparison.OrdinalIgnoreCase))
+      {
+        return string.Format("{0}/{1}", newPath, ROOT_DEFAULT_DOCUMENT);
+      }
+
+      return newPath;
     }
 
     private bool IsTransperfectProxyActive()
@@ -143,7 +182,7 @@ namespace Atlantis.Framework.Providers.Localization
 
     private string GetPermanentRedirectUrl(string urlLanguage)
     {
-      //  Get RawUrl path because it will not contain virtual directory info added by a url rewrite
+      //  Get RawUrl path because it will not contain virtual directory info IF added by a url rewrite
       string rawUrlPath = HttpContextFactory.GetHttpContext().Request.RawUrl.Split('?')[0];
       string updatedPath = RemoveLanguageCode(rawUrlPath, urlLanguage);
 
@@ -154,35 +193,35 @@ namespace Atlantis.Framework.Providers.Localization
 
     private string RemoveLanguageCode(string path, string languageCode)
     {
-      if (String.IsNullOrWhiteSpace(languageCode))
-      {
-        return path;
-      }
-
       Regex re = new Regex("/" + languageCode + "\\b", RegexOptions.IgnoreCase);
       return re.Replace(path, "", 1);
     }
 
-    private string RemoveLanguageCodeFromUrlPath(string languageCode = null)
+    private string GetLanguageFreeUrlPath(string languageCode = null)
     {
+      string validMarketId;
+      string result;
+
       if (String.IsNullOrWhiteSpace(languageCode))
       {
-        languageCode = GetUrlLanguage();
+        languageCode = GetUrlLanguage(out validMarketId);
       }
 
-      UriBuilder newUrlBuilder = new UriBuilder(HttpContextFactory.GetHttpContext().Request.Url);
       if (!string.IsNullOrWhiteSpace(languageCode))
       {
-        return RemoveLanguageCode(newUrlBuilder.Path, languageCode);
+        result = RemoveLanguageCode(HttpContextFactory.GetHttpContext().Request.Path, languageCode);
       }
       else
       {
-        return newUrlBuilder.Path;
+        result = HttpContextFactory.GetHttpContext().Request.Path;
       }
+
+      return result;
     }
 
-    private string GetUrlLanguage()
+    private string GetUrlLanguage(out string validMarketId)
     {
+      validMarketId = String.Empty;
       string result = string.Empty;
 
       if (HttpContextFactory.GetHttpContext().Request.AppRelativeCurrentExecutionFilePath != null)
@@ -193,10 +232,15 @@ namespace Atlantis.Framework.Providers.Localization
           string[] segments = appRelativePath.Split('/');
           if (segments.Length > 0)
           {
+            IMarket market;
             string firstSegment = segments[0];
             if (IsValidLanguageCode(firstSegment))
             {
               result = firstSegment;
+            }
+            else if (_activeMarkets.Value.TryGetMarketById(firstSegment, out market) && market != null)
+            {
+              validMarketId = firstSegment;
             }
           }
         }
@@ -211,7 +255,7 @@ namespace Atlantis.Framework.Providers.Localization
 
       if (_countrySiteMarketMappings.Value != null)
       {
-        result = _countrySiteMarketMappings.Value.IsValidUrlLanguageForCountrySite(language);
+        result = _countrySiteMarketMappings.Value.IsValidUrlLanguageForCountrySite(language, _siteContext.Value.IsRequestInternal);
       }
 
       return result;

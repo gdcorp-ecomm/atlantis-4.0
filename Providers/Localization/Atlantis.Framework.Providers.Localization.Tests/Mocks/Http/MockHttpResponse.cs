@@ -1,9 +1,12 @@
 ﻿using System.Web;
+using System.Web.Caching;
 
 namespace Atlantis.Framework.Providers.Localization.Tests.Mocks.Http
 {
   public class MockHttpResponse : HttpResponseBase
   {
+    private HttpCachePolicyBase _cache = new MockHttpCachePolicy();
+
     public MockHttpResponse(HttpResponse response = null) : base()
     {
       BaseResponse = response;
@@ -22,5 +25,15 @@ namespace Atlantis.Framework.Providers.Localization.Tests.Mocks.Http
     }
 
     public string RedirectedToUrl { get; private set; }
+
+    public override HttpCachePolicyBase Cache
+    {
+      get
+      {
+        {
+          return _cache;
+        }
+      }
+    }
   }
 }

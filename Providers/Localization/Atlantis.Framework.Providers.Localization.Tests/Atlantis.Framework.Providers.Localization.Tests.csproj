@@ -70,6 +70,7 @@
     <Compile Include="CountrySubdomainLocalizationProviderTests.cs" />
     <Compile Include="LocalizationTestWebProxy.cs" />
     <Compile Include="MockGeoProvider.cs" />
+    <Compile Include="Mocks\Http\MockHttpCachePolicy.cs" />
     <Compile Include="Mocks\Http\MockHttpContext.cs" />
     <Compile Include="Mocks\Http\MockHttpRequest.cs" />
     <Compile Include="Mocks\Http\MockHttpResponse.cs" />

@@ -76,9 +76,17 @@ namespace Atlantis.Framework.Localization.Interface
       return responseObject;
     }
 
-    public bool IsValidUrlLanguageForCountrySite(string language)
+    public bool IsValidUrlLanguageForCountrySite(string language, bool includeInternalOnly)
     {
-      return IsExceptionDefaultMapping || _mappingsByCountrySiteAndLanguage.ContainsKey(language);
+      bool result = false;
+
+      CountrySiteMarketMapping mapping;
+      if (TryGetMapping(language, out mapping))
+      {
+        result = (mapping != null && (!mapping.IsInternalOnly || includeInternalOnly));
+      }
+
+      return result;
     }
 
     public bool TryGetMarketIdByCountrySiteAndUrlLanguage(string language, out string marketId)
@@ -87,13 +95,19 @@ namespace Atlantis.Framework.Localization.Interface
 
       CountrySiteMarketMapping mapping;
 
-      if (_mappingsByCountrySiteAndLanguage.TryGetValue((IsExceptionDefaultMapping ? String.Empty : language), out mapping))
+      if (TryGetMapping(language, out mapping))
       {
         marketId = mapping.MarketId;
         return true;
       }
       
       return false;
+    }
+
+    private bool TryGetMapping(string language, out CountrySiteMarketMapping mapping)
+    {
+      return _mappingsByCountrySiteAndLanguage.TryGetValue((IsExceptionDefaultMapping ? String.Empty : language),
+                                                           out mapping);
     }
 
     public bool NoMappings { get; private set; }

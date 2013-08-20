@@ -69,12 +69,17 @@ namespace Atlantis.Framework.Localization.Tests
             Assert.AreEqual("en-US", m.MsCulture);
             Assert.AreEqual(true, m.IsInternalOnly);
             break;
+          case "qa-PZ":
+            Assert.AreEqual("QA (Zs)", m.Description);
+            Assert.AreEqual("en-US", m.MsCulture);
+            Assert.AreEqual(true, m.IsInternalOnly);
+            break;
           default:
             Assert.Fail("Unknown default Market {0}", m.Id);
             break;
         }
       }
-      Assert.AreEqual(8, count);
+      Assert.AreEqual(9, count);
     }
 
     [TestMethod]

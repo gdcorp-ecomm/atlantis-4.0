@@ -22,40 +22,42 @@ namespace Atlantis.Framework.Localization.Tests
 
       string marketId;
 
-      Assert.IsTrue(response.IsValidUrlLanguageForCountrySite("en"));
+      Assert.IsTrue(response.IsValidUrlLanguageForCountrySite("en", false));
       Assert.IsTrue(response.TryGetMarketIdByCountrySiteAndUrlLanguage("en", out marketId));
       Assert.AreEqual("en-US", marketId);
-      Assert.IsTrue(response.IsValidUrlLanguageForCountrySite("es"));
+      Assert.IsTrue(response.IsValidUrlLanguageForCountrySite("es", false));
       Assert.IsTrue(response.TryGetMarketIdByCountrySiteAndUrlLanguage("es", out marketId));
       Assert.AreEqual("es-US", marketId);
-      Assert.IsTrue(response.IsValidUrlLanguageForCountrySite("qa-qa"));
+      Assert.IsFalse(response.IsValidUrlLanguageForCountrySite("qa-qa", false));
+      Assert.IsTrue(response.IsValidUrlLanguageForCountrySite("qa-qa", true));
       Assert.IsTrue(response.TryGetMarketIdByCountrySiteAndUrlLanguage("qa-qa", out marketId));
       Assert.AreEqual("qa-QA", marketId);
-      Assert.IsTrue(response.IsValidUrlLanguageForCountrySite("qa-ps"));
+      Assert.IsFalse(response.IsValidUrlLanguageForCountrySite("qa-ps", false));
+      Assert.IsTrue(response.IsValidUrlLanguageForCountrySite("qa-ps", true));
       Assert.IsTrue(response.TryGetMarketIdByCountrySiteAndUrlLanguage("qa-ps", out marketId));
       Assert.AreEqual("qa-PS", marketId);
 
       request = new CountrySiteMarketMappingsRequestData("ca");
       response = (CountrySiteMarketMappingsResponseData)Engine.Engine.ProcessRequest(request, _REQUEST_TYPE);
-      Assert.IsTrue(response.IsValidUrlLanguageForCountrySite("en"));
+      Assert.IsTrue(response.IsValidUrlLanguageForCountrySite("en", false));
       Assert.IsTrue(response.TryGetMarketIdByCountrySiteAndUrlLanguage("en", out marketId));
       Assert.AreEqual("en-CA", marketId);
 
       request = new CountrySiteMarketMappingsRequestData("uk");
       response = (CountrySiteMarketMappingsResponseData)Engine.Engine.ProcessRequest(request, _REQUEST_TYPE);
-      Assert.IsTrue(response.IsValidUrlLanguageForCountrySite("en"));
+      Assert.IsTrue(response.IsValidUrlLanguageForCountrySite("en", true));
       Assert.IsTrue(response.TryGetMarketIdByCountrySiteAndUrlLanguage("en", out marketId));
       Assert.AreEqual("en-GB", marketId);
 
       request = new CountrySiteMarketMappingsRequestData("au");
       response = (CountrySiteMarketMappingsResponseData)Engine.Engine.ProcessRequest(request, _REQUEST_TYPE);
-      Assert.IsTrue(response.IsValidUrlLanguageForCountrySite("en"));
+      Assert.IsTrue(response.IsValidUrlLanguageForCountrySite("en", false));
       Assert.IsTrue(response.TryGetMarketIdByCountrySiteAndUrlLanguage("en", out marketId));
       Assert.AreEqual("en-AU", marketId);
 
       request = new CountrySiteMarketMappingsRequestData("in");
       response = (CountrySiteMarketMappingsResponseData)Engine.Engine.ProcessRequest(request, _REQUEST_TYPE);
-      Assert.IsTrue(response.IsValidUrlLanguageForCountrySite("en"));
+      Assert.IsTrue(response.IsValidUrlLanguageForCountrySite("en", true));
       Assert.IsTrue(response.TryGetMarketIdByCountrySiteAndUrlLanguage("en", out marketId));
       Assert.AreEqual("en-IN", marketId);
     }
@@ -68,19 +70,19 @@ namespace Atlantis.Framework.Localization.Tests
 
       string marketId;
 
-      Assert.IsTrue(response.IsValidUrlLanguageForCountrySite("en"));
+      Assert.IsTrue(response.IsValidUrlLanguageForCountrySite("en", false));
       Assert.IsTrue(response.TryGetMarketIdByCountrySiteAndUrlLanguage("en", out marketId));
       Assert.AreEqual("en-CA", marketId);
-      Assert.IsTrue(response.IsValidUrlLanguageForCountrySite("EN"));
+      Assert.IsTrue(response.IsValidUrlLanguageForCountrySite("EN", false));
       Assert.IsTrue(response.TryGetMarketIdByCountrySiteAndUrlLanguage("EN", out marketId));
       Assert.AreEqual("en-CA", marketId);
-      Assert.IsTrue(response.IsValidUrlLanguageForCountrySite("en"));
+      Assert.IsTrue(response.IsValidUrlLanguageForCountrySite("en", true));
       Assert.IsTrue(response.TryGetMarketIdByCountrySiteAndUrlLanguage("en", out marketId));
       Assert.AreEqual("en-CA", marketId);
-      Assert.IsTrue(response.IsValidUrlLanguageForCountrySite("eN"));
+      Assert.IsTrue(response.IsValidUrlLanguageForCountrySite("eN", true));
       Assert.IsTrue(response.TryGetMarketIdByCountrySiteAndUrlLanguage("En", out marketId));
       Assert.AreEqual("en-CA", marketId);
-      Assert.IsTrue(response.IsValidUrlLanguageForCountrySite("EN"));
+      Assert.IsTrue(response.IsValidUrlLanguageForCountrySite("EN", false));
       Assert.IsTrue(response.TryGetMarketIdByCountrySiteAndUrlLanguage("en", out marketId));
       Assert.AreEqual("en-CA", marketId);
     }
@@ -93,13 +95,13 @@ namespace Atlantis.Framework.Localization.Tests
 
       string marketId;
 
-      Assert.IsFalse(response.IsValidUrlLanguageForCountrySite("en"));
+      Assert.IsFalse(response.IsValidUrlLanguageForCountrySite("en", true));
       Assert.IsFalse(response.TryGetMarketIdByCountrySiteAndUrlLanguage("en", out marketId));
       Assert.AreEqual(string.Empty, marketId);
 
       request = new CountrySiteMarketMappingsRequestData("www");
       response = (CountrySiteMarketMappingsResponseData)Engine.Engine.ProcessRequest(request, _REQUEST_TYPE);
-      Assert.IsFalse(response.IsValidUrlLanguageForCountrySite("xx"));
+      Assert.IsFalse(response.IsValidUrlLanguageForCountrySite("xx", true));
       Assert.IsFalse(response.TryGetMarketIdByCountrySiteAndUrlLanguage("xx", out marketId));
       Assert.AreEqual(string.Empty, marketId);
 
@@ -178,10 +180,10 @@ namespace Atlantis.Framework.Localization.Tests
       CountrySiteMarketMappingsResponseData response = CountrySiteMarketMappingsResponseData.FromCacheDataXml(invalidXml);
 
       string marketId;
-      Assert.IsTrue(response.IsValidUrlLanguageForCountrySite("en"));
+      Assert.IsTrue(response.IsValidUrlLanguageForCountrySite("en", false));
       Assert.IsTrue(response.TryGetMarketIdByCountrySiteAndUrlLanguage("en", out marketId));
       Assert.AreEqual("en-US", marketId);
-      Assert.IsTrue(response.IsValidUrlLanguageForCountrySite("es"));
+      Assert.IsTrue(response.IsValidUrlLanguageForCountrySite("es", false));
       Assert.IsTrue(response.TryGetMarketIdByCountrySiteAndUrlLanguage("es", out marketId));
       Assert.AreEqual("es-US", marketId);
     }
@@ -200,10 +202,10 @@ namespace Atlantis.Framework.Localization.Tests
       CountrySiteMarketMappingsResponseData response = CountrySiteMarketMappingsResponseData.FromCacheDataXml(invalidXml);
 
       string marketId;
-      Assert.IsTrue(response.IsValidUrlLanguageForCountrySite("en"));
+      Assert.IsTrue(response.IsValidUrlLanguageForCountrySite("en", false));
       Assert.IsTrue(response.TryGetMarketIdByCountrySiteAndUrlLanguage("en", out marketId));
       Assert.AreEqual("en-US", marketId);
-      Assert.IsTrue(response.IsValidUrlLanguageForCountrySite("es"));
+      Assert.IsTrue(response.IsValidUrlLanguageForCountrySite("es", false));
       Assert.IsTrue(response.TryGetMarketIdByCountrySiteAndUrlLanguage("es", out marketId));
       Assert.AreEqual("es-US", marketId);
     }
@@ -219,9 +221,9 @@ namespace Atlantis.Framework.Localization.Tests
         CountrySiteMarketMappingsResponseData.FromCountrySiteAndMarketId("xx", "yy-ZZ");
 
       string marketId;
-      Assert.IsTrue(response.IsValidUrlLanguageForCountrySite("yy"));
-      Assert.IsTrue(response.IsValidUrlLanguageForCountrySite("aa"));
-      Assert.IsTrue(response.IsValidUrlLanguageForCountrySite("bb"));
+      Assert.IsTrue(response.IsValidUrlLanguageForCountrySite("yy", true));
+      Assert.IsTrue(response.IsValidUrlLanguageForCountrySite("aa", true));
+      Assert.IsTrue(response.IsValidUrlLanguageForCountrySite("bb", true));
       Assert.IsTrue(response.TryGetMarketIdByCountrySiteAndUrlLanguage("yy", out marketId));
       Assert.AreEqual("yy-ZZ", marketId);
       Assert.IsTrue(response.TryGetMarketIdByCountrySiteAndUrlLanguage("aa", out marketId));

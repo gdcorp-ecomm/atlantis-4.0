@@ -7,4 +7,5 @@
 	<item marketID="en-IN" marketDescription="English (India)" msCulture="en-IN" isActive="-1" internalOnly="0" />
 	<item marketID="qa-QA" marketDescription="QA (Show Tags)" msCulture="en-US" isActive="-1" internalOnly="-1" />
   <item marketID="qa-PS" marketDescription="QA (Pseudo)" msCulture="en-US" isActive="-1" internalOnly="-1" />
+  <item marketID="qa-PZ" marketDescription="QA (Zs)" msCulture="en-US" isActive="-1" internalOnly="-1" />
 </data>

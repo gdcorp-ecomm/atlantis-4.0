@@ -72,7 +72,7 @@ namespace Atlantis.Framework.Localization.Tests
     }
 
     [TestMethod]
-    public void CountrySitesACtiveResponse_IndexedByCaseInsensitiveCountrySite()
+    public void CountrySitesActiveResponse_IndexedByCaseInsensitiveCountrySite()
     {
       CountrySitesActiveResponseData response = CountrySitesActiveResponseData.DefaultCountrySites;
       Assert.IsNotNull(response);

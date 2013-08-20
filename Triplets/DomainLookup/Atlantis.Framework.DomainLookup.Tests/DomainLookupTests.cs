@@ -1,0 +1,82 @@
+﻿using System;
+using System.Xml;
+using Atlantis.Framework.DomainLookup.Interface;
+using Atlantis.Framework.Interface;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+
+namespace Atlantis.Framework.DomainLookup.Tests
+{
+  [TestClass]
+  [DeploymentItem("atlantis.config")]
+  [DeploymentItem("Atlantis.Framework.DomainLookup.Impl.dll")]
+  public class DomainLookupTests
+  {
+    const int _DOMAINLOOKUPREQUESTTYPE = 728;
+    const int _DOMAINLOOKUPREQUESTTYPE_WSNOTVALID = 729;
+    
+    [TestMethod]
+    public void CheckActiveResellerDomain()
+    {
+      DomainLookupRequestData request = new DomainLookupRequestData("ELEVENCATS.INFO");
+      DomainLookupResponseData response = (DomainLookupResponseData)Engine.Engine.ProcessRequest(request, _DOMAINLOOKUPREQUESTTYPE);
+
+      
+      Assert.AreEqual(response.DomainID, 2146871);
+      Assert.AreEqual(response.HasSuspectTerms, false);
+      Assert.AreEqual(response.IsActive, true);
+      bool privateLabelCheck = false;
+
+      if (response.PrivateLabelID > 3)
+        privateLabelCheck = true;
+
+      Assert.IsTrue(privateLabelCheck);
+    }
+
+     [TestMethod]
+    public void CheckActiveDomain()
+    {
+      DomainLookupRequestData request = new DomainLookupRequestData("jeffmcookietest1.info");
+      DomainLookupResponseData response = (DomainLookupResponseData)Engine.Engine.ProcessRequest(request, _DOMAINLOOKUPREQUESTTYPE);
+
+      DateTime xferAwayDate = DateTime.MinValue;
+      DateTime.TryParse("2013-03-18T07:58:23-07:00", out xferAwayDate);
+
+      DateTime createDate = DateTime.MinValue;
+      DateTime.TryParse("2013-01-17T14:59:06-07:00", out createDate);
+
+      Assert.AreEqual(response.XfrAwayDateUpdateReason, 1);
+      Assert.AreEqual(response.XfrAwayDate, xferAwayDate);
+      Assert.AreEqual(response.CreateDate, createDate);
+      Assert.AreEqual(response.IsActive, true);
+      bool privateLabelCheck = false;
+
+      if (response.PrivateLabelID == 1)
+        privateLabelCheck = true;
+
+      Assert.IsTrue(privateLabelCheck);
+    }
+
+    
+
+    [TestMethod]
+    public void CheckForEmptyResponse()
+    {
+      DomainLookupRequestData request = new DomainLookupRequestData("gghhasdd");
+      DomainLookupResponseData response = (DomainLookupResponseData)Engine.Engine.ProcessRequest(request, _DOMAINLOOKUPREQUESTTYPE);
+      Assert.AreEqual(response.Shopperid, "");
+      Assert.AreEqual(response.IsActive, false);
+      Assert.AreEqual(response.IsSmartDomain, false);
+    }
+
+    [TestMethod]
+    public void SimulateAnExcpetion()
+    {
+      DomainLookupRequestData request = new DomainLookupRequestData("elevencats.info");
+      AtlantisException ex = new AtlantisException(request, this.GetType().ToString() + "." + "SimulateAnException", "This is testing the error handling of the repsonse", "domain=elevencats.info");
+      DomainLookupResponseData response = DomainLookupResponseData.FromData(ex);
+      Assert.IsNotNull(response.AtlantisEx);
+      
+    }
+  }
+}

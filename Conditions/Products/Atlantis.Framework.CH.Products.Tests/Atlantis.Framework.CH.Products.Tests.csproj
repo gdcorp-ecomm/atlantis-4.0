@@ -54,6 +54,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="ProductHasDiscountMoreThanTests.cs" />
     <Compile Include="ProductHasSavingsMoreThanTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

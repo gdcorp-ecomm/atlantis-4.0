@@ -1,5 +1,4 @@
 ﻿using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following 
@@ -12,11 +11,10 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyDescription("Release Build")]
 [assembly: AssemblyConfiguration("Release Build")]
 #endif
-
+[assembly: AssemblyCompany("GoDaddy.com, LLC")]
 [assembly: AssemblyTitle("Atlantis.Framework.CH.Products")]
-[assembly: AssemblyCompany("GoDaddy")]
 [assembly: AssemblyProduct("Atlantis.Framework.CH.Products")]
-[assembly: AssemblyCopyright("Copyright © GoDaddy 2013")]
+[assembly: AssemblyCopyright("Copyright © GoDaddy.com, LLC 2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -38,5 +36,5 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("4.13.8.6")]
+[assembly: AssemblyVersion("4.0.0.0")]
+[assembly: AssemblyFileVersion("4.13.8.20")]

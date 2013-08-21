@@ -110,7 +110,13 @@ namespace Atlantis.Framework.Providers.PlaceHolder
 
       foreach (IPlaceHolderHandler placeHolderHandler in placeHolderHandlers)
       {
-        contentBuilder.Replace(placeHolderHandler.Markup, placeHolderHandler.Render());
+        string renderedContent = placeHolderHandler.Render();
+        if (placeHolderHandler.Children.Count > 0)
+        {
+          renderedContent = RenderPlaceHolders(placeHolderHandler.Children, renderedContent);
+        }
+
+        contentBuilder.Replace(placeHolderHandler.Markup, renderedContent);
       }
 
       return contentBuilder.ToString();

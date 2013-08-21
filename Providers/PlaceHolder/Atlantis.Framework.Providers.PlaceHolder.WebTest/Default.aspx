@@ -34,6 +34,7 @@
   <hr />
   [@P[webControl:<Data assembly="App_Code" type="WebControls.WebControlTwo"><Parameters><Parameter key="Text" value="Web control two" /></Parameters></Data>]@P]
   <hr />
+  Circular reference cdsDocument placeholder SHOULD NOT render below:
   [@P[cdsDocument:<Data app="atlantis" location="_global/circularreference" />]@P]
   <hr />
 </body>

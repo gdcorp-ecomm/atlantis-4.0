@@ -51,6 +51,7 @@
     <Compile Include="ErrorLogger.cs" />
     <Compile Include="PlaceHolderHandlerManager.cs" />
     <Compile Include="PlaceHolderHandlers\WebControlPlaceHolderHandlerBase.cs" />
+    <Compile Include="PlaceHolderRules.cs" />
     <Compile Include="WebControl\WebControlManager.cs" />
     <Compile Include="PlaceHolderHandlers\PlaceHolderHandlerHandlerFactory.cs" />
     <Compile Include="PlaceHolders\CDSDocumentPlaceHolder.cs" />

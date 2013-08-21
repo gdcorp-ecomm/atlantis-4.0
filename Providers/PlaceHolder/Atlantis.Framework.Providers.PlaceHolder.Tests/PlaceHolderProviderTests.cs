@@ -299,7 +299,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder.Tests
 
       WriteOutput(renderedContent);
 
-      Assert.IsTrue(renderedContent.Contains("[@P["), "Placeholder should have rendered since recursive limit was hit.");
+      Assert.IsTrue(renderedContent == string.Empty);
     }
 
     [TestMethod]

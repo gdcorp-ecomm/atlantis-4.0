@@ -275,6 +275,34 @@ namespace Atlantis.Framework.Providers.PlaceHolder.Tests
     }
 
     [TestMethod]
+    public void RenderCDSDocumentOneNestedPlaceHolder()
+    {
+      IPlaceHolder placeHolder = new CDSDocumentPlaceHolder("atlantis",
+                                                            "_global/nesteddocument");
+
+      IPlaceHolderProvider placeHolderProvider = ProviderContainer.Resolve<IPlaceHolderProvider>();
+      string renderedContent = placeHolderProvider.ReplacePlaceHolders(placeHolder.ToMarkup());
+
+      WriteOutput(renderedContent);
+
+      Assert.IsFalse(renderedContent.Contains("[@P["), "Nested CDS Document placeholder not rendered");
+    }
+
+    [TestMethod]
+    public void RenderCDSDocumentCircularReference()
+    {
+      IPlaceHolder placeHolder = new CDSDocumentPlaceHolder("atlantis",
+                                                            "_global/circularreference");
+
+      IPlaceHolderProvider placeHolderProvider = ProviderContainer.Resolve<IPlaceHolderProvider>();
+      string renderedContent = placeHolderProvider.ReplacePlaceHolders(placeHolder.ToMarkup());
+
+      WriteOutput(renderedContent);
+
+      Assert.IsTrue(renderedContent.Contains("[@P["), "Placeholder should have rendered since recursive limit was hit.");
+    }
+
+    [TestMethod]
     public void RenderCDSDocumentEmptyAppPath()
     {
       IPlaceHolder placeHolder = new CDSDocumentPlaceHolder(string.Empty,

@@ -7,23 +7,29 @@ namespace Atlantis.Framework.Providers.PlaceHolder
 {
   internal abstract class WebControlPlaceHolderHandlerBase : IPlaceHolderHandler
   {
+    private static readonly IList<IPlaceHolderHandler> _emptyChildrenList = new List<IPlaceHolderHandler>(0);
+
     private Control _control;
-    private string _placeHolderDataRaw;
-    private ICollection<string> _debugContextErrors;
+    private readonly string _data;
+    private readonly ICollection<string> _debugContextErrors;
 
-    public abstract string Type { get; }
-
-    internal WebControlPlaceHolderHandlerBase(string placeHolderDataRaw, ICollection<string> debugContextErrors)
+    internal WebControlPlaceHolderHandlerBase(string markup, string data, ICollection<string> debugContextErrors)
     {
       _debugContextErrors = debugContextErrors;
-      _placeHolderDataRaw = placeHolderDataRaw;
-      _control = InitializeControl(placeHolderDataRaw);
+      Markup = markup;
+      _data = data;
     }
 
     ~WebControlPlaceHolderHandlerBase()
     {
       UnloadControl();
     }
+
+    public abstract string Type { get; }
+
+    public string Markup { get; private set; }
+
+    public IList<IPlaceHolderHandler> Children { get { return _emptyChildrenList; } }
 
     private void RaiseEvent(string eventName)
     {
@@ -52,10 +58,15 @@ namespace Atlantis.Framework.Providers.PlaceHolder
       UnloadControl();
 
       _debugContextErrors.Add(message);
-      ErrorLogger.LogException(message, sourceFunction, _placeHolderDataRaw);
+      ErrorLogger.LogException(message, sourceFunction, _data);
     }
 
     protected abstract Control InitializeControl(string placeHolderDataRaw);
+
+    public void Initialize()
+    {
+      _control = InitializeControl(_data);
+    }
 
     public void RaiseInitEvent()
     {

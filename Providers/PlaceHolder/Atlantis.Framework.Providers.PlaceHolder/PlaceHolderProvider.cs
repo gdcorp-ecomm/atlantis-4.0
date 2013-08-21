@@ -1,20 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
-using System.Text.RegularExpressions;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.PlaceHolder.Interface;
-using Atlantis.Framework.Providers.PlaceHolder.PlaceHolderHandlers;
 
 namespace Atlantis.Framework.Providers.PlaceHolder
 {
   public class PlaceHolderProvider : ProviderBase, IPlaceHolderProvider
   {
-    private const string PLACE_HOLDER_TYPE = "placeholdertype";
-    private const string PLACE_HOLDER_DATA = "placeholderdata";
-
-    private static readonly Regex _placeHolderRegex = new Regex(@"\[@P\[(?<placeholdertype>[a-zA-z0-9]*?):(?<placeholderdata>.*?)\]@P\]", RegexOptions.Compiled | RegexOptions.Singleline);
-    
     private readonly ICollection<string> _debugContextErrors = new Collection<string>(); 
 
     public PlaceHolderProvider(IProviderContainer container) : base(container)
@@ -37,12 +30,10 @@ namespace Atlantis.Framework.Providers.PlaceHolder
     private string ProcessPlaceHolderMatches(string originalContent)
     {
       string finalContent = originalContent;
+      IList<IPlaceHolderHandler> placeHolderHandlers = PlaceHolderHandlerManager.GetPlaceHolderHandlers(originalContent, _debugContextErrors, Container);
 
-      MatchCollection placeHolderMatches = _placeHolderRegex.Matches(originalContent);
-
-      if (placeHolderMatches.Count > 0)
+      if (placeHolderHandlers.Count > 0)
       {
-        IList<KeyValuePair<string, IPlaceHolderHandler>> placeHolderHandlers = GetPlaceHolderHandlers(placeHolderMatches);
         finalContent = ProcessPlaceHolderHandlers(placeHolderHandlers, originalContent);
 
         LogDebugContextData();
@@ -51,56 +42,75 @@ namespace Atlantis.Framework.Providers.PlaceHolder
       return finalContent;
     }
 
-    private IList<KeyValuePair<string, IPlaceHolderHandler>> GetPlaceHolderHandlers(MatchCollection placeHolderMatches)
+    private string ProcessPlaceHolderHandlers(IList<IPlaceHolderHandler> placeHolderHandlers, string originalContent)
     {
-      IList<KeyValuePair<string, IPlaceHolderHandler>> placeHolderHandlers = new List<KeyValuePair<string, IPlaceHolderHandler>>(placeHolderMatches.Count);
-      IPlaceHolderHandlerFactory placeHolderHandlerFactory = new PlaceHolderHandlerHandlerFactory();
+      Initialize(placeHolderHandlers);
+      RaiseInitEvent(placeHolderHandlers);
+      RaiseLoadEvent(placeHolderHandlers);
+      RaisePreInitEvent(placeHolderHandlers);
 
-      foreach (Match placeHolderMatch in placeHolderMatches)
-      {
-        string matchValue = placeHolderMatch.Value;
-        string placeHolderType = placeHolderMatch.Groups[PLACE_HOLDER_TYPE].Captures[0].Value;
-        string placeHolderDataRaw = placeHolderMatch.Groups[PLACE_HOLDER_DATA].Captures[0].Value;
-
-        IPlaceHolderHandler placeHolderHandler = placeHolderHandlerFactory.ConstructHandler(placeHolderType, placeHolderDataRaw, _debugContextErrors, Container);
-
-        placeHolderHandlers.Add(new KeyValuePair<string, IPlaceHolderHandler>(matchValue, placeHolderHandler));
-      }
-
-      return placeHolderHandlers;
-    }
-
-    private string ProcessPlaceHolderHandlers(IList<KeyValuePair<string, IPlaceHolderHandler>> placeHolderHandlers, string originalContent)
-    {
-      RaisePlaceHolderEvents(placeHolderHandlers);
       return RenderPlaceHolders(placeHolderHandlers, originalContent);
     }
 
-    private void RaisePlaceHolderEvents(IList<KeyValuePair<string, IPlaceHolderHandler>> placeHolderHandlers)
+    private void Initialize(IList<IPlaceHolderHandler> placeHolderHandlers)
     {
-      foreach (KeyValuePair<string, IPlaceHolderHandler> placeHolderHandler in placeHolderHandlers)
+      foreach (IPlaceHolderHandler placeHolderHandler in placeHolderHandlers)
       {
-        placeHolderHandler.Value.RaiseInitEvent();
-      }
+        placeHolderHandler.Initialize();
 
-      foreach (KeyValuePair<string, IPlaceHolderHandler> placeHolderHandler in placeHolderHandlers)
-      {
-        placeHolderHandler.Value.RaiseLoadEvent();
-      }
-
-      foreach (KeyValuePair<string, IPlaceHolderHandler> placeHolderHandler in placeHolderHandlers)
-      {
-        placeHolderHandler.Value.RaisePreRenderEvent();
+        if (placeHolderHandler.Children.Count > 0)
+        {
+          Initialize(placeHolderHandler.Children);
+        }
       }
     }
 
-    private string RenderPlaceHolders(IList<KeyValuePair<string, IPlaceHolderHandler>> placeHolderHandlers, string originalContent)
+    private void RaiseInitEvent(IList<IPlaceHolderHandler> placeHolderHandlers)
+    {
+      foreach (IPlaceHolderHandler placeHolderHandler in placeHolderHandlers)
+      {
+        placeHolderHandler.RaiseInitEvent();
+
+        if (placeHolderHandler.Children.Count > 0)
+        {
+          RaiseInitEvent(placeHolderHandler.Children);
+        }
+      }
+    }
+
+    private void RaiseLoadEvent(IList<IPlaceHolderHandler> placeHolderHandlers)
+    {
+      foreach (IPlaceHolderHandler placeHolderHandler in placeHolderHandlers)
+      {
+        placeHolderHandler.RaiseLoadEvent();
+
+        if (placeHolderHandler.Children.Count > 0)
+        {
+          RaiseLoadEvent(placeHolderHandler.Children);
+        }
+      }
+    }
+
+    private void RaisePreInitEvent(IList<IPlaceHolderHandler> placeHolderHandlers)
+    {
+      foreach (IPlaceHolderHandler placeHolderHandler in placeHolderHandlers)
+      {
+        placeHolderHandler.RaisePreRenderEvent();
+
+        if (placeHolderHandler.Children.Count > 0)
+        {
+          RaisePreInitEvent(placeHolderHandler.Children);
+        }
+      }
+    }
+
+    private string RenderPlaceHolders(IList<IPlaceHolderHandler> placeHolderHandlers, string originalContent)
     {
       StringBuilder contentBuilder = new StringBuilder(originalContent);
 
-      foreach (KeyValuePair<string, IPlaceHolderHandler> placeHolderHandler in placeHolderHandlers)
+      foreach (IPlaceHolderHandler placeHolderHandler in placeHolderHandlers)
       {
-        contentBuilder.Replace(placeHolderHandler.Key, placeHolderHandler.Value.Render());
+        contentBuilder.Replace(placeHolderHandler.Markup, placeHolderHandler.Render());
       }
 
       return contentBuilder.ToString();

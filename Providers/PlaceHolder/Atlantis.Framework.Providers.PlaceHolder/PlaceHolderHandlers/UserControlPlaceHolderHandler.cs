@@ -9,7 +9,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder
   {
     public override string Type { get { return PlaceHolderTypes.UserControl; } }
 
-    internal UserControlPlaceHolderHandler(string placeHolderDataRaw, ICollection<string> debugContextErrors) : base(placeHolderDataRaw, debugContextErrors)
+    internal UserControlPlaceHolderHandler(string markup, string data, ICollection<string> debugContextErrors) : base(markup, data, debugContextErrors)
     {
     }
 
@@ -34,7 +34,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder
       catch (Exception ex)
       {
         HandleError(string.Format("PlaceHolder error loading control. Type: {0}, Message: {1}", Type, ex.Message),
-                    "UserControlPlaceHolderHandler.InitializeControl()");
+                    "UserControlPlaceHolderHandler.Initialize()");
       }
 
       return control;

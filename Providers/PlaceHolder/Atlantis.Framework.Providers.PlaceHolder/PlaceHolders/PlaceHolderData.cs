@@ -20,12 +20,6 @@ namespace Atlantis.Framework.Providers.PlaceHolder
       get { return _parametersDictionary; }
     }
 
-    internal PlaceHolderData()
-    {
-      _attributesDictionary = new Dictionary<string, string>(0);
-      _parametersDictionary = new Dictionary<string, string>(0);
-    }
-
     internal PlaceHolderData(IList<KeyValuePair<string, string>> attributes, IList<KeyValuePair<string, string>> parameters)
     {
       BuildAttributesDictionary(attributes);

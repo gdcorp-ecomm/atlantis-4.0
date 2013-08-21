@@ -5,6 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
   <title></title>
+  [@P[cdsDocument:<Data app="atlantis" location="_global/csslink" />]@P]
 </head>
 <body>
   <div>
@@ -26,12 +27,14 @@
     <hr />
   </div>
   <div>
-    [@P[cdsDocument:<Data app="sales" location="document/location/test" />]@P]
+    [@P[cdsDocument:<Data app="atlantis" location="_global/banner" />]@P]
     <hr />
   </div>
   [@P[webControl:<Data assembly="App_Code" type="WebControls.WebControlOne"><Parameters><Parameter key="Text" value="Web control one" /></Parameters></Data>]@P]
   <hr />
   [@P[webControl:<Data assembly="App_Code" type="WebControls.WebControlTwo"><Parameters><Parameter key="Text" value="Web control two" /></Parameters></Data>]@P]
+  <hr />
+  [@P[cdsDocument:<Data app="atlantis" location="_global/circularreference" />]@P]
   <hr />
 </body>
 </html>

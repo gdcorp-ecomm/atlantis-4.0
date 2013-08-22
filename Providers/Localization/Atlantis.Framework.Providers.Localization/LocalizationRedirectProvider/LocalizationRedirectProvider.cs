@@ -1,4 +1,5 @@
-﻿using Atlantis.Framework.Interface;
+﻿using System.Web;
+using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.Geo.Interface;
 using Atlantis.Framework.Providers.Localization.Interface;
 using Atlantis.Framework.RuleEngine.Results;
@@ -33,6 +34,20 @@ namespace Atlantis.Framework.Providers.Localization
     }
 
     public LocalizationRedirectProvider(IProviderContainer container) : base(container) { }
+
+    private string CountryView
+    {
+      get
+      {
+        string result = string.Empty;
+        if (HttpContext.Current != null)
+        {
+          result = HttpContext.Current.Request.QueryString["countryview"] ?? string.Empty;
+        }
+
+        return result;
+      }
+    }
 
     private string ValidateCountrySiteResponse(string countrySiteToValidate)
     {
@@ -93,44 +108,51 @@ namespace Atlantis.Framework.Providers.Localization
 
     private ILocalizationRedirectResponse DetermineCountryRedirect()
     {
-
-      var ipCountry = _DEFAULT_IP_COUNTRY;
-      if (GeoIpProvider != null)
-      {
-        ipCountry = GeoIpProvider.RequestCountryCode;
-
-        if (string.IsNullOrEmpty(ipCountry) || ipCountry.Equals("US", StringComparison.OrdinalIgnoreCase))
-        {
-          ipCountry = _DEFAULT_IP_COUNTRY;
-        }
-      }
-
       var currentCountrySite = LocalizationProvider.CountrySite.ToUpperInvariant();
-      var currentLanguage = LocalizationProvider.ShortLanguage.ToUpperInvariant();
-
-      var countryPreference = string.Empty;
-      if (!string.IsNullOrEmpty(LocalizationProvider.PreviousCountrySiteCookieValue))
+      ILocalizationRedirectResponse redirectResponse = null;
+      if (HttpContext.Current != null && CountryView == "1")
       {
-        countryPreference = LocalizationProvider.PreviousCountrySiteCookieValue;
+        redirectResponse = new LocalizationRedirectResponse(false);
+        redirectResponse.CountrySite = currentCountrySite;
       }
+      else
+      {
 
-      var engineModel = new RedirectSiteRuleEngineModel
-                          {
-                            HasCountryCookie = !string.IsNullOrEmpty(countryPreference),
-                            CountryPreference = countryPreference.ToUpperInvariant(),
-                            CurrentSubdomainSite = currentCountrySite,
-                            IPCountry = ipCountry.ToUpperInvariant(),
-                            LanguagePreference = currentLanguage
-                          };
+        var ipCountry = _DEFAULT_IP_COUNTRY;
+        if (GeoIpProvider != null)
+        {
+          ipCountry = GeoIpProvider.RequestCountryCode;
 
-      var rules = new XmlDocument();
-      rules.LoadXml(CountrySiteRedirectRuleData.CountrySiteRedirectRuleXml);
+          if (string.IsNullOrEmpty(ipCountry) || ipCountry.Equals("US", StringComparison.OrdinalIgnoreCase))
+          {
+            ipCountry = _DEFAULT_IP_COUNTRY;
+          }
+        }
 
-      var engineResult = RuleEngine.RuleEngine.EvaluateRules(engineModel.Model, rules);
+        var currentLanguage = LocalizationProvider.ShortLanguage.ToUpperInvariant();
 
-      var redirectResponse = GetRedirectResponse(engineResult, engineModel.ModelId);
+        var countryPreference = string.Empty;
+        if (!string.IsNullOrEmpty(LocalizationProvider.PreviousCountrySiteCookieValue))
+        {
+          countryPreference = LocalizationProvider.PreviousCountrySiteCookieValue;
+        }
 
+        var engineModel = new RedirectSiteRuleEngineModel
+          {
+            HasCountryCookie = !string.IsNullOrEmpty(countryPreference),
+            CountryPreference = countryPreference.ToUpperInvariant(),
+            CurrentSubdomainSite = currentCountrySite,
+            IPCountry = ipCountry.ToUpperInvariant(),
+            LanguagePreference = currentLanguage
+          };
 
+        var rules = new XmlDocument();
+        rules.LoadXml(CountrySiteRedirectRuleData.CountrySiteRedirectRuleXml);
+
+        var engineResult = RuleEngine.RuleEngine.EvaluateRules(engineModel.Model, rules);
+
+        redirectResponse = GetRedirectResponse(engineResult, engineModel.ModelId);
+      }
 
       return redirectResponse;
     }

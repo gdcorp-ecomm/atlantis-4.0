@@ -248,5 +248,18 @@ namespace Atlantis.Framework.Providers.Localization.Tests
       Assert.IsTrue(result.CountrySite.ToUpperInvariant() == "UK");
       Assert.IsTrue(result.ShouldRedirect);
     }
+
+    [TestMethod]
+    public void TestRedirectHasCountryCookieESNoRedirectQueryString()
+    {
+      var container = SetContext("http://mysite.com?countryview=1", "us");
+
+      CreateCountryCookie(1, "ES");
+
+      var localization = container.Resolve<ILocalizationRedirectProvider>();
+      var result = localization.RedirectResponse;
+      Assert.IsTrue(result.CountrySite.ToUpperInvariant() == "WWW");
+      Assert.IsFalse(result.ShouldRedirect);
+    }
   }
 }

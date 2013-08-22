@@ -21,13 +21,13 @@ namespace Atlantis.Framework.DomainLookup.Tests
       DomainLookupRequestData request = new DomainLookupRequestData("ELEVENCATS.INFO");
       DomainLookupResponseData response = (DomainLookupResponseData)Engine.Engine.ProcessRequest(request, _DOMAINLOOKUPREQUESTTYPE);
 
-      
-      Assert.AreEqual(response.DomainID, 2146871);
-      Assert.AreEqual(response.HasSuspectTerms, false);
-      Assert.AreEqual(response.IsActive, true);
+
+      Assert.AreEqual(response.domainData.DomainID, 2146871);
+      Assert.AreEqual(response.domainData.HasSuspectTerms, false);
+      Assert.AreEqual(response.domainData.IsActive, true);
       bool privateLabelCheck = false;
 
-      if (response.PrivateLabelID > 3)
+      if (response.domainData.PrivateLabelID > 3)
         privateLabelCheck = true;
 
       Assert.IsTrue(privateLabelCheck);
@@ -45,13 +45,13 @@ namespace Atlantis.Framework.DomainLookup.Tests
       DateTime createDate = DateTime.MinValue;
       DateTime.TryParse("2013-01-17T14:59:06-07:00", out createDate);
 
-      Assert.AreEqual(response.XfrAwayDateUpdateReason, 1);
-      Assert.AreEqual(response.XfrAwayDate, xferAwayDate);
-      Assert.AreEqual(response.CreateDate, createDate);
-      Assert.AreEqual(response.IsActive, true);
+      Assert.AreEqual(response.domainData.XfrAwayDateUpdateReason, 1);
+      Assert.AreEqual(response.domainData.XfrAwayDate, xferAwayDate);
+      Assert.AreEqual(response.domainData.CreateDate, createDate);
+      Assert.AreEqual(response.domainData.IsActive, true);
       bool privateLabelCheck = false;
 
-      if (response.PrivateLabelID == 1)
+      if (response.domainData.PrivateLabelID == 1)
         privateLabelCheck = true;
 
       Assert.IsTrue(privateLabelCheck);
@@ -64,9 +64,9 @@ namespace Atlantis.Framework.DomainLookup.Tests
     {
       DomainLookupRequestData request = new DomainLookupRequestData("gghhasdd");
       DomainLookupResponseData response = (DomainLookupResponseData)Engine.Engine.ProcessRequest(request, _DOMAINLOOKUPREQUESTTYPE);
-      Assert.AreEqual(response.Shopperid, "");
-      Assert.AreEqual(response.IsActive, false);
-      Assert.AreEqual(response.IsSmartDomain, false);
+      Assert.AreEqual(response.domainData.Shopperid, "");
+      Assert.AreEqual(response.domainData.IsActive, false);
+      Assert.AreEqual(response.domainData.IsSmartDomain, false);
     }
 
     [TestMethod]

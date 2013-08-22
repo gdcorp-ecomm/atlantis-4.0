@@ -70,6 +70,31 @@ namespace Atlantis.Framework.Providers.SplitTesting.Tests
       Assert.AreEqual(cookieValue, cookie.Values[cookieKey]);
     }
 
+    [TestMethod]
+    public void SetsCookieCorrectly_2Tests()
+    {
+      var shopperId = "1234abcd";
+      var privateLabelId = 1;
+      var cookieName = string.Format("SplitTestingOverride{0}_{1}", privateLabelId, shopperId);
+      var cookieKey = "123";
+      var cookieValue = "B";
+      var cookieKeyB = "1243";
+      var cookieValueB = "F";
+
+      var httpRequest = new MockHttpRequest("http://www.debug.godaddy-com.ide/");
+      MockHttpContext.SetFromWorkerRequest(httpRequest);
+      var container = CreateProviderContainer(shopperId, privateLabelId);
+
+      var sut = new SplitTestingCookieOverride(container);
+      sut.CookieValues = new Dictionary<string, string>() { { cookieKey, cookieValue } };
+      sut.CookieValues = new Dictionary<string, string>() { { cookieKeyB, cookieValueB } };
+
+      var cookie = HttpContext.Current.Response.Cookies[cookieName];
+      Assert.IsNotNull(cookie);
+      Assert.AreEqual(cookieValue, cookie.Values[cookieKey]);
+      Assert.AreEqual(cookieValueB, cookie.Values[cookieKeyB]);
+    }
+
     private static MockProviderContainer CreateProviderContainer(string shopperId, int privateLabelId)
     {
       SplitTestingConfiguration.DefaultCategoryName = "Sales";

@@ -77,9 +77,9 @@ namespace Atlantis.Framework.Providers.SplitTesting.Tests
       Assert.IsNotNull(cookie.Expires);
       var expectedExpires = Convert.ToDouble(DateTime.Now.AddHours(24).Ticks);
       var actualExprires = Convert.ToDouble(cookie.Expires.Ticks);
-      var oneMinute = TimeSpan.TicksPerSecond * 60;
+      const long allowableDelta_1Minute = TimeSpan.TicksPerSecond * 60;
 
-      Assert.AreEqual(expectedExpires, actualExprires, oneMinute);
+      Assert.AreEqual(expectedExpires, actualExprires, allowableDelta_1Minute);
     }
 
     private static string GetCookieName(int privateLabelId, string shopperId)

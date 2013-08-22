@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Web;
 using Atlantis.Framework.Interface;
+using System.Linq;
 
 namespace Atlantis.Framework.Providers.SplitTesting
 {
@@ -60,14 +61,26 @@ namespace Atlantis.Framework.Providers.SplitTesting
       {
         if (HttpContext.Current != null)
         {
-          HttpCookie splitValueCookie = _siteContext.Value.NewCrossDomainMemCookie(_cookieName.Value);
-
-          foreach (var activeTest in value)
+          HttpCookie splitValueCookie;
+          if (HttpContext.Current.Response.Cookies.AllKeys.Contains(_cookieName.Value))
           {
-            splitValueCookie.Values.Add(activeTest.Key, activeTest.Value);
+            splitValueCookie = HttpContext.Current.Response.Cookies[_cookieName.Value];
           }
-
-          HttpContext.Current.Response.Cookies.Set(splitValueCookie);
+          else
+          {
+            splitValueCookie = _siteContext.Value.NewCrossDomainMemCookie(_cookieName.Value);
+            if (splitValueCookie != null)
+            {
+              HttpContext.Current.Response.Cookies.Set(splitValueCookie);
+            }
+          }
+          if (splitValueCookie != null)
+          {
+            foreach (var activeTest in value)
+            {
+              splitValueCookie.Values.Add(activeTest.Key, activeTest.Value);
+            }
+          }
         }
       }
     }

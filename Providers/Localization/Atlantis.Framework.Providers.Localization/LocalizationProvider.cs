@@ -122,7 +122,7 @@ namespace Atlantis.Framework.Providers.Localization
         if (_market == null)
         {
           IMarket defaultMarket;
-          string marketId = (ProxyLanguage == "es" || ProxyLanguage == "es-US" ? "es-US" : CountrySiteInfo.DefaultMarketId);
+          string marketId = (ProxyLanguage.Equals("es", StringComparison.OrdinalIgnoreCase) || ProxyLanguage.Equals("es-US", StringComparison.OrdinalIgnoreCase) ? "es-US" : CountrySiteInfo.DefaultMarketId);
           if (!_marketsActive.Value.TryGetMarketById(marketId, out defaultMarket))
           {
             defaultMarket = MarketsActiveResponseData.DefaultMarketInfo;
@@ -252,7 +252,7 @@ namespace Atlantis.Framework.Providers.Localization
         }
       }
 
-      return (result == "es" ? "es-US" : result);
+      return (result.Equals("es", StringComparison.OrdinalIgnoreCase) ? "es-US" : result);
     }
   }
 }

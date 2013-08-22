@@ -62,9 +62,9 @@ namespace Atlantis.Framework.DotTypeCache.Tests
 
       //tlds = TLDML.TLDMLDocument.GetTLDMLSupportedTLDs();
       tlds = new List<string>();
-      tlds.Add("CZ");
-      domainCount = new[] { 1, 6, 21, 50, 101, 201 };
-      standardRegLengths = new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+      tlds.Add("SO");
+      domainCount = new[] { 1 };//, 6, 21, 50, 101, 201 };
+      standardRegLengths = new[] { 1 }; //, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
     }
 
     [TestCleanup()]
@@ -107,7 +107,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
       }
     }
 
-    [TestMethod]
+    [TestMethod, TestCategory("TLDMLEnabled")]
     public void GetRegistrationProductId()
     {
       foreach (string tld in tlds)
@@ -130,7 +130,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
       }
     }
 
-    [TestMethod]
+    [TestMethod, TestCategory("TLDMLEnabled")]
     public void GetValidRegistrationProductIdListWithIndRegLength()
     {
       foreach (string tld in tlds)
@@ -157,7 +157,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
       }
     }
 
-    [TestMethod]
+    [TestMethod, TestCategory("TLDMLEnabled")]
     public void GetValidTransferProductIds()
     {
       foreach (string tld in tlds)
@@ -184,7 +184,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
       }
     }
 
-    [TestMethod]
+    [TestMethod, TestCategory("TLDMLEnabled")]
     public void GetDotTypeProductIds2()
     {
       foreach (string tld in tlds)
@@ -221,7 +221,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
       }
     }
 
-    [TestMethod]
+    [TestMethod, TestCategory("TLDMLEnabled")]
     public void GetDotTypePreRegProductId()
     {
       foreach (string tld in tlds)
@@ -247,7 +247,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
       }
     }
 
-    [TestMethod]
+    [TestMethod, TestCategory("TLDMLEnabled")]
     public void GetDotTypeProductId()
     {
       foreach (string tld in tlds)
@@ -274,31 +274,31 @@ namespace Atlantis.Framework.DotTypeCache.Tests
     //  }
     //}
 
-    [TestMethod]
-    public void ProductExpiredAuctionsYearsPropertiesAreValid()
-    {
-      foreach (string tld in tlds)
-      {
-        IDotTypeInfo dotTypeCache = DotTypeCache.GetDotTypeInfo(tld);
+    //[TestMethod]
+    //public void ProductExpiredAuctionsYearsPropertiesAreValid()
+    //{
+    //  foreach (string tld in tlds)
+    //  {
+    //    IDotTypeInfo dotTypeCache = DotTypeCache.GetDotTypeInfo(tld);
 
-        List<int> expiredAuctionLengths = TLDML.TLDMLProduct.GetAllEnabledExpiredAuctionLengths(tld);
+    //    List<int> expiredAuctionLengths = TLDML.TLDMLProduct.GetAllEnabledExpiredAuctionLengths(tld);
 
-        AssertHelper.AddResults(dotTypeCache.Product.ExpiredAuctionsYears.Max == expiredAuctionLengths.Max(),
-                                "Product.ExpiredAuctionsYears.Max is not correct for: " +
-                                tld + ". Expected: " + expiredAuctionLengths.Max() + ". Actual: " +
-                                dotTypeCache.Product.ExpiredAuctionsYears.Max);
+    //    AssertHelper.AddResults(dotTypeCache.Product.ExpiredAuctionsYears.Max == expiredAuctionLengths.Max(),
+    //                            "Product.ExpiredAuctionsYears.Max is not correct for: " +
+    //                            tld + ". Expected: " + expiredAuctionLengths.Max() + ". Actual: " +
+    //                            dotTypeCache.Product.ExpiredAuctionsYears.Max);
 
-        AssertHelper.AddResults(dotTypeCache.Product.ExpiredAuctionsYears.Min == expiredAuctionLengths.Min(),
-                                "Product.ExpiredAuctionsYears.Min is not correct for: " +
-                                tld + ". Expected: " + expiredAuctionLengths.Min() + ". Actual: " +
-                                dotTypeCache.Product.ExpiredAuctionsYears.Min);
+    //    AssertHelper.AddResults(dotTypeCache.Product.ExpiredAuctionsYears.Min == expiredAuctionLengths.Min(),
+    //                            "Product.ExpiredAuctionsYears.Min is not correct for: " +
+    //                            tld + ". Expected: " + expiredAuctionLengths.Min() + ". Actual: " +
+    //                            dotTypeCache.Product.ExpiredAuctionsYears.Min);
 
-        AssertHelper.AddResults(dotTypeCache.Product.ExpiredAuctionsYears.IsValid(1),
-                                "ExpiredAuctionsYears.IsValid(1) returned false for: " + tld);
-      }
-    }
+    //    AssertHelper.AddResults(dotTypeCache.Product.ExpiredAuctionsYears.IsValid(1),
+    //                            "ExpiredAuctionsYears.IsValid(1) returned false for: " + tld);
+    //  }
+    //}
 
-    [TestMethod]
+    [TestMethod, TestCategory("TLDMLEnabled")]
     public void RegistrationYearsPropertiesAreValid()
     {
       foreach (string tld in tlds)
@@ -322,7 +322,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
       }
     }
 
-    [TestMethod]
+    [TestMethod, TestCategory("TLDMLEnabled")]
     public void RenewalYearsPropertiesAreValid()
     {
       foreach (string tld in tlds)
@@ -346,7 +346,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
       }
     }
 
-    [TestMethod]
+    [TestMethod, TestCategory("TLDMLEnabled")]
     public void ProductTransferYearsPropertiesAreValid()
     {
       foreach (string tld in tlds)
@@ -370,7 +370,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
       }
     }
 
-    [TestMethod]
+    [TestMethod, TestCategory("TLDMLEnabled")]
     public void ProductPreregistrationYearsPropertiesAreValid()
     {
       foreach (string tld in tlds)
@@ -394,7 +394,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
       }
     }
 
-    [TestMethod]
+    [TestMethod, TestCategory("TLDMLEnabled")]
     public void PreRegLengthPropertiesAreValid()
     {
       foreach (string tld in tlds)
@@ -413,7 +413,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
       }
     }
 
-    [TestMethod]
+    [TestMethod, TestCategory("TLDMLEnabled")]
     public void DotTypeCacheIsValid()
     {
       foreach (string tld in tlds)
@@ -438,7 +438,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
       }
     }
 
-    [TestMethod]
+    [TestMethod, TestCategory("TLDMLEnabled")]
     public void IsMultiRegistryFalse()
     {
       foreach (string tld in tlds)
@@ -449,28 +449,28 @@ namespace Atlantis.Framework.DotTypeCache.Tests
       }
     }
 
-    [TestMethod]
-    public void ExpiredAuctionRegLengthPropertiesAreValid()
-    {
-      foreach (string tld in tlds)
-      {
-        IDotTypeInfo dotTypeCache = DotTypeCache.GetDotTypeInfo(tld);
+    //[TestMethod]
+    //public void ExpiredAuctionRegLengthPropertiesAreValid()
+    //{
+    //  foreach (string tld in tlds)
+    //  {
+    //    IDotTypeInfo dotTypeCache = DotTypeCache.GetDotTypeInfo(tld);
 
-        List<int> expiredRegLengths = TLDML.TLDMLProduct.GetAllEnabledExpiredAuctionLengths(tld);
+    //    List<int> expiredRegLengths = TLDML.TLDMLProduct.GetAllEnabledExpiredAuctionLengths(tld);
 
-        AssertHelper.AddResults(dotTypeCache.MaxExpiredAuctionRegLength == expiredRegLengths.Max(),
-                                "MaxExpiredAuctionRegLength did not match for " + tld +
-                                ". Expected: " + expiredRegLengths.Max() + ". Actual: " +
-                                dotTypeCache.MaxExpiredAuctionRegLength);
+    //    AssertHelper.AddResults(dotTypeCache.MaxExpiredAuctionRegLength == expiredRegLengths.Max(),
+    //                            "MaxExpiredAuctionRegLength did not match for " + tld +
+    //                            ". Expected: " + expiredRegLengths.Max() + ". Actual: " +
+    //                            dotTypeCache.MaxExpiredAuctionRegLength);
 
-        AssertHelper.AddResults(dotTypeCache.MinExpiredAuctionRegLength == expiredRegLengths.Min(),
-                                "MinExpiredAuctionRegLength did not match for " + tld +
-                                ". Expected: " + expiredRegLengths.Min() + ". Actual: " +
-                                dotTypeCache.MinExpiredAuctionRegLength);
-      }
-    }
+    //    AssertHelper.AddResults(dotTypeCache.MinExpiredAuctionRegLength == expiredRegLengths.Min(),
+    //                            "MinExpiredAuctionRegLength did not match for " + tld +
+    //                            ". Expected: " + expiredRegLengths.Min() + ". Actual: " +
+    //                            dotTypeCache.MinExpiredAuctionRegLength);
+    //  }
+    //}
 
-    [TestMethod]
+    [TestMethod, TestCategory("TLDMLEnabled")]
     public void MaxRegistrationLengthPropertyIsValid()
     {
       foreach (string tld in tlds)
@@ -484,7 +484,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
       }
     }
 
-    [TestMethod]
+    [TestMethod, TestCategory("TLDMLEnabled")]
     public void RenewalLengthPropertiesAreValid()
     {
       foreach (string tld in tlds)
@@ -502,7 +502,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
       }
     }
 
-    [TestMethod]
+    [TestMethod, TestCategory("TLDMLEnabled")]
     public void TransferLengthPropertiesAreValid()
     {
       foreach (string tld in tlds)
@@ -520,7 +520,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
       }
     }
 
-    [TestMethod]
+    [TestMethod, TestCategory("TLDMLEnabled")]
     public void RenewProhibitedPeriodForExpirationPropertiesAreValid()
     {
       foreach (string tld in tlds)
@@ -534,7 +534,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
       }
     }
 
-    [TestMethod]
+    [TestMethod, TestCategory("TLDMLEnabled")]
     public void CanRenew()
     {
       foreach (string tld in tlds)
@@ -549,32 +549,32 @@ namespace Atlantis.Framework.DotTypeCache.Tests
       }
     }
 
-    [TestMethod]
-    public void GetExpiredAuctionRegProductIds()
-    {
-      foreach (string tld in tlds)
-      {
-        IDotTypeInfo dotTypeCache = DotTypeCache.GetDotTypeInfo(tld);
+    //[TestMethod]
+    //public void GetExpiredAuctionRegProductIds()
+    //{
+    //  foreach (string tld in tlds)
+    //  {
+    //    IDotTypeInfo dotTypeCache = DotTypeCache.GetDotTypeInfo(tld);
 
-        List<int> regLengths = TLDML.TLDMLProduct.GetAllEnabledExpiredAuctionLengths(tld);
+    //    List<int> regLengths = TLDML.TLDMLProduct.GetAllEnabledExpiredAuctionLengths(tld);
 
-        foreach (int dc in domainCount)
-        {
-          foreach (int regLength in regLengths)
-          {
-            int prodId = Convert.ToInt32(TLDML.TLDMLProduct.GetPFID(tld, 1, productfamily.Registration));
+    //    foreach (int dc in domainCount)
+    //    {
+    //      foreach (int regLength in regLengths)
+    //      {
+    //        int prodId = Convert.ToInt32(TLDML.TLDMLProduct.GetPFID(tld, 1, productfamily.Registration));
 
-            int pid = dotTypeCache.GetExpiredAuctionRegProductId(regLength, dc);
+    //        int pid = dotTypeCache.GetExpiredAuctionRegProductId(regLength, dc);
 
-            AssertHelper.AddResults(pid != 0,
-                                    "GetExpiredAuctionRegProductId for reg length: " + regLength +
-                                    " year(s) and for domain count: " + dc + " was zero");
-          }
-        }
-      }
-    }
+    //        AssertHelper.AddResults(pid != 0,
+    //                                "GetExpiredAuctionRegProductId for reg length: " + regLength +
+    //                                " year(s) and for domain count: " + dc + " was zero");
+    //      }
+    //    }
+    //  }
+    //}
 
-    [TestMethod]
+    [TestMethod, TestCategory("TLDMLEnabled")]
     public void GetPreRegProductIds()
     {
       foreach (string tld in tlds)
@@ -599,7 +599,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
       }
     }
 
-    [TestMethod]
+    [TestMethod, TestCategory("TLDMLEnabled")]
     public void GetRegistrationFieldsXml()
     {
       foreach (string tld in tlds)
@@ -612,7 +612,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
       }
     }
 
-    [TestMethod]
+    [TestMethod, TestCategory("TLDMLEnabled")]
     public void GetRenewalProductId()
     {
       foreach (string tld in tlds)
@@ -634,7 +634,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
       }
     }
 
-    [TestMethod]
+    [TestMethod, TestCategory("TLDMLEnabled")]
     public void GetRenewalProductId2()
     {
       foreach (string tld in tlds)
@@ -655,8 +655,8 @@ namespace Atlantis.Framework.DotTypeCache.Tests
         }
       }
     }
-    
-    [TestMethod]
+
+    [TestMethod, TestCategory("TLDMLEnabled")]
     public void GetValidExpiredAuctionRegLengths()
     {
       foreach (string tld in tlds)
@@ -674,7 +674,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
       }
     }
 
-    [TestMethod]
+    [TestMethod, TestCategory("TLDMLEnabled")]
     public void GetValidExpiredAuctionRegProductIdList()
     {
       foreach (string tld in tlds)
@@ -693,7 +693,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
       }
     }
 
-    [TestMethod]
+    [TestMethod, TestCategory("TLDMLEnabled")]
     public void GetValidPreRegLengths()
     {
       foreach (string tld in tlds)
@@ -710,7 +710,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
       }
     }
 
-    [TestMethod]
+    [TestMethod, TestCategory("TLDMLEnabled")]
     public void GetValidPreRegProductIdList()
     {
       foreach (string tld in tlds)
@@ -726,7 +726,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
       }
     }
 
-    [TestMethod]
+    [TestMethod, TestCategory("TLDMLEnabled")]
     public void GetValidRegistrationLengths()
     {
       foreach (string tld in tlds)
@@ -742,7 +742,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
       }
     }
 
-    [TestMethod]
+    [TestMethod, TestCategory("TLDMLEnabled")]
     public void GetValidRegistrationProductIdList()
     {
       foreach (string tld in tlds)
@@ -758,7 +758,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
       }
     }
 
-    [TestMethod]
+    [TestMethod, TestCategory("TLDMLEnabled")]
     public void GetValidRenewalLengths()
     {
       foreach (string tld in tlds)
@@ -776,7 +776,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
       }
     }
 
-    [TestMethod]
+    [TestMethod, TestCategory("TLDMLEnabled")]
     public void GetValidRenewalProductIdList()
     {
       foreach (string tld in tlds)
@@ -793,7 +793,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
       }
     }
 
-    [TestMethod]
+    [TestMethod, TestCategory("TLDMLEnabled")]
     public void GetValidTransferLengths()
     {
       foreach (string tld in tlds)
@@ -810,7 +810,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
       }
     }
 
-    [TestMethod]
+    [TestMethod, TestCategory("TLDMLEnabled")]
     public void GetValidTransferProductId()
     {
       foreach (string tld in tlds)

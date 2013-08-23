@@ -76,5 +76,33 @@ namespace Atlantis.Framework.Providers.DomainSearch.Tests
         {
             get { throw new NotImplementedException(); }
         }
+
+
+        public string RewrittenUrlLanguage
+        {
+          get
+          {
+            throw new NotImplementedException();
+          }
+          set
+          {
+            throw new NotImplementedException();
+          }
+        }
+
+        public ICountrySite CountrySiteInfo
+        {
+          get { throw new NotImplementedException(); }
+        }
+
+        public IMarket MarketInfo
+        {
+          get { throw new NotImplementedException(); }
+        }
+
+        public void SetMarket(string marketId)
+        {
+          throw new NotImplementedException();
+        }
     }
 }

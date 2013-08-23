@@ -7,7 +7,7 @@ namespace Atlantis.Framework.Web.RenderPipeline
   {
     public void ProcessContent(IProcessedRenderContent processRenderContent, IProviderContainer providerContainer)
     {
-      string modifiedContent = JavaScriptWebStashManager.Replace(processRenderContent.Content);
+      string modifiedContent = JavaScriptWebStashManager.ProcessScript(processRenderContent.Content);
 
       processRenderContent.OverWriteContent(modifiedContent);
     }

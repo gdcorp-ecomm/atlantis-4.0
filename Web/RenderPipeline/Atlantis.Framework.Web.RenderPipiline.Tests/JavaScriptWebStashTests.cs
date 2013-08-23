@@ -29,7 +29,7 @@ namespace Atlantis.Framework.Web.RenderPipiline.Tests
     }
 
     [TestMethod]
-    public void JavaScriptStashTestValidOne()
+    public void JavaScriptStashTestValidWithScript()
     {
       const string content = @"<body>
     <div>
@@ -63,7 +63,7 @@ namespace Atlantis.Framework.Web.RenderPipiline.Tests
     }
 
     [TestMethod]
-    public void JavaScriptStashTestValidTwo()
+    public void JavaScriptStashTestValidEmpty()
     {
       const string content = @"<body>
     <div>
@@ -90,7 +90,7 @@ namespace Atlantis.Framework.Web.RenderPipiline.Tests
     }
 
     [TestMethod]
-    public void JavaScriptStashTestValidThree()
+    public void JavaScriptStashTestValidText()
     {
       const string content = @"<body>
     <div>
@@ -119,7 +119,7 @@ def
     }
 
     [TestMethod]
-    public void JavaScriptStashTestInValidOne()
+    public void JavaScriptStashTestInValidCasing()
     {
       const string content = @"<body>
     <div>
@@ -143,12 +143,42 @@ def
     }
 
     [TestMethod]
-    public void JavaScriptStashTestInValidTwo()
+    public void JavaScriptStashTestInValidNoClosingTag()
+    {
+      const string content = @"<body>
+    <div>
+      <atlantis:javascriptwebstash>
+        <script type=""text/javascript"">
+          var k = 3;
+        </script>
+    </div>
+    <hr/>
+  </body>";
+
+      var handler = new JavaScriptWebStashRenderHandler();
+      IProcessedRenderContent processedRenderContent = new SimpleProcessedRenderContent(content);
+      handler.ProcessContent(processedRenderContent, ProviderContainer);
+
+      Assert.IsTrue(processedRenderContent.Content.Equals(content));
+    }
+
+    [TestMethod]
+    public void JavaScriptStashTestInValidNull()
     {
       const string content = null;
 
       var handler = new JavaScriptWebStashRenderHandler();
       IProcessedRenderContent processedRenderContent = new SimpleProcessedRenderContent(content);
+      handler.ProcessContent(processedRenderContent, ProviderContainer);
+
+      Assert.IsTrue(processedRenderContent.Content.Equals(string.Empty));
+    }
+
+    [TestMethod]
+    public void JavaScriptStashTestInValidEmpty()
+    {
+      var handler = new JavaScriptWebStashRenderHandler();
+      IProcessedRenderContent processedRenderContent = new SimpleProcessedRenderContent(string.Empty);
       handler.ProcessContent(processedRenderContent, ProviderContainer);
 
       Assert.IsTrue(processedRenderContent.Content.Equals(string.Empty));

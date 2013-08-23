@@ -12,7 +12,7 @@ namespace Atlantis.Framework.Web.RenderPipeline
     private static readonly Regex _javaScriptRegex = new Regex(@"<atlantis:javascriptwebstash>(?<javascript>.*?)</atlantis:javascriptwebstash>", RegexOptions.Compiled | RegexOptions.Singleline);
     private const string END_BODY_TAG = "</body>";
 
-    internal static string Replace(string content)
+    internal static string ProcessScript(string content)
     {
       var originalContent = content ?? string.Empty;
       var finalContent = string.Empty;
@@ -26,7 +26,7 @@ namespace Atlantis.Framework.Web.RenderPipeline
       }
       catch (Exception ex)
       {
-        var aex = new AtlantisException("JavaScriptWebStashManager.Replace", "0", ex.Message, string.Empty, null, null);
+        var aex = new AtlantisException("JavaScriptWebStashManager.ProcessScript", "0", ex.Message, string.Empty, null, null);
         Engine.Engine.LogAtlantisException(aex);
       }
 

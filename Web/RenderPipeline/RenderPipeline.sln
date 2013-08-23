@@ -17,9 +17,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Web.Rend
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Render.Pipeline", "..\..\Render\RenderPipeline\Atlantis.Framework.Render.Pipeline\Atlantis.Framework.Render.Pipeline.csproj", "{68764D92-7CD9-45FB-B650-1429656DCF14}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Web.RenderPipiline.Tests", "Atlantis.Framework.Web.RenderPipiline.Tests\Atlantis.Framework.Web.RenderPipiline.Tests.csproj", "{9B9A66E7-4E3E-4598-A88F-2433323A7342}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Testing.MockProviders", "..\..\Atlantis.Framework.Testing\Atlantis.Framework.Testing.MockProviders\Atlantis.Framework.Testing.MockProviders.csproj", "{5487DEF2-0FA7-4B77-9AAD-0355784589D6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Testing.MockHttpContext", "..\..\Atlantis.Framework.Testing\Atlantis.Framework.Testing.MockHttpContext\Atlantis.Framework.Testing.MockHttpContext.csproj", "{2F8983B4-801B-461A-9D76-26A58A496261}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 8
+		SccNumberOfProjects = 11
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
 		SccLocalPath0 = .
@@ -49,6 +55,17 @@ Global
 		SccProjectTopLevelParentUniqueName7 = RenderPipeline.sln
 		SccProjectName7 = ../../Render/RenderPipeline/Atlantis.Framework.Render.Pipeline
 		SccLocalPath7 = ..\\..\\Render\\RenderPipeline\\Atlantis.Framework.Render.Pipeline
+		SccProjectUniqueName8 = Atlantis.Framework.Web.RenderPipiline.Tests\\Atlantis.Framework.Web.RenderPipiline.Tests.csproj
+		SccProjectName8 = Atlantis.Framework.Web.RenderPipiline.Tests
+		SccLocalPath8 = Atlantis.Framework.Web.RenderPipiline.Tests
+		SccProjectUniqueName9 = ..\\..\\Atlantis.Framework.Testing\\Atlantis.Framework.Testing.MockProviders\\Atlantis.Framework.Testing.MockProviders.csproj
+		SccProjectTopLevelParentUniqueName9 = RenderPipeline.sln
+		SccProjectName9 = ../../Atlantis.Framework.Testing/Atlantis.Framework.Testing.MockProviders
+		SccLocalPath9 = ..\\..\\Atlantis.Framework.Testing\\Atlantis.Framework.Testing.MockProviders
+		SccProjectUniqueName10 = ..\\..\\Atlantis.Framework.Testing\\Atlantis.Framework.Testing.MockHttpContext\\Atlantis.Framework.Testing.MockHttpContext.csproj
+		SccProjectTopLevelParentUniqueName10 = RenderPipeline.sln
+		SccProjectName10 = ../../Atlantis.Framework.Testing/Atlantis.Framework.Testing.MockHttpContext
+		SccLocalPath10 = ..\\..\\Atlantis.Framework.Testing\\Atlantis.Framework.Testing.MockHttpContext
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -83,6 +100,18 @@ Global
 		{68764D92-7CD9-45FB-B650-1429656DCF14}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{68764D92-7CD9-45FB-B650-1429656DCF14}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{68764D92-7CD9-45FB-B650-1429656DCF14}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9B9A66E7-4E3E-4598-A88F-2433323A7342}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B9A66E7-4E3E-4598-A88F-2433323A7342}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B9A66E7-4E3E-4598-A88F-2433323A7342}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B9A66E7-4E3E-4598-A88F-2433323A7342}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5487DEF2-0FA7-4B77-9AAD-0355784589D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5487DEF2-0FA7-4B77-9AAD-0355784589D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5487DEF2-0FA7-4B77-9AAD-0355784589D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5487DEF2-0FA7-4B77-9AAD-0355784589D6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F8983B4-801B-461A-9D76-26A58A496261}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F8983B4-801B-461A-9D76-26A58A496261}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F8983B4-801B-461A-9D76-26A58A496261}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F8983B4-801B-461A-9D76-26A58A496261}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -93,5 +122,7 @@ Global
 		{0D7F076F-1809-437B-B045-E35A7E68E423} = {73D86A68-B2F7-4187-A7B1-C9E016F6AA34}
 		{C333E679-494E-422D-AB5E-E4C0EC94ACD5} = {73D86A68-B2F7-4187-A7B1-C9E016F6AA34}
 		{68764D92-7CD9-45FB-B650-1429656DCF14} = {73D86A68-B2F7-4187-A7B1-C9E016F6AA34}
+		{5487DEF2-0FA7-4B77-9AAD-0355784589D6} = {73D86A68-B2F7-4187-A7B1-C9E016F6AA34}
+		{2F8983B4-801B-461A-9D76-26A58A496261} = {73D86A68-B2F7-4187-A7B1-C9E016F6AA34}
 	EndGlobalSection
 EndGlobal

@@ -24,7 +24,7 @@ namespace Atlantis.Framework.DomainSearch.Impl
 
         requestBody.Append(searchData);
 
-        var buffer = Encoding.ASCII.GetBytes(requestBody.ToString());
+        var buffer = Encoding.UTF8.GetBytes(requestBody.ToString());
         var webRequest = WebRequest.Create(((WsConfigElement)config).WSURL) as HttpWebRequest;
 
         if (webRequest != null)

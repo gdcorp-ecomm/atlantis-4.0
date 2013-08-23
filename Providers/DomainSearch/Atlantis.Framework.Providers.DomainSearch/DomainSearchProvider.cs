@@ -117,7 +117,7 @@ namespace Atlantis.Framework.Providers.DomainSearch
                           CountrySite = Localization.CountrySite,
                           DomainSearchDataBases = _domainSearchDatabases,
                           IncludeSpins = INCLUDE_SPINS,
-                          Language = Localization.ShortLanguage,
+                          Language = Localization.FullLanguage,
                           PrivateLabelId = _siteContext.Value.PrivateLabelId,
                           SearchPhrase = searchPhrase,
                           ShopperStatus = _shopperContext.Value.ShopperStatus,

@@ -4,9 +4,10 @@ namespace Atlantis.Framework.Domains.Interface
 {
   public class Domain : IDomain
   {
-    public Domain(string sld, string tld, string name)
+    public Domain(string sld, string tld, string name, string punnyCode)
     {
       _domainName = name ?? string.Empty;
+      _punnyCodeDomainName = punnyCode ?? _domainName;
       _sld = sld ?? string.Empty;
       _tld = tld ?? string.Empty;
     }
@@ -15,6 +16,12 @@ namespace Atlantis.Framework.Domains.Interface
     public string DomainName
     {
       get { return _domainName; }
+    }
+
+    private readonly string _punnyCodeDomainName;
+    public string PunnyCodeDomainName
+    {
+      get { return _punnyCodeDomainName; }
     }
 
     private readonly string _sld;

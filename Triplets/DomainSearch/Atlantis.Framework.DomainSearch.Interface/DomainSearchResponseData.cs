@@ -27,6 +27,7 @@ namespace Atlantis.Framework.DomainSearch.Interface
     private static List<IFindResponseDomain> GetResponseDomains(JToken domainJson)
     {
       var domains = new List<IFindResponseDomain>();
+
       if (domainJson != null && domainJson.Any())
       {
         foreach (var domainToken in domainJson)
@@ -34,8 +35,9 @@ namespace Atlantis.Framework.DomainSearch.Interface
           var sld = domainToken["NameWithoutExtension"].ToString();
           var tld = domainToken["Extension"].ToString();
           var domainName = domainToken["DomainName"].ToString();
+          var punnyCodeDomainName = domainToken["PunnyCodeName"].ToString();
 
-          var responseDomain = new FindResponseDomain(sld, tld, domainName, domainToken["Data"]) as IFindResponseDomain;
+          var responseDomain = new FindResponseDomain(sld, tld, domainName, punnyCodeDomainName, domainToken["Data"]) as IFindResponseDomain;
 
           domains.Add(responseDomain);
         }

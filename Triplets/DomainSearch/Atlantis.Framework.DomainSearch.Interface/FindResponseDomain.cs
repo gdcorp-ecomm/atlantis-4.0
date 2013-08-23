@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using Atlantis.Framework.Domains.Interface;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System.IO;
 
 namespace Atlantis.Framework.DomainSearch.Interface
 {
@@ -10,7 +12,12 @@ namespace Atlantis.Framework.DomainSearch.Interface
   {
     public FindResponseDomain(string sld, string tld, string domainName, JToken domainToken)
     {
-      _responseDomain = new Domain(sld, tld, domainName);
+      _responseDomain = new Domain(sld, tld, domainName, domainName);
+      ParseDomainToken(domainToken);
+    }
+    public FindResponseDomain(string sld, string tld, string domainName, string punnyCode, JToken domainToken)
+    {
+      _responseDomain = new Domain(sld, tld, domainName, punnyCode);
       ParseDomainToken(domainToken);
     }
 
@@ -155,7 +162,11 @@ namespace Atlantis.Framework.DomainSearch.Interface
             case "cartattributes":
               if (!string.IsNullOrEmpty(domainTokenValue))
               {
-                _cartAttributes = domainTokenValue.Split(new char[','], StringSplitOptions.RemoveEmptyEntries).ToArray();
+                var tokens = JsonConvert.DeserializeObject<JToken>(domainTokenValue);
+                foreach (var token in tokens)
+                {
+                  _cartAttributes[token["Name"].ToString()] = token["Data"].ToString();
+                }
               }
               break;
             case "isinternaltransfer":
@@ -170,10 +181,25 @@ namespace Atlantis.Framework.DomainSearch.Interface
                 WhoIsExpiration = timeStamp;
               }
               break;
+            case "idnscript":
+              if (!string.IsNullOrEmpty(domainTokenValue))
+              {
+                var o = JsonConvert.DeserializeAnonymousType(domainTokenValue, new {Name="", Data=""});
+                if (o != null)
+                {
+                  IdnScript = o.Name;
+                  IdnScriptId = o.Data;
+                }
+              }
+              break;
           }
         }
       }
     }
+
+    public string IdnScript { get; private set; }
+
+    public string IdnScriptId { get; private set; }
 
     public double CommissionPercentage { get; private set; }
 
@@ -236,18 +262,18 @@ namespace Atlantis.Framework.DomainSearch.Interface
 
     public string AuctionTypeId { get; private set; }
 
-    private IEnumerable<string> _cartAttributes;
+    private Dictionary<string, string> _cartAttributes;
 
     /// <summary>
     /// List of attributes and values that should be passed on to the Cart for down stream systems use (example values: isoingo=true).
     /// </summary>
-    public IEnumerable<string> CartAttributes
+    public Dictionary<string, string> CartAttributes
     {
       get
       {
         if (_cartAttributes == null)
         {
-          _cartAttributes = new string[0];
+          _cartAttributes = new Dictionary<string, string>();
         }
 
         return _cartAttributes;

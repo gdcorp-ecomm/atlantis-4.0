@@ -37,7 +37,9 @@ namespace Atlantis.Framework.DomainSearch.Interface
     string CurrencyType { get; }
     string AvailCheckTypePerformed { get; }
     string DomainSearchDataBase { get; }
-    IEnumerable<string> CartAttributes { get; }
+    string IdnScript { get; }
+    string IdnScriptId { get; }
+    Dictionary<string, string> CartAttributes { get; }
     IDomain Domain { get; }
   }
 }

@@ -211,5 +211,58 @@ namespace Atlantis.Framework.DomainSearch.Tests
         response.Domains.Any(d => d.Domain.Tld == "me");
       Assert.IsTrue(hasTlds);
     }
+
+    [TestMethod]
+    public void TestUnicodeDomainSearch()
+    {
+      var request = new MockHttpRequest("http://www.spoonymac.com");
+      MockHttpContext.SetFromWorkerRequest(request);
+      var domainName = "тестнарусскомязыке.com";
+      var requestData = new DomainSearchRequestData(SHOPPER_ID, string.Empty, string.Empty, string.Empty, 0)
+        {
+          RequestTimeout = TimeSpan.FromSeconds(10),
+          ClientIp = "172.16.172.211",
+          CountrySite = "WWW",
+          IncludeSpins = true,
+          Language = "en",
+          PrivateLabelId = 1,
+          SearchPhrase = domainName,
+          ShopperStatus = ShopperStatusType.Public,
+          SourceCode = "mblDPPSearch",
+          Tlds = new List<string>(0),
+          DomainSearchDataBases = _databases
+        };
+      var response = (DomainSearchResponseData)Engine.Engine.ProcessRequest(requestData, _REQUESTID);
+      Assert.IsTrue(response != null);
+      Assert.IsTrue(response.ExactMatchDomains.Count > 0);
+      Assert.IsTrue(response.ExactMatchDomains[0].Domain.DomainName.ToLowerInvariant() == domainName);
+      //"ExactDomains":[{"Extension":"com","DomainName":"тестнарусскомязыке.com","PunnyCodeName":"xn--80ajbhobmflsidahct6lyc.com","PunnyCodeExtension":"","NameWithoutExtension":"тестнарусскомязыке","Keys":[],"Data":[{"Name":"isavailable","Data":"true"},{"Name":"availcheckstatus","Data":"full"},{"Name":"isvaliddomain","Data":"true"},{"Name":"idnscript","Data":"[{\"Name\":\"eng\",\"Data\":\"35\"}]"},{"Name":"database","Data":"similar"},{"Name":"cartattributes","Data":"[{\"Name\":\"isoingo\",\"Data\":\"10\"}]"}]}]
+    }
+
+    [TestMethod]
+    public void TestPunnyCodeDomainSearch()
+    {
+      var request = new MockHttpRequest("http://www.spoonymac.com");
+      MockHttpContext.SetFromWorkerRequest(request);
+      var domainName = "xn--80ajbhobmflsidahct6lyc.com";
+      var requestData = new DomainSearchRequestData(SHOPPER_ID, string.Empty, string.Empty, string.Empty, 0)
+      {
+        RequestTimeout = TimeSpan.FromSeconds(10),
+        ClientIp = "172.16.172.211",
+        CountrySite = "WWW",
+        IncludeSpins = true,
+        Language = "en",
+        PrivateLabelId = 1,
+        SearchPhrase = domainName,
+        ShopperStatus = ShopperStatusType.Public,
+        SourceCode = "mblDPPSearch",
+        Tlds = new List<string>(0),
+        DomainSearchDataBases = _databases
+      };
+      var response = (DomainSearchResponseData)Engine.Engine.ProcessRequest(requestData, _REQUESTID);
+      Assert.IsTrue(response != null);
+      Assert.IsTrue(response.ExactMatchDomains.Count > 0);
+      Assert.IsTrue(response.ExactMatchDomains[0].Domain.PunnyCodeDomainName == domainName);
+    }
   }
 }

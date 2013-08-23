@@ -1,23 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Atlantis.Framework.Domains.Interface;
+﻿using Atlantis.Framework.Domains.Interface;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using System.IO;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Atlantis.Framework.DomainSearch.Interface
 {
   internal class FindResponseDomain : IFindResponseDomain
   {
-    public FindResponseDomain(string sld, string tld, string domainName, JToken domainToken)
+    public FindResponseDomain(string sld, string tld, string punnyCodeSld, string punnyCodeTld, JToken domainToken)
     {
-      _responseDomain = new Domain(sld, tld, domainName, domainName);
-      ParseDomainToken(domainToken);
-    }
-    public FindResponseDomain(string sld, string tld, string domainName, string punnyCode, JToken domainToken)
-    {
-      _responseDomain = new Domain(sld, tld, domainName, punnyCode);
+      _responseDomain = new Domain(sld, tld, punnyCodeSld, punnyCodeTld);
       ParseDomainToken(domainToken);
     }
 
@@ -184,11 +178,13 @@ namespace Atlantis.Framework.DomainSearch.Interface
             case "idnscript":
               if (!string.IsNullOrEmpty(domainTokenValue))
               {
-                var o = JsonConvert.DeserializeAnonymousType(domainTokenValue, new {Name="", Data=""});
-                if (o != null)
+                var tokens = JsonConvert.DeserializeObject<JToken>(domainTokenValue);
+                var token = tokens.First();
+
+                if (token != null)
                 {
-                  IdnScript = o.Name;
-                  IdnScriptId = o.Data;
+                  IdnScript = token["Name"].ToString();
+                  IdnScriptId = token["Data"].ToString();
                 }
               }
               break;
@@ -262,7 +258,7 @@ namespace Atlantis.Framework.DomainSearch.Interface
 
     public string AuctionTypeId { get; private set; }
 
-    private Dictionary<string, string> _cartAttributes;
+    private Dictionary<string, string> _cartAttributes = new Dictionary<string, string>();
 
     /// <summary>
     /// List of attributes and values that should be passed on to the Cart for down stream systems use (example values: isoingo=true).
@@ -271,11 +267,6 @@ namespace Atlantis.Framework.DomainSearch.Interface
     {
       get
       {
-        if (_cartAttributes == null)
-        {
-          _cartAttributes = new Dictionary<string, string>();
-        }
-
         return _cartAttributes;
       }
     }

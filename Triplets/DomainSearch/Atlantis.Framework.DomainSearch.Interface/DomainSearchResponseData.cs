@@ -34,10 +34,12 @@ namespace Atlantis.Framework.DomainSearch.Interface
         {
           var sld = domainToken["NameWithoutExtension"].ToString();
           var tld = domainToken["Extension"].ToString();
+          var punnyCodeSld = domainToken["PunnyCodeNameWithoutExtension"].ToString();
+          var punnyCodeTld = domainToken["PunnyCodeExtension"].ToString();
           var domainName = domainToken["DomainName"].ToString();
           var punnyCodeDomainName = domainToken["PunnyCodeName"].ToString();
 
-          var responseDomain = new FindResponseDomain(sld, tld, domainName, punnyCodeDomainName, domainToken["Data"]) as IFindResponseDomain;
+          var responseDomain = new FindResponseDomain(sld, tld, punnyCodeSld, punnyCodeTld, domainToken["Data"]) as IFindResponseDomain;
 
           domains.Add(responseDomain);
         }

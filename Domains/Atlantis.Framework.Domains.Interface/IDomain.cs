@@ -5,8 +5,8 @@
     string DomainName { get; }
     string PunnyCodeDomainName { get; }
     string Sld { get; }
+    string PunnyCodeSld { get; }
     string Tld { get; }
-    bool HasSubDomains { get; }
-    string HtmlFormat { get; }
+    string PunnyCodeTld { get; }
   }
 }

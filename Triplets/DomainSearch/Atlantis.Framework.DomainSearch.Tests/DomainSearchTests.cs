@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Atlantis.Framework.DomainSearch.Interface;
+using Atlantis.Framework.Domains.Interface;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Testing.MockHttpContext;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -45,9 +46,9 @@ namespace Atlantis.Framework.DomainSearch.Tests
 
       var response = (DomainSearchResponseData)Engine.Engine.ProcessRequest(requestData, _REQUESTID);
       Assert.IsTrue(response != null);
-      Assert.IsTrue(response.Domains.Count > 0);
-      Assert.IsTrue(response.ExactMatchDomains.Count > 0);
-      Assert.IsTrue(response.ExactMatchDomains[0].Domain.DomainName.ToLowerInvariant() == domainName);
+      Assert.IsTrue(response.Domains.Count > 0
+        && response.ExactMatchDomains.Count > 0 
+        &&response.ExactMatchDomains[0].Domain.DomainName.ToLowerInvariant() == domainName);
     }
 
     [TestMethod]
@@ -261,8 +262,62 @@ namespace Atlantis.Framework.DomainSearch.Tests
       };
       var response = (DomainSearchResponseData)Engine.Engine.ProcessRequest(requestData, _REQUESTID);
       Assert.IsTrue(response != null);
+      var json = response.ToJson();
+      var xml = response.ToXML();
+      Assert.IsTrue(!string.IsNullOrEmpty(json) && string.IsNullOrEmpty(xml));
       Assert.IsTrue(response.ExactMatchDomains.Count > 0);
       Assert.IsTrue(response.ExactMatchDomains[0].Domain.PunnyCodeDomainName == domainName);
+    }
+
+    [TestMethod]
+    public void InvalidDomainTest()
+    {
+      var d = new Domain(string.Empty, string.Empty);
+      Assert.IsTrue(string.IsNullOrEmpty(d.Sld) 
+        && string.IsNullOrEmpty(d.Tld) 
+        && string.IsNullOrEmpty(d.PunnyCodeTld) 
+        && string.IsNullOrEmpty(d.PunnyCodeSld) 
+        && string.IsNullOrEmpty(d.PunnyCodeDomainName) 
+        && string.IsNullOrEmpty(d.DomainName));
+    }
+
+    [TestMethod]
+    public void DomainTest()
+    {
+      var d = new Domain("domain", "com");
+      Assert.IsTrue(d.Sld == "domain");
+      Assert.IsTrue(d.Tld == "com");
+    }
+
+    [TestMethod]
+    public void IdnDomainTest()
+    {
+      var d = new Domain(string.Empty, string.Empty, string.Empty, string.Empty);
+      Assert.IsTrue(string.IsNullOrEmpty(d.Sld)
+        && string.IsNullOrEmpty(d.Tld)
+        && string.IsNullOrEmpty(d.PunnyCodeTld)
+        && string.IsNullOrEmpty(d.PunnyCodeSld)
+        && string.IsNullOrEmpty(d.PunnyCodeDomainName)
+        && string.IsNullOrEmpty(d.DomainName));
+      var d1 = new Domain("тестнарусскомязыке", "ком", "xn--80ajbhobmflsidahct6lyc", "xn--j1aef");
+      Assert.IsTrue(d1.Sld == "тестнарусскомязыке"
+        && d.Tld == "ком"
+        && d1.PunnyCodeSld == "xn--80ajbhobmflsidahct6lyc"
+        && d1.PunnyCodeTld == "xn--j1aef"
+        && d1.DomainName == "тестнарусскомязыке.ком"
+        && d1.PunnyCodeDomainName == "xn--80ajbhobmflsidahct6lyc.xn--j1aef");
+    }
+
+    [TestMethod]
+    public void IdnConvertDomainTest()
+    {
+      var d = new Domain("xn--80ajbhobmflsidahct6lyc", "xn--j1aef");
+      Assert.IsTrue(d.Sld == "тестнарусскомязыке"
+        && d.Tld == "ком"
+        && d.PunnyCodeSld == "xn--80ajbhobmflsidahct6lyc"
+        && d.PunnyCodeTld == "xn--j1aef"
+        && d.DomainName == "тестнарусскомязыке.ком"
+        && d.PunnyCodeDomainName == "xn--80ajbhobmflsidahct6lyc.xn--j1aef");
     }
   }
 }

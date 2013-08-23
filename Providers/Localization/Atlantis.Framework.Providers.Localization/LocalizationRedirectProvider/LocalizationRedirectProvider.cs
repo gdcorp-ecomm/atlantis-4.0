@@ -49,6 +49,24 @@ namespace Atlantis.Framework.Providers.Localization
       }
     }
 
+    private bool? _isTransPerfectProxy;
+    private bool IsTransperfectProxy
+    {
+      get
+      {
+        if (!_isTransPerfectProxy.HasValue)
+        {
+          _isTransPerfectProxy = false;
+          IProxyContext proxy;
+          if (Container.TryResolve(out proxy))
+          {
+            _isTransPerfectProxy = proxy.IsProxyActive(ProxyTypes.TransPerfectTranslation);
+          }
+        }
+        return _isTransPerfectProxy.Value;
+      }
+    }
+
     private string ValidateCountrySiteResponse(string countrySiteToValidate)
     {
       var validCountrySite = LocalizationProvider.CountrySite;
@@ -111,6 +129,11 @@ namespace Atlantis.Framework.Providers.Localization
       var currentCountrySite = LocalizationProvider.CountrySite.ToUpperInvariant();
       ILocalizationRedirectResponse redirectResponse = null;
       if (HttpContext.Current != null && CountryView == "1")
+      {
+        redirectResponse = new LocalizationRedirectResponse(false);
+        redirectResponse.CountrySite = currentCountrySite;
+      }
+      else if (IsTransperfectProxy)
       {
         redirectResponse = new LocalizationRedirectResponse(false);
         redirectResponse.CountrySite = currentCountrySite;

@@ -6,10 +6,10 @@ namespace Atlantis.Framework.EcommInvoices.Interface
   public class EcommInvoicesRequestData: RequestData
   {
     public RetrievalAttributes RetrievalAttributes { get; set; }
-    public EcommInvoicesRequestData(string shopperId, string sourceURL, string orderId, string pathway, int pageCount, RetrievalAttributes retAttributes)
-      : base(shopperId, sourceURL, orderId, pathway, pageCount)
+    public EcommInvoicesRequestData(string shopperId, RetrievalAttributes retAttributes)
     {
-      RetrievalAttributes = (RetrievalAttributes)retAttributes;
+      RetrievalAttributes = retAttributes;
+      ShopperID = shopperId;
     }
 
     public override string GetCacheMD5()

@@ -23,7 +23,7 @@ namespace Atlantis.Framework.EcommInvoices.Interface
     {
       get
       {
-        return this.Amount;
+        return Amount;
       }
     }
 
@@ -33,23 +33,17 @@ namespace Atlantis.Framework.EcommInvoices.Interface
       {
         string statusText = string.Empty;
 
-        if (ProcessorStatus == InvoiceProcessorStatus.Declined) // need to check for this first the InoviceStatus may be anything if the ProcessStatus is declined.
+        if (ProcessorStatus == InvoiceProcessorStatus.Declined) // need to check for this first the InvoiceStatus may be anything if the ProcessStatus is declined.
         {
-          if (_status == InvoiceStatus.Created || _status == InvoiceStatus.Active)
+          switch (_status)
           {
-            switch (_status)
-            {
-              case InvoiceStatus.Created:
-                statusText = "Pending";
-                break;
-              case InvoiceStatus.Active:
-                statusText = "Pending";
-                break;
-            }
-          }
-          else
-          {
-            statusText = "Declined";
+            case InvoiceStatus.Created:
+            case InvoiceStatus.Active:
+              statusText = InvoiceStatusText.Pending;
+              break;
+            default:
+              statusText = InvoiceStatusText.Declined;
+              break;
           }
         }
         else
@@ -57,25 +51,25 @@ namespace Atlantis.Framework.EcommInvoices.Interface
           switch (_status)
           {
             case InvoiceStatus.Cancelled:
-              statusText = "Cancelled";
+              statusText = InvoiceStatusText.Cancelled;
               break;
             case InvoiceStatus.Completed:
-              statusText = "Paid";
+              statusText = InvoiceStatusText.Paid;
               break;
             case InvoiceStatus.Created:
-              statusText = "Pending";
+              statusText = InvoiceStatusText.Pending;
               break;
             case InvoiceStatus.Failed:
-              statusText = "Failed";
+              statusText = InvoiceStatusText.Falied;
               break;
             case InvoiceStatus.Active:
-              statusText = "Pending";
+              statusText = InvoiceStatusText.Pending;
               break;
             case InvoiceStatus.Expired30:
-              statusText = "Expired";
+              statusText = InvoiceStatusText.Expired;
               break;
             default:
-              statusText = "Expired";
+              statusText = InvoiceStatusText.Expired;
               break;
           }         
         }
@@ -94,7 +88,7 @@ namespace Atlantis.Framework.EcommInvoices.Interface
         }
         else
         {
-          return "Paid";
+          return InvoiceStatusText.Paid;
         }
 
       }

@@ -20,4 +20,15 @@
     public const int Pending = 5;
     public const int NoResponse = 6;
   }
+
+  public static class InvoiceStatusText
+  {
+    public const string All = "All";
+    public const string Pending = "Pending";
+    public const string Cancelled = "Cancelled";
+    public const string Paid = "Paid";
+    public const string Falied = "Failed";
+    public const string Expired = "Expired";
+    public const string Declined = "Declined";
+  }
 }

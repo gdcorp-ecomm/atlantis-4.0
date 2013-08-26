@@ -17,9 +17,8 @@ namespace Atlantis.Framework.EcommInvoices.TestWeb
       retAttr.PageSize = 3;
       retAttr.CurrentPage = 1;
       retAttr.SortDirection = "desc";
-      EcommInvoicesRequestData request = new EcommInvoicesRequestData("133729", string.Empty, string.Empty, string.Empty, 0, retAttr);
+      EcommInvoicesRequestData request = new EcommInvoicesRequestData("133729", retAttr);
       EcommInvoicesResponseData response = (EcommInvoicesResponseData)Engine.Engine.ProcessRequest(request, 439);
-
 
       GridView1.DataSource = response.Invoices;// OrderByDescending(x => x.Amount).Skip(5).Take(5);
       GridView1.DataBind();

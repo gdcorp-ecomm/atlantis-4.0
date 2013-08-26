@@ -31,10 +31,10 @@ namespace Atlantis.Framework.DomainLookup.Interface
 
     private void parseDomainLookupResponse(DataSet ds)
     {
-        domainData = new DomainLookupResponse(ds) as IDomainLookupResponse;
+        domainData = new DomainLookupData(ds) as IDomainLookupData;
     }
 
-    public IDomainLookupResponse domainData { get; private set; }
+    public IDomainLookupData domainData { get; private set; }
 
     private readonly AtlantisException _atlantisEx = null;
     public AtlantisException AtlantisEx { get { return this._atlantisEx; } }

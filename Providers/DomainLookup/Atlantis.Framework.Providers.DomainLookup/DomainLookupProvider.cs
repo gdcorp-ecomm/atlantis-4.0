@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.DomainLookup.Interface;
 using Atlantis.Framework.Providers.DomainLookup.Interface;
@@ -11,38 +7,32 @@ namespace Atlantis.Framework.Providers.DomainLookup
 {
     public class DomainLookupProvider : ProviderBase, IDomainLookupProvider
     {
-        #region Properties
+      private static readonly IDomainLookupData _defaultDomainLookupData = DomainLookupData.DefaultInstance; 
 
-        private Lazy<IDomainLookupResponse> domainInformation;
+      public DomainLookupProvider(IProviderContainer container) : base(container)
+      {
+      }
 
-        #endregion
+      public IDomainLookupData GetDomainInformation(string domainName)
+      {
+        IDomainLookupData domainLookupData;
 
-        public DomainLookupProvider(IProviderContainer container)
-            : base(container)
+        try
         {
+          DomainLookupRequestData requestData = new DomainLookupRequestData(domainName);
+          DomainLookupResponseData responseData = (DomainLookupResponseData)DataCache.DataCache.GetProcessRequest(requestData, DomainLookupRequests.DomainLookupRequestType);
+
+          domainLookupData = responseData.domainData;
+
+        }
+        catch (Exception ex)
+        {
+          domainLookupData = _defaultDomainLookupData;
+          Engine.Engine.LogAtlantisException(new AtlantisException("DomainLookupProvider.GetDomainInformation()", 0, ex.Message, "Domain Name: " + domainName));
+
         }
 
-        public IDomainLookupResponse GetDomainInformation(string domainname)
-        {
-            if (ReferenceEquals(null, domainInformation))
-            {
-                domainInformation = new Lazy<IDomainLookupResponse>(() =>
-                {
-                    IDomainLookupResponse returnValue = null;
-
-                    DomainLookupRequestData domainLookupRequestData = new DomainLookupRequestData(domainname);
-                    DomainLookupResponseData domainLookupResponse = (DomainLookupResponseData)Engine.Engine.ProcessRequest(domainLookupRequestData, DomainLookupRequests.DomainLookupRequestType);
-
-                    if (domainLookupResponse.AtlantisEx == null)
-                    {
-                        returnValue = domainLookupResponse.domainData;
-                    }
-
-                    return returnValue;
-                });
-            }
-
-            return domainInformation.Value;
-        }
+        return domainLookupData;
+      }
     }
 }

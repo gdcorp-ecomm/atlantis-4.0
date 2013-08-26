@@ -44,7 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IDomainLookupProvider.cs" />
-    <Compile Include="IDomainLookupResponse.cs" />
+    <Compile Include="IDomainLookupData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

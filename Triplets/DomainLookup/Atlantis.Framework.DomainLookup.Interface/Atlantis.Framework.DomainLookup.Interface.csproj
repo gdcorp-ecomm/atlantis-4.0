@@ -44,7 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DomainLookupRequestData.cs" />
-    <Compile Include="DomainLookupResponse.cs" />
+    <Compile Include="DomainLookupData.cs" />
     <Compile Include="DomainLookupResponseData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

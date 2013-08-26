@@ -7,11 +7,6 @@ namespace Atlantis.Framework.Providers.DomainLookup
 {
     public static class DomainLookupRequests
     {
-        static DomainLookupRequests()
-        {
-            DomainLookupRequestType = 728;
-        }
-
-        public static int DomainLookupRequestType { get; private set; }
+      public const int DomainLookupRequestType = 728;
     }
 }

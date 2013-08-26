@@ -10,20 +10,23 @@ namespace Atlantis.Framework.DomainLookup.Impl
   {
     public IResponseData RequestHandler(RequestData requestData, ConfigElement config)
     {
-      DomainLookupResponseData dlResponseData = null;
-      DataSet ds = null;
-
-      // Handle the request and return the IResponseData object for the request
-      // Returning null will cause an exception
+      DomainLookupResponseData dlResponseData;
+     
       try
       {
         DomainLookupRequestData dlRequestData = (DomainLookupRequestData)requestData;
 
+        if (string.IsNullOrEmpty(dlRequestData.DomainName))
+        {
+          throw new Exception("Domain name was passed as empty.");
+        }
+
         DomainLookupWS.ParkWeb dlWebService = new DomainLookupWS.ParkWeb();
         dlWebService.Url = ((WsConfigElement)config).WSURL;
         dlWebService.Timeout = (int)dlRequestData.RequestTimeout.TotalMilliseconds;
-        ds = dlWebService.GetDomainInfo(dlRequestData.DomainName);
-        dlResponseData = DomainLookupResponseData.FromData(ds);
+
+        DataSet dataSet = dlWebService.GetDomainInfo(dlRequestData.DomainName);
+        dlResponseData = DomainLookupResponseData.FromData(dataSet);
       }
       catch (Exception ex)
       {

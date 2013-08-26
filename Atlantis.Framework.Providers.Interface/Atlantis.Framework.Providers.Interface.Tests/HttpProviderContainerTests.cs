@@ -1,10 +1,11 @@
 ﻿using System;
-using System.Reflection;
 using System.Web;
-using Atlantis.Framework.Providers.Interface.ProviderContainer;
+using Atlantis.Framework.Interface.Tests;
+using Atlantis.Framework.Providers.Containers;
+using Atlantis.Framework.Providers.Interface.Tests.TestProviders;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Atlantis.Framework.Interface.Tests
+namespace Atlantis.Framework.Providers.Interface.Tests
 {
   [TestClass]
   public class HttpProviderContainerTests

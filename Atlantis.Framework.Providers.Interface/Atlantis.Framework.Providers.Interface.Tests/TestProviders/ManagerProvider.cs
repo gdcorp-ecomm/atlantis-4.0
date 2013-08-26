@@ -1,5 +1,8 @@
 ﻿
-namespace Atlantis.Framework.Interface.Tests
+using Atlantis.Framework.Interface;
+using Atlantis.Framework.Interface.Tests;
+
+namespace Atlantis.Framework.Providers.Interface.Tests.TestProviders
 {
   public class ManagerProvider : ProviderBase, IManagerProvider
   {
@@ -49,6 +52,16 @@ namespace Atlantis.Framework.Interface.Tests
     public bool CanResolve<TProviderInterface>() where TProviderInterface : class
     {
       return true;
+    }
+
+    public T GetData<T>(string key, T defaultValue)
+    {
+      throw new System.NotImplementedException();
+    }
+
+    public void SetData<T>(string key, T value)
+    {
+      throw new System.NotImplementedException();
     }
 
 

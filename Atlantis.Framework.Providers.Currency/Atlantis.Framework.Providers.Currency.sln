@@ -71,9 +71,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Products
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Products.Impl", "..\Triplets\Products\Atlantis.Framework.Products.Impl\Atlantis.Framework.Products.Impl.csproj", "{962C4260-4C3A-4B55-98E0-DF9D0F3592DE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Render.Pipeline.Interface", "..\Render\RenderPipeline\Atlantis.Framework.Render.Pipeline.Interface\Atlantis.Framework.Render.Pipeline.Interface.csproj", "{0D7F076F-1809-437B-B045-E35A7E68E423}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 35
+		SccNumberOfProjects = 36
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
 		SccLocalPath0 = .
@@ -211,6 +213,10 @@ Global
 		SccProjectTopLevelParentUniqueName34 = Atlantis.Framework.Providers.Currency.sln
 		SccProjectName34 = ../Triplets/Products/Atlantis.Framework.Products.Impl
 		SccLocalPath34 = ..\\Triplets\\Products\\Atlantis.Framework.Products.Impl
+		SccProjectUniqueName35 = ..\\Render\\RenderPipeline\\Atlantis.Framework.Render.Pipeline.Interface\\Atlantis.Framework.Render.Pipeline.Interface.csproj
+		SccProjectTopLevelParentUniqueName35 = Atlantis.Framework.Providers.Currency.sln
+		SccProjectName35 = ../Render/RenderPipeline/Atlantis.Framework.Render.Pipeline.Interface
+		SccLocalPath35 = ..\\Render\\RenderPipeline\\Atlantis.Framework.Render.Pipeline.Interface
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -565,6 +571,16 @@ Global
 		{962C4260-4C3A-4B55-98E0-DF9D0F3592DE}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{962C4260-4C3A-4B55-98E0-DF9D0F3592DE}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{962C4260-4C3A-4B55-98E0-DF9D0F3592DE}.Release|x86.ActiveCfg = Release|Any CPU
+		{0D7F076F-1809-437B-B045-E35A7E68E423}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D7F076F-1809-437B-B045-E35A7E68E423}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D7F076F-1809-437B-B045-E35A7E68E423}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{0D7F076F-1809-437B-B045-E35A7E68E423}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{0D7F076F-1809-437B-B045-E35A7E68E423}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{0D7F076F-1809-437B-B045-E35A7E68E423}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D7F076F-1809-437B-B045-E35A7E68E423}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D7F076F-1809-437B-B045-E35A7E68E423}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{0D7F076F-1809-437B-B045-E35A7E68E423}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{0D7F076F-1809-437B-B045-E35A7E68E423}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -602,5 +618,6 @@ Global
 		{41573A44-95D3-4BDE-9CFF-65552ACCD7E4} = {06628668-2B08-4DB5-B240-7C09C46E61E6}
 		{F025DA79-8D84-4BB9-AFFC-4B3156532212} = {06628668-2B08-4DB5-B240-7C09C46E61E6}
 		{962C4260-4C3A-4B55-98E0-DF9D0F3592DE} = {06628668-2B08-4DB5-B240-7C09C46E61E6}
+		{0D7F076F-1809-437B-B045-E35A7E68E423} = {06628668-2B08-4DB5-B240-7C09C46E61E6}
 	EndGlobalSection
 EndGlobal

@@ -6,17 +6,13 @@ using Atlantis.Framework.Providers.Interface.Currency;
 using Atlantis.Framework.Providers.Interface.Preferences;
 using Atlantis.Framework.Providers.Interface.Pricing;
 using Atlantis.Framework.Providers.Interface.PromoData;
-using Atlantis.Framework.Providers.Interface.ProviderContainer;
-using Atlantis.Framework.Providers.Interface;
 using Atlantis.Framework.Providers.PromoData;
 using Atlantis.Framework.Testing.MockHttpContext;
 using Atlantis.Framework.Testing.MockProviders;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using System.Web;
 using System.Xml.Linq;
 using Atlantis.Framework.Providers.Localization.Interface;
-using Atlantis.Framework.Providers.Localization;
 
 namespace Atlantis.Framework.Providers.Currency.Tests
 {
@@ -70,10 +66,10 @@ namespace Atlantis.Framework.Providers.Currency.Tests
 
       if (includeLocalizationProvider)
       {
-        result.RegisterProvider<ILocalizationProvider, CountrySubdomainLocalizationProvider>();
+        result.RegisterProvider<ILocalizationProvider, MockLocalizationProvider>();
       }
 
-      result.SetMockSetting(MockSiteContextSettings.PrivateLabelId, privateLabelId);
+      result.SetData(MockSiteContextSettings.PrivateLabelId, privateLabelId);
       IShopperContext shopperContext = result.Resolve<IShopperContext>();
       shopperContext.SetLoggedInShopper(shopperId);
 

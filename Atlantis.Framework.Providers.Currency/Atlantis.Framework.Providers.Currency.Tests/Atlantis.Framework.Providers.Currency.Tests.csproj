@@ -165,10 +165,6 @@
       <Project>{42E827B4-1E98-453B-8A36-009C201DD85A}</Project>
       <Name>Atlantis.Framework.PromoData.Interface</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.Providers.Containers\Atlantis.Framework.Providers.Containers\Atlantis.Framework.Providers.Containers.csproj">
-      <Project>{c333e679-494e-422d-ab5e-e4c0ec94acd5}</Project>
-      <Name>Atlantis.Framework.Providers.Containers</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Atlantis.Framework.Providers.Interface\Atlantis.Framework.Providers.Interface\Atlantis.Framework.Providers.Interface.csproj">
       <Project>{6CC33C6B-FAA7-4B6A-8C3B-BFE94A1A65DE}</Project>
       <Name>Atlantis.Framework.Providers.Interface</Name>
@@ -192,10 +188,6 @@
     <ProjectReference Include="..\..\Providers\Localization\Atlantis.Framework.Providers.Localization.Interface\Atlantis.Framework.Providers.Localization.Interface.csproj">
       <Project>{061fcadc-9547-47e2-9643-cfbcfa355ac2}</Project>
       <Name>Atlantis.Framework.Providers.Localization.Interface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Providers\Localization\Atlantis.Framework.Providers.Localization\Atlantis.Framework.Providers.Localization.csproj">
-      <Project>{b6571cf6-7f3e-47df-984d-f90c4abf8584}</Project>
-      <Name>Atlantis.Framework.Providers.Localization</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Triplets\Currency\Atlantis.Framework.Currency.Impl\Atlantis.Framework.Currency.Impl.csproj">
       <Project>{8dcdc38c-750f-43b4-921e-d49087b30495}</Project>

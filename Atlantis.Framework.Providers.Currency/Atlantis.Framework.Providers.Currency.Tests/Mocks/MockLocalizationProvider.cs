@@ -39,8 +39,7 @@ namespace Atlantis.Framework.Providers.Currency.Tests.Mocks
       get 
       {
         MockProviderContainer container = (MockProviderContainer) this.Container;
-        var value = container.GetMockSetting("Localization.CountrySite");
-        return value.ToString();
+        return container.GetData("Localization.CountrySite", "us");
       }
     }
 
@@ -120,8 +119,7 @@ namespace Atlantis.Framework.Providers.Currency.Tests.Mocks
       get
       {
         MockProviderContainer container = (MockProviderContainer) this.Container;
-        var value = container.GetMockSetting("Localization.CountrySiteInfo");
-        return (ICountrySite)value;
+        return container.GetData<ICountrySite>("Localization.CountrySiteInfo", null);
       }
     }
 

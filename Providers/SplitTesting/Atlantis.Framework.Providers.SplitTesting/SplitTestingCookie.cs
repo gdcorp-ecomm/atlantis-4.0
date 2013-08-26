@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Atlantis.Framework.Interface;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Web;
-using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.Providers.SplitTesting
 {
@@ -15,6 +15,13 @@ namespace Atlantis.Framework.Providers.SplitTesting
 
     readonly IProviderContainer _container;
     readonly Lazy<string> _cookieName;
+
+    // ||  **** Kept for backwards compatibility. Delete in next version ****
+    // \/
+    readonly Lazy<string> _cookieNameOld;
+    // /\ 
+    // || **** Kept for backwards compatibility. Delete in next version ****
+
     readonly Lazy<ISiteContext> _siteContext;
     readonly Lazy<IShopperContext> _shopperContext;
 
@@ -25,9 +32,12 @@ namespace Atlantis.Framework.Providers.SplitTesting
       _siteContext = new Lazy<ISiteContext>(() => _container.Resolve<ISiteContext>());
       _shopperContext = new Lazy<IShopperContext>(() => _container.Resolve<IShopperContext>());
       _cookieName = new Lazy<string>(LoadCookieName);
+      _cookieNameOld = new Lazy<string>(LoadCookieNameOld);
     }
 
-    private string LoadCookieName()
+    // ||  **** Kept for backwards compatibility. Delete in next version ****
+    // \/
+    private string LoadCookieNameOld()
     {
       var shopperId = _shopperContext.Value.ShopperId.ToString(CultureInfo.InvariantCulture);
       if (string.IsNullOrEmpty(shopperId))
@@ -37,12 +47,43 @@ namespace Atlantis.Framework.Providers.SplitTesting
 
       return "SplitTesting" + _siteContext.Value.PrivateLabelId.ToString(CultureInfo.InvariantCulture) + "_" + shopperId;
     }
+    // /\ 
+    // || **** Kept for backwards compatibility. Delete in next version ****
 
-    private HttpCookie RequestCookie
+    private string LoadCookieName()
+    {
+      return "SplitTesting" + _siteContext.Value.PrivateLabelId.ToString(CultureInfo.InvariantCulture);
+    }
+
+    private Dictionary<string, string> RequestCookieValues
     {
       get
       {
-        return HttpContext.Current.Request.Cookies[_cookieName.Value];
+        var vals = new Dictionary<string, string>();
+
+        // ||  **** Kept for backwards compatibility. Delete in next version ****
+        // \/
+        var oldCookie = HttpContext.Current.Request.Cookies[_cookieNameOld.Value];
+        if (oldCookie != null)
+        {
+          foreach (var key in oldCookie.Values.AllKeys)
+          {
+            vals[key] = oldCookie.Values[key];
+          }
+        }
+        // /\ 
+        // || **** Kept for backwards compatibility. Delete in next version ****
+
+
+        var cookie = HttpContext.Current.Request.Cookies[_cookieName.Value];
+        if (cookie != null)
+        {
+          foreach (var key in cookie.Values.AllKeys)
+          {
+            vals[key] = cookie.Values[key];
+          }
+        }
+        return vals;
       }
     }
 
@@ -50,16 +91,11 @@ namespace Atlantis.Framework.Providers.SplitTesting
     {
       get
       {
-        var result = new Dictionary<string, string>();
-        if ((HttpContext.Current != null) && (RequestCookie != null))
+        if ((HttpContext.Current != null) && (RequestCookieValues != null) && RequestCookieValues.Count > 0)
         {
-          var nvc = RequestCookie.Values;
-          foreach (var key in nvc.AllKeys)
-          {
-            result.Add(key, nvc[key]);
-          }
+          return RequestCookieValues;
         }
-        return result;
+        return new Dictionary<string, string>(0);
       }
       set
       {

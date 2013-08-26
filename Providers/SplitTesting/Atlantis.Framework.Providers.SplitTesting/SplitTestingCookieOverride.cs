@@ -12,26 +12,17 @@ namespace Atlantis.Framework.Providers.SplitTesting
     readonly IProviderContainer _container;
     readonly Lazy<string> _cookieName;
     readonly Lazy<ISiteContext> _siteContext;
-    readonly Lazy<IShopperContext> _shopperContext;
 
     internal SplitTestingCookieOverride(IProviderContainer container)
     {
       _container = container;
-
       _siteContext = new Lazy<ISiteContext>(() => _container.Resolve<ISiteContext>());
-      _shopperContext = new Lazy<IShopperContext>(() => _container.Resolve<IShopperContext>());
       _cookieName = new Lazy<string>(LoadCookieName);
     }
 
     private string LoadCookieName()
     {
-      var shopperId = _shopperContext.Value.ShopperId.ToString(CultureInfo.InvariantCulture);
-      if (string.IsNullOrEmpty(shopperId))
-      {
-        shopperId = "0";
-      }
-
-      return "SplitTestingOverride" + _siteContext.Value.PrivateLabelId.ToString(CultureInfo.InvariantCulture) + "_" + shopperId;
+      return "SplitTestingOverride" + _siteContext.Value.PrivateLabelId.ToString(CultureInfo.InvariantCulture);
     }
 
     private HttpCookie RequestCookie
@@ -42,7 +33,7 @@ namespace Atlantis.Framework.Providers.SplitTesting
       }
     }
 
-    public Dictionary<string, string> CookieValues
+    internal Dictionary<string, string> CookieValues
     {
       get
       {

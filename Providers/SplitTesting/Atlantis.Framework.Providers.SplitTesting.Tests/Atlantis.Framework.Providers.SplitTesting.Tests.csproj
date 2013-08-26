@@ -63,9 +63,19 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="ConditionHandlers\AlwaysEligibleConditionHandler.cs" />
+    <Compile Include="ConditionHandlers\NeverElgibleConditionHandler.cs" />
     <Compile Include="ConditionHandlers\DataCenterConditionHandler.cs" />
+    <Compile Include="Mocks\MockActiveSplitTestsRequest_1Test_WithTwoEligibilityRules.cs" />
+    <Compile Include="Mocks\MockActiveSplitTestsRequest_1Test_WithMalformedEligibilityRules.cs" />
+    <Compile Include="Mocks\MockActiveSplitTestsRequest_1Test_WithNeverEligibleEligibilityRules.cs" />
+    <Compile Include="Mocks\MockActiveSplitTestsRequest_1Test_WithEligibilityRules.cs" />
+    <Compile Include="Mocks\MockActiveSplitTestsRequest_ThrowsException.cs" />
+    <Compile Include="Mocks\MockActiveSplitTestDetailsRequest_ThrowsException.cs" />
+    <Compile Include="Mocks\MockActiveSplitTestDetailsRequest_AB_100_0.cs" />
+    <Compile Include="Mocks\MockActiveSplitTestDetailsRequest_AB_80_20.cs" />
     <Compile Include="Mocks\MockActiveSplitTestDetailsRequest_A.cs" />
-    <Compile Include="Mocks\MockActiveSplitTestDetailsRequest_AB.cs" />
+    <Compile Include="Mocks\MockActiveSplitTestDetailsRequest_AB_50_50.cs" />
     <Compile Include="Mocks\MockActiveSplitTestsRequest_3Tests.cs" />
     <Compile Include="Mocks\MockActiveSplitTestsRequest_1Tests.cs" />
     <Compile Include="Mocks\MockAppSettingRequest_ATLANTIS_SPLITPROVIDER_COOKIELIFE_HOURS_24Hours.cs" />
@@ -77,6 +87,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SplitTestingProviderTests.cs" />
     <Compile Include="SplitTestingCookieOverrideTests.cs" />
+    <Compile Include="SplitTestingRequestCacheTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Atlantis.Framework.AppSettings\Atlantis.Framework.AppSettings.Impl\Atlantis.Framework.AppSettings.Impl.csproj">

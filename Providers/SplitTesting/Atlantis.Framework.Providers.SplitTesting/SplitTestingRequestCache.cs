@@ -11,29 +11,21 @@ namespace Atlantis.Framework.Providers.SplitTesting
     readonly IProviderContainer _container;
     readonly Lazy<string> _cacheKey;
     readonly Lazy<ISiteContext> _siteContext;
-    readonly Lazy<IShopperContext> _shopperContext;
 
     internal SplitTestingRequestCache(IProviderContainer container)
     {
       _container = container;
 
       _siteContext = new Lazy<ISiteContext>(() => _container.Resolve<ISiteContext>());
-      _shopperContext = new Lazy<IShopperContext>(() => _container.Resolve<IShopperContext>());
       _cacheKey = new Lazy<string>(LoadCacheKeyName);
     }
 
-    public string LoadCacheKeyName()
+    internal string LoadCacheKeyName()
     {
-      var shopperId = _shopperContext.Value.ShopperId.ToString(CultureInfo.InvariantCulture);
-      if (string.IsNullOrEmpty(shopperId))
-      {
-        shopperId = "0";
-      }
-
-      return "SplitTestingRequestCache" + _siteContext.Value.PrivateLabelId.ToString(CultureInfo.InvariantCulture) + "_" + shopperId;
+      return "SplitTestingRequestCache" + _siteContext.Value.PrivateLabelId.ToString(CultureInfo.InvariantCulture);
     }
 
-    public ISet<string> GetCacheValues()
+    internal ISet<string> GetCacheValues()
     {
       var result = new HashSet<string>();
       if (HttpContext.Current != null)
@@ -43,7 +35,7 @@ namespace Atlantis.Framework.Providers.SplitTesting
       return result;
     }
 
-    public void AddCacheValues(string value)
+    internal void AddCacheValues(string value)
     {
         if (HttpContext.Current != null)
         {
@@ -57,7 +49,7 @@ namespace Atlantis.Framework.Providers.SplitTesting
         }
      }
 
-    public void ClearCache() { HttpContext.Current.Session.Remove(_cacheKey.Value); }
+    internal void ClearCache() { HttpContext.Current.Session.Remove(_cacheKey.Value); }
 
  }
 }

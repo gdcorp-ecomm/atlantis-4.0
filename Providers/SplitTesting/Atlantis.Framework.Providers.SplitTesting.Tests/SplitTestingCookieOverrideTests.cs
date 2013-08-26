@@ -16,7 +16,7 @@ namespace Atlantis.Framework.Providers.SplitTesting.Tests
     {
       var shopperId = "1234abcd";
       var privateLabelId = 1;
-      var cookieName = string.Format("SplitTestingOverride{0}_{1}", privateLabelId, shopperId);
+      var cookieName = string.Format("SplitTestingOverride{0}", privateLabelId);
       var cookieKey = "123-1";
       var cookieValue = "14";
       var cookies = new NameValueCollection();
@@ -34,7 +34,7 @@ namespace Atlantis.Framework.Providers.SplitTesting.Tests
     }
 
     [TestMethod]
-    public void ReadsCookie_WhenCookieMissing()
+    public void ReadsCookie_NoExceptionWhenCookieMissing()
     {
       var shopperId = "1234abcd";
       var privateLabelId = 1;
@@ -54,7 +54,7 @@ namespace Atlantis.Framework.Providers.SplitTesting.Tests
     {
       var shopperId = "1234abcd";
       var privateLabelId = 1;
-      var cookieName = string.Format("SplitTestingOverride{0}_{1}", privateLabelId, shopperId);
+      var cookieName = string.Format("SplitTestingOverride{0}", privateLabelId);
       var cookieKey = "123-1";
       var cookieValue = "14";
 
@@ -75,7 +75,7 @@ namespace Atlantis.Framework.Providers.SplitTesting.Tests
     {
       var shopperId = "1234abcd";
       var privateLabelId = 1;
-      var cookieName = string.Format("SplitTestingOverride{0}_{1}", privateLabelId, shopperId);
+      var cookieName = string.Format("SplitTestingOverride{0}", privateLabelId);
       var cookieKey = "123";
       var cookieValue = "B";
       var cookieKeyB = "1243";

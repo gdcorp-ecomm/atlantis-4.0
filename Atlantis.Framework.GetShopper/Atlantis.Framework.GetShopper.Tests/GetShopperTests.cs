@@ -11,6 +11,8 @@ namespace Atlantis.Framework.GetShopper.Tests
   /// Summary description for UnitTest1
   /// </summary>
   [TestClass]
+  [DeploymentItem("Atlantis.Config")]
+  [DeploymentItem("Atlantis.Framework.GetShopper.Impl.dll")]
   public class GetShopperTests
   {
     public GetShopperTests()
@@ -61,7 +63,6 @@ namespace Atlantis.Framework.GetShopper.Tests
     #endregion
 
     [TestMethod]
-    [DeploymentItem("Atlantis.Config")]
     public void GetShopperBasic()
     {
       GetShopper.Interface.GetShopperRequestData request = new Atlantis.Framework.GetShopper.Interface.GetShopperRequestData("822497", string.Empty, string.Empty, string.Empty, 0);
@@ -71,7 +72,31 @@ namespace Atlantis.Framework.GetShopper.Tests
     }
 
     [TestMethod]
-    [DeploymentItem("Atlantis.Config")]
+    public void GetShopperCommPref()
+    {
+      GetShopper.Interface.GetShopperRequestData request = new Atlantis.Framework.GetShopper.Interface.GetShopperRequestData("822497", string.Empty, string.Empty, string.Empty, 0);
+      request.AddCommunicationPref(200);
+      request.RequestTimeout = TimeSpan.FromSeconds(1);
+      GetShopper.Interface.GetShopperResponseData response = (GetShopper.Interface.GetShopperResponseData)Engine.Engine.ProcessRequest(request, 1);
+      Assert.AreNotEqual(-1, response.GetCommunicationPref(2));
+    }
+
+    [TestMethod]
+    public void GetShopperInterestPref()
+    {
+      GetShopper.Interface.GetShopperRequestData request = new Atlantis.Framework.GetShopper.Interface.GetShopperRequestData("822497", string.Empty, string.Empty, string.Empty, 0);
+      request.AddInterestPref(2, 2);
+      request.RequestTimeout = TimeSpan.FromSeconds(1);
+      GetShopper.Interface.GetShopperResponseData response = (GetShopper.Interface.GetShopperResponseData)Engine.Engine.ProcessRequest(request, 1);
+      Assert.AreNotEqual(-1, response.GetInterestPref(2, 2));
+    }
+
+
+
+
+
+
+    [TestMethod]
     [ExpectedException (typeof(Atlantis.Framework.Interface.AtlantisException))]
     public void GetShopperTimeout()
     {
@@ -82,7 +107,6 @@ namespace Atlantis.Framework.GetShopper.Tests
     }
 
     [TestMethod]
-    [DeploymentItem("Atlantis.Config")]
     public void GetShopperFirstNameTimings()
     {
       string name;
@@ -114,7 +138,6 @@ namespace Atlantis.Framework.GetShopper.Tests
     }
 
     [TestMethod]
-    [DeploymentItem("Atlantis.Config")]
     public void NoDuplicateFields()
     {
       GetShopperRequestData request = new GetShopperRequestData(

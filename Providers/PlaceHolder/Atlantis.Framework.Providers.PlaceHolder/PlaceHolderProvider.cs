@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Text;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.PlaceHolder.Interface;
+using Atlantis.Framework.Render.Pipeline.Interface;
 
 namespace Atlantis.Framework.Providers.PlaceHolder
 {
@@ -14,23 +15,23 @@ namespace Atlantis.Framework.Providers.PlaceHolder
     {
     }
 
-    public string ReplacePlaceHolders(string content)
+    public string ReplacePlaceHolders(string content, IList<IRenderHandler> placeHolderRenderHandlers)
     {
       string originalContent = content ?? string.Empty;
       string finalContent = string.Empty;
 
       if (originalContent != string.Empty)
       {
-        finalContent = ProcessPlaceHolderMatches(originalContent);
+        finalContent = ProcessPlaceHolderMatches(originalContent, placeHolderRenderHandlers);
       }
 
       return finalContent;
     }
 
-    private string ProcessPlaceHolderMatches(string originalContent)
+    private string ProcessPlaceHolderMatches(string originalContent, IList<IRenderHandler> renderHandlers)
     {
       string finalContent = originalContent;
-      IList<IPlaceHolderHandler> placeHolderHandlers = PlaceHolderHandlerManager.GetPlaceHolderHandlers(originalContent, _debugContextErrors, Container);
+      IList<IPlaceHolderHandler> placeHolderHandlers = PlaceHolderHandlerManager.GetPlaceHolderHandlers(originalContent, renderHandlers, _debugContextErrors, Container);
 
       if (placeHolderHandlers.Count > 0)
       {

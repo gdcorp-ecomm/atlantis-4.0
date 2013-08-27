@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Render.Pipeline.Interface;
 
@@ -20,6 +21,14 @@ namespace Atlantis.Framework.Render.Pipeline
       foreach (IRenderHandler renderHandler in renderHandlers)
       {
         _renderPipeline.Add(renderHandler);  
+      }
+    }
+
+    public void AddRenderHandler(IEnumerable<IRenderHandler> renderHandlers)
+    {
+      foreach (IRenderHandler renderHandler in renderHandlers)
+      {
+        _renderPipeline.Add(renderHandler);
       }
     }
 

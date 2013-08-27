@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Web.UI;
 using Atlantis.Framework.Providers.PlaceHolder.Interface;
 
@@ -7,9 +6,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder
 {
   internal class UserControlPlaceHolderHandler : WebControlPlaceHolderHandlerBase
   {
-    public override string Type { get { return PlaceHolderTypes.UserControl; } }
-
-    internal UserControlPlaceHolderHandler(string markup, string data, ICollection<string> debugContextErrors) : base(markup, data, debugContextErrors)
+    internal UserControlPlaceHolderHandler(IPlaceHolderHandlerContext context) : base(context)
     {
     }
 
@@ -33,7 +30,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder
       }
       catch (Exception ex)
       {
-        HandleError(string.Format("PlaceHolder error loading control. Type: {0}, Message: {1}", Type, ex.Message),
+        HandleError(string.Format("PlaceHolder error loading control. Type: {0}, Message: {1}", Context.Type, ex.Message),
                     "UserControlPlaceHolderHandler.Initialize()");
       }
 

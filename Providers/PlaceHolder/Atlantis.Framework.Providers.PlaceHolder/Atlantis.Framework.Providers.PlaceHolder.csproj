@@ -49,9 +49,12 @@
     <Compile Include="Caches\WebControlTypeCache.cs" />
     <Compile Include="Constants\WebControlEvents.cs" />
     <Compile Include="ErrorLogger.cs" />
+    <Compile Include="PlaceHolderHandlerContext.cs" />
     <Compile Include="PlaceHolderHandlerManager.cs" />
     <Compile Include="PlaceHolderHandlers\WebControlPlaceHolderHandlerBase.cs" />
     <Compile Include="PlaceHolderRules.cs" />
+    <Compile Include="RenderContent\PlaceHolderRenderContent.cs" />
+    <Compile Include="RenderPipeline\PlaceHolderRenderPipeline.cs" />
     <Compile Include="WebControl\WebControlManager.cs" />
     <Compile Include="PlaceHolderHandlers\PlaceHolderHandlerHandlerFactory.cs" />
     <Compile Include="PlaceHolders\CDSDocumentPlaceHolder.cs" />
@@ -87,6 +90,10 @@
     <ProjectReference Include="..\..\..\Render\RenderPipeline\Atlantis.Framework.Render.Pipeline.Interface\Atlantis.Framework.Render.Pipeline.Interface.csproj">
       <Project>{0d7f076f-1809-437b-b045-e35a7e68e423}</Project>
       <Name>Atlantis.Framework.Render.Pipeline.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Render\RenderPipeline\Atlantis.Framework.Render.Pipeline\Atlantis.Framework.Render.Pipeline.csproj">
+      <Project>{68764d92-7cd9-45fb-b650-1429656dcf14}</Project>
+      <Name>Atlantis.Framework.Render.Pipeline</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\CDSContent\Atlantis.Framework.Providers.CDSContent.Interface\Atlantis.Framework.Providers.CDSContent.Interface.csproj">
       <Project>{99bcb8c3-f00f-44be-ab61-7b433f519e2b}</Project>

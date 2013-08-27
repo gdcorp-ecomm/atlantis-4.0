@@ -1,28 +1,26 @@
-﻿using System.Collections.Generic;
-using Atlantis.Framework.Interface;
-using Atlantis.Framework.Providers.PlaceHolder.Interface;
+﻿using Atlantis.Framework.Providers.PlaceHolder.Interface;
 
 namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolderHandlers
 {
   public class PlaceHolderHandlerHandlerFactory : IPlaceHolderHandlerFactory
   {
-    public IPlaceHolderHandler ConstructHandler(string type, string markup, string data, ICollection<string> debugContextErrors, IProviderContainer providerContainer)
+    public IPlaceHolderHandler ConstructHandler(IPlaceHolderHandlerContext context)
     {
       IPlaceHolderHandler placeHolderHandler;
 
-      switch (type.ToLowerInvariant())
+      switch (context.Type.ToLowerInvariant())
       {
         case PlaceHolderTypes.UserControl:
-          placeHolderHandler = new UserControlPlaceHolderHandler(markup, data, debugContextErrors);
+          placeHolderHandler = new UserControlPlaceHolderHandler(context);
           break;
         case PlaceHolderTypes.WebControl:
-          placeHolderHandler = new WebControlPaceHolderHandler(markup, data, debugContextErrors);
+          placeHolderHandler = new WebControlPaceHolderHandler(context);
           break;
         case PlaceHolderTypes.CDSDocument:
-          placeHolderHandler = new CDSDocumentPlaceHolderHandler(markup, data, debugContextErrors, providerContainer);
+          placeHolderHandler = new CDSDocumentPlaceHolderHandler(context);
           break;
         default:
-          placeHolderHandler = new NullPlaceHolderHandler(type, markup, data, debugContextErrors);
+          placeHolderHandler = new NullPlaceHolderHandler(context);
           break;
       }
 

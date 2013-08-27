@@ -3,6 +3,7 @@ using System.Text.RegularExpressions;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.PlaceHolder.Interface;
 using Atlantis.Framework.Providers.PlaceHolder.PlaceHolderHandlers;
+using Atlantis.Framework.Render.Pipeline.Interface;
 
 namespace Atlantis.Framework.Providers.PlaceHolder
 {
@@ -14,7 +15,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder
     private static readonly Regex _placeHolderRegex = new Regex(@"\[@P\[(?<placeholdertype>[a-zA-z0-9]*?):(?<placeholderdata>.*?)\]@P\]", RegexOptions.Compiled | RegexOptions.Singleline);
     private static readonly IList<IPlaceHolderHandler> _emptyPlaceHolderHandlersList = new List<IPlaceHolderHandler>(0);
 
-    internal static IList<IPlaceHolderHandler> GetPlaceHolderHandlers(string content, ICollection<string> debugContextErrors, IProviderContainer container)
+    internal static IList<IPlaceHolderHandler> GetPlaceHolderHandlers(string content, IList<IRenderHandler> renderHandlers, ICollection<string> debugContextErrors, IProviderContainer providerContainer)
     {
       IList<IPlaceHolderHandler> placeHolderHandlers;
 
@@ -35,7 +36,8 @@ namespace Atlantis.Framework.Providers.PlaceHolder
           string placeHolderType = placeHolderMatch.Groups[PLACE_HOLDER_TYPE].Captures[0].Value;
           string placeHolderDataRaw = placeHolderMatch.Groups[PLACE_HOLDER_DATA].Captures[0].Value;
 
-          IPlaceHolderHandler placeHolderHandler = placeHolderHandlerFactory.ConstructHandler(placeHolderType, matchValue, placeHolderDataRaw, debugContextErrors, container);
+          IPlaceHolderHandlerContext context = new PlaceHolderHandlerContext(placeHolderType, matchValue, placeHolderDataRaw, renderHandlers, debugContextErrors, providerContainer);
+          IPlaceHolderHandler placeHolderHandler = placeHolderHandlerFactory.ConstructHandler(context);
 
           placeHolderHandlers.Add(placeHolderHandler);
         }

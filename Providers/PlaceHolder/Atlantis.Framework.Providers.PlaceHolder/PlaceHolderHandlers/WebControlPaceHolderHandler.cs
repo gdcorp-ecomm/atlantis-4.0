@@ -1,17 +1,14 @@
 ﻿using Atlantis.Framework.Providers.PlaceHolder.Interface;
 using System;
-using System.Collections.Generic;
 using System.Web.UI;
 
 namespace Atlantis.Framework.Providers.PlaceHolder
 {
   internal class WebControlPaceHolderHandler : WebControlPlaceHolderHandlerBase
   {
-    internal WebControlPaceHolderHandler(string markup, string data, ICollection<string> debugContextErrors) : base(markup, data, debugContextErrors)
+    internal WebControlPaceHolderHandler(IPlaceHolderHandlerContext context) : base(context)
     {
     }
-
-    public override string Type { get { return PlaceHolderTypes.WebControl; } }
 
     protected override Control InitializeControl(string placeHolderDataRaw)
     {
@@ -39,8 +36,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder
       }
       catch (Exception ex)
       {
-        HandleError(string.Format("PlaceHolder error loading control. Type: {0}, Message: {1}", Type, ex.Message),
-                    "WebControlPaceHolderHandler.Initialize()");
+        HandleError(string.Format("PlaceHolder error loading control. Type: {0}, Message: {1}", Context.Type, ex.Message), "WebControlPaceHolderHandler.Initialize()");
       }
 
       return control;

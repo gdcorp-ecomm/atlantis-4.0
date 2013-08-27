@@ -10,14 +10,11 @@ namespace Atlantis.Framework.Providers.PlaceHolder
     private static readonly IList<IPlaceHolderHandler> _emptyChildrenList = new List<IPlaceHolderHandler>(0);
 
     private Control _control;
-    private readonly string _data;
-    private readonly ICollection<string> _debugContextErrors;
+    private readonly IPlaceHolderHandlerContext _context;
 
-    internal WebControlPlaceHolderHandlerBase(string markup, string data, ICollection<string> debugContextErrors)
+    internal WebControlPlaceHolderHandlerBase(IPlaceHolderHandlerContext context)
     {
-      _debugContextErrors = debugContextErrors;
-      Markup = markup;
-      _data = data;
+      _context = context;
     }
 
     ~WebControlPlaceHolderHandlerBase()
@@ -25,9 +22,12 @@ namespace Atlantis.Framework.Providers.PlaceHolder
       UnloadControl();
     }
 
-    public abstract string Type { get; }
+    protected IPlaceHolderHandlerContext Context
+    {
+      get { return _context; }
+    }
 
-    public string Markup { get; private set; }
+    public string Markup { get { return _context.Markup; } }
 
     public IList<IPlaceHolderHandler> Children { get { return _emptyChildrenList; } }
 
@@ -39,8 +39,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder
       }
       catch (Exception ex)
       {
-        HandleError(string.Format("PlaceHolder error raising event. Type: {0}, Event: {1}, Message: {2}", Type, eventName, ex.Message),
-                    "WebControlPlaceHolderHandlerBase.RaiseEvent()");
+        HandleError(string.Format("PlaceHolder error raising event. Type: {0}, Event: {1}, Message: {2}", _context.Type, eventName, ex.Message), "WebControlPlaceHolderHandlerBase.RaiseEvent()");
       }
     }
 
@@ -57,15 +56,15 @@ namespace Atlantis.Framework.Providers.PlaceHolder
     {
       UnloadControl();
 
-      _debugContextErrors.Add(message);
-      ErrorLogger.LogException(message, sourceFunction, _data);
+      _context.DebugContextErrors.Add(message);
+      ErrorLogger.LogException(message, sourceFunction, _context.Data);
     }
 
     protected abstract Control InitializeControl(string placeHolderDataRaw);
 
     public void Initialize()
     {
-      _control = InitializeControl(_data);
+      _control = InitializeControl(_context.Data);
     }
 
     public void RaiseInitEvent()
@@ -85,19 +84,19 @@ namespace Atlantis.Framework.Providers.PlaceHolder
 
     public string Render()
     {
-      string html = string.Empty;
+      string finalContent = string.Empty;
 
       try
       {
-        html = WebControlManager.Render(_control);
+        string renderedContent = WebControlManager.Render(_control);
+        finalContent = PlaceHolderRenderPipeline.RunRenderPipeline(renderedContent, _context.RenderHandlers, _context.ProviderContainer);
       }
       catch (Exception ex)
       {
-        HandleError(string.Format("PlaceHolder render error. Type: {0}, Message: {1}", Type, ex.Message),
-                    "WebControlPlaceHolderHandlerBase.Render()");
+        HandleError(string.Format("PlaceHolder render error. Type: {0}, Message: {1}", _context.Type, ex.Message), "WebControlPlaceHolderHandlerBase.Render()");
       }
 
-      return html;
+      return finalContent;
     }
   }
 }

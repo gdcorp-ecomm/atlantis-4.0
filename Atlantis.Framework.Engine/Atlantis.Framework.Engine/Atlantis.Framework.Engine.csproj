@@ -73,6 +73,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="Atlantis.Framework.Engine.nuget.bat" />
     <None Include="Atlantis.Framework.Engine.nuspec">
       <SubType>Designer</SubType>
     </None>

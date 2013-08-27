@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <package >
   <metadata>
-    <id>$id$</id>
-    <version>$version$</version>
-    <title>$title$</title>
+    <id>Atlantis.Framework.Engine</id>
+    <version>4.0.0.0</version>
+    <title>Atlantis Framework Engine</title>
     <authors>$author$</authors>
     <owners>$author$</owners>
     <projectUrl>https://confluence.int.godaddy.com/display/ATLANTIS/Atlantis+Framework+Home</projectUrl>
@@ -14,7 +14,7 @@
     <tags>Atlantis Framework Engine</tags>
   </metadata>
   <files>
-    <file src="bin\release\Atlantis.Framework.Engine.XmlSerializers.dll" target="lib\net40\Atlantis.Framework.Engine.XmlSerializers.dll" />
+    <file src="bin\Release\Atlantis.Framework.Engine.XmlSerializers.dll" target="lib\net40\Atlantis.Framework.Engine.XmlSerializers.dll" />
     <file src="bin\atlantis.config" target="content\bin\atlantis.config" />
     <file src="bin\atlantis.config" target="content\bin\atlantis.prod.config" />
     <file src="bin\atlantis.config" target="content\bin\atlantis.test.config" />

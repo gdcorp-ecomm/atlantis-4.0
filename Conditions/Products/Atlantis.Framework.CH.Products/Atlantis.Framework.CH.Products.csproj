@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ProductGroups.cs" />
     <Compile Include="ProductIsOfferedConditionHandler.cs" />
     <Compile Include="ProductHasDiscountMoreThanConditionHandler.cs" />
     <Compile Include="ProductHasSavingsMoreThanConditionHandler.cs" />

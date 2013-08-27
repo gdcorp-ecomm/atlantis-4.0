@@ -50,6 +50,27 @@ namespace Atlantis.Framework.CH.Products.Tests
     }
 
     [TestMethod]
+    public void EvaluateValidConditionNameGDTrue()
+    {
+      MockProviderContainer.SetMockSetting(MockSiteContextSettings.PrivateLabelId, 1);
+      Assert.IsTrue(ConditionHandlerManager.EvaluateCondition("productIsOffered", new[] { "WebHosting" }, MockProviderContainer));
+    }
+
+    [TestMethod]
+    public void EvaluateValidConditionNameBlueRazorTrue()
+    {
+      MockProviderContainer.SetMockSetting(MockSiteContextSettings.PrivateLabelId, 2);
+      Assert.IsTrue(ConditionHandlerManager.EvaluateCondition("productIsOffered", new[] { "email" }, MockProviderContainer));
+    }
+
+    [TestMethod]
+    public void EvaluateValidConditionNameWwdFalse()
+    {
+      MockProviderContainer.SetMockSetting(MockSiteContextSettings.PrivateLabelId, 1387);
+      Assert.IsFalse(ConditionHandlerManager.EvaluateCondition("productIsOffered", new[] { "qsc" }, MockProviderContainer));
+    }
+
+    [TestMethod]
     public void EvaluateValidConditionGDTrue()
     {
       MockProviderContainer.SetMockSetting(MockSiteContextSettings.PrivateLabelId, 1);
@@ -69,6 +90,7 @@ namespace Atlantis.Framework.CH.Products.Tests
       MockProviderContainer.SetMockSetting(MockSiteContextSettings.PrivateLabelId, 1387);
       Assert.IsFalse(ConditionHandlerManager.EvaluateCondition("productIsOffered", new[] { "23" }, MockProviderContainer));
     }
+
 
     [TestMethod]
     public void TestErrorConditionInvalidParameters()

@@ -22,7 +22,7 @@ namespace Atlantis.Framework.CH.Products
         int productGroupId;
         var productGroupParam = parameters[0];
 
-        if (int.TryParse(productGroupParam, out productGroupId))
+        if (ProductGroups.TryGetProductId(productGroupParam, out productGroupId) || int.TryParse(productGroupParam, out productGroupId))
         {
           var productProvider = providerContainer.Resolve<IProductProvider>();
           result = productProvider.IsProductGroupOffered(productGroupId);

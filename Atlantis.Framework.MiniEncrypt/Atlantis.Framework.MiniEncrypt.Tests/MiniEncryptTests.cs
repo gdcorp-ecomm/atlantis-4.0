@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Atlantis.Framework.MiniEncrypt.Tests
 {
@@ -12,7 +11,7 @@ namespace Atlantis.Framework.MiniEncrypt.Tests
       string pwToEncrypt = "Firefly";
       string pwEncrypted;
 
-      using (var password = MiniEncryptPassword.CreateDisposable())
+      using (var password = PasswordEncryption.CreateDisposable())
       {
         pwEncrypted = password.EncryptPassword(pwToEncrypt);
       }
@@ -22,6 +21,45 @@ namespace Atlantis.Framework.MiniEncrypt.Tests
     }
 
     [TestMethod]
+    public void TestMstkSingleNullAndEmptyInputs()
+    {
+      using (var auth = MstkAuthentication.CreateDisposable())
+      {
+        var mstk = auth.CreateMstk(null, "mmicco");
+        Assert.AreNotEqual(string.Empty, mstk);
+
+        mstk = auth.CreateMstk("1000", null);
+        Assert.AreNotEqual(string.Empty, mstk);
+
+        mstk = auth.CreateMstk(string.Empty, "mmicco");
+        Assert.AreNotEqual(string.Empty, mstk);
+
+        mstk = auth.CreateMstk("1000", string.Empty);
+        Assert.AreNotEqual(string.Empty, mstk);
+      }
+    }
+
+    [TestMethod]
+    public void TestMstkBothNullAndEmptyInputs()
+    {
+      using (var auth = MstkAuthentication.CreateDisposable())
+      {
+        var mstk = auth.CreateMstk(null, null);
+        Assert.AreEqual(string.Empty, mstk);
+
+        mstk = auth.CreateMstk(string.Empty, null);
+        Assert.AreEqual(string.Empty, mstk);
+
+        mstk = auth.CreateMstk(string.Empty, null);
+        Assert.AreEqual(string.Empty, mstk);
+
+        mstk = auth.CreateMstk(string.Empty, string.Empty);
+        Assert.AreEqual(string.Empty, mstk);
+      }
+    }
+
+
+    [TestMethod]
     public void TestDecryptEncryptManagerValues()
     {
       const string userName = "syukna";
@@ -29,10 +67,10 @@ namespace Atlantis.Framework.MiniEncrypt.Tests
       string decryptedUserName;
       string decryptedUserId;
 
-      using (var auth = MiniEncryptAuthentication.CreateDisposable())
+      using (var auth = MstkAuthentication.CreateDisposable())
       {
-        string encryptedMstk = auth.GetMgrEncryptedValue(userId, userName);
-        auth.GetMgrDecryptedValues(encryptedMstk, out decryptedUserId, out decryptedUserName);
+        string encryptedMstk = auth.CreateMstk(userId, userName);
+        auth.ParseMstk(encryptedMstk, out decryptedUserId, out decryptedUserName);
       }
 
       Assert.AreEqual(decryptedUserId, userId);
@@ -46,7 +84,7 @@ namespace Atlantis.Framework.MiniEncrypt.Tests
       string encryptedValue;
       string decryptedValue;
 
-      using (var cookie = MiniEncryptCookie.CreateDisposable())
+      using (var cookie = CookieEncryption.CreateDisposable())
       {
         encryptedValue = cookie.EncryptCookieValue(valueToEncrypt);
         decryptedValue = cookie.DecryptCookieValue(encryptedValue);

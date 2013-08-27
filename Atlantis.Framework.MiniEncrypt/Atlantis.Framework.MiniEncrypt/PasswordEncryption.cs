@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Atlantis.Framework.MiniEncrypt
 {
-  public class PasswordEncryption : MiniEncryptBase
+  public class PasswordEncryption : IDisposable
   {
     private gdMiniEncryptLib.IPassword _passwordClass;
 
@@ -16,12 +13,12 @@ namespace Atlantis.Framework.MiniEncrypt
 
     ~PasswordEncryption()
     {
-      ReleaseObject(_passwordClass);
+      _passwordClass.SafeRelease();
     }
 
-    public override void Dispose()
+    public void Dispose()
     {
-      ReleaseObject(_passwordClass);
+      _passwordClass.SafeRelease();
       GC.SuppressFinalize(this);
     }
 

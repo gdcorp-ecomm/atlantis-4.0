@@ -49,10 +49,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MiniEncryptAuthentication.cs" />
-    <Compile Include="MiniEncryptCookie.cs" />
-    <Compile Include="MiniEncryptBase.cs" />
-    <Compile Include="MiniEncryptPassword.cs" />
+    <Compile Include="MstkAuthentication.cs" />
+    <Compile Include="CookieEncryption.cs" />
+    <Compile Include="ComHelper.cs" />
+    <Compile Include="PasswordEncryption.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

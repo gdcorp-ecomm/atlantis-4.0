@@ -2,7 +2,7 @@
 
 namespace Atlantis.Framework.MiniEncrypt
 {
-  public class CookieEncryption: MiniEncryptBase
+  public class CookieEncryption : IDisposable
   {
     private gdMiniEncryptLib.IgdCookie _cookieClass;
 
@@ -13,12 +13,12 @@ namespace Atlantis.Framework.MiniEncrypt
 
     ~CookieEncryption()
     {
-      ReleaseObject(_cookieClass);
+      _cookieClass.SafeRelease();
     }
 
-    public override void Dispose()
+    public void Dispose()
     {
-      ReleaseObject(_cookieClass);
+      _cookieClass.SafeRelease();
       GC.SuppressFinalize(this);
     }
 

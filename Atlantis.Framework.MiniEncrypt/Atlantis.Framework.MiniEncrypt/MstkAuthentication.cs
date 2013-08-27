@@ -2,32 +2,31 @@
 
 namespace Atlantis.Framework.MiniEncrypt
 {
-  public class Mstk : MiniEncryptBase
+  public class MstkAuthentication : IDisposable
   {
     private gdMiniEncryptLib.IAuthentication _authenticationClass;
 
-    private Mstk ()
+    private MstkAuthentication()
     {
       _authenticationClass = new gdMiniEncryptLib.Authentication();
     }
 
-    ~Mstk()
+    ~MstkAuthentication()
     {
-      ReleaseObject(_authenticationClass);
+      _authenticationClass.SafeRelease();
     }
 
-    public override void Dispose()
+    public void Dispose()
     {
-      ReleaseObject(_authenticationClass);
+      _authenticationClass.SafeRelease();
       GC.SuppressFinalize(this);
     }
 
-    public static Mstk CreateDisposable() 
+    public static MstkAuthentication CreateDisposable()
     {
-      return new Mstk();
+      return new MstkAuthentication();
     }
-    
-  //todo add try catch, rn
+
     public string CreateMstk(string managerUserId, string managerUserName)
     {
       string result = string.Empty;

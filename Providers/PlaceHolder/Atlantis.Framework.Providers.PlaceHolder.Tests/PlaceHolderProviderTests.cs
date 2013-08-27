@@ -223,6 +223,11 @@ namespace Atlantis.Framework.Providers.PlaceHolder.Tests
       IList<KeyValuePair<string, string>> parameters = new List<KeyValuePair<string, string>>(2);
       parameters.Add(new KeyValuePair<string, string>("Title", "Hello World!"));
       parameters.Add(new KeyValuePair<string, string>("Text", "My Name Is Timbo"));
+      parameters.Add(new KeyValuePair<string, string>("boolVal", "true"));
+      parameters.Add(new KeyValuePair<string, string>("intVal", "1"));
+      parameters.Add(new KeyValuePair<string, string>("dateVal", "08/27/2013"));
+
+
 
       IPlaceHolder placeHolder = new WebControlPlaceHolder(Assembly.GetExecutingAssembly().FullName,
                                                            "Atlantis.Framework.Providers.PlaceHolder.Tests.WebControls.WebControlOne",
@@ -234,7 +239,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder.Tests
       string renderedContent = placeHolderProvider.ReplacePlaceHolders(placeHolder.ToMarkup(), null);
 
       WriteOutput(renderedContent);
-      Assert.IsTrue(renderedContent.Equals("Web Control One!" + "Hello World!" + "My Name Is Timbo"  + "Init event fired!!!" + "Load event fired!!!" + "PreRender event fired!!!"));
+      Assert.IsTrue(renderedContent.Equals("Web Control One!" + "Hello World!" + "My Name Is Timbo" + "int value is 1!" + "bool value is True!" + "datetime value is 8/27/2013 12:00:00 AM!" + "Init event fired!!!" + "Load event fired!!!" + "PreRender event fired!!!"));
     }
 
     [TestMethod]

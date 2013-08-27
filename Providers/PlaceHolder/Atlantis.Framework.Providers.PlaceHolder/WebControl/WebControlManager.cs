@@ -40,7 +40,14 @@ namespace Atlantis.Framework.Providers.PlaceHolder
           PropertyInfo propertyInfo = type.GetProperty(parameterKey);
           if (propertyInfo != null && propertyInfo.CanWrite)
           {
-            propertyInfo.SetValue(control, placeHolderData.ParametersDictionary[parameterKey], null);
+            if (propertyInfo.PropertyType == typeof(string))
+            {
+              propertyInfo.SetValue(control, placeHolderData.ParametersDictionary[parameterKey], null);
+            }
+            else
+            {
+              propertyInfo.SetValue(control, Convert.ChangeType(placeHolderData.ParametersDictionary[parameterKey], propertyInfo.PropertyType), null);
+            }
           }
         }
       }

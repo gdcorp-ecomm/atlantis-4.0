@@ -27,6 +27,10 @@ namespace Atlantis.Framework.Providers.PlaceHolder.Tests.WebControls
 
     public string Text { get; set; }
 
+    public int intVal { get; set; }
+    public bool boolVal { get; set; }
+    public DateTime dateVal { get; set; }
+
     protected override void OnInit(EventArgs e)
     {
       _textSetOnInit = "Init event fired!!!";
@@ -47,6 +51,16 @@ namespace Atlantis.Framework.Providers.PlaceHolder.Tests.WebControls
       writer.Write("Web Control One!");
       writer.Write(Title ?? string.Empty);
       writer.Write(Text ?? string.Empty);
+      
+      if (intVal>0)
+      writer.Write(string.Format("int value is {0}!", intVal));
+      
+      if (boolVal)
+      writer.Write(string.Format("bool value is {0}!", boolVal));
+      
+      if (dateVal >DateTime.MinValue)
+      writer.Write(string.Format("datetime value is {0}!", dateVal));
+      
       writer.Write(TextSetOnInit);
       writer.Write(TextSetOnLoad);
       writer.Write(TextSetOnPreRender);

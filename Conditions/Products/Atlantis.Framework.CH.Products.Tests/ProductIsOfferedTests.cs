@@ -67,7 +67,7 @@ namespace Atlantis.Framework.CH.Products.Tests
     public void EvaluateValidConditionNameWwdFalse()
     {
       MockProviderContainer.SetMockSetting(MockSiteContextSettings.PrivateLabelId, 1387);
-      Assert.IsFalse(ConditionHandlerManager.EvaluateCondition("productIsOffered", new[] { "qsc" }, MockProviderContainer));
+      Assert.IsFalse(ConditionHandlerManager.EvaluateCondition("productIsOffered", new[] { "shoppingcart" }, MockProviderContainer));
     }
 
     [TestMethod]

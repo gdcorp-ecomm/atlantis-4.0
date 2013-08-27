@@ -46,16 +46,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ContextIds.cs" />
     <Compile Include="PrivateLabelTypes.cs" />
     <Compile Include="SupportEngineRequests.cs" />
     <Compile Include="SupportProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Atlantis.Framework.BasePages\Atlantis.Framework.BasePages\Atlantis.Framework.BasePages.csproj">
-      <Project>{69A90C5C-706C-49DD-8F1C-78B8FFB67EA3}</Project>
-      <Name>Atlantis.Framework.BasePages</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj">
       <Project>{D30157B2-C1B3-4073-BA5E-632E2337A997}</Project>
       <Name>Atlantis.Framework.Engine</Name>
@@ -68,13 +65,13 @@
       <Project>{36BF7B2D-17A8-4BCA-8A61-5DCE8C75DE4E}</Project>
       <Name>Atlantis.Framework.Support.Interface</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Geo\Atlantis.Framework.Providers.Geo.Interface\Atlantis.Framework.Providers.Geo.Interface.csproj">
+      <Project>{56c72bae-ff21-49ff-a097-ac38b874ac39}</Project>
+      <Name>Atlantis.Framework.Providers.Geo.Interface</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Localization\Atlantis.Framework.Providers.Localization.Interface\Atlantis.Framework.Providers.Localization.Interface.csproj">
       <Project>{061FCADC-9547-47E2-9643-CFBCFA355AC2}</Project>
       <Name>Atlantis.Framework.Providers.Localization.Interface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Localization\Atlantis.Framework.Providers.Localization\Atlantis.Framework.Providers.Localization.csproj">
-      <Project>{B6571CF6-7F3E-47DF-984D-F90C4ABF8584}</Project>
-      <Name>Atlantis.Framework.Providers.Localization</Name>
     </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.Providers.Support.Interface\Atlantis.Framework.Providers.Support.Interface.csproj">
       <Project>{8EF69837-5224-4910-BC70-F837975D689D}</Project>

@@ -1,6 +1,6 @@
 ﻿using System;
-using Atlantis.Framework.BasePages;
 using Atlantis.Framework.Interface;
+using Atlantis.Framework.Providers.Geo.Interface;
 using Atlantis.Framework.Providers.Localization.Interface;
 using Atlantis.Framework.Providers.Support.Interface;
 using Atlantis.Framework.Support.Interface;
@@ -13,16 +13,42 @@ namespace Atlantis.Framework.Providers.Support
     const int PRIVATE_LABEL_CATEGORY_USER_SUPPORT_PHONE = 46;
     const string WWW = "WWW";
     const string COUNTRY_CODE_US = "us";
+    private const string US_SPANISH_SUPPORT_NUMBER = "(480) 463-8300";
 
     private static readonly ISupportPhoneData _emptySupportPhoneData = new SupportPhoneData(string.Empty);
 
     private readonly Lazy<ISiteContext> _siteContext;
     private readonly Lazy<ILocalizationProvider> _localizationProvider;
+    private readonly Lazy<IGeoProvider> _geoProvider;
 
     public SupportProvider(IProviderContainer container) : base(container)
     {
       _siteContext = new Lazy<ISiteContext>(() => Container.Resolve<ISiteContext>());
-      _localizationProvider = new Lazy<ILocalizationProvider>(() => Container.Resolve<ILocalizationProvider>());
+      _localizationProvider = new Lazy<ILocalizationProvider>(LocalizationProvider);
+      _geoProvider = new Lazy<IGeoProvider>(GeoProvider);
+    }
+
+    private ILocalizationProvider LocalizationProvider()
+    {
+      return Container.CanResolve<ILocalizationProvider>() ? Container.Resolve<ILocalizationProvider>() : null;
+    }
+
+    private IGeoProvider GeoProvider()
+    {
+      return Container.CanResolve<IGeoProvider>() ? Container.Resolve<IGeoProvider>() : null;
+    }
+
+    private bool IsTransperfectProxyActive()
+    {
+      bool result = false;
+
+      IProxyContext proxyContext;
+      if (Container.TryResolve(out proxyContext))
+      {
+        result = proxyContext.IsProxyActive(ProxyTypes.TransPerfectTranslation);
+      }
+
+      return result;
     }
 
     private string _countryCode;
@@ -32,8 +58,19 @@ namespace Atlantis.Framework.Providers.Support
       {
         if (_countryCode == null)
         {
-          _countryCode = _localizationProvider.Value.CountrySite;
-          if (WWW.Equals(_countryCode))
+          if (_localizationProvider.Value != null && !_localizationProvider.Value.IsGlobalSite())
+          {
+            _countryCode = _localizationProvider.Value.CountrySite;
+          }
+          else
+          {
+            if (_geoProvider.Value != null)
+            {
+              _countryCode = _geoProvider.Value.RequestCountryCode;
+            }
+          }
+
+          if (WWW.Equals(_countryCode) || string.IsNullOrEmpty(_countryCode))
           {
             _countryCode = COUNTRY_CODE_US;
           }
@@ -189,6 +226,10 @@ namespace Atlantis.Framework.Providers.Support
         if (SupportOption == "1" || SupportOption == "2")
         {
           technicalSupportPhone = new SupportPhoneData(FormattedPrivateLabelSupportPhone, false);
+        }
+        else if (CountryCode == COUNTRY_CODE_US && IsTransperfectProxyActive())
+        {
+          technicalSupportPhone = new SupportPhoneData(US_SPANISH_SUPPORT_NUMBER, false);
         }
         else
         {

@@ -249,6 +249,41 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="GetResellerDRID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="privatelabelid" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetResellerDRIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetResellerDRIDResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDomainInfoWithPdDomain">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="domainName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDomainInfoWithPdDomainResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetDomainInfoWithPdDomainResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="DataSet" nillable="true">
         <s:complexType>
           <s:sequence>
@@ -358,6 +393,18 @@
   <wsdl:message name="performAvailCheckSoapOut">
     <wsdl:part name="parameters" element="tns:performAvailCheckResponse" />
   </wsdl:message>
+  <wsdl:message name="GetResellerDRIDSoapIn">
+    <wsdl:part name="parameters" element="tns:GetResellerDRID" />
+  </wsdl:message>
+  <wsdl:message name="GetResellerDRIDSoapOut">
+    <wsdl:part name="parameters" element="tns:GetResellerDRIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetDomainInfoWithPdDomainSoapIn">
+    <wsdl:part name="parameters" element="tns:GetDomainInfoWithPdDomain" />
+  </wsdl:message>
+  <wsdl:message name="GetDomainInfoWithPdDomainSoapOut">
+    <wsdl:part name="parameters" element="tns:GetDomainInfoWithPdDomainResponse" />
+  </wsdl:message>
   <wsdl:message name="GetParkedTemplateRecordHttpPostIn">
     <wsdl:part name="iRecurringID" type="s:string" />
   </wsdl:message>
@@ -435,6 +482,18 @@
   <wsdl:message name="performAvailCheckHttpPostOut">
     <wsdl:part name="Body" element="tns:string" />
   </wsdl:message>
+  <wsdl:message name="GetResellerDRIDHttpPostIn">
+    <wsdl:part name="privatelabelid" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetResellerDRIDHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetDomainInfoWithPdDomainHttpPostIn">
+    <wsdl:part name="domainName" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetDomainInfoWithPdDomainHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
   <wsdl:portType name="ParkWebSoap">
     <wsdl:operation name="GetParkedTemplateRecord">
       <wsdl:input message="tns:GetParkedTemplateRecordSoapIn" />
@@ -491,6 +550,14 @@
     <wsdl:operation name="performAvailCheck">
       <wsdl:input message="tns:performAvailCheckSoapIn" />
       <wsdl:output message="tns:performAvailCheckSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetResellerDRID">
+      <wsdl:input message="tns:GetResellerDRIDSoapIn" />
+      <wsdl:output message="tns:GetResellerDRIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDomainInfoWithPdDomain">
+      <wsdl:input message="tns:GetDomainInfoWithPdDomainSoapIn" />
+      <wsdl:output message="tns:GetDomainInfoWithPdDomainSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="ParkWebHttpPost">
@@ -549,6 +616,14 @@
     <wsdl:operation name="performAvailCheck">
       <wsdl:input message="tns:performAvailCheckHttpPostIn" />
       <wsdl:output message="tns:performAvailCheckHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetResellerDRID">
+      <wsdl:input message="tns:GetResellerDRIDHttpPostIn" />
+      <wsdl:output message="tns:GetResellerDRIDHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDomainInfoWithPdDomain">
+      <wsdl:input message="tns:GetDomainInfoWithPdDomainHttpPostIn" />
+      <wsdl:output message="tns:GetDomainInfoWithPdDomainHttpPostOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="ParkWebSoap" type="tns:ParkWebSoap">
@@ -672,6 +747,24 @@
     </wsdl:operation>
     <wsdl:operation name="performAvailCheck">
       <soap:operation soapAction="http://cmpapp-v01.prod.mesa1.gdg:80/CMPWebServices/ParkWeb.asmx/performAvailCheck" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetResellerDRID">
+      <soap:operation soapAction="http://cmpapp-v01.prod.mesa1.gdg:80/CMPWebServices/ParkWeb.asmx/GetResellerDRID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDomainInfoWithPdDomain">
+      <soap:operation soapAction="http://cmpapp-v01.prod.mesa1.gdg:80/CMPWebServices/ParkWeb.asmx/GetDomainInfoWithPdDomain" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -808,6 +901,24 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetResellerDRID">
+      <soap12:operation soapAction="http://cmpapp-v01.prod.mesa1.gdg:80/CMPWebServices/ParkWeb.asmx/GetResellerDRID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDomainInfoWithPdDomain">
+      <soap12:operation soapAction="http://cmpapp-v01.prod.mesa1.gdg:80/CMPWebServices/ParkWeb.asmx/GetDomainInfoWithPdDomain" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="ParkWebHttpPost" type="tns:ParkWebHttpPost">
     <http:binding verb="POST" />
@@ -928,6 +1039,24 @@
     </wsdl:operation>
     <wsdl:operation name="performAvailCheck">
       <http:operation location="/performAvailCheck" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetResellerDRID">
+      <http:operation location="/GetResellerDRID" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDomainInfoWithPdDomain">
+      <http:operation location="/GetDomainInfoWithPdDomain" />
       <wsdl:input>
         <mime:content type="application/x-www-form-urlencoded" />
       </wsdl:input>

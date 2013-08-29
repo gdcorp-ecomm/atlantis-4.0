@@ -41,6 +41,8 @@ namespace Atlantis.Framework.Providers.DomainLookup.Tests
           privateLabelCheck = true;
 
         Assert.IsTrue(privateLabelCheck);
+
+        Assert.AreEqual(data.PdDomainId, 467553);
       }
 
       [TestMethod]
@@ -58,6 +60,8 @@ namespace Atlantis.Framework.Providers.DomainLookup.Tests
           privateLabelCheck = true;
 
         Assert.IsTrue(privateLabelCheck);
+
+        Assert.AreEqual(data.PdDomainId, 477322);
       }
 
       [TestMethod]

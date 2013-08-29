@@ -25,7 +25,7 @@ namespace Atlantis.Framework.DomainLookup.Impl
         dlWebService.Url = ((WsConfigElement)config).WSURL;
         dlWebService.Timeout = (int)dlRequestData.RequestTimeout.TotalMilliseconds;
 
-        DataSet dataSet = dlWebService.GetDomainInfo(dlRequestData.DomainName);
+        DataSet dataSet = dlWebService.GetDomainInfoWithPdDomain(dlRequestData.DomainName);
         dlResponseData = DomainLookupResponseData.FromData(dataSet);
       }
       catch (Exception ex)

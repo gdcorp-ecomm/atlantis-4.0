@@ -5,37 +5,37 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
   <title></title>
-  [@P[cdsDocument:<Data app="atlantis" location="_global/csslink" />]@P]
+  [@P[cdsDocument:<data app="atlantis" location="_global/csslink" />]@P]
 </head>
 <body>
   <div>
-    [@P[userControl:<Data location="~/controls/banner.ascx"><Parameters><Parameter key="Title" value="Attention!" /><Parameter key="Text" value="Scheduled maintenance underway." /></Parameters></Data>]@P]
+    [@P[userControl:<data location="~/controls/banner.ascx"><Parameters><Parameter key="Title" value="Attention!" /><Parameter key="Text" value="Scheduled maintenance underway." /></Parameters></data>]@P]
     <hr />
-    [@P[userControl:<Data location="~/controls/banner.ascx"><Parameters><Parameter key="Title" value="Attention 1!" /><Parameter key="Text" value="Scheduled maintenance underway." /></Parameters></Data>]@P]
+    [@P[userControl:<data location="~/controls/banner.ascx"><Parameters><Parameter key="Title" value="Attention 1!" /><Parameter key="Text" value="Scheduled maintenance underway." /></Parameters></data>]@P]
     <hr />
-    [@P[userControl:<Data location="~/controls/banner.ascx"><Parameters><Parameter key="Title" value="Attention 2!" /><Parameter key="Text" value="Scheduled maintenance underway." /></Parameters></Data>]@P]
+    [@P[userControl:<data location="~/controls/banner.ascx"><Parameters><Parameter key="Title" value="Attention 2!" /><Parameter key="Text" value="Scheduled maintenance underway." /></Parameters></data>]@P]
     <hr />
-    [@P[userControl:<Data location="~/controls/banner2.ascx" />]@P]
+    [@P[userControl:<data location="~/controls/banner2.ascx" />]@P]
     <hr />
   </div>
   <div>
-    [@P[userControl:<Data location="~/controls/content.ascx" />]@P]
+    [@P[userControl:<data location="~/controls/content.ascx" />]@P]
     <hr />
   </div>
    <div>
-    [@P[userControl:<Data location="~/controls/parent.ascx" />]@P]
+    [@P[userControl:<data location="~/controls/parent.ascx" />]@P]
     <hr />
   </div>
   <div>
-    [@P[cdsDocument:<Data app="atlantis" location="_global/banner" />]@P]
+    [@P[cdsDocument:<data app="atlantis" location="_global/banner" />]@P]
     <hr />
   </div>
-  [@P[webControl:<Data assembly="App_Code" type="WebControls.WebControlOne"><Parameters><Parameter key="Text" value="Web control one" /></Parameters></Data>]@P]
+  [@P[webControl:<data assembly="App_Code" type="WebControls.WebControlOne"><Parameters><Parameter key="Text" value="Web control one" /></Parameters></data>]@P]
   <hr />
-  [@P[webControl:<Data assembly="App_Code" type="WebControls.WebControlTwo"><Parameters><Parameter key="Text" value="Web control two" /></Parameters></Data>]@P]
+  [@P[webControl:<data assembly="App_Code" type="WebControls.WebControlTwo"><Parameters><Parameter key="Text" value="Web control two" /></Parameters></data>]@P]
   <hr />
   Circular reference cdsDocument placeholder SHOULD NOT render below:
-  [@P[cdsDocument:<Data app="atlantis" location="_global/circularreference" />]@P]
+  [@P[cdsDocument:<data app="atlantis" location="_global/circularreference" />]@P]
   <hr />
 </body>
 </html>

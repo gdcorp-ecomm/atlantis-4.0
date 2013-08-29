@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Web.UI;
 using Atlantis.Framework.Providers.PlaceHolder.Interface;
 
@@ -27,6 +28,9 @@ namespace Atlantis.Framework.Providers.PlaceHolder
         Type type = UserControlTypeCache.GetType(location);
 
         control = WebControlManager.Construct(type, placeHolderData);
+      }
+      catch (ThreadAbortException)
+      {
       }
       catch (Exception ex)
       {

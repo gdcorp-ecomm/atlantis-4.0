@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Web.UI;
 using Atlantis.Framework.Providers.PlaceHolder.Interface;
 
@@ -36,6 +37,9 @@ namespace Atlantis.Framework.Providers.PlaceHolder
       try
       {
         WebControlManager.FireEvent(eventName, _control);
+      }
+      catch (ThreadAbortException)
+      {
       }
       catch (Exception ex)
       {
@@ -90,6 +94,9 @@ namespace Atlantis.Framework.Providers.PlaceHolder
       {
         string renderedContent = WebControlManager.Render(_control);
         finalContent = PlaceHolderRenderPipeline.RunRenderPipeline(renderedContent, _context.RenderHandlers, _context.ProviderContainer);
+      }
+      catch (ThreadAbortException)
+      {
       }
       catch (Exception ex)
       {

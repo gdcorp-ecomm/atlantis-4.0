@@ -1,4 +1,5 @@
-﻿using Atlantis.Framework.Providers.PlaceHolder.Interface;
+﻿using System.Threading;
+using Atlantis.Framework.Providers.PlaceHolder.Interface;
 using System;
 using System.Web.UI;
 
@@ -33,6 +34,9 @@ namespace Atlantis.Framework.Providers.PlaceHolder
           throw new Exception(string.Format("Attributes \"{0}\" and \"{1}\" are required.", PlaceHolderAttributes.Assembly, PlaceHolderAttributes.Type));
         }
         
+      }
+      catch (ThreadAbortException)
+      {
       }
       catch (Exception ex)
       {

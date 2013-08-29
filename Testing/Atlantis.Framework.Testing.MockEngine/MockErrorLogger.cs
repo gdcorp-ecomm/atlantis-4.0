@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Atlantis.Framework.Interface;
 
-namespace Atlantis.Framework.Testing.MockProviders
+namespace Atlantis.Framework.Testing.MockEngine
 {
   public class MockErrorLogger : IErrorLogger
   {

@@ -9,7 +9,7 @@ using System.Reflection;
 using System.Linq;
 using Atlantis.Framework.Providers.Segmentation.Interface;
 
-namespace Atlantis.Framework.CH.ShopperSegment.Tests
+namespace Atlantis.Framework.CH.Segmentation.Tests
 {
   public class MockShopperSegmentProvider : ProviderBase, ISegmentationProvider
   {
@@ -19,15 +19,15 @@ namespace Atlantis.Framework.CH.ShopperSegment.Tests
 
     }
 
-    public System.Collections.Generic.IEnumerable<int> GetShopperSegmentIds()
-    {
-      return Enumerable.Range(1, 5);
-    }
-
     public int GetShopperSegmentId()
     {
-      return 6;
+      return Container.GetData(MockShopperSegmentProviderSettings.ShopperSegment, 0);
     }
+  }
+
+  public class MockShopperSegmentProviderSettings
+  {
+    public const string ShopperSegment = "MockManagerContextSettings.ShopperSegment";
   }
 }
 

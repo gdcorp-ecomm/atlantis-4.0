@@ -11,9 +11,15 @@ namespace Atlantis.Framework.Providers.Support
   {
     const int PRIVATE_LABEL_CATEGORY_SUPPORT_OPTION = 44;
     const int PRIVATE_LABEL_CATEGORY_USER_SUPPORT_PHONE = 46;
+    const int PRIVATE_LABEL_CATEGORY_USER_SUPPORT_EMAIL = 45;
     const string WWW = "WWW";
     const string COUNTRY_CODE_US = "us";
     private const string US_SPANISH_SUPPORT_NUMBER = "(480) 463-8300";
+
+    public const string GO_DADDY_SUPPORT_EMAIL = "support@godaddy.com";
+    public const string BLUE_RAZOR_SUPPORT_EMAIL = "support@bluerazor.com";
+    public const string WWD_SUPPORT_EMAIL = "support@wildwestdomains.com";
+    public const string DEFAULT_SUPPORT_EMAIL = "support@secureserver.net ";
 
     private static readonly ISupportPhoneData _emptySupportPhoneData = new SupportPhoneData(string.Empty);
 
@@ -77,6 +83,34 @@ namespace Atlantis.Framework.Providers.Support
         }
 
         return _countryCode;
+      }
+    }
+
+    private bool? _isGoDaddy;
+    private bool IsGoDaddy
+    {
+      get
+      {
+        if (!_isGoDaddy.HasValue)
+        {
+          _isGoDaddy = (_siteContext.Value.ContextId == ContextIds.GoDaddy);
+        }
+
+        return _isGoDaddy.Value;
+      }
+    }
+
+    private bool? _isBlueRazor;
+    private bool IsBlueRazor
+    {
+      get
+      {
+        if (!_isBlueRazor.HasValue)
+        {
+          _isBlueRazor = (_siteContext.Value.ContextId == ContextIds.BlueRazor);
+        }
+
+        return _isBlueRazor.Value;
       }
     }
 
@@ -254,6 +288,52 @@ namespace Atlantis.Framework.Providers.Support
       }
 
       return technicalSupportPhone;
+    }
+
+    private string _supportEmail;
+    public string SupportEmail
+    {
+      get
+      {
+        if (_supportEmail == null)
+        {
+          if (IsGoDaddy)
+          {
+            _supportEmail = GO_DADDY_SUPPORT_EMAIL;
+          }
+          else if (IsBlueRazor)
+          {
+            _supportEmail = BLUE_RAZOR_SUPPORT_EMAIL;
+          }
+          else if (IsWwd)
+          {
+            _supportEmail = WWD_SUPPORT_EMAIL;
+          }
+          else if (IsReseller)
+          {
+            try
+            {
+              _supportEmail = DataCache.DataCache.GetPLData(_siteContext.Value.PrivateLabelId, PRIVATE_LABEL_CATEGORY_USER_SUPPORT_EMAIL);
+            }
+            catch (Exception ex)
+            {
+              string data = "PrivateLabelId: " + _siteContext.Value.PrivateLabelId;
+              var exception = new AtlantisException("SupportProvider.SupportEmail", "0", ex.Message + ex.StackTrace, data, null, null);
+              Engine.Engine.LogAtlantisException(exception);              
+            }
+
+            if (string.IsNullOrWhiteSpace(_supportEmail))
+            {
+              _supportEmail = DEFAULT_SUPPORT_EMAIL;
+            }
+          }
+          else
+          {
+            _supportEmail = DEFAULT_SUPPORT_EMAIL;
+          }
+        }
+        return _supportEmail;
+      }
     }
   }
 }

@@ -216,5 +216,43 @@ namespace Atlantis.Framework.Providers.Support.Tests
       ISupportPhoneData supportPhoneData = provider.GetSupportPhone(SupportPhoneType.Technical);
       Assert.AreEqual(true, supportPhoneData.Number == US_SPANISH_SUPPORT_NUMBER);
     }
+
+    [TestMethod]
+    public void SupportEmailGdSuccess()
+    {
+      ISupportProvider provider = SupportProvider();
+      var email = provider.SupportEmail;
+      Assert.AreEqual(true, !string.IsNullOrEmpty(email) && email == "support@godaddy.com");
+    }
+
+    [TestMethod]
+    public void SupportEmailBlueRazorSuccess()
+    {
+      _container.SetData<int>(MockSiteContextSettings.PrivateLabelId, 2);
+
+      ISupportProvider provider = SupportProvider();
+      var email = provider.SupportEmail;
+      Assert.AreEqual(true, email == "support@bluerazor.com");
+    }
+
+    [TestMethod]
+    public void SupportEmailWildWestSuccess()
+    {
+      _container.SetData<int>(MockSiteContextSettings.PrivateLabelId, 1387);
+
+      ISupportProvider provider = SupportProvider();
+      var email = provider.SupportEmail;
+      Assert.AreEqual(true, !string.IsNullOrEmpty(email) && email == "support@wildwestdomains.com");
+    }
+
+    [TestMethod]
+    public void SupportEmailResellerSuccess()
+    {
+      _container.SetData<int>(MockSiteContextSettings.PrivateLabelId, 998);
+
+      ISupportProvider provider = SupportProvider();
+      var email = provider.SupportEmail;
+      Assert.AreEqual(true, !string.IsNullOrEmpty(email) && email == "support@secureserver.net");
+    }
   }
 }

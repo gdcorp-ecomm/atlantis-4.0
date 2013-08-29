@@ -13,6 +13,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Xml.Linq;
 using Atlantis.Framework.Providers.Localization.Interface;
+using Atlantis.Framework.Testing.MockPreferencesProvider;
 
 namespace Atlantis.Framework.Providers.Currency.Tests
 {

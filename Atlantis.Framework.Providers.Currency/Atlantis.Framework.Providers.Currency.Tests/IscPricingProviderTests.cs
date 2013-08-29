@@ -4,6 +4,7 @@ using Atlantis.Framework.Providers.Interface.Pricing;
 using Atlantis.Framework.Providers.Interface.PromoData;
 using Atlantis.Framework.Providers.PromoData;
 using Atlantis.Framework.Testing.MockHttpContext;
+using Atlantis.Framework.Testing.MockPreferencesProvider;
 using Atlantis.Framework.Testing.MockProviders;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Web;

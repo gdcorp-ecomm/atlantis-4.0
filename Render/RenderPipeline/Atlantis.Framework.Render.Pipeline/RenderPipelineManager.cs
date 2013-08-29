@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Render.Pipeline.Interface;
 
@@ -41,6 +42,9 @@ namespace Atlantis.Framework.Render.Pipeline
         try
         {
           renderHandler.ProcessContent(processedRenderContent, providerContainer);
+        }
+        catch (ThreadAbortException)
+        {
         }
         catch (Exception ex)
         {

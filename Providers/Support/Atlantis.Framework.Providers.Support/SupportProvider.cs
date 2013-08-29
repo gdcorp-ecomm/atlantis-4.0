@@ -19,7 +19,7 @@ namespace Atlantis.Framework.Providers.Support
     public const string GO_DADDY_SUPPORT_EMAIL = "support@godaddy.com";
     public const string BLUE_RAZOR_SUPPORT_EMAIL = "support@bluerazor.com";
     public const string WWD_SUPPORT_EMAIL = "support@wildwestdomains.com";
-    public const string DEFAULT_SUPPORT_EMAIL = "support@secureserver.net ";
+    public const string DEFAULT_SUPPORT_EMAIL = "support@secureserver.net";
 
     private static readonly ISupportPhoneData _emptySupportPhoneData = new SupportPhoneData(string.Empty);
 

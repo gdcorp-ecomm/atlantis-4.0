@@ -135,6 +135,10 @@
       <Project>{0d7f076f-1809-437b-b045-e35a7e68e423}</Project>
       <Name>Atlantis.Framework.Render.Pipeline.Interface</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\Testing\Atlantis.Framework.Testing.MockPreferencesProvider\Atlantis.Framework.Testing.MockPreferencesProvider.csproj">
+      <Project>{04a97ebe-b5e8-44f5-bdee-45f593cef0ce}</Project>
+      <Name>Atlantis.Framework.Testing.MockPreferencesProvider</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\Triplets\Currency\Atlantis.Framework.Currency.Impl\Atlantis.Framework.Currency.Impl.csproj">
       <Project>{8dcdc38c-750f-43b4-921e-d49087b30495}</Project>
       <Name>Atlantis.Framework.Currency.Impl</Name>

@@ -10,6 +10,7 @@ using Atlantis.Framework.Providers.Interface.Products;
 using Atlantis.Framework.Providers.Products;
 using Atlantis.Framework.Providers.Interface.Preferences;
 using System.Web;
+using Atlantis.Framework.Testing.MockPreferencesProvider;
 
 namespace Atlantis.Framework.TH.Products.Tests
 {

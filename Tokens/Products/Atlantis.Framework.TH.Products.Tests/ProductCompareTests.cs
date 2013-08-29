@@ -9,6 +9,7 @@ using Atlantis.Framework.Providers.Currency;
 using Atlantis.Framework.Providers.Interface.Products;
 using Atlantis.Framework.Providers.Products;
 using Atlantis.Framework.Providers.Interface.Preferences;
+using Atlantis.Framework.Testing.MockPreferencesProvider;
 
 namespace Atlantis.Framework.TH.Products.Tests
 {

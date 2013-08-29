@@ -2,7 +2,7 @@
 using Atlantis.Framework.Providers.Interface.Preferences;
 using System.Collections.Generic;
 
-namespace Atlantis.Framework.Testing.MockProviders
+namespace Atlantis.Framework.Testing.MockPreferencesProvider
 {
   public class MockShopperPreference : ProviderBase, IShopperPreferencesProvider
   {

@@ -85,6 +85,10 @@
       <Project>{5487def2-0fa7-4b77-9aad-0355784589d6}</Project>
       <Name>Atlantis.Framework.Testing.MockProviders</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\Testing\Atlantis.Framework.Testing.MockEngine\Atlantis.Framework.Testing.MockEngine.csproj">
+      <Project>{20b1c0d2-1789-4813-8bc6-993ce8cf07f7}</Project>
+      <Name>Atlantis.Framework.Testing.MockEngine</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Geo\Atlantis.Framework.Providers.Geo.Interface\Atlantis.Framework.Providers.Geo.Interface.csproj">
       <Project>{56c72bae-ff21-49ff-a097-ac38b874ac39}</Project>
       <Name>Atlantis.Framework.Providers.Geo.Interface</Name>

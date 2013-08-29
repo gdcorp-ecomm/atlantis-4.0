@@ -6,6 +6,7 @@ using Atlantis.Framework.Providers.Interface.Preferences;
 using Atlantis.Framework.Testing.MockHttpContext;
 using Atlantis.Framework.Testing.MockProviders;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Atlantis.Framework.Testing.MockEngine;
 
 namespace Atlantis.Framework.Providers.DataCenter.Tests
 {

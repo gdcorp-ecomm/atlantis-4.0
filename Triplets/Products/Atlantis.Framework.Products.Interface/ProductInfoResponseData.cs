@@ -42,7 +42,8 @@ namespace Atlantis.Framework.Products.Interface
       }
       catch (Exception ex)
       {
-        AtlantisException aex = new AtlantisException("ProductInfoResponseData.FromeCacheData", 0, ex.Message + ex.StackTrace, cacheDataXml);
+        var aex = new AtlantisException("ProductInfoResponseData.FromeCacheData", 0, ex.Message + ex.StackTrace, cacheDataXml);
+        Engine.Engine.LogAtlantisException(aex);
       }
 
       return result;
@@ -59,7 +60,7 @@ namespace Atlantis.Framework.Products.Interface
 
     public string ToXML()
     {
-      XElement element = new XElement("ProductInfoResponseData");
+      var element = new XElement("ProductInfoResponseData");
       return element.ToString(SaveOptions.DisableFormatting);
     }
 
@@ -76,7 +77,7 @@ namespace Atlantis.Framework.Products.Interface
 
     private static RecurringPaymentUnitType ParseRecurringPayment(string recurringPaymentText)
     {
-      RecurringPaymentUnitType result = RecurringPaymentUnitType.Unknown;
+      var result = RecurringPaymentUnitType.Unknown;
 
       if (!string.IsNullOrEmpty(recurringPaymentText))
       {

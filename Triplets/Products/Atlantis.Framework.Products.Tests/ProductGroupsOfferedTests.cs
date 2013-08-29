@@ -5,6 +5,8 @@ using System.Xml.Linq;
 namespace Atlantis.Framework.Products.Tests
 {
   [TestClass]
+  [DeploymentItem("atlantis.config")]
+  [DeploymentItem("Atlantis.Framework.Products.Impl.dll")]
   public class ProductGroupsOfferedTests
   {
     [TestMethod]

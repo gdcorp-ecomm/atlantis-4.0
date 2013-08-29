@@ -7,7 +7,6 @@ namespace Atlantis.Framework.Products.Tests
 {
   [TestClass]
   [DeploymentItem("atlantis.config")]
-  [DeploymentItem("Interop.gdDataCacheLib.dll")]
   [DeploymentItem("Atlantis.Framework.Products.Impl.dll")]
   public class NonUnifiedPfidTests
   {

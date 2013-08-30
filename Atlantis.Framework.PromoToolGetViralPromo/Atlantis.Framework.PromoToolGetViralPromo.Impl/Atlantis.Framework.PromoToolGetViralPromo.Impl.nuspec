@@ -1,12 +1,12 @@
 <?xml version="1.0"?>
 <package >
   <metadata>
-    <id>$id$</id>
-    <version>$version$</version>
-    <title>$title$</title>
+    <id>Atlantis.Framework.PromoToolGetViralPromo</id>
+    <version>1.0.0.0</version>
+    <title>Atlantis Framework PromoToolGetViralPromo</title>
     <authors>$author$</authors>
     <owners>$author$</owners>
-    <projectUrl>https://confluence.int.godaddy.com/display/ATLANTIS/Atlantis+Framework+Home</projectUrl>
+    <projectUrl>https://confluence.int.godaddy.com/display/ATLANTIS</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
     <releaseNotes></releaseNotes>

@@ -3,7 +3,7 @@ namespace Atlantis.Framework.Providers.Links
 {
   public static class LinkProviderEngineRequests
   {
-    private static int _LINKINFO = 12;
+    private static int _LINKINFO = 731;
 
     public static int LinkInfo
     {

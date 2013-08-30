@@ -50,9 +50,19 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LinkProviderTestsWithoutLocalization.cs" />
     <Compile Include="LinkProviderTests.cs" />
+    <Compile Include="LinkProviderLocalizationForGoDaddyCartAsHost.cs" />
+    <Compile Include="LinkProviderTestForDatabaseRelatedValues.cs" />
+    <Compile Include="LinkProviderLocalizationForGoDaddySalesAsHost.cs" />
+    <Compile Include="Mocks\TransperfectTestWebProxy.cs" />
     <Compile Include="Mocks\MockLocalizationProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resource1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resource1.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Atlantis.Framework.AppSettings\Atlantis.Framework.AppSettings.Impl\Atlantis.Framework.AppSettings.Impl.csproj">
@@ -63,6 +73,10 @@
       <Project>{7F2738F8-683C-49E7-88CD-E986C70F0321}</Project>
       <Name>Atlantis.Framework.DataCache</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.DotNetExtensions\Atlantis.Framework.DotNetExtensions\Atlantis.Framework.DotNetExtensions.csproj">
+      <Project>{b63d969f-071e-43cc-a477-7f5951bc0929}</Project>
+      <Name>Atlantis.Framework.DotNetExtensions</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj">
       <Project>{D30157B2-C1B3-4073-BA5E-632E2337A997}</Project>
       <Name>Atlantis.Framework.Engine</Name>
@@ -71,21 +85,17 @@
       <Project>{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}</Project>
       <Name>Atlantis.Framework.Interface</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.LinkInfo\Atlantis.Framework.LinkInfo.Impl\Atlantis.Framework.LinkInfo.Impl.csproj">
-      <Project>{7D677835-485C-4E30-BAC3-DEFCDB0BDA92}</Project>
-      <Name>Atlantis.Framework.LinkInfo.Impl</Name>
+    <ProjectReference Include="..\..\Atlantis.Framework.Localization\Atlantis.Framework.Localization.Impl\Atlantis.Framework.Localization.Impl.csproj">
+      <Project>{fe5bc5f5-bc23-499c-9ac6-470c6f350475}</Project>
+      <Name>Atlantis.Framework.Localization.Impl</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.LinkInfo\Atlantis.Framework.LinkInfo.Interface\Atlantis.Framework.LinkInfo.Interface.csproj">
-      <Project>{39A8B945-42C8-45E8-ADD6-5BC7EB73F423}</Project>
-      <Name>Atlantis.Framework.LinkInfo.Interface</Name>
+    <ProjectReference Include="..\..\Atlantis.Framework.Localization\Atlantis.Framework.Localization.Interface\Atlantis.Framework.Localization.Interface.csproj">
+      <Project>{b324d9ec-957a-40df-8007-9281245ceff0}</Project>
+      <Name>Atlantis.Framework.Localization.Interface</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.Providers.Containers\Atlantis.Framework.Providers.Containers\Atlantis.Framework.Providers.Containers.csproj">
-      <Project>{c333e679-494e-422d-ab5e-e4c0ec94acd5}</Project>
-      <Name>Atlantis.Framework.Providers.Containers</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.Providers.Interface\Atlantis.Framework.Providers.Interface\Atlantis.Framework.Providers.Interface.csproj">
-      <Project>{6cc33c6b-faa7-4b6a-8c3b-bfe94a1a65de}</Project>
-      <Name>Atlantis.Framework.Providers.Interface</Name>
+    <ProjectReference Include="..\..\Atlantis.Framework.Localization\Atlantis.Framework.Localization.MockImpl\Atlantis.Framework.Localization.MockImpl.csproj">
+      <Project>{10E1A35F-D230-443C-AD7D-D509F72B0AB4}</Project>
+      <Name>Atlantis.Framework.Localization.MockImpl</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Atlantis.Framework.Testing\Atlantis.Framework.Testing.MockHttpContext\Atlantis.Framework.Testing.MockHttpContext.csproj">
       <Project>{2F8983B4-801B-461A-9D76-26A58A496261}</Project>
@@ -94,6 +104,14 @@
     <ProjectReference Include="..\..\Atlantis.Framework.Testing\Atlantis.Framework.Testing.MockProviders\Atlantis.Framework.Testing.MockProviders.csproj">
       <Project>{5487def2-0fa7-4b77-9aad-0355784589d6}</Project>
       <Name>Atlantis.Framework.Testing.MockProviders</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Collections\Atlantis.Framework.Collections\Atlantis.Framework.Collections.csproj">
+      <Project>{56bb7e64-2e06-45a9-84ab-d04ad34891eb}</Project>
+      <Name>Atlantis.Framework.Collections</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Triplets\Links\Atlantis.Framework.Links.Impl\Atlantis.Framework.Links.Impl.csproj">
+      <Project>{7d677835-485c-4e30-bac3-defcdb0bda92}</Project>
+      <Name>Atlantis.Framework.Links.Impl</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Providers\Localization\Atlantis.Framework.Providers.Localization.Interface\Atlantis.Framework.Providers.Localization.Interface.csproj">
       <Project>{061fcadc-9547-47e2-9643-cfbcfa355ac2}</Project>
@@ -106,6 +124,14 @@
     <ProjectReference Include="..\..\Triplets\DataCacheGeneric\Atlantis.Framework.DataCacheGeneric.Impl\Atlantis.Framework.DataCacheGeneric.Impl.csproj">
       <Project>{41573a44-95d3-4bde-9cff-65552accd7e4}</Project>
       <Name>Atlantis.Framework.DataCacheGeneric.Impl</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Triplets\Links\Atlantis.Framework.Links.Interface\Atlantis.Framework.Links.Interface.csproj">
+      <Project>{39A8B945-42C8-45E8-ADD6-5BC7EB73F423}</Project>
+      <Name>Atlantis.Framework.Links.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Triplets\Links\Atlantis.Framework.Links.MockImpl\Atlantis.Framework.Links.MockImpl.csproj">
+      <Project>{9006cc0a-f713-4da2-8efd-cd835e3de62b}</Project>
+      <Name>Atlantis.Framework.Links.MockImpl</Name>
     </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.Providers.Links.Interface\Atlantis.Framework.Providers.Links.Interface.csproj">
       <Project>{9972e990-31f1-4c30-9bb5-ac1f3bd4e600}</Project>
@@ -121,6 +147,31 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </None>
+    <None Include="atlantis.linkinfotests.config">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="atlantis.nolocalization.config">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\CountrySiteMarketMappings.xml">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CountrySitesActive.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MarketsActive.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resource1.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resource1.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

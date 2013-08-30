@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Web;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Localization.Interface;
 using Atlantis.Framework.Providers.Localization.Interface;
@@ -22,8 +23,9 @@ namespace Atlantis.Framework.Providers.Localization
     private IMarket _market;
     private string _shortLanguage = null;
     private CultureInfo _cultureInfo = null;
+    private readonly Dictionary<string,CountrySiteMarketMappingsResponseData> _countrySiteMarketMappings;
 
-    public LocalizationProvider(IProviderContainer container)
+    protected LocalizationProvider(IProviderContainer container)
       : base(container)
     {
       _countrySite = new Lazy<ICountrySite>(LoadCountrySiteInfo);
@@ -33,6 +35,7 @@ namespace Atlantis.Framework.Providers.Localization
       _rewrittenUrlLanguage = string.Empty;
       CountrySiteCookie = new Lazy<CountrySiteCookie>(() => new CountrySiteCookie(Container));
       _proxyLanguage = new Lazy<string>(GetProxyLanguage);
+      _countrySiteMarketMappings = new Dictionary<string, CountrySiteMarketMappingsResponseData>();
     }
 
     protected abstract string DetermineCountrySite();
@@ -254,5 +257,45 @@ namespace Atlantis.Framework.Providers.Localization
 
       return (result.Equals("es", StringComparison.OrdinalIgnoreCase) ? "es-US" : result);
     }
+
+    public string GetLanguageUrl()
+    {
+      return GetLanguageUrl(CountrySite, MarketInfo.Id);
+    }
+
+    public string GetLanguageUrl(string marketId)
+    {
+      return GetLanguageUrl(CountrySite, marketId);
+    }
+
+    public string GetLanguageUrl(string countrySiteId, string marketId)
+    {
+      CountrySiteMarketMappingsResponseData marketMappings;
+      _countrySiteMarketMappings.TryGetValue(countrySiteId, out marketMappings);
+      if (marketMappings == null)
+      {
+        marketMappings = LoadCountrySiteMarketMappings(countrySiteId);
+        _countrySiteMarketMappings[countrySiteId] = marketMappings;
+      }
+      return marketMappings.GetLanguageUrl(marketId);
+    }
+
+    private CountrySiteMarketMappingsResponseData LoadCountrySiteMarketMappings(string countrySiteId)
+    {
+      CountrySiteMarketMappingsResponseData result;
+
+      var request = new CountrySiteMarketMappingsRequestData(countrySiteId);
+      try
+      {
+        result = (CountrySiteMarketMappingsResponseData)DataCache.DataCache.GetProcessRequest(request,LocalizationProviderEngineRequests.CountrySiteMarketMappingsRequest);
+      }
+      catch
+      {
+        result = CountrySiteMarketMappingsResponseData.NoMappingsResponse;
+      }
+
+      return result;
+    }
+
   }
 }

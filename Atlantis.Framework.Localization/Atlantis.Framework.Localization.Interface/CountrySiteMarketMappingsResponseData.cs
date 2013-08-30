@@ -9,6 +9,7 @@ namespace Atlantis.Framework.Localization.Interface
   {
     private static CountrySiteMarketMappingsResponseData _defaultResponseData;
     private Dictionary<string, CountrySiteMarketMapping> _mappingsByCountrySiteAndLanguage;
+    private Dictionary<string, CountrySiteMarketMapping> _rawTable;
 
     static CountrySiteMarketMappingsResponseData()
     {
@@ -19,6 +20,7 @@ namespace Atlantis.Framework.Localization.Interface
     private CountrySiteMarketMappingsResponseData()
     {
       _mappingsByCountrySiteAndLanguage = new Dictionary<string, CountrySiteMarketMapping>(StringComparer.OrdinalIgnoreCase);
+      _rawTable = new Dictionary<string, CountrySiteMarketMapping>(StringComparer.OrdinalIgnoreCase);
     }
 
     public static CountrySiteMarketMappingsResponseData NoMappingsResponse
@@ -42,11 +44,14 @@ namespace Atlantis.Framework.Localization.Interface
             XAttribute languageUrlSegment = item.Attribute("languageUrlSegment");
             XAttribute internalOnly = item.Attribute("internalOnly");
 
-            if (languageUrlSegment != null && languageUrlSegment.Value != String.Empty)
+            var csmm = new CountrySiteMarketMapping(countrySiteId.Value, marketId.Value, languageUrlSegment.Value, internalOnly.Value != "0");
+            if (languageUrlSegment.Value != String.Empty)
             {
-              responseObject._mappingsByCountrySiteAndLanguage[languageUrlSegment.Value] =
-                  new CountrySiteMarketMapping(countrySiteId.Value, marketId.Value, languageUrlSegment.Value, internalOnly.Value != "0");
+              responseObject._mappingsByCountrySiteAndLanguage[languageUrlSegment.Value] = csmm;
             }
+
+            // add to the representation of the raw table (no need for the countrysite id, since the response object only contains data for the requested countrysite id)
+            responseObject._rawTable[marketId.Value] = csmm;
           }
         }
         else
@@ -110,6 +115,13 @@ namespace Atlantis.Framework.Localization.Interface
                                                            out mapping);
     }
 
+    public string GetLanguageUrl(string marketId)
+    {
+      CountrySiteMarketMapping csmm;
+      _rawTable.TryGetValue(marketId, out csmm);
+      return csmm != null ? csmm.LanguageUrlSegment : String.Empty;
+    }
+	
     public bool NoMappings { get; private set; }
 
     private bool IsExceptionDefaultMapping { get; set; }

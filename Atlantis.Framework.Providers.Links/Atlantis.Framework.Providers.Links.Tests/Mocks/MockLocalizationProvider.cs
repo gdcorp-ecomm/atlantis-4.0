@@ -56,7 +56,13 @@ namespace Atlantis.Framework.Providers.Links.Tests.Mocks
 
     public bool IsGlobalSite()
     {
-      throw new NotImplementedException();
+      return _IsGlobalSite;
+    }
+
+    private bool _IsGlobalSite;
+    public void SetIsGlobalSite(bool b)
+    {
+      _IsGlobalSite = b;
     }
 
     public bool IsCountrySite(string countryCode)
@@ -97,6 +103,21 @@ namespace Atlantis.Framework.Providers.Links.Tests.Mocks
     public System.Globalization.CultureInfo CurrentCultureInfo
     {
       get { throw new NotImplementedException(); }
+    }
+
+    public string GetLanguageUrl()
+    {
+      throw new NotImplementedException();
+    }
+
+    public string GetLanguageUrl(string marketId)
+    {
+      throw new NotImplementedException();
+    }
+
+    public string GetLanguageUrl(string countrySiteId, string marketId)
+    {
+      throw new NotImplementedException();
     }
 
     #endregion

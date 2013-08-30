@@ -110,5 +110,23 @@ namespace Atlantis.Framework.Providers.Localization.Interface
     /// Returns the CultureInfo of the current request.
     /// </summary>
     CultureInfo CurrentCultureInfo { get; }
+
+    /// <summary>
+    /// Gets the Language Url fragment for the current request
+    /// </summary>
+    /// <returns></returns>
+    string GetLanguageUrl();
+
+    /// <summary>
+    /// Gets the Language Url fragment for the specific marketId, the countrySiteId will be for the current request
+    /// </summary>
+    /// <returns></returns>
+    string GetLanguageUrl(string marketId);
+
+    /// <summary>
+    /// Gets the Language Url fragment for the specific marketId, and countrySiteId.
+    /// </summary>
+    /// <returns></returns>
+    string GetLanguageUrl(string countrySiteId, string marketId);
   }
 }

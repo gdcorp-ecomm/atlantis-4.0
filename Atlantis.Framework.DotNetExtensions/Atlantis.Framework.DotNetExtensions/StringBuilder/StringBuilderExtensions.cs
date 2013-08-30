@@ -1,21 +1,20 @@
-﻿namespace Atlantis.Framework.DotNetExtensions.StringBuilderExtensions
-{
-  using System.Text;
-  using System.Collections.Generic;
+using System.Collections.Generic;
 
-  public static class StringBuilderExt
+namespace Atlantis.Framework.DotNetExtensions.StringBuilder
+{
+  public static class StringBuilderExtensions
   {
-    public static StringBuilder RemoveExcludingEndIndex(this StringBuilder sb, int startIndex, int endIndex)
+    public static System.Text.StringBuilder RemoveExcludingEndIndex(this System.Text.StringBuilder sb, int startIndex, int endIndex)
     {
       return sb.Remove(startIndex, endIndex - startIndex);
     }
 
-    public static bool StartsWith(this StringBuilder sb, string s)
+    public static bool StartsWith(this System.Text.StringBuilder sb, string s)
     {
       return sb.StartsWith(s, 0);
     }
 
-    public static bool StartsWith(this StringBuilder sb, string s, int startIndex)
+    public static bool StartsWith(this System.Text.StringBuilder sb, string s, int startIndex)
     {
       return ((sb.Length - startIndex) >= s.Length) && sb._StartsWith(s, startIndex);
     }
@@ -27,7 +26,7 @@
     /// <param name="s"></param>
     /// <param name="startIndex"></param>
     /// <returns></returns>
-    private static bool _StartsWith(this StringBuilder sb, string s, int startIndex)
+    private static bool _StartsWith(this System.Text.StringBuilder sb, string s, int startIndex)
     {
       int sbi, si;
       for ( sbi=startIndex, si=0; si<s.Length; sbi++,si++ )
@@ -40,12 +39,12 @@
       return true;
     }
 
-    public static int IndexOf(this StringBuilder sb, char value)
+    public static int IndexOf(this System.Text.StringBuilder sb, char value)
     {
       return sb.IndexOf(value, 0);
     }
 
-    public static int IndexOf(this StringBuilder sb, char value, int startIndex)
+    public static int IndexOf(this System.Text.StringBuilder sb, char value, int startIndex)
     {
       for (; startIndex < sb.Length; startIndex++)
       {
@@ -57,12 +56,12 @@
       return -1;
     }
 
-    public static int IndexOf(this StringBuilder sb, string value)
+    public static int IndexOf(this System.Text.StringBuilder sb, string value)
     {
       return sb.IndexOf(value, 0);
     }
 
-    public static int IndexOf(this StringBuilder sb, string value, int startIndex)
+    public static int IndexOf(this System.Text.StringBuilder sb, string value, int startIndex)
     {
       for (; startIndex <= (sb.Length - value.Length); startIndex++)
       {
@@ -89,7 +88,7 @@
     /// <param name="secondToLastItemDelim">delimiter used in lists of size 2 or larger for separating the last two items</param>
     /// <param name="bUseItemDelimOnSecondToLastItem">generally false.  set to true if you want lists of size > 2 to render like so: "blue, red and green" to be "blue, red, and green"</param>
     /// <param name="sb">string builder to which the resultant grammatical list is added</param>
-    public static void GrammaticalListFormatter(this StringBuilder sb, IList<string> itemList, string itemDelim, string secondToLastItemDelim, bool bUseItemDelimOnSecondToLastItem)
+    public static void GrammaticalListFormatter(this System.Text.StringBuilder sb, IList<string> itemList, string itemDelim, string secondToLastItemDelim, bool bUseItemDelimOnSecondToLastItem)
     {
       int countMinusOne = itemList.Count - 1;
 

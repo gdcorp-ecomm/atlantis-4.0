@@ -3,6 +3,7 @@
   public enum QueryParamMode
   {
     CommonParameters = 0,
-    ExplicitParameters = 1
+    ExplicitParameters = 1,
+    ExplicitWithLocalizationParameters = 2
   }
 }

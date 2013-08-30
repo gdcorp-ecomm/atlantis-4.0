@@ -34,6 +34,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Atlantis.Framework.Providers.Containers, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Providers.Containers.4.0.0.0\lib\net40\Atlantis.Framework.Providers.Containers.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Render.Pipeline">
+      <HintPath>..\packages\Atlantis.Framework.Render.Pipeline.2.0.0.0\lib\net40\Atlantis.Framework.Render.Pipeline.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Render.Pipeline.Interface">
+      <HintPath>..\packages\Atlantis.Framework.Render.Pipeline.2.0.0.0\lib\net40\Atlantis.Framework.Render.Pipeline.Interface.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
@@ -60,10 +70,17 @@
     <Compile Include="Stats.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Atlantis.Framework.Providers.Containers\Atlantis.Framework.Providers.Containers\Atlantis.Framework.Providers.Containers.csproj">
-      <Project>{c333e679-494e-422d-ab5e-e4c0ec94acd5}</Project>
-      <Name>Atlantis.Framework.Providers.Containers</Name>
-    </ProjectReference>
+    <EmbeddedResource Include="Resources\firewalltest.xslt" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\stats.xslt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Atlantis.Framework.Engine.Monitor.nuspec" />
+    <None Include="Atlantis.Framework.Engine.Monitor.nuget.bat" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj">
       <Project>{d30157b2-c1b3-4073-ba5e-632e2337a997}</Project>
       <Name>Atlantis.Framework.Engine</Name>
@@ -72,15 +89,6 @@
       <Project>{a083a52e-c3c3-42e0-8dfd-54719e4c3b25}</Project>
       <Name>Atlantis.Framework.Interface</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\firewalltest.xslt" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\stats.xslt" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Atlantis.Framework.Engine.Monitor.nuspec" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

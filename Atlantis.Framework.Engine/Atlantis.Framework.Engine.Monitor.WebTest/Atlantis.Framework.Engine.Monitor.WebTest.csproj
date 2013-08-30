@@ -42,6 +42,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Atlantis.Framework.Providers.Containers, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Providers.Containers.4.0.0.0\lib\net40\Atlantis.Framework.Providers.Containers.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Render.Pipeline, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Render.Pipeline.2.0.0.0\lib\net40\Atlantis.Framework.Render.Pipeline.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Render.Pipeline.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Render.Pipeline.2.0.0.0\lib\net40\Atlantis.Framework.Render.Pipeline.Interface.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -91,10 +103,6 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Atlantis.Framework.Providers.Containers\Atlantis.Framework.Providers.Containers\Atlantis.Framework.Providers.Containers.csproj">
-      <Project>{c333e679-494e-422d-ab5e-e4c0ec94acd5}</Project>
-      <Name>Atlantis.Framework.Providers.Containers</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.Engine.Monitor\Atlantis.Framework.Engine.Monitor.csproj">
       <Project>{8f3e2866-0624-4c9d-94fb-043bf64c24ce}</Project>
       <Name>Atlantis.Framework.Engine.Monitor</Name>
@@ -116,6 +124,9 @@
     <Content Include="atlantis.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

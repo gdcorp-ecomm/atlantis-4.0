@@ -37,12 +37,15 @@ namespace Atlantis.Framework.Providers.Segmentation
             string returnValue = null;
             try
             {
-              RequestData request = new ShopperSegmentRequestData(ShopperContext.ShopperId, string.Empty, string.Empty, SiteContext.Pathway, SiteContext.PageCount);
-              IResponseData response = SessionCache.SessionCache.GetProcessRequest<ShopperSegmentResponseData>(request, SegmentationEngineRequests.ShopperSegmentId);
-              ShopperSegmentResponseData converted = response as ShopperSegmentResponseData;
-              if (!ReferenceEquals(null, converted) && converted.IsSuccess)
+              if (!String.IsNullOrEmpty(ShopperContext.ShopperId))
               {
-                returnValue = converted.SegmentId.SegmentationName();
+                RequestData request = new ShopperSegmentRequestData(ShopperContext.ShopperId, string.Empty, string.Empty, SiteContext.Pathway, SiteContext.PageCount);
+                IResponseData response = SessionCache.SessionCache.GetProcessRequest<ShopperSegmentResponseData>(request, SegmentationEngineRequests.ShopperSegmentId);
+                ShopperSegmentResponseData converted = response as ShopperSegmentResponseData;
+                if (!ReferenceEquals(null, converted) && converted.IsSuccess)
+                {
+                  returnValue = converted.SegmentId.SegmentationName();
+                }
               }
             }
             catch (Exception ex)
@@ -52,7 +55,7 @@ namespace Atlantis.Framework.Providers.Segmentation
               Engine.Engine.LogAtlantisException(exception);
             }
 
-            return returnValue ?? ShopperSegmentations.Nacent;
+            return returnValue ?? ShopperSegmentations.Nascent;
           });
       }
 

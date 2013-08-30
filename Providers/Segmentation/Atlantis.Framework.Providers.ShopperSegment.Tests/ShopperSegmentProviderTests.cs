@@ -44,7 +44,7 @@ namespace Atlantis.Framework.Providers.ShopperSegment.Tests
         IShopperSegmentationProvider provider = InitProvider(1, item);
         Assert.IsNotNull(provider);
         var segment = provider.GetShopperSegmentId();
-        Assert.IsTrue("nacent|activebusiness|ecomm|webpro|domainer".Contains(segment));
+        Assert.IsTrue("nascent|activebusiness|ecomm|webpro|domainer".Contains(segment));
         Assert.IsFalse(string.IsNullOrEmpty(segment));
         this.TestContext.WriteLine("shopperId: {0}, segmentId: {1}", item, provider.GetShopperSegmentId());
       }

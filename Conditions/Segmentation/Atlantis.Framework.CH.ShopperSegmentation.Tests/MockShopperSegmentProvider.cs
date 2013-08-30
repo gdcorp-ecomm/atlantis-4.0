@@ -21,7 +21,7 @@ namespace Atlantis.Framework.CH.Segmentation.Tests
 
     public string GetShopperSegmentId()
     {
-      return Container.GetData(MockShopperSegmentProviderSettings.ShopperSegment, "nacent");
+      return Container.GetData(MockShopperSegmentProviderSettings.ShopperSegment, "nascent");
     }
   }
 

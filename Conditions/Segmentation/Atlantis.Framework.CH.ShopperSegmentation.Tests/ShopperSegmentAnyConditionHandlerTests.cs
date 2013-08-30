@@ -17,7 +17,7 @@ namespace Atlantis.Framework.CH.Segmentation.Tests
     private const string CONDITION_NAME = "shopperSegmentAny";
     private string segmentId = "webpro";
 
-    string Nacent = "Nacent";
+    string Nascent = "Nascent";
     string ActiveBusiness = "ActiveBusiness";
     string eComm = "EComm";
     string WebPro = "WebPro";
@@ -56,7 +56,7 @@ namespace Atlantis.Framework.CH.Segmentation.Tests
     public void OneConditionOneParamFalseExpression()
     {
       var expressionParserManager = GetExpressionParserManager(segmentId);
-      string expression = String.Format("{0}({1})", CONDITION_NAME, Nacent);
+      string expression = String.Format("{0}({1})", CONDITION_NAME, Nascent);
       bool actual = expressionParserManager.EvaluateExpression(expression);
       Assert.IsFalse(actual);
     }
@@ -70,7 +70,7 @@ namespace Atlantis.Framework.CH.Segmentation.Tests
         ActiveBusiness,
         Domainer,
         eComm,
-        Nacent,
+        Nascent,
         WebPro
         );
       bool actual = expressionParserManager.EvaluateExpression(expression);
@@ -86,7 +86,7 @@ namespace Atlantis.Framework.CH.Segmentation.Tests
         ActiveBusiness,
         Domainer,
         eComm,
-        Nacent
+        Nascent
         );
       bool actual = expressionParserManager.EvaluateExpression(expression);
       Assert.IsFalse(actual);
@@ -151,12 +151,12 @@ namespace Atlantis.Framework.CH.Segmentation.Tests
 
 
     [TestMethod]
-    public void SegmentInvalidDefaultNacent()
+    public void SegmentInvalidDefaultNascent()
     {
       var expressionParserManager = GetExpressionParserManager(null);
       string expression = String.Format("{0}({1})",
         CONDITION_NAME,
-        Nacent
+        Nascent
         );
       bool actual = expressionParserManager.EvaluateExpression(expression);
       Assert.IsTrue(actual);

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.InteropServices;
 
 namespace Atlantis.Framework.MiniEncrypt
 {
@@ -39,20 +40,29 @@ namespace Atlantis.Framework.MiniEncrypt
       return result;
     }
 
-    public string DecryptCookieValue(string encryptedValue)
+    public bool TryDecrypteCookieValue(string encryptedValue, out string decryptedValue)
     {
-      string result = null;
+      decryptedValue = null;
 
       if (!string.IsNullOrEmpty(encryptedValue))
       {
-        string decrypted = _cookieClass.Decrypt(encryptedValue);
-
-        if (decrypted != encryptedValue)
+        try
         {
-          result = decrypted;
+          string decrypted = _cookieClass.Decrypt(encryptedValue);
+          if (decrypted != encryptedValue)
+          {
+            decryptedValue = decrypted;
+            return true;
+          }
+        }
+        catch (COMException)
+        {
+          // Do not log. Most common exception is thrown when encrypted value is not really encrypted
+          // return null (never allow unencrypted value to be returned)
         }
       }
-      return result;
+
+      return false;
     }
 
   }

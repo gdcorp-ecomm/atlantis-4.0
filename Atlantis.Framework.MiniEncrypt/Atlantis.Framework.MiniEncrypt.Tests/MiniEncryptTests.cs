@@ -87,12 +87,26 @@ namespace Atlantis.Framework.MiniEncrypt.Tests
       using (var cookie = CookieEncryption.CreateDisposable())
       {
         encryptedValue = cookie.EncryptCookieValue(valueToEncrypt);
-        decryptedValue = cookie.DecryptCookieValue(encryptedValue);
+        cookie.TryDecrypteCookieValue(encryptedValue, out decryptedValue);
       }
 
       Assert.IsNotNull(encryptedValue);
       Assert.IsNotNull(decryptedValue);
       Assert.AreEqual(decryptedValue, valueToEncrypt);
+    }
+
+    [TestMethod]
+    public void TestDecryptNonencryptedCookieValue()
+    {
+      bool result;
+      string decryptedValue;
+
+      using (var cookie = CookieEncryption.CreateDisposable())
+      {
+        result = cookie.TryDecrypteCookieValue("notypted", out decryptedValue);
+      }
+
+      Assert.IsFalse(result);
     }
   }
 }

@@ -78,7 +78,7 @@ namespace Atlantis.Framework.Providers.SplitTesting.Tests
       return container.Resolve<ISplitTestingProvider>();
     }
 
-  #region SplitTestingSide tests
+  #region GetSplitTestingSide tests
 
     [TestMethod]
     public void GetSplitTestingSide_InvalidTestId()
@@ -182,7 +182,6 @@ namespace Atlantis.Framework.Providers.SplitTesting.Tests
       Assert.IsTrue(side1.SideId > 0);
     }
 
-
     [TestMethod]
     public void GetSplitTestingSide_EligibilityRules_NeverElgibile()
     {
@@ -248,6 +247,32 @@ namespace Atlantis.Framework.Providers.SplitTesting.Tests
   
       var cookies = new NameValueCollection();
       cookies.Add(string.Format("SplitTesting{0}", privateLabelId), testId + "-" + versionId + "=" + sideId);
+      mockHttpRequest.MockCookies(cookies);
+
+      var splitProvider = InitializeProviders(privateLabelId, shopperId);
+      SplitTestingEngineRequests.ActiveSplitTests = MockEngineRequests.ActiveSplitTests_3Tests;
+      SplitTestingEngineRequests.ActiveSplitTestDetails = MockEngineRequests.ActiveSplitTestDetails_AB_50_50;
+
+      var side = splitProvider.GetSplitTestingSide(2);
+
+      Assert.AreEqual(sideId, side.SideId);
+    }
+
+    [TestMethod]
+    public void GetSplitTestingSide_SetFromDefaultCookie_OldCookieName()
+    {
+      SplitTestingConfiguration.DefaultCategoryName = "Sales";
+      var mockHttpRequest = new MockHttpRequest("http://www.debug.godaddy-com.ide/");
+      MockHttpContext.SetFromWorkerRequest(mockHttpRequest);
+      string shopperId = "858884";
+      int privateLabelId = 1;
+
+      var testId = 2;
+      var versionId = 2;
+      var sideId = 2;
+
+      var cookies = new NameValueCollection();
+      cookies.Add(string.Format("SplitTesting{0}_{1}", privateLabelId, shopperId), testId + "-" + versionId + "=" + sideId);
       mockHttpRequest.MockCookies(cookies);
 
       var splitProvider = InitializeProviders(privateLabelId, shopperId);
@@ -476,7 +501,6 @@ namespace Atlantis.Framework.Providers.SplitTesting.Tests
     }
 
     #endregion
-
 
   #endregion
 

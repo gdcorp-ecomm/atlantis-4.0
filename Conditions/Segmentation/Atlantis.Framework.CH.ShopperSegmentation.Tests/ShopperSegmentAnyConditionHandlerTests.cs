@@ -15,7 +15,13 @@ namespace Atlantis.Framework.CH.Segmentation.Tests
   {
 
     private const string CONDITION_NAME = "shopperSegmentAny";
-    private int WebPro = 104;
+    private string segmentId = "webpro";
+
+    string Nacent = "Nacent";
+    string ActiveBusiness = "ActiveBusiness";
+    string eComm = "EComm";
+    string WebPro = "WebPro";
+    string Domainer = "Domainer";
 
     [TestInitialize]
     public void Initialize()
@@ -26,10 +32,10 @@ namespace Atlantis.Framework.CH.Segmentation.Tests
 
 
 
-    private ExpressionParserManager GetExpressionParserManager(int segment)
+    private ExpressionParserManager GetExpressionParserManager(string segment)
     {
       var container = new MockProviderContainer();
-      container.RegisterProvider<ISegmentationProvider, MockShopperSegmentProvider>();
+      container.RegisterProvider<IShopperSegmentationProvider, MockShopperSegmentProvider>();
       container.SetData(MockShopperSegmentProviderSettings.ShopperSegment, segment);
       var expressionParserManager = new ExpressionParserManager(container);
       expressionParserManager.EvaluateExpressionHandler += ConditionHandlerManager.EvaluateCondition;
@@ -40,8 +46,8 @@ namespace Atlantis.Framework.CH.Segmentation.Tests
     [TestMethod]
     public void OneConditionOneParamTrueExpression()
     {
-      var expressionParserManager = GetExpressionParserManager(WebPro);
-      string expression = String.Format("{0}({1})", CONDITION_NAME, ShopperSegmentations.WebPro);
+      var expressionParserManager = GetExpressionParserManager(segmentId);
+      string expression = String.Format("{0}({1})", CONDITION_NAME, WebPro);
       bool actual = expressionParserManager.EvaluateExpression(expression);
       Assert.IsTrue(actual);
     }
@@ -49,8 +55,8 @@ namespace Atlantis.Framework.CH.Segmentation.Tests
     [TestMethod]
     public void OneConditionOneParamFalseExpression()
     {
-      var expressionParserManager = GetExpressionParserManager(WebPro);
-      string expression = String.Format("{0}({1})", CONDITION_NAME, ShopperSegmentations.Nacent);
+      var expressionParserManager = GetExpressionParserManager(segmentId);
+      string expression = String.Format("{0}({1})", CONDITION_NAME, Nacent);
       bool actual = expressionParserManager.EvaluateExpression(expression);
       Assert.IsFalse(actual);
     }
@@ -58,14 +64,14 @@ namespace Atlantis.Framework.CH.Segmentation.Tests
     [TestMethod]
     public void OneConditionMultiParamTrueExpression()
     {
-      var expressionParserManager = GetExpressionParserManager(WebPro);
+      var expressionParserManager = GetExpressionParserManager(segmentId);
       string expression = String.Format("{0}({1},{2},{3},{4},{5})",
         CONDITION_NAME,
-        ShopperSegmentations.ActiveBusiness,
-        ShopperSegmentations.Domainer,
-        ShopperSegmentations.eComm,
-        ShopperSegmentations.Nacent,
-        ShopperSegmentations.WebPro
+        ActiveBusiness,
+        Domainer,
+        eComm,
+        Nacent,
+        WebPro
         );
       bool actual = expressionParserManager.EvaluateExpression(expression);
       Assert.IsTrue(actual);
@@ -74,13 +80,13 @@ namespace Atlantis.Framework.CH.Segmentation.Tests
     [TestMethod]
     public void OneConditionMultiParamFalseExpression()
     {
-      var expressionParserManager = GetExpressionParserManager(WebPro);
+      var expressionParserManager = GetExpressionParserManager(segmentId);
       string expression = String.Format("{0}({1},{2},{3},{4})",
         CONDITION_NAME,
-        ShopperSegmentations.ActiveBusiness,
-        ShopperSegmentations.Domainer,
-        ShopperSegmentations.eComm,
-        ShopperSegmentations.Nacent
+        ActiveBusiness,
+        Domainer,
+        eComm,
+        Nacent
         );
       bool actual = expressionParserManager.EvaluateExpression(expression);
       Assert.IsFalse(actual);
@@ -89,11 +95,11 @@ namespace Atlantis.Framework.CH.Segmentation.Tests
     [TestMethod]
     public void MultipleConditionOneParamTrueExpression()
     {
-      var expressionParserManager = GetExpressionParserManager(WebPro);
+      var expressionParserManager = GetExpressionParserManager(segmentId);
       string expression = String.Format("{0}({1}) && !{0}({2})",
         CONDITION_NAME,
-        ShopperSegmentations.WebPro,
-        ShopperSegmentations.ActiveBusiness
+        WebPro,
+        ActiveBusiness
         );
       bool actual = expressionParserManager.EvaluateExpression(expression);
       Assert.IsTrue(actual);
@@ -102,11 +108,11 @@ namespace Atlantis.Framework.CH.Segmentation.Tests
     [TestMethod]
     public void MultipleConditionOneParamFalseExpression()
     {
-      var expressionParserManager = GetExpressionParserManager(WebPro);
+      var expressionParserManager = GetExpressionParserManager(segmentId);
       string expression = String.Format("{0}({1}) && !{0}({2})",
         CONDITION_NAME,
-        ShopperSegmentations.ActiveBusiness,
-        ShopperSegmentations.WebPro
+        ActiveBusiness,
+        WebPro
         );
       bool actual = expressionParserManager.EvaluateExpression(expression);
       Assert.IsFalse(actual);
@@ -115,13 +121,13 @@ namespace Atlantis.Framework.CH.Segmentation.Tests
     [TestMethod]
     public void MultipleConditionMultiParamTrueExpression()
     {
-      var expressionParserManager = GetExpressionParserManager(WebPro);
+      var expressionParserManager = GetExpressionParserManager(segmentId);
       string expression = String.Format("{0}({1},{2},{3}) && !{0}({2},{3},{4})",
         CONDITION_NAME,
-        ShopperSegmentations.WebPro,
-        ShopperSegmentations.ActiveBusiness,
-        ShopperSegmentations.Domainer,
-        ShopperSegmentations.eComm
+        WebPro,
+        ActiveBusiness,
+        Domainer,
+        eComm
         );
       bool actual = expressionParserManager.EvaluateExpression(expression);
       Assert.IsTrue(actual);
@@ -131,13 +137,13 @@ namespace Atlantis.Framework.CH.Segmentation.Tests
     public void MultipleConditionMultiParamFalseExpression()
     {
 
-      var expressionParserManager = GetExpressionParserManager(WebPro);
+      var expressionParserManager = GetExpressionParserManager(segmentId);
       string expression = String.Format("{0}({1},{2},{3}) && !{0}({2},{3},{4})",
         CONDITION_NAME,
-        ShopperSegmentations.ActiveBusiness,
-        ShopperSegmentations.Domainer,
-        ShopperSegmentations.eComm,
-        ShopperSegmentations.WebPro
+        ActiveBusiness,
+        Domainer,
+        eComm,
+        WebPro
         );
       bool actual = expressionParserManager.EvaluateExpression(expression);
       Assert.IsFalse(actual);
@@ -147,10 +153,10 @@ namespace Atlantis.Framework.CH.Segmentation.Tests
     [TestMethod]
     public void SegmentInvalidDefaultNacent()
     {
-      var expressionParserManager = GetExpressionParserManager(0);
+      var expressionParserManager = GetExpressionParserManager(null);
       string expression = String.Format("{0}({1})",
         CONDITION_NAME,
-        ShopperSegmentations.Nacent
+        Nacent
         );
       bool actual = expressionParserManager.EvaluateExpression(expression);
       Assert.IsTrue(actual);

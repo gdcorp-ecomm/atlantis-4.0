@@ -11,7 +11,7 @@ using Atlantis.Framework.Providers.Segmentation.Interface;
 
 namespace Atlantis.Framework.CH.Segmentation.Tests
 {
-  public class MockShopperSegmentProvider : ProviderBase, ISegmentationProvider
+  public class MockShopperSegmentProvider : ProviderBase, IShopperSegmentationProvider
   {
     public MockShopperSegmentProvider(IProviderContainer container)
       : base(container)
@@ -19,9 +19,9 @@ namespace Atlantis.Framework.CH.Segmentation.Tests
 
     }
 
-    public int GetShopperSegmentId()
+    public string GetShopperSegmentId()
     {
-      return Container.GetData(MockShopperSegmentProviderSettings.ShopperSegment, 0);
+      return Container.GetData(MockShopperSegmentProviderSettings.ShopperSegment, "nacent");
     }
   }
 

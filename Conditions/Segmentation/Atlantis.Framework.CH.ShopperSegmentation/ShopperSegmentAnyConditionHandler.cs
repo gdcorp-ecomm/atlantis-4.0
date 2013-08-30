@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Atlantis.Framework.Conditions.Interface;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.Segmentation.Interface;
@@ -13,12 +14,20 @@ namespace Atlantis.Framework.CH.Segmentation
     {
       bool returnValue = false;
 
-      if (!ReferenceEquals(null, parameters) && 0 < parameters.Count)
+      if (parameters.Count > 0)
       {
-        ISegmentationProvider segmentProvider = providerContainer.Resolve<ISegmentationProvider>();
+        IShopperSegmentationProvider segmentProvider = providerContainer.Resolve<IShopperSegmentationProvider>();
         if (!ReferenceEquals(null, segmentProvider))
         {
-          returnValue = parameters.Contains(segmentProvider.GetShopperSegmentId().SegmentationName());
+          var segment = segmentProvider.GetShopperSegmentId();
+          foreach (var param in parameters)
+          {
+            if (segment.Equals(param, StringComparison.OrdinalIgnoreCase))
+            {
+              returnValue = true;
+              break;
+            }
+          }
         }
       }
       return returnValue;

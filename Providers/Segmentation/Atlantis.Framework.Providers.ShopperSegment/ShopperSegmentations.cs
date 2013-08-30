@@ -1,14 +1,14 @@
 ﻿using System.Collections.Generic;
 
-namespace Atlantis.Framework.CH.Segmentation
+namespace Atlantis.Framework.Providers.Segmentation
 {
   public static class ShopperSegmentations
   {
-    public const string Nacent = "Nacent";
-    public const string ActiveBusiness = "ActiveBusiness";
-    public const string eComm = "eComm";
-    public const string WebPro = "WebPro";
-    public const string Domainer = "Domainer";
+    public const string Nacent = "nacent";
+    public const string ActiveBusiness = "activebusiness";
+    public const string eComm = "ecomm";
+    public const string WebPro = "webpro";
+    public const string Domainer = "domainer";
 
     private static Dictionary<int, string> _segmentations;
 
@@ -25,7 +25,7 @@ namespace Atlantis.Framework.CH.Segmentation
       };
     }
 
-    public static string SegmentationName(this int id)
+    internal static string SegmentationName(this int id)
     {
       string value;
       return _segmentations.TryGetValue(id, out value) ? value : Nacent;

@@ -1,0 +1,19 @@
+﻿<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Atlantis.Framework.DataCacheService</id>
+    <version>4.0.0.0</version>
+    <title>Atlantis Framework DataCacheService</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <projectUrl>https://confluence.int.godaddy.com/display/ATLANTIS</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes></releaseNotes>
+    <copyright>$copyright$</copyright>
+    <tags>Atlantis Framework DataCacheService</tags>
+  </metadata>
+  <files>
+    <!-- No Files: Do Not package the Interop -->
+  </files>
+</package>

@@ -50,6 +50,12 @@
     <Content Include="Interop\Interop.gdDataCacheLib.dll" />
     <Content Include="Interop\readme.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Atlantis.Framework.DataCacheService.nuspec">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Atlantis.Framework.DataCacheService.nuget.bat" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

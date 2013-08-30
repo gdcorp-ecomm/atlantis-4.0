@@ -12,9 +12,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyDescription("Release Build")]
 [assembly: AssemblyConfiguration("")]
 #endif
-[assembly: AssemblyCompany("GoDaddy.com, Inc.")]
+[assembly: AssemblyCompany("GoDaddy, LLC")]
 [assembly: AssemblyProduct("Atlantis.Framework.DataCache")]
-[assembly: AssemblyCopyright("Copyright © GoDaddy.com, Inc. 2011-2013")]
+[assembly: AssemblyCopyright("Copyright © GoDaddy.com, LLC 2011-2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

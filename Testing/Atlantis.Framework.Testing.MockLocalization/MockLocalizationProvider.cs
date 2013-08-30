@@ -201,6 +201,20 @@ namespace Atlantis.Framework.Testing.MockLocalization
       _cultureInfo = null;
     }
 
+    public string GetLanguageUrl()
+    {
+      return GetLanguageUrl(CountrySite, MarketInfo.Id);
+    }
+
+    public string GetLanguageUrl(string marketId)
+    {
+      return GetLanguageUrl(CountrySite, marketId);
+    }
+
+    public string GetLanguageUrl(string countrySiteId, string marketId)
+    {
+      throw new NotImplementedException();
+    }
     #endregion
   }
 }

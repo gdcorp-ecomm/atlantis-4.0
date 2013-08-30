@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Atlantis.Framework.PrivateLabel.Impl")]
+[assembly: AssemblyTitle("Atlantis.Framework.PrivateLabel")]
 #if DEBUG
 [assembly: AssemblyDescription("Debug Build")]
 [assembly: AssemblyConfiguration("Debug Build")]
@@ -12,9 +12,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyDescription("Release Build")]
 [assembly: AssemblyConfiguration("Release Build")]
 #endif
-[assembly: AssemblyCompany("GoDaddy.com")]
-[assembly: AssemblyProduct("Atlantis.Framework.PrivateLabel.Impl")]
-[assembly: AssemblyCopyright("Copyright © GoDaddy.com 2013")]
+[assembly: AssemblyCompany("GoDaddy LLC")]
+[assembly: AssemblyProduct("Atlantis.Framework.PrivateLabel")]
+[assembly: AssemblyCopyright("Copyright © GoDaddy LLC 2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

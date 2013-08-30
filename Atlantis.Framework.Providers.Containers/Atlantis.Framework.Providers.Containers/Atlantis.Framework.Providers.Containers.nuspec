@@ -13,7 +13,6 @@
     <copyright>$copyright$</copyright>
     <tags>Atlantis Framework Providers Containers</tags>
     <dependencies>
-      <dependency id="Atlantis.Framework.Engine" version="4.0.0.0" />
       <dependency id="Atlantis.Framework.Render.Pipeline" version="2.0.0.0" />
     </dependencies>
   </metadata>

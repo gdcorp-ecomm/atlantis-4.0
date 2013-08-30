@@ -11,9 +11,9 @@ using System.Runtime.InteropServices;
 #else
 [assembly: AssemblyDescription("Release Build")]
 #endif
-[assembly: AssemblyCompany("GoDaddy.com")]
+[assembly: AssemblyCompany("GoDaddy, LLC")]
 [assembly: AssemblyProduct("Atlantis.Framework.AppSettings.Impl")]
-[assembly: AssemblyCopyright("Copyright © GoDaddy.com 2013")]
+[assembly: AssemblyCopyright("Copyright © GoDaddy, LLC 2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

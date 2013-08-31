@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Web;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.Segmentation.Interface;
 using Atlantis.Framework.Segmentation.Interface;
@@ -34,17 +35,20 @@ namespace Atlantis.Framework.Providers.Segmentation
       {
         _shopperSegmentId = new Lazy<string>(() =>
           {
-            string returnValue = null;
+            string returnValue = GetSpoofShopperSegment();
             try
             {
               if (!String.IsNullOrEmpty(ShopperContext.ShopperId))
               {
-                RequestData request = new ShopperSegmentRequestData(ShopperContext.ShopperId, string.Empty, string.Empty, SiteContext.Pathway, SiteContext.PageCount);
-                IResponseData response = SessionCache.SessionCache.GetProcessRequest<ShopperSegmentResponseData>(request, SegmentationEngineRequests.ShopperSegmentId);
-                ShopperSegmentResponseData converted = response as ShopperSegmentResponseData;
-                if (!ReferenceEquals(null, converted) && converted.IsSuccess)
+                if (String.IsNullOrEmpty(returnValue))
                 {
-                  returnValue = converted.SegmentId.SegmentationName();
+                  RequestData request = new ShopperSegmentRequestData(ShopperContext.ShopperId, string.Empty, string.Empty, SiteContext.Pathway, SiteContext.PageCount);
+                  IResponseData response = SessionCache.SessionCache.GetProcessRequest<ShopperSegmentResponseData>(request, SegmentationEngineRequests.ShopperSegmentId);
+                  ShopperSegmentResponseData converted = response as ShopperSegmentResponseData;
+                  if (!ReferenceEquals(null, converted) && converted.IsSuccess)
+                  {
+                    returnValue = converted.SegmentId.SegmentationName();
+                  }
                 }
               }
             }
@@ -61,5 +65,24 @@ namespace Atlantis.Framework.Providers.Segmentation
 
       return _shopperSegmentId.Value;
     }
+
+    private string GetSpoofShopperSegment()
+    {
+      string result = null;
+      if (SiteContext.IsRequestInternal && HttpContext.Current != null)
+      {
+        var segment = HttpContext.Current.Request.QueryString["qaspoofsegment"];
+
+        if (!string.IsNullOrEmpty(segment))
+        {
+          result = segment;
+        }
+      }
+
+      return result;
+    }
+
+
+
   }
 }

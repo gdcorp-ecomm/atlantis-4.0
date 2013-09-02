@@ -58,7 +58,10 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="ActiveLanguageAnyTests.cs" />
+    <Compile Include="AssemblyInitializer.cs" />
     <Compile Include="CountrySiteAnyConditionHandlerTests.cs" />
+    <Compile Include="IsGlobalSiteTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -43,7 +43,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActiveLanguageAny.cs" />
     <Compile Include="CountrySiteAnyConditionHandler.cs" />
+    <Compile Include="IsGlobalSite.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

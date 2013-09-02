@@ -1,22 +1,25 @@
 ﻿using Atlantis.Framework.Conditions.Interface;
-using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.Localization.Interface;
 using System.Collections.Generic;
 
 namespace Atlantis.Framework.CH.Localization
 {
-  public class CountrySiteAnyConditionHandler : IConditionHandler
+  public class ActiveLanguageAny : IConditionHandler
   {
-    public string ConditionName { get { return "countrySiteAny"; } }
+    public string ConditionName
+    {
+      get { return "activeLanguageAny"; }
 
-    public bool EvaluateCondition(string conditionName, IList<string> parameters, IProviderContainer providerContainer)
+    }
+
+    public bool EvaluateCondition(string conditionName, IList<string> parameters, Interface.IProviderContainer providerContainer)
     {
       bool result = false;
       ILocalizationProvider localizationProvider = providerContainer.Resolve<ILocalizationProvider>();
 
-      foreach (string countrySiteValue in parameters)
+      foreach (string language in parameters)
       {
-        if (localizationProvider.IsCountrySite(countrySiteValue))
+        if (localizationProvider.IsActiveLanguage(language))
         {
           result = true;
           break;

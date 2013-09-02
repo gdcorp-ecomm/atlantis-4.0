@@ -1,22 +1,25 @@
-﻿using System.Reflection;
-using Atlantis.Framework.Conditions.Interface;
+﻿using Atlantis.Framework.Conditions.Interface;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.Localization.Interface;
 using Atlantis.Framework.Render.ExpressionParser;
 using Atlantis.Framework.Testing.MockLocalization;
 using Atlantis.Framework.Testing.MockProviders;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
 namespace Atlantis.Framework.CH.Localization.Tests
 {
   [TestClass]
   [DeploymentItem("Atlantis.Framework.CH.Localization.dll")]
-  public class CountrySiteAnyConditionHandlerTests
+  public class IsGlobalSiteTests
   {
-    private ExpressionParserManager SetContainerAndConditionHandler()
+    private ExpressionParserManager SetContainerAndConditionHandler(string countrySite)
     {
       MockProviderContainer mockProviderContainer = new MockProviderContainer();
-      mockProviderContainer.SetData(MockLocalizationProviderSettings.CountrySite, "www");
+      mockProviderContainer.SetData(MockLocalizationProviderSettings.CountrySite, countrySite);
       mockProviderContainer.RegisterProvider<ISiteContext, MockSiteContext>();
       mockProviderContainer.RegisterProvider<IShopperContext, MockShopperContext>();
       mockProviderContainer.RegisterProvider<IManagerContext, MockManagerContext>();
@@ -28,21 +31,20 @@ namespace Atlantis.Framework.CH.Localization.Tests
     }
 
     [TestMethod]
-    public void OneConditionExpression()
+    public void IsGlobalSiteTrue()
     {
-      var expressionParser = SetContainerAndConditionHandler();
-      string expression = "countrySiteAny(www)";
-      bool result = expressionParser.EvaluateExpression(expression);
-      Assert.IsTrue(result);
+      var expression = "isGlobalSite()";
+      var expressionParser = SetContainerAndConditionHandler("www");
+      Assert.IsTrue(expressionParser.EvaluateExpression(expression));
     }
 
     [TestMethod]
-    public void MultipleConditionExpression()
+    public void IsGlobalSiteFalse()
     {
-      var expressionParser = SetContainerAndConditionHandler();
-      string expression = "countrySiteAny(www) && !countrySiteAny(in)";
-      bool result = expressionParser.EvaluateExpression(expression);
-      Assert.IsTrue(result);
+      var expression = "isGlobalSite()";
+      var expressionParser = SetContainerAndConditionHandler("au");
+      Assert.IsFalse(expressionParser.EvaluateExpression(expression));
     }
+
   }
 }

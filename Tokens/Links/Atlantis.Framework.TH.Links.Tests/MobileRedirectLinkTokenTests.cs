@@ -17,7 +17,7 @@ namespace Atlantis.Framework.TH.Links.Tests
   [DeploymentItem("atlantis.config")]
   [DeploymentItem("Atlantis.Framework.UserAgentEx.Impl.dll")]
   [DeploymentItem("Atlantis.Framework.DataCacheGeneric.Impl.dll")]
-  [DeploymentItem("Atlantis.Framework.LinkInfo.Impl.dll")]
+  [DeploymentItem("Atlantis.Framework.Links.Impl.dll")]
   [DeploymentItem("Atlantis.Framework.TH.Links.dll")]
   public class MobileRedirectLinkTokenTests
   {

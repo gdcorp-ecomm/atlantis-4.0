@@ -149,11 +149,11 @@ namespace Atlantis.Framework.Localization.Tests
     [TestMethod]
     public void CountrySiteMarketMappingsResponseData_InvalidXml_ReturnsNoMappingsResponse()
     {
-      const string invalidXml = 
+      const string invalidXml =
 @"<data count=""3"">
-	<item catalog_countrySite=""www"" marketID=""en-US"" languageUrlSegment=""en"" isActive=""-1"" internalOnly=""0"" />
-	<item catalog_countrySite=""www"" marketID="""" languageUrlSegment=""es"" isActive=""-1"" internalOnly=""0"" />
-	<item catalog_countrySite=""ca"" languageUrlSegment=""fr"" isActive=""-1"" internalOnly=""0"" />
+	<item catalog_countrySite=""www"" catalog_marketID=""en-US"" languageURLSegment=""en"" isActive=""1"" internalOnly=""0"" />
+	<item catalog_countrySite=""www"" catalog_marketID="""" languageURLSegment=""es"" isActive=""1"" internalOnly=""0"" />
+	<item catalog_countrySite=""ca"" languageURLSegment=""fr"" isActive=""1"" internalOnly=""0"" />
 </data>";
 
       CountrySiteMarketMappingsResponseData response = CountrySiteMarketMappingsResponseData.FromCacheDataXml(invalidXml);
@@ -171,10 +171,9 @@ namespace Atlantis.Framework.Localization.Tests
     {
       const string invalidXml =
 @"<data count=""8"">
-	<item catalog_countrySite=""www"" marketID=""en-US"" languageUrlSegment="""" isActive=""-1"" internalOnly=""0"" />
-	<item catalog_countrySite=""www"" marketID=""es-US"" languageUrlSegment=""es"" isActive=""-1"" internalOnly=""0"" />
-	<item catalog_countrySite=""www"" marketID=""en-US"" languageUrlSegment=""en"" isActive=""-1"" internalOnly=""0"" />
-	<item catalog_countrySite=""www"" marketID=""es-US"" isActive=""-1"" internalOnly=""0"" />
+	<item catalog_countrySite=""www"" catalog_marketID=""en-US"" languageURLSegment="""" isActive=""1"" internalOnly=""0"" />
+	<item catalog_countrySite=""www"" catalog_marketID=""es-US"" languageURLSegment=""es"" isActive=""1"" internalOnly=""0"" />
+	<item catalog_countrySite=""www"" catalog_marketID=""en-US"" languageURLSegment=""en"" isActive=""1"" internalOnly=""0"" />
 </data>";
 
       CountrySiteMarketMappingsResponseData response = CountrySiteMarketMappingsResponseData.FromCacheDataXml(invalidXml);
@@ -193,10 +192,10 @@ namespace Atlantis.Framework.Localization.Tests
     {
       const string invalidXml =
 @"<data count=""8"">
-	<item catalog_countrySite=""www"" marketID=""en-XX"" languageUrlSegment=""en"" isActive=""-1"" internalOnly=""0"" />
-	<item catalog_countrySite=""www"" marketID=""es-XX"" languageUrlSegment=""es"" isActive=""-1"" internalOnly=""0"" />
-	<item catalog_countrySite=""www"" marketID=""en-US"" languageUrlSegment=""en"" isActive=""-1"" internalOnly=""0"" />
-	<item catalog_countrySite=""www"" marketID=""es-US"" languageUrlSegment=""es"" isActive=""-1"" internalOnly=""0"" />
+	<item catalog_countrySite=""www"" catalog_marketID=""en-XX"" languageURLSegment=""en"" isActive=""1"" internalOnly=""0"" />
+	<item catalog_countrySite=""www"" catalog_marketID=""es-XX"" languageURLSegment=""es"" isActive=""1"" internalOnly=""0"" />
+	<item catalog_countrySite=""www"" catalog_marketID=""en-US"" languageURLSegment=""en"" isActive=""1"" internalOnly=""0"" />
+	<item catalog_countrySite=""www"" catalog_marketID=""es-US"" languageURLSegment=""es"" isActive=""1"" internalOnly=""0"" />
 </data>";
 
       CountrySiteMarketMappingsResponseData response = CountrySiteMarketMappingsResponseData.FromCacheDataXml(invalidXml);

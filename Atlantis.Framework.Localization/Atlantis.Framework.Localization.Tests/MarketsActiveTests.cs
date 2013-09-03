@@ -117,6 +117,16 @@ namespace Atlantis.Framework.Localization.Tests
     #region Miscellaneous tests
 
     [TestMethod]
+    public void MarketsActiveResponse_DefaultMarketInfo()
+    {
+      IMarket market = MarketsActiveResponseData.DefaultMarketInfo;
+      Assert.IsNotNull(market);
+      Assert.AreEqual("en-US", market.Id);
+      Assert.AreEqual("en-US", market.MsCulture);
+      Assert.IsFalse(market.IsInternalOnly);
+    }
+
+    [TestMethod]
     public void MarketsActiveRequestDataConstructorGeneratesNewRequestDataObject()
     {
       var request = new MarketsActiveRequestData();
@@ -152,10 +162,10 @@ namespace Atlantis.Framework.Localization.Tests
     [TestMethod]
     public void MarketsActiveResponse_InvalidXml_ReturnsEmptyResponseData()
     {
-      const string invalidXml = 
+      const string invalidXml =
 @"<data count=""8"">
-	<item marketID=""en-US"" marketDescription=""English - United States"" msCulture=""en-US"" isActive=""-1"" internalOnly=""0"" />
-	<item marketID=""es-US"" marketDescription=""Spanish - United States"" isActive=""-1"" internalOnly=""0"" />
+	<item catalog_marketID=""en-US"" marketDescription=""English - United States"" MSCulture=""en-US"" isActive=""1"" internalOnly=""0"" />
+	<item catalog_marketID=""es-US"" marketDescription=""Spanish - United States"" isActive=""1"" internalOnly=""0"" />
 </data>";
 
       MarketsActiveResponseData response = MarketsActiveResponseData.FromCacheDataXml(invalidXml);
@@ -173,11 +183,11 @@ namespace Atlantis.Framework.Localization.Tests
     {
       const string invalidXml =
 @"<data count=""8"">
-	<item marketID=""en-US"" marketDescription=""English - United States"" msCulture=""en-US"" isActive=""-1"" internalOnly=""0"" />
-	<item marketID="""" marketDescription=""Spanish - United States"" msCulture=""en-US"" isActive=""-1"" internalOnly=""0"" />
-  <item marketID=""es-US"" marketDescription=""Spanish - United States"" msCulture=""en-US"" isActive=""-1"" internalOnly=""0"" />
-  <item marketDescription=""English - Canada"" msCulture=""en-CA"" isActive=""-1"" internalOnly=""0"" />
-  <item marketID=""fr-CA"" marketDescription=""French - Canada"" msCulture=""fr-CA"" isActive=""-1"" internalOnly=""0"" />
+	<item catalog_marketID=""en-US"" marketDescription=""English - United States"" MSCulture=""en-US"" isActive=""1"" internalOnly=""0"" />
+	<item catalog_marketID="""" marketDescription=""Spanish - United States"" MSCulture=""en-US"" isActive=""1"" internalOnly=""0"" />
+  <item catalog_marketID=""es-US"" marketDescription=""Spanish - United States"" MSCulture=""en-US"" isActive=""1"" internalOnly=""0"" />
+  <item marketDescription=""English - Canada"" MSCulture=""en-CA"" isActive=""1"" internalOnly=""0"" />
+  <item catalog_marketID=""fr-CA"" marketDescription=""French - Canada"" MSCulture=""fr-CA"" isActive=""1"" internalOnly=""0"" />
 </data>";
 
       MarketsActiveResponseData response = MarketsActiveResponseData.FromCacheDataXml(invalidXml);

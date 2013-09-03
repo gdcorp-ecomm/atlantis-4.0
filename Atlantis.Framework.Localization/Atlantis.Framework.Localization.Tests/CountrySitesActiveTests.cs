@@ -124,6 +124,18 @@ namespace Atlantis.Framework.Localization.Tests
     #region Miscellaneous tests
 
     [TestMethod]
+    public void CountrySitesActiveResponse_DefaultCountrySiteInfo()
+    {
+      ICountrySite countrySite = CountrySitesActiveResponseData.DefaultCountrySiteInfo;
+      Assert.IsNotNull(countrySite);
+      Assert.AreEqual("www", countrySite.Id);
+      Assert.AreEqual("en-US", countrySite.DefaultMarketId);
+      Assert.AreEqual("USD", countrySite.DefaultCurrencyType);
+      Assert.AreEqual(0, countrySite.PriceGroupId);
+      Assert.IsFalse(countrySite.IsInternalOnly);
+    }
+
+    [TestMethod]
     public void CountrySitesActiveRequestDataConstructorGeneratesNewRequestDataObject()
     {
       var request = new CountrySitesActiveRequestData();

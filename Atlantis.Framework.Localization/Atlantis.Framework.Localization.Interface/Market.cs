@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Atlantis.Framework.Providers.Localization.Interface;
+﻿using Atlantis.Framework.Providers.Localization.Interface;
 
 namespace Atlantis.Framework.Localization.Interface
 {

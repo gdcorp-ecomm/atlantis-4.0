@@ -40,8 +40,8 @@ namespace Atlantis.Framework.Localization.Interface
           foreach (XElement item in data.Descendants("item"))
           {
             XAttribute countrySiteId = item.Attribute("catalog_countrySite");
-            XAttribute marketId = item.Attribute("marketID");
-            XAttribute languageUrlSegment = item.Attribute("languageUrlSegment");
+            XAttribute marketId = item.Attribute("catalog_marketID");
+            XAttribute languageUrlSegment = item.Attribute("languageURLSegment");
             XAttribute internalOnly = item.Attribute("internalOnly");
 
             var csmm = new CountrySiteMarketMapping(countrySiteId.Value, marketId.Value, languageUrlSegment.Value, internalOnly.Value != "0");
@@ -88,7 +88,7 @@ namespace Atlantis.Framework.Localization.Interface
       CountrySiteMarketMapping mapping;
       if (TryGetMapping(language, out mapping))
       {
-        result = (mapping != null && (!mapping.IsInternalOnly || includeInternalOnly));
+        result = (!mapping.IsInternalOnly || includeInternalOnly);
       }
 
       return result;

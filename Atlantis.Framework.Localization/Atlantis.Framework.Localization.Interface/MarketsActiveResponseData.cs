@@ -49,9 +49,9 @@ namespace Atlantis.Framework.Localization.Interface
           XElement data = XElement.Parse(cacheDataXml);
           foreach (XElement item in data.Descendants("item"))
           {
-            XAttribute id = item.Attribute("marketID");
+            XAttribute id = item.Attribute("catalog_marketID");
             XAttribute description = item.Attribute("marketDescription");
-            XAttribute msCulture = item.Attribute("msCulture");
+            XAttribute msCulture = item.Attribute("MSCulture");
             XAttribute internalOnly = item.Attribute("internalOnly");
 
             if (id != null && id.Value != String.Empty)

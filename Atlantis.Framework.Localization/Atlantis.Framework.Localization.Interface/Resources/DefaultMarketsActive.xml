@@ -1,11 +1,11 @@
 <data count="8">
-	<item marketID="en-US" marketDescription="English (United States)" msCulture="en-US" isActive="-1" internalOnly="0" />
-	<item marketID="es-US" marketDescription="Spanish (United States)" msCulture="es-US" isActive="-1" internalOnly="0" />
-	<item marketID="en-CA" marketDescription="English (Canada)" msCulture="en-CA" isActive="-1" internalOnly="0" />
-	<item marketID="en-GB" marketDescription="English (United Kingdom)" msCulture="en-GB" isActive="-1" internalOnly="0" />
-	<item marketID="en-AU" marketDescription="English (Australia)" msCulture="en-AU" isActive="-1" internalOnly="0" />
-	<item marketID="en-IN" marketDescription="English (India)" msCulture="en-IN" isActive="-1" internalOnly="0" />
-	<item marketID="qa-QA" marketDescription="QA (Show Tags)" msCulture="en-US" isActive="-1" internalOnly="-1" />
-  <item marketID="qa-PS" marketDescription="QA (Pseudo)" msCulture="en-US" isActive="-1" internalOnly="-1" />
-  <item marketID="qa-PZ" marketDescription="QA (Zs)" msCulture="en-US" isActive="-1" internalOnly="-1" />
+	<item catalog_marketID="en-US" marketDescription="English (United States)" MSCulture="en-US" isActive="1" internalOnly="0" />
+	<item catalog_marketID="es-US" marketDescription="Spanish (United States)" MSCulture="es-US" isActive="1" internalOnly="0" />
+	<item catalog_marketID="en-CA" marketDescription="English (Canada)" MSCulture="en-CA" isActive="1" internalOnly="0" />
+	<item catalog_marketID="en-GB" marketDescription="English (United Kingdom)" MSCulture="en-GB" isActive="1" internalOnly="0" />
+	<item catalog_marketID="en-AU" marketDescription="English (Australia)" MSCulture="en-AU" isActive="1" internalOnly="0" />
+	<item catalog_marketID="en-IN" marketDescription="English (India)" MSCulture="en-IN" isActive="1" internalOnly="0" />
+	<item catalog_marketID="qa-QA" marketDescription="QA (Show Tags)" MSCulture="en-US" isActive="1" internalOnly="1" />
+  <item catalog_marketID="qa-PS" marketDescription="QA (Pseudo)" MSCulture="en-US" isActive="1" internalOnly="1" />
+  <item catalog_marketID="qa-PZ" marketDescription="QA (Zs)" MSCulture="en-US" isActive="1" internalOnly="1" />
 </data>

@@ -30,16 +30,16 @@ namespace Atlantis.Framework.CH.Localization.Tests
     public void ActiveLanguageAnySingleFull()
     {
       var expressionParser = SetContainerAndConditionHandler("en-AU");
-      Assert.IsTrue(expressionParser.EvaluateExpression("activeLanguageAny(en-au)"));
-      Assert.IsFalse(expressionParser.EvaluateExpression("activeLangaugeAny(en-us)"));
+      Assert.IsTrue(expressionParser.EvaluateExpression("activeLanguageAny([en-au])"));
+      Assert.IsFalse(expressionParser.EvaluateExpression("activeLangaugeAny([en-us])"));
     }
 
     [TestMethod]
     public void ActiveLanguageAnyMultipleFull()
     {
       var expressionParser = SetContainerAndConditionHandler("en-AU");
-      Assert.IsTrue(expressionParser.EvaluateExpression("activeLanguageAny(es-mx,en-au)"));
-      Assert.IsFalse(expressionParser.EvaluateExpression("activeLangaugeAny(en-us,es-mx)"));
+      Assert.IsTrue(expressionParser.EvaluateExpression("activeLanguageAny([es-mx],[en-au])"));
+      Assert.IsFalse(expressionParser.EvaluateExpression("activeLangaugeAny([en-us],[es-mx])"));
     }
 
     [TestMethod]

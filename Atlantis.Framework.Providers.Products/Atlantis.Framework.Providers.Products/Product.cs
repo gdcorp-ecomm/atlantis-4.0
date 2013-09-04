@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using Atlantis.Framework.Providers.Interface.Products;
 using Atlantis.Framework.Providers.Interface.Currency;
 using Atlantis.Framework.Interface;
@@ -8,24 +9,30 @@ namespace Atlantis.Framework.Providers.Products
 {
   public class Product : IProduct
   {
-    private IProductInfo _productInfo;
-    private int _productId;
-    private int _privateLabelId;
-    private ICurrencyProvider _currencyProvider;
-    private Lazy<Dictionary<RecurringPaymentUnitType, double>> _durationUnits;
+    private readonly int _productId;
+    private readonly IProviderContainer _container;
+    private readonly Lazy<Dictionary<RecurringPaymentUnitType, double>> _durationUnits;
+    private readonly Lazy<IProductInfo> _productInfo;
+    private readonly Lazy<ICurrencyProvider> _currency; 
    
-    internal Product(int productId, int privateLabelId, ICurrencyProvider currencyProvider)
+    internal Product(int productId, IProviderContainer container)
     {
       _productId = productId;
-      _privateLabelId = privateLabelId;
-      _currencyProvider = currencyProvider;
-      _productInfo = new ProductInfo(productId, _privateLabelId);
-      _durationUnits = new Lazy<Dictionary<RecurringPaymentUnitType, double>>(() => { return CalculateDurationUnits(); });
+      _container = container;
+
+      _productInfo = new Lazy<IProductInfo>(LoadProductInfo);
+      _durationUnits = new Lazy<Dictionary<RecurringPaymentUnitType, double>>(CalculateDurationUnits);
+      _currency = new Lazy<ICurrencyProvider>(() => _container.Resolve<ICurrencyProvider>());
+    }
+
+    private IProductInfo LoadProductInfo()
+    {
+      return new ProductInfo(_container, _productId);
     }
 
     public IProductInfo Info
     {
-      get { return _productInfo; }
+      get { return _productInfo.Value; }
     }
 
     public int ProductId
@@ -37,7 +44,7 @@ namespace Atlantis.Framework.Providers.Products
 
     private Dictionary<RecurringPaymentUnitType, double> CalculateDurationUnits()
     {
-      Dictionary<RecurringPaymentUnitType, double> result = new Dictionary<RecurringPaymentUnitType, double>();
+      var result = new Dictionary<RecurringPaymentUnitType, double>();
 
       switch (DurationUnit)
       {
@@ -66,9 +73,9 @@ namespace Atlantis.Framework.Providers.Products
           result[RecurringPaymentUnitType.Annual] = Duration / 4.0;
           break;
         default:
-          string message = "Product DurationUnit Error";
-          string data = string.Concat("ProductId=", ProductId.ToString(), ":DurationUnit=", DurationUnit.ToString());
-          AtlantisException ex = new AtlantisException("Product.CalculateDurationUnits", "30", message, data, null, null);
+          const string message = "Product DurationUnit Error";
+          string data = string.Concat("ProductId=", ProductId.ToString(CultureInfo.InvariantCulture), ":DurationUnit=", DurationUnit.ToString());
+          var ex = new AtlantisException("Product.CalculateDurationUnits", 30, message, data);
           Engine.Engine.LogAtlantisException(ex);
           result[RecurringPaymentUnitType.Monthly] = Duration;
           result[RecurringPaymentUnitType.Quarterly] = Duration;
@@ -104,7 +111,7 @@ namespace Atlantis.Framework.Providers.Products
     {
       get
       {
-        return _productInfo.NumberOfPeriods;
+        return _productInfo.Value.NumberOfPeriods;
       }
     }
 
@@ -112,7 +119,7 @@ namespace Atlantis.Framework.Providers.Products
     {
       get
       {
-        return _productInfo.RecurringPayment;
+        return _productInfo.Value.RecurringPayment;
       }
     }
 
@@ -122,12 +129,12 @@ namespace Atlantis.Framework.Providers.Products
 
     public bool IsOnSale
     {
-      get { return _currencyProvider.IsProductOnSale(ProductId); }
+      get { return _currency.Value.IsProductOnSale(ProductId); }
     }
 
     public bool GetIsOnSale(int shopperPriceType = -1, ICurrencyInfo transactionCurrency = null, string isc = null)
     {
-      return _currencyProvider.IsProductOnSale(ProductId, shopperPriceType, transactionCurrency, isc);
+      return _currency.Value.IsProductOnSale(ProductId, shopperPriceType, transactionCurrency, isc);
     }
 
     #endregion
@@ -140,7 +147,8 @@ namespace Atlantis.Framework.Providers.Products
       {
         return int.MaxValue;
       }
-      else if (value <= int.MinValue)
+
+      if (value <= int.MinValue)
       {
         return int.MinValue;
       }
@@ -156,18 +164,10 @@ namespace Atlantis.Framework.Providers.Products
       {
         double periods = _durationUnits.Value[durationUnit];
 
-        if ((periods > 0) && (periods != 1.0))
+        if ((periods > 0) && (Math.Abs(periods - 1.0) > 0))
         {
-          int periodPrice;
-          if (roundingType == PriceRoundingType.RoundFractionsUpProperly)
-          {
-            periodPrice = ConvertToInt32NoOverflow(Math.Ceiling(price.Price / periods));
-          }
-          else
-          {
-            periodPrice = ConvertToInt32NoOverflow(Math.Floor(price.Price / periods));
-          }
-          result = _currencyProvider.NewCurrencyPrice(periodPrice, price.CurrencyInfo, price.Type);
+          int periodPrice = ConvertToInt32NoOverflow(roundingType == PriceRoundingType.RoundFractionsUpProperly ? Math.Ceiling(price.Price / periods) : Math.Floor(price.Price / periods));
+          result = _currency.Value.NewCurrencyPrice(periodPrice, price.CurrencyInfo, price.Type);
         }
       }
 
@@ -177,49 +177,35 @@ namespace Atlantis.Framework.Providers.Products
     private ICurrencyPrice _listPrice;
     public ICurrencyPrice ListPrice
     {
-      get
-      {
-        if (_listPrice == null)
-        {
-          _listPrice = _currencyProvider.GetListPrice(ProductId);
-        }
-        return _listPrice;
-      }
+      get { return _listPrice ?? (_listPrice = _currency.Value.GetListPrice(ProductId)); }
     }
 
     public ICurrencyPrice GetListPrice(RecurringPaymentUnitType durationUnit, int shopperPriceType = -1, ICurrencyInfo transactionCurrency = null, PriceRoundingType roundingType = PriceRoundingType.RoundFractionsUpProperly)
     {
-      ICurrencyPrice price = _currencyProvider.GetListPrice(ProductId, shopperPriceType, transactionCurrency);
+      var price = _currency.Value.GetListPrice(ProductId, shopperPriceType, transactionCurrency);
       return GetPeriodPrice(price, durationUnit, roundingType);
     }
 
     private ICurrencyPrice _currentPrice;
     public ICurrencyPrice CurrentPrice
     {
-      get
-      {
-        if (_currentPrice == null)
-        {
-          _currentPrice = _currencyProvider.GetCurrentPrice(ProductId);
-        }
-        return _currentPrice;
-      }
+      get { return _currentPrice ?? (_currentPrice = _currency.Value.GetCurrentPrice(ProductId)); }
     }
 
     public ICurrencyPrice GetCurrentPrice(RecurringPaymentUnitType durationUnit, int shopperPriceType = -1, ICurrencyInfo transactionCurrency = null, string isc = null, PriceRoundingType roundingType = PriceRoundingType.RoundFractionsUpProperly)
     {
-      ICurrencyPrice price = _currencyProvider.GetCurrentPrice(ProductId, shopperPriceType, transactionCurrency, isc);
+      var price = _currency.Value.GetCurrentPrice(ProductId, shopperPriceType, transactionCurrency, isc);
       return GetPeriodPrice(price, durationUnit, roundingType);
     }
 
     public ICurrencyPrice GetCurrentPriceByQuantity(int quantity)
     {
-      return _currencyProvider.GetCurrentPriceByQuantity(ProductId, quantity);
+      return _currency.Value.GetCurrentPriceByQuantity(ProductId, quantity);
     }
 
     public ICurrencyPrice GetCurrentPriceByQuantity(int quantity, RecurringPaymentUnitType durationUnit, int shopperPriceType = -1, ICurrencyInfo transactionCurrency = null, PriceRoundingType roundingType = PriceRoundingType.RoundFractionsUpProperly)
     {
-      ICurrencyPrice price = _currencyProvider.GetCurrentPriceByQuantity(ProductId, quantity, shopperPriceType, transactionCurrency);
+      var price = _currency.Value.GetCurrentPriceByQuantity(ProductId, quantity, shopperPriceType, transactionCurrency);
       return GetPeriodPrice(price, durationUnit, roundingType);
     }
 

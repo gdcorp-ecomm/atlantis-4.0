@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace Atlantis.Framework.Providers.Interface.Products
@@ -23,9 +24,17 @@ namespace Atlantis.Framework.Providers.Interface.Products
     /// back from stored procedures that are not unified product ids.
     /// </summary>
     /// <param name="pfid">non-unified pfid</param>
-    /// <param name="privateLabelId">privatelabel of the non-unified pfid</param>
-    /// <returns>a unified private label id.</returns>
-    int GetUnifiedProductIdByPfid(int pfid, int privateLabelId);
+    /// <returns>a unified product id.</returns>
+    int GetUnifiedProductIdByPfid(int nonunifiedPfid);
+
+    /// <summary>
+    /// Will find the non-unified pfid for a unified product id. Useful if you need a 
+    /// non-unified pfid for an older stored procedure or webservice call.
+    /// This method is preferred over using the method on DataCache
+    /// </summary>
+    /// <param name="unifiedProductId">unified product id</param>
+    /// <returns>a non-unified pfid</returns>
+    int GetNonUnifiedPfid(int unifiedProductId);
 
     /// <summary>
     /// Returns an IProduct
@@ -41,14 +50,22 @@ namespace Atlantis.Framework.Providers.Interface.Products
     /// <returns>List of IProduct objects</returns>
     List<IProduct> NewProductList(IEnumerable<int> productIds);
 
+    [Obsolete("Try to avoid using IProductView objects. Use IProduct instead for all pricing.")]
     List<IProductView> NewProductViewList(IEnumerable<int> productIds);
+    [Obsolete("Try to avoid using IProductView objects. Use IProduct instead for all pricing.")]
     List<IProductView> NewProductViewList(IEnumerable<int> productIds, PriceRoundingType priceRoundingMethod, SavingsRoundingType savingsRoundingMethod);
+    [Obsolete("Try to avoid using IProductView objects. Use IProduct instead for all pricing.")]
     List<IProductView> NewProductViewList(IEnumerable<int> productIds, int defaultId);
+    [Obsolete("Try to avoid using IProductView objects. Use IProduct instead for all pricing.")]
     List<IProductView> NewProductViewList(IEnumerable<int> productIds, int defaultId, PriceRoundingType priceRoundingMethod, SavingsRoundingType savingsRoundingMethod);
+    [Obsolete("Try to avoid using IProductView objects. Use IProduct instead for all pricing.")]
     Dictionary<T, IProductView> NewProductViewDictionary<T>(IList<T> keys, IList<int> productIds, PriceRoundingType priceRoundingMethod, SavingsRoundingType savingsRoundingMethod);
 
+    [Obsolete("Try to avoid using IProductView objects. Use IProduct instead for all pricing.")]
     IProductView NewProductView(IProduct product);
+    [Obsolete("Try to avoid using IProductView objects. Use IProduct instead for all pricing.")]
     IProductView NewProductView(IProduct product, PriceRoundingType priceRoundingMethod, SavingsRoundingType savingsRoundingMethod);
+    [Obsolete("Try to avoid using IProductView objects. Use IProduct instead for all pricing.")]
     IProductView NewProductView(IProduct product, bool isDefault, int quantity, PriceRoundingType priceRoundingMethod, SavingsRoundingType savingsRoundingMethod);
   }
 }

@@ -1,130 +1,139 @@
-﻿using System.IO;
-using System.Xml;
-using Atlantis.Framework.Providers.Interface.Products;
+﻿using System.Globalization;
 using Atlantis.Framework.Interface;
+using Atlantis.Framework.Products.Interface;
+using Atlantis.Framework.Providers.Interface.Products;
+using System;
+using Atlantis.Framework.Providers.Localization.Interface;
 
 namespace Atlantis.Framework.Providers.Products
 {
   public class ProductInfo : IProductInfo
   {
-    private const string ProductInfoRequestXml = "<GetProductInfoByUnifiedPFID><param name=\"n_gdshop_product_unifiedProductID\" value=\"{0}\"/><param name=\"n_privateLabelID\" value=\"{1}\"/></GetProductInfoByUnifiedPFID>";
-    private int _productId;
-    private RecurringPaymentUnitType _recurringPayment;
-    private int _numberOfPeriods;
-    private int _gdshop_product_typeID;
-    private string _name;
-    private string _description2= string.Empty;
+    readonly IProviderContainer _container;
+    readonly int _productId;
+    readonly Lazy<ISiteContext> _siteContext;
+    readonly Lazy<ProductInfoResponseData> _productInfoResponse;
+    private readonly Lazy<ProductNamesResponseData> _productNamesResponse;
+    private readonly Lazy<int> _nonUnifiedPfid; 
 
-    public ProductInfo(int productId, int privateLabelId)
+    internal ProductInfo(IProviderContainer container, int productId)
     {
+      _container = container;
       _productId = productId;
-      _recurringPayment = RecurringPaymentUnitType.Unknown;
-      _numberOfPeriods = 0;
-      _gdshop_product_typeID = -1;
 
-      string xml = DataCache.DataCache.GetCacheData(string.Format(ProductInfoRequestXml, productId, privateLabelId));
+      _siteContext = new Lazy<ISiteContext>(() => _container.Resolve<ISiteContext>());
+      _productInfoResponse = new Lazy<ProductInfoResponseData>(LoadProductInfoData);
+      _productNamesResponse = new Lazy<ProductNamesResponseData>(LoadProductNamesForLanguage);
+      _nonUnifiedPfid = new Lazy<int>(LoadNonUnifiedPfid);
+    }
 
-      if (string.IsNullOrEmpty(xml))
+    private ProductInfoResponseData LoadProductInfoData()
+    {
+      ProductInfoResponseData result; 
+      try
       {
-        string message = "ProductInfo not found for product=" + _productId.ToString() + ", plid=" + privateLabelId.ToString() + ". This is a 120 minute cache.";
-        string data = xml;
-        AtlantisException ex = new AtlantisException("IProductInfo.ProductInfo", "86", message, data, null, null);
-        Engine.Engine.LogAtlantisException(ex);
+        var request = new ProductInfoRequestData(_productId, _siteContext.Value.PrivateLabelId);
+        result = (ProductInfoResponseData)DataCache.DataCache.GetProcessRequest(request, ProductProviderEngineRequests.ProductInfo);
       }
-      else
+      catch (Exception ex)
       {
-        using (StringReader sr = new StringReader(xml))
-        {
-          using (XmlReader reader = XmlReader.Create(sr))
-          {
-            while (reader.Read())
-            {
-              if (reader.Name == "item")
-              {
-                while (reader.MoveToNextAttribute())
-                {
-                  switch (reader.Name)
-                  {
-                    case "numberOfPeriods":
-                      int numPeriods;
-                      if (int.TryParse(reader.Value, out numPeriods))
-                      {
-                        _numberOfPeriods = numPeriods;
-                      }
-                      break;
-                    case "recurring_payment":
-                      if (reader.Value == "monthly")
-                        _recurringPayment = RecurringPaymentUnitType.Monthly;
-                      else if (reader.Value == "annual")
-                        _recurringPayment = RecurringPaymentUnitType.Annual;
-                      else if (reader.Value == "semiannual")
-                        _recurringPayment = RecurringPaymentUnitType.SemiAnnual;
-                      else if (reader.Value == "quarterly")
-                        _recurringPayment = RecurringPaymentUnitType.Quarterly;
-                      else
-                        _recurringPayment = RecurringPaymentUnitType.Unknown;
-                      break;
-                    case "gdshop_product_typeID":
-                      int productTypeId;
-                      if (int.TryParse(reader.Value, out productTypeId))
-                      {
-                        _gdshop_product_typeID = productTypeId;
-                      }
-                      break;
-                    case "name":
-                      _name = reader.Value;
-                      break;
-                    case "description2":
-                      _description2 = reader.Value;
-                      break;
+        var exception = new AtlantisException("LoadProductInfoData", 0, ex.Message + ex.StackTrace, _productId.ToString(CultureInfo.InvariantCulture));
+        Engine.Engine.LogAtlantisException(exception);
+        result = ProductInfoResponseData.None;
+      }
+      return result;
+    }
 
-                  }
-                }
-              }
-            }
-          }
-        }
+    private ProductNamesResponseData LoadProductNamesForLanguage()
+    {
+      ILocalizationProvider localization;
+      if (!_container.TryResolve(out localization))
+      {
+        return ProductNamesResponseData.Empty;
       }
 
-      if (string.IsNullOrEmpty(_name))
+      if (localization.IsActiveLanguage("en-us"))
       {
-        _name = _productId.ToString();
+        return ProductNamesResponseData.Empty;
       }
-      if (string.IsNullOrEmpty(_description2))
+
+      if (_nonUnifiedPfid.Value == 0)
       {
-        _description2 = _name;
+        return ProductNamesResponseData.Empty;
       }
+
+      var request = new ProductNamesRequestData(localization.FullLanguage, _nonUnifiedPfid.Value);
+
+      try
+      {
+        return (ProductNamesResponseData)DataCache.DataCache.GetProcessRequest(request, ProductProviderEngineRequests.ProductNames);
+      }
+      catch (Exception ex)
+      {
+        var exception = new AtlantisException("LoadProductNamesForLanguage", 0, ex.Message + ex.StackTrace, request.NonUnifiedPfid + "/" + request.FullLanguage);
+        Engine.Engine.LogAtlantisException(exception);
+        return ProductNamesResponseData.Empty;
+      }
+    }
+
+    private int LoadNonUnifiedPfid()
+    {
+      int result = 0;
+
+      try
+      {
+        var request = new NonUnifiedPfidRequestData(_productId, _siteContext.Value.PrivateLabelId);
+        var response = (NonUnifiedPfidResponseData) DataCache.DataCache.GetProcessRequest(request, ProductProviderEngineRequests.NonUnifiedProductId);
+        result = response.NonUnifiedPfid;
+      }
+      catch (Exception ex)
+      {
+        var exception = new AtlantisException("LoadProductNamesForLanguage", 0, ex.Message + ex.StackTrace, _productId.ToString(CultureInfo.InvariantCulture));
+        Engine.Engine.LogAtlantisException(exception);
+      }
+
+      return result;
     }
 
     public string FriendlyDescription
     {
-      get { return _description2; }
+      get
+      {
+        string result = _productInfoResponse.Value.FriendlyDescription;
+        if (!string.IsNullOrEmpty(_productNamesResponse.Value.FriendlyName))
+        {
+          result = _productNamesResponse.Value.FriendlyName;
+        }
+        return result;
+      }
     }
 
     public string Name
     {
-      get { return _name; }
-    }
-
-    public int ProductTypeId
-    {
       get
       {
-        return _gdshop_product_typeID;
+        string result = _productInfoResponse.Value.Name;
+        if (!string.IsNullOrEmpty(_productNamesResponse.Value.Name))
+        {
+          result = _productNamesResponse.Value.Name;
+        }
+        return result;
       }
     }
 
     public int NumberOfPeriods
     {
-      get
-      {
-        return _numberOfPeriods;
-      }
+      get { return _productInfoResponse.Value.NumberOfPeriods; }
+    }
+
+    public int ProductTypeId
+    {
+      get { return _productInfoResponse.Value.ProductTypeId; }
     }
 
     public RecurringPaymentUnitType RecurringPayment
     {
-      get { return _recurringPayment; }
+      get { return _productInfoResponse.Value.RecurringPayment; }
     }
   }
 }

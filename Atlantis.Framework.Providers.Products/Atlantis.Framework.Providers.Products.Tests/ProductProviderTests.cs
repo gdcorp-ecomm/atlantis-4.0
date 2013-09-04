@@ -1,52 +1,75 @@
-﻿using Atlantis.Framework.Interface;
+﻿using Atlantis.Framework.Engine;
+using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.Currency;
 using Atlantis.Framework.Providers.Interface.Currency;
 using Atlantis.Framework.Providers.Interface.Products;
-using Atlantis.Framework.Providers.Interface.ProviderContainer;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Atlantis.Framework.Testing.MockHttpContext;
-using System;
 using Atlantis.Framework.Testing.MockProviders;
 using Atlantis.Framework.Providers.Interface.Preferences;
-using Atlantis.Framework.Providers.Interface.PromoData;
-using System.Web;
 using System.Collections.Generic;
+using Atlantis.Framework.Providers.Localization.Interface;
+using Atlantis.Framework.Testing.MockEngine;
+using Atlantis.Framework.Testing.MockPreferencesProvider;
+using Atlantis.Framework.Testing.MockLocalization;
 
 namespace Atlantis.Framework.Providers.Products.Tests
 {
   [TestClass]
-  [DeploymentItem("Interop.gdDataCacheLib.dll")]
+  [DeploymentItem("atlantis.config")]
+  [DeploymentItem("Atlantis.Framework.DataCacheGeneric.Impl.dll")]
+  [DeploymentItem("Atlantis.Framework.Currency.Impl.dll")]
+  [DeploymentItem("Atlantis.Framework.EcommPricing.Impl.dll")]
+  [DeploymentItem("Atlantis.Framework.Products.Impl.dll")]
   public class ProductProviderTests
   {
-    private void SetContexts(int privateLabelId, string shopperId)
+    private IErrorLogger _defaultLogger;
+    private MockErrorLogger _testLogger;
+
+    [TestInitialize]
+    public void InitTest()
     {
-      SetContexts(privateLabelId, shopperId, true);
+      _defaultLogger = EngineLogging.EngineLogger;
+      _testLogger = new MockErrorLogger();
+      EngineLogging.EngineLogger = _testLogger;
     }
 
-    private void SetContexts(int privateLabelId, string shopperId, bool includeShopperPreferences)
+    [TestCleanup]
+    public void CleanupTest()
     {
-      MockHttpContext.SetMockHttpContext("default.aspx", "http://localhost/default.aspx", string.Empty);
-      HttpProviderContainer.Instance.RegisterProvider<ISiteContext, MockSiteContext>();
-      HttpProviderContainer.Instance.RegisterProvider<IShopperContext, MockShopperContext>();
-      HttpProviderContainer.Instance.RegisterProvider<IManagerContext, MockNoManagerContext>();
-      HttpProviderContainer.Instance.RegisterProvider<ICurrencyProvider, CurrencyProvider>();
-      HttpProviderContainer.Instance.RegisterProvider<IProductProvider, ProductProvider>();
+      EngineLogging.EngineLogger = _defaultLogger;
+    }
+
+    private IProviderContainer SetContexts(int privateLabelId, string shopperId, bool includeShopperPreferences = true)
+    {
+      var request = new MockHttpRequest("http://localhost/default.aspx");
+      MockHttpContext.SetFromWorkerRequest(request);
+
+      var container = new MockProviderContainer();
+      container.SetData(MockSiteContextSettings.PrivateLabelId, privateLabelId);
+
+      container.RegisterProvider<ISiteContext, MockSiteContext>();
+      container.RegisterProvider<IShopperContext, MockShopperContext>();
+      container.RegisterProvider<IManagerContext, MockNoManagerContext>();
+      container.RegisterProvider<ICurrencyProvider, CurrencyProvider>();
+      container.RegisterProvider<IProductProvider, ProductProvider>();
 
       if (includeShopperPreferences)
       {
-        HttpProviderContainer.Instance.RegisterProvider<IShopperPreferencesProvider, MockShopperPreference>();
+        container.RegisterProvider<IShopperPreferencesProvider, MockShopperPreference>();
       }
 
-      HttpContext.Current.Items[MockSiteContextSettings.PrivateLabelId] = privateLabelId;
-      IShopperContext shopperContext = HttpProviderContainer.Instance.Resolve<IShopperContext>();
+      var shopperContext = container.Resolve<IShopperContext>();
       shopperContext.SetLoggedInShopper(shopperId);
+
+      return container;
     }
 
     [TestMethod]
     public void GetProvider()
     {
-      SetContexts(1, string.Empty);
-      var productProvider = HttpProviderContainer.Instance.Resolve<IProductProvider>();
+      var container = SetContexts(1, string.Empty);
+      var productProvider = container.Resolve<IProductProvider>();
       IProduct prod1 = productProvider.GetProduct(102);
       Assert.IsTrue(prod1.Duration > 0);
       Assert.IsTrue(prod1.CurrentPrice.Price > 0);
@@ -55,28 +78,34 @@ namespace Atlantis.Framework.Providers.Products.Tests
     [TestMethod]
     public void GetProduct()
     {
-      SetContexts(1, string.Empty);
-      var productProvider = HttpProviderContainer.Instance.Resolve<IProductProvider>();
+      var container = SetContexts(1, string.Empty);
+      var productProvider = container.Resolve<IProductProvider>();
       IProduct prod1 = productProvider.GetProduct(56401);
-      bool onSate = prod1.IsOnSale;
+      Assert.IsNotNull(prod1.IsOnSale);
+      Assert.IsNotNull(prod1.GetIsOnSale(2));
       Assert.IsTrue(prod1.Duration > 0);
       Assert.IsTrue(prod1.CurrentPrice.Price > 0);
+      Assert.AreNotEqual(0, prod1.HalfYears);
+      Assert.AreNotEqual(0, prod1.Quarters);
+      Assert.AreNotEqual(0, prod1.Months);
+      Assert.AreNotEqual(0, prod1.Years);
+      Assert.AreNotEqual(string.Empty, prod1.Info.FriendlyDescription);
     }
 
     [TestMethod]
     public void GetProductList()
     {
-      SetContexts(1, string.Empty);
-      var productProvider = HttpProviderContainer.Instance.Resolve<IProductProvider>();
-      List<IProduct> products = productProvider.NewProductList(new int[3] { 58, 59, 60 });
+      var container = SetContexts(1, string.Empty);
+      var productProvider = container.Resolve<IProductProvider>();
+      List<IProduct> products = productProvider.NewProductList(new[] { 58, 59, 60 });
       Assert.AreEqual(3, products.Count);
     }
 
     [TestMethod]
     public void ListPriceMonthlyProduct()
     {
-      SetContexts(1, string.Empty);
-      var productProvider = HttpProviderContainer.Instance.Resolve<IProductProvider>();
+      var container = SetContexts(1, string.Empty);
+      var productProvider = container.Resolve<IProductProvider>();
       var monthlyHosting = productProvider.GetProduct(58);
 
       Assert.AreEqual(RecurringPaymentUnitType.Monthly, monthlyHosting.DurationUnit);
@@ -97,8 +126,8 @@ namespace Atlantis.Framework.Providers.Products.Tests
     [TestMethod]
     public void CurrentPriceMonthlyProduct()
     {
-      SetContexts(1, string.Empty);
-      var productProvider = HttpProviderContainer.Instance.Resolve<IProductProvider>();
+      var container = SetContexts(1, string.Empty);
+      var productProvider = container.Resolve<IProductProvider>();
       var monthlyHosting = productProvider.GetProduct(58);
 
       Assert.AreEqual(RecurringPaymentUnitType.Monthly, monthlyHosting.DurationUnit);
@@ -119,8 +148,8 @@ namespace Atlantis.Framework.Providers.Products.Tests
     [TestMethod]
     public void CurrentPriceByQuantityMonthlyProduct()
     {
-      SetContexts(1, string.Empty);
-      var productProvider = HttpProviderContainer.Instance.Resolve<IProductProvider>();
+      var container = SetContexts(1, string.Empty);
+      var productProvider = container.Resolve<IProductProvider>();
       var monthlyHosting = productProvider.GetProduct(58);
 
       Assert.AreEqual(RecurringPaymentUnitType.Monthly, monthlyHosting.DurationUnit);
@@ -141,8 +170,8 @@ namespace Atlantis.Framework.Providers.Products.Tests
     [TestMethod]
     public void ListPriceAnnualProduct()
     {
-      SetContexts(1, string.Empty);
-      var productProvider = HttpProviderContainer.Instance.Resolve<IProductProvider>();
+      var container = SetContexts(1, string.Empty);
+      var productProvider = container.Resolve<IProductProvider>();
       var dotCom1Year = productProvider.GetProduct(101);
 
       Assert.AreEqual(RecurringPaymentUnitType.Annual, dotCom1Year.DurationUnit);
@@ -163,8 +192,8 @@ namespace Atlantis.Framework.Providers.Products.Tests
     [TestMethod]
     public void CurrentPriceAnnualProduct()
     {
-      SetContexts(1, string.Empty);
-      var productProvider = HttpProviderContainer.Instance.Resolve<IProductProvider>();
+      var container = SetContexts(1, string.Empty);
+      var productProvider = container.Resolve<IProductProvider>();
       var dotCom1Year = productProvider.GetProduct(101);
 
       Assert.AreEqual(RecurringPaymentUnitType.Annual, dotCom1Year.DurationUnit);
@@ -183,24 +212,24 @@ namespace Atlantis.Framework.Providers.Products.Tests
     }
 
     [TestMethod]
-    public void CurrentYearlyPriceDDC()
+    public void CurrentYearlyPriceDdc()
     {
-      SetContexts(1, string.Empty);
-      var productProvider = HttpProviderContainer.Instance.Resolve<IProductProvider>();
+      var container = SetContexts(1, string.Empty);
+      var productProvider = container.Resolve<IProductProvider>();
       var dotCom1Year = productProvider.GetProduct(101);
 
       ICurrencyPrice listPrice = dotCom1Year.GetListPrice(RecurringPaymentUnitType.Annual);
-      ICurrencyPrice currentPriceDDC = dotCom1Year.GetCurrentPrice(RecurringPaymentUnitType.Annual, 16);
+      ICurrencyPrice currentPriceDdc = dotCom1Year.GetCurrentPrice(RecurringPaymentUnitType.Annual, 16);
 
-      Assert.AreNotEqual(currentPriceDDC.Price, listPrice.Price);
+      Assert.AreNotEqual(currentPriceDdc.Price, listPrice.Price);
     }
 
     [TestMethod]
     public void CurrentYearlyPriceEuro()
     {
-      SetContexts(1, string.Empty);
-      var productProvider = HttpProviderContainer.Instance.Resolve<IProductProvider>();
-      var currency = HttpProviderContainer.Instance.Resolve<ICurrencyProvider>();
+      var container = SetContexts(1, string.Empty);
+      var productProvider = container.Resolve<IProductProvider>();
+      var currency = container.Resolve<ICurrencyProvider>();
       var euro = currency.GetCurrencyInfo("EUR");
 
       var dotCom1Year = productProvider.GetProduct(101);
@@ -214,11 +243,85 @@ namespace Atlantis.Framework.Providers.Products.Tests
     [TestMethod]
     public void GetInvalidProduct()
     {
-      SetContexts(1, string.Empty);
-      AtlantisException.SetWebRequestProviderContainer(HttpProviderContainer.Instance);
-      var productProvider = HttpProviderContainer.Instance.Resolve<IProductProvider>();
+      _testLogger.Exceptions.Clear();
+
+      var container = SetContexts(1, string.Empty);
+      var productProvider = container.Resolve<IProductProvider>();
       IProduct prod1 = productProvider.GetProduct(0);
-      //success or failure for this test is a log message containing a shopper id
+
+      int typeId = prod1.Info.ProductTypeId;
+
+      Assert.AreEqual(0, typeId);
+      Assert.AreEqual(string.Empty, prod1.Info.FriendlyDescription);
+      Assert.AreEqual(1, _testLogger.Exceptions.Count);
     }
+
+    [TestMethod]
+    public void ProductGroupOfferedBasic()
+    {
+      var container = SetContexts(1, string.Empty);
+      var productProvider = container.Resolve<IProductProvider>();
+      Assert.IsTrue(productProvider.IsProductGroupOffered(30));
+    }
+
+    [TestMethod]
+    public void NonUnifiedPfidBasic()
+    {
+      var container = SetContexts(2, string.Empty);
+      var productProvider = container.Resolve<IProductProvider>();
+      int pfid = productProvider.GetNonUnifiedPfid(101);
+      Assert.AreEqual(2500101, pfid);
+    }
+
+    [TestMethod]
+    public void UnifiedProductIdBasic()
+    {
+      var container = SetContexts(2, string.Empty);
+      var productProvider = container.Resolve<IProductProvider>();
+      int productId = productProvider.GetUnifiedProductIdByPfid(2500101);
+      Assert.AreEqual(101, productId);
+    }
+
+    [TestMethod]
+    public void LocalizedProductDescriptionNoLocalization()
+    {
+      var container = SetContexts(1, string.Empty);
+      var productProvider = container.Resolve<IProductProvider>();
+      IProduct dotCom1Year = productProvider.GetProduct(101);
+      string description = dotCom1Year.Info.FriendlyDescription;
+      Assert.AreEqual(dotCom1Year.Info.FriendlyDescription, description);
+    }
+
+    [TestMethod]
+    public void LocalizedProductDescriptionPtBr()
+    {
+      string descriptionEnglish;
+      string nameEnglish;
+
+      {
+        var usContainer = SetContexts(1, string.Empty);
+        var productProvider = usContainer.Resolve<IProductProvider>();
+        IProduct dotCom1Year = productProvider.GetProduct(101);
+        descriptionEnglish = dotCom1Year.Info.FriendlyDescription;
+        nameEnglish = dotCom1Year.Info.Name;
+      }
+
+      string description;
+      string name;
+
+      {
+        var container = SetContexts(1, string.Empty);
+        container.RegisterProvider<ILocalizationProvider, MockLocalizationProvider>();
+        container.SetData(MockLocalizationProviderSettings.FullLanguage, "pt-br");
+        var productProvider = container.Resolve<IProductProvider>();
+        var dotCom1Year = productProvider.GetProduct(101);
+        description = dotCom1Year.Info.FriendlyDescription;
+        name = dotCom1Year.Info.Name;        
+      }
+
+      Assert.AreNotEqual(descriptionEnglish, description);
+      Assert.AreNotEqual(nameEnglish, name);
+    }
+
   }
 }

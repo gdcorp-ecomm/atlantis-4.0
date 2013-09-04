@@ -62,9 +62,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ProductInfo.cs" />
     <Compile Include="ProductProviderEngineRequests.cs" />
     <Compile Include="Product.cs" />
-    <Compile Include="ProductInfo.cs" />
     <Compile Include="ProductProvider.cs" />
     <Compile Include="ProductView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -82,13 +82,17 @@
       <Project>{2474F971-3E1D-4608-9D60-B0A9A1CA8D13}</Project>
       <Name>Atlantis.Framework.Interface</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.ProductOffer\Atlantis.Framework.ProductOffer.Interface\Atlantis.Framework.ProductOffer.Interface.csproj">
-      <Project>{D7260EE7-F41C-4AC4-87FF-959BD107A4DE}</Project>
-      <Name>Atlantis.Framework.ProductOffer.Interface</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Atlantis.Framework.Providers.Interface\Atlantis.Framework.Providers.Interface\Atlantis.Framework.Providers.Interface.csproj">
       <Project>{CDB8B44E-47FC-4F39-96EF-207EB67772FF}</Project>
       <Name>Atlantis.Framework.Providers.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Providers\Localization\Atlantis.Framework.Providers.Localization.Interface\Atlantis.Framework.Providers.Localization.Interface.csproj">
+      <Project>{061fcadc-9547-47e2-9643-cfbcfa355ac2}</Project>
+      <Name>Atlantis.Framework.Providers.Localization.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Triplets\Products\Atlantis.Framework.Products.Interface\Atlantis.Framework.Products.Interface.csproj">
+      <Project>{f025da79-8d84-4bb9-affc-4b3156532212}</Project>
+      <Name>Atlantis.Framework.Products.Interface</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

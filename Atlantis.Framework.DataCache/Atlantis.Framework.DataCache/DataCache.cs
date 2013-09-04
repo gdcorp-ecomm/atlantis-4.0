@@ -233,6 +233,7 @@ namespace Atlantis.Framework.DataCache
       return result;
     }
 
+    [Obsolete("Please use the DataCacheGeneric Triplet instead or consider creating a proper triplet for your generic cache data.")]
     public static string GetCacheData(string requestXml)
     {
       return DataCacheEngineRequests.ExecuteGetCacheData(requestXml);
@@ -268,6 +269,7 @@ namespace Atlantis.Framework.DataCache
       return DataCacheEngineRequests.ExecuteIsPrivateLabelActive(privateLabelId);
     }
 
+    [Obsolete("This method will be removed. Please use the IProductProvider.GetNonUnifiedPfid or the NonUnifiedPfidRequestData in the Products triplet directly.")]
     public static int GetPFIDByUnifiedID(int unifiedProductId, int privateLabelId)
     {
       return DataCacheEngineRequests.ExecuteGetNonunifiedPfid(unifiedProductId, privateLabelId);

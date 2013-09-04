@@ -7,14 +7,14 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Atlantis.Framework.DataCache")]
 #if DEBUG
 [assembly: AssemblyDescription("Debug Build")]
-[assembly: AssemblyConfiguration("")]
+[assembly: AssemblyConfiguration("Debug Build")]
 #else
 [assembly: AssemblyDescription("Release Build")]
-[assembly: AssemblyConfiguration("")]
+[assembly: AssemblyConfiguration("Release Build")]
 #endif
-[assembly: AssemblyCompany("GoDaddy, LLC")]
+[assembly: AssemblyCompany("GoDaddy")]
 [assembly: AssemblyProduct("Atlantis.Framework.DataCache")]
-[assembly: AssemblyCopyright("Copyright © GoDaddy.com, LLC 2011-2013")]
+[assembly: AssemblyCopyright("Copyright © GoDaddy 2011-2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -37,4 +37,4 @@ using System.Runtime.InteropServices;
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("4.0.0.0")]
-[assembly: AssemblyFileVersion("4.13.6.25")]
+[assembly: AssemblyFileVersion("4.13.9.4")]

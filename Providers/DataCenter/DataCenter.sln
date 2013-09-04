@@ -39,9 +39,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Testing.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Testing.MockEngine", "..\..\Testing\Atlantis.Framework.Testing.MockEngine\Atlantis.Framework.Testing.MockEngine.csproj", "{20B1C0D2-1789-4813-8BC6-993CE8CF07F7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Testing.MockPreferencesProvider", "..\..\Testing\Atlantis.Framework.Testing.MockPreferencesProvider\Atlantis.Framework.Testing.MockPreferencesProvider.csproj", "{04A97EBE-B5E8-44F5-BDEE-45F593CEF0CE}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 19
+		SccNumberOfProjects = 20
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
 		SccLocalPath0 = .
@@ -114,6 +116,10 @@ Global
 		SccProjectTopLevelParentUniqueName18 = DataCenter.sln
 		SccProjectName18 = ../../Testing/Atlantis.Framework.Testing.MockEngine
 		SccLocalPath18 = ..\\..\\Testing\\Atlantis.Framework.Testing.MockEngine
+		SccProjectUniqueName19 = ..\\..\\Testing\\Atlantis.Framework.Testing.MockPreferencesProvider\\Atlantis.Framework.Testing.MockPreferencesProvider.csproj
+		SccProjectTopLevelParentUniqueName19 = DataCenter.sln
+		SccProjectName19 = ../../Testing/Atlantis.Framework.Testing.MockPreferencesProvider
+		SccLocalPath19 = ..\\..\\Testing\\Atlantis.Framework.Testing.MockPreferencesProvider
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -192,6 +198,10 @@ Global
 		{20B1C0D2-1789-4813-8BC6-993CE8CF07F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{20B1C0D2-1789-4813-8BC6-993CE8CF07F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{20B1C0D2-1789-4813-8BC6-993CE8CF07F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{04A97EBE-B5E8-44F5-BDEE-45F593CEF0CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04A97EBE-B5E8-44F5-BDEE-45F593CEF0CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04A97EBE-B5E8-44F5-BDEE-45F593CEF0CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04A97EBE-B5E8-44F5-BDEE-45F593CEF0CE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -212,5 +222,6 @@ Global
 		{6CC33C6B-FAA7-4B6A-8C3B-BFE94A1A65DE} = {E8007ABC-7840-41CD-881F-5A9A72205533}
 		{2F8983B4-801B-461A-9D76-26A58A496261} = {E8007ABC-7840-41CD-881F-5A9A72205533}
 		{20B1C0D2-1789-4813-8BC6-993CE8CF07F7} = {E8007ABC-7840-41CD-881F-5A9A72205533}
+		{04A97EBE-B5E8-44F5-BDEE-45F593CEF0CE} = {E8007ABC-7840-41CD-881F-5A9A72205533}
 	EndGlobalSection
 EndGlobal

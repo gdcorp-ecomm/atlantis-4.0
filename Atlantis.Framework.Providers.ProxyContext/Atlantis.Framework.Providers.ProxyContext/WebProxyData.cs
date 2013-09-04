@@ -32,6 +32,37 @@ namespace Atlantis.Framework.Providers.ProxyContext
       DetermineProxyStatusAndProperties();
     }
 
+    private string GetRequestHost()
+    {
+      string result = null;
+      try
+      {
+        result = HttpContext.Current.Request.Url.Host;
+      }
+      catch
+      {
+        result = null;
+      }
+
+      return result ?? GetHostHeaderValue();;
+    }
+
+    private string GetHostHeaderValue()
+    {
+      string result;
+
+      try
+      {
+        result = HttpContext.Current.Request.Headers["Host"];
+      }
+      catch
+      {
+        result = string.Empty;
+      }
+
+      return result;
+    }
+
     private void DetermineProxyStatusAndProperties()
     {
       Status = ProxyStatusType.Invalid;
@@ -43,7 +74,7 @@ namespace Atlantis.Framework.Providers.ProxyContext
       int validCount = 0;
 
       OriginIP = HttpContext.Current.Request.UserHostAddress;
-      OriginHost = HttpContext.Current.Request.Url.Host;
+      OriginHost = GetRequestHost();
       ContextHost = OriginHost;
 
       string inProgressOriginIP = OriginIP;

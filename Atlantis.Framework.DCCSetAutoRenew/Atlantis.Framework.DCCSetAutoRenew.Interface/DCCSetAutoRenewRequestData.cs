@@ -8,22 +8,24 @@ namespace Atlantis.Framework.DCCSetAutoRenew.Interface
   {
     private static readonly TimeSpan _requestTimeout = TimeSpan.FromSeconds(12);
 
+    private bool IsManager { get; set; }
+    private string ManagerUserId { get; set; }
+
     public DCCSetAutoRenewRequestData(string shopperId,
-                                            string sourceUrl,
-                                            string orderId,
-                                            string pathway,
-                                            int pageCount,
                                             int privateLabelID,
                                             int domainId,
                                             int autoRenewValue,
-                                            string applicationName)
-      : base(shopperId, sourceUrl, orderId, pathway, pageCount)
+                                            string applicationName, bool isManager, string managerUserId)
+
     {
+      ShopperID = shopperId;
       _privateLabelID = privateLabelID;
       _domainId = domainId;
       _autoRenewValue = autoRenewValue;
       RequestTimeout = _requestTimeout;
       AppName = applicationName;
+      IsManager = isManager;
+      ManagerUserId = managerUserId;
     }
 
     
@@ -69,8 +71,8 @@ namespace Atlantis.Framework.DCCSetAutoRenew.Interface
       XmlElement oRoot = actionDoc.DocumentElement;
       AddAttribute(oRoot, "ActionName", "DomainSetAutoRenew");
       AddAttribute(oRoot, "ShopperId", ShopperID);
-      AddAttribute(oRoot, "UserType", "Shopper");
-      AddAttribute(oRoot, "UserId", ShopperID);
+      AddAttribute(oRoot, "UserType", IsManager ? "Administrator" : "Shopper");
+      AddAttribute(oRoot, "UserId", IsManager ? ManagerUserId : ShopperID);
       AddAttribute(oRoot, "PrivateLabelId", _privateLabelID.ToString());
       AddAttribute(oRoot, "RequestingApplication", AppName);
 
@@ -97,8 +99,8 @@ namespace Atlantis.Framework.DCCSetAutoRenew.Interface
       XmlElement oAction = (XmlElement)AddNode(oRoot, "ACTION");
       AddAttribute(oAction, "ActionName", "DomainSetAutoRenew");
       AddAttribute(oAction, "ShopperId", ShopperID);
-      AddAttribute(oAction, "UserType", "Shopper");
-      AddAttribute(oAction, "UserId", ShopperID);
+      AddAttribute(oAction, "UserType", IsManager ? "Administrator" : "Shopper");
+      AddAttribute(oAction, "UserId", IsManager ? ManagerUserId : ShopperID);
       AddAttribute(oAction, "PrivateLabelId", _privateLabelID.ToString());
       AddAttribute(oAction, "RequestingServer", Environment.MachineName);
       AddAttribute(oAction, "RequestingApplication", AppName);

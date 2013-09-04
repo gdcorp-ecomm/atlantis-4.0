@@ -99,7 +99,7 @@
     <None Include="GeoIP.dat">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="GeoIPLocation.dat">
+    <None Include="GeoIPCity.dat">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

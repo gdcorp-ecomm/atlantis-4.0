@@ -9,28 +9,28 @@ namespace Atlantis.Framework.Providers.Geo
 {
   public class GeoProvider : ProviderBase, IGeoProvider
   {
-    Lazy<ISiteContext> _siteContext;
-    Lazy<IProxyContext> _proxyContext;
-    Lazy<string> _requestCountryCode;
-    Lazy<string> _ipAddress;
-    Lazy<GeoCountryData> _geoCountryData;
+    readonly Lazy<ISiteContext> _siteContext;
+    readonly Lazy<IProxyContext> _proxyContext;
+    readonly Lazy<string> _requestCountryCode;
+    readonly Lazy<string> _ipAddress;
+    readonly Lazy<GeoCountryData> _geoCountryData;
 
-    IGeoLocation _requestLocation = null;
+    IGeoLocation _requestLocation;
 
     public GeoProvider(IProviderContainer container)
       : base(container)
     {
-      _siteContext = new Lazy<ISiteContext>(() => { return Container.Resolve<ISiteContext>(); });
-      _proxyContext = new Lazy<IProxyContext>(() => { return LoadProxyContext(); });
-      _requestCountryCode = new Lazy<string>(() => { return DetermineRequestCountryCode(); });
-      _ipAddress = new Lazy<string>(() => { return GetRequestIP(); });
-      _geoCountryData = new Lazy<GeoCountryData>(() => { return new GeoCountryData(Container); });
+      _siteContext = new Lazy<ISiteContext>(() => Container.Resolve<ISiteContext>());
+      _proxyContext = new Lazy<IProxyContext>(LoadProxyContext);
+      _requestCountryCode = new Lazy<string>(DetermineRequestCountryCode);
+      _ipAddress = new Lazy<string>(GetRequestIP);
+      _geoCountryData = new Lazy<GeoCountryData>(() => new GeoCountryData(Container));
     }
 
     private IProxyContext LoadProxyContext()
     {
       IProxyContext result;
-      if (!Container.TryResolve<IProxyContext>(out result))
+      if (!Container.TryResolve(out result))
       {
         result = null;
       }
@@ -43,14 +43,7 @@ namespace Atlantis.Framework.Providers.Geo
       if (!string.IsNullOrEmpty(_ipAddress.Value))
       {
         string alreadyLoadedCountryCode;
-        if (TryGetCountryCodeFromLocation(out alreadyLoadedCountryCode))
-        {
-          result = alreadyLoadedCountryCode;
-        }
-        else
-        {
-          result = LookupCountryByIP(_ipAddress.Value);      
-        }
+        result = TryGetCountryCodeFromLocation(out alreadyLoadedCountryCode) ? alreadyLoadedCountryCode : LookupCountryByIP(_ipAddress.Value);
       }
 
       return result;
@@ -72,7 +65,7 @@ namespace Atlantis.Framework.Providers.Geo
       }
       catch (Exception ex)
       {
-        AtlantisException exception = new AtlantisException("GeoProvider.LookupCountryByIP", 0, ex.Message, ex.StackTrace);
+        var exception = new AtlantisException("GeoProvider.LookupCountryByIP", 0, ex.Message, ex.StackTrace);
         Engine.Engine.LogAtlantisException(exception);
       }
 
@@ -128,12 +121,6 @@ namespace Atlantis.Framework.Providers.Geo
       return result;
     }
 
-    private CountryResponseData LoadCountries()
-    {
-      var request = new CountryRequestData();
-      return (CountryResponseData)DataCache.DataCache.GetProcessRequest(request, GeoProviderEngineRequests.Countries);
-    }
-
     public string RequestCountryCode
     {
       get { return _requestCountryCode.Value; }
@@ -146,7 +133,7 @@ namespace Atlantis.Framework.Providers.Geo
         return false;
       }
 
-      return  countryCode.Equals(_requestCountryCode.Value, StringComparison.OrdinalIgnoreCase);
+      return countryCode.Equals(_requestCountryCode.Value, StringComparison.OrdinalIgnoreCase);
     }
 
     public bool IsUserInRegion(int regionTypeId, string regionName)
@@ -165,7 +152,7 @@ namespace Atlantis.Framework.Providers.Geo
       }
       catch (Exception ex)
       {
-        AtlantisException exception = new AtlantisException("GeoProvider.IsUserInRegion", 0, ex.Message, ex.StackTrace);
+        var exception = new AtlantisException("GeoProvider.IsUserInRegion", 0, ex.Message, ex.StackTrace);
         Engine.Engine.LogAtlantisException(exception);
       }
 
@@ -174,15 +161,7 @@ namespace Atlantis.Framework.Providers.Geo
 
     public IGeoLocation RequestGeoLocation
     {
-      get 
-      {
-        if (_requestLocation == null)
-        {
-          _requestLocation = LoadGeoLocationFromIP(_ipAddress.Value);
-        }
-
-        return _requestLocation;
-      }
+      get { return _requestLocation ?? (_requestLocation = LoadGeoLocationFromIP(_ipAddress.Value)); }
     }
 
     private IGeoLocation LoadGeoLocationFromIP(string ipAddress)
@@ -199,17 +178,12 @@ namespace Atlantis.Framework.Providers.Geo
         }
         catch (Exception ex)
         {
-          AtlantisException exception = new AtlantisException("GeoProvider.LoadGeoLocationFromIP", 0, ex.Message, ex.StackTrace);
+          var exception = new AtlantisException("GeoProvider.LoadGeoLocationFromIP", 0, ex.Message, ex.StackTrace);
           Engine.Engine.LogAtlantisException(exception);
         }
       }
 
-      if (result == null)
-      {
-        result = GeoLocation.FromNotFound();
-      }
-
-      return result;
+      return result ?? GeoLocation.FromNotFound();
     }
 
     public IEnumerable<IGeoCountry> Countries

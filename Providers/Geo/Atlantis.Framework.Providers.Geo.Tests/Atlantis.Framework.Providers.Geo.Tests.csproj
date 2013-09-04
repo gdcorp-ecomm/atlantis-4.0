@@ -58,6 +58,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="FailRequest.cs" />
     <Compile Include="GeoProviderTests.cs" />
     <Compile Include="MockProxy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -69,7 +70,7 @@
     <None Include="GeoIP.dat">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="GeoIPLocation.dat">
+    <None Include="GeoIPCity.dat">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
@@ -98,6 +99,10 @@
       <Project>{5487def2-0fa7-4b77-9aad-0355784589d6}</Project>
       <Name>Atlantis.Framework.Testing.MockProviders</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\Testing\Atlantis.Framework.Testing.MockLocalization\Atlantis.Framework.Testing.MockLocalization.csproj">
+      <Project>{d4a97573-4ae0-4c40-843a-67b8b898b4bf}</Project>
+      <Name>Atlantis.Framework.Testing.MockLocalization</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\Triplets\Geo\Atlantis.Framework.Geo.Impl\Atlantis.Framework.Geo.Impl.csproj">
       <Project>{95a7334d-a6ee-46d4-97c3-320e119abc59}</Project>
       <Name>Atlantis.Framework.Geo.Impl</Name>
@@ -105,6 +110,10 @@
     <ProjectReference Include="..\..\..\Triplets\Geo\Atlantis.Framework.Geo.Interface\Atlantis.Framework.Geo.Interface.csproj">
       <Project>{27f0cd4d-3807-445b-ab34-2b96e7937492}</Project>
       <Name>Atlantis.Framework.Geo.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Localization\Atlantis.Framework.Providers.Localization.Interface\Atlantis.Framework.Providers.Localization.Interface.csproj">
+      <Project>{061fcadc-9547-47e2-9643-cfbcfa355ac2}</Project>
+      <Name>Atlantis.Framework.Providers.Localization.Interface</Name>
     </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.Providers.Geo.Interface\Atlantis.Framework.Providers.Geo.Interface.csproj">
       <Project>{56c72bae-ff21-49ff-a097-ac38b874ac39}</Project>

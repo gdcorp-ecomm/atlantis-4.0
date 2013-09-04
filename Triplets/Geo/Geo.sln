@@ -15,24 +15,26 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Geo.Impl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Geo.Tests", "Atlantis.Framework.Geo.Tests\Atlantis.Framework.Geo.Tests.csproj", "{229D7511-1C70-48C7-AF31-C60DDA43A7A3}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A8D1A4BC-F335-4621-A5A5-EC1DC5C1C076}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
 		SccNumberOfProjects = 7
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
-		SccProjectUniqueName0 = ..\\..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
-		SccProjectTopLevelParentUniqueName0 = Geo.sln
-		SccProjectName0 = ../../Atlantis.Framework.Engine/Atlantis.Framework.Interface
-		SccLocalPath0 = ..\\..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
-		SccProjectUniqueName1 = ..\\..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ..\\..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
 		SccProjectTopLevelParentUniqueName1 = Geo.sln
-		SccProjectName1 = ../../Atlantis.Framework.Engine/Atlantis.Framework.Engine
-		SccLocalPath1 = ..\\..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
-		SccProjectUniqueName2 = ..\\..\\Atlantis.Framework.DataCache\\Atlantis.Framework.DataCacheService\\Atlantis.Framework.DataCacheService.csproj
+		SccProjectName1 = ../../Atlantis.Framework.Engine/Atlantis.Framework.Interface
+		SccLocalPath1 = ..\\..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
+		SccProjectUniqueName2 = ..\\..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
 		SccProjectTopLevelParentUniqueName2 = Geo.sln
-		SccProjectName2 = ../../Atlantis.Framework.DataCache/Atlantis.Framework.DataCacheService
-		SccLocalPath2 = ..\\..\\Atlantis.Framework.DataCache\\Atlantis.Framework.DataCacheService
-		SccLocalPath3 = .
+		SccProjectName2 = ../../Atlantis.Framework.Engine/Atlantis.Framework.Engine
+		SccLocalPath2 = ..\\..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
+		SccProjectUniqueName3 = ..\\..\\Atlantis.Framework.DataCache\\Atlantis.Framework.DataCacheService\\Atlantis.Framework.DataCacheService.csproj
+		SccProjectTopLevelParentUniqueName3 = Geo.sln
+		SccProjectName3 = ../../Atlantis.Framework.DataCache/Atlantis.Framework.DataCacheService
+		SccLocalPath3 = ..\\..\\Atlantis.Framework.DataCache\\Atlantis.Framework.DataCacheService
 		SccProjectUniqueName4 = Atlantis.Framework.Geo.Impl\\Atlantis.Framework.Geo.Impl.csproj
 		SccProjectName4 = Atlantis.Framework.Geo.Impl
 		SccLocalPath4 = Atlantis.Framework.Geo.Impl

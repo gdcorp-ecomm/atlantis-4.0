@@ -52,7 +52,7 @@ namespace Atlantis.Framework.Geo.Tests
     public void StateNameResponseDataFromGoodXml()
     {
       const string xml =
-        "<LocaleData lang=\"pt-br\"><StateList><State id=\"74\" name=\"Alabama\"/><State id=\"75\" name=\"Alasca\"/><State id=\"78\" name=\"Arizona\"/></StateList></LocaleData>";
+        "<LocaleData lang=\"pt-br\"><Item id=\"74\" state=\"Alabama\"/><Item id=\"75\" state=\"Alasca\"/><Item id=\"78\" state=\"Arizona\"/></LocaleData>";
       var response = StateNamesResponseData.FromServiceData(xml);
 
       Assert.AreNotEqual(0, response.Count);
@@ -72,7 +72,7 @@ namespace Atlantis.Framework.Geo.Tests
     public void StateNameResponseDataFromMissingData()
     {
       const string xml =
-        "<LocaleData lang=\"pt-br\"><StateList><State id=\"74\" name=\"Alabama\"/><State id=\"75\" /><State name=\"Arizona\"/></StateList></LocaleData>";
+        "<LocaleData lang=\"pt-br\"><Item id=\"74\" state=\"Alabama\"/><Item id=\"75\" /><Item state=\"Arizona\"/></LocaleData>";
       var response = StateNamesResponseData.FromServiceData(xml);
 
       Assert.AreEqual(1, response.Count);
@@ -88,7 +88,7 @@ namespace Atlantis.Framework.Geo.Tests
     public void StateNameResponseDataFromBadXml()
     {
       const string xml =
-        "<LocaleData lang=\"pt-br\"<State id=\"74\" name=\"Alabama\"/><State id=\"75\" name=\"Alasca\"/><State id=\"78\" name=\"Arizona\"/></StateList></LocaleData>";
+        "<LocaleData lang=\"pt-br\"<Item id=\"74\" state=\"Alabama\"/><Item id=\"75\" state=\"Alasca\"/><Item id=\"78\" state=\"Arizona\"/></LocaleData>";
       var response = StateNamesResponseData.FromServiceData(xml);
     }
 
@@ -111,17 +111,33 @@ namespace Atlantis.Framework.Geo.Tests
     }
 
     [TestMethod]
-    public void CountryNamesServiceCallEmptyLanguage()
+    public void StateNamesServiceCallInvalidLanguageReturnsEnglish()
     {
-      var request = new StateNamesRequestData("qa-qa", 226);
+      var request = new StateNamesRequestData("qa-unit", 226);
+      var response = (StateNamesResponseData)Engine.Engine.ProcessRequest(request, _REQUESTTYPE);
+      Assert.AreNotEqual(0, response.Count);
+    }
+
+    [TestMethod]
+    public void StateNamesServiceCallEmptyCountry()
+    {
+      var request = new StateNamesRequestData("en-us", 444);
       var response = (StateNamesResponseData)Engine.Engine.ProcessRequest(request, _REQUESTTYPE);
       Assert.AreEqual(0, response.Count);
     }
 
     [TestMethod]
-    public void CountryNamesServiceCallEmptyCountry()
+    public void StateNamesServiceCallNullLanguage()
     {
-      var request = new StateNamesRequestData("en-us", 444);
+      var request = new StateNamesRequestData(null, 226);
+      var response = (StateNamesResponseData)Engine.Engine.ProcessRequest(request, _REQUESTTYPE);
+      Assert.AreEqual(0, response.Count);
+    }
+
+    [TestMethod]
+    public void StateNamesServiceCallEmptyLanguage()
+    {
+      var request = new StateNamesRequestData(string.Empty, 226);
       var response = (StateNamesResponseData)Engine.Engine.ProcessRequest(request, _REQUESTTYPE);
       Assert.AreEqual(0, response.Count);
     }

@@ -49,7 +49,7 @@ namespace Atlantis.Framework.Geo.Tests
     public void CountryNameResponseDataFromGoodXml()
     {
       const string xml =
-        "<LocaleData lang=\"pt-br\"><CountryList><Country id=\"226\" name=\"Estados Unidos\"/><Country id=\"102\" name=\"Índia\"/><Country id=\"111\" name=\"Japão\"/><Country id=\"172\" name=\"Filipinas\"/></CountryList></LocaleData>";
+        "<LocaleData><Item id=\"226\" country=\"Estados Unidos\"/><Item id=\"102\" country=\"Índia\"/><Item id=\"111\" country=\"Japão\"/><Item id=\"172\" country=\"Filipinas\"/></LocaleData>";
       var response = CountryNamesResponseData.FromServiceData(xml);
 
       Assert.AreNotEqual(0, response.Count);
@@ -69,7 +69,7 @@ namespace Atlantis.Framework.Geo.Tests
     public void CountryNameResponseDataFromMissingData()
     {
       const string xml =
-        "<LocaleData lang=\"pt-br\"><CountryList><Country id=\"226\" name=\"Estados Unidos\"/><Country id=\"102\" /><Country name=\"Japão\"/><Country id=\"172\" name=\"Filipinas\"/></CountryList></LocaleData>";
+        "<LocaleData lang=\"pt-br\"><Item id=\"226\" country=\"Estados Unidos\"/><Item id=\"102\" /><Item country=\"Japão\"/><Item id=\"172\" country=\"Filipinas\"/></LocaleData>";
       var response = CountryNamesResponseData.FromServiceData(xml);
 
       Assert.AreEqual(2, response.Count);
@@ -84,7 +84,7 @@ namespace Atlantis.Framework.Geo.Tests
     public void CountryNameResponseDataFromBadXml()
     {
       const string xml =
-        "<LocaleData lang=\"pt-br\"<Country id=\"226\" name=\"Estados Unidos\"/><Country id=\"102\" name=\"Índia\"/><Country id=\"111\" name=\"Japão\"/><Country id=\"172\" name=\"Filipinas\"/></CountryList></LocaleData>";
+        "<LocaleData lang=\"pt-br\"<Item id=\"226\" country=\"Estados Unidos\"/><Item id=\"102\" country=\"Índia\"/><Item id=\"111\" country=\"Japão\"/><Item id=\"172\" country=\"Filipinas\"/></LocaleData>";
       var response = CountryNamesResponseData.FromServiceData(xml);
     }
 
@@ -107,9 +107,25 @@ namespace Atlantis.Framework.Geo.Tests
     }
 
     [TestMethod]
-    public void CountryNamesServiceCallEmpty()
+    public void CountryNamesServiceCallInvalidLanguageReturnsEnglish()
     {
-      var request = new CountryNamesRequestData("qa-qa");
+      var request = new CountryNamesRequestData("qa-unit");
+      var response = (CountryNamesResponseData)Engine.Engine.ProcessRequest(request, _REQUESTTYPE);
+      Assert.AreNotEqual(0, response.Count);
+    }
+
+    [TestMethod]
+    public void CountryNamesServiceCallNullLanguage()
+    {
+      var request = new CountryNamesRequestData(null);
+      var response = (CountryNamesResponseData)Engine.Engine.ProcessRequest(request, _REQUESTTYPE);
+      Assert.AreEqual(0, response.Count);
+    }
+
+    [TestMethod]
+    public void CountryNamesServiceCallEmptyLanguage()
+    {
+      var request = new CountryNamesRequestData(string.Empty);
       var response = (CountryNamesResponseData)Engine.Engine.ProcessRequest(request, _REQUESTTYPE);
       Assert.AreEqual(0, response.Count);
     }

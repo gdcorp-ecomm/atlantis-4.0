@@ -16,14 +16,14 @@ namespace Atlantis.Framework.Geo.Interface
     {
       var countryNamesById = new Dictionary<int, string>();
 
-      // <LocaleData lang="pt-br"><CountryList><Country id="226" name="Estados Unidos"/>etc.
+      // <LocaleData lang="pt-br"><Item id="226" country="Estados Unidos"/>etc.
       var data = XElement.Parse(serviceDataXml);
-      var countryElements = data.Descendants("Country");
+      var countryElements = data.Descendants("Item");
 
       foreach (var countryElement in countryElements)
       {
         var countryId = countryElement.GetAttributeValueInt("id", -1);
-        var name = countryElement.GetAttributeValue("name", null);
+        var name = countryElement.GetAttributeValue("country", null);
 
         if ((countryId != -1) && (name != null))
         {

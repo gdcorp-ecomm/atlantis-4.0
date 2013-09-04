@@ -1,6 +1,8 @@
-﻿using Atlantis.Framework.Geo.Interface;
+﻿using System.Runtime.Remoting;
+using Atlantis.Framework.Geo.Interface;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.Geo.Interface;
+using Atlantis.Framework.Providers.Localization.Interface;
 using Atlantis.Framework.Testing.MockHttpContext;
 using Atlantis.Framework.Testing.MockProviders;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -8,6 +10,7 @@ using System;
 using System.Linq;
 using System.Net;
 using System.Reflection;
+using Atlantis.Framework.Testing.MockLocalization;
 
 namespace Atlantis.Framework.Providers.Geo.Tests
 {
@@ -16,10 +19,10 @@ namespace Atlantis.Framework.Providers.Geo.Tests
   [DeploymentItem("Interop.gdDataCacheLib.dll")]
   [DeploymentItem("Atlantis.Framework.Geo.Impl.dll")]
   [DeploymentItem("GeoIP.dat")]
-  [DeploymentItem("GeoIPLocation.dat")]
+  [DeploymentItem("GeoIPCity.dat")]
   public class GeoProviderTests
   {
-    private IGeoProvider CreateGeoProvider(string requestIP, bool isInternal = false, bool useMockProxy = false, string spoofip = null)
+    private IGeoProvider CreateGeoProvider(string requestIP, bool isInternal = false, bool useMockProxy = false, string spoofip = null, string language = null)
     {
       MockHttpRequest request = new MockHttpRequest("http://blue.com?qaspoofip=" + spoofip ?? string.Empty);
 
@@ -36,11 +39,17 @@ namespace Atlantis.Framework.Providers.Geo.Tests
       container.RegisterProvider<IShopperContext, MockShopperContext>();
       container.RegisterProvider<IManagerContext, MockNoManagerContext>();
       container.RegisterProvider<IGeoProvider, GeoProvider>();
-      container.SetMockSetting(MockSiteContextSettings.IsRequestInternal, isInternal);
+      container.SetData(MockSiteContextSettings.IsRequestInternal, isInternal);
 
       if (useMockProxy)
       {
         container.RegisterProvider<IProxyContext, MockProxy>();
+      }
+
+      if (language != null)
+      {
+        container.RegisterProvider<ILocalizationProvider, MockLocalizationProvider>();
+        container.SetData(MockLocalizationProviderSettings.FullLanguage, language);
       }
 
       return container.Resolve<IGeoProvider>();
@@ -76,7 +85,7 @@ namespace Atlantis.Framework.Providers.Geo.Tests
       IGeoProvider geoProvider = CreateGeoProvider("182.50.145.39", false, spoofip: "148.204.3.3");
       Assert.AreEqual("sg", geoProvider.RequestCountryCode);
     }
-    
+
     [TestMethod]
     public void RequestCountryProxy()
     {
@@ -100,6 +109,22 @@ namespace Atlantis.Framework.Providers.Geo.Tests
     }
 
     [TestMethod]
+    public void UserInRegionDataCacheError()
+    {
+      int regions = GeoProviderEngineRequests.Regions;
+      try
+      {
+        GeoProviderEngineRequests.Regions = 999;
+        IGeoProvider geoProvider = CreateGeoProvider("5.158.255.220", false);
+        Assert.AreEqual("fr", geoProvider.RequestCountryCode);
+        Assert.IsFalse(geoProvider.IsUserInRegion(2, "EU"));
+      }
+      finally
+      {
+        GeoProviderEngineRequests.Regions = regions;
+      }
+    }
+    [TestMethod]
     public void UserNotInRegion()
     {
       IGeoProvider geoProvider = CreateGeoProvider("1.179.3.3", false);
@@ -120,6 +145,50 @@ namespace Atlantis.Framework.Providers.Geo.Tests
       Assert.IsFalse(string.IsNullOrEmpty(geoProvider.RequestGeoLocation.GeoRegionName));
       Assert.IsFalse(string.IsNullOrEmpty(geoProvider.RequestGeoLocation.PostalCode));
     }
+
+    [TestMethod]
+    public void UserIPCountryFailure()
+    {
+      int ipcountry = GeoProviderEngineRequests.IPCountryLookup;
+      int iplocation = GeoProviderEngineRequests.IPLocationLookup;
+
+      try
+      {
+        GeoProviderEngineRequests.IPCountryLookup = 999;
+        GeoProviderEngineRequests.IPLocationLookup = 999;
+
+        IGeoProvider geoProvider = CreateGeoProvider("182.50.145.39");
+        Assert.AreNotEqual("sg", geoProvider.RequestCountryCode);
+        Assert.AreEqual(string.Empty, geoProvider.RequestGeoLocation.City);
+      }
+      finally
+      {
+        GeoProviderEngineRequests.IPCountryLookup = ipcountry;
+        GeoProviderEngineRequests.IPLocationLookup = iplocation;
+      }
+    }
+
+    [TestMethod]
+    public void UserIPLocationFailure()
+    {
+      int ipcountry = GeoProviderEngineRequests.IPCountryLookup;
+      int iplocation = GeoProviderEngineRequests.IPLocationLookup;
+
+      try
+      {
+        GeoProviderEngineRequests.IPCountryLookup = 999;
+        GeoProviderEngineRequests.IPLocationLookup = 999;
+
+        IGeoProvider geoProvider = CreateGeoProvider("97.74.104.201");
+        Assert.AreEqual(string.Empty, geoProvider.RequestGeoLocation.City);
+      }
+      finally
+      {
+        GeoProviderEngineRequests.IPCountryLookup = ipcountry;
+        GeoProviderEngineRequests.IPLocationLookup = iplocation;
+      }
+    }
+
 
     [TestMethod]
     public void UserLocationFirstSavesCountryCall()
@@ -166,6 +235,23 @@ namespace Atlantis.Framework.Providers.Geo.Tests
     }
 
     [TestMethod]
+    public void CountriesDataCacheError()
+    {
+      int countries = GeoProviderEngineRequests.Countries;
+      try
+      {
+        GeoProviderEngineRequests.Countries = 999;
+        IGeoProvider geoProvider = CreateGeoProvider("1.179.3.3", false);
+        int count = geoProvider.Countries.Count();
+        Assert.AreEqual(0, count);
+      }
+      finally
+      {
+        GeoProviderEngineRequests.Countries = countries;
+      }
+    }
+
+    [TestMethod]
     public void TryGetMissingCountry()
     {
       IGeoProvider geoProvider = CreateGeoProvider("1.179.3.3", false);
@@ -189,6 +275,42 @@ namespace Atlantis.Framework.Providers.Geo.Tests
     }
 
     [TestMethod]
+    public void TryGetCountryPtBr()
+    {
+      IGeoProvider geoProvider = CreateGeoProvider("1.179.3.3", false, language: "pt-br");
+      IGeoCountry country;
+      bool result = geoProvider.TryGetCountryByCode("us", out country);
+      Assert.AreNotEqual("United States", country.Name);
+    }
+
+    [TestMethod]
+    public void TryGetCountryPtBrRestServiceError()
+    {
+      int countryNames = GeoProviderEngineRequests.CountryNames;
+      try
+      {
+        GeoProviderEngineRequests.CountryNames = 999;
+        IGeoProvider geoProvider = CreateGeoProvider("1.179.3.3", false, language: "pt-br");
+        IGeoCountry country;
+        bool result = geoProvider.TryGetCountryByCode("us", out country);
+        Assert.AreEqual("United States", country.Name);
+      }
+      finally
+      {
+        GeoProviderEngineRequests.CountryNames = countryNames;
+      }
+    }
+
+    [TestMethod]
+    public void TryGetCountryUsEn()
+    {
+      IGeoProvider geoProvider = CreateGeoProvider("1.179.3.3", false, language: "en-us");
+      IGeoCountry country;
+      bool result = geoProvider.TryGetCountryByCode("us", out country);
+      Assert.AreEqual("United States", country.Name);
+    }
+
+    [TestMethod]
     public void States()
     {
       IGeoProvider geoProvider = CreateGeoProvider("1.179.3.3", false);
@@ -199,6 +321,28 @@ namespace Atlantis.Framework.Providers.Geo.Tests
 
       int stateCount = country.States.Count();
       Assert.AreNotEqual(0, stateCount);
+    }
+
+    [TestMethod]
+    public void StatesDataCacheError()
+    {
+      int states = GeoProviderEngineRequests.States;
+      try
+      {
+        GeoProviderEngineRequests.States = 999;
+        IGeoProvider geoProvider = CreateGeoProvider("1.179.3.3", false);
+        IGeoCountry country;
+        bool result = geoProvider.TryGetCountryByCode("us", out country);
+
+        Assert.IsFalse(country.HasStates);
+
+        int stateCount = country.States.Count();
+        Assert.AreEqual(0, stateCount);
+      }
+      finally
+      {
+        GeoProviderEngineRequests.States = states;
+      }
     }
 
     [TestMethod]
@@ -227,5 +371,54 @@ namespace Atlantis.Framework.Providers.Geo.Tests
       Assert.IsNotNull(state.Name);
       Assert.AreNotEqual(0, state.Id);
     }
+
+    [TestMethod]
+    public void TryGetAlaskaPtBr()
+    {
+      IGeoProvider geoProvider = CreateGeoProvider("1.179.3.3", false, language: "pt-br");
+      IGeoCountry country;
+      bool result = geoProvider.TryGetCountryByCode("us", out country);
+
+      IGeoState state;
+      result = country.TryGetStateByCode("ak", out state);
+      Assert.AreNotEqual("Alaska", state.Name);
+    }
+
+    [TestMethod]
+    public void TryGetAlaskaPtBrRestServiceError()
+    {
+      int stateNames = GeoProviderEngineRequests.StateNames;
+      try
+      {
+        GeoProviderEngineRequests.StateNames = 999;
+
+        IGeoProvider geoProvider = CreateGeoProvider("1.179.3.3", false, language: "pt-br");
+        IGeoCountry country;
+        bool result = geoProvider.TryGetCountryByCode("us", out country);
+
+        IGeoState state;
+        result = country.TryGetStateByCode("ak", out state);
+        Assert.AreEqual("Alaska", state.Name);
+      }
+      finally
+      {
+        GeoProviderEngineRequests.StateNames = stateNames;
+      }
+    }
+
+    [TestMethod]
+    public void TryGetAlaskaUsEn()
+    {
+      IGeoProvider geoProvider = CreateGeoProvider("1.179.3.3", false, language: "en-us");
+      IGeoCountry country;
+      bool result = geoProvider.TryGetCountryByCode("us", out country);
+
+      IGeoState state;
+      result = country.TryGetStateByCode("ak", out state);
+      Assert.AreEqual("Alaska", state.Name);
+    }
+
+
+
   }
 }

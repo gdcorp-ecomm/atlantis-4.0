@@ -8,18 +8,15 @@ namespace Atlantis.Framework.Providers.Geo
 {
   internal class GeoCountryData
   {
-    IProviderContainer _container;
-    List<IGeoCountry> _geoCountries;
-    Dictionary<string, IGeoCountry> _geoCountriesByCode;
+    readonly List<IGeoCountry> _geoCountries;
+    readonly Dictionary<string, IGeoCountry> _geoCountriesByCode;
 
     internal GeoCountryData(IProviderContainer container)
     {
-      _container = container;
-
       _geoCountries = new List<IGeoCountry>();
       _geoCountriesByCode = new Dictionary<string, IGeoCountry>(StringComparer.OrdinalIgnoreCase);
 
-      CountryRequestData request = new CountryRequestData();
+      var request = new CountryRequestData();
       CountryResponseData countries = null;
 
       try
@@ -28,7 +25,7 @@ namespace Atlantis.Framework.Providers.Geo
       }
       catch (Exception ex)
       {
-        AtlantisException aex = new AtlantisException(request, "GeoCountryData.ctor", ex.Message + ex.StackTrace, string.Empty);
+        var aex = new AtlantisException(request, "GeoCountryData.ctor", ex.Message + ex.StackTrace, string.Empty);
         Engine.Engine.LogAtlantisException(aex);
       }
 
@@ -36,7 +33,7 @@ namespace Atlantis.Framework.Providers.Geo
       {
         foreach (var country in countries.Countries)
         {
-          IGeoCountry geoCountry = GeoCountry.FromCountry(_container, country);
+          IGeoCountry geoCountry = GeoCountry.FromCountry(container, country);
           _geoCountries.Add(geoCountry);
           _geoCountriesByCode[geoCountry.Code] = geoCountry;
         }

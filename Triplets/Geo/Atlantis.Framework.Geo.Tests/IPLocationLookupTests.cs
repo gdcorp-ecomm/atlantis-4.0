@@ -9,7 +9,7 @@ namespace Atlantis.Framework.Geo.Tests
   [TestClass]
   [DeploymentItem("atlantis.config")]
   [DeploymentItem("Atlantis.Framework.Geo.Impl.dll")]
-  [DeploymentItem("GeoIPLocation.dat")]
+  [DeploymentItem("GeoIPCity.dat")]
   public class IPLocationLookupTests
   {
     [TestMethod]
@@ -134,7 +134,7 @@ namespace Atlantis.Framework.Geo.Tests
       }
       finally
       {
-        IPLookupDataFiles.LocationFile = @"GeoIPLocation.dat";
+        IPLookupDataFiles.LocationFile = @"GeoIPCity.dat";
         IPLookupDataFiles.PathType = IPLookupPathTypes.AssemblyLocation;
         ReloadCountryData();
       }

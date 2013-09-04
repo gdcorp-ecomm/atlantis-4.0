@@ -3,6 +3,7 @@ using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.Geo.Interface;
 using System;
 using System.Collections.Generic;
+using Atlantis.Framework.Providers.Localization.Interface;
 
 namespace Atlantis.Framework.Providers.Geo
 {
@@ -13,9 +14,10 @@ namespace Atlantis.Framework.Providers.Geo
       return new GeoCountry(container, country);
     }
 
-    private Lazy<GeoStateData> _geoStateData;
-    private IProviderContainer _container;
-    private Country _country;
+    private readonly Lazy<GeoStateData> _geoStateData;
+    private readonly IProviderContainer _container;
+    private readonly Country _country;
+    private string _name;
 
     private GeoCountry(IProviderContainer container, Country country)
     {
@@ -37,9 +39,42 @@ namespace Atlantis.Framework.Providers.Geo
     public string Name
     {
       get
-      { 
-        return _country.Name;
+      {
+        return _name ?? (_name = DetermineLanguageAwareName());
       }
+    }
+
+    private string DetermineLanguageAwareName()
+    {
+      var result = _country.Name;
+
+      if (!_container.CanResolve<ILocalizationProvider>())
+      {
+        return result;
+      }
+
+      var localization = _container.Resolve<ILocalizationProvider>();
+      if (localization.IsActiveLanguage("en-us"))
+      {
+        return result;
+      }
+
+      try
+      {
+        var request = new CountryNamesRequestData(localization.FullLanguage);
+        var response = (CountryNamesResponseData)DataCache.DataCache.GetProcessRequest(request, GeoProviderEngineRequests.CountryNames);
+        string languageName;
+        if (response.TryGetNameById(_country.Id, out languageName))
+        {
+          result = languageName;
+        }
+      }
+      catch
+      {
+        // DataCache logged the exception, keep default english name.
+      }
+
+      return result;
     }
 
     public string CallingCode

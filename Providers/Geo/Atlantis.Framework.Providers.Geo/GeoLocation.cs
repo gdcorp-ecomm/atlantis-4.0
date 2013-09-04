@@ -20,7 +20,7 @@ namespace Atlantis.Framework.Providers.Geo
       return new GeoLocation(location);
     }
 
-    private IPLocation _ipLocation;
+    private readonly IPLocation _ipLocation;
 
     private GeoLocation(IPLocation location)
     {

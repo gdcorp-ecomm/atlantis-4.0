@@ -16,15 +16,15 @@ namespace Atlantis.Framework.Geo.Interface
     {
       var stateNamesById = new Dictionary<int, string>();
 
-      // <LocaleData lang="pt-br"><StateList><State id="74" name="Alabama"/>etc
+      // <LocaleData lang="pt-br"><Item id="74" state="Alabama"/>etc
 
       var data = XElement.Parse(serviceDataXml);
-      var stateElements = data.Descendants("State");
+      var stateElements = data.Descendants("Item");
 
       foreach (var stateElement in stateElements)
       {
         var stateId = stateElement.GetAttributeValueInt("id", -1);
-        var name = stateElement.GetAttributeValue("name", null);
+        var name = stateElement.GetAttributeValue("state", null);
 
         if ((stateId != -1) && (name != null))
         {

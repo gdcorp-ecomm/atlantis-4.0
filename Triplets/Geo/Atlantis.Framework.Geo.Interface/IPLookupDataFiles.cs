@@ -2,7 +2,7 @@
 {
   public static class IPLookupDataFiles
   {
-    static string _locationFile = "GeoIPLocation.dat";
+    static string _locationFile = "GeoIPCity.dat";
     static string _countryFile = "GeoIP.dat";
     static IPLookupPathTypes _pathType = IPLookupPathTypes.AssemblyLocation;
 

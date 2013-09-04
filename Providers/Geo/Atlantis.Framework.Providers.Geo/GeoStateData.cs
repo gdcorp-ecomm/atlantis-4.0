@@ -8,15 +8,11 @@ namespace Atlantis.Framework.Providers.Geo
 {
   internal class GeoStateData
   {
-    IProviderContainer _container;
-    List<IGeoState> _geoStates;
-
-    Dictionary<string, IGeoState> _geoStatesByCode;
+    readonly List<IGeoState> _geoStates;
+    readonly Dictionary<string, IGeoState> _geoStatesByCode;
 
     internal GeoStateData(IProviderContainer container, int countryId)
     {
-      _container = container;
-
       _geoStates = new List<IGeoState>();
       _geoStatesByCode = new Dictionary<string, IGeoState>(StringComparer.OrdinalIgnoreCase);
 
@@ -29,7 +25,7 @@ namespace Atlantis.Framework.Providers.Geo
       }
       catch (Exception ex)
       {
-        AtlantisException aex = new AtlantisException(request, "GeoStateData.ctor", ex.Message + ex.StackTrace, string.Empty);
+        var aex = new AtlantisException(request, "GeoStateData.ctor", ex.Message + ex.StackTrace, string.Empty);
         Engine.Engine.LogAtlantisException(aex);
       }
 
@@ -37,7 +33,7 @@ namespace Atlantis.Framework.Providers.Geo
       {
         foreach (var state in stateResponse.States)
         {
-          IGeoState geoState = GeoState.FromState(_container, state);
+          IGeoState geoState = GeoState.FromState(container, state, countryId);
           _geoStates.Add(geoState);
           _geoStatesByCode[geoState.Code] = geoState;
         }

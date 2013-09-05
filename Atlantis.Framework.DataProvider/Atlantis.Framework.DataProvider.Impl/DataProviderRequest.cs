@@ -288,6 +288,8 @@ namespace Atlantis.Framework.DataProvider.Impl
       {
         case "int":
           return SqlDbType.Int;
+        case "nvarchar":
+          return SqlDbType.NVarChar;
         case "varchar":
         default:
           return SqlDbType.VarChar;

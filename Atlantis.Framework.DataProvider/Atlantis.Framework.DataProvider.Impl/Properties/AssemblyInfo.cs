@@ -7,10 +7,12 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Atlantis.Framework.DataProvider.Impl")]
 #if DEBUG
 [assembly: AssemblyDescription("Debug Build")]
+[assembly: AssemblyConfiguration("Debug Build")]
 #else
 [assembly: AssemblyDescription("Release Build")]
+[assembly: AssemblyConfiguration("Release Build")]
 #endif
-[assembly: AssemblyConfiguration("")]
+
 [assembly: AssemblyCompany("GoDaddy")]
 [assembly: AssemblyProduct("Atlantis.Framework.DataProvider.Impl")]
 [assembly: AssemblyCopyright("Copyright © GoDaddy 2013")]
@@ -36,4 +38,4 @@ using System.Runtime.InteropServices;
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("4.0.0.0")]
-[assembly: AssemblyFileVersion("4.13.5.13")]
+[assembly: AssemblyFileVersion("4.13.9.4")]

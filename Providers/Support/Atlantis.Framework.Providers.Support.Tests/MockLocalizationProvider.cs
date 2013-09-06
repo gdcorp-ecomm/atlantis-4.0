@@ -68,5 +68,19 @@ namespace Atlantis.Framework.Providers.Support.Tests
     }
 
     public CultureInfo CurrentCultureInfo { get; private set; }
+    public string GetLanguageUrl()
+    {
+      throw new NotImplementedException();
+    }
+
+    public string GetLanguageUrl(string marketId)
+    {
+      throw new NotImplementedException();
+    }
+
+    public string GetLanguageUrl(string countrySiteId, string marketId)
+    {
+      throw new NotImplementedException();
+    }
   }
 }

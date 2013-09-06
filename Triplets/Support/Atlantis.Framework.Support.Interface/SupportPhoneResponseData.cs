@@ -26,7 +26,7 @@ namespace Atlantis.Framework.Support.Interface
 
     private SupportPhoneResponseData(string responseXml, string countryCode)
     {
-      ParseResponseXml(responseXml, countryCode);
+      ParseResponseXml(responseXml, countryCode.ToLower());
     }
 
     private SupportPhoneResponseData(AtlantisException ex)

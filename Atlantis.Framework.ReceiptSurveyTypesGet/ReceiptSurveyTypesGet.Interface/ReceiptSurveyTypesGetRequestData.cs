@@ -11,15 +11,16 @@ namespace Atlantis.Framework.ReceiptSurveyTypesGet.Interface
   public class ReceiptSurveyTypesGetRequestData: RequestData
   {
     public string CountryCode { get; private set; }
+    public string Culture { get; private set; }
 
-    //oth is the default values
-    public ReceiptSurveyTypesGetRequestData(string shopperId, string sourceURL, string orderId, string pathway, int pageCount, string countryCode = "oth") :
+   public ReceiptSurveyTypesGetRequestData(string shopperId, string sourceURL, string orderId, string pathway, int pageCount, string culture, string countryCode = "oth") :
       base(shopperId, sourceURL, orderId, pathway, pageCount)
     {
       CountryCode = countryCode;
+      Culture = culture;
+
       RequestTimeout = TimeSpan.FromSeconds(6);
     }
-
     public override string GetCacheMD5()
     {
       MD5 oMD5 = new MD5CryptoServiceProvider();

@@ -30,8 +30,8 @@ namespace Atlantis.Framework.ReceiptSurveyTypesGet.Impl
 
             connection.Open();
             SqlDataReader dataReader = command.ExecuteReader();
-            IEnumerable<SurveyItem> surveyItems = CreateSurveyItemsFromReader(dataReader);
-            responseData = new ReceiptSurveyTypesGetResponseData(surveyItems);
+            IEnumerable<SurveyItem> surveyItems = CreateSurveyItemsFromReader(dataReader, request);
+            responseData = new ReceiptSurveyTypesGetResponseData(surveyItems, request.Culture);
           }
         }
       }
@@ -50,18 +50,23 @@ namespace Atlantis.Framework.ReceiptSurveyTypesGet.Impl
     #region Create Survey Items
 
     private const string _TYPEID = "gdshop_shopper_survey_typeID";
-    private const string _DESCRIPTION = "typeDescription";
     private const string _GROUPID = "gdshop_shopper_survey_groupID";
 
-    private IEnumerable<SurveyItem> CreateSurveyItemsFromReader(SqlDataReader reader)
+    private IEnumerable<SurveyItem> CreateSurveyItemsFromReader(SqlDataReader reader, ReceiptSurveyTypesGetRequestData request)
     {
       List<SurveyItem> items = new List<SurveyItem>();
+      LanguageKeyFactory languageKey = new LanguageKeyFactory();
+      FetchResource resourcFetcher = new FetchResource("Atlantis.Framework.ReceiptSurveyTypesGet.Interface.LanguageResources.ReceiptSurveyTypes", request.Culture);
 
       while (reader.Read())
       {
+        string typeId = reader[_TYPEID].ToString();
+        string surveyLanguageKey = languageKey.GetLanguageKeyForSurveyTypeId(typeId);
+        string surveyDescription = resourcFetcher.GetString(surveyLanguageKey);
+
         items.Add(new SurveyItem(
-          reader[_TYPEID].ToString(),
-          reader[_DESCRIPTION].ToString(),
+          typeId,
+          surveyDescription,
           reader[_GROUPID].ToString().ToLower()
         ));
       }

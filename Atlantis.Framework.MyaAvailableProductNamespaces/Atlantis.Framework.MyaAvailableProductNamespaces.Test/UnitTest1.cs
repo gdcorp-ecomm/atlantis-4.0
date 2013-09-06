@@ -12,9 +12,10 @@ namespace Atlantis.Framework.MyaAvailableProductNamespaces.Test
     [TestMethod]
     [DeploymentItem("atlantis.config")]
     [DeploymentItem("app.config")]
+    [DeploymentItem("Atlantis.Framework.MyaAvailableProductNamespaces.Impl.dll")]
     public void GetNamespaces()
     {
-      var request = new MyaAvailableProductNamespacesRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0);
+      var request = new MyaAvailableProductNamespacesRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "de");
       var response = (MyaAvailableProductNamespacesResponseData)Engine.Engine.ProcessRequest(request, 494);
 
       var namespaceList = new StringBuilder();

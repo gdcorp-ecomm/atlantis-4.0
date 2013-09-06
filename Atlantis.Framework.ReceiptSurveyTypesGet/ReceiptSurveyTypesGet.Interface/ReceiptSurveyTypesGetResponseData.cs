@@ -14,6 +14,7 @@ namespace Atlantis.Framework.ReceiptSurveyTypesGet.Interface
 
     public IEnumerable<SurveyItem> AllSurveyTypes { get; private set; }
     public bool IsSuccess { get; private set; }
+    public string Culture { get; private set; }
 
     private List<SurveyItem> _tvSurveyTypes;
     public List<SurveyItem> TvSurveyTypes
@@ -33,9 +34,10 @@ namespace Atlantis.Framework.ReceiptSurveyTypesGet.Interface
       }
     }
 
-    public ReceiptSurveyTypesGetResponseData(IEnumerable<SurveyItem> surveyTypes)
+    public ReceiptSurveyTypesGetResponseData(IEnumerable<SurveyItem> surveyTypes, string culture = "en")
     {
       AllSurveyTypes = surveyTypes;
+      Culture = culture;
       IsSuccess = surveyTypes != null;
     }
 
@@ -76,7 +78,8 @@ namespace Atlantis.Framework.ReceiptSurveyTypesGet.Interface
         {
           if (removeTvText)
           {
-            clonedItem.Text = clonedItem.Text.Replace("TV - ", string.Empty);
+            int dashIndex = clonedItem.Text.IndexOf("-", StringComparison.OrdinalIgnoreCase);
+            clonedItem.Text = clonedItem.Text.Remove(0, dashIndex + 1).Trim();
           }
 
           if (!item.IsRacingItem)  //if it's not a racing item in the TV group
@@ -109,7 +112,9 @@ namespace Atlantis.Framework.ReceiptSurveyTypesGet.Interface
         _otherSurveyTypes = _otherSurveyTypes.OrderBy(si => si.Text).ToList();
       }
 
-      _tvSurveyTypes.Insert(0, new SurveyItem("1", "Select One...", string.Empty));
+      FetchResource resourcFetcher = new FetchResource("Atlantis.Framework.ReceiptSurveyTypesGet.Interface.LanguageResources.ReceiptSurveyTypes", Culture);
+
+      _tvSurveyTypes.Insert(0, new SurveyItem("1", resourcFetcher.GetString("surveySelectOne"), string.Empty));
       allSurveyTypes.AddRange(_tvSurveyTypes);
       allSurveyTypes.AddRange(_otherSurveyTypes);
 

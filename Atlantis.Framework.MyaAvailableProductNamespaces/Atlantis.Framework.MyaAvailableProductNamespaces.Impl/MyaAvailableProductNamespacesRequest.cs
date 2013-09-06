@@ -26,7 +26,11 @@ namespace Atlantis.Framework.MyaAvailableProductNamespaces.Impl
           }
         }
 
-        response = new MyaAvailableProductNamespacesResponseData(data);
+        MyaAvailableProductNamespacesRequestData request = (MyaAvailableProductNamespacesRequestData) requestData;
+
+        string culture = request.Culture;
+        response = new MyaAvailableProductNamespacesResponseData(data, culture);
+
         data.Dispose();
       }
       catch (AtlantisException ex)

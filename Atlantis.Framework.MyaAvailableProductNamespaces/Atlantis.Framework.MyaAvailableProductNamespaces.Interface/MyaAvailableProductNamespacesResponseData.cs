@@ -9,9 +9,9 @@ namespace Atlantis.Framework.MyaAvailableProductNamespaces.Interface
   {
     private readonly AtlantisException _exception;
 
-    public MyaAvailableProductNamespacesResponseData(DataTable data)
+    public MyaAvailableProductNamespacesResponseData(DataTable data, string culture)
     {
-      ProductNamespaces = GetProductNamespaces(data);
+      ProductNamespaces = GetProductNamespaces(data, culture);
       IsSuccess = true;
     }
 
@@ -25,25 +25,60 @@ namespace Atlantis.Framework.MyaAvailableProductNamespaces.Interface
       _exception = ex;
     }
 
-    static IEnumerable<ProductNamespace> GetProductNamespaces(DataTable data)
+    static IEnumerable<ProductNamespace> GetProductNamespaces(DataTable data, string culture)
     {
       var productNamespaces = new List<ProductNamespace>();
       if (data.Rows != null)
       {
+        FetchResource resourceFetcher = new FetchResource("Atlantis.Framework.MyaAvailableProductNamespaces.Interface.LanguageResources.MyaAvailableProductNamespaces", culture);
+
         foreach (DataRow row in data.Rows)
         {
           var name = Convert.ToString(row["namespace"]);
-          var description = Convert.ToString(row["description"]);
-          var example = Convert.ToString(row["example"]);
-          var note = Convert.ToString(row["note"]);
           var sortOrder = Convert.ToString(row["sortOrder"]);
           var productGroup = Convert.ToString(row["pl_productGroupID"]);
+          
+          string languageKey = string.Concat("myaNs", name.ToLower());
+          string keyValue = resourceFetcher.GetString(languageKey);
 
+          string description;
+          string example;
+          string note;
+          GetValues(keyValue, out description, out example, out note);
+          
           productNamespaces.Add(new ProductNamespace(name, description, example, note, sortOrder, productGroup));
         }
       }
 
       return productNamespaces.AsReadOnly();
+    }
+
+    private static void GetValues(string keyValues, out string description, out string example, out string note)
+    {
+      description = string.Empty;
+      example = string.Empty;
+      note = string.Empty;
+
+      string[] keyArray = keyValues.Split('|');
+      int i = 0;
+
+      foreach(string value in keyArray)
+      {
+        switch (i)
+        {
+          case 0:
+            description = value;
+            break;
+          case 1:
+            example = value;
+            break;
+          case 2:
+            note = value;
+            break;
+        }
+
+        i++;
+      }
     }
 
     public IEnumerable<ProductNamespace> ProductNamespaces { get; private set; }

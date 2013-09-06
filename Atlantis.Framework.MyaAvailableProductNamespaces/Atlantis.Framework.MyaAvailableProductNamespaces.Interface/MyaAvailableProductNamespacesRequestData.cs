@@ -6,9 +6,12 @@ namespace Atlantis.Framework.MyaAvailableProductNamespaces.Interface
 {
   public class MyaAvailableProductNamespacesRequestData : RequestData
   {
-    public MyaAvailableProductNamespacesRequestData(string shopperId, string sourceURL, string orderId, string pathway, int pageCount) :
+    public string Culture { get; private set; }
+    
+    public MyaAvailableProductNamespacesRequestData(string shopperId, string sourceURL, string orderId, string pathway, int pageCount, string culture) :
       base(shopperId, sourceURL, orderId, pathway, pageCount)
-    {   
+    {
+      Culture = culture;
     }
 
     public override string GetCacheMD5()

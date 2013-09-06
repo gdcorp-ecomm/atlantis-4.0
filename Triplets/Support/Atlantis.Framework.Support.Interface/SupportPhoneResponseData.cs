@@ -1,4 +1,5 @@
-﻿using System.Xml;
+﻿using System;
+using System.Collections.Generic;
 using System.Xml.Linq;
 using Atlantis.Framework.Interface;
 
@@ -10,23 +11,25 @@ namespace Atlantis.Framework.Support.Interface
 
     private readonly AtlantisException _exception;
 
-    private ISupportPhoneData _supportPhoneData;
-    public ISupportPhoneData SupportPhoneData
+    public bool TryGetSupportData(string country, out ISupportPhoneData supportPhoneData)
     {
-      get
-      {
-        if (_supportPhoneData == null)
-        {
-          _supportPhoneData = _emptySupportPhoneData;
-        }
+      bool result = false;
+      supportPhoneData = _emptySupportPhoneData;
 
-        return _supportPhoneData;
+      if (!string.IsNullOrEmpty(country))
+      {
+        if (_countriesSupportData.TryGetValue(country, out supportPhoneData))
+        {
+          result = true;
+        }
       }
+
+      return result;
     }
 
-    private SupportPhoneResponseData(string responseXml, string countryCode)
+    private SupportPhoneResponseData(XElement responseXml)
     {
-      ParseResponseXml(responseXml, countryCode.ToLower());
+      ParseResponseXml(responseXml);
     }
 
     private SupportPhoneResponseData(AtlantisException ex)
@@ -39,44 +42,46 @@ namespace Atlantis.Framework.Support.Interface
       return new SupportPhoneResponseData(ex);
     }
 
-    public static SupportPhoneResponseData FromResponseXml(string responseXml, string countryCode)
+    public static SupportPhoneResponseData FromResponseXml(XElement responseXml)
     {
-      return new SupportPhoneResponseData(responseXml, countryCode);
+      return new SupportPhoneResponseData(responseXml);
     }
 
     public string ToXML()
     {
-      XElement element = new XElement("SupportPhoneData");
-      element.Add(new XAttribute("number", SupportPhoneData.Number));
-      element.Add(new XAttribute("isInternational", SupportPhoneData.IsInternational));
-      return element.ToString(SaveOptions.DisableFormatting);
+      string result = "<exception/>";
+      if (_xmlData != null)
+      {
+        result = _xmlData;
+      }
+      return result;
     }
 
-    private void ParseResponseXml(string responseXml, string countryCode)
-    {
-      XmlDocument doc = new XmlDocument();
-      doc.LoadXml(responseXml);
-      XmlNode node;
+    private Dictionary<string, ISupportPhoneData> _countriesSupportData;
+    private string _xmlData;
 
-      node = doc.SelectSingleNode("//item [@isActive='1' and @flagCode='" + countryCode + "']");
-      if (node != null)
+    private void ParseResponseXml(XElement responseXml)
+    {
+      _xmlData = responseXml.ToString();
+      _countriesSupportData = new Dictionary<string, ISupportPhoneData>(StringComparer.OrdinalIgnoreCase);
+
+      foreach (XElement itemElement in responseXml.Descendants("item"))
       {
-        XmlElement nodeElement = node as XmlElement;
-        if (nodeElement != null)
+        try
         {
-          _supportPhoneData = new SupportPhoneData(nodeElement.GetAttribute("supportPhone"), !countryCode.Equals("us"));
-        }
-      }
-      else
-      {
-        node = doc.SelectSingleNode("//item [@isActive='1' and @flagCode='us']");
-        if (node != null)
-        {
-          XmlElement nodeElement = node as XmlElement;
-          if (nodeElement != null)
+          var isActive = itemElement.Attribute("isActive").Value;
+          if (!string.IsNullOrEmpty(isActive) && isActive.Equals("1"))
           {
-            _supportPhoneData = new SupportPhoneData(nodeElement.GetAttribute("supportPhone"), false);
+            var country = itemElement.Attribute("flagCode").Value;
+            var phoneNumber = itemElement.Attribute("supportPhone").Value;
+            _countriesSupportData[country] = new SupportPhoneData(phoneNumber, !country.Equals("us", StringComparison.OrdinalIgnoreCase));
           }
+        }
+        catch (Exception ex)
+        {
+          string message = ex.Message + ex.StackTrace;
+          var aex = new AtlantisException("SupportPhoneResponseData.ctor", "0", message, itemElement.ToString(), null, null);
+          Engine.Engine.LogAtlantisException(aex);
         }
       }
     }

@@ -267,12 +267,17 @@ namespace Atlantis.Framework.Providers.Support
         }
         else
         {
-          var request = new SupportPhoneRequestData(ResellerTypeId, CountryCode);
+          var request = new SupportPhoneRequestData(ResellerTypeId);
           var response = (SupportPhoneResponseData)DataCache.DataCache.GetProcessRequest(request, SupportEngineRequests.SupportPhoneRequest);
 
-          if (response.SupportPhoneData.Number != string.Empty)
+          ISupportPhoneData supportPhoneData;
+          if (response.TryGetSupportData(CountryCode, out supportPhoneData))
           {
-            technicalSupportPhone = response.SupportPhoneData;
+            technicalSupportPhone = supportPhoneData;
+          }
+          else if (CountryCode.ToLower() != COUNTRY_CODE_US && response.TryGetSupportData(COUNTRY_CODE_US, out supportPhoneData))
+          {
+            technicalSupportPhone = supportPhoneData;
           }
           else
           {

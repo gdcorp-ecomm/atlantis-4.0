@@ -8,26 +8,23 @@ namespace Atlantis.Framework.Support.Interface
   public class SupportPhoneRequestData : RequestData
   {
     public int ResellerTypeId { get; set; }
-    public string CountryCode { get; set; }
 
-    public SupportPhoneRequestData(int resellerTypeId, string countryCode)
+    public SupportPhoneRequestData(int resellerTypeId)
     {
       ResellerTypeId = resellerTypeId;
-      CountryCode = countryCode;
 
       RequestTimeout = TimeSpan.FromSeconds(3);
     }
 
     public override string GetCacheMD5()
     {
-      return BuildHashFromStrings(ResellerTypeId.ToString(CultureInfo.InvariantCulture), CountryCode);
+      return BuildHashFromStrings(ResellerTypeId.ToString(CultureInfo.InvariantCulture));
     }
 
     public override string ToXML()
     {
-      XElement element = new XElement("SupportPhoneRequestData");
+      var element = new XElement("SupportPhoneRequestData");
       element.Add(new XAttribute("ResellerTypeId", ResellerTypeId));
-      element.Add(new XAttribute("CountryCode", CountryCode));
       return element.ToString(SaveOptions.DisableFormatting);
     }
   }

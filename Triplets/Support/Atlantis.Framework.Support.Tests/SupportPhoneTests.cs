@@ -14,8 +14,8 @@ namespace Atlantis.Framework.Support.Tests
     [TestMethod]
     public void SupportPhoneCacheKey()
     {
-      SupportPhoneRequestData request = new SupportPhoneRequestData(1, "us");
-      SupportPhoneRequestData request2 = new SupportPhoneRequestData(1, "us");
+      SupportPhoneRequestData request = new SupportPhoneRequestData(1);
+      SupportPhoneRequestData request2 = new SupportPhoneRequestData(1);
       Assert.AreEqual(request.GetCacheMD5(), request2.GetCacheMD5());
     }
 
@@ -31,30 +31,30 @@ namespace Atlantis.Framework.Support.Tests
     [TestMethod]
     public void SupportPhoneRequestToXml()
     {
-      SupportPhoneRequestData request = new SupportPhoneRequestData(1, "us");
+      SupportPhoneRequestData request = new SupportPhoneRequestData(1);
       Assert.IsTrue(!string.IsNullOrEmpty(request.ToXML()));
     }
 
     [TestMethod]
     public void SupportPhoneResponseToXml()
     {
-      SupportPhoneRequestData request = new SupportPhoneRequestData(1, "us");
+      SupportPhoneRequestData request = new SupportPhoneRequestData(1);
       SupportPhoneResponseData response = (SupportPhoneResponseData)Engine.Engine.ProcessRequest(request, SUPPORTPHONEREQUESTTYPE);
       Assert.IsTrue(!string.IsNullOrEmpty(response.ToXML()));
     }
 
     [TestMethod]
-    public void SupportPhoneNoCountryCode()
+    public void SupportPhoneInvalidResellerType()
     {
       try
       {
-        SupportPhoneRequestData request = new SupportPhoneRequestData(1, "");
+        SupportPhoneRequestData request = new SupportPhoneRequestData(0);
         SupportPhoneResponseData response =
           (SupportPhoneResponseData) Engine.Engine.ProcessRequest(request, SUPPORTPHONEREQUESTTYPE);
       }
       catch (Exception ex)
       {
-        Assert.IsTrue(ex.Message.StartsWith("Null or empty country code"));
+        Assert.IsTrue(ex.Message.StartsWith("ResellerTypeId should be greater than 0"));
       }
     }
 
@@ -63,41 +63,77 @@ namespace Atlantis.Framework.Support.Tests
     [TestMethod]
     public void SupportPhoneGdUs()
     {
-      SupportPhoneRequestData request = new SupportPhoneRequestData(1, "us");
+      SupportPhoneRequestData request = new SupportPhoneRequestData(1);
       SupportPhoneResponseData response = (SupportPhoneResponseData)Engine.Engine.ProcessRequest(request, SUPPORTPHONEREQUESTTYPE);
-      Assert.IsFalse(string.IsNullOrEmpty(response.SupportPhoneData.Number));
-      Assert.IsFalse(response.SupportPhoneData.IsInternational);
-      Assert.AreEqual(response.SupportPhoneData.Number, "(480) 505-8877");
+
+      ISupportPhoneData supportPhoneData;
+      if (response.TryGetSupportData("us", out supportPhoneData))
+      {
+        Assert.IsFalse(string.IsNullOrEmpty(supportPhoneData.Number));
+        Assert.IsFalse(supportPhoneData.IsInternational);
+        Assert.AreEqual(supportPhoneData.Number, "(480) 505-8877");
+      }
+      else
+      {
+        Assert.Fail("Failed to get support phone data");
+      }
     }
 
     [TestMethod]
     public void SupportPhoneGdInternational()
     {
-      SupportPhoneRequestData request = new SupportPhoneRequestData(1, "au");
+      SupportPhoneRequestData request = new SupportPhoneRequestData(1);
       SupportPhoneResponseData response = (SupportPhoneResponseData)Engine.Engine.ProcessRequest(request, SUPPORTPHONEREQUESTTYPE);
-      Assert.IsFalse(string.IsNullOrEmpty(response.SupportPhoneData.Number));
-      Assert.IsTrue(response.SupportPhoneData.IsInternational);
-      Assert.AreEqual(response.SupportPhoneData.Number, "02 8023 8592");
+
+      ISupportPhoneData supportPhoneData;
+      if (response.TryGetSupportData("au", out supportPhoneData))
+      {
+        Assert.IsFalse(string.IsNullOrEmpty(supportPhoneData.Number));
+        Assert.IsTrue(supportPhoneData.IsInternational);
+        Assert.AreEqual(supportPhoneData.Number, "02 8023 8592");
+      }
+      else
+      {
+        Assert.Fail("Failed to get support phone data");
+      }
     }
 
     [TestMethod]
     public void SupportPhoneResellerUs()
     {
-      SupportPhoneRequestData request = new SupportPhoneRequestData(5, "us");
+      SupportPhoneRequestData request = new SupportPhoneRequestData(5);
       SupportPhoneResponseData response = (SupportPhoneResponseData)Engine.Engine.ProcessRequest(request, SUPPORTPHONEREQUESTTYPE);
-      Assert.IsFalse(string.IsNullOrEmpty(response.SupportPhoneData.Number));
-      Assert.IsFalse(response.SupportPhoneData.IsInternational);
-      Assert.AreEqual(response.SupportPhoneData.Number, "(480) 624-2500");
+
+      ISupportPhoneData supportPhoneData;
+      if (response.TryGetSupportData("us", out supportPhoneData))
+      {
+        Assert.IsFalse(string.IsNullOrEmpty(supportPhoneData.Number));
+        Assert.IsFalse(supportPhoneData.IsInternational);
+        Assert.AreEqual(supportPhoneData.Number, "(480) 624-2500");
+      }
+      else
+      {
+        Assert.Fail("Failed to get support phone data");
+      }
     }
 
     [TestMethod]
-    public void SupportPhoneResellerInternation()
+    public void SupportPhoneResellerInternational()
     {
-      SupportPhoneRequestData request = new SupportPhoneRequestData(5, "in");
+      SupportPhoneRequestData request = new SupportPhoneRequestData(5);
       SupportPhoneResponseData response = (SupportPhoneResponseData)Engine.Engine.ProcessRequest(request, SUPPORTPHONEREQUESTTYPE);
-      Assert.IsFalse(string.IsNullOrEmpty(response.SupportPhoneData.Number));
-      Assert.IsTrue(response.SupportPhoneData.IsInternational);
-      Assert.AreEqual(response.SupportPhoneData.Number, "1-800-121-0120");
+
+      ISupportPhoneData supportPhoneData;
+      if (response.TryGetSupportData("in", out supportPhoneData))
+      {
+        Assert.IsFalse(string.IsNullOrEmpty(supportPhoneData.Number));
+        Assert.IsTrue(supportPhoneData.IsInternational);
+        Assert.AreEqual(supportPhoneData.Number, "1-800-121-0120");
+      }
+      else
+      {
+        Assert.Fail("Failed to get support phone data");
+      }
     }
   }
 }

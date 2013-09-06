@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using System.Xml.Linq;
 using Atlantis.Framework.DataCacheService;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Support.Interface;
@@ -16,9 +17,9 @@ namespace Atlantis.Framework.Support.Impl
       {
         var supportPhoneRequest = (SupportPhoneRequestData)requestData;
 
-        if (string.IsNullOrEmpty(supportPhoneRequest.CountryCode))
+        if (supportPhoneRequest.ResellerTypeId <= 0)
         {
-          throw new Exception("Null or empty country code");
+          throw new Exception("ResellerTypeId should be greater than 0");
         }
 
         string responseXml;
@@ -32,11 +33,12 @@ namespace Atlantis.Framework.Support.Impl
           throw new Exception("Null or empty response xml");
         }
 
-        result = SupportPhoneResponseData.FromResponseXml(responseXml, supportPhoneRequest.CountryCode);
+        var responseElement = XElement.Parse(responseXml);
+        result = SupportPhoneResponseData.FromResponseXml(responseElement);
       }
       catch (Exception ex)
       {
-        AtlantisException aex = new AtlantisException(requestData, "SupportPhoneRequest.RequestHandler", ex.Message + ex.StackTrace, requestData.ToXML());
+        var aex = new AtlantisException(requestData, "SupportPhoneRequest.RequestHandler", ex.Message + ex.StackTrace, requestData.ToXML());
         result = SupportPhoneResponseData.FromException(aex);
       }
 

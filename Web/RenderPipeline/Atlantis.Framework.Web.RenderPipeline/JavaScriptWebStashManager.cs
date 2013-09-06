@@ -8,20 +8,23 @@ namespace Atlantis.Framework.Web.RenderPipeline
   internal static class JavaScriptWebStashManager
   {
     private const string JAVASCRIPT_MATCH_NAME = "javascript";
+    private const string END_BODY_TAG = "</body>";
 
     private static readonly Regex _javaScriptRegex = new Regex(@"<atlantis:javascriptwebstash>(?<javascript>.*?)</atlantis:javascriptwebstash>", RegexOptions.Compiled | RegexOptions.Singleline);
-    private const string END_BODY_TAG = "</body>";
 
     internal static string ProcessScript(string content)
     {
-      var originalContent = content ?? string.Empty;
       var finalContent = string.Empty;
 
       try
       {
-        if (originalContent != string.Empty)
+        if (!string.IsNullOrEmpty(content))
         {
-          finalContent = CheckJavaScriptRegexMatches(originalContent);
+          StringBuilder scriptStash = new StringBuilder();
+
+          finalContent = _javaScriptRegex.Replace(content, match => ProcessJavaScriptRegexMatch(match, scriptStash));
+
+          finalContent = finalContent.Replace(END_BODY_TAG, scriptStash + END_BODY_TAG);
         }
       }
       catch (Exception ex)
@@ -33,37 +36,16 @@ namespace Atlantis.Framework.Web.RenderPipeline
       return finalContent;
     }
 
-    private static string CheckJavaScriptRegexMatches(string originalContent)
+    private static string ProcessJavaScriptRegexMatch(Match javaScriptMatch, StringBuilder scriptStash)
     {
-      var finalContent = originalContent;
+      string javaScript = javaScriptMatch.Groups[JAVASCRIPT_MATCH_NAME].Captures[0].Value;
 
-      MatchCollection javascriptMatches = _javaScriptRegex.Matches(originalContent);
-
-      if (javascriptMatches.Count > 0)
+      if (!string.IsNullOrEmpty(javaScript))
       {
-        finalContent = ProcessJavaScriptRegexMatches(javascriptMatches, originalContent);
+        scriptStash.AppendLine(javaScript);
       }
 
-      return finalContent;
-    }
-
-    private static string ProcessJavaScriptRegexMatches(MatchCollection javaScriptMatches, string originalContent)
-    {
-      var finalContent = new StringBuilder(originalContent);
-
-      foreach (Match javascriptMatch in javaScriptMatches)
-      {
-        string matchValue = javascriptMatch.Value;
-        string javaScript = javascriptMatch.Groups[JAVASCRIPT_MATCH_NAME].Captures[0].Value;
-
-        if (!string.IsNullOrEmpty(javaScript))
-        {
-          finalContent.Replace(END_BODY_TAG, javaScript + END_BODY_TAG);
-          finalContent.Replace(matchValue, string.Empty);
-        }
-      }
-
-      return finalContent.ToString();
+      return string.Empty;
     }
   }
 }

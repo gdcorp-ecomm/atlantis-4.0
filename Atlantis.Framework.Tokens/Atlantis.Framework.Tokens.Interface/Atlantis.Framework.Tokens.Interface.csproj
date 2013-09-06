@@ -58,7 +58,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DynamicTokenHandlerLoader.cs" />
-    <Compile Include="InProcessTokenGroup.cs" />
+    <Compile Include="ErrorLogHelper.cs" />
+    <Compile Include="TokenHandlerManager.cs" />
     <Compile Include="IToken.cs" />
     <Compile Include="ITokenEncoding.cs" />
     <Compile Include="ITokenHandler.cs" />

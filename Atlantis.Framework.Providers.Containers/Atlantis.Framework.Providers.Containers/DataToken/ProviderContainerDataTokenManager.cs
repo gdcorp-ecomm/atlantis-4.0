@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Text;
 using System.Text.RegularExpressions;
 using Atlantis.Framework.Interface;
 
@@ -15,81 +12,54 @@ namespace Atlantis.Framework.Providers.Containers.DataToken
 
     internal static string ReplaceDataTokens(string content, IProviderContainer providerContainer)
     {
-      var originalContent = content ?? string.Empty;
       var finalContent = string.Empty;
 
       try
       {
-        if (originalContent != string.Empty)
+        if (!string.IsNullOrEmpty(content))
         {
-          finalContent = ProcessDataTokenMatches(originalContent, providerContainer);
+          finalContent = _dataTokenRegex.Replace(content, match => ProcessDataTokenMatch(match, providerContainer));
         }
       }
       catch (Exception ex)
       {
-        var aex = new AtlantisException("ProviderContainerDataTokenManager.ReplaceDataTokens", "0", ex.Message, string.Empty, null, null);
-        Engine.Engine.LogAtlantisException(aex);
+        LogError(ex.Message, "ProviderContainerDataTokenManager.ReplaceDataTokens()", string.Empty, providerContainer);
       }
 
       return finalContent;
     }
 
-    private static string ProcessDataTokenMatches(string originalContent, IProviderContainer providerContainer)
+    private static string ProcessDataTokenMatch(Match dataTokenMatch, IProviderContainer providerContainer)
     {
-      var finalContent = originalContent;
+      string replaceValue;
 
-      MatchCollection dataTokenMatches = _dataTokenRegex.Matches(originalContent);
+      string matchValue = dataTokenMatch.Value;
+      string dataTokenKey = dataTokenMatch.Groups[DATATOKEN_MATCH_KEY].Captures[0].Value;
 
-      if (dataTokenMatches.Count > 0)
+      var dataTokenValue = providerContainer.GetData<string>(dataTokenKey, null);
+      if (dataTokenValue != null)
       {
-        var debugContextErrors = new Collection<string>();
+        replaceValue = dataTokenValue;
+      }
+      else
+      {
+        replaceValue = string.Empty;
 
-        finalContent = ProcessDataTokens(dataTokenMatches, originalContent, providerContainer, debugContextErrors);
-
-        LogDebugContextData(providerContainer, debugContextErrors);
+        LogError("IProviderContainer data value not present.", "ProviderContainerDataTokenManager.ProcessDataTokenMatch()", matchValue, providerContainer);
       }
 
-      return finalContent;
+      return replaceValue;
     }
 
-    private static string ProcessDataTokens(MatchCollection dataTokenMatches, string originalContent, 
-                                            IProviderContainer providerContainer, ICollection<string> errors)
-    {
-      var finalContent = new StringBuilder(originalContent);
-
-      foreach (Match dataTokenMatch in dataTokenMatches)
-      {
-        string matchValue = dataTokenMatch.Value;
-        string dataTokenKey = dataTokenMatch.Groups[DATATOKEN_MATCH_KEY].Captures[0].Value;
-
-        var dataTokenValue = providerContainer.GetData<string>(dataTokenKey, null);
-        if (dataTokenValue != null)
-        {
-          finalContent.Replace(matchValue, dataTokenValue);
-        }
-        else
-        {
-          errors.Add("Could not get IProviderContainer data value for Key: " + dataTokenKey);
-          finalContent.Replace(matchValue, string.Empty);
-        }
-      }
-
-      return finalContent.ToString();
-    }
-
-    private static void LogDebugContextData(IProviderContainer providerContainer, ICollection<string> errors)
+    private static void LogError(string errorMessage, string sourceFunction, string key, IProviderContainer providerContainer)
     {
       IDebugContext debugContext;
-      if (errors.Count > 0 && providerContainer.TryResolve(out debugContext))
+      if (providerContainer.TryResolve(out debugContext))
       {
-        var dataTokenDebugBuilder = new StringBuilder();
-        foreach (string debugContextError in errors)
-        {
-          dataTokenDebugBuilder.AppendLine(debugContextError);
-        }
-
-        debugContext.LogDebugTrackingData("DataTokenManager Errors", dataTokenDebugBuilder.ToString());
+        debugContext.LogDebugTrackingData("IProviderContainer Data Errors - " + key, errorMessage);
       }
+
+      Engine.Engine.LogAtlantisException(new AtlantisException(sourceFunction, 0, errorMessage, key));
     }
   }
 }

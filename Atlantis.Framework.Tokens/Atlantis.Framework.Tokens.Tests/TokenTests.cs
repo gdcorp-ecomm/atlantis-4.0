@@ -1,4 +1,7 @@
 ﻿using Atlantis.Framework.Providers.Containers;
+using Atlantis.Framework.Render.Pipeline;
+using Atlantis.Framework.Render.Pipeline.Interface;
+using Atlantis.Framework.Tokens.Tests.Render;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Atlantis.Framework.Tokens.Interface;
 using Atlantis.Framework.Tokens.Tests.Handlers;
@@ -13,36 +16,24 @@ namespace Atlantis.Framework.Tokens.Tests
   [TestClass]
   public class TokenTests
   {
-    private List<Match> ParseTokenStrings(string inputText)
-    {
-      MethodInfo method = typeof(TokenManager).GetMethod("ParseTokenStrings", BindingFlags.Static | BindingFlags.NonPublic);
-      object[] parameters = new object[1] { inputText };
-      object result = method.Invoke((object)null, parameters);
-      return result as List<Match>;
-    }
-
-    private void ClearHandlers()
-    {
-      MethodInfo method = typeof(TokenManager).GetMethod("ClearHandlers", BindingFlags.Static | BindingFlags.NonPublic);
-      object[] parameters = new object[0];
-      method.Invoke((object)null, parameters);
-    }
-
     [TestMethod]
     public void TokenParsing()
     {
-      ClearHandlers();
+      TokenManager.ClearHandlers();
+
       TokenManager.RegisterTokenHandler(new SimpleTokenHandler());
       string inputText = TestData.GetTextDataResource("inputdata1.txt");
 
-      List<Match> matches = ParseTokenStrings(inputText);
+      List<Match> matches = TokenManager.ParseTokenStrings(inputText);
+
       Assert.IsTrue(matches.Count > 0);
     }
 
     [TestMethod]
     public void TokenManagerAutoLoad()
     {
-      ClearHandlers();
+      TokenManager.ClearHandlers();
+
       TokenManager.AutoRegisterTokenHandlers(Assembly.GetExecutingAssembly());
       var handlers = TokenManager.GetRegisteredTokenHandlers();
       Assert.IsTrue(handlers.Count > 0);
@@ -51,7 +42,8 @@ namespace Atlantis.Framework.Tokens.Tests
     [TestMethod]
     public void TokenManagerAutoLoadInputData1()
     {
-      ClearHandlers();
+      TokenManager.ClearHandlers();
+
       TokenManager.AutoRegisterTokenHandlers(Assembly.GetExecutingAssembly());
       string inputText = TestData.GetTextDataResource("inputdata1.txt");
 
@@ -65,7 +57,7 @@ namespace Atlantis.Framework.Tokens.Tests
       Assert.AreEqual(TokenEvaluationResult.Errors, result);
 
       //no more tokens should exist
-      List<Match> matches = ParseTokenStrings(outputText);
+      List<Match> matches = TokenManager.ParseTokenStrings(outputText);
       Assert.IsTrue(matches.Count == 0);
 
       IDebugContext debug = container.Resolve<IDebugContext>();
@@ -75,7 +67,8 @@ namespace Atlantis.Framework.Tokens.Tests
     [TestMethod]
     public void TokenManagerEvaluateError()
     {
-      ClearHandlers();
+      TokenManager.ClearHandlers();
+
       TokenManager.RegisterTokenHandler(new ErrorTokenHandler());
       string inputText = TestData.GetTextDataResource("inputdata1.txt");
 
@@ -95,7 +88,8 @@ namespace Atlantis.Framework.Tokens.Tests
     [TestMethod]
     public void TokensInEncodedStrings()
     {
-      ClearHandlers();
+      TokenManager.ClearHandlers();
+
       TokenManager.RegisterTokenHandler(new XmlTokenHandler());
       string inputText = TestData.GetTextDataResource("inputdata2.txt");
 
@@ -112,5 +106,31 @@ namespace Atlantis.Framework.Tokens.Tests
 
     }
 
+    [TestMethod]
+    public void TokenRenderHandlerInputData()
+    {
+      TokenManager.ClearHandlers();
+
+      TokenManager.AutoRegisterTokenHandlers(Assembly.GetExecutingAssembly());
+      string inputText = TestData.GetTextDataResource("inputdata1.txt");
+
+
+      IProviderContainer container = new ObjectProviderContainer();
+      container.RegisterProvider<IDebugContext, MockDebug>();
+      
+      RenderPipelineManager renderPipelineManager = new RenderPipelineManager();
+      renderPipelineManager.AddRenderHandler(new TokenRenderHandler());
+
+      IRenderContent renderContent = new TestRenderContent(inputText);
+
+      IProcessedRenderContent processedRenderContent = renderPipelineManager.RenderContent(renderContent, container);
+
+      //no more tokens should exist
+      List<Match> matches = TokenManager.ParseTokenStrings(processedRenderContent.Content);
+      Assert.IsTrue(matches.Count == 0);
+
+      IDebugContext debug = container.Resolve<IDebugContext>();
+      Assert.IsTrue(debug.GetDebugTrackingData().Count > 0);
+    }
   }
 }

@@ -30,7 +30,7 @@ namespace Atlantis.Framework.Providers.Containers.Tests
     [TestMethod]
     public void DataTokenValidEmptyOrigContent()
     {
-      ProviderContainer.SetData<string>("mytest", "new text");
+      ProviderContainer.SetData("mytest", "new text");
 
       string content = null;
 
@@ -44,7 +44,7 @@ namespace Atlantis.Framework.Providers.Containers.Tests
     [TestMethod]
     public void DataTokenValid()
     {
-      ProviderContainer.SetData<string>("mytest", "new text");
+      ProviderContainer.SetData("mytest", "new text");
 
       const string content = @"<div>[@D[mytest]@D]</div>";
 
@@ -58,7 +58,7 @@ namespace Atlantis.Framework.Providers.Containers.Tests
     [TestMethod]
     public void DataTokenInvalid()
     {
-      ProviderContainer.SetData<string>("mytest", "new text");
+      ProviderContainer.SetData("mytest", "new text");
 
       const string originalContent = @"<div>[@D[mytesting]@D]</div>";
 
@@ -72,7 +72,7 @@ namespace Atlantis.Framework.Providers.Containers.Tests
     [TestMethod]
     public void DataTokenInvalidEmptyKey()
     {
-      ProviderContainer.SetData<string>("mytest", "new text");
+      ProviderContainer.SetData("mytest", "new text");
 
       const string content = @"<div>[@D[]@D]</div>";
 
@@ -81,53 +81,6 @@ namespace Atlantis.Framework.Providers.Containers.Tests
       handler.ProcessContent(processedRenderContent, ProviderContainer);
 
       Assert.IsTrue(processedRenderContent.Content.Equals("<div></div>"));
-    }
-
-    [TestMethod]
-    public void DataTokenInvalidProviderContainer()
-    {
-      ProviderContainer.SetData<string>("mytest", "new text");
-
-      const string content = @"<div>[@D[mytest]@D]</div>";
-
-      var handler = new ProviderContainerDataTokenRenderHandler();
-      IProcessedRenderContent processedRenderContent = new SimpleProcessedRenderContent(content);
-      handler.ProcessContent(processedRenderContent, new InvalidProviderContainer());
-
-      Assert.IsTrue(processedRenderContent.Content.Equals(string.Empty));
-    }
-
-    private class InvalidProviderContainer : IProviderContainer
-    {
-      public void RegisterProvider<TProviderInterface, TProvider>() where TProviderInterface : class where TProvider : ProviderBase
-      {
-        throw new System.NotImplementedException();
-      }
-
-      public TProviderInterface Resolve<TProviderInterface>() where TProviderInterface : class
-      {
-        throw new System.NotImplementedException();
-      }
-
-      public bool TryResolve<TProviderInterface>(out TProviderInterface provider) where TProviderInterface : class
-      {
-        throw new System.NotImplementedException();
-      }
-
-      public bool CanResolve<TProviderInterface>() where TProviderInterface : class
-      {
-        throw new System.NotImplementedException();
-      }
-
-      public T GetData<T>(string key, T defaultValue)
-      {
-        throw new System.NotImplementedException();
-      }
-
-      public void SetData<T>(string key, T value)
-      {
-        throw new System.NotImplementedException();
-      }
     }
   }
 }

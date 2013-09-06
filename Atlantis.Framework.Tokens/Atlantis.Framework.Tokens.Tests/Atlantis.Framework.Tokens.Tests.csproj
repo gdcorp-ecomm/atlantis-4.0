@@ -66,6 +66,7 @@
     <Compile Include="Handlers\SimpleTokenHandler.cs" />
     <Compile Include="Handlers\XmlTokenHandler.cs" />
     <Compile Include="MockDebug.cs" />
+    <Compile Include="Render\TestRenderContent.cs" />
     <Compile Include="TokenTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -87,6 +88,14 @@
     <ProjectReference Include="..\..\Atlantis.Framework.Providers.Containers\Atlantis.Framework.Providers.Containers\Atlantis.Framework.Providers.Containers.csproj">
       <Project>{c333e679-494e-422d-ab5e-e4c0ec94acd5}</Project>
       <Name>Atlantis.Framework.Providers.Containers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Render\RenderPipeline\Atlantis.Framework.Render.Pipeline.Interface\Atlantis.Framework.Render.Pipeline.Interface.csproj">
+      <Project>{0d7f076f-1809-437b-b045-e35a7e68e423}</Project>
+      <Name>Atlantis.Framework.Render.Pipeline.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Render\RenderPipeline\Atlantis.Framework.Render.Pipeline\Atlantis.Framework.Render.Pipeline.csproj">
+      <Project>{68764d92-7cd9-45fb-b650-1429656dcf14}</Project>
+      <Name>Atlantis.Framework.Render.Pipeline</Name>
     </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.TH.TestDynamic\Atlantis.Framework.TH.TestDynamic.csproj">
       <Project>{ab6c50db-26d3-48b3-b69e-d9c773da29c6}</Project>

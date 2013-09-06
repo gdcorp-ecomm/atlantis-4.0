@@ -1,21 +1,21 @@
-﻿using System.Diagnostics;
-using Atlantis.Framework.Interface;
+﻿using Atlantis.Framework.Interface;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-using System.Text;
 using System.Text.RegularExpressions;
 
 namespace Atlantis.Framework.Tokens.Interface
 {
   public static class TokenManager
   {
-    const string _TOKENKEY = "tokenkey";
-    const string _TOKENDATA = "tokendata";
-    const string _DEFAULTTOKENPATTERN = @"\[@T\[(?<tokenkey>[a-zA-z0-9]*?):(?<tokendata>.*?)\]@T\]";
-    private static Dictionary<string, ITokenHandler> _tokenHandlers;
+    private const string TOKEN_KEY_GROUP = "tokenkey";
+    private const string TOKEN_DATA_GROUP = "tokendata";
+    private const string DEFAULT_TOKEN_PATTERN = @"\[@T\[(?<tokenkey>[a-zA-z0-9]*?):(?<tokendata>.*?)\]@T\]";
+    private const string TOKEN_RESULT_DATA_KEY = "Atlantis.Framework.Tokens.Interface.TokenManager.TokenResult";
+
+    private static readonly Dictionary<string, ITokenHandler> _tokenHandlers;
     private static readonly Dictionary<string, TokenHandlerStats> _tokenHandlersStats;
-    private static List<Regex> _tokenExpressions;
+    private static readonly List<Regex> _tokenExpressions;
 
     static TokenManager()
     {
@@ -24,8 +24,18 @@ namespace Atlantis.Framework.Tokens.Interface
 
       _tokenExpressions = new List<Regex>();
 
-      Regex defaultTokenEx = new Regex(_DEFAULTTOKENPATTERN, RegexOptions.Singleline | RegexOptions.Compiled);
+      Regex defaultTokenEx = new Regex(DEFAULT_TOKEN_PATTERN, RegexOptions.Singleline | RegexOptions.Compiled);
       _tokenExpressions.Add(defaultTokenEx);
+    }
+
+    private static void SetTokenEvaluationToErrorStatus(IProviderContainer container)
+    {
+      container.SetData(TOKEN_RESULT_DATA_KEY, TokenEvaluationResult.Errors);
+    }
+
+    private static TokenEvaluationResult GetTokenEvaluationResult(IProviderContainer container)
+    {
+      return container.GetData(TOKEN_RESULT_DATA_KEY, TokenEvaluationResult.Success);
     }
 
     public static void AutoRegisterTokenHandlers()
@@ -77,19 +87,17 @@ namespace Atlantis.Framework.Tokens.Interface
       bool tokendataFound = false;
 
       string[] groupNames = tokenExpression.GetGroupNames();
-      if (groupNames != null)
+      
+      foreach (string groupName in groupNames)
       {
-        foreach (string groupName in groupNames)
+        if ("tokenkey".Equals(groupName))
         {
-          if ("tokenkey".Equals(groupName))
-          {
-            tokenkeyFound = true;
-          }
+          tokenkeyFound = true;
+        }
 
-          if ("tokendata".Equals(groupName))
-          {
-            tokendataFound = true;
-          }
+        if ("tokendata".Equals(groupName))
+        {
+          tokendataFound = true;
         }
       }
 
@@ -103,7 +111,12 @@ namespace Atlantis.Framework.Tokens.Interface
       }
     }
 
-    private static List<Match> ParseTokenStrings(string inputText)
+    internal static void ClearHandlers()
+    {
+       _tokenHandlers.Clear();
+    }
+
+    internal static List<Match> ParseTokenStrings(string inputText)
     {
       List<Match> result = new List<Match>();
 
@@ -126,20 +139,14 @@ namespace Atlantis.Framework.Tokens.Interface
     /// <returns>List of registered ITokenHandler objects</returns>
     public static IList<ITokenHandler> GetRegisteredTokenHandlers()
     {
-      List<ITokenHandler> _handlers = new List<ITokenHandler>();
+      List<ITokenHandler> handlers = new List<ITokenHandler>();
+
       foreach (ITokenHandler handler in _tokenHandlers.Values)
       {
-        _handlers.Add(handler);
+        handlers.Add(handler);
       }
-      return _handlers.AsReadOnly();
-    }
 
-    /// <summary>
-    /// Clears all token handlers. This is used for unit tests only. This is not a threadsafe operation
-    /// </summary>
-    private static void ClearHandlers()
-    {
-      _tokenHandlers.Clear();
+      return handlers.AsReadOnly();
     }
 
     public static TokenEvaluationResult ReplaceTokens(string inputText, IProviderContainer container, out string resultText)
@@ -149,93 +156,63 @@ namespace Atlantis.Framework.Tokens.Interface
 
     public static TokenEvaluationResult ReplaceTokens(string inputText, IProviderContainer container, ITokenEncoding tokenDataEncoding, out string resultText)
     {
-      TokenEvaluationResult result = TokenEvaluationResult.Success;
+      resultText = inputText;
 
-      // First, we find all the tokens
-      var foundTokens = ParseTokenStrings(inputText);
-      if (foundTokens.Count == 0)
+      foreach (Regex expression in _tokenExpressions)
       {
-        resultText = inputText;
-      }
-      else
-      {
-        StringBuilder workingText = new StringBuilder(inputText);
-
-        List<string> errors;
-        List<InProcessTokenGroup> groups = InitializeAndGroupTokens(foundTokens, tokenDataEncoding, out errors);
-
-        if ((errors != null) && (errors.Count > 0))
-        {
-          result = TokenEvaluationResult.Errors;
-        }
-
-        foreach(InProcessTokenGroup group in groups)
-        {
-          TokenEvaluationResult evaluationResult = group.EvaluateTokens(container);
-          if (evaluationResult == TokenEvaluationResult.Errors)
-          {
-            result = TokenEvaluationResult.Errors;
-          }
-
-          group.ExecuteReplacements(workingText, tokenDataEncoding);
-        }
-
-        resultText = workingText.ToString();
+        resultText = expression.Replace(resultText, match => ProcessTokenMatch(match, container, tokenDataEncoding));
       }
 
-      return result;
+      return GetTokenEvaluationResult(container);
     }
 
-    private static List<InProcessTokenGroup> InitializeAndGroupTokens(IEnumerable<Match> tokenMatches, ITokenEncoding tokenEncoding, out List<string> errors)
+    private static string ProcessTokenMatch(Match tokenMatch, IProviderContainer container, ITokenEncoding tokenEncoding)
     {
-      List<InProcessTokenGroup> result = new List<InProcessTokenGroup>();
-      Dictionary<string, InProcessTokenGroup>  trackingGroups = new Dictionary<string, InProcessTokenGroup>(StringComparer.OrdinalIgnoreCase);
-      errors = new List<string>();
+      string replacementValue;
 
-      foreach (var tokenMatch in tokenMatches)
+      try
       {
-        try
+        string matchValue = tokenMatch.Value;
+        string tokenKey = tokenMatch.Groups[TOKEN_KEY_GROUP].Captures[0].Value;
+        string tokenData = tokenMatch.Groups[TOKEN_DATA_GROUP].Captures[0].Value;
+
+        if (tokenEncoding != null)
         {
-          string matchValue = tokenMatch.Value;
-          string tokenKey = tokenMatch.Groups[_TOKENKEY].Captures[0].Value;
-          string tokenData = tokenMatch.Groups[_TOKENDATA].Captures[0].Value;
-
-          if (tokenEncoding != null)
-          {
-            tokenData = tokenEncoding.DecodeTokenData(tokenData);
-          }
-
-          InProcessTokenGroup group;
-          if (trackingGroups.TryGetValue(tokenKey, out group))
-          {
-            group.AddInProcessToken(tokenKey, tokenData, matchValue);
-          }
-          else
-          {
-            ITokenHandler tokenHandler;
-            if (!_tokenHandlers.TryGetValue(tokenKey, out tokenHandler))
-            {
-              tokenHandler = null;
-            }
-
-            TokenHandlerStats tokenHandlerStats;
-            _tokenHandlersStats.TryGetValue(tokenKey, out tokenHandlerStats);
-
-            group = new InProcessTokenGroup(tokenHandler, tokenHandlerStats);
-            trackingGroups[tokenKey] = group;
-            result.Add(group);
-            group.AddInProcessToken(tokenKey, tokenData, matchValue);
-          }
-        }
-        catch (Exception ex)
-        {
-          errors.Add(tokenMatch.ToString() + ":" + ex.Message + Environment.NewLine + ex.StackTrace);
+          tokenData = tokenEncoding.DecodeTokenData(tokenData);
         }
 
+        ITokenHandler tokenHandler;
+        _tokenHandlers.TryGetValue(tokenKey, out tokenHandler);
+
+        TokenHandlerStats tokenHandlerStats;
+        _tokenHandlersStats.TryGetValue(tokenKey, out tokenHandlerStats);
+
+        TokenHandlerManager tokenHandlerManager = new TokenHandlerManager(tokenKey, tokenData, matchValue, tokenHandler, tokenHandlerStats);
+
+        TokenEvaluationResult evaluationResult = tokenHandlerManager.EvaluateToken(container);
+        if (evaluationResult == TokenEvaluationResult.Errors)
+        {
+          replacementValue = string.Empty;
+          SetTokenEvaluationToErrorStatus(container);
+        }
+        else
+        {
+          replacementValue = tokenHandlerManager.RenderToken(tokenEncoding);
+        }
+      }
+      catch (Exception ex)
+      {
+        replacementValue = string.Empty;
+
+        SetTokenEvaluationToErrorStatus(container);
+        ErrorLogHelper.LogErrors("TokenManager.ProcessTokenMatch." + tokenMatch.Value,
+                                  ex.Message,
+                                  "TokenHandlerManager.EvaluateToken()",
+                                  tokenMatch.Value,
+                                  container);
       }
 
-      return result;
-
+      return replacementValue;
     }
   }
 }

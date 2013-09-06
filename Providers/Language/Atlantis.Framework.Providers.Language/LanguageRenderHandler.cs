@@ -1,55 +1,33 @@
 ﻿using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.Language.Interface;
 using Atlantis.Framework.Render.Pipeline.Interface;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Text.RegularExpressions;
 
 namespace Atlantis.Framework.Providers.Language
 {
   public class LanguageRenderHandler : IRenderHandler
   {
-    const string _DICTIONARYKEY = "dictionary";
-    const string _PHRASEKEY = "phrasekey";
-    const string _DEFAULTTOKENPATTERN = @"\[@L\[(?<dictionary>[a-zA-z0-9\.\-\/]*?):(?<phrasekey>[a-zA-z0-9\.\-]*?)\]@L\]";
-    private static Regex _languagePhraseTokenPattern;
+    private const string DICTIONARY_GROUP_KEY = "dictionary";
+    private const string PHRASE_GROUP_KEY = "phrasekey";
+    private const string LANGUAGE_TOKEN_PATTERN = @"\[@L\[(?<dictionary>[a-zA-z0-9\.\-\/]*?):(?<phrasekey>[a-zA-z0-9\.\-]*?)\]@L\]";
 
-    static LanguageRenderHandler()
+    private static readonly Regex _languagePhraseTokenPattern = new Regex(LANGUAGE_TOKEN_PATTERN, RegexOptions.Singleline | RegexOptions.Compiled);
+
+    private string PhraseMatchEvaluator(Match phraseMatch, ILanguageProvider languageProvider)
     {
-      _languagePhraseTokenPattern = new Regex(_DEFAULTTOKENPATTERN, RegexOptions.Singleline | RegexOptions.Compiled);
+      string dictionary = phraseMatch.Groups[DICTIONARY_GROUP_KEY].Captures[0].Value;
+      string phrasekey = phraseMatch.Groups[PHRASE_GROUP_KEY].Captures[0].Value;
+
+      return languageProvider.GetLanguagePhrase(dictionary, phrasekey);
     }
 
     public void ProcessContent(IProcessedRenderContent processRenderContent, IProviderContainer providerContainer)
     {
-      ILanguageProvider languageProvider;
-      if (providerContainer.TryResolve(out languageProvider))
-      {
-        var matches = _languagePhraseTokenPattern.Matches(processRenderContent.Content);
-        if (matches.Count > 0)
-        {
-          HashSet<string> alreadyReplaced = new HashSet<string>();
-          StringBuilder contentBuilder = new StringBuilder(processRenderContent.Content);
+      ILanguageProvider languageProvider = providerContainer.Resolve<ILanguageProvider>();
 
-          foreach (Match phraseMatch in matches)
-          {
-            if (!alreadyReplaced.Contains(phraseMatch.Value))
-            {
-              string replacement = string.Empty;
+      string modifiedContent = _languagePhraseTokenPattern.Replace(processRenderContent.Content, match => PhraseMatchEvaluator(match, languageProvider));
 
-              string dictionary = phraseMatch.Groups[_DICTIONARYKEY].Captures[0].Value;
-              string phrasekey = phraseMatch.Groups[_PHRASEKEY].Captures[0].Value;
-
-              replacement = languageProvider.GetLanguagePhrase(dictionary, phrasekey);
-
-              contentBuilder.Replace(phraseMatch.Value, replacement);
-              alreadyReplaced.Add(phraseMatch.Value);
-            }
-          }
-
-          processRenderContent.OverWriteContent(contentBuilder.ToString());
-        }
-      }
+      processRenderContent.OverWriteContent(modifiedContent);
     }
   }
 }

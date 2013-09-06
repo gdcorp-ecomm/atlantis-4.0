@@ -26,7 +26,9 @@ namespace Atlantis.Framework.ReceiptSurveyTypesGet.Interface
       MD5 oMD5 = new MD5CryptoServiceProvider();
       oMD5.Initialize();
 
-      byte[] stringBytes = System.Text.ASCIIEncoding.ASCII.GetBytes(CountryCode);
+      string cacheKey = string.Concat(CountryCode, "|", Culture);
+
+      byte[] stringBytes = System.Text.ASCIIEncoding.ASCII.GetBytes(cacheKey);
       byte[] md5Bytes = oMD5.ComputeHash(stringBytes);
       string sValue = BitConverter.ToString(md5Bytes, 0);
       return sValue.Replace("-", "");

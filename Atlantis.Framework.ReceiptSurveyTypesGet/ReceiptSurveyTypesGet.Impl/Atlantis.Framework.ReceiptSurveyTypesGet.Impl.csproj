@@ -45,11 +45,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="LanguageKeyFactory.cs" />
-    <Compile Include="LanguageResources\ReceiptSurveyTypes.en.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ReceiptSurveyTypes.en.resx</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReceiptSurveyTypesGetRequest.cs" />
   </ItemGroup>
@@ -66,13 +61,6 @@
       <Project>{EF43D6C1-93C4-4704-A96B-2D049244C87A}</Project>
       <Name>Atlantis.Framework.ReceiptSurveyTypesGet.Interface</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="LanguageResources\ReceiptSurveyTypes.de.resx" />
-    <EmbeddedResource Include="LanguageResources\ReceiptSurveyTypes.en.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>ReceiptSurveyTypes.en.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

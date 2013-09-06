@@ -1,5 +1,4 @@
 ﻿using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following 
@@ -15,7 +14,7 @@ using System.Runtime.InteropServices;
 #endif
 [assembly: AssemblyCompany("GoDaddy.com, LLC")]
 [assembly: AssemblyProduct("Atlantis.Framework.CH.SiteContext")]
-[assembly: AssemblyCopyright("Copyright © GoDaddy.com, LLC 2013")]
+[assembly: AssemblyCopyright("Copyright © GoDaddy, LLC 2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -28,14 +27,17 @@ using System.Runtime.InteropServices;
 [assembly: Guid("8e572ab8-1a34-4ae8-aa0f-8d50c686dc38")]
 
 // Version information for an assembly consists of the following four values:
+// Versions must be set so the Assembly Version does not change with revisions,
+// but the FileVersion does.
 //
 //      Major Version
 //      Minor Version 
 //      Build Number
 //      Revision
 //
-// You can specify all the values or you can default the Build and Revision Numbers 
-// by using the '*' as shown below:
-// [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("4.13.8.1")]
+// use 4.0.0.0 for the Assembly Version
+// use 4.YY.M.D for teh FileVersion.  Do not use leading zeros.
+// example 4.13.6.1 for Jun 1, 2013
+//
+[assembly: AssemblyVersion("4.0.0.0")]
+[assembly: AssemblyFileVersion("4.13.9.6")]

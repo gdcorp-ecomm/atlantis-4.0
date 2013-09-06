@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ContextIds.cs" />
+    <Compile Include="HasISCConditionHandler.cs" />
     <Compile Include="SiteContextAnyConditionHandler.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>

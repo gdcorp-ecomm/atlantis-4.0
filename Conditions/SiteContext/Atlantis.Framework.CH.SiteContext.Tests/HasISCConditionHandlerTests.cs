@@ -33,6 +33,8 @@ namespace Atlantis.Framework.CH.SiteContext.Tests
         new HttpResponse(new StringWriter()));  
     }
 
+    private const string IscExpression = "hasISC()";
+
     [TestMethod]
     public void HasIscIsTrue()
     {
@@ -43,8 +45,7 @@ namespace Atlantis.Framework.CH.SiteContext.Tests
 
       var expressionParserManager = GetExpressionParserManager(container);
 
-      string expression = "hasISC()";
-      bool result = expressionParserManager.EvaluateExpression(expression);
+      bool result = expressionParserManager.EvaluateExpression(IscExpression);
       Assert.IsTrue(result);
     }
 
@@ -58,23 +59,7 @@ namespace Atlantis.Framework.CH.SiteContext.Tests
 
       var expressionParserManager = GetExpressionParserManager(container);
 
-      string expression = "hasISC()";
-      bool result = expressionParserManager.EvaluateExpression(expression);
-      Assert.IsFalse(result);
-    }
-
-    [TestMethod]
-    public void HasIscWithWhiteSpace()
-    {
-      InitializeHttpContext("  ");
-
-      var container = new MockProviderContainer();
-      container.RegisterProvider<ISiteContext, MockSiteContext>();
-
-      var expressionParserManager = GetExpressionParserManager(container);
-
-      string expression = "hasISC()";
-      bool result = expressionParserManager.EvaluateExpression(expression);
+      bool result = expressionParserManager.EvaluateExpression(IscExpression);
       Assert.IsFalse(result);
     }
 
@@ -90,8 +75,7 @@ namespace Atlantis.Framework.CH.SiteContext.Tests
 
       var expressionParserManager = GetExpressionParserManager(container);
 
-      string expression = "hasISC()";
-      bool result = expressionParserManager.EvaluateExpression(expression);
+      bool result = expressionParserManager.EvaluateExpression(IscExpression);
       Assert.IsFalse(result);
     }
   }

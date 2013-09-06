@@ -321,13 +321,9 @@ namespace Atlantis.Framework.Providers.Support
               var exception = new AtlantisException("SupportProvider.SupportEmail", "0", ex.Message + ex.StackTrace, data, null, null);
               Engine.Engine.LogAtlantisException(exception);              
             }
-
-            if (string.IsNullOrWhiteSpace(_supportEmail))
-            {
-              _supportEmail = DEFAULT_SUPPORT_EMAIL;
-            }
           }
-          else
+
+          if (string.IsNullOrEmpty(_supportEmail))
           {
             _supportEmail = DEFAULT_SUPPORT_EMAIL;
           }

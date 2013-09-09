@@ -44,12 +44,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseClasses\ShopperRequestData.cs" />
+    <Compile Include="BaseClasses\ShopperResponseData.cs" />
+    <Compile Include="CreateShopperRequestData.cs" />
+    <Compile Include="CreateShopperResponseData.cs" />
     <Compile Include="GetShopperRequestData.cs" />
     <Compile Include="GetShopperResponseData.cs" />
-    <Compile Include="InterestPreference.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SearchShoppersRequestData.cs" />
+    <Compile Include="SearchShoppersResponseData.cs" />
+    <Compile Include="ShopperPriceTypeRequestData.cs" />
+    <Compile Include="ShopperPriceTypeResponseData.cs" />
+    <Compile Include="ShopperPriceTypes.cs" />
     <Compile Include="ShopperResponseStatus.cs" />
     <Compile Include="ShopperResponseStatusType.cs" />
+    <Compile Include="UpdateShopperRequestData.cs" />
+    <Compile Include="UpdateShopperResponseData.cs" />
+    <Compile Include="VerifyShopperRequestData.cs" />
+    <Compile Include="VerifyShopperResponseData.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj">

@@ -1,6 +1,6 @@
-﻿using System;
-using Atlantis.Framework.Interface;
+﻿using Atlantis.Framework.Interface;
 using Atlantis.Framework.Shopper.Impl.gdShopperService;
+using System;
 
 namespace Atlantis.Framework.Shopper.Impl
 {

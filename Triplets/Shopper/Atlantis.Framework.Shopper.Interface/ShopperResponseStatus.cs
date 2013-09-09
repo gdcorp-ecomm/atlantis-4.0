@@ -1,16 +1,18 @@
-﻿using Atlantis.Framework.Interface;
-using System;
-using System.Xml.Linq;
+﻿using System.Xml.Linq;
 
 namespace Atlantis.Framework.Shopper.Interface
 {
   public class ShopperResponseStatus
   {
     public static ShopperResponseStatus Success { get; private set; }
+    public static ShopperResponseStatus UnknownError { get; private set; }
 
     static ShopperResponseStatus()
     {
       Success = new ShopperResponseStatus();
+      UnknownError = new ShopperResponseStatus();
+      UnknownError.Status = ShopperResponseStatusType.UnknownError;
+      UnknownError.ErrorCode = "Unknown";
     }
 
     public ShopperResponseStatusType Status { get; private set; }
@@ -31,11 +33,23 @@ namespace Atlantis.Framework.Shopper.Interface
         return Success;
       }
 
+      var errorElement = responseElement.Element("Error");
+      if (errorElement == null)
+      {
+        return Success;
+      }
+
       ShopperResponseStatus result = new ShopperResponseStatus();
       result.Status = ShopperResponseStatusType.UnknownError;
 
-      var errorElement = responseElement.Element("Error");
-      result.ErrorCode = (errorElement != null) ? errorElement.Value : "Unknown";
+      if (!string.IsNullOrEmpty(errorElement.Value))
+      {
+        result.ErrorCode = errorElement.Value;
+      }
+      else
+      {
+        result.ErrorCode = "Unknown";
+      }
 
       var errorDescription = responseElement.Element("Description");
       result.ErrorMessage = (errorDescription != null) ? errorDescription.Value : string.Empty;

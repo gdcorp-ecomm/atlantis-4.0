@@ -32,5 +32,16 @@ namespace Atlantis.Framework.Shopper.Impl.Properties {
                 return ((string)(this["Atlantis_Framework_Shopper_Impl_gdShopperService_WSCgdShopperService"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://commgtwyws.dev.glbt1.gdg:80/WSgdBillingData/WSgdBillingData.dll?Handler=De" +
+            "fault")]
+        public string Atlantis_Framework_Shopper_Impl_gdBillingDataService_WSgdBillingDataService {
+            get {
+                return ((string)(this["Atlantis_Framework_Shopper_Impl_gdBillingDataService_WSgdBillingDataService"]));
+            }
+        }
     }
 }

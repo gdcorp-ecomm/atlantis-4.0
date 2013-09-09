@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CreateShopperRequest.cs" />
     <Compile Include="GetShopperRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
@@ -54,7 +55,16 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="SearchShoppersRequest.cs" />
+    <Compile Include="ShopperPriceTypeRequest.cs" />
     <Compile Include="ShopperService.cs" />
+    <Compile Include="UpdateShopperRequest.cs" />
+    <Compile Include="VerifyShopperRequest.cs" />
+    <Compile Include="Web References\gdBillingDataService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
     <Compile Include="Web References\gdShopperService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -70,6 +80,10 @@
       <Project>{a083a52e-c3c3-42e0-8dfd-54719e4c3b25}</Project>
       <Name>Atlantis.Framework.Interface</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz.csproj">
+      <Project>{3213e6db-f026-4f17-a46a-7127f79f6620}</Project>
+      <Name>Atlantis.Framework.Nimitz</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.Shopper.Interface\Atlantis.Framework.Shopper.Interface.csproj">
       <Project>{5be1c108-7cc4-401e-b610-eb3a5331fc5a}</Project>
       <Name>Atlantis.Framework.Shopper.Interface</Name>
@@ -81,6 +95,11 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="Web References\gdBillingDataService\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\gdBillingDataService\WSgdBillingData.wsdl" />
     <None Include="Web References\gdShopperService\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
@@ -91,6 +110,17 @@
     <WebReferences Include="Web References\" />
   </ItemGroup>
   <ItemGroup>
+    <WebReferenceUrl Include="http://commgtwyws.dev.glbt1.gdg/WSgdBillingData/WSgdBillingData.dll%3fHandler=GenWSgdBillingDataWSDL">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\gdBillingDataService\</RelPath>
+      <UpdateFromURL>http://commgtwyws.dev.glbt1.gdg/WSgdBillingData/WSgdBillingData.dll%3fHandler=GenWSgdBillingDataWSDL</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>Atlantis_Framework_Shopper_Impl_gdBillingDataService_WSgdBillingDataService</CachedSettingsPropName>
+    </WebReferenceUrl>
     <WebReferenceUrl Include="https://shopper.dev.glbt1.gdg/WSCgdShopper/WSCgdShopper.dll%3fHandler=GenWSCgdShopperWSDL">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\gdShopperService\</RelPath>

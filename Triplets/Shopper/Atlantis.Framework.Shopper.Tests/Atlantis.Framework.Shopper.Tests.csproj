@@ -60,6 +60,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="CreateShopperTests.cs" />
     <Compile Include="GetShopperTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -67,6 +68,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="SearchShoppersTests.cs" />
+    <Compile Include="ShopperPriceTypeTests.cs" />
+    <Compile Include="UpdateShopperTests.cs" />
+    <Compile Include="VerifyShopperTests.cs" />
+    <Compile Include="WrongTypeRequestData.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj">
@@ -76,6 +82,10 @@
     <ProjectReference Include="..\..\..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj">
       <Project>{a083a52e-c3c3-42e0-8dfd-54719e4c3b25}</Project>
       <Name>Atlantis.Framework.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Testing\Atlantis.Framework.Testing.MockEngine\Atlantis.Framework.Testing.MockEngine.csproj">
+      <Project>{20b1c0d2-1789-4813-8bc6-993ce8cf07f7}</Project>
+      <Name>Atlantis.Framework.Testing.MockEngine</Name>
     </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.Shopper.Impl\Atlantis.Framework.Shopper.Impl.csproj">
       <Project>{b63887e6-bcae-48a8-bbc1-1fcdae96eaa3}</Project>
@@ -93,10 +103,22 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="atlantis.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Resources\ShopperCreate.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Resources\ShopperGet.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Resources\ShopperSearch.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Resources\ShopperUpdate.xsd">
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>

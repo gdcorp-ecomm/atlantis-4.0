@@ -1,29 +1,18 @@
-﻿using System.Globalization;
-using System.Web;
-using System.Xml.Linq;
-using Atlantis.Framework.Interface;
-using System;
+﻿using Atlantis.Framework.Shopper.Interface.BaseClasses;
 using System.Collections.Generic;
+using System.Xml.Linq;
 
 namespace Atlantis.Framework.Shopper.Interface
 {
-  public class GetShopperRequestData : RequestData
+  public class GetShopperRequestData : ShopperRequestData
   {
-    public string RequestedBy { get; private set; }
-
-    private readonly string _ipAddress;
-    private readonly HashSet<int> _communicationPreferences;
-    private readonly List<InterestPreference> _interestPreferences;
     private readonly HashSet<string> _fields;
 
     public GetShopperRequestData(string shopperId, string originIpAddress, string requestedBy, IEnumerable<string> fields = null)
     {
       ShopperID = shopperId;
-      _ipAddress = originIpAddress;
+      OriginIpAddress = originIpAddress;
       RequestedBy = requestedBy;
-
-      _communicationPreferences = new HashSet<int>();
-      _interestPreferences = new List<InterestPreference>();
 
       _fields = fields != null ? 
         new HashSet<string>(fields) : 
@@ -36,16 +25,6 @@ namespace Atlantis.Framework.Shopper.Interface
       {
         return _fields;
       }
-    }
-
-    public IEnumerable<int> CommunicationPreferences
-    {
-      get { return _communicationPreferences; }
-    }
-
-    public IEnumerable<InterestPreference> InterestPreferences
-    {
-      get { return _interestPreferences; }
     }
 
     public void AddField(string field)
@@ -64,24 +43,11 @@ namespace Atlantis.Framework.Shopper.Interface
       }
     }
 
-    public void AddCommunicationPreference(int communicationTypeId)
-    {
-      _communicationPreferences.Add(communicationTypeId);
-    }
-
-    public void AddInterestPreference(InterestPreference preference)
-    {
-      if (preference != null)
-      {
-        _interestPreferences.Add(preference);
-      }
-    }
-
     public override string ToXML()
     {
       var requestElement = new XElement("ShopperGet");
       requestElement.Add(new XAttribute("ID", ShopperID));
-      requestElement.Add(new XAttribute("IPAddress", GetIPAddress()));
+      requestElement.Add(new XAttribute("IPAddress", OriginIpAddress));
       requestElement.Add(new XAttribute("RequestedBy", RequestedBy));
 
       var fieldsElement = new XElement("ReturnFields");
@@ -92,28 +58,8 @@ namespace Atlantis.Framework.Shopper.Interface
         fieldsElement.Add(new XElement("Field", new XAttribute("Name", field)));
       }
 
-      var preferencesElement = new XElement("ReturnPreferences");
-      requestElement.Add(preferencesElement);
-
-      foreach (var interestPreference in _interestPreferences)
-      {
-        preferencesElement.Add(new XElement("Interest", 
-          new XAttribute("CommTypeID", interestPreference.CommunicationTypeId.ToString(CultureInfo.InvariantCulture)),
-          new XAttribute("InterestTypeID", interestPreference.InterestTypeId.ToString(CultureInfo.InvariantCulture))));
-      }
-
-      foreach (var communicationPreference in _communicationPreferences)
-      {
-        preferencesElement.Add(new XElement("Communication",
-          new XAttribute("CommTypeID", communicationPreference.ToString(CultureInfo.InvariantCulture))));
-      }
-
       return requestElement.ToString(SaveOptions.DisableFormatting);
     }
 
-    private object GetIPAddress()
-    {
-      return string.IsNullOrEmpty(_ipAddress) ? Environment.MachineName : _ipAddress;
-    }
   }
 }

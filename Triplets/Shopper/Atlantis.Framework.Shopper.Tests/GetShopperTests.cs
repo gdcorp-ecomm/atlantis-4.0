@@ -1,15 +1,11 @@
-﻿using System;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Runtime.Remoting;
-using System.Web;
-using System.Xml;
-using System.Xml.Linq;
-using System.Xml.Schema;
-using Atlantis.Framework.Shopper.Interface;
+﻿using Atlantis.Framework.Shopper.Interface;
 using Atlantis.Framework.Shopper.Tests.Properties;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using System.IO;
+using System.Linq;
+using System.Xml.Linq;
+using System.Xml.Schema;
 
 namespace Atlantis.Framework.Shopper.Tests
 {
@@ -45,8 +41,6 @@ namespace Atlantis.Framework.Shopper.Tests
       Assert.AreEqual(2, request.Fields.Count());
       Assert.AreEqual("832652", request.ShopperID);
       Assert.AreEqual("unittest", request.RequestedBy);
-      Assert.AreEqual(0, request.InterestPreferences.Count());
-      Assert.AreEqual(0, request.CommunicationPreferences.Count());
 
       ValidateShopperGetXml(request.ToXML());
     }
@@ -93,39 +87,6 @@ namespace Atlantis.Framework.Shopper.Tests
       Assert.AreEqual("832652", request.ShopperID);
     }
 
-    [TestMethod]
-    public void InterestPreferenceProperties()
-    {
-      var pref = new InterestPreference(1, 3);
-      Assert.AreEqual(1, pref.InterestTypeId);
-      Assert.AreEqual(3, pref.CommunicationTypeId);
-    }
-
-    [TestMethod]
-    public void AddInterestPreferencesToRequest()
-    {
-      var pref = new InterestPreference(1, 2);
-      var pref2 = new InterestPreference(2, 3);
-      var request = new GetShopperRequestData("832652", "1.2.3.4", "unittest");
-      request.AddInterestPreference(pref);
-      request.AddInterestPreference(pref2);
-      Assert.AreEqual(2, request.InterestPreferences.Count());
-
-      ValidateShopperGetXml(request.ToXML());
-    }
-
-    [TestMethod]
-    public void AddCommunicationPreferencesToRequest()
-    {
-      var request = new GetShopperRequestData("832652", "1.2.3.4", "unittest");
-      request.AddCommunicationPreference(1);
-      request.AddCommunicationPreference(2);
-      request.AddCommunicationPreference(1);
-      Assert.AreEqual(2, request.CommunicationPreferences.Count());
-
-      ValidateShopperGetXml(request.ToXML());
-    }
-
     private const string _SHOPPER_RESPONSE_XML = "<Shopper ID=\"822497\"><Fields><Field Name=\"gdshop_shopper_payment_type_id\">3</Field></Fields></Shopper>";
 
     [TestMethod]
@@ -137,34 +98,7 @@ namespace Atlantis.Framework.Shopper.Tests
       Assert.IsFalse(response.ToXML().Contains("gdshop_shopper_payment_type_id"));
       Assert.IsNull(response.GetException());
       Assert.AreEqual("822497", response.ShopperId);
-    }
-
-    private const string _SHOPPER_RESPONSE_COMMPREFERENCE =
-      "<Shopper ID=\"822497\"><Preferences><Communication CommTypeID=\"200\" OptIn=\"0\"/><Communication CommTypeID=\"100\" OptIn=\"1\"/></Preferences></Shopper>";
-
-    [TestMethod]
-    public void GetShopperResponseDataPropertiesCommunication()
-    {
-      var response = GetShopperResponseData.FromShopperXml(_SHOPPER_RESPONSE_COMMPREFERENCE);
-      Assert.IsFalse(response.HasFieldValue("gdshop_shopper_payment_type_id"));
-      int optIn200 = response.GetCommunicationPreference(200);
-      int optIn100 = response.GetCommunicationPreference(100);
-      Assert.AreEqual(0, optIn200);
-      Assert.AreEqual(1, optIn100);
-    }
-
-    private const string _SHOPPER_RESPONSE_INTEREST =
-      "<Shopper ID=\"822497\"><Preferences><Interest CommTypeID=\"3\" InterestTypeID=\"5\" OptIn=\"15\"/><Interest CommTypeID=\"2\" InterestTypeID=\"2\" OptIn=\"0\"/></Preferences></Shopper>";
-
-    [TestMethod]
-    public void GetShopperResponseDataPropertiesInterest()
-    {
-      var response = GetShopperResponseData.FromShopperXml(_SHOPPER_RESPONSE_INTEREST);
-      Assert.IsFalse(response.HasFieldValue("gdshop_shopper_payment_type_id"));
-      int optIn22 = response.GetInterestPreference(2, 2);
-      int optIn35 = response.GetInterestPreference(3, 5);
-      Assert.AreEqual(0, optIn22);
-      Assert.AreEqual(15, optIn35);
+      Assert.AreEqual(1, response.Fields.Count());
     }
 
     private const string _SHOPPER_RESPONSE_UNKNOWN_ERROR = "<Status />";

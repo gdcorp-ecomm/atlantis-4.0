@@ -13,20 +13,24 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Shopper.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Shopper.Tests", "Atlantis.Framework.Shopper.Tests\Atlantis.Framework.Shopper.Tests.csproj", "{8846E61C-DED4-486A-880D-D9181EDE1D94}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Nimitz", "..\..\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz.csproj", "{3213E6DB-F026-4F17-A46A-7127F79F6620}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Testing.MockEngine", "..\..\Testing\Atlantis.Framework.Testing.MockEngine\Atlantis.Framework.Testing.MockEngine.csproj", "{20B1C0D2-1789-4813-8BC6-993CE8CF07F7}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 6
+		SccNumberOfProjects = 8
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
-		SccProjectUniqueName0 = ..\\..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
-		SccProjectTopLevelParentUniqueName0 = Shopper.sln
-		SccProjectName0 = ../../Atlantis.Framework.Engine/Atlantis.Framework.Interface
-		SccLocalPath0 = ..\\..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
-		SccProjectUniqueName1 = ..\\..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ..\\..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
 		SccProjectTopLevelParentUniqueName1 = Shopper.sln
-		SccProjectName1 = ../../Atlantis.Framework.Engine/Atlantis.Framework.Engine
-		SccLocalPath1 = ..\\..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
-		SccLocalPath2 = .
+		SccProjectName1 = ../../Atlantis.Framework.Engine/Atlantis.Framework.Interface
+		SccLocalPath1 = ..\\..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
+		SccProjectUniqueName2 = ..\\..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
+		SccProjectTopLevelParentUniqueName2 = Shopper.sln
+		SccProjectName2 = ../../Atlantis.Framework.Engine/Atlantis.Framework.Engine
+		SccLocalPath2 = ..\\..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
 		SccProjectUniqueName3 = Atlantis.Framework.Shopper.Impl\\Atlantis.Framework.Shopper.Impl.csproj
 		SccProjectName3 = Atlantis.Framework.Shopper.Impl
 		SccLocalPath3 = Atlantis.Framework.Shopper.Impl
@@ -36,6 +40,14 @@ Global
 		SccProjectUniqueName5 = Atlantis.Framework.Shopper.Tests\\Atlantis.Framework.Shopper.Tests.csproj
 		SccProjectName5 = Atlantis.Framework.Shopper.Tests
 		SccLocalPath5 = Atlantis.Framework.Shopper.Tests
+		SccProjectUniqueName6 = ..\\..\\Atlantis.Framework.Nimitz\\Atlantis.Framework.Nimitz\\Atlantis.Framework.Nimitz.csproj
+		SccProjectTopLevelParentUniqueName6 = Shopper.sln
+		SccProjectName6 = ../../Atlantis.Framework.Nimitz/Atlantis.Framework.Nimitz
+		SccLocalPath6 = ..\\..\\Atlantis.Framework.Nimitz\\Atlantis.Framework.Nimitz
+		SccProjectUniqueName7 = ..\\..\\Testing\\Atlantis.Framework.Testing.MockEngine\\Atlantis.Framework.Testing.MockEngine.csproj
+		SccProjectTopLevelParentUniqueName7 = Shopper.sln
+		SccProjectName7 = ../../Testing/Atlantis.Framework.Testing.MockEngine
+		SccLocalPath7 = ..\\..\\Testing\\Atlantis.Framework.Testing.MockEngine
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -62,6 +74,14 @@ Global
 		{8846E61C-DED4-486A-880D-D9181EDE1D94}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8846E61C-DED4-486A-880D-D9181EDE1D94}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8846E61C-DED4-486A-880D-D9181EDE1D94}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Release|Any CPU.Build.0 = Release|Any CPU
+		{20B1C0D2-1789-4813-8BC6-993CE8CF07F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{20B1C0D2-1789-4813-8BC6-993CE8CF07F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{20B1C0D2-1789-4813-8BC6-993CE8CF07F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{20B1C0D2-1789-4813-8BC6-993CE8CF07F7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -69,5 +89,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {708A91A1-A425-4215-BBD6-9D696569A34B}
 		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {708A91A1-A425-4215-BBD6-9D696569A34B}
+		{3213E6DB-F026-4F17-A46A-7127F79F6620} = {708A91A1-A425-4215-BBD6-9D696569A34B}
+		{20B1C0D2-1789-4813-8BC6-993CE8CF07F7} = {708A91A1-A425-4215-BBD6-9D696569A34B}
 	EndGlobalSection
 EndGlobal

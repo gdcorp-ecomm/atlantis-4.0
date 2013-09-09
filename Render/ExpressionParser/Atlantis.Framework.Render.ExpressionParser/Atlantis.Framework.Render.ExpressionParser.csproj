@@ -87,7 +87,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Atlantis.Framework.Render.ExpressionParser.nuget.bat" />
-    <None Include="Atlantis.Framework.Render.ExpressionParser.nuspec" />
+    <None Include="Atlantis.Framework.Render.ExpressionParser.nuspec">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

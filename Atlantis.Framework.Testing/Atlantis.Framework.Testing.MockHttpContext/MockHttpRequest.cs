@@ -22,6 +22,15 @@ namespace Atlantis.Framework.Testing.MockHttpContext
       _remoteAddress = address;
     }
 
+    public void MockRemoteAddress(string ipAddress)
+    {
+      IPAddress validAddress;
+      if (IPAddress.TryParse(ipAddress, out validAddress))
+      {
+        MockRemoteAddress(validAddress);
+      }
+    }
+
     public void MockUserAgent(string userAgent)
     {
       _userAgent = userAgent;

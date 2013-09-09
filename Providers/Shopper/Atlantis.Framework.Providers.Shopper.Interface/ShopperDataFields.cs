@@ -1,0 +1,73 @@
+﻿namespace Atlantis.Framework.Providers.Shopper.Interface
+{
+  public static class ShopperDataFields
+  {
+    public const string AuthenticationGuid = "authenticationGuid";
+    public const string AuthenticationGuidExpirationDate = "authenticationGuidExpirationDate";
+    public const string BirthDay = "birthDay";
+    public const string BirthMonth = "birthMonth";
+    public const string BirthYear = "birthYear";
+    public const string City = "city";
+    public const string Company = "company";
+    public const string Country = "country";
+    public const string DateCreated = "date_created";
+    public const string DbpEmailFilterPreferenceId = "dbp_emailFilterPreferenceID";
+    public const string DbpShopperStatusId = "dbp_shopperStatusID";
+    public const string DoNotCallFlag = "doNotCallFlag";
+    public const string DoNotEmailFlag = "doNotEmailFlag";
+    public const string EmailAddress = "email";
+    public const string FaxNumber = "fax";
+    public const string FirstName = "first_name";
+    public const string MobileAccountTypeId = "fortKnox_shopperMobileAccountTypeID";
+    public const string MobileCarrierId = "fortKnox_shopperMobileCarrierID";
+    public const string Fraud = "fraud";
+    public const string PaymentTypeId = "gdshop_shopper_payment_type_id";
+    public const string PaymentGroupId = "fortKnox_paymentGroupID";
+    public const string UserTypeId = "gdshop_userTypeID";
+    public const string Gender = "gender";
+    public const string HasRenewingServices = "hasRenewingServices";
+    public const string IsCompany = "isCompany";
+    public const string IsLocked = "isLocked";
+    public const string IsPasswordLocked = "isPwdLocked";
+    public const string IsStrongPassword = "isStrongPassword";
+    public const string IsUnified = "isUnified";
+    public const string LastChangedBy = "last_changed_by";
+    public const string LastChangedDate = "last_changed_date";
+    public const string LastName = "last_name";
+    public const string LoginName = "loginName";
+    public const string EmailTypeId = "lu_emailTypeID";
+    public const string MiddleName = "middle_name";
+    public const string MarketingEmail = "mktg_email";
+    public const string MarketingMail = "mktg_mail";
+    public const string MarketingNonPromotionalNotices = "mktg_nonpromotional_notices";
+    public const string MarketingPartner = "mktg_partner";
+    public const string MobilePhone = "mobilePhone";
+    public const string MobilePushNotification = "mobilePushNotification";
+    public const string Name = "name";
+    public const string ParentShopperId = "parent_shopper_id";
+    public const string PasswordReminder = "passwordReminder";
+    public const string Payment = "payment";
+    public const string PaymentProfilePurgeStatus = "paymentProfilePurgeStatus";
+    public const string PhoneNumber1 = "phone1";
+    public const string PhoneNumber1Extension = "phone1Extension";
+    public const string PhoneNumber2 = "phone2";
+    public const string PrepaidServiceWarnedFlag = "prepaidServiceWarnedFlag";
+    public const string PrepaidServiceWarningLevel = "prepaidServiceWarningLevel";
+    public const string PrivateLabelId = "privateLabelID";
+    public const string SendRecurringPpsWarnings = "sendRecurringPPSWarnings";
+    public const string ShippingMethod = "shipping_method";
+    public const string ShopperGroupId = "shopper_group_id";
+    public const string ShopperId = "shopper_id";
+    public const string ShopperPIN = "shopperPIN";
+    public const string State = "state";
+    public const string Status = "status";
+    public const string StreetAddress1 = "street1";
+    public const string StreetAddress2 = "street2";
+    public const string TimeCreated = "time_created";
+    public const string PostalCode = "zip";
+    public const string TwoFactorStatus = "twoFactorStatus";
+    public const string CurrencyType = "Currency";
+    public const string MarketId = "MarketID";
+    public const string CountrySiteId = "CountrySiteID";
+  }
+}

@@ -9,7 +9,6 @@ namespace Atlantis.Framework.Web.IeEdge
   {
     private const string EDGE_META_TAG = "<meta http-equiv=\"X-UA-Compatible\" content=\"IE=Edge\" />";
     private const string ENABLE_APPLICATION_SETTING = "ATLANTIS_WEB_IEEDGE_ENABLED";
-    private const string IS_IE_USER_AGENT_COOKIE_NAME = "atlantis.web.ieedge.isieuseragent";
 
     private static readonly Regex _ieUserAgentRegex = new Regex(@".*MSIE\s[0-9].*", RegexOptions.Compiled);
 
@@ -38,19 +37,9 @@ namespace Atlantis.Framework.Web.IeEdge
     {
       get
       {
-        bool isIeUserAgent;
-        bool cookieExists = GetIsIeUserAgentCookie(out isIeUserAgent);
-        
-        if(!cookieExists)
-        {
-          isIeUserAgent = HttpContext.Current != null &&
-                          !string.IsNullOrEmpty(HttpContext.Current.Request.UserAgent) &&
-                          _ieUserAgentRegex.IsMatch(HttpContext.Current.Request.UserAgent);
-
-          SetIsIeUserAgentCookie(isIeUserAgent);
-        }
-
-        return isIeUserAgent;
+        return HttpContext.Current != null &&
+               !string.IsNullOrEmpty(HttpContext.Current.Request.UserAgent) &&
+               _ieUserAgentRegex.IsMatch(HttpContext.Current.Request.UserAgent);
       }
     }
 
@@ -70,57 +59,6 @@ namespace Atlantis.Framework.Web.IeEdge
         }
 
         return hostName;
-      }
-    }
-
-    private static HttpCookie CreateCrossDomainSessionCookie(string cookieName)
-    {
-      HttpCookie result = new HttpCookie(cookieName);
-      result.Path = "/";
-      result.Domain = CrossDomainCookieDomain;
-      return result;
-    }
-
-    private static bool GetIsIeUserAgentCookie(out bool isIeUserAgent)
-    {
-      bool cookieExists = false;
-      isIeUserAgent = false;
-
-      if (HttpContext.Current != null)
-      {
-        HttpCookie isIeUserAgentCookie = HttpContext.Current.Request.Cookies[IS_IE_USER_AGENT_COOKIE_NAME];
-        if (isIeUserAgentCookie != null)
-        {
-          cookieExists = true;
-          isIeUserAgent = isIeUserAgentCookie.Value == "1";
-        }
-      }
-
-      return cookieExists;
-    }
-
-    private static void SetIsIeUserAgentCookie(bool value)
-    {
-      if (HttpContext.Current != null)
-      {
-        HttpCookie isIeUserAgentCookie = HttpContext.Current.Request.Cookies[IS_IE_USER_AGENT_COOKIE_NAME];
-        if (isIeUserAgentCookie == null)
-        {
-          isIeUserAgentCookie = CreateCrossDomainSessionCookie(IS_IE_USER_AGENT_COOKIE_NAME);
-        }
-
-        isIeUserAgentCookie.Value = value ? "1" : "0";
-
-        bool cookieExistsInResponse = HttpContext.Current.Response.Cookies[IS_IE_USER_AGENT_COOKIE_NAME] != null;
-
-        if (cookieExistsInResponse)
-        {
-          HttpContext.Current.Response.Cookies.Set(isIeUserAgentCookie);
-        }
-        else
-        {
-          HttpContext.Current.Response.Cookies.Add(isIeUserAgentCookie);
-        }
       }
     }
 

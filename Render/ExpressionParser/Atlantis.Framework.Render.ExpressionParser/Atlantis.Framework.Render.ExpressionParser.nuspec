@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Atlantis.Framework.Render.ExpressionParser</id>
+    <version>4.0.0.0</version>
+    <title>Atlantis Framework Render ExpressionParser</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <projectUrl>https://confluence.int.godaddy.com/display/CDS</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes></releaseNotes>
+    <copyright>$copyright$</copyright>
+    <tags>Atlantis Framework Render ExpressionParser</tags>
+    <dependencies>
+      <dependency id="Atlantis.Framework.Engine" version="4.0.0.0" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="Antlr3\Antlr3.Runtime.dll" target="lib\net40\Antlr3.Runtime.dll" />
+  </files>
+</package>

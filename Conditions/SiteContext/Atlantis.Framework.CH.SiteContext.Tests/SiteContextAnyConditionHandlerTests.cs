@@ -1,6 +1,4 @@
-﻿using System;
-using System.Diagnostics;
-using System.Reflection;
+﻿using System.Reflection;
 using Atlantis.Framework.Conditions.Interface;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Render.ExpressionParser;
@@ -12,14 +10,6 @@ namespace Atlantis.Framework.CH.SiteContext.Tests
   [DeploymentItem("Atlantis.Framework.CH.SiteContext.dll")]
   public class SiteContextAnyConditionHandlerTests
   {
-    private void WriteOutput(string message)
-    {
-#if (DEBUG)
-      Debug.WriteLine(message);
-#else
-      Console.WriteLine(message);
-#endif
-    }
 
     private ExpressionParserManager GetExpressionParserManager(IProviderContainer container)
     {
@@ -46,7 +36,6 @@ namespace Atlantis.Framework.CH.SiteContext.Tests
 
       string expression = "siteContextAny()";
       bool result = expressionParserManager.EvaluateExpression(expression);
-      this.WriteOutput("Check error log for appropriate message that arguments are missing.");
       Assert.IsFalse(result);
     }
 

@@ -1,0 +1,20 @@
+﻿<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Atlantis.Framework.Providers.Links</id>
+    <version>4.0.0.0</version>
+    <title>Atlantis Framework Providers Links</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <projectUrl>https://confluence.int.godaddy.com/display/ATLANTIS</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes></releaseNotes>
+    <copyright>$copyright$</copyright>
+    <tags>Atlantis Framework  Providers Links</tags>
+    <dependencies>
+      <dependency id="Atlantis.Framework.Engine" version="4.0.0.0" />
+      <dependency id="Atlantis.Framework.DataCache" version="4.0.0.0" />
+    </dependencies>
+  </metadata>
+</package>

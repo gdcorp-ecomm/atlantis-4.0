@@ -44,9 +44,51 @@ namespace Atlantis.Framework.Providers.Containers.Tests
     [TestMethod]
     public void DataTokenValid()
     {
-      ProviderContainer.SetData("mytest", "new text");
+      ProviderContainer.SetData("mytest123", "new text");
 
-      const string content = @"<div>[@D[mytest]@D]</div>";
+      const string content = @"<div>[@D[mytest123]@D]</div>";
+
+      var handler = new ProviderContainerDataTokenRenderHandler();
+      IProcessedRenderContent processedRenderContent = new SimpleProcessedRenderContent(content);
+      handler.ProcessContent(processedRenderContent, ProviderContainer);
+
+      Assert.IsTrue(processedRenderContent.Content.Equals("<div>new text</div>"));
+    }
+
+    [TestMethod]
+    public void DataTokenValidWithDots()
+    {
+      ProviderContainer.SetData("mytest.somekey123", "new text");
+
+      const string content = @"<div>[@D[mytest.somekey123]@D]</div>";
+
+      var handler = new ProviderContainerDataTokenRenderHandler();
+      IProcessedRenderContent processedRenderContent = new SimpleProcessedRenderContent(content);
+      handler.ProcessContent(processedRenderContent, ProviderContainer);
+
+      Assert.IsTrue(processedRenderContent.Content.Equals("<div>new text</div>"));
+    }
+
+    [TestMethod]
+    public void DataTokenValidWithDashes()
+    {
+      ProviderContainer.SetData("mytest-somekey123", "new text");
+
+      const string content = @"<div>[@D[mytest-somekey123]@D]</div>";
+
+      var handler = new ProviderContainerDataTokenRenderHandler();
+      IProcessedRenderContent processedRenderContent = new SimpleProcessedRenderContent(content);
+      handler.ProcessContent(processedRenderContent, ProviderContainer);
+
+      Assert.IsTrue(processedRenderContent.Content.Equals("<div>new text</div>"));
+    }
+
+    [TestMethod]
+    public void DataTokenValidWithDotsAndDashes()
+    {
+      ProviderContainer.SetData("mytest.namespace-somekey123", "new text");
+
+      const string content = @"<div>[@D[mytest.namespace-somekey123]@D]</div>";
 
       var handler = new ProviderContainerDataTokenRenderHandler();
       IProcessedRenderContent processedRenderContent = new SimpleProcessedRenderContent(content);

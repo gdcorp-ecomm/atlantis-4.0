@@ -8,7 +8,7 @@ namespace Atlantis.Framework.Providers.Containers.DataToken
   {
     private const string DATATOKEN_MATCH_KEY = "datakey";
 
-    private static readonly Regex _dataTokenRegex = new Regex(@"\[@D\[(?<datakey>[a-zA-z0-9]*?)\]@D\]", RegexOptions.Compiled | RegexOptions.Singleline);
+    private static readonly Regex _dataTokenRegex = new Regex(@"\[@D\[(?<datakey>[a-zA-z0-9\.\-]*?)\]@D\]", RegexOptions.Compiled | RegexOptions.Singleline);
 
     internal static string ReplaceDataTokens(string content, IProviderContainer providerContainer)
     {

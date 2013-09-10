@@ -13,11 +13,7 @@ namespace Atlantis.Framework.CDS.Interface
     private static readonly IDictionary<string, ReadOnlyCollection<IRoutingRule>> _emptyRulesDictionary = new Dictionary<string, ReadOnlyCollection<IRoutingRule>>(0);
 
     private readonly IDictionary<string, ReadOnlyCollection<IRoutingRule>> _readOnlyRulesDictionary = _emptyRulesDictionary;
-
-    public RoutingRulesResponseData(string responseData, bool success) : base(responseData, success)
-    {
-    }
-    
+  
     public RoutingRulesResponseData(string responseData) : base(responseData)
     {
       ContentVersion contentVersion = JsonConvert.DeserializeObject<ContentVersion>(responseData);

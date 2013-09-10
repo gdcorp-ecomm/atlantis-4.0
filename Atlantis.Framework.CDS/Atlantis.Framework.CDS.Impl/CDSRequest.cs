@@ -28,7 +28,7 @@ namespace Atlantis.Framework.CDS.Impl
       {
         if (ex.Response is HttpWebResponse && ((HttpWebResponse)ex.Response).StatusCode == HttpStatusCode.NotFound)
         {
-          result = new CDSResponseData(ex.Message, false);
+            result = new CDSResponseData(cdsRequestData, ex);
         }
         else
         {

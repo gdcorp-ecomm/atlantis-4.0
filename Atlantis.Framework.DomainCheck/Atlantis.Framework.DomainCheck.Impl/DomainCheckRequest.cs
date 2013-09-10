@@ -12,37 +12,41 @@ namespace Atlantis.Framework.DomainCheck.Impl
 
     #region IRequest Members
 
-    public IResponseData RequestHandler(RequestData oRequestData, ConfigElement oConfig)
+    public IResponseData RequestHandler(RequestData requestData, ConfigElement configElement)
     {
       IResponseData oResponseData = null;
-      string sResponseXML = string.Empty;
+      var responseXML = string.Empty;
 
       try
       {
-        using (AvailCheckWebSvc availCheckService = new AvailCheckWebSvc())
+        using (var availCheckService = new AvailCheckWebSvcClass())
         {
-          availCheckService.Url = ((WsConfigElement)oConfig).WSURL;
-          if (oRequestData.RequestTimeout.TotalMilliseconds > _MAX_SERVICETIMEOUT_MILLISECONDS)
+          availCheckService.Url = ((WsConfigElement)configElement).WSURL;
+
+          if (requestData.RequestTimeout.TotalMilliseconds > _MAX_SERVICETIMEOUT_MILLISECONDS)
           {
             availCheckService.Timeout = _MAX_SERVICETIMEOUT_MILLISECONDS;
           }
           else
           {
-            availCheckService.Timeout = (int)oRequestData.RequestTimeout.TotalMilliseconds;
+            availCheckService.Timeout = (int)requestData.RequestTimeout.TotalMilliseconds;
           }
 
-          string XML = oRequestData.ToXML();
-          sResponseXML = availCheckService.Check(XML);
-          if (sResponseXML == null)
+          var xml = requestData.ToXML();
+          //responseXML = availCheckService.Check(xml);
+          responseXML = availCheckService.FindCheck(xml);
+
+          if (responseXML == null)
           {
             throw new Exception("AvailCheck returned null response.");
           }
-          oResponseData = new DomainCheckResponseData(sResponseXML);
+
+          oResponseData = new DomainCheckResponseData(responseXML);
         }
       }
       catch (AtlantisException exAtlantis)
       {
-        oResponseData = new DomainCheckResponseData(sResponseXML, exAtlantis);
+        oResponseData = new DomainCheckResponseData(responseXML, exAtlantis);
       }
       catch (WebException exWeb)
       {
@@ -50,13 +54,12 @@ namespace Atlantis.Framework.DomainCheck.Impl
       }
       catch (Exception ex)
       {
-        oResponseData = new DomainCheckResponseData(sResponseXML, oRequestData, ex);
+        oResponseData = new DomainCheckResponseData(responseXML, requestData, ex);
       }
 
       return oResponseData;
     }
 
     #endregion
-
   }
 }

@@ -3,38 +3,58 @@ namespace Atlantis.Framework.DomainCheck.Interface
 {
   public class DomainAttributes
   {
-    int m_iAvailableCode;
-    int m_iSyntaxCode;
-    string m_sSyntaxDescription;
-    bool m_wasTyped;
+    private readonly int _availableCode;
+    private readonly int _syntaxCode;
+    private readonly string _syntaxDescription;
+    private readonly bool _wasTyped;
+    private readonly string _punyCode;
+    private readonly string _idnScript;
+    private readonly string _languageId;
 
-    public DomainAttributes(int iAvailableCode,
-      int iSyntaxCode, string sSyntaxDescription, bool wasTyped)
+    public DomainAttributes(int availableCode, int syntaxCode, string syntaxDescription, bool wasTyped, string punyCode, string idnScript, string languageId)
     {
-      m_iAvailableCode = iAvailableCode;
-      m_iSyntaxCode = iSyntaxCode;
-      m_sSyntaxDescription = sSyntaxDescription;
-      m_wasTyped = wasTyped;
+      _availableCode = availableCode;
+      _syntaxCode = syntaxCode;
+      _syntaxDescription = syntaxDescription;
+      _wasTyped = wasTyped;
+      _punyCode = punyCode;
+      _idnScript = idnScript;
+      _languageId = languageId;
     }
 
     public int AvailableCode
     {
-      get { return m_iAvailableCode; }
+      get { return _availableCode; }
     }
 
     public int SyntaxCode
     {
-      get { return m_iSyntaxCode; }
+      get { return _syntaxCode; }
     }
 
     public string SyntaxDescription
     {
-      get { return m_sSyntaxDescription; }
+      get { return _syntaxDescription; }
     }
 
     public bool WasTyped
     {
-      get { return m_wasTyped; }
+      get { return _wasTyped; }
+    }
+
+    public string PunyCode
+    {
+      get { return _punyCode; }
+    }
+
+    public string LanguageId
+    {
+      get { return _languageId; }
+    }
+
+    public string IdnScript
+    {
+      get { return _idnScript; }
     }
   }
 }

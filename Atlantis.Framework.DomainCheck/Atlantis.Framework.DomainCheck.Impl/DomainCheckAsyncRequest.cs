@@ -10,48 +10,48 @@ namespace Atlantis.Framework.DomainCheck.Impl
   {
     #region IAsyncRequest Members
 
-    public IAsyncResult BeginHandleRequest(RequestData oRequestData, ConfigElement oConfig, AsyncCallback oCallback, object oState)
+    public IAsyncResult BeginHandleRequest(RequestData requestData, ConfigElement configElement, AsyncCallback callback, object state)
     {
-      AvailCheckWebSvc availCheckService = new AvailCheckWebSvc();
-      availCheckService.Url = ((WsConfigElement)oConfig).WSURL;
-      availCheckService.Timeout = (int)oRequestData.RequestTimeout.TotalMilliseconds;
-
-      AsyncState asyncState = new AsyncState(oRequestData, oConfig, availCheckService, oState);
-      IAsyncResult asyncResult = availCheckService.BeginCheck(oRequestData.ToXML(), oCallback, asyncState);
+      var availCheckService = new AvailCheckWebSvcClass();
+      availCheckService.Url = ((WsConfigElement)configElement).WSURL;
+      availCheckService.Timeout = (int)requestData.RequestTimeout.TotalMilliseconds;
+      var asyncState = new AsyncState(requestData, configElement, availCheckService, state);
+      var asyncResult = availCheckService.BeginFindCheck(requestData.ToXML(), callback, asyncState);
       return asyncResult;
     }
 
     public IResponseData EndHandleRequest(IAsyncResult oAsyncResult)
     {
-      IResponseData oResponseData = null;
-      string responseXml = string.Empty;
-      AsyncState asyncState = (AsyncState)oAsyncResult.AsyncState;
+      IResponseData responseData = null;
+      var responseXml = string.Empty;
+      var asyncState = (AsyncState)oAsyncResult.AsyncState;
 
       try
       {
-        AvailCheckWebSvc availCheckService = (AvailCheckWebSvc)asyncState.Request;
-        responseXml = availCheckService.EndCheck(oAsyncResult);
+        var availCheckService = (AvailCheckWebSvcClass)asyncState.Request;
+        responseXml = availCheckService.EndFindCheck(oAsyncResult);
+
         if (responseXml == null)
         {
           throw new Exception("AvailCheck returned null response.");
         }
 
-        oResponseData = new DomainCheckResponseData(responseXml);
+        responseData = new DomainCheckResponseData(responseXml);
       }
       catch (AtlantisException exAtlantis)
       {
-        oResponseData = new DomainCheckResponseData(responseXml, exAtlantis);
+        responseData = new DomainCheckResponseData(responseXml, exAtlantis);
       }
       catch (WebException exWeb)
       {
-        oResponseData = new DomainCheckResponseData(exWeb.Status);
+        responseData = new DomainCheckResponseData(exWeb.Status);
       }
       catch (Exception ex)
       {
-        oResponseData = new DomainCheckResponseData(responseXml, asyncState.RequestData, ex);
+        responseData = new DomainCheckResponseData(responseXml, asyncState.RequestData, ex);
       }
 
-      return oResponseData;
+      return responseData;
     }
 
     #endregion

@@ -76,8 +76,11 @@ namespace Atlantis.Framework.DomainCheck.Interface
       {
         _clientIpAddress = string.Empty;
         IPAddress address;
+
         if (IPAddress.TryParse(value, out address))
+        {
           _clientIpAddress = address.ToString();
+        }
       }
     }
 
@@ -148,16 +151,15 @@ namespace Atlantis.Framework.DomainCheck.Interface
 
     public void AddDomain(DomainToCheck domainToCheck)
     {
-      if (!_addedDomains.Contains(domainToCheck.DomainName))
-      {
-        _domainsToCheck.Add(domainToCheck);
-        _addedDomains.Add(domainToCheck.DomainName);
-      }
+      if (_addedDomains.Contains(domainToCheck.DomainName)) return;
+
+      _domainsToCheck.Add(domainToCheck);
+      _addedDomains.Add(domainToCheck.DomainName);
     }
 
     public void AddDomains(IEnumerable<DomainToCheck> domainsToCheck)
     {
-      foreach (DomainToCheck domainToCheck in domainsToCheck)
+      foreach (var domainToCheck in domainsToCheck)
       {
         if (!string.IsNullOrEmpty(domainToCheck.TypedDomainName))
         {
@@ -167,18 +169,20 @@ namespace Atlantis.Framework.DomainCheck.Interface
           _wasTldSelected = domainToCheck.WasTldSelected;
           _splitValue = domainToCheck.SplitValue;
         }
+
         AddDomain(domainToCheck);
       }
     }
 
     string GetLocalAddress()
     {
-      string sLocalAddress = string.Empty;
-
-      IPAddress[] addresses = Dns.GetHostEntry(Dns.GetHostName()).AddressList;
+      var sLocalAddress = string.Empty;
+      var addresses = Dns.GetHostEntry(Dns.GetHostName()).AddressList;
 
       if (addresses.Length > 0)
+      {
         sLocalAddress = addresses[0].ToString();
+      }
 
       return sLocalAddress;
     }
@@ -187,26 +191,28 @@ namespace Atlantis.Framework.DomainCheck.Interface
 
     private string GetRegistrarID()
     {
-      string result = "2";
+      var result = "2";
+
       if (_privateLabelID == 1)
+      {
         result = "1";
+      }
       else if (_privateLabelID == 2)
+      {
         result = "3";
+      }
+
       return result;
     }
 
     public override string ToXML()
     {
-      StringBuilder sbResult = new StringBuilder();
-      XmlTextWriter xtwResult = new XmlTextWriter(new StringWriter(sbResult));
-
+      var sbResult = new StringBuilder();
+      var xtwResult = new XmlTextWriter(new StringWriter(sbResult));
       xtwResult.WriteStartElement("checkdata");
-
       xtwResult.WriteAttributeString("waittime", WaitTime.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
-
       xtwResult.WriteAttributeString("type", "REG");
-
-      StringBuilder sbSkip = new StringBuilder(SkipZoneCheck ? "checkzonefile" : string.Empty);
+      var sbSkip = new StringBuilder(SkipZoneCheck ? "checkzonefile" : string.Empty);
       sbSkip.Append((sbSkip.Length > 0 ? "," : string.Empty) + (SkipDatabaseCheck ? "checkdb" : string.Empty));
       sbSkip.Append((sbSkip.Length > 0 ? "," : string.Empty) + (SkipRegistryCheck ? "checkregistry" : string.Empty));
 
@@ -236,15 +242,7 @@ namespace Atlantis.Framework.DomainCheck.Interface
       }
 
       xtwResult.WriteAttributeString("source", Environment.MachineName);
-
-      if (RegistrarID.Length > 0)
-      {
-        xtwResult.WriteAttributeString("registrarID", RegistrarID);
-      }
-      else
-      { 
-        xtwResult.WriteAttributeString("registrarID", GetRegistrarID()); 
-      }
+      xtwResult.WriteAttributeString("registrarID", RegistrarID.Length > 0 ? RegistrarID : GetRegistrarID());
 
       if (!string.IsNullOrEmpty(_sourceCode))
       {
@@ -275,10 +273,11 @@ namespace Atlantis.Framework.DomainCheck.Interface
         xtwResult.WriteAttributeString("splitValue", SplitValue);
       }
 
-      foreach (DomainToCheck domainToCheck in _domainsToCheck)
+      foreach (var domainToCheck in _domainsToCheck)
       {
         xtwResult.WriteStartElement("domain");
-        xtwResult.WriteAttributeString("name", domainToCheck.DomainName);
+        //xtwResult.WriteAttributeString("name", domainToCheck.DomainName);
+        xtwResult.WriteAttributeString("find", domainToCheck.DomainName);
 
         if (!string.IsNullOrEmpty(domainToCheck.LanguageTag))
         {

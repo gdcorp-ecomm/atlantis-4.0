@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Xml;
-
 using Atlantis.Framework.Interface;
 
 
@@ -38,10 +37,7 @@ namespace Atlantis.Framework.DomainCheck.Interface
     public DomainCheckResponseData(string responseXml, RequestData oRequestData, Exception ex)
     {
       _responseXml = responseXml;
-      _exception = new AtlantisException(oRequestData,
-                                   "DomainCheckResponseData",
-                                   ex.Message,
-                                   oRequestData.ToXML());
+      _exception = new AtlantisException(oRequestData, "DomainCheckResponseData", ex.Message, oRequestData.ToXML());
       _isSuccess = false;
     }
 
@@ -57,7 +53,6 @@ namespace Atlantis.Framework.DomainCheck.Interface
 
         IEnumerator<KeyValuePair<string, DomainAttributes>> oEnum = _domainsDictionary.GetEnumerator();
         oEnum.MoveNext();
-
         return oEnum.Current;
       }
     }
@@ -104,41 +99,60 @@ namespace Atlantis.Framework.DomainCheck.Interface
 
     private void PopulateFromXML()
     {
-      XmlDocument xdDoc = new XmlDocument();
-
+      var xdDoc = new XmlDocument();
       xdDoc.LoadXml(_responseXml);
-
-      XmlNodeList xnlDomains = xdDoc.SelectNodes("/checkdata/domain");
+      var xnlDomains = xdDoc.SelectNodes("/checkdata/domain");
 
       foreach (XmlElement xlDomain in xnlDomains)
       {
-        int iAvailable = 0;
-        int iSyntaxResult = 0;
-        string sSyntaxDescription = String.Empty;
-        string sResult = String.Empty;
-        bool wasTyped = false;
-        string sFullName = xlDomain.GetAttribute("name");
+        var availableCode = 0;
+        var syntaxCode = 0;
+        var syntaxDescription = String.Empty;
+        var attribute = String.Empty;
+        var wasTyped = false;
+        var idnScript = "ENG";
+        var languageId = "35";
 
-        sResult = xlDomain.GetAttribute("result");
-        Int32.TryParse(sResult, out iAvailable);
-        sResult = String.Empty;
+        var name = xlDomain.GetAttribute("find");
 
-        string strTyped = xlDomain.GetAttribute("wasTyped");
+        var punyCode = xlDomain.GetAttribute("name");
+
+        attribute = xlDomain.GetAttribute("result");
+        Int32.TryParse(attribute, out availableCode);
+        attribute = String.Empty;
+
+        var strTyped = xlDomain.GetAttribute("wasTyped");
+
         if (!string.IsNullOrEmpty(strTyped))
         {
           wasTyped = strTyped == "1";
         }
-        XmlElement xlSyntax = xlDomain.SelectSingleNode("./syntax") as XmlElement;
-        if (xlSyntax != null)
-        {
-          sResult = xlSyntax.GetAttribute("result");
-          Int32.TryParse(sResult, out iSyntaxResult);
-          sResult = String.Empty;
 
-          sSyntaxDescription = xlSyntax.GetAttribute("description");
+        attribute = xlDomain.GetAttribute("idnScript");
+        
+        if (!string.IsNullOrEmpty(attribute))
+        {
+          idnScript = attribute;
         }
 
-        _domainsDictionary[sFullName.ToUpper()] = new DomainAttributes(iAvailable, iSyntaxResult, sSyntaxDescription, wasTyped);
+        attribute = xlDomain.GetAttribute("languageid");
+
+        if (!string.IsNullOrEmpty(attribute))
+        {
+          languageId = attribute;
+        }
+
+        var xlSyntax = xlDomain.SelectSingleNode("./syntax") as XmlElement;
+
+        if (xlSyntax != null)
+        {
+          attribute = xlSyntax.GetAttribute("result");
+          Int32.TryParse(attribute, out syntaxCode);
+          attribute = String.Empty;
+          syntaxDescription = xlSyntax.GetAttribute("description");
+        }
+
+        _domainsDictionary[name.ToUpper()] = new DomainAttributes(availableCode, syntaxCode, syntaxDescription, wasTyped, punyCode, idnScript, languageId);
       }
     }
 
@@ -150,6 +164,7 @@ namespace Atlantis.Framework.DomainCheck.Interface
         {
           _isSuccess = (_responseXml.IndexOf("<domain", StringComparison.OrdinalIgnoreCase) > -1);
         }
+
         return _isSuccess.Value; 
       }
     }

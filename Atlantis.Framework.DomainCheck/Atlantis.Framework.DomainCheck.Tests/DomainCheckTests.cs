@@ -233,5 +233,40 @@ namespace Atlantis.Framework.DomainCheck.Tests
       Assert.IsTrue(response.IsSuccess);
       Assert.IsTrue(requestXml.Contains("typedDomainName"));
     }
+
+    [TestMethod]
+    [DeploymentItem("atlantis.config")]
+    [DeploymentItem("Atlantis.Framework.DomainCheck.Impl.dll")]
+    public void DomainFindCheckTest()
+    {
+      const string domainname = "доменноеимя.com";
+      const string shopperId = "12345678";
+      const bool wastyped = true;
+      const string typedDomainName = "доменноеимя.com";
+      const string tldChoice = "com";
+      const bool wasTldSelected = false;
+      const bool specialCharsRemoved = true;
+      const string splitValue = "54";
+      var domains = new List<DomainToCheck>
+                      {
+                        new DomainToCheck(domainname, wastyped, typedDomainName, tldChoice, wasTldSelected, specialCharsRemoved, splitValue),
+                        new DomainToCheck("latinchardomainname1.com", false),
+                        new DomainToCheck("latinchardomainname2.com", false),
+                        new DomainToCheck("latinchardomainname3.com", false),
+                        new DomainToCheck("ещёоднодоменноеимя.net", false)
+                      };
+      var request = new DomainCheckRequestData(shopperId, string.Empty, string.Empty, string.Empty, 0, domains, 1, "127.0.0.1", "UnitTest-DomainFindCheckTest");
+      var requestXml = request.ToXML();
+      Assert.IsTrue(!string.IsNullOrEmpty(requestXml));
+      var response = (DomainCheckResponseData)Engine.Engine.ProcessRequest(request, 16);
+      Assert.IsTrue(response.IsSuccess);
+      Assert.IsTrue(response.FirstDomain.Key.Equals("ДОМЕННОЕИМЯ.COM"));
+      Assert.IsTrue(response.FirstDomain.Value.WasTyped);
+      Assert.IsTrue(response.FirstDomain.Value.SyntaxCode > -1);
+      Assert.IsTrue(response.FirstDomain.Value.AvailableCode > -1);
+      Assert.IsTrue(response.FirstDomain.Value.PunyCode.Equals("XN--D1ACAMRDEAFE4Q.COM"));
+      Assert.IsTrue(response.FirstDomain.Value.IdnScript.Equals("ENG"));
+      Assert.IsTrue(response.FirstDomain.Value.LanguageId.Equals("35"));
+    }
   }
 }

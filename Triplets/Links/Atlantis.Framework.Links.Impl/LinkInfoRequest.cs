@@ -28,19 +28,18 @@ namespace Atlantis.Framework.Links.Impl
       foreach (XmlElement itemElement in itemNodes)
       {
         string linkType = itemElement.GetAttribute("linkType");
-
         LinkTypeLanguageSupport langSuppType;
-        Enum.TryParse( itemElement.GetAttribute("languageSupportType"), out langSuppType);
+        Enum.TryParse( itemElement.GetAttribute("linkURL_languageSupportTypeID"), out langSuppType);
 
         LinkTypeCountrySupport countrySupportType;
-        Enum.TryParse(itemElement.GetAttribute("countrySupportType"), out countrySupportType);
+        Enum.TryParse(itemElement.GetAttribute("linkURL_countrySiteSupportTypeID"), out countrySupportType);
         var item = new LinkInfoImpl
           {
               BaseUrl = itemElement.GetAttribute("baseURL"),
               LanguageSupportType = langSuppType,
               LanguageParameter = itemElement.GetAttribute("languageSupportParam"),
               CountrySupportType = countrySupportType,
-              CountryParameter = itemElement.GetAttribute("countrySupportParam")
+              CountryParameter = itemElement.GetAttribute("countrySiteSupportParam")
           };
         linksCollection[linkType] = item; 
 

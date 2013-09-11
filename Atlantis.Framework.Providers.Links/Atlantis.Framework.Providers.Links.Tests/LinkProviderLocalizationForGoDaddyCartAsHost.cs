@@ -206,8 +206,6 @@ namespace Atlantis.Framework.Providers.Links.Tests
       Assert.IsFalse(url.Contains("us."));
       // verify the language is NOT present for the default market
       Assert.IsFalse(url.Contains("/en"));
-      // TODO: Jeff: change all to false and add check for non-default markets
-      // TODO: Jeff: add code to see if market is the  default market and if so, then don't add to the path.  For querystring always add.
 
       // ensure country and language didn't showup as query params
       int iQueryStart = url.IndexOf('?');

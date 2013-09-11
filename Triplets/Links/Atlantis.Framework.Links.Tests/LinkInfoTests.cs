@@ -45,13 +45,45 @@ namespace Atlantis.Framework.Links.Tests
       var request = new LinkInfoRequestData((int)ContextIds.GoDaddy);
       var response = (LinkInfoResponseData)afe.Engine.ProcessRequest(request, kEngineRequest);
       Assert.AreNotEqual(0, response.Links.Count);
+      bool atleastOneRealCountryParamValue = false;
+      bool atleastOneRealCountrySupportTypeValue = false;
+      bool atleastOneRealLanguageParamValue = false;
+      bool atleastOneRealLanguageSupportTypeValue = false;
       foreach (var item in response.Links)
       {
+        if (!String.IsNullOrWhiteSpace(item.Value.CountryParameter))
+        {
+          atleastOneRealCountryParamValue = true;
+        }
+
+        switch( item.Value.CountrySupportType)
+        {
+          case LinkTypeCountrySupport.PrefixHostNameSupport:
+          case LinkTypeCountrySupport.ReplaceHostNameSupport:
+          case LinkTypeCountrySupport.QueryStringSupport:
+            atleastOneRealCountrySupportTypeValue = true;
+            break;
+        }
+
+        if (!String.IsNullOrWhiteSpace(item.Value.LanguageParameter))
+        {
+          atleastOneRealLanguageParamValue = true;
+        }
+
+        switch( item.Value.LanguageSupportType)
+        {
+          case LinkTypeLanguageSupport.PrefixPathSupport:
+          case LinkTypeLanguageSupport.QueryStringSupport:
+            atleastOneRealLanguageSupportTypeValue = true;
+            break;
+        }
+
         Assert.IsNotNull(item.Value.CountryParameter);
-        Assert.IsNotNull(item.Value.CountrySupportType);
+        Assert.IsTrue( Enum.IsDefined(typeof(LinkTypeCountrySupport), item.Value.CountrySupportType ) );
         Assert.IsNotNull(item.Value.LanguageParameter);
-        Assert.IsNotNull(item.Value.LanguageSupportType);
+        Assert.IsTrue( Enum.IsDefined(typeof(LinkTypeLanguageSupport), item.Value.LanguageSupportType ) );
       }
+      Assert.IsTrue(atleastOneRealCountryParamValue && atleastOneRealCountrySupportTypeValue && atleastOneRealLanguageParamValue && atleastOneRealLanguageSupportTypeValue);
     }
 
     [TestMethod]

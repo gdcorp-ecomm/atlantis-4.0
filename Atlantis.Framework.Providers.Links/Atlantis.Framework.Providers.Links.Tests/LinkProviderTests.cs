@@ -408,7 +408,7 @@ namespace Atlantis.Framework.Providers.Links.Tests
       url = links.GetRelativeUrl("a.aspx", QueryParamMode.ExplicitParameters, parms);
       Assert.IsTrue(url.Contains("a.aspx?x=val&y=val2"));
       Assert.IsTrue(url.IndexOf("//",8) == -1);
-// TODO: Mike, the HttpRequest says this isn't a secure connection... why?
+// TODO: the HttpRequest says this isn't a secure connection... why? uncomment test when that part of the moc'ing is fixed
 //      Assert.IsTrue(url.Contains("https://"));
     }
 

@@ -177,14 +177,6 @@ namespace Atlantis.Framework.Providers.Links.Tests
       return linkProvider;
     }
 
-    //TODO: write confluence KB article on:
-    // - clearing cache aftertests
-    // - switching atlantis.configs out
-    // - multiple tests
-
-
-
-
     [TestMethod]
     public void NonWWWPrefixPreservedAndPageLinkTypeWorks()
     {
@@ -209,7 +201,6 @@ namespace Atlantis.Framework.Providers.Links.Tests
       Assert.IsFalse(iQueryStart != -1 && url.IndexOf("=us", iQueryStart, StringComparison.OrdinalIgnoreCase) != -1);
       Assert.IsFalse(iQueryStart != -1 && url.IndexOf("=www", iQueryStart, StringComparison.OrdinalIgnoreCase) != -1);
     }
-
 
     [TestMethod]
     public void GetSalesFromSales()

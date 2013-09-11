@@ -1,12 +1,12 @@
 <data count="10">
-	<item catalog_countrySite="www" marketID="en-US" languageUrlSegment="en" isActive="-1" internalOnly="0" />
-	<item catalog_countrySite="www" marketID="es-US" languageUrlSegment="es" isActive="-1" internalOnly="0" />
-  <item catalog_countrySite='www' marketID='es-BR' languageUrlSegment='es-br' isActive='-1' internalOnly='0' />
-  <item catalog_countrySite="www" marketID="qa-QA" languageUrlSegment="qa-qa" isActive="-1" internalOnly="-1" />
-  <item catalog_countrySite="www" marketID="qa-PS" languageUrlSegment="qa-ps" isActive="-1" internalOnly="-1" />
-	<item catalog_countrySite="ca" marketID="en-CA" languageUrlSegment="en" isActive="-1" internalOnly="0" />
-	<item catalog_countrySite="uk" marketID="en-GB" languageUrlSegment="en" isActive="-1" internalOnly="0" />
-	<item catalog_countrySite="au" marketID="en-AU" languageUrlSegment="en" isActive="-1" internalOnly="0" />
-	<item catalog_countrySite="in" marketID="en-IN" languageUrlSegment="en" isActive="-1" internalOnly="0" />
-  <item catalog_countrySite='in' marketID='es-IN' languageUrlSegment='es' isActive='-1' internalOnly='0' />
+  <item catalog_countrySite="www" catalog_marketID="en-US" languageURLSegment="en" isActive="1" internalOnly="0" />
+  <item catalog_countrySite="www" catalog_marketID="es-US" languageURLSegment="es" isActive="1" internalOnly="0" />
+  <item catalog_countrySite='www' catalog_marketID='es-BR' languageURLSegment='es-br' isActive='1' internalOnly='0' />
+  <item catalog_countrySite="www" catalog_marketID="qa-QA" languageURLSegment="qa-qa" isActive="1" internalOnly="1" />
+  <item catalog_countrySite="www" catalog_marketID="qa-PS" languageURLSegment="qa-ps" isActive="1" internalOnly="1" />
+  <item catalog_countrySite="ca" catalog_marketID="en-CA" languageURLSegment="en" isActive="1" internalOnly="0" />
+  <item catalog_countrySite="uk" catalog_marketID="en-GB" languageURLSegment="en" isActive="1" internalOnly="0" />
+  <item catalog_countrySite="au" catalog_marketID="en-AU" languageURLSegment="en" isActive="1" internalOnly="0" />
+  <item catalog_countrySite="in" catalog_marketID="en-IN" languageURLSegment="en" isActive="1" internalOnly="0" />
+  <item catalog_countrySite='in' catalog_marketID='es-IN' languageURLSegment='es' isActive='1' internalOnly='0' />
 </data>

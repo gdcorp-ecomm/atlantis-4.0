@@ -9,9 +9,9 @@ namespace Atlantis.Framework.DomainSearch.Interface
 {
   internal class FindResponseDomain : IFindResponseDomain
   {
-    public FindResponseDomain(string sld, string tld, string punnyCodeSld, string punnyCodeTld, JToken domainToken)
+    public FindResponseDomain(string sld, string tld, string punyCodeSld, string punyCodeTld, JToken domainToken)
     {
-      _responseDomain = new Domain(sld, tld, punnyCodeSld, punnyCodeTld);
+      _responseDomain = new Domain(sld, tld, punyCodeSld, punyCodeTld);
       ParseDomainToken(domainToken);
     }
 

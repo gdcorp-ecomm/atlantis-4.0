@@ -3,10 +3,10 @@
   public interface IDomain
   {
     string DomainName { get; }
-    string PunnyCodeDomainName { get; }
+    string PunyCodeDomainName { get; }
     string Sld { get; }
-    string PunnyCodeSld { get; }
+    string PunyCodeSld { get; }
     string Tld { get; }
-    string PunnyCodeTld { get; }
+    string PunyCodeTld { get; }
   }
 }

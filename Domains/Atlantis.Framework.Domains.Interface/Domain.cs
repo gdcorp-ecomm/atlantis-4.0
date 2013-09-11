@@ -14,7 +14,7 @@ namespace Atlantis.Framework.Domains.Interface
         try
         {
           _sld = IdnConvertor.GetUnicode(sld);
-          _punnyCodeSld = sld;
+          _punyCodeSld = sld;
         }
         catch (Exception)
         {
@@ -26,7 +26,7 @@ namespace Atlantis.Framework.Domains.Interface
         try
         {
           _sld = sld;
-          _punnyCodeSld = IdnConvertor.GetAscii(sld);
+          _punyCodeSld = IdnConvertor.GetAscii(sld);
         }
         catch (Exception)
         {
@@ -39,7 +39,7 @@ namespace Atlantis.Framework.Domains.Interface
         try
         {
           _tld = IdnConvertor.GetUnicode(tld);
-          _punnyCodeTld = tld;
+          _punyCodeTld = tld;
         }
         catch (Exception)
         {
@@ -51,7 +51,7 @@ namespace Atlantis.Framework.Domains.Interface
         try
         {
           _tld = tld;
-          _punnyCodeTld = IdnConvertor.GetAscii(tld); 
+          _punyCodeTld = IdnConvertor.GetAscii(tld); 
         }
         catch (Exception)
         {
@@ -60,37 +60,53 @@ namespace Atlantis.Framework.Domains.Interface
       }
     }
 
-    public Domain(string sld, string tld, string punnyCodeSld, string punnyCodeTld)
+    public Domain(string sld, string tld, string punyCodeSld, string punyCodeTld)
     {
       _sld = sld ?? string.Empty;
       _tld = tld ?? string.Empty;
-      _punnyCodeSld = punnyCodeSld ?? string.Empty;
-      _punnyCodeTld = punnyCodeTld ?? string.Empty;
+      _punyCodeSld = punyCodeSld ?? string.Empty;
+      _punyCodeTld = punyCodeTld ?? string.Empty;
     }
 
+    private string _domainName;
     public string DomainName
     {
       get
       {
-        if (string.IsNullOrEmpty(_sld) && string.IsNullOrEmpty(_tld))
+        if (_domainName == null)
         {
-          return string.Empty;
+          if (string.IsNullOrEmpty(_sld) || string.IsNullOrEmpty(_tld))
+          {
+            _domainName =  string.Empty;
+          }
+          else
+          {
+            _domainName = string.Concat(_sld, ".", _tld);
+          }
         }
 
-        return string.Concat(_sld, ".", _tld);
+        return _domainName;
       }
     }
 
-    public string PunnyCodeDomainName
+    private string _punyCodeDomainName;
+    public string PunyCodeDomainName
     {
       get
       {
-        if (string.IsNullOrEmpty(_punnyCodeSld) && string.IsNullOrEmpty(_punnyCodeTld))
+        if (_punyCodeDomainName == null)
         {
-          return string.Empty;
+          if (string.IsNullOrEmpty(_punyCodeSld) || string.IsNullOrEmpty(_punyCodeTld))
+          {
+            _punyCodeDomainName = string.Empty;
+          }
+          else
+          {
+            _punyCodeDomainName = string.Concat(_punyCodeSld, ".", _punyCodeTld);
+          }
         }
 
-        return string.Concat(_punnyCodeSld, ".", _punnyCodeTld);
+        return _punyCodeDomainName;
       }
     }
 
@@ -106,16 +122,16 @@ namespace Atlantis.Framework.Domains.Interface
       get { return _tld; }
     }
 
-    private readonly string _punnyCodeSld = string.Empty;
-    public string PunnyCodeSld
+    private readonly string _punyCodeSld = string.Empty;
+    public string PunyCodeSld
     {
-      get { return _punnyCodeSld; }
+      get { return _punyCodeSld; }
     }
 
-    private readonly string _punnyCodeTld = string.Empty;
-    public string PunnyCodeTld
+    private readonly string _punyCodeTld = string.Empty;
+    public string PunyCodeTld
     {
-      get { return _punnyCodeTld; }
+      get { return _punyCodeTld; }
     }
 
     private IdnMapping _idnmapping;

@@ -63,6 +63,11 @@ namespace Atlantis.Framework.DotTypeCache.Tests
       //tlds = TLDML.TLDMLDocument.GetTLDMLSupportedTLDs();
       tlds = new List<string>();
       tlds.Add("CO.ZA");
+      tlds.Add("PE");
+      tlds.Add("COM.PE");
+      tlds.Add("NET.PE");
+      tlds.Add("ORG.PE");
+      tlds.Add("NOM.PE");
       domainCount = new[] { 1 };//, 6, 21, 50, 101, 201 };
       standardRegLengths = new[] { 1 }; //, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
     }
@@ -74,7 +79,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
       AssertHelper.GetResults();
     }
 
-    [TestMethod]
+    [TestMethod, TestCategory("TLDMLEnabled")]
     public void GetDotType()
     {
       foreach (string tld in tlds)
@@ -84,16 +89,14 @@ namespace Atlantis.Framework.DotTypeCache.Tests
       }
     }
 
-    [TestMethod]
+    [TestMethod, TestCategory("TLDMLEnabled")]
     public void GetTransferProductId()
     {
       foreach (string tld in tlds)
       {
         foreach (int dc in domainCount)
         {
-          List<int> reglengths = TLDML.TLDMLProduct.GetAllEnabledRegistrationLengths(tld);
-
-          foreach (int reglength in reglengths)
+          foreach (int reglength in standardRegLengths)
           {
             int dotTypeCacheGetTransferProductId = DotTypeCache.GetTransferProductId(tld, "1", reglength, dc);
             int prodIdFromTldml = Convert.ToInt32(TLDMLProduct.GetPFID(tld, reglength, productfamily.Transfer, dc));
@@ -143,7 +146,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
           foreach (int dc in domainCount)
           {
             List<int> registrationProductIds = dotTypeCache.GetValidRegistrationProductIdList(dc, reglength);
-            
+
             int prodIdFromTdml = Convert.ToInt32(TLDMLProduct.GetPFID(tld, reglength, productfamily.Registration, dc));
 
             AssertHelper.AddResults(registrationProductIds.Contains(prodIdFromTdml),

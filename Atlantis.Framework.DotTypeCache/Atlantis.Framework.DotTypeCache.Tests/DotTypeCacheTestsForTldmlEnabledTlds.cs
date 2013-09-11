@@ -62,7 +62,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
 
       //tlds = TLDML.TLDMLDocument.GetTLDMLSupportedTLDs();
       tlds = new List<string>();
-      tlds.Add("SO");
+      tlds.Add("CO.ZA");
       domainCount = new[] { 1 };//, 6, 21, 50, 101, 201 };
       standardRegLengths = new[] { 1 }; //, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
     }

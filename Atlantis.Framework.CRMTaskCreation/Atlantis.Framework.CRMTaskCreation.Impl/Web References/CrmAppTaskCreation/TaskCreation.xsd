@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://godaddy.com/CRMClientAPI" elementFormDefault="qualified" targetNamespace="http://godaddy.com/CRMClientAPI" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="clientId" type="xs:int" />
+  <xs:element name="clientXml" nillable="true" type="xs:string" />
+  <xs:element name="Result" nillable="true" type="xs:string" />
+</xs:schema>

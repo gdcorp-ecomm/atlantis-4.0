@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="Atlantis_Framework_CRMTaskCreation_Impl_CrmAppTaskCreation_TaskCreation" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">http://testcrmapp/TaskCreationWS/TaskCreation.asmx</Value>
+      <Value Profile="(Default)">https://crmclient-api.test.int.godaddy.com/TaskCreation.svc</Value>
     </Setting>
   </Settings>
 </SettingsFile>

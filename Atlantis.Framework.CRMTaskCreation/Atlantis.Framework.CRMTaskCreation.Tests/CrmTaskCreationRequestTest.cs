@@ -67,6 +67,7 @@ namespace Framework.CrmTaskCreation.Test
 
         [TestMethod]
         [DeploymentItem("atlantis.config")]
+        [DeploymentItem("Atlantis.Framework.CRMTaskCreation.Impl.dll")]
         public void CreateTask()
         {
             var request = new CRMTaskCreationRequestData("850774", string.Empty, "1452305",

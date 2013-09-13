@@ -66,10 +66,10 @@
     <WebReferences Include="Web References\" />
   </ItemGroup>
   <ItemGroup>
-    <WebReferenceUrl Include="http://testcrmapp/TaskCreationWS/TaskCreation.asmx">
+    <WebReferenceUrl Include="https://crmclient-api.test.int.godaddy.com/TaskCreation.svc">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\CrmAppTaskCreation\</RelPath>
-      <UpdateFromURL>http://testcrmapp/TaskCreationWS/TaskCreation.asmx</UpdateFromURL>
+      <UpdateFromURL>https://crmclient-api.test.int.godaddy.com/TaskCreation.svc</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>
@@ -89,6 +89,12 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
     <None Include="Web References\CrmAppTaskCreation\TaskCreation.wsdl" />
+    <None Include="Web References\CrmAppTaskCreation\TaskCreation.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\CrmAppTaskCreation\TaskCreation0.xsd">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="Web References\CrmAppTaskCreation\TaskCreation.disco" />

@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <DiscoveryClientResultsFile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Results>
-    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.ContractReference" url="http://testcrmapp/TaskCreationWS/TaskCreation.asmx?wsdl" filename="TaskCreation.wsdl" />
-    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.DiscoveryDocumentReference" url="http://testcrmapp/TaskCreationWS/TaskCreation.asmx?disco" filename="TaskCreation.disco" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.DiscoveryDocumentReference" url="https://crmclient-api.test.int.godaddy.com/TaskCreation.svc?disco" filename="TaskCreation.disco" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="https://crmclient-api.test.int.godaddy.com/TaskCreation.svc?xsd=xsd1" filename="TaskCreation.xsd" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.ContractReference" url="https://crmclient-api.test.int.godaddy.com/TaskCreation.svc?wsdl" filename="TaskCreation.wsdl" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="https://crmclient-api.test.int.godaddy.com/TaskCreation.svc?xsd=xsd0" filename="TaskCreation0.xsd" />
   </Results>
 </DiscoveryClientResultsFile>

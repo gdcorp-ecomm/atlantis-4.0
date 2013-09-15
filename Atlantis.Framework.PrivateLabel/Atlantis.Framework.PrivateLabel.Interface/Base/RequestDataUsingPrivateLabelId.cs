@@ -7,8 +7,7 @@ namespace Atlantis.Framework.PrivateLabel.Interface.Base
   {
     public int PrivateLabelId { get; private set; }
 
-    public RequestDataUsingPrivateLabelId(string shopperId, string sourceURL, string orderId, string pathway, int pageCount, int privateLabelId)
-      : base(shopperId, sourceURL, orderId, pathway, pageCount)
+    public RequestDataUsingPrivateLabelId(int privateLabelId)
     {
       PrivateLabelId = privateLabelId;
     }

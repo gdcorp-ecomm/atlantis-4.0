@@ -1,16 +1,13 @@
-﻿using Atlantis.Framework.Interface;
-using Atlantis.Framework.PLSignupInfo.Interface;
+﻿using Atlantis.Framework.Currency.Interface;
+using Atlantis.Framework.EcommPricing.Interface;
+using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.Interface.Currency;
-using Atlantis.Framework.Providers.Interface.Preferences;
 using Atlantis.Framework.Providers.Interface.Pricing;
 using Atlantis.Framework.Providers.Interface.PromoData;
+using Atlantis.Framework.Providers.Localization.Interface;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Web;
-using Atlantis.Framework.EcommPricing.Interface;
-using Atlantis.Framework.Currency.Interface;
-using Atlantis.Framework.Providers.Localization.Interface;
 
 namespace Atlantis.Framework.Providers.Currency
 {
@@ -23,17 +20,16 @@ namespace Atlantis.Framework.Providers.Currency
 
   internal static class ProviderErrors
   {
-    internal static string CatalogPriceError = "33";
+    internal static int CatalogPriceError = 33;
     internal static string CatalogPriceErrorMsg = "Catalog Price Missing (USD conversion used)";
-    internal static string ListPriceNotFoundError = "34";
+    internal static int ListPriceNotFoundError = 34;
     internal static string ListPriceNotFoundErrorMsg = "List Price Not Found";
-    internal static string PromoPriceNotFoundError = "35";
+    internal static int PromoPriceNotFoundError = 35;
     internal static string PromoPriceNotFoundErrorMsg = "Promo Price Not Found";
   }
 
   public class CurrencyProvider : ProviderBase, ICurrencyProvider
   {
-    const int RESELLER_CONTEXT = 6;
     private const string CURRENCY_TYPE_USD = "USD";
     private const string NOT_OFFERED_MSG_DEFAULT = "Product not offered.";
     private const string CURRENCY_PREFERENCE_KEY = "gdshop_currencyType";
@@ -41,10 +37,10 @@ namespace Atlantis.Framework.Providers.Currency
     private Lazy<ICurrencyInfo> _USDInfo;
     private Lazy<ISiteContext> _siteContext;
     private Lazy<IShopperContext> _shopperContext;
-    private Lazy<IShopperPreferencesProvider> _shopperPreferences;
     private Lazy<CurrencyTypesResponseData> _currencyData;
-    private Lazy<MultiCurrencyContextsResponseData> _multiCurrencyContexts;
-    private Lazy<int> _priceGroupId; 
+    private Lazy<int> _priceGroupId;
+    private Lazy<CurrencyFormatting> _currencyFormatting;
+    private Lazy<CurrencyPreference> _currencyPreference;
 
     private ISiteContext SiteContext
     {
@@ -56,13 +52,6 @@ namespace Atlantis.Framework.Providers.Currency
       get { return _shopperContext.Value; }
     }
 
-    private IShopperPreferencesProvider ShopperPreferences
-    {
-      get { return _shopperPreferences.Value; }
-    }
-    
-    private readonly Dictionary<string, string> _priceFormatCache;
-
     private ICurrencyInfo _selectedDisplayCurrencyInfo;
     private ICurrencyInfo _selectedTransactionalCurrencyInfo;
     private string _selectedTransactionalCurrencyType;
@@ -71,20 +60,18 @@ namespace Atlantis.Framework.Providers.Currency
     public CurrencyProvider(IProviderContainer providerContainer)
       : base(providerContainer)
     {
-      _priceFormatCache = new Dictionary<string, string>();
-
       _siteContext = new Lazy<ISiteContext>(() => { return Container.Resolve<ISiteContext>(); });
       _shopperContext = new Lazy<IShopperContext>(() => { return Container.Resolve<IShopperContext>(); });      
-      _shopperPreferences = new Lazy<IShopperPreferencesProvider>(
-        () => { return Container.CanResolve<IShopperPreferencesProvider>() ? Container.Resolve<IShopperPreferencesProvider>() : null; });      
 
       _USDInfo = new Lazy<ICurrencyInfo>(
         () => { return _currencyData.Value[CURRENCY_TYPE_USD]; });
 
       _currencyData = new Lazy<CurrencyTypesResponseData>(GetCurrencyTypes);
-      _multiCurrencyContexts = new Lazy<MultiCurrencyContextsResponseData>(GetMultiCurrencyContexts);
 
       _priceGroupId = new Lazy<int>(GetPriceGroupId);
+      _currencyFormatting = new Lazy<CurrencyFormatting>(() => { return new CurrencyFormatting(Container); });
+      _currencyPreference = new Lazy<CurrencyPreference>(() => { return new CurrencyPreference(Container); });
+
     }
 
     #region Selected Currency Settings
@@ -95,25 +82,10 @@ namespace Atlantis.Framework.Providers.Currency
       {
         if (_selectedDisplayCurrencyType == null)
         {
-          if (ShopperPreferences != null)
-          {
-            if (ShopperPreferences.HasPreference(CURRENCY_PREFERENCE_KEY))
-            {
-              _selectedDisplayCurrencyType = ShopperPreferences.GetPreference(CURRENCY_PREFERENCE_KEY, string.Empty);
-            }
-          }
-
+          _selectedDisplayCurrencyType = _currencyPreference.Value.GetCurrencyPreference();
           if ((string.IsNullOrEmpty(_selectedDisplayCurrencyType)) || (!IsValidCurrencyType(_selectedDisplayCurrencyType)))
           {
             _selectedDisplayCurrencyType = CURRENCY_TYPE_USD;
-
-            if ((IsMultiCurrencyActiveForContext) && (SiteContext.ContextId == RESELLER_CONTEXT))
-            {
-              if ((PLSignupInfoData != null) && (IsValidCurrencyType(PLSignupInfoData.DefaultTransactionCurrencyType)))
-              {
-                _selectedDisplayCurrencyType = PLSignupInfoData.DefaultTransactionCurrencyType;
-              }
-            }
           }
         }
 
@@ -123,10 +95,7 @@ namespace Atlantis.Framework.Providers.Currency
       {
         if (IsValidCurrencyType(value))
         {
-          if (ShopperPreferences != null)
-          {
-            ShopperPreferences.UpdatePreference(CURRENCY_PREFERENCE_KEY, value);
-          }
+          _currencyPreference.Value.SetCurrencyPreference(value);
 
           _selectedDisplayCurrencyInfo = null;
           _selectedTransactionalCurrencyType = null;
@@ -148,52 +117,6 @@ namespace Atlantis.Framework.Providers.Currency
       }
     }
 
-    private bool? _isMultiCurrencyActiveForContext = null;
-    private bool IsMultiCurrencyActiveForContext
-    {
-      get
-      {
-        if (!_isMultiCurrencyActiveForContext.HasValue)
-        {
-          if (SiteContext.ContextId == RESELLER_CONTEXT)
-          {
-            _isMultiCurrencyActiveForContext = 
-              _multiCurrencyContexts.Value.IsContextIdActive(SiteContext.ContextId) &&
-              ((PLSignupInfoData != null) && (PLSignupInfoData.IsMultiCurrencyReseller));
-          }
-          else
-          {
-            _isMultiCurrencyActiveForContext = _multiCurrencyContexts.Value.IsContextIdActive(SiteContext.ContextId);
-          }
-        }
-        return _isMultiCurrencyActiveForContext.Value;
-      }
-    }
-
-    private PLSignupInfoResponseData _plSignupInfoData = null;
-    private bool plSignupInfoCalled = false;
-    private PLSignupInfoResponseData PLSignupInfoData
-    {
-      get
-      {
-        if ((_plSignupInfoData == null) && (!plSignupInfoCalled))
-        {
-          plSignupInfoCalled = true;
-          try
-          {
-            PLSignupInfoRequestData request = new PLSignupInfoRequestData(ShopperContext.ShopperId, string.Empty, string.Empty, SiteContext.Pathway, SiteContext.PageCount, SiteContext.PrivateLabelId);
-            _plSignupInfoData = (PLSignupInfoResponseData)DataCache.DataCache.GetProcessRequest(request, CurrencyProviderEngineRequests.PLSignupInfo);
-          }
-          catch
-          {
-            _plSignupInfoData = null; // Engine will log the error once. 
-          }
-        }
-
-        return _plSignupInfoData;
-      }
-    }
-
     public bool IsCurrencyTransactionalForContext(ICurrencyInfo currencyToCheck)
     {
       bool isTransactional = false;
@@ -203,7 +126,7 @@ namespace Atlantis.Framework.Providers.Currency
       }
       else
       {
-        isTransactional = (currencyToCheck.IsTransactional) && (IsMultiCurrencyActiveForContext);
+        isTransactional = (currencyToCheck.IsTransactional) && (_currencyPreference.Value.IsMultiCurrencyActive);
       }
       return isTransactional;
     }
@@ -281,21 +204,21 @@ namespace Atlantis.Framework.Providers.Currency
     private void LogMissingCatalogPrice(string call, int unifiedProductId, int shopperPriceType, int quantity, int privateLabelId, string currencyType)
     {
       string data = string.Concat(call, ":uid=", unifiedProductId.ToString(), ":plid=", privateLabelId.ToString(), ":cur=", currencyType, ":pricetype=", shopperPriceType.ToString(), ":q=", quantity.ToString());
-      AtlantisException ex = new AtlantisException(call, ProviderErrors.CatalogPriceError, ProviderErrors.CatalogPriceErrorMsg, data, SiteContext, ShopperContext);
+      AtlantisException ex = new AtlantisException(call, ProviderErrors.CatalogPriceError, ProviderErrors.CatalogPriceErrorMsg, data);
       Engine.Engine.LogAtlantisException(ex);
     }
 
     private void LogListPriceNotFound(string call, int unifiedProductId, int shopperPriceType, int quantity, int privateLabelId, string currencyType)
     {
       string data = string.Concat(call, ":uid=", unifiedProductId.ToString(), ":plid=", privateLabelId.ToString(), ":cur=", currencyType, ":pricetype=", shopperPriceType.ToString(), ":q=", quantity.ToString());
-      AtlantisException ex = new AtlantisException(call, ProviderErrors.ListPriceNotFoundError, ProviderErrors.ListPriceNotFoundErrorMsg, data, SiteContext, ShopperContext);
+      AtlantisException ex = new AtlantisException(call, ProviderErrors.ListPriceNotFoundError, ProviderErrors.ListPriceNotFoundErrorMsg, data);
       Engine.Engine.LogAtlantisException(ex);
     }
 
     private void LogPromoPriceNotFound(string call, int unifiedProductId, int shopperPriceType, int quantity, int privateLabelId, string currencyType)
     {
       string data = string.Concat(call, ":uid=", unifiedProductId.ToString(), ":plid=", privateLabelId.ToString(), ":cur=", currencyType, ":pricetype=", shopperPriceType.ToString(), ":q=", quantity.ToString());
-      AtlantisException ex = new AtlantisException(call, ProviderErrors.PromoPriceNotFoundError, ProviderErrors.PromoPriceNotFoundError, data, SiteContext, ShopperContext);
+      AtlantisException ex = new AtlantisException(call, ProviderErrors.PromoPriceNotFoundError, ProviderErrors.PromoPriceNotFoundErrorMsg, data);
       Engine.Engine.LogAtlantisException(ex);
     }
 
@@ -582,7 +505,9 @@ namespace Atlantis.Framework.Providers.Currency
       string result;
       if (textOptions.HasFlag(PriceTextOptions.MaskPrices))
       {
-        result = FormatPriceInt(SelectedDisplayCurrencyInfo, "XXX", formatOptions);
+        ICurrencyPrice priceToMask = NewCurrencyPrice(111, SelectedDisplayCurrencyInfo, CurrencyPriceType.Transactional);
+        result = PriceFormat(priceToMask, formatOptions);
+        result = result.Replace("1", "X");
       }
       else if ((price.Price < 0) && (!textOptions.HasFlag(PriceTextOptions.AllowNegativePrice)))
       {
@@ -591,7 +516,7 @@ namespace Atlantis.Framework.Providers.Currency
       else
       {
         ICurrencyPrice convertedPrice = ConvertPriceInt(price, SelectedDisplayCurrencyInfo, CurrencyConversionRoundingType.Round);
-        result = FormatPriceInt(convertedPrice, formatOptions);
+        result = PriceFormat(convertedPrice, formatOptions);
       }
       return result;
     }
@@ -619,132 +544,12 @@ namespace Atlantis.Framework.Providers.Currency
         options |= PriceFormatOptions.NegativeParentheses;
       }
 
-      return FormatPriceInt(currencyPrice, options);
+      return PriceFormat(currencyPrice, options);
     }
 
     public string PriceFormat(ICurrencyPrice price, PriceFormatOptions options = PriceFormatOptions.None)
     {
-      return FormatPriceInt(price, options);
-    }
-
-    private string GetPriceFormatCacheKey(ICurrencyInfo currencyInfo, string processedPrice, PriceFormatOptions options)
-    {
-      return string.Concat(currencyInfo.CurrencyType, "|", ((int)options).ToString(), "|", processedPrice);
-    }
-
-    private string FormatPriceInt(ICurrencyPrice currencyPrice, PriceFormatOptions options)
-    {
-      return FormatPriceInt(currencyPrice.CurrencyInfo, currencyPrice.Price.ToString(), options);
-    }
-
-    private string FormatPriceInt(ICurrencyInfo currencyInfoItem, string processedPrice, PriceFormatOptions options)
-    {
-      string formatKey = GetPriceFormatCacheKey(currencyInfoItem, processedPrice, options);
-      if (_priceFormatCache.ContainsKey(formatKey))
-      {
-        return _priceFormatCache[formatKey];
-      }
-      else
-      {
-        string result = FormatPriceBuild(currencyInfoItem, processedPrice, options);
-        _priceFormatCache[formatKey] = result;
-        return result;
-      }
-    }
-
-    private string FormatPriceBuild(ICurrencyInfo currencyInfoItem, string processedPrice, PriceFormatOptions options)
-    {
-      string workingPrice = processedPrice;
-
-      bool isNegative = workingPrice.Contains("-");
-      if (isNegative)
-      {
-        workingPrice = workingPrice.Replace("-", string.Empty);
-      }
-
-      int padCount = currencyInfoItem.DecimalPrecision + 1;
-      workingPrice = workingPrice.PadLeft(padCount, '0');
-
-      string decimalChars = string.Empty;
-      string nonDecimalChars;
-      string thousandsChars = string.Empty;
-      string millionsChars = string.Empty;
-
-      if (currencyInfoItem.DecimalPrecision > 0)
-      {
-        if (!options.HasFlag(PriceFormatOptions.DropDecimal))
-        {
-          decimalChars = currencyInfoItem.DecimalSeparator + workingPrice.Substring(workingPrice.Length - currencyInfoItem.DecimalPrecision);
-        }
-        nonDecimalChars = workingPrice.Substring(0, workingPrice.Length - currencyInfoItem.DecimalPrecision);
-      }
-      else
-      {
-        nonDecimalChars = workingPrice;
-      }
-
-      if ((nonDecimalChars.Length > 3) && (currencyInfoItem.ThousandsSeparator.Length > 0))
-      {
-        thousandsChars = nonDecimalChars.Substring(0, nonDecimalChars.Length - 3) + currencyInfoItem.ThousandsSeparator;
-        nonDecimalChars = nonDecimalChars.Substring(nonDecimalChars.Length - 3);
-
-        int threePlusSeparator = 3 + currencyInfoItem.ThousandsSeparator.Length;
-        if ((thousandsChars.Length > threePlusSeparator))
-        {
-          millionsChars = thousandsChars.Substring(0, thousandsChars.Length - threePlusSeparator) + currencyInfoItem.ThousandsSeparator;
-          thousandsChars = thousandsChars.Substring(thousandsChars.Length - threePlusSeparator);
-        }
-      }
-
-      string currencySymbol;
-
-      /// Be careful if trying to combine these.  The option flag has to take precendence over the
-      /// global default property
-      if (options.HasFlag(PriceFormatOptions.AsciiSymbol))
-      {
-        currencySymbol = currencyInfoItem.Symbol;
-      }
-      else if (options.HasFlag(PriceFormatOptions.HtmlSymbol))
-      {
-        currencySymbol = currencyInfoItem.SymbolHtml;
-      }
-      else if (CurrencyProviderOptions.UseHtmlCurrencySymbols)
-      {
-        currencySymbol = currencyInfoItem.SymbolHtml;
-      }
-      else
-      {
-        currencySymbol = currencyInfoItem.Symbol;
-      }
-
-      StringBuilder resultBuilder = new StringBuilder();
-      if (!options.HasFlag(PriceFormatOptions.DropSymbol) && currencyInfoItem.SymbolPosition == CurrencySymbolPositionType.Prefix)
-      {
-        resultBuilder.Append(currencySymbol);
-      }
-      resultBuilder.Append(millionsChars);
-      resultBuilder.Append(thousandsChars);
-      resultBuilder.Append(nonDecimalChars);
-      resultBuilder.Append(decimalChars);
-      if (!options.HasFlag(PriceFormatOptions.DropSymbol) && currencyInfoItem.SymbolPosition == CurrencySymbolPositionType.Suffix)
-      {
-        resultBuilder.Append(currencySymbol);
-      }
-
-      if (isNegative)
-      {
-        if (options.HasFlag(PriceFormatOptions.NegativeParentheses))
-        {
-          resultBuilder.Insert(0, "(");
-          resultBuilder.Append(")");
-        }
-        else
-        {
-          resultBuilder.Insert(0, "-");
-        }
-      }
-
-      return resultBuilder.ToString();
+      return _currencyFormatting.Value.FormatPrice(price, options);
     }
 
     #endregion
@@ -999,13 +804,6 @@ namespace Atlantis.Framework.Providers.Currency
     #endregion Promo Pricing
 
     #region CurrencyData
-
-    private MultiCurrencyContextsResponseData GetMultiCurrencyContexts()
-    {
-      MultiCurrencyContextsRequestData request = new MultiCurrencyContextsRequestData();
-      MultiCurrencyContextsResponseData response = (MultiCurrencyContextsResponseData)DataCache.DataCache.GetProcessRequest(request, CurrencyProviderEngineRequests.MultiCurrencyContexts);
-      return response;
-    }
 
     private CurrencyTypesResponseData GetCurrencyTypes()
     {

@@ -44,10 +44,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CurrencyFormatting.cs" />
+    <Compile Include="CurrencyPreference.cs" />
     <Compile Include="CurrencyPrice.cs" />
     <Compile Include="CurrencyProvider.cs" />
     <Compile Include="CurrencyProviderEngineRequests.cs" />
-    <Compile Include="CurrencyProviderOptions.cs" />
     <Compile Include="IscPricingProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -76,9 +77,9 @@
       <Project>{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}</Project>
       <Name>Atlantis.Framework.Interface</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.PLSignupInfo\Atlantis.Framework.PLSignupInfo.Interface\Atlantis.Framework.PLSignupInfo.Interface.csproj">
-      <Project>{3c228090-226d-435d-ac13-be073ccdfae2}</Project>
-      <Name>Atlantis.Framework.PLSignupInfo.Interface</Name>
+    <ProjectReference Include="..\..\Atlantis.Framework.PrivateLabel\Atlantis.Framework.PrivateLabel.Interface\Atlantis.Framework.PrivateLabel.Interface.csproj">
+      <Project>{af7389f6-2167-4503-974e-42139638a9cc}</Project>
+      <Name>Atlantis.Framework.PrivateLabel.Interface</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Atlantis.Framework.Providers.Interface\Atlantis.Framework.Providers.Interface\Atlantis.Framework.Providers.Interface.csproj">
       <Project>{6CC33C6B-FAA7-4B6A-8C3B-BFE94A1A65DE}</Project>
@@ -91,6 +92,10 @@
     <ProjectReference Include="..\..\Providers\Localization\Atlantis.Framework.Providers.Localization.Interface\Atlantis.Framework.Providers.Localization.Interface.csproj">
       <Project>{061fcadc-9547-47e2-9643-cfbcfa355ac2}</Project>
       <Name>Atlantis.Framework.Providers.Localization.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Providers\Shopper\Atlantis.Framework.Providers.Shopper.Interface\Atlantis.Framework.Providers.Shopper.Interface.csproj">
+      <Project>{d58ce651-0cbe-4d68-b47c-d50d6d91efc7}</Project>
+      <Name>Atlantis.Framework.Providers.Shopper.Interface</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Triplets\Currency\Atlantis.Framework.Currency.Interface\Atlantis.Framework.Currency.Interface.csproj">
       <Project>{86171d86-ae69-4f12-b69c-28e2a427fbf4}</Project>

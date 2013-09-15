@@ -73,12 +73,15 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CurrencyFormattingTests.cs" />
+    <Compile Include="CurrencyPreferenceTests.cs" />
     <Compile Include="CurrencyProviderTests.cs" />
     <Compile Include="Mocks\MockAppSettingRequest.cs" />
     <Compile Include="Mocks\MockCurrencyInfo.cs" />
     <Compile Include="Mocks\MockEcommPricingTripletRequest.cs" />
     <Compile Include="Mocks\MockLocalizationProvider.cs" />
     <Compile Include="Mocks\MockPriceProvider.cs" />
+    <Compile Include="Mocks\MockShopperDataProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="IscPricingProviderTests.cs" />
   </ItemGroup>
@@ -141,14 +144,6 @@
       <Project>{3213e6db-f026-4f17-a46a-7127f79f6620}</Project>
       <Name>Atlantis.Framework.Nimitz</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.PLSignupInfo\Atlantis.Framework.PLSignupInfo.Impl\Atlantis.Framework.PLSignupInfo.Impl.csproj">
-      <Project>{4dfb1615-1204-4095-b56e-c697a4ea6e03}</Project>
-      <Name>Atlantis.Framework.PLSignupInfo.Impl</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.PLSignupInfo\Atlantis.Framework.PLSignupInfo.Interface\Atlantis.Framework.PLSignupInfo.Interface.csproj">
-      <Project>{3c228090-226d-435d-ac13-be073ccdfae2}</Project>
-      <Name>Atlantis.Framework.PLSignupInfo.Interface</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Atlantis.Framework.PrivateLabel\Atlantis.Framework.PrivateLabel.Impl\Atlantis.Framework.PrivateLabel.Impl.csproj">
       <Project>{dda75fcc-711e-4fa7-a688-adb2d17ccccd}</Project>
       <Name>Atlantis.Framework.PrivateLabel.Impl</Name>
@@ -188,6 +183,14 @@
     <ProjectReference Include="..\..\Providers\Localization\Atlantis.Framework.Providers.Localization.Interface\Atlantis.Framework.Providers.Localization.Interface.csproj">
       <Project>{061fcadc-9547-47e2-9643-cfbcfa355ac2}</Project>
       <Name>Atlantis.Framework.Providers.Localization.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Providers\Shopper\Atlantis.Framework.Providers.Shopper.Interface\Atlantis.Framework.Providers.Shopper.Interface.csproj">
+      <Project>{d58ce651-0cbe-4d68-b47c-d50d6d91efc7}</Project>
+      <Name>Atlantis.Framework.Providers.Shopper.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Testing\Atlantis.Framework.Testing.MockLocalization\Atlantis.Framework.Testing.MockLocalization.csproj">
+      <Project>{d4a97573-4ae0-4c40-843a-67b8b898b4bf}</Project>
+      <Name>Atlantis.Framework.Testing.MockLocalization</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Testing\Atlantis.Framework.Testing.MockPreferencesProvider\Atlantis.Framework.Testing.MockPreferencesProvider.csproj">
       <Project>{04a97ebe-b5e8-44f5-bdee-45f593cef0ce}</Project>

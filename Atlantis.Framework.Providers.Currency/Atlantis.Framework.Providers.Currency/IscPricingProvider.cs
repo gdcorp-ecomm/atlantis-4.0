@@ -1,7 +1,7 @@
-﻿using System;
-using Atlantis.Framework.EcommPricing.Interface;
+﻿using Atlantis.Framework.EcommPricing.Interface;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.Interface.Pricing;
+using System;
 
 namespace Atlantis.Framework.Providers.Currency
 {

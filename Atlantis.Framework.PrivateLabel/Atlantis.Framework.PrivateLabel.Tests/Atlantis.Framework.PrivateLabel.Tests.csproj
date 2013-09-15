@@ -76,6 +76,7 @@
   <ItemGroup>
     <Compile Include="InvalidRequestData.cs" />
     <Compile Include="IsPrivateLabelActiveTests.cs" />
+    <Compile Include="PLSignupInfoTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ProgIdTests.cs" />
     <Compile Include="PrivateLabelTypeTests.cs" />

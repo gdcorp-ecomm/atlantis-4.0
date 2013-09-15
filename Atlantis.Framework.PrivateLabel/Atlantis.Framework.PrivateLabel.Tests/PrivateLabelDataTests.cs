@@ -7,14 +7,13 @@ namespace Atlantis.Framework.PrivateLabel.Tests
 {
   [TestClass]
   [DeploymentItem("atlantis.config")]
-  [DeploymentItem("Interop.gdDataCacheLib.dll")]
   [DeploymentItem("Atlantis.Framework.PrivateLabel.Impl.dll")]
   public class PrivateLabelDataTests
   {
     [TestMethod]
     public void PrivateLabelDataRequestProperties()
     {
-      var request = new PrivateLabelDataRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, 99, 0);
+      var request = new PrivateLabelDataRequestData(99, 0);
       Assert.AreEqual(99, request.PrivateLabelId);
       Assert.AreEqual(0, request.DataCategoryId);
       Assert.AreEqual("99:0", request.GetCacheMD5());

@@ -5,6 +5,7 @@ using System.Text;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.Localization.Interface;
 using Atlantis.Framework.Testing.MockProviders;
+using System.Globalization;
 
 namespace Atlantis.Framework.Providers.Currency.Tests.Mocks
 {
@@ -38,8 +39,7 @@ namespace Atlantis.Framework.Providers.Currency.Tests.Mocks
     {
       get 
       {
-        MockProviderContainer container = (MockProviderContainer) this.Container;
-        return container.GetData("Localization.CountrySite", "us");
+        return Container.GetData("Localization.CountrySite", "us");
       }
     }
 
@@ -102,7 +102,7 @@ namespace Atlantis.Framework.Providers.Currency.Tests.Mocks
 
     public System.Globalization.CultureInfo CurrentCultureInfo
     {
-      get { throw new NotImplementedException(); }
+      get { return Container.GetData<CultureInfo>("Localization.CultureInfo", CultureInfo.CurrentCulture); }
     }
 
     #endregion
@@ -118,11 +118,26 @@ namespace Atlantis.Framework.Providers.Currency.Tests.Mocks
     {
       get
       {
-        MockProviderContainer container = (MockProviderContainer) this.Container;
-        return container.GetData<ICountrySite>("Localization.CountrySiteInfo", null);
+        return Container.GetData<ICountrySite>("Localization.CountrySiteInfo", null);
       }
     }
 
     #endregion
+
+
+    public string GetLanguageUrl()
+    {
+      throw new NotImplementedException();
+    }
+
+    public string GetLanguageUrl(string marketId)
+    {
+      throw new NotImplementedException();
+    }
+
+    public string GetLanguageUrl(string countrySiteId, string marketId)
+    {
+      throw new NotImplementedException();
+    }
   }
 }

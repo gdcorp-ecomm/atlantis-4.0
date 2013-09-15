@@ -24,6 +24,7 @@ namespace Atlantis.Framework.Providers.Currency.Tests
   [DeploymentItem("Atlantis.Framework.Currency.Impl.dll")]
   [DeploymentItem("Atlantis.Framework.PLSignupInfo.Impl.dll")]
   [DeploymentItem("Atlantis.Framework.PrivateLabel.Impl.dll")]
+  [DeploymentItem("Atlantis.Framework.PromoData.Impl.dll")]
   public class CurrencyProviderTests
   {
     private IProviderContainer SetContexts(int privateLabelId, string shopperId)
@@ -1077,7 +1078,7 @@ namespace Atlantis.Framework.Providers.Currency.Tests
     {
       MockProviderContainer container = (MockProviderContainer)SetContexts(1, "833437");
 
-      container.SetMockSetting("Localization.CountrySiteInfo", null);
+      container.SetData("Localization.CountrySiteInfo", (ICountrySite)null);
 
       container.RegisterProvider<ILocalizationProvider, MockLocalizationProvider>();
 

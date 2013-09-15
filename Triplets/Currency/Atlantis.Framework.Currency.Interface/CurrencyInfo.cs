@@ -23,8 +23,8 @@ namespace Atlantis.Framework.Currency.Interface
           rawCurrencyInfo.ExchangeRate = element.LookupDoubleAttribute("exchangeRate", 0);
           rawCurrencyInfo.ExchangeRatePricing = element.LookupDoubleAttribute("exchangeRatePricing", 0);
           rawCurrencyInfo.ExchangeRateOperating = element.LookupDoubleAttribute("exchangeRateOperating", 0);
-          rawCurrencyInfo.Symbol = element.LookupAttribute("currencySymbol", "$");
-          rawCurrencyInfo.SymbolHtml = element.LookupAttribute("currencySymbolHtml", "$");
+          rawCurrencyInfo.Symbol = element.TrimAttribute("currencySymbol", "$");
+          rawCurrencyInfo.SymbolHtml = element.TrimAttribute("currencySymbolHtml", "$");
 
           var position = element.LookupAttribute("currencySymbolPosition", "prefix");
           if (position.Equals("prefix", StringComparison.OrdinalIgnoreCase))

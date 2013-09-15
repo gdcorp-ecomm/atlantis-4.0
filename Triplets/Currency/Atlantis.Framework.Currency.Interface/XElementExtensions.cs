@@ -15,6 +15,17 @@ namespace Atlantis.Framework.Currency.Interface
       return result;
     }
 
+    public static string TrimAttribute(this XElement element, string name, string defaultValue)
+    {
+      string result = defaultValue;
+      XAttribute attribute = element.Attribute(name);
+      if (attribute != null)
+      {
+        result = attribute.Value.Trim();
+      }
+      return result;
+    }
+
     public static double LookupDoubleAttribute(this XElement element, string name, double defaultValue)
     {
       double result = defaultValue;

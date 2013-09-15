@@ -123,6 +123,16 @@ namespace Atlantis.Framework.Currency.Tests
     }
 
     [TestMethod]
+    public void CurrencyTypesTrimmedSymbols()
+    {
+      string currencyItem = "<currency gdshop_currencyType=\"BRL\" description=\"Brazilian Real\" currencySymbol=\" R$ \" currencySymbolPosition=\"Prefix\" decimalPrecision=\"2\" decimalSeparator=\",\" thousandsSeparator=\".\" fixedFormatMask=\"000,00\" repeatingFormatMask=\"000.\" description2=\"Brazilian Reais\" currencySymbolHtml=\" R$ \" isTransactional=\"1\" exchangeRate=\"0.4948\" exchangeRatePricing=\"0.4804\" exchangeRateOperating=\"0.4948\"/>";
+      XElement currencyElement = XElement.Parse(currencyItem);
+      CurrencyInfo currencyInfo = CurrencyInfo.FromCacheElement(currencyElement);
+      Assert.AreEqual("R$", currencyInfo.Symbol);
+      Assert.AreEqual("R$", currencyInfo.SymbolHtml);
+    }
+
+    [TestMethod]
     public void CurrencyTypesResponseValid()
     {
       string currencyData = "<Cache count=\"33\" expires=\"5/13/2013 3:47:26 PM\" methods=\"getcurrencydata\"><currency gdshop_currencyType=\"ARS\" description=\"Argentine Peso\" currencySymbol=\"$\" currencySymbolPosition=\"Prefix\" decimalPrecision=\"2\" decimalSeparator=\",\" thousandsSeparator=\".\" fixedFormatMask=\"000,00\" repeatingFormatMask=\"000.\" description2=\"Argentine Pesos\" currencySymbolHtml=\"$\" isTransactional=\"1\" exchangeRate=\"0.1912\" exchangeRatePricing=\"0.1856\" exchangeRateOperating=\"0.1912\"/><currency gdshop_currencyType=\"AUD\" description=\"Australian Dollar\" currencySymbol=\"A$\" currencySymbolPosition=\"Prefix\" decimalPrecision=\"2\" decimalSeparator=\".\" thousandsSeparator=\",\" fixedFormatMask=\"000.00\" repeatingFormatMask=\"000,\" description2=\"Australian Dollars\" currencySymbolHtml=\"A$\" isTransactional=\"1\" exchangeRate=\"1.0025\" exchangeRatePricing=\"0.9733\" exchangeRateOperating=\"1.0025\"/><currency gdshop_currencyType=\"BRL\" description=\"Brazilian Real\" currencySymbol=\"R$\" currencySymbolPosition=\"Prefix\" decimalPrecision=\"2\" decimalSeparator=\",\" thousandsSeparator=\".\" fixedFormatMask=\"000,00\" repeatingFormatMask=\"000.\" description2=\"Brazilian Reais\" currencySymbolHtml=\"R$\" isTransactional=\"1\" exchangeRate=\"0.4948\" exchangeRatePricing=\"0.4804\" exchangeRateOperating=\"0.4948\"/></Cache>";

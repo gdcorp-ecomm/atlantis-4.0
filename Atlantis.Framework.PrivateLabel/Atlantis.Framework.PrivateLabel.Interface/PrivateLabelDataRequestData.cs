@@ -1,4 +1,5 @@
 ﻿using Atlantis.Framework.PrivateLabel.Interface.Base;
+using System;
 using System.Xml.Linq;
 
 namespace Atlantis.Framework.PrivateLabel.Interface
@@ -7,8 +8,14 @@ namespace Atlantis.Framework.PrivateLabel.Interface
   {
     public int DataCategoryId { get; private set; }
 
+    [Obsolete("Please use the simpler constructor.")]
     public PrivateLabelDataRequestData(string shopperId, string sourceURL, string orderId, string pathway, int pageCount, int privateLabelId, int dataCategoryId)
-      : base(shopperId, sourceURL, orderId, pathway, pageCount, privateLabelId)
+      : this(privateLabelId, dataCategoryId)
+    {
+    }
+
+    public PrivateLabelDataRequestData(int privateLabelId, int dataCategoryId)
+      :base(privateLabelId)
     {
       DataCategoryId = dataCategoryId;
     }

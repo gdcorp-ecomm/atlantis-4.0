@@ -49,6 +49,8 @@
   <ItemGroup>
     <Compile Include="IsPrivateLabelActiveRequestData.cs" />
     <Compile Include="IsPrivateLabelActiveResponseData.cs" />
+    <Compile Include="PLSignupInfoRequestData.cs" />
+    <Compile Include="PLSignupInfoResponseData.cs" />
     <Compile Include="PrivateLabelDataRequestData.cs" />
     <Compile Include="PrivateLabelDataResponseData.cs" />
     <Compile Include="PrivateLabelIdRequestData.cs" />

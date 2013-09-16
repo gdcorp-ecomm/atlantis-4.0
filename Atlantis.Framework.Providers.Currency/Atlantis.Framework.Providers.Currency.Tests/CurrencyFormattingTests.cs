@@ -120,26 +120,6 @@ namespace Atlantis.Framework.Providers.Currency.Tests
     }
 
     [TestMethod]
-    public void NegativeOptions()
-    {
-      var container2 = SetContainer("en-US");
-      var formattingWithCulture = new CurrencyFormatting(container2);
-      var priceText = formattingWithCulture.FormatPrice(GetPrice(-1111, "USD"), PriceFormatOptions.None);
-      var priceText2 = formattingWithCulture.FormatPrice(GetPrice(-1111, "USD"), PriceFormatOptions.NegativeParentheses);
-      Assert.AreNotEqual(priceText, priceText2);
-    }
-
-    [TestMethod]
-    public void NegativeOptionsRupies()
-    {
-      var container2 = SetContainer("en-IN");
-      var formattingWithCulture = new CurrencyFormatting(container2);
-      var priceText = formattingWithCulture.FormatPrice(GetPrice(-1111, "INR"), PriceFormatOptions.None);
-      var priceText2 = formattingWithCulture.FormatPrice(GetPrice(-1111, "INR"), PriceFormatOptions.NegativeParentheses);
-      Assert.AreNotEqual(priceText, priceText2);
-    }
-
-    [TestMethod]
     public void DropDecimalOptions()
     {
       var container2 = SetContainer("en-US");

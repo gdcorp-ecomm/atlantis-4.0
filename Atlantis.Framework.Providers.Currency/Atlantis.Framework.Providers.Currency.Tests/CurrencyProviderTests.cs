@@ -412,7 +412,7 @@ namespace Atlantis.Framework.Providers.Currency.Tests
     }
 
     [TestMethod]
-    public void PriceFormatDefaultNegativeParanthesis()
+    public void PriceFormatDefaultNegativeParanthesisIgnored()
     {
       var container = SetContexts(1, string.Empty);
       ICurrencyProvider currency = container.Resolve<ICurrencyProvider>();
@@ -423,8 +423,8 @@ namespace Atlantis.Framework.Providers.Currency.Tests
       string text2 = currency.PriceFormat(price, false, false, CurrencyNegativeFormat.Parentheses);
 
       Assert.AreEqual(text1, text2);
-      Assert.IsTrue(text1.StartsWith("("));
-      Assert.IsTrue(text1.EndsWith(")"));
+      Assert.IsFalse(text1.StartsWith("("));
+      Assert.IsFalse(text1.EndsWith(")"));
     }
 
     [TestMethod]

@@ -31,6 +31,7 @@ namespace Atlantis.Framework.Providers.Interface.Currency
     /// <summary>
     /// Uses parenthesis instead of a minus for negatives
     /// </summary>
+    [Obsolete("Currency negative format is set by the culture now.")]
     NegativeParentheses = 16
   }
 }

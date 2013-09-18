@@ -17,9 +17,9 @@
       <dependency id="Atlantis.Framework.CDS" version="4.0.0.0" />
       <dependency id="Atlantis.Framework.DataCache" version="4.0.0.0" />
       <dependency id="Atlantis.Framework.Render.Pipeline" version="4.0.0.0" />
-      <dependency id="Atlantis.Framework.Provider.CDSContent.Interface" version="4.0.0.0" />
+      <dependency id="Atlantis.Framework.Providers.CDSContent.Interface" version="4.0.0.0" />
       <dependency id="Atlantis.Framework.Conditions.Interface" version="4.0.0.0" />
-      <dependency id="Atlantis.Framework.Products.Containers" version="4.0.0.0" />
+      <dependency id="Atlantis.Framework.Providers.Containers" version="4.0.0.0" />
       <dependency id="Atlantis.Framework.Tokens.Interface" version="4.0.0.0" />
     </dependencies>
   </metadata>

@@ -40,8 +40,10 @@ namespace Atlantis.Framework.Providers.DomainLookup.Tests
         if (data.PrivateLabelId == 1)
           privateLabelCheck = true;
 
+        Assert.IsFalse(provider.IsDomainExpired());
+        Assert.IsTrue(provider.ParkedDomainInfo.IsActive);
         Assert.IsTrue(privateLabelCheck);
-
+        Assert.AreEqual("jeffmcookietest1.info", provider.DomainName);
         Assert.AreEqual(data.PdDomainId, 467553);
       }
 

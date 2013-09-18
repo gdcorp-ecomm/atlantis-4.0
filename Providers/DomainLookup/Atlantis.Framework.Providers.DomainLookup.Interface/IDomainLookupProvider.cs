@@ -2,6 +2,9 @@
 {
     public interface IDomainLookupProvider
     {
+      string DomainName { get; }
+      IDomainLookupData ParkedDomainInfo { get; }
       IDomainLookupData GetDomainInformation(string domainName);
+      bool IsDomainExpired();
     }
 }

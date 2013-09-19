@@ -57,7 +57,7 @@ namespace Atlantis.Framework.DCCSetNameservers.Impl
         oDsWebValidate.Timeout = (int)oRequest.RequestTimeout.TotalMilliseconds;
 
         var validateRequestXml = oRequest.GetDomainNameserverValidateRequestXml();
-        var validateResponseXml = oDsWebValidate.Validate(validateRequestXml); //ValidateNameserverUpdate(verifyAction, verifyDomains);
+        var validateResponseXml = oDsWebValidate.Validate(validateRequestXml); 
 
         if (NameserverIsValid(validateResponseXml))
         {

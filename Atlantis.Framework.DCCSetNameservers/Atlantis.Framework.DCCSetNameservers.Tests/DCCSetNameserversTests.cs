@@ -10,6 +10,7 @@ namespace Atlantis.Framework.DCCSetNameservers.Tests
   {
     [DeploymentItem("atlantis.config")]
     [DeploymentItem("Atlantis.Framework.AppSettings.Impl.dll")]
+    [DeploymentItem("Atlantis.Framework.PrivateLabel.Impl.dll")]
     [DeploymentItem("Atlantis.Framework.DCCSetNameservers.Impl.dll")]
     [TestMethod]
     public void TestValidSetNameserversPark()
@@ -27,6 +28,7 @@ namespace Atlantis.Framework.DCCSetNameservers.Tests
 
     [DeploymentItem("atlantis.config")]
     [DeploymentItem("Atlantis.Framework.AppSettings.Impl.dll")]
+    [DeploymentItem("Atlantis.Framework.PrivateLabel.Impl.dll")]
     [DeploymentItem("Atlantis.Framework.DCCSetNameservers.Impl.dll")]
     [TestMethod]
     public void TestValidSetNameserversForward()
@@ -44,6 +46,7 @@ namespace Atlantis.Framework.DCCSetNameservers.Tests
 
     [DeploymentItem("atlantis.config")]
     [DeploymentItem("Atlantis.Framework.AppSettings.Impl.dll")]
+    [DeploymentItem("Atlantis.Framework.PrivateLabel.Impl.dll")]
     [DeploymentItem("Atlantis.Framework.DCCSetNameservers.Impl.dll")]
     [TestMethod]
     public void TestValidSetNameserversHost()
@@ -61,6 +64,7 @@ namespace Atlantis.Framework.DCCSetNameservers.Tests
 
     [DeploymentItem("atlantis.config")]
     [DeploymentItem("Atlantis.Framework.AppSettings.Impl.dll")]
+    [DeploymentItem("Atlantis.Framework.PrivateLabel.Impl.dll")]
     [DeploymentItem("Atlantis.Framework.DCCSetNameservers.Impl.dll")]
     [TestMethod]
     public void TestValidSetNameserversCustom()
@@ -87,6 +91,7 @@ namespace Atlantis.Framework.DCCSetNameservers.Tests
 
     [DeploymentItem("atlantis.config")]
     [DeploymentItem("Atlantis.Framework.AppSettings.Impl.dll")]
+    [DeploymentItem("Atlantis.Framework.PrivateLabel.Impl.dll")]
     [DeploymentItem("Atlantis.Framework.DCCSetNameservers.Impl.dll")]
     [TestMethod]
     public void TestValidSetNameserversRedundantChange()
@@ -104,6 +109,7 @@ namespace Atlantis.Framework.DCCSetNameservers.Tests
 
     [DeploymentItem("atlantis.config")]
     [DeploymentItem("Atlantis.Framework.AppSettings.Impl.dll")]
+    [DeploymentItem("Atlantis.Framework.PrivateLabel.Impl.dll")]
     [DeploymentItem("Atlantis.Framework.DCCSetNameservers.Impl.dll")]
     [TestMethod]
     public void TestSetNameserversErrors()
@@ -121,6 +127,7 @@ namespace Atlantis.Framework.DCCSetNameservers.Tests
 
     [DeploymentItem("atlantis.config")]
     [DeploymentItem("Atlantis.Framework.AppSettings.Impl.dll")]
+    [DeploymentItem("Atlantis.Framework.PrivateLabel.Impl.dll")]
     [DeploymentItem("Atlantis.Framework.DCCSetNameservers.Impl.dll")]
     [TestMethod]
     public void TestSetNameserversEmpty()
@@ -138,6 +145,7 @@ namespace Atlantis.Framework.DCCSetNameservers.Tests
 
     [DeploymentItem("atlantis.config")]
     [DeploymentItem("Atlantis.Framework.AppSettings.Impl.dll")]
+    [DeploymentItem("Atlantis.Framework.PrivateLabel.Impl.dll")]
     [DeploymentItem("Atlantis.Framework.DCCSetNameservers.Impl.dll")]
     [TestMethod]
     public void TestSetNameserversForShopperThatDoesNotOwnDomain()
@@ -159,6 +167,7 @@ namespace Atlantis.Framework.DCCSetNameservers.Tests
 
     [DeploymentItem("atlantis.config")]
     [DeploymentItem("Atlantis.Framework.AppSettings.Impl.dll")]
+    [DeploymentItem("Atlantis.Framework.PrivateLabel.Impl.dll")]
     [DeploymentItem("Atlantis.Framework.DCCSetNameservers.Impl.dll")]
     [TestMethod]
     public void SetNameserversForPremiumDnsShopper()
@@ -179,6 +188,7 @@ namespace Atlantis.Framework.DCCSetNameservers.Tests
 
     [DeploymentItem("atlantis.config")]
     [DeploymentItem("Atlantis.Framework.AppSettings.Impl.dll")]
+    [DeploymentItem("Atlantis.Framework.PrivateLabel.Impl.dll")]
     [DeploymentItem("Atlantis.Framework.DCCSetNameservers.Impl.dll")]
     [TestMethod]
     public void TestNoRegistrarIdSetNameservers()
@@ -197,6 +207,7 @@ namespace Atlantis.Framework.DCCSetNameservers.Tests
 
     [DeploymentItem("atlantis.config")]
     [DeploymentItem("Atlantis.Framework.AppSettings.Impl.dll")]
+    [DeploymentItem("Atlantis.Framework.PrivateLabel.Impl.dll")]
     [DeploymentItem("Atlantis.Framework.DCCSetNameservers.Impl.dll")]
     [TestMethod]
     public void TestIntentionalExceptionWrongRequest()

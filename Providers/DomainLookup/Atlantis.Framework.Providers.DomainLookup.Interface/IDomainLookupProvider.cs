@@ -6,5 +6,6 @@
       IDomainLookupData ParkedDomainInfo { get; }
       IDomainLookupData GetDomainInformation(string domainName);
       bool IsDomainExpired();
+      bool IsDomainAdult();
     }
 }

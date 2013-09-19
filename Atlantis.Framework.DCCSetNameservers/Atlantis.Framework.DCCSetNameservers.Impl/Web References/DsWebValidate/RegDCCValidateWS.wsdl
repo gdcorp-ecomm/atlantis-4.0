@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">RegDCCValidateWS - The latest documentation can be found @ http://wiki.registrar.intranet.gdg/wiki/RegDCCValidationWS</wsdl:documentation>
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="getServiceStatus">
+        <s:complexType />
+      </s:element>
+      <s:element name="getServiceStatusResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getServiceStatusResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Validate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="requestMessage" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ValidateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ValidateResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="getServiceStatusSoapIn">
+    <wsdl:part name="parameters" element="tns:getServiceStatus" />
+  </wsdl:message>
+  <wsdl:message name="getServiceStatusSoapOut">
+    <wsdl:part name="parameters" element="tns:getServiceStatusResponse" />
+  </wsdl:message>
+  <wsdl:message name="ValidateSoapIn">
+    <wsdl:part name="parameters" element="tns:Validate" />
+  </wsdl:message>
+  <wsdl:message name="ValidateSoapOut">
+    <wsdl:part name="parameters" element="tns:ValidateResponse" />
+  </wsdl:message>
+  <wsdl:portType name="RegDCCValidateWSSoap">
+    <wsdl:operation name="getServiceStatus">
+      <wsdl:input message="tns:getServiceStatusSoapIn" />
+      <wsdl:output message="tns:getServiceStatusSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Validate">
+      <wsdl:input message="tns:ValidateSoapIn" />
+      <wsdl:output message="tns:ValidateSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="RegDCCValidateWSSoap" type="tns:RegDCCValidateWSSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="getServiceStatus">
+      <soap:operation soapAction="http://tempuri.org/getServiceStatus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Validate">
+      <soap:operation soapAction="http://tempuri.org/Validate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="RegDCCValidateWSSoap12" type="tns:RegDCCValidateWSSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="getServiceStatus">
+      <soap12:operation soapAction="http://tempuri.org/getServiceStatus" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Validate">
+      <soap12:operation soapAction="http://tempuri.org/Validate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="RegDCCValidateWS">
+    <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">RegDCCValidateWS - The latest documentation can be found @ http://wiki.registrar.intranet.gdg/wiki/RegDCCValidationWS</wsdl:documentation>
+    <wsdl:port name="RegDCCValidateWSSoap" binding="tns:RegDCCValidateWSSoap">
+      <soap:address location="http://dccapp-general.dev.intranet.gdg/RegDCCValidateWS/RegDCCValidateWS.asmx" />
+    </wsdl:port>
+    <wsdl:port name="RegDCCValidateWSSoap12" binding="tns:RegDCCValidateWSSoap12">
+      <soap12:address location="http://dccapp-general.dev.intranet.gdg/RegDCCValidateWS/RegDCCValidateWS.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -35,7 +35,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Atlantis.Framework.Interface">
-      <HintPath>..\packages\Atlantis.Framework.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Interface.dll</HintPath>
+      <HintPath>..\..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\bin\Debug\Atlantis.Framework.Interface.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

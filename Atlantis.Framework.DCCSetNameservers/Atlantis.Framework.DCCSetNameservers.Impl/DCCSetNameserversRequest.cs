@@ -1,17 +1,29 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Xml.Linq;
 using Atlantis.Framework.DCCSetNameservers.Interface;
 using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.DCCSetNameservers.Impl
 {
+
   public class DCCSetNameserversRequest : IRequest
   {
+    enum VerificationUpdateResultCodes
+    {
+      Unknown = -1,
+      Success = 0,
+      ProhibitsUpdate = 4,
+      RedundantChange = 51
+
+    }
+
     public IResponseData RequestHandler(RequestData oRequestData, ConfigElement oConfig)
     {
       DCCSetNameserversResponseData responseData;
       string responseXml = string.Empty;
-      string verifyResponseXml = string.Empty;
+      string verifyResponseXml;
       try
       {
         DCCSetNameserversRequestData oRequest = (DCCSetNameserversRequestData)oRequestData;
@@ -29,49 +41,53 @@ namespace Atlantis.Framework.DCCSetNameservers.Impl
               AddCustomNameservers(forwardingNameservers, oRequest);
               break;
             case DCCSetNameserversRequestData.NameserverType.Host:
-              string[] hostNameservers = GetHostNameservers(oRequest.PrivateLabelID);
+              string[] hostNameservers = GetHostNameservers(oRequest.PrivateLabelId);
               AddCustomNameservers(hostNameservers, oRequest);
               break;
             case DCCSetNameserversRequestData.NameserverType.Park:
-              string[] parkNameservers = GetParkNameservers(oRequest.PrivateLabelID);
+              string[] parkNameservers = GetParkNameservers(oRequest.PrivateLabelId);
               AddCustomNameservers(parkNameservers, oRequest);
               break;
           }
         }
 
-        string verifyAction;
-        string verifyDomains;
-
-        oRequest.XmlToVerify(out verifyAction, out verifyDomains);
-        DsWebValidate.RegDCCValidateWebSvc oDsWebValidate = new DsWebValidate.RegDCCValidateWebSvc();
-        oDsWebValidate.Url = oConfig.GetConfigValue("ValidateUrl"); ;
+        
+        var oDsWebValidate = new DsWebValidate.RegDCCValidateWS();
+        oDsWebValidate.Url = oConfig.GetConfigValue("ValidateUrl"); 
         oDsWebValidate.Timeout = (int)oRequest.RequestTimeout.TotalMilliseconds;
-        string validateResponseXml = oDsWebValidate.ValidateNameserverUpdate(verifyAction, verifyDomains);
 
-        if (validateResponseXml.Contains("ActionResultID=\"51\" Description=\"Redundant change - nameservers"))
-        {
-          responseData = new DCCSetNameserversResponseData("<success");
-        }
-        else if (validateResponseXml.Contains("<ACTIONRESULTS></ACTIONRESULTS>"))
-        {
+        var validateRequestXml = oRequest.GetDomainNameserverValidateRequestXml();
+        var validateResponseXml = oDsWebValidate.Validate(validateRequestXml); //ValidateNameserverUpdate(verifyAction, verifyDomains);
 
-          DsWebVerify.RegDCCVerifyWS oDsWebVerify = new DsWebVerify.RegDCCVerifyWS();
-          oDsWebVerify.Url = oConfig.GetConfigValue("VerifyUrl");
-          oDsWebVerify.Timeout = (int)oRequest.RequestTimeout.TotalMilliseconds;
+        if (NameserverIsValid(validateResponseXml))
+        {
+          string verifyAction;
+          string verifyDomains;
+          oRequest.XmlToVerify(out verifyAction, out verifyDomains);
+
+          var oDsWebVerify = new DsWebVerify.RegDCCVerifyWS
+            {
+              Url = oConfig.GetConfigValue("VerifyUrl"),
+              Timeout = (int) oRequest.RequestTimeout.TotalMilliseconds
+            };
+
           verifyResponseXml = oDsWebVerify.VerifyNameServerUpdate(verifyAction, verifyDomains);
 
-          if (verifyResponseXml.Contains("ActionResultID=\"0\""))
+          var updateResultCode = GetNameserverUpdateResultCode(verifyResponseXml);
+          if (updateResultCode == VerificationUpdateResultCodes.Success)
           {
-            DsWebSubmit.RegDCCRequestWS oDsWeb = new DsWebSubmit.RegDCCRequestWS();
-            oDsWeb.Url = ((WsConfigElement)oConfig).WSURL;
-            oDsWeb.Timeout = (int)oRequest.RequestTimeout.TotalMilliseconds;
+            var oDsWeb = new DsWebSubmit.RegDCCRequestWS
+              {
+                Url = ((WsConfigElement) oConfig).WSURL,
+                Timeout = (int) oRequest.RequestTimeout.TotalMilliseconds
+              };
 
             responseXml = oDsWeb.SubmitRequestStandard(oRequest.ToXML());
-            responseData = new DCCSetNameserversResponseData(responseXml);
+            responseData = new DCCSetNameserversResponseData(true, responseXml);
           }
-          else if (verifyResponseXml.Contains("ActionResultID=\"51\" Description=\"Redundant change - nameservers"))
+          else if (updateResultCode == VerificationUpdateResultCodes.RedundantChange)
           {
-            responseData = new DCCSetNameserversResponseData("<success");
+            responseData = new DCCSetNameserversResponseData(true, verifyResponseXml);
           }
           else
           {
@@ -80,7 +96,7 @@ namespace Atlantis.Framework.DCCSetNameservers.Impl
         }
         else
         {
-          responseData = new DCCSetNameserversResponseData(validateResponseXml, false);
+          responseData = new DCCSetNameserversResponseData(false, validateResponseXml);
         }
       }
       catch (AtlantisException exAtlantis)
@@ -95,7 +111,7 @@ namespace Atlantis.Framework.DCCSetNameservers.Impl
       return responseData;
     }
 
-    private static void AddCustomNameservers(string[] nameservers, DCCSetNameserversRequestData requestData)
+    private static void AddCustomNameservers(IEnumerable<string> nameservers, DCCSetNameserversRequestData requestData)
     {
       foreach (string nameserver in nameservers)
       {
@@ -183,6 +199,55 @@ namespace Atlantis.Framework.DCCSetNameservers.Impl
       }
 
       return parkNameservers;
+    }
+
+    private bool NameserverIsValid(string dccValidationResponseXml)
+    {
+      var responseDoc = XDocument.Parse(dccValidationResponseXml).Root;
+      var isSuccess = responseDoc != null && responseDoc.Attribute("result").Value == "success";
+
+      return isSuccess;
+    }
+
+    private VerificationUpdateResultCodes GetNameserverUpdateResultCode(string dccVerifyUpdateReponseXml)
+    {
+      var updateResult = VerificationUpdateResultCodes.Unknown;
+
+      var responseDoc = XDocument.Parse(dccVerifyUpdateReponseXml).Root;
+
+      if (responseDoc != null && responseDoc.Element("ACTIONRESULTS") != null)
+      {
+        var actionResults = responseDoc.Element("ACTIONRESULTS");
+        if (actionResults != null)
+        {
+          if (!actionResults.HasElements)
+          {
+            updateResult = VerificationUpdateResultCodes.Success;
+          }
+          else
+          {
+            var actionResult = actionResults.Element("ACTIONRESULT");
+            if (actionResult != null)
+            {
+              int resultCode;
+              if (int.TryParse(actionResult.Attribute("ActionResultID").Value, out resultCode))
+              {
+                switch (resultCode)
+                {
+                  case 0:
+                    updateResult = VerificationUpdateResultCodes.Success;
+                    break;
+                  case 51:
+                    updateResult = VerificationUpdateResultCodes.RedundantChange;
+                    break;
+                }
+              }
+            }
+          }
+        }
+      }
+
+      return updateResult;
     }
   }
 }

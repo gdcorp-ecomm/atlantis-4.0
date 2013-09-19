@@ -9,7 +9,7 @@
       <Value Profile="(Default)">https://dccapp-general.dev.intranet.gdg/RegDCCRequestWS/RegDCCRequestWS.asmx</Value>
     </Setting>
     <Setting Name="Atlantis_Framework_DCCSetNameservers_Impl_DsWebValidate_RegDCCValidateWebSvc" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">https://dccapp-general.dev.intranet.gdg/RegDCCValidateWebSvc/RegDCCValidateWebSvc.asmx</Value>
+      <Value Profile="(Default)">http://dccapp-general.dev.intranet.gdg/RegDCCValidateWS/RegDCCValidateWS.asmx</Value>
     </Setting>
   </Settings>
 </SettingsFile>

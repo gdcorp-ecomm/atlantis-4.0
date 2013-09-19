@@ -128,10 +128,10 @@
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>Atlantis_Framework_DCCSetNameservers_Impl_DsWebSubmit_RegDCCRequestWebSvcService</CachedSettingsPropName>
     </WebReferenceUrl>
-    <WebReferenceUrl Include="https://dccapp-general.dev.intranet.gdg/RegDCCValidateWebSvc/RegDCCValidateWebSvc.asmx">
+    <WebReferenceUrl Include="http://dccapp-general.dev.intranet.gdg/RegDCCValidateWS/RegDCCValidateWS.asmx">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\DsWebValidate\</RelPath>
-      <UpdateFromURL>https://dccapp-general.dev.intranet.gdg/RegDCCValidateWebSvc/RegDCCValidateWebSvc.asmx</UpdateFromURL>
+      <UpdateFromURL>http://dccapp-general.dev.intranet.gdg/RegDCCValidateWS/RegDCCValidateWS.asmx</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>
@@ -162,7 +162,7 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
     <None Include="Web References\DsWebSubmit\RegDCCRequestWS.wsdl" />
-    <None Include="Web References\DsWebValidate\RegDCCValidateWebSvc.wsdl" />
+    <None Include="Web References\DsWebValidate\RegDCCValidateWS.wsdl" />
     <None Include="Web References\DsWebVerify\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
@@ -174,7 +174,6 @@
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <None Include="Web References\DsWebValidate\RegDCCValidateWebSvc.disco" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
@@ -198,6 +197,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Web References\DsWebVerify\RegDCCVerifyWS.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Web References\DsWebValidate\RegDCCValidateWS.disco" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

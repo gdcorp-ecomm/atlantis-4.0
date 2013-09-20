@@ -68,17 +68,13 @@
   <ItemGroup>
     <None Include="Atlantis.Framework.PrivateLabel.Impl.nuspec" />
     <None Include="Atlantis.Framework.PrivateLabel.Impl.nuget.bat" />
-    <None Include="bin\atlantis.config.transform">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="bin\atlantis.prod.config.transform">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="bin\atlantis.test.config.transform">
-      <SubType>Designer</SubType>
+    <None Include="atlantis.config.transform">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

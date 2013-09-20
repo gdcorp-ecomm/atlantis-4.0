@@ -63,6 +63,7 @@
     <Compile Include="Base\RequestDataUsingPrivateLabelId.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="atlantis.config" />
     <None Include="Atlantis.Framework.PrivateLabel.Interface.nuget.bat" />
     <None Include="Atlantis.Framework.PrivateLabel.Interface.nuspec" />
     <None Include="packages.config" />

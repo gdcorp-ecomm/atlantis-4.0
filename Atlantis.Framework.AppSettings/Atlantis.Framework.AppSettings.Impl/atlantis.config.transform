@@ -1,0 +1,3 @@
+<ConfigElements>
+  <ConfigElement progid="Atlantis.Framework.AppSettings.Impl.AppSettingRequest" assembly="Atlantis.Framework.AppSettings.Impl.dll" request_type="658" lpc="0" />
+</ConfigElements>

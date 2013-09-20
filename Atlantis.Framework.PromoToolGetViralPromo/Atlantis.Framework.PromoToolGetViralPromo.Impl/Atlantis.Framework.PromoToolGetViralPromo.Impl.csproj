@@ -69,7 +69,7 @@
   <ItemGroup>
     <None Include="Atlantis.Framework.PromoToolGetViralPromo.Impl.nuget.bat" />
     <None Include="Atlantis.Framework.PromoToolGetViralPromo.Impl.nuspec" />
-    <None Include="bin\atlantis.config.transform" />
+    <None Include="atlantis.config.transform" />
     <None Include="bin\atlantis.prod.config.transform" />
     <None Include="bin\atlantis.test.config.transform" />
     <None Include="packages.config" />

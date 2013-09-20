@@ -1,0 +1,3 @@
+﻿<ConfigElements>
+  <ConfigElement progid="Atlantis.Framework.PromoToolGetViralPromo.Impl.PromoToolGetViralPromoRequest" assembly="Atlantis.Framework.PromoToolGetViralPromo.Impl.dll" request_type="600" lpc="0" ws_url="https://siteadmin.dev.intranet.gdg/PromoTool/PromoTool.svc/SOAP" />
+</ConfigElements>

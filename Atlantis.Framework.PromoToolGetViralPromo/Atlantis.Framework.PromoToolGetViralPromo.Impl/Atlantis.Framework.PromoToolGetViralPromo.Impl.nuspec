@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>Atlantis.Framework.PromoToolGetViralPromo</id>
-    <version>1.0.0.0</version>
+    <version>4.0.0.0</version>
     <title>Atlantis Framework PromoToolGetViralPromo</title>
     <authors>$author$</authors>
     <owners>$author$</owners>
@@ -17,8 +17,6 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="bin\atlantis.config.transform" target="content\bin\atlantis.config.transform" />
-    <file src="bin\atlantis.prod.config.transform" target="content\bin\atlantis.prod.config.transform" />
-    <file src="bin\atlantis.test.config.transform" target="content\bin\atlantis.test.config.transform" />
+    <file src="atlantis.config.transform" target="content\atlantis.config.transform" />
   </files>
 </package>

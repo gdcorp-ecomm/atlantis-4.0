@@ -106,6 +106,11 @@ namespace BotDetect.Web
 
             url += String.Format(CultureInfo.InvariantCulture, "&amp;c={0}&amp;t={1}", captchaId, instanceId);
 
+            if (HttpContext.Current.Request != null)
+            {
+              string baseUrl = string.Concat(HttpContext.Current.Request.Url.OriginalString.Replace(HttpContext.Current.Request.Url.LocalPath, string.Empty), "/");
+              url = baseUrl + url;
+            }
             // ensure cookieless ASP.NET Session compatibility
             if (null != HttpContext.Current && null != HttpContext.Current.Response)
             {

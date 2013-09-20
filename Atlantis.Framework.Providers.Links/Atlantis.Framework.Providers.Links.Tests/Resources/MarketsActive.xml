@@ -3,6 +3,7 @@
   <item catalog_marketID="es-US" marketDescription="Spanish (United States)" MSCulture="es-US" isActive="1" internalOnly="0" />
   <item catalog_marketID='es-BR' marketDescription='Spanish (United States)' MSCulture='es-US' isActive='1' internalOnly='0' />
   <item catalog_marketID="en-CA" marketDescription="English (Canada)" MSCulture="en-CA" isActive="1" internalOnly="0" />
+  <item catalog_marketID="fr-CA" marketDescription="French (Canada)" MSCulture="fr-CA" isActive="1" internalOnly="0" />
   <item catalog_marketID="en-GB" marketDescription="English (United Kingdom)" MSCulture="en-GB" isActive="1" internalOnly="0" />
   <item catalog_marketID="en-AU" marketDescription="English (Australia)" MSCulture="en-AU" isActive="1" internalOnly="0" />
   <item catalog_marketID="en-IN" marketDescription="English (India)" MSCulture="en-IN" isActive="1" internalOnly="0" />

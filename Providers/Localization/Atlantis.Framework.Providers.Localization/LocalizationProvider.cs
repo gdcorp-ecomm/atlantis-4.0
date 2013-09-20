@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Web;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Localization.Interface;
 using Atlantis.Framework.Providers.Localization.Interface;
@@ -88,6 +87,65 @@ namespace Atlantis.Framework.Providers.Localization
       return result;
     }
 
+    public ICountrySite TryGetCountrySite(string countrySiteId)
+    {
+      ICountrySite countrySite;
+      _countrySitesActive.Value.TryGetCountrySiteById(countrySiteId, out countrySite);
+      return countrySite;
+    }
+
+    public IMarket TryGetMarket(string marketId)
+    {
+      IMarket market;
+      _marketsActive.Value.TryGetMarketById(marketId, out market);
+      return market;
+    }
+
+    public IMarket GetMarketForCountrySite(string countrySiteId, string marketId)
+    {
+      IMarket market = null;
+      // try to get the mapping given the supplied countrySiteId
+      var marketMappings = GetOrLoadMarketMappingsForCountrySite(countrySiteId);
+      if ( marketMappings != null ) // if we found one, then the countrysiteid must be 'ok'
+      {
+        if (marketMappings.IsPublicMapping(marketId)) // if mapping exists, we are done
+        {
+          market = TryGetMarket(marketId);
+        }
+        // if not, then we had a good countrySiteId, but bad marketid
+      }
+      else
+      {
+        // countrySiteId must have been invalid, so use the request's id... which must have already been validated
+        countrySiteId = CountrySite;
+      }
+
+      if (market == null)
+      {
+        var countrySite = TryGetCountrySite(countrySiteId);
+
+        // if we are here, we must have a valid countrySiteId, so no need to validate
+        marketId = countrySite.DefaultMarketId;
+        _marketsActive.Value.TryGetMarketById(marketId, out market);
+      }
+      return market;
+    }
+
+    public IMarket TryGetMarketForCountrySite(string countrySiteId, string marketId)
+    {
+      IMarket market = null;
+      var marketMappings = GetOrLoadMarketMappingsForCountrySite(countrySiteId);
+      if ( marketMappings != null )
+      {
+        if (marketMappings.IsPublicMapping(marketId))
+        {
+          market = TryGetMarket(marketId);
+        }
+      }
+
+      return market;
+    }
+
     private IEnumerable<string> LoadValidCountrySubdomains()
     {
       var countrySites = new List<string>();
@@ -135,6 +193,11 @@ namespace Atlantis.Framework.Providers.Localization
         
         return _market;
       }
+    }
+
+    public bool IsGlobalSite(string countrySiteId)
+    {
+      return _WWW.Equals(countrySiteId, StringComparison.OrdinalIgnoreCase);
     }
 
     public bool IsGlobalSite()
@@ -270,6 +333,12 @@ namespace Atlantis.Framework.Providers.Localization
 
     public string GetLanguageUrl(string countrySiteId, string marketId)
     {
+      var marketMappings = GetOrLoadMarketMappingsForCountrySite(countrySiteId);
+      return marketMappings.GetLanguageUrl(marketId);
+    }
+
+    private CountrySiteMarketMappingsResponseData GetOrLoadMarketMappingsForCountrySite(string countrySiteId)
+    {
       CountrySiteMarketMappingsResponseData marketMappings;
       _countrySiteMarketMappings.TryGetValue(countrySiteId, out marketMappings);
       if (marketMappings == null)
@@ -277,7 +346,7 @@ namespace Atlantis.Framework.Providers.Localization
         marketMappings = LoadCountrySiteMarketMappings(countrySiteId);
         _countrySiteMarketMappings[countrySiteId] = marketMappings;
       }
-      return marketMappings.GetLanguageUrl(marketId);
+      return marketMappings;
     }
 
     private CountrySiteMarketMappingsResponseData LoadCountrySiteMarketMappings(string countrySiteId)
@@ -296,6 +365,7 @@ namespace Atlantis.Framework.Providers.Localization
 
       return result;
     }
+
 
   }
 }

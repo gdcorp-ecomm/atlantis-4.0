@@ -290,86 +290,86 @@ namespace Atlantis.Framework.Providers.Links.Tests
 
       url = links.GetFullSecureUrl("a.aspx");
       Assert.IsTrue(url.Contains("https://"));
-      Assert.IsTrue(url.IndexOf("//",8) == -1);
+      Assert.IsTrue(url.IndexOf("//", 8) == -1);
       url = links.GetFullSecureUrl("/a.aspx", QueryParamMode.ExplicitParameters);
       Assert.IsTrue(url.Contains("https://"));
-      Assert.IsTrue(url.IndexOf("//",8) == -1);
+      Assert.IsTrue(url.IndexOf("//", 8) == -1);
       url = links.GetFullSecureUrl("/a.aspx", QueryParamMode.ExplicitParameters, parms);
       Assert.IsTrue(url.Contains("https://"));
-      Assert.IsTrue(url.IndexOf("//",8) == -1);
+      Assert.IsTrue(url.IndexOf("//", 8) == -1);
       url = links.GetFullSecureUrl("/a.aspx", QueryParamMode.ExplicitParameters, "x", "val", "y", "val2");
       Assert.IsTrue(url.Contains("https://"));
       Assert.IsTrue(url.Contains("x=val"));
       Assert.IsTrue(url.Contains("y=val2"));
-      Assert.IsTrue(url.IndexOf("//",8) == -1);
+      Assert.IsTrue(url.IndexOf("//", 8) == -1);
       url = links.GetFullSecureUrl("/a.aspx", "x", "val", "y", "val2");
       Assert.IsTrue(url.Contains("https://"));
       Assert.IsTrue(url.Contains("x=val"));
       Assert.IsTrue(url.Contains("y=val2"));
-      Assert.IsTrue(url.IndexOf("//",8) == -1);
+      Assert.IsTrue(url.IndexOf("//", 8) == -1);
 
       url = links.GetFullUrl("a.aspx");
       Assert.IsTrue(url.Contains("/a.aspx"));
-      Assert.IsTrue(url.IndexOf("//",8) == -1);
+      Assert.IsTrue(url.IndexOf("//", 8) == -1);
       url = links.GetFullUrl("a.aspx", QueryParamMode.ExplicitParameters);
       Assert.IsTrue(url.Contains("/a.aspx"));
-      Assert.IsTrue(url.IndexOf("//",8) == -1);
+      Assert.IsTrue(url.IndexOf("//", 8) == -1);
       url = links.GetFullUrl("a.aspx", QueryParamMode.ExplicitParameters, parms);
       Assert.IsTrue(url.Contains("/a.aspx"));
-      Assert.IsTrue(url.IndexOf("//",8) == -1);
+      Assert.IsTrue(url.IndexOf("//", 8) == -1);
       url = links.GetFullUrl("a.aspx", QueryParamMode.ExplicitParameters, "x", "val", "y", "val2");
       Assert.IsTrue(url.Contains("/a.aspx"));
-      Assert.IsTrue(url.IndexOf("//",8) == -1);
+      Assert.IsTrue(url.IndexOf("//", 8) == -1);
       url = links.GetFullUrl("a.aspx", "x", "val", "y", "val2");
       Assert.IsTrue(url.Contains("/a.aspx"));
       Assert.IsTrue(url.Contains("x=val"));
       Assert.IsTrue(url.Contains("y=val2"));
-      Assert.IsTrue(url.IndexOf("//",8) == -1);
+      Assert.IsTrue(url.IndexOf("//", 8) == -1);
 
       url = links.GetUrl("SITEURL", "a.aspx", QueryParamMode.ExplicitParameters, true);
       Assert.IsTrue(url.Contains("/a.aspx"));
       Assert.IsTrue(url.Contains("https://"));
-      Assert.IsTrue(url.IndexOf("//",8) == -1);
+      Assert.IsTrue(url.IndexOf("//", 8) == -1);
 
       url = links.GetUrl("SITEURL", "a.aspx", QueryParamMode.ExplicitParameters, true, parms);
       Assert.IsTrue(url.Contains("/a.aspx"));
       Assert.IsTrue(url.Contains("https://"));
       Assert.IsTrue(url.Contains("x=val"));
       Assert.IsTrue(url.Contains("y=val2"));
-      Assert.IsTrue(url.IndexOf("//",8) == -1);
+      Assert.IsTrue(url.IndexOf("//", 8) == -1);
 
       url = links.GetUrl("SITEURL", "a.aspx", QueryParamMode.ExplicitParameters, true, "x", "val", "y", "val2");
       Assert.IsTrue(url.Contains("/a.aspx"));
       Assert.IsTrue(url.Contains("https://"));
       Assert.IsTrue(url.Contains("x=val"));
       Assert.IsTrue(url.Contains("y=val2"));
-      Assert.IsTrue(url.IndexOf("//",8) == -1);
+      Assert.IsTrue(url.IndexOf("//", 8) == -1);
 
       url = links.GetUrl("SITEURL", "a.aspx", QueryParamMode.ExplicitParameters, "x", "val", "y", "val2");
       Assert.IsTrue(url.Contains("/a.aspx"));
       Assert.IsTrue(url.Contains("http://"));
       Assert.IsTrue(url.Contains("x=val"));
       Assert.IsTrue(url.Contains("y=val2"));
-      Assert.IsTrue(url.IndexOf("//",8) == -1);
+      Assert.IsTrue(url.IndexOf("//", 8) == -1);
 
       url = links.GetUrl("SITEURL", "a.aspx", parms);
       Assert.IsTrue(url.Contains("/a.aspx"));
       Assert.IsTrue(url.Contains("http://"));
       Assert.IsTrue(url.Contains("x=val"));
       Assert.IsTrue(url.Contains("y=val2"));
-      Assert.IsTrue(url.IndexOf("//",8) == -1);
+      Assert.IsTrue(url.IndexOf("//", 8) == -1);
 
       url = links.GetUrl("SITEURL", "a.aspx", "x", "val", "y", "val2");
       Assert.IsTrue(url.Contains("/a.aspx"));
       Assert.IsTrue(url.Contains("http://"));
       Assert.IsTrue(url.Contains("x=val"));
       Assert.IsTrue(url.Contains("y=val2"));
-      Assert.IsTrue(url.IndexOf("//",8) == -1);
+      Assert.IsTrue(url.IndexOf("//", 8) == -1);
 
       // empty linktype always gets the defaultrootsite
       url = links.GetUrl(String.Empty, String.Empty, QueryParamMode.ExplicitParameters);
       Assert.IsTrue(url.Equals("http://www.godaddy.com/"));
-      Assert.IsTrue(url.IndexOf("//",8) == -1);
+      Assert.IsTrue(url.IndexOf("//", 8) == -1);
 
       url = links.GetUrlArguments();
       Assert.IsTrue(url.Equals(String.Empty));
@@ -389,239 +389,329 @@ namespace Atlantis.Framework.Providers.Links.Tests
       url = links.GetUrlArguments(QueryParamMode.ExplicitParameters, "x", "val", "y", "val2");
       Assert.IsTrue(url.Equals("?x=val&y=val2"));
 
-      LinkProvider.AllowRelativeUrls = true;
-      Assert.IsTrue(LinkProvider.AllowRelativeUrls);
-      LinkProvider.AllowRelativeUrls = false;
-      Assert.IsFalse(LinkProvider.AllowRelativeUrls);
+      bool allowRel = LinkProvider.AllowRelativeUrls;
+      try
+      {
+        LinkProvider.AllowRelativeUrls = true;
+        Assert.IsTrue(LinkProvider.AllowRelativeUrls);
+        LinkProvider.AllowRelativeUrls = false;
+        Assert.IsFalse(LinkProvider.AllowRelativeUrls);
 
-      LinkProvider.AllowRelativeUrls = true;
-      url = links.GetRelativeUrl("a.aspx", QueryParamMode.ExplicitParameters, parms);
-      Assert.IsTrue(url.Contains("a.aspx?x=val&y=val2"));
-      Assert.IsFalse(url.Contains("http"));
-      Assert.IsTrue(url.IndexOf("//",8) == -1);
+        LinkProvider.AllowRelativeUrls = true;
+        url = links.GetRelativeUrl("a.aspx", QueryParamMode.ExplicitParameters, parms);
+        Assert.IsTrue(url.Contains("a.aspx?x=val&y=val2"));
+        Assert.IsFalse(url.Contains("http"));
+        Assert.IsTrue(url.IndexOf("//", 8) == -1);
+
+      }
+      finally
+      {
+        LinkProvider.AllowRelativeUrls = allowRel;
+      }
 
       TestCleanup();
       TestInit();
 
-      LinkProvider.AllowRelativeUrls = false;
-      links = NewLinkProvider("https://www.godaddy.com/default.aspx", 1, "832652");
-      url = links.GetRelativeUrl("a.aspx", QueryParamMode.ExplicitParameters, parms);
-      Assert.IsTrue(url.Contains("a.aspx?x=val&y=val2"));
-      Assert.IsTrue(url.IndexOf("//",8) == -1);
-// TODO: the HttpRequest says this isn't a secure connection... why? uncomment test when that part of the moc'ing is fixed
-//      Assert.IsTrue(url.Contains("https://"));
+      allowRel = LinkProvider.AllowRelativeUrls;
+      try
+      {
+        LinkProvider.AllowRelativeUrls = false;
+        links = NewLinkProvider("https://www.godaddy.com/default.aspx", 1, "832652");
+        url = links.GetRelativeUrl("a.aspx", QueryParamMode.ExplicitParameters, parms);
+        Assert.IsTrue(url.Contains("a.aspx?x=val&y=val2"));
+        Assert.IsTrue(url.IndexOf("//", 8) == -1);
+        Assert.IsTrue(url.Contains("https://"));
+      }
+      finally
+      {
+        LinkProvider.AllowRelativeUrls = allowRel;
+      }
     }
 
     [TestMethod]
     public void LowerCaseForSEOFullUrlIgnored()
     {
-      var links = NewLinkProvider("http://WWW.GODADDY.COM/default.aspx", 1, "832652");
-      LinkProvider.LowerCaseRelativeUrlsForSEO = true;
+      bool lowercase = LinkProvider.LowerCaseRelativeUrlsForSEO;
+      try
+      {
+        var links = NewLinkProvider("http://WWW.GODADDY.COM/default.aspx", 1, "832652");
+        LinkProvider.LowerCaseRelativeUrlsForSEO = true;
 
-      string url = links.GetUrl("SITEROOT", "TEST.AsPx");
-      Assert.AreNotEqual(url.ToLowerInvariant(), url);
-      Assert.IsTrue(url.IndexOf("//",8) == -1);
+        string url = links.GetUrl("SITEROOT", "TEST.AsPx");
+        Assert.AreNotEqual(url.ToLowerInvariant(), url);
+        Assert.IsTrue(url.IndexOf("//", 8) == -1);
 
-      LinkProvider.LowerCaseRelativeUrlsForSEO = false;
-      var lp = FrameworkContainer.Resolve<ILocalizationProvider>();
-      lp.RewrittenUrlLanguage = "es";
-      url = links.GetUrl("SITEROOT", "TEST.AsPx");
-      Assert.IsFalse(url.ToLowerInvariant().Contains("/es/"));
-      Assert.IsTrue(url.IndexOf("//",8) == -1);
+        LinkProvider.LowerCaseRelativeUrlsForSEO = false;
+        var lp = FrameworkContainer.Resolve<ILocalizationProvider>();
+        lp.RewrittenUrlLanguage = "es";
+        url = links.GetUrl("SITEROOT", "TEST.AsPx");
+        Assert.IsFalse(url.ToLowerInvariant().Contains("/es/"));
+        Assert.IsTrue(url.IndexOf("//", 8) == -1);
+      }
+      finally
+      {
+        LinkProvider.LowerCaseRelativeUrlsForSEO = lowercase;
+      }
     }
 
     [TestMethod]
     public void LowerCaseForSEO()
     {
-      var links = NewLinkProvider("http://WWW.GODADDY.COM/default.aspx", 1, "832652");
-      LinkProvider.LowerCaseRelativeUrlsForSEO = false;
+      bool lowercase = LinkProvider.LowerCaseRelativeUrlsForSEO;
+      try
+      {
+        var links = NewLinkProvider("http://WWW.GODADDY.COM/default.aspx", 1, "832652");
+        LinkProvider.LowerCaseRelativeUrlsForSEO = false;
 
-      string mixedCaseLink = links.GetRelativeUrl("/tesT.aspx");
-      Assert.AreNotEqual(mixedCaseLink.ToLowerInvariant(), mixedCaseLink);
-      Assert.IsFalse(mixedCaseLink.ToLowerInvariant().Contains("/es/"));
-      Assert.IsTrue(mixedCaseLink.IndexOf("//",8) == -1);
+        string mixedCaseLink = links.GetRelativeUrl("/tesT.aspx");
+        Assert.AreNotEqual(mixedCaseLink.ToLowerInvariant(), mixedCaseLink);
+        Assert.IsFalse(mixedCaseLink.ToLowerInvariant().Contains("/es/"));
+        Assert.IsTrue(mixedCaseLink.IndexOf("//", 8) == -1);
 
-      LinkProvider.LowerCaseRelativeUrlsForSEO = true;
-      string lowerCaseLink = links.GetRelativeUrl("/tesT.aspx");
-      Assert.AreEqual(lowerCaseLink.ToLowerInvariant(), lowerCaseLink);
-      Assert.IsFalse(lowerCaseLink.ToLowerInvariant().Contains("/es/"));
-      Assert.IsTrue(lowerCaseLink.IndexOf("//",8) == -1);
+        LinkProvider.LowerCaseRelativeUrlsForSEO = true;
+        string lowerCaseLink = links.GetRelativeUrl("/tesT.aspx");
+        Assert.AreEqual(lowerCaseLink.ToLowerInvariant(), lowerCaseLink);
+        Assert.IsFalse(lowerCaseLink.ToLowerInvariant().Contains("/es/"));
+        Assert.IsTrue(lowerCaseLink.IndexOf("//", 8) == -1);
 
-      string url = links.GetRelativeUrl("/test.aspx", "ISC", "Blue");
-      Assert.IsTrue(url.Contains("ISC=Blue"));
-      Assert.IsFalse(url.ToLowerInvariant().Contains("/es/"));
-      Assert.IsTrue(url.IndexOf("//",8) == -1);
+        string url = links.GetRelativeUrl("/test.aspx", "ISC", "Blue");
+        Assert.IsTrue(url.Contains("ISC=Blue"));
+        Assert.IsFalse(url.ToLowerInvariant().Contains("/es/"));
+        Assert.IsTrue(url.IndexOf("//", 8) == -1);
 
-      LinkProvider.LowerCaseRelativeUrlsForSEO = false;
-      var lp = FrameworkContainer.Resolve<ILocalizationProvider>();
-      lp.RewrittenUrlLanguage = "es";
+        LinkProvider.LowerCaseRelativeUrlsForSEO = false;
+        var lp = FrameworkContainer.Resolve<ILocalizationProvider>();
+        lp.RewrittenUrlLanguage = "es";
 
-      mixedCaseLink = links.GetRelativeUrl("/tesT.aspx");
-      Assert.AreNotEqual(mixedCaseLink.ToLowerInvariant(), mixedCaseLink);
-      Assert.IsTrue(mixedCaseLink.ToLowerInvariant().Contains("/es/"));
-      Assert.IsTrue(mixedCaseLink.IndexOf("//",8) == -1);
+        mixedCaseLink = links.GetRelativeUrl("/tesT.aspx");
+        Assert.AreNotEqual(mixedCaseLink.ToLowerInvariant(), mixedCaseLink);
+        Assert.IsTrue(mixedCaseLink.ToLowerInvariant().Contains("/es/"));
+        Assert.IsTrue(mixedCaseLink.IndexOf("//", 8) == -1);
 
-      LinkProvider.LowerCaseRelativeUrlsForSEO = true;
-      lowerCaseLink = links.GetRelativeUrl("/tesT.aspx");
-      Assert.AreEqual(lowerCaseLink.ToLowerInvariant(), lowerCaseLink);
-      Assert.IsTrue(lowerCaseLink.ToLowerInvariant().Contains("/es/"));
-      Assert.IsTrue(lowerCaseLink.IndexOf("//",8) == -1);
+        LinkProvider.LowerCaseRelativeUrlsForSEO = true;
+        lowerCaseLink = links.GetRelativeUrl("/tesT.aspx");
+        Assert.AreEqual(lowerCaseLink.ToLowerInvariant(), lowerCaseLink);
+        Assert.IsTrue(lowerCaseLink.ToLowerInvariant().Contains("/es/"));
+        Assert.IsTrue(lowerCaseLink.IndexOf("//", 8) == -1);
 
-      url = links.GetRelativeUrl("/test.aspx", "ISC", "Blue");
-      Assert.IsTrue(url.Contains("ISC=Blue"));
-      Assert.IsTrue(url.ToLowerInvariant().Contains("/es/"));
-      Assert.IsTrue(url.IndexOf("//",8) == -1);
+        url = links.GetRelativeUrl("/test.aspx", "ISC", "Blue");
+        Assert.IsTrue(url.Contains("ISC=Blue"));
+        Assert.IsTrue(url.ToLowerInvariant().Contains("/es/"));
+        Assert.IsTrue(url.IndexOf("//", 8) == -1);
+      }
+      finally
+      {
+        LinkProvider.LowerCaseRelativeUrlsForSEO = lowercase;
+      }
     }
 
     [TestMethod]
     public void FullUrlNoTilda()
     {
-      var links = NewLinkProvider("http://siteadmin.debug.intranet.gdg/default.aspx", 1724, string.Empty);
-      string url = links.GetFullUrl("/test.aspx");
-      Assert.IsTrue(url.Contains("prog_id="));
-      Assert.IsTrue(url.IndexOf("//",8) == -1);
+      bool lowercase = LinkProvider.LowerCaseRelativeUrlsForSEO;
+      try
+      {
+        var links = NewLinkProvider("http://siteadmin.debug.intranet.gdg/default.aspx", 1724, string.Empty);
+        string url = links.GetFullUrl("/test.aspx");
+        Assert.IsTrue(url.Contains("prog_id="));
+        Assert.IsTrue(url.IndexOf("//", 8) == -1);
 
-      LinkProvider.LowerCaseRelativeUrlsForSEO = false;
-      var lp = FrameworkContainer.Resolve<ILocalizationProvider>();
-      lp.RewrittenUrlLanguage = "es";
+        LinkProvider.LowerCaseRelativeUrlsForSEO = false;
+        var lp = FrameworkContainer.Resolve<ILocalizationProvider>();
+        lp.RewrittenUrlLanguage = "es";
 
-      url = links.GetFullUrl("/test.aspx");
-      Assert.IsTrue(url.Contains("prog_id="));
-      Assert.IsTrue(url.Contains("/es/"));
-      Assert.IsTrue(url.IndexOf("//",8) == -1);
+        url = links.GetFullUrl("/test.aspx");
+        Assert.IsTrue(url.Contains("prog_id="));
+        Assert.IsTrue(url.Contains("/es/"));
+        Assert.IsTrue(url.IndexOf("//", 8) == -1);
+      }
+      finally
+      {
+        LinkProvider.LowerCaseRelativeUrlsForSEO = lowercase;
+      }
     }
 
     [TestMethod]
     public void ProgIdForHunter()
     {
-      var links = NewLinkProvider("http://siteadmin.debug.intranet.gdg/default.aspx?prog_id=hunter", 1724, string.Empty);
-      string url = links.GetRelativeUrl("/test.aspx");
-      Assert.IsTrue(url.Contains("prog_id="));
-      Assert.IsTrue(url.IndexOf("//",8) == -1);
+      bool handleprog = LinkProviderCommonParameters.HandleProgId;
+      bool lowercase = LinkProvider.LowerCaseRelativeUrlsForSEO;
+      try
+      {
+        var links = NewLinkProvider("http://siteadmin.debug.intranet.gdg/default.aspx?prog_id=hunter", 1724, string.Empty);
+        string url = links.GetRelativeUrl("/test.aspx");
+        Assert.IsTrue(url.Contains("prog_id="));
+        Assert.IsTrue(url.IndexOf("//", 8) == -1);
 
-      LinkProviderCommonParameters.HandleProgId = false;
+        LinkProviderCommonParameters.HandleProgId = false;
 
-      url = links.GetRelativeUrl("/test.aspx");
-      Assert.IsFalse(url.Contains("prog_id="));
-      Assert.IsTrue(url.IndexOf("//",8) == -1);
+        url = links.GetRelativeUrl("/test.aspx");
+        Assert.IsFalse(url.Contains("prog_id="));
+        Assert.IsTrue(url.IndexOf("//", 8) == -1);
 
-      LinkProvider.LowerCaseRelativeUrlsForSEO = false;
-      var lp = FrameworkContainer.Resolve<ILocalizationProvider>();
-      lp.RewrittenUrlLanguage = "es";
+        LinkProvider.LowerCaseRelativeUrlsForSEO = false;
+        var lp = FrameworkContainer.Resolve<ILocalizationProvider>();
+        lp.RewrittenUrlLanguage = "es";
 
-      url = links.GetRelativeUrl("/test.aspx");
-      Assert.IsFalse(url.Contains("prog_id="));
-      Assert.IsTrue(url.Contains("/es/"));
-      Assert.IsTrue(url.IndexOf("//",8) == -1);
+        url = links.GetRelativeUrl("/test.aspx");
+        Assert.IsFalse(url.Contains("prog_id="));
+        Assert.IsTrue(url.Contains("/es/"));
+        Assert.IsTrue(url.IndexOf("//", 8) == -1);
 
-      LinkProviderCommonParameters.HandleProgId = true;
+        LinkProviderCommonParameters.HandleProgId = true;
 
-      url = links.GetRelativeUrl("/test.aspx");
-      Assert.IsTrue(url.Contains("prog_id="));
-      Assert.IsTrue(url.Contains("/es/"));
-      Assert.IsTrue(url.IndexOf("//",8) == -1);
+        url = links.GetRelativeUrl("/test.aspx");
+        Assert.IsTrue(url.Contains("prog_id="));
+        Assert.IsTrue(url.Contains("/es/"));
+        Assert.IsTrue(url.IndexOf("//", 8) == -1);
+      }
+      finally
+      {
+        LinkProviderCommonParameters.HandleProgId = handleprog;
+        LinkProvider.LowerCaseRelativeUrlsForSEO = lowercase;
+      }
     }
 
     [TestMethod]
     public void ProgIdGoDaddy()
     {
-      var links = NewLinkProvider("http://siteadmin.debug.intranet.gdg/default.aspx?prog_id=hunter", 1, string.Empty);
-      string url = links.GetRelativeUrl("/test.aspx");
-      Assert.IsFalse(url.Contains("prog_id="));
-      Assert.IsTrue(url.IndexOf("//",8) == -1);
+      bool handleprog = LinkProviderCommonParameters.HandleProgId;
+      bool lowercase = LinkProvider.LowerCaseRelativeUrlsForSEO;
+      try
+      {
+        var links = NewLinkProvider("http://siteadmin.debug.intranet.gdg/default.aspx?prog_id=hunter", 1, string.Empty);
+        string url = links.GetRelativeUrl("/test.aspx");
+        Assert.IsFalse(url.Contains("prog_id="));
+        Assert.IsTrue(url.IndexOf("//", 8) == -1);
 
-      LinkProviderCommonParameters.HandleProgId = true;
+        LinkProviderCommonParameters.HandleProgId = true;
 
-      LinkProvider.LowerCaseRelativeUrlsForSEO = false;
-      var lp = FrameworkContainer.Resolve<ILocalizationProvider>();
-      lp.RewrittenUrlLanguage = "es";
+        LinkProvider.LowerCaseRelativeUrlsForSEO = false;
+        var lp = FrameworkContainer.Resolve<ILocalizationProvider>();
+        lp.RewrittenUrlLanguage = "es";
 
-      url = links.GetRelativeUrl("/test.aspx");
-      Assert.IsFalse(url.Contains("prog_id="));
-      Assert.IsTrue(url.Contains("/es/"));
-      Assert.IsTrue(url.IndexOf("//",8) == -1);
+        url = links.GetRelativeUrl("/test.aspx");
+        Assert.IsFalse(url.Contains("prog_id="));
+        Assert.IsTrue(url.Contains("/es/"));
+        Assert.IsTrue(url.IndexOf("//", 8) == -1);
+      }
+      finally
+      {
+        LinkProviderCommonParameters.HandleProgId = handleprog;
+        LinkProvider.LowerCaseRelativeUrlsForSEO = lowercase;
+      }
     }
 
     [TestMethod]
     public void ProgIdBlueRazor()
     {
-      var links = NewLinkProvider("http://siteadmin.debug.intranet.gdg/default.aspx?prog_id=hunter", 2, string.Empty);
-      string url = links.GetRelativeUrl("/test.aspx");
-      Assert.IsFalse(url.Contains("prog_id="));
-      Assert.IsTrue(url.IndexOf("//",8) == -1);
+      bool handleprog = LinkProviderCommonParameters.HandleProgId;
+      bool lowercase = LinkProvider.LowerCaseRelativeUrlsForSEO;
+      try
+      {
+        var links = NewLinkProvider("http://siteadmin.debug.intranet.gdg/default.aspx?prog_id=hunter", 2, string.Empty);
+        string url = links.GetRelativeUrl("/test.aspx");
+        Assert.IsFalse(url.Contains("prog_id="));
+        Assert.IsTrue(url.IndexOf("//", 8) == -1);
 
-      LinkProviderCommonParameters.HandleProgId = true;
+        LinkProviderCommonParameters.HandleProgId = true;
 
-      LinkProvider.LowerCaseRelativeUrlsForSEO = false;
-      var lp = FrameworkContainer.Resolve<ILocalizationProvider>();
-      lp.RewrittenUrlLanguage = "es";
+        LinkProvider.LowerCaseRelativeUrlsForSEO = false;
+        var lp = FrameworkContainer.Resolve<ILocalizationProvider>();
+        lp.RewrittenUrlLanguage = "es";
 
-      url = links.GetRelativeUrl("/test.aspx");
-      Assert.IsFalse(url.Contains("prog_id="));
-      Assert.IsTrue(url.Contains("/es/"));
-      Assert.IsTrue(url.IndexOf("//",8) == -1);
+        url = links.GetRelativeUrl("/test.aspx");
+        Assert.IsFalse(url.Contains("prog_id="));
+        Assert.IsTrue(url.Contains("/es/"));
+        Assert.IsTrue(url.IndexOf("//", 8) == -1);
+      }
+      finally
+      {
+        LinkProviderCommonParameters.HandleProgId = handleprog;
+        LinkProvider.LowerCaseRelativeUrlsForSEO = lowercase;
+      }
     }
 
     [TestMethod]
     public void ProgIdWildWestDomains()
     {
-      var links = NewLinkProvider("http://siteadmin.debug.intranet.gdg/default.aspx?prog_id=hunter", 1387, string.Empty);
-      string url = links.GetRelativeUrl("/test.aspx");
-      Assert.IsFalse(url.Contains("prog_id="));
-      Assert.IsTrue(url.IndexOf("//",8) == -1);
+      bool handleprog = LinkProviderCommonParameters.HandleProgId;
+      bool lowercase = LinkProvider.LowerCaseRelativeUrlsForSEO;
+      try
+      {
+        var links = NewLinkProvider("http://siteadmin.debug.intranet.gdg/default.aspx?prog_id=hunter", 1387, string.Empty);
+        string url = links.GetRelativeUrl("/test.aspx");
+        Assert.IsFalse(url.Contains("prog_id="));
+        Assert.IsTrue(url.IndexOf("//", 8) == -1);
 
-      LinkProviderCommonParameters.HandleProgId = true;
+        LinkProviderCommonParameters.HandleProgId = true;
 
-      LinkProvider.LowerCaseRelativeUrlsForSEO = false;
-      var lp = FrameworkContainer.Resolve<ILocalizationProvider>();
-      lp.RewrittenUrlLanguage = "es";
+        LinkProvider.LowerCaseRelativeUrlsForSEO = false;
+        var lp = FrameworkContainer.Resolve<ILocalizationProvider>();
+        lp.RewrittenUrlLanguage = "es";
 
-      url = links.GetRelativeUrl("/test.aspx");
-      Assert.IsFalse(url.Contains("prog_id="));
-      Assert.IsTrue(url.Contains("/es/"));
-      Assert.IsTrue(url.IndexOf("//",8) == -1);
+        url = links.GetRelativeUrl("/test.aspx");
+        Assert.IsFalse(url.Contains("prog_id="));
+        Assert.IsTrue(url.Contains("/es/"));
+        Assert.IsTrue(url.IndexOf("//", 8) == -1);
+      }
+      finally
+      {
+        LinkProviderCommonParameters.HandleProgId = handleprog;
+        LinkProvider.LowerCaseRelativeUrlsForSEO = lowercase;
+      }
     }
 
     [TestMethod]
     public void ISC()
     {
-      var links = NewLinkProvider("http://siteadmin.debug.intranet.gdg/default.aspx?isc=blue", 2, string.Empty);
+      bool handleisc = LinkProviderCommonParameters.HandleISC;
+      bool lowercase = LinkProvider.LowerCaseRelativeUrlsForSEO;
+      try
+      {
+        var links = NewLinkProvider("http://siteadmin.debug.intranet.gdg/default.aspx?isc=blue", 2, string.Empty);
 
-      string url = links.GetRelativeUrl("/test.aspx");
-      Assert.IsTrue(url.Contains("isc=blue"));
-      Assert.IsTrue(url.IndexOf("//",8) == -1);
+        string url = links.GetRelativeUrl("/test.aspx");
+        Assert.IsTrue(url.Contains("isc=blue"));
+        Assert.IsTrue(url.IndexOf("//", 8) == -1);
 
-      url = links.GetRelativeUrl("/test.aspx", "isc", "green");
-      Assert.IsTrue(url.Contains("isc=green"));
-      Assert.IsTrue(url.IndexOf("//",8) == -1);
+        url = links.GetRelativeUrl("/test.aspx", "isc", "green");
+        Assert.IsTrue(url.Contains("isc=green"));
+        Assert.IsTrue(url.IndexOf("//", 8) == -1);
 
-      LinkProviderCommonParameters.HandleISC = false;
-      url = links.GetRelativeUrl("/test.aspx");
-      Assert.IsFalse(url.Contains("isc="));
-      Assert.IsTrue(url.IndexOf("//",8) == -1);
+        LinkProviderCommonParameters.HandleISC = false;
+        url = links.GetRelativeUrl("/test.aspx");
+        Assert.IsFalse(url.Contains("isc="));
+        Assert.IsTrue(url.IndexOf("//", 8) == -1);
 
-      LinkProviderCommonParameters.HandleISC = true;
+        LinkProviderCommonParameters.HandleISC = true;
 
-      LinkProvider.LowerCaseRelativeUrlsForSEO = false;
+        LinkProvider.LowerCaseRelativeUrlsForSEO = false;
 
-      var lp = FrameworkContainer.Resolve<ILocalizationProvider>();
-      lp.RewrittenUrlLanguage = "es";
+        var lp = FrameworkContainer.Resolve<ILocalizationProvider>();
+        lp.RewrittenUrlLanguage = "es";
 
-      url = links.GetRelativeUrl("/test.aspx");
-      Assert.IsTrue(url.Contains("isc=blue"));
-      Assert.IsTrue(url.Contains("/es/"));
-      Assert.IsTrue(url.IndexOf("//",8) == -1);
+        url = links.GetRelativeUrl("/test.aspx");
+        Assert.IsTrue(url.Contains("isc=blue"));
+        Assert.IsTrue(url.Contains("/es/"));
+        Assert.IsTrue(url.IndexOf("//", 8) == -1);
 
-      url = links.GetRelativeUrl("/test.aspx", "isc", "green");
-      Assert.IsTrue(url.Contains("isc=green"));
-      Assert.IsTrue(url.Contains("/es/"));
-      Assert.IsTrue(url.IndexOf("//",8) == -1);
+        url = links.GetRelativeUrl("/test.aspx", "isc", "green");
+        Assert.IsTrue(url.Contains("isc=green"));
+        Assert.IsTrue(url.Contains("/es/"));
+        Assert.IsTrue(url.IndexOf("//", 8) == -1);
 
-      LinkProviderCommonParameters.HandleISC = false;
-      url = links.GetRelativeUrl("/test.aspx");
-      Assert.IsFalse(url.Contains("isc="));
-      Assert.IsTrue(url.Contains("/es/"));
-      Assert.IsTrue(url.IndexOf("//",8) == -1);
+        LinkProviderCommonParameters.HandleISC = false;
+        url = links.GetRelativeUrl("/test.aspx");
+        Assert.IsFalse(url.Contains("isc="));
+        Assert.IsTrue(url.Contains("/es/"));
+        Assert.IsTrue(url.IndexOf("//", 8) == -1);
+      }
+      finally
+      {
+        LinkProviderCommonParameters.HandleISC = handleisc;
+        LinkProvider.LowerCaseRelativeUrlsForSEO = lowercase;
+      }
     }
 
     [TestMethod]
@@ -660,14 +750,14 @@ namespace Atlantis.Framework.Providers.Links.Tests
 
         string url = links.GetRelativeUrl("/test.aspx");
         Assert.IsTrue(url.Contains("extra=true"));
-        Assert.IsTrue(url.IndexOf("//",8) == -1);
+        Assert.IsTrue(url.IndexOf("//", 8) == -1);
 
         var lp = FrameworkContainer.Resolve<ILocalizationProvider>();
         lp.RewrittenUrlLanguage = "es";
 
         url = links.GetRelativeUrl("/test.aspx");
         Assert.IsTrue(url.Contains("/es/"));
-        Assert.IsTrue(url.IndexOf("//",8) == -1);
+        Assert.IsTrue(url.IndexOf("//", 8) == -1);
 
       }
       finally
@@ -689,7 +779,7 @@ namespace Atlantis.Framework.Providers.Links.Tests
 
         string url = links.GetRelativeUrl("/test.aspx", HttpContext.Current.Request.QueryString);
         Assert.IsFalse(url.Contains("<"));
-        Assert.IsTrue(url.IndexOf("//",8) == -1);
+        Assert.IsTrue(url.IndexOf("//", 8) == -1);
 
         var lp = FrameworkContainer.Resolve<ILocalizationProvider>();
         lp.RewrittenUrlLanguage = "es";
@@ -697,7 +787,7 @@ namespace Atlantis.Framework.Providers.Links.Tests
         url = links.GetRelativeUrl("/test.aspx", HttpContext.Current.Request.QueryString);
         Assert.IsFalse(url.Contains("<"));
         Assert.IsTrue(url.Contains("/es/"));
-        Assert.IsTrue(url.IndexOf("//",8) == -1);
+        Assert.IsTrue(url.IndexOf("//", 8) == -1);
 
       }
       finally
@@ -712,22 +802,22 @@ namespace Atlantis.Framework.Providers.Links.Tests
       ILinkProvider links = NewLinkProvider("http://siteadmin.debug.intranet.gdg/default.aspx", 1, string.Empty);
       string url = links.GetRelativeUrl("/hosting/hosting.aspx");
       Assert.AreEqual("http://siteadmin.debug.intranet.gdg/hosting/hosting.aspx", url);
-      Assert.IsTrue(url.IndexOf("//",8) == -1);
+      Assert.IsTrue(url.IndexOf("//", 8) == -1);
 
       url = links.GetRelativeUrl("/");
       Assert.AreEqual("http://siteadmin.debug.intranet.gdg/", url);
-      Assert.IsTrue(url.IndexOf("//",8) == -1);
+      Assert.IsTrue(url.IndexOf("//", 8) == -1);
 
       var lp = FrameworkContainer.Resolve<ILocalizationProvider>();
       lp.RewrittenUrlLanguage = "es";
 
       url = links.GetRelativeUrl("/hosting/hosting.aspx");
       Assert.AreEqual("http://siteadmin.debug.intranet.gdg/es/hosting/hosting.aspx", url);
-      Assert.IsTrue(url.IndexOf("//",8) == -1);
+      Assert.IsTrue(url.IndexOf("//", 8) == -1);
 
       url = links.GetRelativeUrl("/");
       Assert.AreEqual("http://siteadmin.debug.intranet.gdg/es/", url);
-      Assert.IsTrue(url.IndexOf("//",8) == -1);
+      Assert.IsTrue(url.IndexOf("//", 8) == -1);
     }
 
     /// <summary>
@@ -738,22 +828,22 @@ namespace Atlantis.Framework.Providers.Links.Tests
       ILinkProvider links = NewLinkProvider("http://siteadmin.debug.intranet.gdg/default.aspx", 1, string.Empty);
       string url = links.GetRelativeUrl("~/hosting/hosting.aspx");
       Assert.AreEqual("http://siteadmin.debug.intranet.gdg/hosting/hosting.aspx", url);
-      Assert.IsTrue(url.IndexOf("//",8) == -1);
+      Assert.IsTrue(url.IndexOf("//", 8) == -1);
 
       url = links.GetRelativeUrl("~/");
       Assert.AreEqual("http://siteadmin.debug.intranet.gdg/", url);
-      Assert.IsTrue(url.IndexOf("//",8) == -1);
+      Assert.IsTrue(url.IndexOf("//", 8) == -1);
 
       var lp = FrameworkContainer.Resolve<ILocalizationProvider>();
       lp.RewrittenUrlLanguage = "es";
 
       url = links.GetRelativeUrl("~/hosting/hosting.aspx");
       Assert.AreEqual("http://siteadmin.debug.intranet.gdg/es/hosting/hosting.aspx", url);
-      Assert.IsTrue(url.IndexOf("//",8) == -1);
+      Assert.IsTrue(url.IndexOf("//", 8) == -1);
 
       url = links.GetRelativeUrl("~/");
       Assert.AreEqual("http://siteadmin.debug.intranet.gdg/es/", url);
-      Assert.IsTrue(url.IndexOf("//",8) == -1);
+      Assert.IsTrue(url.IndexOf("//", 8) == -1);
     }
 
     [TestMethod]
@@ -762,22 +852,226 @@ namespace Atlantis.Framework.Providers.Links.Tests
       ILinkProvider links = NewLinkProvider("http://siteadmin.debug.intranet.gdg/default.aspx", 1, string.Empty);
       string url = links.GetRelativeUrl("hosting/hosting.aspx");
       Assert.AreEqual("http://siteadmin.debug.intranet.gdg/hosting/hosting.aspx", url);  //  No slash added between host and relative path argument
-      Assert.IsTrue(url.IndexOf("//",8) == -1);
+      Assert.IsTrue(url.IndexOf("//", 8) == -1);
 
       url = links.GetRelativeUrl("");
       Assert.AreEqual("http://siteadmin.debug.intranet.gdg/", url);
-      Assert.IsTrue(url.IndexOf("//",8) == -1);
+      Assert.IsTrue(url.IndexOf("//", 8) == -1);
 
       var lp = FrameworkContainer.Resolve<ILocalizationProvider>();
       lp.RewrittenUrlLanguage = "es";
 
       url = links.GetRelativeUrl("hosting/hosting.aspx");
       Assert.AreEqual("http://siteadmin.debug.intranet.gdg/es/hosting/hosting.aspx", url);
-      Assert.IsTrue(url.IndexOf("//",8) == -1);
+      Assert.IsTrue(url.IndexOf("//", 8) == -1);
 
       url = links.GetRelativeUrl("");
       Assert.AreEqual("http://siteadmin.debug.intranet.gdg/es/", url);  //  No slash added between host and relative path argument
-      Assert.IsTrue(url.IndexOf("//",8) == -1);
+      Assert.IsTrue(url.IndexOf("//", 8) == -1);
+    }
+
+
+    [TestMethod]
+    public void TestSettingCountrySiteAndMarketOnCountryQueryStringMarketQueryStringink()
+    {
+      var links = NewLinkProvider("http://siteadmin.debug.intranet.gdg/default.aspx?isc=234", 1, string.Empty);
+
+      // test valid countrysite, non-default market
+      string url = links.GetUrl("SUPPORTURL", "/hosting/hosting.aspx", null, LinkProviderOptions.QueryStringExplicitWithLocalizationParameters, "ca", "fr-CA");
+      Assert.IsTrue(url.StartsWith("http://support.godaddy.com/hosting/hosting.aspx?"));
+      Assert.IsTrue(url.IndexOf("cntry=ca", StringComparison.OrdinalIgnoreCase)!=-1);
+      Assert.IsTrue(url.IndexOf("lang=fr-ca", StringComparison.OrdinalIgnoreCase)!=-1);
+
+      // if incorrect marketid, then default returns
+      url = links.GetUrl("SUPPORTURL", "/hosting/hosting.aspx", null, LinkProviderOptions.QueryStringExplicitWithLocalizationParameters, "ca", "xx-CA");
+      Assert.IsTrue(url.StartsWith("http://support.godaddy.com/hosting/hosting.aspx?"));
+      Assert.IsTrue(url.IndexOf("cntry=ca", StringComparison.OrdinalIgnoreCase)!=-1);
+      Assert.IsTrue(url.IndexOf("lang=en-ca", StringComparison.OrdinalIgnoreCase)!=-1);
+
+      // if incorrect countryid, then current countrysite returns w/lang site of requested
+      url = links.GetUrl("SUPPORTURL", "/hosting/hosting.aspx", null, LinkProviderOptions.QueryStringExplicitWithLocalizationParameters, "12", "es-BR");
+      Assert.IsTrue(url.StartsWith("http://support.godaddy.com/hosting/hosting.aspx?"));
+      Assert.IsTrue(url.IndexOf("cntry=www", StringComparison.OrdinalIgnoreCase)!=-1);
+      Assert.IsTrue(url.IndexOf("lang=es-br", StringComparison.OrdinalIgnoreCase)!=-1);
+
+      // if incorrect countryid, then current countrysite returns w/lang site of requested
+      url = links.GetUrl("SUPPORTURL", "/hosting/hosting.aspx", null, LinkProviderOptions.QueryStringExplicitWithLocalizationParameters, "12", "xx-BR");
+      Assert.IsTrue(url.StartsWith("http://support.godaddy.com/hosting/hosting.aspx?"));
+      Assert.IsTrue(url.IndexOf("cntry=www", StringComparison.OrdinalIgnoreCase)!=-1);
+      Assert.IsTrue(url.IndexOf("lang=en-us", StringComparison.OrdinalIgnoreCase)!=-1);
+
+    }
+
+    [TestMethod]
+    public void TestSettingCountrySiteAndMarketOnCountryReplaceMarketPathPrefixLink()
+    {
+      var links = NewLinkProvider("http://siteadmin.debug.intranet.gdg/default.aspx?isc=234", 1, string.Empty);
+
+      // test valid countrysite, non-default market
+      string url = links.GetUrl("SITEURL", "/hosting/hosting.aspx", null, LinkProviderOptions.QueryStringExplicitWithLocalizationParameters, "ca", "fr-CA");
+      Assert.AreEqual(url,"http://ca.godaddy.com/fr/hosting/hosting.aspx");
+
+      // test valid countrysite, invalid market ... should get default market
+      url = links.GetUrl("SITEURL", "/hosting/hosting.aspx", null, LinkProviderOptions.QueryStringExplicitWithLocalizationParameters, "ca", "xx-CA");
+      Assert.AreEqual(url,"http://ca.godaddy.com/hosting/hosting.aspx");
+
+      // test invalid countrysite, valid market which is available for the default country (though not the default market for it) ... should get default countrysite and specified market
+      url = links.GetUrl("SITEURL", "/hosting/hosting.aspx", null, LinkProviderOptions.QueryStringExplicitWithLocalizationParameters, "12", "fr-CA");
+      Assert.AreEqual(url,"http://www.godaddy.com/hosting/hosting.aspx");
+
+      // test invalid countrysite, valid market which is NOT available for the default country ... should get default countrysite and its default market
+      url = links.GetUrl("SITEURL", "/hosting/hosting.aspx", null, LinkProviderOptions.QueryStringExplicitWithLocalizationParameters, "12", "es-BR");
+      Assert.AreEqual(url,"http://www.godaddy.com/es-br/hosting/hosting.aspx");
+    }
+
+    [TestMethod]
+    public void TestProtocolHttpWithLinkProviderOptions()
+    {
+      var links = NewLinkProvider("http://siteadmin.debug.intranet.gdg/default.aspx?isc=234", 1, string.Empty);
+      string url = links.GetUrl("SITEURL", "/hosting/hosting.aspx", null, LinkProviderOptions.ProtocolHttp);
+      Assert.AreEqual("http://www.godaddy.com/hosting/hosting.aspx?isc=234", url);
+    }
+
+    [TestMethod]
+    public void TestProtocolHttpsWithLinkProviderOptions()
+    {
+      var links = NewLinkProvider("http://siteadmin.debug.intranet.gdg/default.aspx?isc=234", 1, string.Empty);
+      string url = links.GetUrl("SITEURL", "/hosting/hosting.aspx", null, LinkProviderOptions.ProtocolHttps);
+      Assert.AreEqual("https://www.godaddy.com/hosting/hosting.aspx?isc=234", url);
+    }
+
+    [TestMethod]
+    public void TestProtocolAgnosticWithLinkProviderOptions()
+    {
+      var links = NewLinkProvider("http://siteadmin.debug.intranet.gdg/default.aspx?isc=234", 1, string.Empty);
+      string url = links.GetUrl("SITEURL", "/hosting/hosting.aspx", null, LinkProviderOptions.ProtocolAgnostic);
+      Assert.AreEqual("//www.godaddy.com/hosting/hosting.aspx?isc=234", url);
+    }
+
+    [TestMethod]
+    public void TestProtocolCurrentRequestForHttpWithLinkProviderOptions()
+    {
+      var links = NewLinkProvider("http://siteadmin.debug.intranet.gdg/default.aspx?isc=234", 1, string.Empty);
+      string url = links.GetUrl("SITEURL", "/hosting/hosting.aspx");
+      Assert.AreEqual("http://www.godaddy.com/hosting/hosting.aspx?isc=234", url);
+    }
+
+    [TestMethod]
+    public void TestProtocolCurrentRequestForHttpsWithLinkProviderOptions()
+    {
+      var links = NewLinkProvider("https://siteadmin.debug.intranet.gdg/default.aspx?isc=234", 1, string.Empty);
+      string url = links.GetUrl("SITEURL", "/hosting/hosting.aspx");
+      Assert.AreEqual("https://www.godaddy.com/hosting/hosting.aspx?isc=234", url);
+    }
+
+    [TestMethod]
+    public void TestQueryStringCommonWithLinkProviderOptions()
+    {
+      var links = NewLinkProvider("http://siteadmin.debug.intranet.gdg/default.aspx?isc=234", 1, string.Empty);
+      string url = links.GetUrl("SITEURL", "/hosting/hosting.aspx", LinkProviderOptions.QueryStringExplicitParameters, null, null, "k1", "v1");
+      Assert.AreEqual("http://www.godaddy.com/hosting/hosting.aspx?k1=v1", url);
+    }
+
+    [TestMethod]
+    public void TestQueryStringExplicitWithLinkProviderOptions()
+    {
+      var links = NewLinkProvider("http://siteadmin.debug.intranet.gdg/default.aspx?isc=234", 1, string.Empty);
+      string url = links.GetUrl("SITEURL", "/hosting/hosting.aspx", new NameValueCollection { { "k1", "v1" }, { "k2", "v2" } }, LinkProviderOptions.QueryStringExplicitParameters);
+      Assert.AreEqual("http://www.godaddy.com/hosting/hosting.aspx?k1=v1&k2=v2", url);
+    }
+
+    [TestMethod]
+    public void TestGetUrlArgsWithLinkProviderOptionsNVC()
+    {
+      var links = NewLinkProvider("http://siteadmin.debug.intranet.gdg/default.aspx?isc=234", 1, string.Empty);
+
+      string url = links.GetUrlArguments(new NameValueCollection { { "k1", "v1"} }, LinkProviderOptions.DefaultOptions );
+      Assert.AreEqual("?k1=v1&isc=234", url);
+
+      url = links.GetUrlArguments(null, LinkProviderOptions.DefaultOptions);
+      Assert.AreEqual("?isc=234", url);
+    }
+
+    [TestMethod]
+    public void TestGetUrlArgsWithLinkProviderOptionsAutoParams()
+    {
+      var links = NewLinkProvider("http://siteadmin.debug.intranet.gdg/default.aspx?isc=234", 1, string.Empty);
+      string url = links.GetUrlArguments(LinkProviderOptions.DefaultOptions, "k1", "v1");
+      Assert.AreEqual("?k1=v1&isc=234", url);
+    }
+
+    [TestMethod]
+    public void TestQueryStringExplicitLocalizationWithLinkProviderOptions()
+    {
+      var links = NewLinkProvider("http://siteadmin.debug.intranet.gdg/default.aspx?isc=234", 1, string.Empty);
+      string url = links.GetUrl("SUPPORTURL", "/hosting/hosting.aspx", new NameValueCollection { { "k1", "v1" }, { "k2", "v2" } }, LinkProviderOptions.QueryStringExplicitWithLocalizationParameters, "ca", "fr-CA");
+
+      Assert.IsTrue(url.StartsWith("http://support.godaddy.com/hosting/hosting.aspx?"));
+      Assert.IsTrue(url.IndexOf("cntry=ca", StringComparison.OrdinalIgnoreCase)!=-1);
+      Assert.IsTrue(url.IndexOf("lang=fr-ca", StringComparison.OrdinalIgnoreCase)!=-1);
+      Assert.IsTrue(url.IndexOf("k1=v1", StringComparison.OrdinalIgnoreCase)!=-1);
+      Assert.IsTrue(url.IndexOf("k2=v2", StringComparison.OrdinalIgnoreCase)!=-1);
+    }
+
+    //[TestMethod]
+    //public void TestGetRelativeWithAutoParams()
+    //{
+    //  var links = NewLinkProvider("http://siteadmin.debug.intranet.gdg/default.aspx?isc=234", 1, string.Empty);
+    //  string url = links.GetRelativeUrl("/hosting/hosting.aspx", LinkProviderOptions.DefaultOptions, "k1", "v1");
+
+    //  Assert.IsTrue(url.IndexOf("/hosting/hosting.aspx?", StringComparison.OrdinalIgnoreCase)!=-1);
+    //  Assert.IsTrue(url.IndexOf("isc=234", StringComparison.OrdinalIgnoreCase)!=-1);
+    //  Assert.IsTrue(url.IndexOf("k1=v1", StringComparison.OrdinalIgnoreCase)!=-1);
+
+    //  url = links.GetRelativeUrl("/hosting/hosting.aspx");
+
+    //  Assert.IsTrue(url.IndexOf("/hosting/hosting.aspx?", StringComparison.OrdinalIgnoreCase)!=-1);
+    //  Assert.IsTrue(url.IndexOf("isc=234", StringComparison.OrdinalIgnoreCase)!=-1);
+
+    //}
+
+    //[TestMethod]
+    //public void TestFormatRelativeUrlLinkProviderOptions()
+    //{
+    //  bool allowRel = LinkProvider.AllowRelativeUrls;
+
+    //  try
+    //  {
+    //    LinkProvider.AllowRelativeUrls = true;
+    //    var links = NewLinkProvider("http://siteadmin.debug.intranet.gdg/default.aspx?isc=234", 1, string.Empty);
+    //    string url = links.GetRelativeUrl("/hosting/hosting.aspx", null, LinkProviderOptions.FormatRelativeUrl);
+    //    Assert.AreEqual("/hosting/hosting.aspx?isc=234", url);
+
+    //    LinkProvider.AllowRelativeUrls = false;
+    //    url = links.GetRelativeUrl("/hosting/hosting.aspx", null, LinkProviderOptions.FormatRelativeUrl);
+    //    Assert.AreEqual("http://siteadmin.debug.intranet.gdg/hosting/hosting.aspx?isc=234", url);
+    //  }
+    //  finally
+    //  {
+    //    LinkProvider.AllowRelativeUrls = allowRel;
+    //  }
+    //}
+
+    [TestMethod]
+    public void TestFormatFullUrlLinkProviderOptions()
+    {
+      bool allowRel = LinkProvider.AllowRelativeUrls;
+
+      try
+      {
+        LinkProvider.AllowRelativeUrls = true;
+        var links = NewLinkProvider("http://siteadmin.debug.intranet.gdg/default.aspx?isc=234", 1, string.Empty);
+        string url = links.GetUrl("SITEURL", "/hosting/hosting.aspx", null, LinkProviderOptions.FormatRelativeUrl);
+        Assert.AreEqual("/hosting/hosting.aspx?isc=234", url);
+
+        LinkProvider.AllowRelativeUrls = false;
+        url = links.GetUrl("SITEURL", "/hosting/hosting.aspx", null, LinkProviderOptions.FormatRelativeUrl);
+        Assert.AreEqual("http://www.godaddy.com/hosting/hosting.aspx?isc=234", url);
+      }
+      finally
+      {
+        LinkProvider.AllowRelativeUrls = allowRel;
+      }
     }
 
   }

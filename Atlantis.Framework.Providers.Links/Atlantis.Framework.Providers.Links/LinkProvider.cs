@@ -2,19 +2,18 @@
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Links.Interface;
 using Atlantis.Framework.Providers.Interface.Links;
+using Atlantis.Framework.Providers.Localization.Interface;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Text;
 using System.Web;
-using Atlantis.Framework.Providers.Localization.Interface;
 
 namespace Atlantis.Framework.Providers.Links
 {
   public class LinkProvider : ProviderBase, ILinkProvider
   {
     private static bool _allowRelativeUrls = false;
-
 
     /// <summary>
     /// Setting this to true will allow the GetRelativeUrl methods to return relative urls "/example.aspx" instead of fully qualified urls
@@ -55,6 +54,7 @@ namespace Atlantis.Framework.Providers.Links
 
     private const string _schemeNonSecure = "http://";
     private const string _schemeSecure = "https://";
+    private const string _schemeNone = "//";
 
     private readonly Dictionary<int, IDictionary<string, ILinkInfo>> _linkMaps;
     private readonly ISiteContext _siteContext;
@@ -66,7 +66,8 @@ namespace Atlantis.Framework.Providers.Links
       NoRoot = 0,
       DefaultRoot = 1,
       HttpRoot = 2,
-      HttpsRoot = 3
+      HttpsRoot = 3,
+      NoProtocol
     }
 
     public LinkProvider(IProviderContainer container)
@@ -234,21 +235,13 @@ namespace Atlantis.Framework.Providers.Links
       }
     }
 
-    private StringBuilder BuildInitialUrl(string relativePath, UrlRootMode rootMode)
+    private StringBuilder BuildInitialUrl(string relativePath, LinkProviderOptions options)
     {
-      var urlStringBuilder = new StringBuilder();
-      if (rootMode != UrlRootMode.NoRoot)
+      var urlStringBuilder = new StringBuilder(relativePath.Length);
+      if (!options.HasFlag(LinkProviderOptions.FormatRelativeUrl))
       {
-        string scheme = DefaultScheme;
-        if ((rootMode == UrlRootMode.HttpsRoot) && (!IsDebugInternal()))
-        {
-          scheme = _schemeSecure;
-        }
-        else if (rootMode == UrlRootMode.HttpRoot)
-        {
-          scheme = _schemeNonSecure;
-        }
-
+        string scheme;
+        ComputeFromOptions(options, out scheme);
         urlStringBuilder.Append(scheme);
         urlStringBuilder.Append(DefaultRootLink);
       }
@@ -304,8 +297,10 @@ namespace Atlantis.Framework.Providers.Links
       return result;
     }
 
-    private StringBuilder BuildInitialUrl(int contextId, string linkName, string relativePath, string scheme, out ILinkInfo linkInfo)
+    private StringBuilder BuildInitialUrl(int contextId, string linkName, string relativePath, LinkProviderOptions options, ref string countrySiteId, ref string marketId, out ILinkInfo linkInfo)
     {
+      string scheme;
+      ComputeFromOptions(options, out scheme);
       var urlStringBuilder = new StringBuilder(scheme);
 
       bool isPage = false;
@@ -318,7 +313,24 @@ namespace Atlantis.Framework.Providers.Links
 
         // if the current site is global, then the target site is global
         // use this as a flag to not change the database's linkinfo url
-        bool bTargetSiteIsGlobal = _localizationProvider.Value == null ? true : _localizationProvider.Value.IsGlobalSite();
+        bool bTargetSiteIsGlobal;
+        string targetSiteDefaultMarketId;
+        if ( _localizationProvider.Value != null && (linkInfo.CountrySupportType != LinkTypeCountrySupport.NoSupport || linkInfo.LanguageSupportType != LinkTypeLanguageSupport.NoSupport) )
+        {
+          var countrySite = _localizationProvider.Value.TryGetCountrySite(countrySiteId ?? _localizationProvider.Value.CountrySite) ?? _localizationProvider.Value.CountrySiteInfo;
+          countrySiteId = countrySite.Id;
+
+          targetSiteDefaultMarketId = countrySite.DefaultMarketId;
+          bTargetSiteIsGlobal = _localizationProvider.Value.IsGlobalSite(countrySiteId);
+
+          var market = _localizationProvider.Value.GetMarketForCountrySite(countrySiteId, marketId ?? _localizationProvider.Value.MarketInfo.Id);
+          marketId = market.Id;
+        }
+        else
+        {
+          bTargetSiteIsGlobal = true;
+          targetSiteDefaultMarketId = String.Empty;
+        }
 
         // update host w/country
         if (!bTargetSiteIsGlobal)
@@ -328,14 +340,14 @@ namespace Atlantis.Framework.Providers.Links
             int iEndOfHostName = urlStringBuilder.IndexOf('.', iStartOfNamedLink);
             if (iEndOfHostName != -1)
             {
-              string newHostname = _localizationProvider.Value.CountrySite.ToLowerInvariant();
+              string newHostname = countrySiteId.ToLowerInvariant();
               urlStringBuilder.Remove(iStartOfNamedLink, iEndOfHostName - iStartOfNamedLink);
               urlStringBuilder.Insert(iStartOfNamedLink, newHostname);
             }
           }
           else if (linkInfo.CountrySupportType == LinkTypeCountrySupport.PrefixHostNameSupport)
           {
-            string newHostname = _localizationProvider.Value.CountrySite.ToLowerInvariant();
+            string newHostname = countrySiteId.ToLowerInvariant();
             urlStringBuilder.Insert(iStartOfNamedLink, '.');
             urlStringBuilder.Insert(iStartOfNamedLink, newHostname);
           }
@@ -348,26 +360,23 @@ namespace Atlantis.Framework.Providers.Links
         // add language as required
         if (_localizationProvider.Value != null && linkInfo.LanguageSupportType == LinkTypeLanguageSupport.PrefixPathSupport)
         {
-          bool bIsDefaultMarket = String.Equals(_localizationProvider.Value.CountrySiteInfo.DefaultMarketId, _localizationProvider.Value.MarketInfo.Id, StringComparison.OrdinalIgnoreCase);
-          if (!bIsDefaultMarket)
+          bool bIsDefaultMarket = String.Equals(targetSiteDefaultMarketId, marketId, StringComparison.OrdinalIgnoreCase);
+          if (!bIsDefaultMarket && !IsTransperfectProxy)
           {
-            if (!IsTransperfectProxy)
+            string langUrl = _localizationProvider.Value.GetLanguageUrl(countrySiteId, marketId);
+
+            if (!String.IsNullOrEmpty(langUrl))
             {
-              string langUrl = _localizationProvider.Value.GetLanguageUrl();
-
-              if (!String.IsNullOrEmpty(langUrl))
+              // if there is no slash then add a slash
+              int iFirstSlash = urlStringBuilder.IndexOf('/', iStartOfNamedLink);
+              if (iFirstSlash == -1)
               {
-                // if there is no slash then add a slash
-                int iFirstSlash = urlStringBuilder.IndexOf('/', iStartOfNamedLink);
-                if (iFirstSlash == -1)
-                {
-                  iFirstSlash = urlStringBuilder.Length;
-                  urlStringBuilder.Append('/');
-                }
-
-                // if there is a slash then insert <language>/ just after the slash
-                urlStringBuilder.Insert(iFirstSlash + 1, langUrl);
+                iFirstSlash = urlStringBuilder.Length;
+                urlStringBuilder.Append('/');
               }
+
+              // if there is a slash then insert <language>/ just after the slash
+              urlStringBuilder.Insert(iFirstSlash + 1, langUrl);
             }
           }
         }
@@ -379,7 +388,6 @@ namespace Atlantis.Framework.Providers.Links
         linkInfo = null;
       }
 
-
       bool bBaseUrlMissingSlash = (urlStringBuilder.Length > 0 && urlStringBuilder[urlStringBuilder.Length - 1] != '/' && !isPage) ||
                                   (urlStringBuilder.Length == 0);
       bool bPathMissingSlash = (relativePath.Length > 0 && relativePath[0] != '/') ||
@@ -389,21 +397,6 @@ namespace Atlantis.Framework.Providers.Links
         urlStringBuilder.Append('/');
       }
       urlStringBuilder.Append(relativePath);
-
-      /*
-      if (relativePath.Length > 0)
-      {
-        if (relativePath[0] != '/')
-        {
-          urlStringBuilder.Append("/");
-        }
-        urlStringBuilder.Append(relativePath);
-      }
-      else if (!isPage)
-      {
-        urlStringBuilder.Append("/");
-      }
-      */
 
       return urlStringBuilder;
     }
@@ -434,51 +427,49 @@ namespace Atlantis.Framework.Providers.Links
     private string BuildUrl(
       string linkName,
       string relativePath,
-      bool isSecure,
-      QueryParamMode queryParamMode,
+      LinkProviderOptions options,
+      string countrySiteId, string marketId,
       NameValueCollection queryParameters)
     {
-      string scheme = isSecure ? _schemeSecure : _schemeNonSecure;
-
       if (relativePath.Contains("?") || relativePath.Contains("&"))
       {
         throw new ArgumentException("Relative path cannot contain query string.");
       }
 
       ILinkInfo linkInfo;
-      var urlStringBuilder = BuildInitialUrl(_siteContext.ContextId, linkName, relativePath, scheme, out linkInfo);
-      HandleCommonParameters(queryParameters, queryParamMode, linkInfo);
+      var urlStringBuilder = BuildInitialUrl(_siteContext.ContextId, linkName, relativePath, options, ref countrySiteId, ref marketId, out linkInfo);
+      HandleCommonParameters(queryParameters, options, countrySiteId, marketId, linkInfo);
       BuildUrlParameters(urlStringBuilder, queryParameters);
 
       return urlStringBuilder.ToString();
     }
 
-    private void HandleCommonParameters(NameValueCollection queryMap, QueryParamMode queryParamMode, ILinkInfo linkInfo)
+    private void HandleCommonParameters(NameValueCollection queryMap, LinkProviderOptions options, string countrySiteId=null, string marketId=null, ILinkInfo linkInfo=null)
     {
-      if ( queryParamMode != QueryParamMode.ExplicitParameters && linkInfo != null && _localizationProvider.Value != null )
+      if (!options.HasFlag(LinkProviderOptions.QueryStringExplicitParameters) && linkInfo != null)
       {
         string langParm = linkInfo.LanguageParameter;
         if (linkInfo.LanguageSupportType == LinkTypeLanguageSupport.QueryStringSupport && !String.IsNullOrEmpty(langParm))
         {
-          string language = queryMap[langParm];
-          if (string.IsNullOrEmpty(language))
+          // TODO Fix the issue w/langParm querystring applying only to the remote site... and not the local
+          if (!String.IsNullOrEmpty(marketId))
           {
-            queryMap[langParm] = _localizationProvider.Value.FullLanguage;
+            queryMap[langParm] = marketId;
           }
         }
 
         string cntryParm = linkInfo.CountryParameter;
         if (linkInfo.CountrySupportType == LinkTypeCountrySupport.QueryStringSupport && !String.IsNullOrEmpty(cntryParm))
         {
-          string country = queryMap[cntryParm];
-          if (string.IsNullOrEmpty(country))
+          // TODO Fix the issue w/langParm querystring applying only to the remote site... and not the local
+          if (!String.IsNullOrEmpty(countrySiteId))
           {
-            queryMap[cntryParm] = _localizationProvider.Value.CountrySite;
+            queryMap[cntryParm] = countrySiteId;
           }
         }
       }
 
-      if (queryParamMode == QueryParamMode.CommonParameters)
+      if (!options.HasFlag(LinkProviderOptions.QueryStringExplicitParameters) && !options.HasFlag(LinkProviderOptions.QueryStringExplicitWithLocalizationParameters))
       {
         if ((LinkProviderCommonParameters.HandleProgId) && (_siteContext.ContextId == _RESELLERCONTEXTID))
         {
@@ -505,29 +496,21 @@ namespace Atlantis.Framework.Providers.Links
         // Use event for application to customize remaining querystring parameters
         LinkProviderCommonParameters.OnAddCommonParameters(Container, queryMap);
       }
+
     }
 
     private string BuildRelativeUrl(
       string relativePath,
-      QueryParamMode queryParamMode,
+      LinkProviderOptions options,
       NameValueCollection queryParameters)
-    {
-      return BuildRelativeUrl(relativePath, queryParamMode, queryParameters, UrlRootMode.NoRoot);
-    }
-
-    private string BuildRelativeUrl(
-      string relativePath,
-      QueryParamMode queryParamMode,
-      NameValueCollection queryParameters,
-      UrlRootMode rootMode)
     {
       if (relativePath.Contains("?") || relativePath.Contains("&"))
       {
         throw new ArgumentException("Relative path cannot contain query string.");
       }
 
-      var urlStringBuilder = BuildInitialUrl(relativePath, rootMode);
-      HandleCommonParameters(queryParameters, queryParamMode, null);
+      var urlStringBuilder = BuildInitialUrl(relativePath, options);
+      HandleCommonParameters(queryParameters, options);
       BuildUrlParameters(urlStringBuilder, queryParameters);
 
       return urlStringBuilder.ToString();
@@ -542,7 +525,7 @@ namespace Atlantis.Framework.Providers.Links
     /// <returns>Relative url in the current site</returns>
     public string GetRelativeUrl(string relativePath)
     {
-      return GetRelativeUrl_Int(relativePath, QueryParamMode.CommonParameters, new NameValueCollection());
+      return GetRelativeUrl_Int(relativePath, LinkProviderOptions.DefaultOptions, new NameValueCollection());
     }
 
     /// <summary>
@@ -554,7 +537,7 @@ namespace Atlantis.Framework.Providers.Links
     public string GetRelativeUrl(string relativePath, params string[] additionalQueryParameters)
     {
       var queryMap = ConvertStringArrayToQueryMap(additionalQueryParameters);
-      return GetRelativeUrl_Int(relativePath, QueryParamMode.CommonParameters, queryMap);
+      return GetRelativeUrl_Int(relativePath, LinkProviderOptions.DefaultOptions, queryMap);
     }
 
     /// <summary>
@@ -566,8 +549,10 @@ namespace Atlantis.Framework.Providers.Links
     /// <returns>Relative url in the current site</returns>
     public string GetRelativeUrl(string relativePath, QueryParamMode queryParamMode, params string[] additionalQueryParameters)
     {
+      var options = LinkProviderOptions.DefaultOptions;
+      AddToOptions(queryParamMode, ref options);
       var queryMap = ConvertStringArrayToQueryMap(additionalQueryParameters);
-      return GetRelativeUrl_Int(relativePath, queryParamMode, queryMap);
+      return GetRelativeUrl_Int(relativePath, options, queryMap);
     }
 
     /// <summary>
@@ -579,7 +564,7 @@ namespace Atlantis.Framework.Providers.Links
     public string GetRelativeUrl(string relativePath, NameValueCollection queryMap)
     {
       var localQueryMap = new NameValueCollection(queryMap);
-      return GetRelativeUrl_Int(relativePath, QueryParamMode.CommonParameters, localQueryMap);
+      return GetRelativeUrl_Int(relativePath, LinkProviderOptions.DefaultOptions, localQueryMap);
     }
 
     /// <summary>
@@ -591,8 +576,10 @@ namespace Atlantis.Framework.Providers.Links
     /// <returns>Relative url in the current site</returns>
     public string GetRelativeUrl(string relativePath, QueryParamMode queryParamMode, NameValueCollection queryMap)
     {
+      var options = LinkProviderOptions.DefaultOptions;
+      AddToOptions(queryParamMode, ref options);
       var localQueryMap = new NameValueCollection(queryMap);
-      return GetRelativeUrl_Int(relativePath, queryParamMode, localQueryMap);
+      return GetRelativeUrl_Int(relativePath, options, localQueryMap);
     }
 
     /// <summary>
@@ -603,25 +590,34 @@ namespace Atlantis.Framework.Providers.Links
     /// <returns>Relative url in the current site</returns>
     public string GetRelativeUrl(string relativePath, QueryParamMode queryParamMode)
     {
-      return GetRelativeUrl_Int(relativePath, queryParamMode, new NameValueCollection());
+      var options = LinkProviderOptions.DefaultOptions;
+      AddToOptions(queryParamMode, ref options);
+      return GetRelativeUrl_Int(relativePath, options, new NameValueCollection());
     }
 
-    private string GetRelativeUrl_Int(string relativePath, QueryParamMode queryParamMode, NameValueCollection queryMap)
+//    public string GetRelativeUrl(string relativePath, LinkProviderOptions options = LinkProviderOptions.DefaultOptions, params string[] additionalQueryParameters)
+//    {
+//      var queryMap = ConvertStringArrayToQueryMap(additionalQueryParameters);
+//      return GetRelativeUrl_Int(relativePath, options, queryMap);
+//    }
+
+//    public string GetRelativeUrl(string relativePath, NameValueCollection queryMap = null, LinkProviderOptions options = LinkProviderOptions.DefaultOptions)
+//    {
+//      queryMap =  queryMap == null ? new NameValueCollection() : new NameValueCollection(queryMap);
+//      return GetRelativeUrl_Int(relativePath, options, queryMap);
+//    }
+
+    private string GetRelativeUrl_Int(string relativePath, LinkProviderOptions options, NameValueCollection queryMap)
     {
-      string result;
       if (AllowRelativeUrls)
       {
-        result = BuildRelativeUrl(relativePath, queryParamMode, queryMap);
-      }
-      else if (HttpContext.Current.Request.IsSecureConnection)
-      {
-        result = GetFullSecureUrl_Int(relativePath, queryParamMode, queryMap);
+        options |= LinkProviderOptions.FormatRelativeUrl;
       }
       else
       {
-        result = GetFullUrl_Int(relativePath, queryParamMode, queryMap);
+        options &= ~LinkProviderOptions.FormatRelativeUrl;
       }
-      return result;
+      return BuildRelativeUrl(relativePath, options, queryMap);
     }
 
     #endregion
@@ -638,7 +634,7 @@ namespace Atlantis.Framework.Providers.Links
     public string GetFullUrl(string relativePath)
     {
       var queryMap = new NameValueCollection();
-      return GetFullUrl_Int(relativePath, QueryParamMode.CommonParameters, queryMap);
+      return GetFullUrl_Int(relativePath, LinkProviderOptions.DefaultOptions, queryMap);
     }
 
     /// <summary>
@@ -650,7 +646,7 @@ namespace Atlantis.Framework.Providers.Links
     public string GetFullUrl(string relativePath, params string[] additionalQueryParameters)
     {
       var queryMap = ConvertStringArrayToQueryMap(additionalQueryParameters);
-      return GetFullUrl_Int(relativePath, QueryParamMode.CommonParameters, queryMap);
+      return GetFullUrl_Int(relativePath, LinkProviderOptions.DefaultOptions, queryMap);
     }
 
     /// <summary>
@@ -662,8 +658,10 @@ namespace Atlantis.Framework.Providers.Links
     /// <returns>Full http: url in the current site</returns>
     public string GetFullUrl(string relativePath, QueryParamMode queryParamMode, params string[] additionalQueryParameters)
     {
+      var options = LinkProviderOptions.DefaultOptions;
+      AddToOptions(queryParamMode, ref options);
       var queryMap = ConvertStringArrayToQueryMap(additionalQueryParameters);
-      return GetFullUrl_Int(relativePath, queryParamMode, queryMap);
+      return GetFullUrl_Int(relativePath, options, queryMap);
     }
 
     /// <summary>
@@ -675,8 +673,10 @@ namespace Atlantis.Framework.Providers.Links
     /// <returns>Full http: url in the current site</returns>
     public string GetFullUrl(string relativePath, QueryParamMode queryParamMode, NameValueCollection queryMap)
     {
+      var options = LinkProviderOptions.DefaultOptions;
+      AddToOptions(queryParamMode, ref options);
       var localQueryMap = new NameValueCollection(queryMap);
-      return GetFullUrl_Int(relativePath, queryParamMode, localQueryMap);
+      return GetFullUrl_Int(relativePath, options, localQueryMap);
     }
 
     /// <summary>
@@ -687,12 +687,14 @@ namespace Atlantis.Framework.Providers.Links
     /// <returns>Full http: url in the current site</returns>
     public string GetFullUrl(string relativePath, QueryParamMode queryParamMode)
     {
-      return GetFullUrl_Int(relativePath, queryParamMode, new NameValueCollection());
+      var options = LinkProviderOptions.DefaultOptions;
+      AddToOptions(queryParamMode, ref options);
+      return GetFullUrl_Int(relativePath, options, new NameValueCollection());
     }
 
-    private string GetFullUrl_Int(string relativePath, QueryParamMode queryParamMode, NameValueCollection queryMap)
+    private string GetFullUrl_Int(string relativePath, LinkProviderOptions options, NameValueCollection queryMap)
     {
-      return BuildRelativeUrl(relativePath, queryParamMode, queryMap, UrlRootMode.DefaultRoot);
+      return BuildRelativeUrl(relativePath, options, queryMap);
     }
 
     #endregion
@@ -707,7 +709,7 @@ namespace Atlantis.Framework.Providers.Links
     public string GetFullSecureUrl(string relativePath)
     {
       var queryMap = new NameValueCollection();
-      return GetFullSecureUrl_Int(relativePath, QueryParamMode.CommonParameters, queryMap);
+      return GetFullSecureUrl_Int(relativePath, LinkProviderOptions.DefaultOptions, queryMap);
     }
 
     /// <summary>
@@ -719,7 +721,7 @@ namespace Atlantis.Framework.Providers.Links
     public string GetFullSecureUrl(string relativePath, params string[] additionalQueryParameters)
     {
       var queryMap = ConvertStringArrayToQueryMap(additionalQueryParameters);
-      return GetFullSecureUrl_Int(relativePath, QueryParamMode.CommonParameters, queryMap);
+      return GetFullSecureUrl_Int(relativePath, LinkProviderOptions.DefaultOptions, queryMap);
     }
 
     /// <summary>
@@ -731,8 +733,10 @@ namespace Atlantis.Framework.Providers.Links
     /// <returns>Full https: url in the current site</returns>
     public string GetFullSecureUrl(string relativePath, QueryParamMode queryParamMode, params string[] additionalQueryParameters)
     {
+      var options = LinkProviderOptions.DefaultOptions;
+      AddToOptions(queryParamMode, ref options);
       var queryMap = ConvertStringArrayToQueryMap(additionalQueryParameters);
-      return GetFullSecureUrl_Int(relativePath, queryParamMode, queryMap);
+      return GetFullSecureUrl_Int(relativePath, options, queryMap);
     }
 
     /// <summary>
@@ -744,8 +748,10 @@ namespace Atlantis.Framework.Providers.Links
     /// <returns>Full https: url in the current site</returns>
     public string GetFullSecureUrl(string relativePath, QueryParamMode queryParamMode, NameValueCollection queryMap)
     {
+      var options = LinkProviderOptions.DefaultOptions;
+      AddToOptions(queryParamMode, ref options);
       var localQueryMap = new NameValueCollection(queryMap);
-      return GetFullSecureUrl_Int(relativePath, queryParamMode, localQueryMap);
+      return GetFullSecureUrl_Int(relativePath, options, localQueryMap);
     }
 
     /// <summary>
@@ -756,12 +762,14 @@ namespace Atlantis.Framework.Providers.Links
     /// <returns>Full https: url in the current site</returns>
     public string GetFullSecureUrl(string relativePath, QueryParamMode queryParamMode)
     {
-      return GetFullSecureUrl_Int(relativePath, queryParamMode, new NameValueCollection());
+      var options = LinkProviderOptions.DefaultOptions;
+      AddToOptions(queryParamMode, ref options);
+      return GetFullSecureUrl_Int(relativePath, options, new NameValueCollection());
     }
 
-    private string GetFullSecureUrl_Int(string relativePath, QueryParamMode queryParamMode, NameValueCollection queryMap)
+    private string GetFullSecureUrl_Int(string relativePath, LinkProviderOptions options, NameValueCollection queryMap)
     {
-      return BuildRelativeUrl(relativePath, queryParamMode, queryMap, UrlRootMode.HttpsRoot);
+      return BuildRelativeUrl(relativePath, options | LinkProviderOptions.ProtocolHttps, queryMap);
     }
 
     #endregion
@@ -779,7 +787,7 @@ namespace Atlantis.Framework.Providers.Links
     public string GetUrl(string linkName, string relativePath)
     {
       var queryMap = new NameValueCollection();
-      return GetUrl_Int(linkName, relativePath, QueryParamMode.CommonParameters, IsSecureConnection, queryMap);
+      return GetUrl_Int(linkName, relativePath, queryMap, LinkProviderOptions.DefaultOptions, null, null);
     }
 
     /// <summary>
@@ -792,7 +800,7 @@ namespace Atlantis.Framework.Providers.Links
     public string GetUrl(string linkName, string relativePath, params string[] additionalQueryParameters)
     {
       var queryMap = ConvertStringArrayToQueryMap(additionalQueryParameters);
-      return GetUrl_Int(linkName, relativePath, QueryParamMode.CommonParameters, IsSecureConnection, queryMap);
+      return GetUrl(linkName, relativePath, queryMap, LinkProviderOptions.DefaultOptions, null, null);
     }
 
     /// <summary>
@@ -805,8 +813,10 @@ namespace Atlantis.Framework.Providers.Links
     /// <returns>Full url to a named link</returns>
     public string GetUrl(string linkName, string relativePath, QueryParamMode queryParamMode, params string[] additionalQueryParameters)
     {
+      var options = LinkProviderOptions.DefaultOptions;
+      AddToOptions(queryParamMode, ref options);
       var queryMap = ConvertStringArrayToQueryMap(additionalQueryParameters);
-      return GetUrl_Int(linkName, relativePath, queryParamMode, IsSecureConnection, queryMap);
+      return GetUrl_Int(linkName, relativePath, queryMap, options, null, null);
     }
 
     /// <summary>
@@ -820,8 +830,10 @@ namespace Atlantis.Framework.Providers.Links
     /// <returns>Full url to a named link</returns>
     public string GetUrl(string linkName, string relativePath, QueryParamMode queryParamMode, bool isSecure, params string[] additionalQueryParameters)
     {
+      var options = isSecure ? LinkProviderOptions.ProtocolHttps : LinkProviderOptions.ProtocolHttp;
+      AddToOptions(queryParamMode, ref options);
       var queryMap = ConvertStringArrayToQueryMap(additionalQueryParameters);
-      return GetUrl_Int(linkName, relativePath, queryParamMode, isSecure, queryMap);
+      return GetUrl_Int(linkName, relativePath, queryMap, options, null, null);
     }
 
     /// <summary>
@@ -834,7 +846,7 @@ namespace Atlantis.Framework.Providers.Links
     public string GetUrl(string linkName, string relativePath, NameValueCollection queryMap)
     {
       var localQueryMap = new NameValueCollection(queryMap);
-      return GetUrl_Int(linkName, relativePath, QueryParamMode.CommonParameters, IsSecureConnection, localQueryMap);
+      return GetUrl_Int(linkName, relativePath, localQueryMap, LinkProviderOptions.DefaultOptions, null, null);
     }
 
     /// <summary>
@@ -848,8 +860,10 @@ namespace Atlantis.Framework.Providers.Links
     /// <returns>Full url to a named link</returns>
     public string GetUrl(string linkName, string relativePath, QueryParamMode queryParamMode, bool isSecure, NameValueCollection queryMap)
     {
+      var options = isSecure ? LinkProviderOptions.ProtocolHttps : LinkProviderOptions.ProtocolHttp;
+      AddToOptions(queryParamMode, ref options);
       var localQueryMap = new NameValueCollection(queryMap);
-      return GetUrl_Int(linkName, relativePath, queryParamMode, isSecure, localQueryMap);
+      return GetUrl_Int(linkName, relativePath, localQueryMap, options, null, null);
     }
 
     /// <summary>
@@ -862,12 +876,35 @@ namespace Atlantis.Framework.Providers.Links
     /// <returns>Full url to a named link</returns>
     public string GetUrl(string linkName, string relativePath, QueryParamMode queryParamMode, bool isSecure)
     {
-      return GetUrl_Int(linkName, relativePath, queryParamMode, isSecure, new NameValueCollection());
+      var options = isSecure ? LinkProviderOptions.ProtocolHttps : LinkProviderOptions.ProtocolHttp;
+      AddToOptions(queryParamMode, ref options);
+      return GetUrl_Int(linkName, relativePath, new NameValueCollection(), options, null, null);
     }
 
-    private string GetUrl_Int(string linkName, string relativePath, QueryParamMode queryParamMode, bool isSecure, NameValueCollection queryMap)
+    public string GetUrl(string linkName, string relativePath, LinkProviderOptions options, string countrySiteId, string marketId, params string[] additionalQueryParameters)
     {
-      return BuildUrl(linkName, relativePath, isSecure, queryParamMode, queryMap);
+      var queryMap = ConvertStringArrayToQueryMap(additionalQueryParameters);
+      return GetUrl_Int(linkName, relativePath, queryMap, options, countrySiteId, marketId);
+    }
+
+    public string GetUrl(string linkName, string relativePath, NameValueCollection queryMap = null, LinkProviderOptions options = LinkProviderOptions.DefaultOptions, string countrySiteId = null, string marketId = null)
+    {
+      var localQueryMap = queryMap == null ? new NameValueCollection() : new NameValueCollection(queryMap);
+      string url;
+      if (options.HasFlag(LinkProviderOptions.FormatRelativeUrl) && AllowRelativeUrls) // new functionality added to support deprecation of the public GetRelative() calls
+      {
+        url = GetRelativeUrl_Int(relativePath, options, localQueryMap);
+      }
+      else
+      {
+        url = GetUrl_Int(linkName, relativePath, localQueryMap, options, countrySiteId, marketId);
+      }
+      return url;
+    }
+
+    private string GetUrl_Int(string linkName, string relativePath, NameValueCollection queryMap, LinkProviderOptions options, string countrySiteId, string marketId)
+    {
+      return BuildUrl(linkName, relativePath, options, countrySiteId, marketId, queryMap);
     }
 
     #endregion
@@ -883,7 +920,9 @@ namespace Atlantis.Framework.Providers.Links
     public string GetUrlArguments(NameValueCollection queryMap, QueryParamMode queryParamMode)
     {
       var localQueryMap = new NameValueCollection(queryMap);
-      return GetUrlArguments_Int(localQueryMap, queryParamMode);
+      var options = LinkProviderOptions.DefaultOptions;
+      AddToOptions(queryParamMode, ref options);
+      return GetUrlArguments_Int(localQueryMap, options);
     }
 
     /// <summary>
@@ -894,7 +933,7 @@ namespace Atlantis.Framework.Providers.Links
     public string GetUrlArguments(NameValueCollection queryMap)
     {
       var localQueryMap = new NameValueCollection(queryMap);
-      return GetUrlArguments_Int(localQueryMap, QueryParamMode.CommonParameters);
+      return GetUrlArguments_Int(localQueryMap, LinkProviderOptions.DefaultOptions);
     }
 
     /// <summary>
@@ -904,7 +943,9 @@ namespace Atlantis.Framework.Providers.Links
     /// <returns>Querystring in the form ?arg=val&arg=val</returns>
     public string GetUrlArguments(QueryParamMode queryParamMode)
     {
-      return GetUrlArguments_Int(new NameValueCollection(), queryParamMode);
+      var options = LinkProviderOptions.DefaultOptions;
+      AddToOptions(queryParamMode, ref options);
+      return GetUrlArguments_Int(new NameValueCollection(), options);
     }
 
     /// <summary>
@@ -913,7 +954,7 @@ namespace Atlantis.Framework.Providers.Links
     /// <returns>Querystring in the form ?arg=val&arg=val</returns>
     public string GetUrlArguments()
     {
-      return GetUrlArguments_Int(new NameValueCollection(), QueryParamMode.CommonParameters);
+      return GetUrlArguments_Int(new NameValueCollection(), LinkProviderOptions.DefaultOptions);
     }
 
     /// <summary>
@@ -925,7 +966,9 @@ namespace Atlantis.Framework.Providers.Links
     public string GetUrlArguments(QueryParamMode queryParamMode, params string[] queryParameters)
     {
       var queryMap = ConvertStringArrayToQueryMap(queryParameters);
-      return GetUrlArguments_Int(queryMap, queryParamMode);
+      var options = LinkProviderOptions.DefaultOptions;
+      AddToOptions(queryParamMode, ref options);
+      return GetUrlArguments_Int(queryMap, options);
     }
 
     /// <summary>
@@ -936,13 +979,25 @@ namespace Atlantis.Framework.Providers.Links
     public string GetUrlArguments(params string[] queryParameters)
     {
       var queryMap = ConvertStringArrayToQueryMap(queryParameters);
-      return GetUrlArguments_Int(queryMap, QueryParamMode.CommonParameters);
+      return GetUrlArguments_Int(queryMap, LinkProviderOptions.DefaultOptions);
     }
 
-    private string GetUrlArguments_Int(NameValueCollection queryMap, QueryParamMode queryParamMode)
+    public string GetUrlArguments(NameValueCollection queryMap = null, LinkProviderOptions options = LinkProviderOptions.DefaultOptions)
+    {
+      queryMap = queryMap == null ? new NameValueCollection() : new NameValueCollection(queryMap);
+      return GetUrlArguments_Int(queryMap, options);
+    }
+
+    public string GetUrlArguments(LinkProviderOptions options, params string[] queryParameters)
+    {
+      var queryMap = ConvertStringArrayToQueryMap(queryParameters);
+      return GetUrlArguments_Int(queryMap, options);
+    }
+
+    private string GetUrlArguments_Int(NameValueCollection queryMap, LinkProviderOptions options)
     {
       var urlBuilder = new StringBuilder();
-      HandleCommonParameters(queryMap, queryParamMode, null);
+      HandleCommonParameters(queryMap, options);
       BuildUrlParameters(urlBuilder, queryMap);
       return urlBuilder.ToString();
     }
@@ -971,7 +1026,7 @@ namespace Atlantis.Framework.Providers.Links
         {
           string scheme = IsSecureConnection ? _schemeSecure : _schemeNonSecure;
           string linkType = ChooseLinkType(LinkTypes.Image, LinkTypes.C3Image);
-          _imageRoot = scheme + this[linkType] + "/";
+          _imageRoot = String.Concat(scheme, this[linkType], "/");
         }
         return _imageRoot;
       }
@@ -986,7 +1041,7 @@ namespace Atlantis.Framework.Providers.Links
         {
           string scheme = IsSecureConnection ? _schemeSecure : _schemeNonSecure;
           string linkType = ChooseLinkType(LinkTypes.ExternalCSS, LinkTypes.C3ExternalCSS);
-          _cssRoot = scheme + this[linkType] + "/";
+          _cssRoot = String.Concat(scheme, this[linkType], "/");
         }
         return _cssRoot;
       }
@@ -1001,7 +1056,7 @@ namespace Atlantis.Framework.Providers.Links
         {
           string scheme = IsSecureConnection ? _schemeSecure : _schemeNonSecure;
           string linkType = ChooseLinkType(LinkTypes.ExternalScript, LinkTypes.C3ExternalScript);
-          _javascriptRoot = scheme + this[linkType] + "/";
+          _javascriptRoot = String.Concat(scheme, this[linkType], "/");
         }
         return _javascriptRoot;
       }
@@ -1016,7 +1071,7 @@ namespace Atlantis.Framework.Providers.Links
         {
           string scheme = IsSecureConnection ? _schemeSecure : _schemeNonSecure;
           string linkType = ChooseLinkType(LinkTypes.ExternalBigImage1, LinkTypes.C3ExternalBigImage1);
-          _largeImagesRoot = scheme + this[linkType] + "/";
+          _largeImagesRoot = String.Concat(scheme, this[linkType], "/");
         }
         return _largeImagesRoot;
       }
@@ -1031,7 +1086,7 @@ namespace Atlantis.Framework.Providers.Links
         {
           string scheme = IsSecureConnection ? _schemeSecure : _schemeNonSecure;
           string linkType = ChooseLinkType(LinkTypes.ExternalBigImage2, LinkTypes.C3ExternalBigImage2);
-          _presentationCentralImagesRoot = scheme + this[linkType] + "/";
+          _presentationCentralImagesRoot = String.Concat(scheme, this[linkType], "/");
         }
         return _presentationCentralImagesRoot;
       }
@@ -1125,5 +1180,117 @@ namespace Atlantis.Framework.Providers.Links
     }
 
     #endregion
+
+    #region Enum conversion helpers
+    /* commented out this currently unused private method to achieve better code coverage scores
+    private void ComputeFromOptions(LinkProviderOptions options, out UrlRootMode rootMode)
+    {
+      if (options.HasFlag(LinkProviderOptions.FormatRelativeUrl))
+      {
+        rootMode = UrlRootMode.NoRoot;
+      }
+      else
+      {
+        if (options.HasFlag(LinkProviderOptions.ProtocolHttp))
+        {
+          rootMode = UrlRootMode.HttpRoot;
+        }
+        else if (options.HasFlag(LinkProviderOptions.ProtocolHttps))
+        {
+          rootMode = UrlRootMode.HttpsRoot;
+        }
+        else if (options.HasFlag(LinkProviderOptions.ProtocolAgnostic))
+        {
+          rootMode = UrlRootMode.NoProtocol;
+        }
+        else
+        {
+          rootMode = UrlRootMode.DefaultRoot;
+        }
+      }
+    }
+    */
+
+    /* commented out this currently unused private method to achieve better code coverage scores
+    private void ComputeFromOptions(LinkProviderOptions options, out QueryParamMode queryParamMode)
+    {
+      if (options.HasFlag(LinkProviderOptions.QueryStringExplicitParameters))
+      {
+        queryParamMode = QueryParamMode.ExplicitParameters;
+      }
+      else if (options.HasFlag(LinkProviderOptions.QueryStringExplicitWithLocalizationParameters))
+      {
+        queryParamMode = QueryParamMode.ExplicitWithLocalizationParameters;
+      }
+      else
+      {
+        queryParamMode = QueryParamMode.CommonParameters;
+      }
+    }
+    */
+
+    private void ComputeFromOptions(LinkProviderOptions options, out string scheme)
+    {
+      if (options.HasFlag(LinkProviderOptions.ProtocolHttp))
+      {
+        scheme = _schemeNonSecure;
+      }
+      else if (options.HasFlag(LinkProviderOptions.ProtocolHttps) && !IsDebugInternal())
+      {
+        scheme = _schemeSecure;
+      }
+      else if (options.HasFlag(LinkProviderOptions.ProtocolAgnostic))
+      {
+        scheme = _schemeNone;
+      }
+      else
+      {
+        scheme = DefaultScheme;
+      }
+    }
+
+    /* commented out this currently unused private method to achieve better code coverage scores
+    private void ComputeFromOptions(LinkProviderOptions options, out UrlRootMode rootMode, out QueryParamMode queryParamMode)
+    {
+      ComputeFromOptions(options, out rootMode);
+      ComputeFromOptions(options, out queryParamMode);
+    }
+    */
+
+    private void AddToOptions(QueryParamMode queryParamMode, ref LinkProviderOptions options)
+    {
+      switch (queryParamMode)
+      {
+        case QueryParamMode.ExplicitParameters:
+          options |= LinkProviderOptions.QueryStringExplicitParameters;
+          break;
+        case QueryParamMode.ExplicitWithLocalizationParameters:
+          options |= LinkProviderOptions.QueryStringExplicitWithLocalizationParameters;
+          break;
+      }
+    }
+
+    /* commented out this currently unused private method to achieve better code coverage scores
+    private void AddToOptions(UrlRootMode rootMode, ref LinkProviderOptions options)
+    {
+      switch (rootMode)
+      {
+        case UrlRootMode.HttpRoot:
+          options |= LinkProviderOptions.ProtocolHttp;
+          break;
+        case UrlRootMode.HttpsRoot:
+          options |= LinkProviderOptions.ProtocolHttps;
+          break;
+        case UrlRootMode.NoProtocol:
+          options |= LinkProviderOptions.ProtocolAgnostic;
+          break;
+        case UrlRootMode.NoRoot:
+          options |= LinkProviderOptions.FormatRelativeUrl;
+          break;
+      }
+    }
+    */
+    #endregion
+  
   }
 }

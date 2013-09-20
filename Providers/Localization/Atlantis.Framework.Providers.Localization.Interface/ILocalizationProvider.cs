@@ -53,11 +53,49 @@ namespace Atlantis.Framework.Providers.Localization.Interface
     IMarket MarketInfo { get; }
 
     /// <summary>
-    /// Returns true if the request is on the global (non-country) site. This will return www if you are on the "es" site
+    /// Get the ICountrySite for the countrySiteId
+    /// </summary>
+    /// <param name="countrySiteId"></param>
+    /// <returns>valid interface or null if the countrySiteId is invalid</returns>
+    ICountrySite TryGetCountrySite(string countrySiteId);
+
+    /// <summary>
+    /// Get the IMarket for the marketId.  The market need not have any relation to the current request's CountrySite.
+    /// </summary>
+    /// <param name="marketId"></param>
+    /// <returns>valid interface or null if the marketId is invalid</returns>
+    IMarket TryGetMarket(string marketId);
+
+    /// <summary>
+    /// Get the IMarket for the marketId for the given CountrySite.  
+    /// If the countrySiteId is invalid, the CountrySite of the current request will be used in its place.
+    /// If the market is not mapped to the CountrySite, then the default market of the current request's CountrySite will be returned (even if no mapping is in place).
+    /// </summary>
+    /// <param name="countrySiteId"></param>
+    /// <param name="marketId"></param>
+    /// <returns></returns>
+    IMarket GetMarketForCountrySite(string countrySiteId, string marketId);
+
+    /// <summary>
+    /// Get the IMarket for the marketId for the given CountrySite.  
+    /// </summary>
+    /// <param name="countrySiteId"></param>
+    /// <param name="marketId"></param>
+    /// <returns>If the countrySiteId is invalid, or the marketId is invalid, or the market is not mapped to the CountrySite, null is returned.</returns>
+    IMarket TryGetMarketForCountrySite(string countrySiteId, string marketId);
+ 
+    /// <summary>
+    /// Returns true if the request is on the global (non-country) site. This will return true if you are on the "es" site
     /// also because that is a language site, not a country site.
     /// </summary>
     /// <returns>true if not on a country site</returns>
     bool IsGlobalSite();
+
+    /// <summary>
+    /// Returns true if the countrySiteId is the global (non-country) site. 
+    /// </summary>
+    /// <returns>true if not on a country site</returns>
+    bool IsGlobalSite(string countrySiteId);
 
     /// <summary>
     /// Returns true if the given countrycode matches the country site of the request.

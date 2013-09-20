@@ -5,8 +5,10 @@
   <item catalog_countrySite="www" catalog_marketID="qa-QA" languageURLSegment="qa-qa" isActive="1" internalOnly="1" />
   <item catalog_countrySite="www" catalog_marketID="qa-PS" languageURLSegment="qa-ps" isActive="1" internalOnly="1" />
   <item catalog_countrySite="ca" catalog_marketID="en-CA" languageURLSegment="en" isActive="1" internalOnly="0" />
+  <item catalog_countrySite="ca" catalog_marketID="fr-CA" languageURLSegment="fr" isActive="1" internalOnly="0" />
   <item catalog_countrySite="uk" catalog_marketID="en-GB" languageURLSegment="en" isActive="1" internalOnly="0" />
   <item catalog_countrySite="au" catalog_marketID="en-AU" languageURLSegment="en" isActive="1" internalOnly="0" />
   <item catalog_countrySite="in" catalog_marketID="en-IN" languageURLSegment="en" isActive="1" internalOnly="0" />
   <item catalog_countrySite='in' catalog_marketID='es-IN' languageURLSegment='es' isActive='1' internalOnly='0' />
+  <item catalog_countrySite='in' catalog_marketID='es-BR' languageURLSegment='es-br' isActive='1' internalOnly='0' />
 </data>

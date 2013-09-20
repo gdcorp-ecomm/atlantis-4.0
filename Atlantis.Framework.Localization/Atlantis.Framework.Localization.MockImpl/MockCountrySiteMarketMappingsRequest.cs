@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Web;
+using System.Xml;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Localization.Interface;
 
@@ -20,7 +21,15 @@ namespace Atlantis.Framework.Localization.MockImpl
           throw new Exception(this.GetType().Name + " requires a request derived from " + typeof(CountrySiteMarketMappingsRequestData).Name);
         }
         string strResp = HttpContext.Current.Items[MockLocalizationSettings.CountrySiteMarketMappingsTable] as string;
-        result = CountrySiteMarketMappingsResponseData.FromCacheDataXml(strResp);
+        var xmldoc = new XmlDocument();
+        xmldoc.LoadXml(strResp);
+        var nodes = xmldoc.SelectNodes(String.Concat("/data/item[@catalog_countrySite!='", request.CountrySite, "']"));
+        foreach (XmlNode node in nodes)
+        {
+          node.ParentNode.RemoveChild(node);
+        }
+        string filteredResp = xmldoc.OuterXml;
+        result = CountrySiteMarketMappingsResponseData.FromCacheDataXml(filteredResp);
 
       }
       return result;

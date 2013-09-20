@@ -122,6 +122,14 @@ namespace Atlantis.Framework.Localization.Interface
       return csmm != null ? csmm.LanguageUrlSegment : String.Empty;
     }
 	
+    public bool IsPublicMapping(string marketId)
+    {
+      CountrySiteMarketMapping csmm;
+      _rawTable.TryGetValue(marketId, out csmm);
+      return csmm != null && !csmm.IsInternalOnly;
+
+    }
+
     public bool NoMappings { get; private set; }
 
     private bool IsExceptionDefaultMapping { get; set; }

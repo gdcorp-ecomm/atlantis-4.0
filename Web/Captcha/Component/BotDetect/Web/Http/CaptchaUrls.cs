@@ -106,7 +106,7 @@ namespace BotDetect.Web
 
             url += String.Format(CultureInfo.InvariantCulture, "&amp;c={0}&amp;t={1}", captchaId, instanceId);
 
-            if (HttpContext.Current.Request != null)
+            if (null != HttpContext.Current && HttpContext.Current.Request != null && null != HttpContext.Current.Request.Url && null != HttpContext.Current.Request.Url.OriginalString && null != HttpContext.Current.Request.Url.LocalPath)
             {
               string baseUrl = string.Concat(HttpContext.Current.Request.Url.OriginalString.Replace(HttpContext.Current.Request.Url.LocalPath, string.Empty), "/");
               url = baseUrl + url;

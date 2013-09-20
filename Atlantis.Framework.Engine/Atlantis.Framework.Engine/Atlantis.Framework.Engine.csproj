@@ -77,7 +77,7 @@
     <None Include="Atlantis.Framework.Engine.nuspec">
       <SubType>Designer</SubType>
     </None>
-    <None Include="bin\atlantis.config" />
+    <None Include="atlantis.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -115,6 +115,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="readme.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

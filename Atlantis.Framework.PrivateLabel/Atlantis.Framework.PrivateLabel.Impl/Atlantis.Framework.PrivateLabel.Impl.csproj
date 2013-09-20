@@ -68,6 +68,16 @@
   <ItemGroup>
     <None Include="Atlantis.Framework.PrivateLabel.Impl.nuspec" />
     <None Include="Atlantis.Framework.PrivateLabel.Impl.nuget.bat" />
+    <None Include="bin\atlantis.config.transform">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="bin\atlantis.prod.config.transform">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="bin\atlantis.test.config.transform">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

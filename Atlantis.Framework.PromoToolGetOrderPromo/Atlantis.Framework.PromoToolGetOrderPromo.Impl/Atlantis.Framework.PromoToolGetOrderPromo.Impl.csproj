@@ -79,15 +79,8 @@
   <ItemGroup>
     <None Include="Atlantis.Framework.PromoToolGetOrderPromo.Impl.nuget.bat" />
     <None Include="Atlantis.Framework.PromoToolGetOrderPromo.Impl.nuspec" />
-    <None Include="bin\atlantis.config.transform">
+    <None Include="atlantis.config.transform">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="bin\atlantis.prod.config.transform">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="bin\atlantis.test.config.transform">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -215,6 +208,9 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

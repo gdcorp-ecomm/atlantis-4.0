@@ -19,6 +19,5 @@
   <files>
     <file src="bin\Release\Atlantis.Framework.Engine.XmlSerializers.dll" target="lib\net40\Atlantis.Framework.Engine.XmlSerializers.dll" />
     <file src="atlantis.config" target="content\atlantis.config" />
-    <file src="readme.txt" target="" />
   </files>
 </package>

@@ -113,9 +113,6 @@
       <CachedSettingsPropName>Atlantis_Framework_Engine_gdSiteLog_WSCgdSiteLogService</CachedSettingsPropName>
     </WebReferenceUrl>
   </ItemGroup>
-  <ItemGroup>
-    <None Include="readme.txt" />
-  </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

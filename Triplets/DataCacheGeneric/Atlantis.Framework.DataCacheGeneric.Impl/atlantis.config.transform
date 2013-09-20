@@ -1,0 +1,3 @@
+﻿<ConfigElements>
+  <ConfigElement progid="Atlantis.Framework.DataCacheGeneric.Impl.GetCacheDataRequest" assembly="Atlantis.Framework.DataCacheGeneric.Impl.dll" request_type="694" />
+</ConfigElements>

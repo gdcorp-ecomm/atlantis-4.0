@@ -56,6 +56,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="atlantis.config.transform">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Atlantis.Framework.DataCacheGeneric.Impl.nuspec">
       <SubType>Designer</SubType>
     </None>

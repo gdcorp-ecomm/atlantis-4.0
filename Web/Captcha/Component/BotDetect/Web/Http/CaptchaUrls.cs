@@ -108,7 +108,7 @@ namespace BotDetect.Web
 
             if (null != HttpContext.Current && HttpContext.Current.Request != null && null != HttpContext.Current.Request.Url && null != HttpContext.Current.Request.Url.OriginalString && null != HttpContext.Current.Request.Url.LocalPath)
             {
-              string baseUrl = string.Concat(HttpContext.Current.Request.Url.OriginalString.Replace(HttpContext.Current.Request.Url.LocalPath, string.Empty), "/");
+              string baseUrl = string.Concat(HttpContext.Current.Request.Url.OriginalString.Replace(HttpContext.Current.Request.Url.LocalPath + HttpContext.Current.Request.Url.Query, string.Empty), "/");
               url = baseUrl + url;
             }
             // ensure cookieless ASP.NET Session compatibility

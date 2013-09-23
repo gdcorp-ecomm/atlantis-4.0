@@ -27,7 +27,7 @@ using System.Web.UI;
 [assembly: AssemblyCulture("")]	
 [assembly: TagPrefix("BotDetect", "BotDetect")]
 [assembly: AssemblyVersion("3.13.12.1")]
-[assembly: AssemblyFileVersion("4.13.09.20")]
+[assembly: AssemblyFileVersion("4.13.09.23")]
 
 
 // assembly settings

@@ -34,6 +34,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Atlantis.Framework.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Interface.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
   </ItemGroup>
@@ -45,10 +49,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj">
-      <Project>{a083a52e-c3c3-42e0-8dfd-54719e4c3b25}</Project>
-      <Name>Atlantis.Framework.Interface</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.Brand.Interface\Atlantis.Framework.Brand.Interface.csproj">
       <Project>{8fb0c2ac-03ca-471b-a247-648cdbf4c645}</Project>
       <Name>Atlantis.Framework.Brand.Interface</Name>
@@ -58,15 +58,26 @@
     <EmbeddedResource Include="Data\CompanyNames.xml" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Atlantis.Framework.Brand.Impl.nuget.bat" />
+    <None Include="Atlantis.Framework.Brand.Impl.nuspec">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="atlantis.config.transform">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Data\CompanyNames.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Data\ProductLineNames.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Data\ProductLineNames.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

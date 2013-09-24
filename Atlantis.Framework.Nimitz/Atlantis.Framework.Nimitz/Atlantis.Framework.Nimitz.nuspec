@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Atlantis.Framework.Nimitz</id>
+    <version>4.0.0.0</version>
+    <title>Atlantis Framework Nimitz</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <projectUrl>https://confluence.int.godaddy.com/display/ATLANTIS</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes></releaseNotes>
+    <copyright>$copyright$</copyright>
+    <tags>Atlantis Framework Nimitz</tags>
+    <dependencies>
+      <dependency id="Atlantis.Framework.Engine" version="4.0.0.0" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="Reference\netConnect.dll" target="lib\net40\netConnect.dll" />
+  </files>
+</package>

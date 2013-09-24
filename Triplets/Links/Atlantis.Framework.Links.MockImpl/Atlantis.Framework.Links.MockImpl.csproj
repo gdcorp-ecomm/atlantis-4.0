@@ -48,12 +48,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Atlantis.Framework.Links.Interface\Atlantis.Framework.Links.Interface.csproj">
-      <Project>{39A8B945-42C8-45E8-ADD6-5BC7EB73F423}</Project>
-      <Name>Atlantis.Framework.Links.Interface</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Atlantis.Framework.Links.MockImpl.nuget.bat" />
     <None Include="Atlantis.Framework.Links.MockImpl.nuspec">
       <SubType>Designer</SubType>

@@ -1,0 +1,3 @@
+<ConfigElements>
+  <ConfigElement progid="Atlantis.Framework.LinkInfo.Impl.LinkInfoRequest" assembly="Atlantis.Framework.LinkInfo.Impl.dll" request_type="12" lpc="1" />
+</ConfigElements>

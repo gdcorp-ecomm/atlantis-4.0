@@ -216,5 +216,31 @@ namespace Atlantis.Framework.Testing.MockLocalization
       throw new NotImplementedException();
     }
     #endregion
+
+
+    public IMarket GetMarketForCountrySite(string countrySiteId, string marketId)
+    {
+        throw new NotImplementedException();
+    }
+
+    public bool IsGlobalSite(string countrySiteId)
+    {
+        throw new NotImplementedException();
+    }
+
+    public ICountrySite TryGetCountrySite(string countrySiteId)
+    {
+        throw new NotImplementedException();
+    }
+
+    public IMarket TryGetMarket(string marketId)
+    {
+        throw new NotImplementedException();
+    }
+
+    public IMarket TryGetMarketForCountrySite(string countrySiteId, string marketId)
+    {
+        throw new NotImplementedException();
+    }
   }
 }

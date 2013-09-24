@@ -5,8 +5,13 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Atlantis.Framework.Testing.MockLocalization")]
-[assembly: AssemblyDescription("")]
-[assembly: AssemblyConfiguration("")]
+#if DEBUG
+[assembly: AssemblyDescription("Debug Build")]
+[assembly: AssemblyConfiguration("Debug Build")]
+#else
+[assembly: AssemblyDescription("Release Build")]
+[assembly: AssemblyConfiguration("Release Build")]
+#endif
 [assembly: AssemblyCompany("GoDaddy")]
 [assembly: AssemblyProduct("Atlantis.Framework.Testing.MockLocalization")]
 [assembly: AssemblyCopyright("Copyright © GoDaddy 2013")]

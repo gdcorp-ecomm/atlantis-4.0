@@ -9,9 +9,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Localiza
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Localization.Tests", "Atlantis.Framework.Localization.Tests\Atlantis.Framework.Localization.Tests.csproj", "{6FB9776B-2A0A-47D3-B04B-EC0419CF31A5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Localization.MockImpl", "Atlantis.Framework.Localization.MockImpl\Atlantis.Framework.Localization.MockImpl.csproj", "{10E1A35F-D230-443C-AD7D-D509F72B0AB4}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 4
+		SccNumberOfProjects = 5
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
 		SccLocalPath0 = .
@@ -24,6 +26,9 @@ Global
 		SccProjectUniqueName3 = Atlantis.Framework.Localization.Tests\\Atlantis.Framework.Localization.Tests.csproj
 		SccProjectName3 = Atlantis.Framework.Localization.Tests
 		SccLocalPath3 = Atlantis.Framework.Localization.Tests
+		SccProjectUniqueName4 = Atlantis.Framework.Localization.MockImpl\\Atlantis.Framework.Localization.MockImpl.csproj
+		SccProjectName4 = Atlantis.Framework.Localization.MockImpl
+		SccLocalPath4 = Atlantis.Framework.Localization.MockImpl
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -42,6 +47,10 @@ Global
 		{6FB9776B-2A0A-47D3-B04B-EC0419CF31A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6FB9776B-2A0A-47D3-B04B-EC0419CF31A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6FB9776B-2A0A-47D3-B04B-EC0419CF31A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{10E1A35F-D230-443C-AD7D-D509F72B0AB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10E1A35F-D230-443C-AD7D-D509F72B0AB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10E1A35F-D230-443C-AD7D-D509F72B0AB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10E1A35F-D230-443C-AD7D-D509F72B0AB4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -13,6 +13,7 @@
     <Name Key="legal" Value="GoDaddy, LLC" />
     <Name Key="parentcompany" Value="The GoDaddy Group" />
     <Name Key="twitter" Value="@Godaddy" />
+    <Name Key="keywords" Value="GoDaddy, Go Daddy, godadddy.com, godaddy, go daddy" />
   </CompanyName>
 
   <CompanyName ContextId="2">
@@ -20,11 +21,13 @@
     <Name Key="name" Value="Wild West Domains" />
     <Name Key="dotcom" Value="WildWestDomains.com" />
     <Name Key="legal" Value="Wild West Domains, LLC" />
+    <Name Key="keywords" Value="Wild West Domains, wildwestdomains.com, wildwestdomains, wild west, wildwest" />
   </CompanyName>
 
   <CompanyName ContextId="5">
     <Name Key="name" Value="Blue Razor" />
     <Name Key="dotcom" Value="BlueRazor.com" />
     <Name Key="legal" Value="Blue Razor Domains, LLC" />
+    <Name Key="keywords" Value="Blue Razor.com, Blue Razor Domains, bluerazor.com, blue razor" />
   </CompanyName>
 </CompanyNames>

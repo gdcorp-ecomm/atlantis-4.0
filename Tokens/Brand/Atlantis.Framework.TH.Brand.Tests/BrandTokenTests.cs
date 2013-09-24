@@ -22,21 +22,32 @@ namespace Atlantis.Framework.TH.Brand.Tests
     private const string _companyTokenFormat = "[@T[companyname:{0}]@T]";
     private const string _productLineCompanyTokenFormat = "[@T[productline:{0}]@T]";
 
-    readonly MockProviderContainer _container = new MockProviderContainer();
-    private ISiteContext _siteContext;
+    private MockProviderContainer _container = new MockProviderContainer();
 
     [TestInitialize]
     public void SetUp()
     {
-      _container.RegisterProvider<ISiteContext, MockSiteContext>();
-      _container.RegisterProvider<IManagerContext, MockNoManagerContext>();
-      _container.RegisterProvider<IBrandProvider, BrandProvider>();
-      _siteContext = _container.Resolve<ISiteContext>();
-
       TokenManager.RegisterTokenHandler(new CompanyTokenHandler());
       TokenManager.RegisterTokenHandler(new ProductLineTokenHandler());
     }
 
+    private MockProviderContainer NewTHBrand(int privateLabelId, bool isInternal = false)
+    {
+      var container = new MockProviderContainer();
+
+      if (isInternal)
+      {
+        container.SetData(MockSiteContextSettings.IsRequestInternal, true);
+      }
+
+      container.RegisterProvider<ISiteContext, MockSiteContext>();
+      container.RegisterProvider<IManagerContext, MockNoManagerContext>();
+      container.RegisterProvider<IBrandProvider, BrandProvider>();
+      container.SetData(MockSiteContextSettings.PrivateLabelId, privateLabelId);
+      container.Resolve<ISiteContext>();
+
+      return container;
+    }
 
     private string GetTokenString(string token)
     {
@@ -52,7 +63,9 @@ namespace Atlantis.Framework.TH.Brand.Tests
     {
       MockHttpRequest mockHttpRequest = new MockHttpRequest("http://www.godaddy.com/");
       MockHttpContext.SetFromWorkerRequest(mockHttpRequest);
-      _container.SetMockSetting(MockSiteContextSettings.PrivateLabelId, "1");
+
+      //_container.SetMockSetting(MockSiteContextSettings.PrivateLabelId, "1");
+      _container = NewTHBrand(1);
 
       Assert.AreEqual(GetTokenString(String.Format(_companyTokenFormat, BrandKeyConstants.NAME_DBP)), "Domains By Proxy");
       Assert.AreEqual(GetTokenString(String.Format(_companyTokenFormat, BrandKeyConstants.NAME_DBP_DOT_COM)), "DomainsByProxy.com");
@@ -65,6 +78,7 @@ namespace Atlantis.Framework.TH.Brand.Tests
       Assert.AreEqual(GetTokenString(String.Format(_companyTokenFormat, BrandKeyConstants.NAME_COMPANY_LEGAL)), "GoDaddy, LLC");
       Assert.AreEqual(GetTokenString(String.Format(_companyTokenFormat, BrandKeyConstants.NAME_COMPANY_PARENT_COMPANY)), "The GoDaddy Group");
       Assert.AreEqual(GetTokenString(String.Format(_companyTokenFormat, BrandKeyConstants.NAME_COMPANY_TWITTER)), "@Godaddy");
+      Assert.AreEqual(GetTokenString(String.Format(_companyTokenFormat, BrandKeyConstants.NAME_KEYWORDS)), "GoDaddy, Go Daddy, godadddy.com, godaddy, go daddy");
     }
 
     [TestMethod]
@@ -72,8 +86,8 @@ namespace Atlantis.Framework.TH.Brand.Tests
     {
       MockHttpRequest mockHttpRequest = new MockHttpRequest("http://www.bluerazor.com/");
       MockHttpContext.SetFromWorkerRequest(mockHttpRequest);
-      _container.SetMockSetting(MockSiteContextSettings.PrivateLabelId, "2");
 
+      _container = NewTHBrand(2);
 
       Assert.AreEqual(GetTokenString(String.Format(_companyTokenFormat, BrandKeyConstants.NAME_DBP)), "Domains By Proxy");
       Assert.AreEqual(GetTokenString(String.Format(_companyTokenFormat, BrandKeyConstants.NAME_DBP_DOT_COM)), "DomainsByProxy.com");
@@ -86,6 +100,7 @@ namespace Atlantis.Framework.TH.Brand.Tests
       Assert.AreEqual(GetTokenString(String.Format(_companyTokenFormat, BrandKeyConstants.NAME_COMPANY_LEGAL)), "Blue Razor Domains, LLC");
       Assert.AreEqual(GetTokenString(String.Format(_companyTokenFormat, BrandKeyConstants.NAME_COMPANY_PARENT_COMPANY)), String.Empty);
       Assert.AreEqual(GetTokenString(String.Format(_companyTokenFormat, BrandKeyConstants.NAME_COMPANY_TWITTER)), String.Empty);
+      Assert.AreEqual(GetTokenString(String.Format(_companyTokenFormat, BrandKeyConstants.NAME_KEYWORDS)), "Blue Razor.com, Blue Razor Domains, bluerazor.com, blue razor");
     }
 
     [TestMethod]
@@ -93,7 +108,8 @@ namespace Atlantis.Framework.TH.Brand.Tests
     {
       MockHttpRequest mockHttpRequest = new MockHttpRequest("http://www.wildwestdomains.com/");
       MockHttpContext.SetFromWorkerRequest(mockHttpRequest);
-      _container.SetMockSetting(MockSiteContextSettings.PrivateLabelId, "1387");
+
+      _container = NewTHBrand(1387);
 
       Assert.AreEqual(GetTokenString(String.Format(_companyTokenFormat, BrandKeyConstants.NAME_DBP)), "Domains By Proxy");
       Assert.AreEqual(GetTokenString(String.Format(_companyTokenFormat, BrandKeyConstants.NAME_DBP_DOT_COM)), "DomainsByProxy.com");
@@ -106,6 +122,7 @@ namespace Atlantis.Framework.TH.Brand.Tests
       Assert.AreEqual(GetTokenString(String.Format(_companyTokenFormat, BrandKeyConstants.NAME_COMPANY_LEGAL)), "Wild West Domains, LLC");
       Assert.AreEqual(GetTokenString(String.Format(_companyTokenFormat, BrandKeyConstants.NAME_COMPANY_PARENT_COMPANY)), String.Empty);
       Assert.AreEqual(GetTokenString(String.Format(_companyTokenFormat, BrandKeyConstants.NAME_COMPANY_TWITTER)), String.Empty);
+      Assert.AreEqual(GetTokenString(String.Format(_companyTokenFormat, BrandKeyConstants.NAME_KEYWORDS)), "Wild West Domains, wildwestdomains.com, wildwestdomains, wild west, wildwest");
     }
 
     [TestMethod]
@@ -113,7 +130,8 @@ namespace Atlantis.Framework.TH.Brand.Tests
     {
       MockHttpRequest mockHttpRequest = new MockHttpRequest("http://www.securepaynet.com/");
       MockHttpContext.SetFromWorkerRequest(mockHttpRequest);
-      _container.SetMockSetting(MockSiteContextSettings.PrivateLabelId, "1592");
+
+      _container = NewTHBrand(1592);
 
       Assert.AreEqual(GetTokenString(String.Format(_companyTokenFormat, BrandKeyConstants.NAME_DBP)), "Domains By Proxy");
       Assert.AreEqual(GetTokenString(String.Format(_companyTokenFormat, BrandKeyConstants.NAME_DBP_DOT_COM)), "DomainsByProxy.com");
@@ -124,6 +142,7 @@ namespace Atlantis.Framework.TH.Brand.Tests
       Assert.AreEqual(GetTokenString(String.Format(_companyTokenFormat, BrandKeyConstants.NAME_COMPANY_DOT_COM)), "Domains Priced Right");
       Assert.AreEqual(GetTokenString(String.Format(_companyTokenFormat, BrandKeyConstants.NAME_COMPANY_LEGAL)), "Domains Priced Right");
       Assert.AreEqual(GetTokenString(String.Format(_companyTokenFormat, BrandKeyConstants.NAME_COMPANY_PARENT_COMPANY)), "Domains Priced Right");
+      Assert.AreEqual(GetTokenString(String.Format(_companyTokenFormat, BrandKeyConstants.NAME_KEYWORDS)), "Domains Priced Right");
     }
 
     [TestMethod]
@@ -131,7 +150,8 @@ namespace Atlantis.Framework.TH.Brand.Tests
     {
       MockHttpRequest mockHttpRequest = new MockHttpRequest("http://www.godaddy.com/");
       MockHttpContext.SetFromWorkerRequest(mockHttpRequest);
-      _container.SetMockSetting(MockSiteContextSettings.PrivateLabelId, "1");
+
+      _container = NewTHBrand(1);
 
       Assert.AreEqual(GetTokenString(String.Format(_productLineCompanyTokenFormat, "<Auctions contextid=\"GD\" />")), "GoDaddy Auctions");
       Assert.AreEqual(GetTokenString(String.Format(_productLineCompanyTokenFormat, "<Auctions contextid=\"Invalid\"/>")), "Domain Auctions");
@@ -147,7 +167,8 @@ namespace Atlantis.Framework.TH.Brand.Tests
     {
       MockHttpRequest mockHttpRequest = new MockHttpRequest("http://www.securepaynet.com/");
       MockHttpContext.SetFromWorkerRequest(mockHttpRequest);
-      _container.SetMockSetting(MockSiteContextSettings.PrivateLabelId, "1592");
+
+      _container = NewTHBrand(1592);
 
       Assert.AreEqual(GetTokenString(String.Format(_productLineCompanyTokenFormat, "<Auctions contextid=\"GD\" />")), "Domain Auctions");
       Assert.AreEqual(GetTokenString(String.Format(_productLineCompanyTokenFormat, "<BusinessRegistration />")), "Business Registration");

@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Xml.Linq;
+using System.Web.Script.Serialization;
 using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.DotTypeForms.Interface
@@ -14,32 +14,29 @@ namespace Atlantis.Framework.DotTypeForms.Interface
     {
       if (!string.IsNullOrEmpty(responseHtml))
       {
-        bool isXmlResponse = false;
-        XElement formsElement = null;
+        _exception = null;
+        bool isError = false;
         try
         {
-          formsElement = XElement.Parse(responseHtml);
-          isXmlResponse = true;
+          var serializer = new JavaScriptSerializer();
+          var data = serializer.Deserialize<TuiResponse>(responseHtml);
+
+          isError = data.ResponseType.Equals("error");
         }
         catch (Exception)
         {
         }
 
-        if (isXmlResponse)
-        { 
-          var error = formsElement.Name.LocalName;
-          if (!error.Equals("error"))
-          {
-            _isSuccess = true;
-          }
-          _responseHtml = responseHtml;
-          _exception = null;
+        _responseHtml = responseHtml;
+
+        if (!isError)
+        {
+          _isSuccess = true;            
         }
         else
         {
-          _responseHtml = responseHtml;
-          _exception = null;
-          _isSuccess = true;
+          _responseHtml = string.Empty;
+          _isSuccess = false;  
         }
       }
     }
@@ -69,6 +66,13 @@ namespace Atlantis.Framework.DotTypeForms.Interface
     public string ToXML()
     {
       return _responseHtml;
+    }
+
+    [Serializable]
+    internal class TuiResponse
+    {
+      public string ResponseType; 
+      public string Message;
     }
   }
 }

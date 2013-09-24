@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Xml.Linq;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.DotTypeRegistration.Interface;
@@ -21,12 +22,12 @@ namespace Atlantis.Framework.DotTypeClaims.Interface
 
     private readonly IDotTypeClaimsSchema _dotTypeClaimsSchema;
     private readonly Dictionary<string, string> _noticeXmlByDomain;
-    private readonly Dictionary<string, string> _claimsXmlByDomain;
+    private readonly Dictionary<string, IEnumerable<string>> _claimsXmlByDomain;
 
     private DotTypeClaimsResponseData()
     {
       _noticeXmlByDomain = new Dictionary<string, string>();
-      _claimsXmlByDomain = new Dictionary<string, string>();
+      _claimsXmlByDomain = new Dictionary<string, IEnumerable<string>>();
     }
 
     public static DotTypeClaimsResponseData FromResponseXml(string responseXml)
@@ -46,7 +47,7 @@ namespace Atlantis.Framework.DotTypeClaims.Interface
         _responseXml = responseXml;
 
         _noticeXmlByDomain = new Dictionary<string, string>();
-        _claimsXmlByDomain = new Dictionary<string, string>();
+        _claimsXmlByDomain = new Dictionary<string, IEnumerable<string>>();
 
         XElement strResponse = XElement.Parse(responseXml);
 
@@ -57,16 +58,33 @@ namespace Atlantis.Framework.DotTypeClaims.Interface
           var domains = strResponse.Descendants("domain");
           foreach (var domain in domains)
           {
-            var noticeElement = domain.Element("notice");
-            if (noticeElement != null)
+            if (!string.IsNullOrEmpty(domain.Value))
             {
+              var noticeElement = XElement.Parse(domain.Value);
+              foreach (XElement xelement in noticeElement.DescendantsAndSelf())
+              {
+                // Stripping the namespace by setting the name of the element to it's localname only
+                xelement.Name = xelement.Name.LocalName;
+
+                // replacing all attributes with attributes that are not namespaces and their names are set to only the localname
+                xelement.ReplaceAttributes((from xattrib in xelement.Attributes().Where(xattr => !xattr.IsNamespaceDeclaration) select new XAttribute(xattrib.Name.LocalName, xattrib.Value)));
+              }
+
               _noticeXmlByDomain[domain.Attribute("name").Value] = noticeElement.ToString();
 
-              var claimsElement = noticeElement.Element("claims");
-              if (claimsElement != null)
+              IList<string> claims = new List<string>();
+              var claimElements = noticeElement.Descendants("claim");
+              foreach (XElement claimElement in claimElements)
               {
-                _claimsXmlByDomain[domain.Attribute("name").Value] = claimsElement.ToString();
+                claims.Add(claimElement.ToString());
               }
+
+              _claimsXmlByDomain[domain.Attribute("name").Value] = claims;
+            }
+            else
+            {
+              _noticeXmlByDomain[domain.Attribute("name").Value] = string.Empty;
+              _claimsXmlByDomain[domain.Attribute("name").Value] = new List<string>();
             }
           }
           _dotTypeClaimsSchema = new DotTypeClaimsSchema(_noticeXmlByDomain, _claimsXmlByDomain);

@@ -2,8 +2,8 @@
 {
   public class DotTypeFormsHtmlRequestData : DotTypeFormsBaseRequestData
   {
-    public DotTypeFormsHtmlRequestData(int tldId, string placement, string phase, string language)
-      : base(tldId, placement, phase, language)
+    public DotTypeFormsHtmlRequestData(string formType, int tldId, string placement, string phase, string marketId, int contextId)
+      : base(formType, tldId, placement, phase, marketId, contextId)
     {
     }
   }

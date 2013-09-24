@@ -49,13 +49,13 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration.Handlers
     {
       var result = new List<IFormField>();
 
-      string claimsXml;
-      if (claims.TryGetClaimsXmlByDomain(domain, out claimsXml))
+      string noticeXml;
+      if (claims.TryGetNoticeXmlByDomain(domain, out noticeXml))
       {
-        var formField = new FormField { Name = field.FieldName, Value = claimsXml, Type = FormFieldTypes.Checkbox };
+        var formField = new FormField { Name = field.FieldName, Value = noticeXml, Type = FormFieldTypes.Checkbox };
         result.Add(formField);
 
-        formField = new FormField { Value = claimsXml, Type = FormFieldTypes.Label };
+        formField = new FormField { Value = noticeXml, Type = FormFieldTypes.Label };
         result.Add(formField);
 
         formField = new FormField { Name = "acceptedDate", Type = FormFieldTypes.Hidden };

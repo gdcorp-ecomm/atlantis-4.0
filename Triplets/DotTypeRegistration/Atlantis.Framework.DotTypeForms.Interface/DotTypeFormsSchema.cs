@@ -22,36 +22,36 @@ namespace Atlantis.Framework.DotTypeForms.Interface
       {
         if (!string.IsNullOrEmpty(responseXml))
         {
-          var formsElement = XElement.Parse(responseXml);
+          var formElement = XElement.Parse(responseXml);
 
-          var error = formsElement.Name.LocalName;
+          var error = formElement.Name.LocalName;
           if (!error.Equals("error"))
           {
             var form = new DotTypeFormsForm();
-            var formElement = formsElement.Element("form");
-            if (formElement != null)
+
+            var formElementName = formElement.Name.LocalName;
+
+            if (formElementName.Equals("form"))
             {
               var formName = formElement.Attribute("name");
               var formDescription = formElement.Attribute("description");
-              var formGetMethod = formElement.Attribute("getmethod");
-              var formSetMethod = formElement.Attribute("setmethod");
+              var formType = formElement.Attribute("type");
 
-              if (formName == null || formDescription == null || formGetMethod == null || formSetMethod == null)
+              if (formName == null || formDescription == null || formType == null)
               {
                 const string message =
-                  "Xml with invalid FormName, FormDescription, FormType, FormGetMethod or FormSetMethod";
+                  "Xml with invalid FormName, FormDescription, FormType";
                 var xmlHeaderException = new AtlantisException("DotTypeFormsSchemaResponseData.BuildModelFromXml", "0",
-                                                               message, responseXml, null, null);
+                                                                message, responseXml, null, null);
                 throw xmlHeaderException;
               }
 
               var dotTypeFormsForm = new DotTypeFormsForm
-                                       {
-                                         FormName = formName.Value,
-                                         FormDescription = formDescription.Value,
-                                         FormGetMethod = formGetMethod.Value,
-                                         FormSetMethod = formSetMethod.Value
-                                       };
+                {
+                  FormName = formName.Value,
+                  FormDescription = formDescription.Value,
+                  FormType = formType.Value
+                };
 
               var fieldCollection = ParseFieldCollection(formElement);
               if (fieldCollection != null && fieldCollection.Count > 0)
@@ -62,7 +62,7 @@ namespace Atlantis.Framework.DotTypeForms.Interface
               {
                 const string message = "Xml is missing FieldCollection";
                 var xmlHeaderException = new AtlantisException("DotTypeFormsSchemaResponseData.BuildModelFromXml", "0",
-                                                               message, responseXml, null, null);
+                                                                message, responseXml, null, null);
                 throw xmlHeaderException;
               }
               form = dotTypeFormsForm;

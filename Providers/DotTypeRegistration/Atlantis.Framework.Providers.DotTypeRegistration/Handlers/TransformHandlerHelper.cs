@@ -11,7 +11,7 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration.Handlers
       DotTypeFormFieldTypes formFieldType;
       switch (fieldType.ToLowerInvariant())
       {
-        case "claims":
+        case "claim":
           formFieldType = DotTypeFormFieldTypes.Claims;
           break;
         case "checkbox":

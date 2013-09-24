@@ -14,14 +14,20 @@ namespace Atlantis.Framework.DotTypeForms.Impl
       try
       {
         var dotTypeFormsXmlSchemaRequestData = (DotTypeFormsXmlRequestData)requestData;
-        using (var tuiApiService = new TuiAPI.TuiApi())
-        {
-          tuiApiService.Url = ((WsConfigElement)config).WSURL;
-          tuiApiService.Timeout = (int)requestData.RequestTimeout.TotalMilliseconds;
-          responseXml = tuiApiService.GetFormSchemas(dotTypeFormsXmlSchemaRequestData.ToXML());
+        var wsConfigElement = ((WsConfigElement)config);
 
-          responseData = new DotTypeFormsXmlResponseData(responseXml);
-        }
+        var fullUrl = string.Format("{0}/api/schema/getxml/{1}?tldid={2}&pl={3}&ph={4}&marketid={5}&contextid={6}",
+                                    wsConfigElement.WSURL,
+                                    dotTypeFormsXmlSchemaRequestData.FormType,
+                                    dotTypeFormsXmlSchemaRequestData.TldId,
+                                    dotTypeFormsXmlSchemaRequestData.Placement,
+                                    dotTypeFormsXmlSchemaRequestData.Phase,
+                                    dotTypeFormsXmlSchemaRequestData.MarketId,
+                                    dotTypeFormsXmlSchemaRequestData.ContextId);
+
+        responseXml = HttpWebRequestHelper.SendWebRequest(dotTypeFormsXmlSchemaRequestData, fullUrl, wsConfigElement);
+
+        responseData = new DotTypeFormsXmlResponseData(responseXml);
       }
       catch (Exception ex)
       {

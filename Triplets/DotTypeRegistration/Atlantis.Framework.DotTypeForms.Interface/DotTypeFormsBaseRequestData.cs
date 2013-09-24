@@ -1,6 +1,4 @@
 ﻿using System.Globalization;
-using System.Security.Cryptography;
-using System.Text;
 using System.Xml.Linq;
 using Atlantis.Framework.Interface;
 
@@ -8,26 +6,32 @@ namespace Atlantis.Framework.DotTypeForms.Interface
 {
   public abstract class DotTypeFormsBaseRequestData : RequestData
   {
-    int _tldId { get; set; }
-    string _placement { get; set; }
-    string _phase { get; set; }
-    string _language { get; set; }
+    public int TldId { get; set; }
+    public string Placement { get; set; }
+    public string Phase { get; set; }
+    public string MarketId { get; set; }
+    public int ContextId { get; set; }
+    public string FormType { get; set; }
 
-    protected DotTypeFormsBaseRequestData(int tldId, string placement, string phase, string language)
+    protected DotTypeFormsBaseRequestData(string formType, int tldId, string placement, string phase, string marketId, int contextId)
     {
-      _tldId = tldId;
-      _placement = placement.ToLowerInvariant();
-      _phase = phase.ToLowerInvariant();
-      _language = language.ToLowerInvariant();
+      FormType = formType;
+      TldId = tldId;
+      Placement = placement.ToLowerInvariant();
+      Phase = phase.ToLowerInvariant();
+      MarketId = marketId.ToLowerInvariant();
+      ContextId = contextId;
     }
 
     public override string ToXML()
     {
       var element = new XElement("parameters");
-      element.Add(new XAttribute("tldid", _tldId.ToString(CultureInfo.InvariantCulture)));
-      element.Add(new XAttribute("placement", _placement));
-      element.Add(new XAttribute("phase", _phase));
-      element.Add(new XAttribute("language", _language));
+      element.Add(new XAttribute("formtype", FormType.ToString(CultureInfo.InvariantCulture)));
+      element.Add(new XAttribute("tldid", TldId.ToString(CultureInfo.InvariantCulture)));
+      element.Add(new XAttribute("placement", Placement));
+      element.Add(new XAttribute("phase", Phase));
+      element.Add(new XAttribute("marketId", MarketId));
+      element.Add(new XAttribute("contextid", ContextId.ToString(CultureInfo.InvariantCulture)));
       return element.ToString();
     }
 

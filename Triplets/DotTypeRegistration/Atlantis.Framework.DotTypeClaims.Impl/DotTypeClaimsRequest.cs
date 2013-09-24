@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Net;
-using System.Text;
+using System.Security.Cryptography.X509Certificates;
 using Atlantis.Framework.DotTypeClaims.Interface;
 using Atlantis.Framework.Interface;
 
@@ -17,9 +17,9 @@ namespace Atlantis.Framework.DotTypeClaims.Impl
       try
       {
         var dotTypeClaimsRequestData = (DotTypeClaimsRequestData)requestData;
-        var url = ((WsConfigElement)config).WSURL;
+        var wsConfigElement = ((WsConfigElement)config);
 
-        var fullUrl = url + "/getclaimdata?d=" + string.Join(",", dotTypeClaimsRequestData.Domains);
+        var fullUrl = wsConfigElement.WSURL + "/getclaimdata?d=" + string.Join(",", dotTypeClaimsRequestData.Domains);
 
         var webRequest = (HttpWebRequest) WebRequest.Create(fullUrl);
         webRequest.ContentType = "application/x-www-form-urlencoded";
@@ -27,16 +27,25 @@ namespace Atlantis.Framework.DotTypeClaims.Impl
         webRequest.Timeout = (int)requestData.RequestTimeout.TotalMilliseconds;
         webRequest.KeepAlive = false;
 
-        var webResponse = webRequest.GetResponse();
-
-        var dataStream = webResponse.GetResponseStream();
-        if (dataStream != null)
+        if (!string.IsNullOrEmpty(wsConfigElement.GetConfigValue("ClientCertificateName")))
         {
-          var streamReader = new StreamReader(dataStream);
-          responseXml = streamReader.ReadToEnd().Trim();
-          streamReader.Close();
+          X509Certificate2 clientCertificate = wsConfigElement.GetClientCertificate();
+          webRequest.ClientCertificates.Add(clientCertificate);
         }
-        webResponse.Close();
+
+        using (var webResponse = webRequest.GetResponse())
+        {
+          using (var dataStream = webResponse.GetResponseStream())
+          {
+            if (dataStream != null)
+            {
+              using (var streamReader = new StreamReader(dataStream))
+              {
+                responseXml = streamReader.ReadToEnd().Trim();
+              }
+            }
+          }
+        }
 
         responseData = DotTypeClaimsResponseData.FromResponseXml(responseXml);
       }

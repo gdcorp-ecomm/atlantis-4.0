@@ -12,7 +12,7 @@ namespace Atlantis.Framework.DotTypeClaims.Tests
     [TestMethod]
     public void DotTypeClaimsGoodRequest()
     {
-      string[] domains = {"domain1.shop", "domain2.shop"};
+      string[] domains = {"domain1.shop", "claim1.example"};
 
       var request = new DotTypeClaimsRequestData(domains);
       var response = (DotTypeClaimsResponseData)Engine.Engine.ProcessRequest(request, 710);

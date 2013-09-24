@@ -19,4 +19,7 @@
       <dependency id="Atlantis.Framework.Products.Interface" version="4.0.0.0" />
     </dependencies>
   </metadata>
+  <files>
+    <file src="atlantis.config.transform" target="content\atlantis.config.transform" />
+  </files>
 </package>

@@ -47,7 +47,7 @@ namespace Atlantis.Framework.Providers.ProxyContext
       return result;
     }
 
-    public override Interface.ProxyTypes ProxyType
+    public override ProxyTypes ProxyType
     {
       get { return ProxyTypes.SmartlingTranslation; }
     }

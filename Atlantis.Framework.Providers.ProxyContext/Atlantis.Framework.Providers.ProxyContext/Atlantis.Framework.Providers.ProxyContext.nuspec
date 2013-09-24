@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Atlantis.Framework.Providers.ProxyContext</id>
+    <version>4.0.0.0</version>
+    <title>Atlantis Framework Providers ProxyContext</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <projectUrl>https://confluence.int.godaddy.com/display/ATLANTIS</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes></releaseNotes>
+    <copyright>$copyright$</copyright>
+    <tags>Atlantis Framework Providers ProxyContext</tags>
+    <dependencies>
+      <dependency id="Atlantis.Framework.DataCache" version="4.0.0.0" />
+      <dependency id="Atlantis.Framework.Engine" version="4.0.0.0" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="readme.txt" target="" />
+  </files>
+</package>

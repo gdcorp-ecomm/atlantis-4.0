@@ -51,7 +51,7 @@ namespace Atlantis.Framework.Providers.ProxyContext
       get { return _originalIP; }
     }
 
-    public Interface.ProxyTypes ProxyType
+    public ProxyTypes ProxyType
     {
       get { return _proxyType; }
     }

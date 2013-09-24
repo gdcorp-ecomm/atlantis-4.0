@@ -9,7 +9,7 @@ namespace Atlantis.Framework.Providers.ProxyContext
     const string _AKAMAISECRET = "X-DSA-Secret";
     const string _AKAMAIHOST = "X-DSA-Host";
 
-    public override HeaderValueStatus CheckForProxyHeaders(string sourceIpAddress, out Interface.IProxyData proxyData)
+    public override HeaderValueStatus CheckForProxyHeaders(string sourceIpAddress, out IProxyData proxyData)
     {
       proxyData = null;
       if (HttpContext.Current == null)

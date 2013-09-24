@@ -1,5 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<ConfigElements>
+﻿<ConfigElements>
   <ConfigElement progid="Atlantis.Framework.Geo.Impl.CountryRequest" assembly="Atlantis.Framework.Geo.Impl.dll" request_type="664" lpc="0" />
   <ConfigElement progid="Atlantis.Framework.Geo.Impl.StateRequest" assembly="Atlantis.Framework.Geo.Impl.dll" request_type="665" lpc="0" />
   <ConfigElement progid="Atlantis.Framework.Geo.Impl.RegionRequest" assembly="Atlantis.Framework.Geo.Impl.dll" request_type="666" lpc="0" />

@@ -82,6 +82,12 @@
     <Compile Include="Results\RuleEngineResultStatus.cs" />
     <Compile Include="Results\ValidationResultStatus.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Atlantis.Framework.RuleEngine.nuget.bat" />
+    <None Include="Atlantis.Framework.RuleEngine.nuspec">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

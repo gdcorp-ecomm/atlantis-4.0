@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0"?>
 <package >
   <metadata>
-    <id>Atlantis.Framework.Providers.RuleEngine</id>
+    <id>Atlantis.Framework.RuleEngine</id>
     <version>4.0.0.0</version>
-    <title>Atlantis Framework Providers RuleEngine</title>
+    <title>Atlantis Framework RuleEngine</title>
     <authors>$author$</authors>
     <owners>$author$</owners>
     <projectUrl>https://confluence.int.godaddy.com/display/ATLANTIS</projectUrl>
@@ -11,6 +11,6 @@
     <description>$description$</description>
     <releaseNotes></releaseNotes>
     <copyright>$copyright$</copyright>
-    <tags>Atlantis Framework Providers RuleEngine</tags>
+    <tags>Atlantis Framework RuleEngine</tags>
   </metadata>
 </package>

@@ -42,8 +42,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Atlantis.Framework.Providers.Preferences.nuget.bat" />
-    <None Include="Atlantis.Framework.Providers.Preferences.nuspec">
+    <None Include="Atlantis.Framework.Providers.Preferences.Interface.nuget.bat" />
+    <None Include="Atlantis.Framework.Providers.Preferences.Interface.nuspec">
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>

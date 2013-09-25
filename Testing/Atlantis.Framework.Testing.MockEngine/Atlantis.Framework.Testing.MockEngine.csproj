@@ -57,6 +57,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="atlantis.config" />
+    <None Include="Atlantis.Framework.Testing.MockEngine.nuget.bat" />
+    <None Include="Atlantis.Framework.Testing.MockEngine.nuspec" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

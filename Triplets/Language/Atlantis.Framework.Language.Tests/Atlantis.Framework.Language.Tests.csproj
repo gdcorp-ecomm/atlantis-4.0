@@ -39,6 +39,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Atlantis.Framework.Engine">
+      <HintPath>..\packages\Atlantis.Framework.Engine.4.0.0.0\lib\net40\Atlantis.Framework.Engine.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Engine.XmlSerializers">
+      <HintPath>..\packages\Atlantis.Framework.Engine.4.0.0.0\lib\net40\Atlantis.Framework.Engine.XmlSerializers.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Interface">
+      <HintPath>..\packages\Atlantis.Framework.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Parsers.LanguageFile">
+      <HintPath>..\packages\Atlantis.Framework.Parsers.LanguageFile.4.0.0.0\lib\net40\Atlantis.Framework.Parsers.LanguageFile.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -64,18 +76,6 @@
     <Compile Include="CDSLanguagePhraseTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj">
-      <Project>{d30157b2-c1b3-4073-ba5e-632e2337a997}</Project>
-      <Name>Atlantis.Framework.Engine</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj">
-      <Project>{a083a52e-c3c3-42e0-8dfd-54719e4c3b25}</Project>
-      <Name>Atlantis.Framework.Interface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Parsers\Atlantis.Framework.Parsers.LanguageFile\Atlantis.Framework.Parsers.LanguageFile.csproj">
-      <Project>{b6beec29-3fd3-4b07-a8f1-32cb789b0ec8}</Project>
-      <Name>Atlantis.Framework.Parsers.LanguageFile</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.Language.Impl\Atlantis.Framework.Language.Impl.csproj">
       <Project>{b1c3a5a6-bdb8-42b6-9bdb-061cd1b71125}</Project>
       <Name>Atlantis.Framework.Language.Impl</Name>
@@ -96,6 +96,7 @@
     <None Include="dict2-en.language">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="packages.config" />
     <None Include="testdictionary-en.language">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

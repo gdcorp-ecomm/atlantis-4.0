@@ -3,45 +3,27 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{F326D42D-1D35-4AFD-B7DA-23DDBFBD6E0B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "..\..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine", "..\..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj", "{D30157B2-C1B3-4073-BA5E-632E2337A997}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Language.Interface", "Atlantis.Framework.Language.Interface\Atlantis.Framework.Language.Interface.csproj", "{11A7884C-71B6-41CD-824F-0F22797D417D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Language.Impl", "Atlantis.Framework.Language.Impl\Atlantis.Framework.Language.Impl.csproj", "{B1C3A5A6-BDB8-42B6-9BDB-061CD1B71125}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Language.Tests", "Atlantis.Framework.Language.Tests\Atlantis.Framework.Language.Tests.csproj", "{3FA72244-485D-43CB-B82B-1054BC784D19}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Parsers.LanguageFile", "..\..\Parsers\Atlantis.Framework.Parsers.LanguageFile\Atlantis.Framework.Parsers.LanguageFile.csproj", "{B6BEEC29-3FD3-4B07-A8F1-32CB789B0EC8}"
-EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 7
+		SccNumberOfProjects = 4
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
 		SccLocalPath0 = .
-		SccProjectUniqueName1 = ..\\..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
-		SccProjectTopLevelParentUniqueName1 = Language.sln
-		SccProjectName1 = ../../Atlantis.Framework.Engine/Atlantis.Framework.Interface
-		SccLocalPath1 = ..\\..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
-		SccProjectUniqueName2 = ..\\..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
-		SccProjectTopLevelParentUniqueName2 = Language.sln
-		SccProjectName2 = ../../Atlantis.Framework.Engine/Atlantis.Framework.Engine
-		SccLocalPath2 = ..\\..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
-		SccProjectUniqueName3 = Atlantis.Framework.Language.Impl\\Atlantis.Framework.Language.Impl.csproj
-		SccProjectName3 = Atlantis.Framework.Language.Impl
-		SccLocalPath3 = Atlantis.Framework.Language.Impl
-		SccProjectUniqueName4 = Atlantis.Framework.Language.Interface\\Atlantis.Framework.Language.Interface.csproj
-		SccProjectName4 = Atlantis.Framework.Language.Interface
-		SccLocalPath4 = Atlantis.Framework.Language.Interface
-		SccProjectUniqueName5 = Atlantis.Framework.Language.Tests\\Atlantis.Framework.Language.Tests.csproj
-		SccProjectName5 = Atlantis.Framework.Language.Tests
-		SccLocalPath5 = Atlantis.Framework.Language.Tests
-		SccProjectUniqueName6 = ..\\..\\Parsers\\Atlantis.Framework.Parsers.LanguageFile\\Atlantis.Framework.Parsers.LanguageFile.csproj
-		SccProjectTopLevelParentUniqueName6 = Language.sln
-		SccProjectName6 = ../../Parsers/Atlantis.Framework.Parsers.LanguageFile
-		SccLocalPath6 = ..\\..\\Parsers\\Atlantis.Framework.Parsers.LanguageFile
+		SccProjectUniqueName1 = Atlantis.Framework.Language.Impl\\Atlantis.Framework.Language.Impl.csproj
+		SccProjectName1 = Atlantis.Framework.Language.Impl
+		SccLocalPath1 = Atlantis.Framework.Language.Impl
+		SccProjectUniqueName2 = Atlantis.Framework.Language.Interface\\Atlantis.Framework.Language.Interface.csproj
+		SccProjectName2 = Atlantis.Framework.Language.Interface
+		SccLocalPath2 = Atlantis.Framework.Language.Interface
+		SccProjectUniqueName3 = Atlantis.Framework.Language.Tests\\Atlantis.Framework.Language.Tests.csproj
+		SccProjectName3 = Atlantis.Framework.Language.Tests
+		SccLocalPath3 = Atlantis.Framework.Language.Tests
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = Atlantis.Framework.DataCache.vsmdi
@@ -51,14 +33,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.Build.0 = Release|Any CPU
 		{11A7884C-71B6-41CD-824F-0F22797D417D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{11A7884C-71B6-41CD-824F-0F22797D417D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{11A7884C-71B6-41CD-824F-0F22797D417D}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -71,17 +45,8 @@ Global
 		{3FA72244-485D-43CB-B82B-1054BC784D19}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3FA72244-485D-43CB-B82B-1054BC784D19}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3FA72244-485D-43CB-B82B-1054BC784D19}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B6BEEC29-3FD3-4B07-A8F1-32CB789B0EC8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B6BEEC29-3FD3-4B07-A8F1-32CB789B0EC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B6BEEC29-3FD3-4B07-A8F1-32CB789B0EC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B6BEEC29-3FD3-4B07-A8F1-32CB789B0EC8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {F326D42D-1D35-4AFD-B7DA-23DDBFBD6E0B}
-		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {F326D42D-1D35-4AFD-B7DA-23DDBFBD6E0B}
-		{B6BEEC29-3FD3-4B07-A8F1-32CB789B0EC8} = {F326D42D-1D35-4AFD-B7DA-23DDBFBD6E0B}
 	EndGlobalSection
 EndGlobal

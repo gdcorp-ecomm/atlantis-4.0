@@ -432,7 +432,7 @@ namespace Atlantis.Framework.Providers.Shopper.Tests
     public void GetShopperWithHttpContext()
     {
       var request = new MockHttpRequest("http://www.godaddy.com/");
-      request.MockRemoteAddress("4.3.4.3");
+      request.MockRemoteAddress(new IPAddress(67306499)); //4.3.4.3
       MockHttpContext.SetFromWorkerRequest(request);
 
       IProviderContainer container = SetContainer("832652");

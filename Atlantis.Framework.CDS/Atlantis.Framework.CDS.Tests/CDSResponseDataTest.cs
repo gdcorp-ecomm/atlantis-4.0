@@ -20,7 +20,7 @@ namespace Atlantis.Framework.CDS.Tests
       string query = "test.com";
       string pathway = Guid.NewGuid().ToString();
       string errorDescription = "this is a test error descrption!";
-      CDSRequestData requestData = new CDSRequestData(shopperId, string.Empty, string.Empty, pathway, 1, query);      
+      CDSRequestData requestData = new CDSRequestData(query);      
       AtlantisException atlantisException = new AtlantisException(requestData, "test", errorDescription, "test");
 
       //Act
@@ -41,7 +41,8 @@ namespace Atlantis.Framework.CDS.Tests
       string query = "test.com";
       string pathway = Guid.NewGuid().ToString();           
       Exception exception = new Exception("This is a test exception!");
-      CDSRequestData requestData = new CDSRequestData(shopperId, string.Empty, string.Empty, pathway, 1, query);
+      CDSRequestData requestData = new CDSRequestData(query);
+      requestData.ShopperID = shopperId;
       
       //Act
       CDSResponseData responseData = new CDSResponseData(requestData, exception);           
@@ -77,7 +78,9 @@ namespace Atlantis.Framework.CDS.Tests
       string query = "test.com";
       string pathway = Guid.NewGuid().ToString();
       string errorDescription = "this is a test error descrption!";
-      CDSRequestData requestData = new CDSRequestData(shopperId, string.Empty, string.Empty, pathway, 1, query);
+      CDSRequestData requestData = new CDSRequestData(query);
+      requestData.ShopperID = shopperId;
+
       AtlantisException atlantisException = new AtlantisException(requestData, "test", errorDescription, "test");
       CDSResponseData responseData = new CDSResponseData(requestData, atlantisException);
       var actual = responseData.ToXML();

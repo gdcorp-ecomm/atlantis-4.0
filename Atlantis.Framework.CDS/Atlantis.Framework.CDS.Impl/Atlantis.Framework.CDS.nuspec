@@ -3,7 +3,7 @@
   <metadata>
     <id>Atlantis.Framework.CDS</id>
     <version>4.0.0.0</version>
-    <title>GoDaddy Content Delivery System</title>
+    <title>Atlantis Framework CDS</title>
     <authors>$author$</authors>
     <owners>$author$</owners>
     <projectUrl>https://confluence.int.godaddy.com/display/CDS</projectUrl>
@@ -18,4 +18,7 @@
       <dependency id="Atlantis.Framework.CDS.Interface" version="4.0.0.0" />
     </dependencies>
   </metadata>
+  <files>
+    <file src="atlantis.config.transform" target="content\atlantis.config.transform" />
+  </files>
 </package>

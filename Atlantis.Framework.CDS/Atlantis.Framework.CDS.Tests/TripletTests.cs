@@ -23,8 +23,8 @@ namespace Atlantis.Framework.CDS.Tests
       string shopperId = "860316";
       int requestType = 424;
       string query = "sales/1/lp/email";
-      CDSRequestData requestData = new CDSRequestData(shopperId, string.Empty, string.Empty, string.Empty, 1, query);
-      //requestData.RequestTimeout = TimeSpan.FromSeconds(20);
+      CDSRequestData requestData = new CDSRequestData(query);
+      requestData.ShopperID = shopperId;
 
       //Act
       CDSResponseData responseData = (CDSResponseData)DataCache.DataCache.GetProcessRequest(requestData, requestType);
@@ -43,8 +43,8 @@ namespace Atlantis.Framework.CDS.Tests
       string shopperId = "860316";
       int requestType = 424;
       string query = "sales/1/lp/email";
-      CDSRequestData requestData = new CDSRequestData(shopperId, string.Empty, string.Empty, string.Empty, 1, query);
-      //requestData.RequestTimeout = TimeSpan.FromSeconds(20);
+      CDSRequestData requestData = new CDSRequestData(query);
+      requestData.ShopperID = shopperId;
 
       //Act
       CDSResponseData responseData = (CDSResponseData)DataCache.DataCache.GetProcessRequest(requestData, requestType);
@@ -62,8 +62,8 @@ namespace Atlantis.Framework.CDS.Tests
       string shopperId = "860316";
       int requestType = 424;
       string query = "sales/1/lp/nonexistent|";
-      CDSRequestData requestData = new CDSRequestData(shopperId, string.Empty, string.Empty, string.Empty, 1, query);
-      //requestData.RequestTimeout = TimeSpan.FromSeconds(20);
+      CDSRequestData requestData = new CDSRequestData(query);
+      requestData.ShopperID = shopperId;
 
       //Act 
       CDSResponseData responseData = (CDSResponseData)Engine.Engine.ProcessRequest(requestData, requestType);
@@ -80,8 +80,8 @@ namespace Atlantis.Framework.CDS.Tests
       int requestType = 688;
       string query = "content/sales/whitelist?docid=5175b13e8b29c70404bc0163";
       string pathway = Guid.NewGuid().ToString();
-      string errorDescription = "this is a test error descrption!";
-      CDSRequestData requestData = new CDSRequestData(shopperId, string.Empty, string.Empty, pathway, 1, query);
+      CDSRequestData requestData = new CDSRequestData(query);
+      requestData.ShopperID = shopperId;
 
       //Act
       UrlWhitelistResponseData responseData = (UrlWhitelistResponseData)Engine.Engine.ProcessRequest(requestData, requestType);
@@ -119,8 +119,8 @@ namespace Atlantis.Framework.CDS.Tests
       int requestType = 687;
       string query = "content/sales/whitelist";
       string pathway = Guid.NewGuid().ToString();
-      string errorDescription = "this is a test error descrption!";
-      CDSRequestData requestData = new CDSRequestData(shopperId, string.Empty, string.Empty, pathway, 1, query);
+      CDSRequestData requestData = new CDSRequestData(query);
+      requestData.ShopperID = shopperId;
 
       //Act
       ContentVersionResponseData responseData = (ContentVersionResponseData)Engine.Engine.ProcessRequest(requestData, requestType);
@@ -140,8 +140,8 @@ namespace Atlantis.Framework.CDS.Tests
       int requestType = 696;
       string query = "content/sales/hosting/webhostingrules?docid=5170752af778fc014c90b155";
       string pathway = Guid.NewGuid().ToString();
-      string errorDescription = "this is a test error descrption!";
-      CDSRequestData requestData = new CDSRequestData(shopperId, string.Empty, string.Empty, pathway, 1, query);
+      CDSRequestData requestData = new CDSRequestData(query);
+      requestData.ShopperID = shopperId;
 
       //Act
       RoutingRulesResponseData responseData = (RoutingRulesResponseData)Engine.Engine.ProcessRequest(requestData, requestType);

@@ -76,6 +76,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="atlantis.config.transform">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Atlantis.Framework.CDS.nuspec">
       <SubType>Designer</SubType>
     </None>

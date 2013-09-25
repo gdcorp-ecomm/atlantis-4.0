@@ -35,23 +35,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Atlantis\Atlantis.Framework.Render.Pipeline.Interface.dll" />
     <Content Include="MongoDB\MongoDB.Bson.dll" />
     <Content Include="MongoDB\MongoDB.Driver.dll" />
-    <Content Include="Json.net\Newtonsoft.Json.dll" />
-    <Content Include="Json.net\Newtonsoft.Json.xml" />
     <Content Include="Testing\TestSetUpAndSettings.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

@@ -7,7 +7,6 @@ namespace Atlantis.Framework.Brand.Interface
 {
   public class ProductLineNameResponseData : IResponseData
   {
-    private AtlantisException _exception;
     private Dictionary<string, Dictionary<string, string>> _productNameDict;
 
     public static ProductLineNameResponseData Empty { get; private set; }
@@ -106,19 +105,9 @@ namespace Atlantis.Framework.Brand.Interface
       _productNameDict = productLineList;
     }
 
-    public static ProductLineNameResponseData FromException(AtlantisException exception)
-    {
-      return new ProductLineNameResponseData(exception);
-    }
-
     public AtlantisException GetException()
     {
-      return _exception;
-    }
-
-    private ProductLineNameResponseData(AtlantisException exception)
-    {
-      _exception = exception;
+      return null;
     }
 
     public string ToXML()

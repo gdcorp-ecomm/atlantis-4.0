@@ -9,22 +9,10 @@ namespace Atlantis.Framework.Brand.Impl
   {
     public IResponseData RequestHandler(RequestData requestData, ConfigElement config)
     {
-      IResponseData result = null;
+      ProductLineNameRequestData productLineNameRequest = (ProductLineNameRequestData)requestData;
+      string productLineNameXml = ProductLineNamesData.ProductLineNamesXml;
 
-      try
-      {
-        ProductLineNameRequestData productLineNameRequest = (ProductLineNameRequestData) requestData;
-        string productLineNameXml = ProductLineNamesData.ProductLineNamesXml;
-
-        result = ProductLineNameResponseData.FromProductLineNameXml(productLineNameXml, productLineNameRequest.ContextId);
-      }
-      catch (Exception ex)
-      {
-        AtlantisException exception = new AtlantisException(requestData, "ProductLineNameRequest.RequestHandler", ex.Message + ex.StackTrace, requestData.ToXML());
-        result = ProductLineNameResponseData.FromException(exception);
-      }
-
-      return result;
+      return ProductLineNameResponseData.FromProductLineNameXml(productLineNameXml, productLineNameRequest.ContextId);
     }
   }
 }

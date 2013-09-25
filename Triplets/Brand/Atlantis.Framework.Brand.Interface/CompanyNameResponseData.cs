@@ -6,7 +6,6 @@ namespace Atlantis.Framework.Brand.Interface
 {
   public class CompanyNameResponseData : IResponseData
   {
-    private AtlantisException _exception;
     private Dictionary<string, string> _companyDict;
 
     public static CompanyNameResponseData Empty { get; private set; }
@@ -90,24 +89,14 @@ namespace Atlantis.Framework.Brand.Interface
       return element.ToString(SaveOptions.DisableFormatting);
     }
 
-    public static CompanyNameResponseData FromException(AtlantisException exception)
-    {
-      return new CompanyNameResponseData(exception);
-    }
-
     public AtlantisException GetException()
     {
-      return _exception;
+      return null;
     }
 
     private CompanyNameResponseData(Dictionary<string, string> companyDict)
     {
       _companyDict = companyDict;
-    }
-
-    private CompanyNameResponseData(AtlantisException exception)
-    {
-      _exception = exception;
     }
 
   }

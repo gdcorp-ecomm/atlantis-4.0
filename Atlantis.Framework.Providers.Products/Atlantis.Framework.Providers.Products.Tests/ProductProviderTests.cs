@@ -264,6 +264,7 @@ namespace Atlantis.Framework.Providers.Products.Tests
       Assert.IsTrue(productProvider.IsProductGroupOffered(30));
     }
 
+    /* Test no longer valid; method removed
     [TestMethod]
     public void NonUnifiedPfidBasic()
     {
@@ -272,13 +273,14 @@ namespace Atlantis.Framework.Providers.Products.Tests
       int pfid = productProvider.GetNonUnifiedPfid(101);
       Assert.AreEqual(2500101, pfid);
     }
+    */
 
     [TestMethod]
     public void UnifiedProductIdBasic()
     {
       var container = SetContexts(2, string.Empty);
       var productProvider = container.Resolve<IProductProvider>();
-      int productId = productProvider.GetUnifiedProductIdByPfid(2500101);
+      int productId = productProvider.GetUnifiedProductIdByPfid(2500101, 1); //PrivateLabelId set to GoDaddy
       Assert.AreEqual(101, productId);
     }
 

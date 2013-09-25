@@ -1,5 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<ConfigElements>
+﻿<ConfigElements>
   <ConfigElement progid="Atlantis.Framework.EcommPricing.Impl.ValidateNonOrderRequest" assembly="Atlantis.Framework.EcommPricing.Impl.dll" request_type="644" lpc="0" />
   <ConfigElement progid="Atlantis.Framework.EcommPricing.Impl.PriceEstimateRequest" assembly="Atlantis.Framework.EcommPricing.Impl.dll" request_type="657" lpc="0" ws_url="https://gdcomm.dev.glbt1.gdg/WsgdPricingEstimate/Service.asmx?WSDL">
     <ConfigValue key="ClientCertificateName" value="corp.web.sales.dev.client.godaddy.com" />

@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Atlantis.Framework.PLSignupInfo.Interface</id>
+    <version>4.0.0.0</version>
+    <title>Atlantis Framework PLSignupInfo Interface</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <projectUrl>https://confluence.int.godaddy.com/display/ATLANTIS</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes></releaseNotes>
+    <copyright>$copyright$</copyright>
+    <tags>Atlantis Framework PLSignupInfo Interface</tags>
+    <dependencies>
+      <dependency id="Atlantis.Framework.Interface" version="4.0.0.0" />
+    </dependencies>
+  </metadata>
+</package>

@@ -1,13 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 11
+# Visual Studio 2012
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{2E4742C5-F136-487C-9E3A-A2FA587D9F7C}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine", "..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj", "{D30157B2-C1B3-4073-BA5E-632E2337A997}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.DataCache", "..\Atlantis.Framework.DataCache\Atlantis.Framework.DataCache\Atlantis.Framework.DataCache.csproj", "{7F2738F8-683C-49E7-88CD-E986C70F0321}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.PLSignupInfo.Interface", "Atlantis.Framework.PLSignupInfo.Interface\Atlantis.Framework.PLSignupInfo.Interface.csproj", "{3C228090-226D-435D-AC13-BE073CCDFAE2}"
 EndProject
@@ -17,31 +11,19 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.PLSignup
 EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 4
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccLocalPath0 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
-		SccLocalPath1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
-		SccLocalPath2 = ..\\Atlantis.Framework.DataCache\\Atlantis.Framework.DataCache
-		SccLocalPath3 = .
-		SccLocalPath4 = Atlantis.Framework.PLSignupInfo.Impl
-		SccLocalPath5 = Atlantis.Framework.PLSignupInfo.Interface
-		SccLocalPath6 = Atlantis.Framework.PLSignupInfo.Tests
-		SccNumberOfProjects = 7
-		SccProjectName0 = ../Atlantis.Framework.Engine/Atlantis.Framework.Interface
-		SccProjectName1 = ../Atlantis.Framework.Engine/Atlantis.Framework.Engine
-		SccProjectName2 = ../Atlantis.Framework.DataCache/Atlantis.Framework.DataCache
-		SccProjectName4 = Atlantis.Framework.PLSignupInfo.Impl
-		SccProjectName5 = Atlantis.Framework.PLSignupInfo.Interface
-		SccProjectName6 = Atlantis.Framework.PLSignupInfo.Tests
-		SccProjectTopLevelParentUniqueName0 = Atlantis.Framework.PLSignupInfo.sln
-		SccProjectTopLevelParentUniqueName1 = Atlantis.Framework.PLSignupInfo.sln
-		SccProjectTopLevelParentUniqueName2 = Atlantis.Framework.PLSignupInfo.sln
-		SccProjectUniqueName0 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
-		SccProjectUniqueName1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
-		SccProjectUniqueName2 = ..\\Atlantis.Framework.DataCache\\Atlantis.Framework.DataCache\\Atlantis.Framework.DataCache.csproj
-		SccProjectUniqueName4 = Atlantis.Framework.PLSignupInfo.Impl\\Atlantis.Framework.PLSignupInfo.Impl.csproj
-		SccProjectUniqueName5 = Atlantis.Framework.PLSignupInfo.Interface\\Atlantis.Framework.PLSignupInfo.Interface.csproj
-		SccProjectUniqueName6 = Atlantis.Framework.PLSignupInfo.Tests\\Atlantis.Framework.PLSignupInfo.Tests.csproj
 		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Atlantis.Framework.PLSignupInfo.Impl\\Atlantis.Framework.PLSignupInfo.Impl.csproj
+		SccProjectName1 = Atlantis.Framework.PLSignupInfo.Impl
+		SccLocalPath1 = Atlantis.Framework.PLSignupInfo.Impl
+		SccProjectUniqueName2 = Atlantis.Framework.PLSignupInfo.Interface\\Atlantis.Framework.PLSignupInfo.Interface.csproj
+		SccProjectName2 = Atlantis.Framework.PLSignupInfo.Interface
+		SccLocalPath2 = Atlantis.Framework.PLSignupInfo.Interface
+		SccProjectUniqueName3 = Atlantis.Framework.PLSignupInfo.Tests\\Atlantis.Framework.PLSignupInfo.Tests.csproj
+		SccProjectName3 = Atlantis.Framework.PLSignupInfo.Tests
+		SccLocalPath3 = Atlantis.Framework.PLSignupInfo.Tests
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -56,18 +38,6 @@ Global
 		{4DFB1615-1204-4095-B56E-C697A4EA6E03}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4DFB1615-1204-4095-B56E-C697A4EA6E03}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4DFB1615-1204-4095-B56E-C697A4EA6E03}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7F2738F8-683C-49E7-88CD-E986C70F0321}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7F2738F8-683C-49E7-88CD-E986C70F0321}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7F2738F8-683C-49E7-88CD-E986C70F0321}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7F2738F8-683C-49E7-88CD-E986C70F0321}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.Build.0 = Release|Any CPU
 		{DD733041-098A-4BB9-9201-3DE4D96D4357}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{DD733041-098A-4BB9-9201-3DE4D96D4357}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DD733041-098A-4BB9-9201-3DE4D96D4357}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -75,10 +45,5 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{7F2738F8-683C-49E7-88CD-E986C70F0321} = {2E4742C5-F136-487C-9E3A-A2FA587D9F7C}
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {2E4742C5-F136-487C-9E3A-A2FA587D9F7C}
-		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {2E4742C5-F136-487C-9E3A-A2FA587D9F7C}
 	EndGlobalSection
 EndGlobal

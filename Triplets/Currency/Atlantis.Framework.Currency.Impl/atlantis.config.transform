@@ -1,0 +1,10 @@
+﻿<ConfigElements>
+  <ConfigElement progid="Atlantis.Framework.Currency.Impl.CurrencyTypesRequest" assembly="Atlantis.Framework.Currency.Impl.dll" request_type="693" lpc="0" />
+  <!-- only used to get all currencies including inactive in certain administrative apps (like pricing tools) -->
+  <ConfigElement progid="Atlantis.Framework.Currency.Impl.CurrencyTypesAllRequest" assembly="Atlantis.Framework.Currency.Impl.dll" request_type="693000" lpc="0">
+    <ConfigValue key="DataSourceName" value="corp.web.siteadmin.godaddy" />
+    <ConfigValue key="CertificateName" value="corp.web.siteadmin.dev.client.godaddy.com" />
+    <ConfigValue key="ApplicationName" value="SiteAdmin" />
+  </ConfigElement>
+  <ConfigElement progid="Atlantis.Framework.Currency.Impl.MultiCurrencyContextsRequest" assembly="Atlantis.Framework.Currency.Impl.dll" request_type="707" lpc="0" />
+</ConfigElements>

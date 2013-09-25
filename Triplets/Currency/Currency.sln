@@ -3,75 +3,33 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{C950CDA5-6B36-4B31-B9A9-CB546C89C271}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "..\..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine", "..\..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj", "{D30157B2-C1B3-4073-BA5E-632E2337A997}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.DataCacheService", "..\..\Atlantis.Framework.DataCache\Atlantis.Framework.DataCacheService\Atlantis.Framework.DataCacheService.csproj", "{3E299D3B-3C8D-455A-92A4-05FF6C60E6F3}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Currency.Interface", "Atlantis.Framework.Currency.Interface\Atlantis.Framework.Currency.Interface.csproj", "{86171D86-AE69-4F12-B69C-28E2A427FBF4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Currency.Impl", "Atlantis.Framework.Currency.Impl\Atlantis.Framework.Currency.Impl.csproj", "{8DCDC38C-750F-43B4-921E-D49087B30495}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Currency.Tests", "Atlantis.Framework.Currency.Tests\Atlantis.Framework.Currency.Tests.csproj", "{25DB7CEE-8AF8-4EB8-8824-47C59509923C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Providers.Interface", "..\..\Atlantis.Framework.Providers.Interface\Atlantis.Framework.Providers.Interface\Atlantis.Framework.Providers.Interface.csproj", "{6CC33C6B-FAA7-4B6A-8C3B-BFE94A1A65DE}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Nimitz", "..\..\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz.csproj", "{3213E6DB-F026-4F17-A46A-7127F79F6620}"
-EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 9
+		SccNumberOfProjects = 4
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
 		SccLocalPath0 = .
-		SccProjectUniqueName1 = ..\\..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
-		SccProjectTopLevelParentUniqueName1 = Currency.sln
-		SccProjectName1 = ../../Atlantis.Framework.Engine/Atlantis.Framework.Interface
-		SccLocalPath1 = ..\\..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
-		SccProjectUniqueName2 = ..\\..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
-		SccProjectTopLevelParentUniqueName2 = Currency.sln
-		SccProjectName2 = ../../Atlantis.Framework.Engine/Atlantis.Framework.Engine
-		SccLocalPath2 = ..\\..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
-		SccProjectUniqueName3 = ..\\..\\Atlantis.Framework.DataCache\\Atlantis.Framework.DataCacheService\\Atlantis.Framework.DataCacheService.csproj
-		SccProjectTopLevelParentUniqueName3 = Currency.sln
-		SccProjectName3 = ../../Atlantis.Framework.DataCache/Atlantis.Framework.DataCacheService
-		SccLocalPath3 = ..\\..\\Atlantis.Framework.DataCache\\Atlantis.Framework.DataCacheService
-		SccProjectUniqueName4 = ..\\..\\Atlantis.Framework.Providers.Interface\\Atlantis.Framework.Providers.Interface\\Atlantis.Framework.Providers.Interface.csproj
-		SccProjectTopLevelParentUniqueName4 = Currency.sln
-		SccProjectName4 = ../../Atlantis.Framework.Providers.Interface/Atlantis.Framework.Providers.Interface
-		SccLocalPath4 = ..\\..\\Atlantis.Framework.Providers.Interface\\Atlantis.Framework.Providers.Interface
-		SccProjectUniqueName5 = Atlantis.Framework.Currency.Impl\\Atlantis.Framework.Currency.Impl.csproj
-		SccProjectName5 = Atlantis.Framework.Currency.Impl
-		SccLocalPath5 = Atlantis.Framework.Currency.Impl
-		SccProjectUniqueName6 = Atlantis.Framework.Currency.Interface\\Atlantis.Framework.Currency.Interface.csproj
-		SccProjectName6 = Atlantis.Framework.Currency.Interface
-		SccLocalPath6 = Atlantis.Framework.Currency.Interface
-		SccProjectUniqueName7 = Atlantis.Framework.Currency.Tests\\Atlantis.Framework.Currency.Tests.csproj
-		SccProjectName7 = Atlantis.Framework.Currency.Tests
-		SccLocalPath7 = Atlantis.Framework.Currency.Tests
-		SccProjectUniqueName8 = ..\\..\\Atlantis.Framework.Nimitz\\Atlantis.Framework.Nimitz\\Atlantis.Framework.Nimitz.csproj
-		SccProjectTopLevelParentUniqueName8 = Currency.sln
-		SccProjectName8 = ../../Atlantis.Framework.Nimitz/Atlantis.Framework.Nimitz
-		SccLocalPath8 = ..\\..\\Atlantis.Framework.Nimitz\\Atlantis.Framework.Nimitz
+		SccProjectUniqueName1 = Atlantis.Framework.Currency.Impl\\Atlantis.Framework.Currency.Impl.csproj
+		SccProjectName1 = Atlantis.Framework.Currency.Impl
+		SccLocalPath1 = Atlantis.Framework.Currency.Impl
+		SccProjectUniqueName2 = Atlantis.Framework.Currency.Interface\\Atlantis.Framework.Currency.Interface.csproj
+		SccProjectName2 = Atlantis.Framework.Currency.Interface
+		SccLocalPath2 = Atlantis.Framework.Currency.Interface
+		SccProjectUniqueName3 = Atlantis.Framework.Currency.Tests\\Atlantis.Framework.Currency.Tests.csproj
+		SccProjectName3 = Atlantis.Framework.Currency.Tests
+		SccLocalPath3 = Atlantis.Framework.Currency.Tests
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3E299D3B-3C8D-455A-92A4-05FF6C60E6F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3E299D3B-3C8D-455A-92A4-05FF6C60E6F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3E299D3B-3C8D-455A-92A4-05FF6C60E6F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3E299D3B-3C8D-455A-92A4-05FF6C60E6F3}.Release|Any CPU.Build.0 = Release|Any CPU
 		{86171D86-AE69-4F12-B69C-28E2A427FBF4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{86171D86-AE69-4F12-B69C-28E2A427FBF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{86171D86-AE69-4F12-B69C-28E2A427FBF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -84,23 +42,8 @@ Global
 		{25DB7CEE-8AF8-4EB8-8824-47C59509923C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{25DB7CEE-8AF8-4EB8-8824-47C59509923C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{25DB7CEE-8AF8-4EB8-8824-47C59509923C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6CC33C6B-FAA7-4B6A-8C3B-BFE94A1A65DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6CC33C6B-FAA7-4B6A-8C3B-BFE94A1A65DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6CC33C6B-FAA7-4B6A-8C3B-BFE94A1A65DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6CC33C6B-FAA7-4B6A-8C3B-BFE94A1A65DE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {C950CDA5-6B36-4B31-B9A9-CB546C89C271}
-		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {C950CDA5-6B36-4B31-B9A9-CB546C89C271}
-		{3E299D3B-3C8D-455A-92A4-05FF6C60E6F3} = {C950CDA5-6B36-4B31-B9A9-CB546C89C271}
-		{6CC33C6B-FAA7-4B6A-8C3B-BFE94A1A65DE} = {C950CDA5-6B36-4B31-B9A9-CB546C89C271}
-		{3213E6DB-F026-4F17-A46A-7127F79F6620} = {C950CDA5-6B36-4B31-B9A9-CB546C89C271}
 	EndGlobalSection
 EndGlobal

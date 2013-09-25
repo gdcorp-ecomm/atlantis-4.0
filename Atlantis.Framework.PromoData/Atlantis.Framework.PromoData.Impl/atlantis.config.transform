@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ConfigElements> 
+﻿<ConfigElements>
   <ConfigElement progid="Atlantis.Framework.PromoData.Impl.PromoDataRequest" assembly="Atlantis.Framework.PromoData.Impl.dll" request_type="365" lpc="0" ws_url="http://fastball.test.glbt1.gdg/offersapi/service.asmx" />
 </ConfigElements>

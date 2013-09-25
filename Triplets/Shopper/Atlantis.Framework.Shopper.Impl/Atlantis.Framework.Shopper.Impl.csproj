@@ -34,6 +34,21 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Atlantis.Framework.Engine">
+      <HintPath>..\packages\Atlantis.Framework.Engine.4.0.0.0\lib\net40\Atlantis.Framework.Engine.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Engine.XmlSerializers">
+      <HintPath>..\packages\Atlantis.Framework.Engine.4.0.0.0\lib\net40\Atlantis.Framework.Engine.XmlSerializers.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Interface">
+      <HintPath>..\packages\Atlantis.Framework.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Nimitz">
+      <HintPath>..\packages\Atlantis.Framework.Nimitz.4.0.0.0\lib\net40\Atlantis.Framework.Nimitz.dll</HintPath>
+    </Reference>
+    <Reference Include="netConnect">
+      <HintPath>..\packages\Atlantis.Framework.Nimitz.4.0.0.0\lib\net40\netConnect.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.EnterpriseServices" />
@@ -72,18 +87,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj">
-      <Project>{d30157b2-c1b3-4073-ba5e-632e2337a997}</Project>
-      <Name>Atlantis.Framework.Engine</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj">
-      <Project>{a083a52e-c3c3-42e0-8dfd-54719e4c3b25}</Project>
-      <Name>Atlantis.Framework.Interface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz.csproj">
-      <Project>{3213e6db-f026-4f17-a46a-7127f79f6620}</Project>
-      <Name>Atlantis.Framework.Nimitz</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.Shopper.Interface\Atlantis.Framework.Shopper.Interface.csproj">
       <Project>{5be1c108-7cc4-401e-b610-eb3a5331fc5a}</Project>
       <Name>Atlantis.Framework.Shopper.Interface</Name>
@@ -91,6 +94,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="atlantis.config.transform" />
+    <None Include="Atlantis.Framework.Shopper.Impl.nuget.bat" />
+    <None Include="Atlantis.Framework.Shopper.Impl.nuspec">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

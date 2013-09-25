@@ -39,6 +39,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Atlantis.Framework.Engine">
+      <HintPath>..\packages\Atlantis.Framework.Engine.4.0.0.0\lib\net40\Atlantis.Framework.Engine.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Engine.XmlSerializers">
+      <HintPath>..\packages\Atlantis.Framework.Engine.4.0.0.0\lib\net40\Atlantis.Framework.Engine.XmlSerializers.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Interface">
+      <HintPath>..\packages\Atlantis.Framework.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Testing.MockEngine">
+      <HintPath>..\packages\Atlantis.Framework.Testing.MockEngine.4.0.0.0\lib\net40\Atlantis.Framework.Testing.MockEngine.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -75,18 +87,6 @@
     <Compile Include="WrongTypeRequestData.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj">
-      <Project>{d30157b2-c1b3-4073-ba5e-632e2337a997}</Project>
-      <Name>Atlantis.Framework.Engine</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj">
-      <Project>{a083a52e-c3c3-42e0-8dfd-54719e4c3b25}</Project>
-      <Name>Atlantis.Framework.Interface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Testing\Atlantis.Framework.Testing.MockEngine\Atlantis.Framework.Testing.MockEngine.csproj">
-      <Project>{20b1c0d2-1789-4813-8bc6-993ce8cf07f7}</Project>
-      <Name>Atlantis.Framework.Testing.MockEngine</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.Shopper.Impl\Atlantis.Framework.Shopper.Impl.csproj">
       <Project>{b63887e6-bcae-48a8-bbc1-1fcdae96eaa3}</Project>
       <Name>Atlantis.Framework.Shopper.Impl</Name>
@@ -109,6 +109,7 @@
     <None Include="atlantis.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="packages.config" />
     <None Include="Resources\ShopperCreate.xsd">
       <SubType>Designer</SubType>
     </None>

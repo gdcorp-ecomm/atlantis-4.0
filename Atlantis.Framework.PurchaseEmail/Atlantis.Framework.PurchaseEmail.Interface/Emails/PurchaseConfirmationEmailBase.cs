@@ -290,7 +290,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
 
       MessagingProcessRequestData request = new MessagingProcessRequestData(
         _orderData.ShopperId, string.Empty, _orderData.OrderId, string.Empty, 0,
-        _orderData.PrivateLabelId, EmailTemplate.Name, EmailTemplate.Namespace, _orderData.LocalizationCode);
+        _orderData.PrivateLabelId, EmailTemplate.Name, EmailTemplate.Namespace);
 
       ResourceItem resourceItem = new ResourceItem(ResourceType, ResourceId);
 
@@ -304,19 +304,18 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
       request.AddResource(resourceItem);
 
       ContactPointItem emailContact = new ContactPointItem("ShopperContact", ContactPointTypes.Shopper);
+
       string shopperEmail = _orderData.ShopperEmail;
       if (!string.IsNullOrEmpty(shopperEmail))
       {
-        emailContact.ExcludeContactPointType = true;
-        emailContact["lastname"] = _orderData.Detail.GetAttribute("bill_to_last_name");
-        emailContact["firstname"] = _orderData.Detail.GetAttribute("bill_to_first_name");
-        emailContact["email"] = shopperEmail;
-        emailContact["sendemail"] = "true";
+        emailContact["Email"] = shopperEmail;
+        emailContact["LastName"] = _orderData.Detail.GetAttribute("bill_to_last_name");
+        emailContact["FirstName"] = _orderData.Detail.GetAttribute("bill_to_first_name");
       }
-      else
-      {
-        emailContact["id"] = _orderData.ShopperId;
-      }
+
+      emailContact["id"] = _orderData.ShopperId;
+      emailContact["SendEmail"] = "true";
+
       emailContact["EmailType"] = IsHTMLEmail ? "html" : "plaintext";
       resourceItem.ContactPoints.Add(emailContact);
 

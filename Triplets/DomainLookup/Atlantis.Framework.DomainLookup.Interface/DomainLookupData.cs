@@ -191,6 +191,9 @@ namespace Atlantis.Framework.DomainLookup.Interface
     private string _customListingLink = "";
     public string CustomListingLink { get { return _customListingLink; } }
 
+    private string _drid = "";
+    public string DRID { get { return _drid; } }
+
     private void ParseDomainLookupResponse(DataSet domaindata)
     {
       if (domaindata != null)
@@ -485,6 +488,14 @@ namespace Atlantis.Framework.DomainLookup.Interface
             if (drPdDomain["RecordUpdated"] != DBNull.Value)
             {
               DateTime.TryParse(drPdDomain["RecordUpdated"].ToString(), out _recordUpdated);
+            }
+          }
+
+          if (drPdDomain.Table.Columns.Contains("DRID"))
+          {
+            if (drPdDomain["DRID"] != DBNull.Value)
+            {
+              _drid = drPdDomain["DRID"].ToString();
             }
           }
         }

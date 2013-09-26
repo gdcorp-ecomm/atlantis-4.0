@@ -61,5 +61,6 @@ namespace Atlantis.Framework.Providers.DomainLookup.Interface
       int CashParkingInquireLinkEnabled { get; }
       string CustomListingText { get; }
       string CustomListingLink { get; }
+      string DRID { get; }
     }
 }

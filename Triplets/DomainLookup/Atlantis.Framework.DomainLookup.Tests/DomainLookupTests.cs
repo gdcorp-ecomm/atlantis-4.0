@@ -22,12 +22,12 @@ namespace Atlantis.Framework.DomainLookup.Tests
       DomainLookupResponseData response = (DomainLookupResponseData)Engine.Engine.ProcessRequest(request, _DOMAINLOOKUPREQUESTTYPE);
 
 
-      Assert.AreEqual(response.domainData.DomainID, 2146871);
+      Assert.AreEqual(response.domainData.DomainId, 2146871);
       Assert.AreEqual(response.domainData.HasSuspectTerms, false);
       Assert.AreEqual(response.domainData.IsActive, true);
       bool privateLabelCheck = false;
 
-      if (response.domainData.PrivateLabelID > 3)
+      if (response.domainData.PrivateLabelId > 3)
         privateLabelCheck = true;
 
       Assert.IsTrue(privateLabelCheck);
@@ -51,7 +51,7 @@ namespace Atlantis.Framework.DomainLookup.Tests
       Assert.AreEqual(response.domainData.IsActive, true);
       bool privateLabelCheck = false;
 
-      if (response.domainData.PrivateLabelID == 1)
+      if (response.domainData.PrivateLabelId == 1)
         privateLabelCheck = true;
 
       Assert.IsTrue(privateLabelCheck);

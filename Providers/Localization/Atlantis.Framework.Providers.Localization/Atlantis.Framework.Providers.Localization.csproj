@@ -82,7 +82,7 @@
     </Reference>
     <Reference Include="Atlantis.Framework.RuleEngine, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.Providers.RuleEngine.4.0.0.0\lib\net40\Atlantis.Framework.RuleEngine.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.RuleEngine.4.0.0.0\lib\net40\Atlantis.Framework.RuleEngine.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

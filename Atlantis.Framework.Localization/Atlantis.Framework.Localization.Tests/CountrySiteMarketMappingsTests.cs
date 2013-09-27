@@ -1,4 +1,6 @@
-﻿using Atlantis.Framework.Localization.Interface;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Atlantis.Framework.Localization.Interface;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Atlantis.Framework.Localization.Tests
@@ -144,6 +146,15 @@ namespace Atlantis.Framework.Localization.Tests
       var request = new CountrySiteMarketMappingsRequestData("www");
       var response = (CountrySiteMarketMappingsResponseData)Engine.Engine.ProcessRequest(request, _REQUEST_TYPE);
       Assert.AreEqual(string.Empty, response.ToXML());
+    }
+
+    [TestMethod]
+    public void GetMarketsForCountryCode()
+    {
+      var request = new CountrySiteMarketMappingsRequestData("www");
+      var response = (CountrySiteMarketMappingsResponseData)Engine.Engine.ProcessRequest(request, _REQUEST_TYPE);
+      IEnumerable<string> marketIds = response.GetMarketIdsForCountry();
+      Assert.IsTrue(marketIds.Any());
     }
 
     [TestMethod]

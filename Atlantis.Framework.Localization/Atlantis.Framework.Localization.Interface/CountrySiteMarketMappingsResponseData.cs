@@ -130,6 +130,16 @@ namespace Atlantis.Framework.Localization.Interface
 
     }
 
+    public IEnumerable<string> GetMarketIdsForCountry()
+    {
+      var marketIds = new List<string>();
+      foreach (KeyValuePair<string, CountrySiteMarketMapping> map in _rawTable)
+      {
+        marketIds.Add(map.Key);
+      }
+      return marketIds;
+    }
+
     public bool NoMappings { get; private set; }
 
     private bool IsExceptionDefaultMapping { get; set; }

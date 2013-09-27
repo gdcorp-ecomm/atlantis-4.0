@@ -1,6 +1,6 @@
 ﻿namespace Atlantis.Framework.DotTypeCache.Interface
 {
-  public enum PreRegPhases
+  public enum LaunchPhases
   {
     SunriseA,
     SunriseB,

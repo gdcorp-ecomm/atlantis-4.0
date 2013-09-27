@@ -6,35 +6,35 @@ namespace Atlantis.Framework.DotTypeCache.Interface
 {
   public static class PhaseHelper
   {
-    private static readonly Dictionary<PreRegPhases, string> _phases = new Dictionary<PreRegPhases, string>();
+    private static readonly Dictionary<LaunchPhases, string> _phases = new Dictionary<LaunchPhases, string>();
 
     static PhaseHelper()
     {
-      _phases.Add(PreRegPhases.SunriseA, "SRA");
-      _phases.Add(PreRegPhases.SunriseB, "SRB");
-      _phases.Add(PreRegPhases.SunriseC, "SRC");
-      _phases.Add(PreRegPhases.Landrush, "LR");
-      _phases.Add(PreRegPhases.GeneralAvailability, "GA");
+      _phases.Add(LaunchPhases.SunriseA, "SRA");
+      _phases.Add(LaunchPhases.SunriseB, "SRB");
+      _phases.Add(LaunchPhases.SunriseC, "SRC");
+      _phases.Add(LaunchPhases.Landrush, "LR");
+      _phases.Add(LaunchPhases.GeneralAvailability, "GA");
     }
 
-    public static DotTypeProductTypes GetDotTypeProductTypes(PreRegPhases preRegPhase, bool isForApplicationFee = false)
+    public static DotTypeProductTypes GetDotTypeProductTypes(LaunchPhases phase, bool isForApplicationFee = false)
     {
       DotTypeProductTypes dotTypeProductType;
-      switch (preRegPhase)
+      switch (phase)
       {
-        case PreRegPhases.SunriseA:
+        case LaunchPhases.SunriseA:
           dotTypeProductType = !isForApplicationFee ? DotTypeProductTypes.SunriseA : DotTypeProductTypes.SunriseAApplication;
           break;
-        case PreRegPhases.SunriseB:
+        case LaunchPhases.SunriseB:
           dotTypeProductType = !isForApplicationFee ? DotTypeProductTypes.SunriseB : DotTypeProductTypes.SunriseBApplication;
           break;
-        case PreRegPhases.SunriseC:
+        case LaunchPhases.SunriseC:
           dotTypeProductType = !isForApplicationFee ? DotTypeProductTypes.SunriseC : DotTypeProductTypes.SunriseCApplication;
           break;
-        case PreRegPhases.Landrush:
+        case LaunchPhases.Landrush:
           dotTypeProductType = !isForApplicationFee ? DotTypeProductTypes.Landrush : DotTypeProductTypes.LandrushApplication;
           break;
-        case PreRegPhases.GeneralAvailability:
+        case LaunchPhases.GeneralAvailability:
           dotTypeProductType = DotTypeProductTypes.GeneralAvailability;
           break;
         default:
@@ -45,17 +45,17 @@ namespace Atlantis.Framework.DotTypeCache.Interface
       return dotTypeProductType;
     }
 
-    public static string GetPhaseCode(PreRegPhases preRegPhase)
+    public static string GetPhaseCode(LaunchPhases phase)
     {
-      string result = string.Empty;
-      _phases.TryGetValue(preRegPhase, out result);
+      string result;
+      _phases.TryGetValue(phase, out result);
 
       return result;
     }
 
-    public static PreRegPhases GetPreRegPhase(string phaseCode)
+    public static LaunchPhases GetLaunchPhase(string phaseCode)
     {
-      PreRegPhases phase = PreRegPhases.Invalid;
+      var phase = LaunchPhases.Invalid;
       foreach (var pair in _phases)
       {
         if (phaseCode.Equals(pair.Value, StringComparison.OrdinalIgnoreCase))

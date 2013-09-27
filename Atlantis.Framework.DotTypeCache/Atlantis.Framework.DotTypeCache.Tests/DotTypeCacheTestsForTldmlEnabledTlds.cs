@@ -240,7 +240,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
             foreach (int dc in domainCount)
             {
               int renewalProdId = Convert.ToInt32(TLDMLProduct.GetPFID(tld, regLength, productfamily.Registration, dc));
-              int productId = DotTypeCache.GetPreRegProductId(tld, PreRegPhases.GeneralAvailability, regLength, dc);
+              int productId = DotTypeCache.GetPreRegProductId(tld, LaunchPhases.GeneralAvailability, regLength, dc);
               AssertHelper.AddResults(productId != 0,
                                       "GetDotTypePreRegProductId - A pre reg product id was zero for: " + tld +
                                       ". Reg length: " + regLength + " year(s) and domain count: " + dc);
@@ -592,7 +592,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
         {
           foreach (int preRegLength in preRegLengths)
           {
-            tldmlmethod = dotTypeCache.GetPreRegProductId(PreRegPhases.GeneralAvailability, preRegLength, dc);
+            tldmlmethod = dotTypeCache.GetPreRegProductId(LaunchPhases.GeneralAvailability, preRegLength, dc);
 
             AssertHelper.AddResults(tldmlmethod != 0,
                                     "GetPreRegProductId for pre reg length: " + preRegLength +

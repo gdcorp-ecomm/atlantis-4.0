@@ -97,7 +97,7 @@ namespace Atlantis.Framework.DotTypeCache.Interface
       return 0;
     }
 
-    public int GetPreRegProductId(PreRegPhases preRegPhase, int registrationLength, int domainCount)
+    public int GetPreRegProductId(LaunchPhases phase, int registrationLength, int domainCount)
     {
       return 0;
     }
@@ -122,7 +122,7 @@ namespace Atlantis.Framework.DotTypeCache.Interface
       return new List<int>();
     }
 
-    public List<int> GetValidPreRegProductIdList(PreRegPhases preRegPhase, int domainCount, params int[] registrationLengths)
+    public List<int> GetValidPreRegProductIdList(LaunchPhases phase, int domainCount, params int[] registrationLengths)
     {
       return new List<int>();
     }
@@ -167,7 +167,7 @@ namespace Atlantis.Framework.DotTypeCache.Interface
       return new List<int>();
     }
 
-    public List<int> GetValidPreRegLengths(PreRegPhases preRegPhase, int domainCount, params int[] registrationLengths)
+    public List<int> GetValidPreRegLengths(LaunchPhases phase, int domainCount, params int[] registrationLengths)
     {
       return new List<int>();
     }
@@ -192,7 +192,7 @@ namespace Atlantis.Framework.DotTypeCache.Interface
       return 0;
     }
 
-    public int GetPreRegProductId(PreRegPhases preRegPhase, string registryId, int registrationLength, int domainCount)
+    public int GetPreRegProductId(LaunchPhases phase, string registryId, int registrationLength, int domainCount)
     {
       return 0;
     }
@@ -217,7 +217,7 @@ namespace Atlantis.Framework.DotTypeCache.Interface
       return new List<int>();
     }
 
-    public List<int> GetValidPreRegProductIdList(PreRegPhases preRegPhase, string registryId, int domainCount, params int[] registrationLengths)
+    public List<int> GetValidPreRegProductIdList(LaunchPhases phase, string registryId, int domainCount, params int[] registrationLengths)
     {
       return new List<int>();
     }
@@ -242,7 +242,7 @@ namespace Atlantis.Framework.DotTypeCache.Interface
       return new List<int>();
     }
 
-    public List<int> GetValidPreRegLengths(PreRegPhases preRegPhase, string registryId, int domainCount, params int[] registrationLengths)
+    public List<int> GetValidPreRegLengths(LaunchPhases phase, string registryId, int domainCount, params int[] registrationLengths)
     {
       return new List<int>();
     }
@@ -292,27 +292,37 @@ namespace Atlantis.Framework.DotTypeCache.Interface
       return new Dictionary<string, ITLDLaunchPhase>();
     }
 
-    public ITLDLaunchPhase GetLaunchPhase(PreRegPhases preRegPhase)
+    public ITLDLaunchPhase GetLaunchPhase(LaunchPhases phase)
     {
       return null;
     }
 
-    public int GetMinPreRegLength(PreRegPhases preRegPhase)
-    {
-      return 0;
-    }
-
-    public int GetMaxPreRegLength(PreRegPhases preRegPhase)
-    {
-      return 0;
-    }
-
-    public bool HasPreRegApplicationFee(PreRegPhases preRegPhase)
+    public bool IsLivePhase(LaunchPhases phase)
     {
       return false;
     }
 
-    public int GetPreRegApplicationProductId(PreRegPhases preRegPhase)
+    public bool HasPreRegPhases
+    {
+      get { return false; }
+    }
+
+    public int GetMinPreRegLength(LaunchPhases phase)
+    {
+      return 0;
+    }
+
+    public int GetMaxPreRegLength(LaunchPhases phase)
+    {
+      return 0;
+    }
+
+    public bool HasPreRegApplicationFee(LaunchPhases phase)
+    {
+      return false;
+    }
+
+    public int GetPreRegApplicationProductId(LaunchPhases phase)
     {
       return 0;
     }

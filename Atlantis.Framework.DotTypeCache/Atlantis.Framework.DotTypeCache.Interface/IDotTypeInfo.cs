@@ -25,8 +25,8 @@ namespace Atlantis.Framework.DotTypeCache.Interface
 
     int GetExpiredAuctionRegProductId(int registrationLength, int domainCount);
     int GetExpiredAuctionRegProductId(string registryId, int registrationLength, int domainCount);
-    int GetPreRegProductId(PreRegPhases preRegPhase, int registrationLength, int domainCount);
-    int GetPreRegProductId(PreRegPhases preRegPhase, string registryId, int registrationLength, int domainCount);
+    int GetPreRegProductId(LaunchPhases phase, int registrationLength, int domainCount);
+    int GetPreRegProductId(LaunchPhases phase, string registryId, int registrationLength, int domainCount);
     int GetRegistrationProductId(int registrationLength, int domainCount);
     int GetRegistrationProductId(string registryId, int registrationLength, int domainCount);
     int GetTransferProductId(int registrationLength, int domainCount);
@@ -36,8 +36,8 @@ namespace Atlantis.Framework.DotTypeCache.Interface
 
     List<int> GetValidExpiredAuctionRegProductIdList(int domainCount, params int[] registrationLengths);
     List<int> GetValidExpiredAuctionRegProductIdList(string registryId, int domainCount, params int[] registrationLengths);
-    List<int> GetValidPreRegProductIdList(PreRegPhases preRegPhase, int domainCount, params int[] registrationLengths);
-    List<int> GetValidPreRegProductIdList(PreRegPhases preRegPhase, string registryId, int domainCount, params int[] registrationLengths);
+    List<int> GetValidPreRegProductIdList(LaunchPhases phase, int domainCount, params int[] registrationLengths);
+    List<int> GetValidPreRegProductIdList(LaunchPhases phase, string registryId, int domainCount, params int[] registrationLengths);
     List<int> GetValidRegistrationProductIdList(int domainCount, params int[] registrationLengths);
     List<int> GetValidRegistrationProductIdList(string registryId, int domainCount, params int[] registrationLengths);
     List<int> GetValidTransferProductIdList(int domainCount, params int[] registrationLengths);
@@ -46,7 +46,7 @@ namespace Atlantis.Framework.DotTypeCache.Interface
     List<int> GetValidRenewalProductIdList(string registryId, int domainCount, params int[] registrationLengths);
 
     List<int> GetValidExpiredAuctionRegLengths(int domainCount, params int[] registrationLengths);
-    List<int> GetValidPreRegLengths(PreRegPhases preRegPhase, int domainCount, params int[] registrationLengths);
+    List<int> GetValidPreRegLengths(LaunchPhases phase, int domainCount, params int[] registrationLengths);
     List<int> GetValidRegistrationLengths(int domainCount, params int[] registrationLengths);
     List<int> GetValidTransferLengths(int domainCount, params int[] registrationLengths);
     List<int> GetValidRenewalLengths(int domainCount, params int[] registrationLengths);
@@ -61,11 +61,13 @@ namespace Atlantis.Framework.DotTypeCache.Interface
     ITLDApplicationControl ApplicationControl { get; }
 
     Dictionary<string, ITLDLaunchPhase> GetActiveClientRequestPhases();
-    ITLDLaunchPhase GetLaunchPhase(PreRegPhases preRegPhase);
+    ITLDLaunchPhase GetLaunchPhase(LaunchPhases phase);
+    bool IsLivePhase(LaunchPhases phase);
+    bool HasPreRegPhases { get; }
 
-    int GetMinPreRegLength(PreRegPhases preRegPhase);
-    int GetMaxPreRegLength(PreRegPhases preRegPhase);
-    bool HasPreRegApplicationFee(PreRegPhases preRegPhase);
-    int GetPreRegApplicationProductId(PreRegPhases preRegPhase);
+    int GetMinPreRegLength(LaunchPhases phase);
+    int GetMaxPreRegLength(LaunchPhases phase);
+    bool HasPreRegApplicationFee(LaunchPhases phase);
+    int GetPreRegApplicationProductId(LaunchPhases phase);
   }
 }

@@ -637,9 +637,9 @@ namespace Atlantis.Framework.DotTypeCache.Tests
         {
           int count = 0;
 
-          List<int> statPreRegLengths = staticTld.GetValidPreRegLengths(PreRegPhases.GeneralAvailability, dc, regLengths);
+          List<int> statPreRegLengths = staticTld.GetValidPreRegLengths(LaunchPhases.GeneralAvailability, dc, regLengths);
 
-          foreach (int tldmlPid in dotTypeCache.GetValidPreRegLengths(PreRegPhases.GeneralAvailability, dc, regLengths))
+          foreach (int tldmlPid in dotTypeCache.GetValidPreRegLengths(LaunchPhases.GeneralAvailability, dc, regLengths))
           {
             AssertHelper.AddResults(tldmlPid == statPreRegLengths[count],
                                     "GetValidPreRegLengths PID for domain count: " + dc + " did not match for " + tld +
@@ -663,8 +663,8 @@ namespace Atlantis.Framework.DotTypeCache.Tests
         IDotTypeInfo dotTypeCache = DotTypeCache.GetDotTypeInfo(tld);
 
         //TODO: Implement foreach when GetValidPreRegProductIdList is fixed
-        List<int> statPreRegPidList = staticTld.GetValidPreRegProductIdList(PreRegPhases.GeneralAvailability, 1, regLengths);
-        List<int> preRegPidList = dotTypeCache.GetValidPreRegProductIdList(PreRegPhases.GeneralAvailability, 1, regLengths);
+        List<int> statPreRegPidList = staticTld.GetValidPreRegProductIdList(LaunchPhases.GeneralAvailability, 1, regLengths);
+        List<int> preRegPidList = dotTypeCache.GetValidPreRegProductIdList(LaunchPhases.GeneralAvailability, 1, regLengths);
         AssertHelper.AddResults(false, "GetValidPreRegProductIdList calls return a count of zero for static and tldml enabled for " + tld);
       }
     }

@@ -58,7 +58,7 @@
     <Compile Include="IDotTypeProvider.cs" />
     <Compile Include="InvalidDotType.cs" />
     <Compile Include="PhaseHelper.cs" />
-    <Compile Include="PreRegPhases.cs" />
+    <Compile Include="LaunchPhases.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

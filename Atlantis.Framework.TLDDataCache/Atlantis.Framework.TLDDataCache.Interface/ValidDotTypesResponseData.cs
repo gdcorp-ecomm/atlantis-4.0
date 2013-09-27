@@ -9,6 +9,7 @@ namespace Atlantis.Framework.TLDDataCache.Interface
   {
     private readonly AtlantisException _exception;
     private readonly Dictionary<string, int> _validDotTypes;
+    private readonly Dictionary<int, string> _validDotTypesById;
 
     public static ValidDotTypesResponseData FromException(RequestData requestData, Exception ex)
     {
@@ -41,6 +42,7 @@ namespace Atlantis.Framework.TLDDataCache.Interface
           if (!string.IsNullOrEmpty(tld))
           {
             _validDotTypes.Add(tld, tldid);
+            _validDotTypesById.Add(tldid, tld);
           }
         }
         catch (Exception ex)
@@ -56,6 +58,11 @@ namespace Atlantis.Framework.TLDDataCache.Interface
     public bool TryGetTldId(string tld, out int tldId)
     {
       return _validDotTypes.TryGetValue(tld, out tldId);
+    }
+
+    public bool TryGetTldById(int tldId, out string tld)
+    {
+      return _validDotTypesById.TryGetValue(tldId, out tld);
     }
 
     public bool IsValidTld(string tld)

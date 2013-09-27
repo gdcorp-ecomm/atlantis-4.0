@@ -118,7 +118,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
       regLengths.Add(9);
       regLengths.Add(10);
       //IDotTypeInfo dotTypeInfo = DotTypeCache.GetDotTypeInfo("XXX");
-      int productId = DotTypeCache.GetPreRegProductId("XXX", PreRegPhases.GeneralAvailability, 1, 1);
+      int productId = DotTypeCache.GetPreRegProductId("XXX", LaunchPhases.GeneralAvailability, 1, 1);
       ///List<int> RegistrationProductIds = dotTypeInfo.GetValidRegistrationProductIdList(1, regLengths.ToArray());
       ///List<int> TransferProductIds = dotTypeInfo.GetValidTransferProductIdList(1, regLengths.ToArray());
       //List<int> renewProductIds = dotTypeInfo.GetValidRenewalProductIdList(1, regLengths.ToArray());
@@ -295,9 +295,9 @@ namespace Atlantis.Framework.DotTypeCache.Tests
           "HasExpiredAuctionIds does not match for: " + dotType.ToUpper() + ". Expected: " +
           (string)testContextInstance.DataRow["HasExpiredAuctionIds"] + " Actual: " + info.HasExpiredAuctionRegIds.ToString());
        */
-      Assert.AreEqual((string)testContextInstance.DataRow["MaxPreRegLength"], info.GetMaxPreRegLength(PreRegPhases.GeneralAvailability).ToString(),
+      Assert.AreEqual((string)testContextInstance.DataRow["MaxPreRegLength"], info.GetMaxPreRegLength(LaunchPhases.GeneralAvailability).ToString(),
           "MaxPreRegLength does not match for: " + dotType.ToUpper() + ". Expected: " +
-          (string)testContextInstance.DataRow["MaxPreRegLength"] + " Actual: " + info.GetMaxPreRegLength(PreRegPhases.GeneralAvailability).ToString());
+          (string)testContextInstance.DataRow["MaxPreRegLength"] + " Actual: " + info.GetMaxPreRegLength(LaunchPhases.GeneralAvailability).ToString());
       Assert.AreEqual((string)testContextInstance.DataRow["MaxExpAuctionRegLength"], info.MaxExpiredAuctionRegLength.ToString(),
           "MaxExpAuctionRegLength does not match for: " + dotType.ToUpper() + ". Expected: " +
           (string)testContextInstance.DataRow["MaxExpAuctionRegLength"] + " Actual: " + info.MaxExpiredAuctionRegLength.ToString());
@@ -310,9 +310,9 @@ namespace Atlantis.Framework.DotTypeCache.Tests
       Assert.AreEqual((string)testContextInstance.DataRow["MaxTransferLength"], info.MaxTransferLength.ToString(),
           "MaxTransferLength does not match for: " + dotType.ToUpper() + ". Expected: " +
           (string)testContextInstance.DataRow["MaxTransferLength"] + " Actual: " + info.MaxTransferLength.ToString());
-      Assert.AreEqual((string)testContextInstance.DataRow["MinPreRegLength"], info.GetMinPreRegLength(PreRegPhases.GeneralAvailability).ToString(),
+      Assert.AreEqual((string)testContextInstance.DataRow["MinPreRegLength"], info.GetMinPreRegLength(LaunchPhases.GeneralAvailability).ToString(),
           "MinPreRegLength does not match for: " + dotType.ToUpper() + ". Expected: " +
-          (string)testContextInstance.DataRow["MinPreRegLength"] + " Actual: " + info.GetMinPreRegLength(PreRegPhases.GeneralAvailability).ToString());
+          (string)testContextInstance.DataRow["MinPreRegLength"] + " Actual: " + info.GetMinPreRegLength(LaunchPhases.GeneralAvailability).ToString());
       Assert.AreEqual((string)testContextInstance.DataRow["MinExpAuctionRegLength"], info.MinExpiredAuctionRegLength.ToString(),
          "MinExpAuctionRegLength does not match for: " + dotType.ToUpper() + ". Expected: " +
          (string)testContextInstance.DataRow["MinExpAuctionRegLength"] + " Actual: " + info.MinExpiredAuctionRegLength.ToString());
@@ -405,11 +405,11 @@ namespace Atlantis.Framework.DotTypeCache.Tests
       Console.WriteLine("DotType: " + dotType);
       IDotTypeInfo info = DotTypeCache.GetDotTypeInfo(dotType);
 
-      List<int> preRegList = info.GetValidPreRegProductIdList(PreRegPhases.GeneralAvailability, 1, new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
+      List<int> preRegList = info.GetValidPreRegProductIdList(LaunchPhases.GeneralAvailability, 1, new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
 
       if (preRegList.Count > 0)
       {
-        int productId = DotTypeCache.GetPreRegProductId(dotType, PreRegPhases.GeneralAvailability, info.GetMinPreRegLength(PreRegPhases.GeneralAvailability), 1);
+        int productId = DotTypeCache.GetPreRegProductId(dotType, LaunchPhases.GeneralAvailability, info.GetMinPreRegLength(LaunchPhases.GeneralAvailability), 1);
         Assert.IsTrue(productId > 0, "ProductID < 0 for dotType: " + dotType);
       }
     }
@@ -421,11 +421,11 @@ namespace Atlantis.Framework.DotTypeCache.Tests
     {
       string dotType = System.Convert.ToString(testContextInstance.DataRow["DotTypeName"]);
       IDotTypeInfo info = DotTypeCache.GetDotTypeInfo(dotType);
-      List<int> preRegList = info.GetValidPreRegProductIdList(PreRegPhases.GeneralAvailability, 1, new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
+      List<int> preRegList = info.GetValidPreRegProductIdList(LaunchPhases.GeneralAvailability, 1, new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
 
       if (preRegList.Count > 0)
       {
-        int productId = DotTypeCache.GetPreRegProductId(dotType, PreRegPhases.GeneralAvailability, info.GetMaxPreRegLength(PreRegPhases.GeneralAvailability), 1);
+        int productId = DotTypeCache.GetPreRegProductId(dotType, LaunchPhases.GeneralAvailability, info.GetMaxPreRegLength(LaunchPhases.GeneralAvailability), 1);
         Assert.IsTrue(productId > 0, "ProductID < 0 for dotType: " + dotType);
       }
     }
@@ -437,15 +437,15 @@ namespace Atlantis.Framework.DotTypeCache.Tests
     {
       string dotType = System.Convert.ToString(testContextInstance.DataRow["DotTypeName"]);
       IDotTypeInfo info = DotTypeCache.GetDotTypeInfo(dotType);
-      List<int> preRegList = info.GetValidPreRegProductIdList(PreRegPhases.GeneralAvailability, 1, new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
+      List<int> preRegList = info.GetValidPreRegProductIdList(LaunchPhases.GeneralAvailability, 1, new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
 
       if (preRegList.Count > 0)
       {
-        int productId = DotTypeCache.GetPreRegProductId(dotType, PreRegPhases.GeneralAvailability, info.GetMinPreRegLength(PreRegPhases.GeneralAvailability), 100);
+        int productId = DotTypeCache.GetPreRegProductId(dotType, LaunchPhases.GeneralAvailability, info.GetMinPreRegLength(LaunchPhases.GeneralAvailability), 100);
         Assert.IsTrue(productId > 0, "ProductID < 0 for dotType: " + dotType);
 
         //verify it is different than domainCount = 1
-        int productId1stTier = DotTypeCache.GetPreRegProductId(dotType, PreRegPhases.GeneralAvailability, info.GetMinPreRegLength(PreRegPhases.GeneralAvailability), 1);
+        int productId1stTier = DotTypeCache.GetPreRegProductId(dotType, LaunchPhases.GeneralAvailability, info.GetMinPreRegLength(LaunchPhases.GeneralAvailability), 1);
         Assert.AreNotEqual(productId1stTier, productId, "ProductID for bulk tiers is the same for dotType: " + dotType);
       }
     }
@@ -455,35 +455,35 @@ namespace Atlantis.Framework.DotTypeCache.Tests
     [TestMethod]
     public void N_GetPreRegProductId_EmptyDotType()
     {
-      int productId = DotTypeCache.GetPreRegProductId(string.Empty, PreRegPhases.GeneralAvailability, 1, 1);
+      int productId = DotTypeCache.GetPreRegProductId(string.Empty, LaunchPhases.GeneralAvailability, 1, 1);
       Assert.AreEqual(0, productId);
     }
 
     [TestMethod]
     public void N_GetPreRegProductId_InvalidDotType()
     {
-      int productId = DotTypeCache.GetPreRegProductId("blah", PreRegPhases.GeneralAvailability, 1, 1);
+      int productId = DotTypeCache.GetPreRegProductId("blah", LaunchPhases.GeneralAvailability, 1, 1);
       Assert.AreEqual(0, productId);
     }
 
     [TestMethod]
     public void N_GetPreRegProductId_NullDotType()
     {
-      int productId = DotTypeCache.GetPreRegProductId(null, PreRegPhases.GeneralAvailability, 1, 1);
+      int productId = DotTypeCache.GetPreRegProductId(null, LaunchPhases.GeneralAvailability, 1, 1);
       Assert.AreEqual(0, productId);
     }
 
     [TestMethod]
     public void N_GetPreRegProductId_InvalidRegistrationLength()
     {
-      int productId = DotTypeCache.GetPreRegProductId("com", PreRegPhases.GeneralAvailability, 20, 1);
+      int productId = DotTypeCache.GetPreRegProductId("com", LaunchPhases.GeneralAvailability, 20, 1);
       Assert.AreEqual(0, productId);
     }
 
     [TestMethod]
     public void N_GetPreRegProductId_InvalidDomainCount()
     {
-      int productId = DotTypeCache.GetPreRegProductId("com", PreRegPhases.GeneralAvailability, 1, 10000);
+      int productId = DotTypeCache.GetPreRegProductId("com", LaunchPhases.GeneralAvailability, 1, 10000);
       Assert.AreEqual(0, productId);
     }
 
@@ -828,7 +828,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
     public void GetMinPreRegLength()
     {
       string dotType = System.Convert.ToString(testContextInstance.DataRow["DotTypeName"]);
-      int preRegLength = DotTypeCache.GetMinPreRegLength(dotType, PreRegPhases.GeneralAvailability);
+      int preRegLength = DotTypeCache.GetMinPreRegLength(dotType, LaunchPhases.GeneralAvailability);
       Assert.AreEqual((string)testContextInstance.DataRow["MinPreRegLength"], preRegLength.ToString(),
           "MinPreRegLength is not as expected for dotType: " + dotType);
     }
@@ -838,21 +838,21 @@ namespace Atlantis.Framework.DotTypeCache.Tests
     [TestMethod]
     public void N_GetMinPreRegLength_Empty()
     {
-      int preRegLength = DotTypeCache.GetMinPreRegLength(string.Empty, PreRegPhases.GeneralAvailability);
+      int preRegLength = DotTypeCache.GetMinPreRegLength(string.Empty, LaunchPhases.GeneralAvailability);
       Assert.AreEqual(0, preRegLength);
     }
 
     [TestMethod]
     public void N_GetMinPreRegLength_Invalid()
     {
-      int preRegLength = DotTypeCache.GetMinPreRegLength("blah", PreRegPhases.GeneralAvailability);
+      int preRegLength = DotTypeCache.GetMinPreRegLength("blah", LaunchPhases.GeneralAvailability);
       Assert.AreEqual(0, preRegLength);
     }
 
     [TestMethod]
     public void N_GetMinPreRegLength_Null()
     {
-      int preRegLength = DotTypeCache.GetMinPreRegLength(null, PreRegPhases.GeneralAvailability);
+      int preRegLength = DotTypeCache.GetMinPreRegLength(null, LaunchPhases.GeneralAvailability);
       Assert.AreEqual(0, preRegLength);
     }
 
@@ -868,7 +868,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
     public void GetMaxPreRegLength()
     {
       string dotType = System.Convert.ToString(testContextInstance.DataRow["DotTypeName"]);
-      int preRegLength = DotTypeCache.GetMaxPreRegLength(dotType, PreRegPhases.GeneralAvailability);
+      int preRegLength = DotTypeCache.GetMaxPreRegLength(dotType, LaunchPhases.GeneralAvailability);
       Assert.AreEqual((string)testContextInstance.DataRow["MaxPreRegLength"], preRegLength.ToString(),
           "MaxPreRegLength is not as expected for dotType: " + dotType);
     }
@@ -878,21 +878,21 @@ namespace Atlantis.Framework.DotTypeCache.Tests
     [TestMethod]
     public void N_GetMaxPreRegLength_Empty()
     {
-      int preRegLength = DotTypeCache.GetMaxPreRegLength(string.Empty, PreRegPhases.GeneralAvailability);
+      int preRegLength = DotTypeCache.GetMaxPreRegLength(string.Empty, LaunchPhases.GeneralAvailability);
       Assert.AreEqual(0, preRegLength);
     }
 
     [TestMethod]
     public void N_GetMaxPreRegLength_Invalid()
     {
-      int preRegLength = DotTypeCache.GetMaxPreRegLength("blah", PreRegPhases.GeneralAvailability);
+      int preRegLength = DotTypeCache.GetMaxPreRegLength("blah", LaunchPhases.GeneralAvailability);
       Assert.AreEqual(0, preRegLength);
     }
 
     [TestMethod]
     public void N_GetMaxPreRegLength_Null()
     {
-      int preRegLength = DotTypeCache.GetMaxPreRegLength(null, PreRegPhases.GeneralAvailability);
+      int preRegLength = DotTypeCache.GetMaxPreRegLength(null, LaunchPhases.GeneralAvailability);
       Assert.AreEqual(0, preRegLength);
     }
 
@@ -1356,7 +1356,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
     public void GetLaunchPhaseForTldmlBorg()
     {
       IDotTypeInfo dotTypeInfo = DotTypeProvider.GetDotTypeInfo("borg");
-      ITLDLaunchPhase launchphase = dotTypeInfo.GetLaunchPhase(PreRegPhases.SunriseA);
+      ITLDLaunchPhase launchphase = dotTypeInfo.GetLaunchPhase(LaunchPhases.SunriseA);
 
       Assert.IsTrue(launchphase == null);
       //Assert.IsTrue(launchphase != null && !string.IsNullOrEmpty(launchphase.Type) && !string.IsNullOrEmpty(launchphase.SubType) && !string.IsNullOrEmpty(launchphase.Description));
@@ -1366,7 +1366,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
     public void GetLaunchPhaseForInvalidTld()
     {
       IDotTypeInfo dotTypeInfo = DotTypeProvider.GetDotTypeInfo("raj");
-      ITLDLaunchPhase launchphase = dotTypeInfo.GetLaunchPhase(PreRegPhases.SunriseA);
+      ITLDLaunchPhase launchphase = dotTypeInfo.GetLaunchPhase(LaunchPhases.SunriseA);
       Assert.IsTrue(launchphase == null);
     }
 
@@ -1374,7 +1374,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
     public void GetLaunchPhaseForStaticTld()
     {
       IDotTypeInfo dotTypeInfo = DotTypeProvider.GetDotTypeInfo("com");
-      ITLDLaunchPhase launchphase = dotTypeInfo.GetLaunchPhase(PreRegPhases.SunriseA);
+      ITLDLaunchPhase launchphase = dotTypeInfo.GetLaunchPhase(LaunchPhases.SunriseA);
       Assert.IsTrue(launchphase == null);
     }
 
@@ -1382,7 +1382,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
     public void GetLaunchPhaseForStaticMultiRegTld()
     {
       IDotTypeInfo dotTypeInfo = DotTypeProvider.GetDotTypeInfo("co.uk");
-      ITLDLaunchPhase launchphase = dotTypeInfo.GetLaunchPhase(PreRegPhases.SunriseA);
+      ITLDLaunchPhase launchphase = dotTypeInfo.GetLaunchPhase(LaunchPhases.SunriseA);
       Assert.IsTrue(launchphase == null);
     }
 
@@ -1390,7 +1390,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
     public void GetInvalidLaunchPhase()
     {
       var dotTypeInfo = DotTypeProvider.GetDotTypeInfo("f.borg");
-      var launchphase = dotTypeInfo.GetLaunchPhase(PreRegPhases.Invalid);
+      var launchphase = dotTypeInfo.GetLaunchPhase(LaunchPhases.Invalid);
       Assert.IsTrue(launchphase == null);
     }
 
@@ -1486,6 +1486,22 @@ namespace Atlantis.Framework.DotTypeCache.Tests
       var dotTypeInfo = DotTypeProvider.GetDotTypeInfo("co.uk");
       var launchphases = dotTypeInfo.GetActiveClientRequestPhases();
       Assert.IsTrue(launchphases.Count == 0);
+    }
+
+    [TestMethod]
+    public void IsTldInLivePhase()
+    {
+      var dotTypeInfo = DotTypeProvider.GetDotTypeInfo("l4.borg");
+      var isLivePhase = dotTypeInfo.IsLivePhase(LaunchPhases.GeneralAvailability);
+      Assert.IsTrue(!isLivePhase);
+    }
+
+    [TestMethod]
+    public void TldHasPreRegPhases()
+    {
+      var dotTypeInfo = DotTypeProvider.GetDotTypeInfo("l4.borg");
+      var hasPreregPhases = dotTypeInfo.HasPreRegPhases;
+      Assert.IsTrue(hasPreregPhases);
     }
   }
 }

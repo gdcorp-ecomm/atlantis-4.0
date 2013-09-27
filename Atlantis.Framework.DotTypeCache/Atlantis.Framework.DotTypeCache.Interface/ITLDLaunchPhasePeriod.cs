@@ -9,7 +9,6 @@ namespace Atlantis.Framework.DotTypeCache.Interface
     string Type { get; }
     DateTime StartDate { get; }
     DateTime StopDate { get; }
-    bool AvailCheck { get; }
 
     bool IsActive();
     bool IsActive(DateTime date);

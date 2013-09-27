@@ -77,16 +77,16 @@ namespace Atlantis.Framework.DotTypeCache
       return dotTypeInfo.GetExpiredAuctionRegProductId(registrarId, registrationLength, domainCount);
     }
 
-    public static int GetPreRegProductId(string dotType, PreRegPhases preRegPhase, int registrationLength, int domainCount)
+    public static int GetPreRegProductId(string dotType, LaunchPhases phase, int registrationLength, int domainCount)
     {
       IDotTypeInfo dotTypeInfo = GetDotTypeInfo(dotType);
-      return dotTypeInfo.GetPreRegProductId(preRegPhase, registrationLength, domainCount);
+      return dotTypeInfo.GetPreRegProductId(phase, registrationLength, domainCount);
     }
 
-    public static int GetPreRegProductId(string dotType, PreRegPhases preRegPhase, string registryId, int registrationLength, int domainCount)
+    public static int GetPreRegProductId(string dotType, LaunchPhases phase, string registryId, int registrationLength, int domainCount)
     {
       IDotTypeInfo dotTypeInfo = GetDotTypeInfo(dotType);
-      return dotTypeInfo.GetPreRegProductId(preRegPhase, registryId, registrationLength, domainCount);
+      return dotTypeInfo.GetPreRegProductId(phase, registryId, registrationLength, domainCount);
     }
 
     public static int GetRegistrationProductId(string dotType, int registrationLength, int domainCount)
@@ -137,16 +137,16 @@ namespace Atlantis.Framework.DotTypeCache
       return dotTypeInfo.MaxExpiredAuctionRegLength;
     }
 
-    public static int GetMinPreRegLength(string dotType, PreRegPhases preRegPhase)
+    public static int GetMinPreRegLength(string dotType, LaunchPhases phase)
     {
       IDotTypeInfo dotTypeInfo = GetDotTypeInfo(dotType);
-      return dotTypeInfo.GetMinPreRegLength(preRegPhase);
+      return dotTypeInfo.GetMinPreRegLength(phase);
     }
 
-    public static int GetMaxPreRegLength(string dotType, PreRegPhases preRegPhase)
+    public static int GetMaxPreRegLength(string dotType, LaunchPhases phase)
     {
       IDotTypeInfo dotTypeInfo = GetDotTypeInfo(dotType);
-      return dotTypeInfo.GetMaxPreRegLength(preRegPhase);
+      return dotTypeInfo.GetMaxPreRegLength(phase);
     }
 
     public static int GetMinRegistrationLength(string dotType)

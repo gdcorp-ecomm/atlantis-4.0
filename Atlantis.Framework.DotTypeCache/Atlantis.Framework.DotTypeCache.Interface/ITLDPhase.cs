@@ -7,6 +7,7 @@ namespace Atlantis.Framework.DotTypeCache.Interface
   // ReSharper restore InconsistentNaming
   {
     Dictionary<string, ITLDLaunchPhase> GetActiveClientRequestPhases();
-    ITLDLaunchPhase GetLaunchPhase(PreRegPhases preRegPhase);
+    ITLDLaunchPhase GetLaunchPhase(LaunchPhases phase);
+    bool HasPreRegPhases { get; }
   }
 }

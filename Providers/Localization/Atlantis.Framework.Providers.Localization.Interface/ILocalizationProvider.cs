@@ -166,5 +166,11 @@ namespace Atlantis.Framework.Providers.Localization.Interface
     /// </summary>
     /// <returns></returns>
     string GetLanguageUrl(string countrySiteId, string marketId);
+
+    /// <summary>
+    /// Gets the IMarket list for a given countrycode. If the country code is invalid returns the default www IMarket list.
+    /// </summary>
+    /// <returns>IMarket list for a given countrycode or returns default www</returns>
+    IEnumerable<IMarket> GetMarketsForCountryCode(string countryCode);
   }
 }

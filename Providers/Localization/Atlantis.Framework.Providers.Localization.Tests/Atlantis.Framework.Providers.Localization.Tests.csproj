@@ -73,9 +73,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Atlantis.Framework.Localization.4.0.0.0\lib\net40\Atlantis.Framework.Localization.Impl.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.Localization.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.Localization.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Localization.Interface.dll</HintPath>
+    <Reference Include="Atlantis.Framework.Localization.Interface">
+      <HintPath>..\packages\Atlantis.Framework.Localization.Interface.4.13.9.27\lib\net40\Atlantis.Framework.Localization.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.PrivateLabel.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -95,10 +94,6 @@
     </Reference>
     <Reference Include="Atlantis.Framework.Providers.Language.Interface">
       <HintPath>..\packages\Atlantis.Framework.Providers.Language.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Providers.Language.Interface.dll</HintPath>
-    </Reference>
-    <Reference Include="Atlantis.Framework.Providers.Localization.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.Providers.Localization.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Providers.Localization.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Providers.Preferences.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -159,6 +154,10 @@
     <Compile Include="TransperfectTestWebProxy.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Atlantis.Framework.Providers.Localization.Interface\Atlantis.Framework.Providers.Localization.Interface.csproj">
+      <Project>{061fcadc-9547-47e2-9643-cfbcfa355ac2}</Project>
+      <Name>Atlantis.Framework.Providers.Localization.Interface</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.Providers.Localization\Atlantis.Framework.Providers.Localization.csproj">
       <Project>{b6571cf6-7f3e-47df-984d-f90c4abf8584}</Project>
       <Name>Atlantis.Framework.Providers.Localization</Name>

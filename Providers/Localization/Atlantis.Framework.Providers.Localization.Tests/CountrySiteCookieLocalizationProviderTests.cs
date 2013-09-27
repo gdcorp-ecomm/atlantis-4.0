@@ -148,7 +148,16 @@ namespace Atlantis.Framework.Providers.Localization.Tests
       Assert.IsTrue(localization.IsGlobalSite());
     }
 
+    [TestMethod]
+    public void GetMarketsForCountry()
+    {
+      IProviderContainer container = SetContext();
 
+      ILocalizationProvider localization = container.Resolve<ILocalizationProvider>();
+      IEnumerable<IMarket> markets = localization.GetMarketsForCountryCode("es");
+      Assert.IsTrue(markets.Any());
+
+    }
 
   }
 }

@@ -337,6 +337,33 @@ namespace Atlantis.Framework.Providers.Localization
       return marketMappings.GetLanguageUrl(marketId);
     }
 
+    public IEnumerable<IMarket> GetMarketsForCountryCode(string countryCode)
+    {
+      var marketList = new List<IMarket>();
+      CountrySiteMarketMappingsResponseData marketMappings;
+      string validCountryCode = IsValidCountrySubdomain(countryCode) ? countryCode : _WWW;
+
+      marketMappings = GetOrLoadMarketMappingsForCountrySite(validCountryCode);
+
+      if (_countrySiteMarketMappings.Count == 0)
+      {
+         marketMappings = GetOrLoadMarketMappingsForCountrySite(_WWW);
+      }
+
+      IEnumerable<string> marketIds = marketMappings.GetMarketIdsForCountry();
+
+      foreach (var marketId in marketIds)
+      {
+        if (marketMappings.IsPublicMapping(marketId))
+        {
+          IMarket market = TryGetMarket(marketId);
+          marketList.Add(market);
+        }
+      }
+
+      return marketList;
+    } 
+
     private CountrySiteMarketMappingsResponseData GetOrLoadMarketMappingsForCountrySite(string countrySiteId)
     {
       CountrySiteMarketMappingsResponseData marketMappings;

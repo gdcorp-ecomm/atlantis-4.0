@@ -24,25 +24,23 @@ namespace Atlantis.Framework.CH.DotTypeCache
 
           if (!dotType.DotType.Equals("INVALID"))
           {
-            DotTypeActivePhase = dotType.GetActiveClientRequestPhases();
-
             foreach (var phases in parameters)
             {
               switch (phases.ToUpperInvariant())
               {
                 case TokenPreReg.GeneralAvailability:
-                  result = IsPhaseActive(PreRegPhases.GeneralAvailability);
+                  result = dotType.IsLivePhase(LaunchPhases.GeneralAvailability);
                   break;
                 case TokenPreReg.EarlyAccess:
-                  result = IsPhaseActive(PreRegPhases.Landrush);
+                  result = dotType.IsLivePhase(LaunchPhases.Landrush);
                   break;
                 case TokenPreReg.Landrush:
-                  result = IsPhaseActive(PreRegPhases.Landrush);
+                  result = dotType.IsLivePhase(LaunchPhases.Landrush);
                   break;
                 case TokenPreReg.Sunrise:
-                  result = IsPhaseActive(PreRegPhases.SunriseA);
-                  result = IsPhaseActive(PreRegPhases.SunriseB);
-                  result = IsPhaseActive(PreRegPhases.SunriseC);
+                  result = dotType.IsLivePhase(LaunchPhases.SunriseA);
+                  result = dotType.IsLivePhase(LaunchPhases.SunriseB);
+                  result = dotType.IsLivePhase(LaunchPhases.SunriseC);
                   break;
               }
 
@@ -72,65 +70,6 @@ namespace Atlantis.Framework.CH.DotTypeCache
       }
 
       return result;
-    }
-
-    private Dictionary<string, ITLDLaunchPhase> DotTypeActivePhase { get; set; }
-
-    private PreRegPhases GetPreRegPhase(ITLDLaunchPhase tldLaunchPhase)
-    {
-      PreRegPhases result;
-
-      if (Enum.TryParse(tldLaunchPhase.Type, out result))
-      {
-        return result;
-      }
-
-      return PreRegPhases.Invalid;
-    }
-
-    private bool IsPhaseActive(PreRegPhases phase)
-    {
-      var isPhaseActive = false;
-
-      foreach (var tldDict in DotTypeActivePhase)
-      {
-        var preRegPhase = GetPreRegPhase(tldDict.Value);
-
-        switch (preRegPhase)
-        {
-          case PreRegPhases.Landrush:
-            if (preRegPhase == phase)
-            {
-              isPhaseActive = true;
-            }
-            break;
-          case PreRegPhases.SunriseA:
-            if (preRegPhase == phase)
-            {
-              isPhaseActive = true;
-            }
-            break;
-          case PreRegPhases.SunriseB:
-            if (preRegPhase == phase)
-            {
-              isPhaseActive = true;
-            }
-            break;
-          case PreRegPhases.SunriseC:
-            if (preRegPhase == phase)
-            {
-              isPhaseActive = true;
-            }
-            break;
-          case PreRegPhases.GeneralAvailability:
-            if (preRegPhase == phase)
-            {
-              isPhaseActive = true;
-            }
-            break;
-        }
-      }
-      return isPhaseActive;
     }
   }
 }

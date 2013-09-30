@@ -71,7 +71,7 @@ namespace Atlantis.Framework.DCCDomainsDataCache.Interface
       return launchPhases;
     }
 
-    public ITLDLaunchPhase GetLaunchPhase(PreRegPhases preRegPhase)
+    public ITLDLaunchPhase GetLaunchPhase(LaunchPhases preRegPhase)
     {
       var launchPhase = TldLaunchPhase.NULLPHASE;
 

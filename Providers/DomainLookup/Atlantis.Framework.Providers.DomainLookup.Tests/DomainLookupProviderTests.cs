@@ -41,6 +41,7 @@ namespace Atlantis.Framework.Providers.DomainLookup.Tests
           privateLabelCheck = true;
 
         Assert.IsFalse(provider.IsDomainExpired());
+        Assert.IsFalse(provider.IsDomainWithin90DaysOfExpiration());
         Assert.IsTrue(provider.ParkedDomainInfo.IsActive);
         Assert.IsTrue(privateLabelCheck);
         Assert.AreEqual("jeffmcookietest1.info", provider.DomainName);

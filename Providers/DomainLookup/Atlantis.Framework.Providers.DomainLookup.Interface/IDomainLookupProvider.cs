@@ -7,5 +7,6 @@
       IDomainLookupData GetDomainInformation(string domainName);
       bool IsDomainExpired();
       bool IsDomainAdult();
+      bool IsDomainWithin90DaysOfExpiration();
     }
 }

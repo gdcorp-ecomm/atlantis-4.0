@@ -58,5 +58,11 @@ namespace Atlantis.Framework.Providers.DomainLookup
       {
         return (_parkedDomainInfo.AdultStatusMap == 1) || (_parkedDomainInfo.AdultStatusMap == 3);
       }
+
+      public bool IsDomainWithin90DaysOfExpiration()
+      {
+        return _parkedDomainInfo.ExpirationDate != DateTime.MinValue &&
+               DateTime.Now.AddDays(90) > _parkedDomainInfo.ExpirationDate;
+      }
     }
 }

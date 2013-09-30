@@ -26,14 +26,8 @@ namespace Atlantis.Framework.Providers.Interface.Links
     ProtocolAgnostic                              = 0x00000040,
     //ProtocolReserved                            = 0x00000080,
 
-    /// <summary>
-    /// Format parameters
-    /// If no Format parameter is specifed, then 'FormatFullUrl' is used
-    /// </summary>
-    //FormatFullUrl                               = 0x00000000,
-    FormatRelativeUrl                             = 0x00000100,
-
     // Reserved blocks
+    //Reserved000                                   = 0x00000100,
     //Reserved001                                   = 0x00000200,
     //Reserved005                                   = 0x00000400,
     //Reserved006                                   = 0x00000800,

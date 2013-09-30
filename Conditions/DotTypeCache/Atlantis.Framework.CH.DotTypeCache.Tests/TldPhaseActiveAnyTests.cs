@@ -124,7 +124,7 @@ namespace Atlantis.Framework.CH.DotTypeCache.Tests
     {
       var expressionParserManager = MockContainerExpressionParserManager();
 
-      const string expression = "tldPhaseActiveAny('K.BORG', GA)";
+      const string expression = "tldPhaseActiveAny('MAP', GA)";
       var result = expressionParserManager.EvaluateExpression(expression);
 
       Assert.IsFalse(result);

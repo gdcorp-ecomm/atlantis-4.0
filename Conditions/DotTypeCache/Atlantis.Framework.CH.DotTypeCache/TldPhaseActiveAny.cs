@@ -14,46 +14,60 @@ namespace Atlantis.Framework.CH.DotTypeCache
     {
       bool result = false;
 
-      try
+      if (parameters.Count >= 2)
       {
-        var dotTypeProvider = providerContainer.Resolve<IDotTypeProvider>();
-        var formatDotType = parameters[0].Replace("'", string.Empty).ToUpperInvariant();
-        var dotType = dotTypeProvider.GetDotTypeInfo(formatDotType);
-
-        if (dotType != null)
+        try
         {
-          DotTypeActivePhase = dotType.GetActiveClientRequestPhases();
+          var dotTypeProvider = providerContainer.Resolve<IDotTypeProvider>();
+          var formatDotType = parameters[0].Replace("'", string.Empty).ToUpperInvariant();
+          var dotType = dotTypeProvider.GetDotTypeInfo(formatDotType);
 
-          foreach (var phases in parameters)
+          if (!dotType.DotType.Equals("INVALID"))
           {
-            TokenPreReg tokenPhase;
+            DotTypeActivePhase = dotType.GetActiveClientRequestPhases();
 
-            if (Enum.TryParse(phases.ToUpperInvariant(), out tokenPhase))
+            foreach (var phases in parameters)
             {
-              switch (tokenPhase)
+              switch (phases.ToUpperInvariant())
               {
-                case TokenPreReg.GA:
+                case TokenPreReg.GeneralAvailability:
                   result = IsPhaseActive(PreRegPhases.GeneralAvailability);
                   break;
-                case TokenPreReg.EA:
+                case TokenPreReg.EarlyAccess:
                   result = IsPhaseActive(PreRegPhases.Landrush);
                   break;
-                case TokenPreReg.LR:
+                case TokenPreReg.Landrush:
                   result = IsPhaseActive(PreRegPhases.Landrush);
                   break;
-                case TokenPreReg.SR:
+                case TokenPreReg.Sunrise:
                   result = IsPhaseActive(PreRegPhases.SunriseA);
                   result = IsPhaseActive(PreRegPhases.SunriseB);
                   result = IsPhaseActive(PreRegPhases.SunriseC);
                   break;
               }
+
+              if (result)
+              {
+                break;
+              }
+
             }
           }
+          else
+          {
+            var aex = new AtlantisException("tldPhaseActiveAny EvaluateCondition", "0", "first parameter must be a TLD", string.Empty, null, null);
+            Engine.Engine.LogAtlantisException(aex);
+          }
+        }
+        catch (Exception ex)
+        {
+          var aex = new AtlantisException("tldPhaseActiveAny EvaluateCondition", "0", ex.Message + Environment.NewLine + ex.StackTrace, string.Empty, null, null);
+          Engine.Engine.LogAtlantisException(aex);
         }
       }
-      catch (Exception ex)
+      else
       {
-        var aex = new AtlantisException("tldPhaseActiveAny EvaluateCondition", "0", ex.Message + Environment.NewLine + ex.StackTrace, string.Empty, null, null);
+        var aex = new AtlantisException("tldPhaseActiveAny EvaluateCondition", "0", "must have at least two parameters", string.Empty, null, null);
         Engine.Engine.LogAtlantisException(aex);
       }
 
@@ -118,13 +132,13 @@ namespace Atlantis.Framework.CH.DotTypeCache
       }
       return isPhaseActive;
     }
-
-    private enum TokenPreReg
-    {
-      SR,
-      EA,
-      LR,
-      GA
-    }
   }
+}
+
+public static class TokenPreReg
+{
+  public const string Sunrise = "SR";
+  public const string EarlyAccess = "EA";
+  public const string Landrush = "LR";
+  public const string GeneralAvailability = "GA";
 }

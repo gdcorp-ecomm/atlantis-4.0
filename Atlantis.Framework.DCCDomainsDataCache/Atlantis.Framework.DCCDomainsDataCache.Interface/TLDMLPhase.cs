@@ -87,5 +87,31 @@ namespace Atlantis.Framework.DCCDomainsDataCache.Interface
 
       return launchPhase;
     }
+
+    public bool HasPreRegPhases 
+    {
+      get
+      {
+        bool result = false;
+
+        foreach (var launchphase in _launchPhases)
+        {
+          ITLDLaunchPhasePeriod clientRequestPhasePeriod;
+          ITLDLaunchPhasePeriod serverSubmissionPhasePeriod;
+          launchphase.Value.TryGetLaunchPhasePeriod("clientrequest", out clientRequestPhasePeriod);
+          launchphase.Value.TryGetLaunchPhasePeriod("serversubmission", out serverSubmissionPhasePeriod);
+
+          if (clientRequestPhasePeriod != null && clientRequestPhasePeriod.IsActive(DateTime.Now))
+          {
+            if (serverSubmissionPhasePeriod != null && (DateTime.Now < serverSubmissionPhasePeriod.StartDate))
+            {
+              result = true;
+              break;
+            }
+          }
+        }
+        return result;
+      }
+    }
   }
 }

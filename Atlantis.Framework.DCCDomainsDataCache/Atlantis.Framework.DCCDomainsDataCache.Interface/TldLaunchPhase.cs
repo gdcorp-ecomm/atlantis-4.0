@@ -49,6 +49,25 @@ namespace Atlantis.Framework.DCCDomainsDataCache.Interface
     public bool UpdatesEnabled { get; private set; }
     public bool RefundsEnabled { get; private set; }
     public bool PrivacyEnabled { get; private set; }
+    public bool IsLive { get; private set; }
+
+    public bool TryGetLaunchPhasePeriod(string type, out ITLDLaunchPhasePeriod launchPhasePeriod)
+    {
+      bool result = false;
+      launchPhasePeriod = null;
+
+      foreach (var period in _periods)
+      {
+        if (period.Type.Equals(type, StringComparison.OrdinalIgnoreCase))
+        {
+          launchPhasePeriod = period;
+          result = true;
+          break;
+        }
+      }
+
+      return result;
+    }
 
     private TldLaunchPhase(XElement phaseElement)
     {
@@ -67,13 +86,16 @@ namespace Atlantis.Framework.DCCDomainsDataCache.Interface
                               StopDate = DateTime.Parse(period.Attribute("utcstopdate").Value)
                             };
 
-        XAttribute enabled = period.Attribute("availcheckenabled");
-        if (enabled != null)
-        {
-          phasePeriod.AvailCheck = "true".Equals(enabled.Value, StringComparison.OrdinalIgnoreCase);
-        }
-
         _periods.Add(phasePeriod);
+      }
+
+      foreach (var period in _periods)
+      {
+        if (period.Type.Equals("serversubmission") && period.IsActive(DateTime.Now))
+        {
+          IsLive = true;
+          break;
+        }
       }
 
       //populate launch phase duplicates

@@ -90,5 +90,39 @@ namespace Atlantis.Framework.DCCDomainsDataCache.Tests
       var response = (TLDMLByNameResponseData)DataCache.DataCache.GetProcessRequest(request, _GETBYNAMEREQUEST);
       Assert.AreEqual(response.Product.PreregistrationYears("SRA"), TldValidYearsSet.INVALIDSET);
     }
+
+    [TestMethod]
+    public void GetAllClientRequestPhases()
+    {
+      var result = false;
+      var request = new TLDMLByNameRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "K.BORG");
+      var response = (TLDMLByNameResponseData)DataCache.DataCache.GetProcessRequest(request, _GETBYNAMEREQUEST);
+
+      var allPhases = response.Phase.GetAllLaunchPhases("clientrequest");
+
+      if (allPhases.Count > 0)
+      {
+        result = true;
+      }
+
+      Assert.IsTrue(result);
+    }
+
+    [TestMethod]
+    public void GetNoClientRequestPhases()
+    {
+      var result = false;
+      var request = new TLDMLByNameRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "LA");
+      var response = (TLDMLByNameResponseData)DataCache.DataCache.GetProcessRequest(request, _GETBYNAMEREQUEST);
+
+      var allPhases = response.Phase.GetAllLaunchPhases("clientrequest");
+
+      if (allPhases.Count == 0)
+      {
+        result = true;
+      }
+
+      Assert.IsTrue(result);
+    }
   }
 }

@@ -547,12 +547,12 @@ namespace Atlantis.Framework.DotTypeCache
       }
     }
 
-    public Dictionary<string, ITLDLaunchPhase> GetActiveClientRequestPhases()
+    public Dictionary<string, ITLDLaunchPhase> GetAllLaunchPhases(string periodType)
     {
       Dictionary<string, ITLDLaunchPhase> launchPhases = new Dictionary<string, ITLDLaunchPhase>();
       if (_tldml.Value.Phase != null)
       {
-        launchPhases = _tldml.Value.Phase.GetActiveClientRequestPhases();
+        launchPhases = _tldml.Value.Phase.GetAllLaunchPhases(periodType);
       }
       return launchPhases;
     }

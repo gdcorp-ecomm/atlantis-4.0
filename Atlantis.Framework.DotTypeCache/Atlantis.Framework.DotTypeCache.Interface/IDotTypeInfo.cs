@@ -60,7 +60,7 @@ namespace Atlantis.Framework.DotTypeCache.Interface
     ITLDTld Tld { get; }
     ITLDApplicationControl ApplicationControl { get; }
 
-    Dictionary<string, ITLDLaunchPhase> GetActiveClientRequestPhases();
+    Dictionary<string, ITLDLaunchPhase> GetAllLaunchPhases(string periodType = "");
     ITLDLaunchPhase GetLaunchPhase(LaunchPhases phase);
     bool IsLivePhase(LaunchPhases phase);
     bool HasPreRegPhases { get; }

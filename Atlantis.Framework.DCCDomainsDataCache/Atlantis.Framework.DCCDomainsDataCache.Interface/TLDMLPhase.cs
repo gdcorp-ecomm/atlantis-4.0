@@ -51,31 +51,28 @@ namespace Atlantis.Framework.DCCDomainsDataCache.Interface
       return result;
     }
 
-    public Dictionary<string, ITLDLaunchPhase> GetActiveClientRequestPhases()
+    public Dictionary<string, ITLDLaunchPhase> GetAllLaunchPhases(string periodType)
     {
-      var launchPhases = new Dictionary<string, ITLDLaunchPhase>(StringComparer.OrdinalIgnoreCase);
-      if (_launchPhases != null)
+      var allPhases = new Dictionary<string, ITLDLaunchPhase>(StringComparer.OrdinalIgnoreCase);
+
+      foreach (var launchPhase in _launchPhases)
       {
-        foreach (var phase in _launchPhases)
+        ITLDLaunchPhasePeriod launchPhasePeriod;
+
+        if (string.IsNullOrEmpty(periodType) || launchPhase.Value.TryGetLaunchPhasePeriod(periodType, out launchPhasePeriod))
         {
-          foreach (var period in phase.Value.Periods)
-          {
-            if (period.Type.Equals("clientrequest", StringComparison.OrdinalIgnoreCase) && period.IsActive())
-            {
-              launchPhases[phase.Key] = phase.Value;
-              break;
-            }
-          }
+          allPhases[launchPhase.Key] = launchPhase.Value;
         }
       }
-      return launchPhases;
+
+      return allPhases;
     }
 
-    public ITLDLaunchPhase GetLaunchPhase(LaunchPhases preRegPhase)
+    public ITLDLaunchPhase GetLaunchPhase(LaunchPhases phase)
     {
       var launchPhase = TldLaunchPhase.NULLPHASE;
 
-      string phaseCode = PhaseHelper.GetPhaseCode(preRegPhase);
+      string phaseCode = PhaseHelper.GetPhaseCode(phase);
       if (!string.IsNullOrEmpty(phaseCode))
       {
         TldLaunchPhase result;
@@ -101,9 +98,9 @@ namespace Atlantis.Framework.DCCDomainsDataCache.Interface
           launchphase.Value.TryGetLaunchPhasePeriod("clientrequest", out clientRequestPhasePeriod);
           launchphase.Value.TryGetLaunchPhasePeriod("serversubmission", out serverSubmissionPhasePeriod);
 
-          if (clientRequestPhasePeriod != null && clientRequestPhasePeriod.IsActive(DateTime.Now))
+          if (clientRequestPhasePeriod != null && clientRequestPhasePeriod.IsActive())
           {
-            if (serverSubmissionPhasePeriod != null && (DateTime.Now < serverSubmissionPhasePeriod.StartDate))
+            if (serverSubmissionPhasePeriod != null && (DateTime.UtcNow < serverSubmissionPhasePeriod.StartDate))
             {
               result = true;
               break;

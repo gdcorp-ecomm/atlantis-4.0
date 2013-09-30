@@ -78,5 +78,17 @@ namespace Atlantis.Framework.CreateShopper.Tests
       Assert.IsTrue(response.IsSuccess);
     }
 
+    [TestMethod]
+    [DeploymentItem("atlantis.config")]
+    public void GetShopperId()
+    {
+      CreateShopperRequestData request = new CreateShopperRequestData(string.Empty, string.Empty, string.Empty, 0, 1, "CreateShopperUnitTest", "127.0.0.7");
+      CreateShopperResponseData response = (CreateShopperResponseData)Engine.Engine.ProcessRequest(request, 28);
+      string shopperId = response.GetShopperId();
+      Assert.IsTrue(response.IsSuccess);
+      Assert.IsNotNull(shopperId);
+      
+    }
+
   }
 }

@@ -70,9 +70,6 @@ namespace Atlantis.Framework.UpdateShopper.Tests
       UpdateShopperResponseData response = (UpdateShopperResponseData)Engine.Engine.ProcessRequest(requestData, 61);
       Assert.IsTrue(response.IsSuccess);
 
-      //
-      // TODO: Add test logic	here
-      //
     }
   }
 }

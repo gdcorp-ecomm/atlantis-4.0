@@ -28,11 +28,19 @@ namespace Atlantis.Framework.ECCGetShopperByEmailAddress.Interface
         return _shopperId;
       }
     }
+
+    private readonly string _message = string.Empty;
+    public string Message { get { return _message; } }
+
+    private readonly string _resultCode = string.Empty;
+    public string ResultCode { get { return _resultCode; } }
     
     #endregion
-    public ECCGetShopperByEmailAddressResponseData(string shopperId)
+    public ECCGetShopperByEmailAddressResponseData(string shopperId, string message, string resultCode)
     {
       _shopperId = shopperId;
+      _message = message;
+      _resultCode = resultCode;
       _success = true;
     }
 

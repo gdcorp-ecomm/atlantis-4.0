@@ -9,4 +9,5 @@
   <ConfigElement progid="Atlantis.Framework.Shopper.Impl.CreateShopperRequest" assembly="Atlantis.Framework.Shopper.Impl.dll" request_type="738" ws_url="http://shopper.dev.glbt1.gdg:80/WSCgdShopper/WSCgdShopper.dll?Handler=Default" />
   <ConfigElement progid="Atlantis.Framework.Shopper.Impl.UpdateShopperRequest" assembly="Atlantis.Framework.Shopper.Impl.dll" request_type="739" ws_url="http://shopper.dev.glbt1.gdg:80/WSCgdShopper/WSCgdShopper.dll?Handler=Default" />
   <ConfigElement progid="Atlantis.Framework.Shopper.Impl.SearchShoppersRequest" assembly="Atlantis.Framework.Shopper.Impl.dll" request_type="740" ws_url="http://shopper.dev.glbt1.gdg:80/WSCgdShopper/WSCgdShopper.dll?Handler=Default" />
+  <ConfigElement progid="Atlantis.Framework.Shopper.Impl.VipShopperRequest" assembly="Atlantis.Framework.Shopper.Impl.dll" request_type="742" />
 </ConfigElements>

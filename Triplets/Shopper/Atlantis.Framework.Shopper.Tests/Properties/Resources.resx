@@ -130,4 +130,13 @@
   <data name="ShopperUpdate" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ShopperUpdate.xsd;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
+  <data name="VipShopperEmpty" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\VipShopperEmpty.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="VipShopperExists" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\VipShopperExists.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="VipShopperMissingAttributes" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\VipShopperMissingAttributes.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
 </root>

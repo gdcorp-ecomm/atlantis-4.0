@@ -62,6 +62,9 @@ namespace Atlantis.Framework.Shopper.Interface
         case "0xC0044A10":
           result.Status = ShopperResponseStatusType.InvalidRequestField;
           break;
+        case "0xC0044A1A":
+          result.Status = ShopperResponseStatusType.InvalidShopperId;
+          break;
       }
 
       return result;

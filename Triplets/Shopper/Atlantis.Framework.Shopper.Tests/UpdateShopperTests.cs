@@ -119,11 +119,10 @@ namespace Atlantis.Framework.Shopper.Tests
       Dictionary<string, string> updatefields = new Dictionary<string, string>();
       updatefields["city"] = "Springfield";
 
-      var request = new UpdateShopperRequestData("invalid", "1.2.3.4", "unittest", updatefields);
+      var request = new UpdateShopperRequestData("invalidshopperid", "1.2.3.4", "unittest", updatefields);
       var response = (UpdateShopperResponseData)Engine.Engine.ProcessRequest(request, _REQUESTTYPE);
       
-      // TODO verify success always comes back from this
-      Assert.AreEqual(ShopperResponseStatusType.ShopperNotFound, response.Status.Status);
+      Assert.AreEqual(ShopperResponseStatusType.InvalidShopperId, response.Status.Status);
     }
 
     [TestMethod]

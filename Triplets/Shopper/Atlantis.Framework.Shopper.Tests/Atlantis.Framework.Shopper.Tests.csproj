@@ -84,6 +84,7 @@
     <Compile Include="ShopperPriceTypeTests.cs" />
     <Compile Include="UpdateShopperTests.cs" />
     <Compile Include="VerifyShopperTests.cs" />
+    <Compile Include="VipShopperTests.cs" />
     <Compile Include="WrongTypeRequestData.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -122,6 +123,15 @@
     <None Include="Resources\ShopperUpdate.xsd">
       <SubType>Designer</SubType>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VipShopperExists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VipShopperEmpty.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VipShopperMissingAttributes.txt" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

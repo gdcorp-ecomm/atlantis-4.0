@@ -71,6 +71,8 @@
     <Compile Include="UpdateShopperResponseData.cs" />
     <Compile Include="VerifyShopperRequestData.cs" />
     <Compile Include="VerifyShopperResponseData.cs" />
+    <Compile Include="VipShopperRequestData.cs" />
+    <Compile Include="VipShopperResponseData.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="atlantis.config" />

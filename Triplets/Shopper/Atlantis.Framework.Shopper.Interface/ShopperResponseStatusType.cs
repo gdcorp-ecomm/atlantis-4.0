@@ -5,6 +5,7 @@
     Success,
     UnknownError,
     ShopperNotFound,
-    InvalidRequestField
+    InvalidRequestField,
+    InvalidShopperId
   }
 }

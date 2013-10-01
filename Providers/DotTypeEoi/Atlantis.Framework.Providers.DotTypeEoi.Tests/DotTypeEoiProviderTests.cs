@@ -1,4 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using Atlantis.Framework.DotTypeCache;
+using Atlantis.Framework.DotTypeCache.Interface;
 using Atlantis.Framework.DotTypeEoi.Interface;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.DotTypeEoi.Interface;
@@ -13,6 +17,7 @@ namespace Atlantis.Framework.Providers.DotTypeEoi.Tests
 {
   [TestClass]
   [DeploymentItem("atlantis.config")]
+  [DeploymentItem("dottypecache.config")]
   [DeploymentItem("Atlantis.Framework.DotTypeEoi.Impl.dll")]
   [DeploymentItem("Atlantis.Framework.Localization.Interface.dll")]
   [DeploymentItem("Atlantis.Framework.Localization.Impl.dll")]
@@ -39,8 +44,11 @@ namespace Atlantis.Framework.Providers.DotTypeEoi.Tests
       _container.RegisterProvider<IManagerContext, MockNoManagerContext>();
       _container.RegisterProvider<IShopperContext, MockShopperContext>();
       _container.RegisterProvider<IDotTypeEoiProvider, DotTypeEoiProvider>();
+      _container.RegisterProvider<IDotTypeProvider, DotTypeProvider>();
       _container.RegisterProvider<IProxyContext, WebProxyContext>();
       _container.RegisterProvider<ILocalizationProvider, CountrySubdomainLocalizationProvider>();
+
+      _container.Resolve<IDotTypeProvider>();
 
       return _container.Resolve<IDotTypeEoiProvider>();
     }
@@ -51,6 +59,7 @@ namespace Atlantis.Framework.Providers.DotTypeEoi.Tests
       IDotTypeEoiProvider provider = NewDotTypeEoiProvider();
       IGeneralEoiData generalEoiData;
       ShopperContext.SetLoggedInShopper("861126");
+      
       bool isSuccess = provider.GetGeneralEoi(out generalEoiData);
       Assert.AreEqual(true, isSuccess);
       Assert.AreEqual(true, generalEoiData.DisplayTime != string.Empty);
@@ -66,7 +75,7 @@ namespace Atlantis.Framework.Providers.DotTypeEoi.Tests
     {
       IDotTypeEoiProvider provider = NewDotTypeEoiProvider();
       IGeneralGtldData generalGtldData;
-      bool isSuccess = provider.GetGeneralEoi(1, 5, 22, out generalGtldData);
+      bool isSuccess = provider.GetGeneralEoi(1, 5, 23, out generalGtldData);
       Assert.AreEqual(true, isSuccess);
       Assert.AreEqual(true, generalGtldData.DisplayTime != string.Empty);
       Assert.AreEqual(true, generalGtldData.Gtlds.Count == 5);

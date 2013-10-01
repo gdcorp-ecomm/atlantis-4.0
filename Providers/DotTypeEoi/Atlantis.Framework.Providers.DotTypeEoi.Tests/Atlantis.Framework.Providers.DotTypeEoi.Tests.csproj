@@ -62,6 +62,22 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Atlantis.Framework.DotTypeCache\Atlantis.Framework.DotTypeCache.Interface\Atlantis.Framework.DotTypeCache.Interface.csproj">
+      <Project>{95e67e48-7173-4f0c-854f-2f08cbfcf923}</Project>
+      <Name>Atlantis.Framework.DotTypeCache.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Atlantis.Framework.DotTypeCache\Atlantis.Framework.DotTypeCache.StaticTypes\Atlantis.Framework.DotTypeCache.StaticTypes.csproj">
+      <Project>{fc7381b1-66e0-462f-952b-4ec1f18e9c90}</Project>
+      <Name>Atlantis.Framework.DotTypeCache.StaticTypes</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Atlantis.Framework.DotTypeCache\Atlantis.Framework.DotTypeCache.Static\Atlantis.Framework.DotTypeCache.Static.csproj">
+      <Project>{c6714b5f-ce86-4d8b-a615-0482465d0619}</Project>
+      <Name>Atlantis.Framework.DotTypeCache.Static</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Atlantis.Framework.DotTypeCache\Atlantis.Framework.DotTypeCache\Atlantis.Framework.DotTypeCache.csproj">
+      <Project>{c86da599-d09d-4c1e-934d-7e59d38ea9c2}</Project>
+      <Name>Atlantis.Framework.DotTypeCache</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj">
       <Project>{d30157b2-c1b3-4073-ba5e-632e2337a997}</Project>
       <Name>Atlantis.Framework.Engine</Name>
@@ -124,6 +140,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </None>
+    <None Include="dottypecache.config" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

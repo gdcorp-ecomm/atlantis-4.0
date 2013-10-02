@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Atlantis.Framework.Domains.Interface</id>
+    <version>4.0.0.0</version>
+    <title>Atlantis Framework Domains Interface</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <projectUrl>https://confluence.int.godaddy.com/display/ATLANTIS</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes></releaseNotes>
+    <copyright>$copyright$</copyright>
+    <tags>Atlantis Framework Domains Interface</tags>
+  </metadata>
+  <files>
+    <file src="Dependencies\Newtonsoft.Json.dll" target="content\Newtonsoft.Json.dll" />
+  </files>
+</package>

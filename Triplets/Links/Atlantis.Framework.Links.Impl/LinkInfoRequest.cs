@@ -24,6 +24,7 @@ namespace Atlantis.Framework.Links.Impl
 
       var itemNodes = linkInfoDoc.SelectNodes("//item");
       var linksCollection = new Dictionary<string, ILinkInfo>(itemNodes.Count, StringComparer.OrdinalIgnoreCase);
+      var linkTypesByBaseUrlCollection = new Dictionary<string, string>(itemNodes.Count, StringComparer.OrdinalIgnoreCase);
 
       foreach (XmlElement itemElement in itemNodes)
       {
@@ -41,8 +42,8 @@ namespace Atlantis.Framework.Links.Impl
               CountrySupportType = countrySupportType,
               CountryParameter = itemElement.GetAttribute("countrySiteSupportParam")
           };
-        linksCollection[linkType] = item; 
-
+        linksCollection[linkType] = item;
+        linkTypesByBaseUrlCollection[item.BaseUrl] = linkType;
       }
 
       var oGetLinkInfoRequestData = (LinkInfoRequestData)oRequestData;
@@ -52,7 +53,7 @@ namespace Atlantis.Framework.Links.Impl
         throw new Exception(message);
       }
 
-      return new LinkInfoResponseData( linksCollection );
+      return new LinkInfoResponseData(linksCollection, linkTypesByBaseUrlCollection);
     }
 
     #endregion

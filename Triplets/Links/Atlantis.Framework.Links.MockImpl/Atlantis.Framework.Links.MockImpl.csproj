@@ -54,6 +54,12 @@
     </None>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Atlantis.Framework.Links.Interface\Atlantis.Framework.Links.Interface.csproj">
+      <Project>{39a8b945-42c8-45e8-add6-5bc7eb73f423}</Project>
+      <Name>Atlantis.Framework.Links.Interface</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

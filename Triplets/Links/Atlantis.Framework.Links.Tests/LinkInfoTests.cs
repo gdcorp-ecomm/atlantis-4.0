@@ -92,6 +92,7 @@ namespace Atlantis.Framework.Links.Tests
       var request = new LinkInfoRequestData((int)ContextIds.NoContext);
       var response = (LinkInfoResponseData)afe.Engine.ProcessRequest(request, kEngineRequest);
       Assert.AreEqual(0, response.Links.Count);
+      Assert.AreEqual(0, response.LinkTypesByBaseUrl.Count);
     }
 
     [TestMethod]
@@ -153,5 +154,16 @@ namespace Atlantis.Framework.Links.Tests
 
     }
 
+    [TestMethod]
+    public void LinkInfoGetLinkInfoByBaseUrl()
+    {
+      string hostToFind = "idp.dev.GoDaDdy-CoM.IDE";
+      
+      var request = new LinkInfoRequestData((int)ContextIds.GoDaddy);
+      var response = (LinkInfoResponseData)afe.Engine.ProcessRequest(request, kEngineRequest);
+
+      string linkTypeReturnedByDictKey = response.LinkTypesByBaseUrl[hostToFind];
+      Assert.AreEqual("SSOURL", linkTypeReturnedByDictKey);
+    }
   }
 }

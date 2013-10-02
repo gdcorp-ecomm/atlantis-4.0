@@ -11,9 +11,10 @@ namespace Atlantis.Framework.Links.Interface
 {
   public class LinkInfoResponseData : IResponseData
   {
-    public LinkInfoResponseData(IDictionary<string, ILinkInfo> dictLinkInfo)
+    public LinkInfoResponseData(IDictionary<string, ILinkInfo> dictLinkInfo, IDictionary<string, string> dictLinkTypesByBaseUrl)
     {
       Links = new ReadOnlyDictionary<string, ILinkInfo>(dictLinkInfo);
+      LinkTypesByBaseUrl = new ReadOnlyDictionary<string, string>(dictLinkTypesByBaseUrl);
       _Xml = new Lazy<string>(() =>
         {
           var result = new StringBuilder(1024);
@@ -44,6 +45,7 @@ namespace Atlantis.Framework.Links.Interface
     }
 
     public IDictionary<string, ILinkInfo> Links { get; private set; }
+    public IDictionary<string, string> LinkTypesByBaseUrl { get; private set; }
 
     #region IResponseData Members
 

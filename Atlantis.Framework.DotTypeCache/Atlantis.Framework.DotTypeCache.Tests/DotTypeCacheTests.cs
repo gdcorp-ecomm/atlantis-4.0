@@ -1446,7 +1446,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
     public void GetAllClientRequestLaunchPhasesFBorg()
     {
       var dotTypeInfo = DotTypeProvider.GetDotTypeInfo("f.borg");
-      var launchphases = dotTypeInfo.GetAllLaunchPhases("clientrequest");
+      var launchphases = dotTypeInfo.GetAllLaunchPhases();
 
       Assert.IsTrue(launchphases.Count == 3);
       List<string> validTypes = new List<string>() { "GA", "LR", "SRA" };
@@ -1457,34 +1457,34 @@ namespace Atlantis.Framework.DotTypeCache.Tests
     }
 
     [TestMethod]
-    public void GetAllClientRequestLaunchPhasesForTldmlBorg()
+    public void GetAllLaunchPhasesForTldml()
     {
-      var dotTypeInfo = DotTypeProvider.GetDotTypeInfo("borg");
-      var launchphases = dotTypeInfo.GetAllLaunchPhases("clientrequest");
-      Assert.IsTrue(launchphases.Count == 0);
+      var dotTypeInfo = DotTypeProvider.GetDotTypeInfo("l4.borg");
+      var launchphases = dotTypeInfo.GetAllLaunchPhases();
+      Assert.IsTrue(launchphases.Count > 0);
     }
 
     [TestMethod]
-    public void GetAllClientRequestLaunchPhasesForInvalidTld()
+    public void GetAllLaunchPhasesForInvalidTld()
     {
       var dotTypeInfo = DotTypeProvider.GetDotTypeInfo("nate");
-      var launchphases = dotTypeInfo.GetAllLaunchPhases("clientrequest");
+      var launchphases = dotTypeInfo.GetAllLaunchPhases();
       Assert.IsTrue(launchphases.Count == 0);
     }
 
     [TestMethod]
-    public void GetAllClientRequestLaunchPhasesForStaticTld()
+    public void GetAllLaunchPhasesForStaticTld()
     {
       var dotTypeInfo = DotTypeProvider.GetDotTypeInfo("com");
-      var launchphases = dotTypeInfo.GetAllLaunchPhases("clientrequest");
+      var launchphases = dotTypeInfo.GetAllLaunchPhases();
       Assert.IsTrue(launchphases.Count == 0);
     }
 
     [TestMethod]
-    public void GetAllClientRequestLaunchPhasesForStaticMultiRegTld()
+    public void GetAllLaunchPhasesForStaticMultiRegTld()
     {
       var dotTypeInfo = DotTypeProvider.GetDotTypeInfo("co.uk");
-      var launchphases = dotTypeInfo.GetAllLaunchPhases("clientrequest");
+      var launchphases = dotTypeInfo.GetAllLaunchPhases();
       Assert.IsTrue(launchphases.Count == 0);
     }
 

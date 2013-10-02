@@ -1,4 +1,5 @@
-﻿using Atlantis.Framework.DotTypeCache.Interface;
+﻿using System.Collections.Generic;
+using Atlantis.Framework.DotTypeCache.Interface;
 
 namespace Atlantis.Framework.DotTypeCache.Static
 {
@@ -32,6 +33,11 @@ namespace Atlantis.Framework.DotTypeCache.Static
       {
         return StaticDotTypes.IsDotTypeMultiRegistry(_staticDotType.DotType);
       } 
+    }
+
+    public Dictionary<string, ITLDTuiFormGroup> TuiFormGroups
+    {
+      get { return new Dictionary<string, ITLDTuiFormGroup>(); }
     }
   }
 }

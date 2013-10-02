@@ -17,5 +17,6 @@ namespace Atlantis.Framework.DotTypeCache.Interface
 
     bool IsLive { get; }
     bool TryGetLaunchPhasePeriod(string type, out ITLDLaunchPhasePeriod launchPhasePeriod);
+    bool NeedsClaimCheck { get; }
   }
 }

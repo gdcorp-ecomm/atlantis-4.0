@@ -44,6 +44,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ITLDTuiFormGroupLaunchPhase.cs" />
+    <Compile Include="ITLDTuiFormGroup.cs" />
     <Compile Include="ITLDLaunchPhase.cs" />
     <Compile Include="ITLDLaunchPhasePeriod.cs" />
     <Compile Include="ITLDPhase.cs" />

@@ -69,6 +69,8 @@ namespace Atlantis.Framework.DCCDomainsDataCache.Interface
       return result;
     }
 
+    public bool NeedsClaimCheck { get; private set; }
+
     private TldLaunchPhase(XElement phaseElement)
     {
       Code = phaseElement.Attribute("code").Value;
@@ -94,6 +96,15 @@ namespace Atlantis.Framework.DCCDomainsDataCache.Interface
         if (period.Type.Equals("serversubmission") && period.IsActive(DateTime.Now))
         {
           IsLive = true;
+          break;
+        }
+      }
+
+      foreach (var period in _periods)
+      {
+        if (period.Type.Equals("claims") && period.IsActive(DateTime.Now))
+        {
+          NeedsClaimCheck = true;
           break;
         }
       }

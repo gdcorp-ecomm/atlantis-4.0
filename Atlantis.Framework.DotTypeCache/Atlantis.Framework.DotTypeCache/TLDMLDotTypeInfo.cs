@@ -547,12 +547,12 @@ namespace Atlantis.Framework.DotTypeCache
       }
     }
 
-    public Dictionary<string, ITLDLaunchPhase> GetAllLaunchPhases(string periodType)
+    public Dictionary<string, ITLDLaunchPhasePeriod> GetAllLaunchPhases(bool activeOnly = false)
     {
-      Dictionary<string, ITLDLaunchPhase> launchPhases = new Dictionary<string, ITLDLaunchPhase>();
+      var launchPhases = new Dictionary<string, ITLDLaunchPhasePeriod>();
       if (_tldml.Value.Phase != null)
       {
-        launchPhases = _tldml.Value.Phase.GetAllLaunchPhases(periodType);
+        launchPhases = _tldml.Value.Phase.GetAllLaunchPhases();
       }
       return launchPhases;
     }
@@ -592,6 +592,48 @@ namespace Atlantis.Framework.DotTypeCache
         }
         return result;
       }
+    }
+
+    public IList<string> GetTuiFormTypes(LaunchPhases launchPhase)
+    {
+      var result = new List<string>();
+
+      if (_tldml.Value.ApplicationControl != null)
+      {
+        bool needsClaimCheck = false;
+        if (_tldml.Value.Phase != null)
+        {
+          needsClaimCheck = _tldml.Value.Phase.GetLaunchPhase(launchPhase).NeedsClaimCheck;
+        }
+
+        var phaseCode = PhaseHelper.GetPhaseCode(launchPhase);
+        var formGroups = _tldml.Value.ApplicationControl.TuiFormGroups;
+
+        foreach (var tldTuiFormGroup in formGroups)
+        {
+          var formgroupLaunchPhases = tldTuiFormGroup.Value.FormGrouplaunchPhases;
+          foreach (var tldTuiFormGroupLaunchPhase in formgroupLaunchPhases)
+          {
+            if (tldTuiFormGroupLaunchPhase.Code.Equals(phaseCode))
+            {
+              if (tldTuiFormGroupLaunchPhase.PeriodType.Equals("claims", StringComparison.OrdinalIgnoreCase))
+              {
+                if (needsClaimCheck)
+                {
+                  result.Add(tldTuiFormGroup.Key);
+                }
+              }
+              else
+              {
+                result.Add(tldTuiFormGroup.Key);
+              }
+              break;
+            }
+          }
+        }
+      }
+
+      return result;
     }
 
     public int GetMinPreRegLength(LaunchPhases phase)

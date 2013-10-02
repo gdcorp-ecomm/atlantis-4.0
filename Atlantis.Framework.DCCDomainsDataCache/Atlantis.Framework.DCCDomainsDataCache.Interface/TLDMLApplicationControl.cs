@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
 using Atlantis.Framework.DotTypeCache.Interface;
@@ -44,12 +45,50 @@ namespace Atlantis.Framework.DCCDomainsDataCache.Interface
       get { return _isMultiRegistry; }
     }
 
+    private Dictionary<string, ITLDTuiFormGroup> _tuiFormGroups;
+    public Dictionary<string, ITLDTuiFormGroup> TuiFormGroups
+    {
+      get { return _tuiFormGroups; }
+    }
 
     private void Load()
     {
       _dotTypeDescription = string.Empty;
       _landingPageUrl = string.Empty;
 
+      LoadDpp();
+      LoadTuiFormGroups();
+    }
+
+    private void LoadTuiFormGroups()
+    {
+      XElement masterFormGroup = NamespaceElement.Descendants("formgroup").FirstOrDefault();
+      if (masterFormGroup.IsEnabled())
+      {
+        XElement collection = NamespaceElement.Descendants("tuiformgroupcollection").FirstOrDefault();
+        if (collection != null)
+        {
+          var formGroups = collection.Descendants("tuiformgroup");
+
+          _tuiFormGroups = new Dictionary<string, ITLDTuiFormGroup>();
+
+          foreach (var formgroup in formGroups)
+          {
+            var formTypeValue = string.Empty;
+            var formType = formgroup.Attribute("type");
+            if (formType != null)
+            {
+              formTypeValue = formType.Value;
+            }
+
+            _tuiFormGroups[formTypeValue] = TldTuiFormGroup.FromFormGroupElement(formgroup);
+          }
+        }
+      }
+    }
+
+    private void LoadDpp()
+    {
       XElement collection = NamespaceElement.Descendants("dpp").FirstOrDefault();
       if (collection != null)
       {
@@ -82,7 +121,6 @@ namespace Atlantis.Framework.DCCDomainsDataCache.Interface
             _isMultiRegistry = attr.Value.Equals("true");
           }
         }
-
       }
     }
   }

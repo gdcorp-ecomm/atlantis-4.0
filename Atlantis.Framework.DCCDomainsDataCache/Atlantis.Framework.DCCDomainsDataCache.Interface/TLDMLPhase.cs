@@ -51,17 +51,20 @@ namespace Atlantis.Framework.DCCDomainsDataCache.Interface
       return result;
     }
 
-    public Dictionary<string, ITLDLaunchPhase> GetAllLaunchPhases(string periodType)
+    public Dictionary<string, ITLDLaunchPhasePeriod> GetAllLaunchPhases(bool activeOnly = false)
     {
-      var allPhases = new Dictionary<string, ITLDLaunchPhase>(StringComparer.OrdinalIgnoreCase);
+      var allPhases = new Dictionary<string, ITLDLaunchPhasePeriod>(StringComparer.OrdinalIgnoreCase);
 
       foreach (var launchPhase in _launchPhases)
       {
         ITLDLaunchPhasePeriod launchPhasePeriod;
 
-        if (string.IsNullOrEmpty(periodType) || launchPhase.Value.TryGetLaunchPhasePeriod(periodType, out launchPhasePeriod))
+        if (launchPhase.Value.TryGetLaunchPhasePeriod("clientrequest", out launchPhasePeriod))
         {
-          allPhases[launchPhase.Key] = launchPhase.Value;
+          if ( (activeOnly && launchPhasePeriod.IsActive()) || !activeOnly)
+          {
+            allPhases[launchPhase.Key] = launchPhasePeriod;
+          }
         }
       }
 

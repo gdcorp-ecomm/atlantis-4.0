@@ -287,9 +287,9 @@ namespace Atlantis.Framework.DotTypeCache.Interface
       get { return _invalidApplicationControl; }
     }
 
-    public Dictionary<string, ITLDLaunchPhase> GetAllLaunchPhases(string periodType)
+    public Dictionary<string, ITLDLaunchPhasePeriod> GetAllLaunchPhases(bool activeOnly = false)
     {
-      return new Dictionary<string, ITLDLaunchPhase>();
+      return new Dictionary<string, ITLDLaunchPhasePeriod>();
     }
 
     public ITLDLaunchPhase GetLaunchPhase(LaunchPhases phase)
@@ -305,6 +305,11 @@ namespace Atlantis.Framework.DotTypeCache.Interface
     public bool HasPreRegPhases
     {
       get { return false; }
+    }
+
+    public IList<string> GetTuiFormTypes(LaunchPhases launchPhase)
+    {
+      return new List<string>();
     }
 
     public int GetMinPreRegLength(LaunchPhases phase)
@@ -349,6 +354,11 @@ namespace Atlantis.Framework.DotTypeCache.Interface
       public bool IsMultiRegistry
       {
         get { return false; }
+      }
+
+      public Dictionary<string, ITLDTuiFormGroup> TuiFormGroups
+      {
+        get { return new Dictionary<string, ITLDTuiFormGroup>(); }
       }
     }
   }

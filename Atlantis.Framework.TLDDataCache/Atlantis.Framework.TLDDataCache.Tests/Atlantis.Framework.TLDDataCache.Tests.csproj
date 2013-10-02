@@ -60,6 +60,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="ActiveTLDsTests.cs" />
+    <Compile Include="TLDPhaseDateListTests.cs" />
     <Compile Include="ExtendedTLDDataTests.cs" />
     <Compile Include="ValidDotTypesTests.cs" />
     <Compile Include="TLDLanguageTests.cs" />
@@ -70,6 +71,7 @@
   <ItemGroup>
     <None Include="atlantis.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </None>
   </ItemGroup>
   <ItemGroup>

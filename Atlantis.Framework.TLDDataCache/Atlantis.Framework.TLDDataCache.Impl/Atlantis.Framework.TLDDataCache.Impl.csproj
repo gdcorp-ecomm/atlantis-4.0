@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ActiveTLDsRequest.cs" />
+    <Compile Include="TLDPhaseDateListRequest.cs" />
     <Compile Include="ExtendedTLDDataRequest.cs" />
     <Compile Include="ValidDotTypesRequest.cs" />
     <Compile Include="TLDLanguageRequest.cs" />

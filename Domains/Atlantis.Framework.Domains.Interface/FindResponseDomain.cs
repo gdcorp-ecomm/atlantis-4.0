@@ -324,7 +324,7 @@ namespace Atlantis.Framework.Domains.Interface
         return _cartAttributes;
       }
     }
-
+    
     private readonly IDomain _responseDomain;
 
     public IDomain Domain
@@ -361,6 +361,14 @@ namespace Atlantis.Framework.Domains.Interface
       get
       {
         return DomainSearchDataBase == "private";
+      }
+    }
+
+    public Dictionary<string, string> PreRegPhrases
+    {
+      get
+      {
+        return _preRegPhrases;
       }
     }
 

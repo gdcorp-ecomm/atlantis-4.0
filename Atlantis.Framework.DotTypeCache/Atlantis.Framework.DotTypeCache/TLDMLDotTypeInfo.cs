@@ -552,7 +552,7 @@ namespace Atlantis.Framework.DotTypeCache
       var launchPhases = new Dictionary<string, ITLDLaunchPhasePeriod>();
       if (_tldml.Value.Phase != null)
       {
-        launchPhases = _tldml.Value.Phase.GetAllLaunchPhases();
+        launchPhases = _tldml.Value.Phase.GetAllLaunchPhases(activeOnly);
       }
       return launchPhases;
     }

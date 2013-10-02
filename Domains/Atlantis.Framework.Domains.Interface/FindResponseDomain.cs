@@ -16,7 +16,7 @@ namespace Atlantis.Framework.Domains.Interface
 
     private readonly Dictionary<string, string> _cartAttributes = new Dictionary<string, string>();
 
-    private readonly Dictionary<string, string> _preRegPhrases = new Dictionary<string, string>();
+    private readonly Dictionary<string, string> _PreRegPhases = new Dictionary<string, string>();
     
     private void ParseDomainToken(JToken domainToken)
     {
@@ -197,7 +197,7 @@ namespace Atlantis.Framework.Domains.Interface
                 var tokens = JsonConvert.DeserializeObject<JToken>(domainTokenValue);
                 foreach (var token in tokens)
                 {
-                  _preRegPhrases[token["Name"].ToString()] = token["Data"].ToString();
+                  _PreRegPhases[token["Name"].ToString()] = token["Data"].ToString();
                 }
               }
               break;
@@ -364,11 +364,11 @@ namespace Atlantis.Framework.Domains.Interface
       }
     }
 
-    public Dictionary<string, string> PreRegPhrases
+    public Dictionary<string, string> PreRegPhases
     {
       get
       {
-        return _preRegPhrases;
+        return _PreRegPhases;
       }
     }
 
@@ -379,7 +379,7 @@ namespace Atlantis.Framework.Domains.Interface
       {
         if (_inWatchPhase == null)
         {
-          _inWatchPhase = _preRegPhrases.Keys.Contains("wa");
+          _inWatchPhase = _PreRegPhases.Keys.Contains("wa");
         }
 
         return _inWatchPhase.Value;
@@ -394,7 +394,7 @@ namespace Atlantis.Framework.Domains.Interface
       {
         if (_inSunrisePhase == null)
         {
-          _inSunrisePhase = _preRegPhrases.Keys.Contains("sr");
+          _inSunrisePhase = _PreRegPhases.Keys.Contains("sr");
         }
 
         return _inSunrisePhase.Value;
@@ -409,7 +409,7 @@ namespace Atlantis.Framework.Domains.Interface
       {
         if (_inLandrushPhase == null)
         {
-          _inLandrushPhase = _preRegPhrases.Keys.Contains("lr");
+          _inLandrushPhase = _PreRegPhases.Keys.Contains("lr");
         }
 
         return _inLandrushPhase.Value;
@@ -424,7 +424,7 @@ namespace Atlantis.Framework.Domains.Interface
       {
         if (_inGeneralAvailabilityPhase == null)
         {
-          _inGeneralAvailabilityPhase = _preRegPhrases.Count == 0 || _preRegPhrases.Keys.Contains("ga");
+          _inGeneralAvailabilityPhase = _PreRegPhases.Count == 0 || _PreRegPhases.Keys.Contains("ga");
         }
 
         return _inGeneralAvailabilityPhase.Value;

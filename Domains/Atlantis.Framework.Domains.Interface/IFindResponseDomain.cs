@@ -48,5 +48,6 @@ namespace Atlantis.Framework.Domains.Interface
     int VendorCost { get; }
     int VendorTier { get; }
     int InternalTier { get; }
+    Dictionary<string, string> PreRegPhases { get; }
   }
 }

@@ -15,6 +15,7 @@ namespace Atlantis.Framework.EcommDelayedPayment.Interface
     public string RequestType { get; set; }
     public BillingInfo Billing{get;set;}
     public PaymentInfo Payment { get; set; }
+    public string MarketID { get; set; }
 
     public EcommDelayedPaymentRequestData(string shopperId,
                                   string sourceUrl,
@@ -29,6 +30,23 @@ namespace Atlantis.Framework.EcommDelayedPayment.Interface
       RequestType = requestType;
       Billing = new BillingInfo();
       Payment = new PaymentInfo();
+      MarketID = string.Empty;
+    }
+
+    public EcommDelayedPaymentRequestData(string shopperId,
+                                  string sourceUrl,
+                                  string orderIo,
+                                  string pathway,
+                                  int pageCount,
+                                  string returnURL, string requestType,string marketID)
+      : base(shopperId, sourceUrl, orderIo, pathway, pageCount)
+    {
+      RequestTimeout = TimeSpan.FromSeconds(40);
+      ReturnURL = returnURL;
+      RequestType = requestType;
+      Billing = new BillingInfo();
+      Payment = new PaymentInfo();
+      MarketID = marketID;
     }
 
     public override string GetCacheMD5()
@@ -46,6 +64,10 @@ namespace Atlantis.Framework.EcommDelayedPayment.Interface
       xtwRequest.WriteAttributeString("shopper_id", ShopperID);
       xtwRequest.WriteAttributeString("type", RequestType);
       xtwRequest.WriteAttributeString("return_url", ReturnURL);
+      if (!string.IsNullOrEmpty(MarketID))
+      {
+        xtwRequest.WriteAttributeString("MarketID", MarketID);
+      }
       Payment.ToXML(xtwRequest);
       Billing.ToXML(xtwRequest);
       xtwRequest.WriteEndElement();

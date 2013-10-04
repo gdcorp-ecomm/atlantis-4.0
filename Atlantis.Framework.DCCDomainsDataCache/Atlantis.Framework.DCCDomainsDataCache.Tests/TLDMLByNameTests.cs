@@ -95,10 +95,10 @@ namespace Atlantis.Framework.DCCDomainsDataCache.Tests
     public void GetAllClientRequestPhases()
     {
       var result = false;
-      var request = new TLDMLByNameRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "K.BORG");
+      var request = new TLDMLByNameRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "O1.BORG");
       var response = (TLDMLByNameResponseData)DataCache.DataCache.GetProcessRequest(request, _GETBYNAMEREQUEST);
 
-      var allPhases = response.Phase.GetAllLaunchPhases("clientrequest");
+      var allPhases = response.Phase.GetAllLaunchPhases();
 
       if (allPhases.Count > 0)
       {
@@ -115,7 +115,41 @@ namespace Atlantis.Framework.DCCDomainsDataCache.Tests
       var request = new TLDMLByNameRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "LA");
       var response = (TLDMLByNameResponseData)DataCache.DataCache.GetProcessRequest(request, _GETBYNAMEREQUEST);
 
-      var allPhases = response.Phase.GetAllLaunchPhases("clientrequest");
+      var allPhases = response.Phase.GetAllLaunchPhases();
+
+      if (allPhases.Count == 0)
+      {
+        result = true;
+      }
+
+      Assert.IsTrue(result);
+    }
+
+    [TestMethod]
+    public void GetActiveClientRequestPhases()
+    {
+      var result = false;
+      var request = new TLDMLByNameRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "O1.BORG");
+      var response = (TLDMLByNameResponseData)DataCache.DataCache.GetProcessRequest(request, _GETBYNAMEREQUEST);
+
+      var allPhases = response.Phase.GetAllLaunchPhases(true);
+
+      if (allPhases.Count > 0)
+      {
+        result = true;
+      }
+
+      Assert.IsTrue(result);
+    }
+
+    [TestMethod]
+    public void GetNoActiveClientRequestPhases()
+    {
+      var result = false;
+      var request = new TLDMLByNameRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "SUNRISE-0911");
+      var response = (TLDMLByNameResponseData)DataCache.DataCache.GetProcessRequest(request, _GETBYNAMEREQUEST);
+
+      var allPhases = response.Phase.GetAllLaunchPhases(true);
 
       if (allPhases.Count == 0)
       {

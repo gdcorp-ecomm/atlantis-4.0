@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://godaddy.com/CRMClientAPI" elementFormDefault="qualified" targetNamespace="http://godaddy.com/CRMClientAPI" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="https://crmclient-api.dev.int.godaddy.com/TaskUtil.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/GoDaddy.CRM.ClientAPI.DataContracts" />
+  <xs:element name="IsEnrolledInDTVS">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/GoDaddy.CRM.ClientAPI.DataContracts" minOccurs="0" name="input" nillable="true" type="q1:EnrolledInDTVSRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="IsEnrolledInDTVSResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/GoDaddy.CRM.ClientAPI.DataContracts" minOccurs="0" name="IsEnrolledInDTVSResult" nillable="true" type="q2:EnrolledInDTVSResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CloseDTVSTask">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/GoDaddy.CRM.ClientAPI.DataContracts" minOccurs="0" name="input" nillable="true" type="q3:CloseDTVSTaskRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CloseDTVSTaskResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AddWrapUpReason">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/GoDaddy.CRM.ClientAPI.DataContracts" minOccurs="0" name="input" nillable="true" type="q4:AddWrapUpReasonRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AddWrapUpReasonResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="InsertPrivacyDataAndScheduleCall">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/GoDaddy.CRM.ClientAPI.DataContracts" minOccurs="0" name="input" nillable="true" type="q5:InsertPrivacyDataAndScheduleCallRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="InsertPrivacyDataAndScheduleCallResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/GoDaddy.CRM.ClientAPI.DataContracts" minOccurs="0" name="InsertPrivacyDataAndScheduleCallResult" nillable="true" type="q6:InsertPrivacyDataAndScheduleCallResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

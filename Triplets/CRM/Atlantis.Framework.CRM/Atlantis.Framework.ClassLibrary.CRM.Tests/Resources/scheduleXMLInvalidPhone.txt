@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="utf-16"?><TaskProperties><shopper_id></shopper_id><phone1>4805551234</phone1><activeDate>10-03-2013 9:00AM</activeDate></TaskProperties>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DiscoveryClientResultsFile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Results>
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="https://crmclient-api.dev.int.godaddy.com/TaskUtil.svc?xsd=xsd0" filename="TaskUtil.xsd" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.DiscoveryDocumentReference" url="https://crmclient-api.dev.int.godaddy.com/TaskUtil.svc?disco" filename="TaskUtil.disco" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.ContractReference" url="https://crmclient-api.dev.int.godaddy.com/TaskUtil.svc?wsdl" filename="TaskUtil.wsdl" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="https://crmclient-api.dev.int.godaddy.com/TaskUtil.svc?xsd=xsd1" filename="TaskUtil0.xsd" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="https://crmclient-api.dev.int.godaddy.com/TaskUtil.svc?xsd=xsd2" filename="TaskUtil1.xsd" />
+  </Results>
+</DiscoveryClientResultsFile>

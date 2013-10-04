@@ -29,39 +29,39 @@ namespace Atlantis.Framework.DomainSearch.Interface
     {
       var jsonSearchData = new JObject(
         new JProperty("SearchPhrase", SearchPhrase),
-        new JProperty("RequestingServer", Environment.MachineName), // part of triplet
-        new JProperty("ClientIP", ClientIp), // part of provider
-        new JProperty("TimeoutInMilliSeconds", (int) RequestTimeout.TotalMilliseconds), // part of provider
+        new JProperty("RequestingServer", Environment.MachineName), 
+        new JProperty("ClientIP", ClientIp), 
+        new JProperty("TimeoutInMilliSeconds", (int) RequestTimeout.TotalMilliseconds),
         new JProperty("SourceCode", SourceCode),
-        new JProperty("PrivateLabelID", PrivateLabelId), // part of provider
+        new JProperty("PrivateLabelID", PrivateLabelId),
         new JProperty("Data",
                       new JArray(
                         new JObject(
                           new JProperty("Name", "searchdatabase"),
-                          new JProperty("Data", string.Join(",", DomainSearchDataBases)) // Not an option  for phase 1
+                          new JProperty("Data", string.Join(",", DomainSearchDataBases))
                           ),
                         new JObject(
-                          new JProperty("Name", "shopperid"), // part of provider
+                          new JProperty("Name", "shopperid"),
                           new JProperty("Data", ShopperID)
                           ),
                         new JObject(
-                          new JProperty("Name", "shopperstatus"), // part of provider
+                          new JProperty("Name", "shopperstatus"), 
                           new JProperty("Data", ShopperStatus.ToString())
                           ),
                         new JObject(
-                          new JProperty("Name", "countrysite"), // part of provider
+                          new JProperty("Name", "countrysite"), 
                           new JProperty("Data", CountrySite.ToLowerInvariant())
                           ),
                         new JObject(
-                          new JProperty("Name", "language"), // part of provider
+                          new JProperty("Name", "language"),
                           new JProperty("Data", Language.ToLowerInvariant())
                           ),
                         new JObject(
-                          new JProperty("Name", "includespins"), // Not an option  for phase 1
-                          new JProperty("Data", IncludeSpins) // Not an option  for phase 1
+                          new JProperty("Name", "includespins"), 
+                          new JProperty("Data", IncludeSpins)
                           ),
                         new JObject(
-                          new JProperty("Name", "pathway"), // part of provider
+                          new JProperty("Name", "pathway"),
                           new JProperty("Data", Pathway)
                           )
                         )

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Atlantis.Framework.Domains.Interface;
 using Atlantis.Framework.Interface;
 using System;
 using Newtonsoft.Json;
@@ -16,7 +17,7 @@ namespace Atlantis.Framework.DomainSearch.Interface
     private DomainSearchResponseData(string rawJson)
     {
       _rawJsonResponse = rawJson;
-      ParseRawJsonReponse();
+      ParseRawJsonResponse();
     }
     
     private DomainSearchResponseData(AtlantisException exception)
@@ -36,9 +37,6 @@ namespace Atlantis.Framework.DomainSearch.Interface
           var tld = domainToken["Extension"].ToString();
           var punyCodeSld = domainToken["PunyCodeNameWithoutExtension"].ToString();
           var punyCodeTld = domainToken["PunyCodeExtension"].ToString();
-          var domainName = domainToken["DomainName"].ToString();
-          var punyCodeDomainName = domainToken["PunyCodeName"].ToString();
-
           var responseDomain = new FindResponseDomain(sld, tld, punyCodeSld, punyCodeTld, domainToken["Data"]) as IFindResponseDomain;
 
           domains.Add(responseDomain);
@@ -48,7 +46,7 @@ namespace Atlantis.Framework.DomainSearch.Interface
       return domains;
     }
 
-    private void ParseRawJsonReponse()
+    private void ParseRawJsonResponse()
     {
       ExactMatchDomains = new List<IFindResponseDomain>(0);
       Domains = new List<IFindResponseDomain>(0);
@@ -67,7 +65,7 @@ namespace Atlantis.Framework.DomainSearch.Interface
         }
         catch (Exception ex)
         {
-          var aex = new AtlantisException("DomainSearchResponseData.ParseRawJsonReponse", "0", ex.ToString(), _rawJsonResponse, null, null);
+          var aex = new AtlantisException("DomainSearchResponseData.ParseRawJsonResponse", "0", ex.ToString(), _rawJsonResponse, null, null);
            Engine.Engine.LogAtlantisException(aex);        }
       }
     }

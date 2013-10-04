@@ -16,7 +16,7 @@ namespace Atlantis.Framework.Domains.Interface
 
     private readonly Dictionary<string, string> _cartAttributes = new Dictionary<string, string>();
 
-    private readonly Dictionary<string, string> _PreRegPhases = new Dictionary<string, string>();
+    private readonly Dictionary<string, string> _preRegPhases = new Dictionary<string, string>();
     
     private void ParseDomainToken(JToken domainToken)
     {
@@ -197,7 +197,7 @@ namespace Atlantis.Framework.Domains.Interface
                 var tokens = JsonConvert.DeserializeObject<JToken>(domainTokenValue);
                 foreach (var token in tokens)
                 {
-                  _PreRegPhases[token["Name"].ToString()] = token["Data"].ToString();
+                  _preRegPhases[token["Name"].ToString().ToUpperInvariant()] = token["Data"].ToString();
                 }
               }
               break;
@@ -363,74 +363,27 @@ namespace Atlantis.Framework.Domains.Interface
         return DomainSearchDataBase == "private";
       }
     }
-
-    public Dictionary<string, string> PreRegPhases
+    
+    private bool? _inPreRegistrationPhase;
+    public bool InPreRegPhase
     {
       get
       {
-        return _PreRegPhases;
-      }
-    }
-
-    private bool? _inWatchPhase;
-    public bool InWatchPhase
-    {
-      get
-      {
-        if (_inWatchPhase == null)
+        if (_inPreRegistrationPhase == null)
         {
-          _inWatchPhase = _PreRegPhases.Keys.Contains("wa");
+          _inPreRegistrationPhase = _preRegPhases.Count > 0;
         }
 
-        return _inWatchPhase.Value;
+        return _inPreRegistrationPhase.Value;
 
       }
     }
 
-    private bool? _inSunrisePhase;
-    public bool InSunrisePhase
+    public bool IsPreRegPhaseAvailable(string preRegPhase)
     {
-      get
-      {
-        if (_inSunrisePhase == null)
-        {
-          _inSunrisePhase = _PreRegPhases.Keys.Contains("sr");
-        }
-
-        return _inSunrisePhase.Value;
-
-      }
+      return _preRegPhases.Keys.Contains(preRegPhase.ToUpperInvariant());
     }
-
-    private bool? _inLandrushPhase;
-    public bool InLandrushPhase
-    {
-      get
-      {
-        if (_inLandrushPhase == null)
-        {
-          _inLandrushPhase = _PreRegPhases.Keys.Contains("lr");
-        }
-
-        return _inLandrushPhase.Value;
-
-      }
-    }
-
-    private bool? _inGeneralAvailabilityPhase;
-    public bool InGeneralAvailabilityPhase
-    {
-      get
-      {
-        if (_inGeneralAvailabilityPhase == null)
-        {
-          _inGeneralAvailabilityPhase = _PreRegPhases.Count == 0 || _PreRegPhases.Keys.Contains("ga");
-        }
-
-        return _inGeneralAvailabilityPhase.Value;
-      }
-    }
-
+    
     public bool HasLeafPage { get; private set; }
 
     public int VendorCost { get; private set; }

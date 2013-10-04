@@ -40,14 +40,11 @@ namespace Atlantis.Framework.Domains.Interface
     string IdnScriptId { get; }
     Dictionary<string, string> CartAttributes { get; }
     IDomain Domain { get; }
-
-    bool InWatchPhase { get; }
-    bool InSunrisePhase { get; }
-    bool InLandrushPhase { get; }
+    bool InPreRegPhase { get; }
+    bool IsPreRegPhaseAvailable(string preRegPhase);
     bool HasLeafPage { get; }
     int VendorCost { get; }
     int VendorTier { get; }
     int InternalTier { get; }
-    Dictionary<string, string> PreRegPhases { get; }
   }
 }

@@ -13,7 +13,4 @@
     <copyright>$copyright$</copyright>
     <tags>Atlantis Framework Domains Interface</tags>
   </metadata>
-  <files>
-    <file src="Dependencies\Newtonsoft.Json.dll" target="content\bin\Newtonsoft.Json.dll" />
-  </files>
 </package>

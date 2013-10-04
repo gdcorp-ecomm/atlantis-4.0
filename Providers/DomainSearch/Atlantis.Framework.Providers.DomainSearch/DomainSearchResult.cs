@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Atlantis.Framework.DomainSearch.Interface;
+using Atlantis.Framework.Domains.Interface;
 using Atlantis.Framework.Providers.DomainSearch.Interface;
 
 namespace Atlantis.Framework.Providers.DomainSearch

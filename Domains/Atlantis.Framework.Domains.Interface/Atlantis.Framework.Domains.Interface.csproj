@@ -36,10 +36,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Atlantis.Framework.Domains.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Triplets\DomainSearch\packages\Atlantis.Framework.Domains.Interface.4.13.10.4\lib\net40\Atlantis.Framework.Domains.Interface.dll</HintPath>
-    </Reference>
     <Reference Include="Atlantis.Framework.Engine, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Triplets\DomainSearch\packages\Atlantis.Framework.Engine.4.0.0.0\lib\net40\Atlantis.Framework.Engine.dll</HintPath>
@@ -78,7 +74,6 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <None Include="atlantis.config" />
     <None Include="Atlantis.Framework.Domains.Interface.nuget.bat" />
     <None Include="Atlantis.Framework.Domains.Interface.nuspec" />
     <None Include="packages.config" />

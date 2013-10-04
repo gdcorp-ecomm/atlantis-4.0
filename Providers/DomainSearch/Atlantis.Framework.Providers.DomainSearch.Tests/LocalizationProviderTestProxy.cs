@@ -1,4 +1,5 @@
-﻿using Atlantis.Framework.Interface;
+﻿using System.Collections.Generic;
+using Atlantis.Framework.Interface;
 using System;
 using Atlantis.Framework.Providers.Localization.Interface;
 
@@ -32,12 +33,22 @@ namespace Atlantis.Framework.Providers.DomainSearch.Tests
             get { return "www"; }
         }
 
-        public bool IsGlobalSite()
+      public IMarket TryGetMarketForCountrySite(string countrySiteId, string marketId)
+      {
+        throw new NotImplementedException();
+      }
+
+      public bool IsGlobalSite()
         {
             return true;
         }
 
-        public bool IsCountrySite(string countryCode)
+      public bool IsGlobalSite(string countrySiteId)
+      {
+        throw new NotImplementedException();
+      }
+
+      public bool IsCountrySite(string countryCode)
         {
             return countryCode.ToLowerInvariant() != "us";
         }
@@ -77,8 +88,28 @@ namespace Atlantis.Framework.Providers.DomainSearch.Tests
             get { throw new NotImplementedException(); }
         }
 
+      public string GetLanguageUrl()
+      {
+        throw new NotImplementedException();
+      }
 
-        public string RewrittenUrlLanguage
+      public string GetLanguageUrl(string marketId)
+      {
+        throw new NotImplementedException();
+      }
+
+      public string GetLanguageUrl(string countrySiteId, string marketId)
+      {
+        throw new NotImplementedException();
+      }
+
+      public IEnumerable<IMarket> GetMarketsForCountryCode(string countryCode)
+      {
+        throw new NotImplementedException();
+      }
+
+
+      public string RewrittenUrlLanguage
         {
           get
           {
@@ -100,7 +131,22 @@ namespace Atlantis.Framework.Providers.DomainSearch.Tests
           get { throw new NotImplementedException(); }
         }
 
-        public void SetMarket(string marketId)
+      public ICountrySite TryGetCountrySite(string countrySiteId)
+      {
+        throw new NotImplementedException();
+      }
+
+      public IMarket TryGetMarket(string marketId)
+      {
+        throw new NotImplementedException();
+      }
+
+      public IMarket GetMarketForCountrySite(string countrySiteId, string marketId)
+      {
+        throw new NotImplementedException();
+      }
+
+      public void SetMarket(string marketId)
         {
           throw new NotImplementedException();
         }

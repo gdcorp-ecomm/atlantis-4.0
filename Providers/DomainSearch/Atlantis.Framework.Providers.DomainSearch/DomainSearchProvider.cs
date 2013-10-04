@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Atlantis.Framework.DomainSearch.Interface;
+using Atlantis.Framework.Domains.Interface;
 using Atlantis.Framework.Interface;
 using System;
 using Atlantis.Framework.Providers.DomainSearch.Interface;

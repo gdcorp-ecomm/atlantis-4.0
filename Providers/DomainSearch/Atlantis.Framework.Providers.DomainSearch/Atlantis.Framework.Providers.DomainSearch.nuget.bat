@@ -1,0 +1,2 @@
+@ECHO offtlantis.Fram
+nuget pack Atlantis.Framework.Providers.DomainSearch.csproj -IncludeReferencedProjects -Build -Prop Configuration=Release -OutputDirectory \\g1dwdevmgmt001\webcontent\nuget.packages\

@@ -1,8 +1,9 @@
 ﻿using System.Linq;
+using Atlantis.Framework.Domains.Interface;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.DomainSearch.Interface;
-using Atlantis.Framework.Providers.Localization;
 using Atlantis.Framework.Providers.Localization.Interface;
+using Atlantis.Framework.Providers.ProxyContext;
 using Atlantis.Framework.Testing.MockHttpContext;
 using Atlantis.Framework.Testing.MockProviders;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -39,7 +40,7 @@ namespace Atlantis.Framework.Providers.DomainSearch.Tests
           _providerContainer.RegisterProvider<ISiteContext, MockSiteContext>();
           _providerContainer.RegisterProvider<IShopperContext, MockShopperContext>();
           _providerContainer.RegisterProvider<IManagerContext, MockNoManagerContext>();
-          _providerContainer.RegisterProvider<IProxyContext, ProxyContext.WebProxyContext>();
+          _providerContainer.RegisterProvider<IProxyContext, WebProxyContext>();
           _providerContainer.RegisterProvider<ILocalizationProvider, LocalizationProviderTestProxy>();
           _providerContainer.RegisterProvider<IDomainSearchProvider, DomainSearchProvider>();
         }
@@ -228,6 +229,20 @@ namespace Atlantis.Framework.Providers.DomainSearch.Tests
       var hasCrossCheck = domains.Any(d => d.DomainSearchDataBase == DomainGroupTypes.CROSS_CHECK);
 
       Assert.IsTrue(hasCrossCheck);
+    }
+
+    [TestMethod]
+    public void DomainSearchPreReg()
+    {
+      const string searchPhrase = "iowa.mx";
+
+      var domainSearchResult = DomainSearch.SearchDomain(searchPhrase, SOURCE_CODE, string.Empty);
+      Assert.IsTrue(domainSearchResult.IsSuccess);
+
+      var domains = domainSearchResult.GetDomainsByGroup(DomainGroupTypes.EXACT_MATCH);
+
+      Assert.IsTrue(domains[0].InPreRegPhase);
+      Assert.IsTrue(domains[0].IsPreRegPhaseAvailable(PreRegistrationPhases.SUNRISE));
     }
   }
 }

@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>Atlantis.Framework.DomainSearch.Impl</id>
-    <version>4.13.10.2</version>
+    <version>4.13.10.4</version>
     <title>Atlantis Framework DomainSearch Impl</title>
     <authors>$author$</authors>
     <owners>$author$</owners>
@@ -13,7 +13,4 @@
     <copyright>$copyright$</copyright>
     <tags>Atlantis Framework DomainSearch Impl</tags>
   </metadata>
-  <files>
-    <file src="atlantis.config" target="content\bin\atlantis.config" />
-  </files>
 </package>

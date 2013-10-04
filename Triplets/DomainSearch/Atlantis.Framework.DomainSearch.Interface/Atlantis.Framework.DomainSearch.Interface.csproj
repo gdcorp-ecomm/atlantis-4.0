@@ -70,7 +70,6 @@
     <Compile Include="DomainSearchResponseData.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="atlantis.config" />
     <None Include="Atlantis.Framework.DomainSearch.Interface.nuspec" />
     <None Include="Atlantis.Framework.DomainSearch.Interface.nuget.bat" />
     <None Include="packages.config" />

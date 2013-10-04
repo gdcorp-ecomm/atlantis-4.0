@@ -71,7 +71,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="atlantis.config" />
     <None Include="Atlantis.Framework.DomainSearch.Impl.nuspec" />
     <None Include="Atlantis.Framework.DomainSearch.Impl.nuget.bat" />
     <None Include="packages.config" />

@@ -1,4 +1,5 @@
 ﻿using System;
+using Atlantis.Framework.Interface;
 using Atlantis.Framework.MyaOrderHistory.Interface;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -12,89 +13,168 @@ namespace Atlantis.Framework.MyaOrderHistory.Tests
   [DeploymentItem("Atlantis.Framework.MyaOrderHistory.Impl.dll")]
   public class GetHistory
   {
-    public GetHistory()
-    {
-      //
-      // TODO: Add constructor logic here
-      //
-    }
-
-    private TestContext testContextInstance;
-
-    /// <summary>
-    ///Gets or sets the test context which provides
-    ///information about and functionality for the current test run.
-    ///</summary>
-    public TestContext TestContext
-    {
-      get
-      {
-        return testContextInstance;
-      }
-      set
-      {
-        testContextInstance = value;
-      }
-    }
-
-    #region Additional test attributes
-    //
-    // You can use the following additional attributes as you write your tests:
-    //
-    // Use ClassInitialize to run code before running the first test in the class
-    // [ClassInitialize()]
-    // public static void MyClassInitialize(TestContext testContext) { }
-    //
-    // Use ClassCleanup to run code after all tests in a class have run
-    // [ClassCleanup()]
-    // public static void MyClassCleanup() { }
-    //
-    // Use TestInitialize to run code before running each test 
-    // [TestInitialize()]
-    // public void MyTestInitialize() { }
-    //
-    // Use TestCleanup to run code after each test has run
-    // [TestCleanup()]
-    // public void MyTestCleanup() { }
-    //
-    #endregion
-
     [TestMethod]
-    public void TestMethod1()
+    public void GetOrdersByShopperId()
     {
-      
-      MyaOrderHistoryRequestData request = new MyaOrderHistoryRequestData("856907", string.Empty, string.Empty, string.Empty, 0);
 
-      request.StartDate = DateTime.Now.AddYears(-1);
-      request.EndDate = DateTime.Now;
+      var request = new MyaOrderHistoryRequestData("840420", string.Empty, string.Empty, string.Empty, 0);
 
-      request.PaymentProfileId = 58628;
+      var response = (MyaOrderHistoryResponseData)Engine.Engine.ProcessRequest(request, 571);
 
-
-      //request.ProductGroupId = 1;
-
-
-      //request.DomainName = "needaboatloadofdomains10.biz";
-
-      MyaOrderHistoryResponseData response = (MyaOrderHistoryResponseData)Engine.Engine.ProcessRequest(request, 571);
-      
       Assert.IsTrue(response.IsSuccess);
-
     }
 
     [TestMethod]
-    public void TestMethodOrderId()
+    public void GetOrdersByOrderIdCheckProductList()
     {
 
-      MyaOrderHistoryRequestData request = new MyaOrderHistoryRequestData("856907", string.Empty, "1451694", string.Empty, 0);
+      var request = new MyaOrderHistoryRequestData("840420", string.Empty, "1461362", string.Empty, 0);
 
-      //request.StartDate = DateTime.Now.AddYears(-1);
-      //request.EndDate = DateTime.Now;
+      var response = (MyaOrderHistoryResponseData)Engine.Engine.ProcessRequest(request, 571);
 
-      MyaOrderHistoryResponseData response = (MyaOrderHistoryResponseData)Engine.Engine.ProcessRequest(request, 571);
+      var items = response.GetRecords;
+
+      var item = items[0];
+
+      Assert.IsTrue(item.NonUnifiedReceiptProductIds.Contains(764000));
+      Assert.IsTrue(response.ToXML().Equals(string.Empty));
+    }
+
+    [TestMethod]
+    public void GetOrdersByPaymentProfileId()
+    {
+
+      var request = new MyaOrderHistoryRequestData("840420", string.Empty, string.Empty, string.Empty, 0)
+        {
+          PaymentProfileId = 58071
+        };
+
+      var response = (MyaOrderHistoryResponseData)Engine.Engine.ProcessRequest(request, 571);
 
       Assert.IsTrue(response.IsSuccess);
+    }
 
+    [TestMethod]
+    public void GetOrdersByDomain()
+    {
+
+      var request = new MyaOrderHistoryRequestData("840420", string.Empty, string.Empty, string.Empty, 0)
+        {
+          DomainName = "ima.gogetterkickass"
+        };
+
+      var response = (MyaOrderHistoryResponseData)Engine.Engine.ProcessRequest(request, 571);
+
+      Assert.IsTrue(response.IsSuccess);
+    }
+
+    [TestMethod]
+    public void GetOrdersByDateRange()
+    {
+
+      var request = new MyaOrderHistoryRequestData("840420", string.Empty, string.Empty, string.Empty, 0)
+        {
+          StartDate = DateTime.Now.AddYears(-1),
+          EndDate = DateTime.Now
+        };
+
+      var response = (MyaOrderHistoryResponseData)Engine.Engine.ProcessRequest(request, 571);
+
+      Assert.IsTrue(response.IsSuccess);
+    }
+
+    [TestMethod]
+    public void GetOrdersByProductGroup()
+    {
+
+      var request = new MyaOrderHistoryRequestData("840420", string.Empty, string.Empty, string.Empty, 0)
+        {
+          ProductGroupId = 1
+        };
+
+      var response = (MyaOrderHistoryResponseData)Engine.Engine.ProcessRequest(request, 571);
+
+      Assert.IsTrue(response.GetRecords.Count > 0);
+    }
+
+    [TestMethod]
+    public void GetOrdersByProductType()
+    {
+
+      var request = new MyaOrderHistoryRequestData("840420", string.Empty, string.Empty, string.Empty, 0)
+      {
+        ProductTypeId = 14
+      };
+
+      var response = (MyaOrderHistoryResponseData)Engine.Engine.ProcessRequest(request, 571);
+
+      Assert.IsTrue(response.GetRecords.Count > 0);
+    }
+
+    [TestMethod]
+    public void ReqestException()
+    {
+      try
+      {
+        var request = new MyaOrderHistoryRequestData("840420", string.Empty, "1461362", string.Empty, 0);
+
+        Engine.Engine.ProcessRequest(request, 999571);
+
+      }
+      catch (Exception)
+      {
+        Assert.IsTrue(true);
+      }
+    }
+
+    [TestMethod]
+    public void ReqestExceptionBadConfig()
+    {
+      try
+      {
+        var request = new MyaOrderHistoryRequestData("840420", string.Empty, "1461362", string.Empty, 0);
+
+        Engine.Engine.ProcessRequest(request, 99571);
+
+      }
+      catch (Exception)
+      {
+        Assert.IsTrue(true);
+      }
+    }
+
+    [TestMethod]
+    public void ResponseDataException()
+    {
+      var request = new MyaOrderHistoryRequestData("840420", string.Empty, "1461362", string.Empty, 0);
+
+      var responseEx = new MyaOrderHistoryResponseData(new AtlantisException(request, "ResponseDataException", "Exception Test1", string.Empty));
+
+      Assert.IsTrue(responseEx.GetException().ErrorDescription.Equals("Exception Test1"));
+    }
+
+    [TestMethod]
+    public void ResponseDataExceptionRequest()
+    {
+      var request = new MyaOrderHistoryRequestData("840420", string.Empty, "1461362", string.Empty, 0);
+
+      var responseEx = new MyaOrderHistoryResponseData(request, new AtlantisException(request, "ResponseDataException", "Exception Test2", string.Empty));
+
+      Assert.IsTrue(responseEx.GetException().ErrorDescription.Equals("Exception Test2"));
+    }
+
+    [TestMethod]
+    public void RequestMD5Test()
+    {
+      try
+      {
+        var request = new MyaOrderHistoryRequestData("840420", string.Empty, "1461362", string.Empty, 0);
+        request.GetCacheMD5();
+      }
+      catch (Exception ex)
+      {
+        Assert.IsTrue(ex.Message.Equals("MyaOrderHistoryRequestData is not a cachable request."));
+      }
     }
   }
 }

@@ -7,13 +7,14 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Atlantis.Framework.MyaOrderHistory.Impl")]
 #if DEBUG
 [assembly: AssemblyDescription("Debug Build")]
+[assembly: AssemblyConfiguration("Debug Build")]
 #else
 [assembly: AssemblyDescription("Release Build")]
+[assembly: AssemblyConfiguration("Release Build")]
 #endif
-[assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("GoDaddy.com")]
+[assembly: AssemblyCompany("GoDaddy")]
 [assembly: AssemblyProduct("Atlantis.Framework.MyaOrderHistory.Impl")]
-[assembly: AssemblyCopyright("Copyright © GoDaddy.com 2012-2013")]
+[assembly: AssemblyCopyright("Copyright © GoDaddy 2012-2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -36,4 +37,4 @@ using System.Runtime.InteropServices;
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("4.0.0.0")]
-[assembly: AssemblyFileVersion("4.13.2.25")]
+[assembly: AssemblyFileVersion("4.13.10.4")]

@@ -14,6 +14,7 @@ namespace Atlantis.Framework.MyaOrderHistory.Interface
     public bool IsRefunded { get; set; }
     public string OrderSource { get; set; }
     public List<string> ReceiptDetails { get; set; }
+    public List<int> NonUnifiedReceiptProductIds { get; set; }
 
     public ReceiptItem(string receiptId, DateTime receiptDate, string transactionCurrency, int transactionTotal, bool isRefunded, string orderSource, string detailsXml)
     {
@@ -23,33 +24,38 @@ namespace Atlantis.Framework.MyaOrderHistory.Interface
       TransactionTotal = transactionTotal;
       IsRefunded = isRefunded;
       OrderSource = orderSource;
-      ReceiptDetails = ReceiptDescriptionList(detailsXml);
+      FillReceiptLists(detailsXml);
     }
 
-    private List<string> ReceiptDescriptionList(string xml)
+    private void FillReceiptLists(string xml)
     {
-      List<string> items = new List<string>(5);
+      ReceiptDetails = new List<string>(5);
+      NonUnifiedReceiptProductIds = new List<int>(5);
+
       if (xml.Length > 0)
       {
         using (XmlReader reader = new XmlTextReader(new StringReader(xml)))
         {
-          string detail;
           while (reader.Read())
           {
             if (reader.IsStartElement() && string.Equals(reader.Name, "item"))
             {
-              detail = reader["detail"];
+              var detail = reader["detail"];
               if (!string.IsNullOrEmpty(detail))
               {
-                items.Add(detail);
+                ReceiptDetails.Add(detail);
+              }
+
+              var pf_id = reader["pf_id"];
+              int productId;
+              if (int.TryParse(pf_id, out productId))
+              {
+                NonUnifiedReceiptProductIds.Add(productId);
               }
             }
           }
         }
       }
-
-      return items;
     }
-
   }
 }

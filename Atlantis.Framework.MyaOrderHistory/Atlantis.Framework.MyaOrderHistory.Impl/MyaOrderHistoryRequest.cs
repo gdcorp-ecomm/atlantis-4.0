@@ -14,95 +14,81 @@ namespace Atlantis.Framework.MyaOrderHistory.Impl
 
     public IResponseData RequestHandler(RequestData requestData, ConfigElement config)
     {
-      IResponseData responseData;
-      try
+      var numberOfRecords = 0;
+      var numberOfPages = 0;
+      var receiptList = new List<ReceiptItem>(5);
+
+      var connectionString = NetConnect.LookupConnectInfo(config, ConnectLookupType.NetConnectionString);
+      using (var connection = new SqlConnection(connectionString))
       {
-        var numberOfRecords = 0;
-        var numberOfPages = 0;
-        var receiptList = new List<ReceiptItem>(5);
-
-        var connectionString = NetConnect.LookupConnectInfo(config, ConnectLookupType.NetConnectionString);
-        using (var connection = new SqlConnection(connectionString))
+        var request = (MyaOrderHistoryRequestData) requestData;
+        string procName;
+        var _params = BuildSqlParametersForProc(request, out procName);
+        using (var command = new SqlCommand(procName, connection))
         {
-          var request = (MyaOrderHistoryRequestData)requestData;
-          string procName;
-          IEnumerable<SqlParameter> _params = BuildSqlParametersForProc(request, out procName);
-          using (var command = new SqlCommand(procName, connection))
+          command.CommandType = CommandType.StoredProcedure;
+          command.CommandTimeout = (int) request.RequestTimeout.TotalSeconds;
+          foreach (var param in _params)
           {
-            command.CommandType = CommandType.StoredProcedure;
-            command.CommandTimeout = (int)request.RequestTimeout.TotalSeconds;
-            foreach (var param in _params)
-            {
-              command.Parameters.Add(param);
-            }
-            connection.Open();
+            command.Parameters.Add(param);
+          }
+          connection.Open();
 
-            using (var reader = command.ExecuteReader(CommandBehavior.CloseConnection))
+          using (var reader = command.ExecuteReader(CommandBehavior.CloseConnection))
+          {
+            while (reader.HasRows)
             {
-              while (reader.HasRows)
+              while (reader.Read())
               {
-                while (reader.Read())
-                {
-                  numberOfRecords = reader.GetInt32(0);
-                }
+                numberOfRecords = reader.GetInt32(0);
+              }
 
-                reader.NextResult();
+              reader.NextResult();
 
-                while (reader.Read())
-                {
-                  numberOfPages = reader.GetInt32(0);
-                }
+              while (reader.Read())
+              {
+                numberOfPages = reader.GetInt32(0);
+              }
 
-                reader.NextResult();
+              reader.NextResult();
 
-                while (reader.Read())
-                {
-                  var receiptId = !reader.IsDBNull(1) ? reader.GetString(1) : string.Empty;
-                  var receiptDate = !reader.IsDBNull(2) ? reader.GetDateTime(2) : DateTime.Now;
-                  var transactionCurrency = !reader.IsDBNull(3) ? reader.GetString(3) : "";
-                  var transactionTotal = !reader.IsDBNull(4) ? reader.GetInt32(4) : 0;
-                  var isRefunded = !reader.IsDBNull(5);
-                  var orderSource = !reader.IsDBNull(6) ? reader.GetString(6) : string.Empty;
-                  var detailXml = !reader.IsDBNull(7) ? reader.GetString(7) : string.Empty;
-
-                  var item = new ReceiptItem(receiptId, receiptDate, transactionCurrency, transactionTotal, isRefunded, orderSource, detailXml);
-                  receiptList.Add(item);
-
-                }
-
+              while (reader.Read())
+              {
+                var receiptId = !reader.IsDBNull(1) ? reader.GetString(1) : string.Empty;
+                var receiptDate = !reader.IsDBNull(2) ? reader.GetDateTime(2) : DateTime.Now;
+                var transactionCurrency = !reader.IsDBNull(3) ? reader.GetString(3) : "";
+                var transactionTotal = !reader.IsDBNull(4) ? reader.GetInt32(4) : 0;
+                var isRefunded = !reader.IsDBNull(5);
+                var orderSource = !reader.IsDBNull(6) ? reader.GetString(6) : string.Empty;
+                var detailXml = !reader.IsDBNull(7) ? reader.GetString(7) : string.Empty;
+                var item = new ReceiptItem(receiptId, receiptDate, transactionCurrency, transactionTotal, isRefunded,
+                                           orderSource, detailXml);
+                receiptList.Add(item);
               }
             }
           }
         }
+      }
 
-        responseData = new MyaOrderHistoryResponseData(numberOfRecords, numberOfPages, receiptList);
-      }
-      catch (AtlantisException exAtlantis)
-      {
-        responseData = new MyaOrderHistoryResponseData(exAtlantis);
-      }
-      catch (Exception ex)
-      {
-        responseData = new MyaOrderHistoryResponseData(requestData, ex);
-      }
+      IResponseData responseData = new MyaOrderHistoryResponseData(numberOfRecords, numberOfPages, receiptList);
 
       return responseData;
     }
 
     #endregion
 
-    private IEnumerable<SqlParameter> BuildSqlParametersForProc(MyaOrderHistoryRequestData request, out string procName)
+    private static IEnumerable<SqlParameter> BuildSqlParametersForProc(MyaOrderHistoryRequestData request, out string procName)
     {
       var paramList = new List<SqlParameter>(8);
 
-      string sDate = new DateTime(1995,1,1).ToShortDateString();
-      if (request.StartDate != null && request.StartDate.Year > DateTime.MinValue.Year)
+      var sDate = new DateTime(1995,1,1).ToShortDateString();
+      if (request.StartDate.Year > DateTime.MinValue.Year)
       {
         sDate = request.StartDate.ToShortDateString();
       }
 
-      string eDate = DateTime.Now.ToShortDateString();
-      if (request.EndDate != null && request.EndDate.Year > DateTime.MinValue.Year)
+      var eDate = DateTime.Now.ToShortDateString();
+      if (request.EndDate.Year > DateTime.MinValue.Year)
       {
         eDate = request.EndDate.ToShortDateString();
       }

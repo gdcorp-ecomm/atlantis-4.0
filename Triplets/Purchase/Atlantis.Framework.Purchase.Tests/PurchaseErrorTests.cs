@@ -41,5 +41,12 @@ namespace Atlantis.Framework.Purchase.Tests
       PurchaseErrorResponseData response = (PurchaseErrorResponseData)Engine.Engine.ProcessRequest(request, 741);
       Assert.AreEqual("Invalid payment type", response.CustomerFriendlyErrorText);
     }
+    [TestMethod]
+    public void GetInvalidNoDataProvidedError()
+    {
+      PurchaseErrorRequestData request = new PurchaseErrorRequestData(string.Empty, string.Empty, string.Empty, string.Empty);
+      PurchaseErrorResponseData response = (PurchaseErrorResponseData)Engine.Engine.ProcessRequest(request, 741);
+      Assert.AreEqual("There was a problem processing your transaction. Please verify your payment information or use an alternate form of payment.", response.CustomerFriendlyErrorText);
+    }
   }
 }

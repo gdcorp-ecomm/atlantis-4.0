@@ -37,16 +37,41 @@ namespace Atlantis.Framework.Purchase.Impl
       string urlDelim = "/";
       System.Text.StringBuilder requestURL = new StringBuilder(100);
       requestURL.Append(currentConfig.WSURL);
-      requestURL.Append(currentRequest.ResponseCode);
+      if (string.IsNullOrEmpty(currentRequest.ResponseCode))
+      {
+        requestURL.Append("0");
+      }
+      else
+      {
+        requestURL.Append(currentRequest.ResponseCode);
+      }
       requestURL.Append(urlDelim);
-      requestURL.Append(currentRequest.ReasonCode);
+      if (string.IsNullOrEmpty(currentRequest.ReasonCode))
+      {
+        requestURL.Append("0");
+      }
+      else
+      {
+        requestURL.Append(currentRequest.ReasonCode);
+      }
       requestURL.Append(urlDelim);
-      if (!string.IsNullOrEmpty(currentRequest.LanguageCode) && !string.IsNullOrEmpty(currentRequest.RegionCode))
+      if (string.IsNullOrEmpty(currentRequest.LanguageCode))
+      {
+        requestURL.Append("en");
+      }
+      else
       {
         requestURL.Append(currentRequest.LanguageCode);
-        requestURL.Append("_");
+      }
+      requestURL.Append("_");
+      if (string.IsNullOrEmpty(currentRequest.RegionCode))
+      {
+        requestURL.Append("us");
+      }
+      else
+      {
         requestURL.Append(currentRequest.RegionCode);
-      }      
+      }
       return requestURL.ToString();
     }
 

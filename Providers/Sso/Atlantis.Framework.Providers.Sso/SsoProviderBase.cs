@@ -78,10 +78,10 @@ namespace Atlantis.Framework.Providers.Sso
     public SsoProviderBase(IProviderContainer container)
       : base(container)
     {
-      InitializeSsoData();
       _links = new Lazy<ILinkProvider>(() => container.Resolve<ILinkProvider>());
       _siteContext = new Lazy<ISiteContext>(() => container.Resolve<ISiteContext>());
       _shopperContext = new Lazy<IShopperContext>(() => container.Resolve<IShopperContext>());
+      InitializeSsoData();
     }
 
     public abstract bool ParseArtifact(string artifact, out string shopperId);

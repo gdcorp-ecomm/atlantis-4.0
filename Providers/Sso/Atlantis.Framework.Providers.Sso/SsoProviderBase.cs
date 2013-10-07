@@ -107,7 +107,7 @@ namespace Atlantis.Framework.Providers.Sso
           break;
         case SsoUrlType.KeepAlive:
           additionalParams.Remove("spkey");
-          urlToReturn = _links.Value.GetUrl("SSOURL", "keepalive.aspx", QueryParamMode.CommonParameters, true);
+          urlToReturn = _links.Value.GetUrl("SSOURL", "keepalive.aspx", QueryParamMode.CommonParameters, true, additionalParams);
           break;
       }
 

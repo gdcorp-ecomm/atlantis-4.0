@@ -38,7 +38,7 @@ namespace Atlantis.Framework.Providers.Sso
           var linkProvider = _container.Resolve<ILinkProvider>();
           string localizedHost = linkProvider.GetUrl(linkType, uri.LocalPath, QueryParamMode.CommonParameters, isSecure, parms);
 
-          localizedUrl = string.Concat(localizedHost, uri.Query);
+          localizedUrl = string.Concat(localizedHost, uri.Query.Replace("?","/"));
         }
       }
       catch (Exception ex)

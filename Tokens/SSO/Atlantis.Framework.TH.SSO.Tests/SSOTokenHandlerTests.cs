@@ -9,7 +9,7 @@ using Atlantis.Framework.Providers.Interface.Links;
 using Atlantis.Framework.Providers.Links;
 using Atlantis.Framework.Providers.Localization;
 using Atlantis.Framework.Providers.Localization.Interface;
-using Atlantis.Framework.BasePages.Providers;
+using Atlantis.Framework.Providers.Sso.Interface;
 
 namespace Atlantis.Framework.TH.SSO.Tests
 {
@@ -21,6 +21,9 @@ namespace Atlantis.Framework.TH.SSO.Tests
   [DeploymentItem("Atlantis.Framework.Localization.Impl.dll")]
   [DeploymentItem("Atlantis.Framework.DataCacheGeneric.Impl.dll")]
   [DeploymentItem("Atlantis.Framework.TH.SSO.dll")]
+  [DeploymentItem("Atlantis.Framework.Providers.Sso.Interface")]
+  [DeploymentItem("Atlantis.Framework.Providers.Sso")]
+  [DeploymentItem("Atlantis.Framework.Links.Impl.dll")]
   public class SSOTokenHandlerTests
   {
     [TestInitialize]
@@ -35,7 +38,8 @@ namespace Atlantis.Framework.TH.SSO.Tests
       result.RegisterProvider<ISiteContext, MockSiteContext>();
       result.RegisterProvider<ILinkProvider, LinkProvider>();
       result.RegisterProvider<ILocalizationProvider, CountrySubdomainLocalizationProvider>();
-      result.RegisterProvider<IDebugContext, DebugProvider>();
+      result.RegisterProvider<ISsoProvider, ClusterProvider>();
+      //result.RegisterProvider<IDebugContext, DebugProvider>();
 
       this.ProviderContainer = result;
 

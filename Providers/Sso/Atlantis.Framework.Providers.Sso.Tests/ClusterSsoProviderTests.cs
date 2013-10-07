@@ -203,40 +203,40 @@ namespace Atlantis.Framework.Providers.Sso.Tests
     [TestMethod]
     public void TestGetLoginUrlPrivateLabel()
     {
-      var providerContainer = GetProviderContainer("http://www.godaddy.com", 234, SsoProviderType.PrivateLabel);
+      var providerContainer = GetProviderContainer("http://www.securepaynet.net?prog_id=maddogdomains", 1941, SsoProviderType.PrivateLabel);
       var cp = providerContainer.Resolve<ISsoProvider>();
       var spkey = cp.SpKey.ToLower();
       var loginUrl = cp.GetUrl(SsoUrlType.Login).ToLower();
 
       Assert.IsTrue(loginUrl.Contains(spkey));
-      Assert.IsTrue(loginUrl.Contains("234"));
+      Assert.IsTrue(loginUrl.Contains("maddogdomains"));
       Assert.IsTrue(loginUrl.Contains("login.aspx"));
     }
 
     [TestMethod]
     public void TestGetLogoutUrlPrivateLabel()
     {
-      var providerContainer = GetProviderContainer("http://www.godaddy.com", 234, SsoProviderType.PrivateLabel);
+      var providerContainer = GetProviderContainer("http://www.securepaynet.net?prog_id=maddogdomains", 1941, SsoProviderType.PrivateLabel);
       var cp = providerContainer.Resolve<ISsoProvider>();
 
       var spkey = cp.SpKey.ToLower();
       var logoutUrl = cp.GetUrl(SsoUrlType.Logout).ToLower();
 
       Assert.IsTrue(logoutUrl.Contains(spkey));
-      Assert.IsTrue(logoutUrl.Contains("234"));
+      Assert.IsTrue(logoutUrl.Contains("maddogdomains"));
       Assert.IsTrue(logoutUrl.Contains("logout.aspx"));
     }
 
     [TestMethod]
     public void TestGetKeepAliveUrlPrivateLabel()
     {
-      var providerContainer = GetProviderContainer("http://www.securepaynet.net?pl_id=234", 234, SsoProviderType.PrivateLabel);
+      var providerContainer = GetProviderContainer("http://www.securepaynet.net?prog_id=maddogdomains", 1941, SsoProviderType.PrivateLabel);
       var cp = providerContainer.Resolve<ISsoProvider>();
 
       var spkey = cp.SpKey.ToLower();
       var keepaliveUrl = cp.GetUrl(SsoUrlType.KeepAlive).ToLower();
 
-      Assert.IsTrue(keepaliveUrl.Contains("234"));
+      Assert.IsTrue(keepaliveUrl.Contains("maddogdomains"));
       Assert.IsTrue(keepaliveUrl.Contains("keepalive.aspx"));
     }
 
@@ -272,6 +272,15 @@ namespace Atlantis.Framework.Providers.Sso.Tests
 
       Assert.IsNotNull(loginUrl);
       Assert.IsTrue(loginUrl.Length > 0);
+    }
+
+    [TestMethod]
+    public void TestDataCacheException()
+    {
+      var providerContainer = GetProviderContainer("http://www.godaddy.com");
+      var cp = providerContainer.Resolve<ISsoProvider>();
+      var spkey = cp.SpKey.ToLower();
+      var loginUrl = cp.GetUrl(SsoUrlType.Login).ToLower();
     }
 
   }

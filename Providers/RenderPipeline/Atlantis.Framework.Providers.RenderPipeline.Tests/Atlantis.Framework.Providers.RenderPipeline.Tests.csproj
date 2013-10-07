@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{4918006C-436A-42CB-8BEF-B224917F69E7}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Atlantis.Framework.Providers.RenderPipeline.Tests</RootNamespace>
+    <AssemblyName>Atlantis.Framework.Providers.RenderPipeline.Tests</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Atlantis.Framework.AppSettings.Interface">
+      <HintPath>..\packages\Atlantis.Framework.AppSettings.Interface.4.0.0.0\lib\net40\Atlantis.Framework.AppSettings.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.DataCache">
+      <HintPath>..\packages\Atlantis.Framework.DataCache.4.0.0.0\lib\net40\Atlantis.Framework.DataCache.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.DataCacheGeneric.Interface">
+      <HintPath>..\packages\Atlantis.Framework.DataCacheGeneric.Interface.4.0.0.0\lib\net40\Atlantis.Framework.DataCacheGeneric.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.DataCacheService">
+      <HintPath>..\packages\Atlantis.Framework.DataCacheService.4.0.0.0\lib\net40\Atlantis.Framework.DataCacheService.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Engine">
+      <HintPath>..\packages\Atlantis.Framework.Engine.4.0.0.0\lib\net40\Atlantis.Framework.Engine.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Engine.XmlSerializers">
+      <HintPath>..\packages\Atlantis.Framework.Engine.4.0.0.0\lib\net40\Atlantis.Framework.Engine.XmlSerializers.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Interface">
+      <HintPath>..\packages\Atlantis.Framework.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Language.Interface">
+      <HintPath>..\packages\Atlantis.Framework.Language.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Language.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Parsers.LanguageFile">
+      <HintPath>..\packages\Atlantis.Framework.Parsers.LanguageFile.4.0.0.0\lib\net40\Atlantis.Framework.Parsers.LanguageFile.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.PrivateLabel.Interface">
+      <HintPath>..\packages\Atlantis.Framework.PrivateLabel.Interface.4.0.0.0\lib\net40\Atlantis.Framework.PrivateLabel.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Products.Interface">
+      <HintPath>..\packages\Atlantis.Framework.Products.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Products.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Providers.Interface">
+      <HintPath>..\packages\Atlantis.Framework.Providers.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Providers.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Providers.Language">
+      <HintPath>..\packages\Atlantis.Framework.Providers.Language.4.0.0.0\lib\net40\Atlantis.Framework.Providers.Language.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Providers.Language.Interface">
+      <HintPath>..\packages\Atlantis.Framework.Providers.Language.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Providers.Language.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Providers.Localization.Interface">
+      <HintPath>..\packages\Atlantis.Framework.Providers.Localization.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Providers.Localization.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Providers.Preferences.Interface">
+      <HintPath>..\packages\Atlantis.Framework.Providers.Preferences.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Providers.Preferences.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Render.Pipeline.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Render.Pipeline.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Render.Pipeline.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Testing.MockEngine">
+      <HintPath>..\packages\Atlantis.Framework.Testing.MockEngine.4.0.0.0\lib\net40\Atlantis.Framework.Testing.MockEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Testing.MockHttpContext">
+      <HintPath>..\packages\Atlantis.Framework.Testing.MockHttpContext.4.0.0.0\lib\net40\Atlantis.Framework.Testing.MockHttpContext.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Testing.MockProviders">
+      <HintPath>..\packages\Atlantis.Framework.Testing.MockProviders.4.0.0.0\lib\net40\Atlantis.Framework.Testing.MockProviders.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Moq">
+      <HintPath>..\packages\Moq.4.1.1309.1617\lib\net40\Moq.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Helpers\TestProcessedRenderContent.cs" />
+    <Compile Include="Helpers\TestRenderHandler.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RenderPipelineProviderTests.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="atlantis.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Atlantis.Framework.Providers.RenderPipeline.Interface\Atlantis.Framework.Providers.RenderPipeline.Interface.csproj">
+      <Project>{7219f3f9-bf66-48b3-b8e4-4dca7adfbc68}</Project>
+      <Name>Atlantis.Framework.Providers.RenderPipeline.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.Providers.RenderPipeline\Atlantis.Framework.Providers.RenderPipeline.csproj">
+      <Project>{8101912f-5c72-4e29-afcd-c709872bb70f}</Project>
+      <Name>Atlantis.Framework.Providers.RenderPipeline</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

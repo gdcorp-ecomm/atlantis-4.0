@@ -20,6 +20,8 @@
 
     string Comments { get; set; }
 
+    bool HasLeafPage { get; set; }
+
     bool IsFeatured { get; }
 
     ActionButtonTypes ActionButtonType { get; set; }

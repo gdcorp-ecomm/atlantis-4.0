@@ -115,7 +115,9 @@
     <Compile Include="RenderPipelineProviderTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="atlantis.config" />
+    <None Include="atlantis.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

@@ -1,8 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Web;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.RenderPipeline.Interface;
+using Atlantis.Framework.Providers.RenderPipeline.Tests.Helpers;
 using Atlantis.Framework.Render.Pipeline.Interface;
+using Atlantis.Framework.Testing.MockEngine;
 using Atlantis.Framework.Testing.MockHttpContext;
 using Atlantis.Framework.Testing.MockProviders;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -12,13 +15,18 @@ namespace Atlantis.Framework.Providers.RenderPipeline.Tests
 {
 
   [TestClass]
+  [DeploymentItem("atlantis.config")]
   public class RenderPipelineProviderTests
   {
+    private MockErrorLogger _testLogger = new MockErrorLogger();
+    private IErrorLogger _defaultLogger = Engine.EngineLogging.EngineLogger;
+
     [TestInitialize]
     public void Initialize()
     {
       MockHttpRequest mockHttpRequest = new MockHttpRequest("http://www.debug.godaddy-com.ide/");
       MockHttpContext.SetFromWorkerRequest(mockHttpRequest);
+      Engine.EngineLogging.EngineLogger = _testLogger;
     }
 
     public static IProviderContainer InitializeProviderContainer()
@@ -28,7 +36,6 @@ namespace Atlantis.Framework.Providers.RenderPipeline.Tests
       providerContainer.RegisterProvider<IShopperContext, MockShopperContext>();
       providerContainer.RegisterProvider<IManagerContext, MockManagerContext>();
       providerContainer.RegisterProvider<IRenderPipelineProvider, RenderPipelineProvider>();
-
       return providerContainer;
     }
 
@@ -115,13 +122,14 @@ namespace Atlantis.Framework.Providers.RenderPipeline.Tests
     [TestMethod]
     public void RenderContentCatchesException()
     {
+      _testLogger.Exceptions.Clear();
       string content = @"<div>[@L[app:phrase]@L]</div>";
 
       List<IRenderHandler> renderHandlers = new List<IRenderHandler>();
 
       var renderHandler = new Mock<IRenderHandler>();
       renderHandler.Setup(rh => rh.ProcessContent(It.IsAny<IProcessedRenderContent>(), It.IsAny<IProviderContainer>()))
-                   .Throws(new HttpException("Error"));
+                   .Throws(new Exception("Error"));
       renderHandlers.Add(renderHandler.Object);
 
       IProviderContainer providerContainer = InitializeProviderContainer();
@@ -129,6 +137,7 @@ namespace Atlantis.Framework.Providers.RenderPipeline.Tests
       var finalContent = renderPipelineProvider.RenderContent(content, renderHandlers, providerContainer);
 
       Assert.IsTrue(finalContent.Equals(content), "Method should return passed in content on exception");
+      Assert.AreEqual(1, _testLogger.Exceptions.Count,"Should Log Atlantis Exception");
     }
 
     [TestMethod]
@@ -155,6 +164,25 @@ namespace Atlantis.Framework.Providers.RenderPipeline.Tests
       Assert.IsTrue(renderHandlerTimesCalled == renderHandlers.Count, "Not All Render Handlers passed.");
     }
 
+    [TestMethod]
+    public void RenderContentTestRenderHandler()
+    {
+      string content = @"<div>[@L[app:phrase]@L]</div>";
+
+      List<IRenderHandler> renderHandlers = new List<IRenderHandler>();
+
+      var testRenderHandler = new TestRenderHandler();
+      renderHandlers.Add(testRenderHandler);
+
+      IProviderContainer providerContainer = InitializeProviderContainer();
+
+      var renderPipelineProvider = new RenderPipelineProvider(providerContainer);
+
+      var finalContent = renderPipelineProvider.RenderContent(content, renderHandlers, providerContainer);
+
+      Assert.IsTrue(finalContent.Equals("test"),"Content Was not Rendered Correctly");
+    }
+    
   }
 }
 

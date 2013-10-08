@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.RenderPipeline.Interface;
 using Atlantis.Framework.Render.Pipeline;
@@ -26,11 +27,13 @@ namespace Atlantis.Framework.Providers.RenderPipeline
       {
         try
         {
-          RenderPipelineManager renderPipeline = new RenderPipelineManager();
-          renderPipeline.AddRenderHandler(renderHandlers);
-
           IRenderContent renderContent = new RenderPipelineProviderContent(content);
-          IProcessedRenderContent processedRenderContent = renderPipeline.RenderContent(renderContent, providerContainer);
+          IProcessedRenderContent processedRenderContent = new ProcessedRenderContent(renderContent);
+
+          foreach (IRenderHandler renderHandler in renderHandlers)
+          {
+            renderHandler.ProcessContent(processedRenderContent, providerContainer);
+          }
 
           finalContent = processedRenderContent.Content;
         }
@@ -45,4 +48,5 @@ namespace Atlantis.Framework.Providers.RenderPipeline
       return finalContent;
     }
   }
+
 }

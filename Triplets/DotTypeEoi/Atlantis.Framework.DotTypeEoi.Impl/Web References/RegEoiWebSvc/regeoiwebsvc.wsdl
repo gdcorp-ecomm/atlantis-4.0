@@ -182,31 +182,23 @@
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:element name="GetTldPhaseDataXml">
+      <s:element name="GetTldWatchCountXml">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetTldWatchCountXmlResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="languageCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="GetTldWatchCountXmlResult" type="s:string" />
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:element name="GetTldPhaseDataXmlResponse">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="GetTldPhaseDataXmlResult" type="s:string" />
-          </s:sequence>
-        </s:complexType>
+      <s:element name="GetTldWatchCountJSON">
+        <s:complexType />
       </s:element>
-      <s:element name="GetTldPhaseDataJSON">
+      <s:element name="GetTldWatchCountJSONResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="languageCode" type="s:string" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:element name="GetTldPhaseDataJSONResponse">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="GetTldPhaseDataJSONResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="GetTldWatchCountJSONResult" type="s:string" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -221,6 +213,64 @@
         <s:complexType>
           <s:sequence>
             <s:element minOccurs="0" maxOccurs="1" name="RefreshCacheResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetShopperNotificationHtml">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="resourceId" type="s:long" />
+            <s:element minOccurs="0" maxOccurs="1" name="shopperId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="languageCode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetShopperNotificationHtmlResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetShopperNotificationHtmlResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UnsubscribeShopper">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="shopperId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UnsubscribeShopperResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UnsubscribeShopperResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SubscribeShopper">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="shopperId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SubscribeShopperResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SubscribeShopperResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="IsShopperSubscribed">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="shopperId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="IsShopperSubscribedResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="IsShopperSubscribedResult" type="s:string" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -298,23 +348,47 @@
   <wsdl:message name="RemoveFromShopperWishListXmlSoapOut">
     <wsdl:part name="parameters" element="tns:RemoveFromShopperWishListXmlResponse" />
   </wsdl:message>
-  <wsdl:message name="GetTldPhaseDataXmlSoapIn">
-    <wsdl:part name="parameters" element="tns:GetTldPhaseDataXml" />
+  <wsdl:message name="GetTldWatchCountXmlSoapIn">
+    <wsdl:part name="parameters" element="tns:GetTldWatchCountXml" />
   </wsdl:message>
-  <wsdl:message name="GetTldPhaseDataXmlSoapOut">
-    <wsdl:part name="parameters" element="tns:GetTldPhaseDataXmlResponse" />
+  <wsdl:message name="GetTldWatchCountXmlSoapOut">
+    <wsdl:part name="parameters" element="tns:GetTldWatchCountXmlResponse" />
   </wsdl:message>
-  <wsdl:message name="GetTldPhaseDataJSONSoapIn">
-    <wsdl:part name="parameters" element="tns:GetTldPhaseDataJSON" />
+  <wsdl:message name="GetTldWatchCountJSONSoapIn">
+    <wsdl:part name="parameters" element="tns:GetTldWatchCountJSON" />
   </wsdl:message>
-  <wsdl:message name="GetTldPhaseDataJSONSoapOut">
-    <wsdl:part name="parameters" element="tns:GetTldPhaseDataJSONResponse" />
+  <wsdl:message name="GetTldWatchCountJSONSoapOut">
+    <wsdl:part name="parameters" element="tns:GetTldWatchCountJSONResponse" />
   </wsdl:message>
   <wsdl:message name="RefreshCacheSoapIn">
     <wsdl:part name="parameters" element="tns:RefreshCache" />
   </wsdl:message>
   <wsdl:message name="RefreshCacheSoapOut">
     <wsdl:part name="parameters" element="tns:RefreshCacheResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetShopperNotificationHtmlSoapIn">
+    <wsdl:part name="parameters" element="tns:GetShopperNotificationHtml" />
+  </wsdl:message>
+  <wsdl:message name="GetShopperNotificationHtmlSoapOut">
+    <wsdl:part name="parameters" element="tns:GetShopperNotificationHtmlResponse" />
+  </wsdl:message>
+  <wsdl:message name="UnsubscribeShopperSoapIn">
+    <wsdl:part name="parameters" element="tns:UnsubscribeShopper" />
+  </wsdl:message>
+  <wsdl:message name="UnsubscribeShopperSoapOut">
+    <wsdl:part name="parameters" element="tns:UnsubscribeShopperResponse" />
+  </wsdl:message>
+  <wsdl:message name="SubscribeShopperSoapIn">
+    <wsdl:part name="parameters" element="tns:SubscribeShopper" />
+  </wsdl:message>
+  <wsdl:message name="SubscribeShopperSoapOut">
+    <wsdl:part name="parameters" element="tns:SubscribeShopperResponse" />
+  </wsdl:message>
+  <wsdl:message name="IsShopperSubscribedSoapIn">
+    <wsdl:part name="parameters" element="tns:IsShopperSubscribed" />
+  </wsdl:message>
+  <wsdl:message name="IsShopperSubscribedSoapOut">
+    <wsdl:part name="parameters" element="tns:IsShopperSubscribedResponse" />
   </wsdl:message>
   <wsdl:portType name="RegEOIWebSvcSoap">
     <wsdl:operation name="GetGeneralEOIXml">
@@ -365,17 +439,33 @@
       <wsdl:input message="tns:RemoveFromShopperWishListXmlSoapIn" />
       <wsdl:output message="tns:RemoveFromShopperWishListXmlSoapOut" />
     </wsdl:operation>
-    <wsdl:operation name="GetTldPhaseDataXml">
-      <wsdl:input message="tns:GetTldPhaseDataXmlSoapIn" />
-      <wsdl:output message="tns:GetTldPhaseDataXmlSoapOut" />
+    <wsdl:operation name="GetTldWatchCountXml">
+      <wsdl:input message="tns:GetTldWatchCountXmlSoapIn" />
+      <wsdl:output message="tns:GetTldWatchCountXmlSoapOut" />
     </wsdl:operation>
-    <wsdl:operation name="GetTldPhaseDataJSON">
-      <wsdl:input message="tns:GetTldPhaseDataJSONSoapIn" />
-      <wsdl:output message="tns:GetTldPhaseDataJSONSoapOut" />
+    <wsdl:operation name="GetTldWatchCountJSON">
+      <wsdl:input message="tns:GetTldWatchCountJSONSoapIn" />
+      <wsdl:output message="tns:GetTldWatchCountJSONSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="RefreshCache">
       <wsdl:input message="tns:RefreshCacheSoapIn" />
       <wsdl:output message="tns:RefreshCacheSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetShopperNotificationHtml">
+      <wsdl:input message="tns:GetShopperNotificationHtmlSoapIn" />
+      <wsdl:output message="tns:GetShopperNotificationHtmlSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UnsubscribeShopper">
+      <wsdl:input message="tns:UnsubscribeShopperSoapIn" />
+      <wsdl:output message="tns:UnsubscribeShopperSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SubscribeShopper">
+      <wsdl:input message="tns:SubscribeShopperSoapIn" />
+      <wsdl:output message="tns:SubscribeShopperSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="IsShopperSubscribed">
+      <wsdl:input message="tns:IsShopperSubscribedSoapIn" />
+      <wsdl:output message="tns:IsShopperSubscribedSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="RegEOIWebSvcSoap" type="tns:RegEOIWebSvcSoap">
@@ -488,8 +578,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetTldPhaseDataXml">
-      <soap:operation soapAction="urn:RegEOIWebSvc/GetTldPhaseDataXml" style="document" />
+    <wsdl:operation name="GetTldWatchCountXml">
+      <soap:operation soapAction="urn:RegEOIWebSvc/GetTldWatchCountXml" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -497,8 +587,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetTldPhaseDataJSON">
-      <soap:operation soapAction="urn:RegEOIWebSvc/GetTldPhaseDataJSON" style="document" />
+    <wsdl:operation name="GetTldWatchCountJSON">
+      <soap:operation soapAction="urn:RegEOIWebSvc/GetTldWatchCountJSON" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -508,6 +598,42 @@
     </wsdl:operation>
     <wsdl:operation name="RefreshCache">
       <soap:operation soapAction="urn:RegEOIWebSvc/RefreshCache" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetShopperNotificationHtml">
+      <soap:operation soapAction="urn:RegEOIWebSvc/GetShopperNotificationHtml" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UnsubscribeShopper">
+      <soap:operation soapAction="urn:RegEOIWebSvc/UnsubscribeShopper" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SubscribeShopper">
+      <soap:operation soapAction="urn:RegEOIWebSvc/SubscribeShopper" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsShopperSubscribed">
+      <soap:operation soapAction="urn:RegEOIWebSvc/IsShopperSubscribed" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -626,8 +752,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetTldPhaseDataXml">
-      <soap12:operation soapAction="urn:RegEOIWebSvc/GetTldPhaseDataXml" style="document" />
+    <wsdl:operation name="GetTldWatchCountXml">
+      <soap12:operation soapAction="urn:RegEOIWebSvc/GetTldWatchCountXml" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -635,8 +761,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetTldPhaseDataJSON">
-      <soap12:operation soapAction="urn:RegEOIWebSvc/GetTldPhaseDataJSON" style="document" />
+    <wsdl:operation name="GetTldWatchCountJSON">
+      <soap12:operation soapAction="urn:RegEOIWebSvc/GetTldWatchCountJSON" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -646,6 +772,42 @@
     </wsdl:operation>
     <wsdl:operation name="RefreshCache">
       <soap12:operation soapAction="urn:RegEOIWebSvc/RefreshCache" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetShopperNotificationHtml">
+      <soap12:operation soapAction="urn:RegEOIWebSvc/GetShopperNotificationHtml" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UnsubscribeShopper">
+      <soap12:operation soapAction="urn:RegEOIWebSvc/UnsubscribeShopper" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SubscribeShopper">
+      <soap12:operation soapAction="urn:RegEOIWebSvc/SubscribeShopper" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsShopperSubscribed">
+      <soap12:operation soapAction="urn:RegEOIWebSvc/IsShopperSubscribed" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

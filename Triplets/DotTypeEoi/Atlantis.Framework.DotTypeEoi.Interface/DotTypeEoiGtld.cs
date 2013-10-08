@@ -33,6 +33,9 @@ namespace Atlantis.Framework.DotTypeEoi.Interface
     [DataMember(Name = "@comments")]
     public string Comments { get; set; }
 
+    [DataMember(Name = "@hasLeafPage")]
+    public bool HasLeafPage { get; set; }
+
     [IgnoreDataMember]
     public bool IsFeatured { get; private set; }
 
@@ -54,6 +57,7 @@ namespace Atlantis.Framework.DotTypeEoi.Interface
       GtldSubCategoryId = gtld.GtldSubCategoryId;
       DisplayOrder = gtld.DisplayOrder;
       Comments = gtld.Comments;
+      HasLeafPage = gtld.HasLeafPage;
 
       IsFeatured = subCategory.Name.ToLower() == "featured";
     }

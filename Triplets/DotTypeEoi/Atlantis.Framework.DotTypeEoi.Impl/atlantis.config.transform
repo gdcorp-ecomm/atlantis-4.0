@@ -1,0 +1,6 @@
+﻿<ConfigElements>
+  <ConfigElement progid="Atlantis.Framework.DotTypeEoi.Impl.GeneralEoiJsonRequest" assembly="Atlantis.Framework.DotTypeEoi.Impl.dll" request_type="698" lpc="0" ws_url="http://g1dwregcheck01/regeoiwebsvc/regeoiwebsvc.asmx" />
+  <ConfigElement progid="Atlantis.Framework.DotTypeEoi.Impl.ShopperWatchListJsonRequest" assembly="Atlantis.Framework.DotTypeEoi.Impl.dll" request_type="703" lpc="0" ws_url="http://g1dwregcheck01/regeoiwebsvc/regeoiwebsvc.asmx" />
+  <ConfigElement progid="Atlantis.Framework.DotTypeEoi.Impl.AddToShopperWatchListRequest" assembly="Atlantis.Framework.DotTypeEoi.Impl.dll" request_type="704" lpc="0" ws_url="http://g1dwregcheck01/regeoiwebsvc/regeoiwebsvc.asmx" />
+  <ConfigElement progid="Atlantis.Framework.DotTypeEoi.Impl.RemoveFromShopperWatchListRequest" assembly="Atlantis.Framework.DotTypeEoi.Impl.dll" request_type="705" lpc="0" ws_url="http://g1dwregcheck01/regeoiwebsvc/regeoiwebsvc.asmx" />
+</ConfigElements>

@@ -78,9 +78,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Atlantis.Framework.Providers.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Providers.Interface.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.Providers.Localization.Interface">
-      <HintPath>..\packages\Atlantis.Framework.Providers.Localization.Interface.4.13.9.27\lib\net40\Atlantis.Framework.Providers.Localization.Interface.dll</HintPath>
-    </Reference>
     <Reference Include="Atlantis.Framework.RuleEngine, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Atlantis.Framework.RuleEngine.4.0.0.0\lib\net40\Atlantis.Framework.RuleEngine.dll</HintPath>
@@ -116,7 +113,15 @@
     <None Include="Atlantis.Framework.Providers.Localization.nuspec">
       <SubType>Designer</SubType>
     </None>
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Atlantis.Framework.Providers.Localization.Interface\Atlantis.Framework.Providers.Localization.Interface.csproj">
+      <Project>{061fcadc-9547-47e2-9643-cfbcfa355ac2}</Project>
+      <Name>Atlantis.Framework.Providers.Localization.Interface</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

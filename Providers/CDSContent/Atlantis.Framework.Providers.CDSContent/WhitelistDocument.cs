@@ -8,13 +8,12 @@ namespace Atlantis.Framework.Providers.CDSContent
   {
     private const string WhiteListFormat = "content/{0}/whitelist";
     public const int UrlWhitelistRequestType = 688;
-    public const string VersionIDQueryStringParamName = "whitelist";
 
     public WhitelistDocument(IProviderContainer container, string appName)
     {
       Container = container;
-      RawPath = string.Format(WhiteListFormat, appName);
-      AddDocIdParam(VersionIDQueryStringParamName);
+      DefaultContentPath = string.Format(WhiteListFormat, appName);
+      SetContentPath();
     }
        
 
@@ -24,7 +23,7 @@ namespace Atlantis.Framework.Providers.CDSContent
 
       try
       {
-        CDSRequestData requestData = new CDSRequestData(ProcessedPath);
+        CDSRequestData requestData = new CDSRequestData(ContentPath);
         UrlWhitelistResponseData responseData = ByPassDataCache ? (UrlWhitelistResponseData)Engine.Engine.ProcessRequest(requestData, UrlWhitelistRequestType) : (UrlWhitelistResponseData)DataCache.DataCache.GetProcessRequest(requestData, UrlWhitelistRequestType);
         whitelistResult = responseData.CheckWhitelist(relativePath);
         LogCDSDebugInfo(responseData.Id);
@@ -36,7 +35,7 @@ namespace Atlantis.Framework.Providers.CDSContent
         Engine.Engine.LogAtlantisException(new AtlantisException("WhitelistDocument.CheckWhiteList()",
                                                                  "0",
                                                                  "CDSContentProvider whitelist error. " + ex.Message,
-                                                                 ProcessedPath,
+                                                                 ContentPath,
                                                                  null,
                                                                  null));
       }

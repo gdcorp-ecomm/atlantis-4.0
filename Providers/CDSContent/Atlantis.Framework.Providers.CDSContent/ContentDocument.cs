@@ -9,13 +9,12 @@ namespace Atlantis.Framework.Providers.CDSContent
   {
     public const int ContentVersionRequestType = 687;
     public static readonly IRenderContent NullRenderContent = new ContentVersionResponseData(null);
-    public const string VersionIDQueryStringParamName = "version";
 
-    public ContentDocument(IProviderContainer container, string rawPath)
+    public ContentDocument(IProviderContainer container, string defaultContentPath)
     {
       Container = container;
-      RawPath = rawPath;
-      AddDocIdParam(VersionIDQueryStringParamName);
+      DefaultContentPath = defaultContentPath;
+      SetContentPath();
     }
 
     public IRenderContent GetContent()
@@ -24,7 +23,7 @@ namespace Atlantis.Framework.Providers.CDSContent
 
       try
       {
-        var requestData = new CDSRequestData(ProcessedPath);
+        var requestData = new CDSRequestData(ContentPath);
         ContentVersionResponseData responseData = ByPassDataCache ? (ContentVersionResponseData)Engine.Engine.ProcessRequest(requestData, ContentVersionRequestType) : (ContentVersionResponseData)DataCache.DataCache.GetProcessRequest(requestData, ContentVersionRequestType);
 
         if (responseData.IsSuccess && !string.IsNullOrEmpty(responseData.Content))
@@ -38,7 +37,7 @@ namespace Atlantis.Framework.Providers.CDSContent
         Engine.Engine.LogAtlantisException(new AtlantisException("ContentDocument.GetContent()",
                                                                  "0",
                                                                  "CDSContentProvider error getting content. " + ex.Message,
-                                                                 ProcessedPath,
+                                                                 ContentPath,
                                                                  null,
                                                                  null));
       }

@@ -3,34 +3,63 @@ using System.Collections.Specialized;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web;
+using System.Collections.Generic;
 
 namespace Atlantis.Framework.Providers.CDSContent
 {
   internal abstract class CDSDocument
   {
+    const string CLIENT_SPOOF_PARAM_NAME = "version";
+    const string SERVICE_SPOOF_PARAM_NAME = "docid";
+    const string PATH_PREFIX = "content/";
+
     protected IProviderContainer Container { get; set; }
-    protected string RawPath { get; set; }
-    protected string ProcessedPath { get; private set; }
+    protected string DefaultContentPath { get; set; }
+    protected string ContentPath { get; private set; }
     protected bool ByPassDataCache { get; private set; }
 
-    protected void AddDocIdParam(string queryStringParamName)
+    protected void SetContentPath()
     {
-      ProcessedPath = RawPath;
+      ContentPath = DefaultContentPath;
+      ISiteContext siteContext = Container.Resolve<ISiteContext>();
 
-      if (HttpContext.Current != null)
+      if (siteContext.IsRequestInternal && HttpContext.Current != null)
       {
         var queryString = HttpContext.Current.Request.QueryString;
-        var docId = queryString[queryStringParamName];
-        ISiteContext siteContext = Container.Resolve<ISiteContext>();
-        if (IsValidContentId(docId) && siteContext.IsRequestInternal)
+        string list = queryString[CLIENT_SPOOF_PARAM_NAME];
+        string rawPathWithoutPrefix = DefaultContentPath.Replace(PATH_PREFIX, string.Empty);
+        string versionId = GetSpoofedVersionId(rawPathWithoutPrefix, list);
+        if (IsValidContentId(versionId))
         {
           ByPassDataCache = true;
           var queryParams = new NameValueCollection();
-          queryParams.Add("docid", docId);
-          string appendChar = ProcessedPath.Contains("?") ? "&" : "?";
-          ProcessedPath += string.Concat(appendChar, ToQueryString(queryParams));
+          queryParams.Add(SERVICE_SPOOF_PARAM_NAME, versionId);
+          string appendChar = ContentPath.Contains("?") ? "&" : "?";
+          ContentPath += string.Concat(appendChar, ToQueryString(queryParams));
         }
       }
+    }
+
+    private string GetSpoofedVersionId(string key, string list)
+    {
+      string value = null;
+
+      if (!string.IsNullOrEmpty(list) && list.Contains(key))
+      {
+        string[] pairs = list.Split(new char[] { ',' });
+
+        if (pairs.Length > 0)
+        {
+          //Gets the value in the first pair where the key matches
+          //Example query string: version=sales/hosting/web-hosting|12345678,sales/_shared/global-css|87654321
+          value = (from pair in pairs
+                   let pairArray = pair.Split(new char[] { '|' })
+                   where pairArray.Length == 2
+                   && pairArray[0] == key
+                   select pairArray[1]).FirstOrDefault();
+        }
+      }
+      return value;
     }
 
     private bool IsValidContentId(string text)

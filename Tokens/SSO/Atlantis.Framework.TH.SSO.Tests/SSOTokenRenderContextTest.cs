@@ -14,6 +14,30 @@ using Atlantis.Framework.Providers.Sso;
 
 namespace Atlantis.Framework.TH.SSO.Tests
 {
+  public class MockDebugProvider : ProviderBase, IDebugContext
+  {
+    public MockDebugProvider(IProviderContainer container)
+      : base(container)
+    {
+      
+    }
+
+    public List<KeyValuePair<string, string>> GetDebugTrackingData()
+    {
+      throw new NotImplementedException();
+    }
+
+    public void LogDebugTrackingData(string key, string data)
+    {
+      Console.WriteLine("{0}:{1}", key, data);
+    }
+
+    public string GetQaSpoofQueryValue(string spoofParamName)
+    {
+      throw new NotImplementedException();
+    }
+  }
+
   [TestClass]
   [DeploymentItem("atlantis.config")]
   [DeploymentItem("Atlantis.Framework.Providers.Sso.Interface")]
@@ -34,7 +58,7 @@ namespace Atlantis.Framework.TH.SSO.Tests
       result.RegisterProvider<ISiteContext, MockSiteContext>();
       result.RegisterProvider<ILinkProvider, LinkProvider>();
       result.RegisterProvider<ILocalizationProvider, CountrySubdomainLocalizationProvider>();
-      //result.RegisterProvider<IDebugContext, DebugProvider>();
+      result.RegisterProvider<IDebugContext, MockDebugProvider>();
       result.RegisterProvider<ISsoProvider, ClusterProvider>();
 
       return result;
@@ -60,6 +84,34 @@ namespace Atlantis.Framework.TH.SSO.Tests
       Assert.IsNotNull(target);
     }
 
+    [TestMethod]
+    public void SSTokenRenderContext_GetProviderInfoMissingProviderTest()
+    {
+      MockHttpRequest request = new MockHttpRequest("http://www.godaddy.com/default.aspx?ci=1");
+      MockHttpContext.SetFromWorkerRequest(request);
+
+      IProviderContainer providerContainer = new MockProviderContainer();
+      providerContainer.SetData(MockSiteContextSettings.PrivateLabelId, 1);
+      providerContainer.RegisterProvider<ISiteContext, MockSiteContext>();
+      providerContainer.RegisterProvider<ILinkProvider, LinkProvider>();
+      providerContainer.RegisterProvider<ILocalizationProvider, CountrySubdomainLocalizationProvider>();
+      providerContainer.RegisterProvider<IDebugContext, MockDebugProvider>();
+      // NOTE: Missing ISsoProvider.  Very Important.
+      //providerContainer.RegisterProvider<ISsoProvider, ClusterProvider>();
+
+      SSOTokenRenderContext target = new SSOTokenRenderContext(providerContainer);
+      Assert.IsNotNull(target);
+
+      PrivateObject privates = new PrivateObject(target);
+      var actual = privates.Invoke("GetProviderInfo");
+      Assert.IsNotNull(actual);
+
+      PrivateObject temp = new PrivateObject(actual);
+      Assert.IsNull(temp.GetProperty("LogOutUrl"));
+      Assert.IsNull(temp.GetProperty("LogInUrl"));
+      Assert.IsNull(temp.GetProperty("SpGroupName"));
+      Assert.IsNull(temp.GetProperty("SpKey"));
+    }
     [TestMethod]
     public void SSTokenRenderContext_GetProviderInfoTest()
     {

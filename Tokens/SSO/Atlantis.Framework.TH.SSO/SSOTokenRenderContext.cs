@@ -47,76 +47,39 @@ namespace Atlantis.Framework.TH.SSO
 
       if (!ReferenceEquals(null, cast))
       {
-        try
+        TokenType tokenType;
+        ISsoProvider ssoProvider = null;
+        if (Enum.TryParse(token.RawTokenData, true, out tokenType) && ProviderContainer.TryResolve<ISsoProvider>(out ssoProvider))
         {
-          TokenType tokenType;
-          if (Enum.TryParse(token.RawTokenData, true, out tokenType))
+          string result = String.Empty;
+          switch (tokenType)
           {
-            var data = GetProviderInfo();
-
-            string result = String.Empty;
-            switch (tokenType)
-            {
-              case TokenType.SpKey:
-                result = data.SpKey;
-                break;
-              case TokenType.SpGroupName:
-                result = data.SpGroupName;
-                break;
-              case TokenType.LogInUrl:
-                result = data.LogInUrl;
-                break;
-              case TokenType.LogOutUrl:
-                result = data.LogOutUrl;
-                break;
-            }
-
-            token.TokenResult = result;
-            returnValue = true;
+            case TokenType.SpKey:
+              result = ssoProvider.SpKey;
+              break;
+            case TokenType.SpGroupName:
+              result = ssoProvider.ServiceProviderGroupName;
+              break;
+            case TokenType.LogInUrl:
+              result = ssoProvider.GetUrl(SsoUrlType.Login);
+              break;
+            case TokenType.LogOutUrl:
+              result = ssoProvider.GetUrl(SsoUrlType.Logout);
+              break;
           }
-          else
-          {
-            throw new ApplicationException(String.Format("Unable to retrieve Identity Provider Information for {0}.", cast.RawTokenData));
-          }
+          token.TokenResult = result;
+          returnValue = true;
         }
-        catch (Exception ex)
+        else
         {
-          returnValue = false;
+          string errorMsg = "Unable to retrieve Identity Provider Information.";
           token.TokenResult = string.Empty;
-          token.TokenError = ex.Message;
-          LogDebugMessage(ex.Message, ex.Source);
+          token.TokenError = errorMsg;
+          Engine.Engine.LogAtlantisException(new AtlantisException("RenderToken", 0, errorMsg, cast.RawTokenData));
         }
       }
 
       return returnValue;
-    }
-
-    private IdentityProviderInfo GetProviderInfo()
-    {
-      IdentityProviderInfo returnValue = new IdentityProviderInfo();
-
-      try
-      {
-        var ssoProvider = ProviderContainer.Resolve<ISsoProvider>();
-        returnValue.SpKey = ssoProvider.SpKey;
-        returnValue.SpGroupName = ssoProvider.ServiceProviderGroupName;
-        returnValue.LogInUrl = ssoProvider.GetUrl(SsoUrlType.Login);
-        returnValue.LogOutUrl = ssoProvider.GetUrl(SsoUrlType.Logout);
-      }
-      catch (Exception ex)
-      {
-        LogDebugMessage(ex.Message, ex.Source);
-      }
-
-      return returnValue;
-    }
-
-    private void LogDebugMessage(string message, string errorSource)
-    {
-      if (this.ProviderContainer.CanResolve<IDebugContext>())
-      {
-        this.ProviderContainer.Resolve<IDebugContext>().LogDebugTrackingData(errorSource, message);
-      }
     }
 
   }

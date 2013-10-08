@@ -85,59 +85,6 @@ namespace Atlantis.Framework.TH.SSO.Tests
     }
 
     [TestMethod]
-    public void SSTokenRenderContext_GetProviderInfoMissingProviderTest()
-    {
-      MockHttpRequest request = new MockHttpRequest("http://www.godaddy.com/default.aspx?ci=1");
-      MockHttpContext.SetFromWorkerRequest(request);
-
-      IProviderContainer providerContainer = new MockProviderContainer();
-      providerContainer.SetData(MockSiteContextSettings.PrivateLabelId, 1);
-      providerContainer.RegisterProvider<ISiteContext, MockSiteContext>();
-      providerContainer.RegisterProvider<ILinkProvider, LinkProvider>();
-      providerContainer.RegisterProvider<ILocalizationProvider, CountrySubdomainLocalizationProvider>();
-      providerContainer.RegisterProvider<IDebugContext, MockDebugProvider>();
-      // NOTE: Missing ISsoProvider.  Very Important.
-      //providerContainer.RegisterProvider<ISsoProvider, ClusterProvider>();
-
-      SSOTokenRenderContext target = new SSOTokenRenderContext(providerContainer);
-      Assert.IsNotNull(target);
-
-      PrivateObject privates = new PrivateObject(target);
-      var actual = privates.Invoke("GetProviderInfo");
-      Assert.IsNotNull(actual);
-
-      PrivateObject temp = new PrivateObject(actual);
-      Assert.IsNull(temp.GetProperty("LogOutUrl"));
-      Assert.IsNull(temp.GetProperty("LogInUrl"));
-      Assert.IsNull(temp.GetProperty("SpGroupName"));
-      Assert.IsNull(temp.GetProperty("SpKey"));
-    }
-    [TestMethod]
-    public void SSTokenRenderContext_GetProviderInfoTest()
-    {
-      MockHttpRequest request = new MockHttpRequest("http://www.godaddy.com/default.aspx?ci=1");
-      MockHttpContext.SetFromWorkerRequest(request);
-
-      IProviderContainer providerContainer = InitializeContainer(1);
-      SSOTokenRenderContext target = new SSOTokenRenderContext(providerContainer);
-      Assert.IsNotNull(target);
-
-      PrivateObject privates = new PrivateObject(target);
-      var actual = privates.Invoke("GetProviderInfo");
-      Assert.IsNotNull(actual);
-
-      PrivateObject temp = new PrivateObject(actual);
-      Assert.IsFalse(string.IsNullOrEmpty(temp.GetProperty("LogOutUrl").ToString()));
-      Assert.IsTrue(temp.GetProperty("LogOutUrl").ToString().Contains("logout.aspx"));
-      Assert.IsFalse(string.IsNullOrEmpty(temp.GetProperty("LogInUrl").ToString()));
-      Assert.IsTrue(temp.GetProperty("LogInUrl").ToString().Contains("login.aspx"));
-      Assert.IsFalse(string.IsNullOrEmpty(temp.GetProperty("SpGroupName").ToString()));
-      Assert.AreEqual("GDSWNET", temp.GetProperty("SpGroupName"));
-      Assert.IsFalse(string.IsNullOrEmpty(temp.GetProperty("SpKey").ToString()));
-      Assert.AreEqual("GDSWNET-130122134218001", temp.GetProperty("SpKey"));
-    }
-
-    [TestMethod]
     public void SSOTokenRenderContext_RenderBlueRazorTokenSuccessTest()
     {
       MockHttpRequest request = new MockHttpRequest("http://www.bluerazor.com/default.aspx?ci=1");

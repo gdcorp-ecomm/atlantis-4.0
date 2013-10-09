@@ -44,12 +44,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ActiveTLDsRequestData.cs" />
+    <Compile Include="TLDProductDomainAttributes\AllTLDProducts.cs" />
+    <Compile Include="TLDProductDomainAttributesResponseData.cs" />
+    <Compile Include="TLDProductDomainAttributesRequestData.cs" />
     <Compile Include="TLDPhaseDate.cs" />
     <Compile Include="TLDPhaseDateListRequestData.cs" />
     <Compile Include="TLDPhaseDateListResponseData.cs" />
     <Compile Include="ExtendedTLDDataResponseData.cs" />
     <Compile Include="ExtendedTLDDataRequestData.cs" />
     <Compile Include="TLDDataCacheEngineRequests.cs" />
+    <Compile Include="TLDProductDomainAttributes\TLDProduct.cs" />
+    <Compile Include="TLDProductDomainAttributes\TLDProductTier.cs" />
+    <Compile Include="TLDProductDomainAttributes\TLDProductTiers.cs" />
     <Compile Include="ValidDotTypesResponseData.cs" />
     <Compile Include="ValidDotTypesRequestData.cs" />
     <Compile Include="RegistryLanguage.cs" />

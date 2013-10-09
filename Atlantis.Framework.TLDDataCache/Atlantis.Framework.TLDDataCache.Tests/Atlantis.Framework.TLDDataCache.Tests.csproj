@@ -60,6 +60,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="ActiveTLDsTests.cs" />
+    <Compile Include="TLDProductDomainAttributesTests.cs" />
     <Compile Include="TLDPhaseDateListTests.cs" />
     <Compile Include="ExtendedTLDDataTests.cs" />
     <Compile Include="ValidDotTypesTests.cs" />

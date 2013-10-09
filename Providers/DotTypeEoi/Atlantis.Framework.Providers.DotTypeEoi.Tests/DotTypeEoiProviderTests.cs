@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Collections.Generic;
 using Atlantis.Framework.DotTypeCache;
 using Atlantis.Framework.DotTypeCache.Interface;
-using Atlantis.Framework.DotTypeEoi.Interface;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.DotTypeEoi.Interface;
 using Atlantis.Framework.Providers.Localization;
@@ -150,11 +147,7 @@ namespace Atlantis.Framework.Providers.DotTypeEoi.Tests
       IDotTypeEoiProvider provider = NewDotTypeEoiProvider();
       string responseMessage;
       ShopperContext.SetLoggedInShopper("861126");
-      var gTlds = new List<IDotTypeEoiGtld>(1);
-      var gTld = new DotTypeEoiGtld { Id = 1609, GtldSubCategoryId = 10320 };
-      const string displayTime = "2013-05-23 10:29:55";
-      gTlds.Add(gTld);
-      provider.AddToShopperWatchList(displayTime, gTlds, out responseMessage);
+      provider.AddToShopperWatchList("ads", out responseMessage);
 
       IShopperWatchListResponse shopperWatchListResponse;
       bool isSuccess = provider.GetShopperWatchList(out shopperWatchListResponse);
@@ -164,16 +157,12 @@ namespace Atlantis.Framework.Providers.DotTypeEoi.Tests
     }
 
     [TestMethod]
-    public void DotTypeAddToShopperWatchListSuccess()
+    public void DotTypeAddToShopperWatchList2Success()
     {
       IDotTypeEoiProvider provider = NewDotTypeEoiProvider();
       string responseMessage;
       ShopperContext.SetLoggedInShopper("861126");
-      var gTlds = new List<IDotTypeEoiGtld>(1);
-      var gTld = new DotTypeEoiGtld { Id = 1609, GtldSubCategoryId = 10320 };
-      const string displayTime = "2013-05-23 10:29:55";
-      gTlds.Add(gTld);
-      bool isSuccess = provider.AddToShopperWatchList(displayTime, gTlds, out responseMessage);
+      bool isSuccess = provider.AddToShopperWatchList("ads", out responseMessage);
       Assert.AreEqual(true, isSuccess);
     }
 
@@ -183,10 +172,7 @@ namespace Atlantis.Framework.Providers.DotTypeEoi.Tests
       IDotTypeEoiProvider provider = NewDotTypeEoiProvider();
       string responseMessage;
       ShopperContext.SetLoggedInShopper("861126");
-      var gTlds = new List<IDotTypeEoiGtld>(1);
-      var gTld = new DotTypeEoiGtld { Id = 1609, GtldSubCategoryId = 10320 };
-      gTlds.Add(gTld);
-      bool isSuccess = provider.RemoveFromShopperWatchList(gTlds, out responseMessage);
+      bool isSuccess = provider.RemoveFromShopperWatchList("ads", out responseMessage);
       Assert.AreEqual(true, isSuccess);
     }
   }

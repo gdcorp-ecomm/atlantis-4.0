@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Atlantis.Framework.DotTypeCache;
-using Atlantis.Framework.DotTypeCache.Interface;
 using Atlantis.Framework.DotTypeEoi.Interface;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.DotTypeEoi.Interface;
@@ -31,12 +29,6 @@ namespace Atlantis.Framework.Providers.DotTypeEoi
         return _shopperContext.Value.ShopperStatus == ShopperStatusType.PartiallyTrusted ||
                _shopperContext.Value.ShopperStatus == ShopperStatusType.Authenticated;
       }
-    }
-
-    private IDotTypeProvider _dotTypeProvider;
-    private IDotTypeProvider DotTypeProvider
-    {
-      get { return _dotTypeProvider ?? (_dotTypeProvider = Container.Resolve<IDotTypeProvider>()); }
     }
 
     public DotTypeEoiProvider(IProviderContainer container) : base(container)
@@ -71,7 +63,7 @@ namespace Atlantis.Framework.Providers.DotTypeEoi
       if (Container.TryResolve(out proxyContext))
       {
         IProxyData languageProxy;
-        isSpanishTransPerfectProxy = fullLanguage.ToLowerInvariant().StartsWith(SPANISH) && 
+        isSpanishTransPerfectProxy = fullLanguage.ToLowerInvariant().StartsWith(SPANISH) &&
                                      proxyContext.TryGetActiveProxy(ProxyTypes.TransPerfectTranslation, out languageProxy);
       }
 
@@ -87,7 +79,7 @@ namespace Atlantis.Framework.Providers.DotTypeEoi
       {
         var request = new GeneralEoiJsonRequestData(FullLanguage);
         var response = (GeneralEoiJsonResponseData)DataCache.DataCache.GetProcessRequest(request, DotTypeEoiEngineRequests.GeneralEoiJsonRequest);
-        
+
         if (response.IsSuccess && response.DotTypeEoiResponse != null)
         {
           var dotTypeEoiResponse = response.DotTypeEoiResponse;
@@ -122,7 +114,7 @@ namespace Atlantis.Framework.Providers.DotTypeEoi
         {
           var dotTypeEoiResponse = response.DotTypeEoiResponse;
           var displayTime = dotTypeEoiResponse.DisplayTime;
-          
+
           foreach (var category in dotTypeEoiResponse.Categories)
           {
             if (categoryId == category.CategoryId)
@@ -213,7 +205,7 @@ namespace Atlantis.Framework.Providers.DotTypeEoi
       {
         var request = new GeneralEoiJsonRequestData(FullLanguage);
         var response = (GeneralEoiJsonResponseData)DataCache.DataCache.GetProcessRequest(request, DotTypeEoiEngineRequests.GeneralEoiJsonRequest);
-        
+
         if (response.IsSuccess && response.DotTypeEoiResponse != null)
         {
           foreach (var category in response.DotTypeEoiResponse.Categories)
@@ -242,7 +234,7 @@ namespace Atlantis.Framework.Providers.DotTypeEoi
       {
         var request = new GeneralEoiJsonRequestData(FullLanguage);
         var response = (GeneralEoiJsonResponseData)DataCache.DataCache.GetProcessRequest(request, DotTypeEoiEngineRequests.GeneralEoiJsonRequest);
-        
+
         if (response.IsSuccess && response.DotTypeEoiResponse != null)
         {
           IEnumerable<IDotTypeEoiGtld> gtlds = response.DotTypeEoiResponse.AllGtlds.Values;
@@ -299,7 +291,7 @@ namespace Atlantis.Framework.Providers.DotTypeEoi
       return success;
     }
 
-    public bool AddToShopperWatchList(string displayTime, IList<IDotTypeEoiGtld> gTlds, out string responseMessage)
+    public bool AddToShopperWatchList(string gtldName, out string responseMessage)
     {
       var success = false;
       responseMessage = string.Empty;
@@ -309,14 +301,26 @@ namespace Atlantis.Framework.Providers.DotTypeEoi
         try
         {
           string shopperId = _managerContext.Value.IsManager ? _managerContext.Value.ManagerShopperId : _shopperContext.Value.ShopperId;
-          var request = new AddToShopperWatchListRequestData(shopperId, displayTime, gTlds, FullLanguage);
-          var response = (AddToShopperWatchListResponseData)Engine.Engine.ProcessRequest(request, DotTypeEoiEngineRequests.AddToShopperWatchListRequest);
 
-          if (response.IsSuccess)
+          var gtldsToAdd = new List<IDotTypeEoiGtld>(1);
+          var generalEoiRequest = new GeneralEoiJsonRequestData(FullLanguage);
+          var generalEoiResponse = (GeneralEoiJsonResponseData)DataCache.DataCache.GetProcessRequest(generalEoiRequest, DotTypeEoiEngineRequests.GeneralEoiJsonRequest);
+
+          if (generalEoiResponse.IsSuccess && generalEoiResponse.DotTypeEoiResponse != null)
           {
-            success = true;
+            IDotTypeEoiGtld gtldToAdd;
+            generalEoiResponse.DotTypeEoiResponse.AllGtlds.TryGetValue(gtldName, out gtldToAdd);
+            gtldsToAdd.Add(gtldToAdd);
+
+            var addToWatchListRequest = new AddToShopperWatchListRequestData(shopperId, generalEoiResponse.DotTypeEoiResponse.DisplayTime, gtldsToAdd, FullLanguage);
+            var addToWatchListResponse = (AddToShopperWatchListResponseData)Engine.Engine.ProcessRequest(addToWatchListRequest, DotTypeEoiEngineRequests.AddToShopperWatchListRequest);
+            if (addToWatchListResponse.IsSuccess)
+            {
+              success = true;
+            }
+
+            responseMessage = addToWatchListResponse.ResponseMessage;
           }
-          responseMessage = response.ResponseMessage;
         }
         catch (Exception ex)
         {
@@ -329,7 +333,7 @@ namespace Atlantis.Framework.Providers.DotTypeEoi
       return success;
     }
 
-    public bool RemoveFromShopperWatchList(IList<IDotTypeEoiGtld> gTlds, out string responseMessage)
+    public bool RemoveFromShopperWatchList(string gtldName, out string responseMessage)
     {
       var success = false;
       responseMessage = string.Empty;
@@ -339,14 +343,26 @@ namespace Atlantis.Framework.Providers.DotTypeEoi
         try
         {
           string shopperId = _managerContext.Value.IsManager ? _managerContext.Value.ManagerShopperId : _shopperContext.Value.ShopperId;
-          var request = new RemoveFromShopperWatchListRequestData(shopperId, gTlds);
-          var response = (RemoveFromShopperWatchListResponseData)Engine.Engine.ProcessRequest(request, DotTypeEoiEngineRequests.RemoveFromShopperWatchListRequest);
 
-          if (response.IsSuccess)
+          var gtldsToRemove = new List<IDotTypeEoiGtld>(1);
+          var generalEoiRequest = new GeneralEoiJsonRequestData(FullLanguage);
+          var generalEoiResponse = (GeneralEoiJsonResponseData)DataCache.DataCache.GetProcessRequest(generalEoiRequest, DotTypeEoiEngineRequests.GeneralEoiJsonRequest);
+
+          if (generalEoiResponse.IsSuccess && generalEoiResponse.DotTypeEoiResponse != null)
           {
-            success = true;
+            IDotTypeEoiGtld gtldToRemove;
+            generalEoiResponse.DotTypeEoiResponse.AllGtlds.TryGetValue(gtldName, out gtldToRemove);
+            gtldsToRemove.Add(gtldToRemove);
+
+            var removeFromWatchListRequest = new RemoveFromShopperWatchListRequestData(shopperId, gtldsToRemove);
+            var removeFromWatchListResponse = (RemoveFromShopperWatchListResponseData)Engine.Engine.ProcessRequest(removeFromWatchListRequest, DotTypeEoiEngineRequests.RemoveFromShopperWatchListRequest);
+            if (removeFromWatchListResponse.IsSuccess)
+            {
+              success = true;
+            }
+
+            responseMessage = removeFromWatchListResponse.ResponseMessage;
           }
-          responseMessage = response.ResponseMessage;
         }
         catch (Exception ex)
         {
@@ -370,28 +386,16 @@ namespace Atlantis.Framework.Providers.DotTypeEoi
           {
             foreach (var gtld in subCategory.Gtlds)
             {
-              var dotTypeInfo = DotTypeProvider.GetDotTypeInfo(gtld.Name);
-              if (dotTypeInfo.IsLivePhase(LaunchPhases.GeneralAvailability))
+              IShopperWatchListResponse shopperWatchListResponse;
+              if (GetShopperWatchList(out shopperWatchListResponse))
               {
-                gtld.ActionButtonType = ActionButtonTypes.Register;
-              }
-              else if (dotTypeInfo.HasPreRegPhases)
-              {
-                gtld.ActionButtonType = ActionButtonTypes.PreRegister;
-              }
-              else
-              {
-                IShopperWatchListResponse shopperWatchListResponse;
-                if (GetShopperWatchList(out shopperWatchListResponse))
+                if (shopperWatchListResponse.GtldIdDictionary.ContainsKey(gtld.Id))
                 {
-                  if (shopperWatchListResponse.GtldIdDictionary.ContainsKey(gtld.Id))
-                  {
-                    gtld.ActionButtonType = ActionButtonTypes.DontWatch;
-                  }
-                  else
-                  {
-                    gtld.ActionButtonType = ActionButtonTypes.Watch;
-                  }
+                  gtld.ActionButtonType = ActionButtonTypes.DontWatch;
+                }
+                else
+                {
+                  gtld.ActionButtonType = ActionButtonTypes.Watch;
                 }
               }
             }
@@ -406,28 +410,16 @@ namespace Atlantis.Framework.Providers.DotTypeEoi
       {
         foreach (var gtld in gtlds)
         {
-          var dotTypeInfo = DotTypeProvider.GetDotTypeInfo(gtld.Name);
-          if (!dotTypeInfo.IsLivePhase(LaunchPhases.GeneralAvailability))
+          IShopperWatchListResponse shopperWatchListResponse;
+          if (GetShopperWatchList(out shopperWatchListResponse))
           {
-            gtld.ActionButtonType = ActionButtonTypes.Register;
-          }
-          else if (dotTypeInfo.HasPreRegPhases)
-          {
-            gtld.ActionButtonType = ActionButtonTypes.PreRegister;
-          }
-          else
-          {
-            IShopperWatchListResponse shopperWatchListResponse;
-            if (GetShopperWatchList(out shopperWatchListResponse))
+            if (shopperWatchListResponse.GtldIdDictionary.ContainsKey(gtld.Id))
             {
-              if (shopperWatchListResponse.GtldIdDictionary.ContainsKey(gtld.Id))
-              {
-                gtld.ActionButtonType = ActionButtonTypes.DontWatch;
-              }
-              else
-              {
-                gtld.ActionButtonType = ActionButtonTypes.Watch;
-              }
+              gtld.ActionButtonType = ActionButtonTypes.DontWatch;
+            }
+            else
+            {
+              gtld.ActionButtonType = ActionButtonTypes.Watch;
             }
           }
         }

@@ -8,6 +8,6 @@ namespace Atlantis.Framework.Providers.DotTypeEoi.Interface
     
     IList<IDotTypeEoiCategory> Categories { get; }
 
-    IDictionary<int, IDotTypeEoiGtld> AllGtlds { get; } 
+    IDictionary<string, IDotTypeEoiGtld> AllGtlds { get; }
   }
 }

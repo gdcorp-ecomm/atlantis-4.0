@@ -39,9 +39,9 @@ namespace Atlantis.Framework.DotTypeEoi.Interface
       }
     }
 
-    private IDictionary<int, IDotTypeEoiGtld> _allGtlds;
+    private IDictionary<string, IDotTypeEoiGtld> _allGtlds;
     [IgnoreDataMember]
-    public IDictionary<int, IDotTypeEoiGtld> AllGtlds
+    public IDictionary<string, IDotTypeEoiGtld> AllGtlds
     {
       get
       {
@@ -49,7 +49,7 @@ namespace Atlantis.Framework.DotTypeEoi.Interface
         {
           if (Categories != null)
           {
-            _allGtlds = new Dictionary<int, IDotTypeEoiGtld>(1024);
+            _allGtlds = new Dictionary<string, IDotTypeEoiGtld>(1024);
             foreach (IDotTypeEoiCategory dotTypeEoiCategory in Categories)
             {
               if (dotTypeEoiCategory.SubCategories != null)
@@ -58,7 +58,7 @@ namespace Atlantis.Framework.DotTypeEoi.Interface
                 {
                   foreach (IDotTypeEoiGtld dotTypeEoiGtld in dotTypeEoiCategory.Gtlds)
                   {
-                    _allGtlds[dotTypeEoiGtld.Id] = new DotTypeEoiGtld(dotTypeEoiGtld, dotTypeEoiSubCategory);
+                    _allGtlds[dotTypeEoiGtld.Name] = new DotTypeEoiGtld(dotTypeEoiGtld, dotTypeEoiSubCategory);
                   }
                 }
               }
@@ -66,7 +66,7 @@ namespace Atlantis.Framework.DotTypeEoi.Interface
           }
           else
           {
-            _allGtlds = new Dictionary<int, IDotTypeEoiGtld>(0);
+            _allGtlds = new Dictionary<string, IDotTypeEoiGtld>(0);
           }
         }
         return _allGtlds;

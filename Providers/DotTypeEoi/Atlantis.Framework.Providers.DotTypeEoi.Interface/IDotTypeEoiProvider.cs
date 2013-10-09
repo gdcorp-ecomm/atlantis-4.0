@@ -16,8 +16,8 @@ namespace Atlantis.Framework.Providers.DotTypeEoi.Interface
 
     bool GetShopperWatchList(out IShopperWatchListResponse shopperWatchListResponse);
 
-    bool AddToShopperWatchList(string displayTime, IList<IDotTypeEoiGtld> gTlds, out string responseMessage);
+    bool AddToShopperWatchList(string gtldName, out string responseMessage);
 
-    bool RemoveFromShopperWatchList(IList<IDotTypeEoiGtld> gTlds, out string responseMessage);
+    bool RemoveFromShopperWatchList(string gtldName, out string responseMessage);
   }
 }

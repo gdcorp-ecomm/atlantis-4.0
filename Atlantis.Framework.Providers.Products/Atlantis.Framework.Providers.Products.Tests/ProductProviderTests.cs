@@ -280,7 +280,7 @@ namespace Atlantis.Framework.Providers.Products.Tests
     {
       var container = SetContexts(2, string.Empty);
       var productProvider = container.Resolve<IProductProvider>();
-      int productId = productProvider.GetUnifiedProductIdByPfid(2500101, 1); //PrivateLabelId set to GoDaddy
+      int productId = productProvider.GetUnifiedProductIdByPfid(2500101);
       Assert.AreEqual(101, productId);
     }
 

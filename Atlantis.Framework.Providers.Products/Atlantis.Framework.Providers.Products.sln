@@ -1,8 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{4F085777-CB2E-4C3A-AAD8-868CA6E7482B}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{948766F1-5543-4562-87DD-6A33010BC290}"
 	ProjectSection(SolutionItems) = preProject
 		Atlantis.Framework.Providers.Products.vsmdi = Atlantis.Framework.Providers.Products.vsmdi

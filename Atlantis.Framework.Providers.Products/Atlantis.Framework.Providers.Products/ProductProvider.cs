@@ -161,12 +161,5 @@ namespace Atlantis.Framework.Providers.Products
       var response = (NonUnifiedPfidResponseData)DataCache.DataCache.GetProcessRequest(request, ProductProviderEngineRequests.NonUnifiedProductId);
       return response.NonUnifiedPfid;
     }
-
-    public int GetUnifiedProductIdByPfid(int pfid, int privateLabelId)
-    {
-        var request = new UnifiedProductIdRequestData(pfid, privateLabelId);
-        var response = (UnifiedProductIdResponseData)DataCache.DataCache.GetProcessRequest(request, ProductProviderEngineRequests.UnifiedProductId);
-        return response.UnifiedProductId;
-    }
   }
 }

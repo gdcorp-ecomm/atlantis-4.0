@@ -39,20 +39,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Atlantis.Framework.DotTypeEoi.Impl, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.DotTypeEoi.4.13.10.09\lib\net40\Atlantis.Framework.DotTypeEoi.Impl.dll</HintPath>
-    </Reference>
-    <Reference Include="Atlantis.Framework.DotTypeEoi.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.DotTypeEoi.Interface.4.13.10.09\lib\net40\Atlantis.Framework.DotTypeEoi.Interface.dll</HintPath>
-    </Reference>
-    <Reference Include="Atlantis.Framework.Engine, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="Atlantis.Framework.Engine">
       <HintPath>..\packages\Atlantis.Framework.Engine.4.0.0.0\lib\net40\Atlantis.Framework.Engine.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.Engine.XmlSerializers, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="Atlantis.Framework.Engine.XmlSerializers">
       <HintPath>..\packages\Atlantis.Framework.Engine.4.0.0.0\lib\net40\Atlantis.Framework.Engine.XmlSerializers.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -93,6 +83,16 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Atlantis.Framework.DotTypeEoi.Impl\Atlantis.Framework.DotTypeEoi.Impl.csproj">
+      <Project>{59ff3c50-a3df-4cf2-9578-5c65b43c59b6}</Project>
+      <Name>Atlantis.Framework.DotTypeEoi.Impl</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.DotTypeEoi.Interface\Atlantis.Framework.DotTypeEoi.Interface.csproj">
+      <Project>{7d931e9e-8088-4b73-bebc-7bae27a5083b}</Project>
+      <Name>Atlantis.Framework.DotTypeEoi.Interface</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

@@ -10,7 +10,7 @@ namespace Atlantis.Framework.Providers.Containers.DataToken
 
     private static readonly Regex _dataTokenRegex = new Regex(@"\[@D\[(?<datakey>[a-zA-z0-9\.\-]*?)\]@D\]", RegexOptions.Compiled | RegexOptions.Singleline);
 
-    internal static string ReplaceDataTokens(string content, IProviderContainer providerContainer)
+    public static string ReplaceDataTokens(string content, IProviderContainer providerContainer)
     {
       var finalContent = string.Empty;
 

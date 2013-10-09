@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using Atlantis.Framework.DotTypeCache.Static;
+using Atlantis.Framework.Interface;
 using Atlantis.Framework.TLDDataCache.Interface;
 
 namespace Atlantis.Framework.DotTypeCache
@@ -36,7 +37,7 @@ namespace Atlantis.Framework.DotTypeCache
       return result;
     }
 
-    internal static IDotTypeInfo CreateTLDMLDotTypeIfAvailable(string dotType)
+    internal static IDotTypeInfo CreateTLDMLDotTypeIfAvailable(string dotType, IProviderContainer container)
     {
       IDotTypeInfo result = null;
 
@@ -44,7 +45,7 @@ namespace Atlantis.Framework.DotTypeCache
       {
         try
         {
-          result = TLDMLDotTypeInfo.FromDotType(dotType);
+          result = TLDMLDotTypeInfo.FromDotType(dotType, container);
         }
         catch (Exception ex)
         {

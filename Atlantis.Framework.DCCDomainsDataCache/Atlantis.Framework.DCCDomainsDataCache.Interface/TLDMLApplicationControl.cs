@@ -63,7 +63,7 @@ namespace Atlantis.Framework.DCCDomainsDataCache.Interface
     private void LoadTuiFormGroups()
     {
       XElement masterFormGroup = NamespaceElement.Descendants("formgroup").FirstOrDefault();
-      if (masterFormGroup.IsEnabled())
+      if (masterFormGroup != null && masterFormGroup.IsEnabled())
       {
         XElement collection = NamespaceElement.Descendants("tuiformgroupcollection").FirstOrDefault();
         if (collection != null)

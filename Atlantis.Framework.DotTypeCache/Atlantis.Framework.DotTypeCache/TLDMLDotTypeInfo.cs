@@ -4,9 +4,12 @@ using Atlantis.Framework.DCCDomainsDataCache.Interface;
 using Atlantis.Framework.DomainContactFields.Interface;
 using Atlantis.Framework.DotTypeCache.Interface;
 using Atlantis.Framework.DotTypeCache.Static;
+using Atlantis.Framework.Interface;
+using Atlantis.Framework.PrivateLabel.Interface;
 using Atlantis.Framework.RegDotTypeProductIds.Interface;
 using Atlantis.Framework.RegDotTypeRegistry.Interface;
 using Atlantis.Framework.TLDDataCache.Interface;
+using Atlantis.Framework.TLDDataCache.Interface.TLDProductDomainAttributes;
 
 namespace Atlantis.Framework.DotTypeCache
 {
@@ -19,16 +22,18 @@ namespace Atlantis.Framework.DotTypeCache
     private Lazy<RegDotTypeRegistryResponseData> _dotTypeRegistryData;
     private Lazy<TLDMLByNameResponseData> _tldml;
     private Lazy<int> _tldId;
-    private Lazy<DomainContactFieldsResponseData> _domainContactFieldsData;
-    private Lazy<TLDLanguageResponseData> _languagesData;
-    private Lazy<ValidDotTypesResponseData> _validDotTypes;
+    private readonly Lazy<DomainContactFieldsResponseData> _domainContactFieldsData;
+    private readonly Lazy<TLDLanguageResponseData> _languagesData;
+    private readonly Lazy<ValidDotTypesResponseData> _validDotTypes;
+    private readonly Lazy<ISiteContext> _siteContext;
+    private Lazy<TLDPhaseDateListResponseData> _tldPhaseDateListData;
 
-    internal static TLDMLDotTypeInfo FromDotType(string dotType)
+    internal static TLDMLDotTypeInfo FromDotType(string dotType, IProviderContainer container)
     {
-      return new TLDMLDotTypeInfo(dotType);
+      return new TLDMLDotTypeInfo(dotType, container);
     }
 
-    private TLDMLDotTypeInfo(string tld)
+    private TLDMLDotTypeInfo(string tld, IProviderContainer container)
     {
       _tld = tld;
       _tldId = new Lazy<int>(LoadTldId);
@@ -38,6 +43,8 @@ namespace Atlantis.Framework.DotTypeCache
       _domainContactFieldsData = new Lazy<DomainContactFieldsResponseData>(LoadDomainContactFieldsData);
       _languagesData = new Lazy<TLDLanguageResponseData>(LoadLanguagesData);
       _validDotTypes = new Lazy<ValidDotTypesResponseData>(LoadValidDotTypes);
+      _siteContext = new Lazy<ISiteContext>(container.Resolve<ISiteContext>);
+      _tldPhaseDateListData = new Lazy<TLDPhaseDateListResponseData>(LoadTldPhaseDateList);
 
       ITLDProduct product = _tldml.Value.Product; // Preload the TLDML
     }
@@ -98,6 +105,26 @@ namespace Atlantis.Framework.DotTypeCache
     {
       var request = new ValidDotTypesRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0);
       return (ValidDotTypesResponseData)DataCache.DataCache.GetProcessRequest(request, DotTypeEngineRequests.ValidDotTypes);
+    }
+
+    private TLDPhaseDateListResponseData LoadTldPhaseDateList()
+    {
+      var request = new TLDPhaseDateListRequestData(_tldId.Value);
+      return (TLDPhaseDateListResponseData)DataCache.DataCache.GetProcessRequest(request, DotTypeEngineRequests.TldPhaseDateList);
+    }
+
+    private TLDProductDomainAttributesResponseData LoadProductDomainAttributes(string phaseCode, int privateLabelId, int productTypeId)
+    {
+      var pLTypeResponse = LoadPrivateLabelType(privateLabelId);
+
+      var request = new TLDProductDomainAttributesRequestData(_tldId.Value, phaseCode, pLTypeResponse.PrivateLabelType, productTypeId);
+      return (TLDProductDomainAttributesResponseData)DataCache.DataCache.GetProcessRequest(request, DotTypeEngineRequests.ProductDomainAttributes);
+    }
+
+    private PrivateLabelTypeResponseData LoadPrivateLabelType(int privateLabelId)
+    {
+      var request = new PrivateLabelTypeRequestData(privateLabelId);
+      return (PrivateLabelTypeResponseData)DataCache.DataCache.GetProcessRequest(request, DotTypeEngineRequests.PrivateLabelType);
     }
 
     public string DotType
@@ -550,9 +577,20 @@ namespace Atlantis.Framework.DotTypeCache
     public Dictionary<string, ITLDLaunchPhasePeriod> GetAllLaunchPhases(bool activeOnly = false)
     {
       var launchPhases = new Dictionary<string, ITLDLaunchPhasePeriod>();
-      if (_tldml.Value.Phase != null)
+      if (_tldPhaseDateListData.Value != null)
       {
-        launchPhases = _tldml.Value.Phase.GetAllLaunchPhases(activeOnly);
+        var phases = _tldPhaseDateListData.Value.TldPhaseDates;
+
+        foreach ( var phase in phases)
+        {
+          var launchPhasePeriod = new TldLaunchPhasePeriod
+            {
+              StartDate = phase.StartDate,
+              StopDate = phase.EndDate
+            };
+
+          launchPhases.Add(phase.PhaseCode, launchPhasePeriod);
+        }
       }
       return launchPhases;
     }
@@ -596,7 +634,7 @@ namespace Atlantis.Framework.DotTypeCache
 
     public IList<string> GetTuiFormTypes(LaunchPhases launchPhase)
     {
-      var result = new List<string>();
+      var result = new List<string>(16);
 
       if (_tldml.Value.ApplicationControl != null)
       {
@@ -646,14 +684,142 @@ namespace Atlantis.Framework.DotTypeCache
       return _tldml.Value.Product.PreregistrationYears(PhaseHelper.GetPhaseCode(phase)).Max;
     }
 
-    public bool HasPreRegApplicationFee(LaunchPhases phase)
+    public bool HasPhaseApplicationFee(LaunchPhases phase, out string applicationProductType)
     {
-      return _tldml.Value.Product.HasPreRegApplicationFee(PhaseHelper.GetPhaseCode(phase));
+      bool result = _tldml.Value.Product.HasPhaseApplicationFee(PhaseHelper.GetPhaseCode(phase), out applicationProductType);
+
+      return result;
     }
 
-    public int GetPreRegApplicationProductId(LaunchPhases phase)
+    public List<int> GetPhaseApplicationProductIdList(LaunchPhases phase)
     {
-      return InternalGetProductId(0, 1, PhaseHelper.GetDotTypeProductTypes(phase, true));
+      var result = new List<int>();
+
+      string applicationProductType;
+
+      if (HasPhaseApplicationFee(phase, out applicationProductType))
+      {
+        result = _tldml.Value.Product.GetPhaseApplicationProductIdList(applicationProductType);
+      }
+
+      return result;
+    }
+
+    public int GetProductId(IDomainProductLookup domainProductLookup)
+    {
+      var result = 0;
+
+      var productTypeId = InternalGetTldProductTypeId(domainProductLookup.DomainCount, domainProductLookup.ProductType);
+
+      var productTiers = InternalGetProductTiers(domainProductLookup.TldPhaseCode, productTypeId, domainProductLookup.RegistryId, domainProductLookup.PriceTierId);
+      if (productTiers != null && !productTiers.ValidTierExist(domainProductLookup.DomainCount))
+      {
+        productTypeId = InternalGetTldProductTypeId(domainProductLookup.DomainCount, domainProductLookup.ProductType, false);
+
+        productTiers = InternalGetProductTiers(domainProductLookup.TldPhaseCode, productTypeId, domainProductLookup.RegistryId, domainProductLookup.PriceTierId);
+      }
+
+      if (productTiers != null)
+      {
+        TLDProduct product;
+        if (productTiers.TryGetProduct(domainProductLookup.Years, domainProductLookup.DomainCount, out product))
+        {
+          result = product.UnifiedProductId;
+        }
+      }
+
+      return result;
+    }
+
+    public List<int> GetProductIdList(IDomainProductListLookup domainProductListLookup)
+    {
+      var result = new List<TLDProduct>(8);
+
+      var productTypeId = InternalGetTldProductTypeId(domainProductListLookup.DomainCount, domainProductListLookup.ProductType);
+      var productTiers = InternalGetProductTiers(domainProductListLookup.TldPhaseCode, productTypeId, domainProductListLookup.RegistryId, domainProductListLookup.PriceTierId);
+      if (productTiers != null && !productTiers.ValidTierExist(domainProductListLookup.DomainCount))
+      {
+        productTypeId = InternalGetTldProductTypeId(domainProductListLookup.DomainCount, domainProductListLookup.ProductType, false);
+        productTiers = InternalGetProductTiers(domainProductListLookup.TldPhaseCode, productTypeId, domainProductListLookup.RegistryId, domainProductListLookup.PriceTierId);
+      }
+
+      if (productTiers != null)
+      {
+        foreach (int year in domainProductListLookup.Years)
+        {
+          TLDProduct product;
+          if ((productTiers.TryGetProduct(year, domainProductListLookup.DomainCount, out product)) && (product.IsValid))
+          {
+            result.Add(product);
+          }
+        }
+      }
+
+      return result.ConvertAll(product => product.UnifiedProductId); 
+    }
+
+    private static int InternalGetTldProductTypeId(int domainCount, TLDProductTypes productType, bool getBulkBasedOnDomainCount = true)
+    {
+      var productTypeId = TLDProductTypeIds.TLD_PRODUCT_TYPE_ID_REGISTRATION;
+
+      switch (productType)
+      {
+        case TLDProductTypes.Registration:
+          productTypeId = domainCount > 1 && getBulkBasedOnDomainCount ? 
+            TLDProductTypeIds.TLD_PRODUCT_TYPE_ID_BULK_REGISTRATION : TLDProductTypeIds.TLD_PRODUCT_TYPE_ID_REGISTRATION;
+          break;
+        case TLDProductTypes.Transfer:
+          productTypeId = domainCount > 1 && getBulkBasedOnDomainCount ? 
+            TLDProductTypeIds.TLD_PRODUCT_TYPE_ID_BULK_TRANSFER : TLDProductTypeIds.TLD_PRODUCT_TYPE_ID_TRANSFER;
+          break;
+        case TLDProductTypes.Renewal:
+          productTypeId = domainCount > 1 && getBulkBasedOnDomainCount ? 
+            TLDProductTypeIds.TLD_PRODUCT_TYPE_ID_BULK_RENEWAL : TLDProductTypeIds.TLD_PRODUCT_TYPE_ID_RENEWAL;
+          break;
+      }
+
+      return productTypeId;
+    }
+
+    private TLDProductTiers InternalGetProductTiers(string phaseCode, int productTypeId, int? registryId, int? priceTierId)
+    {
+      var productDomainAttributesResponse = LoadProductDomainAttributes(phaseCode, _siteContext.Value.PrivateLabelId, productTypeId);
+
+      TLDProductTiers productTiers = null;
+
+      if (productDomainAttributesResponse != null)
+      {
+        if (registryId == null)
+        {
+          registryId = 0;
+        }
+
+        if (priceTierId == null)
+        {
+          priceTierId = 0;
+        }
+
+        if (registryId > 0 && priceTierId > 0)
+        {
+          productTiers = productDomainAttributesResponse.GetProductTiersByRegistryAndPriceTier((int)registryId,
+                                                                                               (int)priceTierId);
+        }
+        else if (registryId > 0)
+        {
+          productTiers = productDomainAttributesResponse.GetProductTiersByRegistry((int)registryId);
+        }
+        else if (priceTierId > 0)
+        {
+          productTiers = productDomainAttributesResponse.GetProductTiersByPriceTier((int)priceTierId);
+        }
+
+        if (productTiers == null)
+        {
+          productTiers = productDomainAttributesResponse.GetDefaultProductTiers();
+        }
+      }
+
+      return productTiers;
     }
 
     public string GetRegistrationFieldsXml()

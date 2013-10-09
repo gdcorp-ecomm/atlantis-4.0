@@ -45,6 +45,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConfigElement.cs" />
+    <Compile Include="DomainProductListLookup.cs" />
+    <Compile Include="DomainProductLookup.cs" />
     <Compile Include="DotTypeCacheConfig.cs" />
     <Compile Include="Logging.cs" />
     <Compile Include="StaticApplicationControl.cs" />

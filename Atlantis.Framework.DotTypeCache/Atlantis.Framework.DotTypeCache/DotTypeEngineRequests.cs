@@ -10,6 +10,9 @@
     private static int _domainContactFieldsRequest = 651;
     private static int _languagesRequest = 655;
     private static int _validDotTypesRequest = 667;
+    private static int _tldPhaseDateListRequest = 744;
+    private static int _productDomainAttributesRequest = 745;
+    private static int _privateLabelTypeRequest = 662;
 
     public static int TLDMLByName
     {
@@ -57,6 +60,24 @@
     {
       get { return _validDotTypesRequest; }
       set { _validDotTypesRequest = value; }
+    }
+
+    public static int ProductDomainAttributes
+    {
+      get { return _productDomainAttributesRequest; }
+      set { _productDomainAttributesRequest = value; }
+    }
+
+    public static int PrivateLabelType
+    {
+      get { return _privateLabelTypeRequest; }
+      set { _privateLabelTypeRequest = value; }
+    }
+
+    public static int TldPhaseDateList
+    {
+      get { return _tldPhaseDateListRequest; }
+      set { _tldPhaseDateListRequest = value; }
     }
   }
 }

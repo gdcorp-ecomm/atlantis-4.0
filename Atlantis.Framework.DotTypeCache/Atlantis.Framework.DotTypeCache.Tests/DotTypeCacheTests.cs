@@ -24,6 +24,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
   [DeploymentItem("Atlantis.Framework.DotTypeCache.StaticTypes.dll")]
   [DeploymentItem("Atlantis.Framework.AppSettings.Impl.dll")]
   [DeploymentItem("Atlantis.Framework.DataCacheGeneric.Impl.dll")]
+  [DeploymentItem("Atlantis.Framework.PrivateLabel.Impl.dll")]
   public class DotTypeCacheTests
   {
     private TestContext testContextInstance;
@@ -1503,5 +1504,99 @@ namespace Atlantis.Framework.DotTypeCache.Tests
       var hasPreregPhases = dotTypeInfo.HasPreRegPhases;
       Assert.IsTrue(hasPreregPhases);
     }
+
+    [TestMethod]
+    public void TldGetProductIdStaticCom()
+    {
+      var dotTypeInfo = DotTypeProvider.GetDotTypeInfo("com");
+      DomainProductLookup domainProductLookup = new DomainProductLookup
+        {
+          DomainCount = 1,
+          Years = 4,
+          TldPhaseCode = "REGREG",
+          ProductType = TLDProductTypes.Registration
+        };
+
+      int productId = dotTypeInfo.GetProductId(domainProductLookup);
+      Assert.IsTrue(productId == 104);
+    }
+
+    [TestMethod]
+    public void TldGetProductIdTldmlO2Borg()
+    {
+      var dotTypeInfo = DotTypeProvider.GetDotTypeInfo("o2.borg");
+      DomainProductLookup domainProductLookup = new DomainProductLookup
+      {
+        DomainCount = 3,
+        Years = 4,
+        TldPhaseCode = "REGREG",
+        PriceTierId = 1,
+        ProductType = TLDProductTypes.Registration
+      };
+
+      int productId = dotTypeInfo.GetProductId(domainProductLookup);
+      Assert.IsTrue(productId == 36471);
+    }
+
+    [TestMethod]
+    public void TldGetProductIdListTldmlO2Borg()
+    {
+      var dotTypeInfo = DotTypeProvider.GetDotTypeInfo("o2.borg");
+      var domainProductListLookup = new DomainProductListLookup
+      {
+        DomainCount = 3,
+        Years = new[] { 3, 6 },
+        TldPhaseCode = "REGREG",
+        PriceTierId = 1,
+        ProductType = TLDProductTypes.Registration
+      };
+
+      var productIdList = dotTypeInfo.GetProductIdList(domainProductListLookup);
+      Assert.IsTrue(productIdList.Contains(36469) && productIdList.Contains(36475) );
+    }
+
+    [TestMethod]
+    public void TldGetProductIdTldmlL4Borg()
+    {
+      var dotTypeInfo = DotTypeProvider.GetDotTypeInfo("l4.borg");
+      DomainProductLookup domainProductLookup = new DomainProductLookup
+      {
+        DomainCount = 1,
+        Years = 2,
+        TldPhaseCode = "REGREG",
+        PriceTierId = 1,
+        ProductType = TLDProductTypes.Registration
+      };
+
+      int productId = dotTypeInfo.GetProductId(domainProductLookup);
+      Assert.IsTrue(productId == 36044);
+    }
+
+    [TestMethod]
+    public void TldGetProductIdTldmlL4BorgBulkReg()
+    {
+      var dotTypeInfo = DotTypeProvider.GetDotTypeInfo("l4.borg");
+      DomainProductLookup domainProductLookup = new DomainProductLookup
+      {
+        DomainCount = 7,
+        Years = 2,
+        TldPhaseCode = "REGREG",
+        PriceTierId = 1,
+        ProductType = TLDProductTypes.Registration
+      };
+
+      int productId = dotTypeInfo.GetProductId(domainProductLookup);
+      Assert.IsTrue(productId == 36074);
+    }
+
+    [TestMethod]
+    public void TldGetApplicationProductIdListTldmlL4Borg()
+    {
+      var dotTypeInfo = DotTypeProvider.GetDotTypeInfo("k.borg");
+
+      var productIdList = dotTypeInfo.GetPhaseApplicationProductIdList(LaunchPhases.SunriseA);
+      Assert.IsTrue(productIdList.Any());
+    }
+
   }
 }

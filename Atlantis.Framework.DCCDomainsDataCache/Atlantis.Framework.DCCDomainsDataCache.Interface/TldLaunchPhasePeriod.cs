@@ -8,7 +8,6 @@ namespace Atlantis.Framework.DCCDomainsDataCache.Interface
     public string Type { get; set; }
     public DateTime StartDate { get; set; }
     public DateTime StopDate { get; set; }
-    public bool AvailCheck { get; set; }
 
     public bool IsActive()
     {

@@ -322,14 +322,25 @@ namespace Atlantis.Framework.DotTypeCache.Interface
       return 0;
     }
 
-    public bool HasPreRegApplicationFee(LaunchPhases phase)
+    public bool HasPhaseApplicationFee(LaunchPhases phase, out string applicationProductType)
     {
+      applicationProductType = string.Empty;
       return false;
     }
 
-    public int GetPreRegApplicationProductId(LaunchPhases phase)
+    public List<int> GetPhaseApplicationProductIdList(LaunchPhases phase)
+    {
+      return new List<int>();
+    }
+
+    public int GetProductId(IDomainProductLookup domainProductLookup)
     {
       return 0;
+    }
+
+    public List<int> GetProductIdList(IDomainProductListLookup domainProductListLookup)
+    {
+      return new List<int>();
     }
 
     public string GetRegistrationFieldsXml()

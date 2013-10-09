@@ -1,4 +1,6 @@
-﻿namespace Atlantis.Framework.DotTypeCache.Interface
+﻿using System.Collections.Generic;
+
+namespace Atlantis.Framework.DotTypeCache.Interface
 {
   public interface ITLDProduct
   {
@@ -7,6 +9,7 @@
     ITLDValidYearsSet RenewalYears { get; }
     ITLDValidYearsSet ExpiredAuctionsYears { get; }
     ITLDValidYearsSet PreregistrationYears(string type);
-    bool HasPreRegApplicationFee(string type);
+    bool HasPhaseApplicationFee(string phaseCode, out string applicationProductType);
+    List<int> GetPhaseApplicationProductIdList(string applicationProductType);
   }
 }

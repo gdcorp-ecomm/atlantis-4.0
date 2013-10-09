@@ -24,7 +24,8 @@ namespace Atlantis.Framework.DCCDomainsDataCache.Interface
     private TldValidYearsSet _offeredRenewalYears;
     private TldValidYearsSet _offeredExpiredAuctionYears;
     private Dictionary<string, TldValidYearsSet> _offeredPreregistrationYears;
-    private Dictionary<string, bool> _offeredPreRegApplicationFees = new Dictionary<string, bool>(StringComparer.OrdinalIgnoreCase);
+    private Dictionary<string, bool> _offeredPhaseApplicationFees = new Dictionary<string, bool>(StringComparer.OrdinalIgnoreCase);
+    private Dictionary<string, string> _offeredPhaseApplicationProducts = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
 
     public TLDMLProduct(XDocument tldmlDoc)
       : base(tldmlDoc)
@@ -81,8 +82,17 @@ namespace Atlantis.Framework.DCCDomainsDataCache.Interface
       var applicationElement = phase.Descendants("applicationFee").FirstOrDefault();
       if (applicationElement != null)
       {
-        _offeredPreRegApplicationFees[valueAtt.Value] = "true".Equals(applicationElement.Attribute("enabled").Value,
-                                                              StringComparison.OrdinalIgnoreCase);
+        var applicationElementEnabled = applicationElement.Attribute("enabled").Value;
+        _offeredPhaseApplicationFees[valueAtt.Value] = "true".Equals(applicationElementEnabled, StringComparison.OrdinalIgnoreCase);
+        
+        if ("true".Equals(applicationElementEnabled, StringComparison.OrdinalIgnoreCase))
+        {
+          var productTypeAttr = applicationElement.Attribute("producttype");
+          if (productTypeAttr != null)
+          {
+            _offeredPhaseApplicationProducts[valueAtt.Value] = applicationElement.Attribute("producttype").Value;
+          }
+        }
       }
     }
 
@@ -116,10 +126,43 @@ namespace Atlantis.Framework.DCCDomainsDataCache.Interface
       return result;
     }
 
-    public bool HasPreRegApplicationFee(string type)
+    public bool HasPhaseApplicationFee(string phaseCode, out string applicationProductType)
     {
+      applicationProductType = string.Empty;
       bool result;
-      _offeredPreRegApplicationFees.TryGetValue(type, out result);
+      if (_offeredPhaseApplicationFees.TryGetValue(phaseCode, out result))
+      {
+        _offeredPhaseApplicationProducts.TryGetValue(phaseCode, out applicationProductType);
+      }
+
+      return result;
+    }
+
+    public List<int> GetPhaseApplicationProductIdList(string applicationProductType)
+    {
+      var result = new List<int>();
+
+      var productTypeCollection = NamespaceElement.Descendants("producttype");
+      foreach (var productType in productTypeCollection)
+      {
+        var valueAttr = productType.Attribute("value");
+        if (valueAttr != null && valueAttr.Value.Equals(applicationProductType))
+        {
+          var pfCollection = productType.Descendants("pf");
+          foreach (var pf in pfCollection)
+          {
+            if (pf.IsEnabled())
+            {
+              int nId;
+              if (Int32.TryParse(pf.Attribute("id").Value, out nId))
+              {
+                result.Add(nId);
+              }
+            }
+          }
+          break;
+        }
+      }
 
       return result;
     }

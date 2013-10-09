@@ -68,7 +68,10 @@ namespace Atlantis.Framework.DotTypeCache.Interface
 
     int GetMinPreRegLength(LaunchPhases phase);
     int GetMaxPreRegLength(LaunchPhases phase);
-    bool HasPreRegApplicationFee(LaunchPhases phase);
-    int GetPreRegApplicationProductId(LaunchPhases phase);
+    bool HasPhaseApplicationFee(LaunchPhases phase, out string applicationProductType);
+    List<int> GetPhaseApplicationProductIdList(LaunchPhases phase);
+
+    int GetProductId(IDomainProductLookup domainProductLookup);
+    List<int> GetProductIdList(IDomainProductListLookup domainProductListLookup);
   }
 }

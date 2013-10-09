@@ -479,14 +479,24 @@ namespace Atlantis.Framework.DotTypeCache
       return this._dotTypeInfo.GetMaxPreRegLength(phase);
     }
 
-    public bool HasPreRegApplicationFee(LaunchPhases phase)
+    public bool HasPhaseApplicationFee(LaunchPhases phase, out string applicationProductType)
     {
-      return this._dotTypeInfo.HasPreRegApplicationFee(phase);
+      return this._dotTypeInfo.HasPhaseApplicationFee(phase, out applicationProductType);
     }
 
-    public int GetPreRegApplicationProductId(LaunchPhases phase)
+    public List<int> GetPhaseApplicationProductIdList(LaunchPhases phase)
     {
-      return this._dotTypeInfo.GetPreRegApplicationProductId(phase);
+      return this._dotTypeInfo.GetPhaseApplicationProductIdList(phase);
+    }
+
+    public int GetProductId(IDomainProductLookup domainProductLookup)
+    {
+      return this._dotTypeInfo.GetProductId(domainProductLookup);
+    }
+
+    public List<int> GetProductIdList(IDomainProductListLookup domainProductListLookup)
+    {
+      return this._dotTypeInfo.GetProductIdList(domainProductListLookup);
     }
 
     public string GetRegistrationFieldsXml()

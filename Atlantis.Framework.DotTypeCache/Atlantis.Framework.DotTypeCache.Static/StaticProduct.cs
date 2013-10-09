@@ -1,4 +1,5 @@
-﻿using Atlantis.Framework.DotTypeCache.Interface;
+﻿using System.Collections.Generic;
+using Atlantis.Framework.DotTypeCache.Interface;
 
 namespace Atlantis.Framework.DotTypeCache.Static
 {
@@ -57,9 +58,16 @@ namespace Atlantis.Framework.DotTypeCache.Static
       return _preregistrationYears;
     }
 
-    public bool HasPreRegApplicationFee(string type)
+    public bool HasPhaseApplicationFee(string phaseCode, out string applicationProductType)
     {
+      applicationProductType = string.Empty;
+
       return false;
+    }
+
+    public List<int> GetPhaseApplicationProductIdList(string applicationProductType)
+    {
+      return new List<int>();
     }
   }
 }

@@ -22,6 +22,7 @@ namespace Atlantis.Framework.DotTypeCache
     private readonly ITLDDataImpl _tldDataForTransfer;
     private readonly ITLDDataImpl _tldDataForBulk;
     private readonly ITLDDataImpl _tldDataForBulkTransfer;
+    private readonly IProviderContainer _container;
 
     public DotTypeProvider(IProviderContainer container) : base(container)
     {
@@ -32,6 +33,8 @@ namespace Atlantis.Framework.DotTypeCache
       _tldDataForTransfer = new TLDDataImpl(SiteContext.PrivateLabelId, OfferedTLDProductTypes.Transfer);
       _tldDataForBulk = new TLDDataImpl(SiteContext.PrivateLabelId, OfferedTLDProductTypes.Bulk);
       _tldDataForBulkTransfer = new TLDDataImpl(SiteContext.PrivateLabelId, OfferedTLDProductTypes.BulkTransfer);
+
+      _container = container;
     }
 
     private ISiteContext _siteContext;
@@ -64,7 +67,7 @@ namespace Atlantis.Framework.DotTypeCache
 
     private IDotTypeInfo LoadDotTypeInfo(string dotType)
     {
-      IDotTypeInfo result = TLDMLDotTypes.CreateTLDMLDotTypeIfAvailable(dotType);
+      IDotTypeInfo result = TLDMLDotTypes.CreateTLDMLDotTypeIfAvailable(dotType, _container);
       if (result == null)
       {
         result = StaticDotTypes.GetDotType(dotType);

@@ -493,14 +493,94 @@ namespace Atlantis.Framework.DotTypeCache.Static
       return MaxPreRegLength;
     }
 
-    public bool HasPreRegApplicationFee(LaunchPhases phase)
+    public bool HasPhaseApplicationFee(LaunchPhases phase, out string applicationProductType)
     {
+      applicationProductType = string.Empty;
+
       return false;
     }
 
-    public int GetPreRegApplicationProductId(LaunchPhases phase)
+    public List<int> GetPhaseApplicationProductIdList(LaunchPhases phase)
     {
-      return 0;
+      return new List<int>();
+    }
+
+    public int GetProductId(IDomainProductLookup domainProductLookup)
+    {
+      int result = 0;
+      switch (domainProductLookup.ProductType)
+      {
+        case TLDProductTypes.Registration:
+          if (domainProductLookup.RegistryId != null)
+          {
+            result = this.GetRegistrationProductId(domainProductLookup.RegistryId.ToString(), domainProductLookup.Years, domainProductLookup.DomainCount);
+          }
+          else
+          {
+            result = this.GetRegistrationProductId(domainProductLookup.Years, domainProductLookup.DomainCount);
+          }
+          break;
+        case TLDProductTypes.Transfer:
+          if (domainProductLookup.RegistryId != null)
+          {
+            result = this.GetTransferProductId(domainProductLookup.RegistryId.ToString(), domainProductLookup.Years, domainProductLookup.DomainCount);
+          }
+          else
+          {
+            result = this.GetTransferProductId(domainProductLookup.Years, domainProductLookup.DomainCount);
+          }
+          break;
+        case TLDProductTypes.Renewal:
+          if (domainProductLookup.RegistryId != null)
+          {
+            result = this.GetRenewalProductId(domainProductLookup.RegistryId.ToString(), domainProductLookup.Years, domainProductLookup.DomainCount);
+          }
+          else
+          {
+            result = this.GetRenewalProductId(domainProductLookup.Years, domainProductLookup.DomainCount);
+          }
+          break;
+      }
+      return result;
+    }
+
+    public List<int> GetProductIdList(IDomainProductListLookup domainProductListLookup)
+    {
+      var result = new List<int>(8);
+      switch (domainProductListLookup.ProductType)
+      {
+        case TLDProductTypes.Registration:
+          if (domainProductListLookup.RegistryId != null)
+          {
+            result = this.GetValidRegistrationProductIdList(domainProductListLookup.RegistryId.ToString(), domainProductListLookup.DomainCount, domainProductListLookup.Years);
+          }
+          else
+          {
+            result = this.GetValidRegistrationProductIdList(domainProductListLookup.DomainCount, domainProductListLookup.Years);
+          }
+          break;
+        case TLDProductTypes.Transfer:
+          if (domainProductListLookup.RegistryId != null)
+          {
+            result = this.GetValidTransferProductIdList(domainProductListLookup.RegistryId.ToString(), domainProductListLookup.DomainCount, domainProductListLookup.Years);
+          }
+          else
+          {
+            result = this.GetValidTransferProductIdList(domainProductListLookup.DomainCount, domainProductListLookup.Years);
+          }
+          break;
+        case TLDProductTypes.Renewal:
+          if (domainProductListLookup.RegistryId != null)
+          {
+            result = this.GetValidRenewalProductIdList(domainProductListLookup.RegistryId.ToString(), domainProductListLookup.DomainCount, domainProductListLookup.Years);
+          }
+          else
+          {
+            result = this.GetValidRenewalProductIdList(domainProductListLookup.DomainCount, domainProductListLookup.Years);
+          }
+          break;
+      }
+      return result;
     }
 
     public string GetRegistrationFieldsXml()

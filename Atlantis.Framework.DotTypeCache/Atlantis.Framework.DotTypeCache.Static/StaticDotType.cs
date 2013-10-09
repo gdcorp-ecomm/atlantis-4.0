@@ -458,7 +458,7 @@ namespace Atlantis.Framework.DotTypeCache.Static
       get { return _staticApplicationControl; }
     }
 
-    public Dictionary<string, ITLDLaunchPhasePeriod> GetAllLaunchPhases(bool activeOnly = false)
+    public Dictionary<string, ITLDLaunchPhasePeriod> GetAllLaunchPhases()
     {
       return new Dictionary<string, ITLDLaunchPhasePeriod>();
     }

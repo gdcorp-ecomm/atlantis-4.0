@@ -574,7 +574,7 @@ namespace Atlantis.Framework.DotTypeCache
       }
     }
 
-    public Dictionary<string, ITLDLaunchPhasePeriod> GetAllLaunchPhases(bool activeOnly = false)
+    public Dictionary<string, ITLDLaunchPhasePeriod> GetAllLaunchPhases()
     {
       var launchPhases = new Dictionary<string, ITLDLaunchPhasePeriod>();
       if (_tldPhaseDateListData.Value != null)

@@ -37,7 +37,6 @@
     LandrushH,
     LandrushI,
     LandrushJ,
-    RegularRegistration,
     Invalid
   }
 }

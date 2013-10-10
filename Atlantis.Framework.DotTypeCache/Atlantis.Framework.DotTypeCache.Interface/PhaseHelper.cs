@@ -45,7 +45,6 @@ namespace Atlantis.Framework.DotTypeCache.Interface
       _phases.Add(LaunchPhases.FiveDayEarlyRegistration, "ER5");
       _phases.Add(LaunchPhases.SixDayEarlyRegistration, "ER6");
       _phases.Add(LaunchPhases.SevenDayEarlyRegistration, "ER7");
-      _phases.Add(LaunchPhases.RegularRegistration, "REGREG");
     }
 
     [Obsolete("Please dont use this method. This is provided for backward compatibility. This method will be removed in a future version.")]

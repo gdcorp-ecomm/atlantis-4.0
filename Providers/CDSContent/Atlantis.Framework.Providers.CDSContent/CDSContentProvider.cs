@@ -114,14 +114,14 @@ namespace Atlantis.Framework.Providers.CDSContent
           {
             try
             {
-              result = ExpressionParserManager.EvaluateExpression(rule.Condition);
+              result = ExpressionParserManager.EvaluateExpression(resultText);
             }
             catch (Exception ex)
             {
               Engine.Engine.LogAtlantisException(new AtlantisException("CDSContentProvider.GetRuleData()", 
                                                                        "0", 
                                                                        "CDSContentProvider error evaluating rule condition. " + ex.Message,
-                                                                       "Condition: " + rule.Condition,
+                                                                       "Condition: " + resultText,
                                                                        null,
                                                                        null));
               result = false;

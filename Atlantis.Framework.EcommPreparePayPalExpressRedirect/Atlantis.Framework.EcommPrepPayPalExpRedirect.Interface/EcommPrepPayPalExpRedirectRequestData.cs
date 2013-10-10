@@ -18,6 +18,7 @@ namespace Atlantis.Framework.EcommPrepPayPalExpRedirect.Interface
     public string LogoImage { get; set; }
     public string LocaleCode { get; set; }
     public int ProfileID { get; set; }
+    public string MarketID { get; set; }
 
     public EcommPrepPayPalExpRedirectRequestData( string shopperId, string sourceUrl, string orderId, string pathway, int pageCount,
                                                   string returnUrl, string cancelUrl, string headerImage, string headerBorderColor, string headerBackColor,
@@ -52,6 +53,24 @@ namespace Atlantis.Framework.EcommPrepPayPalExpRedirect.Interface
       LogoImage = logoImage;
       LocaleCode = localeCode;
       ProfileID = profileID;
+    }
+
+    public EcommPrepPayPalExpRedirectRequestData(string shopperId, string sourceUrl, string orderId, string pathway, int pageCount,
+                                                  string returnUrl, string cancelUrl, string headerImage, string headerBorderColor, string headerBackColor,
+                                                  string headerPayFlowColor, string cartBorderColor, string logoImage, int profileID,string marketID)
+      : base(shopperId, sourceUrl, orderId, pathway, pageCount)
+    {
+      RequestTimeout = TimeSpan.FromSeconds(20);
+      ReturnURL = returnUrl;
+      CancelURL = cancelUrl;
+      HeaderImage = headerImage;
+      HeaderBorderColor = headerBorderColor;
+      HeaderBackColor = headerBackColor;
+      HeaderPayFlowColor = headerPayFlowColor;
+      CartBorderColor = cartBorderColor;
+      LogoImage = logoImage;
+      ProfileID = profileID;
+      MarketID=marketID;
     }
 
     public override string GetCacheMD5()
@@ -92,6 +111,9 @@ namespace Atlantis.Framework.EcommPrepPayPalExpRedirect.Interface
 
       if (!string.IsNullOrEmpty(LocaleCode))
         xtwRequest.WriteAttributeString("LocaleCode", LocaleCode);
+
+      if (!string.IsNullOrEmpty(MarketID))
+        xtwRequest.WriteAttributeString("MarketID", MarketID);
 
       xtwRequest.WriteEndElement();
       return sbRequest.ToString();

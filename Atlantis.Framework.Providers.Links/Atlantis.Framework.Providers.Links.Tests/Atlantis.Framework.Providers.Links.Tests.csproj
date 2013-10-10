@@ -79,23 +79,22 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Atlantis.Framework.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Interface.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.Links.Impl, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.Links.4.0.0.0\lib\net40\Atlantis.Framework.Links.Impl.dll</HintPath>
+    <Reference Include="Atlantis.Framework.Links.Impl">
+      <HintPath>..\packages\Atlantis.Framework.Links.4.13.10.1\lib\net40\Atlantis.Framework.Links.Impl.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Links.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.Links.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Links.Interface.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.Links.Interface.4.13.10.1\lib\net40\Atlantis.Framework.Links.Interface.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.Links.MockImpl, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.Links.MockImpl.4.0.0.0\lib\net40\Atlantis.Framework.Links.MockImpl.dll</HintPath>
+    <Reference Include="Atlantis.Framework.Links.MockImpl">
+      <HintPath>..\packages\Atlantis.Framework.Links.MockImpl.4.13.10.1\lib\net40\Atlantis.Framework.Links.MockImpl.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Localization.Impl">
       <HintPath>..\packages\Atlantis.Framework.Localization.4.0.0.0\lib\net40\Atlantis.Framework.Localization.Impl.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.Localization.Interface">
-      <HintPath>..\packages\Atlantis.Framework.Localization.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Localization.Interface.dll</HintPath>
+    <Reference Include="Atlantis.Framework.Localization.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Localization.Interface.4.13.10.9\lib\net40\Atlantis.Framework.Localization.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Localization.MockImpl">
       <HintPath>..\packages\Atlantis.Framework.Localization.MockImpl.4.0.0.0\lib\net40\Atlantis.Framework.Localization.MockImpl.dll</HintPath>
@@ -115,11 +114,13 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Atlantis.Framework.Providers.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Providers.Interface.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.Providers.Localization">
-      <HintPath>..\packages\Atlantis.Framework.Providers.Localization.4.0.0.0\lib\net40\Atlantis.Framework.Providers.Localization.dll</HintPath>
+    <Reference Include="Atlantis.Framework.Providers.Localization, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Providers.Localization.4.13.10.9\lib\net40\Atlantis.Framework.Providers.Localization.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.Providers.Localization.Interface">
-      <HintPath>..\packages\Atlantis.Framework.Providers.Localization.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Providers.Localization.Interface.dll</HintPath>
+    <Reference Include="Atlantis.Framework.Providers.Localization.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Providers.Localization.Interface.4.13.9.27\lib\net40\Atlantis.Framework.Providers.Localization.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Providers.Preferences.Interface">
       <HintPath>..\packages\Atlantis.Framework.Providers.Preferences.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Providers.Preferences.Interface.dll</HintPath>

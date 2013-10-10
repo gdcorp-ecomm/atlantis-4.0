@@ -14,6 +14,11 @@ namespace Atlantis.Framework.Providers.Links.Tests.Mocks
 
     #region ILocalizationProvider Members
 
+    public IEnumerable<IMarket> GetMarketsForCountryCode(string countryCode)
+    {
+      throw new NotImplementedException();
+    }
+
     public string FullLanguage
     {
       get { throw new NotImplementedException(); }

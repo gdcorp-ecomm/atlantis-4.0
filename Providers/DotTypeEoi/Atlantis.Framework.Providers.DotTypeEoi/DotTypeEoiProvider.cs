@@ -255,7 +255,7 @@ namespace Atlantis.Framework.Providers.DotTypeEoi
             }
           }
 
-          AddGtldButtonStatus(gtlds);
+          AddGtldButtonStatus(matchingGtlds);
 
           generalGtldData = new GeneralGtldData(response.DotTypeEoiResponse.DisplayTime, matchingGtlds, 0);
           success = true;

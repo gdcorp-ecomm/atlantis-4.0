@@ -11,13 +11,11 @@ namespace Atlantis.Framework.Providers.Sso
   public abstract class SsoProviderBase : ProviderBase, ISsoProvider
   {
     #region Properties
-    private string _loginUrl = string.Empty;
-    private string _logoutUrl = string.Empty;
-    private string _spkey = string.Empty;
 
     private Lazy<ILinkProvider> _links;
     private Lazy<ISiteContext> _siteContext;
     private Lazy<IShopperContext> _shopperContext;
+    private Lazy<SsoData> _ssoData;
 
     protected ILinkProvider Links
     {
@@ -84,7 +82,7 @@ namespace Atlantis.Framework.Providers.Sso
     {
       get
       {
-        return _spkey;
+        return _ssoData.Value.SpKey;
       }
     }
 
@@ -96,7 +94,7 @@ namespace Atlantis.Framework.Providers.Sso
       _links = new Lazy<ILinkProvider>(() => container.Resolve<ILinkProvider>());
       _siteContext = new Lazy<ISiteContext>(() => container.Resolve<ISiteContext>());
       _shopperContext = new Lazy<IShopperContext>(() => container.Resolve<IShopperContext>());
-      InitializeSsoData();
+      _ssoData = new Lazy<SsoData>(() => InitializeSsoData());
     }
 
     public abstract bool ParseArtifact(string artifact, out string shopperId);
@@ -115,10 +113,10 @@ namespace Atlantis.Framework.Providers.Sso
       switch (ssoUrlType)
       {
         case SsoUrlType.Login:
-          urlToReturn = LocalizeUrl.GetLocalizedUrl(_loginUrl, additionalParams);
+          urlToReturn = LocalizeUrl.GetLocalizedUrl(_ssoData.Value.LoginUrl, additionalParams);
           break;
         case SsoUrlType.Logout:
-          urlToReturn = LocalizeUrl.GetLocalizedUrl(_logoutUrl, additionalParams);
+          urlToReturn = LocalizeUrl.GetLocalizedUrl(_ssoData.Value.LogoutUrl, additionalParams);
           break;
         case SsoUrlType.KeepAlive:
           additionalParams.Remove("spkey");
@@ -160,20 +158,22 @@ namespace Atlantis.Framework.Providers.Sso
 
     }
 
-    private void InitializeSsoData()
+    private SsoData InitializeSsoData()
     {
       string xmlFormatString = "<ssoGetIdentityProviderByServer><param name=\"serviceProviderGroupName\" value=\"{0}\"/><param name=\"serverName\" value=\"{1}\"/></ssoGetIdentityProviderByServer>";
       string requestXml = string.Format(xmlFormatString, ServiceProviderGroupName, ServerOrClusterName);
       string returnXmlData = string.Empty;
+
+      SsoData ssoData = new SsoData();
 
       try
       {
         returnXmlData = DataCache.DataCache.GetCacheData(requestXml);
         var response = XElement.Parse(returnXmlData);
         var item = response.Element("item");
-        _spkey = item.Attribute("spkey").Value;
-        _loginUrl = item.Attribute("loginURL").Value;
-        _logoutUrl = item.Attribute("logoutURL").Value;
+        ssoData.SpKey = item.Attribute("spkey").Value;
+        ssoData.LoginUrl = item.Attribute("loginURL").Value;
+        ssoData.LogoutUrl = item.Attribute("logoutURL").Value;
       }
       catch (Exception ex)
       {
@@ -181,6 +181,8 @@ namespace Atlantis.Framework.Providers.Sso
         AtlantisException aex = new AtlantisException("ClusterSsoProvider::InitializeSsoData", 0, errorMessage, ex.StackTrace);
         Engine.Engine.LogAtlantisException(aex);
       }
+
+      return ssoData;
     }
   }
 }

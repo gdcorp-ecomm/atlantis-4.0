@@ -49,6 +49,7 @@
     <Compile Include="ContextIds.cs" />
     <Compile Include="LocalizeUrl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SsoData.cs" />
     <Compile Include="SsoProviderBase.cs" />
     <Compile Include="SsoProviderEngineRequests.cs" />
   </ItemGroup>

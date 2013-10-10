@@ -2,6 +2,7 @@
 using Atlantis.Framework.Conditions.Interface;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.CDSContent.Interface;
+using Atlantis.Framework.Providers.Containers.DataToken;
 using Atlantis.Framework.Render.ExpressionParser;
 using Atlantis.Framework.Render.Pipeline.Interface;
 using Atlantis.Framework.Tokens.Interface;
@@ -64,7 +65,7 @@ namespace Atlantis.Framework.Providers.CDSContent
             if (!string.IsNullOrEmpty(rawRedirectData.Location))
             {
               string resultText;
-              TokenManager.ReplaceTokens(rawRedirectData.Location, Container, out resultText);
+              TokenManager.ReplaceTokens(ProviderContainerDataTokenManager.ReplaceDataTokens(rawRedirectData.Location, Container), Container, out resultText);
 
               redirectResult = new RedirectResult(true, new RedirectData(rawRedirectData.Type, resultText));
             }
@@ -108,7 +109,8 @@ namespace Atlantis.Framework.Providers.CDSContent
         foreach (IRoutingRule rule in rules)
         {
           bool result;
-          if (!string.IsNullOrEmpty(rule.Condition))
+          string resultText = ProviderContainerDataTokenManager.ReplaceDataTokens(rule.Condition, Container);
+          if (!string.IsNullOrEmpty(resultText))
           {
             try
             {

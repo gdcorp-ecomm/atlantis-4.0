@@ -17,6 +17,7 @@ namespace Atlantis.Framework.Providers.Localization
     private readonly Lazy<CountrySitesActiveResponseData> _countrySitesActive;
     private readonly Lazy<MarketsActiveResponseData> _marketsActive; 
     protected Lazy<CountrySiteCookie> CountrySiteCookie;
+    private Lazy<ISiteContext> _siteContext;
     private readonly Lazy<string> _proxyLanguage;
     private string _rewrittenUrlLanguage;
     private IMarket _market;
@@ -35,6 +36,7 @@ namespace Atlantis.Framework.Providers.Localization
       CountrySiteCookie = new Lazy<CountrySiteCookie>(() => new CountrySiteCookie(Container));
       _proxyLanguage = new Lazy<string>(GetProxyLanguage);
       _countrySiteMarketMappings = new Dictionary<string, CountrySiteMarketMappingsResponseData>();
+      _siteContext = new Lazy<ISiteContext>(() => Container.Resolve<ISiteContext>());
     }
 
     protected abstract string DetermineCountrySite();
@@ -108,7 +110,8 @@ namespace Atlantis.Framework.Providers.Localization
       var marketMappings = GetOrLoadMarketMappingsForCountrySite(countrySiteId);
       if ( marketMappings != null ) // if we found one, then the countrysiteid must be 'ok'
       {
-        if (marketMappings.IsPublicMapping(marketId)) // if mapping exists, we are done
+        bool isMapping = marketMappings.IsMapping(marketId, _siteContext.Value.IsRequestInternal);
+        if (isMapping) // if mapping exists, we are done
         {
           market = TryGetMarket(marketId);
         }
@@ -120,6 +123,8 @@ namespace Atlantis.Framework.Providers.Localization
         countrySiteId = CountrySite;
       }
 
+      // we have a valid countrySiteId now, and if the market wasn't computable from marketid, then
+      // we revert to the default market id
       if (market == null)
       {
         var countrySite = TryGetCountrySite(countrySiteId);
@@ -127,7 +132,9 @@ namespace Atlantis.Framework.Providers.Localization
         // if we are here, we must have a valid countrySiteId, so no need to validate
         marketId = countrySite.DefaultMarketId;
         _marketsActive.Value.TryGetMarketById(marketId, out market);
+        // no need to check for IsInternal/public because we are using the default... which needs to always be not internal
       }
+
       return market;
     }
 
@@ -137,7 +144,8 @@ namespace Atlantis.Framework.Providers.Localization
       var marketMappings = GetOrLoadMarketMappingsForCountrySite(countrySiteId);
       if ( marketMappings != null )
       {
-        if (marketMappings.IsPublicMapping(marketId))
+        bool isMapping = marketMappings.IsMapping(marketId, _siteContext.Value.IsRequestInternal);
+        if (isMapping)
         {
           market = TryGetMarket(marketId);
         }

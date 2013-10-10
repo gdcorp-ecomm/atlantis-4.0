@@ -1,5 +1,4 @@
 ﻿using System.Globalization;
-using System.Net;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.Geo.Interface;
 using Atlantis.Framework.Providers.Localization.Interface;

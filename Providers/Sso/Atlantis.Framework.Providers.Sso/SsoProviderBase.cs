@@ -15,9 +15,24 @@ namespace Atlantis.Framework.Providers.Sso
     private string _logoutUrl = string.Empty;
     private string _spkey = string.Empty;
 
-    protected Lazy<ILinkProvider> _links;
-    protected Lazy<ISiteContext> _siteContext;
-    protected Lazy<IShopperContext> _shopperContext;
+    private Lazy<ILinkProvider> _links;
+    private Lazy<ISiteContext> _siteContext;
+    private Lazy<IShopperContext> _shopperContext;
+
+    protected ILinkProvider Links
+    {
+      get { return _links.Value; }
+    }
+
+    protected ISiteContext SiteContext
+    {
+      get { return _siteContext.Value; }
+    }
+
+    protected IShopperContext ShopperContext
+    {
+      get { return _shopperContext.Value;  }
+    }
 
     LocalizeUrl _localizeUrl;
     private LocalizeUrl LocalizeUrl
@@ -107,7 +122,7 @@ namespace Atlantis.Framework.Providers.Sso
           break;
         case SsoUrlType.KeepAlive:
           additionalParams.Remove("spkey");
-          urlToReturn = _links.Value.GetUrl("SSOURL", "keepalive.aspx", QueryParamMode.CommonParameters, true, additionalParams);
+          urlToReturn = Links.GetUrl("SSOURL", "keepalive.aspx", QueryParamMode.CommonParameters, true, additionalParams);
           break;
       }
 

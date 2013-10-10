@@ -11,6 +11,7 @@ namespace Atlantis.Framework.Providers.Sso
       : base(container)
     { }
 
+
     public override bool ParseArtifact(string artifact, out string shopperId, out int failureCount)
     {
       bool result = false;
@@ -23,7 +24,7 @@ namespace Atlantis.Framework.Providers.Sso
       {
         string url = HttpRequestExists ? HttpContext.Current.Request.Url.ToString() : string.Empty;
 
-        AuthRetrieveRequestData authReq = new AuthRetrieveRequestData(_shopperContext.Value.ShopperId, string.Empty, string.Empty, string.Empty, 0, SpKey, artifact);
+        AuthRetrieveRequestData authReq = new AuthRetrieveRequestData(ShopperContext.ShopperId, string.Empty, string.Empty, string.Empty, 0, SpKey, artifact);
         response = (AuthRetrieveResponseData)Engine.Engine.ProcessRequest(authReq, SsoProviderEngineRequests.AuthRequestRetrieve);
 
         if (response.IsSuccess)
@@ -43,7 +44,7 @@ namespace Atlantis.Framework.Providers.Sso
           responseXml = response.ToXML();
         }
 
-        AtlantisException atlEx = new AtlantisException(ex.Message, string.Format("Artifact:'{0}', ResponseXml: '{1}'", artifact, responseXml), "ClusterSsoProvider::ParseArtifact", string.Empty, _siteContext.Value, null);
+        AtlantisException atlEx = new AtlantisException(ex.Message, string.Format("Artifact:'{0}', ResponseXml: '{1}'", artifact, responseXml), "ClusterSsoProvider::ParseArtifact", string.Empty, SiteContext, null);
         Engine.Engine.LogAtlantisException(atlEx);
       }
 

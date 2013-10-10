@@ -39,7 +39,7 @@ namespace Atlantis.Framework.DotTypeCache.Monitor
 
           el = new XElement("MonitorUrl");
           el.Add(new XAttribute("type", "productids"));
-          el.Add(new XAttribute("sampleurl", baseUrl + "_dottypecache/monitor/productids?tld=borg"));
+          el.Add(new XAttribute("sampleurl", baseUrl + "_dottypecache/monitor/productids?tld=o2.borg&phase=regreg&plresellertypeid=1&prodtypeid=2"));
           root.Add(el);
 
           el = new XElement("MonitorUrl");

@@ -9,6 +9,7 @@ using Atlantis.Framework.DotTypeCache.Interface;
 using Atlantis.Framework.DotTypeCache.Static;
 using Atlantis.Framework.Providers.Interface.ProviderContainer;
 using Atlantis.Framework.RegDotTypeProductIds.Interface;
+using Atlantis.Framework.TLDDataCache.Interface;
 
 namespace Atlantis.Framework.DotTypeCache.Monitor
 {
@@ -17,6 +18,12 @@ namespace Atlantis.Framework.DotTypeCache.Monitor
     public ProductIDs()
     {
       HttpProviderContainer.Instance.RegisterProvider<IDotTypeProvider, DotTypeProvider>();
+    }
+
+    private ValidDotTypesResponseData LoadValidDotTypes()
+    {
+      var request = new ValidDotTypesRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0);
+      return (ValidDotTypesResponseData)DataCache.DataCache.GetProcessRequest(request, DotTypeEngineRequests.ValidDotTypes);
     }
 
     public XDocument GetMonitorData(NameValueCollection qsc)
@@ -30,7 +37,12 @@ namespace Atlantis.Framework.DotTypeCache.Monitor
       try
       {
         var items = qsc.AllKeys.SelectMany(qsc.GetValues, (k, v) => new { key = k, value = v });
+        int tldId = 0;
         string tldName = string.Empty;
+        string tldPhase = string.Empty;
+        int plResellerTypeId = 0;
+        int productTypeId = 0;
+
         foreach (var item in items)
         {
           if (!string.IsNullOrEmpty(item.key) && !string.IsNullOrEmpty(item.value))
@@ -39,6 +51,15 @@ namespace Atlantis.Framework.DotTypeCache.Monitor
             {
               case "tld":
                 tldName = item.value;
+                break;
+              case "phase":
+                tldPhase = item.value;
+                break;
+              case "plresellertypeid":
+                Int32.TryParse(item.value, out plResellerTypeId);
+                break;
+              case "prodtypeid":
+                Int32.TryParse(item.value, out productTypeId);
                 break;
             }
           }
@@ -51,11 +72,34 @@ namespace Atlantis.Framework.DotTypeCache.Monitor
           {
             var data = new XElement("Data");
             data.Add(new XAttribute("tld", tldName));
+
+            var validDotTypesResponse = LoadValidDotTypes();
+            validDotTypesResponse.TryGetTldId(tldName, out tldId);
+            data.Add(new XAttribute("tldId", tldId));
             data.Add(new XAttribute("dottypesource", dotTypeInfo.GetType().FullName));
 
             if (dotTypeInfo.GetType().Name != "InvalidDotType")
             {
-              if (dotTypeInfo.GetType().Name == "TLDMLDotTypeInfo" || dotTypeInfo.GetType().Name == "MultiRegDotTypeInfo")
+              if (dotTypeInfo.GetType().Name == "TLDMLDotTypeInfo")
+              {
+
+                if (tldId <= 0 || plResellerTypeId <= 0 && productTypeId <= 0)
+                {
+                  throw new ArgumentException("TldId, PrivateLabelResellerTypeId and productTypeId must be greater than zero.");
+                }
+
+                if (string.IsNullOrEmpty(tldPhase))
+                {
+                  throw new ArgumentException("TLDPhase cannot be empty.");
+                }
+
+                var request = new TLDProductDomainAttributesRequestData(tldId, tldPhase, plResellerTypeId, productTypeId);
+                var response = (TLDProductDomainAttributesResponseData)
+                  DataCache.DataCache.GetProcessRequest(request, DotTypeEngineRequests.ProductDomainAttributes);
+
+                data.Add(XElement.Parse(response.ToXML()));
+              }
+              else if (dotTypeInfo.GetType().Name == "MultiRegDotTypeInfo")
               {
                 var request = new ProductIdListRequestData(string.Empty, string.Empty, string.Empty,
                                                             string.Empty, 0, tldName);

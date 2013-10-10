@@ -124,10 +124,19 @@ namespace Atlantis.Framework.Localization.Interface
 	
     public bool IsPublicMapping(string marketId)
     {
+      return IsMapping(marketId, false);
+    }
+
+    public bool IsMapping(string marketId)
+    {
+      return IsMapping(marketId, true);
+    }
+
+    public bool IsMapping(string marketId, bool bIncludeInternal)
+    {
       CountrySiteMarketMapping csmm;
       _rawTable.TryGetValue(marketId, out csmm);
-      return csmm != null && !csmm.IsInternalOnly;
-
+      return csmm != null && (!csmm.IsInternalOnly || bIncludeInternal);
     }
 
     public IEnumerable<string> GetMarketIdsForCountry()

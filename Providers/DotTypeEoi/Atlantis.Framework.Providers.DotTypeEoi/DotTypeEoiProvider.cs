@@ -430,7 +430,7 @@ namespace Atlantis.Framework.Providers.DotTypeEoi
         foreach (var gtld in gtlds)
         {
           var dotTypeInfo = DotTypeProvider.GetDotTypeInfo(gtld.Name);
-          if (!dotTypeInfo.IsLivePhase(LaunchPhases.GeneralAvailability))
+          if (dotTypeInfo.IsLivePhase(LaunchPhases.GeneralAvailability))
           {
             gtld.ActionButtonType = ActionButtonTypes.Register;
           }

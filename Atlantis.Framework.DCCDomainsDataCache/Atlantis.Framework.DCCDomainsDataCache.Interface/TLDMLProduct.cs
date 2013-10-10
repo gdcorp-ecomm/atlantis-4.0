@@ -79,7 +79,7 @@ namespace Atlantis.Framework.DCCDomainsDataCache.Interface
 
     private void LoadPhasesApplicationFees(XElement phase, XAttribute valueAtt)
     {
-      var applicationElement = phase.Descendants("applicationFee").FirstOrDefault();
+      var applicationElement = phase.Descendants("applicationfee").FirstOrDefault();
       if (applicationElement != null)
       {
         var applicationElementEnabled = applicationElement.Attribute("enabled").Value;

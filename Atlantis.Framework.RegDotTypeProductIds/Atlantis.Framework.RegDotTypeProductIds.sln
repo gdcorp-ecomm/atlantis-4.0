@@ -3,12 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{506A4E18-C3B0-495A-B377-B24B3D18373F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine", "..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj", "{D30157B2-C1B3-4073-BA5E-632E2337A997}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.DataCache", "..\Atlantis.Framework.DataCache\Atlantis.Framework.DataCache\Atlantis.Framework.DataCache.csproj", "{7F2738F8-683C-49E7-88CD-E986C70F0321}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.RegDotTypeProductIds.Interface", "Atlantis.Framework.RegDotTypeProductIds.Interface\Atlantis.Framework.RegDotTypeProductIds.Interface.csproj", "{AE02C23A-DED2-492E-BF1B-BE5D6E7A805A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.RegDotTypeProductIds.Impl", "Atlantis.Framework.RegDotTypeProductIds.Impl\Atlantis.Framework.RegDotTypeProductIds.Impl.csproj", "{BC7C7C55-B5EE-4067-92FC-CC6700D82DBE}"
@@ -17,49 +11,25 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.RegDotTy
 EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 7
+		SccNumberOfProjects = 4
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
-		SccProjectUniqueName0 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
-		SccProjectTopLevelParentUniqueName0 = Atlantis.Framework.RegDotTypeProductIds.sln
-		SccProjectName0 = ../Atlantis.Framework.Engine/Atlantis.Framework.Interface
-		SccLocalPath0 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
-		SccProjectUniqueName1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
-		SccProjectTopLevelParentUniqueName1 = Atlantis.Framework.RegDotTypeProductIds.sln
-		SccProjectName1 = ../Atlantis.Framework.Engine/Atlantis.Framework.Engine
-		SccLocalPath1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
-		SccProjectUniqueName2 = ..\\Atlantis.Framework.DataCache\\Atlantis.Framework.DataCache\\Atlantis.Framework.DataCache.csproj
-		SccProjectTopLevelParentUniqueName2 = Atlantis.Framework.RegDotTypeProductIds.sln
-		SccProjectName2 = ../Atlantis.Framework.DataCache/Atlantis.Framework.DataCache
-		SccLocalPath2 = ..\\Atlantis.Framework.DataCache\\Atlantis.Framework.DataCache
-		SccLocalPath3 = .
-		SccProjectUniqueName4 = Atlantis.Framework.RegDotTypeProductIds.Impl\\Atlantis.Framework.RegDotTypeProductIds.Impl.csproj
-		SccProjectName4 = Atlantis.Framework.RegDotTypeProductIds.Impl
-		SccLocalPath4 = Atlantis.Framework.RegDotTypeProductIds.Impl
-		SccProjectUniqueName5 = Atlantis.Framework.RegDotTypeProductIds.Interface\\Atlantis.Framework.RegDotTypeProductIds.Interface.csproj
-		SccProjectName5 = Atlantis.Framework.RegDotTypeProductIds.Interface
-		SccLocalPath5 = Atlantis.Framework.RegDotTypeProductIds.Interface
-		SccProjectUniqueName6 = Atlantis.Framework.RegDotTypeProductIds.Tests\\Atlantis.Framework.RegDotTypeProductIds.Tests.csproj
-		SccProjectName6 = Atlantis.Framework.RegDotTypeProductIds.Tests
-		SccLocalPath6 = Atlantis.Framework.RegDotTypeProductIds.Tests
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Atlantis.Framework.RegDotTypeProductIds.Impl\\Atlantis.Framework.RegDotTypeProductIds.Impl.csproj
+		SccProjectName1 = Atlantis.Framework.RegDotTypeProductIds.Impl
+		SccLocalPath1 = Atlantis.Framework.RegDotTypeProductIds.Impl
+		SccProjectUniqueName2 = Atlantis.Framework.RegDotTypeProductIds.Interface\\Atlantis.Framework.RegDotTypeProductIds.Interface.csproj
+		SccProjectName2 = Atlantis.Framework.RegDotTypeProductIds.Interface
+		SccLocalPath2 = Atlantis.Framework.RegDotTypeProductIds.Interface
+		SccProjectUniqueName3 = Atlantis.Framework.RegDotTypeProductIds.Tests\\Atlantis.Framework.RegDotTypeProductIds.Tests.csproj
+		SccProjectName3 = Atlantis.Framework.RegDotTypeProductIds.Tests
+		SccLocalPath3 = Atlantis.Framework.RegDotTypeProductIds.Tests
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7F2738F8-683C-49E7-88CD-E986C70F0321}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7F2738F8-683C-49E7-88CD-E986C70F0321}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7F2738F8-683C-49E7-88CD-E986C70F0321}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7F2738F8-683C-49E7-88CD-E986C70F0321}.Release|Any CPU.Build.0 = Release|Any CPU
 		{AE02C23A-DED2-492E-BF1B-BE5D6E7A805A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{AE02C23A-DED2-492E-BF1B-BE5D6E7A805A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AE02C23A-DED2-492E-BF1B-BE5D6E7A805A}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -75,10 +45,5 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {506A4E18-C3B0-495A-B377-B24B3D18373F}
-		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {506A4E18-C3B0-495A-B377-B24B3D18373F}
-		{7F2738F8-683C-49E7-88CD-E986C70F0321} = {506A4E18-C3B0-495A-B377-B24B3D18373F}
 	EndGlobalSection
 EndGlobal

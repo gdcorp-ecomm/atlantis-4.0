@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Atlantis.Framework.Basket.Interface</id>
+    <version>4.13.10.9</version>
+    <title>Atlantis Framework Basket Interface</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <projectUrl>https://confluence.int.godaddy.com/display/ATLANTIS</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes></releaseNotes>
+    <copyright>$copyright$</copyright>
+    <tags>Atlantis Framework Basket Interface</tags>
+  </metadata>
+</package>

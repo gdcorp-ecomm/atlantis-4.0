@@ -1,0 +1,47 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Basket.Tests", "Atlantis.Framework.Basket.Tests\Atlantis.Framework.Basket.Tests.csproj", "{448745F8-C26D-4A3D-BB18-2AA1C3E725C4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Basket.Interface", "Atlantis.Framework.Basket.Interface\Atlantis.Framework.Basket.Interface.csproj", "{7CC1509D-53F2-45F8-812C-F1C7BB808623}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Basket.Impl", "Atlantis.Framework.Basket.Impl\Atlantis.Framework.Basket.Impl.csproj", "{0B17606E-DA9C-4E39-BD1F-C77A20857961}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 4
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Atlantis.Framework.Basket.Impl\\Atlantis.Framework.Basket.Impl.csproj
+		SccProjectName1 = Atlantis.Framework.Basket.Impl
+		SccLocalPath1 = Atlantis.Framework.Basket.Impl
+		SccProjectUniqueName2 = Atlantis.Framework.Basket.Interface\\Atlantis.Framework.Basket.Interface.csproj
+		SccProjectName2 = Atlantis.Framework.Basket.Interface
+		SccLocalPath2 = Atlantis.Framework.Basket.Interface
+		SccProjectUniqueName3 = Atlantis.Framework.Basket.Tests\\Atlantis.Framework.Basket.Tests.csproj
+		SccProjectName3 = Atlantis.Framework.Basket.Tests
+		SccLocalPath3 = Atlantis.Framework.Basket.Tests
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{448745F8-C26D-4A3D-BB18-2AA1C3E725C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{448745F8-C26D-4A3D-BB18-2AA1C3E725C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{448745F8-C26D-4A3D-BB18-2AA1C3E725C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{448745F8-C26D-4A3D-BB18-2AA1C3E725C4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7CC1509D-53F2-45F8-812C-F1C7BB808623}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7CC1509D-53F2-45F8-812C-F1C7BB808623}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7CC1509D-53F2-45F8-812C-F1C7BB808623}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7CC1509D-53F2-45F8-812C-F1C7BB808623}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B17606E-DA9C-4E39-BD1F-C77A20857961}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B17606E-DA9C-4E39-BD1F-C77A20857961}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B17606E-DA9C-4E39-BD1F-C77A20857961}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B17606E-DA9C-4E39-BD1F-C77A20857961}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

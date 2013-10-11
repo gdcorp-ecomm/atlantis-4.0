@@ -1,0 +1,3 @@
+﻿<ConfigElements>
+  <ConfigElement progid="Atlantis.Framework.Basket.Impl.BasketAddRequest" assembly="Atlantis.Framework.Basket.Impl.dll" request_type="746" ws_url="http://gdcomm.dev.glbt1.gdg/WscgdBasket/WscgdBasket.dll?Handler=Default" />
+</ConfigElements>

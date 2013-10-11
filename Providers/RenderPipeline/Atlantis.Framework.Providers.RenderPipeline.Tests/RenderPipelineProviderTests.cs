@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Web;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.RenderPipeline.Interface;
 using Atlantis.Framework.Providers.RenderPipeline.Tests.Helpers;
-using Atlantis.Framework.Render.Pipeline.Interface;
 using Atlantis.Framework.Testing.MockEngine;
 using Atlantis.Framework.Testing.MockHttpContext;
 using Atlantis.Framework.Testing.MockProviders;
@@ -58,33 +56,9 @@ namespace Atlantis.Framework.Providers.RenderPipeline.Tests
 
       var renderPipelineProvider = new RenderPipelineProvider(providerContainer);
 
-      renderPipelineProvider.RenderContent(content, renderHandlers, providerContainer);
+      renderPipelineProvider.RenderContent(content, renderHandlers);
 
       Assert.IsTrue(renderHandlerTimesCalled == 1, "Render Handler was not called correctly");
-    }
-
-    [TestMethod]
-    public void RenderContentNullProvider()
-    {
-      string content = @"<div>[@L[app:phrase]@L]</div>";
-
-      bool renderHandlerCalled = false;
-      List<IRenderHandler> renderHandlers = new List<IRenderHandler>();
-
-      var renderHandler = new Mock<IRenderHandler>();
-      renderHandler.Setup(rh => rh.ProcessContent(It.IsAny<IProcessedRenderContent>(), It.IsAny<IProviderContainer>()))
-                   .Callback(() => renderHandlerCalled = true);
-
-      renderHandlers.Add(renderHandler.Object);
-
-      IProviderContainer providerContainer = InitializeProviderContainer();
-
-      var renderPipelineProvider = new RenderPipelineProvider(providerContainer);
-
-      string finalContent = renderPipelineProvider.RenderContent(content, renderHandlers, null);
-
-      Assert.IsFalse(renderHandlerCalled, "Render Pipeline should not be called");
-      Assert.IsTrue(content.Equals(finalContent), "Should return the passed in content.");
     }
 
     [TestMethod]
@@ -99,7 +73,7 @@ namespace Atlantis.Framework.Providers.RenderPipeline.Tests
      
       var renderPipelineProvider = new RenderPipelineProvider(providerContainer);
 
-      string finalContent = renderPipelineProvider.RenderContent(content, null, providerContainer);
+      string finalContent = renderPipelineProvider.RenderContent(content, null);
 
       Assert.IsFalse(renderPipelineCalled, "Render Pipeline should not be called");
       Assert.IsTrue(content.Equals(finalContent), "Should return the passed in content.");
@@ -114,7 +88,7 @@ namespace Atlantis.Framework.Providers.RenderPipeline.Tests
 
       var renderPipelineProvider = new RenderPipelineProvider(providerContainer);
 
-      string finalContent = renderPipelineProvider.RenderContent(content, null, null);
+      string finalContent = renderPipelineProvider.RenderContent(content, null);
 
       Assert.IsTrue(finalContent == null, "Content should be null");
     }
@@ -134,7 +108,7 @@ namespace Atlantis.Framework.Providers.RenderPipeline.Tests
 
       IProviderContainer providerContainer = InitializeProviderContainer();
       var renderPipelineProvider = new RenderPipelineProvider(providerContainer);
-      var finalContent = renderPipelineProvider.RenderContent(content, renderHandlers, providerContainer);
+      var finalContent = renderPipelineProvider.RenderContent(content, renderHandlers);
 
       Assert.IsTrue(finalContent.Equals(content), "Method should return passed in content on exception");
       Assert.AreEqual(1, _testLogger.Exceptions.Count,"Should Log Atlantis Exception");
@@ -159,7 +133,7 @@ namespace Atlantis.Framework.Providers.RenderPipeline.Tests
       
       var renderPipelineProvider = new RenderPipelineProvider(providerContainer);
 
-      renderPipelineProvider.RenderContent(content, renderHandlers, providerContainer);
+      renderPipelineProvider.RenderContent(content, renderHandlers);
 
       Assert.IsTrue(renderHandlerTimesCalled == renderHandlers.Count, "Not All Render Handlers passed.");
     }
@@ -178,7 +152,7 @@ namespace Atlantis.Framework.Providers.RenderPipeline.Tests
 
       var renderPipelineProvider = new RenderPipelineProvider(providerContainer);
 
-      var finalContent = renderPipelineProvider.RenderContent(content, renderHandlers, providerContainer);
+      var finalContent = renderPipelineProvider.RenderContent(content, renderHandlers);
 
       Assert.IsTrue(finalContent.Equals("test"),"Content Was not Rendered Correctly");
     }

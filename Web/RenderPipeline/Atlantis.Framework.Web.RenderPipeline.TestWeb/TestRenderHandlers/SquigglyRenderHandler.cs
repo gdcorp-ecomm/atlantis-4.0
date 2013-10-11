@@ -1,4 +1,5 @@
-﻿using Atlantis.Framework.Render.Pipeline.Interface;
+﻿
+using Atlantis.Framework.Providers.RenderPipeline.Interface;
 
 namespace Atlantis.Framework.Web.RenderPipeline.TestWeb.TestRenderHandlers
 {

@@ -1,5 +1,5 @@
 ﻿using Atlantis.Framework.Interface;
-using Atlantis.Framework.Render.Pipeline.Interface;
+using Atlantis.Framework.Providers.RenderPipeline.Interface;
 using System.Text.RegularExpressions;
 
 namespace Atlantis.Framework.Web.RenderPipeline

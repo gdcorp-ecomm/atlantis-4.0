@@ -1,9 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using Atlantis.Framework.Interface;
-using Atlantis.Framework.Render.Pipeline.Interface;
+using Atlantis.Framework.Providers.RenderPipeline;
+using Atlantis.Framework.Providers.RenderPipeline.Interface;
 using Atlantis.Framework.Testing.MockProviders;
 using Atlantis.Framework.Web.RenderPipeline;
-using Atlantis.Framework.Web.RenderPipiline.Tests.RenderContent;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Atlantis.Framework.Web.RenderPipiline.Tests
@@ -22,6 +23,8 @@ namespace Atlantis.Framework.Web.RenderPipiline.Tests
           _providerContainer.RegisterProvider<ISiteContext, MockSiteContext>();
           _providerContainer.RegisterProvider<IShopperContext, MockShopperContext>();
           _providerContainer.RegisterProvider<IManagerContext, MockManagerContext>();
+
+          _providerContainer.RegisterProvider<IRenderPipelineProvider, RenderPipelineProvider>();
         }
 
         return _providerContainer;
@@ -49,17 +52,15 @@ namespace Atlantis.Framework.Web.RenderPipiline.Tests
     <hr/>
   </body>";
 
-      var handler = new JavaScriptWebStashRenderHandler();
-      IProcessedRenderContent processedRenderContent = new SimpleProcessedRenderContent(content);
-      handler.ProcessContent(processedRenderContent, ProviderContainer);
+      IRenderPipelineProvider renderPipelineProvider = ProviderContainer.Resolve<IRenderPipelineProvider>();
+      string renderedContent = renderPipelineProvider.RenderContent(content, new List<IRenderHandler> {new JavaScriptWebStashRenderHandler()});
 
-      var scriptContent = processedRenderContent.Content.Substring(processedRenderContent.Content.IndexOf("<hr/>", StringComparison.OrdinalIgnoreCase) + 5).TrimStart('\r', '\n').Trim();
-      var scriptArray = scriptContent.Split(new string[] { "<script" }, StringSplitOptions.None);
+      var scriptContent = renderedContent.Substring(renderedContent.IndexOf("<hr/>", StringComparison.OrdinalIgnoreCase) + 5).TrimStart('\r', '\n').Trim();
+      var scriptArray = scriptContent.Split(new[] { "<script" }, StringSplitOptions.None);
 
-      Assert.IsTrue(!processedRenderContent.Content.Contains("<atlantis:javascriptwebstash>") &&
-                    !processedRenderContent.Content.Contains("</atlantis:javascriptwebstash>") &&
-                    scriptArray.Length == 3
-                   );
+      Assert.IsTrue(!renderedContent.Contains("<atlantis:javascriptwebstash>") &&
+                    !renderedContent.Contains("</atlantis:javascriptwebstash>") &&
+                    scriptArray.Length == 3);
     }
 
     [TestMethod]
@@ -77,16 +78,14 @@ namespace Atlantis.Framework.Web.RenderPipiline.Tests
     <hr/>
   </body>";
 
-      var handler = new JavaScriptWebStashRenderHandler();
-      IProcessedRenderContent processedRenderContent = new SimpleProcessedRenderContent(content);
-      handler.ProcessContent(processedRenderContent, ProviderContainer);
+      IRenderPipelineProvider renderPipelineProvider = ProviderContainer.Resolve<IRenderPipelineProvider>();
+      string renderedContent = renderPipelineProvider.RenderContent(content, new List<IRenderHandler> { new JavaScriptWebStashRenderHandler() });
 
-      var scriptContent = processedRenderContent.Content.Substring(processedRenderContent.Content.IndexOf("<hr/>", StringComparison.OrdinalIgnoreCase) + 5).TrimStart('\r', '\n').Trim();
+      var scriptContent = renderedContent.Substring(renderedContent.IndexOf("<hr/>", StringComparison.OrdinalIgnoreCase) + 5).TrimStart('\r', '\n').Trim();
 
-      Assert.IsTrue(!processedRenderContent.Content.Contains("<atlantis:javascriptwebstash>") &&
-                    !processedRenderContent.Content.Contains("</atlantis:javascriptwebstash>") &&
-                    scriptContent == "</body>"
-                   );
+      Assert.IsTrue(!renderedContent.Contains("<atlantis:javascriptwebstash>") &&
+                    !renderedContent.Contains("</atlantis:javascriptwebstash>") &&
+                    scriptContent == "</body>");
     }
 
     [TestMethod]
@@ -106,14 +105,13 @@ def
     <hr/>
   </body>";
 
-      var handler = new JavaScriptWebStashRenderHandler();
-      IProcessedRenderContent processedRenderContent = new SimpleProcessedRenderContent(content);
-      handler.ProcessContent(processedRenderContent, ProviderContainer);
+      IRenderPipelineProvider renderPipelineProvider = ProviderContainer.Resolve<IRenderPipelineProvider>();
+      string renderedContent = renderPipelineProvider.RenderContent(content, new List<IRenderHandler> { new JavaScriptWebStashRenderHandler() });
 
-      var scriptContent = processedRenderContent.Content.Substring(processedRenderContent.Content.IndexOf("<hr/>", StringComparison.OrdinalIgnoreCase) + 5).TrimStart('\r', '\n').Trim();
+      var scriptContent = renderedContent.Substring(renderedContent.IndexOf("<hr/>", StringComparison.OrdinalIgnoreCase) + 5).TrimStart('\r', '\n').Trim();
 
-      Assert.IsTrue(!processedRenderContent.Content.Contains("<atlantis:javascriptwebstash>") &&
-                    !processedRenderContent.Content.Contains("</atlantis:javascriptwebstash>") &&
+      Assert.IsTrue(!renderedContent.Contains("<atlantis:javascriptwebstash>") &&
+                    !renderedContent.Contains("</atlantis:javascriptwebstash>") &&
                     scriptContent.Contains("abc") && scriptContent.Contains("def") && scriptContent.Contains("</body>")
                    );
     }
@@ -135,11 +133,10 @@ def
     <hr/>
   </body>";
 
-      var handler = new JavaScriptWebStashRenderHandler();
-      IProcessedRenderContent processedRenderContent = new SimpleProcessedRenderContent(content);
-      handler.ProcessContent(processedRenderContent, ProviderContainer);
+      IRenderPipelineProvider renderPipelineProvider = ProviderContainer.Resolve<IRenderPipelineProvider>();
+      string renderedContent = renderPipelineProvider.RenderContent(content, new List<IRenderHandler> { new JavaScriptWebStashRenderHandler() });
 
-      Assert.IsTrue(processedRenderContent.Content.Equals(content));
+      Assert.IsTrue(renderedContent.Equals(content));
     }
 
     [TestMethod]
@@ -155,11 +152,10 @@ def
     <hr/>
   </body>";
 
-      var handler = new JavaScriptWebStashRenderHandler();
-      IProcessedRenderContent processedRenderContent = new SimpleProcessedRenderContent(content);
-      handler.ProcessContent(processedRenderContent, ProviderContainer);
+      IRenderPipelineProvider renderPipelineProvider = ProviderContainer.Resolve<IRenderPipelineProvider>();
+      string renderedContent = renderPipelineProvider.RenderContent(content, new List<IRenderHandler> { new JavaScriptWebStashRenderHandler() });
 
-      Assert.IsTrue(processedRenderContent.Content.Equals(content));
+      Assert.IsTrue(renderedContent.Equals(content));
     }
 
     [TestMethod]
@@ -167,21 +163,19 @@ def
     {
       const string content = null;
 
-      var handler = new JavaScriptWebStashRenderHandler();
-      IProcessedRenderContent processedRenderContent = new SimpleProcessedRenderContent(content);
-      handler.ProcessContent(processedRenderContent, ProviderContainer);
+      IRenderPipelineProvider renderPipelineProvider = ProviderContainer.Resolve<IRenderPipelineProvider>();
+      string renderedContent = renderPipelineProvider.RenderContent(content, new List<IRenderHandler> { new JavaScriptWebStashRenderHandler() });
 
-      Assert.IsTrue(processedRenderContent.Content.Equals(string.Empty));
+      Assert.IsTrue(renderedContent == null);
     }
 
     [TestMethod]
     public void JavaScriptStashTestInValidEmpty()
     {
-      var handler = new JavaScriptWebStashRenderHandler();
-      IProcessedRenderContent processedRenderContent = new SimpleProcessedRenderContent(string.Empty);
-      handler.ProcessContent(processedRenderContent, ProviderContainer);
+      IRenderPipelineProvider renderPipelineProvider = ProviderContainer.Resolve<IRenderPipelineProvider>();
+      string renderedContent = renderPipelineProvider.RenderContent(string.Empty, new List<IRenderHandler> { new JavaScriptWebStashRenderHandler() });
 
-      Assert.IsTrue(processedRenderContent.Content.Equals(string.Empty));
+      Assert.IsTrue(renderedContent.Equals(string.Empty));
     }
   }
 }

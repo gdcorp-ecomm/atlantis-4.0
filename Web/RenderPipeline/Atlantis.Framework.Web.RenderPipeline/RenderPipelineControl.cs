@@ -1,6 +1,6 @@
-﻿using Atlantis.Framework.Providers.Containers;
-using Atlantis.Framework.Render.Pipeline;
-using Atlantis.Framework.Render.Pipeline.Interface;
+﻿using System.Collections.Generic;
+using Atlantis.Framework.Providers.Containers;
+using Atlantis.Framework.Providers.RenderPipeline.Interface;
 using System.IO;
 using System.Text;
 using System.Web.UI;
@@ -8,65 +8,50 @@ using System.Web.UI.WebControls;
 
 namespace Atlantis.Framework.Web.RenderPipeline
 {
-    [ToolboxData("<{0}:RenderPipeline1 runat=server></{0}:RenderPipeline1>")]
-    public class RenderPipelineControl : PlaceHolder
+  [ToolboxData("<{0}:RenderPipeline1 runat=server></{0}:RenderPipeline1>")]
+  public class RenderPipelineControl : PlaceHolder
+  {
+    private readonly List<IRenderHandler> _renderHandlers = new List<IRenderHandler>(32);
+
+    public void AddRenderHandlers(params IRenderHandler[] renderHandlers)
     {
-      private RenderPipelineManager _pipelineManager = null;
-
-      public void AddRenderHandlers(params IRenderHandler[] renderHandlers)
+      if ((renderHandlers == null) || (renderHandlers.Length == 0))
       {
-        if ((renderHandlers == null) || (renderHandlers.Length == 0))
-        {
-          return;
-        }
-
-        if (_pipelineManager == null)
-        {
-          _pipelineManager = new RenderPipelineManager();
-        }
-
-        _pipelineManager.AddRenderHandler(renderHandlers);
+        return;
       }
 
-      protected override void Render(HtmlTextWriter writer)
-      {
-        if (_pipelineManager == null)
-        {
-          base.Render(writer);
-        }
-        else
-        {
-          PipelineRender(writer);
-        }
+      _renderHandlers.AddRange(renderHandlers);
+    }
 
+    protected override void Render(HtmlTextWriter writer)
+    {
+      if (_renderHandlers.Count == 0)
+      {
+        base.Render(writer);
       }
-
-      private void PipelineRender(HtmlTextWriter writer)
+      else
       {
-        StringBuilder prePipelineText = new StringBuilder(1000);
-
-        using (var prePipelineStringWriter = new StringWriter(prePipelineText))
-        {
-          using (var prePipelineHtml = new HtmlTextWriter(prePipelineStringWriter))
-          {
-            base.Render(prePipelineHtml);
-          }
-        }
-
-        var content = new PipelineContent(prePipelineText.ToString());
-        IProcessedRenderContent processedContent = _pipelineManager.RenderContent(content, HttpProviderContainer.Instance);
-
-        writer.Write(processedContent.Content);
-      }
-
-      private class PipelineContent : IRenderContent
-      {
-        public PipelineContent(string content)
-        {
-          Content = content;
-        }
-
-        public string Content { get; private set; }
+        PipelineRender(writer);
       }
     }
+
+    private void PipelineRender(HtmlTextWriter writer)
+    {
+      StringBuilder prePipelineText = new StringBuilder(1000);
+
+      using (var prePipelineStringWriter = new StringWriter(prePipelineText))
+      {
+        using (var prePipelineHtml = new HtmlTextWriter(prePipelineStringWriter))
+        {
+          base.Render(prePipelineHtml);
+        }
+      }
+
+      IRenderPipelineProvider renderPipelineProvider = HttpProviderContainer.Instance.Resolve<IRenderPipelineProvider>();
+
+      string renderedContent = renderPipelineProvider.RenderContent(prePipelineText.ToString(), _renderHandlers);
+
+      writer.Write(renderedContent);
+    }
+  }
 }

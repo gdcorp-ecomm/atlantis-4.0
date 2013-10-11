@@ -62,20 +62,13 @@
     <Reference Include="Atlantis.Framework.Providers.Preferences.Interface">
       <HintPath>..\packages\Atlantis.Framework.Providers.Preferences.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Providers.Preferences.Interface.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.Providers.RenderPipeline">
-      <HintPath>..\packages\Atlantis.Framework.Providers.RenderPipeline.4.13.10.13\lib\net40\Atlantis.Framework.Providers.RenderPipeline.dll</HintPath>
+    <Reference Include="Atlantis.Framework.Providers.RenderPipeline, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Providers.RenderPipeline.4.13.10.14\lib\net40\Atlantis.Framework.Providers.RenderPipeline.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Providers.RenderPipeline.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.Providers.RenderPipeline.4.13.10.13\lib\net40\Atlantis.Framework.Providers.RenderPipeline.Interface.dll</HintPath>
-    </Reference>
-    <Reference Include="Atlantis.Framework.Render.Pipeline, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.Render.Pipeline.4.0.0.0\lib\net40\Atlantis.Framework.Render.Pipeline.dll</HintPath>
-    </Reference>
-    <Reference Include="Atlantis.Framework.Render.Pipeline.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.Render.Pipeline.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Render.Pipeline.Interface.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.Providers.RenderPipeline.4.13.10.14\lib\net40\Atlantis.Framework.Providers.RenderPipeline.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Testing.MockEngine">
       <HintPath>..\packages\Atlantis.Framework.Testing.MockEngine.4.0.0.0\lib\net40\Atlantis.Framework.Testing.MockEngine.dll</HintPath>

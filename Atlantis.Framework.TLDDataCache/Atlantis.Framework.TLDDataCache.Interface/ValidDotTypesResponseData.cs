@@ -31,6 +31,7 @@ namespace Atlantis.Framework.TLDDataCache.Interface
     private ValidDotTypesResponseData(XElement cacheDataElement)
     {
       _validDotTypes = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
+      _validDotTypesById = new Dictionary<int, string>();
 
       foreach (XElement itemElement in cacheDataElement.Descendants("item"))
       {

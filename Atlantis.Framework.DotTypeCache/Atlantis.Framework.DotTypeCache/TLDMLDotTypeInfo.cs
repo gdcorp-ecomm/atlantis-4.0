@@ -16,6 +16,7 @@ namespace Atlantis.Framework.DotTypeCache
   public class TLDMLDotTypeInfo : IDotTypeInfo
   {
     private const string _DEFAULTPREREGTYPE = "GA";
+    private const string _REGULARREGISTRATIONPHASECODE = "REGREG";
 
     private string _tld;
     private Lazy<ProductIdListResponseData> _productIdList;
@@ -583,13 +584,16 @@ namespace Atlantis.Framework.DotTypeCache
 
         foreach ( var phase in phases)
         {
-          var launchPhasePeriod = new TldLaunchPhasePeriod
-            {
-              StartDate = phase.StartDate,
-              StopDate = phase.EndDate
-            };
+          if (!phase.PhaseCode.Equals(_REGULARREGISTRATIONPHASECODE))
+          {
+            var launchPhasePeriod = new TldLaunchPhasePeriod
+              {
+                StartDate = phase.StartDate,
+                StopDate = phase.EndDate
+              };
 
-          launchPhases.Add(phase.PhaseCode, launchPhasePeriod);
+            launchPhases.Add(phase.PhaseCode, launchPhasePeriod);
+          }
         }
       }
       return launchPhases;

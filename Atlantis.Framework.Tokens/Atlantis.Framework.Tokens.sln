@@ -1,7 +1,5 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{231F3310-3BE2-4FC0-AF5F-0367B11BECA4}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Tokens.Interface", "Atlantis.Framework.Tokens.Interface\Atlantis.Framework.Tokens.Interface.csproj", "{79189505-C1C8-4282-83E2-0140A2635624}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Tokens.Tests", "Atlantis.Framework.Tokens.Tests\Atlantis.Framework.Tokens.Tests.csproj", "{F28F1870-129D-4A58-B13A-8799D41249D4}"

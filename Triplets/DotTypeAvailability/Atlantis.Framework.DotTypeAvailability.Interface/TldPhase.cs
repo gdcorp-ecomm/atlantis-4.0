@@ -1,11 +1,18 @@
-﻿namespace Atlantis.Framework.DotTypeAvailability.Interface
+﻿using System;
+using System.Runtime.Serialization;
+
+namespace Atlantis.Framework.DotTypeAvailability.Interface
 {
+  [DataContract]
   public class TldPhase : ITldPhase
   {
+    [DataMember]
     public string Name { get; set; }
 
-    public string StartDate { get; set; }
+    [DataMember]
+    public DateTime StartDate { get; set; }
 
-    public string StopDate { get; set; }
+    [DataMember]
+    public DateTime StopDate { get; set; }
   }
 }

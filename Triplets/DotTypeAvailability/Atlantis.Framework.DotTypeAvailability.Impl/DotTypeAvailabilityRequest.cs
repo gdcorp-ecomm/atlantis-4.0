@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Atlantis.Framework.DotTypeAvailability.Impl.TldAvailSvc;
 using Atlantis.Framework.DotTypeAvailability.Interface;
 using Atlantis.Framework.Interface;
@@ -10,7 +11,7 @@ namespace Atlantis.Framework.DotTypeAvailability.Impl
   {
     public IResponseData RequestHandler(RequestData requestData, ConfigElement config)
     {
-      DotTypeAvailabilityResponseData responseData;
+      IResponseData responseData;
 
       try
       {
@@ -23,19 +24,18 @@ namespace Atlantis.Framework.DotTypeAvailability.Impl
           if (responseObject != null && responseObject.tldData != null && responseObject.tldData.tldList != null &&
               responseObject.tldData.tldList.Length > 0)
           {
-            responseData = new DotTypeAvailabilityResponseData(ParseResponse(responseObject.tldData.tldList));
+            responseData = DotTypeAvailabilityResponseData.FromTldAvailabilityList(ParseResponse(responseObject.tldData.tldList));
           }
           else
           {
-            responseData = new DotTypeAvailabilityResponseData(new AtlantisException(requestData, "DotTypeAvailabilityRequest",
-                                                                        "TldList has returned empty", string.Empty));
+            var ex = new Exception("DotTypeAvailabilityRequest:TldList has returned empty");
+            responseData = DotTypeAvailabilityResponseData.FromException(requestData, ex);
           }
         }
       }
       catch (Exception ex)
       {
-        responseData = new DotTypeAvailabilityResponseData(new AtlantisException(requestData,
-                     "DotTypeAvailabilityRequest", ex.Message, string.Empty, ex));
+        responseData = DotTypeAvailabilityResponseData.FromException(requestData, ex);
       }
 
       return responseData;
@@ -46,25 +46,55 @@ namespace Atlantis.Framework.DotTypeAvailability.Impl
       var tldAvailabilityList = new Dictionary<string, ITldAvailability>();
       foreach (var tldType in tldTypes)
       {
-        TldAvailability tldAvailability = new TldAvailability
+        var tldAvailability = new TldAvailability
           {
             HasLeafPage = tldType.leafPage,
             IsVisibleInDomainSpins = tldType.isVisibleInDomainSpins,
-            Name = tldType.name
+            TldName = tldType.name,
+            TldPunyCodeName = tldType.aLabel
           };
 
         IList<ITldPhase> tldPhases = new List<ITldPhase>(8);
         foreach (var phase in tldType.phases)
         {
-          TldPhase tldPhase = new TldPhase {Name = phase.name, StartDate = phase.startDate, StopDate = phase.stopDate};
+          DateTime startDate;
+          DateTime.TryParse(phase.startDate, out startDate);
+
+          DateTime stopDate;
+          DateTime.TryParse(phase.stopDate, out stopDate);
+
+          var tldPhase = new TldPhase { Name = phase.name };
+          if (startDate != DateTime.MinValue)
+          {
+            tldPhase.StartDate = startDate;
+          }
+          if (stopDate != DateTime.MinValue)
+          {
+            tldPhase.StopDate = stopDate;
+          }
+
           tldPhases.Add(tldPhase);
         }
 
         tldAvailability.TldPhases = tldPhases;
-        tldAvailabilityList.Add(tldAvailability.Name, tldAvailability);
+
+        if (!ContainsUnicodeCharacter(tldAvailability.TldName))
+        {
+          tldAvailabilityList.Add(tldAvailability.TldName, tldAvailability);
+        }
+        else
+        {
+          tldAvailabilityList.Add(tldAvailability.TldPunyCodeName, tldAvailability);
+        }
       }
 
       return tldAvailabilityList;
+    }
+
+    private static bool ContainsUnicodeCharacter(string input)
+    {
+      const int maxAnsiCode = 255;
+      return input.Any(c => c > maxAnsiCode);
     }
   }
 }

@@ -9,5 +9,10 @@ namespace Atlantis.Framework.DotTypeAvailability.Interface
     {
       RequestTimeout = TimeSpan.FromSeconds(10);
     }
+
+    public override string GetCacheMD5()
+    {
+      return "DotTypeAvailabilityRequestData";
+    }
   }
 }

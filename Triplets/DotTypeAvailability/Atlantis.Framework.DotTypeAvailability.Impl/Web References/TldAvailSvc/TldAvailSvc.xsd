@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://godaddy.com" elementFormDefault="qualified" targetNamespace="http://godaddy.com" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="GetAvailableTldData">
+    <xs:complexType />
+  </xs:element>
+  <xs:element name="GetAvailableTldDataResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="GetAvailableTldDataResult" type="tns:TldDataResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="TldDataResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="tldData" type="tns:TldDataType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="TldDataType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="tldList" type="tns:ArrayOfTldType" />
+    </xs:sequence>
+    <xs:attribute name="ttlMinutes" type="xs:long" use="required" />
+  </xs:complexType>
+  <xs:complexType name="ArrayOfTldType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="tld" nillable="true" type="tns:TldType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="TldType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="phases" type="tns:ArrayOfPhase" />
+    </xs:sequence>
+    <xs:attribute name="name" type="xs:string" />
+    <xs:attribute name="aLabel" type="xs:string" />
+    <xs:attribute name="leafPage" type="xs:boolean" use="required" />
+    <xs:attribute name="isVisibleInDomainSpins" type="xs:boolean" use="required" />
+  </xs:complexType>
+  <xs:complexType name="ArrayOfPhase">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="phase" nillable="true" type="tns:Phase" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Phase">
+    <xs:attribute name="name" type="xs:string" />
+    <xs:attribute name="startDate" type="xs:string" />
+    <xs:attribute name="stopDate" type="xs:string" />
+  </xs:complexType>
+</xs:schema>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DiscoveryClientResultsFile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Results>
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.DiscoveryDocumentReference" url="https://regcheck.dev.glbt1.gdg/TldAvailabilitySvc/TldAvailSvc.svc?disco" filename="TldAvailSvc.disco" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="https://regcheck.dev.glbt1.gdg/TldAvailabilitySvc/TldAvailSvc.svc?xsd=xsd0" filename="TldAvailSvc.xsd" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.ContractReference" url="https://regcheck.dev.glbt1.gdg/TldAvailabilitySvc/TldAvailSvc.svc?wsdl" filename="TldAvailSvc.wsdl" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.ContractReference" url="https://regcheck.dev.glbt1.gdg/TldAvailabilitySvc/TldAvailSvc.svc?wsdl=wsdl0" filename="TldAvailSvc0.wsdl" />
+  </Results>
+</DiscoveryClientResultsFile>

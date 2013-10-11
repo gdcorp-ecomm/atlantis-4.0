@@ -583,6 +583,11 @@ namespace Atlantis.Framework.DotTypeCache.Static
       return result;
     }
 
+    public bool HasLeafPage
+    {
+      get { return false; }
+    }
+
     public string GetRegistrationFieldsXml()
     {
       var domainContactFieldsData = LoadDomainContactFieldsData();

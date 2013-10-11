@@ -169,6 +169,14 @@
       <Project>{cbfe3b17-5d0f-481a-8ebe-f2493ec96637}</Project>
       <Name>Atlantis.Framework.DataCacheGeneric.Interface</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Triplets\DotTypeAvailability\Atlantis.Framework.DotTypeAvailability.Impl\Atlantis.Framework.DotTypeAvailability.Impl.csproj">
+      <Project>{1a80790a-8633-4367-89ce-4e6e480e31cc}</Project>
+      <Name>Atlantis.Framework.DotTypeAvailability.Impl</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Triplets\DotTypeAvailability\Atlantis.Framework.DotTypeAvailability.Interface\Atlantis.Framework.DotTypeAvailability.Interface.csproj">
+      <Project>{8ffba5ef-e5e2-44b3-9aec-a77a415a1ddb}</Project>
+      <Name>Atlantis.Framework.DotTypeAvailability.Interface</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Triplets\Products\Atlantis.Framework.Products.Interface\Atlantis.Framework.Products.Interface.csproj">
       <Project>{f025da79-8d84-4bb9-affc-4b3156532212}</Project>
       <Name>Atlantis.Framework.Products.Interface</Name>

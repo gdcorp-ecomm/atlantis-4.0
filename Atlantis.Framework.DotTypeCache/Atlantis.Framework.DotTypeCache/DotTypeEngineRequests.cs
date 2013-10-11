@@ -13,6 +13,7 @@
     private static int _tldPhaseDateListRequest = 744;
     private static int _productDomainAttributesRequest = 745;
     private static int _privateLabelTypeRequest = 662;
+    private static int _tldAvailabilityRequest = 753;
 
     public static int TLDMLByName
     {
@@ -78,6 +79,12 @@
     {
       get { return _tldPhaseDateListRequest; }
       set { _tldPhaseDateListRequest = value; }
+    }
+
+    public static int TldAvailabilityRequest
+    {
+      get { return _tldAvailabilityRequest; }
+      set { _tldAvailabilityRequest = value; }
     }
   }
 }

@@ -499,6 +499,12 @@ namespace Atlantis.Framework.DotTypeCache
       return this._dotTypeInfo.GetProductIdList(domainProductListLookup);
     }
 
+    public bool HasLeafPage
+    {
+      get { return this._dotTypeInfo.HasLeafPage;
+      }
+    }
+
     public string GetRegistrationFieldsXml()
     {
       return this._dotTypeInfo.GetRegistrationFieldsXml();

@@ -343,6 +343,11 @@ namespace Atlantis.Framework.DotTypeCache.Interface
       return new List<int>();
     }
 
+    public bool HasLeafPage
+    {
+      get { return false; }
+    }
+
     public string GetRegistrationFieldsXml()
     {
       return string.Empty;

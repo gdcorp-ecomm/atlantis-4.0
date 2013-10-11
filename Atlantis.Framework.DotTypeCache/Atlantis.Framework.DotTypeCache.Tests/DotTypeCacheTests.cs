@@ -25,6 +25,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
   [DeploymentItem("Atlantis.Framework.AppSettings.Impl.dll")]
   [DeploymentItem("Atlantis.Framework.DataCacheGeneric.Impl.dll")]
   [DeploymentItem("Atlantis.Framework.PrivateLabel.Impl.dll")]
+  [DeploymentItem("Atlantis.Framework.DotTypeAvailability.Impl.dll")]
   public class DotTypeCacheTests
   {
     private TestContext testContextInstance;
@@ -1598,5 +1599,22 @@ namespace Atlantis.Framework.DotTypeCache.Tests
       Assert.IsTrue(productIdList.Any());
     }
 
+    [TestMethod]
+    public void TldHasLeafPageL4Borg()
+    {
+      var dotTypeInfo = DotTypeProvider.GetDotTypeInfo("k.borg");
+
+      var hasLeafPage = dotTypeInfo.HasLeafPage;
+      Assert.IsTrue(hasLeafPage);
+    }
+
+    [TestMethod]
+    public void TldHasLeafPageCom()
+    {
+      var dotTypeInfo = DotTypeProvider.GetDotTypeInfo("com");
+
+      var hasLeafPage = dotTypeInfo.HasLeafPage;
+      Assert.IsTrue(!hasLeafPage);
+    }
   }
 }

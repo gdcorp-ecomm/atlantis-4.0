@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Atlantis.Framework.DCCDomainsDataCache.Interface;
 using Atlantis.Framework.DomainContactFields.Interface;
+using Atlantis.Framework.DotTypeAvailability.Interface;
 using Atlantis.Framework.DotTypeCache.Interface;
 using Atlantis.Framework.DotTypeCache.Static;
 using Atlantis.Framework.Interface;
@@ -28,6 +29,7 @@ namespace Atlantis.Framework.DotTypeCache
     private readonly Lazy<ValidDotTypesResponseData> _validDotTypes;
     private readonly Lazy<ISiteContext> _siteContext;
     private Lazy<TLDPhaseDateListResponseData> _tldPhaseDateListData;
+    private Lazy<DotTypeAvailabilityResponseData> _tldAvailabilityData;
 
     internal static TLDMLDotTypeInfo FromDotType(string dotType, IProviderContainer container)
     {
@@ -46,6 +48,7 @@ namespace Atlantis.Framework.DotTypeCache
       _validDotTypes = new Lazy<ValidDotTypesResponseData>(LoadValidDotTypes);
       _siteContext = new Lazy<ISiteContext>(container.Resolve<ISiteContext>);
       _tldPhaseDateListData = new Lazy<TLDPhaseDateListResponseData>(LoadTldPhaseDateList);
+      _tldAvailabilityData = new Lazy<DotTypeAvailabilityResponseData>(LoadTldAvailabilityData);
 
       ITLDProduct product = _tldml.Value.Product; // Preload the TLDML
     }
@@ -126,6 +129,12 @@ namespace Atlantis.Framework.DotTypeCache
     {
       var request = new PrivateLabelTypeRequestData(privateLabelId);
       return (PrivateLabelTypeResponseData)DataCache.DataCache.GetProcessRequest(request, DotTypeEngineRequests.PrivateLabelType);
+    }
+
+    private DotTypeAvailabilityResponseData LoadTldAvailabilityData()
+    {
+      var request = new DotTypeAvailabilityRequestData();
+      return (DotTypeAvailabilityResponseData)DataCache.DataCache.GetProcessRequest(request, DotTypeEngineRequests.TldAvailabilityRequest);
     }
 
     public string DotType
@@ -760,6 +769,24 @@ namespace Atlantis.Framework.DotTypeCache
       }
 
       return result.ConvertAll(product => product.UnifiedProductId); 
+    }
+
+    public bool HasLeafPage
+    {
+      get
+      {
+        bool result = false;
+
+        if (_tldAvailabilityData.Value != null)
+        {
+          ITldAvailability tldAvailability;
+          if (_tldAvailabilityData.Value.TldAvailabilityList.TryGetValue(_tld, out tldAvailability))
+          {
+            result = tldAvailability.HasLeafPage;
+          }
+        }
+        return result;
+      }
     }
 
     private static int InternalGetTldProductTypeId(int domainCount, TLDProductTypes productType, bool getBulkBasedOnDomainCount = true)

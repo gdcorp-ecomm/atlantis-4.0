@@ -37,6 +37,77 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Atlantis.Framework.AppSettings.Impl, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.AppSettings.4.0.0.0\lib\net40\Atlantis.Framework.AppSettings.Impl.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.AppSettings.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.AppSettings.Interface.4.0.0.0\lib\net40\Atlantis.Framework.AppSettings.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.DataCache, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.DataCache.4.0.0.0\lib\net40\Atlantis.Framework.DataCache.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.DataCacheGeneric.Impl, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.DataCacheGeneric.4.0.0.0\lib\net40\Atlantis.Framework.DataCacheGeneric.Impl.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.DataCacheGeneric.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.DataCacheGeneric.Interface.4.0.0.0\lib\net40\Atlantis.Framework.DataCacheGeneric.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.DataCacheService, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.DataCacheService.4.0.0.0\lib\net40\Atlantis.Framework.DataCacheService.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Engine, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Engine.4.0.0.0\lib\net40\Atlantis.Framework.Engine.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Engine.XmlSerializers">
+      <HintPath>..\packages\Atlantis.Framework.Engine.4.0.0.0\lib\net40\Atlantis.Framework.Engine.XmlSerializers.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Interface.4.13.9.25\lib\net40\Atlantis.Framework.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.PrivateLabel.Impl, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.PrivateLabel.4.0.0.0\lib\net40\Atlantis.Framework.PrivateLabel.Impl.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.PrivateLabel.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.PrivateLabel.Interface.4.0.0.0\lib\net40\Atlantis.Framework.PrivateLabel.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Products.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Products.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Products.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Providers.Containers, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Providers.Containers.4.13.10.11\lib\net40\Atlantis.Framework.Providers.Containers.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Providers.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Providers.Interface.4.13.8.28\lib\net40\Atlantis.Framework.Providers.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Providers.Preferences.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Providers.Preferences.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Providers.Preferences.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Render.Pipeline.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Render.Pipeline.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Render.Pipeline.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Testing.MockHttpContext, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Testing.MockHttpContext.4.0.0.0\lib\net40\Atlantis.Framework.Testing.MockHttpContext.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Testing.MockProviders, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Testing.MockProviders.4.0.0.0\lib\net40\Atlantis.Framework.Testing.MockProviders.dll</HintPath>
+    </Reference>
     <Reference Include="Data">
       <HintPath>..\..\Atlantis.Framework.Testing\Atlantis.Framework.Testing.Automation\Reference\Data.dll</HintPath>
     </Reference>
@@ -73,22 +144,6 @@
     <Compile Include="DotTypeCacheTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Atlantis.Framework.AppSettings\Atlantis.Framework.AppSettings.Impl\Atlantis.Framework.AppSettings.Impl.csproj">
-      <Project>{1f866bc2-a3d5-4042-abaa-b90cdc575dff}</Project>
-      <Name>Atlantis.Framework.AppSettings.Impl</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.AppSettings\Atlantis.Framework.AppSettings.Interface\Atlantis.Framework.AppSettings.Interface.csproj">
-      <Project>{638f2820-0ca4-43c1-8712-1823704389d3}</Project>
-      <Name>Atlantis.Framework.AppSettings.Interface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.DataCache\Atlantis.Framework.DataCacheService\Atlantis.Framework.DataCacheService.csproj">
-      <Project>{3e299d3b-3c8d-455a-92a4-05ff6c60e6f3}</Project>
-      <Name>Atlantis.Framework.DataCacheService</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.DataCache\Atlantis.Framework.DataCache\Atlantis.Framework.DataCache.csproj">
-      <Project>{8E4322D7-C6B3-4EE1-9FAD-7B848B38C834}</Project>
-      <Name>Atlantis.Framework.DataCache</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Atlantis.Framework.DCCDomainsDataCache\Atlantis.Framework.DCCDomainsDataCache.Impl\Atlantis.Framework.DCCDomainsDataCache.Impl.csproj">
       <Project>{89873d19-5d77-4886-add3-cedbf196d270}</Project>
       <Name>Atlantis.Framework.DCCDomainsDataCache.Impl</Name>
@@ -104,30 +159,6 @@
     <ProjectReference Include="..\..\Atlantis.Framework.DomainContactFields\Atlantis.Framework.DomainContactFields.Interface\Atlantis.Framework.DomainContactFields.Interface.csproj">
       <Project>{bd8f8fc4-8a78-4dde-8ed7-8caef06791fe}</Project>
       <Name>Atlantis.Framework.DomainContactFields.Interface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj">
-      <Project>{092618E1-1F37-422C-82AF-17A1337B8986}</Project>
-      <Name>Atlantis.Framework.Engine</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj">
-      <Project>{2474F971-3E1D-4608-9D60-B0A9A1CA8D13}</Project>
-      <Name>Atlantis.Framework.Interface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.PrivateLabel\Atlantis.Framework.PrivateLabel.Impl\Atlantis.Framework.PrivateLabel.Impl.csproj">
-      <Project>{dda75fcc-711e-4fa7-a688-adb2d17ccccd}</Project>
-      <Name>Atlantis.Framework.PrivateLabel.Impl</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.PrivateLabel\Atlantis.Framework.PrivateLabel.Interface\Atlantis.Framework.PrivateLabel.Interface.csproj">
-      <Project>{af7389f6-2167-4503-974e-42139638a9cc}</Project>
-      <Name>Atlantis.Framework.PrivateLabel.Interface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.Providers.Containers\Atlantis.Framework.Providers.Containers\Atlantis.Framework.Providers.Containers.csproj">
-      <Project>{c333e679-494e-422d-ab5e-e4c0ec94acd5}</Project>
-      <Name>Atlantis.Framework.Providers.Containers</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.Providers.Preferences\Atlantis.Framework.Providers.Preferences.Interface\Atlantis.Framework.Providers.Preferences.Interface.csproj">
-      <Project>{1a50e3b8-4a5c-4e48-bad4-17c5092f0dde}</Project>
-      <Name>Atlantis.Framework.Providers.Preferences.Interface</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Atlantis.Framework.RegDotTypeProductIds\Atlantis.Framework.RegDotTypeProductIds.Impl\Atlantis.Framework.RegDotTypeProductIds.Impl.csproj">
       <Project>{bc7c7c55-b5ee-4067-92fc-cc6700d82dbe}</Project>
@@ -145,14 +176,6 @@
       <Project>{970b458c-3fdf-45d7-8b0e-3d8818907ffd}</Project>
       <Name>Atlantis.Framework.RegDotTypeRegistry.Interface</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.Testing\Atlantis.Framework.Testing.MockHttpContext\Atlantis.Framework.Testing.MockHttpContext.csproj">
-      <Project>{5B0E8D0F-247E-4937-8177-48EA5E267CAB}</Project>
-      <Name>Atlantis.Framework.Testing.MockHttpContext</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.Testing\Atlantis.Framework.Testing.MockProviders\Atlantis.Framework.Testing.MockProviders.csproj">
-      <Project>{5487def2-0fa7-4b77-9aad-0355784589d6}</Project>
-      <Name>Atlantis.Framework.Testing.MockProviders</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Atlantis.Framework.TLDDataCache\Atlantis.Framework.TLDDataCache.Impl\Atlantis.Framework.TLDDataCache.Impl.csproj">
       <Project>{b6638632-2265-4f7e-a6a2-c494391dfbab}</Project>
       <Name>Atlantis.Framework.TLDDataCache.Impl</Name>
@@ -161,14 +184,6 @@
       <Project>{2a615d6f-9604-40c1-bc6a-2659e3b97bcc}</Project>
       <Name>Atlantis.Framework.TLDDataCache.Interface</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Triplets\DataCacheGeneric\Atlantis.Framework.DataCacheGeneric.Impl\Atlantis.Framework.DataCacheGeneric.Impl.csproj">
-      <Project>{41573a44-95d3-4bde-9cff-65552accd7e4}</Project>
-      <Name>Atlantis.Framework.DataCacheGeneric.Impl</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Triplets\DataCacheGeneric\Atlantis.Framework.DataCacheGeneric.Interface\Atlantis.Framework.DataCacheGeneric.Interface.csproj">
-      <Project>{cbfe3b17-5d0f-481a-8ebe-f2493ec96637}</Project>
-      <Name>Atlantis.Framework.DataCacheGeneric.Interface</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Triplets\DotTypeAvailability\Atlantis.Framework.DotTypeAvailability.Impl\Atlantis.Framework.DotTypeAvailability.Impl.csproj">
       <Project>{1a80790a-8633-4367-89ce-4e6e480e31cc}</Project>
       <Name>Atlantis.Framework.DotTypeAvailability.Impl</Name>
@@ -176,10 +191,6 @@
     <ProjectReference Include="..\..\Triplets\DotTypeAvailability\Atlantis.Framework.DotTypeAvailability.Interface\Atlantis.Framework.DotTypeAvailability.Interface.csproj">
       <Project>{8ffba5ef-e5e2-44b3-9aec-a77a415a1ddb}</Project>
       <Name>Atlantis.Framework.DotTypeAvailability.Interface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Triplets\Products\Atlantis.Framework.Products.Interface\Atlantis.Framework.Products.Interface.csproj">
-      <Project>{f025da79-8d84-4bb9-affc-4b3156532212}</Project>
-      <Name>Atlantis.Framework.Products.Interface</Name>
     </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.DotTypeCache.Interface\Atlantis.Framework.DotTypeCache.Interface.csproj">
       <Project>{95E67E48-7173-4F0C-854F-2F08CBFCF923}</Project>
@@ -211,6 +222,7 @@
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="DotTypesData.xml">

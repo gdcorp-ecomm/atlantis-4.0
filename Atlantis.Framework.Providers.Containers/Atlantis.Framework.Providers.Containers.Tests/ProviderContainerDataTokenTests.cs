@@ -1,7 +1,7 @@
 ﻿using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.Containers.DataToken.RenderHandlers;
 using Atlantis.Framework.Providers.Containers.Tests.RenderContent;
-using Atlantis.Framework.Render.Pipeline.Interface;
+using Atlantis.Framework.Providers.RenderPipeline.Interface;
 using Atlantis.Framework.Testing.MockProviders;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 

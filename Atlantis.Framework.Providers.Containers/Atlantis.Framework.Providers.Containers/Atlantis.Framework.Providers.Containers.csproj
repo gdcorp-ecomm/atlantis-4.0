@@ -45,8 +45,8 @@
     <Reference Include="Atlantis.Framework.Interface">
       <HintPath>..\packages\Atlantis.Framework.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Interface.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.Render.Pipeline.Interface">
-      <HintPath>..\packages\Atlantis.Framework.Render.Pipeline.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Render.Pipeline.Interface.dll</HintPath>
+    <Reference Include="Atlantis.Framework.Providers.RenderPipeline.Interface">
+      <HintPath>..\packages\Atlantis.Framework.Providers.RenderPipeline.Interface.4.13.10.15\lib\net40\Atlantis.Framework.Providers.RenderPipeline.Interface.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -70,6 +70,7 @@
     <Compile Include="DataToken\RenderHandlers\ProviderContainerDataTokenRenderHandler.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="atlantis.config" />
     <None Include="Atlantis.Framework.Providers.Containers.nuget.bat" />
     <None Include="Atlantis.Framework.Providers.Containers.nuspec">
       <SubType>Designer</SubType>

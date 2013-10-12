@@ -34,15 +34,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Atlantis.Framework.AppSettings.Interface">
-      <HintPath>..\packages\Atlantis.Framework.AppSettings.Interface.4.0.0.0\lib\net40\Atlantis.Framework.AppSettings.Interface.dll</HintPath>
-    </Reference>
-    <Reference Include="Atlantis.Framework.DataCache">
-      <HintPath>..\packages\Atlantis.Framework.DataCache.4.0.0.0\lib\net40\Atlantis.Framework.DataCache.dll</HintPath>
-    </Reference>
-    <Reference Include="Atlantis.Framework.DataCacheGeneric.Interface">
-      <HintPath>..\packages\Atlantis.Framework.DataCacheGeneric.Interface.4.0.0.0\lib\net40\Atlantis.Framework.DataCacheGeneric.Interface.dll</HintPath>
-    </Reference>
     <Reference Include="Atlantis.Framework.DataCacheService">
       <HintPath>..\packages\Atlantis.Framework.DataCacheService.4.0.0.0\lib\net40\Atlantis.Framework.DataCacheService.dll</HintPath>
     </Reference>
@@ -54,30 +45,6 @@
     </Reference>
     <Reference Include="Atlantis.Framework.Interface">
       <HintPath>..\packages\Atlantis.Framework.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Interface.dll</HintPath>
-    </Reference>
-    <Reference Include="Atlantis.Framework.Language.Interface">
-      <HintPath>..\packages\Atlantis.Framework.Language.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Language.Interface.dll</HintPath>
-    </Reference>
-    <Reference Include="Atlantis.Framework.Parsers.LanguageFile">
-      <HintPath>..\packages\Atlantis.Framework.Parsers.LanguageFile.4.0.0.0\lib\net40\Atlantis.Framework.Parsers.LanguageFile.dll</HintPath>
-    </Reference>
-    <Reference Include="Atlantis.Framework.PrivateLabel.Interface">
-      <HintPath>..\packages\Atlantis.Framework.PrivateLabel.Interface.4.0.0.0\lib\net40\Atlantis.Framework.PrivateLabel.Interface.dll</HintPath>
-    </Reference>
-    <Reference Include="Atlantis.Framework.Products.Interface">
-      <HintPath>..\packages\Atlantis.Framework.Products.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Products.Interface.dll</HintPath>
-    </Reference>
-    <Reference Include="Atlantis.Framework.Providers.Interface">
-      <HintPath>..\packages\Atlantis.Framework.Providers.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Providers.Interface.dll</HintPath>
-    </Reference>
-    <Reference Include="Atlantis.Framework.Providers.Language">
-      <HintPath>..\packages\Atlantis.Framework.Providers.Language.4.0.0.0\lib\net40\Atlantis.Framework.Providers.Language.dll</HintPath>
-    </Reference>
-    <Reference Include="Atlantis.Framework.Providers.Language.Interface">
-      <HintPath>..\packages\Atlantis.Framework.Providers.Language.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Providers.Language.Interface.dll</HintPath>
-    </Reference>
-    <Reference Include="Atlantis.Framework.Providers.Localization.Interface">
-      <HintPath>..\packages\Atlantis.Framework.Providers.Localization.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Providers.Localization.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Providers.Preferences.Interface">
       <HintPath>..\packages\Atlantis.Framework.Providers.Preferences.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Providers.Preferences.Interface.dll</HintPath>

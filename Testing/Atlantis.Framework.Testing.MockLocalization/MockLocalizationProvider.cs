@@ -1,6 +1,5 @@
 ﻿using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.Localization.Interface;
-using Atlantis.Framework.Testing.MockProviders;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -13,15 +12,14 @@ namespace Atlantis.Framework.Testing.MockLocalization
     const string _DEFAULTCOUNTRYSITE = "www";
     const string _DEFAULTLANGUAGE = "en";
 
-    string _countrySite;
+    readonly string _countrySite;
     string _fullLanguage;
-    IMarket _marketInfo = null;
-    ICountrySite _countrySiteInfo = null;
-    private CultureInfo _cultureInfo = null;
+    IMarket _marketInfo;
+    readonly ICountrySite _countrySiteInfo;
+    private CultureInfo _cultureInfo;
     string _rewrittenUrlLanguage = String.Empty;
 
-    public MockLocalizationProvider(IProviderContainer container)
-      : base(container)
+    public MockLocalizationProvider(IProviderContainer container) : base(container)
     {
       _countrySiteInfo = LoadCountySiteInfo();
       _marketInfo = LoadMarketInfo();
@@ -57,6 +55,20 @@ namespace Atlantis.Framework.Testing.MockLocalization
       }
 
       return Container.GetData(MockLocalizationProviderSettings.CountrySite, _DEFAULTCOUNTRYSITE);
+    }
+
+    public IEnumerable<IMarket> GetMarketsForCountryCode(string countryCode)
+    {
+      IEnumerable<IMarket> markets;
+
+      var marketDictionary = Container.GetData<IDictionary<string, IEnumerable<IMarket>>>(MockLocalizationProviderSettings.MarketInfoForCountryCode, null);
+
+      if (marketDictionary == null || !marketDictionary.TryGetValue(countryCode, out markets))
+      {
+        markets = new IMarket[0];
+      }
+
+      return markets;
     }
 
     public string FullLanguage

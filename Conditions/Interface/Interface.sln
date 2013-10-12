@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Conditions.Interface", "Atlantis.Framework.Conditions.Interface\Atlantis.Framework.Conditions.Interface.csproj", "{9F0B7F62-5A62-4823-8697-A18FA91B2A8D}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{EAB353A2-3E92-44A3-A907-C5C0F518255B}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Conditions.Tests", "Atlantis.Framework.Conditions.Tests\Atlantis.Framework.Conditions.Tests.csproj", "{40D27D08-6A49-4526-AFCB-DDCE982A5DD5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Conditions.Monitor", "Atlantis.Framework.Conditions.Monitor\Atlantis.Framework.Conditions.Monitor.csproj", "{A1005CE1-482B-40C0-AF80-95CB29B82E27}"

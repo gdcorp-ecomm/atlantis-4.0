@@ -1,7 +1,7 @@
 ﻿using Atlantis.Framework.Interface;
+using Atlantis.Framework.Providers.RenderPipeline.Interface;
 using Atlantis.Framework.Render.ExpressionParser;
 using Atlantis.Framework.Render.MarkupParser;
-using Atlantis.Framework.Render.Pipeline.Interface;
 
 namespace Atlantis.Framework.Conditions.Interface
 {

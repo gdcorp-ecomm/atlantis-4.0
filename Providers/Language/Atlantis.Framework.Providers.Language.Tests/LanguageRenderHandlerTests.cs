@@ -1,8 +1,9 @@
-﻿using Atlantis.Framework.Interface;
+﻿using System.Collections.Generic;
+using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.Language.Interface;
 using Atlantis.Framework.Providers.Localization.Interface;
-using Atlantis.Framework.Render.Pipeline;
-using Atlantis.Framework.Render.Pipeline.Interface;
+using Atlantis.Framework.Providers.RenderPipeline;
+using Atlantis.Framework.Providers.RenderPipeline.Interface;
 using Atlantis.Framework.Testing.MockLocalization;
 using Atlantis.Framework.Testing.MockProviders;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -34,6 +35,7 @@ namespace Atlantis.Framework.Providers.Language.Tests
       container.RegisterProvider<IShopperContext, MockShopperContext>();
       container.RegisterProvider<ILocalizationProvider, MockLocalizationProvider>();
       container.RegisterProvider<ILanguageProvider, LanguageProvider>();
+      container.RegisterProvider<IRenderPipelineProvider, RenderPipelineProvider>();
 
       return container;
     }
@@ -43,65 +45,65 @@ namespace Atlantis.Framework.Providers.Language.Tests
     public void ValidLanaguagePhraseReplacementUk()
     {
       IProviderContainer container = NewLanguageProviderContainer(1, "uk", "en");
-      TestContent content = new TestContent("<div>[@L[testdictionary:testkey]@L]</div>");
+      
+      IRenderPipelineProvider renderPipelineProvider = container.Resolve<IRenderPipelineProvider>();
 
-      var pipeline = new RenderPipelineManager();
-      pipeline.AddRenderHandler(new LanguageRenderHandler());
-      IProcessedRenderContent processedContent = pipeline.RenderContent(content, container);
-
-      Assert.AreEqual("<div>Thames River</div>", processedContent.Content);
+      string content = "<div>[@L[testdictionary:testkey]@L]</div>";
+      string output = renderPipelineProvider.RenderContent(content, new List<IRenderHandler> {new LanguageRenderHandler()});
+      
+      Assert.AreEqual("<div>Thames River</div>", output);
     }
 
     [TestMethod]
     public void ValidLanaguagePhraseReplacementWww()
     {
       IProviderContainer container = NewLanguageProviderContainer(1, "www", "en");
-      TestContent content = new TestContent("<div>[@L[testdictionary:testkey]@L]</div>");
 
-      var pipeline = new RenderPipelineManager();
-      pipeline.AddRenderHandler(new LanguageRenderHandler());
-      IProcessedRenderContent processedContent = pipeline.RenderContent(content, container);
+      IRenderPipelineProvider renderPipelineProvider = container.Resolve<IRenderPipelineProvider>();
 
-      Assert.AreEqual("<div>GoDaddy Green River</div>", processedContent.Content);
+      string content = "<div>[@L[testdictionary:testkey]@L]</div>";
+      string output = renderPipelineProvider.RenderContent(content, new List<IRenderHandler> { new LanguageRenderHandler() });
+
+      Assert.AreEqual("<div>GoDaddy Green River</div>", output);
     }
 
     [TestMethod]
     public void ValidLanaguagePhraseReplacementWwwDuplicate()
     {
       IProviderContainer container = NewLanguageProviderContainer(1, "www", "en");
-      TestContent content = new TestContent("<div>[@L[testdictionary:testkey]@L]</div><div>[@L[testdictionary:testkey]@L]</div>");
 
-      var pipeline = new RenderPipelineManager();
-      pipeline.AddRenderHandler(new LanguageRenderHandler());
-      IProcessedRenderContent processedContent = pipeline.RenderContent(content, container);
+      IRenderPipelineProvider renderPipelineProvider = container.Resolve<IRenderPipelineProvider>();
 
-      Assert.AreEqual("<div>GoDaddy Green River</div><div>GoDaddy Green River</div>", processedContent.Content);
+      string content = "<div>[@L[testdictionary:testkey]@L]</div><div>[@L[testdictionary:testkey]@L]</div>";
+      string output = renderPipelineProvider.RenderContent(content, new List<IRenderHandler> { new LanguageRenderHandler() });
+
+      Assert.AreEqual("<div>GoDaddy Green River</div><div>GoDaddy Green River</div>", output);
     }
 
     [TestMethod]
     public void MissedLanaguagePhraseReplacement()
     {
       IProviderContainer container = NewLanguageProviderContainer(1, "www", "en");
-      TestContent content = new TestContent("<div>[@L[wrongdictionary:testkey]@L]</div>");
 
-      var pipeline = new RenderPipelineManager();
-      pipeline.AddRenderHandler(new LanguageRenderHandler());
-      IProcessedRenderContent processedContent = pipeline.RenderContent(content, container);
+      IRenderPipelineProvider renderPipelineProvider = container.Resolve<IRenderPipelineProvider>();
 
-      Assert.AreEqual("<div></div>", processedContent.Content);
+      string content = "<div>[@L[wrongdictionary:testkey]@L]</div>";
+      string output = renderPipelineProvider.RenderContent(content, new List<IRenderHandler> { new LanguageRenderHandler() });
+
+      Assert.AreEqual("<div></div>", output);
     }
 
     [TestMethod]
     public void NoLanaguagePhraseReplacement()
     {
       IProviderContainer container = NewLanguageProviderContainer(1, "www", "en");
-      TestContent content = new TestContent("<div>Hello</div>");
 
-      var pipeline = new RenderPipelineManager();
-      pipeline.AddRenderHandler(new LanguageRenderHandler());
-      IProcessedRenderContent processedContent = pipeline.RenderContent(content, container);
+      IRenderPipelineProvider renderPipelineProvider = container.Resolve<IRenderPipelineProvider>();
 
-      Assert.AreEqual("<div>Hello</div>", processedContent.Content);
+      string content = "<div>Hello</div>";
+      string output = renderPipelineProvider.RenderContent(content, new List<IRenderHandler> { new LanguageRenderHandler() });
+
+      Assert.AreEqual("<div>Hello</div>", output);
     }
 
 
@@ -119,65 +121,65 @@ namespace Atlantis.Framework.Providers.Language.Tests
     public void ValidLanaguagePhraseReplacementQaNotInternal()
     {
       IProviderContainer container = NewLanguageProviderContainer(1, "www", "qa-qa");
-      TestContent content = new TestContent("<div>[@L[testdictionary:testkey]@L]</div>");
 
-      var pipeline = new RenderPipelineManager();
-      pipeline.AddRenderHandler(new LanguageRenderHandler());
-      IProcessedRenderContent processedContent = pipeline.RenderContent(content, container);
+      IRenderPipelineProvider renderPipelineProvider = container.Resolve<IRenderPipelineProvider>();
 
-      Assert.AreNotEqual("<div>[testdictionary:testkey]</div>", processedContent.Content);
+      string content = "<div>[@L[testdictionary:testkey]@L]</div>";
+      string output = renderPipelineProvider.RenderContent(content, new List<IRenderHandler> { new LanguageRenderHandler() });
+
+      Assert.AreNotEqual("<div>[testdictionary:testkey]</div>", output);
     }
 
     [TestMethod]
     public void ValidLanaguagePhraseReplacementQa()
     {
       IProviderContainer container = NewLanguageProviderContainer(1, "www", "qa-qa", true);
-      TestContent content = new TestContent("<div>[@L[testdictionary:testkey]@L]</div>");
 
-      var pipeline = new RenderPipelineManager();
-      pipeline.AddRenderHandler(new LanguageRenderHandler());
-      IProcessedRenderContent processedContent = pipeline.RenderContent(content, container);
+      IRenderPipelineProvider renderPipelineProvider = container.Resolve<IRenderPipelineProvider>();
 
-      Assert.AreEqual("<div>[testdictionary:testkey]</div>", processedContent.Content);
+      string content = "<div>[@L[testdictionary:testkey]@L]</div>";
+      string output = renderPipelineProvider.RenderContent(content, new List<IRenderHandler> { new LanguageRenderHandler() });
+
+      Assert.AreEqual("<div>[testdictionary:testkey]</div>", output);
     }
 
     [TestMethod]
     public void ValidLanguagePhraseReplacementCDS()
     {
       IProviderContainer container = NewLanguageProviderContainer(1, "www", "en");
-      TestContent content = new TestContent("<div>[@L[cds.sales/integrationtests/hosting/web-hosting:testkey]@L]</div>");
 
-      var pipeline = new RenderPipelineManager();
-      pipeline.AddRenderHandler(new LanguageRenderHandler());
-      IProcessedRenderContent processedContent = pipeline.RenderContent(content, container);
+      IRenderPipelineProvider renderPipelineProvider = container.Resolve<IRenderPipelineProvider>();
 
-      Assert.AreEqual("<div>Purple River</div>", processedContent.Content);
+      string content = "<div>[@L[cds.sales/integrationtests/hosting/web-hosting:testkey]@L]</div>";
+      string output = renderPipelineProvider.RenderContent(content, new List<IRenderHandler> { new LanguageRenderHandler() });
+
+      Assert.AreEqual("<div>Purple River</div>", output);
     }
 
     [TestMethod]
     public void ValidLanguagePhraseReplacementInShortLanguageCDS()
     {
       IProviderContainer container = NewLanguageProviderContainer(1, "www", "en-US");
-      TestContent content = new TestContent("<div>[@L[cds.sales/integrationtests/hosting/web-hosting:testkey]@L]</div>");
 
-      var pipeline = new RenderPipelineManager();
-      pipeline.AddRenderHandler(new LanguageRenderHandler());
-      IProcessedRenderContent processedContent = pipeline.RenderContent(content, container);
+      IRenderPipelineProvider renderPipelineProvider = container.Resolve<IRenderPipelineProvider>();
 
-      Assert.AreEqual("<div>Purple River</div>", processedContent.Content);
+      string content = "<div>[@L[cds.sales/integrationtests/hosting/web-hosting:testkey]@L]</div>";
+      string output = renderPipelineProvider.RenderContent(content, new List<IRenderHandler> { new LanguageRenderHandler() });
+
+      Assert.AreEqual("<div>Purple River</div>", output);
     }
 
     [TestMethod]
     public void ValidLanguagePhraseReplacementNotValidLanguageCDS()
     {
       IProviderContainer container = NewLanguageProviderContainer(1, "www", "es-mx");
-      TestContent content = new TestContent("<div>[@L[cds.sales/integrationtests/hosting/web-hosting:testkey]@L]</div>");
 
-      var pipeline = new RenderPipelineManager();
-      pipeline.AddRenderHandler(new LanguageRenderHandler());
-      IProcessedRenderContent processedContent = pipeline.RenderContent(content, container);
+      IRenderPipelineProvider renderPipelineProvider = container.Resolve<IRenderPipelineProvider>();
 
-      Assert.AreEqual("<div>Purple River</div>", processedContent.Content);
+      string content = "<div>[@L[cds.sales/integrationtests/hosting/web-hosting:testkey]@L]</div>";
+      string output = renderPipelineProvider.RenderContent(content, new List<IRenderHandler> { new LanguageRenderHandler() });
+
+      Assert.AreEqual("<div>Purple River</div>", output);
     }
 
   }

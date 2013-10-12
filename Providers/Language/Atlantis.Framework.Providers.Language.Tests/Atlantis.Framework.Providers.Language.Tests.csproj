@@ -76,22 +76,23 @@
       <HintPath>..\packages\Atlantis.Framework.Products.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Products.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Providers.Interface">
-      <HintPath>..\packages\Atlantis.Framework.Providers.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Providers.Interface.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.Providers.Interface.4.13.8.28\lib\net40\Atlantis.Framework.Providers.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Providers.Localization.Interface">
-      <HintPath>..\packages\Atlantis.Framework.Providers.Localization.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Providers.Localization.Interface.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.Providers.Localization.Interface.4.13.9.27\lib\net40\Atlantis.Framework.Providers.Localization.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Providers.Preferences.Interface">
       <HintPath>..\packages\Atlantis.Framework.Providers.Preferences.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Providers.Preferences.Interface.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.Render.Pipeline">
-      <HintPath>..\packages\Atlantis.Framework.Render.Pipeline.4.0.0.0\lib\net40\Atlantis.Framework.Render.Pipeline.dll</HintPath>
+    <Reference Include="Atlantis.Framework.Providers.RenderPipeline">
+      <HintPath>..\packages\Atlantis.Framework.Providers.RenderPipeline.4.13.10.15\lib\net40\Atlantis.Framework.Providers.RenderPipeline.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.Render.Pipeline.Interface">
-      <HintPath>..\packages\Atlantis.Framework.Render.Pipeline.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Render.Pipeline.Interface.dll</HintPath>
+    <Reference Include="Atlantis.Framework.Providers.RenderPipeline.Interface">
+      <HintPath>..\packages\Atlantis.Framework.Providers.RenderPipeline.4.13.10.15\lib\net40\Atlantis.Framework.Providers.RenderPipeline.Interface.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.Testing.MockLocalization">
-      <HintPath>..\packages\Atlantis.Framework.Testing.MockLocalization.4.0.0.0\lib\net40\Atlantis.Framework.Testing.MockLocalization.dll</HintPath>
+    <Reference Include="Atlantis.Framework.Testing.MockLocalization, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Testing.MockLocalization.4.13.10.12\lib\net40\Atlantis.Framework.Testing.MockLocalization.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Testing.MockProviders">
       <HintPath>..\packages\Atlantis.Framework.Testing.MockProviders.4.0.0.0\lib\net40\Atlantis.Framework.Testing.MockProviders.dll</HintPath>

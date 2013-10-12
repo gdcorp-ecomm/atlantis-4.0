@@ -1,8 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{8CDA229A-DA28-4CDD-B7DE-D9C0D1D591C9}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Providers.Language.Interface", "Atlantis.Framework.Providers.Language.Interface\Atlantis.Framework.Providers.Language.Interface.csproj", "{3A4F8E16-D9C2-40E1-9273-F2C4B9C7D306}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Providers.Language", "Atlantis.Framework.Providers.Language\Atlantis.Framework.Providers.Language.csproj", "{201A8C54-FA1A-4144-80BA-6908254F0286}"

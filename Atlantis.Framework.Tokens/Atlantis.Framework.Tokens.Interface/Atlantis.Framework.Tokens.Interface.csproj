@@ -34,18 +34,19 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Atlantis.Framework.Engine">
+    <Reference Include="Atlantis.Framework.Engine, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Atlantis.Framework.Engine.4.0.0.0\lib\net40\Atlantis.Framework.Engine.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.Engine.XmlSerializers">
+    <Reference Include="Atlantis.Framework.Engine.XmlSerializers, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Atlantis.Framework.Engine.4.0.0.0\lib\net40\Atlantis.Framework.Engine.XmlSerializers.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Interface">
       <HintPath>..\packages\Atlantis.Framework.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Interface.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.Render.Pipeline.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.Render.Pipeline.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Render.Pipeline.Interface.dll</HintPath>
+    <Reference Include="Atlantis.Framework.Providers.RenderPipeline.Interface">
+      <HintPath>..\packages\Atlantis.Framework.Providers.RenderPipeline.Interface.4.13.10.15\lib\net40\Atlantis.Framework.Providers.RenderPipeline.Interface.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />

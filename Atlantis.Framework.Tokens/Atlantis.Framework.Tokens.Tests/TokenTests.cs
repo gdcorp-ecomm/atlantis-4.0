@@ -1,7 +1,6 @@
-﻿using Atlantis.Framework.Providers.Containers;
-using Atlantis.Framework.Render.Pipeline;
-using Atlantis.Framework.Render.Pipeline.Interface;
-using Atlantis.Framework.Tokens.Tests.Render;
+﻿using Atlantis.Framework.Providers.RenderPipeline;
+using Atlantis.Framework.Providers.RenderPipeline.Interface;
+using Atlantis.Framework.Testing.MockProviders;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Atlantis.Framework.Tokens.Interface;
 using Atlantis.Framework.Tokens.Tests.Handlers;
@@ -47,7 +46,7 @@ namespace Atlantis.Framework.Tokens.Tests
       TokenManager.AutoRegisterTokenHandlers(Assembly.GetExecutingAssembly());
       string inputText = TestData.GetTextDataResource("inputdata1.txt");
 
-      IProviderContainer container = new ObjectProviderContainer();
+      IProviderContainer container = new MockProviderContainer();
       container.RegisterProvider<IDebugContext, MockDebug>();
 
       string outputText;
@@ -72,7 +71,7 @@ namespace Atlantis.Framework.Tokens.Tests
       TokenManager.RegisterTokenHandler(new ErrorTokenHandler());
       string inputText = TestData.GetTextDataResource("inputdata1.txt");
 
-      IProviderContainer container = new ObjectProviderContainer();
+      IProviderContainer container = new MockProviderContainer();
       container.RegisterProvider<IDebugContext, MockDebug>();
 
       string outputText;
@@ -93,7 +92,7 @@ namespace Atlantis.Framework.Tokens.Tests
       TokenManager.RegisterTokenHandler(new XmlTokenHandler());
       string inputText = TestData.GetTextDataResource("inputdata2.txt");
 
-      IProviderContainer container = new ObjectProviderContainer();
+      IProviderContainer container = new MockProviderContainer();
       container.RegisterProvider<IDebugContext, MockDebug>();
 
       ITokenEncoding tokenEncoding = new QuoteEncoding();
@@ -115,18 +114,15 @@ namespace Atlantis.Framework.Tokens.Tests
       string inputText = TestData.GetTextDataResource("inputdata1.txt");
 
 
-      IProviderContainer container = new ObjectProviderContainer();
+      IProviderContainer container = new MockProviderContainer();
       container.RegisterProvider<IDebugContext, MockDebug>();
-      
-      RenderPipelineManager renderPipelineManager = new RenderPipelineManager();
-      renderPipelineManager.AddRenderHandler(new TokenRenderHandler());
+      container.RegisterProvider<IRenderPipelineProvider, RenderPipelineProvider>();
 
-      IRenderContent renderContent = new TestRenderContent(inputText);
-
-      IProcessedRenderContent processedRenderContent = renderPipelineManager.RenderContent(renderContent, container);
+      IRenderPipelineProvider renderPipelineProvider = container.Resolve<IRenderPipelineProvider>();
+      string output = renderPipelineProvider.RenderContent(inputText, new List<IRenderHandler> {new TokenRenderHandler()});
 
       //no more tokens should exist
-      List<Match> matches = TokenManager.ParseTokenStrings(processedRenderContent.Content);
+      List<Match> matches = TokenManager.ParseTokenStrings(output);
       Assert.IsTrue(matches.Count == 0);
 
       IDebugContext debug = container.Resolve<IDebugContext>();

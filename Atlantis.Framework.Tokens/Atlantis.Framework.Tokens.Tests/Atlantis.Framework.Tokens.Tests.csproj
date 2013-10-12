@@ -39,26 +39,32 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Atlantis.Framework.DataCacheService">
+      <HintPath>..\packages\Atlantis.Framework.DataCacheService.4.0.0.0\lib\net40\Atlantis.Framework.DataCacheService.dll</HintPath>
+    </Reference>
     <Reference Include="Atlantis.Framework.Engine, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Atlantis.Framework.Engine.4.0.0.0\lib\net40\Atlantis.Framework.Engine.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.Engine.XmlSerializers">
+    <Reference Include="Atlantis.Framework.Engine.XmlSerializers, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Atlantis.Framework.Engine.4.0.0.0\lib\net40\Atlantis.Framework.Engine.XmlSerializers.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Atlantis.Framework.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Interface.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.Providers.Containers, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.Providers.Containers.4.0.0.0\lib\net40\Atlantis.Framework.Providers.Containers.dll</HintPath>
+    <Reference Include="Atlantis.Framework.Providers.Preferences.Interface">
+      <HintPath>..\packages\Atlantis.Framework.Providers.Preferences.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Providers.Preferences.Interface.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.Render.Pipeline">
-      <HintPath>..\packages\Atlantis.Framework.Render.Pipeline.4.0.0.0\lib\net40\Atlantis.Framework.Render.Pipeline.dll</HintPath>
+    <Reference Include="Atlantis.Framework.Providers.RenderPipeline">
+      <HintPath>..\packages\Atlantis.Framework.Providers.RenderPipeline.4.13.10.15\lib\net40\Atlantis.Framework.Providers.RenderPipeline.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.Render.Pipeline.Interface">
-      <HintPath>..\packages\Atlantis.Framework.Render.Pipeline.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Render.Pipeline.Interface.dll</HintPath>
+    <Reference Include="Atlantis.Framework.Providers.RenderPipeline.Interface">
+      <HintPath>..\packages\Atlantis.Framework.Providers.RenderPipeline.4.13.10.15\lib\net40\Atlantis.Framework.Providers.RenderPipeline.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Testing.MockProviders">
+      <HintPath>..\packages\Atlantis.Framework.Testing.MockProviders.4.0.0.0\lib\net40\Atlantis.Framework.Testing.MockProviders.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
@@ -112,6 +118,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

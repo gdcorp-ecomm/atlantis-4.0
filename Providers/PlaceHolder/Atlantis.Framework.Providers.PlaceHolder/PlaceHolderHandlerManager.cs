@@ -3,7 +3,7 @@ using System.Text.RegularExpressions;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.PlaceHolder.Interface;
 using Atlantis.Framework.Providers.PlaceHolder.PlaceHolderHandlers;
-using Atlantis.Framework.Render.Pipeline.Interface;
+using Atlantis.Framework.Providers.RenderPipeline.Interface;
 
 namespace Atlantis.Framework.Providers.PlaceHolder
 {

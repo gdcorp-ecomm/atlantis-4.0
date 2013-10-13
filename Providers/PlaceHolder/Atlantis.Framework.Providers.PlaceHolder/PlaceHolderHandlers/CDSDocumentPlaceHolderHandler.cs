@@ -2,6 +2,7 @@
 using Atlantis.Framework.Providers.PlaceHolder.Interface;
 using System;
 using System.Collections.Generic;
+using Atlantis.Framework.Providers.RenderPipeline.Interface;
 
 namespace Atlantis.Framework.Providers.PlaceHolder
 {
@@ -75,7 +76,9 @@ namespace Atlantis.Framework.Providers.PlaceHolder
               placeHolderData.TryGetAttribute(PlaceHolderAttributes.Location, out location))
           {
             string rawContent = cdsContentProvider.GetContent(app, location).Content;
-            renderContent = PlaceHolderRenderPipeline.RunRenderPipeline(rawContent, _context.RenderHandlers, _context.ProviderContainer);
+
+            IRenderPipelineProvider renderPipelineProvider = _context.ProviderContainer.Resolve<IRenderPipelineProvider>();
+            renderContent = renderPipelineProvider.RenderContent(rawContent, _context.RenderHandlers);
           }
           else
           {

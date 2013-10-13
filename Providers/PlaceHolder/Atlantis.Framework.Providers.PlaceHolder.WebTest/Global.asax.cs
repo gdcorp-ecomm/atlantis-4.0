@@ -5,6 +5,8 @@ using Atlantis.Framework.Providers.CDSContent;
 using Atlantis.Framework.Providers.CDSContent.Interface;
 using Atlantis.Framework.Providers.Containers;
 using Atlantis.Framework.Providers.PlaceHolder.Interface;
+using Atlantis.Framework.Providers.RenderPipeline;
+using Atlantis.Framework.Providers.RenderPipeline.Interface;
 using Atlantis.Framework.Testing.MockProviders;
 
 namespace Atlantis.Framework.Providers.PlaceHolder.WebTest
@@ -19,6 +21,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder.WebTest
       HttpProviderContainer.Instance.RegisterProvider<IManagerContext, MockManagerContext>();
       HttpProviderContainer.Instance.RegisterProvider<IPlaceHolderProvider, PlaceHolderProvider>();
       HttpProviderContainer.Instance.RegisterProvider<ICDSContentProvider, CDSContentProvider>();
+      HttpProviderContainer.Instance.RegisterProvider<IRenderPipelineProvider, RenderPipelineProvider>();
     }
 
     protected void Session_Start(object sender, EventArgs e)

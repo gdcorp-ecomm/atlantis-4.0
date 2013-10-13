@@ -1,6 +1,5 @@
-﻿
-using System.Collections.Generic;
-using Atlantis.Framework.Render.Pipeline.Interface;
+﻿using System.Collections.Generic;
+using Atlantis.Framework.Providers.RenderPipeline.Interface;
 
 namespace Atlantis.Framework.Providers.PlaceHolder.Interface
 {

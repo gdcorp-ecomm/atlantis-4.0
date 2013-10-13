@@ -34,6 +34,54 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Atlantis.Framework.AppSettings.Interface">
+      <HintPath>..\packages\Atlantis.Framework.AppSettings.Interface.4.0.0.0\lib\net40\Atlantis.Framework.AppSettings.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.CDS.Interface">
+      <HintPath>..\packages\Atlantis.Framework.CDS.Interface.4.0.0.0\lib\net40\Atlantis.Framework.CDS.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.DataCache">
+      <HintPath>..\packages\Atlantis.Framework.DataCache.4.0.0.0\lib\net40\Atlantis.Framework.DataCache.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.DataCacheGeneric.Interface">
+      <HintPath>..\packages\Atlantis.Framework.DataCacheGeneric.Interface.4.0.0.0\lib\net40\Atlantis.Framework.DataCacheGeneric.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.DataCacheService">
+      <HintPath>..\packages\Atlantis.Framework.DataCacheService.4.0.0.0\lib\net40\Atlantis.Framework.DataCacheService.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Engine">
+      <HintPath>..\packages\Atlantis.Framework.Engine.4.0.0.0\lib\net40\Atlantis.Framework.Engine.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Engine.XmlSerializers">
+      <HintPath>..\packages\Atlantis.Framework.Engine.4.0.0.0\lib\net40\Atlantis.Framework.Engine.XmlSerializers.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Interface">
+      <HintPath>..\packages\Atlantis.Framework.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.PrivateLabel.Interface">
+      <HintPath>..\packages\Atlantis.Framework.PrivateLabel.Interface.4.0.0.0\lib\net40\Atlantis.Framework.PrivateLabel.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Products.Interface">
+      <HintPath>..\packages\Atlantis.Framework.Products.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Products.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Providers.CDSContent.Interface">
+      <HintPath>..\packages\Atlantis.Framework.Providers.CDSContent.Interface.4.13.10.14\lib\net40\Atlantis.Framework.Providers.CDSContent.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Providers.Interface">
+      <HintPath>..\packages\Atlantis.Framework.Providers.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Providers.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Providers.RenderPipeline">
+      <HintPath>..\packages\Atlantis.Framework.Providers.RenderPipeline.4.13.10.15\lib\net40\Atlantis.Framework.Providers.RenderPipeline.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Providers.RenderPipeline.Interface">
+      <HintPath>..\packages\Atlantis.Framework.Providers.RenderPipeline.4.13.10.15\lib\net40\Atlantis.Framework.Providers.RenderPipeline.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Render.Pipeline.Interface">
+      <HintPath>..\packages\Atlantis.Framework.Render.Pipeline.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Render.Pipeline.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.5.0.6\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
@@ -53,8 +101,6 @@
     <Compile Include="PlaceHolderHandlerManager.cs" />
     <Compile Include="PlaceHolderHandlers\WebControlPlaceHolderHandlerBase.cs" />
     <Compile Include="PlaceHolderRules.cs" />
-    <Compile Include="RenderContent\PlaceHolderRenderContent.cs" />
-    <Compile Include="RenderPipeline\PlaceHolderRenderPipeline.cs" />
     <Compile Include="WebControl\WebControlManager.cs" />
     <Compile Include="PlaceHolderHandlers\PlaceHolderHandlerHandlerFactory.cs" />
     <Compile Include="PlaceHolders\CDSDocumentPlaceHolder.cs" />

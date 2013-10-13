@@ -6,9 +6,8 @@ using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.CDSContent;
 using Atlantis.Framework.Providers.CDSContent.Interface;
 using Atlantis.Framework.Providers.PlaceHolder.Interface;
-using Atlantis.Framework.Providers.PlaceHolder.Tests.RenderContent;
-using Atlantis.Framework.Render.Pipeline;
-using Atlantis.Framework.Render.Pipeline.Interface;
+using Atlantis.Framework.Providers.RenderPipeline;
+using Atlantis.Framework.Providers.RenderPipeline.Interface;
 using Atlantis.Framework.Testing.MockHttpContext;
 using Atlantis.Framework.Testing.MockProviders;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -28,6 +27,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder.Tests
       providerContainer.RegisterProvider<IManagerContext, MockManagerContext>();
       providerContainer.RegisterProvider<IPlaceHolderProvider, PlaceHolderProvider>();
       providerContainer.RegisterProvider<ICDSContentProvider, CDSContentProvider>();
+      providerContainer.RegisterProvider<IRenderPipelineProvider, RenderPipelineProvider>();
 
       return providerContainer;
     }
@@ -57,15 +57,11 @@ namespace Atlantis.Framework.Providers.PlaceHolder.Tests
 
       IProviderContainer providerContainer = InitializeProviderContainer();
 
-      RenderPipelineManager renderPipelineManager = new RenderPipelineManager();
-      renderPipelineManager.AddRenderHandler(new PlaceHolderRenderHandler(null));
+      IRenderPipelineProvider renderPipelineProvider = providerContainer.Resolve<IRenderPipelineProvider>();
+      string renderedContent = renderPipelineProvider.RenderContent(placeHolder.ToMarkup(), new List<IRenderHandler> { new PlaceHolderRenderHandler(null) });
 
-      IRenderContent renderContent = new TestRenderContent(placeHolder.ToMarkup());
-
-      IProcessedRenderContent processedRenderContent = renderPipelineManager.RenderContent(renderContent, providerContainer);
-
-      WriteOutput(processedRenderContent.Content);
-      Assert.IsTrue(processedRenderContent.Content.Equals("Web Control One!" + "Init event fired!!!" + "Load event fired!!!" + "PreRender event fired!!!"));
+      WriteOutput(renderedContent);
+      Assert.IsTrue(renderedContent.Equals("Web Control One!" + "Init event fired!!!" + "Load event fired!!!" + "PreRender event fired!!!"));
     }
 
     [TestMethod]
@@ -77,15 +73,11 @@ namespace Atlantis.Framework.Providers.PlaceHolder.Tests
 
       IProviderContainer providerContainer = InitializeProviderContainer();
 
-      RenderPipelineManager renderPipelineManager = new RenderPipelineManager();
-      renderPipelineManager.AddRenderHandler(new PlaceHolderRenderHandler(new List<IRenderHandler> { new AppendRenderHandler("APPENDED RENDER HANDLER CONTENT!!!") }));
+      IRenderPipelineProvider renderPipelineProvider = providerContainer.Resolve<IRenderPipelineProvider>();
+      string renderedContent = renderPipelineProvider.RenderContent(placeHolder.ToMarkup(), new List<IRenderHandler> { new PlaceHolderRenderHandler(new List<IRenderHandler> { new AppendRenderHandler("APPENDED RENDER HANDLER CONTENT!!!") }) });
 
-      IRenderContent renderContent = new TestRenderContent(placeHolder.ToMarkup());
-
-      IProcessedRenderContent processedRenderContent = renderPipelineManager.RenderContent(renderContent, providerContainer);
-
-      WriteOutput(processedRenderContent.Content);
-      Assert.IsTrue(processedRenderContent.Content.Equals("Web Control One!" + "Init event fired!!!" + "Load event fired!!!" + "PreRender event fired!!!" + "APPENDED RENDER HANDLER CONTENT!!!"));
+      WriteOutput(renderedContent);
+      Assert.IsTrue(renderedContent.Equals("Web Control One!" + "Init event fired!!!" + "Load event fired!!!" + "PreRender event fired!!!" + "APPENDED RENDER HANDLER CONTENT!!!"));
     }
 
     [TestMethod]
@@ -93,15 +85,11 @@ namespace Atlantis.Framework.Providers.PlaceHolder.Tests
     {
       IProviderContainer providerContainer = InitializeProviderContainer();
 
-      RenderPipelineManager renderPipelineManager = new RenderPipelineManager();
-      renderPipelineManager.AddRenderHandler(new PlaceHolderRenderHandler(null));
+      IRenderPipelineProvider renderPipelineProvider = providerContainer.Resolve<IRenderPipelineProvider>();
+      string renderedContent = renderPipelineProvider.RenderContent(null, new List<IRenderHandler> { new PlaceHolderRenderHandler(null) });
 
-      IRenderContent renderContent = new TestRenderContent(null);
-
-      IProcessedRenderContent processedRenderContent = renderPipelineManager.RenderContent(renderContent, providerContainer);
-
-      WriteOutput(processedRenderContent.Content);
-      Assert.IsTrue(processedRenderContent.Content == string.Empty);
+      WriteOutput(renderedContent);
+      Assert.IsTrue(renderedContent == null);
     }
 
     [TestMethod]
@@ -109,15 +97,11 @@ namespace Atlantis.Framework.Providers.PlaceHolder.Tests
     {
       IProviderContainer providerContainer = InitializeProviderContainer();
 
-      RenderPipelineManager renderPipelineManager = new RenderPipelineManager();
-      renderPipelineManager.AddRenderHandler(new PlaceHolderRenderHandler(null));
+      IRenderPipelineProvider renderPipelineProvider = providerContainer.Resolve<IRenderPipelineProvider>();
+      string renderedContent = renderPipelineProvider.RenderContent(string.Empty, new List<IRenderHandler> { new PlaceHolderRenderHandler(null) });
 
-      IRenderContent renderContent = new TestRenderContent(null);
-
-      IProcessedRenderContent processedRenderContent = renderPipelineManager.RenderContent(renderContent, providerContainer);
-
-      WriteOutput(processedRenderContent.Content);
-      Assert.IsTrue(processedRenderContent.Content == string.Empty);
+      WriteOutput(renderedContent);
+      Assert.IsTrue(renderedContent == string.Empty);
     }
   }
 }

@@ -2,7 +2,7 @@
 using System.Collections.ObjectModel;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.PlaceHolder.Interface;
-using Atlantis.Framework.Render.Pipeline.Interface;
+using Atlantis.Framework.Providers.RenderPipeline.Interface;
 
 namespace Atlantis.Framework.Providers.PlaceHolder
 {

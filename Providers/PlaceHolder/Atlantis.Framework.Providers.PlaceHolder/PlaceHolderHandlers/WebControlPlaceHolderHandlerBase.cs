@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Web.UI;
 using Atlantis.Framework.Providers.PlaceHolder.Interface;
+using Atlantis.Framework.Providers.RenderPipeline.Interface;
 
 namespace Atlantis.Framework.Providers.PlaceHolder
 {
@@ -93,7 +94,9 @@ namespace Atlantis.Framework.Providers.PlaceHolder
       try
       {
         string renderedContent = WebControlManager.Render(_control);
-        finalContent = PlaceHolderRenderPipeline.RunRenderPipeline(renderedContent, _context.RenderHandlers, _context.ProviderContainer);
+
+        IRenderPipelineProvider renderPipelineProvider = _context.ProviderContainer.Resolve<IRenderPipelineProvider>();
+        finalContent = renderPipelineProvider.RenderContent(renderedContent, _context.RenderHandlers);
       }
       catch (ThreadAbortException)
       {

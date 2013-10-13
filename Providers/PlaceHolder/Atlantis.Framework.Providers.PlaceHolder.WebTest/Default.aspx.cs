@@ -1,4 +1,5 @@
 ﻿using System;
+using Atlantis.Framework.Web.RenderPipeline;
 
 namespace Atlantis.Framework.Providers.PlaceHolder.WebTest
 {
@@ -8,7 +9,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder.WebTest
     {
       base.OnInit(e);
 
-      AddRenderHandler(new PlaceHolderRenderHandler(null));
+      AddRenderHandlers(new PlaceHolderRenderHandler(null));
     }
   }
 }

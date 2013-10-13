@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Reflection;
 using Atlantis.Framework.DotTypeCache.Interface;
-using System.Collections.Generic;
 using Atlantis.Framework.Providers.Containers;
 
 namespace Atlantis.Framework.DotTypeCache
@@ -9,6 +8,7 @@ namespace Atlantis.Framework.DotTypeCache
   public sealed class DotTypeCache
   {
     public static string FileVersion { get; set; }
+
     public static string InterfaceVersion { get; set; }
 
     static DotTypeCache()

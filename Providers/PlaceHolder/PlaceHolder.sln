@@ -1,8 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{9311BE7D-A1B3-4D04-9764-8373207EE6D3}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Providers.PlaceHolder.Interface", "Atlantis.Framework.Providers.PlaceHolder.Interface\Atlantis.Framework.Providers.PlaceHolder.Interface.csproj", "{E9297A57-BDAF-45A3-AC6C-891F5235385F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Providers.PlaceHolder", "Atlantis.Framework.Providers.PlaceHolder\Atlantis.Framework.Providers.PlaceHolder.csproj", "{57D6C492-F584-43EF-8F3C-D433179297D7}"

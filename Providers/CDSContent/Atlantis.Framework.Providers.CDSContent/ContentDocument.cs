@@ -1,6 +1,6 @@
 ﻿using Atlantis.Framework.CDS.Interface;
 using Atlantis.Framework.Interface;
-using Atlantis.Framework.Render.Pipeline.Interface;
+using Atlantis.Framework.Providers.RenderPipeline.Interface;
 using System;
 
 namespace Atlantis.Framework.Providers.CDSContent

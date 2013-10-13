@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Atlantis.Framework.CDS.Interface;
-using Atlantis.Framework.DataCache;
-using System.Net;
-using Atlantis.Framework.Interface;
 using System.Collections.ObjectModel;
 
 namespace Atlantis.Framework.CDS.Tests

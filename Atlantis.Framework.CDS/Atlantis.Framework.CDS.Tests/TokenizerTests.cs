@@ -8,11 +8,10 @@ using Atlantis.Framework.Providers.Currency;
 using Atlantis.Framework.Providers.Interface.Currency;
 using Atlantis.Framework.Providers.Interface.Links;
 using Atlantis.Framework.Providers.Interface.Products;
-using Atlantis.Framework.Providers.Interface.ProviderContainer;
 using Atlantis.Framework.Providers.Links;
 using Atlantis.Framework.Providers.Products;
 using Atlantis.Framework.Testing.MockHttpContext;
-using Helpers;
+using Atlantis.Framework.Testing.MockProviders;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SiteConstants;
 
@@ -81,24 +80,38 @@ namespace Atlantis.Framework.CDS.Tests
     //
     #endregion
 
+    private IProviderContainer _providerContainer;
+    private IProviderContainer ProviderContainer
+    {
+      get
+      {
+        if (_providerContainer == null)
+        {
+          _providerContainer = new MockProviderContainer();
+          _providerContainer.RegisterProvider<ISiteContext, TestContexts>();
+          _providerContainer.RegisterProvider<IShopperContext, TestContexts>();
+          _providerContainer.RegisterProvider<IManagerContext, TestContexts>();
+          _providerContainer.RegisterProvider<ILinkProvider, LinkProvider>();
+          _providerContainer.RegisterProvider<IProductProvider, ProductProvider>();
+          _providerContainer.RegisterProvider<ICurrencyProvider, CurrencyProvider>();
+        }
+
+        return _providerContainer;
+      }
+    }
+
     [TestInitialize]
     public void InitializeTests()
     {
       var privateLabelId = 1;
       var shopperId = string.Empty;
       MockHttpContext.SetMockHttpContext("default.aspx", "http://www.debug.godaddy-com.ide/", string.Empty);
-      HttpProviderContainer.Instance.RegisterProvider<ISiteContext, TestContexts>();
-      HttpProviderContainer.Instance.RegisterProvider<IShopperContext, TestContexts>();
-      HttpProviderContainer.Instance.RegisterProvider<IManagerContext, TestContexts>();
-      HttpProviderContainer.Instance.RegisterProvider<ILinkProvider, LinkProvider>();
-      HttpProviderContainer.Instance.RegisterProvider<IProductProvider, ProductProvider>();
-      HttpProviderContainer.Instance.RegisterProvider<ICurrencyProvider, CurrencyProvider>();
 
-      ISiteContext siteContext = HttpProviderContainer.Instance.Resolve<ISiteContext>();
+      ISiteContext siteContext = ProviderContainer.Resolve<ISiteContext>();
       TestContexts testContexts = (TestContexts)siteContext;
       testContexts.SetContextInfo(privateLabelId, shopperId);
 
-      IShopperContext shopperContext = HttpProviderContainer.Instance.Resolve<IShopperContext>();
+      IShopperContext shopperContext = ProviderContainer.Resolve<IShopperContext>();
       shopperContext.SetLoggedInShopper(shopperId);
     }
 
@@ -618,7 +631,7 @@ namespace Atlantis.Framework.CDS.Tests
       get
       {
         if (_currencyProvider == null)
-          _currencyProvider = HttpProviderContainer.Instance.Resolve<ICurrencyProvider>();
+          _currencyProvider = ProviderContainer.Resolve<ICurrencyProvider>();
         return _currencyProvider;
       }
     }
@@ -629,7 +642,7 @@ namespace Atlantis.Framework.CDS.Tests
       get
       {
         if (_productProvider == null)
-          _productProvider = HttpProviderContainer.Instance.Resolve<IProductProvider>();
+          _productProvider = ProviderContainer.Resolve<IProductProvider>();
         return _productProvider;
       }
     }
@@ -641,7 +654,7 @@ namespace Atlantis.Framework.CDS.Tests
       {
         if (_links == null)
         {
-          _links = HttpProviderContainer.Instance.Resolve<ILinkProvider>();
+          _links = ProviderContainer.Resolve<ILinkProvider>();
         }
         return _links;
       }
@@ -666,9 +679,9 @@ namespace Atlantis.Framework.CDS.Tests
 
     #region Helper Items
 
-    private string GetTransactionalPriceFromUSD(int price, bool dropDecimal)
+    private string GetTransactionalPriceFromUSD(int price, bool dropDecimal = false)
     {
-      return Currency.PriceText(CurrencyHelper.GetTransactionalPriceFromUSD(price), false, dropDecimal);
+      return Currency.PriceText(Currency.GetCurrentPrice(price));
     }
 
     private string GetProductYearlyCurrentPrice(int productId, bool dropDecimal)

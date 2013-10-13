@@ -1,6 +1,8 @@
 ﻿using Atlantis.Framework.CDS.Interface;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.CDSContent.Interface;
+using Atlantis.Framework.Providers.RenderPipeline;
+using Atlantis.Framework.Providers.RenderPipeline.Interface;
 using Atlantis.Framework.Testing.MockHttpContext;
 using Atlantis.Framework.Testing.MockProviders;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -24,6 +26,7 @@ namespace Atlantis.Framework.Providers.CDSContent.Tests
           _providerContainer.RegisterProvider<ISiteContext, MockSiteContext>();
           _providerContainer.RegisterProvider<IShopperContext, MockShopperContext>();
           _providerContainer.RegisterProvider<IManagerContext, MockManagerContext>();
+          _providerContainer.RegisterProvider<IRenderPipelineProvider, RenderPipelineProvider>();
           _providerContainer.RegisterProvider<ICDSContentProvider, CDSContentProvider>();
 
           MockProviderContainer mockContainer = _providerContainer as MockProviderContainer;

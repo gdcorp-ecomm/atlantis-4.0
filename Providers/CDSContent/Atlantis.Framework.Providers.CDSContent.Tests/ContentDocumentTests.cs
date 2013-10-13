@@ -1,16 +1,9 @@
-﻿using Atlantis.Framework.CDS.Interface;
-using Atlantis.Framework.Conditions.Interface;
-using Atlantis.Framework.Interface;
-using Atlantis.Framework.Providers.CDSContent.Interface;
-using Atlantis.Framework.Providers.CDSContent.Tests.RenderHandlers;
+﻿using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.Containers;
-using Atlantis.Framework.Render.Pipeline;
-using Atlantis.Framework.Render.Pipeline.Interface;
+using Atlantis.Framework.Providers.RenderPipeline.Interface;
 using Atlantis.Framework.Testing.MockHttpContext;
 using Atlantis.Framework.Testing.MockProviders;
-using Atlantis.Framework.Tokens.Interface;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Reflection;
 
 namespace Atlantis.Framework.Providers.CDSContent.Tests
 {
@@ -23,28 +16,6 @@ namespace Atlantis.Framework.Providers.CDSContent.Tests
     private IProviderContainer ObjectProviderContainer
     {
       get { return _objectProviderContainer ?? (_objectProviderContainer = new ObjectProviderContainer()); }
-    }
-
-    private IProviderContainer _providerContainer;
-    private IProviderContainer ProviderContainer
-    {
-      get
-      {
-        if (_providerContainer == null)
-        {
-          _providerContainer = new MockProviderContainer();
-          _providerContainer.RegisterProvider<ISiteContext, MockSiteContext>();
-          _providerContainer.RegisterProvider<IShopperContext, MockShopperContext>();
-          _providerContainer.RegisterProvider<IManagerContext, MockManagerContext>();
-          _providerContainer.RegisterProvider<ICDSContentProvider, CDSContentProvider>();
-
-          MockProviderContainer mockContainer = _providerContainer as MockProviderContainer;
-          mockContainer.SetMockSetting(MockSiteContextSettings.IsRequestInternal, true);
-          mockContainer.SetMockSetting(MockSiteContextSettings.ServerLocation, ServerLocationType.Dev);
-        }
-
-        return _providerContainer;
-      }
     }
 
     private void RegisterProviders()

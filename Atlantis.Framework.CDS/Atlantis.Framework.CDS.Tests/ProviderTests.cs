@@ -1,12 +1,12 @@
 ﻿using Atlantis.Framework.Providers.CDS;
 using Atlantis.Framework.Providers.Interface.CDS;
+using Atlantis.Framework.Providers.Interface.Currency;
+using Atlantis.Framework.Providers.Interface.Links;
+using Atlantis.Framework.Providers.Interface.Products;
+using Atlantis.Framework.Testing.MockProviders;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Testing.MockHttpContext;
-using Atlantis.Framework.Providers.Interface.ProviderContainer;
-using Atlantis.Framework.Providers.Interface.Links;
-using Atlantis.Framework.Providers.Interface.Products;
-using Atlantis.Framework.Providers.Interface.Currency;
 using Atlantis.Framework.Providers.Links;
 using Atlantis.Framework.Providers.Products;
 using Atlantis.Framework.Providers.Currency;
@@ -45,32 +45,31 @@ namespace Atlantis.Framework.CDS.Tests
       }
     }
 
-    #region Additional test attributes
-    //
-    // You can use the following additional attributes as you write your tests:
-    //
-    // Use ClassInitialize to run code before running the first test in the class
-    // [ClassInitialize()]
-    // public static void MyClassInitialize(TestContext testContext) { }
-    //
-    // Use ClassCleanup to run code after all tests in a class have run
-    // [ClassCleanup()]
-    // public static void MyClassCleanup() { }
-    //
-    // Use TestInitialize to run code before running each test 
-    // [TestInitialize()]
-    // public void MyTestInitialize() { }
-    //
-    // Use TestCleanup to run code after each test has run
-    // [TestCleanup()]
-    // public void MyTestCleanup() { }
-    //
-    #endregion
-
     public class PageData
     {
       public string Stuff { get; set; }
       public string Noise { get; set; }
+    }
+
+    private IProviderContainer _providerContainer;
+    private IProviderContainer ProviderContainer
+    {
+      get
+      {
+        if (_providerContainer == null)
+        {
+          _providerContainer = new MockProviderContainer();
+          _providerContainer.RegisterProvider<ISiteContext, TestContexts>();
+          _providerContainer.RegisterProvider<IShopperContext, TestContexts>();
+          _providerContainer.RegisterProvider<IManagerContext, TestContexts>();
+          _providerContainer.RegisterProvider<ILinkProvider, LinkProvider>();
+          _providerContainer.RegisterProvider<IProductProvider, ProductProvider>();
+          _providerContainer.RegisterProvider<ICurrencyProvider, CurrencyProvider>();
+          _providerContainer.RegisterProvider<ICDSProvider, CDSProvider>();
+        }
+
+        return _providerContainer;
+      }
     }
 
     [TestInitialize]
@@ -79,19 +78,15 @@ namespace Atlantis.Framework.CDS.Tests
       var privateLabelId = 1;
       var shopperId = string.Empty;
       MockHttpContext.SetMockHttpContext("default.aspx", "http://www.debug.godaddy-com.ide/", string.Empty);
-      HttpProviderContainer.Instance.RegisterProvider<ISiteContext, TestContexts>();
-      HttpProviderContainer.Instance.RegisterProvider<IShopperContext, TestContexts>();
-      HttpProviderContainer.Instance.RegisterProvider<IManagerContext, TestContexts>();
-      HttpProviderContainer.Instance.RegisterProvider<ILinkProvider, LinkProvider>();
-      HttpProviderContainer.Instance.RegisterProvider<IProductProvider, ProductProvider>();
-      HttpProviderContainer.Instance.RegisterProvider<ICurrencyProvider, CurrencyProvider>();
-      HttpProviderContainer.Instance.RegisterProvider<ICDSProvider, CDSProvider>();
+      
 
-      ISiteContext siteContext = HttpProviderContainer.Instance.Resolve<ISiteContext>();
+      
+
+      ISiteContext siteContext = ProviderContainer.Resolve<ISiteContext>();
       TestContexts testContexts = (TestContexts)siteContext;
       testContexts.SetContextInfo(privateLabelId, shopperId);
 
-      IShopperContext shopperContext = HttpProviderContainer.Instance.Resolve<IShopperContext>();
+      IShopperContext shopperContext = ProviderContainer.Resolve<IShopperContext>();
       shopperContext.SetLoggedInShopper(shopperId);
     }
 
@@ -102,7 +97,7 @@ namespace Atlantis.Framework.CDS.Tests
       //Arrange
 
       //Act
-      ICDSProvider provider = HttpProviderContainer.Instance.Resolve<ICDSProvider>();
+      ICDSProvider provider = ProviderContainer.Resolve<ICDSProvider>();
       PageData model = provider.GetModel<PageData>("en/sales/1/domainaddon/domain-backorders.aspx", null);
 
       //Assert
@@ -116,7 +111,7 @@ namespace Atlantis.Framework.CDS.Tests
         //Arrange
 
         //Act
-        ICDSProvider provider = HttpProviderContainer.Instance.Resolve<ICDSProvider>();
+        ICDSProvider provider = ProviderContainer.Resolve<ICDSProvider>();
         PageData model = provider.GetModel<PageData>("sales/1/danica", null);
 
         //Assert
@@ -131,7 +126,7 @@ namespace Atlantis.Framework.CDS.Tests
 
 
       //Act
-      ICDSProvider provider = HttpProviderContainer.Instance.Resolve<ICDSProvider>();
+      ICDSProvider provider = ProviderContainer.Resolve<ICDSProvider>();
       var data = provider.GetJson("gdtv/celebs/leeann-dearing/",null);
       PageData model = provider.GetModel<PageData>("gdtv/celebs/leeann-dearing/", null);
 
@@ -145,7 +140,7 @@ namespace Atlantis.Framework.CDS.Tests
     public void Provider_Homepage_ES_test()
     {
       //Arrange
-      ICDSProvider provider = HttpProviderContainer.Instance.Resolve<ICDSProvider>();
+      ICDSProvider provider = ProviderContainer.Resolve<ICDSProvider>();
 
       //Act
       var data = provider.GetJson("content/es/sales/1/homepage/new/magic", null);
@@ -161,7 +156,7 @@ namespace Atlantis.Framework.CDS.Tests
       //Arrange
 
       //Act
-      ICDSProvider provider = HttpProviderContainer.Instance.Resolve<ICDSProvider>();
+      ICDSProvider provider = ProviderContainer.Resolve<ICDSProvider>();
       var data = provider.GetJson("content/es/sales/1/homepage/new/default", null);
 
       //Assert
@@ -174,7 +169,7 @@ namespace Atlantis.Framework.CDS.Tests
       //Arrange
 
       //Act
-      ICDSProvider provider = HttpProviderContainer.Instance.Resolve<ICDSProvider>();
+      ICDSProvider provider = ProviderContainer.Resolve<ICDSProvider>();
       var data = provider.GetJson("test/invalid/PoorlyFormed", null);
 
       //Assert

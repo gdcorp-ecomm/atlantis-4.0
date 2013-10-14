@@ -25,8 +25,7 @@ namespace Atlantis.Framework.Providers.CDSContent
 
       if (siteContext.IsRequestInternal && HttpContext.Current != null)
       {
-        var queryString = HttpContext.Current.Request.QueryString;
-        string list = queryString[CLIENT_SPOOF_PARAM_NAME];
+        string list = HttpContext.Current.Request.Params[CLIENT_SPOOF_PARAM_NAME];
         string rawPathWithoutPrefix = DefaultContentPath.Replace(PATH_PREFIX, string.Empty);
         string versionId = GetSpoofedVersionId(rawPathWithoutPrefix, list);
         if (IsValidContentId(versionId))

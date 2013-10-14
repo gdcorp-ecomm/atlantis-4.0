@@ -2,6 +2,7 @@
 using Atlantis.Framework.Providers.CDSContent.Interface;
 using Atlantis.Framework.Providers.PlaceHolder;
 using Atlantis.Framework.Providers.PlaceHolder.Interface;
+using Atlantis.Framework.Providers.RenderPipeline.Interface;
 using Atlantis.Framework.Testing.MockHttpContext;
 using Atlantis.Framework.Testing.MockProviders;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -28,6 +29,7 @@ namespace Atlantis.Framework.Providers.CDSContent.Tests
         providerContainer.RegisterProvider<IManagerContext, MockManagerContext>();
         providerContainer.RegisterProvider<ICDSContentProvider, CDSContentProvider>();
         providerContainer.RegisterProvider<IPlaceHolderProvider, PlaceHolderProvider>();
+        providerContainer.RegisterProvider<IRenderPipelineProvider, RenderPipeline.RenderPipelineProvider>();
 
         return providerContainer;
       }
@@ -80,11 +82,11 @@ namespace Atlantis.Framework.Providers.CDSContent.Tests
     [TestMethod]
     public void Can_both_ContentVersion_and_CDSPlaceHolderVersion_Be_Spoofed()
     {
-      string url = "http://www.debug.godaddy-com.ide/home?version=atlantis/_global/nesteddocument|5254834bf778fc3be4d63525,atlantis/_global/bannerimage|525487f3f778fc3be4d63526";
+      string url = "http://www.debug.godaddy-com.ide/?version=sales/unittest/nesteddocument|525c35ebf778fc1e18aaf48f,sales/unittest/cdsplaceholder|525c35bdf778fc1e18aaf48d";
       SetUrl(url);
 
       CDSContentProvider provider = new CDSContentProvider(ProviderContainer);
-      var result = provider.GetContent("atlantis", "_global/nesteddocument");
+      var result = provider.GetContent("sales", "unittest/nesteddocument");
 
       IPlaceHolderProvider placeHolderProvider = ProviderContainer.Resolve<IPlaceHolderProvider>();
 

@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Provider
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Providers.CDSContent.Tests", "Atlantis.Framework.Providers.CDSContent.Tests\Atlantis.Framework.Providers.CDSContent.Tests.csproj", "{74CDAE7D-55B0-4B93-8E21-58F486277F26}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{2A1DA6A7-D505-4565-93F2-166AD6CE6EE0}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Providers.PlaceHolder", "..\PlaceHolder\Atlantis.Framework.Providers.PlaceHolder\Atlantis.Framework.Providers.PlaceHolder.csproj", "{57D6C492-F584-43EF-8F3C-D433179297D7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Providers.PlaceHolder.Interface", "..\PlaceHolder\Atlantis.Framework.Providers.PlaceHolder.Interface\Atlantis.Framework.Providers.PlaceHolder.Interface.csproj", "{E9297A57-BDAF-45A3-AC6C-891F5235385F}"
@@ -27,9 +29,11 @@ Global
 		SccProjectName3 = Atlantis.Framework.Providers.CDSContent.Tests
 		SccLocalPath3 = Atlantis.Framework.Providers.CDSContent.Tests
 		SccProjectUniqueName4 = ..\\PlaceHolder\\Atlantis.Framework.Providers.PlaceHolder\\Atlantis.Framework.Providers.PlaceHolder.csproj
+		SccProjectTopLevelParentUniqueName4 = CDSContent.sln
 		SccProjectName4 = ../PlaceHolder/Atlantis.Framework.Providers.PlaceHolder
 		SccLocalPath4 = ..\\PlaceHolder\\Atlantis.Framework.Providers.PlaceHolder
 		SccProjectUniqueName5 = ..\\PlaceHolder\\Atlantis.Framework.Providers.PlaceHolder.Interface\\Atlantis.Framework.Providers.PlaceHolder.Interface.csproj
+		SccProjectTopLevelParentUniqueName5 = CDSContent.sln
 		SccProjectName5 = ../PlaceHolder/Atlantis.Framework.Providers.PlaceHolder.Interface
 		SccLocalPath5 = ..\\PlaceHolder\\Atlantis.Framework.Providers.PlaceHolder.Interface
 	EndGlobalSection
@@ -61,5 +65,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{57D6C492-F584-43EF-8F3C-D433179297D7} = {2A1DA6A7-D505-4565-93F2-166AD6CE6EE0}
+		{E9297A57-BDAF-45A3-AC6C-891F5235385F} = {2A1DA6A7-D505-4565-93F2-166AD6CE6EE0}
 	EndGlobalSection
 EndGlobal

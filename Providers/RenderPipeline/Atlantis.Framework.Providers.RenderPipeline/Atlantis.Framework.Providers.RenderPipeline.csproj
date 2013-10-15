@@ -68,12 +68,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="atlantis.config" />
     <None Include="Atlantis.Framework.Providers.RenderPipeline.nuget.bat" />
     <None Include="Atlantis.Framework.RenderPipelineProvider.nuspec">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>

@@ -12,43 +12,28 @@ namespace Atlantis.Framework.CH.DotTypeCache
 
     public bool EvaluateCondition(string conditionName, IList<string> parameters, IProviderContainer providerContainer)
     {
-      bool result = false;
+      bool isAnyPhaseActive = false;
 
       if (parameters.Count >= 2)
       {
         try
         {
           var dotTypeProvider = providerContainer.Resolve<IDotTypeProvider>();
-          var formatDotType = parameters[0].Replace("'", string.Empty).ToUpperInvariant();
+          var formatDotType = parameters[0].ToUpperInvariant();
           var dotType = dotTypeProvider.GetDotTypeInfo(formatDotType);
 
-          if (!dotType.DotType.Equals("INVALID"))
+          if (!(dotType is InvalidDotType))
           {
-            foreach (var phases in parameters)
-            {
-              switch (phases.ToUpperInvariant())
-              {
-                case TokenPreReg.GeneralAvailability:
-                  result = dotType.IsLivePhase(LaunchPhases.GeneralAvailability);
-                  break;
-                case TokenPreReg.EarlyAccess:
-                  result = dotType.IsLivePhase(LaunchPhases.Landrush);
-                  break;
-                case TokenPreReg.Landrush:
-                  result = dotType.IsLivePhase(LaunchPhases.Landrush);
-                  break;
-                case TokenPreReg.Sunrise:
-                  result = dotType.IsLivePhase(LaunchPhases.SunriseA);
-                  result = dotType.IsLivePhase(LaunchPhases.SunriseB);
-                  result = dotType.IsLivePhase(LaunchPhases.SunriseC);
-                  break;
-              }
+            ITLDLaunchPhaseGroupCollection launchPhaseGroupCollection = dotType.GetAllLaunchPhaseGroups();
 
-              if (result)
+            for (int i = 1; i < parameters.Count; i++)
+            {
+              isAnyPhaseActive = IsPhaseActive(parameters[i], launchPhaseGroupCollection);
+
+              if (isAnyPhaseActive)
               {
                 break;
               }
-
             }
           }
           else
@@ -69,15 +54,55 @@ namespace Atlantis.Framework.CH.DotTypeCache
         Engine.Engine.LogAtlantisException(aex);
       }
 
-      return result;
+      return isAnyPhaseActive;
+    }
+
+    private bool IsPhaseActive(string phase, ITLDLaunchPhaseGroupCollection launchPhaseGroupCollection)
+    {
+      bool isPhaseActive = false;
+
+      ITLDLaunchPhaseGroup launchPhaseGroup;
+
+      switch (phase.ToUpperInvariant())
+      {
+        case TldPhaseActiveAnyPhaseTypes.GeneralAvailability:
+          if (launchPhaseGroupCollection.TryGetGroup(LaunchPhaseGroupTypes.GeneralAvailability, out launchPhaseGroup))
+          {
+            isPhaseActive = launchPhaseGroup.Phases[0].LivePeriod.IsActive;
+          }
+          break;
+        case TldPhaseActiveAnyPhaseTypes.PreRegGeneralAvailability:
+          if (launchPhaseGroupCollection.TryGetGroup(LaunchPhaseGroupTypes.GeneralAvailability, out launchPhaseGroup))
+          {
+            isPhaseActive = launchPhaseGroup.Phases[0].PreRegistrationPeriod.IsActive;
+          }
+          break;
+        case TldPhaseActiveAnyPhaseTypes.Landrush:
+          isPhaseActive = IsLaunchPhaseGroupActive(LaunchPhaseGroupTypes.Landrush, launchPhaseGroupCollection);
+          break;
+        case TldPhaseActiveAnyPhaseTypes.EarlyRegistration:
+          isPhaseActive = IsLaunchPhaseGroupActive(LaunchPhaseGroupTypes.EarlyRegistration, launchPhaseGroupCollection);
+          break;
+        case TldPhaseActiveAnyPhaseTypes.Sunrise:
+          isPhaseActive = IsLaunchPhaseGroupActive(LaunchPhaseGroupTypes.Sunrise, launchPhaseGroupCollection);
+          break;
+      }
+
+      return isPhaseActive;
+    }
+
+    private bool IsLaunchPhaseGroupActive(LaunchPhaseGroupTypes groupType, ITLDLaunchPhaseGroupCollection launchPhaseGroupCollection)
+    {
+      bool isActive = false;
+
+      ITLDLaunchPhaseGroup group;
+
+      if (launchPhaseGroupCollection.TryGetGroup(groupType, out group))
+      {
+        isActive = group.Phases[0].PreRegistrationPeriod.IsActive || group.Phases[0].LivePeriod.IsActive;
+      }
+
+      return isActive;
     }
   }
-}
-
-public static class TokenPreReg
-{
-  public const string Sunrise = "SR";
-  public const string EarlyAccess = "EA";
-  public const string Landrush = "LR";
-  public const string GeneralAvailability = "GA";
 }

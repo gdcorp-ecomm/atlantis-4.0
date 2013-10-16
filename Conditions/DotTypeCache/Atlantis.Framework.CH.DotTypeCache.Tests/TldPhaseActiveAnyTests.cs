@@ -12,10 +12,24 @@ namespace Atlantis.Framework.CH.DotTypeCache.Tests
   [TestClass]
   [DeploymentItem("atlantis.config")]
   [DeploymentItem("dottypecache.config")]
-  [DeploymentItem("Atlantis.Framework.AppSettings.Impl.dll")]    
+  [DeploymentItem("Atlantis.Framework.AppSettings.Impl.dll")]
   [DeploymentItem("Atlantis.Framework.CH.DotTypeCache.dll")]
-  [DeploymentItem("Atlantis.Framework.TLDDataCache.Impl.dll")]
+  [DeploymentItem("Atlantis.Framework.DCCDomainsDataCache.Interface.dll")]
   [DeploymentItem("Atlantis.Framework.DCCDomainsDataCache.Impl.dll")]
+  [DeploymentItem("Atlantis.Framework.DomainContactFields.Interface.dll")]
+  [DeploymentItem("Atlantis.Framework.DomainContactFields.Impl.dll")]
+  [DeploymentItem("Atlantis.Framework.DotTypeAvailability.Interface.dll")]
+  [DeploymentItem("Atlantis.Framework.DotTypeAvailability.Impl.dll")]
+  [DeploymentItem("Atlantis.Framework.DotTypeCache.Interface.dll")]
+  [DeploymentItem("Atlantis.Framework.DotTypeCache.dll")]
+  [DeploymentItem("Atlantis.Framework.DotTypeCache.Static.dll")]
+  [DeploymentItem("Atlantis.Framework.DotTypeCache.StaticTypes.dll")]
+  [DeploymentItem("Atlantis.Framework.RegDotTypeProductIds.Interface.dll")]
+  [DeploymentItem("Atlantis.Framework.RegDotTypeProductIds.Impl.dll")]
+  [DeploymentItem("Atlantis.Framework.RegDotTypeRegistry.Interface.dll")]
+  [DeploymentItem("Atlantis.Framework.RegDotTypeRegistry.Impl.dll")]
+  [DeploymentItem("Atlantis.Framework.TLDDataCache.Interface.dll")]
+  [DeploymentItem("Atlantis.Framework.TLDDataCache.Impl.dll")]
   public class TldPhaseActiveAnyTests
   {
     private ExpressionParserManager GetExpressionParserManager(IProviderContainer container)
@@ -58,7 +72,7 @@ namespace Atlantis.Framework.CH.DotTypeCache.Tests
     {
       var expressionParserManager = MockContainerExpressionParserManager();
 
-      const string expression = "tldPhaseActiveAny(fghjfytrtyr)";
+      const string expression = "tldPhaseActiveAny([fghjfytrtyr])";
       var result = expressionParserManager.EvaluateExpression(expression);
 
       Assert.IsFalse(result);
@@ -69,7 +83,7 @@ namespace Atlantis.Framework.CH.DotTypeCache.Tests
     {
       var expressionParserManager = MockContainerExpressionParserManager();
 
-      const string expression = "tldPhaseActiveAny(fhsajfhdsja, fydusaifydsui)";
+      const string expression = "tldPhaseActiveAny([fhsajfhdsja], fydusaifydsui)";
       var result = expressionParserManager.EvaluateExpression(expression);
 
       Assert.IsFalse(result);
@@ -80,7 +94,7 @@ namespace Atlantis.Framework.CH.DotTypeCache.Tests
     {
       var expressionParserManager = MockContainerExpressionParserManager();
 
-      const string expression = "tldPhaseActiveAny(fydusaifydsui, GA)";
+      const string expression = "tldPhaseActiveAny([fydusaifydsui], GA)";
       var result = expressionParserManager.EvaluateExpression(expression);
 
       Assert.IsFalse(result);
@@ -91,7 +105,7 @@ namespace Atlantis.Framework.CH.DotTypeCache.Tests
     {
       var expressionParserManager = MockContainerExpressionParserManager();
 
-      const string expression = "tldPhaseActiveAny('K.BORG', LR)";
+      const string expression = "tldPhaseActiveAny([K.BORG], LR)";
       bool result = expressionParserManager.EvaluateExpression(expression);
 
       Assert.IsTrue(result);
@@ -102,7 +116,7 @@ namespace Atlantis.Framework.CH.DotTypeCache.Tests
     {
       var expressionParserManager = MockContainerExpressionParserManager();
 
-      const string expression = "tldPhaseActiveAny('k.borg', GA, LR)";
+      const string expression = "tldPhaseActiveAny([k.borg], GA, LR)";
       var result = expressionParserManager.EvaluateExpression(expression);
 
       Assert.IsTrue(result);
@@ -113,7 +127,7 @@ namespace Atlantis.Framework.CH.DotTypeCache.Tests
     {
       var expressionParserManager = MockContainerExpressionParserManager();
 
-      const string expression = "tldPhaseActiveAny('K.bOrG', lR)";
+      const string expression = "tldPhaseActiveAny([K.bOrG], lR)";
       var result = expressionParserManager.EvaluateExpression(expression);
 
       Assert.IsTrue(result);
@@ -124,7 +138,7 @@ namespace Atlantis.Framework.CH.DotTypeCache.Tests
     {
       var expressionParserManager = MockContainerExpressionParserManager();
 
-      const string expression = "tldPhaseActiveAny('MAP', GA)";
+      const string expression = "tldPhaseActiveAny([MAP], GA)";
       var result = expressionParserManager.EvaluateExpression(expression);
 
       Assert.IsFalse(result);

@@ -3,6 +3,8 @@ namespace Atlantis.Framework.DotTypeCache.Interface
 {
   public enum LaunchPhases
   {
+    Invalid,
+
     SunriseA,
     SunriseB,
     SunriseC,

@@ -11,24 +11,6 @@ namespace Atlantis.Framework.DotTypeCache.Tests
   [TestClass]
   public class DotTypeRegistrationXmlTest
   {
-    private TestContext testContextInstance;
-
-    /// <summary>
-    ///Gets or sets the test context which provides
-    ///information about and functionality for the current test run.
-    ///</summary>
-    public TestContext TestContext
-    {
-      get
-      {
-        return testContextInstance;
-      }
-      set
-      {
-        testContextInstance = value;
-      }
-    }
-
     [TestInitialize]
     public void InitializeTests()
     {
@@ -57,6 +39,5 @@ namespace Atlantis.Framework.DotTypeCache.Tests
 
       Assert.IsTrue(contactNode.HasElements);
     }
-
   }
 }

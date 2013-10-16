@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Atlantis.Framework.DCCDomainsDataCache.Interface;
 using Atlantis.Framework.DomainContactFields.Interface;
 using Atlantis.Framework.DotTypeCache.Interface;
 using Atlantis.Framework.TLDDataCache.Interface;
@@ -8,28 +9,32 @@ namespace Atlantis.Framework.DotTypeCache.Static
 {
   public abstract class StaticDotType : IDotTypeInfo
   {
-    private static int _domainContactFieldsRequest = 651;
-    private static int _languagesRequest = 655;
-    private static int _validDotTypesRequest = 667;
+    private const int DomainContactFieldsRequest = 651;
+    private const int LanguagesRequest = 655;
+    private const int ValidDotTypesRequest = 667;
 
-    private StaticDotTypeTiers _registerProductIds;
-    private StaticDotTypeTiers _transferProductIds;
-    private StaticDotTypeTiers _renewalProductIds;
-    private StaticDotTypeTiers _preregistrationProductIds;
-    private StaticDotTypeTiers _expiredAuctionRegProductIds;
+    private static readonly ITLDLaunchPhaseGroup _gaLaunchPhaseGroup = TldLaunchPhaseGroup.CreateGroup(TldLaunchPhase.GeneralAvailabilityActive());
+    private static readonly IDictionary<LaunchPhaseGroupTypes, ITLDLaunchPhaseGroup> _gaLaunchPhaseDictionary = new Dictionary<LaunchPhaseGroupTypes, ITLDLaunchPhaseGroup> { { LaunchPhaseGroupTypes.GeneralAvailability, _gaLaunchPhaseGroup } };
+    private static readonly ITLDLaunchPhaseGroupCollection _gaTldLaunchPhaseCollection = TldLaunchPhaseGroupCollection.CreateCollection(_gaLaunchPhaseDictionary);
 
-    private StaticProduct _staticProduct;
-    private StaticTld _staticTld;
-    private StaticApplicationControl _staticApplicationControl;
+    private readonly StaticDotTypeTiers _registerProductIds;
+    private readonly StaticDotTypeTiers _transferProductIds;
+    private readonly StaticDotTypeTiers _renewalProductIds;
+    private readonly StaticDotTypeTiers _preregistrationProductIds;
+    private readonly StaticDotTypeTiers _expiredAuctionRegProductIds;
 
-    private bool _isMultiRegistry = false;
+    private readonly StaticProduct _staticProduct;
+    private readonly StaticTld _staticTld;
+    private readonly StaticApplicationControl _staticApplicationControl;
+
+    private bool _isMultiRegistry;
     public bool IsMultiRegistry
     {
       get { return _isMultiRegistry; }
       protected set { _isMultiRegistry = value; }
     }
 
-    private bool _isGtld = false;
+    private bool _isGtld;
     public bool IsGtld
     {
       get { return _isGtld; }
@@ -106,19 +111,19 @@ namespace Atlantis.Framework.DotTypeCache.Static
     private DomainContactFieldsResponseData LoadDomainContactFieldsData()
     {
       var request = new DomainContactFieldsRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, DotType);
-      return (DomainContactFieldsResponseData)DataCache.DataCache.GetProcessRequest(request, _domainContactFieldsRequest);
+      return (DomainContactFieldsResponseData)DataCache.DataCache.GetProcessRequest(request, DomainContactFieldsRequest);
     }
 
     private TLDLanguageResponseData LoadLanguagesData()
     {
       var request = new TLDLanguageRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, TldId);
-      return (TLDLanguageResponseData)DataCache.DataCache.GetProcessRequest(request, _languagesRequest);
+      return (TLDLanguageResponseData)DataCache.DataCache.GetProcessRequest(request, LanguagesRequest);
     }
 
     private ValidDotTypesResponseData LoadValidDotTypes()
     {
       var request = new ValidDotTypesRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0);
-      return (ValidDotTypesResponseData)DataCache.DataCache.GetProcessRequest(request, _validDotTypesRequest);
+      return (ValidDotTypesResponseData)DataCache.DataCache.GetProcessRequest(request, ValidDotTypesRequest);
     }
 
     protected abstract StaticDotTypeTiers InitializeRegistrationProductIds();
@@ -377,52 +382,52 @@ namespace Atlantis.Framework.DotTypeCache.Static
 
     public int GetPreRegProductId(LaunchPhases phase, string registryId, int registrationLength, int domainCount)
     {
-      return this.GetPreRegProductId(phase, registrationLength, domainCount);
+      return GetPreRegProductId(phase, registrationLength, domainCount);
     }
 
     public int GetRegistrationProductId(string registryId, int registrationLength, int domainCount)
     {
-      return this.GetRegistrationProductId(registrationLength, domainCount);
+      return GetRegistrationProductId(registrationLength, domainCount);
     }
 
     public int GetTransferProductId(string registryId, int registrationLength, int domainCount)
     {
-      return this.GetTransferProductId(registrationLength, domainCount);
+      return GetTransferProductId(registrationLength, domainCount);
     }
 
     public int GetRenewalProductId(string registryId, int registrationLength, int domainCount)
     {
-      return this.GetRenewalProductId(registrationLength, domainCount);
+      return GetRenewalProductId(registrationLength, domainCount);
     }
 
     public int GetExpiredAuctionRegProductId(string registryId, int registrationLength, int domainCount)
     {
-      return this.GetExpiredAuctionRegProductId(registrationLength, domainCount);
+      return GetExpiredAuctionRegProductId(registrationLength, domainCount);
     }
 
     public List<int> GetValidPreRegProductIdList(LaunchPhases phase, string registryId, int domainCount, params int[] registrationLengths)
     {
-      return this.GetValidPreRegLengths(phase, domainCount, registrationLengths);
+      return GetValidPreRegLengths(phase, domainCount, registrationLengths);
     }
 
     public List<int> GetValidRegistrationProductIdList(string registryId, int domainCount, params int[] registrationLengths)
     {
-      return this.GetValidRegistrationProductIdList(domainCount, registrationLengths);
+      return GetValidRegistrationProductIdList(domainCount, registrationLengths);
     }
 
     public List<int> GetValidTransferProductIdList(string registryId, int domainCount, params int[] registrationLengths)
     {
-      return this.GetValidTransferProductIdList(domainCount, registrationLengths);
+      return GetValidTransferProductIdList(domainCount, registrationLengths);
     }
 
     public List<int> GetValidRenewalProductIdList(string registryId, int domainCount, params int[] registrationLengths)
     {
-      return this.GetValidRenewalProductIdList(domainCount, registrationLengths);
+      return GetValidRenewalProductIdList(domainCount, registrationLengths);
     }
 
     public List<int> GetValidExpiredAuctionRegProductIdList(string registryId, int domainCount, params int[] registrationLengths)
     {
-      return this.GetValidExpiredAuctionRegProductIdList(domainCount, registrationLengths);
+      return GetValidExpiredAuctionRegProductIdList(domainCount, registrationLengths);
     }
 
     public string GetRegistryIdByProductId(int productId)
@@ -458,22 +463,17 @@ namespace Atlantis.Framework.DotTypeCache.Static
       get { return _staticApplicationControl; }
     }
 
-    public Dictionary<string, ITLDLaunchPhasePeriod> GetAllLaunchPhases()
-    {
-      return new Dictionary<string, ITLDLaunchPhasePeriod>();
-    }
-
     public ITLDLaunchPhase GetLaunchPhase(LaunchPhases phase)
     {
       return null;
     }
 
-    public bool IsLivePhase(LaunchPhases phase)
+    public ITLDLaunchPhaseGroupCollection GetAllLaunchPhaseGroups(bool activeOnly = true)
     {
-      return true;
+      return _gaTldLaunchPhaseCollection;
     }
 
-    public bool HasPreRegPhases
+    public bool IsPreRegPhaseActive
     {
       get { return false; }
     }
@@ -513,31 +513,31 @@ namespace Atlantis.Framework.DotTypeCache.Static
         case TLDProductTypes.Registration:
           if (domainProductLookup.RegistryId != null)
           {
-            result = this.GetRegistrationProductId(domainProductLookup.RegistryId.ToString(), domainProductLookup.Years, domainProductLookup.DomainCount);
+            result = GetRegistrationProductId(domainProductLookup.RegistryId.ToString(), domainProductLookup.Years, domainProductLookup.DomainCount);
           }
           else
           {
-            result = this.GetRegistrationProductId(domainProductLookup.Years, domainProductLookup.DomainCount);
+            result = GetRegistrationProductId(domainProductLookup.Years, domainProductLookup.DomainCount);
           }
           break;
         case TLDProductTypes.Transfer:
           if (domainProductLookup.RegistryId != null)
           {
-            result = this.GetTransferProductId(domainProductLookup.RegistryId.ToString(), domainProductLookup.Years, domainProductLookup.DomainCount);
+            result = GetTransferProductId(domainProductLookup.RegistryId.ToString(), domainProductLookup.Years, domainProductLookup.DomainCount);
           }
           else
           {
-            result = this.GetTransferProductId(domainProductLookup.Years, domainProductLookup.DomainCount);
+            result = GetTransferProductId(domainProductLookup.Years, domainProductLookup.DomainCount);
           }
           break;
         case TLDProductTypes.Renewal:
           if (domainProductLookup.RegistryId != null)
           {
-            result = this.GetRenewalProductId(domainProductLookup.RegistryId.ToString(), domainProductLookup.Years, domainProductLookup.DomainCount);
+            result = GetRenewalProductId(domainProductLookup.RegistryId.ToString(), domainProductLookup.Years, domainProductLookup.DomainCount);
           }
           else
           {
-            result = this.GetRenewalProductId(domainProductLookup.Years, domainProductLookup.DomainCount);
+            result = GetRenewalProductId(domainProductLookup.Years, domainProductLookup.DomainCount);
           }
           break;
       }
@@ -552,31 +552,31 @@ namespace Atlantis.Framework.DotTypeCache.Static
         case TLDProductTypes.Registration:
           if (domainProductListLookup.RegistryId != null)
           {
-            result = this.GetValidRegistrationProductIdList(domainProductListLookup.RegistryId.ToString(), domainProductListLookup.DomainCount, domainProductListLookup.Years);
+            result = GetValidRegistrationProductIdList(domainProductListLookup.RegistryId.ToString(), domainProductListLookup.DomainCount, domainProductListLookup.Years);
           }
           else
           {
-            result = this.GetValidRegistrationProductIdList(domainProductListLookup.DomainCount, domainProductListLookup.Years);
+            result = GetValidRegistrationProductIdList(domainProductListLookup.DomainCount, domainProductListLookup.Years);
           }
           break;
         case TLDProductTypes.Transfer:
           if (domainProductListLookup.RegistryId != null)
           {
-            result = this.GetValidTransferProductIdList(domainProductListLookup.RegistryId.ToString(), domainProductListLookup.DomainCount, domainProductListLookup.Years);
+            result = GetValidTransferProductIdList(domainProductListLookup.RegistryId.ToString(), domainProductListLookup.DomainCount, domainProductListLookup.Years);
           }
           else
           {
-            result = this.GetValidTransferProductIdList(domainProductListLookup.DomainCount, domainProductListLookup.Years);
+            result = GetValidTransferProductIdList(domainProductListLookup.DomainCount, domainProductListLookup.Years);
           }
           break;
         case TLDProductTypes.Renewal:
           if (domainProductListLookup.RegistryId != null)
           {
-            result = this.GetValidRenewalProductIdList(domainProductListLookup.RegistryId.ToString(), domainProductListLookup.DomainCount, domainProductListLookup.Years);
+            result = GetValidRenewalProductIdList(domainProductListLookup.RegistryId.ToString(), domainProductListLookup.DomainCount, domainProductListLookup.Years);
           }
           else
           {
-            result = this.GetValidRenewalProductIdList(domainProductListLookup.DomainCount, domainProductListLookup.Years);
+            result = GetValidRenewalProductIdList(domainProductListLookup.DomainCount, domainProductListLookup.Years);
           }
           break;
       }

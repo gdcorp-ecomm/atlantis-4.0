@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
 using Atlantis.Framework.DotTypeCache.Interface;
@@ -8,7 +7,6 @@ namespace Atlantis.Framework.DCCDomainsDataCache.Interface
 {
   public class TLDMLTld : TLDMLNamespaceElement, ITLDTld  
   {
-
     protected override string Namespace
     {
       get { return "urn:godaddy:ns:tld"; }
@@ -42,6 +40,7 @@ namespace Atlantis.Framework.DCCDomainsDataCache.Interface
     {
       get { return _isGtld; }
     }
+
     private bool LoadIsGTld()
     {
       var gtldFalg = false;
@@ -52,6 +51,7 @@ namespace Atlantis.Framework.DCCDomainsDataCache.Interface
       }
       return gtldFalg;
     }
+
     private int LoadRenewProhibitedPeriodForExpiration()
     {
       int period = 0;

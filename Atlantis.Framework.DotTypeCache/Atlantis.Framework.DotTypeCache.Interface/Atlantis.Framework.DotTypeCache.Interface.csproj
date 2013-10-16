@@ -46,6 +46,8 @@
   <ItemGroup>
     <Compile Include="IDomainProductListLookup.cs" />
     <Compile Include="IDomainProductLookup.cs" />
+    <Compile Include="ITLDLaunchPhaseGroup.cs" />
+    <Compile Include="ITLDLaunchPhaseGroupCollection.cs" />
     <Compile Include="ITLDTuiFormGroupLaunchPhase.cs" />
     <Compile Include="ITLDTuiFormGroup.cs" />
     <Compile Include="ITLDLaunchPhase.cs" />
@@ -61,8 +63,8 @@
     <Compile Include="IDotTypeInfo.cs" />
     <Compile Include="IDotTypeProvider.cs" />
     <Compile Include="InvalidDotType.cs" />
-    <Compile Include="PhaseHelper.cs" />
     <Compile Include="LaunchPhases.cs" />
+    <Compile Include="LaunchPhaseGroupTypes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TLDProductTypes.cs" />
   </ItemGroup>

@@ -83,8 +83,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConfigElement.cs" />
-    <Compile Include="DomainProductListLookup.cs" />
-    <Compile Include="DomainProductLookup.cs" />
     <Compile Include="DotTypeCacheConfig.cs" />
     <Compile Include="Logging.cs" />
     <Compile Include="StaticApplicationControl.cs" />
@@ -101,6 +99,10 @@
     <Compile Include="TLDRenewal.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Atlantis.Framework.DCCDomainsDataCache\Atlantis.Framework.DCCDomainsDataCache.Interface\Atlantis.Framework.DCCDomainsDataCache.Interface.csproj">
+      <Project>{98f402fb-90d0-4bea-8d97-46a73e6363b8}</Project>
+      <Name>Atlantis.Framework.DCCDomainsDataCache.Interface</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Atlantis.Framework.DomainContactFields\Atlantis.Framework.DomainContactFields.Interface\Atlantis.Framework.DomainContactFields.Interface.csproj">
       <Project>{bd8f8fc4-8a78-4dde-8ed7-8caef06791fe}</Project>
       <Name>Atlantis.Framework.DomainContactFields.Interface</Name>

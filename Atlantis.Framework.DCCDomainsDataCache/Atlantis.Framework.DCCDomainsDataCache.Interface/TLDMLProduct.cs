@@ -19,11 +19,11 @@ namespace Atlantis.Framework.DCCDomainsDataCache.Interface
       get { return "product"; }
     }
 
-    private TldValidYearsSet _offeredRegistrationYears;
-    private TldValidYearsSet _offeredTransferYears;
-    private TldValidYearsSet _offeredRenewalYears;
-    private TldValidYearsSet _offeredExpiredAuctionYears;
-    private Dictionary<string, TldValidYearsSet> _offeredPreregistrationYears;
+    private ITLDValidYearsSet _offeredRegistrationYears;
+    private ITLDValidYearsSet _offeredTransferYears;
+    private ITLDValidYearsSet _offeredRenewalYears;
+    private ITLDValidYearsSet _offeredExpiredAuctionYears;
+    private Dictionary<string, ITLDValidYearsSet> _offeredPreregistrationYears;
     private Dictionary<string, bool> _offeredPhaseApplicationFees = new Dictionary<string, bool>(StringComparer.OrdinalIgnoreCase);
     private Dictionary<string, string> _offeredPhaseApplicationProducts = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
 
@@ -37,9 +37,9 @@ namespace Atlantis.Framework.DCCDomainsDataCache.Interface
       _offeredPreregistrationYears = LoadPreregistrationYears();
     }
 
-    private TldValidYearsSet LoadValidYears(string periodCollectionName, string periodItemName)
+    private ITLDValidYearsSet LoadValidYears(string periodCollectionName, string periodItemName)
     {
-      TldValidYearsSet result;
+      ITLDValidYearsSet result;
 
       XElement periodCollection = NamespaceElement.Descendants(periodCollectionName).FirstOrDefault();
       if (periodCollection != null)
@@ -54,9 +54,9 @@ namespace Atlantis.Framework.DCCDomainsDataCache.Interface
       return result;
     }
 
-    private Dictionary<string, TldValidYearsSet> LoadPreregistrationYears()
+    private Dictionary<string, ITLDValidYearsSet> LoadPreregistrationYears()
     {
-      var phaseYears = new Dictionary<string, TldValidYearsSet>(StringComparer.OrdinalIgnoreCase);
+      var phaseYears = new Dictionary<string, ITLDValidYearsSet>(StringComparer.OrdinalIgnoreCase);
 
       var launchRegCollections = NamespaceElement.Descendants("launchregistrationcollection");
       foreach (XElement launchRegCollection in launchRegCollections)
@@ -68,7 +68,6 @@ namespace Atlantis.Framework.DCCDomainsDataCache.Interface
           {
             phaseYears[valueAtt.Value] = TldValidYearsSet.FromPeriodElements(phase.Descendants("launchregistrationperiod"));
 
-            //load the application fee dictionary for each phase
             LoadPhasesApplicationFees(phase, valueAtt);
           }
         }
@@ -118,7 +117,7 @@ namespace Atlantis.Framework.DCCDomainsDataCache.Interface
 
     public ITLDValidYearsSet PreregistrationYears(string type)
     {
-      TldValidYearsSet result;
+      ITLDValidYearsSet result;
       if (!_offeredPreregistrationYears.TryGetValue(type, out result))
       {
         result = TldValidYearsSet.INVALIDSET;

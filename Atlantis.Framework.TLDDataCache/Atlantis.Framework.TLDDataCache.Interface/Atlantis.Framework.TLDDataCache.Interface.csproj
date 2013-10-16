@@ -78,8 +78,6 @@
     <Compile Include="TLDProductDomainAttributesResponseData.cs" />
     <Compile Include="TLDProductDomainAttributesRequestData.cs" />
     <Compile Include="TLDPhaseDate.cs" />
-    <Compile Include="TLDPhaseDateListRequestData.cs" />
-    <Compile Include="TLDPhaseDateListResponseData.cs" />
     <Compile Include="ExtendedTLDDataResponseData.cs" />
     <Compile Include="ExtendedTLDDataRequestData.cs" />
     <Compile Include="TLDDataCacheEngineRequests.cs" />

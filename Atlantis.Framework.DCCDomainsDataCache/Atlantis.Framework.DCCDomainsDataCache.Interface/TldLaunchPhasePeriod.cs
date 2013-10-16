@@ -5,18 +5,17 @@ namespace Atlantis.Framework.DCCDomainsDataCache.Interface
 {
   public class TldLaunchPhasePeriod : ITLDLaunchPhasePeriod
   {
-    public string Type { get; set; }
-    public DateTime StartDate { get; set; }
-    public DateTime StopDate { get; set; }
+    public DateTime StartDateUtc { get; set; }
 
-    public bool IsActive()
-    {
-      return IsActive(DateTime.UtcNow);
-    }
+    public DateTime StopDateUtc { get; set; }
 
-    public bool IsActive(DateTime date)
+    public bool IsActive
     {
-      return (date >= StartDate && date < StopDate);
+      get
+      {
+        DateTime utcDate = DateTime.UtcNow;
+        return utcDate >= StartDateUtc && utcDate < StopDateUtc;
+      }
     }
   }
 }

@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Atlantis.Framework.TLDDataCache.Interface;
 
 namespace Atlantis.Framework.DotTypeCache.Interface
 {

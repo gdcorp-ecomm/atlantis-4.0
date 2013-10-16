@@ -4,9 +4,7 @@ using Atlantis.Framework.DotTypeCache.Interface;
 
 namespace Atlantis.Framework.DCCDomainsDataCache.Interface
 {
-// ReSharper disable InconsistentNaming
   public class TldTuiFormGroup : ITLDTuiFormGroup
-// ReSharper restore InconsistentNaming
   {
     public string Type { get; private set; }
     public string Value { get; private set; }
@@ -17,24 +15,24 @@ namespace Atlantis.Framework.DCCDomainsDataCache.Interface
       get { return _formgroupLaunchPhases; }
     }
 
-    private static readonly TldTuiFormGroup _nullTuiFormGroup;
+    private static readonly ITLDTuiFormGroup _nullTuiFormGroup;
 
     static TldTuiFormGroup()
     {
       _nullTuiFormGroup = FromNothing();
     }
 
-    public static TldTuiFormGroup NULLTUIGROUP
+    public static ITLDTuiFormGroup NULLTUIGROUP
     {
       get { return _nullTuiFormGroup; }
     }
 
-    public static TldTuiFormGroup FromFormGroupElement(XElement formGroupElement)
+    public static ITLDTuiFormGroup FromFormGroupElement(XElement formGroupElement)
     {
       return new TldTuiFormGroup(formGroupElement);
     }
 
-    public static TldTuiFormGroup FromNothing()
+    public static ITLDTuiFormGroup FromNothing()
     {
       return null;
     }

@@ -5,9 +5,7 @@ using Atlantis.Framework.DotTypeCache.Interface;
 
 namespace Atlantis.Framework.DCCDomainsDataCache.Interface
 {
-  // ReSharper disable InconsistentNaming
   public class TLDMLPhase : TLDMLNamespaceElement, ITLDPhase
-  // ReSharper restore InconsistentNaming
   {
     protected override string Namespace
     {
@@ -19,19 +17,19 @@ namespace Atlantis.Framework.DCCDomainsDataCache.Interface
       get { return "phase"; }
     }
 
-    private readonly Dictionary<string, TldLaunchPhase> _launchPhases;
+    private readonly IList<ITLDLaunchPhase> _launchPhases;
 
-    public TLDMLPhase(XDocument tldmlDoc)
-      : base(tldmlDoc)
+    public TLDMLPhase(XDocument tldmlDoc) : base(tldmlDoc)
     {
       _launchPhases = Load();
     }
 
-    private Dictionary<string, TldLaunchPhase> Load()
+    private IList<ITLDLaunchPhase> Load()
     {
-      var result = new Dictionary<string, TldLaunchPhase>(StringComparer.OrdinalIgnoreCase);
+      var result = new List<ITLDLaunchPhase>(32);
 
       var launchPhaseCollections = NamespaceElement.Descendants("launchphasecollection");
+      
       foreach (XElement launchPhaseCollection in launchPhaseCollections)
       {
         foreach (var launchPhase in launchPhaseCollection.Descendants("launchphase"))
@@ -42,7 +40,7 @@ namespace Atlantis.Framework.DCCDomainsDataCache.Interface
 
             if (typeAtt != null)
             {
-              result[typeAtt.Value] = TldLaunchPhase.FromPhaseElement(launchPhase);
+              result.Add(TldLaunchPhase.FromPhaseElement(launchPhase));
             }
           }
         }
@@ -51,66 +49,66 @@ namespace Atlantis.Framework.DCCDomainsDataCache.Interface
       return result;
     }
 
-    public Dictionary<string, ITLDLaunchPhasePeriod> GetAllLaunchPhases(bool activeOnly = false)
+    public IList<ITLDLaunchPhase> GetAllLaunchPhases(bool activeOnly = true)
     {
-      var allPhases = new Dictionary<string, ITLDLaunchPhasePeriod>(StringComparer.OrdinalIgnoreCase);
+      var allPhases = new List<ITLDLaunchPhase>(_launchPhases.Count);
 
       foreach (var launchPhase in _launchPhases)
       {
-        ITLDLaunchPhasePeriod launchPhasePeriod;
-
-        if (launchPhase.Value.TryGetLaunchPhasePeriod("clientrequest", out launchPhasePeriod))
+        if ((launchPhase.PreRegistrationPeriod.IsActive || launchPhase.LivePeriod.IsActive) || !activeOnly)
         {
-          if ( (activeOnly && launchPhasePeriod.IsActive()) || !activeOnly)
-          {
-            allPhases[launchPhase.Key] = launchPhasePeriod;
-          }
+          allPhases.Add(launchPhase);
         }
       }
 
       return allPhases;
     }
 
-    public ITLDLaunchPhase GetLaunchPhase(LaunchPhases phase)
+    public ITLDLaunchPhase GetLaunchPhase(string launchPhaseCode)
     {
-      var launchPhase = TldLaunchPhase.NULLPHASE;
+      var foundPhase = TldLaunchPhase.NullPhase;
 
-      string phaseCode = PhaseHelper.GetPhaseCode(phase);
-      if (!string.IsNullOrEmpty(phaseCode))
+      if (!string.IsNullOrEmpty(launchPhaseCode))
       {
-        TldLaunchPhase result;
-        if (_launchPhases.TryGetValue(phaseCode, out result))
+        foreach (TldLaunchPhase tldLaunchPhase in _launchPhases)
         {
-          launchPhase = result;
+          if (tldLaunchPhase.Code.Equals(launchPhaseCode, StringComparison.OrdinalIgnoreCase))
+          {
+            foundPhase = tldLaunchPhase;
+            break;
+          }
         }
       }
 
-      return launchPhase;
+      return foundPhase;
     }
 
-    public bool HasPreRegPhases 
+    public bool IsPreRegPhaseActive 
     {
       get
       {
-        bool result = false;
+        bool isPreRegPhaseActive = false;
 
         foreach (var launchphase in _launchPhases)
         {
-          ITLDLaunchPhasePeriod clientRequestPhasePeriod;
-          ITLDLaunchPhasePeriod serverSubmissionPhasePeriod;
-          launchphase.Value.TryGetLaunchPhasePeriod("clientrequest", out clientRequestPhasePeriod);
-          launchphase.Value.TryGetLaunchPhasePeriod("serversubmission", out serverSubmissionPhasePeriod);
+          bool isGeneralAvailability = launchphase.Code.Equals("GA", StringComparison.OrdinalIgnoreCase);
 
-          if (clientRequestPhasePeriod != null && clientRequestPhasePeriod.IsActive())
+          if (isGeneralAvailability)
           {
-            if (serverSubmissionPhasePeriod != null && (DateTime.UtcNow < serverSubmissionPhasePeriod.StartDate))
-            {
-              result = true;
-              break;
-            }
+            isPreRegPhaseActive = launchphase.PreRegistrationPeriod.IsActive;
+          }
+          else if (launchphase.LivePeriod.IsActive || launchphase.PreRegistrationPeriod.IsActive)
+          {
+            isPreRegPhaseActive = true;
+          }
+
+          if (isPreRegPhaseActive)
+          {
+            break;
           }
         }
-        return result;
+
+        return isPreRegPhaseActive;
       }
     }
   }

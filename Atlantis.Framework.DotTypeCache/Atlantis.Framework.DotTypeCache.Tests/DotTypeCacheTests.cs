@@ -101,7 +101,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
       List<int> renewProductIds2 = dotTypeInfo.GetValidRenewalProductIdList("1", 1, regLengths.ToArray());
       List<int> renewProductIds3 = dotTypeInfo.GetValidRenewalProductIdList("2", 1, regLengths.ToArray());
       int renewProductId = dotTypeInfo.GetRenewalProductId("1", 2, 1);
-      Assert.IsTrue(renewProductId == 13313);
+      Assert.IsTrue(renewProductId == 219656);
       Assert.IsTrue((RegistrationProductIds.Count * TransferProductIds.Count * renewProductIds.Count) != 0);
     }
 
@@ -182,27 +182,6 @@ namespace Atlantis.Framework.DotTypeCache.Tests
       MethodInfo TLDMLIsAvailableMethod = (typeof(TLDMLDotTypes)).GetMethod("TLDMLIsAvailable", BindingFlags.Static | BindingFlags.NonPublic);
       var args = new object[1] { dotType };
       return (bool)TLDMLIsAvailableMethod.Invoke(null, args);
-    }
-
-    //[TestMethod]
-    //public void TLDMLAttributeExists()
-    //{
-    //  var dotTypeAttributesDictionary = DataCache.DataCache.GetExtendedTLDData("COM");
-    //  var dotTypeAttributes = dotTypeAttributesDictionary["COM"];
-    //  Assert.IsTrue(dotTypeAttributes.ContainsKey(TLDMLDotTypes.TLDMLSupportedFlag));
-    //}
-
-    [TestMethod]
-    public void OrgStaticVsTLDMLEnabled()
-    {
-      Type staticDotTypesType = typeof(StaticDotTypes);
-      MethodInfo getStaticDotType = staticDotTypesType.GetMethod("GetDotType", BindingFlags.Static | BindingFlags.Public);
-      object[] methodParms = new object[1] { "org" };
-      IDotTypeInfo staticOrg = getStaticDotType.Invoke(null, methodParms) as IDotTypeInfo;
-
-      IDotTypeInfo tldmlOrg = DotTypeCache.GetDotTypeInfo("org");
-
-      Assert.AreNotEqual(staticOrg, tldmlOrg);
     }
 
     [TestMethod]
@@ -1389,14 +1368,6 @@ namespace Atlantis.Framework.DotTypeCache.Tests
     }
 
     [TestMethod]
-    public void GetInvalidLaunchPhase()
-    {
-      var dotTypeInfo = DotTypeProvider.GetDotTypeInfo("f.borg");
-      var launchphase = dotTypeInfo.GetLaunchPhase(LaunchPhases.Invalid);
-      Assert.IsTrue(launchphase == null);
-    }
-
-    [TestMethod]
     public void GetDotTypeLandingPageUrl()
     {
       IDotTypeInfo inValid = DotTypeProvider.GetDotTypeInfo("nowaythisiseverinthere");
@@ -1433,7 +1404,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
     {
       IDotTypeInfo dotTypeInfo = DotTypeProvider.GetDotTypeInfo("e.borg");
 
-      Assert.IsTrue(dotTypeInfo.IsGtld == true);
+      Assert.IsTrue(dotTypeInfo.IsGtld);
     
     }
 
@@ -1448,61 +1419,103 @@ namespace Atlantis.Framework.DotTypeCache.Tests
     public void GetAllClientRequestLaunchPhasesFBorg()
     {
       var dotTypeInfo = DotTypeProvider.GetDotTypeInfo("f.borg");
-      var launchphases = dotTypeInfo.GetAllLaunchPhases();
 
-      Assert.IsTrue(launchphases.Count == 3);
-      List<string> validTypes = new List<string>() { "GA", "LR", "SRA" };
-      foreach (var phase in launchphases)
-      {
-        Assert.IsTrue(validTypes.Contains(phase.Key));
-      }
+      var launchPhaseGroupCollectionActive = dotTypeInfo.GetAllLaunchPhaseGroups();
+
+      ITLDLaunchPhaseGroup launchPhaseGroup;
+
+      Assert.IsTrue(!launchPhaseGroupCollectionActive.TryGetGroup(LaunchPhaseGroupTypes.Sunrise, out launchPhaseGroup));
+      Assert.IsTrue(!launchPhaseGroupCollectionActive.TryGetGroup(LaunchPhaseGroupTypes.Landrush, out launchPhaseGroup));
+
+      Assert.IsTrue(launchPhaseGroupCollectionActive.TryGetGroup(LaunchPhaseGroupTypes.GeneralAvailability, out launchPhaseGroup));
+      Assert.IsTrue(launchPhaseGroup.Phases.Count == 1);
+
+      var launchPhaseGroupCollectionAll = dotTypeInfo.GetAllLaunchPhaseGroups(false);
+
+      Assert.IsTrue(launchPhaseGroupCollectionAll.TryGetGroup(LaunchPhaseGroupTypes.Sunrise, out launchPhaseGroup));
+      Assert.IsTrue(launchPhaseGroup.Phases.Count == 1);
+      
+      Assert.IsTrue(launchPhaseGroupCollectionAll.TryGetGroup(LaunchPhaseGroupTypes.Landrush, out launchPhaseGroup));
+      Assert.IsTrue(launchPhaseGroup.Phases.Count == 1);
+
+      Assert.IsTrue(launchPhaseGroupCollectionAll.TryGetGroup(LaunchPhaseGroupTypes.GeneralAvailability, out launchPhaseGroup));
+      Assert.IsTrue(launchPhaseGroup.Phases.Count == 1);
     }
 
     [TestMethod]
     public void GetAllLaunchPhasesForTldml()
     {
       var dotTypeInfo = DotTypeProvider.GetDotTypeInfo("l4.borg");
-      var launchphases = dotTypeInfo.GetAllLaunchPhases();
-      Assert.IsTrue(launchphases.Count > 0);
+
+      var launchPhaseGroupCollectionActive = dotTypeInfo.GetAllLaunchPhaseGroups();
+
+      ITLDLaunchPhaseGroup launchPhaseGroup;
+
+      Assert.IsTrue(!launchPhaseGroupCollectionActive.TryGetGroup(LaunchPhaseGroupTypes.Sunrise, out launchPhaseGroup));
+      Assert.IsTrue(!launchPhaseGroupCollectionActive.TryGetGroup(LaunchPhaseGroupTypes.Landrush, out launchPhaseGroup));
+      
+      Assert.IsTrue(launchPhaseGroupCollectionActive.TryGetGroup(LaunchPhaseGroupTypes.GeneralAvailability, out launchPhaseGroup));
+      Assert.IsTrue(launchPhaseGroup.Phases.Count == 1);
+
+      var launchPhaseGroupCollectionAll = dotTypeInfo.GetAllLaunchPhaseGroups(false);
+
+      Assert.IsTrue(!launchPhaseGroupCollectionAll.TryGetGroup(LaunchPhaseGroupTypes.Sunrise, out launchPhaseGroup));
+      Assert.IsTrue(!launchPhaseGroupCollectionAll.TryGetGroup(LaunchPhaseGroupTypes.Landrush, out launchPhaseGroup));
+
+      Assert.IsTrue(launchPhaseGroupCollectionAll.TryGetGroup(LaunchPhaseGroupTypes.GeneralAvailability, out launchPhaseGroup));
+      Assert.IsTrue(launchPhaseGroup.Phases.Count == 1);
     }
 
     [TestMethod]
     public void GetAllLaunchPhasesForInvalidTld()
     {
       var dotTypeInfo = DotTypeProvider.GetDotTypeInfo("nate");
-      var launchphases = dotTypeInfo.GetAllLaunchPhases();
-      Assert.IsTrue(launchphases.Count == 0);
+
+      var launchPhaseGroupCollection = dotTypeInfo.GetAllLaunchPhaseGroups();
+
+      Assert.IsTrue(launchPhaseGroupCollection == null);
     }
 
     [TestMethod]
     public void GetAllLaunchPhasesForStaticTld()
     {
       var dotTypeInfo = DotTypeProvider.GetDotTypeInfo("com");
-      var launchphases = dotTypeInfo.GetAllLaunchPhases();
-      Assert.IsTrue(launchphases.Count == 0);
+
+      var launchPhaseGroupCollection = dotTypeInfo.GetAllLaunchPhaseGroups();
+
+      ITLDLaunchPhaseGroup launchPhaseGroup;
+
+      Assert.IsTrue(launchPhaseGroupCollection.TryGetGroup(LaunchPhaseGroupTypes.GeneralAvailability, out launchPhaseGroup));
+      Assert.IsTrue(launchPhaseGroup.Phases[0].LivePeriod.IsActive);
     }
 
     [TestMethod]
     public void GetAllLaunchPhasesForStaticMultiRegTld()
     {
       var dotTypeInfo = DotTypeProvider.GetDotTypeInfo("co.uk");
-      var launchphases = dotTypeInfo.GetAllLaunchPhases();
-      Assert.IsTrue(launchphases.Count == 0);
+
+      var launchPhaseGroupCollection = dotTypeInfo.GetAllLaunchPhaseGroups();
+
+      ITLDLaunchPhaseGroup launchPhaseGroup;
+
+      Assert.IsTrue(launchPhaseGroupCollection.TryGetGroup(LaunchPhaseGroupTypes.GeneralAvailability, out launchPhaseGroup));
+      Assert.IsTrue(launchPhaseGroup.Phases[0].LivePeriod.IsActive);
     }
 
-    [TestMethod]
     public void IsTldInLivePhase()
     {
       var dotTypeInfo = DotTypeProvider.GetDotTypeInfo("l4.borg");
-      var isLivePhase = dotTypeInfo.IsLivePhase(LaunchPhases.GeneralAvailability);
-      Assert.IsTrue(!isLivePhase);
+      
+      ITLDLaunchPhase launchPhase = dotTypeInfo.GetLaunchPhase(LaunchPhases.GeneralAvailability);
+
+      Assert.IsTrue(launchPhase.LivePeriod.IsActive);
     }
 
     [TestMethod]
     public void TldHasPreRegPhases()
     {
       var dotTypeInfo = DotTypeProvider.GetDotTypeInfo("l4.borg");
-      var hasPreregPhases = dotTypeInfo.HasPreRegPhases;
+      var hasPreregPhases = dotTypeInfo.IsPreRegPhaseActive;
       Assert.IsTrue(hasPreregPhases);
     }
 
@@ -1510,90 +1523,61 @@ namespace Atlantis.Framework.DotTypeCache.Tests
     public void TldGetProductIdStaticCom()
     {
       var dotTypeInfo = DotTypeProvider.GetDotTypeInfo("com");
-      DomainProductLookup domainProductLookup = new DomainProductLookup
-        {
-          DomainCount = 1,
-          Years = 4,
-          TldPhaseCode = "REGREG",
-          ProductType = TLDProductTypes.Registration
-        };
+      
+      IDomainProductLookup domainProductLookup = DomainProductLookup.Create(4, 1, LaunchPhases.GeneralAvailability, TLDProductTypes.Registration);
 
       int productId = dotTypeInfo.GetProductId(domainProductLookup);
       Assert.IsTrue(productId == 104);
     }
 
     [TestMethod]
-    public void TldGetProductIdTldmlO2Borg()
+    public void TldGetProductIdTldmlO2Borg4Years()
     {
       var dotTypeInfo = DotTypeProvider.GetDotTypeInfo("o2.borg");
-      DomainProductLookup domainProductLookup = new DomainProductLookup
-      {
-        DomainCount = 3,
-        Years = 4,
-        TldPhaseCode = "REGREG",
-        PriceTierId = 1,
-        ProductType = TLDProductTypes.Registration
-      };
+      
+      IDomainProductLookup domainProductLookup = DomainProductLookup.Create(4, 3, LaunchPhases.GeneralAvailability, TLDProductTypes.Registration, 1);
 
       int productId = dotTypeInfo.GetProductId(domainProductLookup);
-      Assert.IsTrue(productId == 36471);
+      Assert.IsTrue(productId == 37671);
     }
 
     [TestMethod]
     public void TldGetProductIdListTldmlO2Borg()
     {
       var dotTypeInfo = DotTypeProvider.GetDotTypeInfo("o2.borg");
-      var domainProductListLookup = new DomainProductListLookup
-      {
-        DomainCount = 3,
-        Years = new[] { 3, 6 },
-        TldPhaseCode = "REGREG",
-        PriceTierId = 1,
-        ProductType = TLDProductTypes.Registration
-      };
-
+      
+      IDomainProductListLookup domainProductListLookup = DomainProductListLookup.Create(new[] { 3, 6 }, 3, LaunchPhases.GeneralAvailability,TLDProductTypes.Registration, 1);
+    
       var productIdList = dotTypeInfo.GetProductIdList(domainProductListLookup);
-      Assert.IsTrue(productIdList.Contains(36469) && productIdList.Contains(36475) );
+      Assert.IsTrue(productIdList.Contains(37670) && productIdList.Contains(37673));
     }
 
     [TestMethod]
-    public void TldGetProductIdTldmlL4Borg()
+    public void TldGetProductIdTldmlO2Borg2Years()
     {
-      var dotTypeInfo = DotTypeProvider.GetDotTypeInfo("l4.borg");
-      DomainProductLookup domainProductLookup = new DomainProductLookup
-      {
-        DomainCount = 1,
-        Years = 2,
-        TldPhaseCode = "REGREG",
-        PriceTierId = 1,
-        ProductType = TLDProductTypes.Registration
-      };
+      var dotTypeInfo = DotTypeProvider.GetDotTypeInfo("o2.borg");
+    
+      IDomainProductLookup domainProductLookup = DomainProductLookup.Create(2, 1, LaunchPhases.GeneralAvailability, TLDProductTypes.Registration, 1);
 
       int productId = dotTypeInfo.GetProductId(domainProductLookup);
-      Assert.IsTrue(productId == 36044);
+      Assert.IsTrue(productId == 37669);
     }
 
     [TestMethod]
-    public void TldGetProductIdTldmlL4BorgBulkReg()
+    public void TldGetProductIdTldmlO2BorgBulkReg()
     {
-      var dotTypeInfo = DotTypeProvider.GetDotTypeInfo("l4.borg");
-      DomainProductLookup domainProductLookup = new DomainProductLookup
-      {
-        DomainCount = 7,
-        Years = 2,
-        TldPhaseCode = "REGREG",
-        PriceTierId = 1,
-        ProductType = TLDProductTypes.Registration
-      };
+      var dotTypeInfo = DotTypeProvider.GetDotTypeInfo("o2.borg");
+    
+      IDomainProductLookup domainProductLookup = DomainProductLookup.Create(2, 7, LaunchPhases.GeneralAvailability, TLDProductTypes.Registration, 1);
 
       int productId = dotTypeInfo.GetProductId(domainProductLookup);
-      Assert.IsTrue(productId == 36074);
+      Assert.IsTrue(productId == 37669);
     }
 
     [TestMethod]
-    public void TldGetApplicationProductIdListTldmlL4Borg()
+    public void TldGetApplicationProductIdListTldmlO2Borg()
     {
-      var dotTypeInfo = DotTypeProvider.GetDotTypeInfo("k.borg");
+      var dotTypeInfo = DotTypeProvider.GetDotTypeInfo("f.borg");
 
       var productIdList = dotTypeInfo.GetPhaseApplicationProductIdList(LaunchPhases.SunriseA);
       Assert.IsTrue(productIdList.Any());
@@ -1614,7 +1598,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
       var dotTypeInfo = DotTypeProvider.GetDotTypeInfo("com");
 
       var hasLeafPage = dotTypeInfo.HasLeafPage;
-      Assert.IsTrue(!hasLeafPage);
+      Assert.IsFalse(hasLeafPage);
     }
   }
 }

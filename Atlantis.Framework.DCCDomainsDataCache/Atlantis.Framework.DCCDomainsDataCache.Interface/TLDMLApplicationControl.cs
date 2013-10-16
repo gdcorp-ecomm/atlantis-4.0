@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
 using Atlantis.Framework.DotTypeCache.Interface;
 
 namespace Atlantis.Framework.DCCDomainsDataCache.Interface
 {
-// ReSharper disable InconsistentNaming
   public class TLDMLApplicationControl : TLDMLNamespaceElement, ITLDApplicationControl  
-// ReSharper restore InconsistentNaming
   {
 
     protected override string Namespace

@@ -2,8 +2,10 @@
 {
   public interface ITLDValidYearsSet
   {
-    bool IsValid(int years);
     int Min { get; }
+
     int Max { get; }
+
+    bool IsValid(int years);
   }
 }

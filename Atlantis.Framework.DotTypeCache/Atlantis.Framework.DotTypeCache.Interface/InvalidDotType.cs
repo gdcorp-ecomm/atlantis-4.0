@@ -6,7 +6,7 @@ namespace Atlantis.Framework.DotTypeCache.Interface
 {
   public class InvalidDotType : IDotTypeInfo
   {
-    static readonly IDotTypeInfo _instance;
+    private static readonly IDotTypeInfo _instance;
 
     static InvalidDotType()
     {
@@ -69,11 +69,6 @@ namespace Atlantis.Framework.DotTypeCache.Interface
     public int MaxRenewalLength
     {
       get { return 10; }
-    }
-
-    public int MaxRenewalMonthsOut
-    {
-      get { return 120; }
     }
 
     public RegistryLanguage GetLanguageByName(string languageName)
@@ -140,11 +135,6 @@ namespace Atlantis.Framework.DotTypeCache.Interface
     public List<int> GetValidRenewalProductIdList(int domainCount, params int[] registrationLengths)
     {
       return new List<int>();
-    }
-
-    public bool HasExpiredAuctionRegIds
-    {
-      get { return false; }
     }
 
     public bool IsMultiRegistry
@@ -237,31 +227,6 @@ namespace Atlantis.Framework.DotTypeCache.Interface
       return new List<int>();
     }
 
-    public List<int> GetValidExpiredAuctionRegLengths(string registryId, int domainCount, params int[] registrationLengths)
-    {
-      return new List<int>();
-    }
-
-    public List<int> GetValidPreRegLengths(LaunchPhases phase, string registryId, int domainCount, params int[] registrationLengths)
-    {
-      return new List<int>();
-    }
-
-    public List<int> GetValidRegistrationLengths(string registryId, int domainCount, params int[] registrationLengths)
-    {
-      return new List<int>();
-    }
-
-    public List<int> GetValidTransferLengths(string registryId, int domainCount, params int[] registrationLengths)
-    {
-      return new List<int>();
-    }
-
-    public List<int> GetValidRenewalLengths(string registryId, int domainCount, params int[] registrationLengths)
-    {
-      return new List<int>();
-    }
-
     public string GetRegistryIdByProductId(int productId)
     {
       return string.Empty;
@@ -287,22 +252,17 @@ namespace Atlantis.Framework.DotTypeCache.Interface
       get { return _invalidApplicationControl; }
     }
 
-    public Dictionary<string, ITLDLaunchPhasePeriod> GetAllLaunchPhases()
-    {
-      return new Dictionary<string, ITLDLaunchPhasePeriod>();
-    }
-
     public ITLDLaunchPhase GetLaunchPhase(LaunchPhases phase)
     {
       return null;
     }
 
-    public bool IsLivePhase(LaunchPhases phase)
+    public ITLDLaunchPhaseGroupCollection GetAllLaunchPhaseGroups(bool activeOnly = true)
     {
-      return false;
+      return null;
     }
 
-    public bool HasPreRegPhases
+    public bool IsPreRegPhaseActive
     {
       get { return false; }
     }

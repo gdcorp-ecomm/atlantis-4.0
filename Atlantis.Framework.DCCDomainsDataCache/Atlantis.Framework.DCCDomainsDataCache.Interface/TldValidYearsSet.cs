@@ -6,28 +6,28 @@ namespace Atlantis.Framework.DCCDomainsDataCache.Interface
 {
   public class TldValidYearsSet : ITLDValidYearsSet
   {
-    private static TldValidYearsSet _noValidYears;
+    private static readonly ITLDValidYearsSet _noValidYears;
+    
+    private readonly HashSet<int> _validYears;
+    private readonly int _minimumYears;
+    private readonly int _maximumYears;
 
     static TldValidYearsSet()
     {
-      _noValidYears = TldValidYearsSet.FromNothing();
+      _noValidYears = FromNothing();
     }
 
-    public static TldValidYearsSet INVALIDSET
+    public static ITLDValidYearsSet INVALIDSET
     {
       get { return _noValidYears; }
     }
 
-    private HashSet<int> _validYears;
-    private int _minimumYears = 0;
-    private int _maximumYears = 0;
-
-    public static TldValidYearsSet FromPeriodElements(IEnumerable<XElement> periodElements)
+    public static ITLDValidYearsSet FromPeriodElements(IEnumerable<XElement> periodElements)
     {
       return new TldValidYearsSet(periodElements);
     }
 
-    public static TldValidYearsSet FromNothing()
+    public static ITLDValidYearsSet FromNothing()
     {
       return new TldValidYearsSet();
     }
@@ -69,19 +69,12 @@ namespace Atlantis.Framework.DCCDomainsDataCache.Interface
 
     public int Min
     {
-      get
-      {
-        return _minimumYears;
-      }
+      get { return _minimumYears; }
     }
 
     public int Max
     {
-      get
-      {
-        return _maximumYears;
-      }
+      get { return _maximumYears; }
     }
-    
   }
 }

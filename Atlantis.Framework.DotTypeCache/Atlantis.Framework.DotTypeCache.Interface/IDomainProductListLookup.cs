@@ -2,11 +2,16 @@
 {
   public interface IDomainProductListLookup
   {
-    int[] Years { get; set; }
-    int DomainCount { get; set; }
-    string TldPhaseCode { get; set; }
-    TLDProductTypes ProductType { get; set; }
-    int? PriceTierId { get; set; }
-    int? RegistryId { get; set; }
+    int[] Years { get; }
+
+    int DomainCount { get; }
+
+    LaunchPhases TldPhase { get; }
+
+    TLDProductTypes ProductType { get; }
+
+    int? PriceTierId { get; }
+
+    int? RegistryId { get; }
   }
 }

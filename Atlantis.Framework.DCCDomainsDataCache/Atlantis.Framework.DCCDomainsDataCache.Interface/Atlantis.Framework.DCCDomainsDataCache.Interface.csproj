@@ -53,7 +53,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="TldLaunchPhase.cs" />
+    <Compile Include="TldLaunchPhaseGroupCollection.cs" />
     <Compile Include="TldLaunchPhasePeriod.cs" />
+    <Compile Include="TldLaunchPhaseGroup.cs" />
     <Compile Include="TLDMLPhase.cs" />
     <Compile Include="TLDMLApplicationControl.cs" />
     <Compile Include="TLDMLTld.cs" />

@@ -84,6 +84,7 @@
   <ItemGroup>
     <Compile Include="DomainProductListLookup.cs" />
     <Compile Include="DomainProductLookup.cs" />
+    <Compile Include="LaunchPhaseMappings.cs" />
     <Compile Include="TLDDataImpl.cs" />
     <Compile Include="DotTypeCache.cs" />
     <Compile Include="DotTypeEngineRequests.cs" />

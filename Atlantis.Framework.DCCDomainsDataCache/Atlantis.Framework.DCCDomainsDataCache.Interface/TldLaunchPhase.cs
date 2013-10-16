@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Xml.Linq;
 using Atlantis.Framework.DotTypeCache.Interface;
 
@@ -8,68 +6,25 @@ namespace Atlantis.Framework.DCCDomainsDataCache.Interface
 {
   public class TldLaunchPhase : ITLDLaunchPhase
   {
-    private static readonly TldLaunchPhase _nullLaunchPhase;
+    private static readonly ITLDLaunchPhase _nullLaunchPhase;
+    private static readonly ITLDLaunchPhase _generalAvailabilityActiveLaunchPhase = new TldLaunchPhase { Code = "GA", 
+                                                                                                         ClaimPeriod = null,
+                                                                                                         LivePeriod = new TldLaunchPhasePeriod { StartDateUtc = DateTime.UtcNow.AddYears(-1), StopDateUtc = DateTime.MaxValue },
+                                                                                                         PreRegistrationPeriod = new TldLaunchPhasePeriod { StartDateUtc = DateTime.UtcNow.AddYears(-3), StopDateUtc = DateTime.UtcNow.AddYears(-2) },
+                                                                                                         PrivacyEnabled = false,
+                                                                                                         RefundsEnabled = true,
+                                                                                                         Type = "General Availability",
+                                                                                                         UpdatesEnabled = true,
+                                                                                                         Value = "General Availability" };
 
     static TldLaunchPhase()
     {
       _nullLaunchPhase = FromNothing();
     }
 
-    public static TldLaunchPhase NULLPHASE
+    private TldLaunchPhase()
     {
-      get { return _nullLaunchPhase; }
     }
-
-    public static TldLaunchPhase FromPhaseElement(XElement phaseElement)
-    {
-      return new TldLaunchPhase(phaseElement);
-    }
-
-    public static TldLaunchPhase FromNothing()
-    {
-      return null;
-    }
-
-    public string Code { get; private set; }
-    public string Type { get; private set; }
-    public string Value { get; private set; }
-
-    private readonly HashSet<TldLaunchPhasePeriod> _periods;
-    public IEnumerable<ITLDLaunchPhasePeriod> Periods
-    {
-      get { return _periods; }
-    }
-
-    private readonly HashSet<string> _duplicates;
-    public IEnumerable<string> Duplicates
-    {
-      get { return _duplicates; }
-    }
-    
-    public bool UpdatesEnabled { get; private set; }
-    public bool RefundsEnabled { get; private set; }
-    public bool PrivacyEnabled { get; private set; }
-    public bool IsLive { get; private set; }
-
-    public bool TryGetLaunchPhasePeriod(string type, out ITLDLaunchPhasePeriod launchPhasePeriod)
-    {
-      bool result = false;
-      launchPhasePeriod = null;
-
-      foreach (var period in _periods)
-      {
-        if (period.Type.Equals(type, StringComparison.OrdinalIgnoreCase))
-        {
-          launchPhasePeriod = period;
-          result = true;
-          break;
-        }
-      }
-
-      return result;
-    }
-
-    public bool NeedsClaimCheck { get; private set; }
 
     private TldLaunchPhase(XElement phaseElement)
     {
@@ -77,64 +32,97 @@ namespace Atlantis.Framework.DCCDomainsDataCache.Interface
       Type = phaseElement.Attribute("type").Value;
       Value = phaseElement.Attribute("value").Value;
 
-      //populate lauch phase periods
-      _periods = new HashSet<TldLaunchPhasePeriod>();
+      ParsePeriods(phaseElement);
+    }
+
+    public static ITLDLaunchPhase NullPhase
+    {
+      get { return _nullLaunchPhase; }
+    }
+
+    public static ITLDLaunchPhase FromPhaseElement(XElement phaseElement)
+    {
+      return new TldLaunchPhase(phaseElement);
+    }
+
+    public static ITLDLaunchPhase FromNothing()
+    {
+      return null;
+    }
+
+    public static ITLDLaunchPhase GeneralAvailabilityActive()
+    {
+      return _generalAvailabilityActiveLaunchPhase;
+    }
+
+    public string Code { get; private set; }
+
+    public string Type { get; private set; }
+
+    public string Value { get; private set; }
+
+    private ITLDLaunchPhasePeriod ClaimPeriod { get; set; }
+
+    public ITLDLaunchPhasePeriod PreRegistrationPeriod { get; private set; }
+
+    public ITLDLaunchPhasePeriod LivePeriod { get; private set; }
+
+    public bool UpdatesEnabled { get; private set; }
+
+    public bool RefundsEnabled { get; private set; }
+
+    public bool PrivacyEnabled { get; private set; }
+
+    public bool NeedsClaimCheck
+    {
+      get 
+      { 
+        bool needsClaimCheck = false;
+        
+        if (ClaimPeriod != null)
+        {
+          DateTime utcNow = DateTime.UtcNow;
+
+          needsClaimCheck = utcNow >= ClaimPeriod.StartDateUtc && utcNow <= ClaimPeriod.StopDateUtc;
+        }
+
+        return needsClaimCheck;
+      }
+    }
+
+    private void ParsePeriods(XElement phaseElement)
+    {
+      DateTime preRegStart = DateTime.MinValue;
+      DateTime preRegEnd = DateTime.MinValue;
+      DateTime liveStart = DateTime.UtcNow.AddHours(-1);
+      DateTime liveEnd = DateTime.MaxValue;
+
       foreach (var period in phaseElement.Descendants("launchphaseperiod"))
       {
-        var phasePeriod = new TldLaunchPhasePeriod
-                            {
-                              Type = period.Attribute("type").Value,
-                              StartDate = DateTime.Parse(period.Attribute("utcstartdate").Value),
-                              StopDate = DateTime.Parse(period.Attribute("utcstopdate").Value)
-                            };
+        string periodType = period.Attribute("type").Value;
 
-        _periods.Add(phasePeriod);
-      }
-
-      foreach (var period in _periods)
-      {
-        if (period.Type.Equals("serversubmission") && period.IsActive(DateTime.Now))
+        if (periodType.Equals("clientrequest"))
         {
-          IsLive = true;
-          break;
+          preRegStart = DateTime.Parse(period.Attribute("utcstartdate").Value);
         }
-      }
 
-      foreach (var period in _periods)
-      {
-        if (period.Type.Equals("claims") && period.IsActive(DateTime.Now))
+        if (periodType.Equals("serversubmission"))
         {
-          NeedsClaimCheck = true;
-          break;
+          preRegEnd = DateTime.Parse(period.Attribute("utcstartdate").Value);
+          liveStart = DateTime.Parse(period.Attribute("utcstartdate").Value);
+          liveEnd = DateTime.Parse(period.Attribute("utcstopdate").Value);
         }
-      }
 
-      //populate launch phase duplicates
-      _duplicates = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
-      foreach (var duplicate in phaseElement.Descendants("launchphaseduplicates"))
-      {
-        if (duplicate.IsEnabled())
+        PreRegistrationPeriod = new TldLaunchPhasePeriod { StartDateUtc = preRegStart, StopDateUtc = preRegEnd };
+        LivePeriod = new TldLaunchPhasePeriod { StartDateUtc = liveStart, StopDateUtc = liveEnd };
+
+        if (periodType.Equals("claims"))
         {
-          _duplicates.Add(duplicate.Attribute("type").Value);
+          DateTime claimStart = DateTime.Parse(period.Attribute("utcstartdate").Value);
+          DateTime claimEnd = DateTime.Parse(period.Attribute("utcstopdate").Value);
+
+          ClaimPeriod = new TldLaunchPhasePeriod { StartDateUtc = claimStart, StopDateUtc = claimEnd };
         }
-      }
-
-      var updateElement = phaseElement.Element("launchphaseupdates");
-      if (updateElement != null)
-      {
-        UpdatesEnabled = updateElement.IsEnabled();
-      }
-
-      var refundElement = phaseElement.Element("launchphaserefunds");
-      if (refundElement != null)
-      {
-        RefundsEnabled = refundElement.IsEnabled();
-      }
-
-      var privacyElement = phaseElement.Element("launchphaseprivacy");
-      if (privacyElement != null)
-      {
-        PrivacyEnabled = privacyElement.IsEnabled();
       }
     }
   }

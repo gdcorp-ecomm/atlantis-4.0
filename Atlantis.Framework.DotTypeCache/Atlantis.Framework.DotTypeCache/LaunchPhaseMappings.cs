@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Atlantis.Framework.DotTypeCache.Interface;
 
 namespace Atlantis.Framework.DotTypeCache
 {
-  internal static class LaunchPhaseMappings
+  public static class LaunchPhaseMappings
   {
     private static IDictionary<LaunchPhases, string> _phaseMappingDictionary = new Dictionary<LaunchPhases, string> { { LaunchPhases.SunriseA , "SRA"},
                                                                                                                       { LaunchPhases.SunriseB , "SRB"},
@@ -24,6 +25,18 @@ namespace Atlantis.Framework.DotTypeCache
                                                                                                                                      { LaunchPhaseGroupTypes.EarlyRegistration , "ER"},
                                                                                                                                      { LaunchPhaseGroupTypes.GeneralAvailability , "GA"} };
 
+    internal static string GetCodePrefix(LaunchPhaseGroupTypes launchPhaseGroupType)
+    {
+      string codePrefix;
+
+      if (!_phaseGroupMappingDictionary.TryGetValue(launchPhaseGroupType, out codePrefix))
+      {
+        codePrefix = string.Empty;
+      }
+
+      return codePrefix;
+    }
+
     internal static string GetCode(LaunchPhases launchPhase)
     {
       string code;
@@ -36,16 +49,20 @@ namespace Atlantis.Framework.DotTypeCache
       return code;
     }
 
-    internal static string GetCodePrefix(LaunchPhaseGroupTypes launchPhaseGroupType)
+    public static LaunchPhases GetPhase(string code)
     {
-      string codePrefix;
+      LaunchPhases launchPhase = LaunchPhases.Invalid;
 
-      if (!_phaseGroupMappingDictionary.TryGetValue(launchPhaseGroupType, out codePrefix))
+      foreach (KeyValuePair<LaunchPhases, string> phaseCodePair in _phaseMappingDictionary)
       {
-        codePrefix = string.Empty;
+        if (phaseCodePair.Value.Equals(code, StringComparison.OrdinalIgnoreCase))
+        {
+          launchPhase = phaseCodePair.Key;
+          break;
+        }
       }
 
-      return codePrefix;
+      return launchPhase;
     }
   }
 }

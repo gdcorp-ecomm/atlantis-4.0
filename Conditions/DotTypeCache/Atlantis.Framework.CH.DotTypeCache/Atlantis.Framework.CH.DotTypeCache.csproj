@@ -34,76 +34,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Antlr3.Runtime, Version=3.1.3.22795, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.Render.ExpressionParser.4.0.0.0\lib\net40\Antlr3.Runtime.dll</HintPath>
-    </Reference>
     <Reference Include="Atlantis.Framework.AppSettings.Impl, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Atlantis.Framework.AppSettings.4.0.0.0\lib\net40\Atlantis.Framework.AppSettings.Impl.dll</HintPath>
-    </Reference>
-    <Reference Include="Atlantis.Framework.AppSettings.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.AppSettings.Interface.4.0.0.0\lib\net40\Atlantis.Framework.AppSettings.Interface.dll</HintPath>
-    </Reference>
-    <Reference Include="Atlantis.Framework.Conditions.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.Conditions.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Conditions.Interface.dll</HintPath>
-    </Reference>
-    <Reference Include="Atlantis.Framework.DataCache, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.DataCache.4.0.0.0\lib\net40\Atlantis.Framework.DataCache.dll</HintPath>
-    </Reference>
-    <Reference Include="Atlantis.Framework.DataCacheGeneric.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.DataCacheGeneric.Interface.4.0.0.0\lib\net40\Atlantis.Framework.DataCacheGeneric.Interface.dll</HintPath>
-    </Reference>
-    <Reference Include="Atlantis.Framework.DataCacheService, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.DataCacheService.4.0.0.0\lib\net40\Atlantis.Framework.DataCacheService.dll</HintPath>
-    </Reference>
-    <Reference Include="Atlantis.Framework.Engine, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.Engine.4.0.0.0\lib\net40\Atlantis.Framework.Engine.dll</HintPath>
-    </Reference>
-    <Reference Include="Atlantis.Framework.Engine.XmlSerializers">
-      <HintPath>..\packages\Atlantis.Framework.Engine.4.0.0.0\lib\net40\Atlantis.Framework.Engine.XmlSerializers.dll</HintPath>
-    </Reference>
-    <Reference Include="Atlantis.Framework.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Interface.dll</HintPath>
-    </Reference>
-    <Reference Include="Atlantis.Framework.PrivateLabel.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.PrivateLabel.Interface.4.0.0.0\lib\net40\Atlantis.Framework.PrivateLabel.Interface.dll</HintPath>
-    </Reference>
-    <Reference Include="Atlantis.Framework.Products.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.Products.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Products.Interface.dll</HintPath>
-    </Reference>
-    <Reference Include="Atlantis.Framework.Providers.Containers, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.Providers.Containers.4.13.10.11\lib\net40\Atlantis.Framework.Providers.Containers.dll</HintPath>
-    </Reference>
-    <Reference Include="Atlantis.Framework.Providers.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.Providers.Interface.4.13.8.28\lib\net40\Atlantis.Framework.Providers.Interface.dll</HintPath>
-    </Reference>
-    <Reference Include="Atlantis.Framework.Providers.Preferences.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.Providers.Preferences.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Providers.Preferences.Interface.dll</HintPath>
-    </Reference>
-    <Reference Include="Atlantis.Framework.Render.ExpressionParser, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.Render.ExpressionParser.4.0.0.0\lib\net40\Atlantis.Framework.Render.ExpressionParser.dll</HintPath>
-    </Reference>
-    <Reference Include="Atlantis.Framework.Render.MarkupParser, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.Render.MarkupParser.4.0.0.0\lib\net40\Atlantis.Framework.Render.MarkupParser.dll</HintPath>
-    </Reference>
-    <Reference Include="Atlantis.Framework.Render.Pipeline.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.Render.Pipeline.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Render.Pipeline.Interface.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -124,7 +57,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="atlantis.config" />
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Atlantis.Framework.DotTypeCache\Atlantis.Framework.DotTypeCache.Interface\Atlantis.Framework.DotTypeCache.Interface.csproj">

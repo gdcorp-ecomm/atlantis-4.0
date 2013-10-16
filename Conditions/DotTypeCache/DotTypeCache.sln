@@ -29,9 +29,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.TLDDataC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.ManagerUser.Interface", "..\..\Atlantis.Framework.ManagerUser\Atlantis.Framework.ManagerUser.Interface\Atlantis.Framework.ManagerUser.Interface.csproj", "{55F48501-FE1B-441B-A786-A14001AD2F04}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.DotTypeAvailability.Interface", "..\..\Triplets\DotTypeAvailability\Atlantis.Framework.DotTypeAvailability.Interface\Atlantis.Framework.DotTypeAvailability.Interface.csproj", "{8FFBA5EF-E5E2-44B3-9AEC-A77A415A1DDB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.DotTypeAvailability.Impl", "..\..\Triplets\DotTypeAvailability\Atlantis.Framework.DotTypeAvailability.Impl\Atlantis.Framework.DotTypeAvailability.Impl.csproj", "{1A80790A-8633-4367-89CE-4E6E480E31CC}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 14
+		SccNumberOfProjects = 16
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
 		SccLocalPath0 = .
@@ -85,6 +89,14 @@ Global
 		SccProjectTopLevelParentUniqueName13 = DotTypeCache.sln
 		SccProjectName13 = ../../Atlantis.Framework.ManagerUser/Atlantis.Framework.ManagerUser.Interface
 		SccLocalPath13 = ..\\..\\Atlantis.Framework.ManagerUser\\Atlantis.Framework.ManagerUser.Interface
+		SccProjectUniqueName14 = ..\\..\\Triplets\\DotTypeAvailability\\Atlantis.Framework.DotTypeAvailability.Interface\\Atlantis.Framework.DotTypeAvailability.Interface.csproj
+		SccProjectTopLevelParentUniqueName14 = DotTypeCache.sln
+		SccProjectName14 = ../../Triplets/DotTypeAvailability/Atlantis.Framework.DotTypeAvailability.Interface
+		SccLocalPath14 = ..\\..\\Triplets\\DotTypeAvailability\\Atlantis.Framework.DotTypeAvailability.Interface
+		SccProjectUniqueName15 = ..\\..\\Triplets\\DotTypeAvailability\\Atlantis.Framework.DotTypeAvailability.Impl\\Atlantis.Framework.DotTypeAvailability.Impl.csproj
+		SccProjectTopLevelParentUniqueName15 = DotTypeCache.sln
+		SccProjectName15 = ../../Triplets/DotTypeAvailability/Atlantis.Framework.DotTypeAvailability.Impl
+		SccLocalPath15 = ..\\..\\Triplets\\DotTypeAvailability\\Atlantis.Framework.DotTypeAvailability.Impl
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -143,6 +155,14 @@ Global
 		{55F48501-FE1B-441B-A786-A14001AD2F04}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{55F48501-FE1B-441B-A786-A14001AD2F04}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{55F48501-FE1B-441B-A786-A14001AD2F04}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8FFBA5EF-E5E2-44B3-9AEC-A77A415A1DDB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8FFBA5EF-E5E2-44B3-9AEC-A77A415A1DDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8FFBA5EF-E5E2-44B3-9AEC-A77A415A1DDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8FFBA5EF-E5E2-44B3-9AEC-A77A415A1DDB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A80790A-8633-4367-89CE-4E6E480E31CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A80790A-8633-4367-89CE-4E6E480E31CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A80790A-8633-4367-89CE-4E6E480E31CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A80790A-8633-4367-89CE-4E6E480E31CC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -159,5 +179,7 @@ Global
 		{2A615D6F-9604-40C1-BC6A-2659E3B97BCC} = {89B6B66B-27F9-40A3-B5D9-8AECD04EE1CD}
 		{B6638632-2265-4F7E-A6A2-C494391DFBAB} = {89B6B66B-27F9-40A3-B5D9-8AECD04EE1CD}
 		{55F48501-FE1B-441B-A786-A14001AD2F04} = {89B6B66B-27F9-40A3-B5D9-8AECD04EE1CD}
+		{8FFBA5EF-E5E2-44B3-9AEC-A77A415A1DDB} = {89B6B66B-27F9-40A3-B5D9-8AECD04EE1CD}
+		{1A80790A-8633-4367-89CE-4E6E480E31CC} = {89B6B66B-27F9-40A3-B5D9-8AECD04EE1CD}
 	EndGlobalSection
 EndGlobal

@@ -49,7 +49,8 @@
       <HintPath>..\packages\Atlantis.Framework.AppSettings.Interface.4.0.0.0\lib\net40\Atlantis.Framework.AppSettings.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Conditions.Interface">
-      <HintPath>..\packages\Atlantis.Framework.Conditions.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Conditions.Interface.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.Conditions.Interface.4.13.10.12\lib\net40\Atlantis.Framework.Conditions.Interface.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Atlantis.Framework.DataCache">
       <HintPath>..\packages\Atlantis.Framework.DataCache.4.0.0.0\lib\net40\Atlantis.Framework.DataCache.dll</HintPath>
@@ -76,13 +77,18 @@
       <HintPath>..\packages\Atlantis.Framework.Products.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Products.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Providers.Containers">
-      <HintPath>..\packages\Atlantis.Framework.Providers.Containers.4.13.10.11\lib\net40\Atlantis.Framework.Providers.Containers.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.Providers.Containers.4.13.10.12\lib\net40\Atlantis.Framework.Providers.Containers.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Atlantis.Framework.Providers.Interface">
       <HintPath>..\packages\Atlantis.Framework.Providers.Interface.4.13.8.28\lib\net40\Atlantis.Framework.Providers.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Providers.Preferences.Interface">
       <HintPath>..\packages\Atlantis.Framework.Providers.Preferences.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Providers.Preferences.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Providers.RenderPipeline.Interface">
+      <HintPath>..\packages\Atlantis.Framework.Providers.RenderPipeline.Interface.4.13.10.16\lib\net40\Atlantis.Framework.Providers.RenderPipeline.Interface.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Atlantis.Framework.Render.ExpressionParser">
       <HintPath>..\packages\Atlantis.Framework.Render.ExpressionParser.4.0.0.0\lib\net40\Atlantis.Framework.Render.ExpressionParser.dll</HintPath>

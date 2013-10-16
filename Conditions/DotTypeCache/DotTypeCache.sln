@@ -27,11 +27,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.TLDDataC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.TLDDataCache.Impl", "..\..\Atlantis.Framework.TLDDataCache\Atlantis.Framework.TLDDataCache.Impl\Atlantis.Framework.TLDDataCache.Impl.csproj", "{B6638632-2265-4F7E-A6A2-C494391DFBAB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.ManagerUser.Interface", "..\..\Atlantis.Framework.ManagerUser\Atlantis.Framework.ManagerUser.Interface\Atlantis.Framework.ManagerUser.Interface.csproj", "{55F48501-FE1B-441B-A786-A14001AD2F04}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.DotTypeAvailability.Interface", "..\..\Triplets\DotTypeAvailability\Atlantis.Framework.DotTypeAvailability.Interface\Atlantis.Framework.DotTypeAvailability.Interface.csproj", "{8FFBA5EF-E5E2-44B3-9AEC-A77A415A1DDB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.DotTypeAvailability.Impl", "..\..\Triplets\DotTypeAvailability\Atlantis.Framework.DotTypeAvailability.Impl\Atlantis.Framework.DotTypeAvailability.Impl.csproj", "{1A80790A-8633-4367-89CE-4E6E480E31CC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.DotTypeCache.StaticTypes", "..\..\Atlantis.Framework.DotTypeCache\Atlantis.Framework.DotTypeCache.StaticTypes\Atlantis.Framework.DotTypeCache.StaticTypes.csproj", "{FC7381B1-66E0-462F-952B-4EC1F18E9C90}"
 EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
@@ -85,18 +85,18 @@ Global
 		SccProjectTopLevelParentUniqueName12 = DotTypeCache.sln
 		SccProjectName12 = ../../Atlantis.Framework.TLDDataCache/Atlantis.Framework.TLDDataCache.Impl
 		SccLocalPath12 = ..\\..\\Atlantis.Framework.TLDDataCache\\Atlantis.Framework.TLDDataCache.Impl
-		SccProjectUniqueName13 = ..\\..\\Atlantis.Framework.ManagerUser\\Atlantis.Framework.ManagerUser.Interface\\Atlantis.Framework.ManagerUser.Interface.csproj
+		SccProjectUniqueName13 = ..\\..\\Triplets\\DotTypeAvailability\\Atlantis.Framework.DotTypeAvailability.Interface\\Atlantis.Framework.DotTypeAvailability.Interface.csproj
 		SccProjectTopLevelParentUniqueName13 = DotTypeCache.sln
-		SccProjectName13 = ../../Atlantis.Framework.ManagerUser/Atlantis.Framework.ManagerUser.Interface
-		SccLocalPath13 = ..\\..\\Atlantis.Framework.ManagerUser\\Atlantis.Framework.ManagerUser.Interface
-		SccProjectUniqueName14 = ..\\..\\Triplets\\DotTypeAvailability\\Atlantis.Framework.DotTypeAvailability.Interface\\Atlantis.Framework.DotTypeAvailability.Interface.csproj
+		SccProjectName13 = ../../Triplets/DotTypeAvailability/Atlantis.Framework.DotTypeAvailability.Interface
+		SccLocalPath13 = ..\\..\\Triplets\\DotTypeAvailability\\Atlantis.Framework.DotTypeAvailability.Interface
+		SccProjectUniqueName14 = ..\\..\\Triplets\\DotTypeAvailability\\Atlantis.Framework.DotTypeAvailability.Impl\\Atlantis.Framework.DotTypeAvailability.Impl.csproj
 		SccProjectTopLevelParentUniqueName14 = DotTypeCache.sln
-		SccProjectName14 = ../../Triplets/DotTypeAvailability/Atlantis.Framework.DotTypeAvailability.Interface
-		SccLocalPath14 = ..\\..\\Triplets\\DotTypeAvailability\\Atlantis.Framework.DotTypeAvailability.Interface
-		SccProjectUniqueName15 = ..\\..\\Triplets\\DotTypeAvailability\\Atlantis.Framework.DotTypeAvailability.Impl\\Atlantis.Framework.DotTypeAvailability.Impl.csproj
+		SccProjectName14 = ../../Triplets/DotTypeAvailability/Atlantis.Framework.DotTypeAvailability.Impl
+		SccLocalPath14 = ..\\..\\Triplets\\DotTypeAvailability\\Atlantis.Framework.DotTypeAvailability.Impl
+		SccProjectUniqueName15 = ..\\..\\Atlantis.Framework.DotTypeCache\\Atlantis.Framework.DotTypeCache.StaticTypes\\Atlantis.Framework.DotTypeCache.StaticTypes.csproj
 		SccProjectTopLevelParentUniqueName15 = DotTypeCache.sln
-		SccProjectName15 = ../../Triplets/DotTypeAvailability/Atlantis.Framework.DotTypeAvailability.Impl
-		SccLocalPath15 = ..\\..\\Triplets\\DotTypeAvailability\\Atlantis.Framework.DotTypeAvailability.Impl
+		SccProjectName15 = ../../Atlantis.Framework.DotTypeCache/Atlantis.Framework.DotTypeCache.StaticTypes
+		SccLocalPath15 = ..\\..\\Atlantis.Framework.DotTypeCache\\Atlantis.Framework.DotTypeCache.StaticTypes
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -151,10 +151,6 @@ Global
 		{B6638632-2265-4F7E-A6A2-C494391DFBAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B6638632-2265-4F7E-A6A2-C494391DFBAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B6638632-2265-4F7E-A6A2-C494391DFBAB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{55F48501-FE1B-441B-A786-A14001AD2F04}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{55F48501-FE1B-441B-A786-A14001AD2F04}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{55F48501-FE1B-441B-A786-A14001AD2F04}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{55F48501-FE1B-441B-A786-A14001AD2F04}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8FFBA5EF-E5E2-44B3-9AEC-A77A415A1DDB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8FFBA5EF-E5E2-44B3-9AEC-A77A415A1DDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8FFBA5EF-E5E2-44B3-9AEC-A77A415A1DDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -163,6 +159,10 @@ Global
 		{1A80790A-8633-4367-89CE-4E6E480E31CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1A80790A-8633-4367-89CE-4E6E480E31CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1A80790A-8633-4367-89CE-4E6E480E31CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC7381B1-66E0-462F-952B-4EC1F18E9C90}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC7381B1-66E0-462F-952B-4EC1F18E9C90}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC7381B1-66E0-462F-952B-4EC1F18E9C90}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC7381B1-66E0-462F-952B-4EC1F18E9C90}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -178,8 +178,8 @@ Global
 		{970B458C-3FDF-45D7-8B0E-3D8818907FFD} = {89B6B66B-27F9-40A3-B5D9-8AECD04EE1CD}
 		{2A615D6F-9604-40C1-BC6A-2659E3B97BCC} = {89B6B66B-27F9-40A3-B5D9-8AECD04EE1CD}
 		{B6638632-2265-4F7E-A6A2-C494391DFBAB} = {89B6B66B-27F9-40A3-B5D9-8AECD04EE1CD}
-		{55F48501-FE1B-441B-A786-A14001AD2F04} = {89B6B66B-27F9-40A3-B5D9-8AECD04EE1CD}
 		{8FFBA5EF-E5E2-44B3-9AEC-A77A415A1DDB} = {89B6B66B-27F9-40A3-B5D9-8AECD04EE1CD}
 		{1A80790A-8633-4367-89CE-4E6E480E31CC} = {89B6B66B-27F9-40A3-B5D9-8AECD04EE1CD}
+		{FC7381B1-66E0-462F-952B-4EC1F18E9C90} = {89B6B66B-27F9-40A3-B5D9-8AECD04EE1CD}
 	EndGlobalSection
 EndGlobal

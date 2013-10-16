@@ -6,9 +6,9 @@ using Atlantis.Framework.CDS.Interface;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.CDSContent.Interface;
 using Atlantis.Framework.Providers.PlaceHolder.Interface;
+using Atlantis.Framework.Providers.RenderPipeline.Interface;
 using Atlantis.Framework.Render.ContentInjection;
 using Atlantis.Framework.Render.ContentInjection.RenderHandlers;
-using Atlantis.Framework.Render.Pipeline.Interface;
 using Atlantis.Framework.Web.RenderPipeline;
 
 namespace Atlantis.Framework.Web.CDSContent

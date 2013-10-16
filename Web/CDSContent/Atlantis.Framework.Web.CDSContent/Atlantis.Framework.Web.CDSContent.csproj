@@ -34,6 +34,94 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Antlr3.Runtime">
+      <HintPath>..\packages\Atlantis.Framework.Render.ExpressionParser.4.0.0.0\lib\net40\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.AppSettings.Interface">
+      <HintPath>..\packages\Atlantis.Framework.AppSettings.Interface.4.0.0.0\lib\net40\Atlantis.Framework.AppSettings.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.CDS.Impl">
+      <HintPath>..\packages\Atlantis.Framework.CDS.4.13.10.14\lib\net40\Atlantis.Framework.CDS.Impl.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.CDS.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.CDS.Interface.4.13.10.15\lib\net40\Atlantis.Framework.CDS.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Conditions.Interface">
+      <HintPath>..\packages\Atlantis.Framework.Conditions.Interface.4.13.10.12\lib\net40\Atlantis.Framework.Conditions.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.DataCache">
+      <HintPath>..\packages\Atlantis.Framework.DataCache.4.0.0.0\lib\net40\Atlantis.Framework.DataCache.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.DataCacheGeneric.Interface">
+      <HintPath>..\packages\Atlantis.Framework.DataCacheGeneric.Interface.4.0.0.0\lib\net40\Atlantis.Framework.DataCacheGeneric.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.DataCacheService">
+      <HintPath>..\packages\Atlantis.Framework.DataCacheService.4.0.0.0\lib\net40\Atlantis.Framework.DataCacheService.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Engine, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Engine.4.0.0.0\lib\net40\Atlantis.Framework.Engine.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Engine.XmlSerializers, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Engine.4.0.0.0\lib\net40\Atlantis.Framework.Engine.XmlSerializers.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.PrivateLabel.Interface">
+      <HintPath>..\packages\Atlantis.Framework.PrivateLabel.Interface.4.0.0.0\lib\net40\Atlantis.Framework.PrivateLabel.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Products.Interface">
+      <HintPath>..\packages\Atlantis.Framework.Products.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Products.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Providers.CDSContent">
+      <HintPath>..\packages\Atlantis.Framework.Providers.CDSContent.4.13.10.14\lib\net40\Atlantis.Framework.Providers.CDSContent.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Providers.CDSContent.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Providers.CDSContent.Interface.4.13.10.14\lib\net40\Atlantis.Framework.Providers.CDSContent.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Providers.Containers, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Providers.Containers.4.13.10.12\lib\net40\Atlantis.Framework.Providers.Containers.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Providers.Interface">
+      <HintPath>..\packages\Atlantis.Framework.Providers.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Providers.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Providers.PlaceHolder.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Providers.PlaceHolder.Interface.4.13.10.15\lib\net40\Atlantis.Framework.Providers.PlaceHolder.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Providers.RenderPipeline">
+      <HintPath>..\packages\Atlantis.Framework.Providers.RenderPipeline.4.13.10.16\lib\net40\Atlantis.Framework.Providers.RenderPipeline.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Providers.RenderPipeline.Interface">
+      <HintPath>..\packages\Atlantis.Framework.Providers.RenderPipeline.4.13.10.16\lib\net40\Atlantis.Framework.Providers.RenderPipeline.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Render.ContentInjection, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Render.ContentInjection.4.13.10.16\lib\net40\Atlantis.Framework.Render.ContentInjection.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Render.ExpressionParser">
+      <HintPath>..\packages\Atlantis.Framework.Render.ExpressionParser.4.0.0.0\lib\net40\Atlantis.Framework.Render.ExpressionParser.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Render.MarkupParser">
+      <HintPath>..\packages\Atlantis.Framework.Render.MarkupParser.4.0.0.0\lib\net40\Atlantis.Framework.Render.MarkupParser.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Tokens.Interface">
+      <HintPath>..\packages\Atlantis.Framework.Tokens.Interface.4.13.10.12\lib\net40\Atlantis.Framework.Tokens.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Web.RenderPipeline, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Web.RenderPipeline.4.13.10.15\lib\net40\Atlantis.Framework.Web.RenderPipeline.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.5.0.7\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
@@ -50,38 +138,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Atlantis.Framework.CDS\Atlantis.Framework.CDS.Interface\Atlantis.Framework.CDS.Interface.csproj">
-      <Project>{43ecc9f8-c897-4ae0-8c53-22b2691d6995}</Project>
-      <Name>Atlantis.Framework.CDS.Interface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj">
-      <Project>{d30157b2-c1b3-4073-ba5e-632e2337a997}</Project>
-      <Name>Atlantis.Framework.Engine</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj">
-      <Project>{a083a52e-c3c3-42e0-8dfd-54719e4c3b25}</Project>
-      <Name>Atlantis.Framework.Interface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Providers\CDSContent\Atlantis.Framework.Providers.CDSContent.Interface\Atlantis.Framework.Providers.CDSContent.Interface.csproj">
-      <Project>{99bcb8c3-f00f-44be-ab61-7b433f519e2b}</Project>
-      <Name>Atlantis.Framework.Providers.CDSContent.Interface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Providers\PlaceHolder\Atlantis.Framework.Providers.PlaceHolder.Interface\Atlantis.Framework.Providers.PlaceHolder.Interface.csproj">
-      <Project>{e9297a57-bdaf-45a3-ac6c-891f5235385f}</Project>
-      <Name>Atlantis.Framework.Providers.PlaceHolder.Interface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Render\ContentInjection\Atlantis.Framework.Render.ContentInjection\Atlantis.Framework.Render.ContentInjection.csproj">
-      <Project>{772f3587-7323-4dc4-a8f3-b20e4b48e8d7}</Project>
-      <Name>Atlantis.Framework.Render.ContentInjection</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Render\RenderPipeline\Atlantis.Framework.Render.Pipeline.Interface\Atlantis.Framework.Render.Pipeline.Interface.csproj">
-      <Project>{0d7f076f-1809-437b-b045-e35a7e68e423}</Project>
-      <Name>Atlantis.Framework.Render.Pipeline.Interface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\RenderPipeline\Atlantis.Framework.Web.RenderPipeline\Atlantis.Framework.Web.RenderPipeline.csproj">
-      <Project>{1ff847b7-4b9e-4c2e-a91e-759b0e772c40}</Project>
-      <Name>Atlantis.Framework.Web.RenderPipeline</Name>
-    </ProjectReference>
+    <None Include="atlantis.config" />
+    <None Include="Atlantis.Framework.Web.CDSContent.bat" />
+    <None Include="Atlantis.Framework.Web.CDSContent.nuspec" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

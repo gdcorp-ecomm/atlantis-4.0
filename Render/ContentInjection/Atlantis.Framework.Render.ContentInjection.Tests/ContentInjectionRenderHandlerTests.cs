@@ -3,9 +3,9 @@ using System.Diagnostics;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.PlaceHolder;
 using Atlantis.Framework.Providers.PlaceHolder.Interface;
+using Atlantis.Framework.Providers.RenderPipeline;
+using Atlantis.Framework.Providers.RenderPipeline.Interface;
 using Atlantis.Framework.Render.ContentInjection.RenderHandlers;
-using Atlantis.Framework.Render.Pipeline;
-using Atlantis.Framework.Render.Pipeline.Interface;
 using Atlantis.Framework.Testing.MockProviders;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -55,6 +55,7 @@ namespace Atlantis.Framework.Render.ContentInjection.Tests
       ProviderContainer.RegisterProvider<IShopperContext, MockShopperContext>();
       ProviderContainer.RegisterProvider<IManagerContext, MockManagerContext>();
       ProviderContainer.RegisterProvider<IPlaceHolderProvider, PlaceHolderProvider>();
+      ProviderContainer.RegisterProvider<IRenderPipelineProvider, RenderPipelineProvider>();
     }
 
     private void WriteOutput(string output)
@@ -79,21 +80,17 @@ namespace Atlantis.Framework.Render.ContentInjection.Tests
 
       IRenderHandler renderHandler = new ContentInjectionRenderHandler(context);
 
-      RenderPipelineManager renderPipelineManager = new RenderPipelineManager();
-      renderPipelineManager.AddRenderHandler(renderHandler);
+      IRenderPipelineProvider renderPipelineProvider = ProviderContainer.Resolve<IRenderPipelineProvider>();
+      string renderedContent = renderPipelineProvider.RenderContent(HTML_CONTENT, new IRenderHandler[] { renderHandler });
 
-      IRenderContent renderContent = new TestRenderContent(HTML_CONTENT);
+      WriteOutput(renderedContent);
 
-      IProcessedRenderContent processedRenderContent = renderPipelineManager.RenderContent(renderContent, ProviderContainer);
+      Assert.IsTrue(renderedContent.Contains("<head>"));
+      Assert.IsTrue(renderedContent.Contains("</head>"));
+      Assert.IsTrue(renderedContent.Contains("<body>"));
+      Assert.IsTrue(renderedContent.Contains("</body>"));
 
-      WriteOutput(processedRenderContent.Content);
-
-      Assert.IsTrue(processedRenderContent.Content.Contains("<head>"));
-      Assert.IsTrue(processedRenderContent.Content.Contains("</head>"));
-      Assert.IsTrue(processedRenderContent.Content.Contains("<body>"));
-      Assert.IsTrue(processedRenderContent.Content.Contains("</body>"));
-
-      Assert.IsTrue(processedRenderContent.Content.Contains(placeHolderProvider.ReplacePlaceHolders(new UserControlPlaceHolder("~/controls/metatags/ieedgemetatag.ascx", null).ToMarkup())));
+      Assert.IsTrue(renderedContent.Contains(placeHolderProvider.ReplacePlaceHolders(new UserControlPlaceHolder("~/controls/metatags/ieedgemetatag.ascx", null).ToMarkup(), null)));
     }
 
     [TestMethod]
@@ -114,25 +111,21 @@ namespace Atlantis.Framework.Render.ContentInjection.Tests
       IContentInjectionContext context = new ContentInjectionContext(contentInjectionItems);
 
       IRenderHandler renderHandler = new ContentInjectionRenderHandler(context);
+
+      IRenderPipelineProvider renderPipelineProvider = ProviderContainer.Resolve<IRenderPipelineProvider>();
+      string renderedContent = renderPipelineProvider.RenderContent(HTML_CONTENT, new IRenderHandler[] { renderHandler });
+
+      WriteOutput(renderedContent);
       
-      RenderPipelineManager renderPipelineManager = new RenderPipelineManager();
-      renderPipelineManager.AddRenderHandler(renderHandler);
+      Assert.IsTrue(renderedContent.Contains("<head>"));
+      Assert.IsTrue(renderedContent.Contains("</head>"));
+      Assert.IsTrue(renderedContent.Contains("<body>"));
+      Assert.IsTrue(renderedContent.Contains("</body>"));
 
-      IRenderContent renderContent = new TestRenderContent(HTML_CONTENT);
-
-      IProcessedRenderContent processedRenderContent = renderPipelineManager.RenderContent(renderContent, ProviderContainer);
-
-      WriteOutput(processedRenderContent.Content);
-      
-      Assert.IsTrue(processedRenderContent.Content.Contains("<head>"));
-      Assert.IsTrue(processedRenderContent.Content.Contains("</head>"));
-      Assert.IsTrue(processedRenderContent.Content.Contains("<body>"));
-      Assert.IsTrue(processedRenderContent.Content.Contains("</body>"));
-
-      Assert.IsTrue(processedRenderContent.Content.Contains(new UserControlPlaceHolder("~/controls/metatags/ieedgemetatag.ascx", null).ToMarkup()));
-      Assert.IsTrue(processedRenderContent.Content.Contains(new UserControlPlaceHolder("~/controls/scripts/gascript.ascx", null).ToMarkup()));
-      Assert.IsTrue(processedRenderContent.Content.Contains(new UserControlPlaceHolder("~/controls/banners/iscbanner.ascx", null).ToMarkup()));
-      Assert.IsTrue(processedRenderContent.Content.Contains(new UserControlPlaceHolder("~/controls/traffic/trafficimage.ascx", null).ToMarkup()));
+      Assert.IsTrue(renderedContent.Contains(new UserControlPlaceHolder("~/controls/metatags/ieedgemetatag.ascx", null).ToMarkup()));
+      Assert.IsTrue(renderedContent.Contains(new UserControlPlaceHolder("~/controls/scripts/gascript.ascx", null).ToMarkup()));
+      Assert.IsTrue(renderedContent.Contains(new UserControlPlaceHolder("~/controls/banners/iscbanner.ascx", null).ToMarkup()));
+      Assert.IsTrue(renderedContent.Contains(new UserControlPlaceHolder("~/controls/traffic/trafficimage.ascx", null).ToMarkup()));
     }
 
     [TestMethod]
@@ -154,31 +147,25 @@ namespace Atlantis.Framework.Render.ContentInjection.Tests
 
       IRenderHandler renderHandler = new ContentInjectionRenderHandler(context);
 
-      RenderPipelineManager renderPipelineManager = new RenderPipelineManager();
-      renderPipelineManager.AddRenderHandler(renderHandler);
+      IRenderPipelineProvider renderPipelineProvider = ProviderContainer.Resolve<IRenderPipelineProvider>();
+      string renderedContent = renderPipelineProvider.RenderContent(HTML_CONTENT_BODY_AND_HEAD_WITH_ATTRIBUTES, new IRenderHandler[] { renderHandler });
 
-      IRenderContent renderContent = new TestRenderContent(HTML_CONTENT_BODY_AND_HEAD_WITH_ATTRIBUTES);
+      WriteOutput(renderedContent);
 
-      IProcessedRenderContent processedRenderContent = renderPipelineManager.RenderContent(renderContent, ProviderContainer);
+      Assert.IsTrue(renderedContent.Contains("<head style=\"padding:10px;\">"));
+      Assert.IsTrue(renderedContent.Contains("</head>"));
+      Assert.IsTrue(renderedContent.Contains("<body style=\"background-color:#000;\">"));
+      Assert.IsTrue(renderedContent.Contains("</body>"));
 
-      WriteOutput(processedRenderContent.Content);
-
-      Assert.IsTrue(processedRenderContent.Content.Contains("<head style=\"padding:10px;\">"));
-      Assert.IsTrue(processedRenderContent.Content.Contains("</head>"));
-      Assert.IsTrue(processedRenderContent.Content.Contains("<body style=\"background-color:#000;\">"));
-      Assert.IsTrue(processedRenderContent.Content.Contains("</body>"));
-
-      Assert.IsTrue(processedRenderContent.Content.Contains(new UserControlPlaceHolder("~/controls/metatags/ieedgemetatag.ascx", null).ToMarkup()));
-      Assert.IsTrue(processedRenderContent.Content.Contains(new UserControlPlaceHolder("~/controls/scripts/gascript.ascx", null).ToMarkup()));
-      Assert.IsTrue(processedRenderContent.Content.Contains(new UserControlPlaceHolder("~/controls/banners/iscbanner.ascx", null).ToMarkup()));
-      Assert.IsTrue(processedRenderContent.Content.Contains(new UserControlPlaceHolder("~/controls/traffic/trafficimage.ascx", null).ToMarkup()));
+      Assert.IsTrue(renderedContent.Contains(new UserControlPlaceHolder("~/controls/metatags/ieedgemetatag.ascx", null).ToMarkup()));
+      Assert.IsTrue(renderedContent.Contains(new UserControlPlaceHolder("~/controls/scripts/gascript.ascx", null).ToMarkup()));
+      Assert.IsTrue(renderedContent.Contains(new UserControlPlaceHolder("~/controls/banners/iscbanner.ascx", null).ToMarkup()));
+      Assert.IsTrue(renderedContent.Contains(new UserControlPlaceHolder("~/controls/traffic/trafficimage.ascx", null).ToMarkup()));
     }
 
     [TestMethod]
     public void NullContentWithInjectionItems()
     {
-      IPlaceHolderProvider placeHolderProvider = ProviderContainer.Resolve<IPlaceHolderProvider>();
-
       IContentInjectionItem headBeginContentInjectionItem = new HtmlHeadBeginContentInjectionItem(new UserControlPlaceHolder("~/controls/metatags/ieedgemetatag.ascx", null).ToMarkup());
 
       IContentInjectionItem[] contentInjectionItems = new[] { headBeginContentInjectionItem };
@@ -187,16 +174,12 @@ namespace Atlantis.Framework.Render.ContentInjection.Tests
 
       IRenderHandler renderHandler = new ContentInjectionRenderHandler(context);
 
-      RenderPipelineManager renderPipelineManager = new RenderPipelineManager();
-      renderPipelineManager.AddRenderHandler(renderHandler);
+      IRenderPipelineProvider renderPipelineProvider = ProviderContainer.Resolve<IRenderPipelineProvider>();
+      string renderedContent = renderPipelineProvider.RenderContent(null, new IRenderHandler[] { renderHandler });
 
-      IRenderContent renderContent = new TestRenderContent(null);
+      WriteOutput(renderedContent);
 
-      IProcessedRenderContent processedRenderContent = renderPipelineManager.RenderContent(renderContent, ProviderContainer);
-
-      WriteOutput(processedRenderContent.Content);
-
-      Assert.AreEqual(string.Empty, processedRenderContent.Content);
+      Assert.AreEqual(null, renderedContent);
     }
 
     [TestMethod]
@@ -212,16 +195,12 @@ namespace Atlantis.Framework.Render.ContentInjection.Tests
 
       IRenderHandler renderHandler = new ContentInjectionRenderHandler(context);
 
-      RenderPipelineManager renderPipelineManager = new RenderPipelineManager();
-      renderPipelineManager.AddRenderHandler(renderHandler);
+      IRenderPipelineProvider renderPipelineProvider = ProviderContainer.Resolve<IRenderPipelineProvider>();
+      string renderedContent = renderPipelineProvider.RenderContent(string.Empty, new IRenderHandler[] { renderHandler });
 
-      IRenderContent renderContent = new TestRenderContent(string.Empty);
+      WriteOutput(renderedContent);
 
-      IProcessedRenderContent processedRenderContent = renderPipelineManager.RenderContent(renderContent, ProviderContainer);
-
-      WriteOutput(processedRenderContent.Content);
-
-      Assert.AreEqual(string.Empty, processedRenderContent.Content);
+      Assert.AreEqual(string.Empty, renderedContent);
     }
 
     [TestMethod]
@@ -235,16 +214,12 @@ namespace Atlantis.Framework.Render.ContentInjection.Tests
 
       IRenderHandler renderHandler = new ContentInjectionRenderHandler(context);
 
-      RenderPipelineManager renderPipelineManager = new RenderPipelineManager();
-      renderPipelineManager.AddRenderHandler(renderHandler);
+      IRenderPipelineProvider renderPipelineProvider = ProviderContainer.Resolve<IRenderPipelineProvider>();
+      string renderedContent = renderPipelineProvider.RenderContent(HTML_CONTENT, new IRenderHandler[] { renderHandler });
 
-      IRenderContent renderContent = new TestRenderContent(HTML_CONTENT);
+      WriteOutput(renderedContent);
 
-      IProcessedRenderContent processedRenderContent = renderPipelineManager.RenderContent(renderContent, ProviderContainer);
-
-      WriteOutput(processedRenderContent.Content);
-
-      Assert.AreEqual(HTML_CONTENT, processedRenderContent.Content);
+      Assert.AreEqual(HTML_CONTENT, renderedContent);
     }
 
     [TestMethod]
@@ -258,16 +233,12 @@ namespace Atlantis.Framework.Render.ContentInjection.Tests
 
       IRenderHandler renderHandler = new ContentInjectionRenderHandler(context);
 
-      RenderPipelineManager renderPipelineManager = new RenderPipelineManager();
-      renderPipelineManager.AddRenderHandler(renderHandler);
+      IRenderPipelineProvider renderPipelineProvider = ProviderContainer.Resolve<IRenderPipelineProvider>();
+      string renderedContent = renderPipelineProvider.RenderContent(HTML_CONTENT, new IRenderHandler[] { renderHandler });
 
-      IRenderContent renderContent = new TestRenderContent(HTML_CONTENT);
+      WriteOutput(renderedContent);
 
-      IProcessedRenderContent processedRenderContent = renderPipelineManager.RenderContent(renderContent, ProviderContainer);
-
-      WriteOutput(processedRenderContent.Content);
-
-      Assert.AreEqual(HTML_CONTENT, processedRenderContent.Content);
+      Assert.AreEqual(HTML_CONTENT, renderedContent);
     }
 
     [TestMethod]
@@ -281,16 +252,12 @@ namespace Atlantis.Framework.Render.ContentInjection.Tests
 
       IRenderHandler renderHandler = new ContentInjectionRenderHandler(context);
 
-      RenderPipelineManager renderPipelineManager = new RenderPipelineManager();
-      renderPipelineManager.AddRenderHandler(renderHandler);
+      IRenderPipelineProvider renderPipelineProvider = ProviderContainer.Resolve<IRenderPipelineProvider>();
+      string renderedContent = renderPipelineProvider.RenderContent(HTML_CONTENT, new IRenderHandler[] { renderHandler });
 
-      IRenderContent renderContent = new TestRenderContent(HTML_CONTENT);
+      WriteOutput(renderedContent);
 
-      IProcessedRenderContent processedRenderContent = renderPipelineManager.RenderContent(renderContent, ProviderContainer);
-
-      WriteOutput(processedRenderContent.Content);
-
-      Assert.AreEqual(HTML_CONTENT, processedRenderContent.Content);
+      Assert.AreEqual(HTML_CONTENT, renderedContent);
     }
 
     [TestMethod]
@@ -304,16 +271,12 @@ namespace Atlantis.Framework.Render.ContentInjection.Tests
 
       IRenderHandler renderHandler = new ContentInjectionRenderHandler(context);
 
-      RenderPipelineManager renderPipelineManager = new RenderPipelineManager();
-      renderPipelineManager.AddRenderHandler(renderHandler);
+      IRenderPipelineProvider renderPipelineProvider = ProviderContainer.Resolve<IRenderPipelineProvider>();
+      string renderedContent = renderPipelineProvider.RenderContent(HTML_CONTENT, new IRenderHandler[] { renderHandler });
 
-      IRenderContent renderContent = new TestRenderContent(HTML_CONTENT);
+      WriteOutput(renderedContent);
 
-      IProcessedRenderContent processedRenderContent = renderPipelineManager.RenderContent(renderContent, ProviderContainer);
-
-      WriteOutput(processedRenderContent.Content);
-
-      Assert.AreEqual(HTML_CONTENT, processedRenderContent.Content);
+      Assert.AreEqual(HTML_CONTENT, renderedContent);
     }
 
     [TestMethod]
@@ -321,16 +284,12 @@ namespace Atlantis.Framework.Render.ContentInjection.Tests
     {
       IRenderHandler renderHandler = new ContentInjectionRenderHandler(null);
 
-      RenderPipelineManager renderPipelineManager = new RenderPipelineManager();
-      renderPipelineManager.AddRenderHandler(renderHandler);
+      IRenderPipelineProvider renderPipelineProvider = ProviderContainer.Resolve<IRenderPipelineProvider>();
+      string renderedContent = renderPipelineProvider.RenderContent(HTML_CONTENT, new IRenderHandler[] { renderHandler });
 
-      IRenderContent renderContent = new TestRenderContent(HTML_CONTENT);
+      WriteOutput(renderedContent);
 
-      IProcessedRenderContent processedRenderContent = renderPipelineManager.RenderContent(renderContent, ProviderContainer);
-
-      WriteOutput(processedRenderContent.Content);
-
-      Assert.AreEqual(HTML_CONTENT, processedRenderContent.Content);
+      Assert.AreEqual(HTML_CONTENT, renderedContent);
     }
   }
 }

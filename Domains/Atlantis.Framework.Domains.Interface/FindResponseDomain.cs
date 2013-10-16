@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Atlantis.Framework.DotTypeCache.Interface;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -388,8 +389,10 @@ namespace Atlantis.Framework.Domains.Interface
 
     public int VendorCost { get; private set; }
 
-    public int VendorTier { get; private set; }
+    public int? VendorTier { get; private set; }
 
-    public int InternalTier { get; private set; }
+    public int? InternalTier { get; private set; }
+
+    public IList<LaunchPhases> PreRegLaunchPhases { get; set; }
   }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Atlantis.Framework.DotTypeCache.Interface;
 
 namespace Atlantis.Framework.Domains.Interface
 {
@@ -41,10 +42,10 @@ namespace Atlantis.Framework.Domains.Interface
     Dictionary<string, string> CartAttributes { get; }
     IDomain Domain { get; }
     bool InPreRegPhase { get; }
-    bool IsPreRegPhaseAvailable(string preRegPhase);
+    IList<LaunchPhases> PreRegLaunchPhases { get; }
     bool HasLeafPage { get; }
     int VendorCost { get; }
-    int VendorTier { get; }
-    int InternalTier { get; }
+    int? VendorTier { get; }
+    int? InternalTier { get; }
   }
 }

@@ -393,6 +393,23 @@ namespace Atlantis.Framework.Domains.Interface
 
     public int? InternalTier { get; private set; }
 
-    public IList<LaunchPhases> PreRegLaunchPhases { get; set; }
+    private IList<LaunchPhases> _preRegLaunchPhases;
+    public IEnumerable<LaunchPhases> PreRegLaunchPhases
+    {
+      get
+      {
+        if (_preRegLaunchPhases == null)
+        {
+          _preRegLaunchPhases = new List<LaunchPhases>(_preRegPhases.Keys.Count);
+          foreach (var preRegPhase in _preRegPhases.Keys)
+          {
+            var launchPhase = DotTypeCache.LaunchPhaseMappings.GetPhase(preRegPhase);
+            _preRegLaunchPhases.Add(launchPhase);
+          }
+        }
+
+        return _preRegLaunchPhases;
+      }
+  }
   }
 }

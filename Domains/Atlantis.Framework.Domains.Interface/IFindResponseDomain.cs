@@ -42,7 +42,7 @@ namespace Atlantis.Framework.Domains.Interface
     Dictionary<string, string> CartAttributes { get; }
     IDomain Domain { get; }
     bool InPreRegPhase { get; }
-    IList<LaunchPhases> PreRegLaunchPhases { get; }
+    IEnumerable<LaunchPhases> PreRegLaunchPhases { get; }
     bool HasLeafPage { get; }
     int VendorCost { get; }
     int? VendorTier { get; }

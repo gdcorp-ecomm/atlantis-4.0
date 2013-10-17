@@ -9,10 +9,10 @@ namespace Atlantis.Framework.Domains.Interface
     
     IDomain Domain { get; }
 
-    bool InPreRegPhase { get; }
+    bool InLaunchPhase { get; }
 
-    IDictionary<LaunchPhases, IDomainProductPackage> PreRegPackages { get; }
+    IDictionary<LaunchPhases, IDomainProductPackage> LaunchPhasePackages { get; }
 
-    IDomainProductPackage RegistrationPackage { get; }
+    bool TryGetRegistrationPackage(out IDomainProductPackage registrationPackage);
   }
 }

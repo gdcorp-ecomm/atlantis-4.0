@@ -53,7 +53,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DomainProductPackageGroup.cs" />
     <Compile Include="IDomainProductPackageGroup.cs" />
     <Compile Include="IDomainProductPackage.cs" />
     <Compile Include="Domain.cs" />
@@ -80,6 +79,10 @@
     <ProjectReference Include="..\..\Atlantis.Framework.DotTypeCache\Atlantis.Framework.DotTypeCache.Interface\Atlantis.Framework.DotTypeCache.Interface.csproj">
       <Project>{95e67e48-7173-4f0c-854f-2f08cbfcf923}</Project>
       <Name>Atlantis.Framework.DotTypeCache.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.DotTypeCache\Atlantis.Framework.DotTypeCache\Atlantis.Framework.DotTypeCache.csproj">
+      <Project>{c86da599-d09d-4c1e-934d-7e59d38ea9c2}</Project>
+      <Name>Atlantis.Framework.DotTypeCache</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Atlantis.Framework.Providers.Interface\Atlantis.Framework.Providers.Interface\Atlantis.Framework.Providers.Interface.csproj">
       <Project>{6cc33c6b-faa7-4b6a-8c3b-bfe94a1a65de}</Project>

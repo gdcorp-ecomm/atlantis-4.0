@@ -65,18 +65,18 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Atlantis.Framework.DomainSearch.Interface\Atlantis.Framework.DomainSearch.Interface.csproj">
-      <Project>{b2328a76-0f49-459e-b3c7-063e73bd56ff}</Project>
-      <Name>Atlantis.Framework.DomainSearch.Interface</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Atlantis.Framework.DomainSearch.Impl.nuspec" />
     <None Include="Atlantis.Framework.DomainSearch.Impl.nuget.bat" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Dependencies\Newtonsoft.Json.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Atlantis.Framework.DomainSearch.Interface\Atlantis.Framework.DomainSearch.Interface.csproj">
+      <Project>{b2328a76-0f49-459e-b3c7-063e73bd56ff}</Project>
+      <Name>Atlantis.Framework.DomainSearch.Interface</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

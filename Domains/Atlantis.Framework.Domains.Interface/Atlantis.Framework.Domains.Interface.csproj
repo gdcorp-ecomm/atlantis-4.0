@@ -40,6 +40,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Triplets\DomainSearch\packages\Atlantis.Framework.Engine.4.0.0.0\lib\net40\Atlantis.Framework.Engine.XmlSerializers.dll</HintPath>
     </Reference>
+    <Reference Include="Atlantis.Framework.Providers.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Providers.Interface.4.13.10.16\lib\net40\Atlantis.Framework.Providers.Interface.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Dependencies\Newtonsoft.Json.dll</HintPath>
@@ -83,10 +87,6 @@
     <ProjectReference Include="..\..\Atlantis.Framework.DotTypeCache\Atlantis.Framework.DotTypeCache\Atlantis.Framework.DotTypeCache.csproj">
       <Project>{c86da599-d09d-4c1e-934d-7e59d38ea9c2}</Project>
       <Name>Atlantis.Framework.DotTypeCache</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.Providers.Interface\Atlantis.Framework.Providers.Interface\Atlantis.Framework.Providers.Interface.csproj">
-      <Project>{6cc33c6b-faa7-4b6a-8c3b-bfe94a1a65de}</Project>
-      <Name>Atlantis.Framework.Providers.Interface</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

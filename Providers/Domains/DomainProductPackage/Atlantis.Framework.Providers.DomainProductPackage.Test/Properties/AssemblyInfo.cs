@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Atlantis.Framework.Providers.Interface")]
+[assembly: AssemblyTitle("Atlantis.Framework.Providers.DomainProductPackage.Test")]
 #if DEBUG
 [assembly: AssemblyDescription("Debug Build")]
 [assembly: AssemblyConfiguration("Debug Build")]
@@ -12,9 +12,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyDescription("Release Build")]
 [assembly: AssemblyConfiguration("Release Build")]
 #endif
-[assembly: AssemblyCompany("GoDaddy")]
-[assembly: AssemblyProduct("Atlantis.Framework.Providers.Interface")]
-[assembly: AssemblyCopyright("Copyright © GoDaddy 2011-2013")]
+[assembly: AssemblyCompany("GoDaddy.com")]
+[assembly: AssemblyProduct("Atlantis.Framework.Providers.DomainProductPackage.Test")]
+[assembly: AssemblyCopyright("Copyright © GoDaddy.com 2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -24,17 +24,20 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("f1713977-de1d-492c-a108-72cbd0adc59b")]
+[assembly: Guid("b7633b87-1e70-401d-8b6d-358a4e518f04")]
 
 // Version information for an assembly consists of the following four values:
+// Versions must be set so the Assembly Version does not change with revisions,
+// but the FileVersion does.
 //
 //      Major Version
 //      Minor Version 
 //      Build Number
 //      Revision
 //
-// You can specify all the values or you can default the Build and Revision Numbers 
-// by using the '*' as shown below:
-// [assembly: AssemblyVersion("1.0.*")]
+// use 4.0.0.0 for the Assembly Version
+// use 4.YY.M.D for teh FileVersion.  Do not use leading zeros.
+// example 4.13.6.1 for Jun 1, 2013
+//
 [assembly: AssemblyVersion("4.0.0.0")]
-[assembly: AssemblyFileVersion("4.13.10.17")]
+[assembly: AssemblyFileVersion("4.13.0.0")]

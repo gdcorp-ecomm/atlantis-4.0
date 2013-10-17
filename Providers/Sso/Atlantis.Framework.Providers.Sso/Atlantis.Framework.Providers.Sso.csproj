@@ -52,6 +52,7 @@
     <Compile Include="SsoData.cs" />
     <Compile Include="SsoProviderBase.cs" />
     <Compile Include="SsoProviderEngineRequests.cs" />
+    <Compile Include="TokenSsoProviderBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Atlantis.Framework.AuthRetrieve\Atlantis.Framework.AuthRetrieve\Atlantis.Framework.AuthRetrieve.Interface\Atlantis.Framework.AuthRetrieve.Interface.csproj">
@@ -81,6 +82,10 @@
     <ProjectReference Include="..\..\..\Triplets\Links\Atlantis.Framework.Links.Interface\Atlantis.Framework.Links.Interface.csproj">
       <Project>{39a8b945-42c8-45e8-add6-5bc7eb73f423}</Project>
       <Name>Atlantis.Framework.Links.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Triplets\Sso\Atlantis.Framework.Sso.Interface\Atlantis.Framework.Sso.Interface.csproj">
+      <Project>{0244b4ee-6257-4019-9ff0-079f884a2e07}</Project>
+      <Name>Atlantis.Framework.Sso.Interface</Name>
     </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.Providers.Sso.Interface\Atlantis.Framework.Providers.Sso.Interface.csproj">
       <Project>{7aa4d9ac-a56b-4eda-ae0d-fceff0ff34f4}</Project>

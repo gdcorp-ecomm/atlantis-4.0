@@ -5,7 +5,8 @@ namespace Atlantis.Framework.Providers.Sso.Tests.Mocks.Http
 {
   public class MockHttpRequest : HttpRequestBase
   {
-    public MockHttpRequest(HttpRequest request = null, string httpMethod = "GET", string virtualFolder = "") : base()
+    public MockHttpRequest(HttpRequest request = null, string httpMethod = "GET", string virtualFolder = "")
+      : base()
     {
       BaseRequest = request;
       _httpMethod = httpMethod;
@@ -33,7 +34,7 @@ namespace Atlantis.Framework.Providers.Sso.Tests.Mocks.Http
     {
       get
       {
-        { return BaseRequest.Path;}
+        { return BaseRequest.Path; }
       }
     }
 
@@ -51,6 +52,6 @@ namespace Atlantis.Framework.Providers.Sso.Tests.Mocks.Http
       {
         return BaseRequest.Url;
       }
-    }    
+    }
   }
 }

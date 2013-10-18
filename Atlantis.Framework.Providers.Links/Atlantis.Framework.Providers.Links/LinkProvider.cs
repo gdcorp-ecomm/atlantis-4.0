@@ -13,7 +13,7 @@ namespace Atlantis.Framework.Providers.Links
 {
   public class LinkProvider : ProviderBase, ILinkProvider
   {
-    public static bool _RemoveTrailingSlashForRootRequests = true;
+    public static bool RemoveTrailingSlashFromRelativeRootUrl = false;
     
     private static bool _lowerCaseRelativeUrlsForSEO = false;
     /// <summary>
@@ -236,8 +236,8 @@ namespace Atlantis.Framework.Providers.Links
       }
       urlStringBuilder.Append(path);
 
-      //  If the user didn't pass in a relative path, then remove trailing slash
-      if (_RemoveTrailingSlashForRootRequests && (string.IsNullOrEmpty(relativePath) || relativePath == "~/" ))
+      //  If the user didn't pass in a relative path, then remove trailing slash if needed
+      if (RemoveTrailingSlashFromRelativeRootUrl && (string.IsNullOrEmpty(relativePath) || relativePath == "~/" ))
       {
         urlStringBuilder.Replace("/", string.Empty, urlStringBuilder.Length - 1, 1);
       }

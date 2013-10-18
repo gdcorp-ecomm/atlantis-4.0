@@ -41,8 +41,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Domains.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.DomainSearch.Interface", "..\..\..\Triplets\DomainSearch\Atlantis.Framework.DomainSearch.Interface\Atlantis.Framework.DomainSearch.Interface.csproj", "{B2328A76-0F49-459E-B3C7-063E73BD56FF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.DataCacheGeneric.Impl", "..\..\..\Triplets\DataCacheGeneric\Atlantis.Framework.DataCacheGeneric.Impl\Atlantis.Framework.DataCacheGeneric.Impl.csproj", "{41573A44-95D3-4BDE-9CFF-65552ACCD7E4}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.DCCDomainsDataCache.Impl", "..\..\..\Atlantis.Framework.DCCDomainsDataCache\Atlantis.Framework.DCCDomainsDataCache.Impl\Atlantis.Framework.DCCDomainsDataCache.Impl.csproj", "{89873D19-5D77-4886-ADD3-CEDBF196D270}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.RegDotTypeProductIds.Impl", "..\..\..\Atlantis.Framework.RegDotTypeProductIds\Atlantis.Framework.RegDotTypeProductIds.Impl\Atlantis.Framework.RegDotTypeProductIds.Impl.csproj", "{BC7C7C55-B5EE-4067-92FC-CC6700D82DBE}"
@@ -53,7 +51,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.DomainSe
 EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 25
+		SccNumberOfProjects = 24
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
 		SccLocalPath0 = .
@@ -131,26 +129,22 @@ Global
 		SccProjectTopLevelParentUniqueName19 = DomainProductPackage.sln
 		SccProjectName19 = ../../../Triplets/DomainSearch/Atlantis.Framework.DomainSearch.Interface
 		SccLocalPath19 = ..\\..\\..\\Triplets\\DomainSearch\\Atlantis.Framework.DomainSearch.Interface
-		SccProjectUniqueName20 = ..\\..\\..\\Triplets\\DataCacheGeneric\\Atlantis.Framework.DataCacheGeneric.Impl\\Atlantis.Framework.DataCacheGeneric.Impl.csproj
+		SccProjectUniqueName20 = ..\\..\\..\\Atlantis.Framework.DCCDomainsDataCache\\Atlantis.Framework.DCCDomainsDataCache.Impl\\Atlantis.Framework.DCCDomainsDataCache.Impl.csproj
 		SccProjectTopLevelParentUniqueName20 = DomainProductPackage.sln
-		SccProjectName20 = ../../../Triplets/DataCacheGeneric/Atlantis.Framework.DataCacheGeneric.Impl
-		SccLocalPath20 = ..\\..\\..\\Triplets\\DataCacheGeneric\\Atlantis.Framework.DataCacheGeneric.Impl
-		SccProjectUniqueName21 = ..\\..\\..\\Atlantis.Framework.DCCDomainsDataCache\\Atlantis.Framework.DCCDomainsDataCache.Impl\\Atlantis.Framework.DCCDomainsDataCache.Impl.csproj
+		SccProjectName20 = ../../../Atlantis.Framework.DCCDomainsDataCache/Atlantis.Framework.DCCDomainsDataCache.Impl
+		SccLocalPath20 = ..\\..\\..\\Atlantis.Framework.DCCDomainsDataCache\\Atlantis.Framework.DCCDomainsDataCache.Impl
+		SccProjectUniqueName21 = ..\\..\\..\\Atlantis.Framework.RegDotTypeProductIds\\Atlantis.Framework.RegDotTypeProductIds.Impl\\Atlantis.Framework.RegDotTypeProductIds.Impl.csproj
 		SccProjectTopLevelParentUniqueName21 = DomainProductPackage.sln
-		SccProjectName21 = ../../../Atlantis.Framework.DCCDomainsDataCache/Atlantis.Framework.DCCDomainsDataCache.Impl
-		SccLocalPath21 = ..\\..\\..\\Atlantis.Framework.DCCDomainsDataCache\\Atlantis.Framework.DCCDomainsDataCache.Impl
-		SccProjectUniqueName22 = ..\\..\\..\\Atlantis.Framework.RegDotTypeProductIds\\Atlantis.Framework.RegDotTypeProductIds.Impl\\Atlantis.Framework.RegDotTypeProductIds.Impl.csproj
+		SccProjectName21 = ../../../Atlantis.Framework.RegDotTypeProductIds/Atlantis.Framework.RegDotTypeProductIds.Impl
+		SccLocalPath21 = ..\\..\\..\\Atlantis.Framework.RegDotTypeProductIds\\Atlantis.Framework.RegDotTypeProductIds.Impl
+		SccProjectUniqueName22 = ..\\..\\..\\Atlantis.Framework.RegDotTypeRegistry\\Atlantis.Framework.RegDotTypeRegistry.Impl\\Atlantis.Framework.RegDotTypeRegistry.Impl.csproj
 		SccProjectTopLevelParentUniqueName22 = DomainProductPackage.sln
-		SccProjectName22 = ../../../Atlantis.Framework.RegDotTypeProductIds/Atlantis.Framework.RegDotTypeProductIds.Impl
-		SccLocalPath22 = ..\\..\\..\\Atlantis.Framework.RegDotTypeProductIds\\Atlantis.Framework.RegDotTypeProductIds.Impl
-		SccProjectUniqueName23 = ..\\..\\..\\Atlantis.Framework.RegDotTypeRegistry\\Atlantis.Framework.RegDotTypeRegistry.Impl\\Atlantis.Framework.RegDotTypeRegistry.Impl.csproj
+		SccProjectName22 = ../../../Atlantis.Framework.RegDotTypeRegistry/Atlantis.Framework.RegDotTypeRegistry.Impl
+		SccLocalPath22 = ..\\..\\..\\Atlantis.Framework.RegDotTypeRegistry\\Atlantis.Framework.RegDotTypeRegistry.Impl
+		SccProjectUniqueName23 = ..\\..\\..\\Triplets\\DomainSearch\\Atlantis.Framework.DomainSearch.Impl\\Atlantis.Framework.DomainSearch.Impl.csproj
 		SccProjectTopLevelParentUniqueName23 = DomainProductPackage.sln
-		SccProjectName23 = ../../../Atlantis.Framework.RegDotTypeRegistry/Atlantis.Framework.RegDotTypeRegistry.Impl
-		SccLocalPath23 = ..\\..\\..\\Atlantis.Framework.RegDotTypeRegistry\\Atlantis.Framework.RegDotTypeRegistry.Impl
-		SccProjectUniqueName24 = ..\\..\\..\\Triplets\\DomainSearch\\Atlantis.Framework.DomainSearch.Impl\\Atlantis.Framework.DomainSearch.Impl.csproj
-		SccProjectTopLevelParentUniqueName24 = DomainProductPackage.sln
-		SccProjectName24 = ../../../Triplets/DomainSearch/Atlantis.Framework.DomainSearch.Impl
-		SccLocalPath24 = ..\\..\\..\\Triplets\\DomainSearch\\Atlantis.Framework.DomainSearch.Impl
+		SccProjectName23 = ../../../Triplets/DomainSearch/Atlantis.Framework.DomainSearch.Impl
+		SccLocalPath23 = ..\\..\\..\\Triplets\\DomainSearch\\Atlantis.Framework.DomainSearch.Impl
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -273,12 +267,6 @@ Global
 		{B2328A76-0F49-459E-B3C7-063E73BD56FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B2328A76-0F49-459E-B3C7-063E73BD56FF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B2328A76-0F49-459E-B3C7-063E73BD56FF}.Release|x86.ActiveCfg = Release|Any CPU
-		{41573A44-95D3-4BDE-9CFF-65552ACCD7E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{41573A44-95D3-4BDE-9CFF-65552ACCD7E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{41573A44-95D3-4BDE-9CFF-65552ACCD7E4}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{41573A44-95D3-4BDE-9CFF-65552ACCD7E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{41573A44-95D3-4BDE-9CFF-65552ACCD7E4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{41573A44-95D3-4BDE-9CFF-65552ACCD7E4}.Release|x86.ActiveCfg = Release|Any CPU
 		{89873D19-5D77-4886-ADD3-CEDBF196D270}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{89873D19-5D77-4886-ADD3-CEDBF196D270}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{89873D19-5D77-4886-ADD3-CEDBF196D270}.Debug|x86.ActiveCfg = Debug|Any CPU
@@ -325,7 +313,6 @@ Global
 		{B6638632-2265-4F7E-A6A2-C494391DFBAB} = {1A88A197-C8F0-47D6-9492-EB72AA8B2E40}
 		{02F25A7D-D430-4E14-86CD-1E649FA001DB} = {1A88A197-C8F0-47D6-9492-EB72AA8B2E40}
 		{B2328A76-0F49-459E-B3C7-063E73BD56FF} = {1A88A197-C8F0-47D6-9492-EB72AA8B2E40}
-		{41573A44-95D3-4BDE-9CFF-65552ACCD7E4} = {1A88A197-C8F0-47D6-9492-EB72AA8B2E40}
 		{89873D19-5D77-4886-ADD3-CEDBF196D270} = {1A88A197-C8F0-47D6-9492-EB72AA8B2E40}
 		{BC7C7C55-B5EE-4067-92FC-CC6700D82DBE} = {1A88A197-C8F0-47D6-9492-EB72AA8B2E40}
 		{B7560459-22ED-46D7-B32C-D49EA5B9F74A} = {1A88A197-C8F0-47D6-9492-EB72AA8B2E40}

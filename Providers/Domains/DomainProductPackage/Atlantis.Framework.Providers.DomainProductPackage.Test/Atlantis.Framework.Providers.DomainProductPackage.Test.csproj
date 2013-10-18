@@ -144,9 +144,6 @@
     <Reference Include="netConnect">
       <HintPath>..\packages\Atlantis.Framework.Nimitz.4.0.0.0\lib\net40\netConnect.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\Atlantis.Framework.Providers.DomainProductPackageSerializer\Dependencies\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -241,10 +238,6 @@
     <ProjectReference Include="..\..\..\..\Domains\Atlantis.Framework.Domains.Interface\Atlantis.Framework.Domains.Interface.csproj">
       <Project>{02f25a7d-d430-4e14-86cd-1e649fa001db}</Project>
       <Name>Atlantis.Framework.Domains.Interface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\..\Triplets\DataCacheGeneric\Atlantis.Framework.DataCacheGeneric.Impl\Atlantis.Framework.DataCacheGeneric.Impl.csproj">
-      <Project>{41573a44-95d3-4bde-9cff-65552accd7e4}</Project>
-      <Name>Atlantis.Framework.DataCacheGeneric.Impl</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\..\Triplets\DomainSearch\Atlantis.Framework.DomainSearch.Impl\Atlantis.Framework.DomainSearch.Impl.csproj">
       <Project>{675eed53-c6b8-4ed1-a6dc-5b096467e7aa}</Project>

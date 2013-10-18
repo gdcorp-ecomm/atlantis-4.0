@@ -21,6 +21,17 @@ namespace Atlantis.Framework.DotTypeAvailability.Tests
     }
 
     [TestMethod]
+    public void DotTypeAvailabilityGoodRequestTryGetByTldName()
+    {
+      var request = new DotTypeAvailabilityRequestData();
+      var response = (DotTypeAvailabilityResponseData)Engine.Engine.ProcessRequest(request, 753);
+      Assert.AreEqual(true, response.TldAvailabilityList != null && response.TldAvailabilityList.Count > 0);
+
+      ITldAvailability tldAvailability;
+      Assert.AreEqual(true, response.TldAvailabilityList != null && response.TldAvailabilityList.TryGetValue("L4.Borg", out tldAvailability) && tldAvailability != null);
+    }
+
+    [TestMethod]
     public void DotTypeAvailabilityExceptionResponse()
     {
       var requestData = new DotTypeAvailabilityRequestData();

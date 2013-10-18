@@ -1015,6 +1015,36 @@ namespace Atlantis.Framework.Providers.Links.Tests
     }
 
     [TestMethod]
+    public void TestToMakeSureNoTrailingSlashIsAddedIfRelativePathDoesNotHaveOne()
+    {
+      NameValueCollection qs = new NameValueCollection();
+      qs.Add("qs1", "ONE");
+      qs.Add("qs2", "TWO");
+
+      ILinkProvider links = NewLinkProvider("http://siteadmin.debug.intranet.gdg", 1, string.Empty);
+      string url = links.GetRelativeUrl("/testpath", QueryParamMode.ExplicitWithLocalizationParameters);
+      Assert.AreEqual("http://siteadmin.debug.intranet.gdg/testpath", url);
+
+      url = links.GetRelativeUrl("/testpath", QueryParamMode.CommonParameters);
+      Assert.IsTrue(url.StartsWith("http://siteadmin.debug.intranet.gdg/testpath", StringComparison.OrdinalIgnoreCase));
+
+      url = links.GetRelativeUrl("/testpath", QueryParamMode.ExplicitWithLocalizationParameters, qs);
+      Assert.AreEqual("http://siteadmin.debug.intranet.gdg/testpath?qs1=ONE&qs2=TWO", url);
+
+      var lp = FrameworkContainer.Resolve<ILocalizationProvider>();
+      lp.RewrittenUrlLanguage = "es";
+
+      url = links.GetRelativeUrl("/testpath", QueryParamMode.ExplicitWithLocalizationParameters);
+      Assert.AreEqual("http://siteadmin.debug.intranet.gdg/es/testpath", url);
+
+      url = links.GetRelativeUrl("/testpath", QueryParamMode.CommonParameters);
+      Assert.IsTrue(url.StartsWith("http://siteadmin.debug.intranet.gdg/es/testpath", StringComparison.OrdinalIgnoreCase));
+
+      url = links.GetRelativeUrl("/testpath", QueryParamMode.ExplicitWithLocalizationParameters, qs);
+      Assert.AreEqual("http://siteadmin.debug.intranet.gdg/es/testpath?qs1=ONE&qs2=TWO", url);
+    }
+
+    [TestMethod]
     public void TestSettingCountrySiteAndMarketOnCountryQueryStringMarketQueryStringink()
     {
       var links = NewLinkProvider("http://siteadmin.debug.intranet.gdg/default.aspx?isc=234", 1, string.Empty);

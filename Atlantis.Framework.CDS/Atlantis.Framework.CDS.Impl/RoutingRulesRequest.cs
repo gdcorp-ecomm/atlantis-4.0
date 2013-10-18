@@ -27,7 +27,8 @@ namespace Atlantis.Framework.CDS.Impl
       {
         if (ex.Response is HttpWebResponse && ((HttpWebResponse)ex.Response).StatusCode == HttpStatusCode.NotFound)
         {
-            result = new RoutingRulesResponseData(cdsRequestData, ex);
+          //no error logging is required
+          result = new RoutingRulesResponseData();
         }
         else
         {

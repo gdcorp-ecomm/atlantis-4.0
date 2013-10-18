@@ -28,6 +28,9 @@ namespace Atlantis.Framework.CDS.Interface
       _success = false;
     }
 
+    //use this method when it is an error but logging is NOT required.  (Eg. a rule document is not found)
+    public CDSResponseData() { }
+
     public bool IsSuccess
     {
       get

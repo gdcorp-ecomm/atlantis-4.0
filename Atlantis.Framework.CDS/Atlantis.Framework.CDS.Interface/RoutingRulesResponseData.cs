@@ -50,6 +50,10 @@ namespace Atlantis.Framework.CDS.Interface
     {
     }
 
+    public RoutingRulesResponseData()
+      : base()
+    { }
+
     public bool TryGetValue(string type, out ReadOnlyCollection<IRoutingRule> routingRules)
     {
       bool found = false;

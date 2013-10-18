@@ -175,6 +175,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </None>
+    <None Include="CodeCoverage.runsettings" />
     <None Include="dottypecache.config" />
     <None Include="packages.config" />
   </ItemGroup>

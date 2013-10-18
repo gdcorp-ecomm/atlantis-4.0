@@ -34,9 +34,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Atlantis.Framework.DotTypeEoi.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.DotTypeEoi.Interface.4.0.0.0\lib\net40\Atlantis.Framework.DotTypeEoi.Interface.dll</HintPath>
+    <Reference Include="Atlantis.Framework.DotTypeEoi.Interface">
+      <HintPath>..\packages\Atlantis.Framework.DotTypeEoi.Interface.4.13.10.09\lib\net40\Atlantis.Framework.DotTypeEoi.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Engine, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

@@ -394,11 +394,11 @@ namespace Atlantis.Framework.Providers.DotTypeEoi
             foreach (var gtld in subCategory.Gtlds)
             {
               var dotTypeInfo = DotTypeProvider.GetDotTypeInfo(gtld.Name);
-              if (dotTypeInfo.IsLivePhase(LaunchPhases.GeneralAvailability))
+              if (dotTypeInfo.GetLaunchPhase(LaunchPhases.GeneralAvailability).LivePeriod.IsActive)
               {
                 gtld.ActionButtonType = ActionButtonTypes.Register;
               }
-              else if (dotTypeInfo.HasPreRegPhases)
+              else if (dotTypeInfo.IsPreRegPhaseActive)
               {
                 gtld.ActionButtonType = ActionButtonTypes.PreRegister;
               }
@@ -430,11 +430,11 @@ namespace Atlantis.Framework.Providers.DotTypeEoi
         foreach (var gtld in gtlds)
         {
           var dotTypeInfo = DotTypeProvider.GetDotTypeInfo(gtld.Name);
-          if (dotTypeInfo.IsLivePhase(LaunchPhases.GeneralAvailability))
+          if (dotTypeInfo.GetLaunchPhase(LaunchPhases.GeneralAvailability).LivePeriod.IsActive)
           {
             gtld.ActionButtonType = ActionButtonTypes.Register;
           }
-          else if (dotTypeInfo.HasPreRegPhases)
+          else if (dotTypeInfo.IsPreRegPhaseActive)
           {
             gtld.ActionButtonType = ActionButtonTypes.PreRegister;
           }

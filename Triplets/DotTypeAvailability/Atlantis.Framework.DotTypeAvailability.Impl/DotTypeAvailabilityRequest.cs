@@ -43,7 +43,7 @@ namespace Atlantis.Framework.DotTypeAvailability.Impl
 
     private static IDictionary<string, ITldAvailability> ParseResponse(IEnumerable<TldType> tldTypes)
     {
-      var tldAvailabilityList = new Dictionary<string, ITldAvailability>();
+      var tldAvailabilityList = new Dictionary<string, ITldAvailability>(StringComparer.OrdinalIgnoreCase);
       foreach (var tldType in tldTypes)
       {
         var tldAvailability = new TldAvailability

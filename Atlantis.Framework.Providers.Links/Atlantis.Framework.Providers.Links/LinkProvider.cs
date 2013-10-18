@@ -13,6 +13,8 @@ namespace Atlantis.Framework.Providers.Links
 {
   public class LinkProvider : ProviderBase, ILinkProvider
   {
+    public static bool _RemoveTrailingSlashForRootRequests = true;
+    
     private static bool _lowerCaseRelativeUrlsForSEO = false;
     /// <summary>
     /// Setting this to true will lowercase all urls that don't use GetURL (same site urls) to improve SEO
@@ -233,6 +235,12 @@ namespace Atlantis.Framework.Providers.Links
         urlStringBuilder.Append('/');
       }
       urlStringBuilder.Append(path);
+
+      //  If the user didn't pass in a relative path, then remove trailing slash
+      if (_RemoveTrailingSlashForRootRequests && (string.IsNullOrEmpty(relativePath) || relativePath == "~/" ))
+      {
+        urlStringBuilder.Replace("/", string.Empty, urlStringBuilder.Length - 1, 1);
+      }
 
       return urlStringBuilder;
     }

@@ -821,7 +821,8 @@ namespace Atlantis.Framework.Providers.Links.Tests
     }
 
     /// <summary>
-    /// Cannot test this unless we can set HttpRuntime.AppDomainAppVirtualPath
+    /// Cannot test this unless we can set HttpRuntime.AppDomainAppVirtualPath because
+    /// code calls VirtualPathUtility.ToAbsolute
     /// </summary>
     public void TestRelativeUrlWithLeadingTildeArguments()
     {
@@ -831,7 +832,7 @@ namespace Atlantis.Framework.Providers.Links.Tests
       Assert.IsTrue(url.IndexOf("//", 8) == -1);
 
       url = links.GetRelativeUrl("~/");
-      Assert.AreEqual("http://siteadmin.debug.intranet.gdg/", url);
+      Assert.AreEqual("http://siteadmin.debug.intranet.gdg", url);
       Assert.IsTrue(url.IndexOf("//", 8) == -1);
 
       var lp = FrameworkContainer.Resolve<ILocalizationProvider>();
@@ -842,8 +843,27 @@ namespace Atlantis.Framework.Providers.Links.Tests
       Assert.IsTrue(url.IndexOf("//", 8) == -1);
 
       url = links.GetRelativeUrl("~/");
-      Assert.AreEqual("http://siteadmin.debug.intranet.gdg/es/", url);
+      Assert.AreEqual("http://siteadmin.debug.intranet.gdg/es", url);
       Assert.IsTrue(url.IndexOf("//", 8) == -1);
+
+      try
+      {
+        LinkProvider._RemoveTrailingSlashForRootRequests = false;
+
+        lp.RewrittenUrlLanguage = string.Empty;
+        url = links.GetRelativeUrl("~/");
+        Assert.AreEqual("http://siteadmin.debug.intranet.gdg/", url);
+        Assert.IsTrue(url.IndexOf("//", 8) == -1);
+
+        lp.RewrittenUrlLanguage = "es";
+        url = links.GetRelativeUrl("~/");
+        Assert.AreEqual("http://siteadmin.debug.intranet.gdg/es/", url);
+        Assert.IsTrue(url.IndexOf("//", 8) == -1);
+      }
+      finally
+      {
+        LinkProvider._RemoveTrailingSlashForRootRequests = true;
+      }
     }
 
     [TestMethod]
@@ -851,11 +871,11 @@ namespace Atlantis.Framework.Providers.Links.Tests
     {
       ILinkProvider links = NewLinkProvider("http://siteadmin.debug.intranet.gdg/default.aspx", 1, string.Empty);
       string url = links.GetRelativeUrl("hosting/hosting.aspx");
-      Assert.AreEqual("http://siteadmin.debug.intranet.gdg/hosting/hosting.aspx", url);  //  No slash added between host and relative path argument
+      Assert.AreEqual("http://siteadmin.debug.intranet.gdg/hosting/hosting.aspx", url);
       Assert.IsTrue(url.IndexOf("//", 8) == -1);
 
       url = links.GetRelativeUrl("");
-      Assert.AreEqual("http://siteadmin.debug.intranet.gdg/", url);
+      Assert.AreEqual("http://siteadmin.debug.intranet.gdg", url);
       Assert.IsTrue(url.IndexOf("//", 8) == -1);
 
       var lp = FrameworkContainer.Resolve<ILocalizationProvider>();
@@ -866,10 +886,133 @@ namespace Atlantis.Framework.Providers.Links.Tests
       Assert.IsTrue(url.IndexOf("//", 8) == -1);
 
       url = links.GetRelativeUrl("");
-      Assert.AreEqual("http://siteadmin.debug.intranet.gdg/es/", url);  //  No slash added between host and relative path argument
+      Assert.AreEqual("http://siteadmin.debug.intranet.gdg/es", url);
       Assert.IsTrue(url.IndexOf("//", 8) == -1);
     }
 
+    [TestMethod]
+    public void TestToMakeSureNoTrailingSlashAfterHostNameIfEmptyPath()
+    {
+      NameValueCollection qs = new NameValueCollection();
+      qs.Add("qs1", "ONE");
+      qs.Add("qs2", "TWO");
+
+      ILinkProvider links = NewLinkProvider("http://siteadmin.debug.intranet.gdg", 1, string.Empty);
+      string url = links.GetRelativeUrl(string.Empty, QueryParamMode.ExplicitParameters);
+      Assert.AreEqual("http://siteadmin.debug.intranet.gdg", url);
+
+      url = links.GetRelativeUrl(string.Empty, QueryParamMode.ExplicitWithLocalizationParameters);
+      Assert.AreEqual("http://siteadmin.debug.intranet.gdg", url);
+
+      url = links.GetRelativeUrl(string.Empty, QueryParamMode.CommonParameters);
+      Assert.IsTrue(url.StartsWith("http://siteadmin.debug.intranet.gdg", StringComparison.OrdinalIgnoreCase));
+
+      url = links.GetRelativeUrl(string.Empty, QueryParamMode.ExplicitWithLocalizationParameters, qs);
+      Assert.AreEqual("http://siteadmin.debug.intranet.gdg?qs1=ONE&qs2=TWO", url);
+
+      var lp = FrameworkContainer.Resolve<ILocalizationProvider>();
+      lp.RewrittenUrlLanguage = "es";
+
+      url = links.GetRelativeUrl(string.Empty, QueryParamMode.ExplicitParameters);
+      Assert.AreEqual("http://siteadmin.debug.intranet.gdg/es", url);
+
+      url = links.GetRelativeUrl(string.Empty, QueryParamMode.ExplicitWithLocalizationParameters);
+      Assert.AreEqual("http://siteadmin.debug.intranet.gdg/es", url);
+
+      url = links.GetRelativeUrl(string.Empty, QueryParamMode.CommonParameters);
+      Assert.IsTrue(url.StartsWith("http://siteadmin.debug.intranet.gdg/es", StringComparison.OrdinalIgnoreCase));
+      Assert.IsFalse(url.StartsWith("http://siteadmin.debug.intranet.gdg/es/", StringComparison.OrdinalIgnoreCase));
+
+      url = links.GetRelativeUrl(string.Empty, QueryParamMode.ExplicitWithLocalizationParameters, qs);
+      Assert.AreEqual("http://siteadmin.debug.intranet.gdg/es?qs1=ONE&qs2=TWO", url);
+    }
+
+    [TestMethod]
+    public void TestTrailingSlashOveerrideIfEmptyPath()
+    {
+      try
+      {
+        LinkProvider._RemoveTrailingSlashForRootRequests = false;
+
+        NameValueCollection qs = new NameValueCollection();
+        qs.Add("qs1", "ONE");
+        qs.Add("qs2", "TWO");
+
+        ILinkProvider links = NewLinkProvider("http://siteadmin.debug.intranet.gdg", 1, string.Empty);
+        string url = links.GetRelativeUrl(string.Empty, QueryParamMode.ExplicitParameters);
+        Assert.AreEqual("http://siteadmin.debug.intranet.gdg/", url);
+
+        url = links.GetRelativeUrl(string.Empty, QueryParamMode.ExplicitWithLocalizationParameters);
+        Assert.AreEqual("http://siteadmin.debug.intranet.gdg/", url);
+
+        url = links.GetRelativeUrl(string.Empty, QueryParamMode.CommonParameters);
+        Assert.IsTrue(url.StartsWith("http://siteadmin.debug.intranet.gdg/", StringComparison.OrdinalIgnoreCase));
+
+        url = links.GetRelativeUrl(string.Empty, QueryParamMode.ExplicitWithLocalizationParameters, qs);
+        Assert.AreEqual("http://siteadmin.debug.intranet.gdg/?qs1=ONE&qs2=TWO", url);
+
+        var lp = FrameworkContainer.Resolve<ILocalizationProvider>();
+        lp.RewrittenUrlLanguage = "es";
+
+        url = links.GetRelativeUrl(string.Empty, QueryParamMode.ExplicitParameters);
+        Assert.AreEqual("http://siteadmin.debug.intranet.gdg/es/", url);
+
+        url = links.GetRelativeUrl(string.Empty, QueryParamMode.ExplicitWithLocalizationParameters);
+        Assert.AreEqual("http://siteadmin.debug.intranet.gdg/es/", url);
+
+        url = links.GetRelativeUrl(string.Empty, QueryParamMode.CommonParameters);
+        Assert.IsTrue(url.StartsWith("http://siteadmin.debug.intranet.gdg/es/", StringComparison.OrdinalIgnoreCase));
+
+        url = links.GetRelativeUrl(string.Empty, QueryParamMode.ExplicitWithLocalizationParameters, qs);
+        Assert.AreEqual("http://siteadmin.debug.intranet.gdg/es/?qs1=ONE&qs2=TWO", url);
+      }
+      finally
+      {
+        LinkProvider._RemoveTrailingSlashForRootRequests = true;
+      }
+    }
+
+    [TestMethod]
+    public void TestToMakeSureTrailingSlashPreservedIfPassedIn()
+    {
+      NameValueCollection qs = new NameValueCollection();
+      qs.Add("qs1", "ONE");
+      qs.Add("qs2", "TWO");
+
+      ILinkProvider links = NewLinkProvider("http://siteadmin.debug.intranet.gdg", 1, string.Empty);
+      string url = links.GetRelativeUrl("/", QueryParamMode.ExplicitParameters);
+      Assert.AreEqual("http://siteadmin.debug.intranet.gdg/", url);
+
+      url = links.GetRelativeUrl("/testpath/", QueryParamMode.ExplicitWithLocalizationParameters);
+      Assert.AreEqual("http://siteadmin.debug.intranet.gdg/testpath/", url);
+
+      url = links.GetRelativeUrl("/", QueryParamMode.CommonParameters);
+      Assert.IsTrue(url.StartsWith("http://siteadmin.debug.intranet.gdg/", StringComparison.OrdinalIgnoreCase));
+
+      url = links.GetRelativeUrl("/testpath/", QueryParamMode.CommonParameters);
+      Assert.IsTrue(url.StartsWith("http://siteadmin.debug.intranet.gdg/testpath/", StringComparison.OrdinalIgnoreCase));
+
+      url = links.GetRelativeUrl("/testpath/", QueryParamMode.ExplicitWithLocalizationParameters, qs);
+      Assert.AreEqual("http://siteadmin.debug.intranet.gdg/testpath/?qs1=ONE&qs2=TWO", url);
+
+      var lp = FrameworkContainer.Resolve<ILocalizationProvider>();
+      lp.RewrittenUrlLanguage = "es";
+
+      url = links.GetRelativeUrl("/", QueryParamMode.ExplicitParameters);
+      Assert.AreEqual("http://siteadmin.debug.intranet.gdg/es/", url);
+
+      url = links.GetRelativeUrl("/testpath/", QueryParamMode.ExplicitWithLocalizationParameters);
+      Assert.AreEqual("http://siteadmin.debug.intranet.gdg/es/testpath/", url);
+
+      url = links.GetRelativeUrl("/", QueryParamMode.CommonParameters);
+      Assert.IsTrue(url.StartsWith("http://siteadmin.debug.intranet.gdg/es/", StringComparison.OrdinalIgnoreCase));
+
+      url = links.GetRelativeUrl("/testpath/", QueryParamMode.CommonParameters);
+      Assert.IsTrue(url.StartsWith("http://siteadmin.debug.intranet.gdg/es/testpath/", StringComparison.OrdinalIgnoreCase));
+
+      url = links.GetRelativeUrl("/testpath/", QueryParamMode.ExplicitWithLocalizationParameters, qs);
+      Assert.AreEqual("http://siteadmin.debug.intranet.gdg/es/testpath/?qs1=ONE&qs2=TWO", url);
+    }
 
     [TestMethod]
     public void TestSettingCountrySiteAndMarketOnCountryQueryStringMarketQueryStringink()
@@ -1029,7 +1172,18 @@ namespace Atlantis.Framework.Providers.Links.Tests
       var links = NewLinkProvider("http://siteadmin.debug.intranet.gdg/default.aspx?isc=234", 1, string.Empty);
       string url = links.GetRelativeUrl(null, null, LinkProviderOptions.QueryStringExplicitParameters);
 
-      Assert.IsFalse(url.IndexOf("siteadmin.debug.intranet.gdg/?", StringComparison.OrdinalIgnoreCase)!=-1);
+      Assert.AreEqual("http://siteadmin.debug.intranet.gdg", url.ToLowerInvariant());
+
+      try
+      {
+        LinkProvider._RemoveTrailingSlashForRootRequests = false;
+        url = links.GetRelativeUrl(null, null, LinkProviderOptions.QueryStringExplicitParameters);
+        Assert.AreEqual("http://siteadmin.debug.intranet.gdg/", url.ToLowerInvariant());
+      }
+      finally
+      {
+        LinkProvider._RemoveTrailingSlashForRootRequests = true;
+      }
     }
 
     [TestMethod]
@@ -1038,9 +1192,24 @@ namespace Atlantis.Framework.Providers.Links.Tests
       var links = NewLinkProvider("http://siteadmin.debug.intranet.gdg/default.aspx?isc=234", 1, string.Empty);
       string url = links.GetRelativeUrl(null, new NameValueCollection {{"k1", "v1"}}, LinkProviderOptions.DefaultOptions);
 
-      Assert.IsTrue(url.IndexOf("siteadmin.debug.intranet.gdg/?", StringComparison.OrdinalIgnoreCase)!=-1);
+      Assert.IsTrue(url.StartsWith("http://siteadmin.debug.intranet.gdg?", StringComparison.OrdinalIgnoreCase));
       Assert.IsTrue(url.IndexOf("k1=v1", StringComparison.OrdinalIgnoreCase)!=-1);
       Assert.IsTrue(url.IndexOf("isc=234", StringComparison.OrdinalIgnoreCase)!=-1);
+
+      try
+      {
+        LinkProvider._RemoveTrailingSlashForRootRequests = false;
+
+        url = links.GetRelativeUrl(null, new NameValueCollection { { "k1", "v1" } }, LinkProviderOptions.DefaultOptions);
+
+        Assert.IsTrue(url.StartsWith("http://siteadmin.debug.intranet.gdg/?", StringComparison.OrdinalIgnoreCase));
+        Assert.IsTrue(url.IndexOf("k1=v1", StringComparison.OrdinalIgnoreCase) != -1);
+        Assert.IsTrue(url.IndexOf("isc=234", StringComparison.OrdinalIgnoreCase) != -1);
+      }
+      finally
+      {
+        LinkProvider._RemoveTrailingSlashForRootRequests = true;
+      }
     }
 
     [TestMethod]

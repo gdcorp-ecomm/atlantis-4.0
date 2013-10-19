@@ -11,7 +11,7 @@ namespace Atlantis.Framework.Providers.Basket
     private readonly IProviderContainer _container;
     private readonly List<IBasketAddItem> _childItems;
     private readonly Lazy<ISiteContext> _siteContext;
-    private IBasketAddPriceOverride _priceOverride = null;
+    private IBasketAddPriceOverride _priceOverride;
  
     internal BasketAddItem(IProviderContainer container, int unifiedProductId, string itemTrackingCode)
     {
@@ -29,8 +29,18 @@ namespace Atlantis.Framework.Providers.Basket
     public string ItemTrackingCode {get; set;}
     public string Pathway {get; set;}
     public string CiCode {get; set;}
-    public int? Duration {get; set;}
-
+    public float? Duration {get; set;}
+    public string OverrideProductName { get; set; }
+    public string DiscountCode { get; set; }
+    public string PromoTrackingCode { get; set; }
+    public string FastballOfferId { get; set; }
+    public string FastballOfferUid { get; set; }
+    public string FastballDiscount { get; set; }
+    public string ResourceId { get; set; }
+    public string AffiliateData { get; set; }
+    public int? StackId { get; set; }
+    public int? PartnerId { get; set; }
+    public string RedemptionCode { get; set; }
 
     public void SetOverridePrice(int overrideListPriceUSD, int overrideCurrentPriceUSD)
     {
@@ -47,17 +57,6 @@ namespace Atlantis.Framework.Providers.Basket
       get { return _priceOverride != null; }
     }
 
-    public string OverrideProductName {get; set;}
-    public string DiscountCode {get; set;}
-    public string PromoTrackingCode {get; set;}
-    public string FastballOfferId {get; set;}
-    public string FastballOfferUid {get; set;}
-    public string FastballDiscount {get; set;}
-    public string ResourceId {get; set;}
-    public string AffiliateData {get; set;}
-    public string StackId {get; set;}
-    public string PartnerId {get; set;}
-    public string RedemptionCode {get; set;}
     public XElement CustomXml { get; set; }
 
     public void AddChildItem(IBasketAddItem childItem)

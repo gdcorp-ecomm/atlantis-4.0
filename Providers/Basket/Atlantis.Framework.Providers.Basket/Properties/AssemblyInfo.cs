@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following 
@@ -40,4 +41,6 @@ using System.Runtime.InteropServices;
 // example 4.13.6.1 for Jun 1, 2013
 //
 [assembly: AssemblyVersion("4.0.0.0")]
-[assembly: AssemblyFileVersion("4.13.10.1")]
+[assembly: AssemblyFileVersion("4.13.10.18")]
+[assembly: InternalsVisibleTo("Atlantis.Framework.Providers.Basket.Tests")]
+

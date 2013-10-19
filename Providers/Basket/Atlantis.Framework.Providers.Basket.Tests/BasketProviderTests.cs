@@ -1,7 +1,15 @@
 ﻿using System;
+using System.Globalization;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Text.RegularExpressions;
 using System.Xml.Linq;
+using Atlantis.Framework.Basket.Interface;
+using Atlantis.Framework.Engine;
+using Atlantis.Framework.Providers.Basket.Constants;
+using Atlantis.Framework.Providers.Basket.Tests.Properties;
+using Atlantis.Framework.Providers.Shopper.Interface;
+using Atlantis.Framework.Testing.MockEngine;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Testing.MockProviders;
@@ -10,13 +18,22 @@ using Atlantis.Framework.Providers.Basket.Interface;
 namespace Atlantis.Framework.Providers.Basket.Tests
 {
   [TestClass]
+  [DeploymentItem("atlantis.config")]
   public class BasketProviderTests
   {
-    IProviderContainer SetContext<T>() where T : ProviderBase
+    IProviderContainer SetContext<T>(string shopperId = null) where T : ProviderBase
     {
-      MockProviderContainer result = new MockProviderContainer();
+      var result = new MockProviderContainer();
       result.RegisterProvider<ISiteContext, MockSiteContext>();
+      result.RegisterProvider<IShopperContext, MockShopperContext>();
+      result.RegisterProvider<IShopperDataProvider, MockShopperDataProvider>();
       result.RegisterProvider<IBasketProvider, T>();
+
+      if (shopperId != null)
+      {
+        var shopperContext = result.Resolve<IShopperContext>();
+        shopperContext.SetNewShopper(shopperId);
+      }
 
       return result;
     }
@@ -157,8 +174,8 @@ namespace Atlantis.Framework.Providers.Basket.Tests
 
       try
       {
-        var realHash = overridePriceCOM.GetHash("1", "101", "999", "111", DateTime.Now.ToString());
-        int result = overridePriceCOM.VerifyHash("1", "101", "999", "111", DateTime.Now.ToString(), itemAdd.OverridePrice.Hash);
+        int result = overridePriceCOM.VerifyHash(
+          "1", "101", "999", "199", DateTime.Now.ToString(CultureInfo.InvariantCulture), itemAdd.OverridePrice.Hash);
         Assert.AreEqual(0, result);
       }
       finally
@@ -167,6 +184,289 @@ namespace Atlantis.Framework.Providers.Basket.Tests
       }
     }
 
+    [TestMethod]
+    public void PostToCartWithExistingValidShopper()
+    {
+      BasketEngineRequests.AddItems = 1746;
+
+      try
+      {
+        var container = SetContext<TestBasketProvider>(MockShopperDataProvider.MockCreatedShopperId);
+        var basket = container.Resolve<IBasketProvider>();
+        var basketAddRequest = basket.NewAddRequest();
+        var basketItem = basket.NewBasketAddItem(58, string.Empty);
+        basketAddRequest.AddItem(basketItem);
+
+        var response = basket.PostToBasket(basketAddRequest);
+        Assert.AreEqual(0, response.ErrorCount);
+      }
+      finally
+      {
+        BasketEngineRequests.AddItems = 746;
+      }
+    }
+
+    [TestMethod]
+    public void PostToCartWithExistingNoShopper()
+    {
+      BasketEngineRequests.AddItems = 1746;
+
+      try
+      {
+        var container = SetContext<TestBasketProvider>();
+        var basket = container.Resolve<IBasketProvider>();
+        var basketAddRequest = basket.NewAddRequest();
+        var basketItem = basket.NewBasketAddItem(58, string.Empty);
+        basketAddRequest.AddItem(basketItem);
+
+        var response = basket.PostToBasket(basketAddRequest);
+        Assert.AreEqual(0, response.ErrorCount);
+      }
+      finally
+      {
+        BasketEngineRequests.AddItems = 746;
+      }
+    }
+
+    [TestMethod]
+    public void PostToCartWithExistingInvalidShopper()
+    {
+      BasketEngineRequests.AddItems = 1746;
+
+      try
+      {
+        var container = SetContext<TestBasketProvider>(MockShopperDataProvider.MockBadShopperId);
+        var basket = container.Resolve<IBasketProvider>();
+        var basketAddRequest = basket.NewAddRequest();
+        var basketItem = basket.NewBasketAddItem(58, string.Empty);
+        basketAddRequest.AddItem(basketItem);
+
+        var response = basket.PostToBasket(basketAddRequest);
+        Assert.AreEqual(0, response.ErrorCount);
+      }
+      finally
+      {
+        BasketEngineRequests.AddItems = 746;
+      }
+    }
+
+    [TestMethod]
+    [ExpectedException(typeof(ArgumentException))]
+    public void PostToCartNullException()
+    {
+      var container = SetContext<TestBasketProvider>();
+      var basket = container.Resolve<IBasketProvider>();
+      basket.PostToBasket(null);
+    }
+
+    [TestMethod]
+    public void PostToCartAddRequestThrowsException()
+    {
+      BasketEngineRequests.AddItems = 1746;
+
+      try
+      {
+        var container = SetContext<TestBasketProvider>("ERR");
+        var basket = container.Resolve<IBasketProvider>();
+        var basketAddRequest = basket.NewAddRequest();
+        var basketItem = basket.NewBasketAddItem(58, string.Empty);
+        basketAddRequest.AddItem(basketItem);
+
+        var response = basket.PostToBasket(basketAddRequest);
+        Assert.AreNotEqual(0, response.ErrorCount);
+      }
+      finally
+      {
+        BasketEngineRequests.AddItems = 746;
+      }
+    }
+
+    [TestMethod]
+    public void ShopperDataProviderErrors()
+    {
+      IErrorLogger oldLogger = EngineLogging.EngineLogger;
+      var mockLogger = new MockErrorLogger();
+      EngineLogging.EngineLogger = mockLogger;
+      BasketEngineRequests.AddItems = 1746;
+
+      try
+      {
+        var container = SetContext<TestBasketProvider>(MockShopperDataProvider.MockCreatedShopperId);
+        container.SetData("MockShopperDataProvider.CauseErrors", true);
+
+        var basket = container.Resolve<IBasketProvider>();
+        var basketAddRequest = basket.NewAddRequest();
+        var basketItem = basket.NewBasketAddItem(58, string.Empty);
+        basketAddRequest.AddItem(basketItem);
+
+        var response = basket.PostToBasket(basketAddRequest);
+        Assert.AreEqual(0, response.ErrorCount);
+        Assert.AreEqual(2, mockLogger.Exceptions.Count);
+      }
+      finally
+      {
+        BasketEngineRequests.AddItems = 746;
+        EngineLogging.EngineLogger = oldLogger;
+      }
+    }
+
+    [TestMethod]
+    public void BasketResponseWithUnknownErrors()
+    {
+      var tripletResponseWithErrors = BasketAddResponseData.FromResponseXml(Resources.UnknownResponse);
+      var basketResponse = ProviderBasketResponse.FromBasketResponseStatus(tripletResponseWithErrors.Status);
+      Assert.AreNotEqual(0, basketResponse.ErrorCount);
+      Assert.AreEqual(basketResponse.ErrorCount, basketResponse.Errors.Count());
+
+      IBasketError error;
+      var foundError = basketResponse.TryGetError("definitelyNotThere", out error);
+      Assert.IsFalse(foundError);
+      Assert.IsNull(error);
+
+      foundError = basketResponse.TryGetError("0", out error);
+      Assert.IsTrue(foundError);
+      Assert.IsNotNull(error);
+
+      foundError = basketResponse.TryGetError(null, out error);
+      Assert.IsFalse(foundError);
+      Assert.IsNull(error);
+    }
+
+    [TestMethod]
+    public void BasketResponseWithSuccess()
+    {
+      var tripletResponseWithErrors = BasketAddResponseData.FromResponseXml(Resources.SuccessResponse);
+      var basketResponse = ProviderBasketResponse.FromBasketResponseStatus(tripletResponseWithErrors.Status);
+      Assert.AreEqual(0, basketResponse.ErrorCount);
+      Assert.AreEqual(BasketResponseStatusType.Success.ToString(), basketResponse.Message);
+    }
+
+    [TestMethod]
+    public void BasketAddRequestBuilderExtraElement()
+    {
+      var container = SetContext<TestBasketProvider>(MockShopperDataProvider.MockCreatedShopperId);
+      var basket = container.Resolve<IBasketProvider>();
+      var basketAddRequest = basket.NewAddRequest();
+      basketAddRequest.AddElement(new XElement("AdditionalElement"));
+      
+      var request = BasketAddRequestBuilder.FromBasketAddRequest(MockShopperDataProvider.MockCreatedShopperId, basketAddRequest);
+      var testElement = XElement.Parse(request.ToXML());
+
+      var additionalElement = testElement.Descendants("AdditionalElement").FirstOrDefault();
+      Assert.IsNotNull(additionalElement);
+    }
+
+    [TestMethod]
+    public void BasketAddRequestBuilderNumericItemAttributes()
+    {
+      var container = SetContext<TestBasketProvider>(MockShopperDataProvider.MockCreatedShopperId);
+      var basket = container.Resolve<IBasketProvider>();
+      var basketAddRequest = basket.NewAddRequest();
+      var basketAddItem = basket.NewBasketAddItem(101, null);
+      basketAddItem.Duration = 1.5f;
+      basketAddItem.StackId = 4;
+      basketAddRequest.AddItem(basketAddItem);
+
+      var request = BasketAddRequestBuilder.FromBasketAddRequest(MockShopperDataProvider.MockCreatedShopperId, basketAddRequest);
+      var testElement = XElement.Parse(request.ToXML());
+
+      var item = testElement.Descendants("item").FirstOrDefault();
+      var stackId = item.Attribute(BasketItemAttributes.StackId);
+      Assert.AreEqual("4", stackId.Value);
+      var duration = item.Attribute(BasketItemAttributes.Duration);
+      Assert.AreEqual("1.5", duration.Value);
+    }
+
+    [TestMethod]
+    public void BasketAddRequestBuilderCustomXmlOnItem()
+    {
+      var container = SetContext<TestBasketProvider>(MockShopperDataProvider.MockCreatedShopperId);
+      var basket = container.Resolve<IBasketProvider>();
+      var basketAddRequest = basket.NewAddRequest();
+      var basketAddItem = basket.NewBasketAddItem(101, null);
+      basketAddItem.CustomXml = new XElement("DOMAIN");
+      basketAddRequest.AddItem(basketAddItem);
+
+      var request = BasketAddRequestBuilder.FromBasketAddRequest(MockShopperDataProvider.MockCreatedShopperId, basketAddRequest);
+      var testElement = XElement.Parse(request.ToXML());
+
+      var item = testElement.Descendants("item").FirstOrDefault();
+      var domain = item.Element("DOMAIN");
+      Assert.IsNotNull(domain);
+    }
+
+    [TestMethod]
+    public void BasketAddRequestBuilderPriceOverride()
+    {
+      var container = SetContext<TestBasketProvider>(MockShopperDataProvider.MockCreatedShopperId);
+      var basket = container.Resolve<IBasketProvider>();
+      var basketAddRequest = basket.NewAddRequest();
+      var basketAddItem = basket.NewBasketAddItem(101, null);
+      basketAddItem.SetOverridePrice(999, 199);
+      basketAddRequest.AddItem(basketAddItem);
+
+      var request = BasketAddRequestBuilder.FromBasketAddRequest(MockShopperDataProvider.MockCreatedShopperId, basketAddRequest);
+      var testElement = XElement.Parse(request.ToXML());
+
+      var item = testElement.Descendants("item").FirstOrDefault();
+
+      var ovList = item.Attribute(BasketItemAttributes.OverrideListPrice);
+      Assert.IsNotNull(ovList);
+      var ovCurrent = item.Attribute(BasketItemAttributes.OverrideCurrentPrice);
+      Assert.IsNotNull(ovCurrent);
+      var ovHash = item.Attribute(BasketItemAttributes.OverrideHash);
+      Assert.IsNotNull(ovHash);
+    }
+
+    [TestMethod]
+    public void BasketAddRequestBuilderMultipleItems()
+    {
+      var container = SetContext<TestBasketProvider>(MockShopperDataProvider.MockCreatedShopperId);
+      var basket = container.Resolve<IBasketProvider>();
+      var basketAddRequest = basket.NewAddRequest();
+      var basketAddItem = basket.NewBasketAddItem(101, null);
+      basketAddRequest.AddItem(basketAddItem);
+      var secondItem = basket.NewBasketAddItem(58, null);
+      basketAddRequest.AddItem(secondItem);
+
+      var request = BasketAddRequestBuilder.FromBasketAddRequest(MockShopperDataProvider.MockCreatedShopperId, basketAddRequest);
+      var testElement = XElement.Parse(request.ToXML());
+
+      Assert.AreEqual(2, testElement.Descendants("item").Count());
+    }
+
+    [TestMethod]
+    public void BasketAddRequestBuilderChildItems()
+    {
+      var container = SetContext<TestBasketProvider>(MockShopperDataProvider.MockCreatedShopperId);
+      var basket = container.Resolve<IBasketProvider>();
+      var basketAddRequest = basket.NewAddRequest();
+      var basketAddItem = basket.NewBasketAddItem(101, null);
+      basketAddRequest.AddItem(basketAddItem);
+      var secondItem = basket.NewBasketAddItem(58, null);
+      basketAddItem.AddChildItem(secondItem);
+
+      var request = BasketAddRequestBuilder.FromBasketAddRequest(MockShopperDataProvider.MockCreatedShopperId, basketAddRequest);
+      var testElement = XElement.Parse(request.ToXML());
+
+      Assert.AreEqual(2, testElement.Descendants("item").Count());
+
+      var firstItem = testElement.Descendants("item").FirstOrDefault();
+      var lastItem = testElement.Descendants("item").LastOrDefault();
+
+      var groupId = firstItem.Attribute(BasketItemAttributes.GroupId);
+      Assert.IsNotNull(groupId);
+      Assert.IsFalse(string.IsNullOrEmpty(groupId.Value));
+
+      var parentgroupId = firstItem.Attribute(BasketItemAttributes.ParentGroupId);
+      var childgroupId = lastItem.Attribute(BasketItemAttributes.GroupId);
+
+      Assert.AreEqual(groupId.Value, parentgroupId.Value);
+      Assert.AreEqual(groupId.Value, childgroupId.Value);
+
+      var childparentgroupid = lastItem.Attribute(BasketItemAttributes.ParentGroupId);
+      Assert.IsNull(childparentgroupid);
+    }
 
   }
 }

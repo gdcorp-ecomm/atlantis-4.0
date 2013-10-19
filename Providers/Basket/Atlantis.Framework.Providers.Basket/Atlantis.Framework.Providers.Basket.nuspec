@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>Atlantis.Framework.Providers.Basket</id>
-    <version>4.13.10.1</version> 
+    <version>4.13.10.18</version> 
     <title>Atlantis Framework Basket Provider</title>
     <authors>$author$</authors>
     <owners>$author$</owners>
@@ -13,7 +13,7 @@
     <copyright>$copyright$</copyright>
     <tags>Atlantis Framework Basket Provider</tags>
     <dependencies>
-      <dependency id="Atlantis.Framework.Providers.Basket.Interface" version="4.13.10.1" />
+      <dependency id="Atlantis.Framework.Providers.Basket.Interface" version="4.13.10.18" />
     </dependencies>
   </metadata>
   <files />

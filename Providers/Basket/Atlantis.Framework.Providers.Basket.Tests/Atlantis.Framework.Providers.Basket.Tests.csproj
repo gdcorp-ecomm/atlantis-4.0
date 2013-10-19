@@ -39,6 +39,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Atlantis.Framework.Basket.Interface">
+      <HintPath>..\packages\Atlantis.Framework.Basket.Interface.4.13.10.9\lib\net40\Atlantis.Framework.Basket.Interface.dll</HintPath>
+    </Reference>
     <Reference Include="Atlantis.Framework.DataCacheService">
       <HintPath>..\packages\Atlantis.Framework.DataCacheService.4.0.0.0\lib\net40\Atlantis.Framework.DataCacheService.dll</HintPath>
     </Reference>
@@ -53,6 +56,12 @@
     </Reference>
     <Reference Include="Atlantis.Framework.Providers.Preferences.Interface">
       <HintPath>..\packages\Atlantis.Framework.Providers.Preferences.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Providers.Preferences.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Providers.Shopper.Interface">
+      <HintPath>..\packages\Atlantis.Framework.Providers.Shopper.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Providers.Shopper.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Testing.MockEngine">
+      <HintPath>..\packages\Atlantis.Framework.Testing.MockEngine.4.0.0.0\lib\net40\Atlantis.Framework.Testing.MockEngine.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Testing.MockProviders">
       <HintPath>..\packages\Atlantis.Framework.Testing.MockProviders.4.0.0.0\lib\net40\Atlantis.Framework.Testing.MockProviders.dll</HintPath>
@@ -83,12 +92,21 @@
   </Choose>
   <ItemGroup>
     <Compile Include="BasketProviderTests.cs" />
+    <Compile Include="MockBasketAddRequest.cs" />
+    <Compile Include="MockShopperDataProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="TestBasketProvider.cs" />
     <Compile Include="TestBasketProviderOverrides.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="atlantis.config" />
+    <None Include="atlantis.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -103,6 +121,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Interop\Interop.gdOverrideLib.dll" />
+    <None Include="Resources\InvalidShopperResponse.txt" />
+    <None Include="Resources\UnknownResponse.txt" />
+    <None Include="Resources\SuccessResponse.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

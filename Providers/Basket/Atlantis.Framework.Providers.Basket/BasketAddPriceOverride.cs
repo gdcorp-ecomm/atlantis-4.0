@@ -1,5 +1,4 @@
 ﻿using System.Globalization;
-using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using Atlantis.Framework.Providers.Basket.Interface;
@@ -10,12 +9,12 @@ namespace Atlantis.Framework.Providers.Basket
   public class BasketAddPriceOverride : IBasketAddPriceOverride
   {
     private readonly static DateTime _daysBase;
-    private static readonly char[] _base25chars;
+    private static readonly char[] _base25Chars;
 
     static BasketAddPriceOverride()
     {
       _daysBase = new DateTime(1979, 9, 13, 0, 0, 0);  
-      _base25chars = new char[25] {'0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O'};
+      _base25Chars = new [] {'0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f','g','h','i','j','k','l','m','n','o'};
     }
 
     internal BasketAddPriceOverride(int privateLabelId, int unifiedProductId, int overrideCurrentPrice, int overrideListPrice)
@@ -39,7 +38,6 @@ namespace Atlantis.Framework.Providers.Basket
 
       var days = (int)DateTime.Now.Subtract(_daysBase).TotalDays;
       sb.Append(ConvertToBase25(days));
-      //sb.Append(days.ToString(CultureInfo.InvariantCulture));
 
       return CreateSHA256Hash(sb.ToString());
     }
@@ -62,11 +60,11 @@ namespace Atlantis.Framework.Providers.Basket
     {
       int i = 32;
       var buffer = new char[i];
-      int targetBase = _base25chars.Length;
+      int targetBase = _base25Chars.Length;
 
       do
       {
-        buffer[--i] = _base25chars[value%targetBase];
+        buffer[--i] = _base25Chars[value%targetBase];
         value = value/targetBase;
       } 
       while (value > 0);

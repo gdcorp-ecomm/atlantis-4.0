@@ -53,7 +53,7 @@ namespace Atlantis.Framework.Providers.Basket.Interface
     /// <summary>
     /// Duration
     /// </summary>
-    int? Duration { get; set; }
+    float? Duration { get; set; }
 
     /// <summary>
     /// Overidden product name
@@ -98,12 +98,12 @@ namespace Atlantis.Framework.Providers.Basket.Interface
     /// <summary>
     /// Stack id
     /// </summary>
-    string StackId { get; set; }
+    int? StackId { get; set; }
 
     /// <summary>
     /// Partner Id
     /// </summary>
-    string PartnerId { get; set; }
+    int? PartnerId { get; set; }
 
     /// <summary>
     /// Redemption code

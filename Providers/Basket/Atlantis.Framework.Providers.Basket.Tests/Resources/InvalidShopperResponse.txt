@@ -1,0 +1,1 @@
+<RESPONSE><ERRORS><ERROR><NUMBER>-1073468912</NUMBER><DESC> The specified shopper is not valid.</DESC><SOURCE>WscgdBasketService::CWscgdBasketService::AddItem</SOURCE><LEVEL>ERROR</LEVEL></ERROR></ERRORS></RESPONSE>

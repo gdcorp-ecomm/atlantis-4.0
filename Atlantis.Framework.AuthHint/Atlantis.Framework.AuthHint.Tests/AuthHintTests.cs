@@ -47,6 +47,7 @@ namespace Atlantis.Framework.AuthHint.Tests
 
     [TestMethod]
     [DeploymentItem( "atlantis.config" )]
+    [DeploymentItem("Atlantis.Framework.AuthHint.Impl.dll")]
     [ExpectedException( typeof( AtlantisException ) )]
     public void HintNonsecureWsInConfig()
     {
@@ -57,6 +58,7 @@ namespace Atlantis.Framework.AuthHint.Tests
 
     [TestMethod]
     [DeploymentItem( "atlantis.config" )]
+    [DeploymentItem("Atlantis.Framework.AuthHint.Impl.dll")]
     public void HintRequired()
     {
       AuthHintRequestData request = new AuthHintRequestData(
@@ -69,6 +71,7 @@ namespace Atlantis.Framework.AuthHint.Tests
 
     [TestMethod]
     [DeploymentItem( "atlantis.config" )]
+    [DeploymentItem("Atlantis.Framework.AuthHint.Impl.dll")]
     public void HintValid()
     {
       AuthHintRequestData request = new AuthHintRequestData(

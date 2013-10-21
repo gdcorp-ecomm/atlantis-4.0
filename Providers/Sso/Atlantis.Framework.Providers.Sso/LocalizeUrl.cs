@@ -1,4 +1,5 @@
-﻿using Atlantis.Framework.Interface;
+﻿using System.Collections.Generic;
+using Atlantis.Framework.Interface;
 using Atlantis.Framework.Links.Interface;
 using Atlantis.Framework.Providers.Interface.Links;
 using System;
@@ -10,14 +11,16 @@ namespace Atlantis.Framework.Providers.Sso
   internal class LocalizeUrl
   {
     Lazy<ISiteContext> _siteContext;
-    IProviderContainer _container;
+    private Lazy<ILinkProvider> _links;
+   IProviderContainer _container;
 
     public LocalizeUrl(IProviderContainer container)
     {
       _container = container;
       _siteContext = new Lazy<ISiteContext>(() => container.Resolve<ISiteContext>());
+      _links = new Lazy<ILinkProvider>(() => container.Resolve<ILinkProvider>());
     }
-    
+
     public string GetLocalizedUrl(string urlToLocalize, NameValueCollection parms)
     {
       string localizedUrl = urlToLocalize;
@@ -29,21 +32,22 @@ namespace Atlantis.Framework.Providers.Sso
 
         var request = new LinkInfoRequestData(_siteContext.Value.ContextId);
         var response = (LinkInfoResponseData)DataCache.DataCache.GetProcessRequest(request, SsoProviderEngineRequests.Links);
-
         if (response.LinkTypesByBaseUrl.ContainsKey(host))
         {
           string linkType = response.LinkTypesByBaseUrl[host];
           bool isSecure = uri.Scheme.Equals("https", StringComparison.OrdinalIgnoreCase);
+          string localizedHost = _links.Value.GetUrl(linkType, uri.LocalPath, QueryParamMode.CommonParameters, isSecure, parms);
 
-          var linkProvider = _container.Resolve<ILinkProvider>();
-          string localizedHost = linkProvider.GetUrl(linkType, uri.LocalPath, QueryParamMode.CommonParameters, isSecure, parms);
-
-          localizedUrl = string.Concat(localizedHost, uri.Query.Replace("?","&"));
+          localizedUrl = string.Concat(localizedHost, uri.Query.Replace("?", "&"));
+        }
+        else
+        {
+          localizedUrl = AddParamsToNonLinkProviderUrl(parms, urlToLocalize);
         }
       }
       catch (Exception ex)
       {
-        localizedUrl = urlToLocalize;
+        localizedUrl = AddParamsToNonLinkProviderUrl(parms, urlToLocalize);
 
         string errorMessage = "Error getting localizedURL. urlToLocalize:: " + urlToLocalize;
         AtlantisException aex = new AtlantisException("LocalizeUrl::GetLocalizedUrl", 0, errorMessage, ex.StackTrace);
@@ -52,6 +56,14 @@ namespace Atlantis.Framework.Providers.Sso
 
       return localizedUrl;
     }
+
+    private string AddParamsToNonLinkProviderUrl(NameValueCollection parms, string urlToLocalize)
+    {
+      string queryStringAppender = urlToLocalize.Contains("?") ? "&" : "?";
+      var convertedParams = _links.Value.GetUrlArguments(parms).Replace("?", "");
+      return string.Concat(urlToLocalize, queryStringAppender, convertedParams);
+    }
   }
+
 
 }

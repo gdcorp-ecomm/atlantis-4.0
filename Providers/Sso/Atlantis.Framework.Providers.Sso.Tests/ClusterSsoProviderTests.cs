@@ -1,4 +1,5 @@
-﻿using Atlantis.Framework.Interface;
+﻿using System.Collections.Specialized;
+using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.Interface.Links;
 using Atlantis.Framework.Providers.Links;
 using Atlantis.Framework.Providers.Sso.Interface;
@@ -45,6 +46,10 @@ namespace Atlantis.Framework.Providers.Sso.Tests
       if (ssoProviderType == SsoProviderType.GoDaddy)
       {
         result.RegisterProvider<ISsoProvider, ClusterProvider>();
+      }
+      else if (ssoProviderType == SsoProviderType.DBP)
+      {
+        result.RegisterProvider<ISsoProvider, ClusterProviderDbp>();
       }
       else
       {
@@ -283,12 +288,26 @@ namespace Atlantis.Framework.Providers.Sso.Tests
       var loginUrl = cp.GetUrl(SsoUrlType.Login).ToLower();
     }
 
+    [TestMethod]
+    public void TestParamsAreReturnedWhenLinkTypeNotFound()
+    {
+
+      var providerContainer = GetProviderContainer("http://www.securepaynet.net?prog_id=domainsbyproxy", 1941, SsoProviderType.DBP);
+      var cp = providerContainer.Resolve<ISsoProvider>();
+      var addparams = new NameValueCollection();
+      addparams["parm1"] = "seth";
+      var loginUrl = cp.GetUrl(SsoUrlType.Login, addparams).ToLower();
+
+      Assert.IsTrue(loginUrl.Contains("seth"));
+      Assert.IsTrue(loginUrl.Contains("spkey"));
+    }
   }
 
   public enum SsoProviderType
   {
     GoDaddy,
-    PrivateLabel
+    PrivateLabel,
+    DBP
   }
 
   public class ClusterProvider : ClusterSsoProvider
@@ -327,4 +346,22 @@ namespace Atlantis.Framework.Providers.Sso.Tests
     }
   }
 
+  public class ClusterProviderDbp : ClusterSsoProvider
+  {
+    string spGroupName = "DBPCARTNET2";
+    string clusterName = "G1DWCARTWEB";
+
+    public ClusterProviderDbp(IProviderContainer container) : base(container) { }
+    public override string ServiceProviderGroupName
+    {
+      get
+      {
+        return spGroupName;
+      }
+    }
+    public override string ServerOrClusterName
+    {
+      get { return clusterName; }
+    }
+  }
 }

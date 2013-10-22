@@ -17,6 +17,7 @@ namespace Atlantis.Framework.CH.Products.Tests
   [DeploymentItem("Atlantis.Framework.EcommPricing.Impl.dll")]
   [DeploymentItem("Atlantis.Framework.CH.Products.dll")]
   [DeploymentItem("Atlantis.Framework.ProductOffer.Impl.dll")]
+  [DeploymentItem("Atlantis.Framework.Products.Impl.dll")]
   public class ProductIsOfferedTests
   {
     private bool _conditionHandlersRegistered;

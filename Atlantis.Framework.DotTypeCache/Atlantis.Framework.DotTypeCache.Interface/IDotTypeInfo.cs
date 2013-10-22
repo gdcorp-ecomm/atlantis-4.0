@@ -72,6 +72,5 @@ namespace Atlantis.Framework.DotTypeCache.Interface
 
     int GetProductId(IDomainProductLookup domainProductLookup);
     List<int> GetProductIdList(IDomainProductListLookup domainProductListLookup);
-    bool HasLeafPage { get; }
   }
 }

@@ -24,7 +24,7 @@ namespace Atlantis.Framework.DotTypeAvailability.Impl
           if (responseObject != null && responseObject.tldData != null && responseObject.tldData.tldList != null &&
               responseObject.tldData.tldList.Length > 0)
           {
-            responseData = DotTypeAvailabilityResponseData.FromTldAvailabilityList(ParseResponse(responseObject.tldData.tldList));
+            responseData = DotTypeAvailabilityResponseData.FromTldAvailabilityDictionary(ParseResponse(responseObject.tldData.tldList));
           }
           else
           {

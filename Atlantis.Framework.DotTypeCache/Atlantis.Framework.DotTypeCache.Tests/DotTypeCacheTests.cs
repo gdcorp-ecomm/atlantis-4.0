@@ -1582,23 +1582,5 @@ namespace Atlantis.Framework.DotTypeCache.Tests
       var productIdList = dotTypeInfo.GetPhaseApplicationProductIdList(LaunchPhases.SunriseA);
       Assert.IsTrue(productIdList.Any());
     }
-
-    [TestMethod]
-    public void TldHasLeafPageL4Borg()
-    {
-      var dotTypeInfo = DotTypeProvider.GetDotTypeInfo("k.borg");
-
-      var hasLeafPage = dotTypeInfo.HasLeafPage;
-      Assert.IsTrue(hasLeafPage);
-    }
-
-    [TestMethod]
-    public void TldHasLeafPageCom()
-    {
-      var dotTypeInfo = DotTypeProvider.GetDotTypeInfo("com");
-
-      var hasLeafPage = dotTypeInfo.HasLeafPage;
-      Assert.IsFalse(hasLeafPage);
-    }
   }
 }

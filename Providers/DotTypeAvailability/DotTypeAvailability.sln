@@ -1,0 +1,73 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Providers.DotTypeAvailability", "Atlantis.Framework.Providers.DotTypeAvailability\Atlantis.Framework.Providers.DotTypeAvailability.csproj", "{DFB4C02E-81CC-4A56-8022-53989186C644}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Providers.DotTypeAvailability.Interface", "Atlantis.Framework.Providers.DotTypeAvailability.Interface\Atlantis.Framework.Providers.DotTypeAvailability.Interface.csproj", "{00EE3F28-130C-4A7E-917B-4F84BFD24D9A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Providers.DotTypeAvailability.Tests", "Atlantis.Framework.Providers.DotTypeAvailability.Tests\Atlantis.Framework.Providers.DotTypeAvailability.Tests.csproj", "{AA57868F-922A-4847-9414-327C96AC9CB3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{D9E5E406-50A0-4604-968D-E00E0A12BD96}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.DotTypeAvailability.Interface", "..\..\Triplets\DotTypeAvailability\Atlantis.Framework.DotTypeAvailability.Interface\Atlantis.Framework.DotTypeAvailability.Interface.csproj", "{8FFBA5EF-E5E2-44B3-9AEC-A77A415A1DDB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.DotTypeAvailability.Impl", "..\..\Triplets\DotTypeAvailability\Atlantis.Framework.DotTypeAvailability.Impl\Atlantis.Framework.DotTypeAvailability.Impl.csproj", "{1A80790A-8633-4367-89CE-4E6E480E31CC}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 6
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Atlantis.Framework.Providers.DotTypeAvailability\\Atlantis.Framework.Providers.DotTypeAvailability.csproj
+		SccProjectName1 = Atlantis.Framework.Providers.DotTypeAvailability
+		SccLocalPath1 = Atlantis.Framework.Providers.DotTypeAvailability
+		SccProjectUniqueName2 = Atlantis.Framework.Providers.DotTypeAvailability.Interface\\Atlantis.Framework.Providers.DotTypeAvailability.Interface.csproj
+		SccProjectName2 = Atlantis.Framework.Providers.DotTypeAvailability.Interface
+		SccLocalPath2 = Atlantis.Framework.Providers.DotTypeAvailability.Interface
+		SccProjectUniqueName3 = Atlantis.Framework.Providers.DotTypeAvailability.Tests\\Atlantis.Framework.Providers.DotTypeAvailability.Tests.csproj
+		SccProjectName3 = Atlantis.Framework.Providers.DotTypeAvailability.Tests
+		SccLocalPath3 = Atlantis.Framework.Providers.DotTypeAvailability.Tests
+		SccProjectUniqueName4 = ..\\..\\Triplets\\DotTypeAvailability\\Atlantis.Framework.DotTypeAvailability.Interface\\Atlantis.Framework.DotTypeAvailability.Interface.csproj
+		SccProjectTopLevelParentUniqueName4 = DotTypeAvailability.sln
+		SccProjectName4 = ../../Triplets/DotTypeAvailability/Atlantis.Framework.DotTypeAvailability.Interface
+		SccLocalPath4 = ..\\..\\Triplets\\DotTypeAvailability\\Atlantis.Framework.DotTypeAvailability.Interface
+		SccProjectUniqueName5 = ..\\..\\Triplets\\DotTypeAvailability\\Atlantis.Framework.DotTypeAvailability.Impl\\Atlantis.Framework.DotTypeAvailability.Impl.csproj
+		SccProjectTopLevelParentUniqueName5 = DotTypeAvailability.sln
+		SccProjectName5 = ../../Triplets/DotTypeAvailability/Atlantis.Framework.DotTypeAvailability.Impl
+		SccLocalPath5 = ..\\..\\Triplets\\DotTypeAvailability\\Atlantis.Framework.DotTypeAvailability.Impl
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DFB4C02E-81CC-4A56-8022-53989186C644}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DFB4C02E-81CC-4A56-8022-53989186C644}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DFB4C02E-81CC-4A56-8022-53989186C644}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DFB4C02E-81CC-4A56-8022-53989186C644}.Release|Any CPU.Build.0 = Release|Any CPU
+		{00EE3F28-130C-4A7E-917B-4F84BFD24D9A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{00EE3F28-130C-4A7E-917B-4F84BFD24D9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{00EE3F28-130C-4A7E-917B-4F84BFD24D9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{00EE3F28-130C-4A7E-917B-4F84BFD24D9A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AA57868F-922A-4847-9414-327C96AC9CB3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA57868F-922A-4847-9414-327C96AC9CB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA57868F-922A-4847-9414-327C96AC9CB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA57868F-922A-4847-9414-327C96AC9CB3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8FFBA5EF-E5E2-44B3-9AEC-A77A415A1DDB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8FFBA5EF-E5E2-44B3-9AEC-A77A415A1DDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8FFBA5EF-E5E2-44B3-9AEC-A77A415A1DDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8FFBA5EF-E5E2-44B3-9AEC-A77A415A1DDB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A80790A-8633-4367-89CE-4E6E480E31CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A80790A-8633-4367-89CE-4E6E480E31CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A80790A-8633-4367-89CE-4E6E480E31CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A80790A-8633-4367-89CE-4E6E480E31CC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8FFBA5EF-E5E2-44B3-9AEC-A77A415A1DDB} = {D9E5E406-50A0-4604-968D-E00E0A12BD96}
+		{1A80790A-8633-4367-89CE-4E6E480E31CC} = {D9E5E406-50A0-4604-968D-E00E0A12BD96}
+	EndGlobalSection
+EndGlobal

@@ -784,24 +784,6 @@ namespace Atlantis.Framework.DotTypeCache
       return result.ConvertAll(product => product.UnifiedProductId); 
     }
 
-    public bool HasLeafPage
-    {
-      get
-      {
-        bool result = false;
-
-        if (_tldAvailabilityData.Value != null)
-        {
-          ITldAvailability tldAvailability;
-          if (_tldAvailabilityData.Value.TldAvailabilityList.TryGetValue(_tld, out tldAvailability))
-          {
-            result = tldAvailability.HasLeafPage;
-          }
-        }
-        return result;
-      }
-    }
-
     private static int InternalGetTldProductTypeId(int domainCount, TLDProductTypes productType, bool getBulkBasedOnDomainCount = true)
     {
       var productTypeId = TLDProductTypeIds.TLD_PRODUCT_TYPE_ID_REGISTRATION;

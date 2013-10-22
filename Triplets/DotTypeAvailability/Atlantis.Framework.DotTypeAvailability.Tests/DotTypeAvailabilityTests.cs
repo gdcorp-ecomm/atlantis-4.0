@@ -17,7 +17,7 @@ namespace Atlantis.Framework.DotTypeAvailability.Tests
     {
       var request = new DotTypeAvailabilityRequestData();
       var response = (DotTypeAvailabilityResponseData)Engine.Engine.ProcessRequest(request, 753);
-      Assert.AreEqual(true, response.TldAvailabilityList != null && response.TldAvailabilityList.Count > 0);
+      Assert.AreEqual(true, response.TldAvailabilityDictionary != null && response.TldAvailabilityDictionary.Count > 0);
     }
 
     [TestMethod]
@@ -25,10 +25,10 @@ namespace Atlantis.Framework.DotTypeAvailability.Tests
     {
       var request = new DotTypeAvailabilityRequestData();
       var response = (DotTypeAvailabilityResponseData)Engine.Engine.ProcessRequest(request, 753);
-      Assert.AreEqual(true, response.TldAvailabilityList != null && response.TldAvailabilityList.Count > 0);
+      Assert.AreEqual(true, response.TldAvailabilityDictionary != null && response.TldAvailabilityDictionary.Count > 0);
 
       ITldAvailability tldAvailability;
-      Assert.AreEqual(true, response.TldAvailabilityList != null && response.TldAvailabilityList.TryGetValue("L4.Borg", out tldAvailability) && tldAvailability != null);
+      Assert.AreEqual(true, response.TldAvailabilityDictionary != null && response.TldAvailabilityDictionary.TryGetValue("L4.Borg", out tldAvailability) && tldAvailability != null);
     }
 
     [TestMethod]

@@ -13,14 +13,14 @@ namespace Atlantis.Framework.DotTypeAvailability.Interface
     private readonly AtlantisException _exception;
     private readonly string _xmlData;
 
-    private readonly Dictionary<string, ITldAvailability> _tldAvailabilityList;
+    private readonly Dictionary<string, ITldAvailability> _tldAvailabilityDictionary;
 
     [DataMember]
-    public IDictionary<string, ITldAvailability> TldAvailabilityList
+    public IDictionary<string, ITldAvailability> TldAvailabilityDictionary
     {
       get
       {
-        return _tldAvailabilityList;
+        return _tldAvailabilityDictionary;
       }
     }
 
@@ -36,20 +36,20 @@ namespace Atlantis.Framework.DotTypeAvailability.Interface
       _exception = new AtlantisException(requestData, "DotTypeAvailabilityResponseData.ctor", message, inputData);
     }
 
-    public static DotTypeAvailabilityResponseData FromTldAvailabilityList(IDictionary<string, ITldAvailability> tldAvailabilityList)
+    public static DotTypeAvailabilityResponseData FromTldAvailabilityDictionary(IDictionary<string, ITldAvailability> tldAvailabilityDictionary)
     {
-      return new DotTypeAvailabilityResponseData(tldAvailabilityList);
+      return new DotTypeAvailabilityResponseData(tldAvailabilityDictionary);
     }
 
-    private DotTypeAvailabilityResponseData(IDictionary<string, ITldAvailability> tldAvailabilityList)
+    private DotTypeAvailabilityResponseData(IDictionary<string, ITldAvailability> tldAvailabilityDictionary)
     {
-      _tldAvailabilityList = tldAvailabilityList as Dictionary<string, ITldAvailability>;
-      _xmlData = GetTldAvailabilityXml(tldAvailabilityList);
+      _tldAvailabilityDictionary = tldAvailabilityDictionary as Dictionary<string, ITldAvailability>;
+      _xmlData = GetTldAvailabilityXml(tldAvailabilityDictionary);
     }
 
-    private static string GetTldAvailabilityXml(IDictionary<string, ITldAvailability> tldAvailabilityList)
+    private static string GetTldAvailabilityXml(IDictionary<string, ITldAvailability> tldAvailabilityDictionary)
     {
-      string result = tldAvailabilityList.ToString();
+      string result = tldAvailabilityDictionary.ToString();
 
       return result;
     }
@@ -57,7 +57,7 @@ namespace Atlantis.Framework.DotTypeAvailability.Interface
     public string ToXML()
     {
       string result = "<exception/>";
-      if (_tldAvailabilityList != null)
+      if (_tldAvailabilityDictionary != null)
       {
         try
         {

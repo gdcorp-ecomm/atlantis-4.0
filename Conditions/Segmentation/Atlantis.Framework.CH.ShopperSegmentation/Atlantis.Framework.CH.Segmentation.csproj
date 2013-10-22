@@ -35,6 +35,37 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Antlr3.Runtime, Version=3.1.3.22795, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Render.ExpressionParser.4.0.0.0\lib\net40\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Conditions.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Conditions.Interface.4.13.10.12\lib\net40\Atlantis.Framework.Conditions.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Engine, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Engine.4.0.0.0\lib\net40\Atlantis.Framework.Engine.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Engine.XmlSerializers, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Engine.4.0.0.0\lib\net40\Atlantis.Framework.Engine.XmlSerializers.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Providers.RenderPipeline.Interface">
+      <HintPath>..\packages\Atlantis.Framework.Providers.RenderPipeline.Interface.4.13.10.16\lib\net40\Atlantis.Framework.Providers.RenderPipeline.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Render.ExpressionParser, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Render.ExpressionParser.4.0.0.0\lib\net40\Atlantis.Framework.Render.ExpressionParser.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Render.MarkupParser, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Render.MarkupParser.4.0.0.0\lib\net40\Atlantis.Framework.Render.MarkupParser.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -48,18 +79,14 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj">
-      <Project>{a083a52e-c3c3-42e0-8dfd-54719e4c3b25}</Project>
-      <Name>Atlantis.Framework.Interface</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\..\Providers\Segmentation\Atlantis.Framework.Providers.ShopperSegment.Interface\Atlantis.Framework.Providers.Segmentation.Interface.csproj">
       <Project>{bd4c4dec-fac5-4558-a79b-e1d0c6f5ab8a}</Project>
       <Name>Atlantis.Framework.Providers.Segmentation.Interface</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Interface\Atlantis.Framework.Conditions.Interface\Atlantis.Framework.Conditions.Interface.csproj">
-      <Project>{9f0b7f62-5a62-4823-8697-a18fa91b2a8d}</Project>
-      <Name>Atlantis.Framework.Conditions.Interface</Name>
-    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="atlantis.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

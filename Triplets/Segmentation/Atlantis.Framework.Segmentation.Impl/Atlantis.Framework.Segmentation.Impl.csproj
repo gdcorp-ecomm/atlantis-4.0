@@ -57,6 +57,30 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Atlantis.Framework.Engine, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Conditions\Segmentation\packages\Atlantis.Framework.Engine.4.0.0.0\lib\net40\Atlantis.Framework.Engine.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Engine.XmlSerializers, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Conditions\Segmentation\packages\Atlantis.Framework.Engine.4.0.0.0\lib\net40\Atlantis.Framework.Engine.XmlSerializers.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Conditions\Segmentation\packages\Atlantis.Framework.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Nimitz, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Conditions\Segmentation\packages\Atlantis.Framework.Nimitz.4.0.0.0\lib\net40\Atlantis.Framework.Nimitz.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.SessionCache, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Conditions\Segmentation\packages\Atlantis.Framework.SessionCache.4.13.10.22\lib\net40\Atlantis.Framework.SessionCache.dll</HintPath>
+    </Reference>
+    <Reference Include="netConnect, Version=1.9.10.20, Culture=neutral, PublicKeyToken=6bd9b754bfae49c9, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Conditions\Segmentation\packages\Atlantis.Framework.Nimitz.4.0.0.0\lib\net40\netConnect.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -94,22 +118,14 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj">
-      <Project>{a083a52e-c3c3-42e0-8dfd-54719e4c3b25}</Project>
-      <Name>Atlantis.Framework.Interface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz.csproj">
-      <Project>{3213e6db-f026-4f17-a46a-7127f79f6620}</Project>
-      <Name>Atlantis.Framework.Nimitz</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Atlantis.Framework.SessionCache\Atlantis.Framework.SessionCache\Atlantis.Framework.SessionCache.csproj">
-      <Project>{53be1e8c-c474-4d2d-b2e3-db00cbe1b5f9}</Project>
-      <Name>Atlantis.Framework.SessionCache</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.Segmentation.Interface\Atlantis.Framework.Segmentation.Interface.csproj">
       <Project>{3a47c855-6f2e-4843-848c-bd2451ad28e0}</Project>
       <Name>Atlantis.Framework.Segmentation.Interface</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="atlantis.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

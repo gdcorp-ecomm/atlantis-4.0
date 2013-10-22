@@ -465,7 +465,14 @@ namespace Atlantis.Framework.DotTypeCache.Static
 
     public ITLDLaunchPhase GetLaunchPhase(LaunchPhases phase)
     {
-      return null;
+      ITLDLaunchPhase result = null;
+
+      if (phase == LaunchPhases.GeneralAvailability)
+      {
+        result = TldLaunchPhase.GeneralAvailabilityActive();
+      }
+
+      return result;
     }
 
     public ITLDLaunchPhaseGroupCollection GetAllLaunchPhaseGroups(bool activeOnly = true)

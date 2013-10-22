@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using Atlantis.Framework.DCCDomainsDataCache.Interface;
 using Atlantis.Framework.DomainContactFields.Interface;
-using Atlantis.Framework.DotTypeAvailability.Interface;
 using Atlantis.Framework.DotTypeCache.Interface;
 using Atlantis.Framework.DotTypeCache.Static;
 using Atlantis.Framework.Interface;
@@ -30,7 +29,6 @@ namespace Atlantis.Framework.DotTypeCache
     private readonly Lazy<TLDLanguageResponseData> _languagesData;
     private readonly Lazy<ValidDotTypesResponseData> _validDotTypes;
     private readonly Lazy<ISiteContext> _siteContext;
-    private readonly Lazy<DotTypeAvailabilityResponseData> _tldAvailabilityData;
 
     internal static TLDMLDotTypeInfo FromDotType(string dotType, IProviderContainer container)
     {
@@ -47,7 +45,6 @@ namespace Atlantis.Framework.DotTypeCache
       _languagesData = new Lazy<TLDLanguageResponseData>(LoadLanguagesData);
       _validDotTypes = new Lazy<ValidDotTypesResponseData>(LoadValidDotTypes);
       _siteContext = new Lazy<ISiteContext>(container.Resolve<ISiteContext>);
-      _tldAvailabilityData = new Lazy<DotTypeAvailabilityResponseData>(LoadTldAvailabilityData);
 
       _tldml = LoadTLDML();
     }
@@ -122,12 +119,6 @@ namespace Atlantis.Framework.DotTypeCache
     {
       var request = new PrivateLabelTypeRequestData(privateLabelId);
       return (PrivateLabelTypeResponseData)DataCache.DataCache.GetProcessRequest(request, DotTypeEngineRequests.PrivateLabelType);
-    }
-
-    private DotTypeAvailabilityResponseData LoadTldAvailabilityData()
-    {
-      var request = new DotTypeAvailabilityRequestData();
-      return (DotTypeAvailabilityResponseData)DataCache.DataCache.GetProcessRequest(request, DotTypeEngineRequests.TldAvailabilityRequest);
     }
 
     public string DotType

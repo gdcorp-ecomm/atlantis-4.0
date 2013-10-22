@@ -2,9 +2,9 @@
 using System.Reflection;
 using Atlantis.Framework.Conditions.Interface;
 using Atlantis.Framework.Interface;
-using Atlantis.Framework.Providers.Containers;
 using Atlantis.Framework.Providers.SplitTesting;
 using Atlantis.Framework.Providers.SplitTesting.Interface;
+using Atlantis.Framework.Testing.MockProviders;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Atlantis.Framework.CH.SplitTesting.Tests
@@ -27,31 +27,31 @@ namespace Atlantis.Framework.CH.SplitTesting.Tests
       }
     }
 
-    private IProviderContainer _objectProviderContainer;
-    private IProviderContainer ObjectProviderContainer
+    private IProviderContainer _providerContainer;
+    private IProviderContainer ProviderContainer
     {
       get
       {
-        if (_objectProviderContainer == null)
+        if (_providerContainer == null)
         {
-          _objectProviderContainer = new ObjectProviderContainer();
-          _objectProviderContainer.RegisterProvider<ISplitTestingProvider, SplitTestingProvider>();
+          _providerContainer = new MockProviderContainer();
+          _providerContainer.RegisterProvider<ISplitTestingProvider, SplitTestingProvider>();
         }
 
-        return _objectProviderContainer;
+        return _providerContainer;
       }
     }
 
     [TestMethod]
     public void EvaluateValidConditionFalse()
     {
-      Assert.IsFalse(ConditionHandlerManager.EvaluateCondition("SplitTestingSideIsActive", new[] { "9999998989", "A" }, ObjectProviderContainer));
+      Assert.IsFalse(ConditionHandlerManager.EvaluateCondition("SplitTestingSideIsActive", new[] { "9999998989", "A" }, ProviderContainer));
     }
 
     [TestMethod]
     public void EvaluateValidConditionInvalidFalse()
     {
-      Assert.IsFalse(ConditionHandlerManager.EvaluateCondition("SplitTestingSideIsActive", new[] { "123Abc", "A" }, ObjectProviderContainer));
+      Assert.IsFalse(ConditionHandlerManager.EvaluateCondition("SplitTestingSideIsActive", new[] { "123Abc", "A" }, ProviderContainer));
     }
   }
 }

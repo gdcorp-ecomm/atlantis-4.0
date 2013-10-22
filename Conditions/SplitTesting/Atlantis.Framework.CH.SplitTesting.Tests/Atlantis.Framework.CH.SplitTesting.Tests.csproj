@@ -39,6 +39,47 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Antlr3.Runtime, Version=3.1.3.22795, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Render.ExpressionParser.4.0.0.0\lib\net40\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Conditions.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Conditions.Interface.4.13.10.12\lib\net40\Atlantis.Framework.Conditions.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.DataCacheService, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.DataCacheService.4.0.0.0\lib\net40\Atlantis.Framework.DataCacheService.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Engine, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Engine.4.0.0.0\lib\net40\Atlantis.Framework.Engine.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Engine.XmlSerializers, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Engine.4.0.0.0\lib\net40\Atlantis.Framework.Engine.XmlSerializers.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Providers.Preferences.Interface">
+      <HintPath>..\packages\Atlantis.Framework.Providers.Preferences.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Providers.Preferences.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Providers.RenderPipeline.Interface">
+      <HintPath>..\packages\Atlantis.Framework.Providers.RenderPipeline.Interface.4.13.10.16\lib\net40\Atlantis.Framework.Providers.RenderPipeline.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Render.ExpressionParser, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Render.ExpressionParser.4.0.0.0\lib\net40\Atlantis.Framework.Render.ExpressionParser.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Render.MarkupParser, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Render.MarkupParser.4.0.0.0\lib\net40\Atlantis.Framework.Render.MarkupParser.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Testing.MockProviders">
+      <HintPath>..\packages\Atlantis.Framework.Testing.MockProviders.4.0.0.0\lib\net40\Atlantis.Framework.Testing.MockProviders.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -62,18 +103,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj">
-      <Project>{d30157b2-c1b3-4073-ba5e-632e2337a997}</Project>
-      <Name>Atlantis.Framework.Engine</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj">
-      <Project>{a083a52e-c3c3-42e0-8dfd-54719e4c3b25}</Project>
-      <Name>Atlantis.Framework.Interface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Atlantis.Framework.Providers.Containers\Atlantis.Framework.Providers.Containers\Atlantis.Framework.Providers.Containers.csproj">
-      <Project>{c333e679-494e-422d-ab5e-e4c0ec94acd5}</Project>
-      <Name>Atlantis.Framework.Providers.Containers</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\..\Providers\SplitTesting\Atlantis.Framework.Providers.SplitTesting.Interface\Atlantis.Framework.Providers.SplitTesting.Interface.csproj">
       <Project>{3f43b620-addb-41dd-826c-b565d8157b28}</Project>
       <Name>Atlantis.Framework.Providers.SplitTesting.Interface</Name>
@@ -86,10 +115,6 @@
       <Project>{1dcccfdf-b22e-4e29-924d-fc1e0db7feaf}</Project>
       <Name>Atlantis.Framework.SplitTesting.Impl</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Interface\Atlantis.Framework.Conditions.Interface\Atlantis.Framework.Conditions.Interface.csproj">
-      <Project>{9f0b7f62-5a62-4823-8697-a18fa91b2a8d}</Project>
-      <Name>Atlantis.Framework.Conditions.Interface</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.CH.SplitTesting\Atlantis.Framework.CH.SplitTesting.csproj">
       <Project>{c48bdf93-b172-49cc-b9fd-00d8ddea1841}</Project>
       <Name>Atlantis.Framework.CH.SplitTesting</Name>
@@ -99,6 +124,7 @@
     <None Include="atlantis.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="packages.config" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

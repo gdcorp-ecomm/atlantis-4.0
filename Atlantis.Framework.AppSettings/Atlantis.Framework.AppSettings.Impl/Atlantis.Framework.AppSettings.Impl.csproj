@@ -49,12 +49,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Atlantis.Framework.AppSettings.Interface\Atlantis.Framework.AppSettings.Interface.csproj">
-      <Project>{638f2820-0ca4-43c1-8712-1823704389d3}</Project>
-      <Name>Atlantis.Framework.AppSettings.Interface</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="atlantis.config.transform">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

@@ -3,7 +3,7 @@
   <metadata>
     <id>Atlantis.Framework.Providers.RenderPipeline.Interface</id>
     <version>4.13.10.16</version>
-    <title>Atlantis Framework Render Pipeline Provider Interfac</title>
+    <title>Atlantis Framework Render Pipeline Provider Interface</title>
     <authors>$author$</authors>
     <owners>$author$</owners>
     <projectUrl>https://confluence.int.godaddy.com/display/ATLANTIS</projectUrl>
@@ -11,7 +11,7 @@
     <description>$description$</description>
     <releaseNotes></releaseNotes>
     <copyright>$copyright$</copyright>
-    <tags>Atlantis Framework Render Pipeline Provider</tags>
+    <tags>Atlantis Framework Render Pipeline Provider Interface</tags>
     <dependencies>
       <dependency id="Atlantis.Framework.Interface" version="4.0.0.0" />
     </dependencies>

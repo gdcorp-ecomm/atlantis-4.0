@@ -124,7 +124,7 @@ namespace Atlantis.Framework.Providers.DotTypeEoi.Tests
     {
       IDotTypeEoiProvider provider = NewDotTypeEoiProvider();
       IGeneralGtldData generalGtldData;
-      bool isSuccess = provider.SearchEoi("ba", out generalGtldData);
+      bool isSuccess = provider.SearchEoi("k.borg", out generalGtldData);
       Assert.AreEqual(true, isSuccess);
       Assert.AreEqual(true, generalGtldData.Gtlds.Count > 0);
       Assert.AreEqual(true, generalGtldData.Gtlds[0].Id > -1);

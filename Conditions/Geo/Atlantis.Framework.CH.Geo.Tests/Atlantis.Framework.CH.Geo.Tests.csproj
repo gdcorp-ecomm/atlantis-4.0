@@ -39,6 +39,75 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Antlr3.Runtime">
+      <HintPath>..\packages\Atlantis.Framework.Render.ExpressionParser.4.0.0.0\lib\net40\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.AppSettings.Interface">
+      <HintPath>..\packages\Atlantis.Framework.AppSettings.Interface.4.0.0.0\lib\net40\Atlantis.Framework.AppSettings.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Conditions.Interface">
+      <HintPath>..\packages\Atlantis.Framework.Conditions.Interface.4.13.10.12\lib\net40\Atlantis.Framework.Conditions.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.DataCache">
+      <HintPath>..\packages\Atlantis.Framework.DataCache.4.0.0.0\lib\net40\Atlantis.Framework.DataCache.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.DataCacheGeneric.Interface">
+      <HintPath>..\packages\Atlantis.Framework.DataCacheGeneric.Interface.4.0.0.0\lib\net40\Atlantis.Framework.DataCacheGeneric.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.DataCacheService">
+      <HintPath>..\packages\Atlantis.Framework.DataCacheService.4.0.0.0\lib\net40\Atlantis.Framework.DataCacheService.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Engine">
+      <HintPath>..\packages\Atlantis.Framework.Engine.4.0.0.0\lib\net40\Atlantis.Framework.Engine.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Engine.XmlSerializers">
+      <HintPath>..\packages\Atlantis.Framework.Engine.4.0.0.0\lib\net40\Atlantis.Framework.Engine.XmlSerializers.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Geo.Impl">
+      <HintPath>..\packages\Atlantis.Framework.Geo.4.0.0.0\lib\net40\Atlantis.Framework.Geo.Impl.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Geo.Interface">
+      <HintPath>..\packages\Atlantis.Framework.Geo.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Geo.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Interface">
+      <HintPath>..\packages\Atlantis.Framework.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.PrivateLabel.Interface">
+      <HintPath>..\packages\Atlantis.Framework.PrivateLabel.Interface.4.0.0.0\lib\net40\Atlantis.Framework.PrivateLabel.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Products.Interface">
+      <HintPath>..\packages\Atlantis.Framework.Products.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Products.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Providers.Geo">
+      <HintPath>..\packages\Atlantis.Framework.Providers.Geo.4.0.0.0\lib\net40\Atlantis.Framework.Providers.Geo.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Providers.Geo.Interface">
+      <HintPath>..\packages\Atlantis.Framework.Providers.Geo.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Providers.Geo.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Providers.Interface">
+      <HintPath>..\packages\Atlantis.Framework.Providers.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Providers.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Providers.Localization.Interface">
+      <HintPath>..\packages\Atlantis.Framework.Providers.Localization.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Providers.Localization.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Providers.Preferences.Interface">
+      <HintPath>..\packages\Atlantis.Framework.Providers.Preferences.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Providers.Preferences.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Providers.RenderPipeline.Interface">
+      <HintPath>..\packages\Atlantis.Framework.Providers.RenderPipeline.Interface.4.13.10.16\lib\net40\Atlantis.Framework.Providers.RenderPipeline.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Render.ExpressionParser">
+      <HintPath>..\packages\Atlantis.Framework.Render.ExpressionParser.4.0.0.0\lib\net40\Atlantis.Framework.Render.ExpressionParser.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Render.MarkupParser">
+      <HintPath>..\packages\Atlantis.Framework.Render.MarkupParser.4.0.0.0\lib\net40\Atlantis.Framework.Render.MarkupParser.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Testing.MockHttpContext">
+      <HintPath>..\packages\Atlantis.Framework.Testing.MockHttpContext.4.0.0.0\lib\net40\Atlantis.Framework.Testing.MockHttpContext.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Testing.MockProviders">
+      <HintPath>..\packages\Atlantis.Framework.Testing.MockProviders.4.0.0.0\lib\net40\Atlantis.Framework.Testing.MockProviders.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -64,58 +133,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Atlantis.Framework.DataCache\Atlantis.Framework.DataCache\Atlantis.Framework.DataCache.csproj">
-      <Project>{7f2738f8-683c-49e7-88cd-e986c70f0321}</Project>
-      <Name>Atlantis.Framework.DataCache</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj">
-      <Project>{d30157b2-c1b3-4073-ba5e-632e2337a997}</Project>
-      <Name>Atlantis.Framework.Engine</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj">
-      <Project>{a083a52e-c3c3-42e0-8dfd-54719e4c3b25}</Project>
-      <Name>Atlantis.Framework.Interface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Atlantis.Framework.Testing\Atlantis.Framework.Testing.MockHttpContext\Atlantis.Framework.Testing.MockHttpContext.csproj">
-      <Project>{2f8983b4-801b-461a-9d76-26a58a496261}</Project>
-      <Name>Atlantis.Framework.Testing.MockHttpContext</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Atlantis.Framework.Testing\Atlantis.Framework.Testing.MockProviders\Atlantis.Framework.Testing.MockProviders.csproj">
-      <Project>{5487def2-0fa7-4b77-9aad-0355784589d6}</Project>
-      <Name>Atlantis.Framework.Testing.MockProviders</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Providers\Geo\Atlantis.Framework.Providers.Geo.Interface\Atlantis.Framework.Providers.Geo.Interface.csproj">
-      <Project>{56c72bae-ff21-49ff-a097-ac38b874ac39}</Project>
-      <Name>Atlantis.Framework.Providers.Geo.Interface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Providers\Geo\Atlantis.Framework.Providers.Geo\Atlantis.Framework.Providers.Geo.csproj">
-      <Project>{49e70b29-00bd-4665-994b-f232e84d63a0}</Project>
-      <Name>Atlantis.Framework.Providers.Geo</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Render\ExpressionParser\Atlantis.Framework.Render.ExpressionParser\Atlantis.Framework.Render.ExpressionParser.csproj">
-      <Project>{e35a1790-4605-4adb-813e-dcd5485f58bb}</Project>
-      <Name>Atlantis.Framework.Render.ExpressionParser</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Render\MarkupParser\Atlantis.Framework.Render.MarkupParser\Atlantis.Framework.Render.MarkupParser.csproj">
-      <Project>{772aac0d-761e-4906-b46f-100e1af3f5ca}</Project>
-      <Name>Atlantis.Framework.Render.MarkupParser</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Render\RenderPipeline\Atlantis.Framework.Render.Pipeline.Interface\Atlantis.Framework.Render.Pipeline.Interface.csproj">
-      <Project>{0d7f076f-1809-437b-b045-e35a7e68e423}</Project>
-      <Name>Atlantis.Framework.Render.Pipeline.Interface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Triplets\Geo\Atlantis.Framework.Geo.Impl\Atlantis.Framework.Geo.Impl.csproj">
-      <Project>{95a7334d-a6ee-46d4-97c3-320e119abc59}</Project>
-      <Name>Atlantis.Framework.Geo.Impl</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Triplets\Geo\Atlantis.Framework.Geo.Interface\Atlantis.Framework.Geo.Interface.csproj">
-      <Project>{27f0cd4d-3807-445b-ab34-2b96e7937492}</Project>
-      <Name>Atlantis.Framework.Geo.Interface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Interface\Atlantis.Framework.Conditions.Interface\Atlantis.Framework.Conditions.Interface.csproj">
-      <Project>{9f0b7f62-5a62-4823-8697-a18fa91b2a8d}</Project>
-      <Name>Atlantis.Framework.Conditions.Interface</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.CH.Geo\Atlantis.Framework.CH.Geo.csproj">
       <Project>{778c978d-fe06-44e8-9e11-baf8c6aff946}</Project>
       <Name>Atlantis.Framework.CH.Geo</Name>
@@ -131,6 +148,7 @@
     <None Include="GeoIPLocation.dat">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="packages.config" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

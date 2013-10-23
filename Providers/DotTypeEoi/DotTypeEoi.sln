@@ -63,9 +63,17 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.DotTypeC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.DotTypeAvailability.Interface", "..\..\Triplets\DotTypeAvailability\Atlantis.Framework.DotTypeAvailability.Interface\Atlantis.Framework.DotTypeAvailability.Interface.csproj", "{8FFBA5EF-E5E2-44B3-9AEC-A77A415A1DDB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.AppSettings.Impl", "..\..\Atlantis.Framework.AppSettings\Atlantis.Framework.AppSettings.Impl\Atlantis.Framework.AppSettings.Impl.csproj", "{1F866BC2-A3D5-4042-ABAA-B90CDC575DFF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.DCCDomainsDataCache.Impl", "..\..\Atlantis.Framework.DCCDomainsDataCache\Atlantis.Framework.DCCDomainsDataCache.Impl\Atlantis.Framework.DCCDomainsDataCache.Impl.csproj", "{89873D19-5D77-4886-ADD3-CEDBF196D270}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.DataCacheGeneric.Impl", "..\..\Triplets\DataCacheGeneric\Atlantis.Framework.DataCacheGeneric.Impl\Atlantis.Framework.DataCacheGeneric.Impl.csproj", "{41573A44-95D3-4BDE-9CFF-65552ACCD7E4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.TLDDataCache.Impl", "..\..\Atlantis.Framework.TLDDataCache\Atlantis.Framework.TLDDataCache.Impl\Atlantis.Framework.TLDDataCache.Impl.csproj", "{B6638632-2265-4F7E-A6A2-C494391DFBAB}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 30
+		SccNumberOfProjects = 34
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
 		SccLocalPath0 = .
@@ -182,6 +190,22 @@ Global
 		SccProjectTopLevelParentUniqueName29 = DotTypeEoi.sln
 		SccProjectName29 = ../../Triplets/DotTypeAvailability/Atlantis.Framework.DotTypeAvailability.Interface
 		SccLocalPath29 = ..\\..\\Triplets\\DotTypeAvailability\\Atlantis.Framework.DotTypeAvailability.Interface
+		SccProjectUniqueName30 = ..\\..\\Atlantis.Framework.AppSettings\\Atlantis.Framework.AppSettings.Impl\\Atlantis.Framework.AppSettings.Impl.csproj
+		SccProjectTopLevelParentUniqueName30 = DotTypeEoi.sln
+		SccProjectName30 = ../../Atlantis.Framework.AppSettings/Atlantis.Framework.AppSettings.Impl
+		SccLocalPath30 = ..\\..\\Atlantis.Framework.AppSettings\\Atlantis.Framework.AppSettings.Impl
+		SccProjectUniqueName31 = ..\\..\\Atlantis.Framework.DCCDomainsDataCache\\Atlantis.Framework.DCCDomainsDataCache.Impl\\Atlantis.Framework.DCCDomainsDataCache.Impl.csproj
+		SccProjectTopLevelParentUniqueName31 = DotTypeEoi.sln
+		SccProjectName31 = ../../Atlantis.Framework.DCCDomainsDataCache/Atlantis.Framework.DCCDomainsDataCache.Impl
+		SccLocalPath31 = ..\\..\\Atlantis.Framework.DCCDomainsDataCache\\Atlantis.Framework.DCCDomainsDataCache.Impl
+		SccProjectUniqueName32 = ..\\..\\Triplets\\DataCacheGeneric\\Atlantis.Framework.DataCacheGeneric.Impl\\Atlantis.Framework.DataCacheGeneric.Impl.csproj
+		SccProjectTopLevelParentUniqueName32 = DotTypeEoi.sln
+		SccProjectName32 = ../../Triplets/DataCacheGeneric/Atlantis.Framework.DataCacheGeneric.Impl
+		SccLocalPath32 = ..\\..\\Triplets\\DataCacheGeneric\\Atlantis.Framework.DataCacheGeneric.Impl
+		SccProjectUniqueName33 = ..\\..\\Atlantis.Framework.TLDDataCache\\Atlantis.Framework.TLDDataCache.Impl\\Atlantis.Framework.TLDDataCache.Impl.csproj
+		SccProjectTopLevelParentUniqueName33 = DotTypeEoi.sln
+		SccProjectName33 = ../../Atlantis.Framework.TLDDataCache/Atlantis.Framework.TLDDataCache.Impl
+		SccLocalPath33 = ..\\..\\Atlantis.Framework.TLDDataCache\\Atlantis.Framework.TLDDataCache.Impl
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -304,6 +328,22 @@ Global
 		{8FFBA5EF-E5E2-44B3-9AEC-A77A415A1DDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8FFBA5EF-E5E2-44B3-9AEC-A77A415A1DDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8FFBA5EF-E5E2-44B3-9AEC-A77A415A1DDB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F866BC2-A3D5-4042-ABAA-B90CDC575DFF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F866BC2-A3D5-4042-ABAA-B90CDC575DFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F866BC2-A3D5-4042-ABAA-B90CDC575DFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F866BC2-A3D5-4042-ABAA-B90CDC575DFF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{89873D19-5D77-4886-ADD3-CEDBF196D270}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89873D19-5D77-4886-ADD3-CEDBF196D270}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89873D19-5D77-4886-ADD3-CEDBF196D270}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89873D19-5D77-4886-ADD3-CEDBF196D270}.Release|Any CPU.Build.0 = Release|Any CPU
+		{41573A44-95D3-4BDE-9CFF-65552ACCD7E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{41573A44-95D3-4BDE-9CFF-65552ACCD7E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{41573A44-95D3-4BDE-9CFF-65552ACCD7E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{41573A44-95D3-4BDE-9CFF-65552ACCD7E4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B6638632-2265-4F7E-A6A2-C494391DFBAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6638632-2265-4F7E-A6A2-C494391DFBAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6638632-2265-4F7E-A6A2-C494391DFBAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6638632-2265-4F7E-A6A2-C494391DFBAB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -335,5 +375,9 @@ Global
 		{2A615D6F-9604-40C1-BC6A-2659E3B97BCC} = {C100BC64-0929-49A0-8795-8A32B9599636}
 		{FC7381B1-66E0-462F-952B-4EC1F18E9C90} = {C100BC64-0929-49A0-8795-8A32B9599636}
 		{8FFBA5EF-E5E2-44B3-9AEC-A77A415A1DDB} = {C100BC64-0929-49A0-8795-8A32B9599636}
+		{1F866BC2-A3D5-4042-ABAA-B90CDC575DFF} = {C100BC64-0929-49A0-8795-8A32B9599636}
+		{89873D19-5D77-4886-ADD3-CEDBF196D270} = {C100BC64-0929-49A0-8795-8A32B9599636}
+		{41573A44-95D3-4BDE-9CFF-65552ACCD7E4} = {C100BC64-0929-49A0-8795-8A32B9599636}
+		{B6638632-2265-4F7E-A6A2-C494391DFBAB} = {C100BC64-0929-49A0-8795-8A32B9599636}
 	EndGlobalSection
 EndGlobal

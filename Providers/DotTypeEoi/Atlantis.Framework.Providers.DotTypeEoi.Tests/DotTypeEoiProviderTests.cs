@@ -20,6 +20,14 @@ namespace Atlantis.Framework.Providers.DotTypeEoi.Tests
   [DeploymentItem("Atlantis.Framework.Localization.Impl.dll")]
   [DeploymentItem("Atlantis.Framework.Providers.Localization.dll")]
   [DeploymentItem("Atlantis.Framework.Providers.ProxyContext.dll")]
+  [DeploymentItem("Atlantis.Framework.RegDotTypeRegistry.Impl.dll")]
+  [DeploymentItem("Atlantis.Framework.RegDotTypeProductIds.Impl.dll")]
+  [DeploymentItem("Atlantis.Framework.DCCDomainsDataCache.Impl.dll")]
+  [DeploymentItem("Atlantis.Framework.TLDDataCache.Impl.dll")]
+  [DeploymentItem("Atlantis.Framework.DotTypeCache.StaticTypes.dll")]
+  [DeploymentItem("Atlantis.Framework.AppSettings.Impl.dll")]
+  [DeploymentItem("Atlantis.Framework.DataCacheGeneric.Impl.dll")]
+  [DeploymentItem("Atlantis.Framework.PrivateLabel.Impl.dll")]
   public class DotTypeEoiProviderTests
   {
     readonly MockProviderContainer _container = new MockProviderContainer();
@@ -120,7 +128,18 @@ namespace Atlantis.Framework.Providers.DotTypeEoi.Tests
     }
 
     [TestMethod]
-    public void DotTypeSearchEoi()
+    public void DotTypeSearchEoiStaticTld()
+    {
+      IDotTypeEoiProvider provider = NewDotTypeEoiProvider();
+      IGeneralGtldData generalGtldData;
+      bool isSuccess = provider.SearchEoi("com", out generalGtldData);
+      Assert.AreEqual(true, isSuccess);
+      Assert.AreEqual(true, generalGtldData.Gtlds.Count > 0);
+      Assert.AreEqual(true, generalGtldData.Gtlds[0].Id > -1);
+    }
+
+    [TestMethod]
+    public void DotTypeSearchEoiTldmlTld()
     {
       IDotTypeEoiProvider provider = NewDotTypeEoiProvider();
       IGeneralGtldData generalGtldData;

@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8BE9C3E5-2A5D-420B-A2A9-604FFF030DFC}"
 	ProjectSection(SolutionItems) = preProject
 		Atlantis.Framework.DCCGetDomainInfoByID.vsmdi = Atlantis.Framework.DCCGetDomainInfoByID.vsmdi
@@ -14,35 +14,21 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.DCCGetDo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.DCCGetDomainInfoByID.Tests", "Atlantis.Framework.DCCGetDomainInfoByID.Tests\Atlantis.Framework.DCCGetDomainInfoByID.Tests.csproj", "{3B48FECD-5B92-4CF7-A1F7-C9ED12C3DD30}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine", "..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj", "{D30157B2-C1B3-4073-BA5E-632E2337A997}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{B9B18540-899B-4C67-B27F-8B6F3ECA0F66}"
-EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 6
+		SccNumberOfProjects = 4
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = http://tfs:8080/
+		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
 		SccLocalPath0 = .
-		SccProjectUniqueName1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
-		SccProjectTopLevelParentUniqueName1 = Atlantis.Framework.DCCGetDomainInfoByID.sln
-		SccProjectName1 = ../Atlantis.Framework.Engine/Atlantis.Framework.Engine
-		SccLocalPath1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
-		SccProjectUniqueName2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
-		SccProjectTopLevelParentUniqueName2 = Atlantis.Framework.DCCGetDomainInfoByID.sln
-		SccProjectName2 = ../Atlantis.Framework.Engine/Atlantis.Framework.Interface
-		SccLocalPath2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
-		SccProjectUniqueName3 = Atlantis.Framework.DCCGetDomainInfoByID.Impl\\Atlantis.Framework.DCCGetDomainInfoByID.Impl.csproj
-		SccProjectName3 = Atlantis.Framework.DCCGetDomainInfoByID.Impl
-		SccLocalPath3 = Atlantis.Framework.DCCGetDomainInfoByID.Impl
-		SccProjectUniqueName4 = Atlantis.Framework.DCCGetDomainInfoByID.Interface\\Atlantis.Framework.DCCGetDomainInfoByID.Interface.csproj
-		SccProjectName4 = Atlantis.Framework.DCCGetDomainInfoByID.Interface
-		SccLocalPath4 = Atlantis.Framework.DCCGetDomainInfoByID.Interface
-		SccProjectUniqueName5 = Atlantis.Framework.DCCGetDomainInfoByID.Tests\\Atlantis.Framework.DCCGetDomainInfoByID.Tests.csproj
-		SccProjectName5 = Atlantis.Framework.DCCGetDomainInfoByID.Tests
-		SccLocalPath5 = Atlantis.Framework.DCCGetDomainInfoByID.Tests
+		SccProjectUniqueName1 = Atlantis.Framework.DCCGetDomainInfoByID.Impl\\Atlantis.Framework.DCCGetDomainInfoByID.Impl.csproj
+		SccProjectName1 = Atlantis.Framework.DCCGetDomainInfoByID.Impl
+		SccLocalPath1 = Atlantis.Framework.DCCGetDomainInfoByID.Impl
+		SccProjectUniqueName2 = Atlantis.Framework.DCCGetDomainInfoByID.Interface\\Atlantis.Framework.DCCGetDomainInfoByID.Interface.csproj
+		SccProjectName2 = Atlantis.Framework.DCCGetDomainInfoByID.Interface
+		SccLocalPath2 = Atlantis.Framework.DCCGetDomainInfoByID.Interface
+		SccProjectUniqueName3 = Atlantis.Framework.DCCGetDomainInfoByID.Tests\\Atlantis.Framework.DCCGetDomainInfoByID.Tests.csproj
+		SccProjectName3 = Atlantis.Framework.DCCGetDomainInfoByID.Tests
+		SccLocalPath3 = Atlantis.Framework.DCCGetDomainInfoByID.Tests
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = Atlantis.Framework.DCCGetDomainInfoByID1.vsmdi
@@ -64,20 +50,8 @@ Global
 		{3B48FECD-5B92-4CF7-A1F7-C9ED12C3DD30}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3B48FECD-5B92-4CF7-A1F7-C9ED12C3DD30}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3B48FECD-5B92-4CF7-A1F7-C9ED12C3DD30}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {B9B18540-899B-4C67-B27F-8B6F3ECA0F66}
-		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {B9B18540-899B-4C67-B27F-8B6F3ECA0F66}
 	EndGlobalSection
 EndGlobal

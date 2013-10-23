@@ -1,41 +1,27 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{52A96570-4398-4E93-8E07-605E79F0BEB0}"
-EndProject
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.EcommDelayedProcess.Impl", "Atlantis.Framework.EcommDelayedProcess\Atlantis.Framework.EcommDelayedProcess.Impl\Atlantis.Framework.EcommDelayedProcess.Impl.csproj", "{641EE714-BE86-438E-9EA0-BBD19C8CAFCA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.EcommDelayedProcess.Interface", "Atlantis.Framework.EcommDelayedProcess\Atlantis.Framework.EcommDelayedProcess.Interface\Atlantis.Framework.EcommDelayedProcess.Interface.csproj", "{92CEF5BB-439B-4055-AF0D-1B319A956EFE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.EcommDelayedProcess.Test", "Atlantis.Framework.EcommDelayedProcess\Atlantis.Framework.EcommDelayedProcess.Test\Atlantis.Framework.EcommDelayedProcess.Test.csproj", "{5BE9787F-9ADF-44A5-869C-4FFCF833FA4D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine", "..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj", "{D30157B2-C1B3-4073-BA5E-632E2337A997}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}"
-EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 6
+		SccNumberOfProjects = 4
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = http://tfs:8080/
+		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
 		SccLocalPath0 = .
-		SccProjectUniqueName1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
-		SccProjectTopLevelParentUniqueName1 = Atlantis.Framework.EcommDelayedProcess.sln
-		SccProjectName1 = ../Atlantis.Framework.Engine/Atlantis.Framework.Engine
-		SccLocalPath1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
-		SccProjectUniqueName2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
-		SccProjectTopLevelParentUniqueName2 = Atlantis.Framework.EcommDelayedProcess.sln
-		SccProjectName2 = ../Atlantis.Framework.Engine/Atlantis.Framework.Interface
-		SccLocalPath2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
-		SccProjectUniqueName3 = Atlantis.Framework.EcommDelayedProcess\\Atlantis.Framework.EcommDelayedProcess.Impl\\Atlantis.Framework.EcommDelayedProcess.Impl.csproj
-		SccProjectName3 = Atlantis.Framework.EcommDelayedProcess/Atlantis.Framework.EcommDelayedProcess.Impl
-		SccLocalPath3 = Atlantis.Framework.EcommDelayedProcess\\Atlantis.Framework.EcommDelayedProcess.Impl
-		SccProjectUniqueName4 = Atlantis.Framework.EcommDelayedProcess\\Atlantis.Framework.EcommDelayedProcess.Interface\\Atlantis.Framework.EcommDelayedProcess.Interface.csproj
-		SccProjectName4 = Atlantis.Framework.EcommDelayedProcess/Atlantis.Framework.EcommDelayedProcess.Interface
-		SccLocalPath4 = Atlantis.Framework.EcommDelayedProcess\\Atlantis.Framework.EcommDelayedProcess.Interface
-		SccProjectUniqueName5 = Atlantis.Framework.EcommDelayedProcess\\Atlantis.Framework.EcommDelayedProcess.Test\\Atlantis.Framework.EcommDelayedProcess.Test.csproj
-		SccProjectName5 = Atlantis.Framework.EcommDelayedProcess/Atlantis.Framework.EcommDelayedProcess.Test
-		SccLocalPath5 = Atlantis.Framework.EcommDelayedProcess\\Atlantis.Framework.EcommDelayedProcess.Test
+		SccProjectUniqueName1 = Atlantis.Framework.EcommDelayedProcess\\Atlantis.Framework.EcommDelayedProcess.Impl\\Atlantis.Framework.EcommDelayedProcess.Impl.csproj
+		SccProjectName1 = Atlantis.Framework.EcommDelayedProcess/Atlantis.Framework.EcommDelayedProcess.Impl
+		SccLocalPath1 = Atlantis.Framework.EcommDelayedProcess\\Atlantis.Framework.EcommDelayedProcess.Impl
+		SccProjectUniqueName2 = Atlantis.Framework.EcommDelayedProcess\\Atlantis.Framework.EcommDelayedProcess.Interface\\Atlantis.Framework.EcommDelayedProcess.Interface.csproj
+		SccProjectName2 = Atlantis.Framework.EcommDelayedProcess/Atlantis.Framework.EcommDelayedProcess.Interface
+		SccLocalPath2 = Atlantis.Framework.EcommDelayedProcess\\Atlantis.Framework.EcommDelayedProcess.Interface
+		SccProjectUniqueName3 = Atlantis.Framework.EcommDelayedProcess\\Atlantis.Framework.EcommDelayedProcess.Test\\Atlantis.Framework.EcommDelayedProcess.Test.csproj
+		SccProjectName3 = Atlantis.Framework.EcommDelayedProcess/Atlantis.Framework.EcommDelayedProcess.Test
+		SccLocalPath3 = Atlantis.Framework.EcommDelayedProcess\\Atlantis.Framework.EcommDelayedProcess.Test
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -54,20 +40,8 @@ Global
 		{5BE9787F-9ADF-44A5-869C-4FFCF833FA4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5BE9787F-9ADF-44A5-869C-4FFCF833FA4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5BE9787F-9ADF-44A5-869C-4FFCF833FA4D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {52A96570-4398-4E93-8E07-605E79F0BEB0}
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {52A96570-4398-4E93-8E07-605E79F0BEB0}
 	EndGlobalSection
 EndGlobal

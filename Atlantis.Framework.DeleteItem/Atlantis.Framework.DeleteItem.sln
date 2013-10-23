@@ -1,19 +1,15 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.DeleteItem.Interface", "Atlantis.Framework.DeleteItem.Interface\Atlantis.Framework.DeleteItem.Interface.csproj", "{6C82AFF1-5CBD-42D5-8A3D-C47A57867AD6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.DeleteItem.Impl", "Atlantis.Framework.DeleteItem.Impl\Atlantis.Framework.DeleteItem.Impl.csproj", "{CD6A396B-98BA-4A68-B1AE-D78DDEDC5461}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{280E8FB7-18D0-434E-81AE-282D5348D96A}"
-EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 4
+		SccNumberOfProjects = 3
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = http://tfs:8080/
+		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
 		SccLocalPath0 = .
 		SccProjectUniqueName1 = Atlantis.Framework.DeleteItem.Interface\\Atlantis.Framework.DeleteItem.Interface.csproj
 		SccProjectName1 = Atlantis.Framework.DeleteItem.Interface
@@ -21,10 +17,6 @@ Global
 		SccProjectUniqueName2 = Atlantis.Framework.DeleteItem.Impl\\Atlantis.Framework.DeleteItem.Impl.csproj
 		SccProjectName2 = Atlantis.Framework.DeleteItem.Impl
 		SccLocalPath2 = Atlantis.Framework.DeleteItem.Impl
-		SccProjectUniqueName3 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
-		SccProjectTopLevelParentUniqueName3 = Atlantis.Framework.DeleteItem.sln
-		SccProjectName3 = ../Atlantis.Framework.Engine/Atlantis.Framework.Interface
-		SccLocalPath3 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,15 +31,8 @@ Global
 		{CD6A396B-98BA-4A68-B1AE-D78DDEDC5461}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CD6A396B-98BA-4A68-B1AE-D78DDEDC5461}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CD6A396B-98BA-4A68-B1AE-D78DDEDC5461}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {280E8FB7-18D0-434E-81AE-282D5348D96A}
 	EndGlobalSection
 EndGlobal

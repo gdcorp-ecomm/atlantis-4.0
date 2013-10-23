@@ -78,11 +78,14 @@ namespace Atlantis.Framework.Providers.Sso.Tests
 
     private string GetArtifact(string spKey)
     {
-      string publishXml = "<Request><ShopperID>867900</ShopperID><FirstName></FirstName><MiddleName></MiddleName><LastName></LastName><ParentShopperId></ParentShopperId>";
-      publishXml += "<FederatedIdentities><FederatedIdentity ShopperID=\"867900\" PrivateLabelID=\"1\"/></FederatedIdentities></Request>";
+      //REMOVE THIS IF YOU HAVE THE SSOPUBLISH LIB INSTALLED
+      return string.Empty;
 
-      var publisher = new Interop.SSOPublishLib.PublishAuth();
-      return publisher.Publish(publishXml, spKey);
+      //string publishXml = "<Request><ShopperID>867900</ShopperID><FirstName></FirstName><MiddleName></MiddleName><LastName></LastName><ParentShopperId></ParentShopperId>";
+      //publishXml += "<FederatedIdentities><FederatedIdentity ShopperID=\"867900\" PrivateLabelID=\"1\"/></FederatedIdentities></Request>";
+
+      //var publisher = new Interop.SSOPublishLib.PublishAuth();
+      //return publisher.Publish(publishXml, spKey);
     }
     #endregion
 
@@ -102,6 +105,7 @@ namespace Atlantis.Framework.Providers.Sso.Tests
     }
 
     [TestMethod]
+    [Ignore]
     public void TestParseArtifactSuccessWithCount()
     {
       var providerContainer = GetProviderContainer("http://www.godaddy.com");
@@ -118,6 +122,7 @@ namespace Atlantis.Framework.Providers.Sso.Tests
     }
 
     [TestMethod]
+    [Ignore]
     public void TestParseArtifactSuccessNoCount()
     {
       var providerContainer = GetProviderContainer("http://www.godaddy.com");

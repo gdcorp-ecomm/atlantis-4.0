@@ -35,6 +35,78 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Atlantis.Framework.AppSettings.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.AppSettings.Interface.4.0.0.0\lib\net40\Atlantis.Framework.AppSettings.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.AuthRetrieve.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.AuthRetrieve.Interface.4.0.0.0\lib\net40\Atlantis.Framework.AuthRetrieve.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Collections, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Collections.4.0.0.0\lib\net40\Atlantis.Framework.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.DataCache, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.DataCache.4.0.0.0\lib\net40\Atlantis.Framework.DataCache.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.DataCacheGeneric.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.DataCacheGeneric.Interface.4.0.0.0\lib\net40\Atlantis.Framework.DataCacheGeneric.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.DataCacheService, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.DataCacheService.4.0.0.0\lib\net40\Atlantis.Framework.DataCacheService.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.DotNetExtensions">
+      <HintPath>..\packages\Atlantis.Framework.DotNetExtensions.4.0.0.0\lib\net40\Atlantis.Framework.DotNetExtensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Engine, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Engine.4.0.0.0\lib\net40\Atlantis.Framework.Engine.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Engine.XmlSerializers, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Engine.4.0.0.0\lib\net40\Atlantis.Framework.Engine.XmlSerializers.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Interface.4.13.9.25\lib\net40\Atlantis.Framework.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Links.Impl">
+      <HintPath>..\packages\Atlantis.Framework.Links.4.13.10.1\lib\net40\Atlantis.Framework.Links.Impl.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Links.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Links.Interface.4.13.10.1\lib\net40\Atlantis.Framework.Links.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.PrivateLabel.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.PrivateLabel.Interface.4.0.0.0\lib\net40\Atlantis.Framework.PrivateLabel.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Products.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Products.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Products.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Providers.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Providers.Interface.4.13.10.17\lib\net40\Atlantis.Framework.Providers.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Providers.Links">
+      <HintPath>..\packages\Atlantis.Framework.Providers.Links.4.13.10.18\lib\net40\Atlantis.Framework.Providers.Links.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Providers.Links.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Providers.Links.Interface.4.13.9.27\lib\net40\Atlantis.Framework.Providers.Links.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Providers.Localization.Interface">
+      <HintPath>..\packages\Atlantis.Framework.Providers.Localization.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Providers.Localization.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Sso.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Sso.Interface.4.13.10.16\lib\net40\Atlantis.Framework.Sso.Interface.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
@@ -55,42 +127,15 @@
     <Compile Include="TokenSsoProviderBase.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Atlantis.Framework.AuthRetrieve\Atlantis.Framework.AuthRetrieve\Atlantis.Framework.AuthRetrieve.Interface\Atlantis.Framework.AuthRetrieve.Interface.csproj">
-      <Project>{ac16510f-d152-42f9-bc5e-119888c5204f}</Project>
-      <Name>Atlantis.Framework.AuthRetrieve.Interface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Atlantis.Framework.DataCache\Atlantis.Framework.DataCacheService\Atlantis.Framework.DataCacheService.csproj">
-      <Project>{3e299d3b-3c8d-455a-92a4-05ff6c60e6f3}</Project>
-      <Name>Atlantis.Framework.DataCacheService</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Atlantis.Framework.DataCache\Atlantis.Framework.DataCache\Atlantis.Framework.DataCache.csproj">
-      <Project>{7f2738f8-683c-49e7-88cd-e986c70f0321}</Project>
-      <Name>Atlantis.Framework.DataCache</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj">
-      <Project>{d30157b2-c1b3-4073-ba5e-632e2337a997}</Project>
-      <Name>Atlantis.Framework.Engine</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj">
-      <Project>{a083a52e-c3c3-42e0-8dfd-54719e4c3b25}</Project>
-      <Name>Atlantis.Framework.Interface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Atlantis.Framework.Providers.Links\Atlantis.Framework.Providers.Links.Interface\Atlantis.Framework.Providers.Links.Interface.csproj">
-      <Project>{9972e990-31f1-4c30-9bb5-ac1f3bd4e600}</Project>
-      <Name>Atlantis.Framework.Providers.Links.Interface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Triplets\Links\Atlantis.Framework.Links.Interface\Atlantis.Framework.Links.Interface.csproj">
-      <Project>{39a8b945-42c8-45e8-add6-5bc7eb73f423}</Project>
-      <Name>Atlantis.Framework.Links.Interface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Triplets\Sso\Atlantis.Framework.Sso.Interface\Atlantis.Framework.Sso.Interface.csproj">
-      <Project>{0244b4ee-6257-4019-9ff0-079f884a2e07}</Project>
-      <Name>Atlantis.Framework.Sso.Interface</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.Providers.Sso.Interface\Atlantis.Framework.Providers.Sso.Interface.csproj">
       <Project>{7aa4d9ac-a56b-4eda-ae0d-fceff0ff34f4}</Project>
       <Name>Atlantis.Framework.Providers.Sso.Interface</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Atlantis.Framework.Providers.Sso.nuget.bat" />
+    <None Include="Atlantis.Framework.Providers.Sso.nuspec" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,41 +1,27 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{8F50CC3E-5B03-4BAD-B970-4575020B3FDF}"
-EndProject
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.CMSCreditAccounts.Impl", "Atlantis.Framework.CMSCreditAccounts.Impl\Atlantis.Framework.CMSCreditAccounts.Impl.csproj", "{EDCF731A-13FE-4546-ACF4-BB075BCDF890}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.CMSCreditAccounts.Interface", "Atlantis.Framework.CMSCreditAccounts.Interface\Atlantis.Framework.CMSCreditAccounts.Interface.csproj", "{B41E9A91-C1E2-4306-8C9E-F2DEC73AAF26}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.CMSCreditAccounts.Test", "Atlantis.Framework.CMSCreditAccounts.Test\Atlantis.Framework.CMSCreditAccounts.Test.csproj", "{54F73529-BF18-480D-854B-9E5B884007D7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine", "..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj", "{D30157B2-C1B3-4073-BA5E-632E2337A997}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}"
-EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 6
+		SccNumberOfProjects = 4
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = http://tfs:8080/
+		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
 		SccLocalPath0 = .
-		SccProjectUniqueName1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
-		SccProjectTopLevelParentUniqueName1 = Atlantis.Framework.CMSCreditAccounts.sln
-		SccProjectName1 = ../Atlantis.Framework.Engine/Atlantis.Framework.Engine
-		SccLocalPath1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
-		SccProjectUniqueName2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
-		SccProjectTopLevelParentUniqueName2 = Atlantis.Framework.CMSCreditAccounts.sln
-		SccProjectName2 = ../Atlantis.Framework.Engine/Atlantis.Framework.Interface
-		SccLocalPath2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
-		SccProjectUniqueName3 = Atlantis.Framework.CMSCreditAccounts.Impl\\Atlantis.Framework.CMSCreditAccounts.Impl.csproj
-		SccProjectName3 = Atlantis.Framework.CMSCreditAccounts.Impl
-		SccLocalPath3 = Atlantis.Framework.CMSCreditAccounts.Impl
-		SccProjectUniqueName4 = Atlantis.Framework.CMSCreditAccounts.Interface\\Atlantis.Framework.CMSCreditAccounts.Interface.csproj
-		SccProjectName4 = Atlantis.Framework.CMSCreditAccounts.Interface
-		SccLocalPath4 = Atlantis.Framework.CMSCreditAccounts.Interface
-		SccProjectUniqueName5 = Atlantis.Framework.CMSCreditAccounts.Test\\Atlantis.Framework.CMSCreditAccounts.Test.csproj
-		SccProjectName5 = Atlantis.Framework.CMSCreditAccounts.Test
-		SccLocalPath5 = Atlantis.Framework.CMSCreditAccounts.Test
+		SccProjectUniqueName1 = Atlantis.Framework.CMSCreditAccounts.Impl\\Atlantis.Framework.CMSCreditAccounts.Impl.csproj
+		SccProjectName1 = Atlantis.Framework.CMSCreditAccounts.Impl
+		SccLocalPath1 = Atlantis.Framework.CMSCreditAccounts.Impl
+		SccProjectUniqueName2 = Atlantis.Framework.CMSCreditAccounts.Interface\\Atlantis.Framework.CMSCreditAccounts.Interface.csproj
+		SccProjectName2 = Atlantis.Framework.CMSCreditAccounts.Interface
+		SccLocalPath2 = Atlantis.Framework.CMSCreditAccounts.Interface
+		SccProjectUniqueName3 = Atlantis.Framework.CMSCreditAccounts.Test\\Atlantis.Framework.CMSCreditAccounts.Test.csproj
+		SccProjectName3 = Atlantis.Framework.CMSCreditAccounts.Test
+		SccLocalPath3 = Atlantis.Framework.CMSCreditAccounts.Test
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -54,20 +40,8 @@ Global
 		{54F73529-BF18-480D-854B-9E5B884007D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{54F73529-BF18-480D-854B-9E5B884007D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{54F73529-BF18-480D-854B-9E5B884007D7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {8F50CC3E-5B03-4BAD-B970-4575020B3FDF}
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {8F50CC3E-5B03-4BAD-B970-4575020B3FDF}
 	EndGlobalSection
 EndGlobal

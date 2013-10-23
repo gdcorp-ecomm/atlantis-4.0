@@ -1,75 +1,33 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{0DC988B1-7D0B-4340-BA92-F9F28412FD05}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine", "..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj", "{D30157B2-C1B3-4073-BA5E-632E2337A997}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.SessionCache", "..\Atlantis.Framework.SessionCache\Atlantis.Framework.SessionCache\Atlantis.Framework.SessionCache.csproj", "{53BE1E8C-C474-4D2D-B2E3-DB00CBE1B5F9}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Testing.MockHttpContext", "..\Atlantis.Framework.Testing\Atlantis.Framework.Testing.MockHttpContext\Atlantis.Framework.Testing.MockHttpContext.csproj", "{2F8983B4-801B-461A-9D76-26A58A496261}"
-EndProject
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.DCCGetDomainByShopper.Impl", "Atlantis.Framework.DCCGetDomainByShopper.Impl\Atlantis.Framework.DCCGetDomainByShopper.Impl.csproj", "{E3506897-E4F3-4FE4-9F7E-0E44C000E60F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.DCCGetDomainByShopper.Interface", "Atlantis.Framework.DCCGetDomainByShopper.Interface\Atlantis.Framework.DCCGetDomainByShopper.Interface.csproj", "{30B34A21-CB5E-4712-A17F-27842D5589F4}"
 EndProject
-Project("{00000000-0000-0000-0000-000000000000}") = "Atlantis.Framework.DCCGetDomainByShopper.Tests", "Atlantis.Framework.DCCGetDomainByShopper.Tests\Atlantis.Framework.DCCGetDomainByShopper.Tests.csproj", "{D4FE9BFF-941B-4AAF-8497-30C20D2CC0C5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.DCCGetDomainByShopper.Tests", "Atlantis.Framework.DCCGetDomainByShopper.Tests\Atlantis.Framework.DCCGetDomainByShopper.Tests.csproj", "{D4FE9BFF-941B-4AAF-8497-30C20D2CC0C5}"
 EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 8
+		SccNumberOfProjects = 4
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = http://tfs:8080/
-		SccProjectUniqueName0 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
-		SccProjectTopLevelParentUniqueName0 = Atlantis.Framework.DCCGetDomainByShopper.sln
-		SccProjectName0 = ../Atlantis.Framework.Engine/Atlantis.Framework.Engine
-		SccLocalPath0 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
-		SccProjectUniqueName1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
-		SccProjectTopLevelParentUniqueName1 = Atlantis.Framework.DCCGetDomainByShopper.sln
-		SccProjectName1 = ../Atlantis.Framework.Engine/Atlantis.Framework.Interface
-		SccLocalPath1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
-		SccProjectUniqueName2 = ..\\Atlantis.Framework.SessionCache\\Atlantis.Framework.SessionCache\\Atlantis.Framework.SessionCache.csproj
-		SccProjectTopLevelParentUniqueName2 = Atlantis.Framework.DCCGetDomainByShopper.sln
-		SccProjectName2 = ../Atlantis.Framework.SessionCache/Atlantis.Framework.SessionCache
-		SccLocalPath2 = ..\\Atlantis.Framework.SessionCache\\Atlantis.Framework.SessionCache
-		SccProjectUniqueName3 = ..\\Atlantis.Framework.Testing\\Atlantis.Framework.Testing.MockHttpContext\\Atlantis.Framework.Testing.MockHttpContext.csproj
-		SccProjectTopLevelParentUniqueName3 = Atlantis.Framework.DCCGetDomainByShopper.sln
-		SccProjectName3 = ../Atlantis.Framework.Testing/Atlantis.Framework.Testing.MockHttpContext
-		SccLocalPath3 = ..\\Atlantis.Framework.Testing\\Atlantis.Framework.Testing.MockHttpContext
-		SccLocalPath4 = .
-		SccProjectUniqueName5 = Atlantis.Framework.DCCGetDomainByShopper.Impl\\Atlantis.Framework.DCCGetDomainByShopper.Impl.csproj
-		SccProjectName5 = Atlantis.Framework.DCCGetDomainByShopper.Impl
-		SccLocalPath5 = Atlantis.Framework.DCCGetDomainByShopper.Impl
-		SccProjectUniqueName6 = Atlantis.Framework.DCCGetDomainByShopper.Interface\\Atlantis.Framework.DCCGetDomainByShopper.Interface.csproj
-		SccProjectName6 = Atlantis.Framework.DCCGetDomainByShopper.Interface
-		SccLocalPath6 = Atlantis.Framework.DCCGetDomainByShopper.Interface
-		SccProjectUniqueName7 = Atlantis.Framework.DCCGetDomainByShopper.Tests\\Atlantis.Framework.DCCGetDomainByShopper.Tests.csproj
-		SccProjectName7 = Atlantis.Framework.DCCGetDomainByShopper.Tests
-		SccLocalPath7 = Atlantis.Framework.DCCGetDomainByShopper.Tests
+		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Atlantis.Framework.DCCGetDomainByShopper.Impl\\Atlantis.Framework.DCCGetDomainByShopper.Impl.csproj
+		SccProjectName1 = Atlantis.Framework.DCCGetDomainByShopper.Impl
+		SccLocalPath1 = Atlantis.Framework.DCCGetDomainByShopper.Impl
+		SccProjectUniqueName2 = Atlantis.Framework.DCCGetDomainByShopper.Interface\\Atlantis.Framework.DCCGetDomainByShopper.Interface.csproj
+		SccProjectName2 = Atlantis.Framework.DCCGetDomainByShopper.Interface
+		SccLocalPath2 = Atlantis.Framework.DCCGetDomainByShopper.Interface
+		SccProjectUniqueName3 = Atlantis.Framework.DCCGetDomainByShopper.Tests\\Atlantis.Framework.DCCGetDomainByShopper.Tests.csproj
+		SccProjectName3 = Atlantis.Framework.DCCGetDomainByShopper.Tests
+		SccLocalPath3 = Atlantis.Framework.DCCGetDomainByShopper.Tests
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.Build.0 = Release|Any CPU
-		{53BE1E8C-C474-4D2D-B2E3-DB00CBE1B5F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{53BE1E8C-C474-4D2D-B2E3-DB00CBE1B5F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{53BE1E8C-C474-4D2D-B2E3-DB00CBE1B5F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{53BE1E8C-C474-4D2D-B2E3-DB00CBE1B5F9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2F8983B4-801B-461A-9D76-26A58A496261}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2F8983B4-801B-461A-9D76-26A58A496261}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2F8983B4-801B-461A-9D76-26A58A496261}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2F8983B4-801B-461A-9D76-26A58A496261}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E3506897-E4F3-4FE4-9F7E-0E44C000E60F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E3506897-E4F3-4FE4-9F7E-0E44C000E60F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E3506897-E4F3-4FE4-9F7E-0E44C000E60F}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -85,11 +43,5 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {0DC988B1-7D0B-4340-BA92-F9F28412FD05}
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {0DC988B1-7D0B-4340-BA92-F9F28412FD05}
-		{53BE1E8C-C474-4D2D-B2E3-DB00CBE1B5F9} = {0DC988B1-7D0B-4340-BA92-F9F28412FD05}
-		{2F8983B4-801B-461A-9D76-26A58A496261} = {0DC988B1-7D0B-4340-BA92-F9F28412FD05}
 	EndGlobalSection
 EndGlobal

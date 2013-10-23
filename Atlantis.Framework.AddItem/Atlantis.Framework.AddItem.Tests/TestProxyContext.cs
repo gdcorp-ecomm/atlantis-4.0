@@ -13,6 +13,41 @@ namespace Atlantis.Framework.AddItem.Tests
       : base(container)
     { }
 
+    public string ContextHost 
+    { 
+      get 
+      { 
+        return string.Empty; 
+      } 
+    }
+
+    public string OriginHost
+    {
+      get
+      {
+        return string.Empty;
+      }
+    }
+
+    public IEnumerable<IProxyData> ActiveProxyChain
+    {
+      get
+      {
+        return null;
+      }
+    }
+
+    public bool TryGetActiveProxy(ProxyTypes proxyType, out IProxyData proxyData)
+    {
+      proxyData = null;
+      return false;
+    }
+
+    public bool IsProxyActive(ProxyTypes proxyType)
+    {
+      return false;
+    }
+
     public ProxyStatusType Status
     {
       get { return ProxyStatusType.Valid; }

@@ -108,7 +108,11 @@ namespace Atlantis.Framework.Providers.Sso
     public string GetUrl(SsoUrlType ssoUrlType, NameValueCollection additionalParams)
     {
       string urlToReturn = string.Empty;
-      additionalParams["spkey"] = SpKey;
+
+      if (additionalParams["spkey"] == null)
+      {
+        additionalParams["spkey"] = SpKey;
+      }
 
       switch (ssoUrlType)
       {

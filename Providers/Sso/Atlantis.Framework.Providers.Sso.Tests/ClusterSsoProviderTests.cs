@@ -186,6 +186,22 @@ namespace Atlantis.Framework.Providers.Sso.Tests
     }
 
     [TestMethod]
+    public void TestGetLoginUrlWithSpkeyOverride()
+    {
+      var providerContainer = GetProviderContainer("http://www.godaddy.com");
+      var cp = providerContainer.Resolve<ISsoProvider>();
+      var spkey = cp.SpKey.ToLower();
+
+      var overrideSpkey = "thedude";
+      var nvc = new NameValueCollection();
+      nvc["SpKeY"] = overrideSpkey;
+      var loginUrl = cp.GetUrl(SsoUrlType.Login, nvc).ToLower();
+      
+      Assert.IsTrue(loginUrl.Contains(overrideSpkey));
+      Assert.IsTrue(loginUrl.Contains("login.aspx"));
+    }
+
+    [TestMethod]
     public void TestGetLogoutUrl()
     {
       var providerContainer = GetProviderContainer("http://www.godaddy.com");

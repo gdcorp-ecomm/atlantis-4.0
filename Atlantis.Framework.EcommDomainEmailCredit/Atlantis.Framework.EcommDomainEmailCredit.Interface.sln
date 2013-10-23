@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.EcommDomainEmailCredit.Interface", "Atlantis.Framework.EcommDomainEmailCredit.Interface\Atlantis.Framework.EcommDomainEmailCredit.Interface.csproj", "{0F81786A-7FEF-4C28-A5E2-F92D14779D43}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.EcommDomainEmailCredit.Impl", "Atlantis.Framework.EcommDomainEmailCredit.Impl\Atlantis.Framework.EcommDomainEmailCredit.Impl.csproj", "{835292EB-9587-4D34-928F-DBC4869DC4BD}"
@@ -14,36 +14,21 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine", "..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj", "{D30157B2-C1B3-4073-BA5E-632E2337A997}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Nimitz", "..\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz.csproj", "{3213E6DB-F026-4F17-A46A-7127F79F6620}"
-EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 7
+		SccNumberOfProjects = 4
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = http://tfs:8080/
+		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
 		SccLocalPath0 = .
-		SccProjectUniqueName1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
-		SccProjectName1 = ../Atlantis.Framework.Engine/Atlantis.Framework.Engine
-		SccLocalPath1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
-		SccProjectUniqueName2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
-		SccProjectName2 = ../Atlantis.Framework.Engine/Atlantis.Framework.Interface
-		SccLocalPath2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
-		SccProjectUniqueName3 = Atlantis.Framework.EcommDomainEmailCredit.Impl\\Atlantis.Framework.EcommDomainEmailCredit.Impl.csproj
-		SccProjectName3 = Atlantis.Framework.EcommDomainEmailCredit.Impl
-		SccLocalPath3 = Atlantis.Framework.EcommDomainEmailCredit.Impl
-		SccProjectUniqueName4 = Atlantis.Framework.EcommDomainEmailCredit.Interface\\Atlantis.Framework.EcommDomainEmailCredit.Interface.csproj
-		SccProjectName4 = Atlantis.Framework.EcommDomainEmailCredit.Interface
-		SccLocalPath4 = Atlantis.Framework.EcommDomainEmailCredit.Interface
-		SccProjectUniqueName5 = Atlantis.Framework.EcommDomainEmailCredit.Tests\\Atlantis.Framework.EcommDomainEmailCredit.Tests.csproj
-		SccProjectName5 = Atlantis.Framework.EcommDomainEmailCredit.Tests
-		SccLocalPath5 = Atlantis.Framework.EcommDomainEmailCredit.Tests
-		SccProjectUniqueName6 = ..\\Atlantis.Framework.Nimitz\\Atlantis.Framework.Nimitz\\Atlantis.Framework.Nimitz.csproj
-		SccProjectName6 = ../Atlantis.Framework.Nimitz/Atlantis.Framework.Nimitz
-		SccLocalPath6 = ..\\Atlantis.Framework.Nimitz\\Atlantis.Framework.Nimitz
+		SccProjectUniqueName1 = Atlantis.Framework.EcommDomainEmailCredit.Impl\\Atlantis.Framework.EcommDomainEmailCredit.Impl.csproj
+		SccProjectName1 = Atlantis.Framework.EcommDomainEmailCredit.Impl
+		SccLocalPath1 = Atlantis.Framework.EcommDomainEmailCredit.Impl
+		SccProjectUniqueName2 = Atlantis.Framework.EcommDomainEmailCredit.Interface\\Atlantis.Framework.EcommDomainEmailCredit.Interface.csproj
+		SccProjectName2 = Atlantis.Framework.EcommDomainEmailCredit.Interface
+		SccLocalPath2 = Atlantis.Framework.EcommDomainEmailCredit.Interface
+		SccProjectUniqueName3 = Atlantis.Framework.EcommDomainEmailCredit.Tests\\Atlantis.Framework.EcommDomainEmailCredit.Tests.csproj
+		SccProjectName3 = Atlantis.Framework.EcommDomainEmailCredit.Tests
+		SccLocalPath3 = Atlantis.Framework.EcommDomainEmailCredit.Tests
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = Atlantis.Framework.EcommDomainEmailCredit.Interface.vsmdi
@@ -65,18 +50,6 @@ Global
 		{A632BE39-6BE0-4EFA-9DFF-6FB881E5462A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A632BE39-6BE0-4EFA-9DFF-6FB881E5462A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A632BE39-6BE0-4EFA-9DFF-6FB881E5462A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

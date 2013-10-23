@@ -1,55 +1,33 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine", "..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj", "{D30157B2-C1B3-4073-BA5E-632E2337A997}"
-EndProject
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.DCCGetExpirationCount.Interface", "Atlantis.Framework.DCCGetExpirationCount.Interface\Atlantis.Framework.DCCGetExpirationCount.Interface.csproj", "{E5325904-C110-4B06-AB4F-7091794AC33C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.DCCGetExpirationCount.Impl", "Atlantis.Framework.DCCGetExpirationCount.Impl\Atlantis.Framework.DCCGetExpirationCount.Impl.csproj", "{164A57EF-5D5A-478C-A403-36F59E6CB560}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.DCCGetExpirationCount.Tests", "Atlantis.Framework.DCCGetExpirationCount.Tests\Atlantis.Framework.DCCGetExpirationCount.Tests.csproj", "{87C07869-FDBF-401F-B0AC-033C1C1752EC}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{053EB954-DC58-4D68-A722-1EC5CD0E4253}"
-EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 6
+		SccNumberOfProjects = 4
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = http://tfs:8080/
+		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
 		SccLocalPath0 = .
-		SccProjectUniqueName1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
-		SccProjectTopLevelParentUniqueName1 = Atlantis.Framework.DCCGetExpirationCount.sln
-		SccProjectName1 = ../Atlantis.Framework.Engine/Atlantis.Framework.Interface
-		SccLocalPath1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
-		SccProjectUniqueName2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
-		SccProjectTopLevelParentUniqueName2 = Atlantis.Framework.DCCGetExpirationCount.sln
-		SccProjectName2 = ../Atlantis.Framework.Engine/Atlantis.Framework.Engine
-		SccLocalPath2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
-		SccProjectUniqueName3 = Atlantis.Framework.DCCGetExpirationCount.Impl\\Atlantis.Framework.DCCGetExpirationCount.Impl.csproj
-		SccProjectName3 = Atlantis.Framework.DCCGetExpirationCount.Impl
-		SccLocalPath3 = Atlantis.Framework.DCCGetExpirationCount.Impl
-		SccProjectUniqueName4 = Atlantis.Framework.DCCGetExpirationCount.Interface\\Atlantis.Framework.DCCGetExpirationCount.Interface.csproj
-		SccProjectName4 = Atlantis.Framework.DCCGetExpirationCount.Interface
-		SccLocalPath4 = Atlantis.Framework.DCCGetExpirationCount.Interface
-		SccProjectUniqueName5 = Atlantis.Framework.DCCGetExpirationCount.Tests\\Atlantis.Framework.DCCGetExpirationCount.Tests.csproj
-		SccProjectName5 = Atlantis.Framework.DCCGetExpirationCount.Tests
-		SccLocalPath5 = Atlantis.Framework.DCCGetExpirationCount.Tests
+		SccProjectUniqueName1 = Atlantis.Framework.DCCGetExpirationCount.Impl\\Atlantis.Framework.DCCGetExpirationCount.Impl.csproj
+		SccProjectName1 = Atlantis.Framework.DCCGetExpirationCount.Impl
+		SccLocalPath1 = Atlantis.Framework.DCCGetExpirationCount.Impl
+		SccProjectUniqueName2 = Atlantis.Framework.DCCGetExpirationCount.Interface\\Atlantis.Framework.DCCGetExpirationCount.Interface.csproj
+		SccProjectName2 = Atlantis.Framework.DCCGetExpirationCount.Interface
+		SccLocalPath2 = Atlantis.Framework.DCCGetExpirationCount.Interface
+		SccProjectUniqueName3 = Atlantis.Framework.DCCGetExpirationCount.Tests\\Atlantis.Framework.DCCGetExpirationCount.Tests.csproj
+		SccProjectName3 = Atlantis.Framework.DCCGetExpirationCount.Tests
+		SccLocalPath3 = Atlantis.Framework.DCCGetExpirationCount.Tests
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E5325904-C110-4B06-AB4F-7091794AC33C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E5325904-C110-4B06-AB4F-7091794AC33C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E5325904-C110-4B06-AB4F-7091794AC33C}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -65,9 +43,5 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {053EB954-DC58-4D68-A722-1EC5CD0E4253}
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {053EB954-DC58-4D68-A722-1EC5CD0E4253}
 	EndGlobalSection
 EndGlobal

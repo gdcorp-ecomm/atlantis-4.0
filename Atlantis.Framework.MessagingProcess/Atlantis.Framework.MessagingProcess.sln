@@ -1,15 +1,11 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B69BD3C6-311D-4903-A595-E140F92A0507}"
 	ProjectSection(SolutionItems) = preProject
 		Atlantis.Framework.MessagingProcess.vsmdi = Atlantis.Framework.MessagingProcess.vsmdi
 		LocalTestRun.testrunconfig = LocalTestRun.testrunconfig
 	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine", "..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj", "{D30157B2-C1B3-4073-BA5E-632E2337A997}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.MessagingProcess.Interface", "Atlantis.Framework.MessagingProcess.Interface\Atlantis.Framework.MessagingProcess.Interface.csproj", "{8D5F838D-A604-4CEF-9F86-FE9A6843584A}"
 EndProject
@@ -17,31 +13,21 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Messagin
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.MessagingProcess.Tests", "Atlantis.Framework.MessagingProcess.Tests\Atlantis.Framework.MessagingProcess.Tests.csproj", "{3157EAED-E7DB-47D1-930F-129F4EDC25EC}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{41348C76-141F-447F-8F9B-E6B03EF1597B}"
-EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 6
+		SccNumberOfProjects = 4
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = http://tfs:8080/
+		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
 		SccLocalPath0 = .
-		SccProjectUniqueName1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
-		SccProjectTopLevelParentUniqueName1 = Atlantis.Framework.MessagingProcess.sln
-		SccProjectName1 = ../Atlantis.Framework.Engine/Atlantis.Framework.Interface
-		SccLocalPath1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
-		SccProjectUniqueName2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
-		SccProjectTopLevelParentUniqueName2 = Atlantis.Framework.MessagingProcess.sln
-		SccProjectName2 = ../Atlantis.Framework.Engine/Atlantis.Framework.Engine
-		SccLocalPath2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
-		SccProjectUniqueName3 = Atlantis.Framework.MessagingProcess.Interface\\Atlantis.Framework.MessagingProcess.Interface.csproj
-		SccProjectName3 = Atlantis.Framework.MessagingProcess.Interface
-		SccLocalPath3 = Atlantis.Framework.MessagingProcess.Interface
-		SccProjectUniqueName4 = Atlantis.Framework.MessagingProcess.Impl\\Atlantis.Framework.MessagingProcess.Impl.csproj
-		SccProjectName4 = Atlantis.Framework.MessagingProcess.Impl
-		SccLocalPath4 = Atlantis.Framework.MessagingProcess.Impl
-		SccProjectUniqueName5 = Atlantis.Framework.MessagingProcess.Tests\\Atlantis.Framework.MessagingProcess.Tests.csproj
-		SccProjectName5 = Atlantis.Framework.MessagingProcess.Tests
-		SccLocalPath5 = Atlantis.Framework.MessagingProcess.Tests
+		SccProjectUniqueName1 = Atlantis.Framework.MessagingProcess.Interface\\Atlantis.Framework.MessagingProcess.Interface.csproj
+		SccProjectName1 = Atlantis.Framework.MessagingProcess.Interface
+		SccLocalPath1 = Atlantis.Framework.MessagingProcess.Interface
+		SccProjectUniqueName2 = Atlantis.Framework.MessagingProcess.Impl\\Atlantis.Framework.MessagingProcess.Impl.csproj
+		SccProjectName2 = Atlantis.Framework.MessagingProcess.Impl
+		SccLocalPath2 = Atlantis.Framework.MessagingProcess.Impl
+		SccProjectUniqueName3 = Atlantis.Framework.MessagingProcess.Tests\\Atlantis.Framework.MessagingProcess.Tests.csproj
+		SccProjectName3 = Atlantis.Framework.MessagingProcess.Tests
+		SccLocalPath3 = Atlantis.Framework.MessagingProcess.Tests
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = Atlantis.Framework.MessagingProcess.vsmdi
@@ -51,14 +37,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8D5F838D-A604-4CEF-9F86-FE9A6843584A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8D5F838D-A604-4CEF-9F86-FE9A6843584A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8D5F838D-A604-4CEF-9F86-FE9A6843584A}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -74,9 +52,5 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {41348C76-141F-447F-8F9B-E6B03EF1597B}
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {41348C76-141F-447F-8F9B-E6B03EF1597B}
 	EndGlobalSection
 EndGlobal

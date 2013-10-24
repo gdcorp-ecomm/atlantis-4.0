@@ -1,15 +1,9 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{793BC819-2C33-4697-99DD-B4A1E9D57A4D}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}"
-EndProject
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.GetDurationHash.Interface", "Atlantis.Framework.GetDurationHash.Interface\Atlantis.Framework.GetDurationHash.Interface.csproj", "{1C006098-4ABC-4B43-BFA1-113A40969668}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.GetDurationHash.Impl", "Atlantis.Framework.GetDurationHash.Impl\Atlantis.Framework.GetDurationHash.Impl.csproj", "{FA639FE0-485A-41CA-8689-884F7E264CD7}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine", "..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj", "{D30157B2-C1B3-4073-BA5E-632E2337A997}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F7ED66D5-6FD6-4722-B8FD-AFB4AC358AD8}"
 	ProjectSection(SolutionItems) = preProject
@@ -22,27 +16,19 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.GetDurat
 EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 6
+		SccNumberOfProjects = 4
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = http://tfs:8080/
+		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
 		SccLocalPath0 = .
-		SccProjectUniqueName1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
-		SccProjectTopLevelParentUniqueName1 = Atlantis.Framework.GetDurationHash.sln
-		SccProjectName1 = ../Atlantis.Framework.Engine/Atlantis.Framework.Interface
-		SccLocalPath1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
-		SccProjectUniqueName2 = Atlantis.Framework.GetDurationHash.Interface\\Atlantis.Framework.GetDurationHash.Interface.csproj
-		SccProjectName2 = Atlantis.Framework.GetDurationHash.Interface
-		SccLocalPath2 = Atlantis.Framework.GetDurationHash.Interface
-		SccProjectUniqueName3 = Atlantis.Framework.GetDurationHash.Impl\\Atlantis.Framework.GetDurationHash.Impl.csproj
-		SccProjectName3 = Atlantis.Framework.GetDurationHash.Impl
-		SccLocalPath3 = Atlantis.Framework.GetDurationHash.Impl
-		SccProjectUniqueName4 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
-		SccProjectTopLevelParentUniqueName4 = Atlantis.Framework.GetDurationHash.sln
-		SccProjectName4 = ../Atlantis.Framework.Engine/Atlantis.Framework.Engine
-		SccLocalPath4 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
-		SccProjectUniqueName5 = Atlantis.Framework.GetDurationHash.Tests\\Atlantis.Framework.GetDurationHash.Tests.csproj
-		SccProjectName5 = Atlantis.Framework.GetDurationHash.Tests
-		SccLocalPath5 = Atlantis.Framework.GetDurationHash.Tests
+		SccProjectUniqueName1 = Atlantis.Framework.GetDurationHash.Interface\\Atlantis.Framework.GetDurationHash.Interface.csproj
+		SccProjectName1 = Atlantis.Framework.GetDurationHash.Interface
+		SccLocalPath1 = Atlantis.Framework.GetDurationHash.Interface
+		SccProjectUniqueName2 = Atlantis.Framework.GetDurationHash.Impl\\Atlantis.Framework.GetDurationHash.Impl.csproj
+		SccProjectName2 = Atlantis.Framework.GetDurationHash.Impl
+		SccLocalPath2 = Atlantis.Framework.GetDurationHash.Impl
+		SccProjectUniqueName3 = Atlantis.Framework.GetDurationHash.Tests\\Atlantis.Framework.GetDurationHash.Tests.csproj
+		SccProjectName3 = Atlantis.Framework.GetDurationHash.Tests
+		SccLocalPath3 = Atlantis.Framework.GetDurationHash.Tests
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = Atlantis.Framework.GetDurationHash.vsmdi
@@ -52,10 +38,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1C006098-4ABC-4B43-BFA1-113A40969668}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1C006098-4ABC-4B43-BFA1-113A40969668}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1C006098-4ABC-4B43-BFA1-113A40969668}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -64,10 +46,6 @@ Global
 		{FA639FE0-485A-41CA-8689-884F7E264CD7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FA639FE0-485A-41CA-8689-884F7E264CD7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FA639FE0-485A-41CA-8689-884F7E264CD7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D1F3D92B-4820-4221-9CC4-4522DBA7B879}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D1F3D92B-4820-4221-9CC4-4522DBA7B879}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D1F3D92B-4820-4221-9CC4-4522DBA7B879}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -75,9 +53,5 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {793BC819-2C33-4697-99DD-B4A1E9D57A4D}
-		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {793BC819-2C33-4697-99DD-B4A1E9D57A4D}
 	EndGlobalSection
 EndGlobal

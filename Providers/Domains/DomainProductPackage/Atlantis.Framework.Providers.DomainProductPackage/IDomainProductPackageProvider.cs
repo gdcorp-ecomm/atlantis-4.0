@@ -5,6 +5,7 @@ namespace Atlantis.Framework.Providers.DomainProductPackage
 {
   public interface IDomainProductPackageProvider
   {
+    IDomainRegistrationProductPackageGroup BuildDomainProductPackageGroup(DomainProductPackageLookUp packageLookUp);
     IEnumerable<IDomainRegistrationProductPackageGroup> BuildDomainProductPackageGroups(IList<IFindResponseDomain> findResponseDomains);
   }
 }

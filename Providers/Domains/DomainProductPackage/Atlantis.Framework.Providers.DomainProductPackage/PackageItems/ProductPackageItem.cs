@@ -10,7 +10,7 @@ namespace Atlantis.Framework.Providers.DomainProductPackage.PackageItems
   {
     private readonly Lazy<ICurrencyProvider> _currencyProvider;
 
-    public static ProductPackageItem Create(string name, int productId, int quantity, int duration, IProviderContainer container)
+    public static ProductPackageItem Create(string name, int productId, int quantity, double duration, IProviderContainer container)
     {
       var productPackageItem = new ProductPackageItem(name, container) {ProductId = productId, Duration = duration, Quantity = quantity};
 

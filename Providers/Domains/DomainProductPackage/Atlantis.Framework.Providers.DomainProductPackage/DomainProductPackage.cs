@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using Atlantis.Framework.Domains.Interface;
+using Atlantis.Framework.DotTypeCache.Interface;
 using Atlantis.Framework.Interface;
+using Atlantis.Framework.Providers.Currency;
+using Atlantis.Framework.Providers.DomainProductPackage.PackageItems;
 using Atlantis.Framework.Providers.Interface.Currency;
 using Atlantis.Framework.Providers.Interface.Products;
 
@@ -11,41 +14,24 @@ namespace Atlantis.Framework.Providers.DomainProductPackage
   public class DomainProductPackage : IDomainProductPackage
   {
     internal const string PACKAGE_NAME = "IDomainProductPackage.DomainProductPackage";
+    internal const string APPLICATION_FEE = "IDomainProductPackage.DomainProductPackage";
     private readonly IProviderContainer _container;
     private readonly Lazy<IShopperContext> _shopperContext;
     private readonly Lazy<ICurrencyProvider> _currencyProvider;
+    private readonly Lazy<IDotTypeProvider> _dotTypeProvider; 
+
+    internal int ApplicationFeeProductId { get; set; }
 
     public DomainProductPackage(IProviderContainer container)
     {
       _container = container;
       _shopperContext = new Lazy<IShopperContext>(_container.Resolve<IShopperContext>);
       _currencyProvider = new Lazy<ICurrencyProvider>(_container.Resolve<ICurrencyProvider>);
+      _dotTypeProvider = new Lazy<IDotTypeProvider>(() => container.Resolve<IDotTypeProvider>());
     }
 
     public IDomain Domain { get; set; }
 
-    //public int RegistrationLength { get; private set; }
-
-    //public void UpdateRegistrationLength(int registrationlength, int domainCount)
-    //{
-    //  var dotTypeInfo = DotTypeCache.DotTypeCache.GetDotTypeInfo(Domain.Tld);
-
-    //  IDomainProductLookup lookup = new DomainProductLookup();
-    //  lookup.DomainCount = domainCount;
-    //  lookup.PriceTierId = TierId;
-    //  lookup.Years = registrationlength;
-
-    //  var productId = dotTypeInfo.GetProductId(lookup);
-
-    //  DomainProductPackageItem.ProductId = productId;
-
-    //  RegistrationLength = registrationlength;
-    //}
-    
-    //public void SetRegAppToken()
-    //{
-      
-    //}
 
     private IProductPackageItem _domainProductPackageItem;
     public IProductPackageItem DomainProductPackageItem
@@ -60,45 +46,7 @@ namespace Atlantis.Framework.Providers.DomainProductPackage
         return _domainProductPackageItem;
       }
     }
-
-    //public void SetPrivacy(string productPackageItemName)
-    //{
-    //  PrivacyRegistrationAttributes privacyAttributes = new PrivacyRegistrationAttributes();
-    //  privacyAttributes.DomainByProxyAccount = _shopperContext.Value.ShopperId;
-
-    //  var privacyPackage = new PrivacyPackageItem(Domain, privacyAttributes, _container);
-    //  privacyPackage.Name = productPackageItemName;
-    //  PackageItems.Add(privacyPackage);
-    //}
-
-    //public bool TryGetPrivacyPackageItem(string productPackageItemName, out IProductPackageItem privacyPackageItem)
-    //{
-    //  privacyPackageItem = PackageItems.FirstOrDefault(pi => pi.Name == productPackageItemName);
-    //  var hasItem = privacyPackageItem != null && privacyPackageItem.Name == productPackageItemName;
-    //  return hasItem;
-    //}
-
-    //public void SetDomainContacts()
-    //{ 
-      
-    //}
-
-    //public void SetCertifiedDomainOffer()
-    //{
-    //  var certifiedPackage = new CertifiedDomainPackageItem(Domain, DomainProductPackageItem.Duration);
-    //  certifiedPackage.Duration = DomainProductPackageItem.Duration;
-    //  certifiedPackage.Quantity = DomainProductPackageItem.Quantity;
-
-    //  PackageItems.Add(certifiedPackage);
-    //}
-
-    //public bool TryGetCertifiedDomainOffer(string productPackageItemName, out IProductPackageItem productPackageItem)
-    //{
-    //  productPackageItem = PackageItems.FirstOrDefault(pi => pi.Name == productPackageItemName);
-    //  var hasItem = productPackageItem != null && productPackageItem.Name == productPackageItemName;
-    //  return hasItem;
-    //}
-
+    
     IList<IProductPackageItem> _packageItems;
     public IList<IProductPackageItem> PackageItems
     {
@@ -124,7 +72,21 @@ namespace Atlantis.Framework.Providers.DomainProductPackage
     {
       get
       {
+        var totalAmount = 0;
         _currentPrice = _currencyProvider.Value.GetCurrentPrice(DomainProductPackageItem.ProductId);
+
+        foreach (var productPackageItem in PackageItems)
+        {
+          totalAmount += productPackageItem.CurrentPrice.Price;
+        }
+
+        if (totalAmount > 0)
+        {
+          var currencyInfo = _currentPrice.CurrencyInfo;
+          _currentPrice = new CurrencyPrice(totalAmount, currencyInfo, CurrencyPriceType.Transactional);
+
+        }
+
         return _currentPrice;
       }
     }
@@ -134,11 +96,37 @@ namespace Atlantis.Framework.Providers.DomainProductPackage
     {
       get
       {
+        var totalAmount = 0;
         _listPrice = _currencyProvider.Value.GetListPrice(DomainProductPackageItem.ProductId);
+
+        foreach (var productPackageItem in PackageItems)
+        {
+          totalAmount += productPackageItem.CurrentPrice.Price;
+        }
+
+        if (totalAmount > 0)
+        {
+          _listPrice = new CurrencyPrice(totalAmount, _currentPrice.CurrencyInfo, CurrencyPriceType.Transactional);
+
+        }
         return _listPrice;
       }
     }
 
-    // expose YearPrice and 
+
+    public bool TryGetApplicationFee(out ICurrencyPrice applicationFee)
+    {
+      applicationFee = null;
+
+      foreach (IProductPackageItem productPackageItem in PackageItems)
+      {
+        if (productPackageItem.Name == APPLICATION_FEE)
+        {
+          applicationFee = productPackageItem.CurrentPrice;
+        }
+      }
+
+      return applicationFee != null;
+    }
   }
 }

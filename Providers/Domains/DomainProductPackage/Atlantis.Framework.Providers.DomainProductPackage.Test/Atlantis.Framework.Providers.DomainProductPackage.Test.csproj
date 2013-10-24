@@ -259,6 +259,10 @@
       <Project>{3e55be92-5308-452e-a70a-0a87670e47a8}</Project>
       <Name>Atlantis.Framework.Providers.DomainSearch</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.Providers.DomainProductPackageSerializer\Atlantis.Framework.Providers.DomainProductPackageStateProvider.csproj">
+      <Project>{8790db3e-a25a-4091-a726-518d7e005bf2}</Project>
+      <Name>Atlantis.Framework.Providers.DomainProductPackageStateProvider</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.Providers.DomainProductPackage\Atlantis.Framework.Providers.DomainProductPackage.csproj">
       <Project>{5dc4df1b-688c-40cb-8a05-1e6052263707}</Project>
       <Name>Atlantis.Framework.Providers.DomainProductPackage</Name>

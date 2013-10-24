@@ -49,9 +49,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.RegDotTy
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.DomainSearch.Impl", "..\..\..\Triplets\DomainSearch\Atlantis.Framework.DomainSearch.Impl\Atlantis.Framework.DomainSearch.Impl.csproj", "{675EED53-C6B8-4ED1-A6DC-5B096467E7AA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Providers.DomainProductPackageStateProvider", "Atlantis.Framework.Providers.DomainProductPackageSerializer\Atlantis.Framework.Providers.DomainProductPackageStateProvider.csproj", "{8790DB3E-A25A-4091-A726-518D7E005BF2}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 24
+		SccNumberOfProjects = 25
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
 		SccLocalPath0 = .
@@ -145,6 +147,9 @@ Global
 		SccProjectTopLevelParentUniqueName23 = DomainProductPackage.sln
 		SccProjectName23 = ../../../Triplets/DomainSearch/Atlantis.Framework.DomainSearch.Impl
 		SccLocalPath23 = ..\\..\\..\\Triplets\\DomainSearch\\Atlantis.Framework.DomainSearch.Impl
+		SccProjectUniqueName24 = Atlantis.Framework.Providers.DomainProductPackageSerializer\\Atlantis.Framework.Providers.DomainProductPackageStateProvider.csproj
+		SccProjectName24 = Atlantis.Framework.Providers.DomainProductPackageSerializer
+		SccLocalPath24 = Atlantis.Framework.Providers.DomainProductPackageSerializer
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -291,6 +296,12 @@ Global
 		{675EED53-C6B8-4ED1-A6DC-5B096467E7AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{675EED53-C6B8-4ED1-A6DC-5B096467E7AA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{675EED53-C6B8-4ED1-A6DC-5B096467E7AA}.Release|x86.ActiveCfg = Release|Any CPU
+		{8790DB3E-A25A-4091-A726-518D7E005BF2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8790DB3E-A25A-4091-A726-518D7E005BF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8790DB3E-A25A-4091-A726-518D7E005BF2}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{8790DB3E-A25A-4091-A726-518D7E005BF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8790DB3E-A25A-4091-A726-518D7E005BF2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8790DB3E-A25A-4091-A726-518D7E005BF2}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

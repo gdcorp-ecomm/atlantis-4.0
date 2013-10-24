@@ -1,12 +1,13 @@
 ﻿using System.Collections.Generic;
 using Atlantis.Framework.Domains.Interface;
 using Atlantis.Framework.DotTypeCache.Interface;
+using Atlantis.Framework.Providers.Interface.Currency;
 
 namespace Atlantis.Framework.Providers.DomainProductPackage
 {
   public class DomainRegistrationProductPackageGroup  : IDomainRegistrationProductPackageGroup
   {
-    internal IDomainProductPackage RegistrationPackage { get; set; }
+    public IDomainProductPackage RegistrationPackage { get; set; }
 
     public int? TierId { get; set; }
 

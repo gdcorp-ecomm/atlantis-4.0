@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Atlantis.Framework.DotTypeCache.Interface;
 using Atlantis.Framework.Providers.Interface.Currency;
 using Atlantis.Framework.Providers.Interface.Products;
 
@@ -11,9 +12,10 @@ namespace Atlantis.Framework.Domains.Interface
   {
     IProductPackageItem DomainProductPackageItem { get; }
 
+    IList<IProductPackageItem> PackageItems { get; }
 
-    // bool TryGetApplicationFee
-    
+    bool TryGetApplicationFee(out ICurrencyPrice applicationFee);
+
     //void SetPrivacy(string privacyPackageItemName);
 
     /// <summary>

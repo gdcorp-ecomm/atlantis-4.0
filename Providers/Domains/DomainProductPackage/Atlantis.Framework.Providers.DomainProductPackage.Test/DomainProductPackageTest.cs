@@ -4,6 +4,7 @@ using Atlantis.Framework.Domains.Interface;
 using Atlantis.Framework.DotTypeCache;
 using Atlantis.Framework.DotTypeCache.Interface;
 using Atlantis.Framework.Interface;
+using Atlantis.Framework.Providers.DomainProductPackageStateProvider;
 using Atlantis.Framework.Providers.DomainSearch;
 using Atlantis.Framework.Providers.DomainSearch.Interface;
 using Atlantis.Framework.Providers.Interface.Currency;
@@ -51,6 +52,7 @@ namespace Atlantis.Framework.Providers.DomainProductPackage.Test
     }
 
     private IProviderContainer _providerContainer;
+
     private IProviderContainer ProviderContainer
     {
       get
@@ -58,7 +60,7 @@ namespace Atlantis.Framework.Providers.DomainProductPackage.Test
         if (_providerContainer == null)
         {
           _providerContainer = new MockProviderContainer();
-          ((MockProviderContainer)_providerContainer).SetMockSetting(MockSiteContextSettings.IsRequestInternal, true);
+          ((MockProviderContainer) _providerContainer).SetMockSetting(MockSiteContextSettings.IsRequestInternal, true);
 
           _providerContainer.RegisterProvider<ISiteContext, MockSiteContext>();
           _providerContainer.RegisterProvider<IShopperContext, MockShopperContext>();
@@ -69,6 +71,7 @@ namespace Atlantis.Framework.Providers.DomainProductPackage.Test
           _providerContainer.RegisterProvider<IDomainProductPackageProvider, DomainProductPackageProvider>();
           _providerContainer.RegisterProvider<IDotTypeProvider, DotTypeProvider>();
           _providerContainer.RegisterProvider<ICurrencyProvider, Currency.CurrencyProvider>();
+          _providerContainer.RegisterProvider<IPersistanceStoreProvider, PersistanceStoreProvider>();
         }
 
         return _providerContainer;
@@ -76,6 +79,7 @@ namespace Atlantis.Framework.Providers.DomainProductPackage.Test
     }
 
     private IDomainSearchProvider _domainSearch;
+
     private IDomainSearchProvider DomainSearch
     {
       get
@@ -103,10 +107,24 @@ namespace Atlantis.Framework.Providers.DomainProductPackage.Test
       }
     }
 
+    private IPersistanceStoreProvider _storeProvider;
+    private IPersistanceStoreProvider StoreProvider
+    {
+      get
+      {
+        if (_storeProvider == null)
+        {
+          _storeProvider = ProviderContainer.Resolve<IPersistanceStoreProvider>();
+        }
+
+        return _storeProvider;
+      }
+    }
+
     [TestMethod]
     public void DomainProductPackagePreRegTest()
     {
-      var domainSearchResponse = DomainSearch.SearchDomain("sunrise-test.o2.borg", SOURCE_CODE, string.Empty, new List<string> { "o2.borg" });
+      var domainSearchResponse = DomainSearch.SearchDomain("sunrise-test.o2.borg", SOURCE_CODE, string.Empty, new List<string> {"o2.borg"});
 
       var packageGroups = DomainProductPackageProvider.BuildDomainProductPackageGroups(domainSearchResponse.GetDomainsByGroup(DomainGroupTypes.EXACT_MATCH));
 
@@ -124,10 +142,10 @@ namespace Atlantis.Framework.Providers.DomainProductPackage.Test
       }
     }
 
-    [TestMethod]  
+    [TestMethod]
     public void DomainProductPackagePreRegPriceTest()
     {
-      var domainSearchResponse = DomainSearch.SearchDomain("sunrise-test.o2.borg", SOURCE_CODE, string.Empty, new List<string> { "o2.borg" });
+      var domainSearchResponse = DomainSearch.SearchDomain("sunrise-test.o2.borg", SOURCE_CODE, string.Empty, new List<string> {"o2.borg"});
 
       var packageGroups = DomainProductPackageProvider.BuildDomainProductPackageGroups(domainSearchResponse.GetDomainsByGroup(DomainGroupTypes.EXACT_MATCH));
 
@@ -158,7 +176,7 @@ namespace Atlantis.Framework.Providers.DomainProductPackage.Test
       {
         Assert.IsTrue(packageGroup.Domain.DomainName.Length > 0);
         IDomainProductPackage normalRegistrationPackage;
-        
+
         Assert.IsTrue(packageGroup.InLaunchPhase == false);
         Assert.IsTrue(packageGroup.TryGetRegistrationPackage(out normalRegistrationPackage));
 
@@ -201,10 +219,129 @@ namespace Atlantis.Framework.Providers.DomainProductPackage.Test
       {
         Assert.IsTrue(packageGroup.InLaunchPhase == false);
         Assert.IsTrue(packageGroup.LaunchPhasePackages.Count == 0);
-        
+
         IDomainProductPackage registrationPackage;
         Assert.IsTrue(packageGroup.TryGetRegistrationPackage(out registrationPackage));
       }
+    }
+
+    [TestMethod]
+    public void DomainProductPackageApplicationFeeTest()
+    {
+      var domainSearchResponse = DomainSearch.SearchDomain("sunrise-test.o2.borg", SOURCE_CODE, string.Empty, new List<string> { "o2.borg" });
+
+      var packageGroups = DomainProductPackageProvider.BuildDomainProductPackageGroups(domainSearchResponse.GetDomainsByGroup(DomainGroupTypes.EXACT_MATCH));
+
+      Assert.IsTrue(packageGroups.Count() > 0);
+
+      foreach (var packageGroup in packageGroups)
+      {
+        var domainProductPackage = packageGroup.LaunchPhasePackages.ToList()[0].Value;
+
+        ICurrencyPrice currentPrice;
+
+        Assert.IsTrue(domainProductPackage.TryGetApplicationFee(out currentPrice));
+        Assert.IsTrue(currentPrice.Price > 0);
+      }
+    }
+
+    [TestMethod]  
+    public void DomainProductPackageLaunchPhaseSerializeTest()
+    {
+      var domainSearchResponse = DomainSearch.SearchDomain("blue-test.o1.borg", SOURCE_CODE, string.Empty);
+
+      var packageGroups = DomainProductPackageProvider.BuildDomainProductPackageGroups(domainSearchResponse.GetDomainsByGroup(DomainGroupTypes.EXACT_MATCH));
+      
+      StoreProvider.SaveDomainProductPackages(packageGroups);
+
+      Assert.IsTrue(StoreProvider.TryGetDomainProductPackages(out packageGroups));
+
+      Assert.IsTrue(packageGroups.Any());
+
+      foreach (var packageGroup in packageGroups)
+      {
+        IDomainProductPackage registrationPackage;
+
+        Assert.IsTrue(packageGroup.InLaunchPhase);
+        Assert.IsTrue(packageGroup.Domain.DomainName == "blue-test.o1.borg");
+        Assert.IsTrue(packageGroup.LaunchPhasePackages.Count > 0);
+        Assert.IsTrue(packageGroup.TierId.HasValue);
+        Assert.IsTrue(packageGroup.TryGetRegistrationPackage(out registrationPackage) == false);
+      
+        var domainProductPackage = packageGroup.LaunchPhasePackages.ToList()[0];
+
+        Assert.IsTrue(domainProductPackage.Value.CurrentPrice.Price > 0);
+        Assert.IsTrue(domainProductPackage.Value.ListPrice.Price > 0);
+
+        Assert.IsFalse(packageGroup.TryGetRegistrationPackage(out registrationPackage));
+      }
+    }
+
+    [TestMethod]
+    public void DomainProductPackageRegistrationSerializeTest()
+    {
+      var domainSearchResponse = DomainSearch.SearchDomain("blue-spoon-test123.com", SOURCE_CODE, string.Empty);
+
+      var packageGroups = DomainProductPackageProvider.BuildDomainProductPackageGroups(domainSearchResponse.GetDomainsByGroup(DomainGroupTypes.EXACT_MATCH));
+
+      StoreProvider.SaveDomainProductPackages(packageGroups);
+
+      Assert.IsTrue(StoreProvider.TryGetDomainProductPackages(out packageGroups));
+
+      Assert.IsTrue(packageGroups.Any());
+
+      foreach (var packageGroup in packageGroups)
+      {
+        IDomainProductPackage registrationPackage;
+
+        Assert.IsFalse(packageGroup.InLaunchPhase);
+        Assert.IsFalse(packageGroup.LaunchPhasePackages.Any());
+
+        Assert.IsTrue(packageGroup.Domain.DomainName == "blue-spoon-test123.com");
+        Assert.IsTrue(packageGroup.TryGetRegistrationPackage(out registrationPackage));
+
+
+        Assert.IsTrue(registrationPackage.CurrentPrice.Price > 0);
+        Assert.IsTrue(registrationPackage.ListPrice.Price > 0);
+      }
+    }
+
+    [TestMethod]
+    public void DomainProductPackageGroupInPreRegTest()
+    {
+      var packageLookUp = DomainProductPackageLookUp.Create(1, LaunchPhases.SunriseA, "blue-test", "o1.borg");
+
+      var packageGroup = DomainProductPackageProvider.BuildDomainProductPackageGroup(packageLookUp);
+
+      Assert.IsTrue(packageGroup.InLaunchPhase);
+      Assert.IsTrue(packageGroup.LaunchPhasePackages.Any());
+      Assert.IsTrue(packageGroup.LaunchPhasePackages.ToList()[0].Value.CurrentPrice.Price > 0);
+      Assert.IsTrue(packageGroup.LaunchPhasePackages.ToList()[0].Value.ListPrice.Price > 0);
+    }
+
+    [TestMethod]
+    public void DomainProductPackageGroupRegistrationTest()
+    {
+      var packageLookUp = DomainProductPackageLookUp.Create(1, LaunchPhases.SunriseA, "blue-test-123-456", "com");
+
+      var packageGroup = DomainProductPackageProvider.BuildDomainProductPackageGroup(packageLookUp);
+
+      IDomainProductPackage productPackage;
+
+      Assert.IsFalse(packageGroup.InLaunchPhase);
+      Assert.IsTrue(packageGroup.TryGetRegistrationPackage(out productPackage));
+      Assert.IsTrue(productPackage.CurrentPrice.Price > 0);
+      Assert.IsTrue(productPackage.ListPrice.Price > 0);
+    }
+
+    [TestMethod]
+    public void DomainProductPackageSerializeExceptionTest()
+    {
+      var domainSearchResponse = DomainSearch.SearchDomain("blue-spoon-test123.com", SOURCE_CODE, string.Empty);
+
+      var packageGroups = DomainProductPackageProvider.BuildDomainProductPackageGroups(domainSearchResponse.GetDomainsByGroup(DomainGroupTypes.EXACT_MATCH));
+      
+      Assert.IsFalse(StoreProvider.TryGetDomainProductPackages(out packageGroups));
     }
   }
 }

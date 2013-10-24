@@ -1,11 +1,7 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine", "..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj", "{D30157B2-C1B3-4073-BA5E-632E2337A997}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.EcommPaymentProfile.Interface", "Atlantis.Framework.EcommPaymentProfile.Interface\Atlantis.Framework.EcommPaymentProfile.Interface.csproj", "{09E0EE3D-9392-4AB2-B8AE-EFF09749B357}"
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.EcommPaymentProfile.Interface", "Atlantis.Framework.EcommPaymentProfile.Interface\Atlantis.Framework.EcommPaymentProfile.Interface.csproj", "{0066A523-3B95-41DE-96CA-1AC529D1BAA2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.EcommPaymentProfile.Impl", "Atlantis.Framework.EcommPaymentProfile.Impl\Atlantis.Framework.EcommPaymentProfile.Impl.csproj", "{BFA829D2-AB95-4913-BCF3-CB0748AD3AB4}"
 EndProject
@@ -13,65 +9,37 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.EcommPay
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{2885E6F5-7B2C-4838-BB1E-CD07BBCF773E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.KiwiLogger.Impl", "..\Atlantis.Framework.KiwiLogger\Atlantis.Framework.KiwiLogger.Impl\Atlantis.Framework.KiwiLogger.Impl.csproj", "{B25FA241-4ABE-4183-8C50-2DC6B684D0BD}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.KiwiLogger.Interface", "..\Atlantis.Framework.KiwiLogger\Atlantis.Framework.KiwiLogger.Interface\Atlantis.Framework.KiwiLogger.Interface.csproj", "{5A01EC44-56C6-4216-8CF4-575B4AC4FD5A}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.PaymentProfile.Interface", "..\Atlantis.Framework.PaymentProfile\Atlantis.Framework.PaymentProfile.Interface\Atlantis.Framework.PaymentProfile.Interface.csproj", "{8B540B38-34E0-4136-B409-1DC7B322AA63}"
 EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 9
+		SccNumberOfProjects = 5
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
 		SccLocalPath0 = .
-		SccProjectUniqueName1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
-		SccProjectTopLevelParentUniqueName1 = Atlantis.Framework.EcommPaymentProfile.sln
-		SccProjectName1 = ../Atlantis.Framework.Engine/Atlantis.Framework.Interface
-		SccLocalPath1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
-		SccProjectUniqueName2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
-		SccProjectTopLevelParentUniqueName2 = Atlantis.Framework.EcommPaymentProfile.sln
-		SccProjectName2 = ../Atlantis.Framework.Engine/Atlantis.Framework.Engine
-		SccLocalPath2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
-		SccProjectUniqueName3 = ..\\Atlantis.Framework.KiwiLogger\\Atlantis.Framework.KiwiLogger.Impl\\Atlantis.Framework.KiwiLogger.Impl.csproj
-		SccProjectTopLevelParentUniqueName3 = Atlantis.Framework.EcommPaymentProfile.sln
-		SccProjectName3 = ../Atlantis.Framework.KiwiLogger/Atlantis.Framework.KiwiLogger.Impl
-		SccLocalPath3 = ..\\Atlantis.Framework.KiwiLogger\\Atlantis.Framework.KiwiLogger.Impl
-		SccProjectUniqueName4 = ..\\Atlantis.Framework.KiwiLogger\\Atlantis.Framework.KiwiLogger.Interface\\Atlantis.Framework.KiwiLogger.Interface.csproj
+		SccProjectUniqueName1 = Atlantis.Framework.EcommPaymentProfile.Impl\\Atlantis.Framework.EcommPaymentProfile.Impl.csproj
+		SccProjectName1 = Atlantis.Framework.EcommPaymentProfile.Impl
+		SccLocalPath1 = Atlantis.Framework.EcommPaymentProfile.Impl
+		SccProjectUniqueName2 = Atlantis.Framework.EcommPaymentProfile.Interface\\Atlantis.Framework.EcommPaymentProfile.Interface.csproj
+		SccProjectName2 = Atlantis.Framework.EcommPaymentProfile.Interface
+		SccLocalPath2 = Atlantis.Framework.EcommPaymentProfile.Interface
+		SccProjectUniqueName3 = Atlantis.Framework.EcommPaymentProfile.Tests\\Atlantis.Framework.EcommPaymentProfile.Tests.csproj
+		SccProjectName3 = Atlantis.Framework.EcommPaymentProfile.Tests
+		SccLocalPath3 = Atlantis.Framework.EcommPaymentProfile.Tests
+		SccProjectUniqueName4 = ..\\Atlantis.Framework.PaymentProfile\\Atlantis.Framework.PaymentProfile.Interface\\Atlantis.Framework.PaymentProfile.Interface.csproj
 		SccProjectTopLevelParentUniqueName4 = Atlantis.Framework.EcommPaymentProfile.sln
-		SccProjectName4 = ../Atlantis.Framework.KiwiLogger/Atlantis.Framework.KiwiLogger.Interface
-		SccLocalPath4 = ..\\Atlantis.Framework.KiwiLogger\\Atlantis.Framework.KiwiLogger.Interface
-		SccProjectUniqueName5 = Atlantis.Framework.EcommPaymentProfile.Impl\\Atlantis.Framework.EcommPaymentProfile.Impl.csproj
-		SccProjectName5 = Atlantis.Framework.EcommPaymentProfile.Impl
-		SccLocalPath5 = Atlantis.Framework.EcommPaymentProfile.Impl
-		SccProjectUniqueName6 = Atlantis.Framework.EcommPaymentProfile.Interface\\Atlantis.Framework.EcommPaymentProfile.Interface.csproj
-		SccProjectName6 = Atlantis.Framework.EcommPaymentProfile.Interface
-		SccLocalPath6 = Atlantis.Framework.EcommPaymentProfile.Interface
-		SccProjectUniqueName7 = Atlantis.Framework.EcommPaymentProfile.Tests\\Atlantis.Framework.EcommPaymentProfile.Tests.csproj
-		SccProjectName7 = Atlantis.Framework.EcommPaymentProfile.Tests
-		SccLocalPath7 = Atlantis.Framework.EcommPaymentProfile.Tests
-		SccProjectUniqueName8 = ..\\Atlantis.Framework.PaymentProfile\\Atlantis.Framework.PaymentProfile.Interface\\Atlantis.Framework.PaymentProfile.Interface.csproj
-		SccProjectTopLevelParentUniqueName8 = Atlantis.Framework.EcommPaymentProfile.sln
-		SccProjectName8 = ../Atlantis.Framework.PaymentProfile/Atlantis.Framework.PaymentProfile.Interface
-		SccLocalPath8 = ..\\Atlantis.Framework.PaymentProfile\\Atlantis.Framework.PaymentProfile.Interface
+		SccProjectName4 = ../Atlantis.Framework.PaymentProfile/Atlantis.Framework.PaymentProfile.Interface
+		SccLocalPath4 = ..\\Atlantis.Framework.PaymentProfile\\Atlantis.Framework.PaymentProfile.Interface
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.Build.0 = Release|Any CPU
-		{09E0EE3D-9392-4AB2-B8AE-EFF09749B357}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{09E0EE3D-9392-4AB2-B8AE-EFF09749B357}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{09E0EE3D-9392-4AB2-B8AE-EFF09749B357}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{09E0EE3D-9392-4AB2-B8AE-EFF09749B357}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0066A523-3B95-41DE-96CA-1AC529D1BAA2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0066A523-3B95-41DE-96CA-1AC529D1BAA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0066A523-3B95-41DE-96CA-1AC529D1BAA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0066A523-3B95-41DE-96CA-1AC529D1BAA2}.Release|Any CPU.Build.0 = Release|Any CPU
 		{BFA829D2-AB95-4913-BCF3-CB0748AD3AB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{BFA829D2-AB95-4913-BCF3-CB0748AD3AB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BFA829D2-AB95-4913-BCF3-CB0748AD3AB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -80,14 +48,6 @@ Global
 		{EFAEE078-C0CB-49E4-A98C-ABE7D17D2FB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EFAEE078-C0CB-49E4-A98C-ABE7D17D2FB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EFAEE078-C0CB-49E4-A98C-ABE7D17D2FB5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B25FA241-4ABE-4183-8C50-2DC6B684D0BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B25FA241-4ABE-4183-8C50-2DC6B684D0BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B25FA241-4ABE-4183-8C50-2DC6B684D0BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B25FA241-4ABE-4183-8C50-2DC6B684D0BD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5A01EC44-56C6-4216-8CF4-575B4AC4FD5A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5A01EC44-56C6-4216-8CF4-575B4AC4FD5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5A01EC44-56C6-4216-8CF4-575B4AC4FD5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5A01EC44-56C6-4216-8CF4-575B4AC4FD5A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8B540B38-34E0-4136-B409-1DC7B322AA63}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8B540B38-34E0-4136-B409-1DC7B322AA63}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8B540B38-34E0-4136-B409-1DC7B322AA63}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -97,10 +57,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {2885E6F5-7B2C-4838-BB1E-CD07BBCF773E}
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {2885E6F5-7B2C-4838-BB1E-CD07BBCF773E}
-		{B25FA241-4ABE-4183-8C50-2DC6B684D0BD} = {2885E6F5-7B2C-4838-BB1E-CD07BBCF773E}
-		{5A01EC44-56C6-4216-8CF4-575B4AC4FD5A} = {2885E6F5-7B2C-4838-BB1E-CD07BBCF773E}
 		{8B540B38-34E0-4136-B409-1DC7B322AA63} = {2885E6F5-7B2C-4838-BB1E-CD07BBCF773E}
 	EndGlobalSection
 EndGlobal

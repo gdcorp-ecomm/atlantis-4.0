@@ -32,7 +32,8 @@ namespace Atlantis.Framework.Providers.DotTypeEoi
       }
     }
 
-    public DotTypeEoiProvider(IProviderContainer container) : base(container)
+    public DotTypeEoiProvider(IProviderContainer container)
+      : base(container)
     {
       _shopperContext = new Lazy<IShopperContext>(() => Container.Resolve<IShopperContext>());
       _managerContext = new Lazy<IManagerContext>(() => Container.Resolve<IManagerContext>());
@@ -384,6 +385,14 @@ namespace Atlantis.Framework.Providers.DotTypeEoi
 
     private void AddGtldButtonStatus(IEnumerable<IDotTypeEoiCategory> categories)
     {
+      IDictionary<int, IDotTypeEoiGtld> watchList = new Dictionary<int, IDotTypeEoiGtld>();
+      bool hasWatchList = _managerContext.Value.IsManager || IsAuthenticated;
+      IShopperWatchListResponse shopperWatchListResponse;
+      if (hasWatchList && GetShopperWatchList(out shopperWatchListResponse))
+      {
+        watchList = shopperWatchListResponse.GtldIdDictionary;
+      }
+
       foreach (var category in categories)
       {
         var subCategories = category.SubCategories;
@@ -402,26 +411,15 @@ namespace Atlantis.Framework.Providers.DotTypeEoi
                   gtld.ActionButtonType = ActionButtonTypes.Register;
                 }
               }
-              
+
               if (dotTypeInfo.IsPreRegPhaseActive)
               {
                 gtld.ActionButtonType = ActionButtonTypes.PreRegister;
               }
             }
-            else if (_managerContext.Value.IsManager || IsAuthenticated)
+            else if (hasWatchList)
             {
-              IShopperWatchListResponse shopperWatchListResponse;
-              if (GetShopperWatchList(out shopperWatchListResponse))
-              {
-                if (shopperWatchListResponse.GtldIdDictionary.ContainsKey(gtld.Id))
-                {
-                  gtld.ActionButtonType = ActionButtonTypes.DontWatch;
-                }
-                else
-                {
-                  gtld.ActionButtonType = ActionButtonTypes.Watch;
-                }
-              }
+              gtld.ActionButtonType = watchList.ContainsKey(gtld.Id) ? ActionButtonTypes.DontWatch : ActionButtonTypes.Watch;
             }
           }
         }
@@ -430,6 +428,14 @@ namespace Atlantis.Framework.Providers.DotTypeEoi
 
     private void AddGtldButtonStatus(IEnumerable<IDotTypeEoiGtld> gtlds)
     {
+      IDictionary<int, IDotTypeEoiGtld> watchList = new Dictionary<int, IDotTypeEoiGtld>();
+      bool hasWatchList = _managerContext.Value.IsManager || IsAuthenticated;
+      IShopperWatchListResponse shopperWatchListResponse;
+      if (hasWatchList && GetShopperWatchList(out shopperWatchListResponse))
+      {
+        watchList = shopperWatchListResponse.GtldIdDictionary;
+      }
+
       foreach (var gtld in gtlds)
       {
         var dotTypeInfo = DotTypeProvider.GetDotTypeInfo(gtld.Name);
@@ -443,26 +449,15 @@ namespace Atlantis.Framework.Providers.DotTypeEoi
               gtld.ActionButtonType = ActionButtonTypes.Register;
             }
           }
-          
+
           if (dotTypeInfo.IsPreRegPhaseActive)
           {
             gtld.ActionButtonType = ActionButtonTypes.PreRegister;
           }
         }
-        else if (_managerContext.Value.IsManager || IsAuthenticated)
+        else if (hasWatchList)
         {
-          IShopperWatchListResponse shopperWatchListResponse;
-          if (GetShopperWatchList(out shopperWatchListResponse))
-          {
-            if (shopperWatchListResponse.GtldIdDictionary.ContainsKey(gtld.Id))
-            {
-              gtld.ActionButtonType = ActionButtonTypes.DontWatch;
-            }
-            else
-            {
-              gtld.ActionButtonType = ActionButtonTypes.Watch;
-            }
-          }
+          gtld.ActionButtonType = watchList.ContainsKey(gtld.Id) ? ActionButtonTypes.DontWatch : ActionButtonTypes.Watch;
         }
       }
     }

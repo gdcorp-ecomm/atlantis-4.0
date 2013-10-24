@@ -1,12 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{1A44F11A-C6A9-463B-8825-DF254231462A}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine", "..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj", "{D30157B2-C1B3-4073-BA5E-632E2337A997}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.EcommPrepPayPalExpRedirect.Impl", "Atlantis.Framework.EcommPrepPayPalExpRedirect.Impl\Atlantis.Framework.EcommPrepPayPalExpRedirect.Impl.csproj", "{406DE37F-EC70-4745-A304-59D1341B2F5D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.EcommPrepPayPalExpRedirect.Interface", "Atlantis.Framework.EcommPrepPayPalExpRedirect.Interface\Atlantis.Framework.EcommPrepPayPalExpRedirect.Interface.csproj", "{17A9A3E1-F5B9-419F-824B-41C2A67F45A5}"
@@ -15,41 +9,25 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.EcommPre
 EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 6
+		SccNumberOfProjects = 4
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
-		SccProjectUniqueName0 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
-		SccProjectTopLevelParentUniqueName0 = Atlantis.Framework.EcommPreparePayPalExpressRedirect.sln
-		SccProjectName0 = ../Atlantis.Framework.Engine/Atlantis.Framework.Engine
-		SccLocalPath0 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
-		SccProjectUniqueName1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
-		SccProjectTopLevelParentUniqueName1 = Atlantis.Framework.EcommPreparePayPalExpressRedirect.sln
-		SccProjectName1 = ../Atlantis.Framework.Engine/Atlantis.Framework.Interface
-		SccLocalPath1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
-		SccLocalPath2 = .
-		SccProjectUniqueName3 = Atlantis.Framework.EcommPrepPayPalExpRedirect.Impl\\Atlantis.Framework.EcommPrepPayPalExpRedirect.Impl.csproj
-		SccProjectName3 = Atlantis.Framework.EcommPrepPayPalExpRedirect.Impl
-		SccLocalPath3 = Atlantis.Framework.EcommPrepPayPalExpRedirect.Impl
-		SccProjectUniqueName4 = Atlantis.Framework.EcommPrepPayPalExpRedirect.Interface\\Atlantis.Framework.EcommPrepPayPalExpRedirect.Interface.csproj
-		SccProjectName4 = Atlantis.Framework.EcommPrepPayPalExpRedirect.Interface
-		SccLocalPath4 = Atlantis.Framework.EcommPrepPayPalExpRedirect.Interface
-		SccProjectUniqueName5 = Atlantis.Framework.EcommPrepPayPalExpRedirect.Tests\\Atlantis.Framework.EcommPrepPayPalExpRedirect.Tests.csproj
-		SccProjectName5 = Atlantis.Framework.EcommPrepPayPalExpRedirect.Tests
-		SccLocalPath5 = Atlantis.Framework.EcommPrepPayPalExpRedirect.Tests
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Atlantis.Framework.EcommPrepPayPalExpRedirect.Impl\\Atlantis.Framework.EcommPrepPayPalExpRedirect.Impl.csproj
+		SccProjectName1 = Atlantis.Framework.EcommPrepPayPalExpRedirect.Impl
+		SccLocalPath1 = Atlantis.Framework.EcommPrepPayPalExpRedirect.Impl
+		SccProjectUniqueName2 = Atlantis.Framework.EcommPrepPayPalExpRedirect.Interface\\Atlantis.Framework.EcommPrepPayPalExpRedirect.Interface.csproj
+		SccProjectName2 = Atlantis.Framework.EcommPrepPayPalExpRedirect.Interface
+		SccLocalPath2 = Atlantis.Framework.EcommPrepPayPalExpRedirect.Interface
+		SccProjectUniqueName3 = Atlantis.Framework.EcommPrepPayPalExpRedirect.Tests\\Atlantis.Framework.EcommPrepPayPalExpRedirect.Tests.csproj
+		SccProjectName3 = Atlantis.Framework.EcommPrepPayPalExpRedirect.Tests
+		SccLocalPath3 = Atlantis.Framework.EcommPrepPayPalExpRedirect.Tests
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.Build.0 = Release|Any CPU
 		{406DE37F-EC70-4745-A304-59D1341B2F5D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{406DE37F-EC70-4745-A304-59D1341B2F5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{406DE37F-EC70-4745-A304-59D1341B2F5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -65,9 +43,5 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {1A44F11A-C6A9-463B-8825-DF254231462A}
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {1A44F11A-C6A9-463B-8825-DF254231462A}
 	EndGlobalSection
 EndGlobal

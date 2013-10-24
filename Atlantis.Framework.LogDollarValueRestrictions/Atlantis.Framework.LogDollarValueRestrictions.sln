@@ -1,17 +1,11 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{968E54DD-09D9-41C3-A80B-17B11F4A5FD0}"
 	ProjectSection(SolutionItems) = preProject
 		Atlantis.Framework.LogDollarValueRestrictions.vsmdi = Atlantis.Framework.LogDollarValueRestrictions.vsmdi
 		Local.testsettings = Local.testsettings
 	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine", "..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj", "{D30157B2-C1B3-4073-BA5E-632E2337A997}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{E9AD428B-EF8A-48F4-92AA-4F54829042D8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.LogDollarValueRestrictions.Impl", "Atlantis.Framework.LogDollarValueRestrictions.Impl\Atlantis.Framework.LogDollarValueRestrictions.Impl.csproj", "{2BE90B68-6E90-465E-92B4-4832B62C7465}"
 EndProject
@@ -19,35 +13,21 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.LogDolla
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.LogDollarValueRestrictions.Tests", "Atlantis.Framework.LogDollarValueRestrictions.Tests\Atlantis.Framework.LogDollarValueRestrictions.Tests.csproj", "{E4D270DB-AD3C-4C0D-BE4E-F7FCD5288B1D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Nimitz", "..\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz.csproj", "{3213E6DB-F026-4F17-A46A-7127F79F6620}"
-EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 7
+		SccNumberOfProjects = 4
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
 		SccLocalPath0 = .
-		SccProjectUniqueName1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
-		SccProjectTopLevelParentUniqueName1 = Atlantis.Framework.LogDollarValueRestrictions.sln
-		SccProjectName1 = ../Atlantis.Framework.Engine/Atlantis.Framework.Engine
-		SccLocalPath1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
-		SccProjectUniqueName2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
-		SccProjectTopLevelParentUniqueName2 = Atlantis.Framework.LogDollarValueRestrictions.sln
-		SccProjectName2 = ../Atlantis.Framework.Engine/Atlantis.Framework.Interface
-		SccLocalPath2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
-		SccProjectUniqueName3 = Atlantis.Framework.LogDollarValueRestrictions.Impl\\Atlantis.Framework.LogDollarValueRestrictions.Impl.csproj
-		SccProjectName3 = Atlantis.Framework.LogDollarValueRestrictions.Impl
-		SccLocalPath3 = Atlantis.Framework.LogDollarValueRestrictions.Impl
-		SccProjectUniqueName4 = Atlantis.Framework.LogDollarValueRestrictions.Interface\\Atlantis.Framework.LogDollarValueRestrictions.Interface.csproj
-		SccProjectName4 = Atlantis.Framework.LogDollarValueRestrictions.Interface
-		SccLocalPath4 = Atlantis.Framework.LogDollarValueRestrictions.Interface
-		SccProjectUniqueName5 = Atlantis.Framework.LogDollarValueRestrictions.Tests\\Atlantis.Framework.LogDollarValueRestrictions.Tests.csproj
-		SccProjectName5 = Atlantis.Framework.LogDollarValueRestrictions.Tests
-		SccLocalPath5 = Atlantis.Framework.LogDollarValueRestrictions.Tests
-		SccProjectUniqueName6 = ..\\Atlantis.Framework.Nimitz\\Atlantis.Framework.Nimitz\\Atlantis.Framework.Nimitz.csproj
-		SccProjectTopLevelParentUniqueName6 = Atlantis.Framework.LogDollarValueRestrictions.sln
-		SccProjectName6 = ../Atlantis.Framework.Nimitz/Atlantis.Framework.Nimitz
-		SccLocalPath6 = ..\\Atlantis.Framework.Nimitz\\Atlantis.Framework.Nimitz
+		SccProjectUniqueName1 = Atlantis.Framework.LogDollarValueRestrictions.Impl\\Atlantis.Framework.LogDollarValueRestrictions.Impl.csproj
+		SccProjectName1 = Atlantis.Framework.LogDollarValueRestrictions.Impl
+		SccLocalPath1 = Atlantis.Framework.LogDollarValueRestrictions.Impl
+		SccProjectUniqueName2 = Atlantis.Framework.LogDollarValueRestrictions.Interface\\Atlantis.Framework.LogDollarValueRestrictions.Interface.csproj
+		SccProjectName2 = Atlantis.Framework.LogDollarValueRestrictions.Interface
+		SccLocalPath2 = Atlantis.Framework.LogDollarValueRestrictions.Interface
+		SccProjectUniqueName3 = Atlantis.Framework.LogDollarValueRestrictions.Tests\\Atlantis.Framework.LogDollarValueRestrictions.Tests.csproj
+		SccProjectName3 = Atlantis.Framework.LogDollarValueRestrictions.Tests
+		SccLocalPath3 = Atlantis.Framework.LogDollarValueRestrictions.Tests
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = Atlantis.Framework.LogDollarValueRestrictions.vsmdi
@@ -57,14 +37,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2BE90B68-6E90-465E-92B4-4832B62C7465}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2BE90B68-6E90-465E-92B4-4832B62C7465}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2BE90B68-6E90-465E-92B4-4832B62C7465}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -77,17 +49,8 @@ Global
 		{E4D270DB-AD3C-4C0D-BE4E-F7FCD5288B1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E4D270DB-AD3C-4C0D-BE4E-F7FCD5288B1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E4D270DB-AD3C-4C0D-BE4E-F7FCD5288B1D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {E9AD428B-EF8A-48F4-92AA-4F54829042D8}
-		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {E9AD428B-EF8A-48F4-92AA-4F54829042D8}
-		{3213E6DB-F026-4F17-A46A-7127F79F6620} = {E9AD428B-EF8A-48F4-92AA-4F54829042D8}
 	EndGlobalSection
 EndGlobal

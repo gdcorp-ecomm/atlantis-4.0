@@ -1,47 +1,27 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{D0BE5128-6FBC-4AAF-9377-F757856008EC}"
-EndProject
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.ShopperFirstOrderGet.Impl", "Atlantis.Framework.ShopperFirstOrderGet.Impl\Atlantis.Framework.ShopperFirstOrderGet.Impl.csproj", "{A97FE745-78C7-4184-91AE-89543CB8DE0D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.ShopperFirstOrderGet.Interface", "Atlantis.Framework.ShopperFirstOrderGet.Interface\Atlantis.Framework.ShopperFirstOrderGet.Interface.csproj", "{89210EF0-715A-4B27-ACB4-1F98C0EF773B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.ShopperFirstOrderGet.Test", "Atlantis.Framework.ShopperFirstOrderGet.Test\Atlantis.Framework.ShopperFirstOrderGet.Test.csproj", "{2499054A-8E0C-4F30-95B6-32D41F2CB68A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine", "..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj", "{D30157B2-C1B3-4073-BA5E-632E2337A997}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Nimitz", "..\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz.csproj", "{3213E6DB-F026-4F17-A46A-7127F79F6620}"
-EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 7
+		SccNumberOfProjects = 4
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = http://tfs:8080/
+		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
 		SccLocalPath0 = .
-		SccProjectUniqueName1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
-		SccProjectTopLevelParentUniqueName1 = Atlantis.Framework.ShopperFirstOrderGet.sln
-		SccProjectName1 = ../Atlantis.Framework.Engine/Atlantis.Framework.Engine
-		SccLocalPath1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
-		SccProjectUniqueName2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
-		SccProjectTopLevelParentUniqueName2 = Atlantis.Framework.ShopperFirstOrderGet.sln
-		SccProjectName2 = ../Atlantis.Framework.Engine/Atlantis.Framework.Interface
-		SccLocalPath2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
-		SccProjectUniqueName3 = Atlantis.Framework.ShopperFirstOrderGet.Impl\\Atlantis.Framework.ShopperFirstOrderGet.Impl.csproj
-		SccProjectName3 = Atlantis.Framework.ShopperFirstOrderGet.Impl
-		SccLocalPath3 = Atlantis.Framework.ShopperFirstOrderGet.Impl
-		SccProjectUniqueName4 = Atlantis.Framework.ShopperFirstOrderGet.Interface\\Atlantis.Framework.ShopperFirstOrderGet.Interface.csproj
-		SccProjectName4 = Atlantis.Framework.ShopperFirstOrderGet.Interface
-		SccLocalPath4 = Atlantis.Framework.ShopperFirstOrderGet.Interface
-		SccProjectUniqueName5 = Atlantis.Framework.ShopperFirstOrderGet.Test\\Atlantis.Framework.ShopperFirstOrderGet.Test.csproj
-		SccProjectName5 = Atlantis.Framework.ShopperFirstOrderGet.Test
-		SccLocalPath5 = Atlantis.Framework.ShopperFirstOrderGet.Test
-		SccProjectUniqueName6 = ..\\Atlantis.Framework.Nimitz\\Atlantis.Framework.Nimitz\\Atlantis.Framework.Nimitz.csproj
-		SccProjectTopLevelParentUniqueName6 = Atlantis.Framework.ShopperFirstOrderGet.sln
-		SccProjectName6 = ../Atlantis.Framework.Nimitz/Atlantis.Framework.Nimitz
-		SccLocalPath6 = ..\\Atlantis.Framework.Nimitz\\Atlantis.Framework.Nimitz
+		SccProjectUniqueName1 = Atlantis.Framework.ShopperFirstOrderGet.Impl\\Atlantis.Framework.ShopperFirstOrderGet.Impl.csproj
+		SccProjectName1 = Atlantis.Framework.ShopperFirstOrderGet.Impl
+		SccLocalPath1 = Atlantis.Framework.ShopperFirstOrderGet.Impl
+		SccProjectUniqueName2 = Atlantis.Framework.ShopperFirstOrderGet.Interface\\Atlantis.Framework.ShopperFirstOrderGet.Interface.csproj
+		SccProjectName2 = Atlantis.Framework.ShopperFirstOrderGet.Interface
+		SccLocalPath2 = Atlantis.Framework.ShopperFirstOrderGet.Interface
+		SccProjectUniqueName3 = Atlantis.Framework.ShopperFirstOrderGet.Test\\Atlantis.Framework.ShopperFirstOrderGet.Test.csproj
+		SccProjectName3 = Atlantis.Framework.ShopperFirstOrderGet.Test
+		SccLocalPath3 = Atlantis.Framework.ShopperFirstOrderGet.Test
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -60,25 +40,8 @@ Global
 		{2499054A-8E0C-4F30-95B6-32D41F2CB68A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2499054A-8E0C-4F30-95B6-32D41F2CB68A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2499054A-8E0C-4F30-95B6-32D41F2CB68A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {D0BE5128-6FBC-4AAF-9377-F757856008EC}
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {D0BE5128-6FBC-4AAF-9377-F757856008EC}
-		{3213E6DB-F026-4F17-A46A-7127F79F6620} = {D0BE5128-6FBC-4AAF-9377-F757856008EC}
 	EndGlobalSection
 EndGlobal

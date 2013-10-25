@@ -93,6 +93,16 @@
     <Reference Include="Atlantis.Framework.Providers.RenderPipeline.Interface">
       <HintPath>..\packages\Atlantis.Framework.Providers.RenderPipeline.Interface.4.13.10.16\lib\net40\Atlantis.Framework.Providers.RenderPipeline.Interface.dll</HintPath>
     </Reference>
+    <Reference Include="Atlantis.Framework.Providers.SplitTesting.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Providers.SplitTesting.Interface.4.13.7.30\lib\net40\Atlantis.Framework.Providers.SplitTesting.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Providers.UserAgentDetection">
+      <HintPath>..\packages\Atlantis.Framework.Providers.UserAgentDetection.4.13.8.6\lib\net40\Atlantis.Framework.Providers.UserAgentDetection.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Providers.UserAgentDetection.Interface">
+      <HintPath>..\packages\Atlantis.Framework.Providers.UserAgentDetection.4.13.8.6\lib\net40\Atlantis.Framework.Providers.UserAgentDetection.Interface.dll</HintPath>
+    </Reference>
     <Reference Include="Atlantis.Framework.Render.ExpressionParser, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Atlantis.Framework.Render.ExpressionParser.4.0.0.0\lib\net40\Atlantis.Framework.Render.ExpressionParser.dll</HintPath>
@@ -101,6 +111,14 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Atlantis.Framework.Render.MarkupParser.4.0.0.0\lib\net40\Atlantis.Framework.Render.MarkupParser.dll</HintPath>
     </Reference>
+    <Reference Include="Atlantis.Framework.SplitTesting.Impl, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.SplitTesting.Impl.4.13.4.30\lib\net40\Atlantis.Framework.SplitTesting.Impl.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.SplitTesting.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.SplitTesting.Impl.4.13.4.30\lib\net40\Atlantis.Framework.SplitTesting.Interface.dll</HintPath>
+    </Reference>
     <Reference Include="Atlantis.Framework.Testing.MockHttpContext, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Atlantis.Framework.Testing.MockHttpContext.4.0.0.0\lib\net40\Atlantis.Framework.Testing.MockHttpContext.dll</HintPath>
@@ -108,6 +126,12 @@
     <Reference Include="Atlantis.Framework.Testing.MockProviders, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Atlantis.Framework.Testing.MockProviders.4.0.0.0\lib\net40\Atlantis.Framework.Testing.MockProviders.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.UserAgentEx.Impl">
+      <HintPath>..\packages\Atlantis.Framework.UserAgentEx.Impl.4.13.7.29\lib\net40\Atlantis.Framework.UserAgentEx.Impl.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.UserAgentEx.Interface">
+      <HintPath>..\packages\Atlantis.Framework.UserAgentEx.Interface.4.13.7.29\lib\net40\Atlantis.Framework.UserAgentEx.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Interop.gdDataCacheLib">
       <HintPath>..\..\..\..\..\D\Services\Fastball\ThirdParty\Interop\Interop.gdDataCacheLib.dll</HintPath>
@@ -160,34 +184,6 @@
     <Compile Include="SplitTestingRequestCacheTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Atlantis.Framework.UserAgentEx\Atlantis.Framework.UserAgentEx.Impl\Atlantis.Framework.UserAgentEx.Impl.csproj">
-      <Project>{eafe4d23-60a6-4f86-aa83-9d95cf10573f}</Project>
-      <Name>Atlantis.Framework.UserAgentEx.Impl</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Atlantis.Framework.UserAgentEx\Atlantis.Framework.UserAgentEx.Interface\Atlantis.Framework.UserAgentEx.Interface.csproj">
-      <Project>{08b1219f-fd25-46ba-8240-f706d533fc7a}</Project>
-      <Name>Atlantis.Framework.UserAgentEx.Interface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Triplets\SplitTesting\Atlantis.Framework.SplitTesting.Impl\Atlantis.Framework.SplitTesting.Impl.csproj">
-      <Project>{1dcccfdf-b22e-4e29-924d-fc1e0db7feaf}</Project>
-      <Name>Atlantis.Framework.SplitTesting.Impl</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Triplets\SplitTesting\Atlantis.Framework.SplitTesting.Interface\Atlantis.Framework.SplitTesting.Interface.csproj">
-      <Project>{3c889792-7183-4648-8031-418bae99c76b}</Project>
-      <Name>Atlantis.Framework.SplitTesting.Interface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\UserAgentDetection\Atlantis.Framework.Providers.UserAgentDetection.Interface\Atlantis.Framework.Providers.UserAgentDetection.Interface.csproj">
-      <Project>{38fa2893-690d-40ee-b840-f7a93850e32d}</Project>
-      <Name>Atlantis.Framework.Providers.UserAgentDetection.Interface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\UserAgentDetection\Atlantis.Framework.Providers.UserAgentDetection\Atlantis.Framework.Providers.UserAgentDetection.csproj">
-      <Project>{7ab11df0-b140-44ca-8b40-09878f6f2aff}</Project>
-      <Name>Atlantis.Framework.Providers.UserAgentDetection</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Atlantis.Framework.Providers.SplitTesting.Interface\Atlantis.Framework.Providers.SplitTesting.Interface.csproj">
-      <Project>{3f43b620-addb-41dd-826c-b565d8157b28}</Project>
-      <Name>Atlantis.Framework.Providers.SplitTesting.Interface</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.Providers.SplitTesting.Monitor.WebTest\Atlantis.Framework.Providers.SplitTesting.Monitor.WebTest.csproj">
       <Project>{425dfee6-ad19-4186-878a-342ee70de2d6}</Project>
       <Name>Atlantis.Framework.Providers.SplitTesting.Monitor.WebTest</Name>

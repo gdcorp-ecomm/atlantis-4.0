@@ -83,6 +83,16 @@
     <Reference Include="Atlantis.Framework.Providers.RenderPipeline.Interface">
       <HintPath>..\packages\Atlantis.Framework.Providers.RenderPipeline.Interface.4.13.10.16\lib\net40\Atlantis.Framework.Providers.RenderPipeline.Interface.dll</HintPath>
     </Reference>
+    <Reference Include="Atlantis.Framework.Providers.SplitTesting.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Providers.SplitTesting.Interface.4.13.7.30\lib\net40\Atlantis.Framework.Providers.SplitTesting.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Providers.UserAgentDetection">
+      <HintPath>..\packages\Atlantis.Framework.Providers.UserAgentDetection.4.13.8.6\lib\net40\Atlantis.Framework.Providers.UserAgentDetection.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Providers.UserAgentDetection.Interface">
+      <HintPath>..\packages\Atlantis.Framework.Providers.UserAgentDetection.4.13.8.6\lib\net40\Atlantis.Framework.Providers.UserAgentDetection.Interface.dll</HintPath>
+    </Reference>
     <Reference Include="Atlantis.Framework.Render.ExpressionParser, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Atlantis.Framework.Render.ExpressionParser.4.0.0.0\lib\net40\Atlantis.Framework.Render.ExpressionParser.dll</HintPath>
@@ -90,6 +100,19 @@
     <Reference Include="Atlantis.Framework.Render.MarkupParser, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Atlantis.Framework.Render.MarkupParser.4.0.0.0\lib\net40\Atlantis.Framework.Render.MarkupParser.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.SplitTesting.Impl">
+      <HintPath>..\packages\Atlantis.Framework.SplitTesting.Impl.4.13.4.30\lib\net40\Atlantis.Framework.SplitTesting.Impl.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.SplitTesting.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.SplitTesting.Impl.4.13.4.30\lib\net40\Atlantis.Framework.SplitTesting.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.UserAgentEx.Impl">
+      <HintPath>..\packages\Atlantis.Framework.UserAgentEx.Impl.4.13.7.29\lib\net40\Atlantis.Framework.UserAgentEx.Impl.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.UserAgentEx.Interface">
+      <HintPath>..\packages\Atlantis.Framework.UserAgentEx.Interface.4.13.7.29\lib\net40\Atlantis.Framework.UserAgentEx.Interface.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -112,24 +135,12 @@
     <Compile Include="SplitTestingUserAgent.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Triplets\SplitTesting\Atlantis.Framework.SplitTesting.Interface\Atlantis.Framework.SplitTesting.Interface.csproj">
-      <Project>{3c889792-7183-4648-8031-418bae99c76b}</Project>
-      <Name>Atlantis.Framework.SplitTesting.Interface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\UserAgentDetection\Atlantis.Framework.Providers.UserAgentDetection.Interface\Atlantis.Framework.Providers.UserAgentDetection.Interface.csproj">
-      <Project>{38fa2893-690d-40ee-b840-f7a93850e32d}</Project>
-      <Name>Atlantis.Framework.Providers.UserAgentDetection.Interface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Atlantis.Framework.Providers.SplitTesting.Interface\Atlantis.Framework.Providers.SplitTesting.Interface.csproj">
-      <Project>{3f43b620-addb-41dd-826c-b565d8157b28}</Project>
-      <Name>Atlantis.Framework.Providers.SplitTesting.Interface</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="atlantis.config" />
+    <None Include="Atlantis.Framework.Providers.SplitTesting.nuget.bat" />
+    <None Include="Atlantis.Framework.Providers.SplitTesting.nuspec" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

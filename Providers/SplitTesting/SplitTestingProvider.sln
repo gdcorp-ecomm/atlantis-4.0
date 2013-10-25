@@ -7,27 +7,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Provider
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Providers.SplitTesting.Tests", "Atlantis.Framework.Providers.SplitTesting.Tests\Atlantis.Framework.Providers.SplitTesting.Tests.csproj", "{2501FDC9-CA30-4746-AD67-EADD3172FD41}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{3C8B5189-BFC2-449A-9081-77AE65F778B6}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.SplitTesting.Impl", "..\..\Triplets\SplitTesting\Atlantis.Framework.SplitTesting.Impl\Atlantis.Framework.SplitTesting.Impl.csproj", "{1DCCCFDF-B22E-4E29-924D-FC1E0DB7FEAF}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.SplitTesting.Interface", "..\..\Triplets\SplitTesting\Atlantis.Framework.SplitTesting.Interface\Atlantis.Framework.SplitTesting.Interface.csproj", "{3C889792-7183-4648-8031-418BAE99C76B}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Providers.SplitTesting.Monitor", "Atlantis.Framework.Providers.SplitTesting.Monitor\Atlantis.Framework.Providers.SplitTesting.Monitor.csproj", "{A093E966-B0AC-4C31-9A58-6613323152C9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Providers.SplitTesting.Monitor.WebTest", "Atlantis.Framework.Providers.SplitTesting.Monitor.WebTest\Atlantis.Framework.Providers.SplitTesting.Monitor.WebTest.csproj", "{425DFEE6-AD19-4186-878A-342EE70DE2D6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Providers.UserAgentDetection", "..\UserAgentDetection\Atlantis.Framework.Providers.UserAgentDetection\Atlantis.Framework.Providers.UserAgentDetection.csproj", "{7AB11DF0-B140-44CA-8B40-09878F6F2AFF}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Providers.UserAgentDetection.Interface", "..\UserAgentDetection\Atlantis.Framework.Providers.UserAgentDetection.Interface\Atlantis.Framework.Providers.UserAgentDetection.Interface.csproj", "{38FA2893-690D-40EE-B840-F7A93850E32D}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.UserAgentEx.Interface", "..\..\Atlantis.Framework.UserAgentEx\Atlantis.Framework.UserAgentEx.Interface\Atlantis.Framework.UserAgentEx.Interface.csproj", "{08B1219F-FD25-46BA-8240-F706D533FC7A}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.UserAgentEx.Impl", "..\..\Atlantis.Framework.UserAgentEx\Atlantis.Framework.UserAgentEx.Impl\Atlantis.Framework.UserAgentEx.Impl.csproj", "{EAFE4D23-60A6-4F86-AA83-9D95CF10573F}"
-EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 12
+		SccNumberOfProjects = 6
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
 		SccLocalPath0 = .
@@ -40,36 +26,12 @@ Global
 		SccProjectUniqueName3 = Atlantis.Framework.Providers.SplitTesting.Tests\\Atlantis.Framework.Providers.SplitTesting.Tests.csproj
 		SccProjectName3 = Atlantis.Framework.Providers.SplitTesting.Tests
 		SccLocalPath3 = Atlantis.Framework.Providers.SplitTesting.Tests
-		SccProjectUniqueName4 = ..\\..\\Triplets\\SplitTesting\\Atlantis.Framework.SplitTesting.Impl\\Atlantis.Framework.SplitTesting.Impl.csproj
-		SccProjectTopLevelParentUniqueName4 = SplitTestingProvider.sln
-		SccProjectName4 = ../../Triplets/SplitTesting/Atlantis.Framework.SplitTesting.Impl
-		SccLocalPath4 = ..\\..\\Triplets\\SplitTesting\\Atlantis.Framework.SplitTesting.Impl
-		SccProjectUniqueName5 = ..\\..\\Triplets\\SplitTesting\\Atlantis.Framework.SplitTesting.Interface\\Atlantis.Framework.SplitTesting.Interface.csproj
-		SccProjectTopLevelParentUniqueName5 = SplitTestingProvider.sln
-		SccProjectName5 = ../../Triplets/SplitTesting/Atlantis.Framework.SplitTesting.Interface
-		SccLocalPath5 = ..\\..\\Triplets\\SplitTesting\\Atlantis.Framework.SplitTesting.Interface
-		SccProjectUniqueName6 = Atlantis.Framework.Providers.SplitTesting.Monitor\\Atlantis.Framework.Providers.SplitTesting.Monitor.csproj
-		SccProjectName6 = Atlantis.Framework.Providers.SplitTesting.Monitor
-		SccLocalPath6 = Atlantis.Framework.Providers.SplitTesting.Monitor
-		SccProjectUniqueName7 = Atlantis.Framework.Providers.SplitTesting.Monitor.WebTest\\Atlantis.Framework.Providers.SplitTesting.Monitor.WebTest.csproj
-		SccProjectName7 = Atlantis.Framework.Providers.SplitTesting.Monitor.WebTest
-		SccLocalPath7 = Atlantis.Framework.Providers.SplitTesting.Monitor.WebTest
-		SccProjectUniqueName8 = ..\\UserAgentDetection\\Atlantis.Framework.Providers.UserAgentDetection\\Atlantis.Framework.Providers.UserAgentDetection.csproj
-		SccProjectTopLevelParentUniqueName8 = SplitTestingProvider.sln
-		SccProjectName8 = ../UserAgentDetection/Atlantis.Framework.Providers.UserAgentDetection
-		SccLocalPath8 = ..\\UserAgentDetection\\Atlantis.Framework.Providers.UserAgentDetection
-		SccProjectUniqueName9 = ..\\UserAgentDetection\\Atlantis.Framework.Providers.UserAgentDetection.Interface\\Atlantis.Framework.Providers.UserAgentDetection.Interface.csproj
-		SccProjectTopLevelParentUniqueName9 = SplitTestingProvider.sln
-		SccProjectName9 = ../UserAgentDetection/Atlantis.Framework.Providers.UserAgentDetection.Interface
-		SccLocalPath9 = ..\\UserAgentDetection\\Atlantis.Framework.Providers.UserAgentDetection.Interface
-		SccProjectUniqueName10 = ..\\..\\Atlantis.Framework.UserAgentEx\\Atlantis.Framework.UserAgentEx.Interface\\Atlantis.Framework.UserAgentEx.Interface.csproj
-		SccProjectTopLevelParentUniqueName10 = SplitTestingProvider.sln
-		SccProjectName10 = ../../Atlantis.Framework.UserAgentEx/Atlantis.Framework.UserAgentEx.Interface
-		SccLocalPath10 = ..\\..\\Atlantis.Framework.UserAgentEx\\Atlantis.Framework.UserAgentEx.Interface
-		SccProjectUniqueName11 = ..\\..\\Atlantis.Framework.UserAgentEx\\Atlantis.Framework.UserAgentEx.Impl\\Atlantis.Framework.UserAgentEx.Impl.csproj
-		SccProjectTopLevelParentUniqueName11 = SplitTestingProvider.sln
-		SccProjectName11 = ../../Atlantis.Framework.UserAgentEx/Atlantis.Framework.UserAgentEx.Impl
-		SccLocalPath11 = ..\\..\\Atlantis.Framework.UserAgentEx\\Atlantis.Framework.UserAgentEx.Impl
+		SccProjectUniqueName4 = Atlantis.Framework.Providers.SplitTesting.Monitor\\Atlantis.Framework.Providers.SplitTesting.Monitor.csproj
+		SccProjectName4 = Atlantis.Framework.Providers.SplitTesting.Monitor
+		SccLocalPath4 = Atlantis.Framework.Providers.SplitTesting.Monitor
+		SccProjectUniqueName5 = Atlantis.Framework.Providers.SplitTesting.Monitor.WebTest\\Atlantis.Framework.Providers.SplitTesting.Monitor.WebTest.csproj
+		SccProjectName5 = Atlantis.Framework.Providers.SplitTesting.Monitor.WebTest
+		SccLocalPath5 = Atlantis.Framework.Providers.SplitTesting.Monitor.WebTest
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -88,14 +50,6 @@ Global
 		{2501FDC9-CA30-4746-AD67-EADD3172FD41}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2501FDC9-CA30-4746-AD67-EADD3172FD41}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2501FDC9-CA30-4746-AD67-EADD3172FD41}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1DCCCFDF-B22E-4E29-924D-FC1E0DB7FEAF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1DCCCFDF-B22E-4E29-924D-FC1E0DB7FEAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1DCCCFDF-B22E-4E29-924D-FC1E0DB7FEAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1DCCCFDF-B22E-4E29-924D-FC1E0DB7FEAF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3C889792-7183-4648-8031-418BAE99C76B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3C889792-7183-4648-8031-418BAE99C76B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3C889792-7183-4648-8031-418BAE99C76B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3C889792-7183-4648-8031-418BAE99C76B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A093E966-B0AC-4C31-9A58-6613323152C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A093E966-B0AC-4C31-9A58-6613323152C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A093E966-B0AC-4C31-9A58-6613323152C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -104,32 +58,8 @@ Global
 		{425DFEE6-AD19-4186-878A-342EE70DE2D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{425DFEE6-AD19-4186-878A-342EE70DE2D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{425DFEE6-AD19-4186-878A-342EE70DE2D6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7AB11DF0-B140-44CA-8B40-09878F6F2AFF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7AB11DF0-B140-44CA-8B40-09878F6F2AFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7AB11DF0-B140-44CA-8B40-09878F6F2AFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7AB11DF0-B140-44CA-8B40-09878F6F2AFF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{38FA2893-690D-40EE-B840-F7A93850E32D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{38FA2893-690D-40EE-B840-F7A93850E32D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{38FA2893-690D-40EE-B840-F7A93850E32D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{38FA2893-690D-40EE-B840-F7A93850E32D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{08B1219F-FD25-46BA-8240-F706D533FC7A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{08B1219F-FD25-46BA-8240-F706D533FC7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{08B1219F-FD25-46BA-8240-F706D533FC7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{08B1219F-FD25-46BA-8240-F706D533FC7A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EAFE4D23-60A6-4F86-AA83-9D95CF10573F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EAFE4D23-60A6-4F86-AA83-9D95CF10573F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EAFE4D23-60A6-4F86-AA83-9D95CF10573F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EAFE4D23-60A6-4F86-AA83-9D95CF10573F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{1DCCCFDF-B22E-4E29-924D-FC1E0DB7FEAF} = {3C8B5189-BFC2-449A-9081-77AE65F778B6}
-		{3C889792-7183-4648-8031-418BAE99C76B} = {3C8B5189-BFC2-449A-9081-77AE65F778B6}
-		{7AB11DF0-B140-44CA-8B40-09878F6F2AFF} = {3C8B5189-BFC2-449A-9081-77AE65F778B6}
-		{38FA2893-690D-40EE-B840-F7A93850E32D} = {3C8B5189-BFC2-449A-9081-77AE65F778B6}
-		{08B1219F-FD25-46BA-8240-F706D533FC7A} = {3C8B5189-BFC2-449A-9081-77AE65F778B6}
-		{EAFE4D23-60A6-4F86-AA83-9D95CF10573F} = {3C8B5189-BFC2-449A-9081-77AE65F778B6}
 	EndGlobalSection
 EndGlobal

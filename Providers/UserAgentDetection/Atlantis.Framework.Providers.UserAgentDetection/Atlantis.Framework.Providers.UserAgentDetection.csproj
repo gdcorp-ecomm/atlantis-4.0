@@ -73,6 +73,14 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\SplitTesting\packages\Atlantis.Framework.Providers.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Providers.Interface.dll</HintPath>
     </Reference>
+    <Reference Include="Atlantis.Framework.UserAgentEx.Impl, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.UserAgentEx.Impl.4.13.7.29\lib\net40\Atlantis.Framework.UserAgentEx.Impl.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.UserAgentEx.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.UserAgentEx.Interface.4.13.7.29\lib\net40\Atlantis.Framework.UserAgentEx.Interface.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
@@ -87,14 +95,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Atlantis.Framework.UserAgentEx\Atlantis.Framework.UserAgentEx.Impl\Atlantis.Framework.UserAgentEx.Impl.csproj">
-      <Project>{eafe4d23-60a6-4f86-aa83-9d95cf10573f}</Project>
-      <Name>Atlantis.Framework.UserAgentEx.Impl</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Atlantis.Framework.UserAgentEx\Atlantis.Framework.UserAgentEx.Interface\Atlantis.Framework.UserAgentEx.Interface.csproj">
-      <Project>{08b1219f-fd25-46ba-8240-f706d533fc7a}</Project>
-      <Name>Atlantis.Framework.UserAgentEx.Interface</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.Providers.UserAgentDetection.Interface\Atlantis.Framework.Providers.UserAgentDetection.Interface.csproj">
       <Project>{38fa2893-690d-40ee-b840-f7a93850e32d}</Project>
       <Name>Atlantis.Framework.Providers.UserAgentDetection.Interface</Name>
@@ -102,6 +102,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="atlantis.config" />
+    <None Include="Atlantis.Framework.Providers.UserAgentDetection.nuget.bat" />
+    <None Include="Atlantis.Framework.Providers.UserAgentDetection.nuspec" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -105,6 +105,8 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Atlantis.Framework.KiwiLogger.Impl.nuget.bat" />
+    <None Include="Atlantis.Framework.KiwiLogger.Impl.nuspec" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -5,8 +5,8 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Atlantis.Framework.KiwiLogger.Impl")]
-[assembly: AssemblyDescription("")]
-[assembly: AssemblyConfiguration("")]
+[assembly: AssemblyDescription("Release Build")]
+[assembly: AssemblyConfiguration("Release Build")]
 [assembly: AssemblyCompany("GoDaddy.com, Inc.")]
 [assembly: AssemblyProduct("Atlantis.Framework.KiwiLogger.Impl")]
 [assembly: AssemblyCopyright("Copyright © GoDaddy.com, Inc. 2009-2011")]

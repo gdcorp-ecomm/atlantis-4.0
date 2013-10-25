@@ -1,0 +1,23 @@
+﻿<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Atlantis.Framework.KiwiLogger.Impl</id>
+    <version>4.13.10.21</version>
+    <title>Atlantis Framework KiwiLogger</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <projectUrl>https://confluence.int.godaddy.com/display/ATLANTIS</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes></releaseNotes>
+    <copyright>$copyright$</copyright>
+    <tags>Atlantis Framework KiwiLogger</tags>
+    <dependencies>
+      <dependency id="Atlantis.Framework.Interface" version="4.13.9.25" />
+      <dependency id="Atlantis.Framework.KiwiLogger.Interface" version="4.11.8.2" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="bin\Release\Atlantis.Framework.KiwiLogger.Impl.dll" target="lib\net40\Atlantis.Framework.KiwiLogger.Impl.dll" />
+  </files>
+</package>

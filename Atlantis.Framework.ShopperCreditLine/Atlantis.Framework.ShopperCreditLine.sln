@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{171601A2-FA84-4C48-A32C-16D71B3A112E}"
 	ProjectSection(SolutionItems) = preProject
 		Atlantis.Framework.ShopperCreditLine.vsmdi = Atlantis.Framework.ShopperCreditLine.vsmdi
@@ -11,43 +11,23 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.ShopperC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.ShopperCreditLine.Interface", "Atlantis.Framework.ShopperCreditLine.Interface\Atlantis.Framework.ShopperCreditLine.Interface.csproj", "{CEF8B0DF-D5CD-4579-B0E0-3C883F5C9234}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine", "..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj", "{D30157B2-C1B3-4073-BA5E-632E2337A997}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.ShopperCreditLine.Tests", "Atlantis.Framework.ShopperCreditLine.Tests\Atlantis.Framework.ShopperCreditLine.Tests.csproj", "{9D743124-F9EF-42FC-861B-A6037DFE5343}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.DataCache", "..\Atlantis.Framework.DataCache\Atlantis.Framework.DataCache\Atlantis.Framework.DataCache.csproj", "{7F2738F8-683C-49E7-88CD-E986C70F0321}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{11AE3B62-EA42-4778-A3E8-B1651303E928}"
 EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 7
+		SccNumberOfProjects = 4
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = http://tfs:8080/
+		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
 		SccLocalPath0 = .
-		SccProjectUniqueName1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
-		SccProjectTopLevelParentUniqueName1 = Atlantis.Framework.ShopperCreditLine.sln
-		SccProjectName1 = ../Atlantis.Framework.Engine/Atlantis.Framework.Interface
-		SccLocalPath1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
-		SccProjectUniqueName2 = Atlantis.Framework.ShopperCreditLine.Impl\\Atlantis.Framework.ShopperCreditLine.Impl.csproj
-		SccProjectName2 = Atlantis.Framework.ShopperCreditLine.Impl
-		SccLocalPath2 = Atlantis.Framework.ShopperCreditLine.Impl
-		SccProjectUniqueName3 = Atlantis.Framework.ShopperCreditLine.Interface\\Atlantis.Framework.ShopperCreditLine.Interface.csproj
-		SccProjectName3 = Atlantis.Framework.ShopperCreditLine.Interface
-		SccLocalPath3 = Atlantis.Framework.ShopperCreditLine.Interface
-		SccProjectUniqueName4 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
-		SccProjectTopLevelParentUniqueName4 = Atlantis.Framework.ShopperCreditLine.sln
-		SccProjectName4 = ../Atlantis.Framework.Engine/Atlantis.Framework.Engine
-		SccLocalPath4 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
-		SccProjectUniqueName5 = Atlantis.Framework.ShopperCreditLine.Tests\\Atlantis.Framework.ShopperCreditLine.Tests.csproj
-		SccProjectName5 = Atlantis.Framework.ShopperCreditLine.Tests
-		SccLocalPath5 = Atlantis.Framework.ShopperCreditLine.Tests
-		SccProjectUniqueName6 = ..\\Atlantis.Framework.DataCache\\Atlantis.Framework.DataCache\\Atlantis.Framework.DataCache.csproj
-		SccProjectTopLevelParentUniqueName6 = Atlantis.Framework.ShopperCreditLine.sln
-		SccProjectName6 = ../Atlantis.Framework.DataCache/Atlantis.Framework.DataCache
-		SccLocalPath6 = ..\\Atlantis.Framework.DataCache\\Atlantis.Framework.DataCache
+		SccProjectUniqueName1 = Atlantis.Framework.ShopperCreditLine.Impl\\Atlantis.Framework.ShopperCreditLine.Impl.csproj
+		SccProjectName1 = Atlantis.Framework.ShopperCreditLine.Impl
+		SccLocalPath1 = Atlantis.Framework.ShopperCreditLine.Impl
+		SccProjectUniqueName2 = Atlantis.Framework.ShopperCreditLine.Interface\\Atlantis.Framework.ShopperCreditLine.Interface.csproj
+		SccProjectName2 = Atlantis.Framework.ShopperCreditLine.Interface
+		SccLocalPath2 = Atlantis.Framework.ShopperCreditLine.Interface
+		SccProjectUniqueName3 = Atlantis.Framework.ShopperCreditLine.Tests\\Atlantis.Framework.ShopperCreditLine.Tests.csproj
+		SccProjectName3 = Atlantis.Framework.ShopperCreditLine.Tests
+		SccLocalPath3 = Atlantis.Framework.ShopperCreditLine.Tests
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = Atlantis.Framework.ShopperCreditLine.vsmdi
@@ -65,29 +45,12 @@ Global
 		{CEF8B0DF-D5CD-4579-B0E0-3C883F5C9234}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CEF8B0DF-D5CD-4579-B0E0-3C883F5C9234}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CEF8B0DF-D5CD-4579-B0E0-3C883F5C9234}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9D743124-F9EF-42FC-861B-A6037DFE5343}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9D743124-F9EF-42FC-861B-A6037DFE5343}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9D743124-F9EF-42FC-861B-A6037DFE5343}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9D743124-F9EF-42FC-861B-A6037DFE5343}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7F2738F8-683C-49E7-88CD-E986C70F0321}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7F2738F8-683C-49E7-88CD-E986C70F0321}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7F2738F8-683C-49E7-88CD-E986C70F0321}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7F2738F8-683C-49E7-88CD-E986C70F0321}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {11AE3B62-EA42-4778-A3E8-B1651303E928}
-		{7F2738F8-683C-49E7-88CD-E986C70F0321} = {11AE3B62-EA42-4778-A3E8-B1651303E928}
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {11AE3B62-EA42-4778-A3E8-B1651303E928}
 	EndGlobalSection
 EndGlobal

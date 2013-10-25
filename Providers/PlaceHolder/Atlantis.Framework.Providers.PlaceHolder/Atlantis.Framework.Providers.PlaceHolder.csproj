@@ -38,7 +38,7 @@
       <HintPath>..\packages\Atlantis.Framework.AppSettings.Interface.4.0.0.0\lib\net40\Atlantis.Framework.AppSettings.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.CDS.Interface">
-      <HintPath>..\packages\Atlantis.Framework.CDS.Interface.4.0.0.0\lib\net40\Atlantis.Framework.CDS.Interface.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.CDS.Interface.4.13.10.21\lib\net40\Atlantis.Framework.CDS.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.DataCache">
       <HintPath>..\packages\Atlantis.Framework.DataCache.4.0.0.0\lib\net40\Atlantis.Framework.DataCache.dll</HintPath>

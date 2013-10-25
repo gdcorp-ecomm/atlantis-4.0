@@ -101,12 +101,12 @@ namespace Atlantis.Framework.Providers.DomainProductPackage
 
         foreach (var productPackageItem in PackageItems)
         {
-          totalAmount += productPackageItem.CurrentPrice.Price;
+          totalAmount += productPackageItem.ListPrice.Price;
         }
 
         if (totalAmount > 0)
         {
-          _listPrice = new CurrencyPrice(totalAmount, _currentPrice.CurrencyInfo, CurrencyPriceType.Transactional);
+          _listPrice = new CurrencyPrice(totalAmount, _listPrice.CurrencyInfo, CurrencyPriceType.Transactional);
 
         }
         return _listPrice;

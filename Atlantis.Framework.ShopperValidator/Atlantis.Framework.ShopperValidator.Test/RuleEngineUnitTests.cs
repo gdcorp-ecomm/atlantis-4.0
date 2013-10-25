@@ -1,111 +1,130 @@
-﻿using System;
-using System.Linq;
+﻿using System.Collections.Generic;
 using Atlantis.Framework.RuleEngine.Results;
 using Atlantis.Framework.ShopperValidator.Interface;
+using Atlantis.Framework.ShopperValidator.Interface.RuleConstants;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Atlantis.Framework.ShopperValidator.Test
 {
+  // ReSharper disable InconsistentNaming
+
   [TestClass]
+  [DeploymentItem("Atlantis.Framework.ShopperValidator.Impl.dll")]
+  [DeploymentItem("Atlantis.Framework.SearchShoppers.Impl.dll")]
+  [DeploymentItem("Atlantis.Framework.ValidateField.Impl.dll")]
+  [DeploymentItem("Atlantis.Framework.AuthValidatePassword.Impl.dll")]
   public class RuleEngineUnitTests
   {
-    private void EvaluateValid(IModelResult model, params string[] failFactKeys)
+    private const string _CULTURE = "en-US";
+
+    private IModelResult _model;
+    private IModelResult Model
     {
-      Assert.IsNotNull(model);
-
-      Assert.IsTrue(model.ContainsInvalids ^ !failFactKeys.Any());
-
-      foreach (var fact in model.Facts)
+      get
       {
-        if (failFactKeys.Contains(fact.FactKey))
+        if (_model == null)
+        {
+          _model = new ModelResult();
+        }
+        return _model;
+      }
+      set { _model = value; }
+    }
+
+    private IList<string> _expectedInvalidFacts;
+    private IList<string> ExpectedInvalidFacts
+    {
+      get
+      {
+        if (_expectedInvalidFacts == null)
+        {
+          _expectedInvalidFacts = new List<string>(0);
+        }
+        return _expectedInvalidFacts;
+      }
+      set { _expectedInvalidFacts = value; }
+    }
+
+    private IDictionary<string, IList<string>> _expectedErrorMessages;
+    private IDictionary<string, IList<string>> ExpectedErrorMessages
+    {
+      get
+      {
+        if (_expectedErrorMessages == null)
+        {
+          _expectedErrorMessages = new Dictionary<string, IList<string>>(0);
+        }
+        return _expectedErrorMessages;
+      }
+      set { _expectedErrorMessages = value; }
+    }
+
+    private ShopperValidatorResponseData _response;
+    private ShopperValidatorResponseData Response
+    {
+      get
+      {
+        if (_response == null)
+        {
+          _response = new ShopperValidatorResponseData(new RuleEngineResult(RuleEngineResultStatus.Invalid));
+        }
+        return _response;
+      }
+      set { _response = value; }
+    }
+
+    [TestInitialize]
+    public void Initialize()
+    {
+      Response = null;
+      Model = null;
+      ExpectedInvalidFacts = null;
+      ExpectedErrorMessages = null;
+    }
+
+    [TestCleanup]
+    public void AssertAllTheThings()
+    {
+
+      foreach (var fact in Model.Facts)
+      {
+        if (ExpectedInvalidFacts.Contains(fact.FactKey))
         {
           Assert.IsTrue(fact.Status == ValidationResultStatus.InValid);
-          Assert.IsTrue(fact.Messages.Count > 0);
         }
-        else
+
+        if (fact.Messages.Count > 0)
         {
-          Assert.IsTrue(fact.Status == ValidationResultStatus.Valid);
+          Assert.IsTrue(ExpectedErrorMessages.ContainsKey(fact.FactKey));
+          foreach (var errorMessage in fact.Messages)
+          {
+            Assert.IsTrue(ExpectedErrorMessages[fact.FactKey].Contains(errorMessage));
+          }
         }
       }
+    }
+
+    public void ValidateShopper(string username, string password, string password2, string pin, string email, string culture = _CULTURE)
+    {
+      var request = new ShopperValidatorRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, username, password, password2, pin, email, culture);
+      Response = Engine.Engine.ProcessRequest(request, 588) as ShopperValidatorResponseData;
+
+      Model = Response.ValidatedModel;
     }
 
     [TestMethod]
     [DeploymentItem("atlantis.config")]
     public void TestRuleEngineSlimShopperValid()
     {
-      var request = new ShopperValidatorRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "username", "P4ssW0rd!", "P4ssW0rd!", "1223", "email@email.com");
-      var response = Engine.Engine.ProcessRequest(request, 588) as ShopperValidatorResponseData;
-
-      Assert.IsTrue(response.IsSuccess);
-
-      EvaluateValid(response.ValidatedModel);
+      ValidateShopper("username", "P4ssW0rd!", "P4ssW0rd!", "1223", "email@email.com", _CULTURE);
     }
-
-    #region Supplemental Rule Engine Properties
-
-    #region First Name Properties
-    private const int _firstNameMaxLength = 30;
-    private string FirstNameMaxLength { get { return Convert.ToString(_firstNameMaxLength); } }
-    #endregion
-
-    #region Last Name Properties
-    private const int _lastNameMaxLength = 50;
-    private string LastNameMaxLength { get { return Convert.ToString(_lastNameMaxLength); } }
-    #endregion
-
-    #region Username Properties
-    private const int _usernameMaxLength = 30;
-    private string UsernameMaxLength { get { return Convert.ToString(_usernameMaxLength); } }
-    #endregion
-
-    #region Password Properties
-    private const int _passwordMaxLength = 255;
-    private string PasswordMaxLength { get { return Convert.ToString(_passwordMaxLength); } }
-
-    private const int _passwordMinLength = 8;
-    private string PasswordMinLength { get { return Convert.ToString(_passwordMinLength); } }
-
-    private const string _passwordRegex = @"(?=^\S).*(?=.*[A-Z])(?=.*\d).*(?=\S$)";
-    private string PasswordRegex { get { return _passwordRegex; } }
-    #endregion
-
-    #region Pin Properties
-    private const int _callInPinMaxLength = 4;
-    private string CallInPinMaxLength { get { return Convert.ToString(_callInPinMaxLength); } }
-
-    private const int _callInPinMinLength = 4;
-    private string CallInPinMinLength { get { return Convert.ToString(_callInPinMinLength); } }
-    #endregion
-
-    #region Email Properties
-    private const int _emailMaxLength = 100;
-    private string EmailMaxLength { get { return Convert.ToString(_emailMaxLength); } }
-
-    private const string _emailRegex = @"^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,6}$";
-    private string EmailRegex { get { return _emailRegex; } }
-    #endregion
-
-    #region General Properties
-    private const string _numericOnlyRegex = @"^[0-9]*$";
-    private string NumericOnlyRegex { get { return _numericOnlyRegex; } }
-
-    private const string _invalidCharactersRegex = @"[^\x20-\x27\x2A-\x3A\x3F-\x7E]";
-    private string InvalidCharactersRegex { get { return _invalidCharactersRegex; } }
-    #endregion
-
-    #endregion
 
     #region Rule Engine Test Methods
     [TestMethod]
     [DeploymentItem("atlantis.config")]
     public void TestREGoodShopper()
     {
-      var request = new ShopperValidatorRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "username", "P4ssW0rd!", "P4ssW0rd!", "1223", "email@email.com");
-      var response = Engine.Engine.ProcessRequest(request, 588) as ShopperValidatorResponseData;
-
-      Assert.IsTrue(response.IsSuccess);
-
-      EvaluateValid(response.ValidatedModel);
+      ValidateShopper("username", "P4ssW0rd!", "P4ssW0rd!", "1223", "email@email.com", _CULTURE);
     }
 
     #region Username Tests (count = 5)
@@ -113,282 +132,258 @@ namespace Atlantis.Framework.ShopperValidator.Test
     [DeploymentItem("atlantis.config")]
     public void TestREBadUsernameEmpty()
     {
-      var request = new ShopperValidatorRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, string.Empty, "P4ssW0rd!", "P4ssW0rd!", "1223", "email@email.com");
-      var response = Engine.Engine.ProcessRequest(request, 588) as ShopperValidatorResponseData;
+      ValidateShopper(string.Empty, "P4ssW0rd!", "P4ssW0rd!", "1223", "email@email.com", _CULTURE);
 
-      Assert.IsTrue(response.IsSuccess);
-
-      EvaluateValid(response.ValidatedModel, ModelConstants.FACT_USERNAME);
+      ExpectedInvalidFacts.Add(ModelConstants.FACT_USERNAME);
+      ExpectedErrorMessages[ModelConstants.FACT_USERNAME] = new[] { ValidationErrorMessages.Error_Username_Required_en };
     }
 
     [TestMethod]
     [DeploymentItem("atlantis.config")]
     public void TestREBadUsernameNull()
     {
-      var request = new ShopperValidatorRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, null, "P4ssW0rd!", "P4ssW0rd!", "1223", "email@email.com");
-      var response = Engine.Engine.ProcessRequest(request, 588) as ShopperValidatorResponseData;
+      ValidateShopper(null, "P4ssW0rd!", "P4ssW0rd!", "1223", "email@email.com", _CULTURE);
 
-      Assert.IsTrue(response.IsSuccess);
-
-      EvaluateValid(response.ValidatedModel, ModelConstants.FACT_USERNAME);
+      ExpectedInvalidFacts.Add(ModelConstants.FACT_USERNAME);
+      ExpectedErrorMessages[ModelConstants.FACT_USERNAME] = new[] { ValidationErrorMessages.Error_Username_Required_en };
     }
-
+    
     [TestMethod]
     [DeploymentItem("atlantis.config")]
     public void TestREBadUsernameMaxLength()
     {
       var longUsername = "";
-      while (longUsername.Length < _usernameMaxLength + 1)
+      while (longUsername.Length < LengthConstants.UsernameMaxLength + 1)
       {
         longUsername += "A";
       }
 
-      var request = new ShopperValidatorRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, longUsername, "P4ssW0rd!", "P4ssW0rd!", "1223", "email@email.com");
-      var response = Engine.Engine.ProcessRequest(request, 588) as ShopperValidatorResponseData;
+      ValidateShopper(longUsername, "P4ssW0rd!", "P4ssW0rd!", "1223", "email@email.com", _CULTURE);
 
-      Assert.IsTrue(response.IsSuccess);
-
-      EvaluateValid(response.ValidatedModel, ModelConstants.FACT_USERNAME);
+      ExpectedInvalidFacts.Add(ModelConstants.FACT_USERNAME);
+      ExpectedErrorMessages[ModelConstants.FACT_USERNAME] = new[] { ValidationErrorMessages.Error_Username_MaxLength_en };
     }
-
+    
     [TestMethod]
     [DeploymentItem("atlantis.config")]
     public void TestREBadUsernameAllNumeric()
     {
-      var request = new ShopperValidatorRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "123456789", "P4ssW0rd!", "P4ssW0rd!", "1223", "email@email.com");
-      var response = Engine.Engine.ProcessRequest(request, 588) as ShopperValidatorResponseData;
+      ValidateShopper("123456789", "P4ssW0rd!", "P4ssW0rd!", "1223", "email@email.com", _CULTURE);
 
-      Assert.IsTrue(response.IsSuccess);
-
-      EvaluateValid(response.ValidatedModel, ModelConstants.FACT_USERNAME);
+      ExpectedInvalidFacts.Add(ModelConstants.FACT_USERNAME);
+      ExpectedErrorMessages[ModelConstants.FACT_USERNAME] = new[] { ValidationErrorMessages.Error_Username_NonNumericOnly_en };
     }
-
+    
     [TestMethod]
     [DeploymentItem("atlantis.config")]
     public void TestREBadUsernameInvalidChars()
     {
-      var request = new ShopperValidatorRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "user;name", "P4ssW0rd!", "P4ssW0rd!", "1223", "email@email.com");
-      var response = Engine.Engine.ProcessRequest(request, 588) as ShopperValidatorResponseData;
+      ValidateShopper("user;name", "P4ssW0rd!", "P4ssW0rd!", "1223", "email@email.com", _CULTURE);
+      
+      ExpectedInvalidFacts.Add(ModelConstants.FACT_USERNAME);
+      ExpectedErrorMessages[ModelConstants.FACT_USERNAME] = new[] { ValidationErrorMessages.Error_Username_InvalidChars_en };
+    }
 
-      Assert.IsTrue(response.IsSuccess);
+    [TestMethod]
+    [DeploymentItem("atlantis.config")]
+    public void TestREBadUsernameDuplicate()
+    {
+      ValidateShopper("devgdalan09", "P4ssW0rd!", "P4ssW0rd!", "1223", "email@email.com", _CULTURE);
 
-      EvaluateValid(response.ValidatedModel, ModelConstants.FACT_USERNAME);
+      ExpectedInvalidFacts.Add(ModelConstants.FACT_USERNAME);
+      ExpectedErrorMessages[ModelConstants.FACT_USERNAME] = new[] { ValidationErrorMessages.Error_Username_Exists_en };
     }
     #endregion
 
-
+    
     #region Password Tests (count = 12)
     [TestMethod]
     [DeploymentItem("atlantis.config")]
     public void TestREBothBadPasswordsEmpty()
     {
-      var request = new ShopperValidatorRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "username", string.Empty, string.Empty, "1223", "email@email.com");
-      var response = Engine.Engine.ProcessRequest(request, 588) as ShopperValidatorResponseData;
+      ValidateShopper("username", string.Empty, string.Empty, "1223", "email@email.com", _CULTURE);
 
-      Assert.IsTrue(response.IsSuccess);
-
-      EvaluateValid(response.ValidatedModel, ModelConstants.FACT_PASSWORD, ModelConstants.FACT_PASSWORD2);
+      ExpectedInvalidFacts.Add(ModelConstants.FACT_PASSWORD);
+      ExpectedInvalidFacts.Add(ModelConstants.FACT_PASSWORD2);
+      ExpectedErrorMessages[ModelConstants.FACT_PASSWORD] = new[] { ValidationErrorMessages.Error_Password_Required_en, ValidationErrorMessages.Error_Password_MinLength_en, ValidationErrorMessages.Error_Password_InvalidFormat_en };
+      ExpectedErrorMessages[ModelConstants.FACT_PASSWORD2] = new[] { ValidationErrorMessages.Error_Password2_Required_en };
     }
-
+    
     [TestMethod]
     [DeploymentItem("atlantis.config")]
     public void TestREBothBadPasswordsNull()
     {
-      var request = new ShopperValidatorRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "username", null, null, "1223", "email@email.com");
-      var response = Engine.Engine.ProcessRequest(request, 588) as ShopperValidatorResponseData;
+      ValidateShopper("username", null, null, "1223", "email@email.com", _CULTURE);
 
-      Assert.IsTrue(response.IsSuccess);
-
-      EvaluateValid(response.ValidatedModel, ModelConstants.FACT_PASSWORD, ModelConstants.FACT_PASSWORD2);
+      ExpectedInvalidFacts.Add(ModelConstants.FACT_PASSWORD);
+      ExpectedInvalidFacts.Add(ModelConstants.FACT_PASSWORD2);
+      ExpectedErrorMessages[ModelConstants.FACT_PASSWORD] = new[] { ValidationErrorMessages.Error_Password_Required_en, ValidationErrorMessages.Error_Password_MinLength_en, ValidationErrorMessages.Error_Password_InvalidFormat_en };
+      ExpectedErrorMessages[ModelConstants.FACT_PASSWORD2] = new[] { ValidationErrorMessages.Error_Password2_Required_en };
     }
-
+    
     [TestMethod]
     [DeploymentItem("atlantis.config")]
     public void TestREBadPasswordEmpty()
     {
-      var request = new ShopperValidatorRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "username", string.Empty, "P4ssW0rd!", "1223", "email@email.com");
-      var response = Engine.Engine.ProcessRequest(request, 588) as ShopperValidatorResponseData;
+      ValidateShopper("username", string.Empty, "P4ssW0rd!", "1223", "email@email.com", _CULTURE);
 
-      Assert.IsTrue(response.IsSuccess);
-
-      EvaluateValid(response.ValidatedModel, ModelConstants.FACT_PASSWORD, ModelConstants.FACT_PASSWORD2);
+      ExpectedInvalidFacts.Add(ModelConstants.FACT_PASSWORD);
+      ExpectedInvalidFacts.Add(ModelConstants.FACT_PASSWORD2);
+      ExpectedErrorMessages[ModelConstants.FACT_PASSWORD] = new[] { ValidationErrorMessages.Error_Password_Required_en, ValidationErrorMessages.Error_Password_MinLength_en, ValidationErrorMessages.Error_Password_InvalidFormat_en };
+      ExpectedErrorMessages[ModelConstants.FACT_PASSWORD2] = new[] { ValidationErrorMessages.Error_Password2_Mismatch_en };
     }
-
+    
     [TestMethod]
     [DeploymentItem("atlantis.config")]
     public void TestREBadPassword2Empty()
     {
-      var request = new ShopperValidatorRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "username", "P4ssW0rd!", string.Empty, "1223", "email@email.com");
-      var response = Engine.Engine.ProcessRequest(request, 588) as ShopperValidatorResponseData;
+      ValidateShopper("username", "P4ssW0rd!", string.Empty, "1223", "email@email.com", _CULTURE);
 
-      Assert.IsTrue(response.IsSuccess);
-
-      EvaluateValid(response.ValidatedModel, ModelConstants.FACT_PASSWORD2);
+      ExpectedInvalidFacts.Add(ModelConstants.FACT_PASSWORD2);
+      ExpectedErrorMessages[ModelConstants.FACT_PASSWORD2] = new[] { ValidationErrorMessages.Error_Password2_Required_en, ValidationErrorMessages.Error_Password2_Mismatch_en };
     }
-
+    
     [TestMethod]
     [DeploymentItem("atlantis.config")]
     public void TestREBadPasswordNull()
     {
-      var request = new ShopperValidatorRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "username", null, "P4ssW0rd!", "1223", "email@email.com");
-      var response = Engine.Engine.ProcessRequest(request, 588) as ShopperValidatorResponseData;
+      ValidateShopper("username", null, "P4ssW0rd!", "1223", "email@email.com", _CULTURE);
 
-      Assert.IsTrue(response.IsSuccess);
-
-      EvaluateValid(response.ValidatedModel, ModelConstants.FACT_PASSWORD, ModelConstants.FACT_PASSWORD2);
+      ExpectedInvalidFacts.Add(ModelConstants.FACT_PASSWORD);
+      ExpectedInvalidFacts.Add(ModelConstants.FACT_PASSWORD2);
+      ExpectedErrorMessages[ModelConstants.FACT_PASSWORD] = new[] { ValidationErrorMessages.Error_Password_Required_en, ValidationErrorMessages.Error_Password_MinLength_en, ValidationErrorMessages.Error_Password_InvalidFormat_en };
+      ExpectedErrorMessages[ModelConstants.FACT_PASSWORD2] = new[] { ValidationErrorMessages.Error_Password2_Mismatch_en };
     }
-
+    
     [TestMethod]
     [DeploymentItem("atlantis.config")]
     public void TestREBadPassword2Null()
     {
-      var request = new ShopperValidatorRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "username", "P4ssW0rd!", null, "1223", "email@email.com");
-      var response = Engine.Engine.ProcessRequest(request, 588) as ShopperValidatorResponseData;
+      ValidateShopper("username", "P4ssW0rd!", null, "1223", "email@email.com", _CULTURE);
 
-      Assert.IsTrue(response.IsSuccess);
-
-      EvaluateValid(response.ValidatedModel, ModelConstants.FACT_PASSWORD2);
+      ExpectedInvalidFacts.Add(ModelConstants.FACT_PASSWORD2);
+      ExpectedErrorMessages[ModelConstants.FACT_PASSWORD2] = new[] { ValidationErrorMessages.Error_Password2_Required_en, ValidationErrorMessages.Error_Password2_Mismatch_en };
     }
-
+    
     [TestMethod]
     [DeploymentItem("atlantis.config")]
     public void TestREBadPasswordRegexNoNumbers()
     {
-      var request = new ShopperValidatorRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "username", "PassWord!", "PassWord!", "1223", "email@email.com");
-      var response = Engine.Engine.ProcessRequest(request, 588) as ShopperValidatorResponseData;
+      ValidateShopper("username", "PassWord!", "PassWord!", "1223", "email@email.com", _CULTURE);
 
-      Assert.IsTrue(response.IsSuccess);
-
-      EvaluateValid(response.ValidatedModel, ModelConstants.FACT_PASSWORD);
+      ExpectedInvalidFacts.Add(ModelConstants.FACT_PASSWORD);
+      ExpectedErrorMessages[ModelConstants.FACT_PASSWORD] = new[] { ValidationErrorMessages.Error_Password_InvalidFormat_en };
     }
-
+    
     [TestMethod]
     [DeploymentItem("atlantis.config")]
     public void TestREBadPasswordRegexNoCaps()
     {
-      var request = new ShopperValidatorRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "username", "p4ssw0rd!", "p4ssw0rd!", "1223", "email@email.com");
-      var response = Engine.Engine.ProcessRequest(request, 588) as ShopperValidatorResponseData;
+      ValidateShopper("username", "p4ssw0rd!", "p4ssw0rd!", "1223", "email@email.com", _CULTURE);
 
-      Assert.IsTrue(response.IsSuccess);
-
-      EvaluateValid(response.ValidatedModel, ModelConstants.FACT_PASSWORD);
+      ExpectedInvalidFacts.Add(ModelConstants.FACT_PASSWORD);
+      ExpectedErrorMessages[ModelConstants.FACT_PASSWORD] = new[] { ValidationErrorMessages.Error_Password_InvalidFormat_en };
     }
-
+    
     [TestMethod]
     [DeploymentItem("atlantis.config")]
     public void TestREBadPasswordRegexBeginningSpace()
     {
-      var request = new ShopperValidatorRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "username", " P4ssW0rd!", " P4ssW0rd!", "1223", "email@email.com");
-      var response = Engine.Engine.ProcessRequest(request, 588) as ShopperValidatorResponseData;
+      ValidateShopper("username", " P4ssW0rd!", " P4ssW0rd!", "1223", "email@email.com", _CULTURE);
 
-      Assert.IsTrue(response.IsSuccess);
-
-      EvaluateValid(response.ValidatedModel, ModelConstants.FACT_PASSWORD);
+      ExpectedInvalidFacts.Add(ModelConstants.FACT_PASSWORD);
+      ExpectedErrorMessages[ModelConstants.FACT_PASSWORD] = new[] { ValidationErrorMessages.Error_Password_InvalidFormat_en };
     }
-
+    
     [TestMethod]
     [DeploymentItem("atlantis.config")]
     public void TestREBadPasswordMinLength()
     {
       var shortPassword = "P4s!";
-      while (shortPassword.Length < _passwordMinLength - 1)
+      while (shortPassword.Length < LengthConstants.PasswordMinLength - 1)
       {
         shortPassword += "A";
       }
 
-      var request = new ShopperValidatorRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "username", shortPassword, shortPassword, "1223", "email@email.com");
-      var response = Engine.Engine.ProcessRequest(request, 588) as ShopperValidatorResponseData;
+      ValidateShopper("username", shortPassword, shortPassword, "1223", "email@email.com", _CULTURE);
 
-      Assert.IsTrue(response.IsSuccess);
-
-      EvaluateValid(response.ValidatedModel, ModelConstants.FACT_PASSWORD);
+      ExpectedInvalidFacts.Add(ModelConstants.FACT_PASSWORD);
+      ExpectedErrorMessages[ModelConstants.FACT_PASSWORD] = new[] { ValidationErrorMessages.Error_Password_MinLength_en };
     }
-
+    
     [TestMethod]
     [DeploymentItem("atlantis.config")]
     public void TestREBadPasswordMaxLength()
     {
       var longPassword = "P4s!";
-      while (longPassword.Length < _passwordMaxLength + 1)
+      while (longPassword.Length < LengthConstants.PasswordMaxLength + 1)
       {
         longPassword += "A";
       }
 
-      var request = new ShopperValidatorRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "username", longPassword, longPassword, "1223", "email@email.com");
-      var response = Engine.Engine.ProcessRequest(request, 588) as ShopperValidatorResponseData;
+      ValidateShopper("username", longPassword, longPassword, "1223", "email@email.com", _CULTURE);
 
-      Assert.IsTrue(response.IsSuccess);
-
-      EvaluateValid(response.ValidatedModel, ModelConstants.FACT_PASS_MAX_LENGTH);
+      ExpectedInvalidFacts.Add(ModelConstants.FACT_PASS_MAX_LENGTH);
+      ExpectedErrorMessages[ModelConstants.FACT_PASS_MAX_LENGTH] = new[] { ValidationErrorMessages.Error_PasswordMaxLength_MaxLength_en };
     }
-
+    
     [TestMethod]
     [DeploymentItem("atlantis.config")]
     public void TestREBadPasswordMatch()
     {
-      var request = new ShopperValidatorRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "username", "P4ssW0rd!", "P4ssW0rd!!", "1223", "email@email.com");
-      var response = Engine.Engine.ProcessRequest(request, 588) as ShopperValidatorResponseData;
+      ValidateShopper("username", "P4ssW0rd!", "P4ssW0rd!!", "1223", "email@email.com", _CULTURE);
 
-      Assert.IsTrue(response.IsSuccess);
-
-      EvaluateValid(response.ValidatedModel, ModelConstants.FACT_PASSWORD2);
+      ExpectedInvalidFacts.Add(ModelConstants.FACT_PASSWORD2);
+      ExpectedErrorMessages[ModelConstants.FACT_PASSWORD2] = new[] { ValidationErrorMessages.Error_Password2_Mismatch_en };
     }
     #endregion
 
-
+    
     #region Email Tests (count = 4)
     [TestMethod]
     [DeploymentItem("atlantis.config")]
     public void TestREBadEmailEmpty()
     {
-      var request = new ShopperValidatorRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "username", "P4ssW0rd!", "P4ssW0rd!", "1223", string.Empty);
-      var response = Engine.Engine.ProcessRequest(request, 588) as ShopperValidatorResponseData;
-
-      Assert.IsTrue(response.IsSuccess);
-
-      EvaluateValid(response.ValidatedModel, ModelConstants.FACT_EMAIL);
+      ValidateShopper("username", "P4ssW0rd!", "P4ssW0rd!", "1223", string.Empty, _CULTURE);
+      
+      ExpectedInvalidFacts.Add(ModelConstants.FACT_EMAIL);
+      ExpectedErrorMessages[ModelConstants.FACT_EMAIL] = new[] { ValidationErrorMessages.Error_Email_Required_en, ValidationErrorMessages.Error_Email_InvalidFormat_en };
     }
-
+    
     [TestMethod]
     [DeploymentItem("atlantis.config")]
     public void TestREBadEmailNull()
     {
-      var request = new ShopperValidatorRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "username", "P4ssW0rd!", "P4ssW0rd!", "1223", null);
-      var response = Engine.Engine.ProcessRequest(request, 588) as ShopperValidatorResponseData;
+      ValidateShopper("username", "P4ssW0rd!", "P4ssW0rd!", "1223", null, _CULTURE);
 
-      Assert.IsTrue(response.IsSuccess);
-
-      EvaluateValid(response.ValidatedModel, ModelConstants.FACT_EMAIL);
+      ExpectedInvalidFacts.Add(ModelConstants.FACT_EMAIL);
+      ExpectedErrorMessages[ModelConstants.FACT_EMAIL] = new[] { ValidationErrorMessages.Error_Email_Required_en, ValidationErrorMessages.Error_Email_InvalidFormat_en };
     }
-
+    
     [TestMethod]
     [DeploymentItem("atlantis.config")]
     public void TestREBadEmailMaxLength()
     {
       var longEmail = "a@x.";
-      while (longEmail.Length < _emailMaxLength + 1)
+      while (longEmail.Length < LengthConstants.EmailMaxLength + 1)
       {
         longEmail += "c";
       }
 
-      var request = new ShopperValidatorRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "username", "P4ssW0rd!", "P4ssW0rd!", "1223", longEmail);
-      var response = Engine.Engine.ProcessRequest(request, 588) as ShopperValidatorResponseData;
+      ValidateShopper("username", "P4ssW0rd!", "P4ssW0rd!", "1223", longEmail, _CULTURE);
 
-      Assert.IsTrue(response.IsSuccess);
-
-      EvaluateValid(response.ValidatedModel, ModelConstants.FACT_EMAIL);
+      ExpectedInvalidFacts.Add(ModelConstants.FACT_EMAIL);
+      ExpectedErrorMessages[ModelConstants.FACT_EMAIL] = new[] { ValidationErrorMessages.Error_Email_MaxLength_en, ValidationErrorMessages.Error_Email_InvalidFormat_en };
     }
-
+    
     [TestMethod]
     [DeploymentItem("atlantis.config")]
     public void TestREBadEmailRegex()
     {
-      var request = new ShopperValidatorRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "username", "P4ssW0rd!", "P4ssW0rd!", "1223", "email@emailcom");
-      var response = Engine.Engine.ProcessRequest(request, 588) as ShopperValidatorResponseData;
+      ValidateShopper("username", "P4ssW0rd!", "P4ssW0rd!", "1223", "email@emailcom", _CULTURE);
 
-      Assert.IsTrue(response.IsSuccess);
-
-      EvaluateValid(response.ValidatedModel, ModelConstants.FACT_EMAIL);
+      ExpectedInvalidFacts.Add(ModelConstants.FACT_EMAIL);
+      ExpectedErrorMessages[ModelConstants.FACT_EMAIL] = new[] { ValidationErrorMessages.Error_Email_InvalidFormat_en };
     }
     #endregion
 
@@ -397,51 +392,147 @@ namespace Atlantis.Framework.ShopperValidator.Test
     [DeploymentItem("atlantis.config")]
     public void TestREBadPinEmpty()
     {
-      var request = new ShopperValidatorRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "username", "P4ssW0rd!", "P4ssW0rd!", string.Empty, "email@email.com");
-      var response = Engine.Engine.ProcessRequest(request, 588) as ShopperValidatorResponseData;
+      ValidateShopper("username", "P4ssW0rd!", "P4ssW0rd!", string.Empty, "email@email.com", _CULTURE);
 
-      Assert.IsTrue(response.IsSuccess);
-
-      EvaluateValid(response.ValidatedModel, ModelConstants.FACT_PIN);
+      ExpectedInvalidFacts.Add(ModelConstants.FACT_PIN);
+      ExpectedErrorMessages[ModelConstants.FACT_PIN] = new[] { ValidationErrorMessages.Error_PIN_Required_en };
     }
-
+    
     [TestMethod]
     [DeploymentItem("atlantis.config")]
     public void TestREBadPinNull()
     {
-      var request = new ShopperValidatorRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "username", "P4ssW0rd!", "P4ssW0rd!", null, "email@email.com");
-      var response = Engine.Engine.ProcessRequest(request, 588) as ShopperValidatorResponseData;
+      ValidateShopper("username", "P4ssW0rd!", "P4ssW0rd!", null, "email@email.com", _CULTURE);
 
-      Assert.IsTrue(response.IsSuccess);
-
-      EvaluateValid(response.ValidatedModel, ModelConstants.FACT_PIN);
+      ExpectedInvalidFacts.Add(ModelConstants.FACT_PIN);
+      ExpectedErrorMessages[ModelConstants.FACT_PIN] = new[] { ValidationErrorMessages.Error_PIN_Required_en };
     }
-
+    
     [TestMethod]
     [DeploymentItem("atlantis.config")]
     public void TestREBadPinMaxLength()
     {
-      var request = new ShopperValidatorRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "username", "P4ssW0rd!", "P4ssW0rd!", "12235", "email@email.com");
-      var response = Engine.Engine.ProcessRequest(request, 588) as ShopperValidatorResponseData;
+      ValidateShopper("username", "P4ssW0rd!", "P4ssW0rd!", "12235", "email@email.com", _CULTURE);
 
-      Assert.IsTrue(response.IsSuccess);
-
-      EvaluateValid(response.ValidatedModel, ModelConstants.FACT_PIN);
+      ExpectedInvalidFacts.Add(ModelConstants.FACT_PIN);
+      ExpectedErrorMessages[ModelConstants.FACT_PIN] = new[] { ValidationErrorMessages.Error_PIN_MaxLength_en };
     }
-
+    
     [TestMethod]
     [DeploymentItem("atlantis.config")]
     public void TestREBadPinMinLength()
     {
-      var request = new ShopperValidatorRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "username", "P4ssW0rd!", "P4ssW0rd!", "122", "email@email.com");
-      var response = Engine.Engine.ProcessRequest(request, 588) as ShopperValidatorResponseData;
+      ValidateShopper("username", "P4ssW0rd!", "P4ssW0rd!", "122", "email@email.com", _CULTURE);
 
-      Assert.IsTrue(response.IsSuccess);
-
-      EvaluateValid(response.ValidatedModel, ModelConstants.FACT_PIN);
+      ExpectedInvalidFacts.Add(ModelConstants.FACT_PIN);
+      ExpectedErrorMessages[ModelConstants.FACT_PIN] = new[] { ValidationErrorMessages.Error_PIN_MinLength_en };
     }
+    
+    #endregion
+
+    #region Error Message Validation
+
+    protected static class ValidationErrorMessages
+    {
+      public static string Error_Username_Exists_en
+      {
+        get { return "Username already exists"; }
+      }
+
+      public static string Error_Username_Required_en
+      {
+        get { return "Username is required."; }
+      }
+
+      public static string Error_Username_MaxLength_en
+      {
+        get { return string.Format("Username cannot be longer than {0} characters long.", LengthConstants.UsernameMaxLength); }
+      }
+
+      public static string Error_Username_InvalidChars_en
+      {
+        get { return "Username contains invalid characters."; }
+      }
+
+      public static string Error_Username_NonNumericOnly_en
+      {
+        get { return "Username cannot be only numbers."; }
+      }
+
+      public static string Error_PasswordMaxLength_MaxLength_en
+      {
+        get { return string.Format("Password cannot be longer than {0} characters long.", LengthConstants.PasswordMaxLength); }
+      }
+
+      public static string Error_Password_Required_en
+      {
+        get { return "Password is required."; }
+      }
+
+      public static string Error_Password_MinLength_en
+      {
+        get { return string.Format("Password must be at least {0} characters long.", LengthConstants.PasswordMinLength); }
+      }
+
+      public static string Error_Password_InvalidFormat_en
+      {
+        get { return "Password must contain at least 1 uppercase letter, 1 number, and cannot begin or end with a space."; }
+      }
+
+      public static string Error_Password2_Required_en
+      {
+        get { return "Confirm Password is required."; }
+      }
+
+      public static string Error_Password2_Mismatch_en
+      {
+        get { return "Passwords must match."; }
+      }
+
+      public static string Error_PIN_Required_en
+      {
+        get { return "PIN is required."; }
+      }
+
+      public static string Error_PIN_MaxLength_en
+      {
+        get { return string.Format("PIN cannot be longer than {0} characters long.", LengthConstants.CallInPinMaxLength); }
+      }
+
+      public static string Error_PIN_MinLength_en
+      {
+        get { return string.Format("PIN must be at least {0} characters long.", LengthConstants.CallInPinMinLength); }
+      }
+
+      public static string Error_PIN_NumericOnly_en
+      {
+        get { return "PIN must contain only numbers."; }
+      }
+
+      public static string Error_PIN_Sequential_en
+      {
+        get { return "PIN cannot be any straight numerical sequence of digits."; }
+      }
+
+      public static string Error_Email_Required_en
+      {
+        get { return "Email is required."; }
+      }
+
+      public static string Error_Email_MaxLength_en
+      {
+        get { return string.Format("Email cannot be longer than {0} characters long.", LengthConstants.EmailMaxLength); }
+      }
+
+      public static string Error_Email_InvalidFormat_en
+      {
+        get { return "Email is an invalid format."; }
+      }
+    }
+
     #endregion
 
     #endregion
+    // ReSharper restore InconsistentNaming
   }
 }

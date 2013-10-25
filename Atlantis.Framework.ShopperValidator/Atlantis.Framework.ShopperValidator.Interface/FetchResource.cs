@@ -64,8 +64,16 @@ namespace Atlantis.Framework.ShopperValidator.Interface
       
       try
       {
-        value = ResourceManager.GetString(keyName, new CultureInfo(culture));
-        stringFound = true;
+        if (culture.Equals("qa-qa", StringComparison.OrdinalIgnoreCase))
+        {
+          value = string.Format("[afw.shoppervalidator:{0}]", keyName);
+          stringFound = true;
+        }
+        else
+        {
+          value = ResourceManager.GetString(keyName, new CultureInfo(culture));
+          stringFound = true;
+        }
       }
       catch (Exception ex)
       { }

@@ -95,12 +95,8 @@
       <Project>{47179F6E-FC85-4105-BE64-D0297C149887}</Project>
       <Name>Atlantis.Framework.ValidateField.Interface</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Atlantis.Framework.ShopperValidator.Impl\Atlantis.Framework.ShopperValidator.Impl.csproj">
-      <Project>{8C3F6D97-27C8-4398-B8CE-877473DC2945}</Project>
-      <Name>Atlantis.Framework.ShopperValidator.Impl</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.ShopperValidator.Interface\Atlantis.Framework.ShopperValidator.Interface.csproj">
-      <Project>{6778431F-6ED2-46F1-8E4D-FF72B0A96E54}</Project>
+      <Project>{6778431f-6ed2-46f1-8e4d-ff72b0a96e54}</Project>
       <Name>Atlantis.Framework.ShopperValidator.Interface</Name>
     </ProjectReference>
   </ItemGroup>

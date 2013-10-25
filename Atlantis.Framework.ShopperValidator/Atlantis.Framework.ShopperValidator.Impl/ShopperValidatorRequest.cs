@@ -217,7 +217,7 @@ namespace Atlantis.Framework.ShopperValidator.Impl
               {
                 FetchResource fetcher = new FetchResource(ResourceNamespace.ShopperValidator, requestData.Culture);
                 fact.Status = ValidationResultStatus.InValid;
-                fact.Messages.Add(fetcher.GetString("usenameExists"));
+                fact.Messages.Add(fetcher.GetString("usernameExists"));
                 model.ContainsInvalids = true;
                 break;
               }

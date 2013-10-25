@@ -1,0 +1,22 @@
+﻿<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Atlantis.Framework.PresCentral.Impl</id>
+    <version>4.12.7.30</version>
+    <title>Atlantis Framework PresCentral</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <projectUrl>https://confluence.int.godaddy.com/display/ATLANTIS</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes></releaseNotes>
+    <copyright>$copyright$</copyright>
+    <tags>Atlantis Framework PresCentral</tags>
+    <dependencies>
+      <dependency id="Atlantis.Framework.Interface" version="4.0.0.0" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="bin\Release\Atlantis.Framework.PresCentral.Impl.dll" target="lib\net40\Atlantis.Framework.PresCentral.Impl.dll" />
+  </files>
+</package>

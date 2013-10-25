@@ -89,22 +89,6 @@
       <Project>{53be1e8c-c474-4d2d-b2e3-db00cbe1b5f9}</Project>
       <Name>Atlantis.Framework.SessionCache</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.ShopperPriceType\Atlantis.Framework.ShopperPriceType.Impl\Atlantis.Framework.ShopperPriceType.Impl.csproj">
-      <Project>{b328af05-4bee-45bb-9913-c836e5593e50}</Project>
-      <Name>Atlantis.Framework.ShopperPriceType.Impl</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.ShopperPriceType\Atlantis.Framework.ShopperPriceType.Interface\Atlantis.Framework.ShopperPriceType.Interface.csproj">
-      <Project>{f310fe92-7999-46f3-a64e-36f90243ba02}</Project>
-      <Name>Atlantis.Framework.ShopperPriceType.Interface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.VerifyShopper\Atlantis.Framework.VerifyShopper.Impl\Atlantis.Framework.VerifyShopper.Impl.csproj">
-      <Project>{fb8a1912-7114-4fe2-9e96-9698635fbeb1}</Project>
-      <Name>Atlantis.Framework.VerifyShopper.Impl</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.VerifyShopper\Atlantis.Framework.VerifyShopper.Interface\Atlantis.Framework.VerifyShopper.Interface.csproj">
-      <Project>{8cdd515f-375e-4fa5-9e41-f95227396675}</Project>
-      <Name>Atlantis.Framework.VerifyShopper.Interface</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.BasePages\Atlantis.Framework.BasePages.csproj">
       <Project>{69a90c5c-706c-49dd-8f1c-78b8ffb67ea3}</Project>
       <Name>Atlantis.Framework.BasePages</Name>

@@ -12,9 +12,10 @@ namespace Atlantis.Framework.UserAgentEx.Tests
     [DeploymentItem("atlantis.config")]
     [DeploymentItem("Interop.gdDataCacheLib.dll")]
     [DeploymentItem("Atlantis.Framework.UserAgentEx.Impl.dll")]
+    [DeploymentItem("Atlantis.Framework.DataCacheGeneric.Impl.dll")]
     public void SearchEngineBotExpressions()
     {
-      UserAgentExRequestData request = new UserAgentExRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, 10);
+      UserAgentExRequestData request = new UserAgentExRequestData(10);
       UserAgentExResponseData response = (UserAgentExResponseData)DataCache.DataCache.GetProcessRequest(request, 528);
 
       string testAgent = "Mozilla/5.0+(compatible;+bingbot/2.0;++http://www.bing.com/bingbot.htm)";
@@ -25,9 +26,10 @@ namespace Atlantis.Framework.UserAgentEx.Tests
     [DeploymentItem("atlantis.config")]
     [DeploymentItem("Interop.gdDataCacheLib.dll")]
     [DeploymentItem("Atlantis.Framework.UserAgentEx.Impl.dll")]
+    [DeploymentItem("Atlantis.Framework.DataCacheGeneric.Impl.dll")]
     public void NullAgent()
     {
-      UserAgentExRequestData request = new UserAgentExRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, 10);
+      UserAgentExRequestData request = new UserAgentExRequestData(10);
       UserAgentExResponseData response = (UserAgentExResponseData)DataCache.DataCache.GetProcessRequest(request, 528);
 
       Assert.IsFalse(response.IsMatch(null));
@@ -37,9 +39,10 @@ namespace Atlantis.Framework.UserAgentEx.Tests
     [DeploymentItem("atlantis.config")]
     [DeploymentItem("Interop.gdDataCacheLib.dll")]
     [DeploymentItem("Atlantis.Framework.UserAgentEx.Impl.dll")]
+    [DeploymentItem("Atlantis.Framework.DataCacheGeneric.Impl.dll")]
     public void NullAgentMatch()
     {
-      UserAgentExRequestData request = new UserAgentExRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, 10);
+      UserAgentExRequestData request = new UserAgentExRequestData(10);
       UserAgentExResponseData response = (UserAgentExResponseData)DataCache.DataCache.GetProcessRequest(request, 528);
 
       Match match = response.FindMatch(null);

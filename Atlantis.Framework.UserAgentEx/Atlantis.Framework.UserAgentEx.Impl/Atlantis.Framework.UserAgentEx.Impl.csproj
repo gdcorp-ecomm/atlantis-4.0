@@ -73,6 +73,10 @@
       <HintPath>..\..\Providers\SplitTesting\packages\Atlantis.Framework.Providers.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Providers.Interface.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Atlantis.Framework.UserAgentEx.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.UserAgentEx.Interface.4.13.7.29\lib\net40\Atlantis.Framework.UserAgentEx.Interface.dll</HintPath>
+    </Reference>
     <Reference Include="Interop.gdDataCacheLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <EmbedInteropTypes>False</EmbedInteropTypes>
@@ -91,13 +95,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Atlantis.Framework.UserAgentEx.Interface\Atlantis.Framework.UserAgentEx.Interface.csproj">
-      <Project>{08b1219f-fd25-46ba-8240-f706d533fc7a}</Project>
-      <Name>Atlantis.Framework.UserAgentEx.Interface</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="atlantis.config" />
+    <None Include="Atlantis.Framework.UserAgentEx.Impl.nuget.bat" />
+    <None Include="Atlantis.Framework.UserAgentEx.Impl.nuspec" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

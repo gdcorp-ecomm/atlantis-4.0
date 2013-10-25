@@ -88,6 +88,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="atlantis.config" />
+    <None Include="Atlantis.Framework.SplitTesting.Impl.nuget.bat" />
+    <None Include="Atlantis.Framework.SplitTesting.Impl.nuspec" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

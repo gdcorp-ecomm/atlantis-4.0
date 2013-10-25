@@ -1,0 +1,23 @@
+﻿<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Atlantis.Framework.SplitTesting.Impl</id>
+    <version>4.13.4.30</version>
+    <title>Atlantis Framework SplitTesting</title>
+      <authors>$author$</authors>
+    <owners>$author$</owners>
+    <projectUrl>https://confluence.int.godaddy.com/display/ATLANTIS</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes></releaseNotes>
+    <copyright>$copyright$</copyright>
+    <tags>Atlantis Framework SplitTesting</tags>
+    <dependencies>
+      <dependency id="Atlantis.Framework.DataCache" version="4.0.0.0" />
+      <dependency id="Atlantis.Framework.Engine" version="4.0.0.0" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="bin\Release\Atlantis.Framework.SplitTesting.Impl.dll" target="lib\net40\Atlantis.Framework.SplitTesting.Impl.dll" />
+  </files>
+</package>

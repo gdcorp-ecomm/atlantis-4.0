@@ -45,6 +45,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\Providers\SplitTesting\packages\Atlantis.Framework.Interface.4.13.9.25\lib\net40\Atlantis.Framework.Interface.dll</HintPath>
     </Reference>
+    <Reference Include="Atlantis.Framework.Providers.SplitTesting.Interface">
+      <HintPath>..\packages\Atlantis.Framework.Providers.SplitTesting.Interface.4.13.7.30\lib\net40\Atlantis.Framework.Providers.SplitTesting.Interface.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -61,12 +64,6 @@
     <Compile Include="ActiveSplitTestsRequestData.cs" />
     <Compile Include="ActiveSplitTestsResponseData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\Providers\SplitTesting\Atlantis.Framework.Providers.SplitTesting.Interface\Atlantis.Framework.Providers.SplitTesting.Interface.csproj">
-      <Project>{3f43b620-addb-41dd-826c-b565d8157b28}</Project>
-      <Name>Atlantis.Framework.Providers.SplitTesting.Interface</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="atlantis.config" />

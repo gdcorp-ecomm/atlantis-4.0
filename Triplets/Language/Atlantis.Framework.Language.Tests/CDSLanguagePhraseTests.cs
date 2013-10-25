@@ -20,6 +20,7 @@ namespace Atlantis.Framework.Language.Tests
       var phrase = response.Phrases.FindPhrase("testkey");
 
       // Assert
+      Assert.IsNotNull(response.VersionId);
       Assert.IsNotNull(response);
       Assert.IsNotNull(response.Phrases);
       Assert.IsNotNull(phrase);

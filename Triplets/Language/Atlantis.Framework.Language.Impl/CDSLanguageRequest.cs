@@ -12,7 +12,7 @@ namespace Atlantis.Framework.Language.Impl
 {
   public class CdsLanguageRequest : IRequest
   {
-    const string LocalizationUrl = "{0}content/localization/{1}/{2}";
+    const string LocalizationUrl = "{0}content/localization/{1}/{2}{3}";
 
     public IResponseData RequestHandler(RequestData requestData, ConfigElement config)
     {
@@ -28,7 +28,7 @@ namespace Atlantis.Framework.Language.Impl
           var webRequest =
             (HttpWebRequest)
             WebRequest.Create(string.Format(LocalizationUrl, wsConfig.WSURL, cdsRequestData.DictionaryName,
-                                            cdsRequestData.Language));
+                                            cdsRequestData.Language, cdsRequestData.SpoofParam));
           webRequest.Method = WebRequestMethods.Http.Get;
           webRequest.CachePolicy = new RequestCachePolicy(RequestCacheLevel.BypassCache);
           var webResponse = (HttpWebResponse) webRequest.GetResponse();
@@ -45,7 +45,7 @@ namespace Atlantis.Framework.Language.Impl
                   var dictionary = new PhraseDictionary(false);
                   PhraseDictionary.Parse(dictionary,content.Content, cdsRequestData.DictionaryName,
                                                    cdsRequestData.Language);
-                  result = new CDSLanguageResponseData(dictionary);
+                  result = new CDSLanguageResponseData(dictionary, content._id.oid);
                 }
               }
             }

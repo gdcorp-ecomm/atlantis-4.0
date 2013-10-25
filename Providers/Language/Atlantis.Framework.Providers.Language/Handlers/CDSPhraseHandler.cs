@@ -139,7 +139,7 @@ namespace Atlantis.Framework.Providers.Language.Handlers
           if (_debugContext.Value != null)
           {
             var debugData = _debugContext.Value.GetDebugTrackingData();
-            if (!(from kvp in debugData where kvp.Value == value select kvp).Any())
+            if (debugData == null || !(from kvp in debugData where kvp.Value == value select kvp).Any())
             {
               _debugContext.Value.LogDebugTrackingData(string.Format(DebugInfoKeyFormat, name), value);
             }

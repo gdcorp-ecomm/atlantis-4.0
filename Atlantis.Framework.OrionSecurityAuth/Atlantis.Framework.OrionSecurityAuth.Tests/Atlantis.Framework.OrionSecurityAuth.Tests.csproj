@@ -58,7 +58,43 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Atlantis.Framework.AppSettings.Interface">
+      <HintPath>..\packages\Atlantis.Framework.AppSettings.Interface.4.0.0.0\lib\net40\Atlantis.Framework.AppSettings.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.DataCache">
+      <HintPath>..\packages\Atlantis.Framework.DataCache.4.0.0.0\lib\net40\Atlantis.Framework.DataCache.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.DataCacheGeneric.Interface">
+      <HintPath>..\packages\Atlantis.Framework.DataCacheGeneric.Interface.4.0.0.0\lib\net40\Atlantis.Framework.DataCacheGeneric.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.DataCacheService">
+      <HintPath>..\packages\Atlantis.Framework.DataCacheService.4.0.0.0\lib\net40\Atlantis.Framework.DataCacheService.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Engine">
+      <HintPath>..\packages\Atlantis.Framework.Engine.4.0.0.0\lib\net40\Atlantis.Framework.Engine.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Engine.XmlSerializers">
+      <HintPath>..\packages\Atlantis.Framework.Engine.4.0.0.0\lib\net40\Atlantis.Framework.Engine.XmlSerializers.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Interface">
+      <HintPath>..\packages\Atlantis.Framework.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Nimitz">
+      <HintPath>..\packages\Atlantis.Framework.Nimitz.4.0.0.0\lib\net40\Atlantis.Framework.Nimitz.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.PrivateLabel.Interface">
+      <HintPath>..\packages\Atlantis.Framework.PrivateLabel.Interface.4.0.0.0\lib\net40\Atlantis.Framework.PrivateLabel.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Products.Interface">
+      <HintPath>..\packages\Atlantis.Framework.Products.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Products.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Providers.Interface">
+      <HintPath>..\packages\Atlantis.Framework.Providers.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Providers.Interface.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="netConnect">
+      <HintPath>..\packages\Atlantis.Framework.Nimitz.4.0.0.0\lib\net40\netConnect.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -72,22 +108,6 @@
     <Content Include="AuthoringTests.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Atlantis.Framework.DataCache\Atlantis.Framework.DataCache\Atlantis.Framework.DataCache.csproj">
-      <Project>{8E4322D7-C6B3-4EE1-9FAD-7B848B38C834}</Project>
-      <Name>Atlantis.Framework.DataCache</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj">
-      <Project>{092618E1-1F37-422C-82AF-17A1337B8986}</Project>
-      <Name>Atlantis.Framework.Engine</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj">
-      <Project>{2474F971-3E1D-4608-9D60-B0A9A1CA8D13}</Project>
-      <Name>Atlantis.Framework.Interface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz.csproj">
-      <Project>{17EBED78-9469-4678-96B1-A175AB221916}</Project>
-      <Name>Atlantis.Framework.Nimitz</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.OrionSecurityAuth.Impl\Atlantis.Framework.OrionSecurityAuth.Impl.csproj">
       <Project>{23973B8C-0EDB-4001-8FAA-ED0930971D5A}</Project>
       <Name>Atlantis.Framework.OrionSecurityAuth.Impl</Name>
@@ -102,6 +122,7 @@
     <None Include="Atlantis.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0">

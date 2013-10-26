@@ -17,6 +17,8 @@
     <SccAuxPath>SAK</SccAuxPath>
     <SccProvider>SAK</SccProvider>
     <TargetFrameworkProfile />
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\Providers\Domains\DomainProductPackage\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -66,8 +68,9 @@
     <Reference Include="Atlantis.Framework.Providers.Containers">
       <HintPath>..\packages\Atlantis.Framework.Providers.Containers.4.13.10.12\lib\net40\Atlantis.Framework.Providers.Containers.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.Providers.Interface">
-      <HintPath>..\packages\Atlantis.Framework.Providers.Interface.4.13.8.28\lib\net40\Atlantis.Framework.Providers.Interface.dll</HintPath>
+    <Reference Include="Atlantis.Framework.Providers.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Providers\Domains\DomainProductPackage\packages\Atlantis.Framework.Providers.Interface.4.13.10.25\lib\net40\Atlantis.Framework.Providers.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Providers.RenderPipeline.Interface">
       <HintPath>..\packages\Atlantis.Framework.Providers.RenderPipeline.Interface.4.13.10.15\lib\net40\Atlantis.Framework.Providers.RenderPipeline.Interface.dll</HintPath>
@@ -131,6 +134,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

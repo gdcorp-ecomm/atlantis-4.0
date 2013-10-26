@@ -112,8 +112,9 @@
     <Reference Include="Atlantis.Framework.Providers.Geo.Interface">
       <HintPath>..\packages\Atlantis.Framework.Providers.Geo.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Providers.Geo.Interface.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.Providers.Interface">
-      <HintPath>..\packages\Atlantis.Framework.Providers.Interface.4.13.10.17\lib\net40\Atlantis.Framework.Providers.Interface.dll</HintPath>
+    <Reference Include="Atlantis.Framework.Providers.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Providers.Interface.4.13.10.25\lib\net40\Atlantis.Framework.Providers.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Providers.Localization">
       <HintPath>..\packages\Atlantis.Framework.Providers.Localization.4.13.10.9\lib\net40\Atlantis.Framework.Providers.Localization.dll</HintPath>

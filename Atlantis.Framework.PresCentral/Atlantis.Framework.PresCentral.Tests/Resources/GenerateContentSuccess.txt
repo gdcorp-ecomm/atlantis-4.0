@@ -1,0 +1,15 @@
+<pc cachekey="Dv6tdLD7KQj/+xJUf8xIuyICx6cO6JnjCJqSUP+Ruko=" result="0">
+  <items>
+    <item name="css" location="head">head</item>
+    <item name="header" location="predetermined">header</item>
+    <item name="script" location="bottom"><![CDATA[bottom]]></item>
+    <item name="script2" location="bottom"><![CDATA[bottom]]></item>
+  </items>
+  <debug>
+    <item name="CreateDate"><![CDATA[10/26/2013 11:27:36 PM]]></item>
+    <item name="SourceServer"><![CDATA[G1TWGDAPI001]]></item>
+    <item name="Viewname"><![CDATA[v1]]></item>
+    <item name="CacheKeySource"><![CDATA[applicationheader|1|Unspecified|HTML5|http|split:v1|nomanager|lang:en-us|countrysite:www]]></item>
+  </debug>
+  <errors />
+</pc>

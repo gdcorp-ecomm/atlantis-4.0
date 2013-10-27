@@ -1,0 +1,5 @@
+﻿<ConfigElements>
+  <ConfigElement progid="Atlantis.Framework.PresCentral.Impl.DetermineCacheKeyRequest" assembly="Atlantis.Framework.PresCentral.Impl.dll" request_type="542" ws_url="http://presentationcentral.dev.glbt1.gdg/atlantis/2012/determine-cache-key.aspx"></ConfigElement>
+  <ConfigElement progid="Atlantis.Framework.PresCentral.Impl.GenerateContentRequest" assembly="Atlantis.Framework.PresCentral.Impl.dll" request_type="543" ws_url="http://presentationcentral.dev.glbt1.gdg/atlantis/2012/generate-content.aspx"></ConfigElement>
+  <ConfigElement progid="Atlantis.Framework.PresCentral.Impl.GenerateContentNoCacheRequest" assembly="Atlantis.Framework.PresCentral.Impl.dll" request_type="544" ws_url="http://presentationcentral.dev.glbt1.gdg/atlantis/2012/generate-content-nocache.aspx"></ConfigElement>
+</ConfigElements>

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.IO;
 using System.Net;
 using System.Net.Cache;
@@ -13,75 +14,59 @@ namespace Atlantis.Framework.PresCentral.Impl
   {
     public IResponseData RequestHandler(RequestData requestData, ConfigElement config)
     {
-      IResponseData result = null;
+      IResponseData result;
 
-      T pcRequestData = (T)requestData;
-      WsConfigElement serviceConfig = (WsConfigElement)config;
-      WebRequest request = GetWebRequest(serviceConfig, pcRequestData);
+      var pcRequestData = (T)requestData;
+      var serviceConfig = (WsConfigElement)config;
+      var request = GetWebRequest(serviceConfig, pcRequestData);
 
-      try
+      string output;
+      using (var response = request.GetResponse())
       {
-        string output;
-        using (WebResponse response = request.GetResponse())
+        using (var receiveStream = response.GetResponseStream())
         {
-          using (Stream receiveStream = response.GetResponseStream())
+          using (var readStream = new StreamReader(receiveStream, Encoding.UTF8))
           {
-            using (StreamReader readStream = new StreamReader(receiveStream, Encoding.UTF8))
-            {
-              output = readStream.ReadToEnd();
-            }
+            output = readStream.ReadToEnd();
           }
         }
-
-        PCResponse responseData = new PCResponse(output);
-
-        if ((responseData.ResultCode == 0) || (pcRequestData.AllowErrorResponses))
-        {
-          result = pcRequestData.CreateResponse(responseData);
-        }
-        else
-        {
-          // Error conditions
-          StringBuilder mb = new StringBuilder(500);
-          foreach (PCResponseError error in responseData.Errors)
-          {
-            mb.Append(error.ErrorNumber.ToString());
-            mb.Append('=');
-            mb.Append(error.Message);
-            mb.Append(':');
-          }
-
-          string message = mb.ToString();
-          string data = request.RequestUri.ToString();
-          AtlantisException aex = new AtlantisException(requestData, "PCRequest2012.RequestHandler", message, data);
-          result = pcRequestData.CreateResponse(aex);
-        }
-
       }
-      catch (Exception ex)
+
+      var responseData = new PCResponse(output);
+
+      if (responseData.ResultCode == 0)
       {
-        string message = ex.Message + ex.StackTrace;
-        string data = request.RequestUri.ToString();
-        AtlantisException aex = new AtlantisException(requestData, "PCRequest2012.RequestHandler", message, data);
-        result = pcRequestData.CreateResponse(aex);
+        result = pcRequestData.CreateResponse(responseData);
+      }
+      else
+      {
+        // Error conditions
+        var mb = new StringBuilder(500);
+        foreach (var error in responseData.Errors)
+        {
+          mb.Append(error.ErrorNumber.ToString(CultureInfo.InvariantCulture));
+          mb.Append('=');
+          mb.Append(error.Message);
+          mb.Append(':');
+        }
+
+        throw new AtlantisException(requestData, "PCRequest2012.RequestHandler", mb.ToString(), request.RequestUri.ToString());
       }
 
       return result;
     }
 
-    private WebRequest GetWebRequest(WsConfigElement config, T requestData)
+    private static WebRequest GetWebRequest(WsConfigElement config, T requestData)
     {
-      WebRequest result;
-      UriBuilder urlBuilder = new UriBuilder(config.WSURL);
+      var urlBuilder = new UriBuilder(config.WSURL);
+      var query = requestData.GetQuery();
 
-      string query = requestData.GetQuery();
       if (!string.IsNullOrEmpty(query))
       {
         urlBuilder.Query = query;
       }
 
-      Uri uri = urlBuilder.Uri;
-      result = HttpWebRequest.Create(uri);
+      var result = WebRequest.Create(urlBuilder.Uri);
       result.Timeout = (int)requestData.RequestTimeout.TotalMilliseconds;
       result.CachePolicy = new RequestCachePolicy(RequestCacheLevel.BypassCache);
       return result;

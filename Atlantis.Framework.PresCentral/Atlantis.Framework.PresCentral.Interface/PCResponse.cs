@@ -7,9 +7,9 @@ namespace Atlantis.Framework.PresCentral.Interface
 {
   public class PCResponse
   {
-    XDocument _responseDoc = null;
+    readonly XDocument _responseDoc;
     private int _resultCode;
-    private string _cacheKey = null;
+    private string _cacheKey;
     private Dictionary<string, string> _debugData;
     private List<PCResponseError> _errors;
     private List<PCContentItem> _itemsList;
@@ -31,16 +31,18 @@ namespace Atlantis.Framework.PresCentral.Interface
       _itemsDictionary = new Dictionary<string, PCContentItem>(6, StringComparer.InvariantCultureIgnoreCase);
 
       XElement itemsElement = _responseDoc.Descendants("items").FirstOrDefault();
-      if (itemsElement != null)
+      if (itemsElement == null)
       {
-        foreach (XElement contentItem in itemsElement.Descendants("item"))
+        return;
+      }
+
+      foreach (var contentItem in itemsElement.Descendants("item"))
+      {
+        if (contentItem != null)
         {
-          if (contentItem != null)
-          {
-            PCContentItem item = new PCContentItem(contentItem);
-            _itemsList.Add(item);
-            _itemsDictionary[item.Name] = item;
-          }
+          var item = new PCContentItem(contentItem);
+          _itemsList.Add(item);
+          _itemsDictionary[item.Name] = item;
         }
       }
     }
@@ -56,7 +58,7 @@ namespace Atlantis.Framework.PresCentral.Interface
         {
           if (errorItem != null)
           {
-            PCResponseError error = new PCResponseError(errorItem);
+            var error = new PCResponseError(errorItem);
             _errors.Add(error);
           }
         }
@@ -67,7 +69,7 @@ namespace Atlantis.Framework.PresCentral.Interface
     {
       _cacheKey = null;
 
-      XAttribute cacheKeyAtt = _responseDoc.Root.Attribute("cachekey");
+      var cacheKeyAtt = _responseDoc.Root.Attribute("cachekey");
       if (cacheKeyAtt != null)
       {
         _cacheKey = cacheKeyAtt.Value;
@@ -77,15 +79,17 @@ namespace Atlantis.Framework.PresCentral.Interface
     private void ParsePCResultCode()
     {
       _resultCode = -1;
-      XAttribute resultAtt = _responseDoc.Root.Attribute("result");
-      if (resultAtt != null)
+
+      var resultAtt = _responseDoc.Root.Attribute("result");
+      if (resultAtt == null)
       {
-        string resultString = resultAtt.Value;
-        int resultCode;
-        if (int.TryParse(resultString, out resultCode))
-        {
-          _resultCode = resultCode;
-        }
+        return;
+      }
+
+      int resultCode;
+      if (int.TryParse(resultAtt.Value, out resultCode))
+      {
+        _resultCode = resultCode;
       }
     }
 
@@ -119,7 +123,7 @@ namespace Atlantis.Framework.PresCentral.Interface
 
     public string GetDebugData(string key)
     {
-      string result = null;
+      string result;
       if (!_debugData.TryGetValue(key, out result))
       {
         result = null;
@@ -129,12 +133,12 @@ namespace Atlantis.Framework.PresCentral.Interface
 
     public IEnumerable<string> DebugDataKeys
     {
-      get { return _debugData.Keys as IEnumerable<string>; }
+      get { return _debugData.Keys; }
     }
 
     public IEnumerable<PCResponseError> Errors
     {
-      get { return _errors as IEnumerable<PCResponseError>; }
+      get { return _errors; }
     }
 
     public IEnumerable<PCContentItem> FindContentByLocation(string location)
@@ -144,7 +148,7 @@ namespace Atlantis.Framework.PresCentral.Interface
 
     public PCContentItem FindContentByName(string name)
     {
-      PCContentItem result = null;
+      PCContentItem result;
       if (!_itemsDictionary.TryGetValue(name, out result))
       {
         result = null;

@@ -7,7 +7,6 @@
     public const string Application = "app";
     public const string Https = "https";
     public const string CurrencyType = "currencytype";
-    public const string Country = "country";
     public const string Language = "language";
     public const string CountrySite = "countrysite";
     public const string DocType = "doctype";

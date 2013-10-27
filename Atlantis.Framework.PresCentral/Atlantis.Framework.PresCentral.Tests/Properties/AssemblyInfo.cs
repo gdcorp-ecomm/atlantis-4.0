@@ -6,11 +6,16 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Atlantis.Framework.PresCentral.Tests")]
-[assembly: AssemblyDescription("")]
-[assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("GoDaddy.com")]
+#if DEBUG
+[assembly: AssemblyDescription("Debug Build")]
+[assembly: AssemblyConfiguration("Debug Build")]
+#else
+[assembly: AssemblyDescription("Release Build")]
+[assembly: AssemblyConfiguration("Release Build")]
+#endif
+[assembly: AssemblyCompany("GoDaddy")]
 [assembly: AssemblyProduct("Atlantis.Framework.PresCentral.Tests")]
-[assembly: AssemblyCopyright("Copyright © GoDaddy.com 2012")]
+[assembly: AssemblyCopyright("Copyright © GoDaddy 2012-2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -32,5 +37,5 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: AssemblyVersion("4.0.0.0")]
+[assembly: AssemblyFileVersion("4.13.10.26")]

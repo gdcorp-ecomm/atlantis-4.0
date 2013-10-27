@@ -2,8 +2,8 @@
 <package >
   <metadata>
     <id>Atlantis.Framework.PresCentral.Impl</id>
-    <version>4.12.7.30</version>
-    <title>Atlantis Framework PresCentral</title>
+    <version>4.13.10.26</version>
+    <title>Atlantis Framework PresCentral Impl</title>
     <authors>$author$</authors>
     <owners>$author$</owners>
     <projectUrl>https://confluence.int.godaddy.com/display/ATLANTIS</projectUrl>
@@ -11,12 +11,9 @@
     <description>$description$</description>
     <releaseNotes></releaseNotes>
     <copyright>$copyright$</copyright>
-    <tags>Atlantis Framework PresCentral</tags>
-    <dependencies>
-      <dependency id="Atlantis.Framework.Interface" version="4.0.0.0" />
-    </dependencies>
+    <tags>Atlantis Framework PresCentral Impl</tags>
   </metadata>
   <files>
-    <file src="bin\Release\Atlantis.Framework.PresCentral.Impl.dll" target="lib\net40\Atlantis.Framework.PresCentral.Impl.dll" />
+    <file src="atlantis.config.transform" target="content\atlantis.config.transform" />
   </files>
 </package>

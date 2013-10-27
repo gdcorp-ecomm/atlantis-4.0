@@ -1,0 +1,10 @@
+<pc result="-1">
+  <debug>
+    <item name="CreateDate"><![CDATA[10/26/2013 11:23:51 PM]]></item>
+    <item name="SourceServer"><![CDATA[G1TWGDAPI001]]></item>
+  </debug>
+  <errors>
+    <error number="10"><![CDATA[Create ManifestHandler failed. Manifest is null. (manifest=doesnotexist)]]></error>
+    <error number="20"><![CDATA[Create ManifestHandler failed. Manifest is null. (manifest=doesnotexist)]]></error>
+  </errors>
+</pc>

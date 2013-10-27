@@ -8,19 +8,8 @@ namespace Atlantis.Framework.PresCentral.Interface
   public abstract class PCRequestDataBase : RequestData
   {
     public abstract IResponseData CreateResponse(PCResponse responseData);
-    public abstract IResponseData CreateResponse(AtlantisException ex);
 
-    public virtual bool AllowErrorResponses
-    {
-      get { return false; }
-    }
-
-    NameValueCollection _parameters = new NameValueCollection();
-
-    public PCRequestDataBase(string shopperId, string sourceURL, string orderId, string pathway, int pageCount) 
-      : base(shopperId, sourceURL, orderId, pathway, pageCount)
-    {
-    }
+    readonly NameValueCollection _parameters = new NameValueCollection();
 
     public void AddQueryParameter(string key, string value)
     {

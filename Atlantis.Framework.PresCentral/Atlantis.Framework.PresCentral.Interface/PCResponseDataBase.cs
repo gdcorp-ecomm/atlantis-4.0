@@ -4,15 +4,9 @@ namespace Atlantis.Framework.PresCentral.Interface
 {
   public abstract class PCResponseDataBase : IResponseData
   {
-    AtlantisException _exception = null;
-    PCResponse _responseData;
+    readonly PCResponse _responseData;
 
-    public PCResponseDataBase(AtlantisException exception)
-    {
-      _exception = exception;
-    }
-
-    public PCResponseDataBase(PCResponse responseData)
+    protected PCResponseDataBase(PCResponse responseData)
     {
       _responseData = responseData;
     }
@@ -34,7 +28,7 @@ namespace Atlantis.Framework.PresCentral.Interface
 
     public AtlantisException GetException()
     {
-      return _exception;
+      return null;
     }
 
   }

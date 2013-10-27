@@ -59,6 +59,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="atlantis.config.transform" />
     <None Include="Atlantis.Framework.PresCentral.Impl.nuget.bat" />
     <None Include="Atlantis.Framework.PresCentral.Impl.nuspec" />
     <None Include="packages.config" />

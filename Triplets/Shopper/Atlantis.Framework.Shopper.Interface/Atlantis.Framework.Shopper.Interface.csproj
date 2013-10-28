@@ -69,6 +69,8 @@
     <Compile Include="ShopperResponseStatusType.cs" />
     <Compile Include="UpdateShopperRequestData.cs" />
     <Compile Include="UpdateShopperResponseData.cs" />
+    <Compile Include="VerifiyCountryAllowedRequestData.cs" />
+    <Compile Include="VerifyCountryAllowedResponseData.cs" />
     <Compile Include="VerifyShopperRequestData.cs" />
     <Compile Include="VerifyShopperResponseData.cs" />
     <Compile Include="VipShopperRequestData.cs" />

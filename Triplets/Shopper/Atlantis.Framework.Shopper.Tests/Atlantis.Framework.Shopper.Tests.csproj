@@ -83,6 +83,7 @@
     <Compile Include="SearchShoppersTests.cs" />
     <Compile Include="ShopperPriceTypeTests.cs" />
     <Compile Include="UpdateShopperTests.cs" />
+    <Compile Include="VerifyCountryAllowedTests.cs" />
     <Compile Include="VerifyShopperTests.cs" />
     <Compile Include="VipShopperTests.cs" />
     <Compile Include="WrongTypeRequestData.cs" />

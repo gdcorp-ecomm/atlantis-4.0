@@ -145,7 +145,7 @@ namespace Atlantis.Framework.Providers.DomainProductPackage.Test
     [TestMethod]
     public void DomainProductPackagePreRegPriceTest()
     {
-      var domainSearchResponse = DomainSearch.SearchDomain("sunrise-test.o2.borg", SOURCE_CODE, string.Empty, new List<string> {"o2.borg"});
+      var domainSearchResponse = DomainSearch.SearchDomain("sunrise-test.menu", SOURCE_CODE, string.Empty, new List<string> {"menu"});
 
       var packageGroups = DomainProductPackageProvider.BuildDomainProductPackageGroups(domainSearchResponse.GetDomainsByGroup(DomainGroupTypes.EXACT_MATCH));
 
@@ -309,7 +309,7 @@ namespace Atlantis.Framework.Providers.DomainProductPackage.Test
     [TestMethod]
     public void DomainProductPackageGroupInPreRegTest()
     {
-      var packageLookUp = DomainProductPackageLookUp.Create(1, LaunchPhases.SunriseA, "blue-test", "o1.borg");
+      var packageLookUp = DomainProductPackageLookUp.Create(1, LaunchPhases.SunriseA, "o1.borg");
 
       var packageGroup = DomainProductPackageProvider.BuildDomainProductPackageGroup(packageLookUp);
 
@@ -322,7 +322,7 @@ namespace Atlantis.Framework.Providers.DomainProductPackage.Test
     [TestMethod]
     public void DomainProductPackageGroupRegistrationTest()
     {
-      var packageLookUp = DomainProductPackageLookUp.Create(1, LaunchPhases.SunriseA, "blue-test-123-456", "com");
+      var packageLookUp = DomainProductPackageLookUp.Create(1, LaunchPhases.SunriseA, "com");
 
       var packageGroup = DomainProductPackageProvider.BuildDomainProductPackageGroup(packageLookUp);
 

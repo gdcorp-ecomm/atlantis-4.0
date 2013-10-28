@@ -21,7 +21,7 @@ namespace Atlantis.Framework.Providers.DomainProductPackage
     private void SetApplicationFee(LaunchPhases launchPhase, IDomainProductPackage domainProductPackage, IDotTypeInfo dotTypeInfo)
     {
       var productIds = dotTypeInfo.GetPhaseApplicationProductIdList(launchPhase);
-
+     
       if (productIds != null && productIds.Count > 0)
       {
         IProductPackageItem appFeeItem = ProductPackageItem.Create(DomainProductPackage.APPLICATION_FEE, productIds[0], 1, 1, Container);
@@ -33,6 +33,7 @@ namespace Atlantis.Framework.Providers.DomainProductPackage
     private DomainRegistrationProductPackageGroup GetDomainRegistrationProductPackageGroup(IFindResponseDomain findResponseDomain, int domainCount)
     {
       var dotTypeInfo = _dotTypeProvider.Value.GetDotTypeInfo(findResponseDomain.Domain.Tld);
+      
 
       var domainProductPackageGroup = new DomainRegistrationProductPackageGroup
       {
@@ -48,7 +49,7 @@ namespace Atlantis.Framework.Providers.DomainProductPackage
       {
         foreach (var launchPhase in findResponseDomain.PreRegLaunchPhases)
         {
-          var domainProductLookup = DomainProductLookup.Create(years, domainCount, launchPhase, TLDProductTypes.Registration, tierId);
+          var domainProductLookup = DomainProductLookup.Create(years, domainCount, launchPhase, TLDProductTypes.Registration);
           var productid = dotTypeInfo.GetProductId(domainProductLookup);
 
           var domainProductPackage = new DomainProductPackage(Container) { Domain = findResponseDomain.Domain, TierId = findResponseDomain.InternalTier };

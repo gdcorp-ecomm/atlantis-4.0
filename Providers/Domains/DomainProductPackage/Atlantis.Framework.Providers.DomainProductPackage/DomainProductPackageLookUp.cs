@@ -10,13 +10,12 @@ namespace Atlantis.Framework.Providers.DomainProductPackage
     internal string Sld { get; set; }
     internal TLDProductTypes ProductType { get; set; }
 
-    public static DomainProductPackageLookUp Create(int domainCount, LaunchPhases launchPhase, string sld, string tld, TLDProductTypes productType = TLDProductTypes.Registration)
+    public static DomainProductPackageLookUp Create(int domainCount, LaunchPhases launchPhase, string tld, TLDProductTypes productType = TLDProductTypes.Registration)
     {
       var lookUp = new DomainProductPackageLookUp
         {
           DomainCount = domainCount, 
-          LaunchPhase = launchPhase, 
-          Sld = sld,
+          LaunchPhase = launchPhase,
           Tld = tld,
           ProductType = productType
         };

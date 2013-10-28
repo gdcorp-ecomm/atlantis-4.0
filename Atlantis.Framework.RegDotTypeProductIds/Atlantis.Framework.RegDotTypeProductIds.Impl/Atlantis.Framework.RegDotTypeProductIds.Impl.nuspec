@@ -1,0 +1,24 @@
+﻿<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Atlantis.Framework.RegDotTypeProductIds.Impl</id>
+    <version>4.11.12.16</version>
+    <title>Atlantis Framework RegDotTypeProductIds</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <projectUrl>https://confluence.int.godaddy.com/display/ATLANTIS</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes></releaseNotes>
+    <copyright>$copyright$</copyright>
+    <tags>Atlantis Framework RegDotTypeProductIds</tags>
+    <dependencies>
+      <dependency id="Atlantis.Framework.Engine" version="4.0.0.0" />
+      <dependency id="Atlantis.Framework.Interface" version="4.0.0.0" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="bin\Release\Atlantis.Framework.RegDotTypeProductIds.Impl.dll" target="lib\net40\Atlantis.Framework.RegDotTypeProductIds.Impl.dll" />
+    <file src="bin\Release\Atlantis.Framework.RegDotTypeProductIds.Impl.XmlSerializers.dll" target="lib\net40\Atlantis.Framework.RegDotTypeProductIds.Impl.XmlSerializers.dll" />
+  </files>
+</package>

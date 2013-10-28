@@ -95,6 +95,10 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="atlantis.config" />
+    <None Include="Atlantis.Framework.RegDotTypeRegistry.Impl.nuget.bat" />
+    <None Include="Atlantis.Framework.RegDotTypeRegistry.Impl.nuspec">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

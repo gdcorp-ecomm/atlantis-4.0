@@ -101,6 +101,8 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <None Include="app.config" />
+    <None Include="Atlantis.Framework.RegGetDotTypeProductIdList.Impl.nuget.bat" />
+    <None Include="Atlantis.Framework.RegGetDotTypeProductIdList.Impl.nuspec" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

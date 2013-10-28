@@ -103,6 +103,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="atlantis.config" />
+    <None Include="Atlantis.Framework.TLDDataCache.Interface.nuget.bat" />
+    <None Include="Atlantis.Framework.TLDDataCache.Interface.nuspec" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

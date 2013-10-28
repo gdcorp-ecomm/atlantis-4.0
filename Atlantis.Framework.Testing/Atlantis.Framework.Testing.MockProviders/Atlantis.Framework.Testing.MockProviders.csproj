@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="KnownPrivateLabelIds.cs" />
+    <Compile Include="MockDebugContext.cs" />
     <Compile Include="MockManagerContext.cs" />
     <Compile Include="MockManagerContextSettings.cs" />
     <Compile Include="MockNoManagerContext.cs" />

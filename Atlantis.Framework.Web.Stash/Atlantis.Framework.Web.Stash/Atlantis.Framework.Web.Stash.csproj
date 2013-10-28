@@ -52,6 +52,10 @@
     <Compile Include="StashData.cs" />
     <Compile Include="StashRenderLocation.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Atlantis.Framework.Web.Stash.nuget.bat" />
+    <None Include="Atlantis.Framework.Web.Stash.nuspec" />
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

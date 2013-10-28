@@ -5,10 +5,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Web.Capt
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BotDetect", "Component\BotDetect\BotDetect.csproj", "{DB71A246-51E3-4495-8840-BDF31CEC0E2C}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{4291D6F2-0124-4C59-9AA0-11D7825158BC}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Web.Stash", "..\..\Atlantis.Framework.Web.Stash\Atlantis.Framework.Web.Stash\Atlantis.Framework.Web.Stash.csproj", "{3F594DF0-9705-4781-B65D-937C0CCD9E4A}"
-EndProject
 Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Atlantis.Framework.Web.CaptchaCtl.TestWeb", "http://localhost:58857", "{33923029-BBC7-41AB-BB6C-940F28EA2D93}"
 	ProjectSection(WebsiteProperties) = preProject
 		SccProjectName = "SAK"
@@ -17,7 +13,7 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Atlantis.Framework.Web.Capt
 		SccProvider = "SAK"
 		UseIISExpress = "true"
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
-		ProjectReferences = "{f9e5d997-796a-40f1-914d-abdb32ba1f68}|Atlantis.Framework.Web.CaptchaCtl.dll;{3F594DF0-9705-4781-B65D-937C0CCD9E4A}|Atlantis.Framework.Web.Stash.dll;{DB71A246-51E3-4495-8840-BDF31CEC0E2C}|BotDetect.dll;"
+		ProjectReferences = "{f9e5d997-796a-40f1-914d-abdb32ba1f68}|Atlantis.Framework.Web.CaptchaCtl.dll;{DB71A246-51E3-4495-8840-BDF31CEC0E2C}|BotDetect.dll;"
 		Debug.AspNetCompiler.VirtualPath = "/localhost_58857"
 		Debug.AspNetCompiler.PhysicalPath = "Atlantis.Framework.Web.CaptchaCtl.TestWeb\"
 		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_58857\"
@@ -38,25 +34,21 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Atlantis.Framework.Web.Capt
 EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 5
+		SccNumberOfProjects = 4
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
-		SccProjectUniqueName0 = ..\\..\\Atlantis.Framework.Web.Stash\\Atlantis.Framework.Web.Stash\\Atlantis.Framework.Web.Stash.csproj
-		SccProjectTopLevelParentUniqueName0 = Atlantis.Framework.Web.CaptchaCtl.sln
-		SccProjectName0 = ../../Atlantis.Framework.Web.Stash/Atlantis.Framework.Web.Stash
-		SccLocalPath0 = ..\\..\\Atlantis.Framework.Web.Stash\\Atlantis.Framework.Web.Stash
-		SccLocalPath1 = .
-		SccProjectUniqueName2 = Atlantis.Framework.Web.Captcha\\Atlantis.Framework.Web.CaptchaCtl.csproj
-		SccProjectName2 = Atlantis.Framework.Web.Captcha
-		SccLocalPath2 = Atlantis.Framework.Web.Captcha
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Atlantis.Framework.Web.Captcha\\Atlantis.Framework.Web.CaptchaCtl.csproj
+		SccProjectName1 = Atlantis.Framework.Web.Captcha
+		SccLocalPath1 = Atlantis.Framework.Web.Captcha
+		SccProjectUniqueName2 = Component\\BotDetect\\BotDetect.csproj
+		SccProjectName2 = Component/BotDetect
+		SccLocalPath2 = Component\\BotDetect
 		SccWebProject3 = true
 		SccProjectUniqueName3 = http://localhost:58857
 		SccProjectName3 = Atlantis.Framework.Web.CaptchaCtl.TestWeb
 		SccLocalPath3 = Atlantis.Framework.Web.CaptchaCtl.TestWeb
 		SccProjectEnlistmentChoice3 = 2
-		SccProjectUniqueName4 = Component\\BotDetect\\BotDetect.csproj
-		SccProjectName4 = Component/BotDetect
-		SccLocalPath4 = Component\\BotDetect
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -71,10 +63,6 @@ Global
 		{DB71A246-51E3-4495-8840-BDF31CEC0E2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DB71A246-51E3-4495-8840-BDF31CEC0E2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DB71A246-51E3-4495-8840-BDF31CEC0E2C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3F594DF0-9705-4781-B65D-937C0CCD9E4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3F594DF0-9705-4781-B65D-937C0CCD9E4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3F594DF0-9705-4781-B65D-937C0CCD9E4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3F594DF0-9705-4781-B65D-937C0CCD9E4A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{33923029-BBC7-41AB-BB6C-940F28EA2D93}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{33923029-BBC7-41AB-BB6C-940F28EA2D93}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{33923029-BBC7-41AB-BB6C-940F28EA2D93}.Release|Any CPU.ActiveCfg = Debug|Any CPU
@@ -82,8 +70,5 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{3F594DF0-9705-4781-B65D-937C0CCD9E4A} = {4291D6F2-0124-4C59-9AA0-11D7825158BC}
 	EndGlobalSection
 EndGlobal

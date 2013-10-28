@@ -34,6 +34,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Atlantis.Framework.Web.Stash">
+      <HintPath>..\packages\Atlantis.Framework.Web.Stash.4.13.7.17\lib\net40\Atlantis.Framework.Web.Stash.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
@@ -48,14 +51,15 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Atlantis.Framework.Web.Stash\Atlantis.Framework.Web.Stash\Atlantis.Framework.Web.Stash.csproj">
-      <Project>{3f594df0-9705-4781-b65d-937c0ccd9e4a}</Project>
-      <Name>Atlantis.Framework.Web.Stash</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Component\BotDetect\BotDetect.csproj">
       <Project>{db71a246-51e3-4495-8840-bdf31cec0e2c}</Project>
       <Name>BotDetect</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Atlantis.Framework.Web.CaptchaCtl.nuget.bat" />
+    <None Include="Atlantis.Framework.Web.CaptchaCtl.nuspec" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

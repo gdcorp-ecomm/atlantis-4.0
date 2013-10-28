@@ -80,6 +80,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="atlantis.config" />
+    <None Include="Atlantis.Framework.Web.IeEdge.nuget.bat" />
+    <None Include="Atlantis.Framework.Web.IeEdge.nuspec" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -6,16 +6,20 @@ using System.Web;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Collections.Specialized;
+using System.Collections.Generic;
 
 namespace Atlantis.Framework.Providers.Language.Handlers
 {
   internal class CDSPhraseHandler : ILanguagePhraseHandler
   {
+    const string DebugInfoLogTrackingKey = "Providers.Language.CDSPhraseHandler.DebugInfoLogTracking";
     const string CLIENT_SPOOF_PARAM_NAME = "version";
     const string SERVICE_SPOOF_PARAM_NAME = "docid";
     const string CDSDictionaryUrlFormat = "localization/{0}/{1}";
-    const string DebugInfoKeyFormat = "CDS Lang. Dictionary - {0}";
+    const string DebugInfoKey = "CDS Language Dictionary";
+    const string DebugInfoValueFormat = "{0}, {1}";
 
+    private readonly IProviderContainer _container;
     private readonly Lazy<ISiteContext> _siteContext;
     private readonly Lazy<ILocalizationProvider> _localization;
     private readonly Lazy<IDebugContext> _debugContext;
@@ -23,6 +27,7 @@ namespace Atlantis.Framework.Providers.Language.Handlers
 
     public CDSPhraseHandler(IProviderContainer container)
     {
+      _container = container;
       _siteContext = new Lazy<ISiteContext>(container.Resolve<ISiteContext>);
       _localization = new Lazy<ILocalizationProvider>(container.Resolve<ILocalizationProvider>);
       if (_siteContext.Value.IsRequestInternal)
@@ -66,7 +71,12 @@ namespace Atlantis.Framework.Providers.Language.Handlers
       {
         response = (CDSLanguageResponseData)DataCache.DataCache.GetProcessRequest(request, LanguageProviderEngineRequests.CDSLanguagePhrase);
       }
-      LogCDSDebugInfo(dictionaryUrl, response.VersionId);
+      //Commenting debug info logging since printing debug info happens even before language tokens are parsed.
+      //Will revist this code when this changes.
+      //if (!string.IsNullOrEmpty(response.VersionId))
+      //{
+      //  LogCDSDebugInfo(dictionaryUrl, response.VersionId);
+      //}
       return response;
     }
 
@@ -138,15 +148,24 @@ namespace Atlantis.Framework.Providers.Language.Handlers
         {
           if (_debugContext.Value != null)
           {
-            var debugData = _debugContext.Value.GetDebugTrackingData();
-            if (debugData == null || !(from kvp in debugData where kvp.Value == value select kvp).Any())
+            HashSet<string> loggedDebugInfoValues = _container.GetData<HashSet<string>>(DebugInfoLogTrackingKey, null);
+            if (loggedDebugInfoValues == null)
             {
-              _debugContext.Value.LogDebugTrackingData(string.Format(DebugInfoKeyFormat, name), value);
+              loggedDebugInfoValues = new HashSet<string>();
             }
-
+            string debugInfoValue = string.Format(DebugInfoValueFormat, name, value);
+            if (!loggedDebugInfoValues.Contains(debugInfoValue))
+            {
+              loggedDebugInfoValues.Add(debugInfoValue);
+              _debugContext.Value.LogDebugTrackingData(DebugInfoKey, debugInfoValue);
+              _container.SetData<HashSet<string>>(DebugInfoLogTrackingKey, loggedDebugInfoValues);
+            }
           }
         }
-        catch { }
+        catch
+        { 
+          //intentionally left blank
+        }
       }
     }
 

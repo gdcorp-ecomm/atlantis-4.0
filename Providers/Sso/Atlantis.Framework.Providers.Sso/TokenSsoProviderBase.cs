@@ -103,7 +103,7 @@ namespace Atlantis.Framework.Providers.Sso
 
       var tokenCookie = HttpContext.Current.Request.Cookies[GetTokenCookieName()];
 
-      if (tokenCookie != null && tokenCookie.Expires > DateTime.Now )
+      if (tokenCookie != null)
       {
         returnToken.data = tokenCookie.Value;
         returnToken.PrivateLabelId = _siteContext.Value.PrivateLabelId;

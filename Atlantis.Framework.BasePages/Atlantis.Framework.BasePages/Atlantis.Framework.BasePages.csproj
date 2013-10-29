@@ -65,6 +65,9 @@
     <Reference Include="Atlantis.Framework.ManagerUser.Interface">
       <HintPath>..\packages\Atlantis.Framework.ManagerUser.Interface.4.0.0.0\lib\net40\Atlantis.Framework.ManagerUser.Interface.dll</HintPath>
     </Reference>
+    <Reference Include="Atlantis.Framework.MiniEncrypt">
+      <HintPath>..\packages\Atlantis.Framework.MiniEncrypt.4.0.0.0\lib\net40\Atlantis.Framework.MiniEncrypt.dll</HintPath>
+    </Reference>
     <Reference Include="Atlantis.Framework.PrivateLabel.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Atlantis.Framework.PrivateLabel.Interface.4.0.0.0\lib\net40\Atlantis.Framework.PrivateLabel.Interface.dll</HintPath>
@@ -87,9 +90,6 @@
     <Reference Include="Atlantis.Framework.SessionCache, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Atlantis.Framework.SessionCache.4.13.10.22\lib\net40\Atlantis.Framework.SessionCache.dll</HintPath>
-    </Reference>
-    <Reference Include="Interop.gdMiniEncryptLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <EmbedInteropTypes>False</EmbedInteropTypes>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -117,10 +117,8 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Authentication\AuthenticationHelper.cs" />
-    <Compile Include="Authentication\AuthenticationWrapper.cs" />
     <Compile Include="BasePageEngineRequests.cs" />
     <Compile Include="ContextIds.cs" />
-    <Compile Include="Cookies\CookieCryptWrapper.cs" />
     <Compile Include="Cookies\CookieHelper.cs" />
     <Compile Include="Json\AtlantisContextJsonContentBasePage.cs">
       <SubType>ASPXCodeBehind</SubType>
@@ -138,33 +136,13 @@
     <Compile Include="Providers\MstkManagerContextProvider.cs" />
     <Compile Include="Providers\PrivateLabelAwareSiteContextProvider.cs" />
     <Compile Include="Providers\RequestHelper.cs" />
-    <Compile Include="Providers\ShopperContextProvider.cs" />
     <Compile Include="Providers\SiteContextProviderBase.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Reference\Interop.gdMiniEncryptLib.dll" />
   </ItemGroup>
   <ItemGroup>
     <None Include="atlantis.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Obsolete\Atlantis.Framework.ShopperPriceType\Atlantis.Framework.ShopperPriceType.Impl\Atlantis.Framework.ShopperPriceType.Impl.csproj">
-      <Project>{b328af05-4bee-45bb-9913-c836e5593e50}</Project>
-      <Name>Atlantis.Framework.ShopperPriceType.Impl</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Obsolete\Atlantis.Framework.ShopperPriceType\Atlantis.Framework.ShopperPriceType.Interface\Atlantis.Framework.ShopperPriceType.Interface.csproj">
-      <Project>{f310fe92-7999-46f3-a64e-36f90243ba02}</Project>
-      <Name>Atlantis.Framework.ShopperPriceType.Interface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Obsolete\Atlantis.Framework.VerifyShopper\Atlantis.Framework.VerifyShopper.Impl\Atlantis.Framework.VerifyShopper.Impl.csproj">
-      <Project>{fb8a1912-7114-4fe2-9e96-9698635fbeb1}</Project>
-      <Name>Atlantis.Framework.VerifyShopper.Impl</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Obsolete\Atlantis.Framework.VerifyShopper\Atlantis.Framework.VerifyShopper.Interface\Atlantis.Framework.VerifyShopper.Interface.csproj">
-      <Project>{8cdd515f-375e-4fa5-9e41-f95227396675}</Project>
-      <Name>Atlantis.Framework.VerifyShopper.Interface</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Triplets\Shopper\Atlantis.Framework.Shopper.Impl\Atlantis.Framework.Shopper.Impl.csproj">
       <Project>{b63887e6-bcae-48a8-bbc1-1fcdae96eaa3}</Project>
       <Name>Atlantis.Framework.Shopper.Impl</Name>

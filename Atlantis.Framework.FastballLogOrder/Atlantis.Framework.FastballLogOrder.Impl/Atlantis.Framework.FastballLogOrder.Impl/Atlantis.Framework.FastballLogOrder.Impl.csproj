@@ -110,6 +110,8 @@
     </WebReferenceUrl>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Atlantis.Framework.FastballLogOrder.Impl.nuget.bat" />
+    <None Include="Atlantis.Framework.FastballLogOrder.Impl.nuspec" />
     <None Include="packages.config" />
     <None Include="Web References\FastballOrderTracking\order.wsdl" />
   </ItemGroup>

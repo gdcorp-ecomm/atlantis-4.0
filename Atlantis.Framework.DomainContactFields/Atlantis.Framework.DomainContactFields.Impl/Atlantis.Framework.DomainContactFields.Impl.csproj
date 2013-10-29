@@ -59,16 +59,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Atlantis.Framework.DomainContactFields.Interface\Atlantis.Framework.DomainContactFields.Interface.csproj">
-      <Project>{bd8f8fc4-8a78-4dde-8ed7-8caef06791fe}</Project>
-      <Name>Atlantis.Framework.DomainContactFields.Interface</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Data\DomainContactFields.xml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="atlantis.config" />
+    <None Include="Atlantis.Framework.DomainContactFields.Impl.nuget.bat" />
+    <None Include="Atlantis.Framework.DomainContactFields.Impl.nuspec" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,0 +1,23 @@
+﻿<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Atlantis.Framework.FastballLogOrder.Impl</id>
+    <version>4.11.12.15</version>
+    <title>Atlantis Framework FastballLogOrder</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <projectUrl>https://confluence.int.godaddy.com/display/ATLANTIS</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes></releaseNotes>
+    <copyright>$copyright$</copyright>
+    <tags>Atlantis Framework FastballLogOrder</tags>
+    <dependencies>
+      <dependency id="Atlantis.Framework.Interface" version="4.0.0.0" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="bin\Release\Atlantis.Framework.FastballLogOrder.Impl.dll" target="lib\net40\Atlantis.Framework.FastballLogOrder.Impl.dll" />
+    <file src="bin\Release\Atlantis.Framework.FastballLogOrder.Impl.XmlSerializers.dll" target="lib\net40\Atlantis.Framework.FastballLogOrder.Impl.XmlSerializers.dll" />
+  </files>
+</package>

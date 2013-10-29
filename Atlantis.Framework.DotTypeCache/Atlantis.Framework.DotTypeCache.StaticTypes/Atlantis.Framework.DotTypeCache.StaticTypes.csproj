@@ -135,6 +135,10 @@
       <Name>Atlantis.Framework.DotTypeCache.Static</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Atlantis.Framework.DotTypeCache.StaticTypes.nuget.bat" />
+    <None Include="Atlantis.Framework.DotTypeCache.StaticTypes.nuspec" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

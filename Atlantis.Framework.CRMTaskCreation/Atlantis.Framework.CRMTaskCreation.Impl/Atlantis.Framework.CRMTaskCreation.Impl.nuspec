@@ -1,0 +1,22 @@
+﻿<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Atlantis.Framework.CRMTaskCreation.Impl</id>
+    <version>4.13.9.11</version>
+    <title>Atlantis Framework CRM Task Creation</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <projectUrl>https://confluence.int.godaddy.com/display/ATLANTIS</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes></releaseNotes>
+    <copyright>$copyright$</copyright>
+    <tags>Atlantis Framework CRM Task Creation</tags>
+    <dependencies>
+      <dependency id="Atlantis.Framework.Interface" version="4.0.0.0" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="bin\Release\Atlantis.Framework.CRMTaskCreation.Impl.dll" target="lib\net40\Atlantis.Framework.CRMTaskCreation.Impl.dll" />
+  </files>
+</package>

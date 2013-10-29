@@ -8,6 +8,7 @@ using Atlantis.Framework.ManagerUser.Interface;
 using Atlantis.Framework.BasePages.Cookies;
 using Atlantis.Framework.BasePages.Authentication;
 using Atlantis.Framework.Providers.Interface.ProviderContainer;
+using Atlantis.Framework.MiniEncrypt;
 
 namespace Atlantis.Framework.BasePages.TestWeb
 {
@@ -61,7 +62,8 @@ namespace Atlantis.Framework.BasePages.TestWeb
       string mname;
       if (GetManagerData(shopperId, out muserid, out mname))
       {
-        string mstk = AuthenticationHelper.GetMgrEncryptedValue(muserid, mname);
+        //string mstk = AuthenticationHelper.GetMgrEncryptedValue(muserid, mname);
+        string mstk = MstkAuthentication.CreateDisposable().CreateMstk(muserid, mname);
         string redirect = "~/ManagerTest.aspx?mstk=" + mstk + "&shopper_id=" + shopperId;
         Response.Redirect(redirect);
       }

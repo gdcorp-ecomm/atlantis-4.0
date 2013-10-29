@@ -83,6 +83,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Atlantis.Framework.ManagerUser.Interface.4.0.0.0\lib\net40\Atlantis.Framework.ManagerUser.Interface.dll</HintPath>
     </Reference>
+    <Reference Include="Atlantis.Framework.MiniEncrypt, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.MiniEncrypt.4.0.0.0\lib\net40\Atlantis.Framework.MiniEncrypt.dll</HintPath>
+    </Reference>
     <Reference Include="Atlantis.Framework.Nimitz, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Atlantis.Framework.Nimitz.4.0.0.0\lib\net40\Atlantis.Framework.Nimitz.dll</HintPath>
@@ -106,13 +110,19 @@
     <Reference Include="Atlantis.Framework.Providers.RenderPipeline.Interface">
       <HintPath>..\packages\Atlantis.Framework.Providers.RenderPipeline.Interface.4.13.10.16\lib\net40\Atlantis.Framework.Providers.RenderPipeline.Interface.dll</HintPath>
     </Reference>
+    <Reference Include="Atlantis.Framework.Providers.Shopper">
+      <HintPath>..\packages\Atlantis.Framework.Providers.Shopper.4.0.0.0\lib\net40\Atlantis.Framework.Providers.Shopper.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Providers.Shopper.Interface">
+      <HintPath>..\packages\Atlantis.Framework.Providers.Shopper.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Providers.Shopper.Interface.dll</HintPath>
+    </Reference>
     <Reference Include="Atlantis.Framework.SessionCache, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Atlantis.Framework.SessionCache.4.13.10.22\lib\net40\Atlantis.Framework.SessionCache.dll</HintPath>
     </Reference>
-    <Reference Include="Interop.gdMiniEncryptLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <EmbedInteropTypes>False</EmbedInteropTypes>
-      <HintPath>..\Atlantis.Framework.BasePages\Reference\Interop.gdMiniEncryptLib.dll</HintPath>
+    <Reference Include="Atlantis.Framework.Shopper.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Shopper.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Shopper.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="netConnect, Version=1.9.10.20, Culture=neutral, PublicKeyToken=6bd9b754bfae49c9, processorArchitecture=MSIL">

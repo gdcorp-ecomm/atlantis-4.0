@@ -1,7 +1,8 @@
-﻿using System;
-using Atlantis.Framework.Providers.Interface.ProviderContainer;
-using Atlantis.Framework.BasePages.Providers;
+﻿using Atlantis.Framework.BasePages.Providers;
 using Atlantis.Framework.Interface;
+using Atlantis.Framework.Providers.Interface.ProviderContainer;
+using Atlantis.Framework.Providers.Shopper;
+using System;
 
 namespace Atlantis.Framework.BasePages.TestWeb
 {

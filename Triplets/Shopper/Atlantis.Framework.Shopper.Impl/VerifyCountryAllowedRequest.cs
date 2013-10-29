@@ -15,40 +15,33 @@ namespace Atlantis.Framework.Shopper.Impl
     public IResponseData RequestHandler(RequestData requestData, ConfigElement config)
     {
       VerifyCountryAllowedResponseData response;
-      try
+      VerifiyCountryAllowedRequestData currentRequest = (VerifiyCountryAllowedRequestData)requestData;
+      string connectionString = NetConnect.LookupConnectInfo(config);
+      HashSet<string> blockedCountries = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+      using (SqlConnection connection = new SqlConnection(connectionString))
       {
-        VerifiyCountryAllowedRequestData currentRequest = (VerifiyCountryAllowedRequestData)requestData;
-        string connectionString = NetConnect.LookupConnectInfo(config);
-        HashSet<string> blockedCountries = new HashSet<string>(StringComparer.InvariantCultureIgnoreCase);
-        using (SqlConnection connection = new SqlConnection(connectionString))
+        using (SqlCommand command = new SqlCommand(_PROCNAME, connection))
         {
-          using (SqlCommand command = new SqlCommand(_PROCNAME, connection))
+          command.CommandType = CommandType.StoredProcedure;
+          command.CommandTimeout = (int)requestData.RequestTimeout.TotalSeconds;
+          connection.Open();
+          using (SqlDataReader reader = command.ExecuteReader())
           {
-            command.CommandType = CommandType.StoredProcedure;
-            command.CommandTimeout = (int)requestData.RequestTimeout.TotalSeconds;
-            connection.Open();
-            using (SqlDataReader reader = command.ExecuteReader())
+            while (reader.Read())
             {
-              while (reader.Read())
+              if (reader[0] != DBNull.Value)
               {
-                if (reader[0] != DBNull.Value)
+                string countryCode = reader[0] as string;
+                if (!string.IsNullOrEmpty(countryCode) && !blockedCountries.Contains(countryCode))
                 {
-                  string countryCode = reader[0] as string;
-                  if (!string.IsNullOrEmpty(countryCode) && !blockedCountries.Contains(countryCode))
-                  {
-                    blockedCountries.Add(countryCode);
-                  }
+                  blockedCountries.Add(countryCode);
                 }
               }
             }
           }
         }
-        response=new VerifyCountryAllowedResponseData(blockedCountries,currentRequest.CountryCode);
       }
-      catch (Exception ex)
-      {
-        response=new VerifyCountryAllowedResponseData(new AtlantisException(requestData, "VerifiyCountryAllowedRequest.RequestHandler()", ex.Message, requestData.ToXML()));
-      }
+      response = new VerifyCountryAllowedResponseData(blockedCountries);
       return response;
     }
 

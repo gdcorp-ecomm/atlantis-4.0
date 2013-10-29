@@ -11,31 +11,21 @@ namespace Atlantis.Framework.Shopper.Interface
   {
     AtlantisException _exception;
     private readonly HashSet<string> _countryCodes;
-    private HashSet<string> CountryCodes
-    {
-      get
-      {
-        return _countryCodes;
-      }
-    }
-
-    public bool IsAllowed { get; set; }
 
     public VerifyCountryAllowedResponseData(AtlantisException exceptionOccured)
     {
       _exception = exceptionOccured;
-      _countryCodes=new HashSet<string>(StringComparer.InvariantCultureIgnoreCase);
+      _countryCodes = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
     }
 
-    public VerifyCountryAllowedResponseData(HashSet<string> countryList,string countryCode)
+    public VerifyCountryAllowedResponseData(HashSet<string> countryList)
     {
       _countryCodes = countryList;
-      IsAllowed = !_countryCodes.Contains(countryCode);
     }
 
     public bool IsCountryAllowed(string countryCode)
     {
-      return CountryCodes.Contains(countryCode);
+      return _countryCodes.Contains(countryCode);
     }
 
     public AtlantisException GetException()

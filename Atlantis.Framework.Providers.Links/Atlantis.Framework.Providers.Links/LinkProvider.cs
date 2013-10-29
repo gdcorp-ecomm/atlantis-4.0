@@ -13,8 +13,6 @@ namespace Atlantis.Framework.Providers.Links
 {
   public class LinkProvider : ProviderBase, ILinkProvider
   {
-    public static bool RemoveTrailingSlashFromRelativeRootUrl = false;
-    
     private static bool _lowerCaseRelativeUrlsForSEO = false;
     /// <summary>
     /// Setting this to true will lowercase all urls that don't use GetURL (same site urls) to improve SEO
@@ -228,19 +226,12 @@ namespace Atlantis.Framework.Providers.Links
       string path = ResolveUrl(AppendUrlLanguage(relativePath));
       bool bBaseUrlMissingSlash = (urlStringBuilder.Length > 0 && urlStringBuilder[urlStringBuilder.Length - 1] != '/') ||
                                   (urlStringBuilder.Length == 0);
-      bool bPathMissingSlash = (path.Length > 0 && path[0] != '/') ||
-                               (path.Length == 0);
+      bool bPathMissingSlash = (path.Length > 0 && path[0] != '/');
       if (bBaseUrlMissingSlash && bPathMissingSlash)
       {
         urlStringBuilder.Append('/');
       }
       urlStringBuilder.Append(path);
-
-      //  If the user didn't pass in a relative path, then remove trailing slash if needed
-      if (RemoveTrailingSlashFromRelativeRootUrl && (string.IsNullOrEmpty(relativePath) || relativePath == "~/" ))
-      {
-        urlStringBuilder.Replace("/", string.Empty, urlStringBuilder.Length - 1, 1);
-      }
 
       return urlStringBuilder;
     }
@@ -253,7 +244,7 @@ namespace Atlantis.Framework.Providers.Links
         return relativePath;
       }
 
-      if (relativePath.StartsWith("~"))
+      if (relativePath.StartsWith("~/"))
       {
         return relativePath.Insert(1, String.Format("/{0}", _localizationProvider.Value.RewrittenUrlLanguage));
       }
@@ -263,7 +254,12 @@ namespace Atlantis.Framework.Providers.Links
         return String.Format("/{0}{1}", _localizationProvider.Value.RewrittenUrlLanguage, relativePath);
       }
 
-      return String.Format("{0}/{1}", _localizationProvider.Value.RewrittenUrlLanguage, relativePath);
+      if (string.IsNullOrEmpty(relativePath))
+      {
+        return String.Format("/{0}", _localizationProvider.Value.RewrittenUrlLanguage);
+      }
+
+      return String.Format("/{0}/{1}", _localizationProvider.Value.RewrittenUrlLanguage, relativePath);
     }
 
     private static string ResolveUrl(string url)
@@ -375,12 +371,12 @@ namespace Atlantis.Framework.Providers.Links
 
       bool bBaseUrlMissingSlash = (urlStringBuilder.Length > 0 && urlStringBuilder[urlStringBuilder.Length - 1] != '/' && !isPage) ||
                                   (urlStringBuilder.Length == 0);
-      bool bPathMissingSlash = (relativePath.Length > 0 && relativePath[0] != '/') ||
-                               (relativePath.Length == 0);
+      bool bPathMissingSlash = (relativePath.Length > 0 && relativePath[0] != '/');
       if (bBaseUrlMissingSlash && bPathMissingSlash)
       {
         urlStringBuilder.Append('/');
       }
+
       urlStringBuilder.Append(relativePath);
 
       return urlStringBuilder;

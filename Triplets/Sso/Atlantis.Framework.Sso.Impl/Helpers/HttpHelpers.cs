@@ -6,18 +6,18 @@ namespace Atlantis.Framework.Sso.Impl.Helpers
 {
   internal static class HttpHelpers
   {
-    public static HttpWebRequest GetHttpWebRequestAndAddByteData(string wsUrl, byte[] byteData, string contentType, string httpMethod)
+    public static HttpWebRequest GetHttpWebRequestAndAddData(string wsUrl, string urlEncodedData, string contentType, string httpMethod)
     {
       var httpWebRequest = (HttpWebRequest)WebRequest.Create(wsUrl);
       httpWebRequest.Method = httpMethod;
       httpWebRequest.ContentType = contentType;
 
-      if (byteData != null)
+      if (urlEncodedData != null)
       {
-        httpWebRequest.ContentLength = byteData.Length;
-        using (Stream authPostStream = httpWebRequest.GetRequestStream())
+        httpWebRequest.ContentLength = urlEncodedData.Length;
+        using (var authPostStream = new StreamWriter(httpWebRequest.GetRequestStream()))
         {
-          authPostStream.Write(byteData, 0, byteData.Length);
+          authPostStream.Write(urlEncodedData);
         }
       }
 

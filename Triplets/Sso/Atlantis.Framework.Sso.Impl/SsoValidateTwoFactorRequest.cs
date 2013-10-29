@@ -1,4 +1,5 @@
-﻿using Atlantis.Framework.Interface;
+﻿using System.Web;
+using Atlantis.Framework.Interface;
 using Atlantis.Framework.Sso.Impl.Helpers;
 using Atlantis.Framework.Sso.Interface;
 using Atlantis.Framework.Sso.Interface.JsonHelperClasses;
@@ -20,10 +21,10 @@ namespace Atlantis.Framework.Sso.Impl
         _ssoTokenRequestData = (SsoValidateTwoFactorRequestData)requestData;
         ThrowExceptionIfRequestDataIsMissing();
 
-        var byteData = GetTokenRequestByteData();
+        var urlEncodedData = GetTokenRequestData();
         var wsUrl = ((WsConfigElement)config).WSURL;
 
-        var tokenWebRequest = HttpHelpers.GetHttpWebRequestAndAddByteData(wsUrl, byteData, "application/x-www-form-urlencoded", "POST");
+        var tokenWebRequest = HttpHelpers.GetHttpWebRequestAndAddData(wsUrl, urlEncodedData, "application/x-www-form-urlencoded", "POST");
         Token token = HttpHelpers.GetWebResponseAndConvertToObject<Token>(tokenWebRequest);
 
         response = new SsoValidateTwoFactorResponseData(token);
@@ -41,18 +42,17 @@ namespace Atlantis.Framework.Sso.Impl
       return response;
     }
 
-    private byte[] GetTokenRequestByteData()
+    private string GetTokenRequestData()
     {
       var inputDataString = new StringBuilder(100);
 
       inputDataString.Append("factor=p_sms");
       inputDataString.Append("&token=");
-      inputDataString.Append(_ssoTokenRequestData.EncryptedToken);
+      inputDataString.Append(HttpUtility.UrlEncode(_ssoTokenRequestData.EncryptedToken));
       inputDataString.Append("&value=");
-      inputDataString.Append(_ssoTokenRequestData.TwoFactorCode);
-      
-      var byteData = Encoding.UTF8.GetBytes(inputDataString.ToString());
-      return byteData;
+      inputDataString.Append(HttpUtility.UrlEncode(_ssoTokenRequestData.TwoFactorCode));
+
+      return inputDataString.ToString();
     }
 
     private void ThrowExceptionIfRequestDataIsMissing()

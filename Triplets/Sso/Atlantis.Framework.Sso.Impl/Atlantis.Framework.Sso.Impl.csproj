@@ -39,6 +39,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -55,16 +56,16 @@
     <Compile Include="SsoValidateTwoFactorRequest.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Atlantis.Framework.Sso.Interface\Atlantis.Framework.Sso.Interface.csproj">
-      <Project>{0244b4ee-6257-4019-9ff0-079f884a2e07}</Project>
-      <Name>Atlantis.Framework.Sso.Interface</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="atlantis.config" />
     <None Include="Atlantis.Framework.Sso.Impl.nuget.bat" />
     <None Include="Atlantis.Framework.Sso.Impl.nuspec" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Atlantis.Framework.Sso.Interface\Atlantis.Framework.Sso.Interface.csproj">
+      <Project>{0244b4ee-6257-4019-9ff0-079f884a2e07}</Project>
+      <Name>Atlantis.Framework.Sso.Interface</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -96,6 +96,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="atlantis.config" />
+    <None Include="Atlantis.Framework.Providers.DomainLookup.nuspec" />
+    <None Include="Atlantis.Framework.Providers.DomainLookup.nuget.bat" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

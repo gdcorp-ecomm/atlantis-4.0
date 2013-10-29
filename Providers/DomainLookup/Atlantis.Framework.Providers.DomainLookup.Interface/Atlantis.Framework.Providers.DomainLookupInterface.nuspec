@@ -1,0 +1,19 @@
+﻿<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Atlantis.Framework.Providers.DomainLookup.Interface</id>
+    <version>4.13.8.29</version>
+    <title>Atlantis Framework Providers DomainLookup Interface</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <projectUrl>https://confluence.int.godaddy.com/display/ATLANTIS</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes></releaseNotes>
+    <copyright>$copyright$</copyright>
+    <tags>Atlantis Framework Providers DomainLookup</tags>
+    <dependencies>
+      <dependency id="Atlantis.Framework.Interface" version="4.0.0.0" />
+    </dependencies>
+  </metadata>
+</package>

@@ -49,6 +49,10 @@
     <Reference Include="Atlantis.Framework.DataCacheService">
       <HintPath>..\packages\Atlantis.Framework.DataCacheService.4.0.0.0\lib\net40\Atlantis.Framework.DataCacheService.dll</HintPath>
     </Reference>
+    <Reference Include="Atlantis.Framework.DomainLookup.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.DomainLookup.Interface.4.13.10.28\lib\net40\Atlantis.Framework.DomainLookup.Interface.dll</HintPath>
+    </Reference>
     <Reference Include="Atlantis.Framework.Engine, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Atlantis.Framework.Engine.4.0.0.0\lib\net40\Atlantis.Framework.Engine.dll</HintPath>
@@ -69,6 +73,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Atlantis.Framework.Products.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Products.Interface.dll</HintPath>
     </Reference>
+    <Reference Include="Atlantis.Framework.Providers.DomainLookup.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Providers.DomainLookup.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Providers.DomainLookup.Interface.dll</HintPath>
+    </Reference>
     <Reference Include="Atlantis.Framework.Providers.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Atlantis.Framework.Providers.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Providers.Interface.dll</HintPath>
@@ -85,16 +93,6 @@
     <Compile Include="DomainLookupProvider.cs" />
     <Compile Include="DomainLookupRequests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\Triplets\DomainLookup\Atlantis.Framework.DomainLookup.Interface\Atlantis.Framework.DomainLookup.Interface.csproj">
-      <Project>{d19e730f-ee68-4b94-92d4-393e80c3f99e}</Project>
-      <Name>Atlantis.Framework.DomainLookup.Interface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Atlantis.Framework.Providers.DomainLookup.Interface\Atlantis.Framework.Providers.DomainLookup.Interface.csproj">
-      <Project>{76e3e83a-424a-4494-857f-d5142a3682af}</Project>
-      <Name>Atlantis.Framework.Providers.DomainLookup.Interface</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="atlantis.config" />

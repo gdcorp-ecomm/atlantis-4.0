@@ -1,12 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{7BE17AC9-9F2C-4D0A-BBAC-D18F55A9D314}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.DomainLookup.Impl", "..\..\Triplets\DomainLookup\Atlantis.Framework.DomainLookup.Impl\Atlantis.Framework.DomainLookup.Impl.csproj", "{89628C91-2A46-49FC-8DDB-566E2D7F23C8}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.DomainLookup.Interface", "..\..\Triplets\DomainLookup\Atlantis.Framework.DomainLookup.Interface\Atlantis.Framework.DomainLookup.Interface.csproj", "{D19E730F-EE68-4B94-92D4-393E80C3F99E}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Providers.DomainLookup", "Atlantis.Framework.Providers.DomainLookup\Atlantis.Framework.Providers.DomainLookup.csproj", "{7C565C96-0F1C-48D8-96D0-5A24FB65BC45}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Providers.DomainLookup.Interface", "Atlantis.Framework.Providers.DomainLookup.Interface\Atlantis.Framework.Providers.DomainLookup.Interface.csproj", "{76E3E83A-424A-4494-857F-D5142A3682AF}"
@@ -15,41 +9,25 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Provider
 EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 6
+		SccNumberOfProjects = 4
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
 		SccLocalPath0 = .
-		SccProjectUniqueName1 = ..\\..\\Triplets\\DomainLookup\\Atlantis.Framework.DomainLookup.Impl\\Atlantis.Framework.DomainLookup.Impl.csproj
-		SccProjectTopLevelParentUniqueName1 = Atlantis.Framework.Providers.DomainLookup.sln
-		SccProjectName1 = ../../Triplets/DomainLookup/Atlantis.Framework.DomainLookup.Impl
-		SccLocalPath1 = ..\\..\\Triplets\\DomainLookup\\Atlantis.Framework.DomainLookup.Impl
-		SccProjectUniqueName2 = ..\\..\\Triplets\\DomainLookup\\Atlantis.Framework.DomainLookup.Interface\\Atlantis.Framework.DomainLookup.Interface.csproj
-		SccProjectTopLevelParentUniqueName2 = Atlantis.Framework.Providers.DomainLookup.sln
-		SccProjectName2 = ../../Triplets/DomainLookup/Atlantis.Framework.DomainLookup.Interface
-		SccLocalPath2 = ..\\..\\Triplets\\DomainLookup\\Atlantis.Framework.DomainLookup.Interface
-		SccProjectUniqueName3 = Atlantis.Framework.Providers.DomainLookup.Interface\\Atlantis.Framework.Providers.DomainLookup.Interface.csproj
-		SccProjectName3 = Atlantis.Framework.Providers.DomainLookup.Interface
-		SccLocalPath3 = Atlantis.Framework.Providers.DomainLookup.Interface
-		SccProjectUniqueName4 = Atlantis.Framework.Providers.DomainLookup.Tests\\Atlantis.Framework.Providers.DomainLookup.Tests.csproj
-		SccProjectName4 = Atlantis.Framework.Providers.DomainLookup.Tests
-		SccLocalPath4 = Atlantis.Framework.Providers.DomainLookup.Tests
-		SccProjectUniqueName5 = Atlantis.Framework.Providers.DomainLookup\\Atlantis.Framework.Providers.DomainLookup.csproj
-		SccProjectName5 = Atlantis.Framework.Providers.DomainLookup
-		SccLocalPath5 = Atlantis.Framework.Providers.DomainLookup
+		SccProjectUniqueName1 = Atlantis.Framework.Providers.DomainLookup.Interface\\Atlantis.Framework.Providers.DomainLookup.Interface.csproj
+		SccProjectName1 = Atlantis.Framework.Providers.DomainLookup.Interface
+		SccLocalPath1 = Atlantis.Framework.Providers.DomainLookup.Interface
+		SccProjectUniqueName2 = Atlantis.Framework.Providers.DomainLookup.Tests\\Atlantis.Framework.Providers.DomainLookup.Tests.csproj
+		SccProjectName2 = Atlantis.Framework.Providers.DomainLookup.Tests
+		SccLocalPath2 = Atlantis.Framework.Providers.DomainLookup.Tests
+		SccProjectUniqueName3 = Atlantis.Framework.Providers.DomainLookup\\Atlantis.Framework.Providers.DomainLookup.csproj
+		SccProjectName3 = Atlantis.Framework.Providers.DomainLookup
+		SccLocalPath3 = Atlantis.Framework.Providers.DomainLookup
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{89628C91-2A46-49FC-8DDB-566E2D7F23C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{89628C91-2A46-49FC-8DDB-566E2D7F23C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{89628C91-2A46-49FC-8DDB-566E2D7F23C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{89628C91-2A46-49FC-8DDB-566E2D7F23C8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D19E730F-EE68-4B94-92D4-393E80C3F99E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D19E730F-EE68-4B94-92D4-393E80C3F99E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D19E730F-EE68-4B94-92D4-393E80C3F99E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D19E730F-EE68-4B94-92D4-393E80C3F99E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7C565C96-0F1C-48D8-96D0-5A24FB65BC45}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7C565C96-0F1C-48D8-96D0-5A24FB65BC45}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7C565C96-0F1C-48D8-96D0-5A24FB65BC45}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -65,9 +43,5 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{89628C91-2A46-49FC-8DDB-566E2D7F23C8} = {7BE17AC9-9F2C-4D0A-BBAC-D18F55A9D314}
-		{D19E730F-EE68-4B94-92D4-393E80C3F99E} = {7BE17AC9-9F2C-4D0A-BBAC-D18F55A9D314}
 	EndGlobalSection
 EndGlobal

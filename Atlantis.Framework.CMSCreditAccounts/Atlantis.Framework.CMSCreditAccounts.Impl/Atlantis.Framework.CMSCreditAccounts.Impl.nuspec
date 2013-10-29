@@ -1,0 +1,23 @@
+﻿<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Atlantis.Framework.CMSCreditAccounts.Impl</id>
+    <version>4.11.12.15</version>
+    <title>Atlantis Framework CMSCreditAccounts</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <projectUrl>https://confluence.int.godaddy.com/display/ATLANTIS</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes></releaseNotes>
+    <copyright>$copyright$</copyright>
+    <tags>Atlantis Framework CMSCreditAccounts</tags>
+    <dependencies>
+      <dependency id="Atlantis.Framework.Interface" version="4.13.9.25" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="bin\Release\Atlantis.Framework.CMSCreditAccounts.Impl.dll" target="lib\net40\Atlantis.Framework.CMSCreditAccounts.Impl.dll" />
+    <file src="bin\Release\Atlantis.Framework.CMSCreditAccounts.Impl.XmlSerializers.dll" target="lib\net40\Atlantis.Framework.CMSCreditAccounts.Impl.XmlSerializers.dll" />
+  </files>
+</package>

@@ -11,6 +11,9 @@ namespace Atlantis.Framework.DocumentAttributes.Tests
   {
     [TestMethod]
     [DeploymentItem("atlantis.config")]
+    [DeploymentItem("Atlantis.Framework.DocumentAttributes.Impl.dll")]
+    [DeploymentItem("Atlantis.Framework.DocumentAttributes.Impl.XmlSerializers.dll")]
+    [DeploymentItem("Atlantis.Framework.DocumentAttributes.Interface.dll")]
     public void GetDocumentAttributes()
     {
       DocumentAttributesRequestData request = new DocumentAttributesRequestData("832652", string.Empty, string.Empty, string.Empty, 0);

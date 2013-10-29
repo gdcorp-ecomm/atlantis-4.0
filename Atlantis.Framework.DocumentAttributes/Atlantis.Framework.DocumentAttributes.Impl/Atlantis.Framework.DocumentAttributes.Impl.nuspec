@@ -1,0 +1,23 @@
+﻿<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Atlantis.Framework.DocumentAttributes.Impl</id>
+    <version>4.11.12.7</version>
+    <title>Atlantis Framework DocumentAttributes</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <projectUrl>https://confluence.int.godaddy.com/display/ATLANTIS</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes></releaseNotes>
+    <copyright>$copyright$</copyright>
+    <tags>Atlantis Framework DocumentAttributes</tags>
+    <dependencies>
+      <dependency id="Atlantis.Framework.Interface" version="4.13.9.25" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="bin\Release\Atlantis.Framework.DocumentAttributes.Impl.dll" target="lib\net40\Atlantis.Framework.DocumentAttributes.Impl.dll" />
+    <file src="bin\Release\Atlantis.Framework.DocumentAttributes.Impl.XmlSerializers.dll" target="lib\net40\Atlantis.Framework.DocumentAttributes.Impl.XmlSerializers.dll" />
+  </files>
+</package>

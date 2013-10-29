@@ -1,10 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{DF4BAA5F-A493-4718-871E-C0334CFFAF11}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}"
-EndProject
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.DocumentAttributes.Interface", "Atlantis.Framework.DocumentAttributes.Interface\Atlantis.Framework.DocumentAttributes.Interface.csproj", "{E4D0A13B-19F0-45F0-BE7B-F144198AEB24}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.DocumentAttributes.Impl", "Atlantis.Framework.DocumentAttributes.Impl\Atlantis.Framework.DocumentAttributes.Impl.csproj", "{98C88312-7719-4EE1-BEB2-315F0F85DF6B}"
@@ -18,31 +14,21 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine", "..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj", "{D30157B2-C1B3-4073-BA5E-632E2337A997}"
-EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 6
+		SccNumberOfProjects = 4
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = http://tfs:8080/
+		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
 		SccLocalPath0 = .
-		SccProjectUniqueName1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
-		SccProjectTopLevelParentUniqueName1 = Atlantis.Framework.DocumentAttributes.sln
-		SccProjectName1 = ../Atlantis.Framework.Engine/Atlantis.Framework.Interface
-		SccLocalPath1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
-		SccProjectUniqueName2 = Atlantis.Framework.DocumentAttributes.Interface\\Atlantis.Framework.DocumentAttributes.Interface.csproj
-		SccProjectName2 = Atlantis.Framework.DocumentAttributes.Interface
-		SccLocalPath2 = Atlantis.Framework.DocumentAttributes.Interface
-		SccProjectUniqueName3 = Atlantis.Framework.DocumentAttributes.Impl\\Atlantis.Framework.DocumentAttributes.Impl.csproj
-		SccProjectName3 = Atlantis.Framework.DocumentAttributes.Impl
-		SccLocalPath3 = Atlantis.Framework.DocumentAttributes.Impl
-		SccProjectUniqueName4 = Atlantis.Framework.DocumentAttributes.Tests\\Atlantis.Framework.DocumentAttributes.Tests.csproj
-		SccProjectName4 = Atlantis.Framework.DocumentAttributes.Tests
-		SccLocalPath4 = Atlantis.Framework.DocumentAttributes.Tests
-		SccProjectUniqueName5 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
-		SccProjectTopLevelParentUniqueName5 = Atlantis.Framework.DocumentAttributes.sln
-		SccProjectName5 = ../Atlantis.Framework.Engine/Atlantis.Framework.Engine
-		SccLocalPath5 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
+		SccProjectUniqueName1 = Atlantis.Framework.DocumentAttributes.Interface\\Atlantis.Framework.DocumentAttributes.Interface.csproj
+		SccProjectName1 = Atlantis.Framework.DocumentAttributes.Interface
+		SccLocalPath1 = Atlantis.Framework.DocumentAttributes.Interface
+		SccProjectUniqueName2 = Atlantis.Framework.DocumentAttributes.Impl\\Atlantis.Framework.DocumentAttributes.Impl.csproj
+		SccProjectName2 = Atlantis.Framework.DocumentAttributes.Impl
+		SccLocalPath2 = Atlantis.Framework.DocumentAttributes.Impl
+		SccProjectUniqueName3 = Atlantis.Framework.DocumentAttributes.Tests\\Atlantis.Framework.DocumentAttributes.Tests.csproj
+		SccProjectName3 = Atlantis.Framework.DocumentAttributes.Tests
+		SccLocalPath3 = Atlantis.Framework.DocumentAttributes.Tests
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = Atlantis.Framework.DocumentAttributes.vsmdi
@@ -52,10 +38,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E4D0A13B-19F0-45F0-BE7B-F144198AEB24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E4D0A13B-19F0-45F0-BE7B-F144198AEB24}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E4D0A13B-19F0-45F0-BE7B-F144198AEB24}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -68,16 +50,8 @@ Global
 		{3375639A-EED6-4715-B4B9-2A6D39E6D05B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3375639A-EED6-4715-B4B9-2A6D39E6D05B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3375639A-EED6-4715-B4B9-2A6D39E6D05B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {DF4BAA5F-A493-4718-871E-C0334CFFAF11}
-		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {DF4BAA5F-A493-4718-871E-C0334CFFAF11}
 	EndGlobalSection
 EndGlobal

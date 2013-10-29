@@ -97,6 +97,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="Atlantis.Framework.CMSCreditAccounts.Impl.nuget.bat" />
+    <None Include="Atlantis.Framework.CMSCreditAccounts.Impl.nuspec" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

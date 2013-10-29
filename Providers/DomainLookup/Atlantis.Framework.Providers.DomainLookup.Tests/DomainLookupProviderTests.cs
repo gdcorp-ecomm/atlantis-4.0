@@ -46,6 +46,7 @@ namespace Atlantis.Framework.Providers.DomainLookup.Tests
         Assert.IsTrue(privateLabelCheck);
         Assert.AreEqual("jeffmcookietest1.info", provider.DomainName);
         Assert.AreEqual(data.PdDomainId, 467553);
+        Assert.AreEqual(false, provider.IsDomainAdult());
       }
 
       [TestMethod]
@@ -98,6 +99,17 @@ namespace Atlantis.Framework.Providers.DomainLookup.Tests
         Assert.AreEqual(data.Shopperid, string.Empty);
         Assert.AreEqual(data.IsActive, false);
         Assert.AreEqual(data.IsSmartDomain, false);
+      }
+
+      [TestMethod]
+      public void TestAdultName1()
+      {
+        IDomainLookupProvider provider = NewDomainLookupProvider();
+        IDomainLookupData data = provider.GetDomainInformation("IOWAISCOLD.XXX");
+
+        Assert.AreEqual(true, provider.IsDomainAdult());
+        Assert.AreEqual(false, provider.IsDomainExpired());
+        Assert.AreEqual(false, provider.IsDomainWithin90DaysOfExpiration());
       }
     }
 }

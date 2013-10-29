@@ -56,7 +56,7 @@ namespace Atlantis.Framework.Providers.DomainLookup
 
       public bool IsDomainAdult()
       {
-        return (_parkedDomainInfo.AdultStatusMap == 1) || (_parkedDomainInfo.AdultStatusMap == 3);
+        return (_parkedDomainInfo.AdultStatusMap == 1) || (_parkedDomainInfo.AdultStatusMap == 3) || (_parkedDomainInfo.TldId.Equals(280));
       }
 
       public bool IsDomainWithin90DaysOfExpiration()

@@ -35,6 +35,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Atlantis.Framework.DomainLookup.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.DomainLookup.Interface.4.13.10.28\lib\net40\Atlantis.Framework.DomainLookup.Interface.dll</HintPath>
+    </Reference>
     <Reference Include="Atlantis.Framework.Engine, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\ParkWeb-CashParking\Providers\ParkWeb.Providers.ParkedDomain\packages\Atlantis.Framework.Engine.4.0.0.0\lib\net40\Atlantis.Framework.Engine.dll</HintPath>
@@ -45,6 +49,10 @@
     <Reference Include="Atlantis.Framework.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Atlantis.Framework.Interface.4.13.9.25\lib\net40\Atlantis.Framework.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Providers.DomainLookup.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Providers.DomainLookup.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Providers.DomainLookup.Interface.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -71,12 +79,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Atlantis.Framework.DomainLookup.Interface\Atlantis.Framework.DomainLookup.Interface.csproj">
-      <Project>{d19e730f-ee68-4b94-92d4-393e80c3f99e}</Project>
-      <Name>Atlantis.Framework.DomainLookup.Interface</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
@@ -98,6 +100,8 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="atlantis.config" />
+    <None Include="Atlantis.Framework.DomainLookup.nuget.bat" />
+    <None Include="Atlantis.Framework.DomainLookup.nuspec" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

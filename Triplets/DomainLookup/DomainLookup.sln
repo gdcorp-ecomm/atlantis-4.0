@@ -1,19 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{73E34527-AE4E-42D0-AB4E-18E965200701}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.DomainLookup.Impl", "Atlantis.Framework.DomainLookup.Impl\Atlantis.Framework.DomainLookup.Impl.csproj", "{89628C91-2A46-49FC-8DDB-566E2D7F23C8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.DomainLookup.Interface", "Atlantis.Framework.DomainLookup.Interface\Atlantis.Framework.DomainLookup.Interface.csproj", "{D19E730F-EE68-4B94-92D4-393E80C3F99E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.DomainLookup.Tests", "Atlantis.Framework.DomainLookup.Tests\Atlantis.Framework.DomainLookup.Tests.csproj", "{0E2A93F3-1ADA-4381-B13F-AF07D0F59D63}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Providers.DomainLookup.Interface", "..\..\Providers\DomainLookup\Atlantis.Framework.Providers.DomainLookup.Interface\Atlantis.Framework.Providers.DomainLookup.Interface.csproj", "{76E3E83A-424A-4494-857F-D5142A3682AF}"
-EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 5
+		SccNumberOfProjects = 4
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
 		SccLocalPath0 = .
@@ -26,10 +22,6 @@ Global
 		SccProjectUniqueName3 = Atlantis.Framework.DomainLookup.Tests\\Atlantis.Framework.DomainLookup.Tests.csproj
 		SccProjectName3 = Atlantis.Framework.DomainLookup.Tests
 		SccLocalPath3 = Atlantis.Framework.DomainLookup.Tests
-		SccProjectUniqueName4 = ..\\..\\Providers\\DomainLookup\\Atlantis.Framework.Providers.DomainLookup.Interface\\Atlantis.Framework.Providers.DomainLookup.Interface.csproj
-		SccProjectTopLevelParentUniqueName4 = DomainLookup.sln
-		SccProjectName4 = ../../Providers/DomainLookup/Atlantis.Framework.Providers.DomainLookup.Interface
-		SccLocalPath4 = ..\\..\\Providers\\DomainLookup\\Atlantis.Framework.Providers.DomainLookup.Interface
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -48,15 +40,8 @@ Global
 		{0E2A93F3-1ADA-4381-B13F-AF07D0F59D63}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0E2A93F3-1ADA-4381-B13F-AF07D0F59D63}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0E2A93F3-1ADA-4381-B13F-AF07D0F59D63}.Release|Any CPU.Build.0 = Release|Any CPU
-		{76E3E83A-424A-4494-857F-D5142A3682AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{76E3E83A-424A-4494-857F-D5142A3682AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{76E3E83A-424A-4494-857F-D5142A3682AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{76E3E83A-424A-4494-857F-D5142A3682AF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{76E3E83A-424A-4494-857F-D5142A3682AF} = {73E34527-AE4E-42D0-AB4E-18E965200701}
 	EndGlobalSection
 EndGlobal

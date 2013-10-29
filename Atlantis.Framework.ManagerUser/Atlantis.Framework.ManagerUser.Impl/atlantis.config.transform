@@ -1,0 +1,3 @@
+﻿<ConfigElements>
+  <ConfigElement progid="Atlantis.Framework.ManagerUser.Impl.ManagerUserLookupRequest" assembly="Atlantis.Framework.ManagerUser.Impl.dll" request_type="65" ws_url="http://g1dwdvweb01/ManagerUserLookup/LookupService.asmx" />
+</ConfigElements>

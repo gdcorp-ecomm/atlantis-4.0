@@ -89,6 +89,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="atlantis.config.transform" />
+    <None Include="Atlantis.Framework.ManagerUser.Impl.nuget.bat" />
+    <None Include="Atlantis.Framework.ManagerUser.Impl.nuspec">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

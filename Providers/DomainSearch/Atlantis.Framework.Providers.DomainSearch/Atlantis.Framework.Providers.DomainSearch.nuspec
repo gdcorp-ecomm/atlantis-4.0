@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>Atlantis.Framework.Providers.DomainSearch</id>
-    <version>4.13.10.4</version>
+    <version>4.13.10.30</version>
     <title>Atlantis Framework Providers DomainSearch</title>
     <authors>$author$</authors>
     <owners>$author$</owners>

@@ -51,10 +51,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Atlantis.Framework.DCCDomainsDataCache.Interface.4.13.10.15\lib\net40\Atlantis.Framework.DCCDomainsDataCache.Interface.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.DotTypeCache.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.DotTypeCache.Interface.4.13.10.22\lib\net40\Atlantis.Framework.DotTypeCache.Interface.dll</HintPath>
-    </Reference>
     <Reference Include="Atlantis.Framework.Engine">
       <HintPath>..\packages\Atlantis.Framework.Engine.4.0.0.0\lib\net40\Atlantis.Framework.Engine.dll</HintPath>
     </Reference>
@@ -119,6 +115,10 @@
     <Compile Include="Web\DotTypeCacheMonitorRouteHandler.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Atlantis.Framework.DotTypeCache.Interface\Atlantis.Framework.DotTypeCache.Interface.csproj">
+      <Project>{95e67e48-7173-4f0c-854f-2f08cbfcf923}</Project>
+      <Name>Atlantis.Framework.DotTypeCache.Interface</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.DotTypeCache.StaticTypes\Atlantis.Framework.DotTypeCache.StaticTypes.csproj">
       <Project>{FC7381B1-66E0-462F-952B-4EC1F18E9C90}</Project>
       <Name>Atlantis.Framework.DotTypeCache.StaticTypes</Name>

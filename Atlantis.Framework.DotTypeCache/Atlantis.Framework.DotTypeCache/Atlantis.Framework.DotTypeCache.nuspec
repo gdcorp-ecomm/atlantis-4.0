@@ -25,7 +25,4 @@
       <dependency id="Atlantis.Framework.TLDDataCache.Interface" version="4.13.10.14" />
     </dependencies>
   </metadata>
-  <files>
-    <file src="bin\Release\Atlantis.Framework.DotTypeCache.dll" target="lib\net40\Atlantis.Framework.DotTypeCache.dll" />
-  </files>
 </package>

@@ -114,19 +114,34 @@ namespace Atlantis.Framework.Providers.DomainProductPackage
     }
 
 
-    public bool TryGetApplicationFee(out ICurrencyPrice applicationFee)
+    public bool TryGetApplicationFee(out ICurrencyPrice applicationFeePrice)
     {
-      applicationFee = null;
+      applicationFeePrice = null;
 
-      foreach (IProductPackageItem productPackageItem in PackageItems)
+      IProductPackageItem packageItem;
+      if (TryGetApplicationFeePackage(out packageItem))
       {
-        if (productPackageItem.Name == APPLICATION_FEE)
+        applicationFeePrice = packageItem.CurrentPrice;
+      }
+
+      return applicationFeePrice != null;
+    }
+
+
+    public bool TryGetApplicationFeePackage(out IProductPackageItem productPackageItem)
+    {
+      productPackageItem = null;
+
+      foreach (IProductPackageItem package in PackageItems)
+      {
+        if (package.Name == APPLICATION_FEE)
         {
-          applicationFee = productPackageItem.CurrentPrice;
+          productPackageItem = package;
+          break;
         }
       }
 
-      return applicationFee != null;
+      return productPackageItem != null;
     }
   }
 }

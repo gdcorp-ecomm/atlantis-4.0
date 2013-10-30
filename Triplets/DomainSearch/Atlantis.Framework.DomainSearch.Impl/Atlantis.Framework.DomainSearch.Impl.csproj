@@ -70,9 +70,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Dependencies\Newtonsoft.Json.dll" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Atlantis.Framework.DomainSearch.Interface\Atlantis.Framework.DomainSearch.Interface.csproj">
       <Project>{b2328a76-0f49-459e-b3c7-063e73bd56ff}</Project>
       <Name>Atlantis.Framework.DomainSearch.Interface</Name>

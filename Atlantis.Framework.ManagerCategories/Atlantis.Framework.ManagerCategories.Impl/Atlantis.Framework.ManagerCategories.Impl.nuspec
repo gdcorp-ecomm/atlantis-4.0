@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Atlantis.Framework.ManagerCategories</id>
+    <version>4.13.3.13</version>
+    <title>Atlantis Framework ManagerCategories</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <projectUrl>https://confluence.int.godaddy.com/display/ATLANTIS</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes></releaseNotes>
+    <copyright>$copyright$</copyright>
+    <tags>Atlantis Framework ManagerCategories</tags>
+    <dependencies>
+      <dependency id="Atlantis.Framework.DataCache" version="4.0.0.0" />
+    </dependencies>
+  </metadata>
+  <files />
+</package>

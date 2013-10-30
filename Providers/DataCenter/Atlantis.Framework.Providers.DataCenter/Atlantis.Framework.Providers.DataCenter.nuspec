@@ -1,0 +1,24 @@
+﻿<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Atlantis.Framework.Providers.DataCenter</id>
+    <version>4.13.8.12</version>
+    <title>Atlantis Framework Providers DataCenter</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <projectUrl>https://confluence.int.godaddy.com/display/ATLANTIS</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes></releaseNotes>
+    <copyright>$copyright$</copyright>
+    <tags>Atlantis Framework Providers DataCenter</tags>
+    <dependencies>
+      <dependency id="Atlantis.Framework.Engine" version="4.0.0.0" />
+      <dependency id="Atlantis.Framework.Interface" version="4.13.9.25" />
+      <dependency id="Atlantis.Framework.Providers.Geo.Interface" version="4.0.0.0" />
+      <dependency id="Atlantis.Framework.Providers.Preferences.Interface" version="4.0.0.0" />
+      <dependency id="Atlantis.Framework.Providers.DataCenter.Interface" version="4.13.8.12" />
+    </dependencies>
+  </metadata>
+  <files />
+</package>

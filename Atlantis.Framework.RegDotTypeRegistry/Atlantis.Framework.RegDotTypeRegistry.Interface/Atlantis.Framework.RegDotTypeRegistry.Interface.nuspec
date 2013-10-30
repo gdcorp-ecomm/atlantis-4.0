@@ -1,0 +1,19 @@
+﻿<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Atlantis.Framework.RegDotTypeRegistry.Interface</id>
+    <version>4.13.1.7</version>
+    <title>Atlantis Framework RegDotTypeRegistry Interface</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <projectUrl>https://confluence.int.godaddy.com/display/ATLANTIS</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes></releaseNotes>
+    <copyright>$copyright$</copyright>
+    <tags>Atlantis Framework RegDotTypeRegistry Interface</tags>
+    <dependencies>
+      <dependency id="Atlantis.Framework.Interface" version="4.13.9.25" />
+    </dependencies>
+  </metadata>
+</package>

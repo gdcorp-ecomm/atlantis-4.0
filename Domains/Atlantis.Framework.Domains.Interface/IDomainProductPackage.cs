@@ -16,6 +16,8 @@ namespace Atlantis.Framework.Domains.Interface
 
     bool TryGetApplicationFee(out ICurrencyPrice applicationFee);
 
+    bool TryGetApplicationFeePackage(out IProductPackageItem productPackageItem);
+
     //void SetPrivacy(string privacyPackageItemName);
 
     /// <summary>

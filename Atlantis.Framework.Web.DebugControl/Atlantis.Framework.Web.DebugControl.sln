@@ -1,36 +1,12 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Web.DebugControl", "Atlantis.Framework.Web.DebugControl\Atlantis.Framework.Web.DebugControl.csproj", "{60BE50B6-D8F1-4C41-8DBE-9D911539EB3E}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Web.DebugControl.TestWeb", "Atlantis.Framework.Web.DebugControl.TestWeb\Atlantis.Framework.Web.DebugControl.TestWeb.csproj", "{2F98C3B3-68C7-4563-9AFC-B10050AEE251}"
-EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 3
+		SccNumberOfProjects = 1
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
-		SccProjectUniqueName0 = Atlantis.Framework.Web.DebugControl\\Atlantis.Framework.Web.DebugControl.csproj
-		SccProjectName0 = Atlantis.Framework.Web.DebugControl
-		SccLocalPath0 = Atlantis.Framework.Web.DebugControl
-		SccProjectUniqueName1 = Atlantis.Framework.Web.DebugControl.TestWeb\\Atlantis.Framework.Web.DebugControl.TestWeb.csproj
-		SccProjectName1 = Atlantis.Framework.Web.DebugControl.TestWeb
-		SccLocalPath1 = Atlantis.Framework.Web.DebugControl.TestWeb
-		SccLocalPath2 = .
-	EndGlobalSection
-	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|Any CPU = Debug|Any CPU
-		Release|Any CPU = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{60BE50B6-D8F1-4C41-8DBE-9D911539EB3E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{60BE50B6-D8F1-4C41-8DBE-9D911539EB3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{60BE50B6-D8F1-4C41-8DBE-9D911539EB3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{60BE50B6-D8F1-4C41-8DBE-9D911539EB3E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2F98C3B3-68C7-4563-9AFC-B10050AEE251}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2F98C3B3-68C7-4563-9AFC-B10050AEE251}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2F98C3B3-68C7-4563-9AFC-B10050AEE251}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2F98C3B3-68C7-4563-9AFC-B10050AEE251}.Release|Any CPU.Build.0 = Release|Any CPU
+		SccLocalPath0 = .
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

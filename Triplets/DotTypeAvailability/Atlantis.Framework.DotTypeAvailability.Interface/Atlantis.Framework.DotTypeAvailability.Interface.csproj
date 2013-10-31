@@ -65,6 +65,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="Atlantis.Framework.DotTypeAvailability.Interface.nuget.bat" />
+    <None Include="Atlantis.Framework.DotTypeAvailability.Interface.nuspec" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

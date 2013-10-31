@@ -17,7 +17,6 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="bin\Release\Atlantis.Framework.DomainCheck.Impl.dll" target="lib\net40\Atlantis.Framework.DomainCheck.Impl.dll" />
     <file src="bin\Release\Atlantis.Framework.DomainCheck.Impl.XmlSerializers.dll" target="lib\net40\Atlantis.Framework.DomainCheck.Impl.XmlSerializers.dll" />
   </files>
 </package>

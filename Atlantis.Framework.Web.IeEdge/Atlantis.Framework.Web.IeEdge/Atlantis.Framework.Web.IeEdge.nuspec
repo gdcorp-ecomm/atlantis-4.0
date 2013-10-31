@@ -18,7 +18,5 @@
       <dependency id="Atlantis.Framework.Engine" version="4.0.0.0" />
     </dependencies>
   </metadata>
-  <files>
-    <file src="bin\Release\Atlantis.Framework.Web.IeEdge.dll" target="lib\net40\Atlantis.Framework.Web.IeEdge.dll" />
-  </files>
+  <files />
 </package>

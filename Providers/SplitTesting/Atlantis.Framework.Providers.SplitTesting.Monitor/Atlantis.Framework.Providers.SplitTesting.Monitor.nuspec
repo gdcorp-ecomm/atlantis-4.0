@@ -18,7 +18,5 @@
       <dependency id="Atlantis.Framework.Providers.Containers" version="4.13.10.12" />
     </dependencies>
   </metadata>
-  <files>
-    <file src="bin\Release\Atlantis.Framework.Providers.SplitTesting.Monitor.dll" target="lib\net40\Atlantis.Framework.Providers.SplitTesting.Monitor.dll" />
-  </files>
+  <files />
 </package>

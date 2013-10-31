@@ -18,7 +18,6 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="bin\Release\Atlantis.Framework.RegGetDotTypeRegistrar.Impl.dll" target="lib\net40\Atlantis.Framework.RegGetDotTypeRegistrar.Impl.dll" />
     <file src="bin\Release\Atlantis.Framework.RegGetDotTypeRegistrar.Impl.XmlSerializers.dll" target="lib\net40\Atlantis.Framework.RegGetDotTypeRegistrar.Impl.XmlSerializers.dll" />
   </files>
 </package>

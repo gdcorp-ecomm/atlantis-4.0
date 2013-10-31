@@ -20,7 +20,5 @@
       <dependency id="Atlantis.Framework.UserAgentEx.Interface" version="4.13.7.29" />
     </dependencies>
   </metadata>
-  <files>
-    <file src="bin\Release\Atlantis.Framework.UserAgentEx.Impl.dll" target="lib\net40\Atlantis.Framework.UserAgentEx.Impl.dll" />
-  </files>
+  <files />
 </package>

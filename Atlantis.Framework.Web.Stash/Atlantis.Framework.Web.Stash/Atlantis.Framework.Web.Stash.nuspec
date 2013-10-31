@@ -14,7 +14,5 @@
     <tags>Atlantis Framework Web Stash</tags>
     <dependencies />
   </metadata>
-  <files>
-    <file src="bin\Release\Atlantis.Framework.Web.Stash.dll" target="lib\net40\Atlantis.Framework.Web.Stash.dll" />
-  </files>
+  <files />
 </package>

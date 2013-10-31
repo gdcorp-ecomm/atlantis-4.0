@@ -18,7 +18,5 @@
       <dependency id="Atlantis.Framework.Sso.Interface" version="4.13.10.16" />
     </dependencies>
   </metadata>
-  <files>
-    <file src="bin\Release\Atlantis.Framework.Providers.Sso.Interface.dll" target="lib\net40\Atlantis.Framework.Providers.Sso.Interface.dll" />
-  </files>
+  <files />
 </package>

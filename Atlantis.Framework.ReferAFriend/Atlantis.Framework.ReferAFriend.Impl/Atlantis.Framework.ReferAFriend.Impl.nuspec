@@ -18,7 +18,5 @@
       <dependency id="Atlantis.Framework.SessionCache" version="4.13.10.22" />
     </dependencies>
   </metadata>
-  <files>
-    <file src="bin\Release\Atlantis.Framework.ReferAFriend.Impl.dll" target="lib\net40\Atlantis.Framework.ReferAFriend.Impl.dll" />
-  </files>
+  <files />
 </package>

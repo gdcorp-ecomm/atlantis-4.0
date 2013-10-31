@@ -18,7 +18,5 @@
       <dependency id="Atlantis.Framework.Nimitz" version="4.0.0.0" />
     </dependencies>
   </metadata>
-  <files>
-    <file src="bin\Release\Atlantis.Framework.ReceiptSurveyInsert.Impl.dll" target="lib\net40\Atlantis.Framework.ReceiptSurveyInsert.Impl.dll" />
-  </files>
+  <files />
 </package>

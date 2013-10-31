@@ -17,7 +17,5 @@
       <dependency id="Atlantis.Framework.Engine" version="4.0.0.0" />
     </dependencies>
   </metadata>
-  <files>
-    <file src="bin\Release\Atlantis.Framework.Support.Interface.dll" target="lib\net40\Atlantis.Framework.Support.Interface.dll" />
-  </files>
+  <files />
 </package>

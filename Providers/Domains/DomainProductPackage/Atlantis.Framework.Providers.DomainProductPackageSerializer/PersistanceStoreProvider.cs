@@ -28,7 +28,7 @@ namespace Atlantis.Framework.Providers.DomainProductPackageStateProvider
         IEnumerable<PackageData> packageDataItems;
         if (Serializer.TryGetPackageDataItems(packageDataSerializedString, out packageDataItems))
         {
-          domainProductPackages = PackageBuilder.PackageDataToDomainRegistratoinProduct(packageDataItems.ToList(), Container);
+          domainProductPackages = PackageBuilder.PackageDataToDomainRegistrationProduct(packageDataItems.ToList(), Container);
         }
 
         success = domainProductPackages.Any();
@@ -44,7 +44,7 @@ namespace Atlantis.Framework.Providers.DomainProductPackageStateProvider
 
     public void SaveDomainProductPackages(IEnumerable<IDomainRegistrationProductPackageGroup> domainRegistratoinProductPackageGroup)
     {
-      var packageDataItems = PackageBuilder.DomainRegistratoinProductToPackageData(domainRegistratoinProductPackageGroup);
+      var packageDataItems = PackageBuilder.DomainRegistrationProductToPackageData(domainRegistratoinProductPackageGroup);
 
       var output = JsonConvert.SerializeObject(packageDataItems);
 

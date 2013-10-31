@@ -13,8 +13,8 @@ namespace Atlantis.Framework.Providers.DomainProductPackage
 {
   public class DomainProductPackage : IDomainProductPackage
   {
-    internal const string PACKAGE_NAME = "IDomainProductPackage.DomainProductPackage";
-    internal const string APPLICATION_FEE = "IDomainProductPackage.DomainProductPackage";
+    internal const string PACKAGE_NAME = "IDomainProductPackage.DomainProductPackageItem";
+    internal const string APPLICATION_FEE = "IDomainProductPackage.ApplicationFeePackageItem";
     private readonly IProviderContainer _container;
     private readonly Lazy<IShopperContext> _shopperContext;
     private readonly Lazy<ICurrencyProvider> _currencyProvider;

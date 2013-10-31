@@ -24,7 +24,7 @@ namespace Atlantis.Framework.Providers.DomainProductPackageStateProvider
     public bool InLaunchPhase { get; set; }
 
     [DataMember(Name = "phzpkg")]
-    public Dictionary<LaunchPhases, Dictionary<string, object>> LaunchPhasePackages;
+    public Dictionary<LaunchPhases, List<IDictionary<string, object>>> LaunchPhasePackages;
 
     [DataMember(Name = "regpkg")] 
     public Dictionary<string, object> RegistrationPackage;

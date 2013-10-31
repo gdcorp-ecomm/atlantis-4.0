@@ -35,7 +35,7 @@ namespace Atlantis.Framework.Providers.DomainProductPackage
       var dotTypeInfo = _dotTypeProvider.Value.GetDotTypeInfo(findResponseDomain.Domain.Tld);
       
 
-      var domainProductPackageGroup = new DomainRegistrationProductPackageGroup
+      var domainRegProductPackageGroup = new DomainRegistrationProductPackageGroup
       {
         Domain = findResponseDomain.Domain,
         InLaunchPhase = findResponseDomain.InPreRegPhase,
@@ -45,7 +45,7 @@ namespace Atlantis.Framework.Providers.DomainProductPackage
       var years = dotTypeInfo.MinRegistrationLength;
       var tierId = findResponseDomain.InternalTier;
 
-      if (domainProductPackageGroup.InLaunchPhase)
+      if (domainRegProductPackageGroup.InLaunchPhase)
       {
         foreach (var launchPhase in findResponseDomain.PreRegLaunchPhases)
         {
@@ -56,10 +56,10 @@ namespace Atlantis.Framework.Providers.DomainProductPackage
 
           var productPackageItem = ProductPackageItem.Create(DomainProductPackage.PACKAGE_NAME, productid, 1, years, Container);
           domainProductPackage.PackageItems.Add(productPackageItem);
-          
+
           SetApplicationFee(launchPhase, domainProductPackage, dotTypeInfo);
 
-          domainProductPackageGroup.LaunchPhasePackages.Add(launchPhase, domainProductPackage);
+          domainRegProductPackageGroup.LaunchPhasePackages.Add(launchPhase, domainProductPackage);
         }
       }
       else
@@ -73,9 +73,9 @@ namespace Atlantis.Framework.Providers.DomainProductPackage
         var productPackageItem = ProductPackageItem.Create(DomainProductPackage.PACKAGE_NAME, productid, 1, years, Container);
         domainProductPackage.PackageItems.Add(productPackageItem);
 
-        domainProductPackageGroup.RegistrationPackage = domainProductPackage;
+        domainRegProductPackageGroup.RegistrationPackage = domainProductPackage;
       }
-      return domainProductPackageGroup;
+      return domainRegProductPackageGroup;
     }
 
     public IEnumerable<IDomainRegistrationProductPackageGroup> BuildDomainProductPackageGroups(IList<IFindResponseDomain> findResponseDomains)

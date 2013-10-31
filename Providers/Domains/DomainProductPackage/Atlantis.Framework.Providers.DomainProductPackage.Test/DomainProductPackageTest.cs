@@ -8,6 +8,7 @@ using Atlantis.Framework.Providers.DomainProductPackageStateProvider;
 using Atlantis.Framework.Providers.DomainSearch;
 using Atlantis.Framework.Providers.DomainSearch.Interface;
 using Atlantis.Framework.Providers.Interface.Currency;
+using Atlantis.Framework.Providers.Interface.Products;
 using Atlantis.Framework.Providers.Localization;
 using Atlantis.Framework.Providers.Localization.Interface;
 using Atlantis.Framework.Providers.ProxyContext;
@@ -135,7 +136,6 @@ namespace Atlantis.Framework.Providers.DomainProductPackage.Test
         Assert.IsTrue(packageGroup.InLaunchPhase);
         Assert.IsTrue(packageGroup.Domain.DomainName.Length > 0);
         Assert.IsTrue(packageGroup.LaunchPhasePackages.Count > 0);
-        Assert.IsTrue(packageGroup.TierId.HasValue);
 
         IDomainProductPackage registrationPackage;
         Assert.IsTrue(packageGroup.TryGetRegistrationPackage(out registrationPackage) == false);
@@ -228,7 +228,7 @@ namespace Atlantis.Framework.Providers.DomainProductPackage.Test
     [TestMethod]
     public void DomainProductPackageApplicationFeeTest()
     {
-      var domainSearchResponse = DomainSearch.SearchDomain("sunrise-test.o2.borg", SOURCE_CODE, string.Empty, new List<string> { "o2.borg" });
+      var domainSearchResponse = DomainSearch.SearchDomain("appfee123-test.menu", SOURCE_CODE, string.Empty, new List<string> { "menu" });
 
       var packageGroups = DomainProductPackageProvider.BuildDomainProductPackageGroups(domainSearchResponse.GetDomainsByGroup(DomainGroupTypes.EXACT_MATCH));
 
@@ -236,19 +236,24 @@ namespace Atlantis.Framework.Providers.DomainProductPackage.Test
 
       foreach (var packageGroup in packageGroups)
       {
-        var domainProductPackage = packageGroup.LaunchPhasePackages.ToList()[0].Value;
+        var landRushProductPackage = packageGroup.LaunchPhasePackages.ToList().FirstOrDefault(pkg => pkg.Key == LaunchPhases.Landrush);
 
         ICurrencyPrice currentPrice;
 
-        Assert.IsTrue(domainProductPackage.TryGetApplicationFee(out currentPrice));
-        Assert.IsTrue(currentPrice.Price > 0);
+        IProductPackageItem appFeePackage;
+        Assert.IsTrue(landRushProductPackage.Value.TryGetApplicationFeePackage(out appFeePackage));
+
+        Assert.IsTrue(appFeePackage.ProductId == 42753);
+
+        Assert.IsTrue(landRushProductPackage.Value.TryGetApplicationFee(out currentPrice));
+        Assert.IsTrue(currentPrice.Price == appFeePackage.CurrentPrice.Price);
       }
     }
 
     [TestMethod]  
     public void DomainProductPackageLaunchPhaseSerializeTest()
     {
-      var domainSearchResponse = DomainSearch.SearchDomain("blue-test.o1.borg", SOURCE_CODE, string.Empty);
+      var domainSearchResponse = DomainSearch.SearchDomain("blue-test.menu", SOURCE_CODE, string.Empty);
 
       var packageGroups = DomainProductPackageProvider.BuildDomainProductPackageGroups(domainSearchResponse.GetDomainsByGroup(DomainGroupTypes.EXACT_MATCH));
       
@@ -263,9 +268,8 @@ namespace Atlantis.Framework.Providers.DomainProductPackage.Test
         IDomainProductPackage registrationPackage;
 
         Assert.IsTrue(packageGroup.InLaunchPhase);
-        Assert.IsTrue(packageGroup.Domain.DomainName == "blue-test.o1.borg");
+        Assert.IsTrue(packageGroup.Domain.DomainName == "blue-test.menu");
         Assert.IsTrue(packageGroup.LaunchPhasePackages.Count > 0);
-        Assert.IsTrue(packageGroup.TierId.HasValue);
         Assert.IsTrue(packageGroup.TryGetRegistrationPackage(out registrationPackage) == false);
       
         var domainProductPackage = packageGroup.LaunchPhasePackages.ToList()[0];

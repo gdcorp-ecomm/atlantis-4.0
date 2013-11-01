@@ -21,5 +21,6 @@
   </metadata>
   <files>
     <file src="atlantis.config.transform" target="content\atlantis.config.transform" />
+    <file src="bin\Release\Atlantis.Framework.Shopper.Impl.XmlSerializers.dll" target="lib\net40\Atlantis.Framework.Shopper.Impl.XmlSerializers.dll" />
   </files>
 </package>

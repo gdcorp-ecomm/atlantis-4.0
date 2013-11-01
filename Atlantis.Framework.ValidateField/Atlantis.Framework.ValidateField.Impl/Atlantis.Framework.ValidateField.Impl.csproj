@@ -93,6 +93,8 @@
     <EmbeddedResource Include="Data\password.xml" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Atlantis.Framework.ValidateField.Impl.nuget.bat" />
+    <None Include="Atlantis.Framework.ValidateField.Impl.nuspec" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

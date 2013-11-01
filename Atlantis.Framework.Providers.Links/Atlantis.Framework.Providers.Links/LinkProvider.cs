@@ -218,7 +218,7 @@ namespace Atlantis.Framework.Providers.Links
     private StringBuilder BuildInitialRelativeUrl(string relativePath, LinkProviderOptions options)
     {
       string scheme;
-      ComputeFromOptions(options, out scheme);
+      ComputeFromOptions(options, true, out scheme);
       var urlStringBuilder = new StringBuilder(scheme.Length + DefaultRootLink.Length + relativePath.Length);
       urlStringBuilder.Append(scheme);
       urlStringBuilder.Append(DefaultRootLink);
@@ -281,7 +281,7 @@ namespace Atlantis.Framework.Providers.Links
     private StringBuilder BuildInitialUrl(int contextId, string linkName, string relativePath, LinkProviderOptions options, ref string countrySiteId, ref string marketId, out ILinkInfo linkInfo)
     {
       string scheme;
-      ComputeFromOptions(options, out scheme);
+      ComputeFromOptions(options, false, out scheme);
       var urlStringBuilder = new StringBuilder(scheme);
 
       bool isPage = false;
@@ -1205,15 +1205,22 @@ namespace Atlantis.Framework.Providers.Links
     }
     */
 
-    private void ComputeFromOptions(LinkProviderOptions options, out string scheme)
+    private void ComputeFromOptions(LinkProviderOptions options, bool isRelative, out string scheme)
     {
       if (options.HasFlag(LinkProviderOptions.ProtocolHttp))
       {
         scheme = _schemeNonSecure;
       }
-      else if (options.HasFlag(LinkProviderOptions.ProtocolHttps) && !IsDebugInternal())
+      else if (options.HasFlag(LinkProviderOptions.ProtocolHttps))
       {
-        scheme = _schemeSecure;
+        if (isRelative || IsDebugInternal())
+        {
+          scheme = _schemeNonSecure;
+        }
+        else
+        {
+          scheme = _schemeSecure;
+        }
       }
       else if (options.HasFlag(LinkProviderOptions.ProtocolAgnostic))
       {

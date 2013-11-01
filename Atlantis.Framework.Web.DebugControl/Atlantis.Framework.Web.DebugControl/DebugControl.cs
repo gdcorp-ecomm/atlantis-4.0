@@ -78,7 +78,8 @@ namespace Atlantis.Framework.Web.DebugControl
         new LiteralControl("<script language=\"javascript\" type=\"text/javascript\">" +
         "function PostForm() {"+
             "var form = document.createElement(\"form\");"+
-            "form.setAttribute(\"method\", \"post\");"+
+            "form.setAttribute(\"method\", \"post\");" +
+            "form.setAttribute(\"target\", \"_blank\");" +
             "form.setAttribute(\"action\", \"" + SiteAdminLink + "\" );"+
             "var hiddenField = document.createElement(\"input\");" +
             "hiddenField.setAttribute(\"type\", \"hidden\");" +
@@ -138,6 +139,7 @@ namespace Atlantis.Framework.Web.DebugControl
         "function PostForm() {" +
             "var form = document.createElement(\"form\");" +
             "form.setAttribute(\"method\", \"post\");" +
+            "form.setAttribute(\"target\", \"_blank\");" +
             "form.setAttribute(\"action\", \"" + SiteAdminLink + "\" );" +
             "var hiddenField = document.createElement(\"input\");" +
             "hiddenField.setAttribute(\"type\", \"hidden\");" +

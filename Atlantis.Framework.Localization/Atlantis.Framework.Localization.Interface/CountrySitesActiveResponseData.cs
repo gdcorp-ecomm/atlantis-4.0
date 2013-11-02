@@ -99,9 +99,17 @@ namespace Atlantis.Framework.Localization.Interface
       _countrySites = countrySites;
     }
 
-    public bool IsValidCountrySite(string countrySiteId)
+    public bool IsValidCountrySite(string countrySiteId, bool includeInternalOnly)
     {
-      return _countrySites.ContainsKey(countrySiteId);
+      ICountrySite countrySite;
+      if (TryGetCountrySiteById(countrySiteId, out countrySite) && (!countrySite.IsInternalOnly || includeInternalOnly))
+      {
+        return true;
+      }
+      else
+      {
+        return false;
+      }
     }
 
     public bool TryGetCountrySiteById(string countrySiteId, out ICountrySite countrySite)

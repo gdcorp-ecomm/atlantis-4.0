@@ -2,14 +2,14 @@
 <package >
   <metadata>
     <id>Atlantis.Framework.Localization.Interface</id>
-    <version>4.13.10.9</version>
+    <version>4.13.11.1</version>
     <title>Atlantis Framework Localization Interface</title>
     <authors>$author$</authors>
     <owners>$author$</owners>
     <projectUrl>https://confluence.int.godaddy.com/display/ATLANTIS</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes></releaseNotes>
+    <releaseNotes>Changed CountrySitesActiveResponseData.IsValidCountrySite to take a bool includeInternalOnly flag</releaseNotes>
     <copyright>$copyright$</copyright>
     <tags>Atlantis Framework Localization Interface</tags>
     <dependencies>

@@ -107,18 +107,18 @@ namespace Atlantis.Framework.Localization.Tests
     public void CountrySitesActiveResponse_IsValidCountrySite_ValidInput_ReturnsTrue()
     {
       CountrySitesActiveResponseData response = CountrySitesActiveResponseData.DefaultCountrySites;
-      Assert.IsTrue(response.IsValidCountrySite("www"));
-      Assert.IsTrue(response.IsValidCountrySite("uk"));
-      Assert.IsTrue(response.IsValidCountrySite("au"));
+      Assert.IsTrue(response.IsValidCountrySite("www", false));
+      Assert.IsTrue(response.IsValidCountrySite("uk", false));
+      Assert.IsTrue(response.IsValidCountrySite("au", false));
     }
 
     [TestMethod]
     public void CountrySitesActiveResponse_IsValidCountrySite_InvalidInput_ReturnsFalse()
     {
       CountrySitesActiveResponseData response = CountrySitesActiveResponseData.DefaultCountrySites;
-      Assert.IsFalse(response.IsValidCountrySite("xx"));
-      Assert.IsFalse(response.IsValidCountrySite(""));
-      Assert.IsFalse(response.IsValidCountrySite(" "));
+      Assert.IsFalse(response.IsValidCountrySite("xx", false));
+      Assert.IsFalse(response.IsValidCountrySite("", false));
+      Assert.IsFalse(response.IsValidCountrySite(" ", false));
     }
 
     #region Miscellaneous tests
@@ -200,6 +200,25 @@ namespace Atlantis.Framework.Localization.Tests
       CountrySitesActiveResponseData response = CountrySitesActiveResponseData.FromCacheDataXml(invalidXml);
       Assert.AreEqual(0, response.Count);
     }
+
+    [TestMethod]
+    public void CountrySitesActiveResponse_IsValidCountrySite_AcceptsIncludeInternalOnlyArgument_ReturnsAsNeeded()
+    {
+      const string xml = @"<data count=""3"">
+          <item catalog_countrySite=""au"" catalog_priceGroupID=""0"" countrySiteDescription=""Australia"" isActive=""-1"" internalOnly=""0"" defaultMarketID=""en-AU"" defaultCurrencyType=""AUD""/>
+          <item catalog_countrySite=""ca"" catalog_priceGroupID=""0"" countrySiteDescription=""Canada"" isActive=""-1"" internalOnly=""0"" defaultMarketID=""en-CA"" defaultCurrencyType=""CAD""/>
+          <item catalog_countrySite=""ar"" catalog_priceGroupID=""0"" countrySiteDescription=""Argentina"" isActive=""-1"" internalOnly=""1"" defaultMarketID=""es-AR"" defaultCurrencyType=""ARP""/>
+        </data>";
+
+      CountrySitesActiveResponseData response = CountrySitesActiveResponseData.FromCacheDataXml(xml);
+      Assert.IsTrue(response.IsValidCountrySite("au", false));
+      Assert.IsTrue(response.IsValidCountrySite("au", true));
+      Assert.IsTrue(response.IsValidCountrySite("ca", false));
+      Assert.IsTrue(response.IsValidCountrySite("ca", true));
+      Assert.IsFalse(response.IsValidCountrySite("ar", false));
+      Assert.IsTrue(response.IsValidCountrySite("ar", true));      
+    }
+
     #endregion
   }
 }

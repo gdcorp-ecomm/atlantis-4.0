@@ -1,0 +1,16 @@
+<data count="5">
+  <item catalog_countrySite="au" catalog_priceGroupID="0" countrySiteDescription="Australia" isActive="1" internalOnly="0" defaultMarketID="en-AU" defaultCurrencyType="AUD"/>
+  <item catalog_countrySite="ca" catalog_priceGroupID="0" countrySiteDescription="Canada" isActive="1" internalOnly="0" defaultMarketID="en-CA" defaultCurrencyType="CAD"/>
+  <item catalog_countrySite="in" catalog_priceGroupID="0" countrySiteDescription="India" isActive="1" internalOnly="0" defaultMarketID="en-IN" defaultCurrencyType="INR"/>
+  <item catalog_countrySite="uk" catalog_priceGroupID="0" countrySiteDescription="United Kingdom" isActive="1" internalOnly="0" defaultMarketID="en-GB" defaultCurrencyType="GBP"/>
+  <item catalog_countrySite="www" catalog_priceGroupID="0" countrySiteDescription="Global US" isActive="1" internalOnly="0" defaultMarketID="en-US" defaultCurrencyType="USD"/>
+  <item catalog_countrySite="pt" catalog_priceGroupID="0" countrySiteDescription="Portugal" isActive="1" internalOnly="0" defaultMarketID="pt-PT" defaultCurrencyType="EUR"/>
+  <item catalog_countrySite="br" catalog_priceGroupID="0" countrySiteDescription="Brazil" isActive="1" internalOnly="0" defaultMarketID="pt-BR" defaultCurrencyType="BRL"/>
+  <item catalog_countrySite="es" catalog_priceGroupID="0" countrySiteDescription="Spain" isActive="1" internalOnly="0" defaultMarketID="es-ES" defaultCurrencyType="EUR"/>
+  <item catalog_countrySite="fr" catalog_priceGroupID="0" countrySiteDescription="France" isActive="1" internalOnly="0" defaultMarketID="fr-FR" defaultCurrencyType="EUR"/>
+  <item catalog_countrySite="yy" catalog_priceGroupID="0" countrySiteDescription="Philippines" isActive="1" internalOnly="0" defaultMarketID="invalidmarket" defaultCurrencyType="PHP"/>
+  <item catalog_countrySite="zz" catalog_priceGroupID="0" countrySiteDescription="Philippines" isActive="1" internalOnly="0" defaultMarketID="en-PH" defaultCurrencyType="PHP"/>
+  <item catalog_countrySite="rc" catalog_priceGroupID="0" countrySiteDescription="RC Land" isActive="1" internalOnly="1" defaultMarketID="rc-RC" defaultCurrencyType="RCD"/>
+  <item catalog_countrySite="00" catalog_priceGroupID="0" countrySiteDescription="Public CountrySite Internal Market" isActive="1" internalOnly="0" defaultMarketID="00-00" defaultCurrencyType="000"/>
+  <item catalog_countrySite="01" catalog_priceGroupID="0" countrySiteDescription="Public CountrySite Public Market Internal Mapping" isActive="1" internalOnly="0" defaultMarketID="01-01" defaultCurrencyType="000"/>
+</data>

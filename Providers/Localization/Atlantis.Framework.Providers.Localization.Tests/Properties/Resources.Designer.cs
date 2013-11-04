@@ -59,5 +59,44 @@ namespace Atlantis.Framework.Providers.Localization.Tests.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;data count=&quot;10&quot;&gt;
+        ///  &lt;item catalog_countrySite=&quot;www&quot; catalog_marketID=&quot;en-US&quot; languageURLSegment=&quot;en&quot; isActive=&quot;1&quot; internalOnly=&quot;0&quot; /&gt;
+        ///  &lt;item catalog_countrySite=&quot;www&quot; catalog_marketID=&quot;es-US&quot; languageURLSegment=&quot;es&quot; isActive=&quot;1&quot; internalOnly=&quot;0&quot; /&gt;
+        ///  &lt;item catalog_countrySite=&apos;www&apos; catalog_marketID=&apos;es-BR&apos; languageURLSegment=&apos;es-br&apos; isActive=&apos;1&apos; internalOnly=&apos;0&apos; /&gt;
+        ///  &lt;item catalog_countrySite=&quot;www&quot; catalog_marketID=&quot;qa-QA&quot; languageURLSegment=&quot;qa-qa&quot; isActive=&quot;1&quot; internalOnly=&quot;1&quot; /&gt;
+        ///  &lt;item catalog_cou [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string CountrySiteMarketMappings {
+            get {
+                return ResourceManager.GetString("CountrySiteMarketMappings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;data count=&quot;5&quot;&gt;
+        ///  &lt;item catalog_countrySite=&quot;au&quot; catalog_priceGroupID=&quot;0&quot; countrySiteDescription=&quot;Australia&quot; isActive=&quot;1&quot; internalOnly=&quot;0&quot; defaultMarketID=&quot;en-AU&quot; defaultCurrencyType=&quot;AUD&quot;/&gt;
+        ///  &lt;item catalog_countrySite=&quot;ca&quot; catalog_priceGroupID=&quot;0&quot; countrySiteDescription=&quot;Canada&quot; isActive=&quot;1&quot; internalOnly=&quot;0&quot; defaultMarketID=&quot;en-CA&quot; defaultCurrencyType=&quot;CAD&quot;/&gt;
+        ///  &lt;item catalog_countrySite=&quot;in&quot; catalog_priceGroupID=&quot;0&quot; countrySiteDescription=&quot;India&quot; isActive=&quot;1&quot; internalOnly=&quot;0&quot; defaultMarketID=&quot;en-IN&quot; de [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string CountrySitesActive {
+            get {
+                return ResourceManager.GetString("CountrySitesActive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;data count=&quot;10&quot;&gt;
+        ///  &lt;item catalog_marketID=&quot;en-US&quot; marketDescription=&quot;English (United States)&quot; MSCulture=&quot;en-US&quot; isActive=&quot;1&quot; internalOnly=&quot;0&quot; /&gt;
+        ///  &lt;item catalog_marketID=&quot;es-US&quot; marketDescription=&quot;Spanish (United States)&quot; MSCulture=&quot;es-US&quot; isActive=&quot;1&quot; internalOnly=&quot;0&quot; /&gt;
+        ///  &lt;item catalog_marketID=&quot;qa-QA&quot; marketDescription=&quot;QA (Show Tags)&quot; MSCulture=&quot;en-US&quot; isActive=&quot;1&quot; internalOnly=&quot;-1&quot; /&gt;
+        ///  &lt;item catalog_marketID=&quot;qa-PS&quot; marketDescription=&quot;QA (Pseudo)&quot; MSCulture=&quot;en-US&quot; isActive=&quot;1&quot; internalOnly=&quot;-1&quot;  [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string MarketsActive {
+            get {
+                return ResourceManager.GetString("MarketsActive", resourceCulture);
+            }
+        }
     }
 }

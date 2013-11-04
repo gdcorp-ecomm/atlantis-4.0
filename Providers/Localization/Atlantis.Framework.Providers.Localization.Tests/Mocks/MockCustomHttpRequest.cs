@@ -29,5 +29,27 @@ namespace Atlantis.Framework.Providers.Localization.Tests.Mocks
     {
       return _appPath;
     }
+
+    private string _mockAcceptLanguageHeaderValue = null;
+    public void MockAcceptLanguageHeaderValues(string headerValue)
+    {
+      _mockAcceptLanguageHeaderValue = headerValue;
+    }
+
+    public override string GetKnownRequestHeader(int index)
+    {
+      string headerValue;
+
+      if (index == HeaderAcceptLanguage)
+      {
+        headerValue = _mockAcceptLanguageHeaderValue;
+      }
+      else
+      {
+        headerValue = base.GetKnownRequestHeader(index);
+      }
+
+      return headerValue;
+    }
   }
 }

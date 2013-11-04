@@ -12,11 +12,29 @@ using System.Web;
 namespace Atlantis.Framework.Providers.Localization.Tests
 {
   [TestClass]
-  [DeploymentItem("atlantis.config")]
+  [DeploymentItem(afeConfig)]
   [DeploymentItem("Interop.gdDataCacheLib.dll")]
   [DeploymentItem("Atlantis.Framework.Localization.Impl.dll")]
   public class CountrySubdomainLocalizationProviderTests
   {
+    public const string afeConfig = "atlantis.config";
+
+    [ClassInitialize]
+    public static void ClassInit(TestContext c)
+    {
+      Atlantis.Framework.Engine.Engine.ReloadConfig(afeConfig);
+
+      ReloadCache();
+    }
+
+    private static void ReloadCache()
+    {
+      foreach (var config in Engine.Engine.GetConfigElements())
+      {
+        DataCache.DataCache.ClearCachedData(config.RequestType);
+      }
+    }
+
     private IProviderContainer SetContext(string url)
     {
       MockHttpRequest request = new MockHttpRequest(url);
@@ -200,7 +218,7 @@ namespace Atlantis.Framework.Providers.Localization.Tests
       container.RegisterProvider<IProxyContext, TransperfectTestWebProxy>();
 
       ILocalizationProvider localization = container.Resolve<ILocalizationProvider>();
-      Assert.IsTrue(localization.IsGlobalSite());
+      Assert.IsFalse(localization.IsGlobalSite());
       Assert.AreEqual("ES", localization.ShortLanguage.ToUpperInvariant());
       Assert.AreEqual("ES-US", localization.FullLanguage.ToUpperInvariant());
       Assert.IsTrue(localization.IsActiveLanguage("eS"));
@@ -208,20 +226,20 @@ namespace Atlantis.Framework.Providers.Localization.Tests
     }
 
     [TestMethod]
-    public void SetLanguageOnTransperfectProxy()
+    public void SetMarketOnTransperfectProxy()
     {
       IProviderContainer container = SetContext("http://ca.mysite.com");
       container.RegisterProvider<IProxyContext, TransperfectTestWebProxy>();
 
       ILocalizationProvider localization = container.Resolve<ILocalizationProvider>();
-      Assert.IsTrue(localization.IsGlobalSite());
+      Assert.IsFalse(localization.IsGlobalSite());
       Assert.AreEqual("ES", localization.ShortLanguage.ToUpperInvariant());
 
-      localization.SetMarket("qa-QA");
-      Assert.AreEqual("QA", localization.ShortLanguage.ToUpperInvariant());
-      Assert.AreEqual("qa-qa", localization.FullLanguage.ToLowerInvariant());
-      Assert.AreEqual("qa-QA", localization.MarketInfo.Id);
-      Assert.AreEqual("en-US", localization.CurrentCultureInfo.Name);
+      localization.SetMarket("fr-CA");
+      Assert.AreEqual("es", localization.ShortLanguage.ToLowerInvariant());
+      Assert.AreEqual("es-us", localization.FullLanguage.ToLowerInvariant());
+      Assert.AreEqual("es-us", localization.MarketInfo.Id.ToLowerInvariant());
+      Assert.AreEqual("es-us", localization.CurrentCultureInfo.Name.ToLowerInvariant());
     }
 
     [TestMethod]
@@ -281,7 +299,8 @@ namespace Atlantis.Framework.Providers.Localization.Tests
       localization.SetMarket("qa-PS");
 
       info = localization.CurrentCultureInfo;
-      Assert.AreEqual("en-US", info.Name);
+      //Assert.AreEqual("en-US", info.Name);  // The active market table data was changed
+      Assert.AreEqual("de-DE", info.Name);
     }
 
     [TestMethod]

@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>Atlantis.Framework.Providers.Localization</id>
-    <version>4.13.10.9</version>
+    <version>4.13.11.4</version>
     <title>Atlantis Framework Providers Localization</title>
     <authors>$author$</authors>
     <owners>$author$</owners>
@@ -16,7 +16,7 @@
       <dependency id="Atlantis.Framework.DataCache" version="4.0.0.0" />
       <dependency id="Atlantis.Framework.Engine" version="4.0.0.0" />
       <dependency id="Atlantis.Framework.Providers.Geo.Interface" version="4.0.0.0" />
-      <dependency id="Atlantis.Framework.Providers.Localization.Interface" version="4.13.10.9" />
+      <dependency id="Atlantis.Framework.Providers.Localization.Interface" version="4.13.10.29" />
       <dependency id="Atlantis.Framework.RuleEngine" version="4.0.0.0" />
     </dependencies>
   </metadata>

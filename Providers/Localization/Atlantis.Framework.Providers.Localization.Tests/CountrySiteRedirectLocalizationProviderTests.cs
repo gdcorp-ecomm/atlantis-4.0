@@ -17,6 +17,8 @@ namespace Atlantis.Framework.Providers.Localization.Tests
   {
     private IProviderContainer SetContext(string url, string ipCountry)
     {
+      HttpContextFactory.ResetHttpContext();
+
       MockHttpRequest request = new MockHttpRequest(url);
       MockHttpContext.SetFromWorkerRequest(request);
       

@@ -132,6 +132,11 @@ namespace Atlantis.Framework.Providers.Localization.Interface
     string PreviousCountrySiteCookieValue { get; }
 
     /// <summary>
+    /// Returns the previous market id  preference value in the market id (language) cookie.
+    /// </summary>
+    string PreviousLanguageCookieValue { get; }
+
+    /// <summary>
     /// Returns true if the given is valid country subdomain (not case sensitive).
     /// </summary>
     /// <param name="countryCode">Country code.</param>
@@ -141,7 +146,7 @@ namespace Atlantis.Framework.Providers.Localization.Interface
     /// <summary>
     /// Sets the Market for the request
     /// </summary>
-    /// <param name="language">Market ID to set as the Market for the request</param>
+    /// <param name="marketId">Market ID to set as the Market for the request</param>
     void SetMarket(string marketId);
 
     /// <summary>
@@ -172,5 +177,6 @@ namespace Atlantis.Framework.Providers.Localization.Interface
     /// </summary>
     /// <returns>IMarket list for a given countrycode or returns default www</returns>
     IEnumerable<IMarket> GetMarketsForCountryCode(string countryCode);
+
   }
 }

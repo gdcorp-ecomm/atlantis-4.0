@@ -51,6 +51,30 @@ namespace Atlantis.Framework.Providers.Localization.Tests.Mocks.Http
       {
         return BaseRequest.Url;
       }
-    }    
+    }
+
+    public override string[] UserLanguages
+    {
+      get
+      {
+        return BaseRequest.UserLanguages;
+      }
+    }
+
+    public override System.Collections.Specialized.NameValueCollection QueryString
+    {
+      get
+      {
+        return BaseRequest.QueryString;
+      }
+    }
+
+    public override HttpCookieCollection Cookies
+    {
+      get
+      {
+        return BaseRequest.Cookies;
+      }
+    }
   }
 }

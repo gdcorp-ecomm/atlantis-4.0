@@ -1,4 +1,6 @@
 ﻿using Atlantis.Framework.Interface;
+using Atlantis.Framework.Localization.Interface;
+using Atlantis.Framework.Providers.Geo.Interface;
 using Atlantis.Framework.Providers.Localization.Interface;
 using Atlantis.Framework.Testing.MockHttpContext;
 using Atlantis.Framework.Testing.MockProviders;
@@ -18,11 +20,20 @@ namespace Atlantis.Framework.Providers.Localization.Tests
   {
     private IProviderContainer SetContext()
     {
-      MockHttpRequest request = new MockHttpRequest("http://www.mysite.com/");
+      return SetContext("http://www.mysite.com/");
+    }
+
+    private IProviderContainer SetContext(string url)
+    {
+      //  Clear HttpContextFactory
+      HttpContextFactory.ResetHttpContext();
+
+      MockHttpRequest request = new MockHttpRequest(url);
       MockHttpContext.SetFromWorkerRequest(request);
 
       IProviderContainer result = new MockProviderContainer();
       result.RegisterProvider<ISiteContext, MockSiteContext>();
+      result.RegisterProvider<IGeoProvider, MockGeoProvider>();
       result.RegisterProvider<ILocalizationProvider, CountryCookieLocalizationProvider>();
       return result;
     }
@@ -30,7 +41,7 @@ namespace Atlantis.Framework.Providers.Localization.Tests
     private void CreateCountryookie(int privateLabelId, string value)
     {
       HttpCookie countryCookie = new HttpCookie("countrysite" + privateLabelId.ToString(), value);
-      HttpContext.Current.Request.Cookies.Set(countryCookie);
+      HttpContext.Current.Response.Cookies.Set(countryCookie);
     }
 
     [TestMethod]
@@ -82,14 +93,14 @@ namespace Atlantis.Framework.Providers.Localization.Tests
     }
 
     [TestMethod]
-    public void InvalidCookieES()
+    public void ValidCookieES()
     {
       IProviderContainer container = SetContext();
       CreateCountryookie(1, "es");
 
       ILocalizationProvider localization = container.Resolve<ILocalizationProvider>();
-      Assert.AreEqual("WWW", localization.CountrySite.ToUpperInvariant());
-      Assert.IsTrue(localization.IsCountrySite("www"));
+      Assert.AreEqual("ES", localization.CountrySite.ToUpperInvariant());
+      Assert.IsTrue(localization.IsCountrySite("es"));
     }
 
     [TestMethod]
@@ -123,7 +134,7 @@ namespace Atlantis.Framework.Providers.Localization.Tests
     }
 
     [TestMethod]
-    public void EnsureResponseCookieNotSet()
+    public void EnsureResponseCookieSet()
     {
       IProviderContainer container = SetContext();
 
@@ -131,11 +142,8 @@ namespace Atlantis.Framework.Providers.Localization.Tests
       Assert.IsTrue(localization.IsGlobalSite());
 
       string key = "countrysite1";
-      foreach(string cookiekey in HttpContext.Current.Response.Cookies.Keys)
-      {
-        Assert.AreNotEqual(key, cookiekey);
-      }
-    }
+      Assert.AreEqual("www", HttpContext.Current.Response.Cookies[key].Value.ToLowerInvariant());
+    }    
 
     [TestMethod]
     public void CountrySiteContext1Only()
@@ -159,5 +167,119 @@ namespace Atlantis.Framework.Providers.Localization.Tests
 
     }
 
+    [TestMethod]
+    public void QueryString_INVALID_Cookie_INVALID_IpCountry_INVALID_Result_WWW()
+    {
+      var container = SetContext();
+      container.SetData(MockGeoProvider.REQUEST_COUNTRY_SETTING_NAME, string.Empty);
+      ILocalizationProvider localization = container.Resolve<ILocalizationProvider>();
+      Assert.AreEqual("www", localization.CountrySite.ToLowerInvariant());
+      Assert.AreEqual("www", HttpContext.Current.Response.Cookies["countrysite1"].Value.ToLowerInvariant());
+
+      container = SetContext();
+      container.SetData(MockGeoProvider.REQUEST_COUNTRY_SETTING_NAME, "XX");
+      localization = container.Resolve<ILocalizationProvider>();
+      Assert.AreEqual("www", localization.CountrySite.ToLowerInvariant());
+      Assert.AreEqual("www", HttpContext.Current.Response.Cookies["countrysite1"].Value.ToLowerInvariant());
+
+      container = SetContext("http://www.mysite.com?regionsite=XA");
+      container.SetData(MockGeoProvider.REQUEST_COUNTRY_SETTING_NAME, "XB");
+      CreateCountryookie(1, "XC");
+      localization = container.Resolve<ILocalizationProvider>();
+      Assert.AreEqual("www", localization.CountrySite.ToLowerInvariant());
+      Assert.AreEqual("www", HttpContext.Current.Response.Cookies["countrysite1"].Value.ToLowerInvariant());
+    }
+
+    [TestMethod]
+    public void QueryString_NONE_Cookie_NONE_IpCountry_VALID_Result_IPCOUNTRY()
+    {
+      var container = SetContext();
+      container.SetData(MockGeoProvider.REQUEST_COUNTRY_SETTING_NAME, "CA");
+      ILocalizationProvider localization = container.Resolve<ILocalizationProvider>();
+      Assert.AreEqual("ca", localization.CountrySite.ToLowerInvariant());
+      Assert.AreEqual("ca", HttpContext.Current.Response.Cookies["countrysite1"].Value.ToLowerInvariant());
+
+      container = SetContext();
+      container.SetData(MockGeoProvider.REQUEST_COUNTRY_SETTING_NAME, "ca");
+      localization = container.Resolve<ILocalizationProvider>();
+      Assert.AreEqual("ca", localization.CountrySite.ToLowerInvariant());
+      Assert.AreEqual("ca", HttpContext.Current.Response.Cookies["countrysite1"].Value.ToLowerInvariant());
+
+      container = SetContext();
+      container.SetData(MockGeoProvider.REQUEST_COUNTRY_SETTING_NAME, "WWW");
+      localization = container.Resolve<ILocalizationProvider>();
+      Assert.AreEqual("www", localization.CountrySite.ToLowerInvariant());
+      Assert.AreEqual("www", HttpContext.Current.Response.Cookies["countrysite1"].Value.ToLowerInvariant());
+
+      container = SetContext();
+      container.SetData(MockGeoProvider.REQUEST_COUNTRY_SETTING_NAME, "IN");
+      localization = container.Resolve<ILocalizationProvider>();
+      Assert.AreEqual("in", localization.CountrySite.ToLowerInvariant());
+      Assert.AreEqual("in", HttpContext.Current.Response.Cookies["countrysite1"].Value.ToLowerInvariant());
+    }
+
+    [TestMethod]
+    public void QueryString_NONE_Cookie_VALID_IpCountry_IGNORED_Result_COOKIE()
+    {
+      var container = SetContext();
+      container.SetData(MockGeoProvider.REQUEST_COUNTRY_SETTING_NAME, "CA");
+      CreateCountryookie(1, "UK");
+      ILocalizationProvider localization = container.Resolve<ILocalizationProvider>();
+      Assert.AreEqual("uk", localization.CountrySite.ToLowerInvariant());
+      Assert.AreEqual("uk", HttpContext.Current.Response.Cookies["countrysite1"].Value.ToLowerInvariant());
+
+      container = SetContext();
+      container.SetData(MockGeoProvider.REQUEST_COUNTRY_SETTING_NAME, "ca");
+      CreateCountryookie(1, "uk");
+      localization = container.Resolve<ILocalizationProvider>();
+      Assert.AreEqual("uk", localization.CountrySite.ToLowerInvariant());
+      Assert.AreEqual("uk", HttpContext.Current.Response.Cookies["countrysite1"].Value.ToLowerInvariant());
+
+      container = SetContext();
+      container.SetData(MockGeoProvider.REQUEST_COUNTRY_SETTING_NAME, "IN");
+      CreateCountryookie(1, "WWW");
+      localization = container.Resolve<ILocalizationProvider>();
+      Assert.AreEqual("www", localization.CountrySite.ToLowerInvariant());
+      Assert.AreEqual("www", HttpContext.Current.Response.Cookies["countrysite1"].Value.ToLowerInvariant());
+
+      container = SetContext();
+      container.SetData(MockGeoProvider.REQUEST_COUNTRY_SETTING_NAME, "IN");
+      CreateCountryookie(1, "www");
+      localization = container.Resolve<ILocalizationProvider>();
+      Assert.AreEqual("www", localization.CountrySite.ToLowerInvariant());
+      Assert.AreEqual("www", HttpContext.Current.Response.Cookies["countrysite1"].Value.ToLowerInvariant());
+    }
+
+    [TestMethod]
+    public void QueryString_VALID_Cookie_IGNORED_IpCountry_IGNORED_Result_QUERYSTRING()
+    {
+      var container = SetContext("http://www.mysite.com?regionsite=IN");
+      container.SetData(MockGeoProvider.REQUEST_COUNTRY_SETTING_NAME, "CA");
+      CreateCountryookie(1, "UK");
+      ILocalizationProvider localization = container.Resolve<ILocalizationProvider>();
+      Assert.AreEqual("in", localization.CountrySite.ToLowerInvariant());
+      Assert.AreEqual("in", HttpContext.Current.Response.Cookies["countrysite1"].Value.ToLowerInvariant());
+
+      container = SetContext("http://www.mysite.com?regionsite=in");
+      container.SetData(MockGeoProvider.REQUEST_COUNTRY_SETTING_NAME, "ca");
+      CreateCountryookie(1, "uk");
+      localization = container.Resolve<ILocalizationProvider>();
+      Assert.AreEqual("in", localization.CountrySite.ToLowerInvariant());
+      Assert.AreEqual("in", HttpContext.Current.Response.Cookies["countrysite1"].Value.ToLowerInvariant());
+
+      container = SetContext("http://www.mysite.com?regionsite=www");
+      container.SetData(MockGeoProvider.REQUEST_COUNTRY_SETTING_NAME, "IN");
+      CreateCountryookie(1, "UK");
+      localization = container.Resolve<ILocalizationProvider>();
+      Assert.AreEqual("www", localization.CountrySite.ToLowerInvariant());
+      Assert.AreEqual("www", HttpContext.Current.Response.Cookies["countrysite1"].Value.ToLowerInvariant());
+
+      container = SetContext("http://www.mysite.com?regionsite=ca");
+      container.SetData(MockGeoProvider.REQUEST_COUNTRY_SETTING_NAME, "IN");
+      CreateCountryookie(1, "www");
+      localization = container.Resolve<ILocalizationProvider>();
+      Assert.AreEqual("ca", localization.CountrySite.ToLowerInvariant());
+      Assert.AreEqual("ca", HttpContext.Current.Response.Cookies["countrysite1"].Value.ToLowerInvariant());
+    }
   }
 }

@@ -47,9 +47,10 @@ namespace Atlantis.Framework.Providers.Localization
           host = proxyContext.ContextHost;
         }
 
-        if ((host.Length > 2) && (host[2] == '.'))
+        int dotIdx = host.IndexOf('.');
+        if (dotIdx >= 2)
         {
-          result = host.Substring(0, 2);
+          result = host.Substring(0, dotIdx);
         }
       }
       catch { }

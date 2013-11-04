@@ -18,5 +18,7 @@ namespace Atlantis.Framework.Providers.Localization
     public string ShortLanguage { get; set; }
 
     public string CountrySite { get; set; }
+
+    public string MarketId { get; set; }
   }
 }

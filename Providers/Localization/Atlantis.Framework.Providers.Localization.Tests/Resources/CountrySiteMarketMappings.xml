@@ -1,0 +1,40 @@
+<data count="10">
+  <item catalog_countrySite="www" catalog_marketID="en-US" languageURLSegment="en" isActive="1" internalOnly="0" />
+  <item catalog_countrySite="www" catalog_marketID="es-US" languageURLSegment="es" isActive="1" internalOnly="0" />
+  <item catalog_countrySite='www' catalog_marketID='es-BR' languageURLSegment='es-br' isActive='1' internalOnly='0' />
+  <item catalog_countrySite="www" catalog_marketID="qa-QA" languageURLSegment="qa-qa" isActive="1" internalOnly="1" />
+  <item catalog_countrySite="www" catalog_marketID="qa-PS" languageURLSegment="qa-ps" isActive="1" internalOnly="1" />
+  <item catalog_countrySite="www" catalog_marketID="qa-PZ" languageURLSegment="qa-pz" isActive="1" internalOnly="1" />
+  <item catalog_countrySite="ca" catalog_marketID="en-CA" languageURLSegment="en" isActive="1" internalOnly="0" />
+  <item catalog_countrySite="ca" catalog_marketID="fr-CA" languageURLSegment="fr" isActive="1" internalOnly="0" />
+  <item catalog_countrySite="uk" catalog_marketID="en-GB" languageURLSegment="en" isActive="1" internalOnly="0" />
+  <item catalog_countrySite="au" catalog_marketID="en-AU" languageURLSegment="en" isActive="1" internalOnly="0" />
+  <item catalog_countrySite="in" catalog_marketID="en-IN" languageURLSegment="en" isActive="1" internalOnly="0" />
+  <item catalog_countrySite='pt' catalog_marketID='pt-PT' languageURLSegment='pt' isActive='1' internalOnly='0' />
+  <item catalog_countrySite='br' catalog_marketID='pt-BR' languageURLSegment='pt' isActive='1' internalOnly='0' />
+  <item catalog_countrySite='es' catalog_marketID='es-ES' languageURLSegment='es' isActive='1' internalOnly='0' />
+  <item catalog_countrySite='fr' catalog_marketID='fr-FR' languageURLSegment='fr' isActive='1' internalOnly='0' />
+  <!-- CAPS options becuase LocalizationProvider.CountrySite converts to upper case -->
+  <item catalog_countrySite="WWW" catalog_marketID="en-US" languageURLSegment="en" isActive="1" internalOnly="0" />
+  <item catalog_countrySite="WWW" catalog_marketID="es-US" languageURLSegment="es" isActive="1" internalOnly="0" />
+  <item catalog_countrySite='WWW' catalog_marketID='es-BR' languageURLSegment='es-br' isActive='1' internalOnly='0' />
+  <item catalog_countrySite="WWW" catalog_marketID="qa-QA" languageURLSegment="qa-qa" isActive="1" internalOnly="1" />
+  <item catalog_countrySite="WWW" catalog_marketID="qa-PS" languageURLSegment="qa-ps" isActive="1" internalOnly="1" />
+  <item catalog_countrySite="WWW" catalog_marketID="qa-PZ" languageURLSegment="qa-pz" isActive="1" internalOnly="1" />
+  <item catalog_countrySite="CA" catalog_marketID="en-CA" languageURLSegment="en" isActive="1" internalOnly="0" />
+  <item catalog_countrySite="CA" catalog_marketID="fr-CA" languageURLSegment="fr" isActive="1" internalOnly="0" />
+  <item catalog_countrySite="UK" catalog_marketID="en-GB" languageURLSegment="en" isActive="1" internalOnly="0" />
+  <item catalog_countrySite="AU" catalog_marketID="en-AU" languageURLSegment="en" isActive="1" internalOnly="0" />
+  <item catalog_countrySite="IN" catalog_marketID="en-IN" languageURLSegment="en" isActive="1" internalOnly="0" />
+  <item catalog_countrySite='PT' catalog_marketID='pt-PT' languageURLSegment='pt' isActive='1' internalOnly='0' />
+  <item catalog_countrySite='BR' catalog_marketID='pt-BR' languageURLSegment='pt' isActive='1' internalOnly='0' />
+  <item catalog_countrySite='ES' catalog_marketID='es-ES' languageURLSegment='es' isActive='1' internalOnly='0' />
+  <item catalog_countrySite='FR' catalog_marketID='fr-FR' languageURLSegment='fr' isActive='1' internalOnly='0' />
+  <!-- Internal-only country, market, mapping -->
+  <item catalog_countrySite='rc' catalog_marketID='rc-RC' languageURLSegment='rclang' isActive='1' internalOnly='1' />
+  <item catalog_countrySite='RC' catalog_marketID='rc-RC' languageURLSegment='rclang' isActive='1' internalOnly='1' />
+  <!-- Public country Internal market Internal Mapping-->
+  <item catalog_countrySite='00' catalog_marketID='00-00' languageURLSegment='00lang' isActive='1' internalOnly='1' />
+  <!-- Public country Public market Internal-only mapping -->
+  <item catalog_countrySite='01' catalog_marketID='01-01' languageURLSegment='01lang' isActive='1' internalOnly='1' />
+</data>

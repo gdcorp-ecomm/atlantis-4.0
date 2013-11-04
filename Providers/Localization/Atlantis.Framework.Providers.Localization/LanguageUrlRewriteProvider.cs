@@ -221,30 +221,9 @@ namespace Atlantis.Framework.Providers.Localization
 
     private string GetUrlLanguage(out string validMarketId)
     {
-      validMarketId = String.Empty;
-      string result = string.Empty;
+      string result;
 
-      if (HttpContextFactory.GetHttpContext().Request.AppRelativeCurrentExecutionFilePath != null)
-      {
-        string appRelativePath = HttpContextFactory.GetHttpContext().Request.AppRelativeCurrentExecutionFilePath.Replace("~/", string.Empty);
-        if (appRelativePath != String.Empty)
-        {
-          string[] segments = appRelativePath.Split('/');
-          if (segments.Length > 0)
-          {
-            IMarket market;
-            string firstSegment = segments[0];
-            if (IsValidLanguageCode(firstSegment))
-            {
-              result = firstSegment;
-            }
-            else if (_activeMarkets.Value.TryGetMarketById(firstSegment, out market) && market != null)
-            {
-              validMarketId = firstSegment;
-            }
-          }
-        }
-      }
+      TryGetUrlLanguageAndMarketId(out result, out validMarketId);
       
       return result;
     }
@@ -261,6 +240,39 @@ namespace Atlantis.Framework.Providers.Localization
       return result;
     }
 
+    public bool TryGetUrlLanguageAndMarketId(out string language, out string validMarketId)
+    {
+      bool result = false;
+      validMarketId = String.Empty;
+      language = String.Empty;
+
+      HttpContextBase context = HttpContextFactory.GetHttpContext();
+      if (context.Request.AppRelativeCurrentExecutionFilePath != null)
+      {
+        string appRelativePath = context.Request.AppRelativeCurrentExecutionFilePath.Replace("~/", string.Empty);
+        if (appRelativePath != String.Empty)
+        {
+          string[] segments = appRelativePath.Split('/');
+          if (segments.Length > 0)
+          {
+            IMarket market;
+            string firstSegment = segments[0];
+            if (IsValidLanguageCode(firstSegment))
+            {
+              result = true;
+              language = firstSegment;
+              _countrySiteMarketMappings.Value.TryGetMarketIdByCountrySiteAndUrlLanguage(language, out validMarketId);
+            }
+            else if (_activeMarkets.Value.TryGetMarketById(firstSegment, out market) && market != null)
+            {
+              validMarketId = firstSegment;
+            }
+          }
+        }
+      }
+
+      return result;
+    }
     #endregion
   }
 }

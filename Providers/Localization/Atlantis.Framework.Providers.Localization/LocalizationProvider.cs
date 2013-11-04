@@ -11,6 +11,8 @@ namespace Atlantis.Framework.Providers.Localization
   public abstract class LocalizationProvider : ProviderBase, ILocalizationProvider
   {
     protected const string _WWW = "WWW";
+    internal const string QS_COUNTRYSITE_KEY = "regionsite";
+    internal const string QS_MARKETID_KEY = "marketid";
 
     private readonly Lazy<ICountrySite> _countrySite; 
     private readonly Lazy<IEnumerable<string>> _validCountrySubdomains;
@@ -18,6 +20,7 @@ namespace Atlantis.Framework.Providers.Localization
     private readonly Lazy<MarketsActiveResponseData> _marketsActive; 
     protected Lazy<CountrySiteCookie> CountrySiteCookie;
     private Lazy<ISiteContext> _siteContext;
+    protected Lazy<LanguageCookie> LanguageCookie; 
     private readonly Lazy<string> _proxyLanguage;
     private string _rewrittenUrlLanguage;
     private IMarket _market;
@@ -34,6 +37,7 @@ namespace Atlantis.Framework.Providers.Localization
       _marketsActive = new Lazy<MarketsActiveResponseData>(LoadActiveMarkets);
       _rewrittenUrlLanguage = string.Empty;
       CountrySiteCookie = new Lazy<CountrySiteCookie>(() => new CountrySiteCookie(Container));
+      LanguageCookie = new Lazy<LanguageCookie>(() => new LanguageCookie(Container));
       _proxyLanguage = new Lazy<string>(GetProxyLanguage);
       _countrySiteMarketMappings = new Dictionary<string, CountrySiteMarketMappingsResponseData>();
       _siteContext = new Lazy<ISiteContext>(() => Container.Resolve<ISiteContext>());
@@ -165,8 +169,8 @@ namespace Atlantis.Framework.Providers.Localization
     }
 
     public bool IsValidCountrySubdomain(string countryCode)
-    {
-      return _countrySitesActive.Value.IsValidCountrySite(countryCode);
+    {      
+      return _countrySitesActive.Value.IsValidCountrySite(countryCode, _siteContext.Value.IsRequestInternal);
     }
 
     public IEnumerable<string> ValidCountrySiteSubdomains
@@ -188,15 +192,42 @@ namespace Atlantis.Framework.Providers.Localization
     {
       get
       {
+        //string defaultMarketId;
+        //  if (!LocalizationProvider.TryGetMarketIdFromQueryString(out defaultMarketId))
+        //  {
+        //    defaultMarketId = CountrySiteInfo.DefaultMarketId;
+        //  }
+
+
         if (_market == null)
         {
           IMarket defaultMarket;
-          string marketId = (ProxyLanguage.Equals("es", StringComparison.OrdinalIgnoreCase) || ProxyLanguage.Equals("es-US", StringComparison.OrdinalIgnoreCase) ? "es-US" : CountrySiteInfo.DefaultMarketId);
-          if (!_marketsActive.Value.TryGetMarketById(marketId, out defaultMarket))
+
+          //  Transperfect
+          string marketId = (ProxyLanguage.Equals("es", StringComparison.OrdinalIgnoreCase) || ProxyLanguage.Equals("es-US", StringComparison.OrdinalIgnoreCase) ? "es-US" : string.Empty);
+          if (marketId != string.Empty && _marketsActive.Value.TryGetMarketById(marketId, out defaultMarket))
           {
-            defaultMarket = MarketsActiveResponseData.DefaultMarketInfo;
+            _market = defaultMarket;
+            return _market;
           }
-          _market = defaultMarket;
+          
+          //  marketid querystring value
+          if (LocalizationProvider.TryGetMarketIdFromQueryString(out marketId) &&
+                   _marketsActive.Value.TryGetMarketById(marketId, out defaultMarket))
+          {
+            _market = defaultMarket;
+            return _market;
+          }
+
+          //  default market id for countrysite
+          if (_marketsActive.Value.TryGetMarketById(CountrySiteInfo.DefaultMarketId, out defaultMarket))
+          {
+            _market = defaultMarket;
+            return _market;
+          }
+          
+          //  default market 
+          _market = MarketsActiveResponseData.DefaultMarketInfo;
         }
         
         return _market;
@@ -285,12 +316,29 @@ namespace Atlantis.Framework.Providers.Localization
       }
     }
 
+    public virtual string PreviousLanguageCookieValue
+    {
+      get
+      {
+        string result = null;
+        if (LanguageCookie.Value.HasValue)
+        {
+          result = LanguageCookie.Value.Value;
+        }
+
+        return result;
+      }
+    }
+
     public void SetMarket(string marketId)
     {
       IMarket market;
-      if (_marketsActive.Value.TryGetMarketById(marketId, out market))
+      bool proxyActive = IsTransperfectProxyActive();
+      
+      if (_marketsActive.Value.TryGetMarketById((proxyActive ? "es-US" : marketId), out market))
       {
         _market = market;
+        LanguageCookie.Value.Value = (proxyActive ? "es" : market.Id);
         _cultureInfo = null;
         _shortLanguage = null;
       }
@@ -327,6 +375,11 @@ namespace Atlantis.Framework.Providers.Localization
       }
 
       return (result.Equals("es", StringComparison.OrdinalIgnoreCase) ? "es-US" : result);
+    }
+
+    private bool IsTransperfectProxyActive()
+    {
+      return ProxyLanguage.Equals("es", StringComparison.OrdinalIgnoreCase) || ProxyLanguage.Equals("es-us", StringComparison.OrdinalIgnoreCase);
     }
 
     public string GetLanguageUrl()
@@ -393,7 +446,7 @@ namespace Atlantis.Framework.Providers.Localization
       {
         result = (CountrySiteMarketMappingsResponseData)DataCache.DataCache.GetProcessRequest(request,LocalizationProviderEngineRequests.CountrySiteMarketMappingsRequest);
       }
-      catch
+      catch (Exception ex)
       {
         result = CountrySiteMarketMappingsResponseData.NoMappingsResponse;
       }
@@ -401,6 +454,32 @@ namespace Atlantis.Framework.Providers.Localization
       return result;
     }
 
+    public static bool TryGetRegionSiteFromQueryString(out string regionSite)
+    {
+      try
+      {
+        regionSite = HttpContextFactory.GetHttpContext().Request.QueryString[QS_COUNTRYSITE_KEY] ?? string.Empty;
+        return !string.IsNullOrEmpty(regionSite);
+      }
+      catch
+      {
+        regionSite = string.Empty;
+        return false;
+      }  
+    }
 
+    public static bool TryGetMarketIdFromQueryString(out string marketId)
+    {
+      try
+      {
+        marketId = HttpContextFactory.GetHttpContext().Request.QueryString[QS_MARKETID_KEY];
+        return !string.IsNullOrEmpty(marketId);
+      }
+      catch
+      {
+        marketId = string.Empty;
+        return false;
+      }  
+    }
   }
 }

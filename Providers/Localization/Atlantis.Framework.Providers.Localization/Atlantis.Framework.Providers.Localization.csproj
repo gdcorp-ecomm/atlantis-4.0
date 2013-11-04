@@ -61,7 +61,7 @@
     </Reference>
     <Reference Include="Atlantis.Framework.Localization.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.Localization.Interface.4.13.10.9\lib\net40\Atlantis.Framework.Localization.Interface.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.Localization.Interface.4.13.11.1\lib\net40\Atlantis.Framework.Localization.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.PrivateLabel.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -90,6 +90,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LocalizationRedirectProvider\InternationalizationRedirectProvider.cs" />
+    <Compile Include="LanguageCookie.cs" />
     <Compile Include="CountryCookieLocalizationProvider.cs" />
     <Compile Include="CountrySiteCookie.cs" />
     <Compile Include="HttpContextFactory.cs" />

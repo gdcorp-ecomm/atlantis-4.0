@@ -13,12 +13,30 @@ using MockHttpRequest = Atlantis.Framework.Testing.MockHttpContext.MockHttpReque
 namespace Atlantis.Framework.Providers.Localization.Tests
 {
   [TestClass]
-  [DeploymentItem("atlantis.config")]
+  [DeploymentItem(afeConfig)]
   [DeploymentItem("Interop.gdDataCacheLib.dll")]
   [DeploymentItem("Atlantis.Framework.Localization.Impl.dll")]
   public class LanguageUrlRewriteProviderTests
   {
     #region Setup
+
+    public const string afeConfig = "atlantis.config";
+
+    [ClassInitialize]
+    public static void ClassInit(TestContext c)
+    {
+      Atlantis.Framework.Engine.Engine.ReloadConfig(afeConfig);
+
+      ReloadCache();
+    }
+
+    private static void ReloadCache()
+    {
+      foreach (var config in Engine.Engine.GetConfigElements())
+      {
+        DataCache.DataCache.ClearCachedData(config.RequestType);
+      }
+    }
 
     private void ParseUrl(string url, out string filename, out string queryString)
     {
@@ -349,7 +367,7 @@ namespace Atlantis.Framework.Providers.Localization.Tests
       container.RegisterProvider<IProxyContext, TransperfectTestWebProxy>();
 
       ILocalizationProvider localization = container.Resolve<ILocalizationProvider>();
-      Assert.IsTrue(localization.IsGlobalSite());
+      Assert.IsFalse(localization.IsGlobalSite());
       Assert.AreEqual("ES", localization.ShortLanguage.ToUpperInvariant());
       Assert.AreEqual("es-us", localization.FullLanguage.ToLowerInvariant());
       Assert.AreEqual("es-US", localization.MarketInfo.Id);
@@ -358,7 +376,7 @@ namespace Atlantis.Framework.Providers.Localization.Tests
       LanguageUrlRewriteProvider urlRewriteProvider = (LanguageUrlRewriteProvider)container.Resolve<ILanguageUrlRewriteProvider>();
       urlRewriteProvider.ProcessLanguageUrl();
       Assert.AreEqual("http://es.godaddy-com.ide/es/login.aspx?spkey=GDMDOTMYANET-G1MYAWEB&target=default.aspx", HttpContext.Current.Request.Url.ToString());
-      Assert.IsTrue(localization.IsGlobalSite());
+      Assert.IsFalse(localization.IsGlobalSite());
       Assert.AreEqual("ES", localization.ShortLanguage.ToUpperInvariant());
       Assert.AreEqual("es-us", localization.FullLanguage.ToLowerInvariant());
       Assert.AreEqual("es-US", localization.MarketInfo.Id);

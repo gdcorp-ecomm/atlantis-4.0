@@ -21,5 +21,11 @@
     /// Example: EU, CA etc.  
     /// </summary>
     string CountrySite { get; set; }
+
+    /// <summary>
+    /// Returns the market ID for redirect purposes
+    /// Example: en-US, es-US, en-CA, fr-CA, pt-BR, etc.  
+    /// </summary>
+    string MarketId { get; set; }
   }
 }

@@ -75,7 +75,10 @@
     </Reference>
     <Reference Include="Atlantis.Framework.Localization.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.Localization.Interface.4.13.10.9\lib\net40\Atlantis.Framework.Localization.Interface.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.Localization.Interface.4.13.11.1\lib\net40\Atlantis.Framework.Localization.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Localization.MockImpl">
+      <HintPath>..\packages\Atlantis.Framework.Localization.MockImpl.4.0.0.0\lib\net40\Atlantis.Framework.Localization.MockImpl.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.PrivateLabel.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -131,6 +134,7 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="InternationalizationRedirectProviderTests.cs" />
     <Compile Include="LanguageUrlRewriteProviderTests.cs" />
     <Compile Include="LocalizationRedirectProviderTestWebProxy.cs" />
     <Compile Include="CountrySiteRedirectLocalizationProviderTests.cs" />
@@ -169,6 +173,10 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </None>
+    <None Include="atlantis.internationalization.redirect.provider.tests.config">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -176,6 +184,12 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Resources\CountrySiteMarketMappings.xml" />
+    <Content Include="Resources\CountrySitesActive.xml" />
+    <Content Include="Resources\MarketsActive.xml" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

@@ -1,6 +1,7 @@
 ﻿using Atlantis.Framework.Interface;
 using System;
 using System.Web;
+using Atlantis.Framework.Providers.Geo.Interface;
 
 namespace Atlantis.Framework.Providers.Localization
 {
@@ -20,9 +21,61 @@ namespace Atlantis.Framework.Providers.Localization
 
       if ((HttpContext.Current != null) && (_siteContext.Value.ContextId == 1))
       {
+        //  QueryString
+        if (LocalizationProvider.TryGetRegionSiteFromQueryString(out result) && !string.IsNullOrEmpty(result) && IsValidCountrySubdomain(result))
+        {
+          CountrySiteCookie.Value.Value = result;
+          return result;
+        }
+        
+        //  Cookie
         if ((CountrySiteCookie.Value.HasValue) && (IsValidCountrySubdomain(CountrySiteCookie.Value.Value)))
         {
           result = CountrySiteCookie.Value.Value;
+          return result;
+        }
+
+        //   IP Address
+        result = GetCountrySiteFromIpCountry();
+        if (!string.IsNullOrEmpty(result) && (IsValidCountrySubdomain(result)))
+        {
+          CountrySiteCookie.Value.Value = result;
+          return result;
+        }
+
+        //  Default
+        result = _WWW;
+        CountrySiteCookie.Value.Value = result;
+      }      
+
+      return result;
+    }
+
+    private IGeoProvider _geoIpProvider;
+    private IGeoProvider GeoIpProvider
+    {
+      get
+      {
+        if (_geoIpProvider == null)
+        {
+          Container.TryResolve(out _geoIpProvider);
+        }
+
+        return _geoIpProvider;
+      }
+    }
+
+    private string GetCountrySiteFromIpCountry()
+    {
+      string result = null;
+
+      if (GeoIpProvider != null)
+      {
+        result = GeoIpProvider.RequestCountryCode;
+
+        if (!string.IsNullOrEmpty(result) && result.Equals("US", StringComparison.OrdinalIgnoreCase))
+        {
+          result = _WWW;
         }
       }
 

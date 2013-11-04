@@ -345,9 +345,7 @@ namespace Atlantis.Framework.DomainSearch.Tests
       var domain = response.ExactMatchDomains[0];
 
       Assert.IsTrue(domain.InPreRegPhase);
-      Assert.IsTrue(domain.IsPreRegPhaseAvailable(PreRegistrationPhases.GENERAL_AVAILABILITY));
-      Assert.IsTrue(domain.IsPreRegPhaseAvailable(PreRegistrationPhases.LANDRUSH));
-      Assert.IsTrue(domain.IsPreRegPhaseAvailable(PreRegistrationPhases.SUNRISE));
+      Assert.IsTrue(domain.PreRegLaunchPhases.Count() > 0);
     }
 
     [TestMethod]

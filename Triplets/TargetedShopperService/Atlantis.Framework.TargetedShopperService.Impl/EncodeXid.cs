@@ -51,6 +51,7 @@ namespace Atlantis.Framework.TargetedShopperService.Impl
       result = (HttpWebRequest)WebRequest.Create(uri);
       result.Timeout = (int)requestData.RequestTimeout.TotalMilliseconds;
       result.CachePolicy = new RequestCachePolicy(RequestCacheLevel.BypassCache);
+      result.ClientCertificates.Add(config.GetClientCertificate("CertificateName"));
       result.Accept = "text/xml";
       return result;
     }

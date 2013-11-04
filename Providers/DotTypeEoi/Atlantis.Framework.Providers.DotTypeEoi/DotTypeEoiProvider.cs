@@ -243,6 +243,12 @@ namespace Atlantis.Framework.Providers.DotTypeEoi
         var request = new GeneralEoiJsonRequestData(FullLanguage);
         var response = (GeneralEoiJsonResponseData)DataCache.DataCache.GetProcessRequest(request, DotTypeEoiEngineRequests.GeneralEoiJsonRequest);
 
+        searchString = searchString.Trim();
+        if (searchString.StartsWith("."))
+        {
+          searchString = searchString.Substring(1);
+        }
+
         if (response.IsSuccess && response.DotTypeEoiResponse != null)
         {
           IEnumerable<IDotTypeEoiGtld> gtlds = response.DotTypeEoiResponse.AllGtlds.Values;

@@ -187,9 +187,6 @@ namespace Atlantis.Framework.Testing.MockLocalization
       return result;
     }
 
-    #region ILocalizationProvider Members
-
-
     public string RewrittenUrlLanguage
     {
       get { return _rewrittenUrlLanguage; }
@@ -227,8 +224,6 @@ namespace Atlantis.Framework.Testing.MockLocalization
     {
       throw new NotImplementedException();
     }
-    #endregion
-
 
     public IMarket GetMarketForCountrySite(string countrySiteId, string marketId)
     {
@@ -253,6 +248,11 @@ namespace Atlantis.Framework.Testing.MockLocalization
     public IMarket TryGetMarketForCountrySite(string countrySiteId, string marketId)
     {
         throw new NotImplementedException();
+    }
+
+    public string PreviousLanguageCookieValue
+    {
+      get { throw new NotImplementedException(); }
     }
   }
 }

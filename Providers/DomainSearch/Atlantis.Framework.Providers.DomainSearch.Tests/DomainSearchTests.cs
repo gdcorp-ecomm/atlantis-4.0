@@ -242,7 +242,7 @@ namespace Atlantis.Framework.Providers.DomainSearch.Tests
       var domains = domainSearchResult.GetDomainsByGroup(DomainGroupTypes.EXACT_MATCH);
 
       Assert.IsTrue(domains[0].InPreRegPhase);
-      Assert.IsTrue(domains[0].IsPreRegPhaseAvailable(PreRegistrationPhases.SUNRISE));
+      Assert.IsTrue(domains[0].PreRegLaunchPhases.Count() > 0);
     }
   }
 }

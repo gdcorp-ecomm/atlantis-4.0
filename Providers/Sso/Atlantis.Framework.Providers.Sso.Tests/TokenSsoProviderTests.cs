@@ -17,17 +17,19 @@ using MockHttpRequest = Atlantis.Framework.Testing.MockHttpContext.MockHttpReque
 namespace Atlantis.Framework.Providers.Sso.Tests
 {
   [TestClass]
+  [DeploymentItem("atlantis.config")]
+  [DeploymentItem("Atlantis.Framework.Sso.Impl.dll")]
   public class TokenSsoProviderTests
   {
     //NOTE THIS IS NOT VALID AFTER FOUR HOURS OF ISSUING, SO TESTS WILL FAIL
-    private string _tokenData = "eyJhbGciOiJSUzI1NiIsImtpZCI6InFOM2ZqLVFhdlEifQ.eyJzaG9wcGVySWQiOiI4Njc5MDAiLCJmaXJzdG5hbWUiOiJzZXRoIiwicGxpZCI6IjEiLCJmYWN0b3JzIjp7ImtfcHciOjEzODI5ODk3NzJ9LCJleHAiOjEzODMwMzI5NzIsImlhdCI6MTM4Mjk4OTc3MiwianRpIjoiWldReFpUTmlOR1F4TVdNek1EUTRZVEE0WVRFeU16UTFNamxqTlRaaE16ayIsInR5cCI6ImlkcCJ9.jQ6qkJ5rcOItesVJXnfoR6ZWxvG7q3vG3oecdzMVWDbI6nnp2IdqfbCmY8k2VO7xMXhfoLy-2tyQsAGXrh8-YkgNwJDkHja9g5cfFn5MYA9J7eRhLK1O6wW_R6Iwxi0r2fObGYnM9GPmcM_X-AUyfybvRll0p7d7mx9mCqXfCmw";
+    private string _tokenData = "eyJhbGciOiJSUzI1NiIsImtpZCI6IklvbnFwUlhlSHcifQ.eyJzaG9wcGVySWQiOiI4Njc5MDAiLCJmaXJzdG5hbWUiOiJzZXRoIiwicGxpZCI6IjEiLCJmYWN0b3JzIjp7ImtfcHciOjEzODM2ODM1MzJ9LCJleHAiOjEzODM3MjY3MzIsImlhdCI6MTM4MzY4MzUzMiwianRpIjoiT0dOaVptRmtNbVV4T1ROa056WmlObVF4WWpVME1qbGtPVEptTm1NME9EWSIsInR5cCI6ImlkcCJ9.TfaBb0L9NKRibhzHMXLzW2e7HVmMHuPp-KJsMqSbuOcW-kfv4z6sISl3acron-O2-LdMrueGqR-qQfSuXiiF4226IYFkHvVWv-hG1it9rde3xsmRYDU4cBeaaMLbgBCu7EAatIPy61d-tcx1Ol3-JYpFb10VISg73j7GpHLtGxA";
 
     private IProviderContainer GetProviderContainer(string url, int privateLabelId = 1, ServerLocationType serverLocationType = ServerLocationType.Prod, string httpMethod = "POST", string virtualDirectoryName = "")
     {
       MockHttpRequest request = new MockCustomHttpRequest(url, httpMethod, virtualDirectoryName);
 
       var cc = new NameValueCollection();
-      cc["auth_idp" + privateLabelId] = _tokenData;
+      cc["auth_idp"] = _tokenData;
 
       request.MockCookies(cc);
 

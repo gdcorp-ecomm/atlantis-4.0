@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Web;
-using Atlantis.Framework.Interface;
+﻿using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.Sso.Interface;
 using Atlantis.Framework.Sso.Interface.JsonHelperClasses;
+using System;
+using System.Web;
 
 namespace Atlantis.Framework.Providers.Sso
 {
@@ -76,8 +73,9 @@ namespace Atlantis.Framework.Providers.Sso
         {
           bool issuedAtTimeIsValid = Token.IssuedAt.AddMinutes(TokenTimeoutMins) > DateTime.Now;
           bool expiredTimeIsValid = Token.ExpiresAt > DateTime.Now;
+          bool authenticatedPrivateLabelMatchesSiteContext = Token.Payload.plid == _siteContext.Value.PrivateLabelId.ToString();
 
-          _isTokenValid = issuedAtTimeIsValid && expiredTimeIsValid && Token.IsSignatureValid;
+          _isTokenValid = issuedAtTimeIsValid && expiredTimeIsValid  && Token.IsSignatureValid && authenticatedPrivateLabelMatchesSiteContext;
         }
         catch (Exception ex)
         {
@@ -132,7 +130,6 @@ namespace Atlantis.Framework.Providers.Sso
           break;
       }
 
-      cookieName += _siteContext.Value.PrivateLabelId;
       return cookieName;
     }
   }

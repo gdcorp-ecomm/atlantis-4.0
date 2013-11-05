@@ -17,6 +17,7 @@ namespace Atlantis.Framework.Sso.Tests
     private string username = "syukna";
     private string shopperId = "867900";
     private string password = "Seth1seth";
+    private string clientIp = "172.23.44.142";
     private int privateLabelId = 1;
 
     private string usernameLocked = "syukna2";
@@ -42,17 +43,17 @@ namespace Atlantis.Framework.Sso.Tests
     
     public void TestSetup()
     {
-      tokenRequest = new SsoValidateShopperAndGetTokenRequestData(username, password, privateLabelId);
+      tokenRequest = new SsoValidateShopperAndGetTokenRequestData(username, password,  privateLabelId, clientIp);
       tokenResponse = (SsoValidateShopperAndGetTokenResponseData)Engine.Engine.ProcessRequest(tokenRequest, SsoEngineRequests.SsoValidateShopperAndGetTokenRequest);
 
-      tokenRequestInvalid = new SsoValidateShopperAndGetTokenRequestData("junk", password, privateLabelId);
+      tokenRequestInvalid = new SsoValidateShopperAndGetTokenRequestData("junk", password,  privateLabelId, clientIp);
       tokenResponseInvalid = (SsoValidateShopperAndGetTokenResponseData)Engine.Engine.ProcessRequest(tokenRequestInvalid, SsoEngineRequests.SsoValidateShopperAndGetTokenRequest);
 
 
-      tokenRequestLocked = new SsoValidateShopperAndGetTokenRequestData(usernameLocked, password, privateLabelId);
+      tokenRequestLocked = new SsoValidateShopperAndGetTokenRequestData(usernameLocked, password,  privateLabelId, clientIp);
       tokenResponseLocked = (SsoValidateShopperAndGetTokenResponseData)Engine.Engine.ProcessRequest(tokenRequestLocked, SsoEngineRequests.SsoValidateShopperAndGetTokenRequest);
 
-      tokenRequestTwoFactor = new SsoValidateShopperAndGetTokenRequestData(usernameTwoFactor, password, privateLabelId);
+      tokenRequestTwoFactor = new SsoValidateShopperAndGetTokenRequestData(usernameTwoFactor, password,  privateLabelId, clientIp);
       tokenResponseTwoFactor = (SsoValidateShopperAndGetTokenResponseData)Engine.Engine.ProcessRequest(tokenRequestTwoFactor, SsoEngineRequests.SsoValidateShopperAndGetTokenRequest);
 
 
@@ -134,7 +135,7 @@ namespace Atlantis.Framework.Sso.Tests
     public void ValidTwoFactor()
     {
 
-      tokenRequestTwoFactor = new SsoValidateShopperAndGetTokenRequestData(usernameTwoFactor, password, privateLabelId);
+      tokenRequestTwoFactor = new SsoValidateShopperAndGetTokenRequestData(usernameTwoFactor, password,  privateLabelId, clientIp);
       tokenResponseTwoFactor = (SsoValidateShopperAndGetTokenResponseData)Engine.Engine.ProcessRequest(tokenRequestTwoFactor, SsoEngineRequests.SsoValidateShopperAndGetTokenRequest);
       Assert.IsTrue(tokenResponseTwoFactor.Token.code == SsoAuthApiResponseCodes.SuccessTwoFactor);
     }
@@ -144,7 +145,7 @@ namespace Atlantis.Framework.Sso.Tests
     //NOTE THIS TEST NEEDS TO BE DONE MANUALLY DUE TO THE TWO FACTOR TOKEN BEING SENT TO A PHONE
     public void ValidateTwoFactorCode()
     {
-      tokenRequestTwoFactor = new SsoValidateShopperAndGetTokenRequestData(usernameTwoFactor, password, privateLabelId);
+      tokenRequestTwoFactor = new SsoValidateShopperAndGetTokenRequestData(usernameTwoFactor, password,  privateLabelId, clientIp);
       tokenResponseTwoFactor = (SsoValidateShopperAndGetTokenResponseData)Engine.Engine.ProcessRequest(tokenRequestTwoFactor, SsoEngineRequests.SsoValidateShopperAndGetTokenRequest);
 
       var tokenData = "eyJhbGciOiJkaXIiLCJraWQiOiJ6d0Qwbk5jYUxRIiwiZW5jIjoiQTEyOENCQy1IUzI1NiJ9..l7A1OOKWOwNo23In1kjo9w.RjGIFzhsyswE6hJNeHI-gv32516ziFVrHuRg4G3naCR8AB-20m96LtTOKqLb5jG-QWZRMBut3CdcBt7-F53URsr8rWU8ltupVQyZ9mE_NLflsfTrf8nI37t6CDD-NQFoEJi7EflBOHjz0x-IRX927YcgXnutsVbnx0BWfSSBYFWKPnuRoN9osXE4BBItQKdq56U7A42JBT9j4vaatdMe20wpTvIPYx_vL1kdHQW7s4iP1c9egj3e2uTWS1NbSyKy.dGJk_rbcmN85nxHnYXLPYQ";
@@ -179,7 +180,7 @@ namespace Atlantis.Framework.Sso.Tests
     [ExpectedException(typeof(Atlantis.Framework.Interface.AtlantisException))]
     public void ExceptionMissingPrivateLabel()
     {
-      var request = new SsoValidateShopperAndGetTokenRequestData(string.Empty, string.Empty, 0);
+      var request = new SsoValidateShopperAndGetTokenRequestData(string.Empty, string.Empty, 0, clientIp);
       var response = (SsoValidateShopperAndGetTokenResponseData)Engine.Engine.ProcessRequest(request, SsoEngineRequests.SsoValidateShopperAndGetTokenRequest);
 
     }
@@ -188,7 +189,7 @@ namespace Atlantis.Framework.Sso.Tests
     [ExpectedException(typeof(Atlantis.Framework.Interface.AtlantisException))]
     public void ExceptionMissingUsernameLabel()
     {
-      var request = new SsoValidateShopperAndGetTokenRequestData(string.Empty, password, privateLabelId);
+      var request = new SsoValidateShopperAndGetTokenRequestData(string.Empty, password,  privateLabelId, clientIp);
       var response = (SsoValidateShopperAndGetTokenResponseData)Engine.Engine.ProcessRequest(request, SsoEngineRequests.SsoValidateShopperAndGetTokenRequest);
 
     }
@@ -197,7 +198,7 @@ namespace Atlantis.Framework.Sso.Tests
     [ExpectedException(typeof(Atlantis.Framework.Interface.AtlantisException))]
     public void ExceptionMissingPasswordLabel()
     {
-      var request = new SsoValidateShopperAndGetTokenRequestData(username, string.Empty, privateLabelId);
+      var request = new SsoValidateShopperAndGetTokenRequestData(username, string.Empty,  privateLabelId, clientIp);
       var response = (SsoValidateShopperAndGetTokenResponseData)Engine.Engine.ProcessRequest(request, SsoEngineRequests.SsoValidateShopperAndGetTokenRequest);
 
     }
@@ -206,7 +207,7 @@ namespace Atlantis.Framework.Sso.Tests
     [ExpectedException(typeof(Atlantis.Framework.Interface.AtlantisException))]
     public void ExceptionInvalidRequestType()
     {
-      var request = new SsoValidateShopperAndGetTokenRequestData(username, string.Empty, privateLabelId);
+      var request = new SsoValidateShopperAndGetTokenRequestData(username, string.Empty,  privateLabelId, clientIp);
       var response = (SsoValidateShopperAndGetTokenResponseData)Engine.Engine.ProcessRequest(request, 1234);
 
     }

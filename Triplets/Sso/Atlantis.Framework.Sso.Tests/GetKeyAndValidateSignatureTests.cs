@@ -18,6 +18,7 @@ namespace Atlantis.Framework.Sso.Tests
     private string shopperId = "867900";
     private string password = "Seth1seth";
     private int privateLabelId = 1;
+    private string clientIp = "172.23.44.142";
 
 
     private SsoValidateShopperAndGetTokenRequestData _tokenRequest;
@@ -29,7 +30,7 @@ namespace Atlantis.Framework.Sso.Tests
     [TestInitialize]
     public void TestSetup()
     {
-      _tokenRequest = new SsoValidateShopperAndGetTokenRequestData(username, password, privateLabelId);
+      _tokenRequest = new SsoValidateShopperAndGetTokenRequestData(username, password, privateLabelId, clientIp);
       _tokenResponse = (SsoValidateShopperAndGetTokenResponseData) Engine.Engine.ProcessRequest(_tokenRequest, SsoEngineRequests.SsoValidateShopperAndGetTokenRequest);
       _token = _tokenResponse.Token;
     }
@@ -44,7 +45,7 @@ namespace Atlantis.Framework.Sso.Tests
     public void ValidSignatureWithExplicitTokenRawData()
     {
 
-      var tokenRequest = new SsoValidateShopperAndGetTokenRequestData(username, password, privateLabelId);
+      var tokenRequest = new SsoValidateShopperAndGetTokenRequestData(username, password, privateLabelId, clientIp);
       var tokenResponse = (SsoValidateShopperAndGetTokenResponseData)Engine.Engine.ProcessRequest(tokenRequest, SsoEngineRequests.SsoValidateShopperAndGetTokenRequest);
       var token = tokenResponse.Token;
 
@@ -58,7 +59,7 @@ namespace Atlantis.Framework.Sso.Tests
     [TestMethod]
     public void GetKeyWithRawData()
     {
-      //var tokenRequest = new SsoGetTokenRequestData(username, password, privateLabelId);
+      //var tokenRequest = new SsoGetTokenRequestData(username, password, privateLabelId, clientIp);
     //  var tokenResponse = (SsoGetTokenResponseData) DataCache.DataCache.GetProcessRequest(tokenRequest, SsoEngineRequests.SsoGetTokenRequest);
 
       var keyRequest = new SsoGetKeyRequestData(_token.data, _token.PrivateLabelId);

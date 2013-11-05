@@ -127,6 +127,8 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="LanguageResources\ShopperValidator.en.resx" />
+    <EmbeddedResource Include="LanguageResources\ShopperValidator.es-US.resx" />
+    <EmbeddedResource Include="LanguageResources\ShopperValidator.pt-BR.resx" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -45,16 +45,11 @@ namespace Atlantis.Framework.Sso.Impl
 
     private void ThrowExceptionIfRequestDataIsMissing()
     {
-      var isValid = !string.IsNullOrEmpty(_ssoKeyRequestData.Token.Header.kid)
-                    && !string.IsNullOrEmpty(_ssoKeyRequestData.Token.RawTokenData.Header)
-                    && !string.IsNullOrEmpty(_ssoKeyRequestData.Token.RawTokenData.Payload)
-                    && !string.IsNullOrEmpty(_ssoKeyRequestData.Token.RawTokenData.Signature);
+      var isValid = !string.IsNullOrEmpty(_ssoKeyRequestData.Token.Header.kid) && !string.IsNullOrEmpty(_ssoKeyRequestData.Token.RawTokenData.Signature);
 
       if (!isValid)
       {
-        var data = string.Concat("kid: ", _ssoKeyRequestData.Token.Header.kid,
-            " | RawTokenRequest: ", _ssoKeyRequestData.Token.RawTokenData);
-
+        var data = string.Concat("kid: ", _ssoKeyRequestData.Token.Header.kid, " | RawTokenRequest: ", _ssoKeyRequestData.Token.RawTokenData);
         throw new MissingFieldException("MissingRequestData: " + data);
       }
     }

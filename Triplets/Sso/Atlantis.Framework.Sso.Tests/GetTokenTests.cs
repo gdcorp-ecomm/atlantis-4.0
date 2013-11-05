@@ -160,6 +160,17 @@ namespace Atlantis.Framework.Sso.Tests
       Assert.IsTrue(validateRes.Token.Payload.shopperId == shopperIdTwoFactor);
 
     }
+
+    [TestMethod]
+    public void TwoFactorBeforeValidateCode()
+    {
+      string tokenData = "eyJhbGciOiJkaXIiLCJraWQiOiJqNVF1LTdfdXpRIiwiZW5jIjoiQTEyOENCQy1IUzI1NiJ9..dDZIVYR2yu6x8poL4mwldg.whTi6fKDYCwmdTmw278-xfjsZ8xOwBGWIj4Y2-kRNH32UjojKYQzyzL4tovDtvf7HPeDM6j4V2GUr3m3wroyRaLDU9INgK4G2czvK_n9zHcDOmlnAJKRSujkKXlAT1dHjVfiv-0YTUrW1y9P0TsCaGmj-xjL2KuPzQXX7E9AD1LTBP8kghHyUU_rh_WhFkItADuHHO7WqG2baIn7Jl2RnWYzVr9kqdqOVazpsHlBJEMPMm95LZs8PJiAN3HklA4U.t0jm5IVEDLMfdpJIT6-zoQ";
+      var token = new Token();
+      token.data = tokenData;
+      token.PrivateLabelId = 1;
+
+      bool z = token.IsSignatureValid;
+    }
     #endregion
 
     #region Exception Tests

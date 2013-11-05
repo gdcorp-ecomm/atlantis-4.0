@@ -23,24 +23,15 @@ namespace Atlantis.Framework.Sso.Tests
     private SsoValidateShopperAndGetTokenRequestData _tokenRequest;
     private SsoValidateShopperAndGetTokenResponseData _tokenResponse;
 
-    private SsoGetKeyRequestData _keyRequest;
-    private SsoGetKeyResponseData _keyResponse;
-
     private Token _token;
-    private Key _key;
 
 
     [TestInitialize]
     public void TestSetup()
     {
-
       _tokenRequest = new SsoValidateShopperAndGetTokenRequestData(username, password, privateLabelId);
-      _tokenResponse = (SsoValidateShopperAndGetTokenResponseData)Engine.Engine.ProcessRequest(_tokenRequest, SsoEngineRequests.SsoValidateShopperAndGetTokenRequest);
+      _tokenResponse = (SsoValidateShopperAndGetTokenResponseData) Engine.Engine.ProcessRequest(_tokenRequest, SsoEngineRequests.SsoValidateShopperAndGetTokenRequest);
       _token = _tokenResponse.Token;
-
-      _keyRequest = new SsoGetKeyRequestData(_token);
-      _keyResponse = (SsoGetKeyResponseData) Engine.Engine.ProcessRequest(_keyRequest, SsoEngineRequests.SsoGetKeyRequest);
-      _key = _keyResponse.Key;
     }
 
     [TestMethod]
@@ -68,10 +59,10 @@ namespace Atlantis.Framework.Sso.Tests
     public void GetKeyWithRawData()
     {
       //var tokenRequest = new SsoGetTokenRequestData(username, password, privateLabelId);
-    //  var tokenResponse = (SsoGetTokenResponseData)Engine.Engine.ProcessRequest(tokenRequest, SsoEngineRequests.SsoGetTokenRequest);
+    //  var tokenResponse = (SsoGetTokenResponseData) DataCache.DataCache.GetProcessRequest(tokenRequest, SsoEngineRequests.SsoGetTokenRequest);
 
       var keyRequest = new SsoGetKeyRequestData(_token.data, _token.PrivateLabelId);
-      var keyResponse = (SsoGetKeyResponseData)Engine.Engine.ProcessRequest(keyRequest, SsoEngineRequests.SsoGetKeyRequest);
+      var keyResponse = (SsoGetKeyResponseData) DataCache.DataCache.GetProcessRequest(keyRequest, SsoEngineRequests.SsoGetKeyRequest);
       Assert.IsTrue(KeyHasAllData(keyResponse.Key));
     }
 
@@ -91,7 +82,7 @@ namespace Atlantis.Framework.Sso.Tests
       token.Header.kid = string.Empty;
 
       var keyRequest = new SsoGetKeyRequestData(token);
-      var keyResponse = (SsoGetKeyResponseData)Engine.Engine.ProcessRequest(keyRequest, SsoEngineRequests.SsoGetKeyRequest);
+      var keyResponse = (SsoGetKeyResponseData) DataCache.DataCache.GetProcessRequest(keyRequest, SsoEngineRequests.SsoGetKeyRequest);
     }
 
     [TestMethod]
@@ -103,7 +94,7 @@ namespace Atlantis.Framework.Sso.Tests
       token.data = string.Empty;
 
       var keyRequest = new SsoGetKeyRequestData(token);
-      var keyResponse = (SsoGetKeyResponseData)Engine.Engine.ProcessRequest(keyRequest, SsoEngineRequests.SsoGetKeyRequest);
+      var keyResponse = (SsoGetKeyResponseData) DataCache.DataCache.GetProcessRequest(keyRequest, SsoEngineRequests.SsoGetKeyRequest);
     }
 
     [TestMethod]
@@ -113,7 +104,7 @@ namespace Atlantis.Framework.Sso.Tests
       var token = new Token();
 
       var keyRequest = new SsoGetKeyRequestData(token);
-      var keyResponse = (SsoGetKeyResponseData)Engine.Engine.ProcessRequest(keyRequest, 0890);
+      var keyResponse = (SsoGetKeyResponseData) DataCache.DataCache.GetProcessRequest(keyRequest, 0890);
     }
 
     private bool KeyHasAllData(Key key)

@@ -7,13 +7,14 @@ namespace Atlantis.Framework.Sso.Interface
     public string Username { get; private set; }  
     public string Password { get; private set; }
     public int PrivateLabelId { get; private set; }
+    public string ClientIp { get; private set; }
 
-#warning rename to validate
-    public SsoValidateShopperAndGetTokenRequestData(string username, string password, int privateLabelId)
+    public SsoValidateShopperAndGetTokenRequestData(string username, string password, int privateLabelId, string clientIp)
     {
       Username = username;
       Password = password;
       PrivateLabelId = privateLabelId;
+      ClientIp = clientIp;
     }
   }
 }

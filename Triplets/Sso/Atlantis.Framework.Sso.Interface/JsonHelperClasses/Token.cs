@@ -121,33 +121,35 @@ namespace Atlantis.Framework.Sso.Interface.JsonHelperClasses
 
       try
       {
-        if (!string.IsNullOrEmpty(Header.kid))
+        bool tokenIsMissingRawData = string.IsNullOrEmpty(RawTokenData.Header) || string.IsNullOrEmpty(RawTokenData.Payload) || string.IsNullOrEmpty(RawTokenData.Signature);
+
+        if (!string.IsNullOrEmpty(Header.kid) && !tokenIsMissingRawData)
         {
           if (_key == null)
           {
             _key = GetKeyData();
           }
+            var publicKey = new RSAParameters { 
+                Exponent = DecryptionHelper.Base64UrlDecodeToBytes(_key.data.e),
+                Modulus = DecryptionHelper.Base64UrlDecodeToBytes(_key.data.n)
+              };
 
-          var publicKey = new RSAParameters
-          {
-            Exponent = DecryptionHelper.Base64UrlDecodeToBytes(_key.data.e),
-            Modulus = DecryptionHelper.Base64UrlDecodeToBytes(_key.data.n)
-          };
+            var rsa = new RSACryptoServiceProvider();
+            rsa.ImportParameters(publicKey);
 
-          var rsa = new RSACryptoServiceProvider();
-          rsa.ImportParameters(publicKey);
+            var verifyData = string.Concat(RawTokenData.Header, ".", RawTokenData.Payload);
+            var bytesToVerify = Encoding.UTF8.GetBytes(verifyData);
+            var signedBytes = DecryptionHelper.Base64UrlDecodeToBytes(RawTokenData.Signature);
 
-          var verifyData = string.Concat(RawTokenData.Header, ".", RawTokenData.Payload);
-          var bytesToVerify = Encoding.UTF8.GetBytes(verifyData);
-          var signedBytes = DecryptionHelper.Base64UrlDecodeToBytes(RawTokenData.Signature);
+            HashAlgorithm hash = HashAlgorithm.Create("SHA256");
+            isSignatureValid = rsa.VerifyData(bytesToVerify, hash, signedBytes);
 
-          HashAlgorithm hash = HashAlgorithm.Create("SHA256");
-          isSignatureValid = rsa.VerifyData(bytesToVerify, hash, signedBytes);
+            if (!isSignatureValid)
+            {
+              throw new SecurityException("Signature is invalid for token.  Potential abuse detected");
+            }
+          
 
-          if (!isSignatureValid)
-          {
-            throw new SecurityException("Signature is invalid for token.  Potential abuse detected");
-          }
         }
       }
       catch (Exception ex)
@@ -190,7 +192,7 @@ namespace Atlantis.Framework.Sso.Interface.JsonHelperClasses
       }
 
       var keyRequest = new SsoGetKeyRequestData(this);
-      var keyResponse = (SsoGetKeyResponseData)Engine.Engine.ProcessRequest(keyRequest, engineRequestType);
+      var keyResponse = (SsoGetKeyResponseData) DataCache.DataCache.GetProcessRequest(keyRequest, engineRequestType);
 
       return keyResponse.Key;
     }

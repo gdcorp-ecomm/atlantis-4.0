@@ -52,8 +52,10 @@ namespace Atlantis.Framework.Sso.Impl
       inputDataString.Append(HttpUtility.UrlEncode(_ssoTokenRequestData.Username));
       inputDataString.Append("&password=");
       inputDataString.Append(HttpUtility.UrlEncode(_ssoTokenRequestData.Password));
+      inputDataString.Append("&user_ip=");
+      inputDataString.Append(HttpUtility.UrlEncode(_ssoTokenRequestData.ClientIp));
 
-      if (_ssoTokenRequestData.PrivateLabelId != PrivateLabelIds.GoDaddy)
+      if (_ssoTokenRequestData.PrivateLabelId != PrivateLabelIds.GoDaddy && _ssoTokenRequestData.PrivateLabelId != PrivateLabelIds.DomainsByProxy)
       {
         inputDataString.Append("&plid=");
         inputDataString.Append(_ssoTokenRequestData.PrivateLabelId);
@@ -66,13 +68,17 @@ namespace Atlantis.Framework.Sso.Impl
     {
       var isValid = !string.IsNullOrEmpty(_ssoTokenRequestData.Username)
                 && !string.IsNullOrEmpty(_ssoTokenRequestData.Password)
+                && !string.IsNullOrEmpty(_ssoTokenRequestData.ClientIp)
                 && _ssoTokenRequestData.PrivateLabelId > 0;
 
       if (!isValid)
       {
         var data = string.Concat("Username: ", _ssoTokenRequestData.Username,
-            " | PasswordLength: ", _ssoTokenRequestData.Password.Length,
-            " | PrivateLabelID: ", _ssoTokenRequestData.PrivateLabelId);
+          " | PasswordLength: ", _ssoTokenRequestData.Password.Length,
+          " | PrivateLabelID: ", _ssoTokenRequestData.PrivateLabelId,
+          " | ClientIp: ", _ssoTokenRequestData.ClientIp);
+        
+        
 
         throw new MissingFieldException("MissingRequestData: " + data);
       }

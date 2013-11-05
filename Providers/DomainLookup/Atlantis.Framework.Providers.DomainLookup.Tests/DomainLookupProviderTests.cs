@@ -1,13 +1,13 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Atlantis.Framework.Providers.DomainLookup.Interface;
 using Atlantis.Framework.Testing.MockProviders;
+using NUnit.Framework;
 
 namespace Atlantis.Framework.Providers.DomainLookup.Tests
 {
-    [TestClass]
-    [DeploymentItem("atlantis.config")]
-    [DeploymentItem("Atlantis.Framework.DomainLookup.Impl.dll")]
+    [TestFixture]
+    //[DeploymentItem("atlantis.config")]
+    //[DeploymentItem("Atlantis.Framework.DomainLookup.Impl.dll")]
     public class DomainLookupProviderTests
     {
       private readonly MockProviderContainer _container = new MockProviderContainer();
@@ -18,7 +18,7 @@ namespace Atlantis.Framework.Providers.DomainLookup.Tests
         return _container.Resolve<IDomainLookupProvider>();
       }
 
-      [TestMethod]
+      [Test]
       public void CheckActiveDomain()
       {
         IDomainLookupProvider provider = NewDomainLookupProvider();
@@ -49,7 +49,7 @@ namespace Atlantis.Framework.Providers.DomainLookup.Tests
         Assert.AreEqual(false, provider.IsDomainAdult());
       }
 
-      [TestMethod]
+      [Test]
       public void CheckActiveResellerDomain()
       {
         IDomainLookupProvider provider = NewDomainLookupProvider();
@@ -68,7 +68,7 @@ namespace Atlantis.Framework.Providers.DomainLookup.Tests
         Assert.AreEqual(data.PdDomainId, 477322);
       }
 
-      [TestMethod]
+      [Test]
       public void CheckForEmptyResponse()
       {
         IDomainLookupProvider provider = NewDomainLookupProvider();
@@ -79,7 +79,7 @@ namespace Atlantis.Framework.Providers.DomainLookup.Tests
         Assert.AreEqual(data.IsSmartDomain, false);
       }
 
-      [TestMethod]
+      [Test]
       public void NullDomain()
       {
         IDomainLookupProvider provider = NewDomainLookupProvider();
@@ -90,7 +90,7 @@ namespace Atlantis.Framework.Providers.DomainLookup.Tests
         Assert.AreEqual(data.IsSmartDomain, false);
       }
 
-      [TestMethod]
+      [Test]
       public void EmptyDomain()
       {
         IDomainLookupProvider provider = NewDomainLookupProvider();
@@ -101,7 +101,7 @@ namespace Atlantis.Framework.Providers.DomainLookup.Tests
         Assert.AreEqual(data.IsSmartDomain, false);
       }
 
-      [TestMethod]
+      [Test]
       public void TestAdultName1()
       {
         IDomainLookupProvider provider = NewDomainLookupProvider();

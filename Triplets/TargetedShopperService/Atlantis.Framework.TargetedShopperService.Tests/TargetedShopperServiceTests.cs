@@ -22,12 +22,12 @@ namespace Atlantis.Framework.TargetedShopperService.Tests
       string encodedInput = encodeResponse.ResultData;
 
       Debug.Write(encodedInput);
-      Assert.AreEqual(encodeResponse.ResultStatus, "Success");
+      Assert.AreEqual(encodeResponse.ResultStatus, "0");
 
       ShopperXidDecodeRequestData decodeRequest = new ShopperXidDecodeRequestData(encodedInput);
       ShopperXidDecodeResponseData decodeResponse = (ShopperXidDecodeResponseData)Engine.Engine.ProcessRequest(decodeRequest, 717);
 
-      Assert.AreEqual(decodeResponse.ResultStatus, "Success");
+      Assert.AreEqual(decodeResponse.ResultStatus, "0");
       Assert.AreEqual(decodeResponse.ResultData, decodedInput);
     }
 
@@ -43,12 +43,12 @@ namespace Atlantis.Framework.TargetedShopperService.Tests
       string encodedInput = encodeResponse.ResultData;
 
       Debug.Write(encodedInput);
-      Assert.AreEqual(encodeResponse.ResultStatus, "Success");
+      Assert.AreEqual(encodeResponse.ResultStatus, "0");
 
       ShopperXidDecodeRequestData decodeRequest = new ShopperXidDecodeRequestData(encodedInput);
       ShopperXidDecodeResponseData decodeResponse = (ShopperXidDecodeResponseData)Engine.Engine.ProcessRequest(decodeRequest, 717);
 
-      Assert.AreEqual(decodeResponse.ResultStatus, "Success");
+      Assert.AreEqual(decodeResponse.ResultStatus, "0");
       Assert.AreEqual(decodeResponse.ResultData, decodedInput);
     }
 
@@ -64,12 +64,12 @@ namespace Atlantis.Framework.TargetedShopperService.Tests
       string encodedInput = encodeResponse.ResultData;
 
       Debug.Write(encodedInput);
-      Assert.AreEqual(encodeResponse.ResultStatus, "Success");
+      Assert.AreEqual(encodeResponse.ResultStatus, "0");
 
       ShopperXidDecodeRequestData decodeRequest = new ShopperXidDecodeRequestData(encodedInput);
       ShopperXidDecodeResponseData decodeResponse = (ShopperXidDecodeResponseData)Engine.Engine.ProcessRequest(decodeRequest, 717);
 
-      Assert.AreEqual(decodeResponse.ResultStatus, "Success");
+      Assert.AreEqual(decodeResponse.ResultStatus, "0");
       Assert.AreEqual(decodeResponse.ResultData, decodedInput);
     }
 
@@ -84,7 +84,7 @@ namespace Atlantis.Framework.TargetedShopperService.Tests
       ShopperXidDecodeRequestData decodeRequest = new ShopperXidDecodeRequestData(encodedInput);
       ShopperXidDecodeResponseData decodeResponse = (ShopperXidDecodeResponseData)Engine.Engine.ProcessRequest(decodeRequest, 717);
 
-      Assert.AreEqual(decodeResponse.ResultStatus, "Error");
+      Assert.AreNotEqual(decodeResponse.ResultStatus, "0");
 
     }
   }

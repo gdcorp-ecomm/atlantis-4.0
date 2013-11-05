@@ -1,0 +1,252 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="maxLengthError" xml:space="preserve">
+    <value>{0} deve ter menos de {1} caracteres.</value>
+  </data>
+  <data name="minLengthError" xml:space="preserve">
+    <value>{0} deve ter mais de {1} caracteres.</value>
+  </data>
+  <data name="invalidData" xml:space="preserve">
+    <value>Dados inválidos</value>
+  </data>
+  <data name="equalLengthAlpha" xml:space="preserve">
+    <value>{0} deve ter {1} caracteres.</value>
+  </data>
+  <data name="equalLengthNumeric" xml:space="preserve">
+    <value>{0} deve ter {1} dígitos.</value>
+  </data>
+  <data name="invalidCharacters" xml:space="preserve">
+    <value>{0} contém caracteres inválidos</value>
+  </data>
+  <data name="match" xml:space="preserve">
+    <value>{0} deve ser igual a {1}</value>
+  </data>
+  <data name="notMatch" xml:space="preserve">
+    <value>{0} não pode ser igual a {1}</value>
+  </data>
+  <data name="numericRule" xml:space="preserve">
+    <value>{0} deve conter apenas números.</value>
+  </data>
+  <data name="isInvalid" xml:space="preserve">
+    <value>{0} é inválido;</value>
+  </data>
+  <data name="phoneMustStartAndContain" xml:space="preserve">
+    <value>{0} não deve iniciar com 0 ou 1.  Deve conter {1} caracteres </value>
+  </data>
+  <data name="phoneMustContainCharacters" xml:space="preserve">
+    <value>{0} deve conter {1} caracteres</value>
+  </data>
+  <data name="mustBeNumeric" xml:space="preserve">
+    <value>{0} deve ser numérico</value>
+  </data>
+  <data name="invalidFormat" xml:space="preserve">
+    <value>{0} é um formato inválido.</value>
+  </data>
+  <data name="required" xml:space="preserve">
+    <value>{0} é obrigatório</value>
+  </data>
+  <data name="birthdayValid" xml:space="preserve">
+    <value>Se estiver informando uma data de aniversário, forneça valores válidos</value>
+  </data>
+  <data name="straightNumerical" xml:space="preserve">
+    <value>{0} não pode ser qualquer sequência numérica direta de dígitos.</value>
+  </data>
+  <data name="commonPhrase" xml:space="preserve">
+    <value>{0} não é possível incluir uma frase ou palavra comum.</value>
+  </data>
+  <data name="lastFive" xml:space="preserve">
+    <value>Não é possível reutilizar as últimas 5 senhas.</value>
+  </data>
+  <data name="matchesHint" xml:space="preserve">
+    <value>{0} não pode ser igual à dica de senha.</value>
+  </data>
+  <data name="samePassword" xml:space="preserve">
+    <value>Não é possível usar a mesma senha por mais de 30 dias.</value>
+  </data>
+  <data name="isInvalidStatusCode" xml:space="preserve">
+    <value>{0} é inválido. Código de status: {1}</value>
+  </data>
+  <data name="passwordConfirm" xml:space="preserve">
+    <value>{0} não pode ter mais de {1} caracteres.  Retire {0} antes de passar para o validador.</value>
+  </data>
+  <data name="usernameExists" xml:space="preserve">
+    <value>O nome de usuário já existe</value>
+  </data>
+  <data name="username" xml:space="preserve">
+    <value>Nome de usuário</value>
+  </data>
+  <data name="birthday" xml:space="preserve">
+    <value>Data de aniversário</value>
+  </data>
+  <data name="address1" xml:space="preserve">
+    <value>Endereço 1</value>
+  </data>
+  <data name="address2" xml:space="preserve">
+    <value>Endereço 2</value>
+  </data>
+  <data name="phone" xml:space="preserve">
+    <value>Telefone</value>
+  </data>
+  <data name="callInPin" xml:space="preserve">
+    <value>PIN de chamada</value>
+  </data>
+  <data name="city" xml:space="preserve">
+    <value>Cidade</value>
+  </data>
+  <data name="country" xml:space="preserve">
+    <value>País</value>
+  </data>
+  <data name="email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="firstName" xml:space="preserve">
+    <value>Nome</value>
+  </data>
+  <data name="lastName" xml:space="preserve">
+    <value>Sobrenome</value>
+  </data>
+  <data name="password" xml:space="preserve">
+    <value>Senha</value>
+  </data>
+  <data name="confirmPassword" xml:space="preserve">
+    <value>Confirmar senha</value>
+  </data>
+  <data name="passwordHint" xml:space="preserve">
+    <value>Dica de senha</value>
+  </data>
+  <data name="ext" xml:space="preserve">
+    <value>Ramal</value>
+  </data>
+  <data name="state" xml:space="preserve">
+    <value>Estado</value>
+  </data>
+  <data name="zip" xml:space="preserve">
+    <value>CEP</value>
+  </data>
+  <data name="alreadyExists" xml:space="preserve">
+    <value>{0} já existe</value>
+  </data>
+  <data name="cannotBeNumeric" xml:space="preserve">
+    <value>{0} não pode ter somente números</value>
+  </data>
+  <data name="pinOneDigit" xml:space="preserve">
+    <value>O PIN deve conter mais de um dígito</value>
+  </data>
+</root>

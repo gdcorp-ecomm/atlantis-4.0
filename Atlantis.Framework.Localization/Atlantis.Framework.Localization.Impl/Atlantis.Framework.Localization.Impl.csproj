@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CountryCodeMarketIdsRequest.cs" />
     <Compile Include="CountrySiteMarketMappingsRequest.cs" />
     <Compile Include="MarketsActiveRequest.cs" />
     <Compile Include="CountrySitesActiveRequest.cs" />

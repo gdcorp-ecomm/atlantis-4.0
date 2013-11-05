@@ -74,6 +74,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="CountryCodeMarketIdsTests.cs" />
     <Compile Include="CountrySiteMarketMappingsTests.cs" />
     <Compile Include="MarketsActiveTests.cs" />
     <Compile Include="CountrySitesActiveTests.cs" />

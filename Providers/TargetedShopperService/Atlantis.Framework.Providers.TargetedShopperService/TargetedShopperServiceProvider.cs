@@ -15,7 +15,7 @@ namespace Atlantis.Framework.Providers.TargetedShopperService
       ShopperXidDecodeRequestData  request = new ShopperXidDecodeRequestData(encodedXid);
       ShopperXidDecodeResponseData response =
         SessionCache.SessionCache.GetProcessRequest<ShopperXidDecodeResponseData>(request,TargetedShopperServiceEngineRequest.DecodeXidRequestId);
-      return response.ResultStatus == "Success" ? response.ResultData : string.Empty;
+      return response.ResultStatus == "0" ? response.ResultData : string.Empty;
     }
 
     public string ShopperEncodeXid(string decodedXid)
@@ -23,7 +23,7 @@ namespace Atlantis.Framework.Providers.TargetedShopperService
       ShopperXidEncodeRequestData request = new ShopperXidEncodeRequestData(decodedXid);
       ShopperXidEncodeResponseData response =
         SessionCache.SessionCache.GetProcessRequest<ShopperXidEncodeResponseData>(request,TargetedShopperServiceEngineRequest.EncodeXidRequestId);
-      return response.ResultStatus == "Success" ? response.ResultData : string.Empty;
+      return response.ResultStatus == "0" ? response.ResultData : string.Empty;
     }
   }
 }

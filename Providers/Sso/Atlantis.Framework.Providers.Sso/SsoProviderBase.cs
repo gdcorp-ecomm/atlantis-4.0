@@ -29,7 +29,7 @@ namespace Atlantis.Framework.Providers.Sso
 
     protected IShopperContext ShopperContext
     {
-      get { return _shopperContext.Value;  }
+      get { return _shopperContext.Value; }
     }
 
     LocalizeUrl _localizeUrl;
@@ -164,27 +164,32 @@ namespace Atlantis.Framework.Providers.Sso
 
     private SsoData InitializeSsoData()
     {
-      string xmlFormatString = "<ssoGetIdentityProviderByServer><param name=\"serviceProviderGroupName\" value=\"{0}\"/><param name=\"serverName\" value=\"{1}\"/></ssoGetIdentityProviderByServer>";
-      string requestXml = string.Format(xmlFormatString, ServiceProviderGroupName, ServerOrClusterName);
-      string returnXmlData = string.Empty;
-
       SsoData ssoData = new SsoData();
 
-      try
+      if (_siteContext.Value.Manager.IsManager == false)
       {
-        returnXmlData = DataCache.DataCache.GetCacheData(requestXml);
-        var response = XElement.Parse(returnXmlData);
-        var item = response.Element("item");
-        ssoData.SpKey = item.Attribute("spkey").Value;
-        ssoData.LoginUrl = item.Attribute("loginURL").Value;
-        ssoData.LogoutUrl = item.Attribute("logoutURL").Value;
+        string xmlFormatString = "<ssoGetIdentityProviderByServer><param name=\"serviceProviderGroupName\" value=\"{0}\"/><param name=\"serverName\" value=\"{1}\"/></ssoGetIdentityProviderByServer>";
+        string requestXml = string.Format(xmlFormatString, ServiceProviderGroupName, ServerOrClusterName);
+        string returnXmlData = string.Empty;
+
+
+        try
+        {
+          returnXmlData = DataCache.DataCache.GetCacheData(requestXml);
+          var response = XElement.Parse(returnXmlData);
+          var item = response.Element("item");
+          ssoData.SpKey = item.Attribute("spkey").Value;
+          ssoData.LoginUrl = item.Attribute("loginURL").Value;
+          ssoData.LogoutUrl = item.Attribute("logoutURL").Value;
+        }
+        catch (Exception ex)
+        {
+          string errorMessage = string.Format("Error reading Identity Provider lookup response. Request: '{0}', Response: '{1}'", requestXml, returnXmlData);
+          AtlantisException aex = new AtlantisException("ClusterSsoProvider::InitializeSsoData", 0, errorMessage, ex.StackTrace);
+          Engine.Engine.LogAtlantisException(aex);
+        }
       }
-      catch (Exception ex)
-      {
-        string errorMessage = string.Format("Error reading Identity Provider lookup response. Request: '{0}', Response: '{1}'", requestXml, returnXmlData);
-        AtlantisException aex = new AtlantisException("ClusterSsoProvider::InitializeSsoData", 0, errorMessage, ex.StackTrace);
-        Engine.Engine.LogAtlantisException(aex);
-      }
+
 
       return ssoData;
     }

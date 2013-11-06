@@ -24,15 +24,15 @@ namespace Atlantis.Framework.Providers.Sso.Tests
   public class ClusterSsoProviderTests
   {
     #region Setup
-    private IProviderContainer GetProviderContainer(string url, int privateLabelId = 1, SsoProviderType ssoProviderType = SsoProviderType.GoDaddy, string httpMethod = "GET", string virtualDirectoryName = "")
+    private IProviderContainer GetProviderContainer(string url, int privateLabelId = 1, SsoProviderType ssoProviderType = SsoProviderType.GoDaddy, bool isManager = false)
     {
-      MockHttpRequest request = new MockCustomHttpRequest(url, httpMethod, virtualDirectoryName);
+      MockHttpRequest request = new MockCustomHttpRequest(url, "GET", "");
       MockHttpContext.MockHttpContext.SetFromWorkerRequest(request);
 
       string filename;
       string queryString;
       ParseUrl(url, out filename, out queryString);
-      var mockRequest = new Mocks.Http.MockHttpRequest(new HttpRequest(filename, url, queryString), httpMethod, virtualDirectoryName);
+      var mockRequest = new Mocks.Http.MockHttpRequest(new HttpRequest(filename, url, queryString));
       var context = new Mocks.Http.MockHttpContext(mockRequest, new Mocks.Http.MockHttpResponse());
       HttpContextFactory.SetHttpContext(context);
 
@@ -40,9 +40,18 @@ namespace Atlantis.Framework.Providers.Sso.Tests
       IProviderContainer result = new MockProviderContainer();
       result.RegisterProvider<IShopperContext, MockShopperContext>();
       result.RegisterProvider<ISiteContext, MockSiteContext>();
-      result.RegisterProvider<IManagerContext, MockNoManagerContext>();
       result.RegisterProvider<ILinkProvider, LinkProvider>();
 
+      if (!isManager)
+      {
+        result.RegisterProvider<IManagerContext, MockNoManagerContext>();
+      }
+      else
+      {
+        result.RegisterProvider<IManagerContext, MockManagerContext>();
+        result.SetData(MockManagerContextSettings.IsManager, true);
+      }
+      
       if (ssoProviderType == SsoProviderType.GoDaddy)
       {
         result.RegisterProvider<ISsoProvider, ClusterProvider>();
@@ -145,7 +154,7 @@ namespace Atlantis.Framework.Providers.Sso.Tests
       Assert.IsFalse(cp.ParseArtifact("does not exist", out shopperId));
       Assert.IsNotNull(shopperId);
     }
-    
+
     [TestMethod]
     public void TestParseArtifactFailWithCount()
     {
@@ -188,7 +197,7 @@ namespace Atlantis.Framework.Providers.Sso.Tests
     [TestMethod]
     public void TestGetLoginUrlWithSpkeyOverride()
     {
-      var providerContainer = GetProviderContainer("http://www.godaddy.com");
+      var providerContainer = GetProviderContainer("http://www.godaddy.com", 1);
       var cp = providerContainer.Resolve<ISsoProvider>();
       var spkey = cp.SpKey.ToLower();
 
@@ -196,7 +205,7 @@ namespace Atlantis.Framework.Providers.Sso.Tests
       var nvc = new NameValueCollection();
       nvc["SpKeY"] = overrideSpkey;
       var loginUrl = cp.GetUrl(SsoUrlType.Login, nvc).ToLower();
-      
+
       Assert.IsTrue(loginUrl.Contains(overrideSpkey));
       Assert.IsTrue(loginUrl.Contains("login.aspx"));
     }
@@ -321,6 +330,15 @@ namespace Atlantis.Framework.Providers.Sso.Tests
 
       Assert.IsTrue(loginUrl.Contains("seth"));
       Assert.IsTrue(loginUrl.Contains("spkey"));
+    }
+
+    [TestMethod]
+    public void TestSsoValuesAreNotSetWhenManager()
+    {
+      var providerContainer = GetProviderContainer("http://www.godaddy.com", isManager: true);
+      var cp = providerContainer.Resolve<ISsoProvider>();
+      var loginUrl = cp.GetUrl(SsoUrlType.Login).ToLower();
+      Assert.IsTrue(string.IsNullOrEmpty(loginUrl));
     }
   }
 

@@ -87,6 +87,7 @@ namespace Atlantis.Framework.Providers.Interface.Links
     string GetRelativeUrl(string relativePath = null, NameValueCollection queryMap = null, LinkProviderOptions options = LinkProviderOptions.DefaultOptions);
     string GetSpecificMarketUrl(string linkName, string relativePath, string countrySiteId, string marketId, NameValueCollection queryMap = null, LinkProviderOptions options = LinkProviderOptions.DefaultOptions);
     string GetUrlArguments(NameValueCollection queryMap = null, LinkProviderOptions options = LinkProviderOptions.DefaultOptions);
+    string GetSpecificContextUrl(string linkName, string relativePath, int contextId, NameValueCollection queryMap = null, LinkProviderOptions options = LinkProviderOptions.DefaultOptions);
 
   }
 }

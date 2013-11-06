@@ -33,6 +33,7 @@ namespace Atlantis.Framework.Providers.Links.Tests
   public class LinkProviderTests
   {
     private static Dictionary<string, ILinkInfo> gdfakeData;
+    private static Dictionary<string, ILinkInfo> wwdfakeData;
 
     private static string fakeMarketsActiveData = Properties.Resource1.MarketsActive;
 
@@ -117,6 +118,76 @@ namespace Atlantis.Framework.Providers.Links.Tests
           }
         };
 
+      wwdfakeData = new Dictionary<string, ILinkInfo>
+        {
+          { 
+            "MYAURL", 
+            new LinkInfoImpl
+              {
+                BaseUrl = "mya.wildwestdomains.com",
+                CountrySupportType = LinkTypeCountrySupport.NoSupport,
+                CountryParameter = String.Empty,
+                LanguageSupportType = LinkTypeLanguageSupport.NoSupport,
+                LanguageParameter = String.Empty
+              }
+          },
+          { 
+            "SITEURL", 
+            new LinkInfoImpl
+              {
+                BaseUrl = "www.wildwestdomains.com",
+                CountrySupportType = LinkTypeCountrySupport.ReplaceHostNameSupport,
+                CountryParameter = String.Empty,
+                LanguageSupportType = LinkTypeLanguageSupport.PrefixPathSupport,
+                LanguageParameter = String.Empty
+              }
+          },
+          { 
+            "CARTURL", 
+            new LinkInfoImpl
+              {
+                BaseUrl = "cart.wildwestdomains.com",
+                CountrySupportType = LinkTypeCountrySupport.NoSupport,
+                CountryParameter = String.Empty,
+                LanguageSupportType = LinkTypeLanguageSupport.PrefixPathSupport,
+                LanguageParameter = String.Empty
+              }
+          },
+          { 
+            "DCCURL", 
+            new LinkInfoImpl
+              {
+                BaseUrl = "us.dcc.wildwestdomains.com/mypage.aspx",
+                CountrySupportType = LinkTypeCountrySupport.ReplaceHostNameSupport,
+                CountryParameter = String.Empty,
+                LanguageSupportType = LinkTypeLanguageSupport.QueryStringSupport,
+                LanguageParameter = "lang"
+              }
+          },
+          { 
+            "SSLURL", 
+            new LinkInfoImpl
+              {
+                BaseUrl = "certificates.wildwestdomains.com",
+                CountrySupportType = LinkTypeCountrySupport.PrefixHostNameSupport,
+                CountryParameter = String.Empty,
+                LanguageSupportType = LinkTypeLanguageSupport.PrefixPathSupport,
+                LanguageParameter = "lang"
+              }
+          },
+          { 
+            "SUPPORTURL", 
+            new LinkInfoImpl
+              {
+                BaseUrl = "support.wildwestdomains.com",
+                CountrySupportType = LinkTypeCountrySupport.QueryStringSupport,
+                CountryParameter = "cntry",
+                LanguageSupportType = LinkTypeLanguageSupport.QueryStringSupport,
+                LanguageParameter = "lang"
+              }
+          }
+        };
+
       afe.Engine.ReloadConfig(afeConfig);
 
       ReloadCache();
@@ -180,6 +251,7 @@ namespace Atlantis.Framework.Providers.Links.Tests
       }
 
       HttpContext.Current.Items[MockLinkInfoRequestContextSettings.LinkInfoTable + ".1"] = gdfakeData;
+      HttpContext.Current.Items[MockLinkInfoRequestContextSettings.LinkInfoTable + ".2"] = wwdfakeData;
 
       HttpContext.Current.Items[MockLocalizationSettings.CountrySiteMarketMappingsTable] = fakeCountrySiteMarketMappingData;
       HttpContext.Current.Items[MockLocalizationSettings.CountrySitesActiveTable] = fakeCountrySitesActive;
@@ -1202,6 +1274,24 @@ namespace Atlantis.Framework.Providers.Links.Tests
       Assert.IsTrue(url.IndexOf("/hosting/hosting.aspx?", StringComparison.OrdinalIgnoreCase)!=-1);
       Assert.IsTrue(url.IndexOf("isc=234", StringComparison.OrdinalIgnoreCase)!=-1);
 
+    }
+
+    [TestMethod]
+    public void TestSettingContextIdLink()
+    {
+      var links = NewLinkProvider("http://www.bluerazor.com/default.aspx?isc=234", 1, string.Empty);
+
+      // test valid contextid, godaddy
+      string url = links.GetSpecificContextUrl("MYAURL", "Default.aspx", 1, null, LinkProviderOptions.QueryStringExplicitWithLocalizationParameters);
+      Assert.IsTrue(url.StartsWith("http://mya.godaddy.com/Default.aspx"));
+
+      // test valid contextid with queryMap, godaddy
+      url = links.GetSpecificContextUrl("MYAURL", "Default.aspx", 1, new NameValueCollection {{"accid", "40"}}, LinkProviderOptions.QueryStringExplicitParameters);
+      Assert.IsTrue(url.StartsWith("http://mya.godaddy.com/Default.aspx?accid=40"));
+
+      // test valid contextid, wildwestdomains
+      url = links.GetSpecificContextUrl("MYAURL", "Default.aspx", 2);
+      Assert.IsTrue(url.StartsWith("http://mya.wildwestdomains.com/Default.aspx?isc=234"));
     }
 
     //[TestMethod]

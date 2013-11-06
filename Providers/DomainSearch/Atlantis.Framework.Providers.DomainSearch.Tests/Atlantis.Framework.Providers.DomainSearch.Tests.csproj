@@ -66,7 +66,7 @@
     </Reference>
     <Reference Include="Atlantis.Framework.Domains.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.Domains.Interface.4.13.10.29\lib\net40\Atlantis.Framework.Domains.Interface.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.Domains.Interface.4.13.11.6\lib\net40\Atlantis.Framework.Domains.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.DomainSearch.Impl, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

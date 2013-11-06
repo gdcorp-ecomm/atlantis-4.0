@@ -76,7 +76,7 @@ namespace Atlantis.Framework.Providers.DomainSearch.Tests
     [TestMethod]
     public void DomainSearchExactMatchTest()
     {
-      const string searchPhrase = "spoonymac.com";
+      const string searchPhrase = "уичтрдеычиикктуйггфф.com";
 
       var domainSearchResult = DomainSearch.SearchDomain(searchPhrase, SOURCE_CODE, string.Empty);
       Assert.IsTrue(domainSearchResult.IsSuccess);
@@ -234,7 +234,7 @@ namespace Atlantis.Framework.Providers.DomainSearch.Tests
     [TestMethod]
     public void DomainSearchPreReg()
     {
-      const string searchPhrase = "iowa.mx";
+      const string searchPhrase = "iowa.menu";
 
       var domainSearchResult = DomainSearch.SearchDomain(searchPhrase, SOURCE_CODE, string.Empty);
       Assert.IsTrue(domainSearchResult.IsSuccess);
@@ -242,7 +242,7 @@ namespace Atlantis.Framework.Providers.DomainSearch.Tests
       var domains = domainSearchResult.GetDomainsByGroup(DomainGroupTypes.EXACT_MATCH);
 
       Assert.IsTrue(domains[0].InPreRegPhase);
-      Assert.IsTrue(domains[0].PreRegLaunchPhases.Count() > 0);
+      Assert.IsTrue(domains[0].LaunchPhaseItems.Count() > 0);
     }
   }
 }

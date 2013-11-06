@@ -2,25 +2,21 @@
 using System.Xml;
 using Atlantis.Framework.DomainLookup.Interface;
 using Atlantis.Framework.Interface;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-
+using NUnit.Framework;
 
 namespace Atlantis.Framework.DomainLookup.Tests
 {
-  [TestClass]
-  [DeploymentItem("atlantis.config")]
-  [DeploymentItem("Atlantis.Framework.DomainLookup.Impl.dll")]
+  [TestFixture]
   public class DomainLookupTests
   {
     const int _DOMAINLOOKUPREQUESTTYPE = 728;
     const int _DOMAINLOOKUPREQUESTTYPE_WSNOTVALID = 729;
     
-    [TestMethod]
+    [Test]
     public void CheckActiveResellerDomain()
     {
       DomainLookupRequestData request = new DomainLookupRequestData("ELEVENCATS.INFO");
       DomainLookupResponseData response = (DomainLookupResponseData)Engine.Engine.ProcessRequest(request, _DOMAINLOOKUPREQUESTTYPE);
-
 
       Assert.AreEqual(response.domainData.DomainId, 2146871);
       Assert.AreEqual(response.domainData.HasSuspectTerms, false);
@@ -33,7 +29,7 @@ namespace Atlantis.Framework.DomainLookup.Tests
       Assert.IsTrue(privateLabelCheck);
     }
 
-     [TestMethod]
+    [Test]
     public void CheckActiveDomain()
     {
       DomainLookupRequestData request = new DomainLookupRequestData("jeffmcookietest1.info");
@@ -57,9 +53,7 @@ namespace Atlantis.Framework.DomainLookup.Tests
       Assert.IsTrue(privateLabelCheck);
     }
 
-    
-
-    [TestMethod]
+    [Test]
     public void CheckForEmptyResponse()
     {
       DomainLookupRequestData request = new DomainLookupRequestData("gghhasdd");
@@ -69,7 +63,7 @@ namespace Atlantis.Framework.DomainLookup.Tests
       Assert.AreEqual(response.domainData.IsSmartDomain, false);
     }
 
-    [TestMethod]
+    [Test]
     public void SimulateAnExcpetion()
     {
       DomainLookupRequestData request = new DomainLookupRequestData("elevencats.info");

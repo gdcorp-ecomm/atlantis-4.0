@@ -43,13 +43,12 @@ namespace Atlantis.Framework.Providers.DomainProductPackage
       };
 
       var years = dotTypeInfo.MinRegistrationLength;
-      var tierId = findResponseDomain.InternalTier;
 
       if (domainRegProductPackageGroup.InLaunchPhase)
       {
-        foreach (var launchPhase in findResponseDomain.PreRegLaunchPhases)
+        foreach (var launchPhaseItem in findResponseDomain.LaunchPhaseItems)
         {
-          var domainProductLookup = DomainProductLookup.Create(years, domainCount, launchPhase, TLDProductTypes.Registration);
+          var domainProductLookup = DomainProductLookup.Create(years, domainCount, launchPhaseItem.LaunchPhase, TLDProductTypes.Registration, launchPhaseItem.TierId);
           var productid = dotTypeInfo.GetProductId(domainProductLookup);
 
           var domainProductPackage = new DomainProductPackage(Container) { Domain = findResponseDomain.Domain, TierId = findResponseDomain.InternalTier };
@@ -57,15 +56,15 @@ namespace Atlantis.Framework.Providers.DomainProductPackage
           var productPackageItem = ProductPackageItem.Create(DomainProductPackage.PACKAGE_NAME, productid, 1, years, Container);
           domainProductPackage.PackageItems.Add(productPackageItem);
 
-          SetApplicationFee(launchPhase, domainProductPackage, dotTypeInfo);
+          SetApplicationFee(launchPhaseItem.LaunchPhase, domainProductPackage, dotTypeInfo);
 
-          domainRegProductPackageGroup.LaunchPhasePackages.Add(launchPhase, domainProductPackage);
+          domainRegProductPackageGroup.LaunchPhasePackages.Add(launchPhaseItem.LaunchPhase, domainProductPackage);
         }
       }
       else
       {
         const LaunchPhases launchPhase = LaunchPhases.GeneralAvailability;
-        var domainProductLookup = DomainProductLookup.Create(years, domainCount, launchPhase, TLDProductTypes.Registration, tierId);
+        var domainProductLookup = DomainProductLookup.Create(years, domainCount, launchPhase, TLDProductTypes.Registration, domainRegProductPackageGroup.TierId);
         var productid = dotTypeInfo.GetProductId(domainProductLookup);
         
         var domainProductPackage = new DomainProductPackage(Container) { Domain = findResponseDomain.Domain, TierId = findResponseDomain.InternalTier };

@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using Atlantis.Framework.Domains.Interface;
-using Atlantis.Framework.DotTypeCache.Interface;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.Currency;
-using Atlantis.Framework.Providers.DomainProductPackage.PackageItems;
 using Atlantis.Framework.Providers.Interface.Currency;
 using Atlantis.Framework.Providers.Interface.Products;
 
@@ -16,18 +14,14 @@ namespace Atlantis.Framework.Providers.DomainProductPackage
     internal const string PACKAGE_NAME = "IDomainProductPackage.DomainProductPackageItem";
     internal const string APPLICATION_FEE = "IDomainProductPackage.ApplicationFeePackageItem";
     private readonly IProviderContainer _container;
-    private readonly Lazy<IShopperContext> _shopperContext;
     private readonly Lazy<ICurrencyProvider> _currencyProvider;
-    private readonly Lazy<IDotTypeProvider> _dotTypeProvider; 
 
     internal int ApplicationFeeProductId { get; set; }
 
     public DomainProductPackage(IProviderContainer container)
     {
       _container = container;
-      _shopperContext = new Lazy<IShopperContext>(_container.Resolve<IShopperContext>);
       _currencyProvider = new Lazy<ICurrencyProvider>(_container.Resolve<ICurrencyProvider>);
-      _dotTypeProvider = new Lazy<IDotTypeProvider>(() => container.Resolve<IDotTypeProvider>());
     }
 
     public IDomain Domain { get; set; }

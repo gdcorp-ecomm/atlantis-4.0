@@ -2,6 +2,7 @@
 using System.Linq;
 using Atlantis.Framework.DomainSearch.Interface;
 using Atlantis.Framework.Domains.Interface;
+using Atlantis.Framework.DotTypeCache.Interface;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Testing.MockHttpContext;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -301,7 +302,7 @@ namespace Atlantis.Framework.DomainSearch.Tests
         && string.IsNullOrEmpty(d.DomainName));
       var d1 = new Domain("тестнарусскомязыке", "ком", "xn--80ajbhobmflsidahct6lyc", "xn--j1aef");
       Assert.IsTrue(d1.Sld == "тестнарусскомязыке"
-        && d.Tld == "ком"
+        && d1.Tld == "ком"
         && d1.PunyCodeSld == "xn--80ajbhobmflsidahct6lyc"
         && d1.PunyCodeTld == "xn--j1aef"
         && d1.DomainName == "тестнарусскомязыке.ком"
@@ -325,7 +326,7 @@ namespace Atlantis.Framework.DomainSearch.Tests
     {
       var request = new MockHttpRequest("http://www.spoonymac.com");
       MockHttpContext.SetFromWorkerRequest(request);
-      var domainName = "iowa.mx";
+      var domainName = "sdf34sdfsdfsdfsdf.menu";
       var requestData = new DomainSearchRequestData(SHOPPER_ID, string.Empty, string.Empty, string.Empty, 0)
       {
         RequestTimeout = TimeSpan.FromSeconds(10),
@@ -345,36 +346,13 @@ namespace Atlantis.Framework.DomainSearch.Tests
       var domain = response.ExactMatchDomains[0];
 
       Assert.IsTrue(domain.InPreRegPhase);
-      Assert.IsTrue(domain.PreRegLaunchPhases.Count() > 0);
-    }
+      Assert.IsTrue(domain.LaunchPhaseItems.Any());
 
-    [TestMethod]
-    public void PriceFeatureTest()
-    {
-      var request = new MockHttpRequest("http://www.spoonymac.com");
-      MockHttpContext.SetFromWorkerRequest(request);
-      var domainName = "iowa.mx";
-      var requestData = new DomainSearchRequestData(SHOPPER_ID, string.Empty, string.Empty, string.Empty, 0)
-      {
-        RequestTimeout = TimeSpan.FromSeconds(10),
-        ClientIp = "172.16.172.211",
-        CountrySite = "WWW",
-        IncludeSpins = true,
-        Language = "en",
-        PrivateLabelId = 1,
-        SearchPhrase = domainName,
-        ShopperStatus = ShopperStatusType.Public,
-        SourceCode = "mblDPPSearch",
-        Tlds = new List<string>(0),
-        DomainSearchDataBases = _databases
-      };
-      var response = (DomainSearchResponseData)Engine.Engine.ProcessRequest(requestData, REQUESTID);
+      var sunrise = domain.LaunchPhaseItems.First(p => p.LaunchPhase == LaunchPhases.SunriseA);
+      var landursh = domain.LaunchPhaseItems.First(p => p.LaunchPhase == LaunchPhases.Landrush);
 
-      var domain = response.ExactMatchDomains[0];
-
-      Assert.IsTrue(domain.VendorCost > 0);
-      Assert.IsTrue(domain.VendorTier > 0);
-      Assert.IsTrue(domain.InternalTier > 0);
+      Assert.IsTrue(sunrise.TierId.Value == 19);
+      Assert.IsFalse(landursh.TierId.HasValue);
     }
   }
 }

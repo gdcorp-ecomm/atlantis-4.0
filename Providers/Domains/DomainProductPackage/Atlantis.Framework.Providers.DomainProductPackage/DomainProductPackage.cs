@@ -54,13 +54,7 @@ namespace Atlantis.Framework.Providers.DomainProductPackage
         return _packageItems;
       }
     }
-
-    //public bool AutoRenew { get; set; }
-
-    //public string User { get; set; }
-
-    public int? TierId { get; set; }
-
+    
     private ICurrencyPrice _currentPrice;
     public ICurrencyPrice CurrentPrice
     {

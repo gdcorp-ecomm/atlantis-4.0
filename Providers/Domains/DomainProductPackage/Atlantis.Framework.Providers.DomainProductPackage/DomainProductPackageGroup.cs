@@ -8,9 +8,7 @@ namespace Atlantis.Framework.Providers.DomainProductPackage
   public class DomainRegistrationProductPackageGroup  : IDomainRegistrationProductPackageGroup
   {
     public IDomainProductPackage RegistrationPackage { get; set; }
-
-    public int? TierId { get; set; }
-
+    
     public IDomain Domain { get; set; }
 
     public bool InLaunchPhase { get; set; }

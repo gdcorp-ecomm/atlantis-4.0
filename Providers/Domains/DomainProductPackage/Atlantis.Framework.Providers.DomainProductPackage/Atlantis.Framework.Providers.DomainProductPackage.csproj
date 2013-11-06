@@ -62,8 +62,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Atlantis.Framework.DomainContactFields.Impl.4.13.6.5\lib\net40\Atlantis.Framework.DomainContactFields.Interface.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.Domains.Interface">
-      <HintPath>..\packages\Atlantis.Framework.Domains.Interface.4.13.11.6\lib\net40\Atlantis.Framework.Domains.Interface.dll</HintPath>
+    <Reference Include="Atlantis.Framework.Domains.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Domains.Interface.4.13.11.7\lib\net40\Atlantis.Framework.Domains.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.DotTypeCache, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

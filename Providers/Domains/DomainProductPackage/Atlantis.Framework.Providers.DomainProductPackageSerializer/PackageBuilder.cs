@@ -48,7 +48,6 @@ namespace Atlantis.Framework.Providers.DomainProductPackageStateProvider
         // Build the domain.
         domainRegProductPackageGroup.Domain = new Domain(packageDataItemGroup.Sld, packageDataItemGroup.Tld, packageDataItemGroup.PunyCodeSld, packageDataItemGroup.PunyCodeTld);
         domainRegProductPackageGroup.InLaunchPhase = packageDataItemGroup.InLaunchPhase;
-        domainRegProductPackageGroup.TierId = packageDataItemGroup.TierId;
 
         if (packageDataItemGroup.InLaunchPhase)
         {
@@ -92,7 +91,6 @@ namespace Atlantis.Framework.Providers.DomainProductPackageStateProvider
       {
         var packageData = new PackageData
         {
-          TierId = domainGroup.TierId,
           InLaunchPhase = domainGroup.InLaunchPhase,
           Tld = domainGroup.Domain.Tld,
           Sld = domainGroup.Domain.Sld,

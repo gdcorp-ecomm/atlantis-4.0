@@ -10,11 +10,15 @@ using Atlantis.Framework.Providers.RenderPipeline.Interface;
 using Atlantis.Framework.Render.ContentInjection;
 using Atlantis.Framework.Render.ContentInjection.RenderHandlers;
 using Atlantis.Framework.Web.RenderPipeline;
+using Atlantis.Framework.Providers.Containers;
+using System.IO;
+using System.Text.RegularExpressions;
 
 namespace Atlantis.Framework.Web.CDSContent
 {
   public abstract class CDSContentPageControllerBase : RenderPipelineBasePage
   {
+    private const string BodyEndTag = @"</body>";
     private static readonly IList<IPlaceHolder> _emptyPlaceHolderList = new List<IPlaceHolder>(0);
     private IWhitelistResult _whitelistResult;
  
@@ -39,6 +43,14 @@ namespace Atlantis.Framework.Web.CDSContent
     protected virtual IList<IPlaceHolder> BodyBeginPlaceHolders { get { return _emptyPlaceHolderList; } }
 
     protected virtual IList<IPlaceHolder> BodyEndPlaceHolders { get { return _emptyPlaceHolderList; } }
+
+    protected abstract string DebugInfoControlPath { get; }
+
+    private ISiteContext _siteContext;
+    protected ISiteContext SiteContext
+    {
+      get { return _siteContext ?? (_siteContext = HttpProviderContainer.Instance.Resolve<ISiteContext>()); }
+    }
 
     private bool _useInjectionRenderHandler = true;
     protected bool UseInjectionRenderHandler
@@ -176,6 +188,73 @@ namespace Atlantis.Framework.Web.CDSContent
       base.OnLoad(e);
 
       ConfigureRenderPipeline();
+    }
+
+    protected override void Render(HtmlTextWriter writer)
+    {
+      if (SiteContext.IsRequestInternal && !string.IsNullOrEmpty(DebugInfoControlPath))
+      {
+        AppendDebugInfoControl(writer);
+      }
+      else
+      {
+        base.Render(writer);
+      }
+    }
+
+    private void AppendDebugInfoControl(HtmlTextWriter writer)
+    {
+      using (HtmlTextWriter htmlwriter = new HtmlTextWriter(new StringWriter()))
+      {
+        base.Render(htmlwriter);
+        StringBuilder contentBuilder = new StringBuilder(htmlwriter.InnerWriter.ToString());
+        string html = RenderControl(DebugInfoControlPath);
+        if (!string.IsNullOrEmpty(html))
+        {
+          contentBuilder.Replace(BodyEndTag, html + BodyEndTag);
+        }
+        writer.Write(contentBuilder.ToString());
+      }
+    }
+
+    private string RenderControl(string controlPath)
+    {
+      string html = string.Empty;
+      Control ctrl = null;
+
+      if (!string.IsNullOrEmpty(controlPath))
+      {
+        try
+        {
+          ctrl = this.LoadControl(controlPath);
+        }
+        catch (Exception ex)
+        {
+          ctrl = null;
+          Engine.Engine.LogAtlantisException(new AtlantisException("Atlantis.Framework.Web.CDSContent.RenderControl()",
+                                                                       "0",
+                                                                       string.Format("Could not load control \"{0}\" : {1}", controlPath, ex.Message),
+                                                                       controlPath,
+                                                                       SiteContext,
+                                                                       null));
+        }
+      }
+
+      if (ctrl != null && ctrl.Visible)
+      {
+        StringBuilder htmlStringBuilder = new StringBuilder();
+
+        using (StringWriter stringWriter = new StringWriter(htmlStringBuilder))
+        {
+          using (HtmlTextWriter htmlTextWriter = new HtmlTextWriter(stringWriter))
+          {
+            ctrl.RenderControl(htmlTextWriter);
+            html = htmlStringBuilder.ToString();
+          }
+        }
+      }
+
+      return html;
     }
   }
 }

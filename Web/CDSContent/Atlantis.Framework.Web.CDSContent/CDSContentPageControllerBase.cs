@@ -44,7 +44,7 @@ namespace Atlantis.Framework.Web.CDSContent
 
     protected virtual IList<IPlaceHolder> BodyEndPlaceHolders { get { return _emptyPlaceHolderList; } }
 
-    protected abstract string DebugInfoControlPath { get; }
+    protected abstract Control DebugInfoControl { get; }
 
     private ISiteContext _siteContext;
     protected ISiteContext SiteContext
@@ -192,7 +192,7 @@ namespace Atlantis.Framework.Web.CDSContent
 
     protected override void Render(HtmlTextWriter writer)
     {
-      if (SiteContext.IsRequestInternal && !string.IsNullOrEmpty(DebugInfoControlPath))
+      if (SiteContext.IsRequestInternal && DebugInfoControl != null)
       {
         AppendDebugInfoControl(writer);
       }
@@ -208,7 +208,7 @@ namespace Atlantis.Framework.Web.CDSContent
       {
         base.Render(htmlwriter);
         StringBuilder contentBuilder = new StringBuilder(htmlwriter.InnerWriter.ToString());
-        string html = RenderControl(DebugInfoControlPath);
+        string html = RenderControl(DebugInfoControl);
         if (!string.IsNullOrEmpty(html))
         {
           contentBuilder.Replace(BodyEndTag, html + BodyEndTag);
@@ -217,28 +217,9 @@ namespace Atlantis.Framework.Web.CDSContent
       }
     }
 
-    private string RenderControl(string controlPath)
+    private string RenderControl(Control ctrl)
     {
       string html = string.Empty;
-      Control ctrl = null;
-
-      if (!string.IsNullOrEmpty(controlPath))
-      {
-        try
-        {
-          ctrl = this.LoadControl(controlPath);
-        }
-        catch (Exception ex)
-        {
-          ctrl = null;
-          Engine.Engine.LogAtlantisException(new AtlantisException("Atlantis.Framework.Web.CDSContent.RenderControl()",
-                                                                       "0",
-                                                                       string.Format("Could not load control \"{0}\" : {1}", controlPath, ex.Message),
-                                                                       controlPath,
-                                                                       SiteContext,
-                                                                       null));
-        }
-      }
 
       if (ctrl != null && ctrl.Visible)
       {

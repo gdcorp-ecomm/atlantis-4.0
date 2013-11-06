@@ -351,7 +351,7 @@ namespace Atlantis.Framework.DomainSearch.Tests
       var sunrise = domain.LaunchPhaseItems.First(p => p.LaunchPhase == LaunchPhases.SunriseA);
       var landursh = domain.LaunchPhaseItems.First(p => p.LaunchPhase == LaunchPhases.Landrush);
 
-      Assert.IsTrue(sunrise.TierId.Value == 19);
+      Assert.IsTrue(sunrise.TierId.Value > 0);
       Assert.IsFalse(landursh.TierId.HasValue);
     }
   }

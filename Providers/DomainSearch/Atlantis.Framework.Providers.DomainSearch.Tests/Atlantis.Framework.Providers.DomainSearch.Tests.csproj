@@ -66,15 +66,15 @@
     </Reference>
     <Reference Include="Atlantis.Framework.Domains.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.Domains.Interface.4.13.11.7\lib\net40\Atlantis.Framework.Domains.Interface.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.Domains.Interface.4.13.11.8\lib\net40\Atlantis.Framework.Domains.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.DomainSearch.Impl, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.DomainSearch.Impl.4.13.11.6\lib\net40\Atlantis.Framework.DomainSearch.Impl.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.DomainSearch.Impl.4.13.11.7\lib\net40\Atlantis.Framework.DomainSearch.Impl.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.DomainSearch.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.DomainSearch.Interface.4.13.11.6\lib\net40\Atlantis.Framework.DomainSearch.Interface.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.DomainSearch.Interface.4.13.11.7\lib\net40\Atlantis.Framework.DomainSearch.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.DotTypeCache">
       <HintPath>..\packages\Atlantis.Framework.DotTypeCache.4.13.10.22\lib\net40\Atlantis.Framework.DotTypeCache.dll</HintPath>

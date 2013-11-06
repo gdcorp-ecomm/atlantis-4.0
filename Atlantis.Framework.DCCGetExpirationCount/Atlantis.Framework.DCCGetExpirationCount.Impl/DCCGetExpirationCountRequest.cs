@@ -1,5 +1,4 @@
-﻿using System;
-using Atlantis.Framework.DCCGetExpirationCount.Impl.DomainStatusWS;
+﻿using Atlantis.Framework.DCCGetExpirationCount.Impl.DomainStatusWS;
 using Atlantis.Framework.DCCGetExpirationCount.Interface;
 using Atlantis.Framework.Interface;
 
@@ -7,36 +6,22 @@ namespace Atlantis.Framework.DCCGetExpirationCount.Impl
 {
   public class DCCGetExpirationCountRequest : IRequest
   {
-    public IResponseData RequestHandler(RequestData oRequestData, ConfigElement oConfig)
+    public IResponseData RequestHandler(RequestData requestData, ConfigElement config)
     {
-      IResponseData result;
-      string responseXml = null;
-      RegCheckDomainStatusWebSvcService service = null;
-
-      try
+      if (string.IsNullOrEmpty(requestData.ShopperID))
       {
-        DCCGetExpirationCountRequestData request = (DCCGetExpirationCountRequestData)oRequestData;
+        return DCCGetExpirationCountResponseData.None;
+      }
 
-        service = new RegCheckDomainStatusWebSvcService();
-        service.Url = ((WsConfigElement)oConfig).WSURL;
+      var request = (DCCGetExpirationCountRequestData)requestData;
+      using (var service = new RegCheckDomainStatusWebSvcService())
+      {
+        service.Url = ((WsConfigElement)config).WSURL;
         service.Timeout = (int)request.RequestTimeout.TotalMilliseconds;
+        string responseXml = service.GetExpirationDomainCountsByShopperId(request.ToXML());
 
-        responseXml = service.GetExpirationDomainCountsByShopperId(request.ToXML());
-        result = new DCCGetExpirationCountResponseData(responseXml, oRequestData);
+        return DCCGetExpirationCountResponseData.FromResponseXml(requestData.ShopperID, responseXml);
       }
-      catch (Exception ex)
-      {
-        result = new DCCGetExpirationCountResponseData(responseXml, oRequestData, ex);
-      }
-      finally
-      {
-        if(service != null)
-        {
-          service.Dispose();
-        }
-      }
-
-      return result;
     }
   }
 }

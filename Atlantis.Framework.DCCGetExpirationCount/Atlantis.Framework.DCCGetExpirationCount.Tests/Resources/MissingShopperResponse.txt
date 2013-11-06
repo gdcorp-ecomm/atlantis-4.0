@@ -1,0 +1,1 @@
+<results><method callid="2224CA67-1BBF-4528-A62E-03FEE29E7CBD" server="G1DWDSWEB01">GetExpirationDomainCountsByShopperId</method><success>1</success><getexpirationdomaincountsbyshopperid><username>FOS</username></getexpirationdomaincountsbyshopperid></results>

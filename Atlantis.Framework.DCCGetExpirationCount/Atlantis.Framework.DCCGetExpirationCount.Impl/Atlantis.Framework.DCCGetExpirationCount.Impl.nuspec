@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Atlantis.Framework.DCCGetExpirationCount.Impl</id>
+    <version>4.13.11.6</version>
+    <title>Atlantis Framework DCCGetExpirationCount Impl</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <projectUrl>https://confluence.int.godaddy.com/display/ATLANTIS</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes></releaseNotes>
+    <copyright>$copyright$</copyright>
+    <tags>Atlantis Framework DCCGetExpirationCount Impl</tags>
+    <dependencies>
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="bin\Release\Atlantis.Framework.DCCGetExpirationCount.Impl.XmlSerializers.dll" target="lib\net40\Atlantis.Framework.DCCGetExpirationCount.Impl.XmlSerializers.dll" />
+  </files>
+</package>

@@ -1,12 +1,13 @@
 ﻿using System.IO;
 using System.Net;
+using System.Security.Cryptography.X509Certificates;
 using System.Web.Script.Serialization;
 
 namespace Atlantis.Framework.Sso.Impl.Helpers
 {
   internal static class HttpHelpers
   {
-    public static HttpWebRequest GetHttpWebRequestAndAddData(string wsUrl, string urlEncodedData, string contentType, string httpMethod)
+    public static HttpWebRequest GetHttpWebRequestAndAddData(string wsUrl, string urlEncodedData, string contentType, string httpMethod, X509Certificate2 clientCert = null)
     {
       var httpWebRequest = (HttpWebRequest)WebRequest.Create(wsUrl);
       httpWebRequest.Method = httpMethod;
@@ -19,6 +20,11 @@ namespace Atlantis.Framework.Sso.Impl.Helpers
         {
           authPostStream.Write(urlEncodedData);
         }
+      }
+
+      if (clientCert != null)
+      {
+        httpWebRequest.ClientCertificates.Add(clientCert);
       }
 
       return httpWebRequest;

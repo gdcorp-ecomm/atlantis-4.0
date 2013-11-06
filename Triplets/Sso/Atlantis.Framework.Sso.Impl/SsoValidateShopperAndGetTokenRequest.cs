@@ -1,4 +1,5 @@
-﻿using System.Web;
+﻿using System.Security.Cryptography.X509Certificates;
+using System.Web;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Sso.Impl.Helpers;
 using Atlantis.Framework.Sso.Interface;
@@ -21,10 +22,13 @@ namespace Atlantis.Framework.Sso.Impl
         _ssoTokenRequestData = (SsoValidateShopperAndGetTokenRequestData)requestData;
         ThrowExceptionIfRequestDataIsMissing();
 
-        var urlEncodedData = GetTokenRequestData();
-        var wsUrl = ((WsConfigElement)config).WSURL;
+        var wsConfigElement = ((WsConfigElement) config);
 
-        var tokenWebRequest = HttpHelpers.GetHttpWebRequestAndAddData(wsUrl, urlEncodedData, "application/x-www-form-urlencoded", "POST");
+        var urlEncodedData = GetTokenRequestData();
+        var wsUrl = wsConfigElement.WSURL;
+        X509Certificate2 clientCert = wsConfigElement.GetClientCertificate();
+
+        var tokenWebRequest = HttpHelpers.GetHttpWebRequestAndAddData(wsUrl, urlEncodedData, "application/x-www-form-urlencoded", "POST", clientCert);
         Token token = HttpHelpers.GetWebResponseAndConvertToObject<Token>(tokenWebRequest);
         token.PrivateLabelId = _ssoTokenRequestData.PrivateLabelId;
 

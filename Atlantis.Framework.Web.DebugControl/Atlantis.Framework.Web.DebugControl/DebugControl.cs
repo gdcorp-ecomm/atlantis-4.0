@@ -1,6 +1,7 @@
 ﻿
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
@@ -58,16 +59,16 @@ namespace Atlantis.Framework.Web.DebugControl
         return _siteAdminLink;
       }
     }
-    
+
     protected override void CreateChildControls()
     {
       this.CreateControlCollection();
-      
+
       GetBrowserInfo();
       GetSessionInfo();
-      
+
       _containerDiv = new HtmlGenericControl();
-      
+
       StringBuilder debugInfo = new StringBuilder();
       foreach (var debugItem in DebugData)
       {
@@ -76,45 +77,45 @@ namespace Atlantis.Framework.Web.DebugControl
 
       var script =
         new LiteralControl("<script language=\"javascript\" type=\"text/javascript\">" +
-        "function PostForm() {"+
-            "var form = document.createElement(\"form\");"+
+        "function PostForm() {" +
+            "var form = document.createElement(\"form\");" +
             "form.setAttribute(\"method\", \"post\");" +
             "form.setAttribute(\"target\", \"_blank\");" +
-            "form.setAttribute(\"action\", \"" + SiteAdminLink + "\" );"+
+            "form.setAttribute(\"action\", \"" + SiteAdminLink + "\" );" +
             "var hiddenField = document.createElement(\"input\");" +
             "hiddenField.setAttribute(\"type\", \"hidden\");" +
-            "hiddenField.setAttribute(\"name\", \"debugInfo\");"+
+            "hiddenField.setAttribute(\"name\", \"debugInfo\");" +
             "hiddenField.setAttribute(\"value\", \"" + debugInfo.ToString().Replace("\r\n", ",") + "\");" +
-            "form.appendChild(hiddenField);"+
+            "form.appendChild(hiddenField);" +
 
             "var browserInfo = document.createElement(\"input\");" +
             "browserInfo.setAttribute(\"type\", \"hidden\");" +
             "browserInfo.setAttribute(\"name\", \"browserInfo\");" +
             "browserInfo.setAttribute(\"value\", arguments[0]);" +
             "form.appendChild(browserInfo);" +
-            
+
             "var sessionInfo = document.createElement(\"input\");" +
             "sessionInfo.setAttribute(\"type\", \"hidden\");" +
             "sessionInfo.setAttribute(\"name\", \"sessionInfo\");" +
             "sessionInfo.setAttribute(\"value\", arguments[1]);" +
             "form.appendChild(sessionInfo);" +
 
-            "document.body.appendChild(form);"+
-            "form.submit();"+
-        "}"+
+            "document.body.appendChild(form);" +
+            "form.submit();" +
+        "}" +
     "</script>");
 
       _containerDiv.Controls.Add(script);
-      
+
       var submitButton = new HtmlGenericControl("div");
-      
+
       submitButton.ID = "submit";
       submitButton.InnerHtml = "Report Feedback";
       submitButton.Attributes.Add("class", "g-btn-lg g-btn-prg");
       submitButton.Attributes.Add("style", "border: none; cursor: pointer");
       submitButton.Attributes.Add("onclick", "PostForm('" + BrowserInfoValue + "' , '" + SessionInfoValue + "')");
       _containerDiv.Controls.Add(submitButton);
-      
+
       Controls.Add(_containerDiv);
 
       ChildControlsCreated = true;
@@ -136,6 +137,12 @@ namespace Atlantis.Framework.Web.DebugControl
       }
 
       writer.Write("<script language=\"javascript\" type=\"text/javascript\">" +
+        "function GetSessionDebugInfo() {" +
+        " return '" + SessionInfoValue + "';" +
+        "}" +
+        "function GetBrowserDebugInfo() {" +
+        " return '" + BrowserInfoValue + "';" +
+        "}" +
         "function PostForm() {" +
             "var form = document.createElement(\"form\");" +
             "form.setAttribute(\"method\", \"post\");" +
@@ -165,8 +172,8 @@ namespace Atlantis.Framework.Web.DebugControl
     "</script>");
 
 
-      writer.Write("<div id=\"submit\" class=\"g-btn-lg g-btn-prg\" style=\"border: none; cursor: pointer\" onclick=\"PostForm(&quot;" + BrowserInfoValue + "&quot; , &quot;" + SessionInfoValue + "&quot;)\">Report Feedback</div>");
-      
+      writer.Write("<div id=\"submit\" class=\"g-btn-lg g-btn-prg\" style=\"border: none; cursor: pointer\" onclick=\"PostForm(GetBrowserDebugInfo() , GetSessionDebugInfo())\">Report Feedback</div>");
+
       writer.Write("</span>");
     }
 
@@ -180,7 +187,7 @@ namespace Atlantis.Framework.Web.DebugControl
       browserInfo.AppendLine("Platform: " + browser.Platform);
       browserInfo.AppendLine("Version: " + browser.Version);
       browserInfo.AppendLine("IsMobileDevice: " + browser.IsMobileDevice);
-      
+
       BrowserInfoValue = browserInfo.ToString().Replace("\r\n", ",");
     }
 
@@ -196,6 +203,8 @@ namespace Atlantis.Framework.Web.DebugControl
       }
 
       SessionInfoValue = sessionInfo.ToString().Replace("\r\n", ",");
+
+      SessionInfoValue = SessionInfoValue.Replace("'", "").Replace("<", "&lt;").Replace(">", "&gt;").Replace("&quot;","").Replace("\"","");
     }
   }
 }

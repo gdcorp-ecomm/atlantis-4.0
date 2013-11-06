@@ -1,4 +1,5 @@
-﻿using Atlantis.Framework.DotTypeCache.Interface;
+﻿using Atlantis.Framework.DotTypeCache;
+using Atlantis.Framework.DotTypeCache.Interface;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -16,8 +17,35 @@ namespace Atlantis.Framework.Domains.Interface
     }
 
     private readonly Dictionary<string, string> _cartAttributes = new Dictionary<string, string>();
+    
+    private void SetLaunchPhaseItems(string domainTokenValue)
+    {
+      if (!string.IsNullOrEmpty(domainTokenValue))
+      {
+        var tokens = JsonConvert.DeserializeObject<JToken>(domainTokenValue);
+        foreach (var token in tokens)
+        {
+          var launchPhase = LaunchPhaseMappings.GetPhase(token["Name"].ToString());
 
-    private readonly Dictionary<string, string> _preRegPhases = new Dictionary<string, string>();
+          var dataItems = JsonConvert.DeserializeObject<JToken>(token["Data"].ToString());
+
+          int? tierId = null;
+          foreach (var preRegItemData in dataItems) 
+          {
+            var hasTierId = preRegItemData["Name"].ToString() == "internaltier";
+            int intValue;
+            if (hasTierId && int.TryParse(preRegItemData["Data"].ToString(), out intValue))
+            {
+              tierId = intValue;
+              break;
+            }
+          }
+
+          var launchPhaseItem = LaunchPhaseItem.Create(launchPhase, tierId);
+          _launchPhaseItems.Add(launchPhaseItem);
+        }
+      }
+    }
     
     private void ParseDomainToken(JToken domainToken)
     {
@@ -193,14 +221,7 @@ namespace Atlantis.Framework.Domains.Interface
               }
               break;
             case "preregphase":
-              if (!string.IsNullOrEmpty(domainTokenValue))
-              {
-                var tokens = JsonConvert.DeserializeObject<JToken>(domainTokenValue);
-                foreach (var token in tokens)
-                {
-                  _preRegPhases[token["Name"].ToString().ToUpperInvariant()] = token["Data"].ToString();
-                }
-              }
+              SetLaunchPhaseItems(domainTokenValue);
               break;
             case "hasleafpage":
               if (bool.TryParse(domainTokenValue, out boolValue))
@@ -220,7 +241,7 @@ namespace Atlantis.Framework.Domains.Interface
         }
       }
     }
-
+    
     private void SetPriceFeatures(IEnumerable<JToken> tokens)
     {
       foreach (var token in tokens)
@@ -364,25 +385,25 @@ namespace Atlantis.Framework.Domains.Interface
         return DomainSearchDataBase == "private";
       }
     }
-    
-    private bool? _inPreRegistrationPhase;
+
+    private bool? _inPreRegPhase;
     public bool InPreRegPhase
     {
       get
       {
-        if (_inPreRegistrationPhase == null)
+        if (_inPreRegPhase == null)
         {
-          _inPreRegistrationPhase = _preRegPhases.Count > 0;
+          _inPreRegPhase = _launchPhaseItems.Count > 0;
         }
 
-        return _inPreRegistrationPhase.Value;
+        return _inPreRegPhase.Value;
 
       }
     }
 
-    public bool IsPreRegPhaseAvailable(string preRegPhase)
+    public bool IsPreRegPhaseAvailable(LaunchPhases launchPhase)
     {
-      return _preRegPhases.Keys.Contains(preRegPhase.ToUpperInvariant());
+      return LaunchPhaseItems.FirstOrDefault(lpi => lpi.LaunchPhase == launchPhase) != null;
     }
     
     public bool HasLeafPage { get; private set; }
@@ -392,24 +413,20 @@ namespace Atlantis.Framework.Domains.Interface
     public int? VendorTier { get; private set; }
 
     public int? InternalTier { get; private set; }
+    
 
-    private IList<LaunchPhases> _preRegLaunchPhases;
-    public IEnumerable<LaunchPhases> PreRegLaunchPhases
+    private IList<LaunchPhaseItem> _launchPhaseItems = new List<LaunchPhaseItem>(0);
+    public IEnumerable<LaunchPhaseItem> LaunchPhaseItems
     {
       get
       {
-        if (_preRegLaunchPhases == null)
+        if (_launchPhaseItems == null)
         {
-          _preRegLaunchPhases = new List<LaunchPhases>(_preRegPhases.Keys.Count);
-          foreach (var preRegPhase in _preRegPhases.Keys)
-          {
-            var launchPhase = DotTypeCache.LaunchPhaseMappings.GetPhase(preRegPhase);
-            _preRegLaunchPhases.Add(launchPhase);
-          }
+          _launchPhaseItems = new List<LaunchPhaseItem>(0);
         }
 
-        return _preRegLaunchPhases;
+        return _launchPhaseItems;
       }
-  }
+    }
   }
 }

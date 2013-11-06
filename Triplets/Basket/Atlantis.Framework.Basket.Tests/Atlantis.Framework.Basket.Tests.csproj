@@ -71,6 +71,7 @@
   <ItemGroup>
     <Compile Include="BasketAddTests.cs" />
     <Compile Include="BasketErrorTests.cs" />
+    <Compile Include="BasketItemCountTests.cs" />
     <Compile Include="BasketResponseStatusTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">

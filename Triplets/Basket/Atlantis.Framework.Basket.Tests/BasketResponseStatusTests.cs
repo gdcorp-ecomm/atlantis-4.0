@@ -36,7 +36,7 @@ namespace Atlantis.Framework.Basket.Tests
       var responseElement = XElement.Parse(Resources.UnknownResponse);
       var status = BasketResponseStatus.FromResponseElement(responseElement);
       Assert.IsTrue(ReferenceEquals(BasketResponseStatus.UnknownError, status));
-      Assert.IsFalse(status.HasErrors);
+      Assert.IsTrue(status.HasErrors);
     }
 
     [TestMethod]

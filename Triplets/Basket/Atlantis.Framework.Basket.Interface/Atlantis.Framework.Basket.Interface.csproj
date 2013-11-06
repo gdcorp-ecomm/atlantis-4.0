@@ -50,6 +50,8 @@
     <Compile Include="BasketAddRequestData.cs" />
     <Compile Include="BasketAddResponseData.cs" />
     <Compile Include="BasketError.cs" />
+    <Compile Include="BasketItemCountRequestData.cs" />
+    <Compile Include="BasketItemCountResponseData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BasketResponseStatus.cs" />
     <Compile Include="BasketResponseStatusType.cs" />

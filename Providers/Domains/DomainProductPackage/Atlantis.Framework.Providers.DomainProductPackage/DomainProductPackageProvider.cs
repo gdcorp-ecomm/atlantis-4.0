@@ -50,7 +50,7 @@ namespace Atlantis.Framework.Providers.DomainProductPackage
           var domainProductLookup = DomainProductLookup.Create(years, domainCount, launchPhaseItem.LaunchPhase, TLDProductTypes.Registration, launchPhaseItem.TierId);
           var productid = dotTypeInfo.GetProductId(domainProductLookup);
 
-          var domainProductPackage = new DomainProductPackage(Container) { Domain = findResponseDomain.Domain };
+          var domainProductPackage = new DomainProductPackage(Container) { Domain = findResponseDomain.Domain, TierId = launchPhaseItem.TierId};
 
           var productPackageItem = ProductPackageItem.Create(DomainProductPackage.PACKAGE_NAME, productid, 1, years, Container);
           domainProductPackage.PackageItems.Add(productPackageItem);
@@ -65,8 +65,8 @@ namespace Atlantis.Framework.Providers.DomainProductPackage
         const LaunchPhases launchPhase = LaunchPhases.GeneralAvailability;
         var domainProductLookup = DomainProductLookup.Create(years, domainCount, launchPhase, TLDProductTypes.Registration, findResponseDomain.InternalTier);
         var productid = dotTypeInfo.GetProductId(domainProductLookup);
-        
-        var domainProductPackage = new DomainProductPackage(Container) { Domain = findResponseDomain.Domain};
+
+        var domainProductPackage = new DomainProductPackage(Container) { Domain = findResponseDomain.Domain, TierId = findResponseDomain.InternalTier };
 
         var productPackageItem = ProductPackageItem.Create(DomainProductPackage.PACKAGE_NAME, productid, 1, years, Container);
         domainProductPackage.PackageItems.Add(productPackageItem);

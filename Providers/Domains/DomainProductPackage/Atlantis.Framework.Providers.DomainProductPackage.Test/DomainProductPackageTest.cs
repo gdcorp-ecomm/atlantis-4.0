@@ -125,7 +125,7 @@ namespace Atlantis.Framework.Providers.DomainProductPackage.Test
     [TestMethod]
     public void DomainProductPackagePreRegTest()
     {
-      var domainSearchResponse = DomainSearch.SearchDomain("sunrise-test.o2.borg", SOURCE_CODE, string.Empty, new List<string> {"o2.borg"});
+      var domainSearchResponse = DomainSearch.SearchDomain("sunrise-test.menu", SOURCE_CODE, string.Empty, new List<string> {"menu"});
 
       var packageGroups = DomainProductPackageProvider.BuildDomainProductPackageGroups(domainSearchResponse.GetDomainsByGroup(DomainGroupTypes.EXACT_MATCH));
 
@@ -135,7 +135,11 @@ namespace Atlantis.Framework.Providers.DomainProductPackage.Test
       {
         Assert.IsTrue(packageGroup.InLaunchPhase);
         Assert.IsTrue(packageGroup.Domain.DomainName.Length > 0);
-        Assert.IsTrue(packageGroup.LaunchPhasePackages.Count > 0);
+        Assert.IsTrue(packageGroup.LaunchPhasePackages.Count == 3);
+
+        IDomainProductPackage launchphasePackage;
+        Assert.IsTrue(packageGroup.LaunchPhasePackages.TryGetValue(LaunchPhases.SunriseA, out launchphasePackage));
+        Assert.IsTrue(launchphasePackage.TierId == 17);
 
         IDomainProductPackage registrationPackage;
         Assert.IsTrue(packageGroup.TryGetRegistrationPackage(out registrationPackage) == false);

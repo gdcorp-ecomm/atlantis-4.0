@@ -19,7 +19,8 @@ namespace Atlantis.Framework.Providers.DomainProductPackageStateProvider
     public string PunyCodeTld { get; set; }
 
     [DataMember(Name = "tierid")]
-    public int? TierId { get; set; }
+    public int TierId { get; set; }
+
     [DataMember(Name = "inphz")]
     public bool InLaunchPhase { get; set; }
 
@@ -28,5 +29,7 @@ namespace Atlantis.Framework.Providers.DomainProductPackageStateProvider
 
     [DataMember(Name = "regpkg")] 
     public Dictionary<string, object> RegistrationPackage;
+
+
   }
 }

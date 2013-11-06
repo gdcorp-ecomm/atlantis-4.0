@@ -131,5 +131,7 @@ namespace Atlantis.Framework.Providers.DomainProductPackage
 
       return productPackageItem != null;
     }
+
+    public int? TierId { get; set; }
   }
 }

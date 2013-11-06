@@ -17,6 +17,7 @@ namespace Atlantis.Framework.Providers.DomainProductPackageStateProvider
     private const string PACKAGE_NAME = "nam";
     private const string PRODUCT_ID = "pfid";
     private const string QUANTITY = "qty";
+    private const string TIER_ID = "tierid";
 
     private static IProductPackageItem CreateProductPackageItem(IProviderContainer container, IDictionary<string, object> packageDataItem)
     {
@@ -30,7 +31,7 @@ namespace Atlantis.Framework.Providers.DomainProductPackageStateProvider
       int.TryParse(packageDataItem[QUANTITY].ToString(), out quantity);
 
       var name = packageDataItem[PACKAGE_NAME].ToString();
-
+      
       var productPackageItem = ProductPackageItem.Create(name, productId, quantity, duration, container);
       productPackageItem.BasketAttributes = packageDataItem[BASKET_ATTRIBUTES] as Dictionary<string, string>;
 
@@ -61,6 +62,12 @@ namespace Atlantis.Framework.Providers.DomainProductPackageStateProvider
             foreach (var packageDataItemValues in launchPhasePackageDataItem)
             {
               launchPhaseDomainProductPackage.PackageItems.Add(CreateProductPackageItem(container, packageDataItemValues));
+              
+              int tierValue;
+              if (packageDataItemValues[TIER_ID] != null && int.TryParse(packageDataItemValues[TIER_ID].ToString(), out tierValue))
+              {
+                launchPhaseDomainProductPackage.TierId = tierValue;
+              }
             }
 
             domainRegProductPackageGroup.LaunchPhasePackages.Add(key, launchPhaseDomainProductPackage);
@@ -73,6 +80,12 @@ namespace Atlantis.Framework.Providers.DomainProductPackageStateProvider
           domainRegProductPackageGroup.RegistrationPackage = registrationPackage;
 
           var productPackageItem = CreateProductPackageItem(container, packageDataItemGroup.RegistrationPackage);
+
+          int tierValue;
+          if (packageDataItemGroup.RegistrationPackage[TIER_ID] != null && int.TryParse(packageDataItemGroup.RegistrationPackage[TIER_ID].ToString(), out tierValue))
+          {
+            domainRegProductPackageGroup.RegistrationPackage.TierId = tierValue;
+          }
 
           domainRegProductPackageGroup.RegistrationPackage.PackageItems.Add(productPackageItem);
         }
@@ -96,7 +109,7 @@ namespace Atlantis.Framework.Providers.DomainProductPackageStateProvider
           Sld = domainGroup.Domain.Sld,
           PunyCodeTld = domainGroup.Domain.PunyCodeTld,
           PunyCodeSld = domainGroup.Domain.PunyCodeSld,
-          PunyCodeDomainName = domainGroup.Domain.PunyCodeDomainName
+          PunyCodeDomainName = domainGroup.Domain.PunyCodeDomainName,
         };
 
         packageData.InLaunchPhase = domainGroup.InLaunchPhase;
@@ -105,10 +118,10 @@ namespace Atlantis.Framework.Providers.DomainProductPackageStateProvider
         {
           packageData.LaunchPhasePackages = new Dictionary<LaunchPhases, List<IDictionary<string, object>>>(domainGroup.LaunchPhasePackages.Count);
 
-          foreach (var package in domainGroup.LaunchPhasePackages)
+          foreach (var launchPhasePackage in domainGroup.LaunchPhasePackages)
           {
-            var launchPhaseDataItems = new List<IDictionary<string, object>>(package.Value.PackageItems.Count);
-            foreach (var packageItem in package.Value.PackageItems)
+            var launchPhaseDataItems = new List<IDictionary<string, object>>(launchPhasePackage.Value.PackageItems.Count);
+            foreach (var packageItem in launchPhasePackage.Value.PackageItems)
             {
               var packageDataItem = new Dictionary<string, object>(8)
               {
@@ -117,13 +130,18 @@ namespace Atlantis.Framework.Providers.DomainProductPackageStateProvider
                 {DURATION, packageItem.Duration},
                 {PACKAGE_NAME, packageItem.Name},
                 {PRODUCT_ID, packageItem.ProductId},
-                {QUANTITY, packageItem.Quantity}
+                {QUANTITY, packageItem.Quantity},
               };
+
+              if (launchPhasePackage.Value.TierId != null)
+              {
+                packageDataItem.Add(TIER_ID, launchPhasePackage.Value.TierId.Value);
+              }
 
               launchPhaseDataItems.Add(packageDataItem);
             }
 
-            packageData.LaunchPhasePackages.Add(package.Key, launchPhaseDataItems);
+            packageData.LaunchPhasePackages.Add(launchPhasePackage.Key, launchPhaseDataItems);
           }
         }
         else
@@ -131,17 +149,16 @@ namespace Atlantis.Framework.Providers.DomainProductPackageStateProvider
           IDomainProductPackage productPackage;
           if (domainGroup.TryGetRegistrationPackage(out productPackage))
           {
-            //packageData.RegistrationPackage = new KeyValuePair<string, Dictionary<string, object>>();
-
-            var packageItem = productPackage.DomainProductPackageItem;
+            var productPackageItem = productPackage.DomainProductPackageItem;
             var dataItem = new Dictionary<string, object>(8)
             {
-              {BASKET_ATTRIBUTES, packageItem.BasketAttributes},
-              {CUSTOM_XML, packageItem.CustomXml},
-              {DURATION, packageItem.Duration},
-              {PACKAGE_NAME, packageItem.Name},
-              {PRODUCT_ID, packageItem.ProductId},
-              {QUANTITY, packageItem.Quantity}
+              {BASKET_ATTRIBUTES, productPackageItem.BasketAttributes},
+              {CUSTOM_XML, productPackageItem.CustomXml},
+              {DURATION, productPackageItem.Duration},
+              {PACKAGE_NAME, productPackageItem.Name},
+              {PRODUCT_ID, productPackageItem.ProductId},
+              {QUANTITY, productPackageItem.Quantity},
+              {TIER_ID, packageData.TierId}
             };
 
             packageData.RegistrationPackage = dataItem;

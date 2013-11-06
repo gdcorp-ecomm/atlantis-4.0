@@ -6,8 +6,6 @@ namespace Atlantis.Framework.Domains.Interface
 {
   public interface IDomainRegistrationProductPackageGroup 
   {
-    int? TierId { get; set; }
-    
     IDomain Domain { get; }
 
     bool InLaunchPhase { get; }

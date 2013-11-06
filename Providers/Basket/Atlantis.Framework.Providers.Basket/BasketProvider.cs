@@ -12,7 +12,7 @@ namespace Atlantis.Framework.Providers.Basket
     private readonly Lazy<IShopperContext> _shopperContext;
     private readonly Lazy<IShopperDataProvider> _shopperDataProvider; 
 
-    public BasketProvider(IProviderContainer container)
+    protected BasketProvider(IProviderContainer container)
       : base(container)
     {
       _siteContext = new Lazy<ISiteContext>(() => Container.Resolve<ISiteContext>());
@@ -132,7 +132,36 @@ namespace Atlantis.Framework.Providers.Basket
       }
     }
 
+    private int? _totalItems;
+    public int TotalItems
+    {
+      get
+      {
+        if (!_totalItems.HasValue)
+        {
+          _totalItems = LoadBasketItemCount();
+        }
+        return _totalItems.GetValueOrDefault();
+      }
+    }
 
+    private int LoadBasketItemCount()
+    {
+      if (string.IsNullOrEmpty(ShopperContext.ShopperId))
+      {
+        return 0;
+      }
 
+      var request = new BasketItemCountRequestData(ShopperContext.ShopperId);
+      try
+      {
+        var response = (BasketItemCountResponseData) Engine.Engine.ProcessRequest(request, BasketEngineRequests.ItemCount);
+        return response.TotalItems;
+      }
+      catch // Engine will log
+      {
+        return 0;
+      }
+    }
   }
 }

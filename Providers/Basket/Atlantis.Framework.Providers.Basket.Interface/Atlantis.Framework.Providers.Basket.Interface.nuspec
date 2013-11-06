@@ -2,14 +2,14 @@
 <package >
   <metadata>
     <id>Atlantis.Framework.Providers.Basket.Interface</id>
-    <version>4.13.10.18</version> 
+    <version>4.13.11.5</version> 
     <title>Atlantis Framework Basket Provider Interface</title>
     <authors>$author$</authors>
     <owners>$author$</owners>
     <projectUrl>https://confluence.int.godaddy.com/display/ATLANTIS</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes>Updated some IBasketAddItem property types to match the itemRequest xsd</releaseNotes>
+    <releaseNotes>Added property to get basket item count</releaseNotes>
     <copyright>$copyright$</copyright>
     <tags>Atlantis Framework Basket Provider Interface</tags>
   </metadata>

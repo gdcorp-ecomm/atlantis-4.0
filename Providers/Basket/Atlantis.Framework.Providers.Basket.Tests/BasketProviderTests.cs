@@ -187,67 +187,40 @@ namespace Atlantis.Framework.Providers.Basket.Tests
     [TestMethod]
     public void PostToCartWithExistingValidShopper()
     {
-      BasketEngineRequests.AddItems = 1746;
+      var container = SetContext<TestBasketProvider>(MockShopperDataProvider.MockCreatedShopperId);
+      var basket = container.Resolve<IBasketProvider>();
+      var basketAddRequest = basket.NewAddRequest();
+      var basketItem = basket.NewBasketAddItem(58, string.Empty);
+      basketAddRequest.AddItem(basketItem);
 
-      try
-      {
-        var container = SetContext<TestBasketProvider>(MockShopperDataProvider.MockCreatedShopperId);
-        var basket = container.Resolve<IBasketProvider>();
-        var basketAddRequest = basket.NewAddRequest();
-        var basketItem = basket.NewBasketAddItem(58, string.Empty);
-        basketAddRequest.AddItem(basketItem);
-
-        var response = basket.PostToBasket(basketAddRequest);
-        Assert.AreEqual(0, response.ErrorCount);
-      }
-      finally
-      {
-        BasketEngineRequests.AddItems = 746;
-      }
+      var response = basket.PostToBasket(basketAddRequest);
+      Assert.AreEqual(0, response.ErrorCount);
     }
 
     [TestMethod]
     public void PostToCartWithExistingNoShopper()
     {
-      BasketEngineRequests.AddItems = 1746;
+      var container = SetContext<TestBasketProvider>();
+      var basket = container.Resolve<IBasketProvider>();
+      var basketAddRequest = basket.NewAddRequest();
+      var basketItem = basket.NewBasketAddItem(58, string.Empty);
+      basketAddRequest.AddItem(basketItem);
 
-      try
-      {
-        var container = SetContext<TestBasketProvider>();
-        var basket = container.Resolve<IBasketProvider>();
-        var basketAddRequest = basket.NewAddRequest();
-        var basketItem = basket.NewBasketAddItem(58, string.Empty);
-        basketAddRequest.AddItem(basketItem);
-
-        var response = basket.PostToBasket(basketAddRequest);
-        Assert.AreEqual(0, response.ErrorCount);
-      }
-      finally
-      {
-        BasketEngineRequests.AddItems = 746;
-      }
+      var response = basket.PostToBasket(basketAddRequest);
+      Assert.AreEqual(0, response.ErrorCount);
     }
 
     [TestMethod]
     public void PostToCartWithExistingInvalidShopper()
     {
-      BasketEngineRequests.AddItems = 1746;
+      var container = SetContext<TestBasketProvider>(MockShopperDataProvider.MockBadShopperId);
+      var basket = container.Resolve<IBasketProvider>();
+      var basketAddRequest = basket.NewAddRequest();
+      var basketItem = basket.NewBasketAddItem(58, string.Empty);
+      basketAddRequest.AddItem(basketItem);
 
-      try
-      {
-        var container = SetContext<TestBasketProvider>(MockShopperDataProvider.MockBadShopperId);
-        var basket = container.Resolve<IBasketProvider>();
-        var basketAddRequest = basket.NewAddRequest();
-        var basketItem = basket.NewBasketAddItem(58, string.Empty);
-        basketAddRequest.AddItem(basketItem);
-
-        var response = basket.PostToBasket(basketAddRequest);
-        Assert.AreEqual(0, response.ErrorCount);
-      }
-      finally
-      {
-        BasketEngineRequests.AddItems = 746;
-      }
+      var response = basket.PostToBasket(basketAddRequest);
+      Assert.AreEqual(0, response.ErrorCount);
     }
 
     [TestMethod]
@@ -262,23 +235,14 @@ namespace Atlantis.Framework.Providers.Basket.Tests
     [TestMethod]
     public void PostToCartAddRequestThrowsException()
     {
-      BasketEngineRequests.AddItems = 1746;
+      var container = SetContext<TestBasketProvider>("ERR");
+      var basket = container.Resolve<IBasketProvider>();
+      var basketAddRequest = basket.NewAddRequest();
+      var basketItem = basket.NewBasketAddItem(58, string.Empty);
+      basketAddRequest.AddItem(basketItem);
 
-      try
-      {
-        var container = SetContext<TestBasketProvider>("ERR");
-        var basket = container.Resolve<IBasketProvider>();
-        var basketAddRequest = basket.NewAddRequest();
-        var basketItem = basket.NewBasketAddItem(58, string.Empty);
-        basketAddRequest.AddItem(basketItem);
-
-        var response = basket.PostToBasket(basketAddRequest);
-        Assert.AreNotEqual(0, response.ErrorCount);
-      }
-      finally
-      {
-        BasketEngineRequests.AddItems = 746;
-      }
+      var response = basket.PostToBasket(basketAddRequest);
+      Assert.AreNotEqual(0, response.ErrorCount);
     }
 
     [TestMethod]
@@ -287,7 +251,6 @@ namespace Atlantis.Framework.Providers.Basket.Tests
       IErrorLogger oldLogger = EngineLogging.EngineLogger;
       var mockLogger = new MockErrorLogger();
       EngineLogging.EngineLogger = mockLogger;
-      BasketEngineRequests.AddItems = 1746;
 
       try
       {
@@ -305,7 +268,6 @@ namespace Atlantis.Framework.Providers.Basket.Tests
       }
       finally
       {
-        BasketEngineRequests.AddItems = 746;
         EngineLogging.EngineLogger = oldLogger;
       }
     }
@@ -466,6 +428,56 @@ namespace Atlantis.Framework.Providers.Basket.Tests
 
       var childparentgroupid = lastItem.Attribute(BasketItemAttributes.ParentGroupId);
       Assert.IsNull(childparentgroupid);
+    }
+
+    [TestMethod]
+    public void BasketItemCount()
+    {
+      ConfigElement itemCountElement;
+      Engine.Engine.TryGetConfigElement(BasketEngineRequests.ItemCount, out itemCountElement);
+      itemCountElement.ResetStats();
+
+      var container = SetContext<TestBasketProvider>(MockShopperDataProvider.MockCreatedShopperId);
+      var basket = container.Resolve<IBasketProvider>();
+      int total = basket.TotalItems;
+
+      Assert.IsTrue(total >= 0);
+      Assert.AreEqual(1, itemCountElement.Stats.Succeeded);
+
+      int total2 = basket.TotalItems;
+      Assert.AreEqual(total, total2);
+      Assert.AreEqual(1, itemCountElement.Stats.Succeeded);
+    }
+
+    [TestMethod]
+    public void BasketItemCountEmptyShopper()
+    {
+      ConfigElement itemCountElement;
+      Engine.Engine.TryGetConfigElement(BasketEngineRequests.ItemCount, out itemCountElement);
+      itemCountElement.ResetStats();
+
+      var container = SetContext<TestBasketProvider>(string.Empty);
+      var basket = container.Resolve<IBasketProvider>();
+      int total = basket.TotalItems;
+
+      Assert.AreEqual(0, total);
+      Assert.AreEqual(0, itemCountElement.Stats.Succeeded);
+      Assert.AreEqual(0, itemCountElement.Stats.Failed);
+    }
+
+    [TestMethod]
+    public void BasketItemCountError()
+    {
+      ConfigElement itemCountElement;
+      Engine.Engine.TryGetConfigElement(BasketEngineRequests.ItemCount, out itemCountElement);
+      itemCountElement.ResetStats();
+
+      var container = SetContext<TestBasketProvider>("ERR");
+      var basket = container.Resolve<IBasketProvider>();
+      int total = basket.TotalItems;
+
+      Assert.AreEqual(0, total);
+      Assert.AreEqual(1, itemCountElement.Stats.Failed);
     }
 
   }

@@ -26,5 +26,9 @@
     /// <returns>a new IBasketAddItem</returns>
     IBasketAddItem NewBasketAddItem(int unifiedProductId, string itemTrackingCode);
 
+    /// <summary>
+    /// Returns the total items in the basket
+    /// </summary>
+    int TotalItems { get; }
   }
 }

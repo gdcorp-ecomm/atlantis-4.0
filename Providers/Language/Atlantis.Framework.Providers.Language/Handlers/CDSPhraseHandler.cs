@@ -17,7 +17,7 @@ namespace Atlantis.Framework.Providers.Language.Handlers
     const string SERVICE_SPOOF_PARAM_NAME = "docid";
     const string CDSDictionaryUrlFormat = "localization/{0}/{1}";
     const string DebugInfoKey = "CDS Language Dictionary";
-    const string DebugInfoValueFormat = "{0}, {1}";
+    const string DebugInfoValueFormat = "{0}, Version Id: {1}";
 
     private readonly IProviderContainer _container;
     private readonly Lazy<ISiteContext> _siteContext;
@@ -73,10 +73,10 @@ namespace Atlantis.Framework.Providers.Language.Handlers
       }
       //Commenting debug info logging since printing debug info happens even before language tokens are parsed.
       //Will revist this code when this changes.
-      //if (!string.IsNullOrEmpty(response.VersionId))
-      //{
-      //  LogCDSDebugInfo(dictionaryUrl, response.VersionId);
-      //}
+      if (!string.IsNullOrEmpty(response.VersionId))
+      {
+        LogCDSDebugInfo(dictionaryUrl, response.VersionId);
+      }
       return response;
     }
 
@@ -140,7 +140,7 @@ namespace Atlantis.Framework.Providers.Language.Handlers
       return string.Join("&", nvc.AllKeys.SelectMany(key => nvc.GetValues(key).Select(value => string.Format("{0}={1}", key, value))).ToArray());
     }
 
-    private void LogCDSDebugInfo(string name, string value)
+    private void LogCDSDebugInfo(string url, string versionId)
     {
       if (_siteContext.Value.IsRequestInternal)
       {
@@ -148,17 +148,16 @@ namespace Atlantis.Framework.Providers.Language.Handlers
         {
           if (_debugContext.Value != null)
           {
-            HashSet<string> loggedDebugInfoValues = _container.GetData<HashSet<string>>(DebugInfoLogTrackingKey, null);
-            if (loggedDebugInfoValues == null)
+            HashSet<string> loggedVersionIds = _container.GetData<HashSet<string>>(DebugInfoLogTrackingKey, null);
+            if (loggedVersionIds == null)
             {
-              loggedDebugInfoValues = new HashSet<string>();
+              loggedVersionIds = new HashSet<string>();
             }
-            string debugInfoValue = string.Format(DebugInfoValueFormat, name, value);
-            if (!loggedDebugInfoValues.Contains(debugInfoValue))
+            if (!loggedVersionIds.Contains(versionId))
             {
-              loggedDebugInfoValues.Add(debugInfoValue);
-              _debugContext.Value.LogDebugTrackingData(DebugInfoKey, debugInfoValue);
-              _container.SetData<HashSet<string>>(DebugInfoLogTrackingKey, loggedDebugInfoValues);
+              loggedVersionIds.Add(versionId);
+              _debugContext.Value.LogDebugTrackingData(DebugInfoKey, string.Format(DebugInfoValueFormat, url, versionId));
+              _container.SetData<HashSet<string>>(DebugInfoLogTrackingKey, loggedVersionIds);
             }
           }
         }

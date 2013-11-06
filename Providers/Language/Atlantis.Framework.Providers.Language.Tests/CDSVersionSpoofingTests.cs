@@ -95,24 +95,24 @@ namespace Atlantis.Framework.Providers.Language.Tests
     }
 
     //commenting this test because debug info. logging is commented out.
-    //[TestMethod]
-    //public void DoesLogDebugInfoWhenInternal()
-    //{
-    //  string url = "http://www.debug.godaddy-com.ide/home?version=localization/sales/atlantistests2/en|52697d55f778fc3e88f8934d,localization/sales/atlantistests/en|52697dcdf778fc3e88f8934e";
-    //  SetUrl(url);
+    [TestMethod]
+    public void DoesLogDebugInfoWhenInternal()
+    {
+      string url = "http://www.debug.godaddy-com.ide/home?version=localization/sales/atlantistests2/en|52697d55f778fc3e88f8934d,localization/sales/atlantistests/en|52697dcdf778fc3e88f8934e";
+      SetUrl(url);
 
-    //  IProviderContainer container = NewLanguageProviderContainer(1, "www", "en", true);
+      IProviderContainer container = NewLanguageProviderContainer(1, "www", "en", true);
 
-    //  IRenderPipelineProvider renderPipelineProvider = container.Resolve<IRenderPipelineProvider>();
+      IRenderPipelineProvider renderPipelineProvider = container.Resolve<IRenderPipelineProvider>();
 
-    //  string content = "<div>[@L[cds.sales/atlantistests:sparky]@L]</div><div>[@L[cds.sales/atlantistests2:shindung]@L]</div>";
-    //  string output = renderPipelineProvider.RenderContent(content, new List<IRenderHandler> { new LanguageRenderHandler() });
+      string content = "<div>[@L[cds.sales/atlantistests:sparky]@L]</div><div>[@L[cds.sales/atlantistests2:shindung]@L]</div>";
+      string output = renderPipelineProvider.RenderContent(content, new List<IRenderHandler> { new LanguageRenderHandler() });
 
-    //  IDebugContext dc = container.Resolve<IDebugContext>();
-    //  Assert.IsTrue((from kvp in dc.GetDebugTrackingData() where kvp.Value == "52697d55f778fc3e88f8934d" select kvp).Any());
+      IDebugContext dc = container.Resolve<IDebugContext>();
+      Assert.IsTrue((from kvp in dc.GetDebugTrackingData() where kvp.Value.EndsWith("52697d55f778fc3e88f8934d") select kvp).Any());
 
-    //  Assert.IsTrue((from kvp in dc.GetDebugTrackingData() where kvp.Value == "52697dcdf778fc3e88f8934e" select kvp).Any());
-    //}
+      Assert.IsTrue((from kvp in dc.GetDebugTrackingData() where kvp.Value.EndsWith("52697dcdf778fc3e88f8934e") select kvp).Any());
+    }
 
     [TestMethod]
     public void DoesNotLogDebugInfoWhenExternal()

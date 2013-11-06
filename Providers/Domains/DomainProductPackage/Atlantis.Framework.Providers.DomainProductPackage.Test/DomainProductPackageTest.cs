@@ -281,6 +281,13 @@ namespace Atlantis.Framework.Providers.DomainProductPackage.Test
         Assert.IsTrue(domainProductPackage.Value.CurrentPrice.Price > 0);
         Assert.IsTrue(domainProductPackage.Value.ListPrice.Price > 0);
 
+        IDomainProductPackage launchphasePackage;
+
+        if (packageGroup.LaunchPhasePackages.TryGetValue(LaunchPhases.SunriseA, out launchphasePackage))
+        {
+          Assert.IsTrue(launchphasePackage.TierId == 17);
+        }
+
         Assert.IsFalse(packageGroup.TryGetRegistrationPackage(out registrationPackage));
       }
     }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Atlantis.Framework.Domains.Interface;
 using Atlantis.Framework.DotTypeCache.Interface;
 using Atlantis.Framework.Interface;
@@ -64,7 +65,8 @@ namespace Atlantis.Framework.Providers.DomainProductPackageStateProvider
               launchPhaseDomainProductPackage.PackageItems.Add(CreateProductPackageItem(container, packageDataItemValues));
               
               int tierValue;
-              if (packageDataItemValues[TIER_ID] != null && int.TryParse(packageDataItemValues[TIER_ID].ToString(), out tierValue))
+              object tierObj;
+              if (packageDataItemValues.TryGetValue(TIER_ID, out tierObj) && int.TryParse(Convert.ToString(tierObj), out tierValue))
               {
                 launchPhaseDomainProductPackage.TierId = tierValue;
               }

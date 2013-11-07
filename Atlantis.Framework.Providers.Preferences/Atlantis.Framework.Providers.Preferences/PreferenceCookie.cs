@@ -100,7 +100,14 @@ namespace Atlantis.Framework.Providers.Preferences
 
       if (oldValue != value)
       {
-        _loadedCookieValues.Value[preferenceKey] = value;
+        if (value == null)
+        {
+          _loadedCookieValues.Value.Remove(preferenceKey);
+        }
+        else
+        {
+          _loadedCookieValues.Value[preferenceKey] = value;
+        }
         WriteCookie();
       }
     }
@@ -119,8 +126,9 @@ namespace Atlantis.Framework.Providers.Preferences
 
       foreach (var key in _loadedCookieValues.Value.Keys)
       {
-        preferenceCookie.Values[key] = _loadedCookieValues.Value[key];
-        legacyCookie.Values[TranslateToLegacy(key)] = _loadedCookieValues.Value[key];
+        string value = _loadedCookieValues.Value[key];
+        preferenceCookie.Values[key] = value;
+        legacyCookie.Values[TranslateToLegacy(key)] = value;
       }
 
       HttpContext.Current.Response.Cookies.Set(preferenceCookie);

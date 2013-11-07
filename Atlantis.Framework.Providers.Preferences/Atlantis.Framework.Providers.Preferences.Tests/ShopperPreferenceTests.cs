@@ -163,6 +163,39 @@ namespace Atlantis.Framework.Providers.Preferences.Tests
     }
 
     [TestMethod]
+    public void UpdatePreferenceRemove()
+    {
+      IProviderContainer result = SetContext("832652");
+
+      IShopperPreferencesProvider prefs = result.Resolve<IShopperPreferencesProvider>();
+      prefs.UpdatePreference("unittest", "success");
+      prefs.UpdatePreference("currency", "CHF");
+
+      HttpCookie newCookie = HttpContext.Current.Response.Cookies["preferences"];
+      HttpCookie oldCookie = HttpContext.Current.Response.Cookies["preferences1"];
+
+      Assert.IsNotNull(newCookie);
+      Assert.IsNotNull(oldCookie);
+
+      Assert.AreEqual("success", newCookie.Values["unittest"]);
+      Assert.AreEqual("success", oldCookie.Values["unittest"]);
+      Assert.AreEqual("CHF", newCookie.Values["currency"]);
+      Assert.AreEqual("CHF", oldCookie.Values["gdshop_currencyType"]);
+
+      prefs.UpdatePreference("currency", null);
+
+      newCookie = HttpContext.Current.Response.Cookies["preferences"];
+      oldCookie = HttpContext.Current.Response.Cookies["preferences1"];
+
+      Assert.IsNotNull(newCookie);
+      Assert.IsNotNull(oldCookie);
+
+      Assert.IsNull(newCookie.Values["currency"]);
+      Assert.IsNull(oldCookie.Values["gdshop_currencyType"]);
+      Assert.IsFalse(prefs.HasPreference("currency"));
+    }
+
+    [TestMethod]
     public void UpdatePreferenceMultiple()
     {
       IProviderContainer result = SetContext("832652");

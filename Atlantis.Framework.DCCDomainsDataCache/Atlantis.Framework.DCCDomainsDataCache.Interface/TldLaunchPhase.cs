@@ -90,6 +90,8 @@ namespace Atlantis.Framework.DCCDomainsDataCache.Interface
       }
     }
 
+    public bool AppFeeRefundsEnabled { get; private set; }
+
     private void ParsePeriods(XElement phaseElement)
     {
       DateTime preRegStart = DateTime.MinValue;
@@ -123,6 +125,12 @@ namespace Atlantis.Framework.DCCDomainsDataCache.Interface
 
           ClaimPeriod = new TldLaunchPhasePeriod { StartDateUtc = claimStart, StopDateUtc = claimEnd };
         }
+      }
+
+      var appFeeRefundElement = phaseElement.Element("launchphaserefunds");
+      if (appFeeRefundElement != null)
+      {
+        AppFeeRefundsEnabled = appFeeRefundElement.IsEnabled();
       }
     }
   }

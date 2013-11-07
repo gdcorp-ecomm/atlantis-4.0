@@ -65,6 +65,8 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="LanguageResources\ValidateField.en.resx" />
+    <EmbeddedResource Include="LanguageResources\ValidateField.es-US.resx" />
+    <EmbeddedResource Include="LanguageResources\ValidateField.pt-BR.resx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

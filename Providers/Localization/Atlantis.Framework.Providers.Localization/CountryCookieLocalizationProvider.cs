@@ -24,7 +24,7 @@ namespace Atlantis.Framework.Providers.Localization
         //  QueryString
         if (LocalizationProvider.TryGetRegionSiteFromQueryString(out result) && !string.IsNullOrEmpty(result) && IsValidCountrySubdomain(result))
         {
-          CountrySiteCookie.Value.Value = result;
+          SetCountrySiteCookie(result);
           return result;
         }
         
@@ -32,6 +32,7 @@ namespace Atlantis.Framework.Providers.Localization
         if ((CountrySiteCookie.Value.HasValue) && (IsValidCountrySubdomain(CountrySiteCookie.Value.Value)))
         {
           result = CountrySiteCookie.Value.Value;
+          SetCountrySiteCookie(result);
           return result;
         }
 
@@ -39,13 +40,13 @@ namespace Atlantis.Framework.Providers.Localization
         result = GetCountrySiteFromIpCountry();
         if (!string.IsNullOrEmpty(result) && (IsValidCountrySubdomain(result)))
         {
-          CountrySiteCookie.Value.Value = result;
+          SetCountrySiteCookie(result);
           return result;
         }
 
         //  Default
         result = _WWW;
-        CountrySiteCookie.Value.Value = result;
+        SetCountrySiteCookie(result);
       }      
 
       return result;

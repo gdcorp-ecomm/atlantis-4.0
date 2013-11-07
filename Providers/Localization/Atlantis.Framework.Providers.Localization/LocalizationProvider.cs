@@ -192,13 +192,6 @@ namespace Atlantis.Framework.Providers.Localization
     {
       get
       {
-        //string defaultMarketId;
-        //  if (!LocalizationProvider.TryGetMarketIdFromQueryString(out defaultMarketId))
-        //  {
-        //    defaultMarketId = CountrySiteInfo.DefaultMarketId;
-        //  }
-
-
         if (_market == null)
         {
           IMarket defaultMarket;
@@ -208,28 +201,36 @@ namespace Atlantis.Framework.Providers.Localization
           if (marketId != string.Empty && _marketsActive.Value.TryGetMarketById(marketId, out defaultMarket))
           {
             _market = defaultMarket;
-            return _market;
-          }
-          
-          //  marketid querystring value
-          if (LocalizationProvider.TryGetMarketIdFromQueryString(out marketId) &&
-                   _marketsActive.Value.TryGetMarketById(marketId, out defaultMarket))
-          {
-            _market = defaultMarket;
+            SetLanguageCookie("es");
             return _market;
           }
 
-          //  default market id for countrysite
+          //  Try to get marketid querystring value
+          if (LocalizationProvider.TryGetMarketIdFromQueryString(out marketId))
+          {
+            //  Make sure it's valid for the CountrySite
+            defaultMarket = TryGetMarketForCountrySite(CountrySite, marketId);
+            if (defaultMarket != null)
+            {
+              _market = defaultMarket;
+              SetLanguageCookie(_market.Id);
+              return _market;
+            }
+          }
+
+          //  Default market id for countrysite
           if (_marketsActive.Value.TryGetMarketById(CountrySiteInfo.DefaultMarketId, out defaultMarket))
           {
             _market = defaultMarket;
+            SetLanguageCookie(_market.Id);
             return _market;
           }
           
-          //  default market 
+          //  Default market 
           _market = MarketsActiveResponseData.DefaultMarketInfo;
+          SetLanguageCookie(_market.Id);
         }
-        
+
         return _market;
       }
     }
@@ -446,7 +447,7 @@ namespace Atlantis.Framework.Providers.Localization
       {
         result = (CountrySiteMarketMappingsResponseData)DataCache.DataCache.GetProcessRequest(request,LocalizationProviderEngineRequests.CountrySiteMarketMappingsRequest);
       }
-      catch (Exception ex)
+      catch
       {
         result = CountrySiteMarketMappingsResponseData.NoMappingsResponse;
       }
@@ -480,6 +481,22 @@ namespace Atlantis.Framework.Providers.Localization
         marketId = string.Empty;
         return false;
       }  
+    }
+
+    protected void SetCountrySiteCookie(string value)
+    {
+      if ((!CountrySiteCookie.Value.HasValue) || !CountrySiteCookie.Value.Value.Equals(value, StringComparison.OrdinalIgnoreCase))
+      {
+        CountrySiteCookie.Value.Value = value;
+      }
+    }
+
+    protected void SetLanguageCookie(string value)
+    {
+      if ((!LanguageCookie.Value.HasValue) || !LanguageCookie.Value.Value.Equals(value, StringComparison.OrdinalIgnoreCase))
+      {
+        LanguageCookie.Value.Value = value;
+      }
     }
   }
 }

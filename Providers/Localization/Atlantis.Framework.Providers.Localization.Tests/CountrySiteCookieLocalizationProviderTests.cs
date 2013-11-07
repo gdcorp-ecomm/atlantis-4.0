@@ -44,6 +44,12 @@ namespace Atlantis.Framework.Providers.Localization.Tests
       HttpContext.Current.Response.Cookies.Set(countryCookie);
     }
 
+    private void CreateLanguageCookie(int privateLabelId, string value)
+    {
+      HttpCookie languageCookie = new HttpCookie("language" + privateLabelId.ToString(), value);
+      HttpContext.Current.Response.Cookies.Set(languageCookie);
+    }
+
     [TestMethod]
     public void NoCookie()
     {
@@ -262,7 +268,7 @@ namespace Atlantis.Framework.Providers.Localization.Tests
 
       container = SetContext("http://www.mysite.com?regionsite=in");
       container.SetData(MockGeoProvider.REQUEST_COUNTRY_SETTING_NAME, "ca");
-      CreateCountryookie(1, "uk");
+      CreateCountryookie(1, "uk");      
       localization = container.Resolve<ILocalizationProvider>();
       Assert.AreEqual("in", localization.CountrySite.ToLowerInvariant());
       Assert.AreEqual("in", HttpContext.Current.Response.Cookies["countrysite1"].Value.ToLowerInvariant());

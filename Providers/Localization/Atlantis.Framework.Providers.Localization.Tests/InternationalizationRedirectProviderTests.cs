@@ -1577,7 +1577,7 @@ namespace Atlantis.Framework.Providers.Localization.Tests
 
     #endregion    
 
-    #region regionsite and marketid querystring tests
+    #region regionsite querystring tests
 
     [TestMethod]
     public void Cookie_WWW_RegionSite_INVALID_CountrySiteCookie_VALID_IpCountry_IGNORED_Result_Redirect_CSCOOKIE()

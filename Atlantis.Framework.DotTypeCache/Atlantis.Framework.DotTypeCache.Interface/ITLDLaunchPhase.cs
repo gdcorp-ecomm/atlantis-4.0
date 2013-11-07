@@ -14,5 +14,7 @@ namespace Atlantis.Framework.DotTypeCache.Interface
     ITLDLaunchPhasePeriod LivePeriod { get; }
 
     bool NeedsClaimCheck { get; }
+
+    bool AppFeeRefundsEnabled { get; }
   }
 }

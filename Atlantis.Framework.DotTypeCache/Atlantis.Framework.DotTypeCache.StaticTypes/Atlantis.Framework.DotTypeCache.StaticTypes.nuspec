@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>Atlantis.Framework.DotTypeCache.StaticTypes</id>
-    <version>4.13.2.25</version>
+    <version>4.13.11.6</version>
     <title>Atlantis Framework DotTypeCache StaticTypes</title>
     <authors>$author$</authors>
     <owners>$author$</owners>
@@ -12,9 +12,6 @@
     <releaseNotes></releaseNotes>
     <copyright>$copyright$</copyright>
     <tags>Atlantis Framework DotTypeCache StaticTypes</tags>
-    <dependencies>
-      <dependency id="Atlantis.Framework.DotTypeCache.Interface" version="4.13.10.22" />
-    </dependencies>
   </metadata>
   <files />
 </package>

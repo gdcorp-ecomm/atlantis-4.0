@@ -803,7 +803,8 @@ namespace Atlantis.Framework.DotTypeCache
       string phaseCode = LaunchPhaseMappings.GetCode(phase);
       ITLDLaunchPhase lookupPhase = _tldml.Phase.GetLaunchPhase(phaseCode);
 
-      if (phase == LaunchPhases.GeneralAvailability && lookupPhase.LivePeriod.IsActive)
+      if ((productTypeId != TLDProductTypeIds.TLD_PRODUCT_TYPE_ID_REGISTRATION && productTypeId != TLDProductTypeIds.TLD_PRODUCT_TYPE_ID_BULK_REGISTRATION) ||
+           (phase == LaunchPhases.GeneralAvailability && lookupPhase.LivePeriod.IsActive))
       {
         phaseCode = ECOMM_GA_LIVE_PHASE_CODE;
       }

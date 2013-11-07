@@ -82,5 +82,40 @@ namespace Atlantis.Framework.Providers.Support.Tests
     {
       throw new NotImplementedException();
     }
+
+    public IMarket GetMarketForCountrySite(string countrySiteId, string marketId)
+    {
+      throw new NotImplementedException();
+    }
+
+    public IEnumerable<IMarket> GetMarketsForCountryCode(string countryCode)
+    {
+      throw new NotImplementedException();
+    }
+
+    public bool IsGlobalSite(string countrySiteId)
+    {
+      throw new NotImplementedException();
+    }
+
+    public string PreviousLanguageCookieValue
+    {
+      get { throw new NotImplementedException(); }
+    }
+
+    public ICountrySite TryGetCountrySite(string countrySiteId)
+    {
+      throw new NotImplementedException();
+    }
+
+    public IMarket TryGetMarket(string marketId)
+    {
+      throw new NotImplementedException();
+    }
+
+    public IMarket TryGetMarketForCountrySite(string countrySiteId, string marketId)
+    {
+      throw new NotImplementedException();
+    }
   }
 }

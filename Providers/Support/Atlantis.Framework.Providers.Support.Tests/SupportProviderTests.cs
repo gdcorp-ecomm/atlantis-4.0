@@ -74,7 +74,7 @@ namespace Atlantis.Framework.Providers.Support.Tests
     public void SupportNumberBlueRazorSuccess()
     {
       ISupportProvider provider = SupportProvider();
-      _container.SetMockSetting(MockSiteContextSettings.PrivateLabelId, "2");
+      _container.SetData(MockSiteContextSettings.PrivateLabelId, "2");
       ISupportPhoneData supportPhoneData = provider.GetSupportPhone(SupportPhoneType.Technical);
       Assert.AreEqual(true, supportPhoneData.Number != string.Empty);
     }
@@ -90,7 +90,7 @@ namespace Atlantis.Framework.Providers.Support.Tests
         SupportEngineRequests.SupportPhoneRequest = 998;
         ISupportPhoneData supportPhoneData = provider.GetSupportPhone(SupportPhoneType.Technical);
       }
-      catch (Exception ex)
+      catch
       {
         Assert.AreEqual(true, true);
       }
@@ -109,7 +109,7 @@ namespace Atlantis.Framework.Providers.Support.Tests
       try
       {
         DataCache.DataCacheEngineRequests.GetPrivateLabelData = 999;
-        _container.SetMockSetting(MockSiteContextSettings.PrivateLabelId, "1726");
+        _container.SetData(MockSiteContextSettings.PrivateLabelId, "1726");
         ISupportPhoneData supportPhoneData = provider.GetSupportPhone(SupportPhoneType.Technical);
         Assert.AreEqual(true, supportPhoneData.Number != string.Empty);
       }
@@ -128,7 +128,7 @@ namespace Atlantis.Framework.Providers.Support.Tests
       try
       {
         DataCache.DataCacheEngineRequests.GetPrivateLabelData = 999;
-        _container.SetMockSetting(MockSiteContextSettings.PrivateLabelId, "1727");
+        _container.SetData(MockSiteContextSettings.PrivateLabelId, "1727");
         ISupportPhoneData supportPhoneData = provider.GetSupportPhone(SupportPhoneType.Technical);
         Assert.AreEqual(true, supportPhoneData.Number != string.Empty);
       }
@@ -147,7 +147,7 @@ namespace Atlantis.Framework.Providers.Support.Tests
       try
       {
         DataCache.DataCacheEngineRequests.GetPrivateLabelData = 999;
-        _container.SetMockSetting(MockSiteContextSettings.PrivateLabelId, "1724");
+        _container.SetData(MockSiteContextSettings.PrivateLabelId, "1724");
         ISupportPhoneData supportPhoneData = provider.GetSupportPhone(SupportPhoneType.Technical);
         Assert.AreEqual(true, supportPhoneData.Number != string.Empty);
       }
@@ -166,7 +166,7 @@ namespace Atlantis.Framework.Providers.Support.Tests
       try
       {
         DataCache.DataCacheEngineRequests.GetPrivateLabelData = 999;
-        _container.SetMockSetting(MockSiteContextSettings.PrivateLabelId, "1725");
+        _container.SetData(MockSiteContextSettings.PrivateLabelId, "1725");
         ISupportPhoneData supportPhoneData = provider.GetSupportPhone(SupportPhoneType.Technical);
         Assert.AreEqual(true, supportPhoneData.Number != string.Empty);
       }
@@ -180,7 +180,7 @@ namespace Atlantis.Framework.Providers.Support.Tests
     public void SupportNumberUsWwdSuccess()
     {
       ISupportProvider provider = SupportProvider();
-      _container.SetMockSetting(MockSiteContextSettings.PrivateLabelId, "1387");
+      _container.SetData(MockSiteContextSettings.PrivateLabelId, "1387");
       ISupportPhoneData supportPhoneData = provider.GetSupportPhone(SupportPhoneType.Technical);
       Assert.AreEqual(true, supportPhoneData.Number != string.Empty);
     }

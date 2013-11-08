@@ -35,6 +35,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Atlantis.Framework.BuyerProfileDetails.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.BuyerProfileDetails.Interface.4.11.8.23\lib\net40\Atlantis.Framework.BuyerProfileDetails.Interface.dll</HintPath>
+    </Reference>
     <Reference Include="Atlantis.Framework.Engine, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Atlantis.Framework.Engine.4.0.0.0\lib\net40\Atlantis.Framework.Engine.dll</HintPath>
@@ -67,10 +71,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Atlantis.Framework.BuyerProfileDetails.Interface\Atlantis.Framework.BuyerProfileDetails.Interface.csproj">
-      <Project>{F127881E-CF8C-4853-A869-AFBAC96731FC}</Project>
-      <Name>Atlantis.Framework.BuyerProfileDetails.Interface</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.BuyerProfileGetById.Interface\Atlantis.Framework.BuyerProfileGetById.Interface.csproj">
       <Project>{20C6C595-02D3-47E1-84BE-F43A04025EA9}</Project>
       <Name>Atlantis.Framework.BuyerProfileGetById.Interface</Name>
@@ -78,6 +78,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="atlantis.config" />
+    <None Include="Atlantis.Framework.BuyerProfileGetById.Impl.nuget.bat" />
+    <None Include="Atlantis.Framework.BuyerProfileGetById.Impl.nuspec" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

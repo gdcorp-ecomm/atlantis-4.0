@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Atlantis.Framework.Domains.Interface;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.DomainSearch.Interface;
@@ -88,13 +89,13 @@ namespace Atlantis.Framework.Providers.DomainSearch.Tests
     [TestMethod]
     public void DomainSearchExactMatchAvailableTest()
     {
-      const string searchPhrase = "spoonymacou812.com";
+      const string searchPhrase = "УИЧТРДЕЫЧИИККТУЙГГФФ.COM";
 
       var domainSearchResult = DomainSearch.SearchDomain(searchPhrase, SOURCE_CODE, string.Empty);
       Assert.IsTrue(domainSearchResult.IsSuccess);
 
       var domains = domainSearchResult.GetDomainsByGroup(DomainGroupTypes.EXACT_MATCH);
-      var isAvailable = domains.Any(d => d.IsAvailable && d.Domain.DomainName == searchPhrase);
+      var isAvailable = domains.Any(d => d.IsAvailable && (d.Domain.DomainName.Equals(searchPhrase, StringComparison.OrdinalIgnoreCase)));
       Assert.IsTrue(isAvailable);
     }
 

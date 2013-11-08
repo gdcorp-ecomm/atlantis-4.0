@@ -237,6 +237,12 @@ namespace Atlantis.Framework.Domains.Interface
                 SetPriceFeatures(tokens);
               }
               break;
+            case "isvaliddomain":
+              if (bool.TryParse(domainTokenValue, out boolValue))
+              {
+                IsValid = boolValue;
+              }
+              break;
           }
         }
       }
@@ -413,6 +419,8 @@ namespace Atlantis.Framework.Domains.Interface
     public int? VendorTier { get; private set; }
 
     public int? InternalTier { get; private set; }
+
+    public bool IsValid { get; private set; }
     
 
     private IList<LaunchPhaseItem> _launchPhaseItems = new List<LaunchPhaseItem>(0);

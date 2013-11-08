@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Atlantis.Framework.DataCacheGeneric.Interface;
 using Atlantis.Framework.DotTypeCache.Interface;
 
 namespace Atlantis.Framework.Domains.Interface
@@ -18,6 +19,9 @@ namespace Atlantis.Framework.Domains.Interface
     bool IsPremium { get; }
     bool IsAuction { get; }
     bool IsCloseOutAuction { get; }
+    bool IsValid { get; }
+    bool HasLeafPage { get; }
+    bool InPreRegPhase { get; }
 
     DateTime AuctionEndTimeStamp { get; } 
     DateTime LastUpdateTimeStamp { get; }
@@ -26,10 +30,14 @@ namespace Atlantis.Framework.Domains.Interface
     int DatabasePercentileRank { get; }
     int LengthOfSld { get; }
     int NumberOfKeywordsInDomain { get; }
-    double CommissionPercentage { get; }
     int Price { get; }
-
     int VendorId { get; }
+    int VendorCost { get; }
+    int? VendorTier { get; }
+    int? InternalTier { get; }
+
+    double CommissionPercentage { get; }
+
     string AuctionId { get; }
     string AuctionType { get; }
     string AuctionTypeId { get; }
@@ -39,13 +47,9 @@ namespace Atlantis.Framework.Domains.Interface
     string DomainSearchDataBase { get; }
     string IdnScript { get; }
     string IdnScriptId { get; }
+
     Dictionary<string, string> CartAttributes { get; }
     IDomain Domain { get; }
-    bool InPreRegPhase { get; }
     IEnumerable<LaunchPhaseItem> LaunchPhaseItems { get; }
-    bool HasLeafPage { get; }
-    int VendorCost { get; }
-    int? VendorTier { get; }
-    int? InternalTier { get; }
   }
 }

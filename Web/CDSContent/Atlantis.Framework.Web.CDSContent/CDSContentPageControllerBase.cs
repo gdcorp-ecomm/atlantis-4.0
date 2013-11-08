@@ -192,7 +192,7 @@ namespace Atlantis.Framework.Web.CDSContent
 
     protected override void Render(HtmlTextWriter writer)
     {
-      if (SiteContext.IsRequestInternal && DebugInfoControl != null)
+      if (UseInjectionRenderHandler && SiteContext.IsRequestInternal && DebugInfoControl != null)
       {
         AppendDebugInfoControl(writer);
       }

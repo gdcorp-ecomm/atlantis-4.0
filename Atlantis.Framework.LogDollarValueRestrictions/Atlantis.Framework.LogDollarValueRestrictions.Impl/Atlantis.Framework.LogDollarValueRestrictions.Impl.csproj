@@ -106,6 +106,8 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Atlantis.Framework.LogDollarValueRestrictions.Impl.nuget.bat" />
+    <None Include="Atlantis.Framework.LogDollarValueRestrictions.Impl.nuspec" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

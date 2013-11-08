@@ -78,6 +78,8 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="atlantis.config" />
+    <None Include="Atlantis.Framework.ProductOfferingFreeOffers.Impl.nuget.bat" />
+    <None Include="Atlantis.Framework.ProductOfferingFreeOffers.Impl.nuspec" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

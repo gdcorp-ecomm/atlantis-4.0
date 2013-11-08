@@ -1,0 +1,18 @@
+﻿<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Atlantis.Framework.LogDollarValueRestrictions.Impl</id>
+    <version>4.12.8.21</version>
+    <title>Atlantis Framework LogDollarValueRestrictions</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <projectUrl>https://confluence.int.godaddy.com/display/ATLANTIS</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes></releaseNotes>
+    <copyright>$copyright$</copyright>
+    <tags>Atlantis Framework LogDollarValueRestrictions</tags>
+    <dependencies />
+  </metadata>
+  <files />
+</package>

@@ -3,9 +3,9 @@
   <metadata>
     <id>Atlantis.Framework.MarketingPublication.Impl</id>
     <!-- version should match the assembly FILE version -->
-    <version>4.0.0.0</version>
+    <version>4.13.10.21</version>
     <!-- change word Title to match your project name with spaces instead of dots -->
-    <title>Atlantis Framework Title</title>
+    <title>Atlantis Framework MarketingPublication</title>
     <authors>$author$</authors>
     <owners>$author$</owners>
     <projectUrl>https://confluence.int.godaddy.com/display/ATLANTIS</projectUrl>
@@ -15,9 +15,10 @@
     <releaseNotes></releaseNotes>
     <copyright>$copyright$</copyright>
     <!-- Make tags the same as title element -->
-    <tags>Atlantis Framework Title</tags>
+    <tags>Atlantis Framework MarketingPublication</tags>
     <dependencies />
   </metadata>
   <files>
+    <file src="bin\Release\Atlantis.Framework.MarketingPublication.Impl.XmlSerializers.dll" target="lib\net40\Atlantis.Framework.MarketingPublication.Impl.XmlSerializers.dll" />
   </files>
 </package>

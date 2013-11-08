@@ -110,6 +110,8 @@
     </WebReferenceUrl>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Atlantis.Framework.NameserverCheck.Impl.nuget.bat" />
+    <None Include="Atlantis.Framework.NameserverCheck.Impl.nuspec" />
     <None Include="packages.config" />
     <None Include="Web References\AvailCheckWS\availcheckwebsvc.wsdl" />
   </ItemGroup>

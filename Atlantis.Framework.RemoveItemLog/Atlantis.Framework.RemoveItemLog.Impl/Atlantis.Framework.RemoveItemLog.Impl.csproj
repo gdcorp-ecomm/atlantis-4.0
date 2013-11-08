@@ -107,6 +107,10 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Atlantis.Framework.RemoveItemLog.Impl.nuget.bat" />
+    <None Include="Atlantis.Framework.RemoveItemLog.Impl.nuspec">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

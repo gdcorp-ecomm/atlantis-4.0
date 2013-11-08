@@ -1,0 +1,20 @@
+﻿<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Atlantis.Framework.GetOffersWithPlId.Impl</id>
+    <version>4.11.7.19</version>
+    <title>Atlantis Framework GetOffersWithPlId</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <projectUrl>https://confluence.int.godaddy.com/display/ATLANTIS</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes></releaseNotes>
+    <copyright>$copyright$</copyright>
+    <tags>Atlantis Framework GetOffersWithPlId</tags>
+    <dependencies />
+  </metadata>
+  <files>
+    <file src="bin\Release\Atlantis.Framework.GetOffersWithPlId.Impl.XmlSerializers.dll" target="lib\net40\Atlantis.Framework.GetOffersWithPlId.Impl.XmlSerializers.dll" />
+  </files>
+</package>

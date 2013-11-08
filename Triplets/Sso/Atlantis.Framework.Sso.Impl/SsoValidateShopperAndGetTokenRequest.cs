@@ -28,7 +28,7 @@ namespace Atlantis.Framework.Sso.Impl
         var wsUrl = wsConfigElement.WSURL;
         X509Certificate2 clientCert = wsConfigElement.GetClientCertificate();
 
-        var tokenWebRequest = HttpHelpers.GetHttpWebRequestAndAddData(wsUrl, urlEncodedData, "application/x-www-form-urlencoded", "POST", clientCert);
+        var tokenWebRequest = HttpHelpers.GetHttpWebRequestAndAddData(wsUrl, urlEncodedData, "application/x-www-form-urlencoded", "POST", _ssoTokenRequestData.RequestTimeout, clientCert);
         Token token = HttpHelpers.GetWebResponseAndConvertToObject<Token>(tokenWebRequest);
         token.PrivateLabelId = _ssoTokenRequestData.PrivateLabelId;
 

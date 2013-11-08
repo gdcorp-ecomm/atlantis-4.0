@@ -1,4 +1,5 @@
-﻿using Atlantis.Framework.Interface;
+﻿using System;
+using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.Sso.Interface
 {
@@ -11,6 +12,7 @@ namespace Atlantis.Framework.Sso.Interface
     {
       EncryptedToken = encryptedToken;
       TwoFactorCode = twoFactorCode;
+      RequestTimeout = new TimeSpan(0, 0, 5);
     }
   }
 }

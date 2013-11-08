@@ -1,7 +1,6 @@
-﻿using System;
-using System.Security.Cryptography;
-using Atlantis.Framework.Interface;
+﻿using Atlantis.Framework.Interface;
 using Atlantis.Framework.Sso.Interface.JsonHelperClasses;
+using System;
 
 namespace Atlantis.Framework.Sso.Interface
 {
@@ -14,11 +13,13 @@ namespace Atlantis.Framework.Sso.Interface
       Token = new Token();
       Token.data = rawTokenData;
       Token.PrivateLabelId = privateLabelId;
+      RequestTimeout = new TimeSpan(0, 0, 5);
     }
 
     public SsoGetKeyRequestData(Token token)
     {
       Token = token;
+      RequestTimeout = new TimeSpan(0, 0, 5);
     }
     
     public override string GetCacheMD5()

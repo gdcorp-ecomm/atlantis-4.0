@@ -124,11 +124,9 @@ namespace Atlantis.Framework.Sso.Tests
     }
 
     [TestMethod]
-    [Ignore]
-    //The Auth Service does not return the correct status code for "Admin Locked" accounts.
     public void LockedAccount()
     {
-      Assert.IsTrue(tokenResponseLocked.Token.code == SsoAuthApiResponseCodes.FailureAccountLocked);
+      Assert.IsTrue(tokenResponseLocked.Token.code == SsoAuthApiResponseCodes.FaliureAdminOrFraudLocked);
     }
 
     [TestMethod]

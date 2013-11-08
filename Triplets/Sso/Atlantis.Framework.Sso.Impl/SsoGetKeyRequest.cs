@@ -24,7 +24,7 @@ namespace Atlantis.Framework.Sso.Impl
         var wsUrl = ((WsConfigElement)config).WSURL;
         var wsUrlWithKey = string.Concat(wsUrl, _ssoKeyRequestData.Token.Header.kid);
 
-        var tokenWebRequest = HttpHelpers.GetHttpWebRequestAndAddData(wsUrlWithKey, null, "text/xhtml", "GET");
+        var tokenWebRequest = HttpHelpers.GetHttpWebRequestAndAddData(wsUrlWithKey, null, "text/xhtml", "GET", _ssoKeyRequestData.RequestTimeout);
 
         Key key = HttpHelpers.GetWebResponseAndConvertToObject<Key>(tokenWebRequest);
         responseData = new SsoGetKeyResponseData(key, _ssoKeyRequestData.Token);

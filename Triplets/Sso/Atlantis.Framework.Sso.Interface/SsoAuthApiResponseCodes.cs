@@ -11,5 +11,6 @@ namespace Atlantis.Framework.Sso.Interface
     public const string FailureInvalidAttemptUseCaptcha = "-3";
     public const string FailureMissingArguments = "-4";
     public const string FailureUnknownRealm = "-5";
+    public const string FaliureAdminOrFraudLocked = "-6";
   }
 }

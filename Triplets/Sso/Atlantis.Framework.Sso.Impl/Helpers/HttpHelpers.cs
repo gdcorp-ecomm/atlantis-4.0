@@ -15,6 +15,11 @@ namespace Atlantis.Framework.Sso.Impl.Helpers
       httpWebRequest.ContentType = contentType;
       httpWebRequest.Timeout = (int)timeout.TotalMilliseconds;
 
+      if (clientCert != null)
+      {
+        httpWebRequest.ClientCertificates.Add(clientCert);
+      }
+
       if (urlEncodedData != null)
       {
         httpWebRequest.ContentLength = urlEncodedData.Length;
@@ -22,11 +27,6 @@ namespace Atlantis.Framework.Sso.Impl.Helpers
         {
           authPostStream.Write(urlEncodedData);
         }
-      }
-
-      if (clientCert != null)
-      {
-        httpWebRequest.ClientCertificates.Add(clientCert);
       }
 
       return httpWebRequest;

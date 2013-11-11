@@ -126,7 +126,7 @@ namespace Atlantis.Framework.ValidateField.Tests
     [DeploymentItem("Atlantis.Framework.ValidateField.Impl.dll")]
     public void PasswordTrailingWhiteSpace()
     {
-      var request = new ValidateFieldRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "password");
+      var request = new ValidateFieldRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "password", "pt-BR");
       ValidateFieldResponseData validator = (ValidateFieldResponseData)DataCache.DataCache.GetProcessRequest(request, 507);
 
       List<ValidationFailure> errors;

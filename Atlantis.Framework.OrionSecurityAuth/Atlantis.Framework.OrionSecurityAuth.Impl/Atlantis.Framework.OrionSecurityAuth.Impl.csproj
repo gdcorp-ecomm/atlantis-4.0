@@ -115,6 +115,8 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="atlantis.config" />
+    <None Include="Atlantis.Framework.OrionSecurityAuth.Impl.nuget.bat" />
+    <None Include="Atlantis.Framework.OrionSecurityAuth.Impl.nuspec" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

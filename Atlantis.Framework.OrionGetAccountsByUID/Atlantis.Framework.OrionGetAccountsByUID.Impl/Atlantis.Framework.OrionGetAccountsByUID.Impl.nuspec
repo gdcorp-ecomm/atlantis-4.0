@@ -1,0 +1,20 @@
+﻿<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Atlantis.Framework.OrionGetAccountsByUID.Impl</id>
+    <version>4.11.8.3</version>
+    <title>Atlantis Framework OrionGetAccountsByUID</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <projectUrl>https://confluence.int.godaddy.com/display/ATLANTIS</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes></releaseNotes>
+    <copyright>$copyright$</copyright>
+    <tags>Atlantis Framework OrionGetAccountsByUID</tags>
+    <dependencies />
+  </metadata>
+  <files>
+    <file src="bin\Release\Atlantis.Framework.OrionGetAccountsByUID.Impl.XmlSerializers.dll" target="lib\net40\Atlantis.Framework.OrionGetAccountsByUID.Impl.XmlSerializers.dll" />
+  </files>
+</package>

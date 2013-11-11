@@ -79,6 +79,19 @@
     <Reference Include="Atlantis.Framework.Interface">
       <HintPath>..\packages\Atlantis.Framework.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Interface.dll</HintPath>
     </Reference>
+    <Reference Include="Atlantis.Framework.Nimitz">
+      <HintPath>..\packages\Atlantis.Framework.Nimitz.4.0.0.0\lib\net40\Atlantis.Framework.Nimitz.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.OrionSecurityAuth.Impl">
+      <HintPath>..\packages\Atlantis.Framework.OrionSecurityAuth.Impl.4.13.10.3\lib\net40\Atlantis.Framework.OrionSecurityAuth.Impl.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.OrionSecurityAuth.Impl.XmlSerializers">
+      <HintPath>..\packages\Atlantis.Framework.OrionSecurityAuth.Impl.4.13.10.3\lib\net40\Atlantis.Framework.OrionSecurityAuth.Impl.XmlSerializers.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.OrionSecurityAuth.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.OrionSecurityAuth.Impl.4.13.10.3\lib\net40\Atlantis.Framework.OrionSecurityAuth.Interface.dll</HintPath>
+    </Reference>
     <Reference Include="Atlantis.Framework.PrivateLabel.Interface">
       <HintPath>..\packages\Atlantis.Framework.PrivateLabel.Interface.4.0.0.0\lib\net40\Atlantis.Framework.PrivateLabel.Interface.dll</HintPath>
     </Reference>
@@ -87,6 +100,9 @@
     </Reference>
     <Reference Include="Atlantis.Framework.Providers.Interface">
       <HintPath>..\packages\Atlantis.Framework.Providers.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Providers.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="netConnect">
+      <HintPath>..\packages\Atlantis.Framework.Nimitz.4.0.0.0\lib\net40\netConnect.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
@@ -125,6 +141,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="Atlantis.Framework.OrionGetAccountsByUID.Impl.nuget.bat" />
+    <None Include="Atlantis.Framework.OrionGetAccountsByUID.Impl.nuspec" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -133,10 +151,6 @@
     <None Include="Web References\AccountQueriesService\ACCOUNTQUERIES.wsdl" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Atlantis.Framework.OrionSecurityAuth\Atlantis.Framework.OrionSecurityAuth.Interface\Atlantis.Framework.OrionSecurityAuth.Interface.csproj">
-      <Project>{DCFF9FB9-6B2B-45F9-8053-9D46CD40399D}</Project>
-      <Name>Atlantis.Framework.OrionSecurityAuth.Interface</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.OrionGetAccountsByUID.Interface\Atlantis.Framework.OrionGetAccountsByUID.Interface.csproj">
       <Project>{C983F220-7193-436D-BC0E-6FA2DD914358}</Project>
       <Name>Atlantis.Framework.OrionGetAccountsByUID.Interface</Name>

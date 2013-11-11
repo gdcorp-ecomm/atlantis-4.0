@@ -1,55 +1,33 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.OrionSecurityAuth.Impl", "..\Atlantis.Framework.OrionSecurityAuth\Atlantis.Framework.OrionSecurityAuth.Impl\Atlantis.Framework.OrionSecurityAuth.Impl.csproj", "{23973B8C-0EDB-4001-8FAA-ED0930971D5A}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.OrionSecurityAuth.Interface", "..\Atlantis.Framework.OrionSecurityAuth\Atlantis.Framework.OrionSecurityAuth.Interface\Atlantis.Framework.OrionSecurityAuth.Interface.csproj", "{DCFF9FB9-6B2B-45F9-8053-9D46CD40399D}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.OrionGetAccountsByUID.Impl", "Atlantis.Framework.OrionGetAccountsByUID.Impl\Atlantis.Framework.OrionGetAccountsByUID.Impl.csproj", "{BB90BECB-515F-43E4-B546-14DA2AFFAE93}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.OrionGetAccountsByUID.Interface", "Atlantis.Framework.OrionGetAccountsByUID.Interface\Atlantis.Framework.OrionGetAccountsByUID.Interface.csproj", "{C983F220-7193-436D-BC0E-6FA2DD914358}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.OrionGetAccountsByUID.Tests", "Atlantis.Framework.OrionGetAccountsByUID.Tests\Atlantis.Framework.OrionGetAccountsByUID.Tests.csproj", "{F42BB348-1726-4478-A518-323F93E8FFBB}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{AD217DDC-392C-4A81-8210-8D5F177A8FFE}"
-EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 6
+		SccNumberOfProjects = 4
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
 		SccLocalPath0 = .
-		SccProjectUniqueName1 = ..\\Atlantis.Framework.OrionSecurityAuth\\Atlantis.Framework.OrionSecurityAuth.Impl\\Atlantis.Framework.OrionSecurityAuth.Impl.csproj
-		SccProjectTopLevelParentUniqueName1 = Atlantis.Framework.OrionGetAccountsByUID.sln
-		SccProjectName1 = ../Atlantis.Framework.OrionSecurityAuth/Atlantis.Framework.OrionSecurityAuth.Impl
-		SccLocalPath1 = ..\\Atlantis.Framework.OrionSecurityAuth\\Atlantis.Framework.OrionSecurityAuth.Impl
-		SccProjectUniqueName2 = ..\\Atlantis.Framework.OrionSecurityAuth\\Atlantis.Framework.OrionSecurityAuth.Interface\\Atlantis.Framework.OrionSecurityAuth.Interface.csproj
-		SccProjectTopLevelParentUniqueName2 = Atlantis.Framework.OrionGetAccountsByUID.sln
-		SccProjectName2 = ../Atlantis.Framework.OrionSecurityAuth/Atlantis.Framework.OrionSecurityAuth.Interface
-		SccLocalPath2 = ..\\Atlantis.Framework.OrionSecurityAuth\\Atlantis.Framework.OrionSecurityAuth.Interface
-		SccProjectUniqueName3 = Atlantis.Framework.OrionGetAccountsByUID.Impl\\Atlantis.Framework.OrionGetAccountsByUID.Impl.csproj
-		SccProjectName3 = Atlantis.Framework.OrionGetAccountsByUID.Impl
-		SccLocalPath3 = Atlantis.Framework.OrionGetAccountsByUID.Impl
-		SccProjectUniqueName4 = Atlantis.Framework.OrionGetAccountsByUID.Interface\\Atlantis.Framework.OrionGetAccountsByUID.Interface.csproj
-		SccProjectName4 = Atlantis.Framework.OrionGetAccountsByUID.Interface
-		SccLocalPath4 = Atlantis.Framework.OrionGetAccountsByUID.Interface
-		SccProjectUniqueName5 = Atlantis.Framework.OrionGetAccountsByUID.Tests\\Atlantis.Framework.OrionGetAccountsByUID.Tests.csproj
-		SccProjectName5 = Atlantis.Framework.OrionGetAccountsByUID.Tests
-		SccLocalPath5 = Atlantis.Framework.OrionGetAccountsByUID.Tests
+		SccProjectUniqueName1 = Atlantis.Framework.OrionGetAccountsByUID.Impl\\Atlantis.Framework.OrionGetAccountsByUID.Impl.csproj
+		SccProjectName1 = Atlantis.Framework.OrionGetAccountsByUID.Impl
+		SccLocalPath1 = Atlantis.Framework.OrionGetAccountsByUID.Impl
+		SccProjectUniqueName2 = Atlantis.Framework.OrionGetAccountsByUID.Interface\\Atlantis.Framework.OrionGetAccountsByUID.Interface.csproj
+		SccProjectName2 = Atlantis.Framework.OrionGetAccountsByUID.Interface
+		SccLocalPath2 = Atlantis.Framework.OrionGetAccountsByUID.Interface
+		SccProjectUniqueName3 = Atlantis.Framework.OrionGetAccountsByUID.Tests\\Atlantis.Framework.OrionGetAccountsByUID.Tests.csproj
+		SccProjectName3 = Atlantis.Framework.OrionGetAccountsByUID.Tests
+		SccLocalPath3 = Atlantis.Framework.OrionGetAccountsByUID.Tests
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{23973B8C-0EDB-4001-8FAA-ED0930971D5A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{23973B8C-0EDB-4001-8FAA-ED0930971D5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{23973B8C-0EDB-4001-8FAA-ED0930971D5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{23973B8C-0EDB-4001-8FAA-ED0930971D5A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DCFF9FB9-6B2B-45F9-8053-9D46CD40399D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DCFF9FB9-6B2B-45F9-8053-9D46CD40399D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DCFF9FB9-6B2B-45F9-8053-9D46CD40399D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DCFF9FB9-6B2B-45F9-8053-9D46CD40399D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{BB90BECB-515F-43E4-B546-14DA2AFFAE93}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{BB90BECB-515F-43E4-B546-14DA2AFFAE93}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BB90BECB-515F-43E4-B546-14DA2AFFAE93}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -65,9 +43,5 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{23973B8C-0EDB-4001-8FAA-ED0930971D5A} = {AD217DDC-392C-4A81-8210-8D5F177A8FFE}
-		{DCFF9FB9-6B2B-45F9-8053-9D46CD40399D} = {AD217DDC-392C-4A81-8210-8D5F177A8FFE}
 	EndGlobalSection
 EndGlobal

@@ -121,6 +121,8 @@
     </WebReferenceUrl>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Atlantis.Framework.ShopperCreditLine.Impl.nuget.bat" />
+    <None Include="Atlantis.Framework.ShopperCreditLine.Impl.nuspec" />
     <None Include="packages.config" />
     <None Include="Web References\gdLoc\Service.wsdl" />
   </ItemGroup>

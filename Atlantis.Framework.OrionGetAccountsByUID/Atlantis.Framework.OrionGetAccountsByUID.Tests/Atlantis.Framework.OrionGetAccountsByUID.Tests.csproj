@@ -82,6 +82,17 @@
     <Reference Include="Atlantis.Framework.Nimitz">
       <HintPath>..\packages\Atlantis.Framework.Nimitz.4.0.0.0\lib\net40\Atlantis.Framework.Nimitz.dll</HintPath>
     </Reference>
+    <Reference Include="Atlantis.Framework.OrionSecurityAuth.Impl, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.OrionSecurityAuth.Impl.4.13.10.3\lib\net40\Atlantis.Framework.OrionSecurityAuth.Impl.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.OrionSecurityAuth.Impl.XmlSerializers">
+      <HintPath>..\packages\Atlantis.Framework.OrionSecurityAuth.Impl.4.13.10.3\lib\net40\Atlantis.Framework.OrionSecurityAuth.Impl.XmlSerializers.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.OrionSecurityAuth.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.OrionSecurityAuth.Impl.4.13.10.3\lib\net40\Atlantis.Framework.OrionSecurityAuth.Interface.dll</HintPath>
+    </Reference>
     <Reference Include="Atlantis.Framework.PrivateLabel.Interface">
       <HintPath>..\packages\Atlantis.Framework.PrivateLabel.Interface.4.0.0.0\lib\net40\Atlantis.Framework.PrivateLabel.Interface.dll</HintPath>
     </Reference>
@@ -108,14 +119,6 @@
     <Content Include="AuthoringTests.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Atlantis.Framework.OrionSecurityAuth\Atlantis.Framework.OrionSecurityAuth.Impl\Atlantis.Framework.OrionSecurityAuth.Impl.csproj">
-      <Project>{23973B8C-0EDB-4001-8FAA-ED0930971D5A}</Project>
-      <Name>Atlantis.Framework.OrionSecurityAuth.Impl</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.OrionSecurityAuth\Atlantis.Framework.OrionSecurityAuth.Interface\Atlantis.Framework.OrionSecurityAuth.Interface.csproj">
-      <Project>{DCFF9FB9-6B2B-45F9-8053-9D46CD40399D}</Project>
-      <Name>Atlantis.Framework.OrionSecurityAuth.Interface</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.OrionGetAccountsByUID.Impl\Atlantis.Framework.OrionGetAccountsByUID.Impl.csproj">
       <Project>{BB90BECB-515F-43E4-B546-14DA2AFFAE93}</Project>
       <Name>Atlantis.Framework.OrionGetAccountsByUID.Impl</Name>

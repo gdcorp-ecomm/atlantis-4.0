@@ -1,0 +1,20 @@
+﻿<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Atlantis.Framework.ShopperCreditLine.Impl</id>
+    <version>4.11.12.16</version>
+    <title>Atlantis Framework ShopperCreditLine</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <projectUrl>https://confluence.int.godaddy.com/display/ATLANTIS</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes></releaseNotes>
+    <copyright>$copyright$</copyright>
+    <tags>Atlantis Framework ShopperCreditLine</tags>
+    <dependencies />
+  </metadata>
+  <files>
+    <file src="bin\Release\Atlantis.Framework.ShopperCreditLine.Impl.XmlSerializers.dll" target="lib\net40\Atlantis.Framework.ShopperCreditLine.Impl.XmlSerializers.dll" />
+  </files>
+</package>

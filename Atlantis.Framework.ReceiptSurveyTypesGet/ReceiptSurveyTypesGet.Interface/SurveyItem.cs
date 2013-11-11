@@ -8,6 +8,7 @@ namespace Atlantis.Framework.ReceiptSurveyTypesGet.Interface
     public string GroupID { get; private set; }
     public bool IsRacingItem { get; private set; }
     public bool IsTVItem { get; private set; }
+    public bool IsEventItem { get; private set; }
     private int _random;
 
     public SurveyItem(string value, string text, string groupId, int random = -1)
@@ -24,6 +25,11 @@ namespace Atlantis.Framework.ReceiptSurveyTypesGet.Interface
     {
       IsRacingItem = GroupID.Equals(SurveyTypeGroups.TVRacing);
       IsTVItem = IsRacingItem || GroupID.Equals(SurveyTypeGroups.TVGeneral)  || GroupID.Equals(SurveyTypeGroups.TVOther);
+
+      if (!IsRacingItem && !IsTVItem)
+      {
+        IsEventItem = GroupID.Equals(SurveyTypeGroups.Event);
+      }
     }
     #endregion
 

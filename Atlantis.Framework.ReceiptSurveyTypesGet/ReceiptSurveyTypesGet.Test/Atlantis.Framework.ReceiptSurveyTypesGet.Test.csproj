@@ -99,11 +99,11 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ReceiptSurveyTypesGet.Impl\Atlantis.Framework.ReceiptSurveyTypesGet.Impl.csproj">
-      <Project>{B522AD2D-122C-41A5-8FC7-84AA8C97EDE3}</Project>
+      <Project>{b522ad2d-122c-41a5-8fc7-84aa8c97ede3}</Project>
       <Name>Atlantis.Framework.ReceiptSurveyTypesGet.Impl</Name>
     </ProjectReference>
     <ProjectReference Include="..\ReceiptSurveyTypesGet.Interface\Atlantis.Framework.ReceiptSurveyTypesGet.Interface.csproj">
-      <Project>{EF43D6C1-93C4-4704-A96B-2D049244C87A}</Project>
+      <Project>{ef43d6c1-93c4-4704-a96b-2d049244c87a}</Project>
       <Name>Atlantis.Framework.ReceiptSurveyTypesGet.Interface</Name>
     </ProjectReference>
   </ItemGroup>

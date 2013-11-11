@@ -64,11 +64,14 @@ namespace Atlantis.Framework.ReceiptSurveyTypesGet.Impl
         string surveyLanguageKey = languageKey.GetLanguageKeyForSurveyTypeId(typeId);
         string surveyDescription = resourcFetcher.GetString(surveyLanguageKey);
 
-        items.Add(new SurveyItem(
-          typeId,
-          surveyDescription,
-          reader[_GROUPID].ToString().ToLower()
-        ));
+        if (!string.IsNullOrEmpty(surveyLanguageKey))
+        {
+          items.Add(new SurveyItem(
+            typeId,
+            surveyDescription,
+            reader[_GROUPID].ToString().ToLower()
+          ));
+        }
       }
 
       return items;

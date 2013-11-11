@@ -64,6 +64,9 @@ namespace Atlantis.Framework.ReceiptSurveyTypesGet.Impl
       _languagePairs["74"] = "surveyTvTTS";
       _languagePairs["75"] = "surveyTvYT";
       _languagePairs["76"] = "surveyTvDD";
+      _languagePairs["78"]=  "surveyEventWorkshop";
+      _languagePairs["79"] ="surveyEventOnlineTraining";
+      _languagePairs["80"] = "surveyEventTradeshowExpo";
     }
   }
 }

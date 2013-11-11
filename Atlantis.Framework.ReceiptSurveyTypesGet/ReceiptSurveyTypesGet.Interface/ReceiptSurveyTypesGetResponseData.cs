@@ -25,6 +25,15 @@ namespace Atlantis.Framework.ReceiptSurveyTypesGet.Interface
       }
     }
 
+    private List<SurveyItem> _eventSurveyTypes;
+    public List<SurveyItem> EventSurveyTypes
+    {
+      get
+      {
+        return _eventSurveyTypes;
+      }
+    }
+
     private List<SurveyItem> _otherSurveyTypes;
     public List<SurveyItem> OtherSurveyTypes
     {
@@ -63,6 +72,7 @@ namespace Atlantis.Framework.ReceiptSurveyTypesGet.Interface
     public List<SurveyItem> PopulateSurveyItems(bool addPositionValue = false, bool randomizeItems = true, bool removeTvText = false)
     {
       _tvSurveyTypes = new List<SurveyItem>();
+      _eventSurveyTypes = new List<SurveyItem>();
       _otherSurveyTypes = new List<SurveyItem>();
       List<SurveyItem> tvTypesRacing = new List<SurveyItem>();
       List<SurveyItem> allSurveyTypes = new List<SurveyItem>();
@@ -91,6 +101,10 @@ namespace Atlantis.Framework.ReceiptSurveyTypesGet.Interface
             tvTypesRacing.Add(clonedItem);
           }
         }
+        else if (item.IsEventItem)
+        {
+          _eventSurveyTypes.Add(clonedItem);
+        }
         else
         {
           _otherSurveyTypes.Add(clonedItem);
@@ -100,6 +114,7 @@ namespace Atlantis.Framework.ReceiptSurveyTypesGet.Interface
       if (randomizeItems)
       {
         _tvSurveyTypes.Sort(); //sorts by random value
+        _eventSurveyTypes.Sort();
         _otherSurveyTypes.Sort(); //sorts by random value
       }
 
@@ -109,6 +124,7 @@ namespace Atlantis.Framework.ReceiptSurveyTypesGet.Interface
       if (!randomizeItems) //sort alphabetically
       {
         _tvSurveyTypes = _tvSurveyTypes.OrderBy(si => si.Text).ToList();
+        _eventSurveyTypes = _eventSurveyTypes.OrderBy(si => si.Text).ToList();
         _otherSurveyTypes = _otherSurveyTypes.OrderBy(si => si.Text).ToList();
       }
 
@@ -116,6 +132,7 @@ namespace Atlantis.Framework.ReceiptSurveyTypesGet.Interface
 
       _tvSurveyTypes.Insert(0, new SurveyItem("1", resourcFetcher.GetString("surveySelectOne"), string.Empty));
       allSurveyTypes.AddRange(_tvSurveyTypes);
+      allSurveyTypes.AddRange(_eventSurveyTypes);
       allSurveyTypes.AddRange(_otherSurveyTypes);
 
       if (addPositionValue)

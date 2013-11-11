@@ -47,6 +47,12 @@
     <Reference Include="Atlantis.Framework.Nimitz">
       <HintPath>..\packages\Atlantis.Framework.Nimitz.4.0.0.0\lib\net40\Atlantis.Framework.Nimitz.dll</HintPath>
     </Reference>
+    <Reference Include="Atlantis.Framework.ReceiptSurveyTypesGet.Impl">
+      <HintPath>..\packages\Atlantis.Framework.ReceiptSurveyTypesGet.Impl.4.13.9.5\lib\net40\Atlantis.Framework.ReceiptSurveyTypesGet.Impl.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.ReceiptSurveyTypesGet.Interface">
+      <HintPath>..\packages\Atlantis.Framework.ReceiptSurveyTypesGet.Impl.4.13.9.5\lib\net40\Atlantis.Framework.ReceiptSurveyTypesGet.Interface.dll</HintPath>
+    </Reference>
     <Reference Include="netConnect">
       <HintPath>..\packages\Atlantis.Framework.Nimitz.4.0.0.0\lib\net40\netConnect.dll</HintPath>
     </Reference>
@@ -62,12 +68,6 @@
     <Compile Include="LanguageKeyFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReceiptSurveyTypesGetRequest.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\ReceiptSurveyTypesGet.Interface\Atlantis.Framework.ReceiptSurveyTypesGet.Interface.csproj">
-      <Project>{EF43D6C1-93C4-4704-A96B-2D049244C87A}</Project>
-      <Name>Atlantis.Framework.ReceiptSurveyTypesGet.Interface</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="atlantis.config" />

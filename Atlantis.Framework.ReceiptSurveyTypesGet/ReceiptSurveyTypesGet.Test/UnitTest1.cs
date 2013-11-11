@@ -30,7 +30,7 @@ namespace Atlantis.Framework.ReceiptSurveyTypesGet.Test
     [DeploymentItem("app.config")]
     public void GetAll()
     {
-      var request = new ReceiptSurveyTypesGetRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "us");
+      var request = new ReceiptSurveyTypesGetRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0,"", "us");
       var response = DataCache.DataCache.GetProcessRequest(request, 562) as ReceiptSurveyTypesGetResponseData;
       //var response = Engine.Engine.ProcessRequest(request, 562) as ReceiptSurveyTypesGetResponseData;
       Assert.IsTrue(response.IsSuccess);
@@ -39,6 +39,8 @@ namespace Atlantis.Framework.ReceiptSurveyTypesGet.Test
       WriteValuesToDebug(filteredItems);
       Debug.WriteLine("---- TV ITEMS ---- ");
       WriteValuesToDebug(response.TvSurveyTypes);
+      Debug.WriteLine("---- EVENT ITEMS ---- ");
+      WriteValuesToDebug(response.EventSurveyTypes);
       Debug.WriteLine("---- OTHER ITEMS ----");
       WriteValuesToDebug(response.OtherSurveyTypes);
 

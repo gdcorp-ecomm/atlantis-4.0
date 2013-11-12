@@ -74,10 +74,556 @@ namespace Atlantis.Framework.Providers.Support.Tests
     public void SupportNumberBlueRazorSuccess()
     {
       ISupportProvider provider = SupportProvider();
-      _container.SetData(MockSiteContextSettings.PrivateLabelId, "2");
+      _container.SetData<int>(MockSiteContextSettings.PrivateLabelId, 2);
       ISupportPhoneData supportPhoneData = provider.GetSupportPhone(SupportPhoneType.Technical);
       Assert.AreEqual(true, supportPhoneData.Number != string.Empty);
     }
+    [TestMethod]
+    public void HostingSupportNumberGdFailure()
+    {
+      ISupportProvider provider = SupportProvider();
+      ISupportPhoneData supportPhoneData = provider.GetSupportPhone(SupportPhoneType.Hosting);
+      Assert.AreEqual(true, supportPhoneData.Number == string.Empty);
+    }
+
+    [TestMethod]
+    public void HostingSupportNumberBlueRazorEmpty()
+    {
+      ISupportProvider provider = SupportProvider();
+      _container.SetData<int>(MockSiteContextSettings.PrivateLabelId, 2);
+      ISupportPhoneData supportPhoneData = provider.GetSupportPhone(SupportPhoneType.Hosting);
+      Assert.AreEqual(true, supportPhoneData.Number == string.Empty);
+    }
+
+    [TestMethod]
+    public void HostingSupportNumberResellerOption3Success()
+    {
+      ISupportProvider provider = SupportProvider();
+      int plDataRequest = DataCache.DataCacheEngineRequests.GetPrivateLabelData;
+
+      try
+      {
+        DataCache.DataCacheEngineRequests.GetPrivateLabelData = 999;
+        _container.SetData<int>(MockSiteContextSettings.PrivateLabelId, 1828);
+        ISupportPhoneData supportPhoneData = provider.GetSupportPhone(SupportPhoneType.Hosting);
+        Assert.AreEqual(true, supportPhoneData.Number == string.Empty);
+      }
+      finally
+      {
+        DataCache.DataCacheEngineRequests.GetPrivateLabelData = plDataRequest;
+      }
+    }
+    [TestMethod]
+    public void HostingExchangeSupportNumberResellerOption3Success()
+    {
+      ISupportProvider provider = SupportProvider();
+      int plDataRequest = DataCache.DataCacheEngineRequests.GetPrivateLabelData;
+
+      try
+      {
+        DataCache.DataCacheEngineRequests.GetPrivateLabelData = 999;
+        _container.SetData<int>(MockSiteContextSettings.PrivateLabelId, 1828);
+        ISupportPhoneData supportPhoneData = provider.GetSupportPhone(SupportPhoneType.HostingExchange);
+        Assert.AreEqual(true, supportPhoneData.Number == string.Empty);
+      }
+      finally
+      {
+        DataCache.DataCacheEngineRequests.GetPrivateLabelData = plDataRequest;
+      }
+    }
+
+    [TestMethod]
+    public void HostingExchangeSupportNonGlobalSiteSuccess()
+    {
+      ISupportProvider provider = SupportProvider("uk", false);
+      ISupportPhoneData supportPhoneData = provider.GetSupportPhone(SupportPhoneType.HostingExchange);
+      Assert.AreEqual(true, supportPhoneData.Number != string.Empty);
+    }
+
+    [TestMethod]
+    public void HostingExchangeSupportNumberResellerSuccess()
+    {
+      ISupportProvider provider = SupportProvider();
+      _container.SetData<int>(MockSiteContextSettings.PrivateLabelId, 998);
+      ISupportPhoneData supportPhoneData = provider.GetSupportPhone(SupportPhoneType.HostingExchange);
+      Assert.AreEqual(true, supportPhoneData.Number != string.Empty);
+    }
+
+    [TestMethod]
+    public void HostingExchangeSupportNumberAPIResellerEmpty()
+    {
+      ISupportProvider provider = SupportProvider();
+      int plDataRequest = DataCache.DataCacheEngineRequests.GetPrivateLabelData;
+
+      try
+      {
+        DataCache.DataCacheEngineRequests.GetPrivateLabelData = 999;
+        _container.SetData<int>(MockSiteContextSettings.PrivateLabelId, 1387);
+        ISupportPhoneData supportPhoneData = provider.GetSupportPhone(SupportPhoneType.HostingExchange);
+        Assert.AreEqual(true, supportPhoneData.Number == string.Empty);
+      }
+      finally
+      {
+        DataCache.DataCacheEngineRequests.GetPrivateLabelData = plDataRequest;
+      }
+    }
+
+    [TestMethod]
+    public void HostingExchangeSupportNumberGdSuccess()
+    {
+      ISupportProvider provider = SupportProvider();
+      ISupportPhoneData supportPhoneData = provider.GetSupportPhone(SupportPhoneType.HostingExchange);
+      Assert.AreEqual(true, supportPhoneData.Number != string.Empty);
+    }
+
+    [TestMethod]
+    public void HostingExchangeSupportNumberBlueRazorSuccess()
+    {
+      ISupportProvider provider = SupportProvider();
+      _container.SetData<int>(MockSiteContextSettings.PrivateLabelId, 2);
+      ISupportPhoneData supportPhoneData = provider.GetSupportPhone(SupportPhoneType.HostingExchange);
+      Assert.AreEqual(true, supportPhoneData.Number != string.Empty);
+    }
+    [TestMethod]
+    public void BillingSupportNumberGdSuccess()
+    {
+      ISupportProvider provider = SupportProvider();
+      ISupportPhoneData supportPhoneData = provider.GetSupportPhone(SupportPhoneType.Billing);
+      Assert.AreEqual(true, supportPhoneData.Number != string.Empty);
+    }
+
+    [TestMethod]
+    public void BillingSupportNumberBlueRazorSuccess()
+    {
+      ISupportProvider provider = SupportProvider();
+      _container.SetData<int>(MockSiteContextSettings.PrivateLabelId, 2);
+      ISupportPhoneData supportPhoneData = provider.GetSupportPhone(SupportPhoneType.Billing);
+      Assert.AreEqual(true, supportPhoneData.Number != string.Empty);
+    }
+
+
+    [TestMethod]
+    public void BillingSupportNumberWWDSuccess()
+    {
+      ISupportProvider provider = SupportProvider();
+      _container.SetData<int>(MockSiteContextSettings.PrivateLabelId, 1387);
+      ISupportPhoneData supportPhoneData = provider.GetSupportPhone(SupportPhoneType.Billing);
+      Assert.AreEqual(true, supportPhoneData.Number != string.Empty);
+    }
+    [TestMethod]
+    public void BillingSupportNumberResellerSuccess()
+    {
+      ISupportProvider provider = SupportProvider();
+      _container.SetData<int>(MockSiteContextSettings.PrivateLabelId, 998);
+      ISupportPhoneData supportPhoneData = provider.GetSupportPhone(SupportPhoneType.Billing);
+      Assert.AreEqual(true, supportPhoneData.Number != string.Empty);
+    }
+
+    [TestMethod]
+    public void BillingSupportNumberAPIResellerEmpty()
+    {
+      ISupportProvider provider = SupportProvider();
+      int plDataRequest = DataCache.DataCacheEngineRequests.GetPrivateLabelData;
+
+      try
+      {
+        DataCache.DataCacheEngineRequests.GetPrivateLabelData = 999;
+        _container.SetData<int>(MockSiteContextSettings.PrivateLabelId,440354);
+        ISupportPhoneData supportPhoneData = provider.GetSupportPhone(SupportPhoneType.Billing);
+        Assert.AreEqual(true, supportPhoneData.Number == string.Empty);
+      }
+      finally
+      {
+        DataCache.DataCacheEngineRequests.GetPrivateLabelData = plDataRequest;
+      }
+    }
+
+    [TestMethod]
+    public void CompanyFaxSupportNumberBlueRazorSuccess()
+    {
+      ISupportProvider provider = SupportProvider();
+      _container.SetData<int>(MockSiteContextSettings.PrivateLabelId, 2);
+      ISupportPhoneData supportPhoneData = provider.GetSupportPhone(SupportPhoneType.CompanyFax);
+      Assert.AreEqual(true, supportPhoneData.Number != string.Empty);
+    }
+    [TestMethod]
+    public void CompanyFaxSupportNumberGdSuccess()
+    {
+      ISupportProvider provider = SupportProvider();
+      ISupportPhoneData supportPhoneData = provider.GetSupportPhone(SupportPhoneType.CompanyFax);
+      Assert.AreEqual(true, supportPhoneData.Number != string.Empty);
+    }
+
+    [TestMethod]
+    public void CompanyFaxSupportNumberWWDSuccess()
+    {
+      ISupportProvider provider = SupportProvider();
+      _container.SetData<int>(MockSiteContextSettings.PrivateLabelId, 1387);
+      ISupportPhoneData supportPhoneData = provider.GetSupportPhone(SupportPhoneType.CompanyFax);
+      Assert.AreEqual(true, supportPhoneData.Number != string.Empty);
+    }
+
+    [TestMethod]
+    public void CompanyFaxSupportNumberResellerEmpty()
+    {
+      ISupportProvider provider = SupportProvider();
+      _container.SetData<int>(MockSiteContextSettings.PrivateLabelId, 998);
+      ISupportPhoneData supportPhoneData = provider.GetSupportPhone(SupportPhoneType.CompanyFax);
+      Assert.AreEqual(true, supportPhoneData.Number == string.Empty);
+    }
+
+    [TestMethod]
+    public void CompanyMainSupportNumberGdSuccess()
+    {
+      ISupportProvider provider = SupportProvider();
+      ISupportPhoneData supportPhoneData = provider.GetSupportPhone(SupportPhoneType.CompanyMain);
+      Assert.AreEqual(true, supportPhoneData.Number != string.Empty);
+    }
+
+    [TestMethod]
+    public void CompanyMainSupportNumberBlueRazorSuccess()
+    {
+      ISupportProvider provider = SupportProvider();
+      _container.SetData<int>(MockSiteContextSettings.PrivateLabelId, 2);
+      ISupportPhoneData supportPhoneData = provider.GetSupportPhone(SupportPhoneType.CompanyMain);
+      Assert.AreEqual(true, supportPhoneData.Number != string.Empty);
+    }
+    [TestMethod]
+    public void CompanyMainSupportNumberWWDSuccess()
+    {
+      ISupportProvider provider = SupportProvider();
+      _container.SetData<int>(MockSiteContextSettings.PrivateLabelId, 1387);
+      ISupportPhoneData supportPhoneData = provider.GetSupportPhone(SupportPhoneType.CompanyMain);
+      Assert.AreEqual(true, supportPhoneData.Number != string.Empty);
+    }
+
+    [TestMethod]
+    public void CompanyMainSupportAPIResellerEmpty()
+    {
+      ISupportProvider provider = SupportProvider();
+      int plDataRequest = DataCache.DataCacheEngineRequests.GetPrivateLabelData;
+
+      try
+      {
+        DataCache.DataCacheEngineRequests.GetPrivateLabelData = 999;
+        _container.SetData<int>(MockSiteContextSettings.PrivateLabelId, 440354);
+        ISupportPhoneData supportPhoneData = provider.GetSupportPhone(SupportPhoneType.CompanyMain);
+        Assert.AreEqual(true, supportPhoneData.Number == string.Empty);
+      }
+      finally
+      {
+        DataCache.DataCacheEngineRequests.GetPrivateLabelData = plDataRequest;
+      }
+    }
+
+    [TestMethod]
+    public void CompanyMainSupportNumberOption1()
+    {
+      ISupportProvider provider = SupportProvider();
+      int plDataRequest = DataCache.DataCacheEngineRequests.GetPrivateLabelData;
+
+      try
+      {
+        DataCache.DataCacheEngineRequests.GetPrivateLabelData = 999;
+        _container.SetData<int>(MockSiteContextSettings.PrivateLabelId, 1724);
+        ISupportPhoneData supportPhoneData = provider.GetSupportPhone(SupportPhoneType.CompanyMain);
+        Assert.AreEqual(true, supportPhoneData.Number != string.Empty);
+      }
+      finally
+      {
+        DataCache.DataCacheEngineRequests.GetPrivateLabelData = plDataRequest;
+      }
+    }
+
+    [TestMethod]
+    public void CompanyMainSupportNumberOption2()
+    {
+      ISupportProvider provider = SupportProvider();
+      int plDataRequest = DataCache.DataCacheEngineRequests.GetPrivateLabelData;
+
+      try
+      {
+        DataCache.DataCacheEngineRequests.GetPrivateLabelData = 999;
+        _container.SetData<int>(MockSiteContextSettings.PrivateLabelId, 1725);
+        ISupportPhoneData supportPhoneData = provider.GetSupportPhone(SupportPhoneType.CompanyMain);
+        Assert.AreEqual(true, supportPhoneData.Number != string.Empty);
+      }
+      finally
+      {
+        DataCache.DataCacheEngineRequests.GetPrivateLabelData = plDataRequest;
+      }
+    }
+
+    [TestMethod]
+    public void DomainsSupportNumberGdSuccess()
+    {
+      ISupportProvider provider = SupportProvider();
+      ISupportPhoneData supportPhoneData = provider.GetSupportPhone(SupportPhoneType.Domains);
+      Assert.AreEqual(true, supportPhoneData.Number != string.Empty);
+    }
+
+    [TestMethod]
+    public void DomainsSupportNumberBlueRazorSuccess()
+    {
+      ISupportProvider provider = SupportProvider();
+      _container.SetData<int>(MockSiteContextSettings.PrivateLabelId, 2);
+      ISupportPhoneData supportPhoneData = provider.GetSupportPhone(SupportPhoneType.Domains);
+      Assert.AreEqual(true, supportPhoneData.Number != string.Empty);
+    }
+    [TestMethod]
+    public void DomainsSupportNumberWWDSuccess()
+    {
+      ISupportProvider provider = SupportProvider();
+      _container.SetData<int>(MockSiteContextSettings.PrivateLabelId, 1387);
+      ISupportPhoneData supportPhoneData = provider.GetSupportPhone(SupportPhoneType.Domains);
+      Assert.AreEqual(true, supportPhoneData.Number != string.Empty);
+    }
+    [TestMethod]
+    public void DomainsSupportNumberOption1()
+    {
+      ISupportProvider provider = SupportProvider();
+      int plDataRequest = DataCache.DataCacheEngineRequests.GetPrivateLabelData;
+
+      try
+      {
+        DataCache.DataCacheEngineRequests.GetPrivateLabelData = 999;
+        _container.SetData<int>(MockSiteContextSettings.PrivateLabelId, 1724);
+        ISupportPhoneData supportPhoneData = provider.GetSupportPhone(SupportPhoneType.Domains);
+        Assert.AreEqual(true, supportPhoneData.Number != string.Empty);
+      }
+      finally
+      {
+        DataCache.DataCacheEngineRequests.GetPrivateLabelData = plDataRequest;
+      }
+    }
+
+    [TestMethod]
+    public void DomainsSupportNumberOption2()
+    {
+      ISupportProvider provider = SupportProvider();
+      int plDataRequest = DataCache.DataCacheEngineRequests.GetPrivateLabelData;
+
+      try
+      {
+        DataCache.DataCacheEngineRequests.GetPrivateLabelData = 999;
+        _container.SetData<int>(MockSiteContextSettings.PrivateLabelId, 1725);
+        ISupportPhoneData supportPhoneData = provider.GetSupportPhone(SupportPhoneType.Domains);
+        Assert.AreEqual(true, supportPhoneData.Number != string.Empty);
+      }
+      finally
+      {
+        DataCache.DataCacheEngineRequests.GetPrivateLabelData = plDataRequest;
+      }
+    }
+    [TestMethod]
+    public void DomainsSupportAPIResellerEmpty()
+    {
+      ISupportProvider provider = SupportProvider();
+      int plDataRequest = DataCache.DataCacheEngineRequests.GetPrivateLabelData;
+
+      try
+      {
+        DataCache.DataCacheEngineRequests.GetPrivateLabelData = 999;
+        _container.SetData<int>(MockSiteContextSettings.PrivateLabelId, 440354);
+        ISupportPhoneData supportPhoneData = provider.GetSupportPhone(SupportPhoneType.Domains);
+        Assert.AreEqual(true, supportPhoneData.Number == string.Empty);
+      }
+      finally
+      {
+        DataCache.DataCacheEngineRequests.GetPrivateLabelData = plDataRequest;
+      }
+    }
+
+    [TestMethod]
+    public void PremiumDomainsSupportNumberGdSuccess()
+    {
+      ISupportProvider provider = SupportProvider();
+      ISupportPhoneData supportPhoneData = provider.GetSupportPhone(SupportPhoneType.PremiumDomains);
+      Assert.AreEqual(true, supportPhoneData.Number != string.Empty);
+    }
+
+    [TestMethod]
+    public void PremiumDomainsSupportNumberBlueRazorSuccess()
+    {
+      ISupportProvider provider = SupportProvider();
+      _container.SetData<int>(MockSiteContextSettings.PrivateLabelId, 2);
+      ISupportPhoneData supportPhoneData = provider.GetSupportPhone(SupportPhoneType.PremiumDomains);
+      Assert.AreEqual(true, supportPhoneData.Number != string.Empty);
+    }
+    [TestMethod]
+    public void ServerSupportNumberGdSuccess()
+    {
+      ISupportProvider provider = SupportProvider();
+      ISupportPhoneData supportPhoneData = provider.GetSupportPhone(SupportPhoneType.Server);
+      Assert.AreEqual(true, supportPhoneData.Number != string.Empty);
+    }
+
+    [TestMethod]
+    public void ServerSupportNumberBlueRazorSuccess()
+    {
+      ISupportProvider provider = SupportProvider();
+      _container.SetData<int>(MockSiteContextSettings.PrivateLabelId, 2);
+      ISupportPhoneData supportPhoneData = provider.GetSupportPhone(SupportPhoneType.Server);
+      Assert.AreEqual(true, supportPhoneData.Number != string.Empty);
+    }
+    [TestMethod]
+    public void ServerSupportNumberResellerSuccess()
+    {
+      ISupportProvider provider = SupportProvider();
+      _container.SetData<int>(MockSiteContextSettings.PrivateLabelId, 998);
+      ISupportPhoneData supportPhoneData = provider.GetSupportPhone(SupportPhoneType.Server);
+      Assert.AreEqual(true, supportPhoneData.Number != string.Empty);
+    }
+
+    [TestMethod]
+    public void ServerSupportNumberResellerOption3Success()
+    {
+      ISupportProvider provider = SupportProvider();
+      int plDataRequest = DataCache.DataCacheEngineRequests.GetPrivateLabelData;
+
+      try
+      {
+        DataCache.DataCacheEngineRequests.GetPrivateLabelData = 999;
+        _container.SetData<int>(MockSiteContextSettings.PrivateLabelId, 1828);
+        ISupportPhoneData supportPhoneData = provider.GetSupportPhone(SupportPhoneType.Server);
+        Assert.AreEqual(true, supportPhoneData.Number == string.Empty);
+      }
+      finally
+      {
+        DataCache.DataCacheEngineRequests.GetPrivateLabelData = plDataRequest;
+      }
+    }
+
+    [TestMethod]
+    public void ServerSupportNumberWWDEmpty()
+    {
+      ISupportProvider provider = SupportProvider();
+      _container.SetData<int>(MockSiteContextSettings.PrivateLabelId, 1387);
+      ISupportPhoneData supportPhoneData = provider.GetSupportPhone(SupportPhoneType.Server);
+      Assert.AreEqual(true, supportPhoneData.Number == string.Empty);
+    }
+
+    [TestMethod]
+    public void AdSpaceSupportNumberGdSuccess()
+    {
+      ISupportProvider provider = SupportProvider();
+      ISupportPhoneData supportPhoneData = provider.GetSupportPhone(SupportPhoneType.AdSpace);
+      Assert.AreEqual(true, supportPhoneData.Number != string.Empty);
+    }
+    [TestMethod]
+    public void AdSpaceSupportNumberResellerSuccess()
+    {
+      ISupportProvider provider = SupportProvider();
+      _container.SetData<int>(MockSiteContextSettings.PrivateLabelId, 998);
+      ISupportPhoneData supportPhoneData = provider.GetSupportPhone(SupportPhoneType.AdSpace);
+      Assert.AreEqual(true, supportPhoneData.Number != string.Empty);
+    }
+
+    [TestMethod]
+    public void AdSpaceSupportNumberWWDEmpty()
+    {
+      ISupportProvider provider = SupportProvider();
+      _container.SetData<int>(MockSiteContextSettings.PrivateLabelId, 1387);
+      ISupportPhoneData supportPhoneData = provider.GetSupportPhone(SupportPhoneType.AdSpace);
+      Assert.AreEqual(true, supportPhoneData.Number == string.Empty);
+    }
+
+    [TestMethod]
+    public void AdSpaceSupportNumberBlueRazorSuccess()
+    {
+      ISupportProvider provider = SupportProvider();
+      _container.SetData<int>(MockSiteContextSettings.PrivateLabelId, 2);
+      ISupportPhoneData supportPhoneData = provider.GetSupportPhone(SupportPhoneType.AdSpace);
+      Assert.AreEqual(true, supportPhoneData.Number != string.Empty);
+    }
+
+    [TestMethod]
+    public void SSLSupportNumberGdSuccess()
+    {
+      ISupportProvider provider = SupportProvider("uk", false);
+      ISupportPhoneData supportPhoneData = provider.GetSupportPhone(SupportPhoneType.SSL);
+      Assert.AreEqual(true, supportPhoneData.Number != string.Empty);
+    }
+
+    [TestMethod]
+    public void SSLSupportNumberBlueRazorSuccess()
+    {
+      ISupportProvider provider = SupportProvider();
+      _container.SetData<int>(MockSiteContextSettings.PrivateLabelId, 2);
+      ISupportPhoneData supportPhoneData = provider.GetSupportPhone(SupportPhoneType.SSL);
+      Assert.AreEqual(true, supportPhoneData.Number != string.Empty);
+    }
+    
+    [TestMethod]
+    public void DesignTeamSupportNumberGdSuccess()
+    {
+      ISupportProvider provider = SupportProvider();
+      ISupportPhoneData supportPhoneData = provider.GetSupportPhone(SupportPhoneType.DesignTeam);
+      Assert.AreEqual(true, supportPhoneData.Number != string.Empty);
+    }
+
+    [TestMethod]
+    public void DesignTeamSupportNumberBlueRazorSuccess()
+    {
+      ISupportProvider provider = SupportProvider();
+      _container.SetData<int>(MockSiteContextSettings.PrivateLabelId, 2);
+      ISupportPhoneData supportPhoneData = provider.GetSupportPhone(SupportPhoneType.DesignTeam);
+      Assert.AreEqual(true, supportPhoneData.Number != string.Empty);
+    }
+
+    [TestMethod]
+    public void DesignTeamSupportNumberResellerSuccess()
+    {
+      ISupportProvider provider = SupportProvider();
+      _container.SetData<int>(MockSiteContextSettings.PrivateLabelId, 998);
+      ISupportPhoneData supportPhoneData = provider.GetSupportPhone(SupportPhoneType.DesignTeam);
+      Assert.AreEqual(true, supportPhoneData.Number != string.Empty);
+    }
+
+    [TestMethod]
+    public void ResellerSalesSupportNumberSuperResellerSuccess()
+    {
+      ISupportProvider provider = SupportProvider();
+      int plDataRequest = DataCache.DataCacheEngineRequests.GetPrivateLabelData;
+
+      try
+      {
+        DataCache.DataCacheEngineRequests.GetPrivateLabelData = 999;
+        _container.SetData<int>(MockSiteContextSettings.PrivateLabelId,441087);
+        ISupportPhoneData supportPhoneData = provider.GetSupportPhone(SupportPhoneType.ResellerSales);
+        Assert.AreEqual(true, supportPhoneData.Number != string.Empty);
+      }
+      finally
+      {
+        DataCache.DataCacheEngineRequests.GetPrivateLabelData = plDataRequest;
+      }
+    }
+
+    [TestMethod]
+    public void ResellerSalesSupportNumberGdSuccess()
+    {
+      ISupportProvider provider = SupportProvider();
+      ISupportPhoneData supportPhoneData = provider.GetSupportPhone(SupportPhoneType.ResellerSales);
+      Assert.AreEqual(true, supportPhoneData.Number != string.Empty);
+    }
+
+    [TestMethod]
+    public void ResellerSalesSupportNumberBlueRazorEmpty()
+    {
+      ISupportProvider provider = SupportProvider();
+      _container.SetData<int>(MockSiteContextSettings.PrivateLabelId, 2);
+      ISupportPhoneData supportPhoneData = provider.GetSupportPhone(SupportPhoneType.ResellerSales);
+      Assert.AreEqual(true, supportPhoneData.Number == string.Empty);
+    }
+
+    [TestMethod]
+    public void McafeeSalesSupportNumberGdSuccess()
+    {
+      ISupportProvider provider = SupportProvider();
+      ISupportPhoneData supportPhoneData = provider.GetSupportPhone(SupportPhoneType.Mcafee);
+      Assert.AreEqual(true, supportPhoneData.Number != string.Empty);
+    }
+
 
     [TestMethod]
     public void SupportNumberDataException()
@@ -109,7 +655,7 @@ namespace Atlantis.Framework.Providers.Support.Tests
       try
       {
         DataCache.DataCacheEngineRequests.GetPrivateLabelData = 999;
-        _container.SetData(MockSiteContextSettings.PrivateLabelId, "1726");
+        _container.SetData<int>(MockSiteContextSettings.PrivateLabelId, 1726);
         ISupportPhoneData supportPhoneData = provider.GetSupportPhone(SupportPhoneType.Technical);
         Assert.AreEqual(true, supportPhoneData.Number != string.Empty);
       }
@@ -128,7 +674,7 @@ namespace Atlantis.Framework.Providers.Support.Tests
       try
       {
         DataCache.DataCacheEngineRequests.GetPrivateLabelData = 999;
-        _container.SetData(MockSiteContextSettings.PrivateLabelId, "1727");
+        _container.SetData<int>(MockSiteContextSettings.PrivateLabelId, 1727);
         ISupportPhoneData supportPhoneData = provider.GetSupportPhone(SupportPhoneType.Technical);
         Assert.AreEqual(true, supportPhoneData.Number != string.Empty);
       }
@@ -147,7 +693,7 @@ namespace Atlantis.Framework.Providers.Support.Tests
       try
       {
         DataCache.DataCacheEngineRequests.GetPrivateLabelData = 999;
-        _container.SetData(MockSiteContextSettings.PrivateLabelId, "1724");
+        _container.SetData<int>(MockSiteContextSettings.PrivateLabelId, 1724);
         ISupportPhoneData supportPhoneData = provider.GetSupportPhone(SupportPhoneType.Technical);
         Assert.AreEqual(true, supportPhoneData.Number != string.Empty);
       }
@@ -166,7 +712,7 @@ namespace Atlantis.Framework.Providers.Support.Tests
       try
       {
         DataCache.DataCacheEngineRequests.GetPrivateLabelData = 999;
-        _container.SetData(MockSiteContextSettings.PrivateLabelId, "1725");
+        _container.SetData<int>(MockSiteContextSettings.PrivateLabelId, 1725);
         ISupportPhoneData supportPhoneData = provider.GetSupportPhone(SupportPhoneType.Technical);
         Assert.AreEqual(true, supportPhoneData.Number != string.Empty);
       }
@@ -180,7 +726,7 @@ namespace Atlantis.Framework.Providers.Support.Tests
     public void SupportNumberUsWwdSuccess()
     {
       ISupportProvider provider = SupportProvider();
-      _container.SetData(MockSiteContextSettings.PrivateLabelId, "1387");
+      _container.SetData<int>(MockSiteContextSettings.PrivateLabelId, 1387);
       ISupportPhoneData supportPhoneData = provider.GetSupportPhone(SupportPhoneType.Technical);
       Assert.AreEqual(true, supportPhoneData.Number != string.Empty);
     }
@@ -189,6 +735,14 @@ namespace Atlantis.Framework.Providers.Support.Tests
     public void SupportNumberGdSuccessWithNonGlobalSite()
     {
       ISupportProvider provider = SupportProvider("uk", false);
+       ISupportPhoneData supportPhoneData = provider.GetSupportPhone(SupportPhoneType.Technical);
+      Assert.AreEqual(true, supportPhoneData.Number != string.Empty);
+    }
+
+    [TestMethod]
+    public void SupportNumberGdSuccessWithBRGlobalSite()
+    {
+      ISupportProvider provider = SupportProvider("br", false);
       ISupportPhoneData supportPhoneData = provider.GetSupportPhone(SupportPhoneType.Technical);
       Assert.AreEqual(true, supportPhoneData.Number != string.Empty);
     }

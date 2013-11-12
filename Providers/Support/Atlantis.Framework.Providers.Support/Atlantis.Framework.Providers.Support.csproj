@@ -40,11 +40,9 @@
     <Reference Include="Atlantis.Framework.Engine">
       <HintPath>..\packages\Atlantis.Framework.Engine.4.0.0.0\lib\net40\Atlantis.Framework.Engine.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.Engine.XmlSerializers">
-      <HintPath>..\packages\Atlantis.Framework.Engine.4.0.0.0\lib\net40\Atlantis.Framework.Engine.XmlSerializers.dll</HintPath>
-    </Reference>
-    <Reference Include="Atlantis.Framework.Interface">
-      <HintPath>..\packages\Atlantis.Framework.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Interface.dll</HintPath>
+    <Reference Include="Atlantis.Framework.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Interface.4.13.9.25\lib\net40\Atlantis.Framework.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Providers.Geo.Interface">
       <HintPath>..\packages\Atlantis.Framework.Providers.Geo.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Providers.Geo.Interface.dll</HintPath>
@@ -78,7 +76,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="atlantis.config" />
-    <None Include="packages.config" />
+    <None Include="Atlantis.Framework.Providers.Support.bat" />
+    <None Include="Atlantis.Framework.Providers.Support.nuspec" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

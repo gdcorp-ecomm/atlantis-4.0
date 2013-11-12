@@ -16,6 +16,51 @@ namespace Atlantis.Framework.Providers.Support
     const string COUNTRY_CODE_US = "us";
     private const string US_SPANISH_SUPPORT_NUMBER = "(480) 463-8300";
 
+    public const string AuctionsHelpPhone = "480-505-8892";
+
+    public const string SSL_Phone = "(480) 463-8887";
+
+    public const string PREM_DOMAINS_PHONE_GD = "(480) 366-3343";
+    public const string PREM_DOMAINS_PHONE_PL = "(480) 463-8143";
+
+    public const string GD_MainPhone = "(480) 505-8800";
+    public const string GD_PresidentPhone = "(480) 505-8828";
+    public const string GD_FaxPhone = "(480) 505-8844";
+    public const string GD_DomainPhone = "(480) 505-8899";
+    public const string GD_BillingPhone = "(480) 505-8855";
+    public const string GD_HostedExchangePhone = "(480) 463-8887";
+    public const string GD_ServerSupportPhone = "(480) 463-8856";
+    public const string GD_AdSpaceSupportPhone = "(480) 463-8835";
+    public const string GD_McafeeSupportPhone = "(480) 505-8877";
+    public const string GD_McafeeSupportEmail = "ssl@mcafee.com";
+
+    public const string BR_MainPhone = "(480) 624-2583";
+    public const string BR_FaxPhone = "(480) 505-8865";
+    public const string BR_DomainPhone = "(480) 624-2583";
+    public const string BR_BillingPhone = "(480) 624-2525";
+    public const string BR_HostedExchangePhone = "(480) 463-8187";
+    public const string BR_AdSpaceSupportPhone = "(480) 463-8135";
+
+    public const string PL_BillingPhone = "(480) 624-2515";
+    public const string PL_HostedExchangePhone = "(480) 463-8187";
+    public const string PL_AdSpaceSupportPhone = "(480) 463-8135";
+
+    public const string WWD_MainPhone = "(480) 505-8857";
+    public const string WWD_FaxPhone = "(480) 275-3996";
+    public const string WWD_DomainPhone = "(480) 624-2500";
+    public const string WWD_BillingPhone = "(480) 505-8857";
+
+    public const string WWD_GD_ResellerSalesPhone = "(480) 505-8857";
+    public const string SUPER_ResellerSalesPhone = "(480) 505-8822";
+
+    public const string GD_SupportEmail = "support@godaddy.com";
+    public const string BR_SupportEmail = "support@bluerazor.com";
+    public const string WWD_SupportEmail = "support@wildwestdomains.com";
+
+    public const string GD_DesignTeamPhone = "(480) 366-3344";
+    public const string BR_DesignTeamPhone = "(480) 463-8144";
+    public const string PL_DesignTeamPhone = "(480) 463-8144";
+
     public const string GO_DADDY_SUPPORT_EMAIL = "support@godaddy.com";
     public const string BLUE_RAZOR_SUPPORT_EMAIL = "support@bluerazor.com";
     public const string WWD_SUPPORT_EMAIL = "support@wildwestdomains.com";
@@ -241,6 +286,45 @@ namespace Atlantis.Framework.Providers.Support
         case SupportPhoneType.Technical:
           supportPhone = GetTechnicalSupportPhone();
           break;
+        case SupportPhoneType.Hosting:
+          supportPhone = GetHostingSupportPhone();
+          break;
+        case SupportPhoneType.HostingExchange:
+          supportPhone = GetHostingExchangeSupportPhone();
+          break;
+        case SupportPhoneType.Billing:
+          supportPhone = GetBillingSupportPhone();
+          break;
+        case SupportPhoneType.CompanyFax:
+          supportPhone = GetCompanyFaxPhone();
+          break;
+        case SupportPhoneType.CompanyMain:
+          supportPhone = GetCompanyMainPhone();
+          break;
+        case SupportPhoneType.Domains:
+          supportPhone = GetDomainSupportPhone();
+          break;
+        case SupportPhoneType.PremiumDomains:
+          supportPhone = GetPremiumDomainSupportPhone();
+          break;
+        case SupportPhoneType.Server:
+          supportPhone = GetServerSupportPhone();
+          break;
+        case SupportPhoneType.AdSpace:
+          supportPhone = GetAdSpaceSupportPhone();
+          break;
+        case SupportPhoneType.SSL:
+          supportPhone = GetSSLSupportPhone();
+          break;
+        case SupportPhoneType.DesignTeam:
+          supportPhone = GetDesignTeamSupportPhone();
+          break;
+        case SupportPhoneType.ResellerSales:
+          supportPhone = GetResellerSalesSupportPhone();
+          break;
+        case SupportPhoneType.Mcafee:
+          supportPhone = GetMcafeeSupportPhone();
+          break;
         default:
           supportPhone = _emptySupportPhoneData;
           var exception = new AtlantisException("SupportProvider.GetSupportPhone", "0", "Unknown support phone type: " + supportPhoneType, string.Empty, null, null);
@@ -294,6 +378,315 @@ namespace Atlantis.Framework.Providers.Support
 
       return technicalSupportPhone;
     }
+
+    private ISupportPhoneData GetHostingSupportPhone()
+    {
+      ISupportPhoneData hostingSupportPhone = null;
+
+        if (IsReseller && SupportOption == "3")
+        {
+          hostingSupportPhone = new SupportPhoneData(FormattedPrivateLabelSupportPhone, false);
+        }
+        else
+        {
+          hostingSupportPhone = _emptySupportPhoneData;
+        }
+
+
+      return hostingSupportPhone;
+    }
+
+    private ISupportPhoneData GetHostingExchangeSupportPhone()
+    {
+      ISupportPhoneData hostingExchangeSupportPhone = null;
+
+        if (CountryCode.ToLower() != COUNTRY_CODE_US)
+        {
+          hostingExchangeSupportPhone = GetTechnicalSupportPhone();
+        }
+        else if (IsGoDaddy)
+        {
+          hostingExchangeSupportPhone = new SupportPhoneData(GD_HostedExchangePhone, false);
+        }
+        else if (IsBlueRazor)
+        {
+          hostingExchangeSupportPhone = new SupportPhoneData(BR_HostedExchangePhone, false);
+        }
+        else if (IsReseller)
+        {
+          if (SupportOption == "3")
+          {
+            hostingExchangeSupportPhone =  new SupportPhoneData(FormattedPrivateLabelSupportPhone, false);
+          }
+          else
+          {
+            hostingExchangeSupportPhone = new SupportPhoneData(PL_HostedExchangePhone, false);
+          }
+        }
+        else
+        {
+          hostingExchangeSupportPhone = _emptySupportPhoneData;
+            
+        }
+      return hostingExchangeSupportPhone;
+    }
+
+    private ISupportPhoneData GetBillingSupportPhone()
+    {
+      ISupportPhoneData billingSupportPhone = null;
+
+        if (IsGoDaddy)
+        {
+          billingSupportPhone = new SupportPhoneData(GD_BillingPhone, false);
+        }
+        else if (IsBlueRazor)
+        {
+          billingSupportPhone = new SupportPhoneData(BR_BillingPhone, false);
+        }
+        else if (IsWwd)
+        {
+          billingSupportPhone = new SupportPhoneData(WWD_BillingPhone, false);
+        }
+        else if (IsApiReseller)
+        {
+          billingSupportPhone = _emptySupportPhoneData;
+        }
+        else if (IsReseller)
+        {
+          billingSupportPhone = new SupportPhoneData(PL_BillingPhone, false);
+        }
+        else
+        {
+          billingSupportPhone = _emptySupportPhoneData;
+        }
+
+      return billingSupportPhone;
+    }
+
+    private ISupportPhoneData GetCompanyFaxPhone()
+    {
+      ISupportPhoneData companyFaxPhone = null;
+
+
+        if (IsGoDaddy)
+        {
+          companyFaxPhone = new SupportPhoneData(GD_FaxPhone, false);
+        }
+        else if (IsBlueRazor)
+        {
+          companyFaxPhone = new SupportPhoneData(BR_FaxPhone, false);
+        }
+        else if (IsWwd)
+        {
+          companyFaxPhone = new SupportPhoneData(WWD_FaxPhone, false);
+        }
+        else
+        {
+          companyFaxPhone = _emptySupportPhoneData;
+        }
+
+      return companyFaxPhone;
+    }
+
+    private ISupportPhoneData GetCompanyMainPhone()
+    {
+      ISupportPhoneData companyMainPhone = null;
+
+        if (IsGoDaddy)
+        {
+          companyMainPhone = new SupportPhoneData(GD_MainPhone, false);
+        }
+        else if (IsBlueRazor)
+        {
+          companyMainPhone = new SupportPhoneData(BR_MainPhone, false);
+        }
+        else if (IsWwd)
+        {
+          companyMainPhone = new SupportPhoneData(WWD_MainPhone, false);
+        }
+        else if ((SupportOption == "1") || (SupportOption == "2"))
+        {
+          companyMainPhone = new SupportPhoneData(FormattedPrivateLabelSupportPhone, false);
+        }
+        else
+        {
+          companyMainPhone = _emptySupportPhoneData;
+        }
+
+      return companyMainPhone;
+    }
+
+    private ISupportPhoneData GetDomainSupportPhone()
+    {
+      ISupportPhoneData domainSupportPhone = null;
+
+        if (IsGoDaddy)
+        {
+          domainSupportPhone = new SupportPhoneData(GD_DomainPhone, false);
+        }
+        else if (IsBlueRazor)
+        {
+          domainSupportPhone = new SupportPhoneData(BR_DomainPhone, false);
+        }
+        else if (IsWwd)
+        {
+          domainSupportPhone = new SupportPhoneData(WWD_DomainPhone, false);
+        }
+        else if ((SupportOption == "1") || (SupportOption == "2"))
+        {
+          domainSupportPhone = new SupportPhoneData(FormattedPrivateLabelSupportPhone, false);
+        }
+        else
+        {
+          domainSupportPhone = _emptySupportPhoneData;
+        }
+
+      return domainSupportPhone;
+    }
+
+    private ISupportPhoneData GetPremiumDomainSupportPhone()
+    {
+      ISupportPhoneData premiumDomainSupportPhone = null;
+
+        if (IsGoDaddy)
+        {
+          premiumDomainSupportPhone = new SupportPhoneData(PREM_DOMAINS_PHONE_GD, false);
+        }
+        else
+        {
+          premiumDomainSupportPhone = new SupportPhoneData(PREM_DOMAINS_PHONE_PL, false);
+        }
+      return premiumDomainSupportPhone;
+    }
+
+    private ISupportPhoneData GetServerSupportPhone()
+    {
+      ISupportPhoneData serverSupportPhone = null;
+
+        if (IsGoDaddy)
+        {
+          serverSupportPhone = new SupportPhoneData(GD_ServerSupportPhone, false);
+        }
+        else if (IsBlueRazor)
+        {
+          serverSupportPhone = GetTechnicalSupportPhone();
+        }
+        else if (IsReseller)
+        {
+          if (SupportOption == "3")
+          {
+            serverSupportPhone = new SupportPhoneData(FormattedPrivateLabelSupportPhone, false);
+          }
+          else
+          {
+            serverSupportPhone = GetTechnicalSupportPhone();
+          }
+        }
+        else
+        {
+          serverSupportPhone = _emptySupportPhoneData;
+        }
+
+      return serverSupportPhone;
+    }
+
+    private ISupportPhoneData GetAdSpaceSupportPhone()
+    {
+      ISupportPhoneData adSpaceSupportPhone = null;
+
+          if (IsGoDaddy)
+          {
+            adSpaceSupportPhone = new SupportPhoneData(GD_AdSpaceSupportPhone, false);
+          }
+          else if (IsBlueRazor)
+          {
+            adSpaceSupportPhone = new SupportPhoneData(BR_AdSpaceSupportPhone,false);
+          }
+          else if (IsReseller)
+          {
+            adSpaceSupportPhone = new SupportPhoneData(PL_AdSpaceSupportPhone,false);
+          }
+          else
+          {
+            adSpaceSupportPhone = _emptySupportPhoneData;
+          }
+
+      return adSpaceSupportPhone;
+    }
+
+    private ISupportPhoneData GetSSLSupportPhone()
+    {
+      ISupportPhoneData sslSupportPhone = null;
+        sslSupportPhone = new SupportPhoneData(SSL_Phone, false);
+
+        if (IsGoDaddy)
+        {
+          if (CountryCode.ToLower() != COUNTRY_CODE_US)
+          {
+            sslSupportPhone = GetTechnicalSupportPhone();
+          }
+        }
+        else
+        {
+          if(!string.IsNullOrEmpty(GetTechnicalSupportPhone().Number))
+          {
+            sslSupportPhone = GetTechnicalSupportPhone();
+          }
+        }
+
+      return sslSupportPhone;
+    }
+
+    private ISupportPhoneData GetDesignTeamSupportPhone()
+    {
+      ISupportPhoneData designTeamSupportPhone = null;
+
+        if (IsGoDaddy)
+        {
+          designTeamSupportPhone = new SupportPhoneData(GD_DesignTeamPhone, false);
+        }
+        else if (IsBlueRazor)
+        {
+          designTeamSupportPhone = new SupportPhoneData(BR_DesignTeamPhone, false);
+        }
+        else
+        {
+          designTeamSupportPhone = new SupportPhoneData(PL_DesignTeamPhone, false);
+        }
+
+      return designTeamSupportPhone;
+    }
+
+    private ISupportPhoneData GetResellerSalesSupportPhone()
+    {
+      ISupportPhoneData resellerSalesPhone = null;
+
+        if (IsGoDaddy || IsWwd)
+        {
+          resellerSalesPhone = new SupportPhoneData(WWD_GD_ResellerSalesPhone, false);
+        }
+        else  if (IsSuperReseller)
+        {
+          resellerSalesPhone = new SupportPhoneData(SUPER_ResellerSalesPhone, false);
+        }
+        else
+        {
+          resellerSalesPhone = _emptySupportPhoneData;
+        }
+      return resellerSalesPhone;
+    }
+
+    private ISupportPhoneData GetMcafeeSupportPhone()
+    {
+      ISupportPhoneData mcafeeSupportPhone = null;
+
+        mcafeeSupportPhone = new SupportPhoneData(GD_McafeeSupportPhone, false);
+
+
+      return mcafeeSupportPhone;
+    }
+
+
 
     private string _supportEmail;
     public string SupportEmail

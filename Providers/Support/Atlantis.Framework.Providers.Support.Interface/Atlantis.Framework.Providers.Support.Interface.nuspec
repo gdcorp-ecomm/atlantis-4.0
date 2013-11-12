@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Atlantis.Framework.Providers.Support.Interface</id>
+    <version>4.13.11.11</version>
+    <title>Atlantis Framework Providers Support Interface</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <projectUrl>https://confluence.int.godaddy.com/display/ATLANTIS</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes></releaseNotes>
+    <copyright>$copyright$</copyright>
+    <tags>Atlantis Framework Providers Support Interface</tags>
+    <dependencies>
+    </dependencies>
+  </metadata>
+</package>

@@ -19,6 +19,10 @@ namespace Atlantis.Framework.Providers.Support.Tests
       {
         response = PrivateLabelDataResponseData.FromDataValue("2");
       }
+      else if (request.PrivateLabelId == 1828 && request.DataCategoryId == 44)
+      {
+        response = PrivateLabelDataResponseData.FromDataValue("3");
+      }
       else if (request.PrivateLabelId == 1726 && request.DataCategoryId == 44)
       {
         response = PrivateLabelDataResponseData.FromDataValue("1");

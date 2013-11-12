@@ -64,7 +64,7 @@ namespace Atlantis.Framework.RegGetDotTypeStackInfo.Impl
             }
             else
             {
-              Dictionary<string, DotTypeStackItem> items = new Dictionary<string, DotTypeStackItem>();
+              Dictionary<string, DotTypeStackItem> items = new Dictionary<string, DotTypeStackItem>(StringComparer.OrdinalIgnoreCase);
               items.Add(dotType, new DotTypeStackItem(promoCode, dotType, price, stackId));
 
               _dotTypeStackItems.Add(promoCode, items);

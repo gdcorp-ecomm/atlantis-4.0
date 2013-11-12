@@ -96,6 +96,8 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Atlantis.Framework.ProductOffer.Interface.nuget.bat" />
+    <None Include="Atlantis.Framework.ProductOffer.Interface.nuspec" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

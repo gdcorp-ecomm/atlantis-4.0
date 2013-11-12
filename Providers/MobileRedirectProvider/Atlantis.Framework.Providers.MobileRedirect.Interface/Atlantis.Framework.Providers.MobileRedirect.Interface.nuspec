@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Atlantis.Framework.Providers.MobileRedirect.Interface</id>
+    <version>4.13.8.8</version>
+    <title>Atlantis Framework Providers MobileRedirect Interface</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <projectUrl>https://confluence.int.godaddy.com/display/ATLANTIS</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes></releaseNotes>
+    <copyright>$copyright$</copyright>
+    <tags>Atlantis Framework Providers MobileRedirect Interface</tags>
+    <dependencies />
+  </metadata>
+  <files />
+</package>

@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>Atlantis.Framework.ReceiptSurveyTypesGet.Impl</id>
-    <version>4.13.11.11</version>
+    <version>4.13.11.12</version>
     <title>Atlantis Framework Receipt Survey Types</title>
     <authors>$author$</authors>
     <owners>$author$</owners>
@@ -12,11 +12,9 @@
     <releaseNotes></releaseNotes>
     <copyright>$copyright$</copyright>
     <tags>Atlantis Framework Receipt Survey Types</tags>
-    <dependencies>
-      <dependency id="Atlantis.Framework.Engine" version="4.0.0.0" />
-      <dependency id="Atlantis.Framework.Interface" version="4.0.0.0" />
-      <dependency id="Atlantis.Framework.Nimitz" version="4.0.0.0" />
-    </dependencies>
+    <dependencies/>
   </metadata>
-  <files />
+  <files>
+    <file src="bin\Release\en\Atlantis.Framework.ReceiptSurveyTypesGet.Interface.resources.dll" target="lib\net40\en\Atlantis.Framework.ReceiptSurveyTypesGet.Interface.resources.dll" />
+  </files>
 </package>

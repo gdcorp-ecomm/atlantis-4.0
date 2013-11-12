@@ -347,11 +347,21 @@ namespace Atlantis.Framework.TH.SSO.Tests
       }
     }
 
+    private ISiteContext SiteContext
+    {
+      get { return Container.Resolve<ISiteContext>(); }
+    }
+
+    private ILinkProvider LinkProvider
+    {
+      get { return Container.Resolve<ILinkProvider>(); }
+    }
+
     private string GetSpGroupName()
     {
       string returnValue = string.Empty;
 
-      switch (_siteContext.Value.ContextId)
+      switch (SiteContext.ContextId)
       {
         case 1:
           returnValue = GD_PREFIX;
@@ -366,9 +376,9 @@ namespace Atlantis.Framework.TH.SSO.Tests
           returnValue = SPN_PREFIX;
           break;
       }
-      string isInternal = _links.Value.IsDebugInternal() ? "-DEBUG64" : string.Empty;
+      string isInternal = LinkProvider.IsDebugInternal() ? "-DEBUG64" : string.Empty;
       returnValue = string.Format("{0}{1}{2}", returnValue, ServiceProviderGroupSuffix, isInternal).Trim();
-
+      
       return returnValue;
     }
   }

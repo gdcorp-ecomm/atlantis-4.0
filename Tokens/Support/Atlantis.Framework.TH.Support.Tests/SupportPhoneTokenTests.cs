@@ -82,5 +82,72 @@ namespace Atlantis.Framework.TH.Support.Tests
     {
       TokenSuccess("<technical />");
     }
+
+    [TestMethod]
+    public void HostingExchangeSupportPhoneSuccess()
+    {
+      TokenSuccess("<hostingexchange />");
+    }
+
+    [TestMethod]
+    public void BillingSupportPhoneSuccess()
+    {
+      TokenSuccess("<billing />");
+    }
+
+    [TestMethod]
+    public void CompanyFaxSupportPhoneSuccess()
+    {
+      TokenSuccess("<companyfax />");
+    }
+
+    [TestMethod]
+    public void CompanyMainSupportPhoneSuccess()
+    {
+      TokenSuccess("<companymain />");
+    }
+
+    [TestMethod]
+    public void DomainsSupportPhoneSuccess()
+    {
+      TokenSuccess("<domains />");
+    }
+
+    [TestMethod]
+    public void PremiumDomainsSupportPhoneSuccess()
+    {
+      TokenSuccess("<premiumdomains />");
+    }
+
+    [TestMethod]
+    public void ServerSupportPhoneSuccess()
+    {
+      TokenSuccess("<server />");
+    }
+    [TestMethod]
+    public void AdSpaceSupportPhoneSuccess()
+    {
+      TokenSuccess("<adspace />");
+    }
+    [TestMethod]
+    public void SSLSupportPhoneSuccess()
+    {
+      TokenSuccess("<ssl />");
+    }
+    [TestMethod]
+    public void DesignTeamSupportPhoneSuccess()
+    {
+      TokenSuccess("<designteam />");
+    }
+    [TestMethod]
+    public void ResellerSalesSupportPhoneSuccess()
+    {
+      TokenSuccess("<resellersales />");
+    }
+    [TestMethod]
+    public void McafeeSupportPhoneSuccess()
+    {
+      TokenSuccess("<mcafee />");
+    }
   }
 }

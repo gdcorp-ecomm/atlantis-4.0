@@ -39,6 +39,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Atlantis.Framework.AppSettings.Interface">
+      <HintPath>..\packages\Atlantis.Framework.AppSettings.Interface.4.0.0.0\lib\net40\Atlantis.Framework.AppSettings.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.DotTypeForms.Impl, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.DotTypeForms.Impl.4.13.11.12\lib\net40\Atlantis.Framework.DotTypeForms.Impl.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.DotTypeForms.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.DotTypeForms.Interface.4.13.11.11\lib\net40\Atlantis.Framework.DotTypeForms.Interface.dll</HintPath>
+    </Reference>
     <Reference Include="Atlantis.Framework.Engine, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Atlantis.Framework.Engine.4.0.0.0\lib\net40\Atlantis.Framework.Engine.dll</HintPath>
@@ -49,7 +60,10 @@
     </Reference>
     <Reference Include="Atlantis.Framework.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Interface.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.Interface.4.13.9.25\lib\net40\Atlantis.Framework.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Providers.DotTypeRegistration.Interface">
+      <HintPath>..\packages\Atlantis.Framework.Providers.DotTypeRegistration.Interface.4.13.11.11\lib\net40\Atlantis.Framework.Providers.DotTypeRegistration.Interface.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
@@ -71,16 +85,6 @@
   <ItemGroup>
     <Compile Include="DotTypeFormsTests .cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Atlantis.Framework.DotTypeForms.Impl\Atlantis.Framework.DotTypeForms.Impl.csproj">
-      <Project>{f5ba97a4-d1d4-4bfa-aea3-17b92510d2df}</Project>
-      <Name>Atlantis.Framework.DotTypeForms.Impl</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Atlantis.Framework.DotTypeForms.Interface\Atlantis.Framework.DotTypeForms.Interface.csproj">
-      <Project>{86434db7-0a41-4802-a9aa-1f95676a38f7}</Project>
-      <Name>Atlantis.Framework.DotTypeForms.Interface</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="atlantis.config">

@@ -60,10 +60,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Providers\DotTypeRegistration\Atlantis.Framework.Providers.DotTypeRegistration.Interface\Atlantis.Framework.Providers.DotTypeRegistration.Interface.csproj">
-      <Project>{35b615cd-c78e-484c-92c5-d54cd0b86cd2}</Project>
-      <Name>Atlantis.Framework.Providers.DotTypeRegistration.Interface</Name>
-    </ProjectReference>
+    <None Include="Atlantis.Framework.DotTypeValidation.Interface.nuget.bat" />
+    <None Include="Atlantis.Framework.DotTypeValidation.Interface.nuspec" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

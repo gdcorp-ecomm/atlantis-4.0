@@ -33,10 +33,10 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration.Tests
       container.Resolve<ILocalizationProvider>();
 
       IDictionary<string, IList<IList<IFormField>>> formFieldsByDomain;
-      string[] domains = { "domain1.shop", "claim1.example" };
+      string[] domains = { "domain1.n.borg", "claim1.n.borg" };
 
       var provider = container.Resolve<IDotTypeRegistrationProvider>();
-      bool isSuccess = provider.GetDotTypeFormSchemas(string.Empty, 1640, "MOBILE", "GA", domains, out formFieldsByDomain);
+      bool isSuccess = provider.GetDotTypeFormSchemas(string.Empty, 1700, "FOS", "SRA", domains, out formFieldsByDomain);
       Assert.AreEqual(true, isSuccess);
       Assert.AreEqual(true, formFieldsByDomain.Count > 0);
     }

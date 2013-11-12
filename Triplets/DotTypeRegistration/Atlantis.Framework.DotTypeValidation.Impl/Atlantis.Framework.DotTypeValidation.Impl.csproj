@@ -97,6 +97,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="Atlantis.Framework.DotTypeValidation.Impl.nuget.bat" />
+    <None Include="Atlantis.Framework.DotTypeValidation.Impl.nuspec" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

@@ -11,7 +11,7 @@ namespace Atlantis.Framework.DotTypeForms.Tests
     [TestMethod]
     public void DotTypeFormsXmlGoodRequest()
     {
-      var request = new DotTypeFormsXmlRequestData(string.Empty,1640, "MOBILE", "GA", "EN-US", 1);
+      var request = new DotTypeFormsXmlRequestData(string.Empty, 1577, "MOBILE", "GA", "EN-US", 1);
       var response = (DotTypeFormsXmlResponseData)Engine.Engine.ProcessRequest(request, 689);
       Assert.AreEqual(true, response.IsSuccess);
       Assert.AreEqual(true, !string.IsNullOrEmpty(response.ToXML()));

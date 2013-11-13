@@ -1,53 +1,75 @@
-﻿using System;
-using Atlantis.Framework.Interface;
+﻿using System.Linq;
 using System.Xml.Linq;
-using Atlantis.Framework.Manager.Interface.ManagerUser;
+using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.Manager.Interface
 {
-  public class ManagerUserLookupResponseData : IResponseData
+  public class ManagerUserLookupResponseData : ResponseData
   {
-    public ManagerUserData ManagerUser { get; private set; }
-    private readonly AtlantisException _ex;
+    public static ManagerUserLookupResponseData Invalid { get; private set; }
 
-    public bool IsSuccess
+    static ManagerUserLookupResponseData()
     {
-      get { return _ex == null; }
+      Invalid = new ManagerUserLookupResponseData(); 
     }
 
-    public static ManagerUserLookupResponseData Empty { get; private set; }
-
-    public ManagerUserLookupResponseData(ManagerUserData managerUser)
+    public static ManagerUserLookupResponseData FromCacheDataXml(string cacheDataXml)
     {
-      ManagerUser = managerUser;
+      if (string.IsNullOrEmpty(cacheDataXml))
+      {
+        return Invalid;
+      }
+
+      int managerUserId;
+      string loginName;
+
+      var dataElement = XElement.Parse(cacheDataXml);
+      var item = dataElement.Descendants("item").FirstOrDefault();
+
+      if (item == null)
+      {
+        return Invalid;
+      }
+
+      string managerUserIdText = item.Attribute("ManagerUserID") != null ? item.Attribute("ManagerUserID").Value : string.Empty;
+      if (!int.TryParse(managerUserIdText, out managerUserId))
+      {
+        return Invalid;
+      }
+
+      string firstName = item.Attribute("FirstName") != null ? item.Attribute("FirstName").Value : string.Empty;
+      string lastName = item.Attribute("LastName") != null ? item.Attribute("LastName").Value : string.Empty;
+
+      return new ManagerUserLookupResponseData(managerUserId, firstName, lastName);
     }
 
-    public ManagerUserLookupResponseData(RequestData requestData, Exception ex)
+    public int ManagerUserId { get; private set; }
+    public string FirstName { get; private set; }
+    public string LastName { get; private set; }
+    public bool IsValid { get; private set; }
+
+    public string FullName
     {
-      _ex = new AtlantisException(requestData,
-                                   "ManagerUserLookupResponseData",
-                                   ex.Message,
-                                   requestData.ToXML());
+      get
+      {
+        return string.Concat(FirstName, string.IsNullOrEmpty(FirstName) ? string.Empty : " ", LastName);
+      }
     }
 
-    #region IResponseData Members
-
-    public string ToXML()
+    private ManagerUserLookupResponseData()
     {
-      var managerUserXml = new XElement("manageruser",
-                                             new XAttribute("userid", ManagerUser.UserId),
-                                             new XAttribute("fullname", ManagerUser.FullName),
-                                             new XAttribute("loginname", ManagerUser.LoginName),
-                                             new XAttribute("mstk", ManagerUser.Mstk));
-
-      return managerUserXml.ToString();
+      ManagerUserId = 0;
+      FirstName = string.Empty;
+      LastName = string.Empty;
+      IsValid = false;
     }
 
-    public AtlantisException GetException()
+    private ManagerUserLookupResponseData(int managerUserId, string firstName, string lastName)
     {
-      return _ex;
+      ManagerUserId = managerUserId;
+      FirstName = firstName;
+      LastName = lastName;
+      IsValid = ManagerUserId != 0;
     }
-
-    #endregion
   }
 }

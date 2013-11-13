@@ -6,7 +6,7 @@ using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.Manager.Interface
 {
-  public class ManagerCategoriesResponseData : IResponseData
+  public class ManagerCategoriesResponseData : ResponseData
   {
     private readonly Dictionary<string, string> _managerAttributes;
     private readonly HashSet<int> _managerCategories;
@@ -40,16 +40,6 @@ namespace Atlantis.Framework.Manager.Interface
       get { return _managerCategories.Count; }
     }
 
-    public string ToXML()
-    {
-      return new XElement("ManagerCategoriesResponseData").ToString();
-    }
-
-    public AtlantisException GetException()
-    {
-      return null;
-    }
-
     public static ManagerCategoriesResponseData FromCacheDataXml(string cacheDataXml)
     {
       if (string.IsNullOrEmpty(cacheDataXml))
@@ -57,43 +47,38 @@ namespace Atlantis.Framework.Manager.Interface
         return Empty;
       }
 
-      try
+      var dataElement = XElement.Parse(cacheDataXml);
+
+      var managerAttributes = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      var managerCategories = new HashSet<int>();
+
+      var userElement = dataElement;
+      if (userElement.Name.LocalName != "user")
       {
-        var dataElement = XElement.Parse(cacheDataXml);
-
-        var managerAttributes = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
-        var managerCategories = new HashSet<int>();
-
-        var userElement = dataElement;
-        if (userElement.Name.LocalName != "user")
-        {
-          userElement = dataElement.Descendants("user").FirstOrDefault();
-        }
-
-        foreach (var managerAttribute in userElement.Attributes())
-        {
-          managerAttributes[managerAttribute.Name.LocalName] = managerAttribute.Value;
-        }
-
-        IEnumerable<XElement> categoryElements = userElement.Descendants("category");
-        foreach (var categoryElement in categoryElements)
-        {
-          int category;
-          if (int.TryParse(categoryElement.Value, out category))
-          {
-            managerCategories.Add(category);
-          }
-        }
-
-        return new ManagerCategoriesResponseData(managerAttributes, managerCategories);
+        userElement = dataElement.Descendants("user").FirstOrDefault();
       }
-      catch (Exception ex)
+
+      if (userElement == null)
       {
-        var exception = new AtlantisException("ManagerCategoriesResponseData.FromCacheDataXml", "0",
-                                              ex.Message + ex.StackTrace, cacheDataXml, null, null);
-        Engine.Engine.LogAtlantisException(exception);
         return Empty;
       }
+
+      foreach (var managerAttribute in userElement.Attributes())
+      {
+        managerAttributes[managerAttribute.Name.LocalName] = managerAttribute.Value;
+      }
+
+      IEnumerable<XElement> categoryElements = userElement.Descendants("category");
+      foreach (var categoryElement in categoryElements)
+      {
+        int category;
+        if (int.TryParse(categoryElement.Value, out category))
+        {
+          managerCategories.Add(category);
+        }
+      }
+
+      return new ManagerCategoriesResponseData(managerAttributes, managerCategories);
     }
 
     public bool HasManagerAttribute(string key)
@@ -121,12 +106,12 @@ namespace Atlantis.Framework.Manager.Interface
       return result;
     }
 
-    public bool HasAnyManagerCategories(IEnumerable<int> categoies)
+    public bool HasAnyManagerCategories(IEnumerable<int> categories)
     {
       var result = false;
-      if (categoies != null)
+      if (categories != null)
       {
-        result = _managerCategories.Overlaps(categoies);
+        result = _managerCategories.Overlaps(categories);
       }
       return result;
     }

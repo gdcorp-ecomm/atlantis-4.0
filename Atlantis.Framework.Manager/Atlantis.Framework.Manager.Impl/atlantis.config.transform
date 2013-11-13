@@ -1,10 +1,9 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
-<ConfigElements>
+﻿<ConfigElements>
   <ConfigElement progid="Atlantis.Framework.Manager.Impl.ManagerUserLookupRequest" assembly="Atlantis.Framework.Manager.Impl.dll" request_type="65" />
   <ConfigElement progid="Atlantis.Framework.Manager.Impl.ManagerGetProductDetailRequest" assembly="Atlantis.Framework.Manager.Impl.dll" request_type="395" >
     <ConfigValue key="DataSourceName" value="corp.web.mya.godaddy" />
     <ConfigValue key="CertificateName" value="corp.web.mya.dev.client.godaddy.com" />
     <ConfigValue key="ApplicationName" value="mya" />
-  </ConfigElement>  
-  <ConfigElement progid="Atlantis.Framework.Manager.Impl.ManagerCategoriesRequest" assembly="Atlantis.Framework.Manager.Impl.dll" request_type="462" />  
+  </ConfigElement>
+  <ConfigElement progid="Atlantis.Framework.Manager.Impl.ManagerCategoriesRequest" assembly="Atlantis.Framework.Manager.Impl.dll" request_type="462" />
 </ConfigElements>

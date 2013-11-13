@@ -1,5 +1,5 @@
-﻿using Atlantis.Framework.Interface;
-using System.Xml.Linq;
+﻿using System.Globalization;
+using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.Manager.Interface
 {
@@ -7,22 +7,14 @@ namespace Atlantis.Framework.Manager.Interface
   {
     public int ManagerUserId { get; private set; }
 
-    public ManagerCategoriesRequestData(string shopperId, string sourceUrl, string orderId, string pathway, int pageCount, int managerUserId)
-      : base(shopperId, sourceUrl, orderId, pathway, pageCount)
+    public ManagerCategoriesRequestData(int managerUserId)
     {
       ManagerUserId = managerUserId;
     }
 
     public override string GetCacheMD5()
     {
-      return ManagerUserId.ToString();
-    }
-
-    public override string ToXML()
-    {
-      var element = new XElement("ManagerCategoriesRequestData");
-      element.Add(new XAttribute("manageruserid", ManagerUserId.ToString()));
-      return element.ToString(SaveOptions.DisableFormatting);
+      return ManagerUserId.ToString(CultureInfo.InvariantCulture);
     }
   }
 }

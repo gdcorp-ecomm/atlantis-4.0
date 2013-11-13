@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Atlantis.Framework.Manager.Impl</id>
+    <version>4.13.11.12</version>
+    <title>Atlantis.Framework.Manager.Impl</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <projectUrl>https://confluence.int.godaddy.com/display/ATLANTIS</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes></releaseNotes>
+    <copyright>$copyright$</copyright>
+    <tags>Atlantis.Framework.Manager.Impl</tags>
+  </metadata>
+  <files>
+    <file src="atlantis.config.transform" target="content\atlantis.config.transform" />
+  </files>
+</package>

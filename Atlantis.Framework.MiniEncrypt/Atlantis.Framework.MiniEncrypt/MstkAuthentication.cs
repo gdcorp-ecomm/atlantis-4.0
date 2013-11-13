@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.InteropServices;
 
 namespace Atlantis.Framework.MiniEncrypt
 {
@@ -51,9 +52,18 @@ namespace Atlantis.Framework.MiniEncrypt
         object userIdObject;
         object userNameObject;
 
-        result = _authenticationClass.GetMgrDecryptedValues(mstk, out userIdObject, out userNameObject);
-        managerUserId = userIdObject.ToString();
-        managerUserName = userNameObject.ToString();
+        try
+        {
+          result = _authenticationClass.GetMgrDecryptedValues(mstk, out userIdObject, out userNameObject);
+          managerUserId = userIdObject.ToString();
+          managerUserName = userNameObject.ToString();
+        }
+        catch (Exception)
+        {
+          result = 1;
+          managerUserId = string.Empty;
+          managerUserName = string.Empty;
+        }
       }
 
       return result;

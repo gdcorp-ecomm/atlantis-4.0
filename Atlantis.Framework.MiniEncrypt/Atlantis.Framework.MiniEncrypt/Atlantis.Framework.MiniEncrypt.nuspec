@@ -2,18 +2,15 @@
 <package >
   <metadata>
     <id>Atlantis.Framework.MiniEncrypt</id>
-    <version>4.0.0.0</version>
-    <title>Atlantis Framework MiniEncrypt</title>
+    <version>4.13.11.13</version>
+    <title>Atlantis.Framework.MiniEncrypt</title>
     <authors>$author$</authors>
     <owners>$author$</owners>
     <projectUrl>https://confluence.int.godaddy.com/display/ATLANTIS</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes></releaseNotes>
+    <releaseNotes>Added exception handling around exceptions if mstk does not parse properly</releaseNotes>
     <copyright>$copyright$</copyright>
-    <tags>Atlantis Framework MiniEncrypt</tags>
+    <tags>Atlantis.Framework.MiniEncrypt</tags>
   </metadata>
-  <files>
-    <!-- No Files: Do Not package the Interop -->
-  </files>
 </package>

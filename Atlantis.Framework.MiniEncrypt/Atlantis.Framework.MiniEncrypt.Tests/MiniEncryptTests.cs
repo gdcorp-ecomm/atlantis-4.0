@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System.Runtime.InteropServices;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Atlantis.Framework.MiniEncrypt.Tests
 {
@@ -107,6 +108,20 @@ namespace Atlantis.Framework.MiniEncrypt.Tests
       }
 
       Assert.IsFalse(result);
+    }
+
+    [TestMethod]
+    public void BogusMstkValue()
+    {
+      int result;
+      using (var mstk = MstkAuthentication.CreateDisposable())
+      {
+        string managerUserId;
+        string managerLogin;
+        result = mstk.ParseMstk("bogus", out managerUserId, out managerLogin);
+      }
+
+      Assert.AreNotEqual(0, result);
     }
   }
 }

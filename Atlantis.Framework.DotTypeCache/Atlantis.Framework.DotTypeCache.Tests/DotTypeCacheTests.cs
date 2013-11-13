@@ -1582,5 +1582,32 @@ namespace Atlantis.Framework.DotTypeCache.Tests
       var productIdList = dotTypeInfo.GetPhaseApplicationProductIdList(LaunchPhases.SunriseA);
       Assert.IsTrue(productIdList.Any());
     }
+
+    [TestMethod]
+    public void TldGetTuiFormTypesSunriseAUno()
+    {
+      var dotTypeInfo = DotTypeProvider.GetDotTypeInfo("uno");
+
+      var tuiFormTypes = dotTypeInfo.GetTuiFormTypes(LaunchPhases.SunriseA);
+      Assert.IsTrue(tuiFormTypes != null && tuiFormTypes.Any());
+    }
+
+    [TestMethod]
+    public void TldGetTuiFormTypesLandrushUno()
+    {
+      var dotTypeInfo = DotTypeProvider.GetDotTypeInfo("uno");
+
+      var tuiFormTypes = dotTypeInfo.GetTuiFormTypes(LaunchPhases.Landrush);
+
+      var currentDate = DateTime.Now;
+      if (currentDate >= new DateTime(2014, 4, 21) && currentDate <= new DateTime(2014, 6, 19))
+      {
+        Assert.IsTrue(tuiFormTypes != null && tuiFormTypes.Count > 0);
+      }
+      else
+      {
+        Assert.IsTrue(tuiFormTypes != null && tuiFormTypes.Count == 0);
+      }
+    }
   }
 }

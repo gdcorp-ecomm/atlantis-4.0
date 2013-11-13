@@ -671,7 +671,8 @@ namespace Atlantis.Framework.DotTypeCache
           {
             if (tldTuiFormGroupLaunchPhase.Code.Equals(launchPhaseCode))
             {
-              if (tldTuiFormGroupLaunchPhase.PeriodType.Equals("claims", StringComparison.OrdinalIgnoreCase))
+              if (!string.IsNullOrEmpty(tldTuiFormGroupLaunchPhase.PeriodType) && 
+                  tldTuiFormGroupLaunchPhase.PeriodType.Equals("claims", StringComparison.OrdinalIgnoreCase))
               {
                 if (needsClaimCheck)
                 {

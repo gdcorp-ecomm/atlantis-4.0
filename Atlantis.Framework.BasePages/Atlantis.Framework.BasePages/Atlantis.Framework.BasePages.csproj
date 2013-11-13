@@ -65,8 +65,9 @@
     <Reference Include="Atlantis.Framework.Manager.Interface">
       <HintPath>..\packages\Atlantis.Framework.Manager.Interface.4.13.11.12\lib\net40\Atlantis.Framework.Manager.Interface.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.MiniEncrypt">
-      <HintPath>..\packages\Atlantis.Framework.MiniEncrypt.4.0.0.0\lib\net40\Atlantis.Framework.MiniEncrypt.dll</HintPath>
+    <Reference Include="Atlantis.Framework.MiniEncrypt, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.MiniEncrypt.4.13.11.13\lib\net40\Atlantis.Framework.MiniEncrypt.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.PrivateLabel.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -133,6 +134,7 @@
     <Compile Include="Providers\DebugProvider.cs" />
     <Compile Include="Providers\GdgManagerContextProvider.cs" />
     <Compile Include="Providers\GoDaddyOnlySiteContextProvider.cs" />
+    <Compile Include="Providers\ManagerContextBase.cs" />
     <Compile Include="Providers\MstkManagerContextProvider.cs" />
     <Compile Include="Providers\PrivateLabelAwareSiteContextProvider.cs" />
     <Compile Include="Providers\RequestHelper.cs" />
@@ -144,6 +146,10 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Interop\Interop.gdMiniEncryptLib.dll" />
+    <Content Include="Interop\readme.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

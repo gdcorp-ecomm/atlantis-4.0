@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Principal;
-using System.Text;
-using System.Threading;
+﻿using System.Threading;
 using System.Web;
-using System.Xml.Linq;
 using Atlantis.Framework.BasePages.Providers;
-using Atlantis.Framework.DataCacheService;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.MiniEncrypt;
+using Atlantis.Framework.Testing.MockEngine;
 using Atlantis.Framework.Testing.MockHttpContext;
 using Atlantis.Framework.Testing.MockProviders;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -23,6 +17,14 @@ namespace Atlantis.Framework.BasePages.Tests
   [DeploymentItem("Atlantis.Framework.Shopper.Impl.dll")]
   public class MstkManagerProviderTests
   {
+    readonly MockErrorLogger _mockLogger = new MockErrorLogger();
+
+    [TestInitialize]
+    public void TestInitialize()
+    {
+      Engine.EngineLogging.EngineLogger = _mockLogger;
+    }
+
     private IProviderContainer SetValidManagerContext(string shopperId)
     {
       string url = "http://gdgmanagertests.host/mypage.aspx?shopper_id=" + shopperId + "&mstk=" + BuildMstk();
@@ -49,12 +51,15 @@ namespace Atlantis.Framework.BasePages.Tests
     }
 
     [TestMethod]
-    public void GdgManagerContextValid()
+    public void MstkManagerContextValid()
     {
+      _mockLogger.Exceptions.Clear();
+
       var container = SetValidManagerContext("832652");
       var manager = container.Resolve<IManagerContext>();
 
       Assert.IsTrue(manager.IsManager);
+      Assert.AreEqual(0, _mockLogger.Exceptions.Count);
     }
   }
 }

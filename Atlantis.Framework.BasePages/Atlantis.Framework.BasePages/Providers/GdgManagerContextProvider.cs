@@ -1,6 +1,8 @@
-﻿using Atlantis.Framework.BasePages.Cookies;
+﻿using System.CodeDom;
+using System.Globalization;
+using Atlantis.Framework.BasePages.Cookies;
 using Atlantis.Framework.Interface;
-using Atlantis.Framework.ManagerUser.Interface;
+using Atlantis.Framework.Manager.Interface;
 using Atlantis.Framework.Shopper.Interface;
 using System;
 using System.Collections.Specialized;
@@ -16,7 +18,7 @@ namespace Atlantis.Framework.BasePages.Providers
   {
     private const int _WWD_PLID = 1387;
     private const string _MGRSHOPPERQSKEY = "mgrshopper";
-    private NameValueCollection _managerQuery = new NameValueCollection();
+    private readonly NameValueCollection _managerQuery = new NameValueCollection();
     private string _managerUserId = string.Empty;
     private string _managerUserName = string.Empty;
     private string _managerShopperId = string.Empty;
@@ -39,7 +41,7 @@ namespace Atlantis.Framework.BasePages.Providers
         string managerHost = WebConfigurationManager.AppSettings["ManagerHost"];
         if (!string.IsNullOrEmpty(managerHost))
         {
-          string host = HttpContext.Current.Request.Url.Host;
+          string host = RequestHelper.GetContextHost();
           result = (string.Compare(host, managerHost, true) == 0);
         }
       }
@@ -47,7 +49,21 @@ namespace Atlantis.Framework.BasePages.Providers
       return result;
     }
 
-    private bool LookupManagerUser(string domain, string userId, string shopperId, string validManagerUserid, out string managerUserId, out string managerLoginName)
+    private string GetManagerLoginName(int managerUserId)
+    {
+      var request = new ManagerCategoriesRequestData(managerUserId);
+      var response = (ManagerCategoriesResponseData) DataCache.DataCache.GetProcessRequest(request, BasePageEngineRequests.ManagerProperties);
+      string result;
+
+      if (!response.TryGetManagerAttribute("login_name", out result))
+      {
+        result = string.Empty;
+      }
+
+      return result;
+    }
+
+    private bool LookupManagerUser(string userId, string validManagerUserid, out string managerUserId, out string managerLoginName)
     {
       bool result = false;
       managerUserId = string.Empty;
@@ -61,49 +77,35 @@ namespace Atlantis.Framework.BasePages.Providers
         }
         else
         {
-          ManagerUserLookupRequestData lookupRequest = new ManagerUserLookupRequestData(
-            shopperId, HttpContext.Current.Request.Url.ToString(),
-            string.Empty, string.Empty, 0, domain, userId);
-          ManagerUserLookupResponseData lookupResponse =
-            (ManagerUserLookupResponseData)DataCache.DataCache.GetProcessRequest(lookupRequest, BasePageEngineRequests.ManagerLookup);
+          var lookupRequest = new ManagerUserLookupRequestData(userId);
+          var lookupResponse =
+            (ManagerUserLookupResponseData) DataCache.DataCache.GetProcessRequest(lookupRequest, BasePageEngineRequests.ManagerLookup);
 
-          if (lookupResponse.IsSuccess)
+          if (lookupResponse.IsValid)
           {
-            if (string.Compare(validManagerUserid, lookupResponse.ManagerUserId, true) == 0)
+            if (validManagerUserid.Equals(lookupResponse.ManagerUserId.ToString(CultureInfo.InvariantCulture), StringComparison.OrdinalIgnoreCase))
             {
               result = true;
-              managerUserId = lookupResponse.ManagerUserId;
-              managerLoginName = lookupResponse.ManagerLoginName;
+              managerUserId = lookupResponse.ManagerUserId.ToString(CultureInfo.InvariantCulture);
+              managerLoginName = GetManagerLoginName(lookupResponse.ManagerUserId);
             }
             else
             {
-              result = false;
-              managerLoginName = "QS Error: " + domain + @"\" + userId;
+              managerLoginName = "QS Error: " + userId;
               LogManagerException(managerLoginName, validManagerUserid + "!=" + lookupResponse.ManagerUserId);
             }
-
           }
           else
           {
-            result = false;
-            managerLoginName = "WS Error:" + domain + @"\" + userId;
-            string data = "Unknown error.";
-            if (!string.IsNullOrEmpty(lookupResponse.Error))
-            {
-              data = lookupResponse.Error;
-            }
-            LogManagerException(managerLoginName, data);
+            managerLoginName = "Error:" + userId;
+            LogManagerException(managerLoginName, "Unknown error.");
           }
-
         }
       }
       catch (Exception ex)
       {
-        AtlantisException aEx = new AtlantisException("GdgManagerContextProvider.LookupManagerUser",
-          HttpContext.Current.Request.Url.ToString(),
-          "0", ex.Message, ex.StackTrace, shopperId,
-          string.Empty, HttpContext.Current.Request.UserHostAddress,
-          string.Empty, 0);
+        var message = ex.Message + ex.StackTrace;
+        var aEx = new AtlantisException("GdgManagerContextProvider.LookupManagerUser", 0, message, string.Empty);
         Engine.Engine.LogAtlantisException(aEx);
       }
 
@@ -117,9 +119,8 @@ namespace Atlantis.Framework.BasePages.Providers
 
       try
       {
-        VerifyShopperRequestData request = new VerifyShopperRequestData(shopperId);
-        VerifyShopperResponseData response = (VerifyShopperResponseData)Engine.Engine.ProcessRequest(
-          request, BasePageEngineRequests.VerifyShopper);
+        var request = new VerifyShopperRequestData(shopperId);
+        var response = (VerifyShopperResponseData)Engine.Engine.ProcessRequest(request, BasePageEngineRequests.VerifyShopper);
 
         if (response.IsVerified)
         {
@@ -133,11 +134,8 @@ namespace Atlantis.Framework.BasePages.Providers
       }
       catch (Exception ex)
       {
-        AtlantisException aEx = new AtlantisException("GdgManagerContextProvider.VerifyShopper",
-          HttpContext.Current.Request.Url.ToString(),
-          "0", ex.Message, ex.StackTrace, shopperId,
-          string.Empty, HttpContext.Current.Request.UserHostAddress,
-          string.Empty, 0);
+        var message = ex.Message + ex.StackTrace;
+        var aEx = new AtlantisException("GdgManagerContextProvider.VerifyShopper", 0, message, shopperId);
         Engine.Engine.LogAtlantisException(aEx);
       }
 
@@ -171,9 +169,9 @@ namespace Atlantis.Framework.BasePages.Providers
       userId = null;
       try
       {
-        if (HttpContext.Current != null && HttpContext.Current.User != null && HttpContext.Current.User.Identity != null)
+        if (HttpContext.Current != null && HttpContext.Current.User != null)
         {
-          WindowsIdentity windowsIdentity = HttpContext.Current.User.Identity as WindowsIdentity;
+          var windowsIdentity = HttpContext.Current.User.Identity as WindowsIdentity;
           if ((windowsIdentity != null) && (windowsIdentity.IsAuthenticated))
           {
             string[] nameParts = windowsIdentity.Name.Split('\\');
@@ -204,15 +202,12 @@ namespace Atlantis.Framework.BasePages.Providers
           {
             LogManagerException("No Current User.", "Windows authentication issue.");
           }
-          else if (HttpContext.Current.User.Identity == null)
-          {
-            LogManagerException("No Current Identity.", "Windows authentication issue.");
-          }
         }
       }
-      catch (System.Exception ex)
+      catch (Exception ex)
       {
-        LogManagerException("Windows identity cannot be determined." + ex.ToString(), "Windows authentication issue.");
+        var message = ex.Message + ex.StackTrace;
+        LogManagerException("Windows identity cannot be determined." + message, "Windows authentication issue.");
       }
 
       return result;
@@ -276,7 +271,7 @@ namespace Atlantis.Framework.BasePages.Providers
                   string userId;
                   if (GetWindowsUserAndDomain(out domain, out userId))
                   {
-                    if (LookupManagerUser(domain, userId, shopperIdFromQueryString, managerUserIdFromQueryString, out _managerUserId, out _managerUserName))
+                    if (LookupManagerUser(userId, managerUserIdFromQueryString, out _managerUserId, out _managerUserName))
                     {
                       _managerShopperId = shopperIdFromQueryString;
                       _managerQuery[_MGRSHOPPERQSKEY] = encryptedQueryStringValue;
@@ -300,37 +295,9 @@ namespace Atlantis.Framework.BasePages.Providers
       }
     }
 
-    private string RequestUrl
-    {
-      get
-      {
-        string result = string.Empty;
-        if ((HttpContext.Current != null) && (HttpContext.Current.Request != null))
-        {
-          result = HttpContext.Current.Request.Url.OriginalString;
-        }
-        return result;
-      }
-    }
-
-    private string ClientIP
-    {
-      get
-      {
-        string result = string.Empty;
-        if ((HttpContext.Current != null) && (HttpContext.Current.Request != null))
-        {
-          result = HttpContext.Current.Request.UserHostAddress;
-        }
-        return result;
-      }
-    }
-
     private void LogManagerException(string message, string data)
     {
-      AtlantisException managerException = new AtlantisException(
-          "GdgManagerContextProvider.DetermineManager", RequestUrl, "403", message, data,
-          _managerShopperId, string.Empty, ClientIP, string.Empty, 0);
+      var managerException = new AtlantisException("GdgManagerContextProvider.DetermineManager", 403, message, data);
       Engine.Engine.LogAtlantisException(managerException);
     }
 

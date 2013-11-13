@@ -30,9 +30,21 @@ namespace Atlantis.Framework.BasePages.Providers
       return result;
     }
 
+    internal static string SafeUrlHost()
+    {
+      try
+      {
+        return HttpContext.Current.Request.Url.Host;
+      }
+      catch
+      {
+        return string.Empty;
+      }
+    }
+
     internal static string GetContextHost()
     {
-      string result = HttpContext.Current.Request.Url.Host;
+      string result = SafeUrlHost();
       IProxyContext proxyContext = GetProxyContext();
       if (proxyContext != null)
       {

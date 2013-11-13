@@ -37,7 +37,7 @@ namespace Atlantis.Framework.BasePages.Providers
       {
         if (_crossDomainCookieDomain == null)
         {
-          string result = HttpContext.Current.Request.Url.Host;
+          string result = RequestHelper.SafeUrlHost();
           if (result == "localhost")
             result = null;
           else if (result.Contains("."))

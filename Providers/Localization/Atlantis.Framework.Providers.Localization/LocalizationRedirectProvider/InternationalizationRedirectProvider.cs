@@ -107,6 +107,13 @@ namespace Atlantis.Framework.Providers.Localization
         redirectResponse.MarketId = "es-US";
         redirectResponse.ShortLanguage = "es";
       }
+      else if (LocalizationProvider.IsGlobalSite() && !string.IsNullOrEmpty(LocalizationProvider.PreviousLanguageCookieValue) && LocalizationProvider.PreviousLanguageCookieValue.Equals("es", StringComparison.OrdinalIgnoreCase))
+      {
+        redirectResponse = new LocalizationRedirectResponse(true);
+        redirectResponse.CountrySite = LocalizationProvider.CountrySite.ToUpperInvariant();
+        redirectResponse.MarketId = "es-US";
+        redirectResponse.ShortLanguage = "es";        
+      }
       else
       {
         redirectResponse = GetRedirectResponse();

@@ -619,7 +619,7 @@ namespace Atlantis.Framework.Providers.Localization.Tests
     public void Subdomain_WWW_CountrySiteCookie_US_LanguageCookie_ES_IpCountry_NONE_BrowserLanguages_NONE_Result_Redirect_WWW_ESUS_SWITCHLANGUAGE()
     {
       var container = SetSubdomainContext("http://www.mysite.com", string.Empty);
-      CreateCountryCookie(1, "us");
+      CreateCountryCookie(1, "www");
       CreateLanguagePreferenceCookie(1, "es");
 
       var localization = container.Resolve<ILocalizationRedirectProvider>();
@@ -629,6 +629,30 @@ namespace Atlantis.Framework.Providers.Localization.Tests
       Assert.AreEqual("es-us", result.MarketId.ToLowerInvariant());
       Assert.AreEqual("es", result.ShortLanguage.ToLowerInvariant());
       TestLanguageCookie(container, result.MarketId);
+
+      container = SetSubdomainContext("http://www.mysite.com", string.Empty);
+      CreateLanguagePreferenceCookie(1, "es");
+      localization = container.Resolve<ILocalizationRedirectProvider>();
+      result = localization.RedirectResponse;
+      Assert.IsTrue(result.ShouldRedirect);
+      Assert.AreEqual("www", result.CountrySite.ToLowerInvariant());
+      Assert.AreEqual("es-us", result.MarketId.ToLowerInvariant());
+      Assert.AreEqual("es", result.ShortLanguage.ToLowerInvariant());
+      TestLanguageCookie(container, result.MarketId);
+
+      //  Invalid test.  Sites using CookieLocalizationProvider don't have auto redirect
+      /*
+      container = SetCookieContext("http://who.mysite.com", string.Empty);
+      CreateCountryCookie(1, "www");
+      CreateLanguagePreferenceCookie(1, "es");
+      localization = container.Resolve<ILocalizationRedirectProvider>();
+      result = localization.RedirectResponse;
+      Assert.IsTrue(result.ShouldRedirect);
+      Assert.AreEqual("www", result.CountrySite.ToLowerInvariant());
+      Assert.AreEqual("es-us", result.MarketId.ToLowerInvariant());
+      Assert.AreEqual("es", result.ShortLanguage.ToLowerInvariant());
+      TestLanguageCookie(container, result.MarketId);
+       */
     }
 
     /// <summary>

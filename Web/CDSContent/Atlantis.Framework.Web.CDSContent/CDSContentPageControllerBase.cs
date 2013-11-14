@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Web;
 using System.Web.UI;
 using Atlantis.Framework.CDS.Interface;
 using Atlantis.Framework.Interface;
@@ -12,7 +13,6 @@ using Atlantis.Framework.Render.ContentInjection.RenderHandlers;
 using Atlantis.Framework.Web.RenderPipeline;
 using Atlantis.Framework.Providers.Containers;
 using System.IO;
-using System.Text.RegularExpressions;
 
 namespace Atlantis.Framework.Web.CDSContent
 {
@@ -57,6 +57,13 @@ namespace Atlantis.Framework.Web.CDSContent
     {
       get { return _useInjectionRenderHandler; }
       set { _useInjectionRenderHandler = value; }
+    }
+
+    private void SetNoCacheHeaders()
+    {
+      Response.Cache.SetCacheability(HttpCacheability.NoCache);
+      Response.Cache.SetNoStore();
+      Response.Cache.SetRevalidation(HttpCacheRevalidation.AllCaches);
     }
 
     private void ProcessContent()
@@ -176,6 +183,8 @@ namespace Atlantis.Framework.Web.CDSContent
     protected override void OnPreInit(EventArgs e)
     {
       base.OnPreInit(e);
+
+      SetNoCacheHeaders();
 
       if (WhiteListCheck() && !RedirectRequest())
       {

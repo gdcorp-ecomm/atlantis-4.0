@@ -9,17 +9,18 @@ namespace Atlantis.Framework.CDS.Interface
   {
     public ContentId Id { get; private set; }
     private readonly Dictionary<string, IWhitelistResult> _whitelistDictionary;
+    private const string STYLE = "style";
 
-    private static readonly IWhitelistResult _notFoundWhitelistResult = new UrlWhitelistResult { Exists = false, UrlData = new UrlData { Style = DocumentStyles.Unknown } };
+    private static readonly IWhitelistResult _notFoundWhitelistResult = new UrlWhitelistResult { Exists = false, UrlData = new Dictionary<string, string>() { { STYLE, DocumentStyles.Unknown } } };
 
-    public static readonly IWhitelistResult NullWhitelistResult = new UrlWhitelistResult { Exists = true, UrlData = new UrlData { Style = DocumentStyles.Unknown } };
+    public static readonly IWhitelistResult NullWhitelistResult = new UrlWhitelistResult { Exists = true, UrlData = new Dictionary<string, string>() { { STYLE, DocumentStyles.Unknown } } };
 
     public UrlWhitelistResponseData(string responseData) : base(responseData)
     {
       ContentVersion contentVersion = JsonConvert.DeserializeObject<ContentVersion>(responseData);
       Id = contentVersion._id;
 
-      var deserializedWhiteList = JsonConvert.DeserializeObject<Dictionary<string, UrlData>>(contentVersion.Content);
+      var deserializedWhiteList = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, string>>>(contentVersion.Content);
       
       if (deserializedWhiteList == null || deserializedWhiteList.Count == 0)
       {
@@ -28,7 +29,7 @@ namespace Atlantis.Framework.CDS.Interface
 
       _whitelistDictionary = new Dictionary<string, IWhitelistResult>(deserializedWhiteList.Count, StringComparer.OrdinalIgnoreCase);
 
-      foreach (KeyValuePair<string, UrlData> keyValuePair in deserializedWhiteList)
+      foreach (KeyValuePair<string, Dictionary<string, string>> keyValuePair in deserializedWhiteList)
       {
         _whitelistDictionary.Add(keyValuePair.Key, new UrlWhitelistResult { Exists = true, UrlData = keyValuePair.Value });
       }

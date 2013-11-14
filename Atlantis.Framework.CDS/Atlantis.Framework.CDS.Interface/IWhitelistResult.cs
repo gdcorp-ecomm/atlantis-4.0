@@ -1,9 +1,10 @@
-﻿namespace Atlantis.Framework.CDS.Interface
+﻿using System.Collections.Generic;
+namespace Atlantis.Framework.CDS.Interface
 {
   public interface IWhitelistResult
   {
     bool Exists { get; }
 
-    IUrlData UrlData { get; }
+    Dictionary<string, string> UrlData { get; }
   }
 }

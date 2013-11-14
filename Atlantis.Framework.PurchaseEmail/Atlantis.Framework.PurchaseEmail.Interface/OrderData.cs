@@ -25,6 +25,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface
     private bool _isFraudRefund;
     private ILinkProvider _linkProvider;
     private EulaProvider _eulaProvider;
+    private string _marketID = string.Empty;
 
     public OrderData(string orderXml, bool isNewShopper, bool isFraudRefund, ObjectProviderContainer providerContainer, string localizationCode)
       : base(providerContainer)
@@ -59,6 +60,17 @@ namespace Atlantis.Framework.PurchaseEmail.Interface
       }
     }
 
+    public string MarketID
+    {
+      get
+      {
+        return _marketID;
+      }
+      set
+      {
+        _marketID = value;
+      }
+    }
     private string _shopperEmail;
     public string ShopperEmail
     {

@@ -331,6 +331,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
       ResourceItem emailParms = new ResourceItem("CartOrder", Order.OrderId);
 
       ContactPointItem emailContact = new ContactPointItem("ShopperContact", ContactPointTypes.Shopper);
+      emailContact["MarketID"] = Order.MarketID;
       emailContact["id"] = ShopperContext.ShopperId;
       emailContact["EmailType"] = IsHTMLEmail ? "html" : "plaintext";
       emailParms.ContactPoints.Add(emailContact);
@@ -349,6 +350,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
       ResourceItem emailParms = new ResourceItem("CartOrder", Order.OrderId);
 
       ContactPointItem emailContact = new ContactPointItem("ShopperContact", ContactPointTypes.Shopper);
+      emailContact["MarketID"] = Order.MarketID;
       emailContact["id"] = ShopperContext.ShopperId;
       emailContact["EmailType"] = IsHTMLEmail ? "html" : "plaintext";
       emailParms.ContactPoints.Add(emailContact);

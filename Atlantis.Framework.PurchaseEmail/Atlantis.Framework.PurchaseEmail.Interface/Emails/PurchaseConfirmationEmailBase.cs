@@ -304,6 +304,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
       request.AddResource(resourceItem);
 
       ContactPointItem emailContact = new ContactPointItem("ShopperContact", ContactPointTypes.Shopper);
+      emailContact["MarketID"] = _orderData.MarketID;
 
       string shopperEmail = _orderData.ShopperEmail;
       if (!string.IsNullOrEmpty(shopperEmail))

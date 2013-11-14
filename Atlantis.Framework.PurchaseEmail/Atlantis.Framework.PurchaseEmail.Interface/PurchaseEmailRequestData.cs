@@ -19,6 +19,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface
       _validOptions.Add("IsDomainMeConfirmation");
       _validOptions.Add("IsAZHumane");
       _validOptions.Add("IsDevServer");
+      _validOptions.Add("MarketID");
     }
 
     private string _orderXml;
@@ -79,12 +80,31 @@ namespace Atlantis.Framework.PurchaseEmail.Interface
       }
       return result;
     }
+    
+    private string GetStringOption(string name, string defaultValue)
+    {
+      string result = defaultValue;
+      string value;
+      if (_options.TryGetValue(name, out value))
+      {
+        result = value;
+      }
+      return result;
+    }
 
     private bool IsNewShopper
     {
       get 
       {
         return GetOption("IsNewShopper", false);
+      }
+    }
+
+    private string MarketID
+    {
+      get
+      {
+        return GetStringOption("MarketID", string.Empty);
       }
     }
 
@@ -140,6 +160,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface
       List<MessagingProcessRequestData> result = new List<MessagingProcessRequestData>();
       ObjectProviderContainer _objectContainer = new ObjectProviderContainer();
       OrderData orderData = new OrderData(_orderXml, IsNewShopper, IsFraudRefund, _objectContainer, _localizationCode);
+      orderData.MarketID = MarketID;
       EmailRequired emailRequired = new EmailRequired(orderData);
 
       Dictionary<string, MessagingProcessRequestData> uniqueRequests = new Dictionary<string, MessagingProcessRequestData>();
@@ -179,7 +200,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface
       ObjectProviderContainer _objectContainer = new ObjectProviderContainer();
 
       OrderData orderData = new OrderData(_orderXml, IsNewShopper, IsFraudRefund,_objectContainer,_localizationCode);
-
+      orderData.MarketID = MarketID;
       try
       {
         XmlNodeList itemNodes = orderData.OrderXmlDoc.SelectNodes("/ORDER/ITEMS/ITEM");

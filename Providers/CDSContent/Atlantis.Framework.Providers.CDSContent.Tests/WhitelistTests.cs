@@ -56,7 +56,7 @@ namespace Atlantis.Framework.Providers.CDSContent.Tests
 
       Assert.IsTrue(whiteListResult.Exists);
       Assert.IsNotNull(whiteListResult.UrlData);
-      Assert.IsTrue(whiteListResult.UrlData.Style == DocumentStyles.Unknown);
+      Assert.IsTrue(whiteListResult.UrlData["style"] == DocumentStyles.Unknown);
     }
 
     [TestMethod]
@@ -70,7 +70,7 @@ namespace Atlantis.Framework.Providers.CDSContent.Tests
       
       Assert.IsTrue(whiteListResult.Exists);
       Assert.IsNotNull(whiteListResult.UrlData);
-      Assert.IsTrue(whiteListResult.UrlData.Style == DocumentStyles.Unknown);
+      Assert.IsTrue(whiteListResult.UrlData["style"] == DocumentStyles.Unknown);
     }
 
     [TestMethod]
@@ -83,7 +83,7 @@ namespace Atlantis.Framework.Providers.CDSContent.Tests
       IWhitelistResult whiteListResult = provider.CheckWhiteList(appName, relativePath);
       
       Assert.IsTrue(whiteListResult.Exists);
-      Assert.IsTrue(whiteListResult.UrlData.Style == DocumentStyles.Widget);
+      Assert.IsTrue(whiteListResult.UrlData["style"] == DocumentStyles.Widget);
     }
 
     [TestMethod]
@@ -96,7 +96,7 @@ namespace Atlantis.Framework.Providers.CDSContent.Tests
       IWhitelistResult whiteListResult = provider.CheckWhiteList(appName, relativePath);
       
       Assert.IsTrue(whiteListResult.Exists);
-      Assert.IsFalse(whiteListResult.UrlData.Style == DocumentStyles.Widget);
+      Assert.IsFalse(whiteListResult.UrlData["style"] == DocumentStyles.Widget);
     }
 
     [TestMethod]
@@ -109,7 +109,7 @@ namespace Atlantis.Framework.Providers.CDSContent.Tests
       IWhitelistResult whiteListResult = provider.CheckWhiteList(appName, relativePath);
 
       Assert.IsTrue(whiteListResult.Exists);
-      Assert.IsTrue(whiteListResult.UrlData.Style == DocumentStyles.Unknown);
+      Assert.IsTrue(whiteListResult.UrlData["style"] == DocumentStyles.Unknown);
     }
 
     [TestMethod]
@@ -122,7 +122,7 @@ namespace Atlantis.Framework.Providers.CDSContent.Tests
       IWhitelistResult whiteListResult = provider.CheckWhiteList(appName, relativePath);
 
       Assert.IsTrue(whiteListResult.Exists);
-      Assert.IsTrue(whiteListResult.UrlData.Style == DocumentStyles.Unknown);
+      Assert.IsTrue(whiteListResult.UrlData["style"] == DocumentStyles.Unknown);
     }
 
     [TestMethod]
@@ -135,7 +135,7 @@ namespace Atlantis.Framework.Providers.CDSContent.Tests
       IWhitelistResult whiteListResult = provider.CheckWhiteList(appName, relativePath);
 
       Assert.IsFalse(whiteListResult.Exists);
-      Assert.IsTrue(whiteListResult.UrlData.Style == DocumentStyles.Unknown);
+      Assert.IsTrue(whiteListResult.UrlData["style"] == DocumentStyles.Unknown);
     }
 
     [TestMethod]
@@ -148,7 +148,7 @@ namespace Atlantis.Framework.Providers.CDSContent.Tests
       IWhitelistResult whiteListResult = provider.CheckWhiteList(appName, relativePath);
 
       Assert.IsTrue(whiteListResult.Exists);
-      Assert.IsTrue(whiteListResult.UrlData.Style == DocumentStyles.FlatPage);
+      Assert.IsTrue(whiteListResult.UrlData["style"] == DocumentStyles.FlatPage);
     }
   }
 }

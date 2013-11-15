@@ -55,11 +55,13 @@
     <Reference Include="Atlantis.Framework.DotTypeClaims.Interface">
       <HintPath>..\packages\Atlantis.Framework.DotTypeClaims.Interface.4.13.11.11\lib\net40\Atlantis.Framework.DotTypeClaims.Interface.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.DotTypeForms.Impl">
-      <HintPath>..\packages\Atlantis.Framework.DotTypeForms.Impl.4.13.11.12\lib\net40\Atlantis.Framework.DotTypeForms.Impl.dll</HintPath>
+    <Reference Include="Atlantis.Framework.DotTypeForms.Impl, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.DotTypeForms.Impl.4.13.11.15\lib\net40\Atlantis.Framework.DotTypeForms.Impl.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.DotTypeForms.Interface">
-      <HintPath>..\packages\Atlantis.Framework.DotTypeForms.Interface.4.13.11.11\lib\net40\Atlantis.Framework.DotTypeForms.Interface.dll</HintPath>
+    <Reference Include="Atlantis.Framework.DotTypeForms.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.DotTypeForms.Interface.4.13.11.15\lib\net40\Atlantis.Framework.DotTypeForms.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.DotTypeValidation.Impl">
       <HintPath>..\packages\Atlantis.Framework.DotTypeValidation.Impl.4.13.11.12\lib\net40\Atlantis.Framework.DotTypeValidation.Impl.dll</HintPath>
@@ -89,9 +91,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Atlantis.Framework.Products.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Products.Interface.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.Providers.DotTypeRegistration.Interface">
-      <HintPath>..\packages\Atlantis.Framework.Providers.DotTypeRegistration.Interface.4.13.11.11\lib\net40\Atlantis.Framework.Providers.DotTypeRegistration.Interface.dll</HintPath>
-    </Reference>
     <Reference Include="Atlantis.Framework.Providers.Geo.Interface">
       <HintPath>..\packages\Atlantis.Framework.Providers.Geo.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Providers.Geo.Interface.dll</HintPath>
     </Reference>
@@ -109,6 +108,9 @@
     <Reference Include="Atlantis.Framework.RuleEngine">
       <HintPath>..\packages\Atlantis.Framework.RuleEngine.4.0.0.0\lib\net40\Atlantis.Framework.RuleEngine.dll</HintPath>
     </Reference>
+    <Reference Include="Atlantis.Framework.TLDDataCache.Interface">
+      <HintPath>..\packages\Atlantis.Framework.TLDDataCache.Interface.4.13.10.14\lib\net40\Atlantis.Framework.TLDDataCache.Interface.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
@@ -119,6 +121,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DotTypeFormLookup.cs" />
     <Compile Include="FormField.cs" />
     <Compile Include="Factories\DotTypeFormFieldTypeFactory.cs" />
     <Compile Include="DotTypeRegistrationEngineRequests.cs" />
@@ -142,6 +145,12 @@
     <None Include="Atlantis.Framework.Providers.DotTypeRegistration.nuget.bat" />
     <None Include="Atlantis.Framework.Providers.DotTypeRegistration.nuspec" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Atlantis.Framework.Providers.DotTypeRegistration.Interface\Atlantis.Framework.Providers.DotTypeRegistration.Interface.csproj">
+      <Project>{35b615cd-c78e-484c-92c5-d54cd0b86cd2}</Project>
+      <Name>Atlantis.Framework.Providers.DotTypeRegistration.Interface</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

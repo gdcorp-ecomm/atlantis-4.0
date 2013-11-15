@@ -51,12 +51,20 @@
     <Reference Include="Atlantis.Framework.DataCacheService">
       <HintPath>..\packages\Atlantis.Framework.DataCacheService.4.0.0.0\lib\net40\Atlantis.Framework.DataCacheService.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.DotTypeForms.Impl">
-      <HintPath>..\packages\Atlantis.Framework.DotTypeForms.Impl.4.13.11.12\lib\net40\Atlantis.Framework.DotTypeForms.Impl.dll</HintPath>
+    <Reference Include="Atlantis.Framework.DotTypeForms.Impl, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.DotTypeForms.Impl.4.13.11.15\lib\net40\Atlantis.Framework.DotTypeForms.Impl.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.DotTypeForms.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.DotTypeForms.Interface.4.13.11.11\lib\net40\Atlantis.Framework.DotTypeForms.Interface.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.DotTypeForms.Interface.4.13.11.15\lib\net40\Atlantis.Framework.DotTypeForms.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.DotTypeValidation.Impl">
+      <HintPath>..\packages\Atlantis.Framework.DotTypeValidation.Impl.4.13.11.12\lib\net40\Atlantis.Framework.DotTypeValidation.Impl.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.DotTypeValidation.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.DotTypeValidation.Interface.4.13.11.11\lib\net40\Atlantis.Framework.DotTypeValidation.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Engine">
       <HintPath>..\packages\Atlantis.Framework.Engine.4.0.0.0\lib\net40\Atlantis.Framework.Engine.dll</HintPath>
@@ -99,6 +107,13 @@
     </Reference>
     <Reference Include="Atlantis.Framework.Testing.MockProviders">
       <HintPath>..\packages\Atlantis.Framework.Testing.MockProviders.4.13.10.28\lib\net40\Atlantis.Framework.Testing.MockProviders.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.TLDDataCache.Impl">
+      <HintPath>..\packages\Atlantis.Framework.TLDDataCache.Impl.4.13.10.14\lib\net40\Atlantis.Framework.TLDDataCache.Impl.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.TLDDataCache.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.TLDDataCache.Interface.4.13.10.14\lib\net40\Atlantis.Framework.TLDDataCache.Interface.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">

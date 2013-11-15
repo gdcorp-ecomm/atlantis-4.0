@@ -12,6 +12,8 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration.Tests
   [DeploymentItem("atlantis.config")]
   [DeploymentItem("Atlantis.Framework.DotTypeForms.Impl.dll")]
   [DeploymentItem("Atlantis.Framework.DotTypeClaims.Impl.dll")]
+  [DeploymentItem("Atlantis.Framework.DotTypeValidation.Impl.dll")]
+  [DeploymentItem("Atlantis.Framework.TLDDataCache.Impl.dll")]
   public class DotTypeRegistrationProviderTests
   {
     private MockProviderContainer NewDotTypeRegistrationProvider()
@@ -36,7 +38,9 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration.Tests
       string[] domains = { "domain1.n.borg", "claim1.n.borg" };
 
       var provider = container.Resolve<IDotTypeRegistrationProvider>();
-      bool isSuccess = provider.GetDotTypeFormSchemas(string.Empty, 1700, "FOS", "SRA", domains, out formFieldsByDomain);
+
+      IDotTypeFormLookup lookup = DotTypeFormLookup.Create(string.Empty, "j.borg", "FOS", "SRA");
+      bool isSuccess = provider.GetDotTypeFormSchemas(lookup, domains, out formFieldsByDomain);
       Assert.AreEqual(true, isSuccess);
       Assert.AreEqual(true, formFieldsByDomain.Count > 0);
     }
@@ -50,7 +54,9 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration.Tests
 
       IDictionary<string, IList<IList<IFormField>>> formFieldsByDomain;
       string[] domains = { "domain1.shop", "domain2.shop" };
-      bool isSuccess = provider.GetDotTypeFormSchemas(string.Empty, -1, "name of placement", "GA", domains, out formFieldsByDomain);
+      IDotTypeFormLookup lookup = DotTypeFormLookup.Create(string.Empty, "abcd", "name of placement", "GA");
+
+      bool isSuccess = provider.GetDotTypeFormSchemas(lookup, domains, out formFieldsByDomain);
       Assert.AreEqual(false, isSuccess);
       Assert.AreEqual(true, formFieldsByDomain.Count == 0);
     }
@@ -63,7 +69,9 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration.Tests
       container.Resolve<ILocalizationProvider>();
       
       string dotTypeFormsHtml;
-      bool isSuccess = provider.GetDotTypeForms("dpp", 1640, "FOS", "GA", out dotTypeFormsHtml);
+      IDotTypeFormLookup lookup = DotTypeFormLookup.Create("smd", "j.borg", "FOS", "GA", "abcd.com");
+
+      bool isSuccess = provider.GetDotTypeForms(lookup, out dotTypeFormsHtml);
       Assert.AreEqual(true, isSuccess);
       Assert.AreEqual(true, !string.IsNullOrEmpty(dotTypeFormsHtml));
     }

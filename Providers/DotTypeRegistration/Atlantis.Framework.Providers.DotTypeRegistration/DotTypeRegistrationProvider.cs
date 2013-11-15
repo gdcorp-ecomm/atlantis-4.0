@@ -8,13 +8,17 @@ using Atlantis.Framework.Interface;
 using Atlantis.Framework.DotTypeForms.Interface;
 using Atlantis.Framework.Providers.DotTypeRegistration.Interface.Handlers;
 using Atlantis.Framework.Providers.Localization.Interface;
+using Atlantis.Framework.TLDDataCache.Interface;
 
 namespace Atlantis.Framework.Providers.DotTypeRegistration
 {
   public class DotTypeRegistrationProvider : ProviderBase, IDotTypeRegistrationProvider
   {
+    private readonly Lazy<ValidDotTypesResponseData> _validDotTypes;
+
     public DotTypeRegistrationProvider(IProviderContainer container) : base(container)
     {
+      _validDotTypes = new Lazy<ValidDotTypesResponseData>(LoadValidDotTypes);
     }
 
     private ISiteContext _siteContext;
@@ -29,11 +33,32 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration
       get { return _localizationProvider ?? (_localizationProvider = Container.Resolve<ILocalizationProvider>()); }
     }
 
-    public bool GetDotTypeForms(string formType, int tldId, string placement, string phase, out string dotTypeFormsHtml)
+    private static ValidDotTypesResponseData LoadValidDotTypes()
     {
+      var request = new ValidDotTypesRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0);
+      return (ValidDotTypesResponseData)DataCache.DataCache.GetProcessRequest(request, DotTypeRegistrationEngineRequests.ValidDotTypesRequest);
+    }
+
+    private int GetTldId(string tld)
+    {
+      int tldId;
+      _validDotTypes.Value.TryGetTldId(tld, out tldId);
+
+      return tldId;
+    }
+
+    public bool GetDotTypeForms(IDotTypeFormLookup dotTypeFormsLookup, out string dotTypeFormsHtml)
+    {
+      var tld = dotTypeFormsLookup.Tld;
+      var formType = dotTypeFormsLookup.FormType;
+      var placement = dotTypeFormsLookup.Placement;
+      var phase = dotTypeFormsLookup.Phase;
+      var domain = dotTypeFormsLookup.Domain;
+
       var success = false;
       dotTypeFormsHtml = null;
       var language = LocalizationProvider.FullLanguage;
+      var tldId = GetTldId(tld);
 
       try
       {
@@ -42,7 +67,8 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration
           formType = "dpp";
         }
 
-        var request = new DotTypeFormsHtmlRequestData(formType, tldId, placement, phase, language, SiteContext.ContextId);
+        var request = new DotTypeFormsHtmlRequestData(formType, tldId, placement, phase, language, SiteContext.ContextId, domain);
+
         var response = (DotTypeFormsHtmlResponseData)DataCache.DataCache.GetProcessRequest(request, DotTypeRegistrationEngineRequests.DotTypeFormsHtmlRequest);
         if (response.IsSuccess)
         {
@@ -52,7 +78,7 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration
       }
       catch (Exception ex)
       {
-        var data = "tldId: " + tldId + ", placement: " + placement + ", phase: " + phase + ", language: " + language;
+        var data = "tldId: " + tldId + ", placement: " + placement + ", phase: " + phase + ", language: " + language + ", domain: " + domain;
         var exception = new AtlantisException("DotTypeRegistrationProvider.GetDotTypeForms", "0", ex.Message + ex.StackTrace, data, null, null);
         Engine.Engine.LogAtlantisException(exception);
       }
@@ -60,11 +86,17 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration
       return success;
     }
 
-    public bool GetDotTypeFormSchemas(string formType, int tldId, string placement, string phase, string[] domains, out IDictionary<string, IList<IList<IFormField>>> formFieldsByDomain)
+    public bool GetDotTypeFormSchemas(IDotTypeFormLookup dotTypeFormsLookup, string[] domains, out IDictionary<string, IList<IList<IFormField>>> formFieldsByDomain)
     {
+      var tld = dotTypeFormsLookup.Tld;
+      var formType = dotTypeFormsLookup.FormType;
+      var placement = dotTypeFormsLookup.Placement;
+      var phase = dotTypeFormsLookup.Phase;
+
       var success = false;
       formFieldsByDomain = new Dictionary<string, IList<IList<IFormField>>>(StringComparer.OrdinalIgnoreCase);
       var language = LocalizationProvider.FullLanguage;
+      var tldId = GetTldId(tld);
 
       try
       {
@@ -173,31 +205,19 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration
       return success;
     }
 
-    public bool ValidateData(string clientApplication, string serverName, int tldId, string phase, string category, Dictionary<string, string> fields,
-      out bool hasErrors, out Dictionary<string, string> validationErrors, out string token)
+    public bool ValidateData(string clientApplication, string serverName, string tld, string phase, string category, Dictionary<string, string> fields,
+      out DotTypeValidationResponseData validationResponseData)
     {
       var success = false;
-      hasErrors = false;
-      token = string.Empty;
-      validationErrors = null;
+      validationResponseData = null;
+      var tldId = GetTldId(tld);
 
       try
       {
         var request = new DotTypeValidationRequestData(clientApplication, serverName, tldId, phase, category, fields);
-        var response = (DotTypeValidationResponseData)DataCache.DataCache.GetProcessRequest(request, DotTypeRegistrationEngineRequests.DotTypeValidationRequest);
-        if (response.IsSuccess)
-        {
-          if (response.HasErrors)
-          {
-            hasErrors = true;
-            validationErrors = response.ValidationErrors;
-          }
-          else
-          {
-            token = response.Token;
-          }
-          success = true;
-        }
+        validationResponseData = (DotTypeValidationResponseData)DataCache.DataCache.GetProcessRequest(request, DotTypeRegistrationEngineRequests.DotTypeValidationRequest);
+
+        success = validationResponseData != null && validationResponseData.IsSuccess;
       }
       catch (Exception ex)
       {

@@ -19,14 +19,17 @@ namespace Atlantis.Framework.DotTypeForms.Impl
         var dotTypeFormsHtmlSchemaRequestData = (DotTypeFormsHtmlRequestData)requestData;
         var wsConfigElement = ((WsConfigElement)config);
 
-        var fullUrl = string.Format("{0}/form/{1}?tldid={2}&pl={3}&ph={4}&marketid={5}&contextid={6}",
+        const string formatString = "{0}/form/{1}?tldid={2}&pl={3}&ph={4}&marketid={5}&contextid={6}&domain={7}";
+
+        var fullUrl = string.Format(formatString,
                                     wsConfigElement.WSURL,
                                     dotTypeFormsHtmlSchemaRequestData.FormType,
                                     dotTypeFormsHtmlSchemaRequestData.TldId, 
                                     dotTypeFormsHtmlSchemaRequestData.Placement,
                                     dotTypeFormsHtmlSchemaRequestData.Phase,
                                     dotTypeFormsHtmlSchemaRequestData.MarketId,
-                                    dotTypeFormsHtmlSchemaRequestData.ContextId);
+                                    dotTypeFormsHtmlSchemaRequestData.ContextId,
+                                    dotTypeFormsHtmlSchemaRequestData.Domain);
 
         responseHtml = HttpWebRequestHelper.SendWebRequest(dotTypeFormsHtmlSchemaRequestData, fullUrl, wsConfigElement);
         responseData = new DotTypeFormsHtmlResponseData(responseHtml);

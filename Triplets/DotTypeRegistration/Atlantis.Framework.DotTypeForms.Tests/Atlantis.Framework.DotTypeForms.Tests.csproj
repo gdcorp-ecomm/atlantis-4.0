@@ -42,14 +42,6 @@
     <Reference Include="Atlantis.Framework.AppSettings.Interface">
       <HintPath>..\packages\Atlantis.Framework.AppSettings.Interface.4.0.0.0\lib\net40\Atlantis.Framework.AppSettings.Interface.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.DotTypeForms.Impl, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.DotTypeForms.Impl.4.13.11.12\lib\net40\Atlantis.Framework.DotTypeForms.Impl.dll</HintPath>
-    </Reference>
-    <Reference Include="Atlantis.Framework.DotTypeForms.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.DotTypeForms.Interface.4.13.11.11\lib\net40\Atlantis.Framework.DotTypeForms.Interface.dll</HintPath>
-    </Reference>
     <Reference Include="Atlantis.Framework.Engine, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Atlantis.Framework.Engine.4.0.0.0\lib\net40\Atlantis.Framework.Engine.dll</HintPath>
@@ -91,6 +83,16 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Atlantis.Framework.DotTypeForms.Impl\Atlantis.Framework.DotTypeForms.Impl.csproj">
+      <Project>{f5ba97a4-d1d4-4bfa-aea3-17b92510d2df}</Project>
+      <Name>Atlantis.Framework.DotTypeForms.Impl</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.DotTypeForms.Interface\Atlantis.Framework.DotTypeForms.Interface.csproj">
+      <Project>{86434db7-0a41-4802-a9aa-1f95676a38f7}</Project>
+      <Name>Atlantis.Framework.DotTypeForms.Interface</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

@@ -393,5 +393,17 @@ namespace Atlantis.Framework.TH.Links.Tests
 
       Assert.AreEqual(expectedUrl, actualUrl);
     }
+    [TestMethod]
+    public void InvalidHAHAToken()
+    {
+      var container = SetBasicContextAndProviders(GoDaddyNonSecureSiteUrl);
+
+      string outputText;
+
+      string token = string.Format(TokenFormat, "<relative path='/hosting/website-builder.aspx' secure='false' parammode='explicit'>Haha");
+      TokenEvaluationResult result = TokenManager.ReplaceTokens(token, container, out outputText);
+      Assert.AreEqual(TokenEvaluationResult.Errors, result);
+      Assert.AreEqual(string.Empty, outputText);
+    }
   }
 }

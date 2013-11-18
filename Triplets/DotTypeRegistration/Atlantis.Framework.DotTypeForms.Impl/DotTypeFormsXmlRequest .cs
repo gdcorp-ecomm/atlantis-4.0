@@ -17,7 +17,7 @@ namespace Atlantis.Framework.DotTypeForms.Impl
         var dotTypeFormsXmlSchemaRequestData = (DotTypeFormsXmlRequestData)requestData;
         var wsConfigElement = ((WsConfigElement)config);
 
-        var fullUrl = string.Format("{0}/api/schema/getxml/{1}?tldid={2}&pl={3}&ph={4}&marketid={5}&contextid={6}",
+        var fullUrl = string.Format("{0}/api/schema/getxml?formtype={1}&tldid={2}&pl={3}&ph={4}&marketid={5}&contextid={6}",
                                     wsConfigElement.WSURL,
                                     dotTypeFormsXmlSchemaRequestData.FormType,
                                     dotTypeFormsXmlSchemaRequestData.TldId,

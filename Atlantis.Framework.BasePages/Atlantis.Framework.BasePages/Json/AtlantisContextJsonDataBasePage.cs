@@ -6,6 +6,7 @@ using System.Text;
 using System.Web;
 using System.Web.Script.Serialization;
 using System.Web.UI;
+using Newtonsoft.Json;
 
 namespace Atlantis.Framework.BasePages.Json
 {
@@ -105,20 +106,27 @@ namespace Atlantis.Framework.BasePages.Json
       }
     }
 
-    protected string SerializeToJson<T>(T dataContractObject)
+    protected string SerializeToJson<T>(T objectToSerialize)
     {
-      string resultJson;
-      DataContractJsonSerializer jsSerializer = new DataContractJsonSerializer(typeof(T));
-      using (MemoryStream ms = new MemoryStream())
+      var sb = new StringBuilder(1000);
+
+      using (var sw = new StringWriter(sb))
       {
-        jsSerializer.WriteObject(ms, dataContractObject);
-        resultJson = Encoding.Default.GetString(ms.ToArray());
-        ms.Close();
+        var jsonText = new JsonTextWriter(sw);
+
+        JsonSerializer serializer;
+      
+        
+          serializer = JsonSerializer.Create();
+
+
+        serializer.Serialize(jsonText, objectToSerialize, typeof(T));
+        jsonText.Flush();
       }
 
-      return resultJson;
-    }
+      return sb.ToString();
 
+    }
     protected string SerializeToJson<T>(T dataContractObject, JsonSerializationType serializerType)
     {
       string resultJson = string.Empty;
@@ -135,6 +143,7 @@ namespace Atlantis.Framework.BasePages.Json
       }
       return resultJson;
     }
+
 
     protected void RenderPageContent(HtmlTextWriter writer)
     {

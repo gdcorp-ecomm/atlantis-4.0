@@ -2,6 +2,7 @@
 using System.Reflection;
 using Atlantis.Framework.BasePages.Json;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Newtonsoft.Json;
 
 namespace Atlantis.Framework.BasePages.Tests
 {
@@ -62,6 +63,25 @@ namespace Atlantis.Framework.BasePages.Tests
 
       object result = isCallbackValidMethod.Invoke(null, callbackArgs);
       return (bool)result;
+    }
+    [TestClass]
+    public class testpage: AtlantisContextJsonDataBasePage
+    {
+      string jsonToBeSerialized = "informações";
+      protected override string GetSerializedJson()
+      {
+        return SerializeToJson(jsonToBeSerialized);
+      }
+      public string serialize()
+      {
+        return GetSerializedJson();
+      }
+    }
+    [TestMethod]
+    public void jsonDataBaseSerialization ()
+    {
+      testpage tp = new testpage();
+      Assert.AreEqual("\"informações\"", tp.serialize());
     }
 
   }

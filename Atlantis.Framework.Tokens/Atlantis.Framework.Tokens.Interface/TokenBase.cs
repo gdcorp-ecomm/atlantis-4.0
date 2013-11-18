@@ -16,16 +16,8 @@ namespace Atlantis.Framework.Tokens.Interface
       _key = key;
       _rawData = data;
       _fullTokenString = fullTokenString;
+      _tokenDataObject = DeserializeTokenData(data);
 
-      try
-      {
-        _tokenDataObject = DeserializeTokenData(data);
-      }
-      catch (Exception ex)
-      {
-        _tokenDataObject = null;
-        _error = ex.Message;
-      }
     }
 
     public string TokenKey

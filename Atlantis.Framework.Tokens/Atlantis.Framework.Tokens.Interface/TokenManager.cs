@@ -200,6 +200,17 @@ namespace Atlantis.Framework.Tokens.Interface
           replacementValue = tokenHandlerManager.RenderToken(tokenEncoding);
         }
       }
+      catch (System.Xml.XmlException)
+      {
+        replacementValue = string.Empty;
+
+        SetTokenEvaluationToErrorStatus(container);
+        ErrorLogHelper.LogErrors( tokenMatch.Groups[TOKEN_KEY_GROUP].Captures[0].Value,
+                                  "Malformed token data in XmlToken: "+tokenMatch.Value,
+                                  "TokenHandlerManager.EvaluateToken()",
+                                  tokenMatch.Groups[TOKEN_DATA_GROUP].Captures[0].Value,
+                                  container);
+      }
       catch (Exception ex)
       {
         replacementValue = string.Empty;

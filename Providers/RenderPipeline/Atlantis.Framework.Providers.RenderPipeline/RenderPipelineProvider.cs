@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.RenderPipeline.Interface;
+using System.Threading;
 
 namespace Atlantis.Framework.Providers.RenderPipeline
 {
@@ -32,6 +33,10 @@ namespace Atlantis.Framework.Providers.RenderPipeline
           }
 
           finalContent = processedRenderContent.Content;
+        }
+        catch (ThreadAbortException)
+        {
+          finalContent = content;
         }
         catch (Exception ex)
         {

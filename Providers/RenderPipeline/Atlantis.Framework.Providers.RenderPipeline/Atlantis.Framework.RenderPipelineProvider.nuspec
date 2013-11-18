@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>Atlantis.Framework.Providers.RenderPipeline</id>
-    <version>4.13.10.16</version>
+    <version>4.13.11.18</version>
     <title>Atlantis Framework Render Pipeline Provider</title>
     <authors>$author$</authors>
     <owners>$author$</owners>

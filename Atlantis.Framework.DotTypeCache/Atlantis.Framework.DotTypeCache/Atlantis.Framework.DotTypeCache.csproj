@@ -66,6 +66,10 @@
     <Reference Include="Atlantis.Framework.DomainContactFields.Interface">
       <HintPath>..\packages\Atlantis.Framework.DomainContactFields.Impl.4.13.6.5\lib\net40\Atlantis.Framework.DomainContactFields.Interface.dll</HintPath>
     </Reference>
+    <Reference Include="Atlantis.Framework.DotTypeCache.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.DotTypeCache.Interface.4.13.11.18\lib\net40\Atlantis.Framework.DotTypeCache.Interface.dll</HintPath>
+    </Reference>
     <Reference Include="Atlantis.Framework.Engine">
       <HintPath>..\packages\Atlantis.Framework.Engine.4.0.0.0\lib\net40\Atlantis.Framework.Engine.dll</HintPath>
     </Reference>
@@ -128,6 +132,7 @@
     <Compile Include="DomainProductListLookup.cs" />
     <Compile Include="DomainProductLookup.cs" />
     <Compile Include="LaunchPhaseMappings.cs" />
+    <Compile Include="PhaseMappingsDictionary.cs" />
     <Compile Include="TLDDataImpl.cs" />
     <Compile Include="DotTypeCache.cs" />
     <Compile Include="DotTypeEngineRequests.cs" />
@@ -146,10 +151,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Atlantis.Framework.DotTypeCache.Interface\Atlantis.Framework.DotTypeCache.Interface.csproj">
-      <Project>{95e67e48-7173-4f0c-854f-2f08cbfcf923}</Project>
-      <Name>Atlantis.Framework.DotTypeCache.Interface</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.DotTypeCache.Static\Atlantis.Framework.DotTypeCache.Static.csproj">
       <Project>{c6714b5f-ce86-4d8b-a615-0482465d0619}</Project>
       <Name>Atlantis.Framework.DotTypeCache.Static</Name>

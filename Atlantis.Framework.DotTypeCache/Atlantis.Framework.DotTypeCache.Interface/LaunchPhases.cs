@@ -8,8 +8,24 @@ namespace Atlantis.Framework.DotTypeCache.Interface
     SunriseA,
     SunriseB,
     SunriseC,
+    SunriseD,
+    SunriseE,
+    SunriseF,
+    SunriseG,
+    SunriseH,
+    SunriseI,
+    SunriseJ,
 
     Landrush,
+    LandrushB,
+    LandrushC,
+    LandrushD,
+    LandrushE,
+    LandrushF,
+    LandrushG,
+    LandrushH,
+    LandrushI,
+    LandrushJ,
 
     EarlyRegistration3Day,
     EarlyRegistration4Day,
@@ -17,6 +33,15 @@ namespace Atlantis.Framework.DotTypeCache.Interface
     EarlyRegistration6Day,
     EarlyRegistration7Day,
 
-    GeneralAvailability
+    GeneralAvailability,
+    GeneralAvailabilityB,
+    GeneralAvailabilityC,
+    GeneralAvailabilityD,
+    GeneralAvailabilityE,
+    GeneralAvailabilityF,
+    GeneralAvailabilityG,
+    GeneralAvailabilityH,
+    GeneralAvailabilityI,
+    GeneralAvailabilityJ
   }
 }

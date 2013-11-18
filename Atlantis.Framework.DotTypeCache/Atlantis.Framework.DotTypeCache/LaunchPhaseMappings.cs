@@ -6,21 +6,7 @@ namespace Atlantis.Framework.DotTypeCache
 {
   public static class LaunchPhaseMappings
   {
-    private static IDictionary<LaunchPhases, string> _phaseMappingDictionary = new Dictionary<LaunchPhases, string> { { LaunchPhases.SunriseA , "SRA"},
-                                                                                                                      { LaunchPhases.SunriseB , "SRB"},
-                                                                                                                      { LaunchPhases.SunriseC , "SRC"},
-
-                                                                                                                      { LaunchPhases.Landrush , "LR"},
-
-                                                                                                                      { LaunchPhases.EarlyRegistration3Day , "ER3"},
-                                                                                                                      { LaunchPhases.EarlyRegistration4Day , "ER4"},
-                                                                                                                      { LaunchPhases.EarlyRegistration5Day , "ER5"},
-                                                                                                                      { LaunchPhases.EarlyRegistration6Day , "ER6"},
-                                                                                                                      { LaunchPhases.EarlyRegistration7Day , "ER7"},
-
-                                                                                                                      { LaunchPhases.GeneralAvailability , "GA"} };
-
-    private static IDictionary<LaunchPhaseGroupTypes, string> _phaseGroupMappingDictionary = new Dictionary<LaunchPhaseGroupTypes, string> { { LaunchPhaseGroupTypes.Sunrise , "SR"},
+    private static readonly IDictionary<LaunchPhaseGroupTypes, string> PhaseGroupMappingDictionary = new Dictionary<LaunchPhaseGroupTypes, string> { { LaunchPhaseGroupTypes.Sunrise , "SR"},
                                                                                                                                      { LaunchPhaseGroupTypes.Landrush , "LR"},
                                                                                                                                      { LaunchPhaseGroupTypes.EarlyRegistration , "ER"},
                                                                                                                                      { LaunchPhaseGroupTypes.GeneralAvailability , "GA"} };
@@ -29,7 +15,7 @@ namespace Atlantis.Framework.DotTypeCache
     {
       string codePrefix;
 
-      if (!_phaseGroupMappingDictionary.TryGetValue(launchPhaseGroupType, out codePrefix))
+      if (!PhaseGroupMappingDictionary.TryGetValue(launchPhaseGroupType, out codePrefix))
       {
         codePrefix = string.Empty;
       }
@@ -41,7 +27,7 @@ namespace Atlantis.Framework.DotTypeCache
     {
       string code;
 
-      if (!_phaseMappingDictionary.TryGetValue(launchPhase, out code))
+      if (!PhaseMappingsDictionary.PhaseMappings.TryGetValue(launchPhase, out code))
       {
         code = string.Empty;
       }
@@ -51,9 +37,9 @@ namespace Atlantis.Framework.DotTypeCache
 
     public static LaunchPhases GetPhase(string code)
     {
-      LaunchPhases launchPhase = LaunchPhases.Invalid;
+      var launchPhase = LaunchPhases.Invalid;
 
-      foreach (KeyValuePair<LaunchPhases, string> phaseCodePair in _phaseMappingDictionary)
+      foreach (var phaseCodePair in PhaseMappingsDictionary.PhaseMappings)
       {
         if (phaseCodePair.Value.Equals(code, StringComparison.OrdinalIgnoreCase))
         {

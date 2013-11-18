@@ -1,4 +1,5 @@
-﻿using Atlantis.Framework.Interface;
+﻿using System.Net;
+using Atlantis.Framework.Interface;
 using Atlantis.Framework.DotTypeForms.Interface;
 using System;
 
@@ -28,6 +29,18 @@ namespace Atlantis.Framework.DotTypeForms.Impl
         responseXml = HttpWebRequestHelper.SendWebRequest(dotTypeFormsXmlSchemaRequestData, fullUrl, wsConfigElement);
 
         responseData = new DotTypeFormsXmlResponseData(responseXml);
+      }
+      catch (WebException ex)
+      {
+        if (ex.Response is HttpWebResponse && ((HttpWebResponse)ex.Response).StatusCode == HttpStatusCode.NotFound)
+        {
+          //no error logging is required
+          responseData = new DotTypeFormsXmlResponseData(string.Empty);
+        }
+        else
+        {
+          throw;
+        }
       }
       catch (Exception ex)
       {

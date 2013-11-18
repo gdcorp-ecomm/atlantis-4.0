@@ -659,31 +659,34 @@ namespace Atlantis.Framework.DotTypeCache
         bool needsClaimCheck = false;
         if (_tldml.Phase != null)
         {
-          needsClaimCheck = _tldml.Phase.GetLaunchPhase(launchPhaseCode).NeedsClaimCheck;
+          var phase = _tldml.Phase.GetLaunchPhase(launchPhaseCode);
+          needsClaimCheck = phase.NeedsClaimCheck;
         }
 
         var formGroups = _tldml.ApplicationControl.TuiFormGroups;
-
-        foreach (var tldTuiFormGroup in formGroups)
+        if (formGroups != null)
         {
-          var formgroupLaunchPhases = tldTuiFormGroup.Value.FormGrouplaunchPhases;
-          foreach (var tldTuiFormGroupLaunchPhase in formgroupLaunchPhases)
+          foreach (var tldTuiFormGroup in formGroups)
           {
-            if (tldTuiFormGroupLaunchPhase.Code.Equals(launchPhaseCode))
+            var formgroupLaunchPhases = tldTuiFormGroup.Value.FormGrouplaunchPhases;
+            foreach (var tldTuiFormGroupLaunchPhase in formgroupLaunchPhases)
             {
-              if (!string.IsNullOrEmpty(tldTuiFormGroupLaunchPhase.PeriodType) && 
-                  tldTuiFormGroupLaunchPhase.PeriodType.Equals("claims", StringComparison.OrdinalIgnoreCase))
+              if (tldTuiFormGroupLaunchPhase.Code.Equals(launchPhaseCode))
               {
-                if (needsClaimCheck)
+                if (!string.IsNullOrEmpty(tldTuiFormGroupLaunchPhase.PeriodType) &&
+                    tldTuiFormGroupLaunchPhase.PeriodType.Equals("claims", StringComparison.OrdinalIgnoreCase))
+                {
+                  if (needsClaimCheck)
+                  {
+                    result.Add(tldTuiFormGroup.Key);
+                  }
+                }
+                else
                 {
                   result.Add(tldTuiFormGroup.Key);
                 }
+                break;
               }
-              else
-              {
-                result.Add(tldTuiFormGroup.Key);
-              }
-              break;
             }
           }
         }

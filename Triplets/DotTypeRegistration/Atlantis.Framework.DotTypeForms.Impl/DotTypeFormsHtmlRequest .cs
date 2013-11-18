@@ -34,6 +34,18 @@ namespace Atlantis.Framework.DotTypeForms.Impl
         responseHtml = HttpWebRequestHelper.SendWebRequest(dotTypeFormsHtmlSchemaRequestData, fullUrl, wsConfigElement);
         responseData = new DotTypeFormsHtmlResponseData(responseHtml);
       }
+      catch (WebException ex)
+      {
+        if (ex.Response is HttpWebResponse && ((HttpWebResponse)ex.Response).StatusCode == HttpStatusCode.NotFound)
+        {
+          //no error logging is required
+          responseData = new DotTypeFormsHtmlResponseData(string.Empty);
+        }
+        else
+        {
+          throw;
+        }
+      }
       catch (Exception ex)
       {
         responseData = new DotTypeFormsHtmlResponseData(responseHtml, requestData, ex);

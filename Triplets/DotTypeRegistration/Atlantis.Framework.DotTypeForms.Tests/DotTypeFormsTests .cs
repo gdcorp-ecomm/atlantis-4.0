@@ -45,7 +45,7 @@ namespace Atlantis.Framework.DotTypeForms.Tests
     [TestMethod]
     public void DotTypeFormsHtmlGoodRequestForSmdFormType()
     {
-      var request = new DotTypeFormsHtmlRequestData("smd", 1677, "FOS", "GA", "EN-US", 1, "abcd.com");
+      var request = new DotTypeFormsHtmlRequestData("trademark", 1677, "FOS", "GA", "EN-US", 1, "abcd.com");
       var response = (DotTypeFormsHtmlResponseData)Engine.Engine.ProcessRequest(request, 709);
       Assert.AreEqual(true, response.IsSuccess);
       Assert.AreEqual(true, !string.IsNullOrEmpty(response.ToXML()));

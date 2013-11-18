@@ -55,9 +55,8 @@
     <Reference Include="Atlantis.Framework.DotTypeClaims.Interface">
       <HintPath>..\packages\Atlantis.Framework.DotTypeClaims.Interface.4.13.11.11\lib\net40\Atlantis.Framework.DotTypeClaims.Interface.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.DotTypeForms.Impl, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.DotTypeForms.Impl.4.13.11.15\lib\net40\Atlantis.Framework.DotTypeForms.Impl.dll</HintPath>
+    <Reference Include="Atlantis.Framework.DotTypeForms.Impl">
+      <HintPath>..\packages\Atlantis.Framework.DotTypeForms.Impl.4.13.11.17\lib\net40\Atlantis.Framework.DotTypeForms.Impl.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.DotTypeForms.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -98,8 +97,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Atlantis.Framework.Providers.Interface.4.13.10.25\lib\net40\Atlantis.Framework.Providers.Interface.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.Providers.Localization">
-      <HintPath>..\packages\Atlantis.Framework.Providers.Localization.4.13.11.7\lib\net40\Atlantis.Framework.Providers.Localization.dll</HintPath>
+    <Reference Include="Atlantis.Framework.Providers.Localization, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Providers.Localization.4.13.11.15\lib\net40\Atlantis.Framework.Providers.Localization.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Providers.Localization.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

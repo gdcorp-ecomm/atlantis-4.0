@@ -53,7 +53,7 @@
     </Reference>
     <Reference Include="Atlantis.Framework.DotTypeForms.Impl, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.DotTypeForms.Impl.4.13.11.15\lib\net40\Atlantis.Framework.DotTypeForms.Impl.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.DotTypeForms.Impl.4.13.11.17\lib\net40\Atlantis.Framework.DotTypeForms.Impl.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.DotTypeForms.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

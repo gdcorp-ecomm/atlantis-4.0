@@ -62,11 +62,6 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration
 
       try
       {
-        if (string.IsNullOrEmpty(formType))
-        {
-          formType = "dpp";
-        }
-
         var request = new DotTypeFormsHtmlRequestData(formType, tldId, placement, phase, language, SiteContext.ContextId, domain);
 
         var response = (DotTypeFormsHtmlResponseData)DataCache.DataCache.GetProcessRequest(request, DotTypeRegistrationEngineRequests.DotTypeFormsHtmlRequest);
@@ -100,8 +95,6 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration
 
       try
       {
-        formType = string.Empty;
-
         IDotTypeFormsSchema dotTypeFormSchema;
         success = GetDotTypeFormXmlSchema(formType, tldId, placement, phase, language, out dotTypeFormSchema);
 

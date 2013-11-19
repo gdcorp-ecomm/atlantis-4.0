@@ -14,5 +14,9 @@
     <tags>Atlantis Framework ValidateField Interface</tags>
     <dependencies />
   </metadata>
-  <files />
+  <files>
+    <file src="bin\Release\en\Atlantis.Framework.ValidateField.Interface.resources.dll" target="lib\net40\en\Atlantis.Framework.ValidateField.Interface.resources.dll" />
+    <file src="bin\Release\es-US\Atlantis.Framework.ValidateField.Interface.resources.dll" target="lib\net40\es-US\Atlantis.Framework.ValidateField.Interface.resources.dll" />
+    <file src="bin\Release\pt-BR\Atlantis.Framework.ValidateField.Interface.resources.dll" target="lib\net40\pt-BR\Atlantis.Framework.ValidateField.Interface.resources.dll" />
+  </files>
 </package>

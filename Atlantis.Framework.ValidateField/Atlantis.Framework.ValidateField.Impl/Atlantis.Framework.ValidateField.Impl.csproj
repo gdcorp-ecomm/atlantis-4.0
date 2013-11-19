@@ -65,6 +65,10 @@
     <Reference Include="Atlantis.Framework.Providers.Interface">
       <HintPath>..\packages\Atlantis.Framework.Providers.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Providers.Interface.dll</HintPath>
     </Reference>
+    <Reference Include="Atlantis.Framework.ValidateField.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.ValidateField.Interface.4.13.11.11\lib\net40\Atlantis.Framework.ValidateField.Interface.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -77,12 +81,6 @@
     <Compile Include="Data\FieldValidationData.cs" />
     <Compile Include="ValidateFieldRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Atlantis.Framework.ValidateField.Interface\Atlantis.Framework.ValidateField.Interface.csproj">
-      <Project>{47179F6E-FC85-4105-BE64-D0297C149887}</Project>
-      <Name>Atlantis.Framework.ValidateField.Interface</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Data\validatefield.xsd">

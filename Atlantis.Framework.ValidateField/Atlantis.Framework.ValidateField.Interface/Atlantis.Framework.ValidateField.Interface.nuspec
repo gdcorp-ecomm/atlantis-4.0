@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0"?>
 <package >
   <metadata>
-    <id>Atlantis.Framework.ValidateField.Impl</id>
-    <version>4.13.7.15</version>
-    <title>Atlantis Framework ValidateField</title>
+    <id>Atlantis.Framework.ValidateField.Interface</id>
+    <version>4.13.11.11</version>
+    <title>Atlantis Framework ValidateField Interface</title>
     <authors>$author$</authors>
     <owners>$author$</owners>
     <projectUrl>https://confluence.int.godaddy.com/display/ATLANTIS</projectUrl>
@@ -11,7 +11,7 @@
     <description>$description$</description>
     <releaseNotes></releaseNotes>
     <copyright>$copyright$</copyright>
-    <tags>Atlantis Framework ValidateField</tags>
+    <tags>Atlantis Framework ValidateField Interface</tags>
     <dependencies />
   </metadata>
   <files />

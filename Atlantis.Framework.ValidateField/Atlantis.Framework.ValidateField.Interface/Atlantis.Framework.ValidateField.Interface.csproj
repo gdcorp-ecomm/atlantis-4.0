@@ -69,6 +69,8 @@
     <EmbeddedResource Include="LanguageResources\ValidateField.pt-BR.resx" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Atlantis.Framework.ValidateField.Interface.nuget.bat" />
+    <None Include="Atlantis.Framework.ValidateField.Interface.nuspec" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

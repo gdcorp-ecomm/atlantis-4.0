@@ -39,14 +39,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Atlantis.Framework.DotTypeClaims.Impl, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.DotTypeClaims.Impl.4.13.11.11\lib\net40\Atlantis.Framework.DotTypeClaims.Impl.dll</HintPath>
-    </Reference>
-    <Reference Include="Atlantis.Framework.DotTypeClaims.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.DotTypeClaims.Interface.4.13.11.11\lib\net40\Atlantis.Framework.DotTypeClaims.Interface.dll</HintPath>
-    </Reference>
     <Reference Include="Atlantis.Framework.Engine, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Atlantis.Framework.Engine.4.0.0.0\lib\net40\Atlantis.Framework.Engine.dll</HintPath>
@@ -57,7 +49,7 @@
     </Reference>
     <Reference Include="Atlantis.Framework.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.Interface.4.13.9.25\lib\net40\Atlantis.Framework.Interface.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Interface.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
@@ -81,7 +73,20 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="atlantis.config" />
+    <None Include="atlantis.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Atlantis.Framework.DotTypeClaims.Impl\Atlantis.Framework.DotTypeClaims.Impl.csproj">
+      <Project>{e4c60f74-ebf7-4f79-8d5b-19075a283077}</Project>
+      <Name>Atlantis.Framework.DotTypeClaims.Impl</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.DotTypeClaims.Interface\Atlantis.Framework.DotTypeClaims.Interface.csproj">
+      <Project>{95b2c83e-9f94-4497-a089-bfa65e8d4a85}</Project>
+      <Name>Atlantis.Framework.DotTypeClaims.Interface</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

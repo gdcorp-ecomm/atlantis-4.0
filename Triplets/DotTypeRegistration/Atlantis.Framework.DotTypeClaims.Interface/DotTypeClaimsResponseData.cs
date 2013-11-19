@@ -60,7 +60,7 @@ namespace Atlantis.Framework.DotTypeClaims.Interface
           {
             if (!string.IsNullOrEmpty(domain.Value))
             {
-              var noticeElement = XElement.Parse(domain.Value);
+              var noticeElement = domain.Descendants().First();
               foreach (XElement xelement in noticeElement.DescendantsAndSelf())
               {
                 // Stripping the namespace by setting the name of the element to it's localname only

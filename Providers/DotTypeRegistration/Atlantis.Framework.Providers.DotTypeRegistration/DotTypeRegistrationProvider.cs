@@ -81,15 +81,16 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration
       return success;
     }
 
-    public bool GetDotTypeFormSchemas(IDotTypeFormLookup dotTypeFormsLookup, string[] domains, out IDictionary<string, IList<IList<IFormField>>> formFieldsByDomain)
+    public bool GetDotTypeFormSchemas(IDotTypeFormLookup dotTypeFormsLookup, string[] domains, out IDotTypeFormFieldsByDomain dotTypeFormFieldsByDomain)
     {
+      dotTypeFormFieldsByDomain = null;
+
       var tld = dotTypeFormsLookup.Tld;
       var formType = dotTypeFormsLookup.FormType;
       var placement = dotTypeFormsLookup.Placement;
       var phase = dotTypeFormsLookup.Phase;
 
       var success = false;
-      formFieldsByDomain = new Dictionary<string, IList<IList<IFormField>>>(StringComparer.OrdinalIgnoreCase);
       var language = LocalizationProvider.FullLanguage;
       var tldId = GetTldId(tld);
 
@@ -100,7 +101,12 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration
 
         if (success && dotTypeFormSchema != null)
         {
+          IDictionary<string, IList<IList<IFormField>>> formFieldsByDomain;
           success = TransformFormSchemaToFormFields(domains, dotTypeFormSchema, out formFieldsByDomain);
+          if (success)
+          {
+            dotTypeFormFieldsByDomain = new DotTypeFormFieldsByDomain(formFieldsByDomain);
+          }
         }
       }
       catch (Exception ex)

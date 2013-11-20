@@ -70,6 +70,7 @@
     <Compile Include="Handlers\IFormFieldHandler.cs" />
     <Compile Include="Handlers\IDotTypeFormFieldTypeHandler.cs" />
     <Compile Include="IDotTypeClaimsSchema.cs" />
+    <Compile Include="IDotTypeFormFieldsByDomain.cs" />
     <Compile Include="IDotTypeFormLookup.cs" />
     <Compile Include="IDotTypeFormsItem.cs" />
     <Compile Include="IDotTypeFormsField.cs" />
@@ -82,7 +83,9 @@
   <ItemGroup>
     <None Include="atlantis.config" />
     <None Include="Atlantis.Framework.Providers.DotTypeRegistration.Interface.nuget.bat" />
-    <None Include="Atlantis.Framework.Providers.DotTypeRegistration.Interface.nuspec" />
+    <None Include="Atlantis.Framework.Providers.DotTypeRegistration.Interface.nuspec">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>

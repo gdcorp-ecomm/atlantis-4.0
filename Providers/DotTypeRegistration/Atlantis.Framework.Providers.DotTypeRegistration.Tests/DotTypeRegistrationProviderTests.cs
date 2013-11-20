@@ -34,15 +34,15 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration.Tests
       var container = NewDotTypeRegistrationProvider();
       container.Resolve<ILocalizationProvider>();
 
-      IDictionary<string, IList<IList<IFormField>>> formFieldsByDomain;
-      string[] domains = { "domain1.n.borg", "claim1.n.borg" };
+      IDotTypeFormFieldsByDomain dotTypeFormFieldsByDomain;
+      string[] domains = { "domain1.n.borg", "claim1.example" };
 
       var provider = container.Resolve<IDotTypeRegistrationProvider>();
 
       IDotTypeFormLookup lookup = DotTypeFormLookup.Create("dpp", "j.borg", "MOBILE", "GA");
-      bool isSuccess = provider.GetDotTypeFormSchemas(lookup, domains, out formFieldsByDomain);
+      bool isSuccess = provider.GetDotTypeFormSchemas(lookup, domains, out dotTypeFormFieldsByDomain);
       Assert.AreEqual(true, isSuccess);
-      Assert.AreEqual(true, formFieldsByDomain.Count > 0);
+      Assert.AreEqual(true, dotTypeFormFieldsByDomain != null && dotTypeFormFieldsByDomain.FormFieldsByDomain.Count > 0);
     }
 
     [TestMethod]
@@ -52,13 +52,13 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration.Tests
       var provider = container.Resolve<IDotTypeRegistrationProvider>();
       container.Resolve<ILocalizationProvider>();
 
-      IDictionary<string, IList<IList<IFormField>>> formFieldsByDomain;
+      IDotTypeFormFieldsByDomain dotTypeFormFieldsByDomain;
       string[] domains = { "domain1.shop", "domain2.shop" };
       IDotTypeFormLookup lookup = DotTypeFormLookup.Create("dpp", "abcd", "name of placement", "GA");
 
-      bool isSuccess = provider.GetDotTypeFormSchemas(lookup, domains, out formFieldsByDomain);
+      bool isSuccess = provider.GetDotTypeFormSchemas(lookup, domains, out dotTypeFormFieldsByDomain);
       Assert.AreEqual(false, isSuccess);
-      Assert.AreEqual(true, formFieldsByDomain.Count == 0);
+      Assert.AreEqual(true, dotTypeFormFieldsByDomain == null);
     }
 
     [TestMethod]

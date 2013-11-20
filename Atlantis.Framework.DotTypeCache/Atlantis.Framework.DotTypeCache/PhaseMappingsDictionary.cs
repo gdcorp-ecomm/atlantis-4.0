@@ -35,6 +35,8 @@ namespace Atlantis.Framework.DotTypeCache
 
     private static readonly IDictionary<LaunchPhases, string> EarlyRegistration = new Dictionary<LaunchPhases, string>
     {
+      {LaunchPhases.EarlyRegistration3Day, "ER1"},
+      {LaunchPhases.EarlyRegistration4Day, "ER2"},
       {LaunchPhases.EarlyRegistration3Day, "ER3"},
       {LaunchPhases.EarlyRegistration4Day, "ER4"},
       {LaunchPhases.EarlyRegistration5Day, "ER5"},

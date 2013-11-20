@@ -1,5 +1,6 @@
 ﻿using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.Brand.Interface;
+using Atlantis.Framework.Providers.Language.Interface;
 using Atlantis.Framework.Testing.MockHttpContext;
 using Atlantis.Framework.Testing.MockProviders;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -33,6 +34,7 @@ namespace Atlantis.Framework.Providers.Brand.Tests
       container.RegisterProvider<IManagerContext, MockNoManagerContext>();
       container.RegisterProvider<IShopperContext, MockShopperContext>();
       container.RegisterProvider<IBrandProvider, BrandProvider>();
+      container.RegisterProvider<ILanguageProvider, MockLanguageProvider>();
       container.SetData(MockSiteContextSettings.PrivateLabelId, privateLabelId);
 
       return container.Resolve<IBrandProvider>();
@@ -117,43 +119,16 @@ namespace Atlantis.Framework.Providers.Brand.Tests
     }
 
     [TestMethod]
-    public void ProductLineNameGoDaddyTest()
+    public void ProductLineNameTest()
     {
       MockHttpRequest mockHttpRequest = new MockHttpRequest("http://www.godaddy.com/");
       MockHttpContext.SetFromWorkerRequest(mockHttpRequest);
 
       var brandProvider = NewBrandProvider(1);
 
-      Assert.AreEqual(brandProvider.GetProductLineName("Auctions", 1), "GoDaddy Auctions");
-      Assert.AreEqual(brandProvider.GetProductLineName("Auctions"), "Domain Auctions");
-      Assert.AreEqual(brandProvider.GetProductLineName("WebsiteBuilder", 1), "GoDaddy Website Builder");
-      Assert.AreEqual(brandProvider.GetProductLineName("WebsiteBuilder"), "Website Builder");
-      Assert.AreEqual(brandProvider.GetProductLineName("BusinessRegistration"), "Business Registration");
-      Assert.AreEqual(brandProvider.GetProductLineName("DomainBackorders"), "Domain Backorders");
-      Assert.AreEqual(brandProvider.GetProductLineName("FaxThruEmail"), "Fax Thru Email");
-      Assert.AreEqual(brandProvider.GetProductLineName("ProtectedRegistration"), "Protected Registration");
-      Assert.AreEqual(brandProvider.GetProductLineName("HostingConnection"), "Value Applications");
+      Assert.AreEqual(brandProvider.GetProductLineName("Auctions"), "auctionsXXX");
     }
 
-    [TestMethod]
-    public void ProductLineNameNonGDTest()
-    {
-      MockHttpRequest mockHttpRequest = new MockHttpRequest("http://www.bluerazor.com/");
-      MockHttpContext.SetFromWorkerRequest(mockHttpRequest);
-
-      var brandProvider = NewBrandProvider(2);
-
-      Assert.AreEqual(brandProvider.GetProductLineName("Auctions"), "Domain Auctions");
-      Assert.AreEqual(brandProvider.GetProductLineName("HostingConnection"), "Value Applications");
-      Assert.AreEqual(brandProvider.GetProductLineName("BusinessRegistration"), "Business Registration");
-      Assert.AreEqual(brandProvider.GetProductLineName("DomainBackorders"), "Domain Backorders");
-      Assert.AreEqual(brandProvider.GetProductLineName("FaxThruEmail"), "Fax Thru Email");
-      Assert.AreEqual(brandProvider.GetProductLineName("ProtectedRegistration"), "Protected Registration");
-      Assert.AreEqual(brandProvider.GetProductLineName("WebsiteBuilder"), "Website Builder");
-
-      Assert.AreNotEqual(brandProvider.GetProductLineName("Auctions"), "GoDaddy Auctions");
-      Assert.AreNotEqual(brandProvider.GetProductLineName("HostingConnection"), "GoDaddy Hosting Connection");
-    }
 
     [TestMethod]
     public void InvalidGoDaddyCompanyNames()

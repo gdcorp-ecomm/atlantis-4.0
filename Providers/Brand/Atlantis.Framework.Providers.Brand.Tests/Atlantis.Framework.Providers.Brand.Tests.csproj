@@ -75,6 +75,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Atlantis.Framework.PrivateLabel.Interface.4.0.0.0\lib\net40\Atlantis.Framework.PrivateLabel.Interface.dll</HintPath>
     </Reference>
+    <Reference Include="Atlantis.Framework.Providers.Language.Interface">
+      <HintPath>..\packages\Atlantis.Framework.Providers.Language.Interface.4.13.10.12\lib\net40\Atlantis.Framework.Providers.Language.Interface.dll</HintPath>
+    </Reference>
     <Reference Include="Atlantis.Framework.Providers.Preferences.Interface">
       <HintPath>..\packages\Atlantis.Framework.Providers.Preferences.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Providers.Preferences.Interface.dll</HintPath>
     </Reference>
@@ -107,6 +110,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="MockLanguageProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BrandProviderTests.cs" />
   </ItemGroup>

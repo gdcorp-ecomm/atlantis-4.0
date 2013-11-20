@@ -2,20 +2,22 @@
 using Atlantis.Framework.Brand.Interface;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.Brand.Interface;
+using Atlantis.Framework.Providers.Language.Interface;
 
 namespace Atlantis.Framework.Providers.Brand
 {
   public class BrandProvider : ProviderBase, IBrandProvider
   {
-    #region Providers
+
+    private const string _DICTIONARY = "cds.atlantis/providers/brand";
 
     private readonly Lazy<ISiteContext> _siteContext;
-
-    #endregion
+    private readonly Lazy<ILanguageProvider> _languageProvider;
 
     public BrandProvider(IProviderContainer container) : base(container)
     {
       _siteContext = new Lazy<ISiteContext>(() => Container.Resolve<ISiteContext>());
+      _languageProvider = new Lazy<ILanguageProvider>(() => Container.Resolve<ILanguageProvider>());
     }
 
     private bool IsDomainsByProxy(string companyPropertyKey)
@@ -47,10 +49,8 @@ namespace Atlantis.Framework.Providers.Brand
 
     public string GetProductLineName(string productLineKey, int contextId = 0)
     {
-      var productLineNameRequestData = new ProductLineNameRequestData(_siteContext.Value.ContextId);
-      var productLineNameResponseData = (ProductLineNameResponseData)DataCache.DataCache.GetProcessRequest(productLineNameRequestData, BrandEngineRequests.ProductLineNameRequestId);
-
-      return productLineNameResponseData.GetName(productLineKey, contextId);
+      string key = productLineKey.ToLowerInvariant();
+      return _languageProvider.Value.GetLanguagePhrase(_DICTIONARY, key);
     }
   }
 }

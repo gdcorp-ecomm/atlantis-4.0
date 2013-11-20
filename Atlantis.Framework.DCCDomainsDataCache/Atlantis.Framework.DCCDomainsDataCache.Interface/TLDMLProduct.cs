@@ -35,6 +35,8 @@ namespace Atlantis.Framework.DCCDomainsDataCache.Interface
       _offeredRenewalYears = LoadValidYears("renewperiodcollection", "renewperiod");
       _offeredExpiredAuctionYears = LoadValidYears("expiredauctionperiodcollection", "expiredauctionperiod");
       _offeredPreregistrationYears = LoadPreregistrationYears();
+
+      LoadTrustee();
     }
 
     private ITLDValidYearsSet LoadValidYears(string periodCollectionName, string periodItemName)
@@ -93,6 +95,11 @@ namespace Atlantis.Framework.DCCDomainsDataCache.Interface
           }
         }
       }
+    }
+
+    private void LoadTrustee()
+    {
+      Trustee = TLDMLTrustee.Create(NamespaceElement.Descendants("trustee"));
     }
 
     public ITLDValidYearsSet RegistrationYears
@@ -165,5 +172,7 @@ namespace Atlantis.Framework.DCCDomainsDataCache.Interface
 
       return result;
     }
+
+    public ITLDTrustee  Trustee { get; private set; }
   }
 }

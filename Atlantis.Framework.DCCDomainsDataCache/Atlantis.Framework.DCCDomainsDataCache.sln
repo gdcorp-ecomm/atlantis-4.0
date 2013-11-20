@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.DCCDomainsDataCache.Interface", "Atlantis.Framework.DCCDomainsDataCache.Interface\Atlantis.Framework.DCCDomainsDataCache.Interface.csproj", "{98F402FB-90D0-4BEA-8D97-46A73E6363B8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.DCCDomainsDataCache.Impl", "Atlantis.Framework.DCCDomainsDataCache.Impl\Atlantis.Framework.DCCDomainsDataCache.Impl.csproj", "{89873D19-5D77-4886-ADD3-CEDBF196D270}"

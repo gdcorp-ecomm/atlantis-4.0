@@ -69,5 +69,10 @@ namespace Atlantis.Framework.DotTypeCache.Static
     {
       return new List<int>();
     }
+
+    public ITLDTrustee Trustee
+    {
+      get { return new StaticTrustee(); }
+    }
   }
 }

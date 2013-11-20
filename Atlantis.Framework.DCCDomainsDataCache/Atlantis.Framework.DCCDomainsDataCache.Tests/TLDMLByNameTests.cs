@@ -158,5 +158,13 @@ namespace Atlantis.Framework.DCCDomainsDataCache.Tests
 
       Assert.IsTrue(result);
     }
+
+    [TestMethod]
+    public void TrusteeRequiredTestSG()
+    {
+      var request = new TLDMLByNameRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "SG");
+      var response = (TLDMLByNameResponseData)DataCache.DataCache.GetProcessRequest(request, _GETBYNAMEREQUEST);
+      Assert.IsTrue(response.Product.Trustee.IsRequired);
+    }
   }
 }

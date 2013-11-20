@@ -42,9 +42,6 @@
     <Reference Include="Atlantis.Framework.DataCache">
       <HintPath>..\packages\Atlantis.Framework.DataCache.4.0.0.0\lib\net40\Atlantis.Framework.DataCache.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.DataCacheGeneric.Interface">
-      <HintPath>..\packages\Atlantis.Framework.DataCacheGeneric.Interface.4.0.0.0\lib\net40\Atlantis.Framework.DataCacheGeneric.Interface.dll</HintPath>
-    </Reference>
     <Reference Include="Atlantis.Framework.DataCacheService">
       <HintPath>..\packages\Atlantis.Framework.DataCacheService.4.0.0.0\lib\net40\Atlantis.Framework.DataCacheService.dll</HintPath>
     </Reference>
@@ -103,6 +100,7 @@
     <Compile Include="ITLDApplicationControl.cs" />
     <Compile Include="ITLDTld.cs" />
     <Compile Include="ITLDDataImpl.cs" />
+    <Compile Include="ITLDTrustee.cs" />
     <Compile Include="ITLDValidYearsSet.cs" />
     <Compile Include="ITLDProduct.cs" />
     <Compile Include="DotTypeFields.cs" />

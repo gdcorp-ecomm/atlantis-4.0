@@ -1609,5 +1609,21 @@ namespace Atlantis.Framework.DotTypeCache.Tests
         Assert.IsTrue(tuiFormTypes != null && tuiFormTypes.Count == 0);
       }
     }
+
+    [TestMethod]
+    public void TestTrusteeRequiredTestSG()
+    {
+      var dotTypeInfo = DotTypeProvider.GetDotTypeInfo("SG");
+
+      Assert.IsTrue(dotTypeInfo.Product.Trustee.IsRequired);
+    }
+
+    [TestMethod]
+    public void TrusteeNegativeStaticTest()
+    {
+      var dotTypeInfo = DotTypeProvider.GetDotTypeInfo("COM");
+      
+      Assert.IsFalse(dotTypeInfo.Product.Trustee.IsRequired);
+    }
   }
 }

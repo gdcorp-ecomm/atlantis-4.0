@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Atlantis.Framework.DotTypeCache.Interface
 {
@@ -17,5 +18,7 @@ namespace Atlantis.Framework.DotTypeCache.Interface
     bool HasPhaseApplicationFee(string phaseCode, out string applicationProductType);
 
     List<int> GetPhaseApplicationProductIdList(string applicationProductType);
+
+    ITLDTrustee Trustee { get; }
   }
 }

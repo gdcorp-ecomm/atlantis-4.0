@@ -21,7 +21,9 @@ namespace Atlantis.Framework.Web.CDSContent
     private const string BodyEndTag = @"</body>";
     private static readonly IList<IPlaceHolder> _emptyPlaceHolderList = new List<IPlaceHolder>(0);
     private IWhitelistResult _whitelistResult;
- 
+
+    private readonly Control _debugInfoControl = null;
+
     private ICDSContentProvider _cdsContentProvider;
     protected ICDSContentProvider CdsContentProvider
     {
@@ -44,7 +46,7 @@ namespace Atlantis.Framework.Web.CDSContent
 
     protected virtual IList<IPlaceHolder> BodyEndPlaceHolders { get { return _emptyPlaceHolderList; } }
 
-    protected abstract Control DebugInfoControl { get; }
+    protected virtual Control DebugInfoControl { get { return _debugInfoControl; } }
 
     private ISiteContext _siteContext;
     protected ISiteContext SiteContext

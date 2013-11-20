@@ -2,14 +2,14 @@
 <package >
   <metadata>
     <id>Atlantis.Framework.BasePages</id>
-    <version>4.13.11.13</version>
+    <version>4.13.11.18</version>
     <title>Atlantis Framework BasePages</title>
     <authors>$author$</authors>
     <owners>$author$</owners>
     <projectUrl>https://confluence.int.godaddy.com/display/ATLANTIS</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes>Removed ShopperContextProvider and updated to use MiniEncrypt and newer VerifyShopper triplet. Updated ManagerContext to use newer Manager Triplet</releaseNotes>
+    <releaseNotes>Updated JSON serialization to work with extended character sets</releaseNotes>
     <copyright>$copyright$</copyright>
     <tags>Atlantis Framework BasePages</tags>
     <dependencies>

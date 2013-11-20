@@ -8,6 +8,12 @@ using Atlantis.Framework.Testing.MockHttpContext;
 using Atlantis.Framework.Testing.MockProviders;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using System.Threading;
+using Atlantis.Framework.Providers.PlaceHolder.Interface;
+using Atlantis.Framework.Providers.PlaceHolder;
+using System.Reflection;
+using Atlantis.Framework.Engine;
+using System.Diagnostics;
 
 namespace Atlantis.Framework.Providers.RenderPipeline.Tests
 {
@@ -18,6 +24,15 @@ namespace Atlantis.Framework.Providers.RenderPipeline.Tests
   {
     private MockErrorLogger _testLogger = new MockErrorLogger();
     private IErrorLogger _defaultLogger = Engine.EngineLogging.EngineLogger;
+
+    private void WriteOutput(string message)
+    {
+#if (DEBUG)
+      Debug.WriteLine(message);
+#else
+      Console.WriteLine(message);
+#endif
+    }
 
     [TestInitialize]
     public void Initialize()
@@ -34,6 +49,7 @@ namespace Atlantis.Framework.Providers.RenderPipeline.Tests
       providerContainer.RegisterProvider<IShopperContext, MockShopperContext>();
       providerContainer.RegisterProvider<IManagerContext, MockManagerContext>();
       providerContainer.RegisterProvider<IRenderPipelineProvider, RenderPipelineProvider>();
+      providerContainer.RegisterProvider<IPlaceHolderProvider, PlaceHolderProvider>();
       return providerContainer;
     }
 
@@ -156,7 +172,60 @@ namespace Atlantis.Framework.Providers.RenderPipeline.Tests
 
       Assert.IsTrue(finalContent.Equals("test"),"Content Was not Rendered Correctly");
     }
-    
+
+    [TestMethod]
+    [ExpectedException(typeof(ThreadAbortException))]
+    public void ThreadAbortExceptionIsNotLogged()
+    {
+      CustomErrorLogger customLogger = new CustomErrorLogger();
+      Engine.EngineLogging.EngineLogger = customLogger;
+
+      IPlaceHolder placeHolder = new WebControlPlaceHolder(Assembly.GetExecutingAssembly().FullName,
+                                                           "Atlantis.Framework.Providers.RenderPipeline.Tests.WebControl.ThreadAbort",
+                                                           new List<KeyValuePair<string, string>>(0));
+
+      IProviderContainer providerContainer = InitializeProviderContainer();
+
+      IRenderPipelineProvider renderPipelineProvider = providerContainer.Resolve<IRenderPipelineProvider>();
+      try
+      {
+        string renderedContent = renderPipelineProvider.RenderContent(placeHolder.ToMarkup(), new List<IRenderHandler> { new PlaceHolderRenderHandler(null) });
+      }
+      catch (ThreadAbortException)
+      {
+        if (customLogger.Count > 0)
+        {
+          //Assert fails don't work here due to the thread got aborted....so unfortunately need to write the failure message out.  Check the output window.
+          //Or place a break point here and run the test in debug mode.
+          WriteOutput("Test failed: Exceptions were logged");
+        }
+      }
+      finally
+      {
+        Engine.EngineLogging.EngineLogger = _testLogger;
+      }
+    }
+
+    [TestMethod]
+    public void OtherExceptionsAreLogged()
+    {
+      CustomErrorLogger customLogger = new CustomErrorLogger();
+      Engine.EngineLogging.EngineLogger = customLogger;
+
+      IPlaceHolder placeHolder = new WebControlPlaceHolder("blahblahblah",
+                                                     "Atlantis.Framework.Providers.RenderPipeline.Tests.WebControl.blahblahblah",
+                                                     new List<KeyValuePair<string, string>>(0));
+
+      IProviderContainer providerContainer = InitializeProviderContainer();
+
+      IRenderPipelineProvider renderPipelineProvider = providerContainer.Resolve<IRenderPipelineProvider>();
+
+      string renderedContent = renderPipelineProvider.RenderContent(placeHolder.ToMarkup(), new List<IRenderHandler> { new PlaceHolderRenderHandler(null) });
+
+      Assert.IsTrue(customLogger.Count > 0, "No exceptions logged.");
+
+      Engine.EngineLogging.EngineLogger = _testLogger;
+    }
   }
 }
 

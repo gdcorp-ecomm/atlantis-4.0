@@ -39,7 +39,9 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IActiveMarketDisplay.cs" />
     <Compile Include="ICountrySite.cs" />
+    <Compile Include="IActiveMarketDisplayProvider.cs" />
     <Compile Include="ILanguageUrlRewriteProvider.cs" />
     <Compile Include="ILocalizationRedirectProvider.cs" />
     <Compile Include="ILocalizationRedirectResult.cs" />

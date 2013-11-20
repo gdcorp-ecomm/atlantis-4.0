@@ -358,5 +358,34 @@ namespace Atlantis.Framework.Providers.DomainProductPackage.Test
       
       Assert.IsFalse(StoreProvider.TryGetDomainProductPackages(out packageGroups));
     }
+
+    [TestMethod]
+    public void DomainProductPackageSunrisePremiumTldInPreRegTest()
+    {
+      var domainSearchResponse = DomainSearch.SearchDomain("sunrise-premium.sunrisepremium", SOURCE_CODE, string.Empty, new List<string> {"sunrisepremium"});
+
+      var packageGroups = DomainProductPackageProvider.BuildDomainProductPackageGroups(domainSearchResponse.GetDomainsByGroup(DomainGroupTypes.EXACT_MATCH));
+
+      Assert.IsTrue(packageGroups.Count() > 0);
+
+      var packages = packageGroups.ToList();
+
+      Assert.IsTrue(packages[0].InLaunchPhase);
+      Assert.IsTrue(packages[0].Domain.DomainName.Length > 0);
+      Assert.IsTrue(packages[0].LaunchPhasePackages.Count == 1);
+      IDomainProductPackage launchphasePackage;
+      Assert.IsTrue(packages[0].LaunchPhasePackages.TryGetValue(LaunchPhases.SunriseA, out launchphasePackage));
+      Assert.IsTrue(launchphasePackage.DomainProductPackageItem.ProductId == 47866);
+
+      IProductPackageItem appFeePackageItem;
+      Assert.IsTrue(launchphasePackage.TryGetApplicationFeePackage(out appFeePackageItem));
+      Assert.IsTrue(appFeePackageItem.ProductId == 47855);
+
+
+      Assert.IsTrue(launchphasePackage.TierId == null);
+
+      IDomainProductPackage registrationPackage;
+      Assert.IsTrue(packages[0].TryGetRegistrationPackage(out registrationPackage) == false);
+    }
   }
 }

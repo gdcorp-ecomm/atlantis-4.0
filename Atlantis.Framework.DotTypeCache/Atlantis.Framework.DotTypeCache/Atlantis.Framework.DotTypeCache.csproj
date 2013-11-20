@@ -68,7 +68,7 @@
     </Reference>
     <Reference Include="Atlantis.Framework.DotTypeCache.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.DotTypeCache.Interface.4.13.11.19\lib\net40\Atlantis.Framework.DotTypeCache.Interface.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.DotTypeCache.Interface.4.13.11.20\lib\net40\Atlantis.Framework.DotTypeCache.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Engine">
       <HintPath>..\packages\Atlantis.Framework.Engine.4.0.0.0\lib\net40\Atlantis.Framework.Engine.dll</HintPath>

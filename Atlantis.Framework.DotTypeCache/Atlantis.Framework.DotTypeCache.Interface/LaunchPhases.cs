@@ -27,6 +27,8 @@ namespace Atlantis.Framework.DotTypeCache.Interface
     LandrushI,
     LandrushJ,
 
+    EarlyRegistration1Day,
+    EarlyRegistration2Day,
     EarlyRegistration3Day,
     EarlyRegistration4Day,
     EarlyRegistration5Day,

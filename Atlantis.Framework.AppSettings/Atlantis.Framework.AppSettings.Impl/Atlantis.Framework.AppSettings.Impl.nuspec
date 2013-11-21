@@ -3,7 +3,7 @@
   <metadata>
     <id>Atlantis.Framework.AppSettings</id>
     <version>4.0.0.0</version>
-    <title>Atlantis Framework AppSettings</title>
+    <title>Atlantis Framework AppSettings Impl</title>
     <authors>$author$</authors>
     <owners>$author$</owners>
     <projectUrl>https://confluence.int.godaddy.com/display/ATLANTIS</projectUrl>
@@ -11,11 +11,7 @@
     <description>$description$</description>
     <releaseNotes></releaseNotes>
     <copyright>$copyright$</copyright>
-    <tags>Atlantis Framework AppSettings</tags>
-    <dependencies>
-      <dependency id="Atlantis.Framework.AppSettings.Interface" version="4.0.0.0" />
-      <dependency id="Atlantis.Framework.DataCacheService" version="4.0.0.0" />
-    </dependencies>
+    <tags>Atlantis Framework AppSettings Impl</tags>
   </metadata>
   <files>
     <file src="atlantis.config.transform" target="content\atlantis.config.transform" />

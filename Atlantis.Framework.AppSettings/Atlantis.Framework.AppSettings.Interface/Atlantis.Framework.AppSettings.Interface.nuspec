@@ -12,8 +12,5 @@
     <releaseNotes></releaseNotes>
     <copyright>$copyright$</copyright>
     <tags>Atlantis Framework AppSettings Interface</tags>
-    <dependencies>
-      <dependency id="Atlantis.Framework.Interface" version="4.0.0.0" />
-    </dependencies>
   </metadata>
 </package>

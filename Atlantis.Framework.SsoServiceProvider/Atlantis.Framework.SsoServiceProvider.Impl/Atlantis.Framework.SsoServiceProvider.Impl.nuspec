@@ -1,0 +1,22 @@
+﻿<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>
+      Atlantis.Framework.SsoServiceProvider.Impl
+    </id>
+    <version>4.13.11.21</version>
+    <title>
+      Atlantis Framework SsoServiceProvider Impl
+    </title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes></releaseNotes>
+    <copyright>$copyright$</copyright>
+    <tags>Atlantis Framework SsoServiceProvider Impl</tags>
+  </metadata>
+  <files>
+    <file src="atlantis.config.transform" target="content\atlantis.config.transform" />
+  </files>
+</package>

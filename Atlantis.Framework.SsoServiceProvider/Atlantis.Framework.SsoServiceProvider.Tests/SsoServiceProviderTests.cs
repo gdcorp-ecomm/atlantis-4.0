@@ -1,14 +1,11 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Atlantis.Framework.SsoServiceProvider.Interface;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Atlantis.Framework.SsoServiceProvider.Interface;
 
 namespace Atlantis.Framework.SsoServiceProvider.Tests
 {
   [TestClass]
   [DeploymentItem("Atlantis.Framework.SsoServiceProvider.Impl.dll")]
+  [DeploymentItem("Atlantis.Framework.DataCacheGeneric.Impl.dll")]
   public class SsoServiceProviderTests
   {
     [TestMethod]
@@ -26,7 +23,7 @@ namespace Atlantis.Framework.SsoServiceProvider.Tests
     [DeploymentItem("Interop.gdDataCacheLib.dll")]
     public void InvalidSpKey()
     {
-      SsoServiceProviderRequestData request = new SsoServiceProviderRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "GDSWNET-NotThere");
+      SsoServiceProviderRequestData request = new SsoServiceProviderRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "spkey=GDSWNET-130506071814001'%2c'9087'%2c'LogOut'%2c'Redirect')&target=https%3a%2f%2fwww.godaddy.com");
       SsoServiceProviderResponseData response = (SsoServiceProviderResponseData)DataCache.DataCache.GetProcessRequest(request, 484);
       Assert.AreEqual(SsoServiceProviderStatus.NotFound, response.Status);
     }

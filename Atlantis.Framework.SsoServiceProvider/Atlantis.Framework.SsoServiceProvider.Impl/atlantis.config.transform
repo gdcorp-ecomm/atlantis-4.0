@@ -1,0 +1,3 @@
+﻿<ConfigElements>
+   <ConfigElement progid="Atlantis.Framework.SsoServiceProvider.Impl.SsoServiceProviderRequest" assembly="Atlantis.Framework.SsoServiceProvider.Impl.dll" request_type="484" lpc="0" />
+</ConfigElements>

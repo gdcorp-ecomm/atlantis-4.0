@@ -24,42 +24,49 @@ namespace Atlantis.Framework.SsoServiceProvider.Interface
 
     public SsoServiceProviderResponseData(string serviceProviderName, string serviceProviderXml)
     {
+      SetDefaultValuesForAllProperties();
       Status = SsoServiceProviderStatus.NotFound;
       ServiceProviderName = serviceProviderName;
-      XDocument serviceProviderDoc = XDocument.Parse(serviceProviderXml);
 
-      XElement itemElement = serviceProviderDoc.Descendants("item").FirstOrDefault();
-      if (itemElement != null)
+      if (!string.IsNullOrEmpty(serviceProviderXml))
       {
-        LoginReceive = GetAttributeValue(itemElement, "loginReceive", string.Empty);
-        LoginReceiveType = GetAttributeValue(itemElement, "loginReceiveType", string.Empty);
-        IdentityProviderName = GetAttributeValue(itemElement, "identityProviderName", string.Empty);
-        ServiceProviderGroupName = GetAttributeValue(itemElement, "serviceProviderGroupName", string.Empty);
-        RedirectLoginUrl = GetAttributeValue(itemElement, "redirectLoginURL", string.Empty);
-        LogoutUrl = GetAttributeValue(itemElement, "logoutURL", string.Empty);
-        RedirectLogoutUrl = GetAttributeValue(itemElement, "redirectLogoutURL", string.Empty);
-        CertificateName = GetAttributeValue(itemElement, "certificateName", string.Empty);
+        XDocument serviceProviderDoc = XDocument.Parse(serviceProviderXml);
 
-        string isRetiredValue = GetAttributeValue(itemElement, "isRetired", "0");
-        Status = "1".Equals(isRetiredValue) ? SsoServiceProviderStatus.Retired : SsoServiceProviderStatus.Active;
-
-        string serviceProviderNameReturn = GetAttributeValue(itemElement, "serviceProviderName", string.Empty);
-        PrimaryServiceProviderName = string.Empty;
-
-        if (!string.IsNullOrEmpty(serviceProviderNameReturn))
+        XElement itemElement = serviceProviderDoc.Descendants("item").FirstOrDefault();
+        if (itemElement != null)
         {
-          IsUsingPrimaryServiceProviderName = !serviceProviderNameReturn.Equals(serviceProviderName, StringComparison.OrdinalIgnoreCase);
-          if (IsUsingPrimaryServiceProviderName)
-          {
-            PrimaryServiceProviderName = serviceProviderNameReturn;
-          }
-        }
+          LoginReceive = GetAttributeValue(itemElement, "loginReceive", string.Empty);
+          LoginReceiveType = GetAttributeValue(itemElement, "loginReceiveType", string.Empty);
+          IdentityProviderName = GetAttributeValue(itemElement, "identityProviderName", string.Empty);
+          ServiceProviderGroupName = GetAttributeValue(itemElement, "serviceProviderGroupName", string.Empty);
+          RedirectLoginUrl = GetAttributeValue(itemElement, "redirectLoginURL", string.Empty);
+          LogoutUrl = GetAttributeValue(itemElement, "logoutURL", string.Empty);
+          RedirectLogoutUrl = GetAttributeValue(itemElement, "redirectLogoutURL", string.Empty);
+          CertificateName = GetAttributeValue(itemElement, "certificateName", string.Empty);
 
+          string isRetiredValue = GetAttributeValue(itemElement, "isRetired", "0");
+          Status = "1".Equals(isRetiredValue) ? SsoServiceProviderStatus.Retired : SsoServiceProviderStatus.Active;
+
+          string serviceProviderNameReturn = GetAttributeValue(itemElement, "serviceProviderName", string.Empty);
+          PrimaryServiceProviderName = string.Empty;
+
+          if (!string.IsNullOrEmpty(serviceProviderNameReturn))
+          {
+            IsUsingPrimaryServiceProviderName = !serviceProviderNameReturn.Equals(serviceProviderName, StringComparison.OrdinalIgnoreCase);
+            if (IsUsingPrimaryServiceProviderName)
+            {
+              PrimaryServiceProviderName = serviceProviderNameReturn;
+            }
+          }
+
+        }
       }
+
     }
 
     public SsoServiceProviderResponseData(RequestData requestData, Exception ex)
     {
+      SetDefaultValuesForAllProperties();
       _exception = new AtlantisException(requestData, "SsoServiceProviderResponsData", ex.Message + ex.StackTrace, requestData.ToXML());
     }
 
@@ -94,6 +101,22 @@ namespace Atlantis.Framework.SsoServiceProvider.Interface
         result = attribute.Value;
       }
       return result;
+    }
+    
+    private void SetDefaultValuesForAllProperties()
+    {
+      ServiceProviderName = string.Empty;
+      LoginReceive = string.Empty;
+      LoginReceiveType = string.Empty;
+      IdentityProviderName = string.Empty;
+      ServiceProviderGroupName = string.Empty;
+      RedirectLoginUrl = string.Empty;
+      RedirectLogoutUrl = string.Empty;
+      LogoutUrl = string.Empty;
+      CertificateName = string.Empty;
+      Status = SsoServiceProviderStatus.NotFound;
+      IsUsingPrimaryServiceProviderName = false;
+      PrimaryServiceProviderName = string.Empty;
     }
   }
 }

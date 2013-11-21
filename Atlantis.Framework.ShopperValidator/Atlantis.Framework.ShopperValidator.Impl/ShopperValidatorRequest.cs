@@ -8,7 +8,7 @@ using Atlantis.Framework.Auth.Interface;
 using Atlantis.Framework.AuthValidatePassword.Interface;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.RuleEngine.Results;
-using Atlantis.Framework.SearchShoppers.Interface;
+using Atlantis.Framework.Shopper.Interface;
 using Atlantis.Framework.ShopperValidator.Interface;
 using Atlantis.Framework.ShopperValidator.Interface.LanguageResources;
 using Atlantis.Framework.ShopperValidator.Interface.RuleConstants;
@@ -200,12 +200,16 @@ namespace Atlantis.Framework.ShopperValidator.Impl
     {
       string username = requestData.ShopperBaseModel[ModelConstants.MODEL_ID_SHOPPERVALID][ModelConstants.FACT_USERNAME];
 
-      var loginRequest = new SearchShoppersRequestData(username, requestData.SourceURL, string.Empty, requestData.Pathway, requestData.PageCount, "ShopperValidator::UsernameRule");
-      loginRequest.AddSearchField("loginName", username);
-      loginRequest.AddReturnField("loginName");
+      var searchFields = new Dictionary<string, string>();
+      var returnFields = new List<string>();
 
-      var loginResponse = (SearchShoppersResponseData)Engine.Engine.ProcessRequest(loginRequest, EngineRequestValues.SearchShoppers);
-      if (loginResponse.ShopperCount > 0)
+      searchFields["loginName"] = username;
+      returnFields.Add("loginName");
+
+      SearchShoppersRequestData request = new SearchShoppersRequestData(string.Empty, "ShopperValidator::UsernameRule", searchFields, returnFields);
+      SearchShoppersResponseData loginResponse = (SearchShoppersResponseData)Engine.Engine.ProcessRequest(request, EngineRequestValues.ShopperSearch);
+
+      if (loginResponse.Count > 0)
       {
         foreach (var model in _engineResults.ValidationResults)
         {

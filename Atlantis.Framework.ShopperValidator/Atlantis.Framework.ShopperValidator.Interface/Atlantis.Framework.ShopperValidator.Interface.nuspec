@@ -1,0 +1,24 @@
+﻿<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>
+      Atlantis.Framework.ShopperValidator.Interface
+    </id>
+    <version>4.13.11.21</version>
+    <title>
+      Atlantis Framework ShopperValidator Interface
+    </title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes></releaseNotes>
+    <copyright>$copyright$</copyright>
+    <tags>Atlantis Framework ShopperValidator Interface</tags>
+  </metadata>
+  <files>
+    <file src="bin\Release\en\Atlantis.Framework.ShopperValidator.Interface.resources.dll" target="lib\net40\en\Atlantis.Framework.ShopperValidator.Interface.resources.dll" />
+    <file src="bin\Release\es-US\Atlantis.Framework.ShopperValidator.Interface.resources.dll" target="lib\net40\es-US\Atlantis.Framework.ShopperValidator.Interface.resources.dll" />
+    <file src="bin\Release\pt-BR\Atlantis.Framework.ShopperValidator.Interface.resources.dll" target="lib\net40\pt-BR\Atlantis.Framework.ShopperValidator.Interface.resources.dll" />
+  </files>
+</package>

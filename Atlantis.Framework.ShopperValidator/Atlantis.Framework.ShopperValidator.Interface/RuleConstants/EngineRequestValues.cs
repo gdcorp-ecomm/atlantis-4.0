@@ -1,10 +1,17 @@
 ﻿
 namespace Atlantis.Framework.ShopperValidator.Interface.RuleConstants
 {
-  public class EngineRequestValues
+  public static class EngineRequestValues
   {
-    public const int SearchShoppers = 2;
-    public const int ValidateField = 507;
-    public const int AuthValidatePassword = 517;
+    public static int ShopperSearch { get; set; }
+    public static int ValidateField { get; set; }
+    public static int  AuthValidatePassword { get; set; }
+
+    static EngineRequestValues()
+    {
+      ShopperSearch = 740;
+      ValidateField = 507;
+      AuthValidatePassword = 517;
+    }
   }
 }

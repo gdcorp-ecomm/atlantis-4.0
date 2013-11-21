@@ -17,8 +17,9 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Atlantis.Framework.ShopperValidator.Test
 {
   [TestClass]
+  [DeploymentItem("altanis.config")]
   [DeploymentItem("Atlantis.Framework.ShopperValidator.Impl.dll")]
-  [DeploymentItem("Atlantis.Framework.SearchShoppers.Impl.dll")]
+  [DeploymentItem("Atlantis.Framework.Shopper.Impl.dll")]
   [DeploymentItem("Atlantis.Framework.ValidateField.Impl.dll")]
   [DeploymentItem("Atlantis.Framework.AuthValidatePassword.Impl.dll")]
   public class UnitTest1
@@ -343,6 +344,46 @@ namespace Atlantis.Framework.ShopperValidator.Test
 
 
       string p = "pause";
+    }
+
+    [TestMethod]
+    public void TestCallInPinWithStringThatPassesIntTryParse()
+    {
+      var pinRule = new CallInPinRule(" 122");
+      pinRule.Validate();
+      Assert.IsFalse(pinRule.IsValid);
+    }
+
+    [TestMethod]
+    public void TestCallInPinValid()
+    {
+      var pinRule = new CallInPinRule("9122");
+      pinRule.Validate();
+      Assert.IsTrue(pinRule.IsValid);
+    }
+
+    [TestMethod]
+    public void TestCallInPinSequence()
+    {
+      var pinRule = new CallInPinRule("1111");
+      pinRule.Validate();
+      Assert.IsFalse(pinRule.IsValid);
+
+      var pinRule2 = new CallInPinRule("1234");
+      pinRule2.Validate();
+      Assert.IsFalse(pinRule2.IsValid);
+    }
+
+    [TestMethod]
+    public void TestCallInPinLength()
+    {
+      var pinRule = new CallInPinRule("92");
+      pinRule.Validate();
+      Assert.IsFalse(pinRule.IsValid);
+
+      var pinRule2 = new CallInPinRule("900002");
+      pinRule2.Validate();
+      Assert.IsFalse(pinRule2.IsValid);
     }
 
     private void ProcessBaseRules(params ValidationRule[] vRules)

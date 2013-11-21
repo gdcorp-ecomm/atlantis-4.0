@@ -1,4 +1,6 @@
-﻿using Atlantis.Framework.SearchShoppers.Interface;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Atlantis.Framework.Shopper.Interface;
 using Atlantis.Framework.ShopperValidator.Interface.RuleConstants;
 using Atlantis.Framework.ShopperValidator.Interface.ValidationRules.BaseRules;
 
@@ -59,12 +61,16 @@ namespace Atlantis.Framework.ShopperValidator.Interface.Validator
       }
       else
       {
-        SearchShoppersRequestData loginRequest = new SearchShoppersRequestData(_username, _requestUrl, string.Empty, _pathway, _pageCount, "ShopperValidator::UsernameRule");
-        loginRequest.AddSearchField("loginName", _username);
-        loginRequest.AddReturnField("loginName");
+        var searchFields = new Dictionary<string, string>();
+        var returnFields = new List<string>();
 
-        SearchShoppersResponseData loginResponse = (SearchShoppersResponseData)Engine.Engine.ProcessRequest(loginRequest, EngineRequestValues.SearchShoppers);
-        if (loginResponse.ShopperCount > 0)
+        searchFields["loginName"] = _username;
+        returnFields.Add("loginName");
+
+        SearchShoppersRequestData request = new SearchShoppersRequestData(string.Empty, "ShopperValidator::UsernameRule", searchFields, returnFields);
+        SearchShoppersResponseData response = (SearchShoppersResponseData)Engine.Engine.ProcessRequest(request, EngineRequestValues.ShopperSearch);
+
+        if (response.Count > 0)
         {
           _usernameExists = true;
           string formatString = FetchResource.GetString("alreadyExists");

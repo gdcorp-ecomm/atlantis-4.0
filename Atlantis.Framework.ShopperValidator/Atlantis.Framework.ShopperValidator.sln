@@ -1,25 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{908CA8AF-5EC4-45F0-B970-A8E6B56DC57E}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine", "..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj", "{D30157B2-C1B3-4073-BA5E-632E2337A997}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{DE0C7FA2-995C-4B23-AD7C-6F8BD70770DF}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.ValidateField.Interface", "..\Atlantis.Framework.ValidateField\Atlantis.Framework.ValidateField.Interface\Atlantis.Framework.ValidateField.Interface.csproj", "{47179F6E-FC85-4105-BE64-D0297C149887}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.ValidateField.Impl", "..\Atlantis.Framework.ValidateField\Atlantis.Framework.ValidateField.Impl\Atlantis.Framework.ValidateField.Impl.csproj", "{55BDC4E4-9BE5-456B-88C6-2D72F9F67BC4}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.DataCache", "..\Atlantis.Framework.DataCache\Atlantis.Framework.DataCache\Atlantis.Framework.DataCache.csproj", "{7F2738F8-683C-49E7-88CD-E986C70F0321}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.AuthValidatePassword.Impl", "..\Atlantis.Framework.AuthValidatePassword\Atlantis.Framework.AuthValidatePassword.Impl\Atlantis.Framework.AuthValidatePassword.Impl.csproj", "{024C6763-F8E1-46D6-9E0F-68CDFA565AB0}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.AuthValidatePassword.Interface", "..\Atlantis.Framework.AuthValidatePassword\Atlantis.Framework.AuthValidatePassword.Interface\Atlantis.Framework.AuthValidatePassword.Interface.csproj", "{7BE20371-1E91-4F00-A55D-DB15FE04F23F}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Auth.Interface", "..\Atlantis.Framework.Auth.Interface\Atlantis.Framework.Auth.Interface\Atlantis.Framework.Auth.Interface.csproj", "{DF0607A1-7EF3-423A-BB64-597FA2EC1DD5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.ShopperValidator.Impl", "Atlantis.Framework.ShopperValidator.Impl\Atlantis.Framework.ShopperValidator.Impl.csproj", "{8C3F6D97-27C8-4398-B8CE-877473DC2945}"
 EndProject
@@ -27,101 +9,27 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.ShopperV
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.ShopperValidator.Test", "Atlantis.Framework.ShopperValidator.Test\Atlantis.Framework.ShopperValidator.Test.csproj", "{AB2DF888-A248-415A-A45F-93CBCAC12690}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.SearchShoppers.Interface", "..\Atlantis.Framework.SearchShoppers\Atlantis.Framework.SearchShoppers.Interface\Atlantis.Framework.SearchShoppers.Interface.csproj", "{E7E75791-3E94-48D8-995A-A629F9505454}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.SearchShoppers.Impl", "..\Atlantis.Framework.SearchShoppers\Atlantis.Framework.SearchShoppers.Impl\Atlantis.Framework.SearchShoppers.Impl.csproj", "{42E5CD89-5359-4EB5-8CE8-789847D42AD6}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.RuleEngine", "..\Atlantis.Framework.RuleEngine\Atlantis.Framework.RuleEngine\Atlantis.Framework.RuleEngine.csproj", "{8BBF78DD-A792-4B0F-A311-B6B670263FBA}"
-EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 15
+		SccNumberOfProjects = 4
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
 		SccLocalPath0 = .
-		SccProjectUniqueName1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
-		SccProjectTopLevelParentUniqueName1 = Atlantis.Framework.ShopperValidator.sln
-		SccProjectName1 = ../Atlantis.Framework.Engine/Atlantis.Framework.Interface
-		SccLocalPath1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
-		SccProjectUniqueName2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
-		SccProjectTopLevelParentUniqueName2 = Atlantis.Framework.ShopperValidator.sln
-		SccProjectName2 = ../Atlantis.Framework.Engine/Atlantis.Framework.Engine
-		SccLocalPath2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
-		SccProjectUniqueName3 = ..\\Atlantis.Framework.DataCache\\Atlantis.Framework.DataCache\\Atlantis.Framework.DataCache.csproj
-		SccProjectTopLevelParentUniqueName3 = Atlantis.Framework.ShopperValidator.sln
-		SccProjectName3 = ../Atlantis.Framework.DataCache/Atlantis.Framework.DataCache
-		SccLocalPath3 = ..\\Atlantis.Framework.DataCache\\Atlantis.Framework.DataCache
-		SccProjectUniqueName4 = ..\\Atlantis.Framework.ValidateField\\Atlantis.Framework.ValidateField.Interface\\Atlantis.Framework.ValidateField.Interface.csproj
-		SccProjectName4 = ../Atlantis.Framework.ValidateField/Atlantis.Framework.ValidateField.Interface
-		SccLocalPath4 = ..\\Atlantis.Framework.ValidateField\\Atlantis.Framework.ValidateField.Interface
-		SccProjectUniqueName5 = ..\\Atlantis.Framework.ValidateField\\Atlantis.Framework.ValidateField.Impl\\Atlantis.Framework.ValidateField.Impl.csproj
-		SccProjectName5 = ../Atlantis.Framework.ValidateField/Atlantis.Framework.ValidateField.Impl
-		SccLocalPath5 = ..\\Atlantis.Framework.ValidateField\\Atlantis.Framework.ValidateField.Impl
-		SccProjectUniqueName6 = ..\\Atlantis.Framework.AuthValidatePassword\\Atlantis.Framework.AuthValidatePassword.Impl\\Atlantis.Framework.AuthValidatePassword.Impl.csproj
-		SccProjectName6 = ../Atlantis.Framework.AuthValidatePassword/Atlantis.Framework.AuthValidatePassword.Impl
-		SccLocalPath6 = ..\\Atlantis.Framework.AuthValidatePassword\\Atlantis.Framework.AuthValidatePassword.Impl
-		SccProjectUniqueName7 = ..\\Atlantis.Framework.AuthValidatePassword\\Atlantis.Framework.AuthValidatePassword.Interface\\Atlantis.Framework.AuthValidatePassword.Interface.csproj
-		SccProjectName7 = ../Atlantis.Framework.AuthValidatePassword/Atlantis.Framework.AuthValidatePassword.Interface
-		SccLocalPath7 = ..\\Atlantis.Framework.AuthValidatePassword\\Atlantis.Framework.AuthValidatePassword.Interface
-		SccProjectUniqueName8 = ..\\Atlantis.Framework.Auth.Interface\\Atlantis.Framework.Auth.Interface\\Atlantis.Framework.Auth.Interface.csproj
-		SccProjectName8 = ../Atlantis.Framework.Auth.Interface/Atlantis.Framework.Auth.Interface
-		SccLocalPath8 = ..\\Atlantis.Framework.Auth.Interface\\Atlantis.Framework.Auth.Interface
-		SccProjectUniqueName9 = Atlantis.Framework.ShopperValidator.Impl\\Atlantis.Framework.ShopperValidator.Impl.csproj
-		SccProjectName9 = Atlantis.Framework.ShopperValidator.Impl
-		SccLocalPath9 = Atlantis.Framework.ShopperValidator.Impl
-		SccProjectUniqueName10 = Atlantis.Framework.ShopperValidator.Interface\\Atlantis.Framework.ShopperValidator.Interface.csproj
-		SccProjectName10 = Atlantis.Framework.ShopperValidator.Interface
-		SccLocalPath10 = Atlantis.Framework.ShopperValidator.Interface
-		SccProjectUniqueName11 = Atlantis.Framework.ShopperValidator.Test\\Atlantis.Framework.ShopperValidator.Test.csproj
-		SccProjectName11 = Atlantis.Framework.ShopperValidator.Test
-		SccLocalPath11 = Atlantis.Framework.ShopperValidator.Test
-		SccProjectUniqueName12 = ..\\Atlantis.Framework.SearchShoppers\\Atlantis.Framework.SearchShoppers.Interface\\Atlantis.Framework.SearchShoppers.Interface.csproj
-		SccProjectName12 = ../Atlantis.Framework.SearchShoppers/Atlantis.Framework.SearchShoppers.Interface
-		SccLocalPath12 = ..\\Atlantis.Framework.SearchShoppers\\Atlantis.Framework.SearchShoppers.Interface
-		SccProjectUniqueName13 = ..\\Atlantis.Framework.SearchShoppers\\Atlantis.Framework.SearchShoppers.Impl\\Atlantis.Framework.SearchShoppers.Impl.csproj
-		SccProjectName13 = ../Atlantis.Framework.SearchShoppers/Atlantis.Framework.SearchShoppers.Impl
-		SccLocalPath13 = ..\\Atlantis.Framework.SearchShoppers\\Atlantis.Framework.SearchShoppers.Impl
-		SccProjectUniqueName14 = ..\\Atlantis.Framework.RuleEngine\\Atlantis.Framework.RuleEngine\\Atlantis.Framework.RuleEngine.csproj
-		SccProjectName14 = ../Atlantis.Framework.RuleEngine/Atlantis.Framework.RuleEngine
-		SccLocalPath14 = ..\\Atlantis.Framework.RuleEngine\\Atlantis.Framework.RuleEngine
+		SccProjectUniqueName1 = Atlantis.Framework.ShopperValidator.Impl\\Atlantis.Framework.ShopperValidator.Impl.csproj
+		SccProjectName1 = Atlantis.Framework.ShopperValidator.Impl
+		SccLocalPath1 = Atlantis.Framework.ShopperValidator.Impl
+		SccProjectUniqueName2 = Atlantis.Framework.ShopperValidator.Interface\\Atlantis.Framework.ShopperValidator.Interface.csproj
+		SccProjectName2 = Atlantis.Framework.ShopperValidator.Interface
+		SccLocalPath2 = Atlantis.Framework.ShopperValidator.Interface
+		SccProjectUniqueName3 = Atlantis.Framework.ShopperValidator.Test\\Atlantis.Framework.ShopperValidator.Test.csproj
+		SccProjectName3 = Atlantis.Framework.ShopperValidator.Test
+		SccLocalPath3 = Atlantis.Framework.ShopperValidator.Test
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.Build.0 = Release|Any CPU
-		{47179F6E-FC85-4105-BE64-D0297C149887}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{47179F6E-FC85-4105-BE64-D0297C149887}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{47179F6E-FC85-4105-BE64-D0297C149887}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{47179F6E-FC85-4105-BE64-D0297C149887}.Release|Any CPU.Build.0 = Release|Any CPU
-		{55BDC4E4-9BE5-456B-88C6-2D72F9F67BC4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{55BDC4E4-9BE5-456B-88C6-2D72F9F67BC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{55BDC4E4-9BE5-456B-88C6-2D72F9F67BC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{55BDC4E4-9BE5-456B-88C6-2D72F9F67BC4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7F2738F8-683C-49E7-88CD-E986C70F0321}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7F2738F8-683C-49E7-88CD-E986C70F0321}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7F2738F8-683C-49E7-88CD-E986C70F0321}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7F2738F8-683C-49E7-88CD-E986C70F0321}.Release|Any CPU.Build.0 = Release|Any CPU
-		{024C6763-F8E1-46D6-9E0F-68CDFA565AB0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{024C6763-F8E1-46D6-9E0F-68CDFA565AB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{024C6763-F8E1-46D6-9E0F-68CDFA565AB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{024C6763-F8E1-46D6-9E0F-68CDFA565AB0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7BE20371-1E91-4F00-A55D-DB15FE04F23F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7BE20371-1E91-4F00-A55D-DB15FE04F23F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7BE20371-1E91-4F00-A55D-DB15FE04F23F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7BE20371-1E91-4F00-A55D-DB15FE04F23F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DF0607A1-7EF3-423A-BB64-597FA2EC1DD5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DF0607A1-7EF3-423A-BB64-597FA2EC1DD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DF0607A1-7EF3-423A-BB64-597FA2EC1DD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DF0607A1-7EF3-423A-BB64-597FA2EC1DD5}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8C3F6D97-27C8-4398-B8CE-877473DC2945}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8C3F6D97-27C8-4398-B8CE-877473DC2945}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8C3F6D97-27C8-4398-B8CE-877473DC2945}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -134,25 +42,8 @@ Global
 		{AB2DF888-A248-415A-A45F-93CBCAC12690}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AB2DF888-A248-415A-A45F-93CBCAC12690}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AB2DF888-A248-415A-A45F-93CBCAC12690}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E7E75791-3E94-48D8-995A-A629F9505454}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E7E75791-3E94-48D8-995A-A629F9505454}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E7E75791-3E94-48D8-995A-A629F9505454}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E7E75791-3E94-48D8-995A-A629F9505454}.Release|Any CPU.Build.0 = Release|Any CPU
-		{42E5CD89-5359-4EB5-8CE8-789847D42AD6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{42E5CD89-5359-4EB5-8CE8-789847D42AD6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{42E5CD89-5359-4EB5-8CE8-789847D42AD6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{42E5CD89-5359-4EB5-8CE8-789847D42AD6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8BBF78DD-A792-4B0F-A311-B6B670263FBA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8BBF78DD-A792-4B0F-A311-B6B670263FBA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8BBF78DD-A792-4B0F-A311-B6B670263FBA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8BBF78DD-A792-4B0F-A311-B6B670263FBA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {908CA8AF-5EC4-45F0-B970-A8E6B56DC57E}
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {908CA8AF-5EC4-45F0-B970-A8E6B56DC57E}
-		{7F2738F8-683C-49E7-88CD-E986C70F0321} = {908CA8AF-5EC4-45F0-B970-A8E6B56DC57E}
 	EndGlobalSection
 EndGlobal

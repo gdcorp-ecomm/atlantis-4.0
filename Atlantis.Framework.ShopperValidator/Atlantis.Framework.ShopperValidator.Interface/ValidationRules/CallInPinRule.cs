@@ -15,13 +15,13 @@ namespace Atlantis.Framework.ShopperValidator.Interface.Validator
       var FieldNames = new FieldNames(culture);
       DefaultFieldNameHelper.OverwriteTextIfEmpty(fieldName, FieldNames.CallInPin, out fieldName);
 
-      _callInPin = value;
+      _callInPin = value.Trim();
       _fieldName = fieldName;
 
       AddIsRequiredRule(value, fieldName, isRequired);
-      base.RulesToValidate.Add(new MaxLengthRule(Culture, fieldName, value, LengthConstants.CallInPinMaxLength));
-      base.RulesToValidate.Add(new EqualLength(Culture, fieldName, value, LengthConstants.CallInPinMinLength, false));
-      base.RulesToValidate.Add(new NumericRule(fieldName, value, Culture));
+      base.RulesToValidate.Add(new MaxLengthRule(Culture, fieldName, _callInPin, LengthConstants.CallInPinMaxLength));
+      base.RulesToValidate.Add(new EqualLength(Culture, fieldName, _callInPin, LengthConstants.CallInPinMinLength, false));
+      base.RulesToValidate.Add(new NumericRule(fieldName, _callInPin, Culture));
 
       BuildCustomRules();
     }

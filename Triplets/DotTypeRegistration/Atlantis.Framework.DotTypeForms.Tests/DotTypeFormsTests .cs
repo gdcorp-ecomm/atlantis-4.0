@@ -39,14 +39,19 @@ namespace Atlantis.Framework.DotTypeForms.Tests
     {
       var request = new DotTypeFormsHtmlRequestData("dpp", -1, "name of placement", "GA", "EN-US", 1, string.Empty);
       var response = (DotTypeFormsHtmlResponseData)Engine.Engine.ProcessRequest(request, 709);
-      Assert.AreEqual(false, response.ToXML().Contains("ValidateSuccess"));
+      Assert.AreEqual(false, response.IsSuccess);
     }
 
     [TestMethod]
     public void DotTypeFormsHtmlGoodRequestForSmdFormType()
     {
-      var request = new DotTypeFormsHtmlRequestData("trademark", 1677, "FOS", "GA", "EN-US", 1, "abcd.com");
+      var request = new DotTypeFormsHtmlRequestData("trademark", 1731, "FOS", "SRA", "EN-US", 1, "fhdsjkaflhdskjaflsa.sunrise");
       var response = (DotTypeFormsHtmlResponseData)Engine.Engine.ProcessRequest(request, 709);
+      Assert.AreEqual(true, response.IsSuccess);
+      Assert.AreEqual(true, !string.IsNullOrEmpty(response.ToXML()));
+
+      request = new DotTypeFormsHtmlRequestData("trademark", 1731, "FOS", "SRA", "EN-US", 1, "abcd.com");
+      response = (DotTypeFormsHtmlResponseData)Engine.Engine.ProcessRequest(request, 709);
       Assert.AreEqual(true, response.IsSuccess);
       Assert.AreEqual(true, !string.IsNullOrEmpty(response.ToXML()));
     }

@@ -19,8 +19,6 @@ namespace Atlantis.Framework.TH.Domains
       ProviderContainer = providerContainer;
     }
 
-    private delegate string TokenRenderer(IToken token, IDotTypeProvider provider);
-
     public IProviderContainer ProviderContainer
     {
       get;

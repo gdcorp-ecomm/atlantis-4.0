@@ -111,8 +111,18 @@ namespace Atlantis.Framework.DotTypeCache
     {
       var pLTypeResponse = LoadPrivateLabelType(privateLabelId);
 
-      var request = new TLDProductDomainAttributesRequestData(_tldId.Value, phaseCode, pLTypeResponse.PrivateLabelType, productTypeId);
-      return (TLDProductDomainAttributesResponseData)DataCache.DataCache.GetProcessRequest(request, DotTypeEngineRequests.ProductDomainAttributes);
+      if (!string.IsNullOrEmpty(phaseCode))
+      {
+        var request = new TLDProductDomainAttributesRequestData(_tldId.Value, phaseCode, pLTypeResponse.PrivateLabelType, productTypeId);
+        return (TLDProductDomainAttributesResponseData)DataCache.DataCache.GetProcessRequest(request, DotTypeEngineRequests.ProductDomainAttributes);
+      }
+      else
+      {
+        string message = string.Format("Missing phase code for tld: {0}; productTypeId: {1}; privateLabelId: {2};", _tld, productTypeId.ToString(), privateLabelId.ToString());
+        Logging.LogException("TLDMLDotTypeInfo.GetProductId", message, _tld);
+      }
+
+      return null;
     }
 
     private PrivateLabelTypeResponseData LoadPrivateLabelType(int privateLabelId)

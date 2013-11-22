@@ -1575,6 +1575,17 @@ namespace Atlantis.Framework.DotTypeCache.Tests
     }
 
     [TestMethod]
+    public void TldGetProductIdTldmlMenuInvalidPhase()
+    {
+      var dotTypeInfo = DotTypeProvider.GetDotTypeInfo("menu");
+
+      IDomainProductLookup domainProductLookup = DomainProductLookup.Create(dotTypeInfo.MinRegistrationLength, 1, LaunchPhases.Invalid, TLDProductTypes.Registration);
+
+      int productId = dotTypeInfo.GetProductId(domainProductLookup);
+      Assert.IsTrue(productId == 0);
+    }
+
+    [TestMethod]
     public void TldGetApplicationProductIdListTldmlO2Borg()
     {
       var dotTypeInfo = DotTypeProvider.GetDotTypeInfo("f.borg");

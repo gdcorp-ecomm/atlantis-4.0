@@ -13,11 +13,19 @@ namespace Atlantis.Framework.Shopper.Tests
   public class VerifyCountryAllowedTests
   {
     [TestMethod]
+    public void VerifyCountryNotAllowed()
+    {
+      VerifiyCountryAllowedRequestData request = new VerifiyCountryAllowedRequestData();
+      VerifyCountryAllowedResponseData response = (VerifyCountryAllowedResponseData)Engine.Engine.ProcessRequest(request, 758);
+      Assert.IsFalse(response.IsCountryAllowed("cU"));
+    }
+
+    [TestMethod]
     public void VerifyCountryAllowed()
     {
       VerifiyCountryAllowedRequestData request = new VerifiyCountryAllowedRequestData();
       VerifyCountryAllowedResponseData response = (VerifyCountryAllowedResponseData)Engine.Engine.ProcessRequest(request, 758);
-      Assert.IsFalse(response.IsCountryAllowed("co"));
+      Assert.IsTrue(response.IsCountryAllowed("us"));
     }
 
   }

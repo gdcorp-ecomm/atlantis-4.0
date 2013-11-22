@@ -10,22 +10,22 @@ namespace Atlantis.Framework.Shopper.Interface
   public class VerifyCountryAllowedResponseData : IResponseData
   {
     AtlantisException _exception;
-    private readonly HashSet<string> _countryCodes;
+    private readonly HashSet<string> _blockedCountryCodes;
 
     public VerifyCountryAllowedResponseData(AtlantisException exceptionOccured)
     {
       _exception = exceptionOccured;
-      _countryCodes = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+      _blockedCountryCodes = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
     }
 
-    public VerifyCountryAllowedResponseData(HashSet<string> countryList)
+    public VerifyCountryAllowedResponseData(HashSet<string> blockedCountryList)
     {
-      _countryCodes = countryList;
+      _blockedCountryCodes = blockedCountryList;
     }
 
     public bool IsCountryAllowed(string countryCode)
     {
-      return _countryCodes.Contains(countryCode);
+      return !_blockedCountryCodes.Contains(countryCode);
     }
 
     public AtlantisException GetException()
@@ -39,7 +39,7 @@ namespace Atlantis.Framework.Shopper.Interface
       XElement fieldsElement = new XElement("Countries");
       requestElement.Add(fieldsElement);
 
-      foreach (string country in _countryCodes)
+      foreach (string country in _blockedCountryCodes)
       {
         fieldsElement.Add(new XElement("Country", new XAttribute("Code", country)));
       }

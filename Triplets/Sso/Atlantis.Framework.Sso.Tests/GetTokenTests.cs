@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Runtime;
 using System.Security.Cryptography;
+using System.Web;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Sso.Interface;
 using Atlantis.Framework.Sso.Interface.JsonHelperClasses;
@@ -232,6 +233,25 @@ namespace Atlantis.Framework.Sso.Tests
     {
       var request = new SsoValidateTwoFactorRequestData(string.Empty, "134");
       var response = (SsoValidateTwoFactorResponseData)Engine.Engine.ProcessRequest(request, 1234);
+    }
+
+    [TestMethod]
+    [ExpectedException(typeof(AtlantisException))]
+    public void ExceptionInvalidHttpResponseType()
+    {
+      try
+      {
+      var request = new SsoValidateShopperAndGetTokenRequestData("syukna", "Seth1seth", privateLabelId, clientIp);
+      var response = (SsoValidateShopperAndGetTokenResponseData)Engine.Engine.ProcessRequest(request, 9999999);
+
+      }
+      catch (AtlantisException ex)
+      {
+        Assert.IsTrue(ex.Message.Contains("Unhandled http status code"));
+        
+        throw ex;
+      }
+
     }
     #endregion
 

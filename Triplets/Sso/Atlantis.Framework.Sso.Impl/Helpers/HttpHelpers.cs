@@ -2,7 +2,9 @@
 using System.IO;
 using System.Net;
 using System.Security.Cryptography.X509Certificates;
+using System.Web;
 using System.Web.Script.Serialization;
+using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.Sso.Impl.Helpers
 {
@@ -49,16 +51,27 @@ namespace Atlantis.Framework.Sso.Impl.Helpers
       }
       catch (WebException exception)
       {
-        var responseStatusCode = ((HttpWebResponse)exception.Response).StatusCode;
+        var responseStatusCode = ((HttpWebResponse) exception.Response).StatusCode;
+        string errorResponseData = string.Empty;
+
+        using (var errorReader = new StreamReader(exception.Response.GetResponseStream()))
+        {
+          errorResponseData = errorReader.ReadToEnd();
+        }
 
         if (responseStatusCode == HttpStatusCode.BadRequest)
         {
-          using (var errorReader = new StreamReader(exception.Response.GetResponseStream()))
-          {
-            string errorResponseData = errorReader.ReadToEnd();
-            returnObject = new JavaScriptSerializer().Deserialize<T>(errorResponseData);
-          }
+          returnObject = new JavaScriptSerializer().Deserialize<T>(errorResponseData);
         }
+        else
+        {
+          string errorMessage = string.Concat("Unhandled http status code: ", responseStatusCode.ToString(), " | responseData ", errorResponseData, " | webexception_message:", exception.Message);
+          throw new HttpUnhandledException(errorMessage);
+        }
+      }
+      catch (Exception ex)
+      {
+        throw ex;
       }
 
       return returnObject;

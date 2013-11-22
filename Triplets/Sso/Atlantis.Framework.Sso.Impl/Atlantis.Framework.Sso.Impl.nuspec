@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>Atlantis.Framework.Sso.Impl</id>
-    <version>4.13.11.11</version>
+    <version>4.13.11.22</version>
     <title>Atlantis Framework Sso</title>
     <authors>$author$</authors>
     <owners>$author$</owners>

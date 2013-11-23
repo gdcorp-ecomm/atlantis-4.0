@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Atlantis.Framework.DotTypeValidation.Interface;
 using Atlantis.Framework.Providers.DotTypeRegistration.Factories;
 using Atlantis.Framework.Providers.DotTypeRegistration.Handlers;
@@ -105,6 +106,22 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration
           success = TransformFormSchemaToFormFields(domains, dotTypeFormSchema, out formFieldsByDomain);
           if (success)
           {
+            var addtlFormFieldsByDomain = AddAdditionalFormFields(domains, dotTypeFormsLookup.Placement, dotTypeFormsLookup.Tld, dotTypeFormsLookup.Phase);
+
+            foreach (var main in formFieldsByDomain)
+            {
+              foreach (var addtl in addtlFormFieldsByDomain)
+              {
+                if (addtl.Key.Equals(main.Key))
+                {
+                  foreach (var formFieldList in addtl.Value)
+                  {
+                    main.Value.Add(formFieldList);
+                  }
+                }
+              }
+            }
+
             dotTypeFormFieldsByDomain = new DotTypeFormFieldsByDomain(formFieldsByDomain);
           }
         }
@@ -202,6 +219,30 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration
       }
 
       return success;
+    }
+
+    private static Dictionary<string, IList<IList<IFormField>>> AddAdditionalFormFields(IEnumerable<string> domains, string clientApp, string tld, string phase)
+    {
+      var result = new Dictionary<string, IList<IList<IFormField>>>(StringComparer.OrdinalIgnoreCase);
+
+      foreach (var domain in domains)
+      {
+        var lst = new List<IList<IFormField>>(3)
+        {
+          GetHiddenFormField("clientapp", clientApp),
+          GetHiddenFormField("tld", tld),
+          GetHiddenFormField("phase", phase)
+        };
+
+        result[domain] = lst;
+      }
+
+      return result;
+    }
+
+    private static List<IFormField> GetHiddenFormField(string name, string value)
+    {
+      return new List<IFormField> {new FormField {Value = value, Type = FormFieldTypes.Hidden, Name = name}};
     }
 
     public bool ValidateData(string clientApplication, string serverName, string tld, string phase, string category, Dictionary<string, string> fields,

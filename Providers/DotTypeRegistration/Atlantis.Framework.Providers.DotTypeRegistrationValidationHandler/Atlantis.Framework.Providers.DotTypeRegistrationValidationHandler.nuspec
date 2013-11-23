@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <package >
   <metadata>
-    <id>Atlantis.Framework.Providers.DotTypeRegistration</id>
+    <id>Atlantis.Framework.Providers.DotTypeRegistrationValidationHandler</id>
     <version>4.13.11.18</version>
-    <title>Atlantis Framework Providers DotTypeRegistration</title>
+    <title>Atlantis Framework Providers DotTypeRegistrationValidationHandler</title>
     <authors>$author$</authors>
     <owners>$author$</owners>
     <projectUrl>https://confluence.int.godaddy.com/display/ATLANTIS</projectUrl>
@@ -11,6 +11,6 @@
     <description>$description$</description>
     <releaseNotes></releaseNotes>
     <copyright>$copyright$</copyright>
-    <tags>Atlantis Framework Providers DotTypeRegistration</tags>
+    <tags>Atlantis Framework Providers DotTypeRegistrationValidationHandler</tags>
   </metadata>
 </package>

@@ -9,7 +9,7 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration.Interface
 
     bool GetDotTypeFormSchemas(IDotTypeFormLookup dotTypeFormsLookup, string[] domains, out IDotTypeFormFieldsByDomain dotTypeFormFieldsByDomain);
 
-    bool ValidateData(string clientApplication, string serverName, string tld, string phase, string category, Dictionary<string, string> fields,
+    bool ValidateData(string clientApplication, string tld, string phase, Dictionary<string, string> fields,
                                out DotTypeValidationResponseData validationResponseData);
   }
 }

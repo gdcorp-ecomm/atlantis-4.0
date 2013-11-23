@@ -9,17 +9,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Provider
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Providers.DotTypeRegistration.Tests", "Atlantis.Framework.Providers.DotTypeRegistration.Tests\Atlantis.Framework.Providers.DotTypeRegistration.Tests.csproj", "{A25C3C7F-EE8F-4457-BC50-AED55EE4D8DE}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{01D9D9F7-30DB-4E22-892A-726C1C95B3FA}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Providers.DotTypeRegistrationValidationHandler", "Atlantis.Framework.Providers.DotTypeRegistrationValidationHandler\Atlantis.Framework.Providers.DotTypeRegistrationValidationHandler.csproj", "{A3B605C9-066F-4599-824A-D1928C2318D0}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Web.DynamicRouteHandler", "..\..\Atlantis.Framework.Web.DynamicRouteHandler\Atlantis.Framework.Web.DynamicRouteHandler\Atlantis.Framework.Web.DynamicRouteHandler.csproj", "{1043C8B5-936F-449D-B3E9-DBA5129151E4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Web.DotTypeRegistrationValidationHandler.TestWeb", "Atlantis.Framework.Web.DotTypeRegistrationValidationHandler.TestWeb\Atlantis.Framework.Web.DotTypeRegistrationValidationHandler.TestWeb.csproj", "{C7FB6940-3382-46D7-B447-55ADFDB1784A}"
 EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 7
+		SccNumberOfProjects = 6
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
 		SccLocalPath0 = .
@@ -35,13 +31,9 @@ Global
 		SccProjectUniqueName4 = Atlantis.Framework.Providers.DotTypeRegistrationValidationHandler\\Atlantis.Framework.Providers.DotTypeRegistrationValidationHandler.csproj
 		SccProjectName4 = Atlantis.Framework.Providers.DotTypeRegistrationValidationHandler
 		SccLocalPath4 = Atlantis.Framework.Providers.DotTypeRegistrationValidationHandler
-		SccProjectUniqueName5 = ..\\..\\Atlantis.Framework.Web.DynamicRouteHandler\\Atlantis.Framework.Web.DynamicRouteHandler\\Atlantis.Framework.Web.DynamicRouteHandler.csproj
-		SccProjectTopLevelParentUniqueName5 = DotTypeRegistration.sln
-		SccProjectName5 = ../../Atlantis.Framework.Web.DynamicRouteHandler/Atlantis.Framework.Web.DynamicRouteHandler
-		SccLocalPath5 = ..\\..\\Atlantis.Framework.Web.DynamicRouteHandler\\Atlantis.Framework.Web.DynamicRouteHandler
-		SccProjectUniqueName6 = Atlantis.Framework.Web.DotTypeRegistrationValidationHandler.TestWeb\\Atlantis.Framework.Web.DotTypeRegistrationValidationHandler.TestWeb.csproj
-		SccProjectName6 = Atlantis.Framework.Web.DotTypeRegistrationValidationHandler.TestWeb
-		SccLocalPath6 = Atlantis.Framework.Web.DotTypeRegistrationValidationHandler.TestWeb
+		SccProjectUniqueName5 = Atlantis.Framework.Web.DotTypeRegistrationValidationHandler.TestWeb\\Atlantis.Framework.Web.DotTypeRegistrationValidationHandler.TestWeb.csproj
+		SccProjectName5 = Atlantis.Framework.Web.DotTypeRegistrationValidationHandler.TestWeb
+		SccLocalPath5 = Atlantis.Framework.Web.DotTypeRegistrationValidationHandler.TestWeb
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -64,10 +56,6 @@ Global
 		{A3B605C9-066F-4599-824A-D1928C2318D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A3B605C9-066F-4599-824A-D1928C2318D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A3B605C9-066F-4599-824A-D1928C2318D0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1043C8B5-936F-449D-B3E9-DBA5129151E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1043C8B5-936F-449D-B3E9-DBA5129151E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1043C8B5-936F-449D-B3E9-DBA5129151E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1043C8B5-936F-449D-B3E9-DBA5129151E4}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C7FB6940-3382-46D7-B447-55ADFDB1784A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C7FB6940-3382-46D7-B447-55ADFDB1784A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C7FB6940-3382-46D7-B447-55ADFDB1784A}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -75,8 +63,5 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{1043C8B5-936F-449D-B3E9-DBA5129151E4} = {01D9D9F7-30DB-4E22-892A-726C1C95B3FA}
 	EndGlobalSection
 EndGlobal

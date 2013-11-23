@@ -151,7 +151,7 @@
     </Reference>
     <Reference Include="Atlantis.Framework.Providers.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.Providers.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Providers.Interface.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.Providers.Interface.4.13.10.25\lib\net40\Atlantis.Framework.Providers.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Providers.Localization">
       <HintPath>..\packages\Atlantis.Framework.Providers.Localization.4.13.11.19\lib\net40\Atlantis.Framework.Providers.Localization.dll</HintPath>
@@ -198,6 +198,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Atlantis.Framework.TLDDataCache.Interface.4.13.10.14\lib\net40\Atlantis.Framework.TLDDataCache.Interface.dll</HintPath>
     </Reference>
+    <Reference Include="Atlantis.Framework.Web.DynamicRouteHandler, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Web.DynamicRouteHandler.4.13.11.18\lib\net40\Atlantis.Framework.Web.DynamicRouteHandler.dll</HintPath>
+    </Reference>
     <Reference Include="netConnect">
       <HintPath>..\packages\Atlantis.Framework.Nimitz.4.0.0.0\lib\net40\netConnect.dll</HintPath>
     </Reference>
@@ -208,10 +212,6 @@
     <Reference Include="System.Web" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Atlantis.Framework.Web.DynamicRouteHandler\Atlantis.Framework.Web.DynamicRouteHandler\Atlantis.Framework.Web.DynamicRouteHandler.csproj">
-      <Project>{1043c8b5-936f-449d-b3e9-dba5129151e4}</Project>
-      <Name>Atlantis.Framework.Web.DynamicRouteHandler</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.Providers.DotTypeRegistration.Interface\Atlantis.Framework.Providers.DotTypeRegistration.Interface.csproj">
       <Project>{35b615cd-c78e-484c-92c5-d54cd0b86cd2}</Project>
       <Name>Atlantis.Framework.Providers.DotTypeRegistration.Interface</Name>

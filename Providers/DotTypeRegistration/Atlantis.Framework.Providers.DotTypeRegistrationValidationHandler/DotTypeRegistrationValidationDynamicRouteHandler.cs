@@ -39,11 +39,6 @@ namespace Atlantis.Framework.Providers.DotTypeRegistrationValidationHandler
       get { return HttpContext.Current.Request.Form[VALIDATE_FIELD_PREFIX + "clientapp"]; }
     }
 
-    private static string ServerName
-    {
-      get { return Environment.MachineName; }
-    }
-
     private static string Tld
     {
       get { return HttpContext.Current.Request.Form[VALIDATE_FIELD_PREFIX + "tld"]; }
@@ -52,11 +47,6 @@ namespace Atlantis.Framework.Providers.DotTypeRegistrationValidationHandler
     private static string Phase
     {
       get { return HttpContext.Current.Request.Form[VALIDATE_FIELD_PREFIX + "phase"]; }
-    }
-
-    private static string Category
-    {
-      get { return "apptoken"; }
     }
 
     private static Dictionary<string, string> ValidationFields
@@ -111,7 +101,7 @@ namespace Atlantis.Framework.Providers.DotTypeRegistrationValidationHandler
           statusCode = 400;
         }
 
-        DotTypeRegistrationProvider.ValidateData(ClientApplication, ServerName, Tld, Phase, Category, ValidationFields, out validationResponse);
+        DotTypeRegistrationProvider.ValidateData(ClientApplication, Tld, Phase, ValidationFields, out validationResponse);
       }
       catch (AtlantisException ex)
       {

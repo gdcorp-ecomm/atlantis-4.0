@@ -35,8 +35,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Atlantis.Framework.DotTypeValidation.Interface">
-      <HintPath>..\packages\Atlantis.Framework.DotTypeValidation.Interface.4.13.11.11\lib\net40\Atlantis.Framework.DotTypeValidation.Interface.dll</HintPath>
+    <Reference Include="Atlantis.Framework.DotTypeValidation.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.DotTypeValidation.Interface.4.13.11.18\lib\net40\Atlantis.Framework.DotTypeValidation.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Engine">
       <HintPath>..\packages\Atlantis.Framework.Engine.4.0.0.0\lib\net40\Atlantis.Framework.Engine.dll</HintPath>
@@ -56,6 +57,10 @@
     <Reference Include="Atlantis.Framework.Providers.RenderPipeline.Interface">
       <HintPath>..\packages\Atlantis.Framework.Providers.RenderPipeline.Interface.4.13.10.16\lib\net40\Atlantis.Framework.Providers.RenderPipeline.Interface.dll</HintPath>
     </Reference>
+    <Reference Include="Atlantis.Framework.Web.DynamicRouteHandler, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Web.DynamicRouteHandler.4.13.11.18\lib\net40\Atlantis.Framework.Web.DynamicRouteHandler.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.5.0.8\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -73,10 +78,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Atlantis.Framework.Web.DynamicRouteHandler\Atlantis.Framework.Web.DynamicRouteHandler\Atlantis.Framework.Web.DynamicRouteHandler.csproj">
-      <Project>{1043c8b5-936f-449d-b3e9-dba5129151e4}</Project>
-      <Name>Atlantis.Framework.Web.DynamicRouteHandler</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.Providers.DotTypeRegistration.Interface\Atlantis.Framework.Providers.DotTypeRegistration.Interface.csproj">
       <Project>{35b615cd-c78e-484c-92c5-d54cd0b86cd2}</Project>
       <Name>Atlantis.Framework.Providers.DotTypeRegistration.Interface</Name>

@@ -14,7 +14,7 @@ namespace Atlantis.Framework.DotTypeValidation.Tests
     {
       var fields = new Dictionary<string, string>();
       fields["legaltype"] = "CCO";
-      var request = new DotTypeValidationRequestData("dpp_absol", "d1wsdv", 1577, "LR", "apptoken", fields);
+      var request = new DotTypeValidationRequestData("dpp_absol", "d1wsdv", 303, "GA", "apptoken", fields);
       var response = (DotTypeValidationResponseData)Engine.Engine.ProcessRequest(request, 695);
       Assert.AreEqual(true, response.IsSuccess);
       Assert.AreEqual(true, !string.IsNullOrEmpty(response.ToXML()));      

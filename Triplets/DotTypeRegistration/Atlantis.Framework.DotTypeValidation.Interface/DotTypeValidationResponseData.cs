@@ -89,9 +89,9 @@ namespace Atlantis.Framework.DotTypeValidation.Interface
           {
             _hasErrors = false;
             _token = rootElement.Value;
-          }
 
-          _isSuccess = true;
+            _isSuccess = true;
+          }
         }
       }
       catch (Exception ex)

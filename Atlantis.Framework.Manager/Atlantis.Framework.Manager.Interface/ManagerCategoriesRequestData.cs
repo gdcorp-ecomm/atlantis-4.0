@@ -14,7 +14,8 @@ namespace Atlantis.Framework.Manager.Interface
 
     public override string GetCacheMD5()
     {
-      return ManagerUserId.ToString(CultureInfo.InvariantCulture);
+      // The "\v2" is to have the MD5 be different so it doesn't namespace clash with the previous ManagerCategories DLL.
+      return ManagerUserId.ToString(CultureInfo.InvariantCulture) + "\v2";
     }
   }
 }

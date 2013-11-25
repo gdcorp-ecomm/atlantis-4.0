@@ -13,7 +13,8 @@ namespace Atlantis.Framework.Manager.Interface
 
     public override string GetCacheMD5()
     {
-      return WindowsUserName.ToLowerInvariant();
+      // The "\v2" is to have the MD5 be different so it doesn't namespace clash with the previous ManagerUser DLL.
+      return WindowsUserName.ToLowerInvariant() + "\v2";
     }
   }
 }

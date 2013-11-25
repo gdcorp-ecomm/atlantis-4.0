@@ -21,7 +21,6 @@ namespace Atlantis.Framework.Manager.Interface
       }
 
       int managerUserId;
-      string loginName;
 
       var dataElement = XElement.Parse(cacheDataXml);
       var item = dataElement.Descendants("item").FirstOrDefault();

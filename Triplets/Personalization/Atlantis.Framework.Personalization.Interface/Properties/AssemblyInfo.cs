@@ -6,8 +6,13 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Atlantis.Framework.Personalization.Interface")]
-[assembly: AssemblyDescription("")]
-[assembly: AssemblyConfiguration("")]
+#if DEBUG
+[assembly: AssemblyDescription("Debug Build")]
+[assembly: AssemblyConfiguration("Debug")]
+#else
+[assembly: AssemblyDescription("Release Build")]
+[assembly: AssemblyConfiguration("Release")]
+#endif
 [assembly: AssemblyCompany("Microsoft")]
 [assembly: AssemblyProduct("Atlantis.Framework.Personalization.Interface")]
 [assembly: AssemblyCopyright("Copyright © Microsoft 2013")]
@@ -33,4 +38,4 @@ using System.Runtime.InteropServices;
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("4.0.0.0")]
-[assembly: AssemblyFileVersion("4.13.10.22")]
+[assembly: AssemblyFileVersion("4.13.11.25")]

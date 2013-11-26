@@ -68,6 +68,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="atlantis.config" />
+    <None Include="Atlantis.Framework.Personalization.Interface.nuget.bat" />
+    <None Include="Atlantis.Framework.Personalization.Interface.nuspec" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

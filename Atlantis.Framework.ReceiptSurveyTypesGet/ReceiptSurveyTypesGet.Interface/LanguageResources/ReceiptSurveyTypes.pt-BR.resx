@@ -117,13 +117,130 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="passwordMinimum" xml:space="preserve">
-    <value>{0} deve ter, no mínimo, 9 caracteres.</value>
+  <data name="surveySelectOne" xml:space="preserve">
+    <value>Selecione um...</value>
   </data>
-  <data name="passwordUcNumSpace" xml:space="preserve">
-    <value>{0} deve conter pelo menos 1 letra maiúscula, 1 número e não pode iniciar nem terminar com um espaço</value>
+  <data name="surveyTvOther" xml:space="preserve">
+    <value>TV - Outro</value>
   </data>
-  <data name="unknownFailure" xml:space="preserve">
-    <value>Falha desconhecida.</value>
+  <data name="surveyRBy" xml:space="preserve">
+    <value>Recomendado por alguém/amigo</value>
+  </data>
+  <data name="surveySE" xml:space="preserve">
+    <value>Mecanismo de pesquisa</value>
+  </data>
+  <data name="surveyPA" xml:space="preserve">
+    <value>Imprimir anúncio (revista etc.)</value>
+  </data>
+  <data name="surveyAlreadyCust" xml:space="preserve">
+    <value>Eu já sou um cliente</value>
+  </data>
+  <data name="surveyOther" xml:space="preserve">
+    <value>Outro</value>
+  </data>
+  <data name="surveyTvSB" xml:space="preserve">
+    <value>TV - Super Bowl</value>
+  </data>
+  <data name="surveyTvIndy" xml:space="preserve">
+    <value>TV - Fórmula Indy</value>
+  </data>
+  <data name="surveyTvNC" xml:space="preserve">
+    <value>TV - NASCAR</value>
+  </data>
+  <data name="surveyTvMLB" xml:space="preserve">
+    <value>TV - Liga de basebol</value>
+  </data>
+  <data name="surveyTvCBB" xml:space="preserve">
+    <value>TV - Basquete universitário</value>
+  </data>
+  <data name="surveyTvFB" xml:space="preserve">
+    <value>TV - Futebol americano</value>
+  </data>
+  <data name="surveyTvCF" xml:space="preserve">
+    <value>TV - Futebol americano universitário</value>
+  </data>
+  <data name="surveyTvBB" xml:space="preserve">
+    <value>TV - Basquete</value>
+  </data>
+  <data name="surveyTvNBA" xml:space="preserve">
+    <value>TV - NBA</value>
+  </data>
+  <data name="surveyMNS" xml:space="preserve">
+    <value>Mídia/Notícia</value>
+  </data>
+  <data name="surveyTvMMA" xml:space="preserve">
+    <value>TV - Mixed Martial Arts</value>
+  </data>
+  <data name="surveyTvSEF" xml:space="preserve">
+    <value>TV - Futebol/Futebol Europeu</value>
+  </data>
+  <data name="surveySM" xml:space="preserve">
+    <value>Twitter, Facebook, LinkedIn</value>
+  </data>
+  <data name="surveyTvBoxing" xml:space="preserve">
+    <value>TV - Boxe</value>
+  </data>
+  <data name="surveyTvTennis" xml:space="preserve">
+    <value>TV - Tênis</value>
+  </data>
+  <data name="surveyBillboard" xml:space="preserve">
+    <value>Billboard</value>
+  </data>
+  <data name="surveyTvHockey" xml:space="preserve">
+    <value>TV - Hóquei</value>
+  </data>
+  <data name="surveyTvRugby" xml:space="preserve">
+    <value>TV - Rugby</value>
+  </data>
+  <data name="surveyTvNFL" xml:space="preserve">
+    <value>TV - NFL</value>
+  </data>
+  <data name="surveyTvDewTour" xml:space="preserve">
+    <value>TV - O Dew Tour</value>
+  </data>
+  <data name="surveyTvGDB" xml:space="preserve">
+    <value>TV - Go Daddy Bowl</value>
+  </data>
+  <data name="surveyTvCricket" xml:space="preserve">
+    <value>TV - Cricket</value>
+  </data>
+  <data name="surveyTvAFL" xml:space="preserve">
+    <value>TV - AFL</value>
+  </data>
+  <data name="surveyTvSoccer" xml:space="preserve">
+    <value>TV - Futebol</value>
+  </data>
+  <data name="surveyTvFutbol" xml:space="preserve">
+    <value>TV - Futebol</value>
+  </data>
+  <data name="surveyTvFO" xml:space="preserve">
+    <value>TV - Fórmula 1</value>
+  </data>
+  <data name="surveyTvV8" xml:space="preserve">
+    <value>TV - Corrida V8</value>
+  </data>
+  <data name="surveyTvFooty" xml:space="preserve">
+    <value>TV - Futebol</value>
+  </data>
+  <data name="surveyTvSLTV" xml:space="preserve">
+    <value>TV - TV em espanhol</value>
+  </data>
+  <data name="surveyTvTTS" xml:space="preserve">
+    <value>TV - The Today Show</value>
+  </data>
+  <data name="surveyTvYT" xml:space="preserve">
+    <value>YouTube</value>
+  </data>
+  <data name="surveyTvDD" xml:space="preserve">
+    <value>TV - Caverna do Dragão</value>
+  </data>
+  <data name="surveyEventOnlineTraining" xml:space="preserve">
+    <value>Treinamento online</value>
+  </data>
+  <data name="surveyEventTradeshowExpo" xml:space="preserve">
+    <value>Feira/Exposição</value>
+  </data>
+  <data name="surveyEventWorkshop" xml:space="preserve">
+    <value>Workshop/Oficina</value>
   </data>
 </root>

@@ -118,10 +118,10 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="passwordMinimum" xml:space="preserve">
-    <value>{0}debe tener como mínimo 9 caracteres.</value>
+    <value>{0}  debe tener 9 caracteres como mínimo.</value>
   </data>
   <data name="passwordUcNumSpace" xml:space="preserve">
-    <value>{0}debe contener por lo menos 1 letra mayúscula, 1 número y no puede empezar o terminar con un espacio.</value>
+    <value>{0} debe incluir por lo menos 1 letra en mayúscula, 1 número y no puede comenzar ni finalizar con un espacio.</value>
   </data>
   <data name="unknownFailure" xml:space="preserve">
     <value>Error desconocido.</value>

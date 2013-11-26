@@ -11,12 +11,16 @@ using Atlantis.Framework.Testing.MockHttpContext;
 using Atlantis.Framework.Testing.MockProviders;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Diagnostics;
+using Atlantis.Framework.Providers.PlaceHolder.PlaceHolders;
+using Atlantis.Framework.Providers.Personalization;
+using Atlantis.Framework.Providers.Personalization.Interface;
 
 namespace Atlantis.Framework.Providers.PlaceHolder.Tests
 {
   [TestClass]
   [DeploymentItem("atlantis.config")]
   [DeploymentItem("Atlantis.Framework.CDS.Impl.dll")]
+  [DeploymentItem("Atlantis.Framework.Personalization.Impl.dll")]
   public class PlaceHolderProviderTests
   {
     public static IProviderContainer InitializeProviderContainer()
@@ -28,6 +32,8 @@ namespace Atlantis.Framework.Providers.PlaceHolder.Tests
       providerContainer.RegisterProvider<IPlaceHolderProvider, PlaceHolderProvider>();
       providerContainer.RegisterProvider<ICDSContentProvider, CDSContentProvider>();
       providerContainer.RegisterProvider<IRenderPipelineProvider, RenderPipelineProvider>();
+      providerContainer.RegisterProvider<IPersonalizationProvider, PersonalizationProvider>();
+
 
       return providerContainer;
     }
@@ -401,6 +407,26 @@ namespace Atlantis.Framework.Providers.PlaceHolder.Tests
 
       Assert.IsFalse(renderedContent.Contains("[@P["), "Nested CDS Document placeholder not rendered");
       Assert.IsTrue(renderedContent.Contains("/>APPENDED RENDER HANDLER CONTENT!!!APPENDED RENDER HANDLER CONTENT!!!"));
+    }
+
+    [TestMethod]
+    public void RenderTMSDocumentValid()
+    {
+      MockHttpRequest mockHttpRequest = new MockHttpRequest("http://www.debug.godaddy-com.ide/?QA--FakeShopperId=912111&version=atlantis/tms/_default|5293c0ecf778fc29c8ead7cf");
+      MockHttpContext.SetFromWorkerRequest(mockHttpRequest);
+
+      IPlaceHolder placeHolder = new TMSDocumentPlaceHolder("atlantis", "2", "homepage", "Tag1");
+
+      IProviderContainer providerContainer = InitializeProviderContainer();
+      providerContainer.SetData<bool>("MockSiteContextSettings.IsRequestInternal", true);
+
+      IPlaceHolderProvider placeHolderProvider = providerContainer.Resolve<IPlaceHolderProvider>();
+
+      string renderedContent = placeHolderProvider.ReplacePlaceHolders(placeHolder.ToMarkup(), null);
+
+      WriteOutput(renderedContent);
+
+      Assert.IsTrue(!string.IsNullOrEmpty(renderedContent), "Empty document returned!");
     }
   }
 }

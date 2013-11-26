@@ -12,15 +12,15 @@ namespace Atlantis.Framework.Providers.PlaceHolder
 
     private static readonly IList<IPlaceHolderHandler> _emptyChildrenList = new List<IPlaceHolderHandler>(0);
 
-    private readonly IPlaceHolderHandlerContext _context;
+    protected IPlaceHolderHandlerContext Context { get; private set; }
     private string _renderedContent;
 
     internal CDSDocumentPlaceHolderHandler(IPlaceHolderHandlerContext context)
     {
-      _context = context;
+      Context = context;
     }
 
-    public string Markup { get { return _context.Markup; } }
+    public string Markup { get { return Context.Markup; } }
 
     private IList<IPlaceHolderHandler> _children;
     public IList<IPlaceHolderHandler> Children
@@ -32,11 +32,11 @@ namespace Atlantis.Framework.Providers.PlaceHolder
     {
       get
       {
-        int recursionCount = _context.ProviderContainer.GetData(PLACEHOLDER_COUNT_KEY, -1);
+        int recursionCount = Context.ProviderContainer.GetData(PLACEHOLDER_COUNT_KEY, -1);
 
         if (recursionCount == -1)
         {
-          _context.ProviderContainer.SetData(PLACEHOLDER_COUNT_KEY, 0);
+          Context.ProviderContainer.SetData(PLACEHOLDER_COUNT_KEY, 0);
           recursionCount = 0;
         }
 
@@ -44,31 +44,31 @@ namespace Atlantis.Framework.Providers.PlaceHolder
       }
       set
       {
-        _context.ProviderContainer.SetData(PLACEHOLDER_COUNT_KEY, value);
+        Context.ProviderContainer.SetData(PLACEHOLDER_COUNT_KEY, value);
       }
     }
 
     private bool HasHitPlaceHolderLimit
     {
-      get { return PlaceHolderCount >= PlaceHolderRules.PlaceHolderLimit(_context.ProviderContainer); }
+      get { return PlaceHolderCount >= PlaceHolderRules.PlaceHolderLimit(Context.ProviderContainer); }
     }
 
-    private void LogError(string message, string sourceFunction)
+    protected void LogError(string message, string sourceFunction)
     {
-      _context.DebugContextErrors.Add(message);
-      ErrorLogger.LogException(message, sourceFunction, _context.Data);
+      Context.DebugContextErrors.Add(message);
+      ErrorLogger.LogException(message, sourceFunction, Context.Data);
     }
 
-    private string GetContent()
+    protected virtual string GetContent()
     {
       string renderContent = string.Empty;
       ICDSContentProvider cdsContentProvider;
 
-      if (_context.ProviderContainer.TryResolve(out cdsContentProvider))
+      if (Context.ProviderContainer.TryResolve(out cdsContentProvider))
       {
         try
         {
-          PlaceHolderData placeHolderData = new PlaceHolderData(_context.Data);
+          PlaceHolderData placeHolderData = new PlaceHolderData(Context.Data);
 
           string app;
           string location;
@@ -77,8 +77,8 @@ namespace Atlantis.Framework.Providers.PlaceHolder
           {
             string rawContent = cdsContentProvider.GetContent(app, location).Content;
 
-            IRenderPipelineProvider renderPipelineProvider = _context.ProviderContainer.Resolve<IRenderPipelineProvider>();
-            renderContent = renderPipelineProvider.RenderContent(rawContent, _context.RenderHandlers);
+            IRenderPipelineProvider renderPipelineProvider = Context.ProviderContainer.Resolve<IRenderPipelineProvider>();
+            renderContent = renderPipelineProvider.RenderContent(rawContent, Context.RenderHandlers);
           }
           else
           {
@@ -87,7 +87,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder
         }
         catch (Exception ex)
         {
-          string errorMessage = string.Format("PlaceHolder render error. Type: {0}, Message: {1}", _context.Type, ex.Message);
+          string errorMessage = string.Format("PlaceHolder render error. Type: {0}, Message: {1}", Context.Type, ex.Message);
           LogError(errorMessage, "CDSDocumentPlaceHolderHandler.Render()");
         }
       }
@@ -102,14 +102,14 @@ namespace Atlantis.Framework.Providers.PlaceHolder
       _children = _emptyChildrenList;
       _renderedContent = string.Empty;
 
-      string errorMessage = string.Format("PlaceHolder render error. Type: {0}, Message: {1}", _context.Type, "You have hit the placeholder limit of" + PlaceHolderRules.PlaceHolderLimit(_context.ProviderContainer) + " for nested placeholders. Please make sure you do not have a circular reference.");
+      string errorMessage = string.Format("PlaceHolder render error. Type: {0}, Message: {1}", Context.Type, "You have hit the placeholder limit of" + PlaceHolderRules.PlaceHolderLimit(Context.ProviderContainer) + " for nested placeholders. Please make sure you do not have a circular reference.");
       LogError(errorMessage, "CDSDocumentPlaceHolderHandler.HandlePlaceHolderLimit()");
     }
 
     private void ProcessChildPlaceHolders()
     {
       _renderedContent = GetContent();
-      _children = PlaceHolderHandlerManager.GetPlaceHolderHandlers(_renderedContent, _context.RenderHandlers, _context.DebugContextErrors, _context.ProviderContainer);
+      _children = PlaceHolderHandlerManager.GetPlaceHolderHandlers(_renderedContent, Context.RenderHandlers, Context.DebugContextErrors, Context.ProviderContainer);
     }
 
     public void Initialize()

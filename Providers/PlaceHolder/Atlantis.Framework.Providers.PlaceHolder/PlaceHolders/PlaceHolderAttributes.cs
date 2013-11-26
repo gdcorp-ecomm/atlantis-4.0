@@ -7,5 +7,8 @@ namespace Atlantis.Framework.Providers.PlaceHolder
     internal const string Application = "app";
     internal const string Assembly = "assembly";
     internal const string Type = "type";
+    internal const string InteractionPoint = "interactionpoint";
+    internal const string MessageTag = "messagetag";
+    internal const string TMSAppId = "tmsappid";
   }
 }

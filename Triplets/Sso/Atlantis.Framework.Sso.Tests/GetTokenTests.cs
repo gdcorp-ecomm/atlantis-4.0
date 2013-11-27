@@ -44,7 +44,7 @@ namespace Atlantis.Framework.Sso.Tests
     
     public void TestSetup()
     {
-      tokenRequest = new SsoValidateShopperAndGetTokenRequestData(username, password,  privateLabelId, clientIp);
+      tokenRequest = new SsoValidateShopperAndGetTokenRequestData(username, password,  privateLabelId, clientIp, "testUserAgent");
       tokenResponse = (SsoValidateShopperAndGetTokenResponseData)Engine.Engine.ProcessRequest(tokenRequest, SsoEngineRequests.SsoValidateShopperAndGetTokenRequest);
 
       tokenRequestInvalid = new SsoValidateShopperAndGetTokenRequestData("junk", password,  privateLabelId, clientIp);
@@ -237,6 +237,7 @@ namespace Atlantis.Framework.Sso.Tests
 
     [TestMethod]
     [ExpectedException(typeof(AtlantisException))]
+    [Ignore]
     public void ExceptionInvalidHttpResponseType()
     {
       try

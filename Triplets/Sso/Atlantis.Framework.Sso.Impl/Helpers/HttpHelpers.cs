@@ -10,7 +10,7 @@ namespace Atlantis.Framework.Sso.Impl.Helpers
 {
   internal static class HttpHelpers
   {
-    public static HttpWebRequest GetHttpWebRequestAndAddData(string wsUrl, string urlEncodedData, string contentType, string httpMethod, TimeSpan timeout, X509Certificate2 clientCert = null)
+    public static HttpWebRequest GetHttpWebRequestAndAddData(string wsUrl, string urlEncodedData, string contentType, string httpMethod, TimeSpan timeout, string userAgent = null, X509Certificate2 clientCert = null)
     {
       var httpWebRequest = (HttpWebRequest)WebRequest.Create(wsUrl);
       httpWebRequest.Method = httpMethod;
@@ -20,6 +20,11 @@ namespace Atlantis.Framework.Sso.Impl.Helpers
       if (clientCert != null)
       {
         httpWebRequest.ClientCertificates.Add(clientCert);
+      }
+
+      if (!string.IsNullOrEmpty(userAgent))
+      {
+        httpWebRequest.UserAgent = userAgent;
       }
 
       if (urlEncodedData != null)

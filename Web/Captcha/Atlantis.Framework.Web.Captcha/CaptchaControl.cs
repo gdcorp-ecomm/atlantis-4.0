@@ -1,9 +1,11 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Security.Permissions;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Atlantis.Framework.Web.CaptchaCtl.Constants;
 using BotDetect.Web;
 using BotDetect.Web.UI;
 using System.Web.UI.HtmlControls;
@@ -180,6 +182,7 @@ ToolboxData(
         if (_currentCaptchaControl == null)
         {
           _currentCaptchaControl = new Captcha(CaptchaID);
+          _currentCaptchaControl.Locale = SupportedLocales.GetLocaleOrReturnDefaultIfNotSupported(Locale);
         }
         return _currentCaptchaControl;
       }
@@ -440,11 +443,15 @@ ToolboxData(
       }
     }
 
-    [
-    Browsable(false),
-    DesignerSerializationVisibility(
-        DesignerSerializationVisibility.Hidden)
-    ]
+    private string _locale = "en-US";
+    [Description("Locale used to display captcha"), Category("Behavior")]
+    public string Locale
+    {
+      get { return _locale; }
+      set { _locale = value; }
+    }
+
+    [Browsable(false),DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
     public TemplateOwner Owner
     {
       get
@@ -774,7 +781,7 @@ ToolboxData(
 
       LiteralControl validateButton = new LiteralControl("<div class=\"g-btn-lg g-btn-prg defaultcaptchaValidate\" style=\"border: none; cursor: pointer\">Validate</div>");
       inputcontainerDiv.Controls.Add(validateButton);
-      
+
       outerContainer.Controls.Add(inputcontainerDiv);
 
       owner.Controls.Add(outerContainer);

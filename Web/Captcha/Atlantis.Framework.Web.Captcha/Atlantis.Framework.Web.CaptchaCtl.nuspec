@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>Atlantis.Framework.Web.CaptchaCtl</id>
-    <version>4.13.7.18</version>
+    <version>4.13.11.27</version>
     <title>Atlantis Framework Web CaptchaCtl</title>
     <authors>$author$</authors>
     <owners>$author$</owners>
@@ -16,5 +16,50 @@
       <dependency id="Atlantis.Framework.Web.Stash" version="4.13.7.17" />
     </dependencies>
   </metadata>
-  <files />
+  <files>
+    <file src="BotDetectSounds\Pronunciation_Arabic_AE.bdsp" target="lib\net40\BotDetectSounds\Pronunciation_Arabic_AE.bdsp" />
+    <file src="BotDetectSounds\Pronunciation_Bulgarian_BG.bdsp" target="lib\net40\BotDetectSounds\Pronunciation_Bulgarian_BG.bdsp" />
+    <file src="BotDetectSounds\Pronunciation_Cantonese_HK.bdsp" target="lib\net40\BotDetectSounds\Pronunciation_Cantonese_HK.bdsp" />
+    <file src="BotDetectSounds\Pronunciation_Croatian_HR.bdsp" target="lib\net40\BotDetectSounds\Pronunciation_Croatian_HR.bdsp" />
+    <file src="BotDetectSounds\Pronunciation_Czech_CZ.bdsp" target="lib\net40\BotDetectSounds\Pronunciation_Czech_CZ.bdsp" />
+    <file src="BotDetectSounds\Pronunciation_Danish_DK.bdsp" target="lib\net40\BotDetectSounds\Pronunciation_Danish_DK.bdsp" />
+    <file src="BotDetectSounds\Pronunciation_Dutch_NL.bdsp" target="lib\net40\BotDetectSounds\Pronunciation_Dutch_NL.bdsp" />
+    <file src="BotDetectSounds\Pronunciation_English_AU.bdsp" target="lib\net40\BotDetectSounds\Pronunciation_English_AU.bdsp" />
+    <file src="BotDetectSounds\Pronunciation_English_CA.bdsp" target="lib\net40\BotDetectSounds\Pronunciation_English_CA.bdsp" />
+    <file src="BotDetectSounds\Pronunciation_English_GB.bdsp" target="lib\net40\BotDetectSounds\Pronunciation_English_GB.bdsp" />
+    <file src="BotDetectSounds\Pronunciation_English_IN.bdsp" target="lib\net40\BotDetectSounds\Pronunciation_English_IN.bdsp" />
+    <file src="BotDetectSounds\Pronunciation_Estonian_EE.bdsp" target="lib\net40\BotDetectSounds\Pronunciation_Estonian_EE.bdsp" />
+    <file src="BotDetectSounds\Pronunciation_Finnish_FI.bdsp" target="lib\net40\BotDetectSounds\Pronunciation_Finnish_FI.bdsp" />
+    <file src="BotDetectSounds\Pronunciation_French_CA.bdsp" target="lib\net40\BotDetectSounds\Pronunciation_French_CA.bdsp" />
+    <file src="BotDetectSounds\Pronunciation_French_FR.bdsp" target="lib\net40\BotDetectSounds\Pronunciation_French_FR.bdsp" />
+    <file src="BotDetectSounds\Pronunciation_German_DE.bdsp" target="lib\net40\BotDetectSounds\Pronunciation_German_DE.bdsp" />
+    <file src="BotDetectSounds\Pronunciation_Greek_GR.bdsp" target="lib\net40\BotDetectSounds\Pronunciation_Greek_GR.bdsp" />
+    <file src="BotDetectSounds\Pronunciation_Hebrew_IL.bdsp" target="lib\net40\BotDetectSounds\Pronunciation_Hebrew_IL.bdsp" />
+    <file src="BotDetectSounds\Pronunciation_Hindi_IN.bdsp" target="lib\net40\BotDetectSounds\Pronunciation_Hindi_IN.bdsp" />
+    <file src="BotDetectSounds\Pronunciation_Hungarian_HU.bdsp" target="lib\net40\BotDetectSounds\Pronunciation_Hungarian_HU.bdsp" />
+    <file src="BotDetectSounds\Pronunciation_Icelandic_IS.bdsp" target="lib\net40\BotDetectSounds\Pronunciation_Icelandic_IS.bdsp" />
+    <file src="BotDetectSounds\Pronunciation_Italian_IT.bdsp" target="lib\net40\BotDetectSounds\Pronunciation_Italian_IT.bdsp" />
+    <file src="BotDetectSounds\Pronunciation_Japanese_JP.bdsp" target="lib\net40\BotDetectSounds\Pronunciation_Japanese_JP.bdsp" />
+    <file src="BotDetectSounds\Pronunciation_Korean_KR.bdsp" target="lib\net40\BotDetectSounds\Pronunciation_Korean_KR.bdsp" />
+    <file src="BotDetectSounds\Pronunciation_Latvian_LV.bdsp" target="lib\net40\BotDetectSounds\Pronunciation_Latvian_LV.bdsp" />
+    <file src="BotDetectSounds\Pronunciation_Lithuanian_LT.bdsp" target="lib\net40\BotDetectSounds\Pronunciation_Lithuanian_LT.bdsp" />
+    <file src="BotDetectSounds\Pronunciation_Mandarin_CN.bdsp" target="lib\net40\BotDetectSounds\Pronunciation_Mandarin_CN.bdsp" />
+    <file src="BotDetectSounds\Pronunciation_Mandarin_TW.bdsp" target="lib\net40\BotDetectSounds\Pronunciation_Mandarin_TW.bdsp" />
+    <file src="BotDetectSounds\Pronunciation_Norwegian_NO.bdsp" target="lib\net40\BotDetectSounds\Pronunciation_Norwegian_NO.bdsp" />
+    <file src="BotDetectSounds\Pronunciation_Polish_PL.bdsp" target="lib\net40\BotDetectSounds\Pronunciation_Polish_PL.bdsp" />
+    <file src="BotDetectSounds\Pronunciation_Portuguese_BR.bdsp" target="lib\net40\BotDetectSounds\Pronunciation_Portuguese_BR.bdsp" />
+    <file src="BotDetectSounds\Pronunciation_Portuguese_PT.bdsp" target="lib\net40\BotDetectSounds\Pronunciation_Portuguese_PT.bdsp" />
+    <file src="BotDetectSounds\Pronunciation_Romanian_RO.bdsp" target="lib\net40\BotDetectSounds\Pronunciation_Romanian_RO.bdsp" />
+    <file src="BotDetectSounds\Pronunciation_Russian_RU.bdsp" target="lib\net40\BotDetectSounds\Pronunciation_Russian_RU.bdsp" />
+    <file src="BotDetectSounds\Pronunciation_Serbian_RS.bdsp" target="lib\net40\BotDetectSounds\Pronunciation_Serbian_RS.bdsp" />
+    <file src="BotDetectSounds\Pronunciation_Slovenian_SI.bdsp" target="lib\net40\BotDetectSounds\Pronunciation_Slovenian_SI.bdsp" />
+    <file src="BotDetectSounds\Pronunciation_Spanish_AR.bdsp" target="lib\net40\BotDetectSounds\Pronunciation_Spanish_AR.bdsp" />
+    <file src="BotDetectSounds\Pronunciation_Spanish_CL.bdsp" target="lib\net40\BotDetectSounds\Pronunciation_Spanish_CL.bdsp" />
+    <file src="BotDetectSounds\Pronunciation_Spanish_ES.bdsp" target="lib\net40\BotDetectSounds\Pronunciation_Spanish_ES.bdsp" />
+    <file src="BotDetectSounds\Pronunciation_Spanish_MX.bdsp" target="lib\net40\BotDetectSounds\Pronunciation_Spanish_MX.bdsp" />
+    <file src="BotDetectSounds\Pronunciation_Swedish_SE.bdsp" target="lib\net40\BotDetectSounds\Pronunciation_Swedish_SE.bdsp" />
+    <file src="BotDetectSounds\Pronunciation_Turkish_TR.bdsp" target="lib\net40\BotDetectSounds\Pronunciation_Turkish_TR.bdsp" />
+    <file src="BotDetectSounds\Pronunciation_Ukrainian_UA.bdsp" target="lib\net40\BotDetectSounds\Pronunciation_Ukrainian_UA.bdsp" />
+    <file src="BotDetectSounds\Pronunciation_Vietnamese_VN.bdsp" target="lib\net40\BotDetectSounds\Pronunciation_Vietnamese_VN.bdsp" />
+  </files>
 </package>

@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CaptchaControl.cs" />
+    <Compile Include="Constants\SupportedLocales.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -59,7 +60,54 @@
   <ItemGroup>
     <None Include="Atlantis.Framework.Web.CaptchaCtl.nuget.bat" />
     <None Include="Atlantis.Framework.Web.CaptchaCtl.nuspec" />
+    <None Include="BotDetectSounds\Pronunciation_Arabic_AE.bdsp" />
+    <None Include="BotDetectSounds\Pronunciation_Bulgarian_BG.bdsp" />
+    <None Include="BotDetectSounds\Pronunciation_Cantonese_HK.bdsp" />
+    <None Include="BotDetectSounds\Pronunciation_Croatian_HR.bdsp" />
+    <None Include="BotDetectSounds\Pronunciation_Czech_CZ.bdsp" />
+    <None Include="BotDetectSounds\Pronunciation_Danish_DK.bdsp" />
+    <None Include="BotDetectSounds\Pronunciation_Dutch_NL.bdsp" />
+    <None Include="BotDetectSounds\Pronunciation_English_AU.bdsp" />
+    <None Include="BotDetectSounds\Pronunciation_English_CA.bdsp" />
+    <None Include="BotDetectSounds\Pronunciation_English_GB.bdsp" />
+    <None Include="BotDetectSounds\Pronunciation_English_IN.bdsp" />
+    <None Include="BotDetectSounds\Pronunciation_Estonian_EE.bdsp" />
+    <None Include="BotDetectSounds\Pronunciation_Finnish_FI.bdsp" />
+    <None Include="BotDetectSounds\Pronunciation_French_CA.bdsp" />
+    <None Include="BotDetectSounds\Pronunciation_French_FR.bdsp" />
+    <None Include="BotDetectSounds\Pronunciation_German_DE.bdsp" />
+    <None Include="BotDetectSounds\Pronunciation_Greek_GR.bdsp" />
+    <None Include="BotDetectSounds\Pronunciation_Hebrew_IL.bdsp" />
+    <None Include="BotDetectSounds\Pronunciation_Hindi_IN.bdsp" />
+    <None Include="BotDetectSounds\Pronunciation_Hungarian_HU.bdsp" />
+    <None Include="BotDetectSounds\Pronunciation_Icelandic_IS.bdsp" />
+    <None Include="BotDetectSounds\Pronunciation_Italian_IT.bdsp" />
+    <None Include="BotDetectSounds\Pronunciation_Japanese_JP.bdsp" />
+    <None Include="BotDetectSounds\Pronunciation_Korean_KR.bdsp" />
+    <None Include="BotDetectSounds\Pronunciation_Latvian_LV.bdsp" />
+    <None Include="BotDetectSounds\Pronunciation_Lithuanian_LT.bdsp" />
+    <None Include="BotDetectSounds\Pronunciation_Mandarin_CN.bdsp" />
+    <None Include="BotDetectSounds\Pronunciation_Mandarin_TW.bdsp" />
+    <None Include="BotDetectSounds\Pronunciation_Norwegian_NO.bdsp" />
+    <None Include="BotDetectSounds\Pronunciation_Polish_PL.bdsp" />
+    <None Include="BotDetectSounds\Pronunciation_Portuguese_BR.bdsp" />
+    <None Include="BotDetectSounds\Pronunciation_Portuguese_PT.bdsp" />
+    <None Include="BotDetectSounds\Pronunciation_Romanian_RO.bdsp" />
+    <None Include="BotDetectSounds\Pronunciation_Russian_RU.bdsp" />
+    <None Include="BotDetectSounds\Pronunciation_Serbian_RS.bdsp" />
+    <None Include="BotDetectSounds\Pronunciation_Slovenian_SI.bdsp" />
+    <None Include="BotDetectSounds\Pronunciation_Spanish_AR.bdsp" />
+    <None Include="BotDetectSounds\Pronunciation_Spanish_CL.bdsp" />
+    <None Include="BotDetectSounds\Pronunciation_Spanish_ES.bdsp" />
+    <None Include="BotDetectSounds\Pronunciation_Spanish_MX.bdsp" />
+    <None Include="BotDetectSounds\Pronunciation_Swedish_SE.bdsp" />
+    <None Include="BotDetectSounds\Pronunciation_Turkish_TR.bdsp" />
+    <None Include="BotDetectSounds\Pronunciation_Ukrainian_UA.bdsp" />
+    <None Include="BotDetectSounds\Pronunciation_Vietnamese_VN.bdsp" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

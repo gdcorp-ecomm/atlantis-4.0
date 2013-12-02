@@ -83,6 +83,8 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>ReceiptSurveyTypes.en.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="LanguageResources\ReceiptSurveyTypes.es.resx" />
+    <EmbeddedResource Include="LanguageResources\ReceiptSurveyTypes.pt-BR.resx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="atlantis.config" />

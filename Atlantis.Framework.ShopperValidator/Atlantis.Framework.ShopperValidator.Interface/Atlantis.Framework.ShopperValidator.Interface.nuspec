@@ -4,7 +4,7 @@
     <id>
       Atlantis.Framework.ShopperValidator.Interface
     </id>
-    <version>4.13.11.22</version>
+    <version>4.13.11.27</version>
     <title>
       Atlantis Framework ShopperValidator Interface
     </title>
@@ -18,7 +18,7 @@
   </metadata>
   <files>
     <file src="bin\Release\en\Atlantis.Framework.ShopperValidator.Interface.resources.dll" target="lib\net40\en\Atlantis.Framework.ShopperValidator.Interface.resources.dll" />
-    <file src="bin\Release\es-US\Atlantis.Framework.ShopperValidator.Interface.resources.dll" target="lib\net40\es-US\Atlantis.Framework.ShopperValidator.Interface.resources.dll" />
+    <file src="bin\Release\es\Atlantis.Framework.ShopperValidator.Interface.resources.dll" target="lib\net40\es\Atlantis.Framework.ShopperValidator.Interface.resources.dll" />
     <file src="bin\Release\pt-BR\Atlantis.Framework.ShopperValidator.Interface.resources.dll" target="lib\net40\pt-BR\Atlantis.Framework.ShopperValidator.Interface.resources.dll" />
   </files>
 </package>

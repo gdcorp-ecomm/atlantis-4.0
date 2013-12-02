@@ -156,7 +156,7 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="LanguageResources\ShopperValidator.en.resx" />
-    <EmbeddedResource Include="LanguageResources\ShopperValidator.es-US.resx" />
+    <EmbeddedResource Include="LanguageResources\ShopperValidator.es.resx" />
     <EmbeddedResource Include="LanguageResources\ShopperValidator.pt-BR.resx" />
   </ItemGroup>
   <ItemGroup>

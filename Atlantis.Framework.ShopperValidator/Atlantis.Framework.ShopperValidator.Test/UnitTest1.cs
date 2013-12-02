@@ -159,7 +159,7 @@ namespace Atlantis.Framework.ShopperValidator.Test
 
       shopper.InitStandardRequiredFields();
       var isNewShopper = true;
-      var request = new ShopperValidatorRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, shopper, isNewShopper, "es-MX");
+      var request = new ShopperValidatorRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, shopper, isNewShopper, "esdX");
       var response = Engine.Engine.ProcessRequest(request, 588) as ShopperValidatorResponseData;
 
       foreach (var prop in response.ValidatedShopper.AllShopperProperties)
@@ -257,7 +257,7 @@ namespace Atlantis.Framework.ShopperValidator.Test
     }
 
 
-    private string _culture = "de-DE";
+    private string _culture = "es-US";
     private string _invalidChars = "<script>alert<%=Message%>";
     [TestMethod]
     [DeploymentItem("atlantis.config")]

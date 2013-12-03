@@ -126,8 +126,13 @@ namespace Atlantis.Framework.Providers.Localization
     {
       _localizationProvider.Value.RewrittenUrlLanguage = urlLanguage;
       string newPath = GetLanguageFreeUrlPath(urlLanguage);
-      HttpContextFactory.GetHttpContext().RewritePath(AdjustForDefaultDocument(newPath));
-      
+
+      //  Rewrite the path only if language URL was stripped off
+      if (!newPath.Equals(HttpContextFactory.GetHttpContext().Request.Path, StringComparison.OrdinalIgnoreCase))
+      {
+        HttpContextFactory.GetHttpContext().RewritePath(AdjustForDefaultDocument(newPath));
+      }
+
       string marketId;
       if (_countrySiteMarketMappings.Value.TryGetMarketIdByCountrySiteAndUrlLanguage(urlLanguage, out marketId))
       {

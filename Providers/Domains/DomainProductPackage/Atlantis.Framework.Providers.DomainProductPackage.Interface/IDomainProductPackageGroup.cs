@@ -1,16 +1,16 @@
 ﻿using System.Collections.Generic;
+using Atlantis.Framework.Domains.Interface;
 using Atlantis.Framework.DotTypeCache.Interface;
-using Atlantis.Framework.Providers.Interface.Currency;
 
-namespace Atlantis.Framework.Domains.Interface
+namespace Atlantis.Framework.Providers.DomainProductPackage.Interface
 {
   public interface IDomainRegistrationProductPackageGroup 
   {
     IDomain Domain { get; }
 
-    bool InLaunchPhase { get; }
+    bool InPreRegPhase { get; }
 
-    IDictionary<LaunchPhases, IDomainProductPackage> LaunchPhasePackages { get; }
+    IDictionary<LaunchPhases, IDomainProductPackage> PreRegPhasePackages { get; }
 
     bool TryGetRegistrationPackage(out IDomainProductPackage registrationPackage);
   }

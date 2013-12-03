@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Atlantis.Framework.Domains.Interface;
 
-namespace Atlantis.Framework.Providers.DomainProductPackage
+namespace Atlantis.Framework.Providers.DomainProductPackage.Interface
 {
   public interface IDomainProductPackageProvider
   {

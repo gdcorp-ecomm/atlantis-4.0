@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using Atlantis.Framework.Domains.Interface;
+using Atlantis.Framework.DotTypeCache;
+using Atlantis.Framework.DotTypeCache.Interface;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.Currency;
+using Atlantis.Framework.Providers.DomainProductPackage.Interface;
 using Atlantis.Framework.Providers.Interface.Currency;
 using Atlantis.Framework.Providers.Interface.Products;
 
@@ -11,21 +14,22 @@ namespace Atlantis.Framework.Providers.DomainProductPackage
 {
   public class DomainProductPackage : IDomainProductPackage
   {
-    internal const string PACKAGE_NAME = "IDomainProductPackage.DomainProductPackageItem";
-    internal const string APPLICATION_FEE = "IDomainProductPackage.ApplicationFeePackageItem";
-    private readonly IProviderContainer _container;
+    public const string PACKAGE_NAME = "DomainProductPackage.DomainProductPackageItem";
+    public const string APPLICATION_FEE_NAME = "DomainProductPackage.ApplicationFeePackageItem";
+    public const string PRIVACY_NAME = "DomainProductPackage.PrivacyPackageItem";
+
     private readonly Lazy<ICurrencyProvider> _currencyProvider;
+    private readonly Lazy<IDotTypeProvider> _dotTypeProvider;
 
     internal int ApplicationFeeProductId { get; set; }
 
     public DomainProductPackage(IProviderContainer container)
     {
-      _container = container;
-      _currencyProvider = new Lazy<ICurrencyProvider>(_container.Resolve<ICurrencyProvider>);
+      _currencyProvider = new Lazy<ICurrencyProvider>(container.Resolve<ICurrencyProvider>);
+      _dotTypeProvider = new Lazy<IDotTypeProvider>(container.Resolve<IDotTypeProvider>);
     }
 
     public IDomain Domain { get; set; }
-
 
     private IProductPackageItem _domainProductPackageItem;
     public IProductPackageItem DomainProductPackageItem
@@ -101,7 +105,6 @@ namespace Atlantis.Framework.Providers.DomainProductPackage
       }
     }
 
-
     public bool TryGetApplicationFee(out ICurrencyPrice applicationFeePrice)
     {
       applicationFeePrice = null;
@@ -115,23 +118,64 @@ namespace Atlantis.Framework.Providers.DomainProductPackage
       return applicationFeePrice != null;
     }
 
-
-    public bool TryGetApplicationFeePackage(out IProductPackageItem productPackageItem)
+    public bool TryGetApplicationFeePackage(out IProductPackageItem applicationFeePackageItem)
     {
-      productPackageItem = null;
+      applicationFeePackageItem = PackageItems.FirstOrDefault(package => package.Name == APPLICATION_FEE_NAME);
 
-      foreach (IProductPackageItem package in PackageItems)
-      {
-        if (package.Name == APPLICATION_FEE)
-        {
-          productPackageItem = package;
-          break;
-        }
-      }
-
-      return productPackageItem != null;
+      return applicationFeePackageItem != null;
     }
 
+    //public bool TryGetPrivacyPackage(out IProductPackageItem privatePackageItem)
+    //{
+    //  privatePackageItem = PackageItems.FirstOrDefault(package => package.Name == PRIVACY_NAME);
+
+    //  return privatePackageItem != null;
+    //}
+
     public int? TierId { get; set; }
+
+    //public bool TrySetRegistrationLength(int registrationLength, int domainCount, LaunchPhases launchPhase)
+    //{
+    //  bool success = false;
+
+    //  var adjustedLength = registrationLength;
+
+    //  var dotTypeInfo = _dotTypeProvider.Value.GetDotTypeInfo(Domain.Tld);
+
+    //  IList<int> validRegLengths;
+
+    //  if (launchPhase == LaunchPhases.GeneralAvailability)
+    //  {
+    //    validRegLengths = dotTypeInfo.GetValidRegistrationLengths(domainCount, new[] {registrationLength});
+    //  }
+    //  else
+    //  {
+    //    validRegLengths = dotTypeInfo.GetValidPreRegLengths(launchPhase, domainCount, new[] {registrationLength});
+    //  }
+
+    //  foreach (var validLength in validRegLengths)
+    //  {
+    //    if (validLength <= registrationLength)
+    //    {
+    //      adjustedLength = registrationLength;
+    //    }
+    //  }
+
+    //  var domainProductLookup = DomainProductLookup.Create(adjustedLength, domainCount, launchPhase, TLDProductTypes.Registration, TierId);
+    //  var productId = dotTypeInfo.GetProductId(domainProductLookup);
+
+    //  if (productId > 0)
+    //  {
+    //    DomainProductPackageItem.ProductId = dotTypeInfo.GetProductId(domainProductLookup);
+    //    success = true;
+    //  }
+
+    //  return success;
+    //}
+    
+    //public void SetPrivacy(string privacyPackageItemName)
+    //{
+      
+    //}
   }
 }

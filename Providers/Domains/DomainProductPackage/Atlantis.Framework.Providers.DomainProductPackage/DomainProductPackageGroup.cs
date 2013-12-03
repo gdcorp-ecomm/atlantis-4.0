@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Atlantis.Framework.Domains.Interface;
 using Atlantis.Framework.DotTypeCache.Interface;
-using Atlantis.Framework.Providers.Interface.Currency;
+using Atlantis.Framework.Providers.DomainProductPackage.Interface;
 
 namespace Atlantis.Framework.Providers.DomainProductPackage
 {
@@ -11,18 +11,13 @@ namespace Atlantis.Framework.Providers.DomainProductPackage
     
     public IDomain Domain { get; set; }
 
-    public bool InLaunchPhase { get; set; }
+    public bool InPreRegPhase { get; set; }
 
-    private IDictionary<LaunchPhases, IDomainProductPackage> _launchPhasePackages;
-    public IDictionary<LaunchPhases, IDomainProductPackage> LaunchPhasePackages {
+    private IDictionary<LaunchPhases, IDomainProductPackage> _preRegPhasePackages;
+    public IDictionary<LaunchPhases, IDomainProductPackage> PreRegPhasePackages {
       get
       {
-        if (_launchPhasePackages == null)
-        {
-          _launchPhasePackages = new Dictionary<LaunchPhases, IDomainProductPackage>(0);
-        }
-
-        return _launchPhasePackages;
+        return _preRegPhasePackages ?? (_preRegPhasePackages = new Dictionary<LaunchPhases, IDomainProductPackage>(0));
       }
     }
 

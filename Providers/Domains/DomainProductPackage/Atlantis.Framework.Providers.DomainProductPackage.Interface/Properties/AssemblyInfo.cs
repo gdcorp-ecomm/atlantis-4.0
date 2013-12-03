@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Atlantis.Framework.Domains.Interface")]
+[assembly: AssemblyTitle("Atlantis.Framework.Providers.DomainProductPackage.Interface")]
 #if DEBUG
 [assembly: AssemblyDescription("Debug Build")]
 [assembly: AssemblyConfiguration("Debug Build")]
@@ -12,9 +12,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyDescription("Release Build")]
 [assembly: AssemblyConfiguration("Release Build")]
 #endif
-[assembly: AssemblyCompany("GoDaddy.com")]
-[assembly: AssemblyProduct("Atlantis.Framework.Domains.Interface")]
-[assembly: AssemblyCopyright("Copyright © GoDaddy.com 2013")]
+[assembly: AssemblyCompany("GoDaddy")]
+[assembly: AssemblyProduct("Atlantis.Framework.Providers.DomainProductPackage.Interface")]
+[assembly: AssemblyCopyright("Copyright © GoDaddy 2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -24,7 +24,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("a59bce29-93c1-41fc-811a-a7e1cba03c12")]
+[assembly: Guid("0030240e-9efe-4cac-b942-390c85a948ed")]
 
 // Version information for an assembly consists of the following four values:
 // Versions must be set so the Assembly Version does not change with revisions,
@@ -40,4 +40,4 @@ using System.Runtime.InteropServices;
 // example 4.13.6.1 for Jun 1, 2013
 //
 [assembly: AssemblyVersion("4.0.0.0")]
-[assembly: AssemblyFileVersion("4.13.11.10")]
+[assembly: AssemblyFileVersion("4.13.12.2")]

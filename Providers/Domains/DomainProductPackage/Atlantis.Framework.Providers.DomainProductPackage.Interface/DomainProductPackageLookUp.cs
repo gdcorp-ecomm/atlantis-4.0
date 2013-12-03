@@ -1,14 +1,14 @@
 ﻿using Atlantis.Framework.DotTypeCache.Interface;
 
-namespace Atlantis.Framework.Providers.DomainProductPackage
+namespace Atlantis.Framework.Providers.DomainProductPackage.Interface
 {
   public class DomainProductPackageLookUp
   {
-    internal int DomainCount { get; set; }
-    internal LaunchPhases LaunchPhase { get; set; }
-    internal string Tld { get; set; }
-    internal string Sld { get; set; }
-    internal TLDProductTypes ProductType { get; set; }
+    public int DomainCount { get; set; }
+    public LaunchPhases LaunchPhase { get; set; }
+    public string Tld { get; set; }
+    public string Sld { get; set; }
+    public TLDProductTypes ProductType { get; set; }
 
     public static DomainProductPackageLookUp Create(int domainCount, LaunchPhases launchPhase, string tld, TLDProductTypes productType = TLDProductTypes.Registration)
     {

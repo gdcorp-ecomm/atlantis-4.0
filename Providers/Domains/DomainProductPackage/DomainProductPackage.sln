@@ -7,7 +7,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Provider
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Providers.DomainProductPackage.Test", "Atlantis.Framework.Providers.DomainProductPackage.Test\Atlantis.Framework.Providers.DomainProductPackage.Test.csproj", "{515AF3D0-780F-4AA8-804A-979D57BDFA2D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Providers.DomainProductPackageStateProvider", "Atlantis.Framework.Providers.DomainProductPackageSerializer\Atlantis.Framework.Providers.DomainProductPackageStateProvider.csproj", "{8790DB3E-A25A-4091-A726-518D7E005BF2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Providers.DomainProductPackage.Interface", "Atlantis.Framework.Providers.DomainProductPackage.Interface\Atlantis.Framework.Providers.DomainProductPackage.Interface.csproj", "{559C905D-46A5-4EAC-B07E-AE0AF77DB270}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{7F16A4EB-F3A9-47DA-A875-A3769C20B2B4}"
 EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
@@ -21,9 +23,9 @@ Global
 		SccProjectUniqueName2 = Atlantis.Framework.Providers.DomainProductPackage\\Atlantis.Framework.Providers.DomainProductPackage.csproj
 		SccProjectName2 = Atlantis.Framework.Providers.DomainProductPackage
 		SccLocalPath2 = Atlantis.Framework.Providers.DomainProductPackage
-		SccProjectUniqueName3 = Atlantis.Framework.Providers.DomainProductPackageSerializer\\Atlantis.Framework.Providers.DomainProductPackageStateProvider.csproj
-		SccProjectName3 = Atlantis.Framework.Providers.DomainProductPackageSerializer
-		SccLocalPath3 = Atlantis.Framework.Providers.DomainProductPackageSerializer
+		SccProjectUniqueName3 = Atlantis.Framework.Providers.DomainProductPackage.Interface\\Atlantis.Framework.Providers.DomainProductPackage.Interface.csproj
+		SccProjectName3 = Atlantis.Framework.Providers.DomainProductPackage.Interface
+		SccLocalPath3 = Atlantis.Framework.Providers.DomainProductPackage.Interface
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,12 +46,12 @@ Global
 		{515AF3D0-780F-4AA8-804A-979D57BDFA2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{515AF3D0-780F-4AA8-804A-979D57BDFA2D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{515AF3D0-780F-4AA8-804A-979D57BDFA2D}.Release|x86.ActiveCfg = Release|Any CPU
-		{8790DB3E-A25A-4091-A726-518D7E005BF2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8790DB3E-A25A-4091-A726-518D7E005BF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8790DB3E-A25A-4091-A726-518D7E005BF2}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{8790DB3E-A25A-4091-A726-518D7E005BF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8790DB3E-A25A-4091-A726-518D7E005BF2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8790DB3E-A25A-4091-A726-518D7E005BF2}.Release|x86.ActiveCfg = Release|Any CPU
+		{559C905D-46A5-4EAC-B07E-AE0AF77DB270}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{559C905D-46A5-4EAC-B07E-AE0AF77DB270}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{559C905D-46A5-4EAC-B07E-AE0AF77DB270}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{559C905D-46A5-4EAC-B07E-AE0AF77DB270}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{559C905D-46A5-4EAC-B07E-AE0AF77DB270}.Release|Any CPU.Build.0 = Release|Any CPU
+		{559C905D-46A5-4EAC-B07E-AE0AF77DB270}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

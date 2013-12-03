@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>Atlantis.Framework.Providers.Interface</id>
-    <version>4.13.10.25</version>
+    <version>4.13.12.2</version>
     <title>Atlantis Framework Providers Interface</title>
     <authors>$author$</authors>
     <owners>$author$</owners>
@@ -12,8 +12,5 @@
     <releaseNotes></releaseNotes>
     <copyright>$copyright$</copyright>
     <tags>Atlantis Framework Providers Interface</tags>
-    <dependencies>
-      <dependency id="Atlantis.Framework.Interface" version="4.0.0.0" />
-    </dependencies>
   </metadata>
 </package>

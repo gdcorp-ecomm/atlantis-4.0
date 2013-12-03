@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
+using Atlantis.Framework.DotTypeCache.Interface;
 using Atlantis.Framework.Providers.Interface.Currency;
 using Atlantis.Framework.Providers.Interface.Products;
 
-namespace Atlantis.Framework.Domains.Interface
+namespace Atlantis.Framework.Providers.DomainProductPackage.Interface
 {
   /// <summary>
   /// Prepare Domain items for cart
@@ -18,6 +19,8 @@ namespace Atlantis.Framework.Domains.Interface
     bool TryGetApplicationFee(out ICurrencyPrice applicationFee);
 
     bool TryGetApplicationFeePackage(out IProductPackageItem productPackageItem);
+
+    //bool TrySetRegistrationLength(int registrationLength, int domainCount, LaunchPhases launchPhase);
 
     //void SetPrivacy(string privacyPackageItemName);
 

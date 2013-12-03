@@ -4,6 +4,7 @@ using Atlantis.Framework.Domains.Interface;
 using Atlantis.Framework.DotTypeCache;
 using Atlantis.Framework.DotTypeCache.Interface;
 using Atlantis.Framework.Interface;
+using Atlantis.Framework.Providers.DomainProductPackage.Interface;
 using Atlantis.Framework.Providers.DomainProductPackage.PackageItems;
 using Atlantis.Framework.Providers.Interface.Products;
 
@@ -24,7 +25,7 @@ namespace Atlantis.Framework.Providers.DomainProductPackage
      
       if (productIds != null && productIds.Count > 0)
       {
-        IProductPackageItem appFeeItem = ProductPackageItem.Create(DomainProductPackage.APPLICATION_FEE, productIds[0], 1, 1, Container);
+        IProductPackageItem appFeeItem = ProductPackageItem.Create(DomainProductPackage.APPLICATION_FEE_NAME, productIds[0], 1, 1, Container);
 
         domainProductPackage.PackageItems.Add(appFeeItem);
       }
@@ -33,17 +34,16 @@ namespace Atlantis.Framework.Providers.DomainProductPackage
     private DomainRegistrationProductPackageGroup GetDomainRegistrationProductPackageGroup(IFindResponseDomain findResponseDomain, int domainCount)
     {
       var dotTypeInfo = _dotTypeProvider.Value.GetDotTypeInfo(findResponseDomain.Domain.Tld);
-      
 
       var domainRegProductPackageGroup = new DomainRegistrationProductPackageGroup
       {
         Domain = findResponseDomain.Domain,
-        InLaunchPhase = findResponseDomain.InPreRegPhase,
+        InPreRegPhase = findResponseDomain.InPreRegPhase,
       };
 
       var years = dotTypeInfo.MinRegistrationLength;
 
-      if (domainRegProductPackageGroup.InLaunchPhase)
+      if (domainRegProductPackageGroup.InPreRegPhase)
       {
         foreach (var launchPhaseItem in findResponseDomain.LaunchPhaseItems)
         {
@@ -57,7 +57,7 @@ namespace Atlantis.Framework.Providers.DomainProductPackage
 
           SetApplicationFee(launchPhaseItem.LaunchPhase, domainProductPackage, dotTypeInfo);
 
-          domainRegProductPackageGroup.LaunchPhasePackages.Add(launchPhaseItem.LaunchPhase, domainProductPackage);
+          domainRegProductPackageGroup.PreRegPhasePackages.Add(launchPhaseItem.LaunchPhase, domainProductPackage);
         }
       }
       else
@@ -73,6 +73,7 @@ namespace Atlantis.Framework.Providers.DomainProductPackage
 
         domainRegProductPackageGroup.RegistrationPackage = domainProductPackage;
       }
+
       return domainRegProductPackageGroup;
     }
 
@@ -99,7 +100,7 @@ namespace Atlantis.Framework.Providers.DomainProductPackage
       var domainProductPackageGroup = new DomainRegistrationProductPackageGroup
       {
         Domain = new Domain(packageLookUp.Sld, packageLookUp.Tld),
-        InLaunchPhase = dotTypeInfo.IsPreRegPhaseActive
+        InPreRegPhase = dotTypeInfo.IsPreRegPhaseActive
       };
 
 
@@ -115,7 +116,7 @@ namespace Atlantis.Framework.Providers.DomainProductPackage
 
           SetApplicationFee(packageLookUp.LaunchPhase, domainProductPackage, dotTypeInfo);
 
-          domainProductPackageGroup.LaunchPhasePackages.Add(packageLookUp.LaunchPhase, domainProductPackage);
+          domainProductPackageGroup.PreRegPhasePackages.Add(packageLookUp.LaunchPhase, domainProductPackage);
       }
       else
       {

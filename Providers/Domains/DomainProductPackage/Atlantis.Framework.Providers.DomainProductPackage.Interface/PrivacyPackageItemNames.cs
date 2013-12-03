@@ -1,7 +1,7 @@
 ﻿
-namespace Atlantis.Framework.Providers.DomainProductPackage
+namespace Atlantis.Framework.Providers.DomainProductPackage.Interface
 {
-  public class ProductPackageItemNames
+  public class PrivacyPackageItemNames
   {
     public const string PRIVACY = "dpp_privacy";
     public const string PRIVACY_BUNDLE = "dpp_privacy_bundle";

@@ -11,7 +11,7 @@
     <description>$description$</description>
     <releaseNotes></releaseNotes>
     <copyright>$copyright$</copyright>
-    <tags>Atlantis Framework SSO Token Handler</tags>
+    <tags>Atlantis Framework TH SSO</tags>
     <dependencies />
   </metadata>
   <files />

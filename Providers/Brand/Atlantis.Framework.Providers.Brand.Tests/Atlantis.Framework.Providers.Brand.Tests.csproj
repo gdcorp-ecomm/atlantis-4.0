@@ -65,7 +65,7 @@
     </Reference>
     <Reference Include="Atlantis.Framework.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Interface.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.Interface.4.13.9.25\lib\net40\Atlantis.Framework.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.PrivateLabel.Impl, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -87,7 +87,7 @@
     </Reference>
     <Reference Include="Atlantis.Framework.Testing.MockProviders, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.Testing.MockProviders.4.0.0.0\lib\net40\Atlantis.Framework.Testing.MockProviders.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.Testing.MockProviders.4.13.10.28\lib\net40\Atlantis.Framework.Testing.MockProviders.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">

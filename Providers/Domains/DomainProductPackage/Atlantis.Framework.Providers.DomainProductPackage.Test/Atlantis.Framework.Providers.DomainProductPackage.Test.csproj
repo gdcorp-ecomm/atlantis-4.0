@@ -159,6 +159,10 @@
     <Reference Include="Atlantis.Framework.Providers.Currency">
       <HintPath>..\packages\Atlantis.Framework.Providers.Currency.4.0.0.0\lib\net40\Atlantis.Framework.Providers.Currency.dll</HintPath>
     </Reference>
+    <Reference Include="Atlantis.Framework.Providers.DomainProductPackage.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Providers.DomainProductPackage.Interface.4.13.12.2\lib\net40\Atlantis.Framework.Providers.DomainProductPackage.Interface.dll</HintPath>
+    </Reference>
     <Reference Include="Atlantis.Framework.Providers.DomainSearch, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Atlantis.Framework.Providers.DomainSearch.4.13.11.8\lib\net40\Atlantis.Framework.Providers.DomainSearch.dll</HintPath>
@@ -175,11 +179,11 @@
     </Reference>
     <Reference Include="Atlantis.Framework.Providers.Localization, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.Providers.Localization.4.13.11.19\lib\net40\Atlantis.Framework.Providers.Localization.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.Providers.Localization.4.13.12.3\lib\net40\Atlantis.Framework.Providers.Localization.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Providers.Localization.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.Providers.Localization.Interface.4.13.11.19\lib\net40\Atlantis.Framework.Providers.Localization.Interface.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.Providers.Localization.Interface.4.13.12.2\lib\net40\Atlantis.Framework.Providers.Localization.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Providers.Preferences.Interface">
       <HintPath>..\packages\Atlantis.Framework.Providers.Preferences.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Providers.Preferences.Interface.dll</HintPath>
@@ -278,10 +282,6 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Atlantis.Framework.Providers.DomainProductPackage.Interface\Atlantis.Framework.Providers.DomainProductPackage.Interface.csproj">
-      <Project>{559c905d-46a5-4eac-b07e-ae0af77db270}</Project>
-      <Name>Atlantis.Framework.Providers.DomainProductPackage.Interface</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.Providers.DomainProductPackage\Atlantis.Framework.Providers.DomainProductPackage.csproj">
       <Project>{5dc4df1b-688c-40cb-8a05-1e6052263707}</Project>
       <Name>Atlantis.Framework.Providers.DomainProductPackage</Name>

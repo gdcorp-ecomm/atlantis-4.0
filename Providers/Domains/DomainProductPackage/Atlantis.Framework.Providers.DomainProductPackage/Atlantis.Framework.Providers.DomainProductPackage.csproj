@@ -109,12 +109,16 @@
     <Reference Include="Atlantis.Framework.Providers.Currency">
       <HintPath>..\packages\Atlantis.Framework.Providers.Currency.4.0.0.0\lib\net40\Atlantis.Framework.Providers.Currency.dll</HintPath>
     </Reference>
+    <Reference Include="Atlantis.Framework.Providers.DomainProductPackage.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Providers.DomainProductPackage.Interface.4.13.12.2\lib\net40\Atlantis.Framework.Providers.DomainProductPackage.Interface.dll</HintPath>
+    </Reference>
     <Reference Include="Atlantis.Framework.Providers.Interface">
       <HintPath>..\packages\Atlantis.Framework.Providers.Interface.4.13.12.2\lib\net40\Atlantis.Framework.Providers.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Providers.Localization.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.Providers.Localization.Interface.4.13.11.19\lib\net40\Atlantis.Framework.Providers.Localization.Interface.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.Providers.Localization.Interface.4.13.12.2\lib\net40\Atlantis.Framework.Providers.Localization.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Providers.Preferences.Interface">
       <HintPath>..\packages\Atlantis.Framework.Providers.Preferences.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Providers.Preferences.Interface.dll</HintPath>
@@ -181,12 +185,6 @@
     <None Include="Atlantis.Framework.Providers.DomainProductPackage.nuget.bat" />
     <None Include="Atlantis.Framework.Providers.DomainProductPackage.nuspec" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Atlantis.Framework.Providers.DomainProductPackage.Interface\Atlantis.Framework.Providers.DomainProductPackage.Interface.csproj">
-      <Project>{559c905d-46a5-4eac-b07e-ae0af77db270}</Project>
-      <Name>Atlantis.Framework.Providers.DomainProductPackage.Interface</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

@@ -9,6 +9,7 @@ namespace Atlantis.Framework.Providers.Localization
 {
   public class LanguageUrlRewriteProvider : ProviderBase, ILanguageUrlRewriteProvider
   {
+    private const string REQUEST_SAVE_KEY = "REWRITTENURLLANGUAGEINFO";
     public static string ROOT_DEFAULT_DOCUMENT = "default.aspx";
 
     private Lazy<ISiteContext> _siteContext;
@@ -132,6 +133,14 @@ namespace Atlantis.Framework.Providers.Localization
       {
         _localizationProvider.Value.SetMarket(marketId);
       }
+
+      //  Save the rewritten values in case they are lost due to child request processing.
+      SaveRequestLanguageUrlInfo(urlLanguage, _localizationProvider.Value.MarketInfo.Id);
+    }
+
+    private void SaveRequestLanguageUrlInfo(string language, string marketId)
+    {
+      HttpContextFactory.GetHttpContext().Request.Headers[REQUEST_SAVE_KEY] = language + "|" + marketId;
     }
 
     private string AdjustForDefaultDocument(string newPath)
@@ -228,6 +237,26 @@ namespace Atlantis.Framework.Providers.Localization
       return result;
     }
 
+    public bool TryGetSavedRequestLanguageUrlInfo(out string savedLanguage, out string savedMarketId)
+    {
+      bool result = false;
+      savedLanguage = null;
+      savedMarketId = null;
+
+      string headerValue = HttpContextFactory.GetHttpContext().Request.Headers[REQUEST_SAVE_KEY];
+      if (!string.IsNullOrEmpty(headerValue))
+      {
+        string[] languageMarket = headerValue.Split('|');
+        if (languageMarket.Length == 2)
+        {
+          savedLanguage = languageMarket[0];
+          savedMarketId = languageMarket[1];
+          result = true;
+        }        
+      }
+      return result;
+    }
+
     private bool IsValidLanguageCode(string language)
     {
       bool result = false;
@@ -269,6 +298,18 @@ namespace Atlantis.Framework.Providers.Localization
             }
           }
         }
+      }
+      
+      if (result) return result;
+
+      //  If no valid language was found then check for saved language info
+      string savedLanguage;
+      string savedMarketId;
+      if (TryGetSavedRequestLanguageUrlInfo(out savedLanguage, out savedMarketId))
+      {
+        result = true;
+        language = savedLanguage;
+        validMarketId = savedMarketId;
       }
 
       return result;

@@ -2,14 +2,14 @@
 <package >
   <metadata>
     <id>Atlantis.Framework.Providers.Localization</id>
-    <version>4.13.11.19</version>
+    <version>4.13.12.2</version>
     <title>Atlantis Framework Providers Localization</title>
     <authors>$author$</authors>
     <owners>$author$</owners>
     <projectUrl>https://confluence.int.godaddy.com/display/ATLANTIS</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes>Updated reference to AF.Localization</releaseNotes>
+    <releaseNotes>Save processed language url to be used by child-request and InternationalizationRedirectProvider</releaseNotes>
     <copyright>$copyright$</copyright>
     <tags>Atlantis Framework Providers Localization</tags>
   </metadata>

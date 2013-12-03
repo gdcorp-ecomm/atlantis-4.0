@@ -1,10 +1,13 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.Collections.Specialized;
+using System.Text.RegularExpressions;
 using System.Web;
 
 namespace Atlantis.Framework.Providers.Localization.Tests.Mocks.Http
 {
   public class MockHttpRequest : HttpRequestBase
   {
+    private NameValueCollection _headers = new NameValueCollection();
+
     public MockHttpRequest(HttpRequest request = null, string httpMethod = "GET", string virtualFolder = "") : base()
     {
       BaseRequest = request;
@@ -75,6 +78,11 @@ namespace Atlantis.Framework.Providers.Localization.Tests.Mocks.Http
       {
         return BaseRequest.Cookies;
       }
+    }
+
+    public override NameValueCollection Headers
+    {
+      get { return _headers; }
     }
   }
 }

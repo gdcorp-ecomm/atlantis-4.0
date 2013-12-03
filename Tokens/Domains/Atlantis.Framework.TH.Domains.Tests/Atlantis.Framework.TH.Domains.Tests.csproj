@@ -62,7 +62,7 @@
       <HintPath>..\packages\Atlantis.Framework.DCCDomainsDataCache.Impl.4.13.1.28\lib\net40\Atlantis.Framework.DCCDomainsDataCache.Impl.XmlSerializers.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.DCCDomainsDataCache.Interface">
-      <HintPath>..\packages\Atlantis.Framework.DCCDomainsDataCache.Interface.4.13.11.6\lib\net40\Atlantis.Framework.DCCDomainsDataCache.Interface.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.DCCDomainsDataCache.Interface.4.13.11.19\lib\net40\Atlantis.Framework.DCCDomainsDataCache.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.DomainContactFields.Impl">
       <HintPath>..\packages\Atlantis.Framework.DomainContactFields.Impl.4.13.6.5\lib\net40\Atlantis.Framework.DomainContactFields.Impl.dll</HintPath>
@@ -71,13 +71,13 @@
       <HintPath>..\packages\Atlantis.Framework.DomainContactFields.Impl.4.13.6.5\lib\net40\Atlantis.Framework.DomainContactFields.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.DotTypeCache">
-      <HintPath>..\packages\Atlantis.Framework.DotTypeCache.4.13.11.8\lib\net40\Atlantis.Framework.DotTypeCache.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.DotTypeCache.4.13.11.21\lib\net40\Atlantis.Framework.DotTypeCache.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.DotTypeCache.Interface">
-      <HintPath>..\packages\Atlantis.Framework.DotTypeCache.Interface.4.13.11.6\lib\net40\Atlantis.Framework.DotTypeCache.Interface.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.DotTypeCache.Interface.4.13.11.20\lib\net40\Atlantis.Framework.DotTypeCache.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.DotTypeCache.Static">
-      <HintPath>..\packages\Atlantis.Framework.DotTypeCache.Static.4.13.10.22\lib\net40\Atlantis.Framework.DotTypeCache.Static.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.DotTypeCache.Static.4.13.11.19\lib\net40\Atlantis.Framework.DotTypeCache.Static.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Engine">
       <HintPath>..\packages\Atlantis.Framework.Engine.4.0.0.0\lib\net40\Atlantis.Framework.Engine.dll</HintPath>
@@ -99,7 +99,7 @@
       <HintPath>..\packages\Atlantis.Framework.Providers.Containers.4.13.10.12\lib\net40\Atlantis.Framework.Providers.Containers.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Providers.Interface">
-      <HintPath>..\packages\Atlantis.Framework.Providers.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Providers.Interface.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.Providers.Interface.4.13.12.2\lib\net40\Atlantis.Framework.Providers.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Providers.Preferences.Interface">
       <HintPath>..\packages\Atlantis.Framework.Providers.Preferences.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Providers.Preferences.Interface.dll</HintPath>
@@ -138,7 +138,7 @@
       <HintPath>..\packages\Atlantis.Framework.TLDDataCache.Interface.4.13.10.14\lib\net40\Atlantis.Framework.TLDDataCache.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Tokens.Interface">
-      <HintPath>..\packages\Atlantis.Framework.Tokens.Interface.4.13.10.12\lib\net40\Atlantis.Framework.Tokens.Interface.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.Tokens.Interface.4.13.11.18\lib\net40\Atlantis.Framework.Tokens.Interface.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />

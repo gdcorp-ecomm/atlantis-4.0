@@ -67,6 +67,12 @@
     <None Include="Atlantis.Framework.DomainContactFields.Impl.nuspec" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Atlantis.Framework.DomainContactFields.Interface\Atlantis.Framework.DomainContactFields.Interface.csproj">
+      <Project>{bd8f8fc4-8a78-4dde-8ed7-8caef06791fe}</Project>
+      <Name>Atlantis.Framework.DomainContactFields.Interface</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

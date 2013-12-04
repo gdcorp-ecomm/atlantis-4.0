@@ -60,12 +60,12 @@ namespace Atlantis.Framework.Providers.Localization
     {
       var activeMarketDisplays = new List<IActiveMarketDisplay>();
 
-      IEnumerable<ICountrySite> activeCountrySites = ActiveCountrySites.CountrySites.OrderBy(cs => cs.Description);
+      IEnumerable<ICountrySite> activeCountrySites = ActiveCountrySites.CountrySites.Where(cs => !cs.IsInternalOnly).OrderBy(cs => cs.Description);
 
       foreach (var countrySite in activeCountrySites)
       {
         IEnumerable<IMarket> markets = _localizationProvider.Value.GetMarketsForCountryCode(countrySite.Id);
-        foreach (var market in markets.OrderBy(m => m.Description))
+        foreach (var market in markets.Where(m => !m.IsInternalOnly).OrderBy(m => m.Description))
         {
           if (IsActiveMarketId(market.Id))
           {

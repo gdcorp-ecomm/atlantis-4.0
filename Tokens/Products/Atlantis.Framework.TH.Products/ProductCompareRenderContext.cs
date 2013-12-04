@@ -112,7 +112,12 @@ namespace Atlantis.Framework.TH.Products
           {
             value1 = primaryProduct.MonthlyCurrentPrice.Price;
           }
-          value2 = token.SecondaryPrice;
+          ICurrencyInfo secondaryCurrencyInfo = _currency.SelectedTransactionalCurrencyInfo;
+          ICurrencyInfo secondaryDisplayCurrency = _currency.SelectedDisplayCurrencyInfo;
+          ICurrencyPrice usdSecondaryPrice = _currency.NewCurrencyPriceFromUSD(token.SecondaryPrice, secondaryCurrencyInfo, CurrencyConversionRoundingType.Ceiling);
+          ICurrencyPrice convertedPrice = _currency.ConvertPrice(usdSecondaryPrice, secondaryCurrencyInfo, CurrencyConversionRoundingType.Ceiling);
+
+          value2 = convertedPrice.Price;
         }
         result = true;
       }
@@ -238,7 +243,6 @@ namespace Atlantis.Framework.TH.Products
           }
         }
       }
-
       token.TokenResult = tokenResult;
       return result;
     }

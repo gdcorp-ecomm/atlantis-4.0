@@ -41,6 +41,7 @@ namespace Atlantis.Framework.TH.Products.Tests
       result.RegisterProvider<IShopperPreferencesProvider, MockShopperPreference>();
       result.RegisterProvider<ICurrencyProvider, CurrencyProvider>();
       result.RegisterProvider<IProductProvider, ProductProvider>();
+      
 
       return result;
     }
@@ -96,7 +97,7 @@ namespace Atlantis.Framework.TH.Products.Tests
     [TestMethod]
     public void CompareFixedPricePercentMonthly()
     {
-      TokenSuccess("<percent primaryproductid=\"58\" secondaryprice=\"10000\" secondaryperiod=\"monthly\" />");
+      TokenSuccess("<percent primaryproductid=\"3813\" secondaryprice=\"2000\" secondaryperiod=\"monthly\" />", "PHP");
     }
 
     [TestMethod]

@@ -279,62 +279,87 @@ namespace Atlantis.Framework.Providers.Support
       }
     }
 
+    private bool IsUSOnlyPhone(SupportPhoneType supportPhoneType)
+    {
+      var isUSOnlyPhone = false;
+      switch (supportPhoneType)
+      {
+        case SupportPhoneType.CompanyFax:
+        case SupportPhoneType.CompanyMain:
+        case SupportPhoneType.SSL:
+        case SupportPhoneType.DesignTeam:
+        case SupportPhoneType.ResellerSales:
+        case SupportPhoneType.Mcafee:
+        case SupportPhoneType.AccountingFax:
+          isUSOnlyPhone = true;
+          break;
+      }
+      return isUSOnlyPhone;
+    }
+
     public ISupportPhoneData GetSupportPhone(SupportPhoneType supportPhoneType)
     {
       ISupportPhoneData supportPhone;
 
-      switch (supportPhoneType)
+      if (IsUSOnlyPhone(supportPhoneType) || CountryCode == COUNTRY_CODE_US)
       {
-        case SupportPhoneType.Technical:
-          supportPhone = GetTechnicalSupportPhone();
-          break;
-        case SupportPhoneType.Hosting:
-          supportPhone = GetHostingSupportPhone();
-          break;
-        case SupportPhoneType.HostingExchange:
-          supportPhone = GetHostingExchangeSupportPhone();
-          break;
-        case SupportPhoneType.Billing:
-          supportPhone = GetBillingSupportPhone();
-          break;
-        case SupportPhoneType.CompanyFax:
-          supportPhone = GetCompanyFaxPhone();
-          break;
-        case SupportPhoneType.CompanyMain:
-          supportPhone = GetCompanyMainPhone();
-          break;
-        case SupportPhoneType.Domains:
-          supportPhone = GetDomainSupportPhone();
-          break;
-        case SupportPhoneType.PremiumDomains:
-          supportPhone = GetPremiumDomainSupportPhone();
-          break;
-        case SupportPhoneType.Server:
-          supportPhone = GetServerSupportPhone();
-          break;
-        case SupportPhoneType.AdSpace:
-          supportPhone = GetAdSpaceSupportPhone();
-          break;
-        case SupportPhoneType.SSL:
-          supportPhone = GetSSLSupportPhone();
-          break;
-        case SupportPhoneType.DesignTeam:
-          supportPhone = GetDesignTeamSupportPhone();
-          break;
-        case SupportPhoneType.ResellerSales:
-          supportPhone = GetResellerSalesSupportPhone();
-          break;
-        case SupportPhoneType.Mcafee:
-          supportPhone = GetMcafeeSupportPhone();
-          break;
-        case SupportPhoneType.AccountingFax:
-          supportPhone = GetAccountingFaxNumber();
-          break;
-        default:
-          supportPhone = _emptySupportPhoneData;
-          var exception = new AtlantisException("SupportProvider.GetSupportPhone", "0", "Unknown support phone type: " + supportPhoneType, string.Empty, null, null);
-          Engine.Engine.LogAtlantisException(exception);
-          break;
+        switch (supportPhoneType)
+        {
+          case SupportPhoneType.Technical:
+            supportPhone = GetTechnicalSupportPhone();
+            break;
+          case SupportPhoneType.Hosting:
+            supportPhone = GetHostingSupportPhone();
+            break;
+          case SupportPhoneType.HostingExchange:
+            supportPhone = GetHostingExchangeSupportPhone();
+            break;
+          case SupportPhoneType.Billing:
+            supportPhone = GetBillingSupportPhone();
+            break;
+          case SupportPhoneType.CompanyFax:
+            supportPhone = GetCompanyFaxPhone();
+            break;
+          case SupportPhoneType.CompanyMain:
+            supportPhone = GetCompanyMainPhone();
+            break;
+          case SupportPhoneType.Domains:
+            supportPhone = GetDomainSupportPhone();
+            break;
+          case SupportPhoneType.PremiumDomains:
+            supportPhone = GetPremiumDomainSupportPhone();
+            break;
+          case SupportPhoneType.Server:
+            supportPhone = GetServerSupportPhone();
+            break;
+          case SupportPhoneType.AdSpace:
+            supportPhone = GetAdSpaceSupportPhone();
+            break;
+          case SupportPhoneType.SSL:
+            supportPhone = GetSSLSupportPhone();
+            break;
+          case SupportPhoneType.DesignTeam:
+            supportPhone = GetDesignTeamSupportPhone();
+            break;
+          case SupportPhoneType.ResellerSales:
+            supportPhone = GetResellerSalesSupportPhone();
+            break;
+          case SupportPhoneType.Mcafee:
+            supportPhone = GetMcafeeSupportPhone();
+            break;
+          case SupportPhoneType.AccountingFax:
+            supportPhone = GetAccountingFaxNumber();
+            break;
+          default:
+            supportPhone = _emptySupportPhoneData;
+            var exception = new AtlantisException("SupportProvider.GetSupportPhone", "0", "Unknown support phone type: " + supportPhoneType, string.Empty, null, null);
+            Engine.Engine.LogAtlantisException(exception);
+            break;
+        }
+      }
+      else
+      {
+        supportPhone = GetTechnicalSupportPhone();
       }
 
       return supportPhone;

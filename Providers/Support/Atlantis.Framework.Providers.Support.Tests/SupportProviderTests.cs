@@ -624,6 +624,13 @@ namespace Atlantis.Framework.Providers.Support.Tests
       Assert.AreEqual(true, supportPhoneData.Number != string.Empty);
     }
 
+    [TestMethod]
+    public void AccountingSupportFaxNumberGSuccess()
+    {
+      ISupportProvider provider = SupportProvider();
+      ISupportPhoneData supportPhoneData = provider.GetSupportPhone(SupportPhoneType.AccountingFax);
+      Assert.AreEqual(true, supportPhoneData.Number != string.Empty);
+    }
 
     [TestMethod]
     public void SupportNumberDataException()

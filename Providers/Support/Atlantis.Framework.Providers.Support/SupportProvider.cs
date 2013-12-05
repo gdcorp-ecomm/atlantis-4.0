@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.Geo.Interface;
 using Atlantis.Framework.Providers.Localization.Interface;
@@ -25,7 +26,8 @@ namespace Atlantis.Framework.Providers.Support
 
     public const string GD_MainPhone = "(480) 505-8800";
     public const string GD_PresidentPhone = "(480) 505-8828";
-    public const string GD_FaxPhone = "(480) 505-8844";
+    public const string GD_FaxPhone = "(480) 505-8865";
+    public const string GD_AccountingFaxPhone = "(480) 275-3996";
     public const string GD_DomainPhone = "(480) 505-8899";
     public const string GD_BillingPhone = "(480) 505-8855";
     public const string GD_HostedExchangePhone = "(480) 463-8887";
@@ -324,6 +326,9 @@ namespace Atlantis.Framework.Providers.Support
           break;
         case SupportPhoneType.Mcafee:
           supportPhone = GetMcafeeSupportPhone();
+          break;
+        case SupportPhoneType.AccountingFax:
+          supportPhone = GetAccountingFaxNumber();
           break;
         default:
           supportPhone = _emptySupportPhoneData;
@@ -686,7 +691,11 @@ namespace Atlantis.Framework.Providers.Support
       return mcafeeSupportPhone;
     }
 
-
+    private ISupportPhoneData GetAccountingFaxNumber()
+    {
+      ISupportPhoneData accountingFaxNumber = new SupportPhoneData(GD_AccountingFaxPhone, false);
+      return accountingFaxNumber;
+    }
 
     private string _supportEmail;
     public string SupportEmail

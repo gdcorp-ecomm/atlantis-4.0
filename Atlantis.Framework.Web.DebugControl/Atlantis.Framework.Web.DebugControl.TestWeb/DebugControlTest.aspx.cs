@@ -13,7 +13,7 @@ namespace Atlantis.Framework.Web.DebugControl.TestWeb
   {
     protected void Page_Load(object sender, EventArgs e)
     {
-      Session["debugControlTest"] = "test";
+      Session["debugControlTest"] = "PlaceholderRegex: <head\\s*[\\w\\s\"=:;#-]*>,";
     }
   }
 

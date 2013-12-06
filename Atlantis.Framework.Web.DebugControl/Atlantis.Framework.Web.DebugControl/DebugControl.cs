@@ -1,15 +1,13 @@
 ﻿
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.HtmlControls;
-using System.Web.UI.WebControls;
 using Atlantis.Framework.Interface;
+using Atlantis.Framework.Providers.Interface.Links;
 using Atlantis.Framework.Providers.Interface.ProviderContainer;
 using System.Text;
-using Atlantis.Framework.Providers.Interface.Links;
+using System.Web;
+using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
 
 namespace Atlantis.Framework.Web.DebugControl
 {
@@ -19,8 +17,8 @@ namespace Atlantis.Framework.Web.DebugControl
 
     private HtmlGenericControl _containerDiv;
 
-    protected string BrowserInfoValue;
-    protected string SessionInfoValue;
+    protected string BrowserInfoValue = string.Empty;
+    protected string SessionInfoValue = string.Empty;
 
     protected List<KeyValuePair<string, string>> DebugData
     {
@@ -78,6 +76,13 @@ namespace Atlantis.Framework.Web.DebugControl
           debugInfo.AppendLine(debugItem.Key + ": " + debugItem.Value);
         }
 
+        debugInfo =
+          debugInfo.Replace("'", "")
+            .Replace("<", "&lt;")
+            .Replace(">", "&gt;")
+            .Replace("&quot;", "")
+            .Replace("\"", "");
+
         writer.Write("<script language=\"javascript\" type=\"text/javascript\">" +
                      "function GetSessionDebugInfo() {" +
                      " return '" + SessionInfoValue + "';" +
@@ -123,32 +128,51 @@ namespace Atlantis.Framework.Web.DebugControl
 
     private void GetBrowserInfo()
     {
-      var browser = HttpContext.Current.Request.Browser;
+      try
+      {
+        var browser = HttpContext.Current.Request.Browser;
 
-      StringBuilder browserInfo = new StringBuilder();
+        StringBuilder browserInfo = new StringBuilder();
 
-      browserInfo.AppendLine("Browser: " + browser.Browser);
-      browserInfo.AppendLine("Platform: " + browser.Platform);
-      browserInfo.AppendLine("Version: " + browser.Version);
-      browserInfo.AppendLine("IsMobileDevice: " + browser.IsMobileDevice);
+        browserInfo.AppendLine("Browser: " + browser.Browser);
+        browserInfo.AppendLine("Platform: " + browser.Platform);
+        browserInfo.AppendLine("Version: " + browser.Version);
+        browserInfo.AppendLine("IsMobileDevice: " + browser.IsMobileDevice);
 
-      BrowserInfoValue = browserInfo.ToString().Replace("\r\n", ",");
+        BrowserInfoValue = browserInfo.ToString().Replace("\r\n", ",");
+      }
+      catch
+      {
+        BrowserInfoValue = "Unable to determine Browser Info.";
+      }
     }
 
     private void GetSessionInfo()
     {
-      var session = HttpContext.Current.Session;
-
-      StringBuilder sessionInfo = new StringBuilder();
-
-      foreach (var key in session.Keys)
+      try
       {
-        sessionInfo.AppendLine(key + ": " + session[key.ToString()]);
+        var session = HttpContext.Current.Session;
+
+        StringBuilder sessionInfo = new StringBuilder();
+
+        foreach (var key in session.Keys)
+        {
+          sessionInfo.AppendLine(key + ": " + session[key.ToString()]);
+        }
+
+        SessionInfoValue = sessionInfo.ToString().Replace("\r\n", ",");
+
+        SessionInfoValue =
+          SessionInfoValue.Replace("'", "")
+            .Replace("<", "&lt;")
+            .Replace(">", "&gt;")
+            .Replace("&quot;", "")
+            .Replace("\"", "");
       }
-
-      SessionInfoValue = sessionInfo.ToString().Replace("\r\n", ",");
-
-      SessionInfoValue = SessionInfoValue.Replace("'", "").Replace("<", "&lt;").Replace(">", "&gt;").Replace("&quot;", "").Replace("\"", "");
+      catch
+      {
+        SessionInfoValue = "Unable to determine Session Info";
+      }
     }
   }
 }

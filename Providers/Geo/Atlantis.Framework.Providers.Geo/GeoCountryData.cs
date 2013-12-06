@@ -3,6 +3,7 @@ using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.Geo.Interface;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Atlantis.Framework.Providers.Geo
 {
@@ -38,6 +39,7 @@ namespace Atlantis.Framework.Providers.Geo
           _geoCountriesByCode[geoCountry.Code] = geoCountry;
         }
       }
+      _geoCountries = _geoCountries.OrderBy(c => c.Name).ToList();
     }
 
     internal bool TryGetGeoCountry(string countryCode, out IGeoCountry country)

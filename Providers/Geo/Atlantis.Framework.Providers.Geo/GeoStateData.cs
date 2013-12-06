@@ -1,8 +1,10 @@
 ﻿using Atlantis.Framework.Geo.Interface;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.Geo.Interface;
+using Atlantis.Framework.Providers.Localization.Interface;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Atlantis.Framework.Providers.Geo
 {
@@ -37,6 +39,27 @@ namespace Atlantis.Framework.Providers.Geo
           _geoStates.Add(geoState);
           _geoStatesByCode[geoState.Code] = geoState;
         }
+      }
+
+      bool isSorted = false;
+      try
+      {
+        ILocalizationProvider localization;
+        if (container.TryResolve<ILocalizationProvider>(out localization) && localization.CurrentCultureInfo != null)
+        {
+          _geoStates = _geoStates.OrderBy(c => c.Name, StringComparer.Create(localization.CurrentCultureInfo, true)).ToList();
+          isSorted = true;
+        }
+      }
+      catch (Exception ex)
+      {
+        var aex = new AtlantisException(request, "GeoStateData.ctor", ex.Message + ex.StackTrace, string.Empty);
+        Engine.Engine.LogAtlantisException(aex);
+      }
+
+      if (!isSorted)
+      {
+        _geoStates = _geoStates.OrderBy(c => c.Name).ToList();
       }
     }
 

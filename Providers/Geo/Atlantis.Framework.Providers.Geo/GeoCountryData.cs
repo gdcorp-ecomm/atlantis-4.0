@@ -4,6 +4,8 @@ using Atlantis.Framework.Providers.Geo.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Atlantis.Framework.Providers.Localization.Interface;
+using System.Collections;
 
 namespace Atlantis.Framework.Providers.Geo
 {
@@ -39,7 +41,28 @@ namespace Atlantis.Framework.Providers.Geo
           _geoCountriesByCode[geoCountry.Code] = geoCountry;
         }
       }
-      _geoCountries = _geoCountries.OrderBy(c => c.Name).ToList();
+
+      bool isSorted = false;
+      try
+      {
+        ILocalizationProvider localization;
+        if (container.TryResolve<ILocalizationProvider>(out localization) && localization.CurrentCultureInfo != null)
+        {
+          _geoCountries = _geoCountries.OrderBy(c => c.Name, StringComparer.Create(localization.CurrentCultureInfo, true)).ToList();
+          isSorted = true;
+        }
+      }
+      catch (Exception ex)
+      {
+        var aex = new AtlantisException(request, "GeoCountryData.ctor", ex.Message + ex.StackTrace, string.Empty);
+        Engine.Engine.LogAtlantisException(aex);
+      }
+
+      if (!isSorted)
+      {
+        _geoCountries = _geoCountries.OrderBy(c => c.Name).ToList();
+      }
+      
     }
 
     internal bool TryGetGeoCountry(string countryCode, out IGeoCountry country)

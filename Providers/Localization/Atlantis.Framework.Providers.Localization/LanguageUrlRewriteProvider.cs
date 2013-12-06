@@ -78,7 +78,7 @@ namespace Atlantis.Framework.Providers.Localization
     {
       try
       {
-        if (IsTransperfectProxyActive() || _localizationProvider.Value == null)
+        if (!IsValidHost() || IsTransperfectProxyActive() || _localizationProvider.Value == null)
         {
           return;
         }
@@ -177,6 +177,20 @@ namespace Atlantis.Framework.Providers.Localization
     }
 
     #region Helper methods
+    private bool IsValidHost()
+    {
+      try
+      {
+        var baseUri = string.Concat("http://", HttpContext.Current.Request.Headers["Host"], "/");
+        Uri hostUri;
+        return Uri.TryCreate(baseUri, UriKind.Absolute, out hostUri);
+      }
+      catch (Exception)
+      {
+        return false;
+      }
+    }
+
     private bool IsDefaultLanguageUrl(string language)
     {
       bool result = false;

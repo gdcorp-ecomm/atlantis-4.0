@@ -249,4 +249,64 @@
   <data name="pinOneDigit" xml:space="preserve">
     <value>O PIN deve conter mais de um dígito</value>
   </data>
+  <data name="errorEmailInvalidFormat" xml:space="preserve">
+    <value>Email é um formato inválido.</value>
+  </data>
+  <data name="errorEmailMaxLength" xml:space="preserve">
+    <value>O email não pode ter mais de {0} caracteres.</value>
+    <comment>{0} replaced with the max email length</comment>
+  </data>
+  <data name="errorEmailRequired" xml:space="preserve">
+    <value>O email é obrigatório.</value>
+  </data>
+  <data name="errorPassword2Required" xml:space="preserve">
+    <value>O campo Confirmar senha é obrigatório.</value>
+  </data>
+  <data name="errorPasswordInvalidFormat" xml:space="preserve">
+    <value>Senha deve conter pelo menos 1 letra maiúscula, 1 número e não pode iniciar nem terminar com um espaço.</value>
+  </data>
+  <data name="errorPasswordMaxLength" xml:space="preserve">
+    <value>O campo Senha não pode ter mais de {0} caracteres.</value>
+    <comment>{0} replaced with the max password length</comment>
+  </data>
+  <data name="errorPasswordMinLength" xml:space="preserve">
+    <value>Senha deve ter no mínimo {0} caracteres.</value>
+    <comment>{0} replaced with the min password length</comment>
+  </data>
+  <data name="errorPasswordMismatch" xml:space="preserve">
+    <value>As senhas não correspondem.</value>
+  </data>
+  <data name="errorPasswordRequired" xml:space="preserve">
+    <value>É necessário uma senha.</value>
+  </data>
+  <data name="errorPinMaxLength" xml:space="preserve">
+    <value>O PIN não pode ter mais de {0} caracteres.</value>
+    <comment>{0} replaced with the max PIN length</comment>
+  </data>
+  <data name="errorPinMinLength" xml:space="preserve">
+    <value>PIN deve ter no mínimo {0} caracteres.</value>
+    <comment>{0} replaced with the min PIN length</comment>
+  </data>
+  <data name="errorPinNumeric" xml:space="preserve">
+    <value>PIN deve conter apenas números.</value>
+  </data>
+  <data name="errorPinRequired" xml:space="preserve">
+    <value>É necessário um PIN.</value>
+  </data>
+  <data name="errorPinSequential" xml:space="preserve">
+    <value>PIN não pode ser qualquer sequência numérica direta de dígitos.</value>
+  </data>
+  <data name="errorUsernameInvalidCharacters" xml:space="preserve">
+    <value>Nome de usuário contém caracteres inválidos.</value>
+  </data>
+  <data name="errorUsernameMaxLength" xml:space="preserve">
+    <value>O nome de usuário não pode ter mais de {0} caracteres.</value>
+    <comment>{0} replaced with the max username length</comment>
+  </data>
+  <data name="errorUsernameNumericOnly" xml:space="preserve">
+    <value>O nome de usuário não pode conter apenas números.</value>
+  </data>
+  <data name="errorUsernameRequired" xml:space="preserve">
+    <value>O nome de usuário é obrigatório.</value>
+  </data>
 </root>

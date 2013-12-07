@@ -118,73 +118,73 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="maxLengthError" xml:space="preserve">
-    <value>{0}debe tener menos de {1} caracteres.</value>
+    <value>{0} debe contener menos de {1} caracteres.</value>
   </data>
   <data name="minLengthError" xml:space="preserve">
-    <value>{0}debe tener más de {1} caracteres.</value>
+    <value>{0} debe contener más de {1} caracteres.</value>
   </data>
   <data name="invalidData" xml:space="preserve">
     <value>Datos no válidos</value>
   </data>
   <data name="equalLengthAlpha" xml:space="preserve">
-    <value>{0}debe tener {1} caracteres.</value>
+    <value>{0} debe contener {1} caracteres.</value>
   </data>
   <data name="equalLengthNumeric" xml:space="preserve">
-    <value>{0}debe tener {1} digitos.</value>
+    <value>{0} debe contener {1} dígitos.</value>
   </data>
   <data name="invalidCharacters" xml:space="preserve">
-    <value>{0}contiene caracteres no válidos</value>
+    <value>{0} contiene caracteres no válidos</value>
   </data>
   <data name="match" xml:space="preserve">
-    <value>{0}debe ser igual a {1}</value>
+    <value>{0} debe ser igual a {1}</value>
   </data>
   <data name="notMatch" xml:space="preserve">
-    <value>{0}no puede ser igual a {1}</value>
+    <value>{0} no puede ser igual a {1}</value>
   </data>
   <data name="numericRule" xml:space="preserve">
-    <value>{0}debe contener únicamente números.</value>
+    <value>{0} debe contener únicamente números.</value>
   </data>
   <data name="isInvalid" xml:space="preserve">
-    <value>{0}no es válido;</value>
+    <value>{0} no es válido;</value>
   </data>
   <data name="phoneMustStartAndContain" xml:space="preserve">
-    <value>{0}no debe iniciar con un 0 o un 1.  Debe contener {1} caracteres </value>
+    <value>{0} no debe iniciar con un 0 o un 1.  Debe contener {1} caracteres </value>
   </data>
   <data name="phoneMustContainCharacters" xml:space="preserve">
-    <value>{0}debe contener {1} caracteres</value>
+    <value>{0} debe contener {1} caracteres</value>
   </data>
   <data name="mustBeNumeric" xml:space="preserve">
-    <value>{0}debe ser numérico</value>
+    <value>{0} debe ser numérico</value>
   </data>
   <data name="invalidFormat" xml:space="preserve">
-    <value>{0}está en un formato no válido.</value>
+    <value>{0} está en un formato no válido.</value>
   </data>
   <data name="required" xml:space="preserve">
-    <value>{0}es obligatorio</value>
+    <value>{0} es obligatorio</value>
   </data>
   <data name="birthdayValid" xml:space="preserve">
     <value>Si se proporciona un cumpleaños, debe proporcionar valores válidos</value>
   </data>
   <data name="straightNumerical" xml:space="preserve">
-    <value>{0}no puede ser una secuencia numérica sucesiva de dígitos.</value>
+    <value>{0} no puede ser una secuencia numérica sucesiva de dígitos.</value>
   </data>
   <data name="commonPhrase" xml:space="preserve">
-    <value>{0}no puede incluir una palabra o frase común.</value>
+    <value>{0} no puede incluir una palabra o frase común.</value>
   </data>
   <data name="lastFive" xml:space="preserve">
     <value>No se pueden volver a usar las últimas 5 contraseñas.</value>
   </data>
   <data name="matchesHint" xml:space="preserve">
-    <value>{0}no puede ser igual a la Sugerencia de contraseña.</value>
+    <value>{0} no puede ser igual a la Sugerencia de contraseña.</value>
   </data>
   <data name="samePassword" xml:space="preserve">
     <value>No puede usar la misma contraseña en un período de 30 días.</value>
   </data>
   <data name="isInvalidStatusCode" xml:space="preserve">
-    <value>{0}no es válido. Código de estado: {1}</value>
+    <value>{0} no es válido. Código de estado: {1}</value>
   </data>
   <data name="passwordConfirm" xml:space="preserve">
-    <value>{0}no puede tener más de {1} caracteres.  Recorte {0} antes de proporcionarlo al validador.</value>
+    <value>{0} no puede contener más de {1} caracteres.  Recorte {0} antes de proporcionarlo al validador.</value>
   </data>
   <data name="usernameExists" xml:space="preserve">
     <value>El nombre de usuario ya existe</value>
@@ -241,12 +241,72 @@
     <value>Código postal</value>
   </data>
   <data name="alreadyExists" xml:space="preserve">
-    <value>{0}ya existe</value>
+    <value>{0} ya existe</value>
   </data>
   <data name="cannotBeNumeric" xml:space="preserve">
-    <value>{0}no pueden ser solo números</value>
+    <value>{0} no pueden ser solo números</value>
   </data>
   <data name="pinOneDigit" xml:space="preserve">
     <value>El PIN debe contener más de un dígito</value>
+  </data>
+  <data name="errorEmailInvalidFormat" xml:space="preserve">
+    <value>Formato de correo electrónico no válido.</value>
+  </data>
+  <data name="errorEmailMaxLength" xml:space="preserve">
+    <value>El correo electrónico no puede contener más de {0} caracteres.</value>
+    <comment>{0} replaced with the max email length</comment>
+  </data>
+  <data name="errorEmailRequired" xml:space="preserve">
+    <value>El correo electrónico es obligatorio.</value>
+  </data>
+  <data name="errorPassword2Required" xml:space="preserve">
+    <value>Confirmar la contraseña es obligatorio.</value>
+  </data>
+  <data name="errorPasswordInvalidFormat" xml:space="preserve">
+    <value>La contraseña debe incluir por lo menos 1 letra en mayúscula, 1 número y no puede comenzar ni finalizar con un espacio.</value>
+  </data>
+  <data name="errorPasswordMaxLength" xml:space="preserve">
+    <value>La contraseña no puede contener más de {0} caracteres.</value>
+    <comment>{0} replaced with the max password length</comment>
+  </data>
+  <data name="errorPasswordMinLength" xml:space="preserve">
+    <value>La contraseña debe contener por lo menos {0} caracteres.</value>
+    <comment>{0} replaced with the min password length</comment>
+  </data>
+  <data name="errorPasswordMismatch" xml:space="preserve">
+    <value>Las contraseñas deben coincidir.</value>
+  </data>
+  <data name="errorPasswordRequired" xml:space="preserve">
+    <value>La contraseña es obligatoria.</value>
+  </data>
+  <data name="errorPinMaxLength" xml:space="preserve">
+    <value>El PIN no puede contener más de {0} caracteres.</value>
+    <comment>{0} replaced with the max PIN length</comment>
+  </data>
+  <data name="errorPinMinLength" xml:space="preserve">
+    <value>El PIN debe contener por lo menos {0} caracteres.</value>
+    <comment>{0} replaced with the min PIN length</comment>
+  </data>
+  <data name="errorPinNumeric" xml:space="preserve">
+    <value>El PIN debe contener únicamente números.</value>
+  </data>
+  <data name="errorPinRequired" xml:space="preserve">
+    <value>El PIN es obligatorio.</value>
+  </data>
+  <data name="errorPinSequential" xml:space="preserve">
+    <value>El PIN no puede ser una secuencia numérica sucesiva de dígitos.</value>
+  </data>
+  <data name="errorUsernameInvalidCharacters" xml:space="preserve">
+    <value>El nombre de usuario contiene caracteres no válidos.</value>
+  </data>
+  <data name="errorUsernameMaxLength" xml:space="preserve">
+    <value>El nombre de usuario no puede contener más de {0} caracteres.</value>
+    <comment>{0} replaced with the max username length</comment>
+  </data>
+  <data name="errorUsernameNumericOnly" xml:space="preserve">
+    <value>El nombre de usuario no puede contener solamente números.</value>
+  </data>
+  <data name="errorUsernameRequired" xml:space="preserve">
+    <value>El nombre de usuario es obligatorio.</value>
   </data>
 </root>

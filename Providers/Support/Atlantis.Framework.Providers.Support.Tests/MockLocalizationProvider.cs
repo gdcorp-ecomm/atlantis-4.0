@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using Atlantis.Framework.Interface;
+using Atlantis.Framework.Providers.Localization;
 using Atlantis.Framework.Providers.Localization.Interface;
 
 namespace Atlantis.Framework.Providers.Support.Tests
@@ -10,6 +11,7 @@ namespace Atlantis.Framework.Providers.Support.Tests
   {
     public const string COUNTRY_SITE_NAME = "MockLocalizationProvider.CountrySite";
     public const string IS_GLOBAL_SITE_NAME = "MockLocalizationProvider.IsGlobalSite";
+    public const string MARKET_INFO = "MockLocalizationProvider.MarketInfo";
 
     public MockLocalizationProvider(IProviderContainer container) : base(container)
     {
@@ -33,7 +35,10 @@ namespace Atlantis.Framework.Providers.Support.Tests
       }
     }
 
-    public IMarket MarketInfo { get; private set; }
+    public IMarket MarketInfo
+    {
+      get { return Container.GetData<IMarket>(MARKET_INFO, null); }       
+    }
 
     public bool IsGlobalSite()
     {

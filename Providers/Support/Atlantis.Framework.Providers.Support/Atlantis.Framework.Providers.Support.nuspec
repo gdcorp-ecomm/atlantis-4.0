@@ -2,14 +2,14 @@
 <package >
   <metadata>
     <id>Atlantis.Framework.Providers.Support</id>
-    <version>4.13.12.5</version>
+    <version>4.13.12.7</version>
     <title>Atlantis Framework Providers Support</title>
     <authors>$author$</authors>
     <owners>$author$</owners>
     <projectUrl>https://confluence.int.godaddy.com/display/ATLANTIS</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes></releaseNotes>
+    <releaseNotes>Return US Spanish tech support number if either Transperfect or Market is es-US</releaseNotes>
     <copyright>$copyright$</copyright>
     <tags>Atlantis Framework Providers Support</tags>
     <dependencies>

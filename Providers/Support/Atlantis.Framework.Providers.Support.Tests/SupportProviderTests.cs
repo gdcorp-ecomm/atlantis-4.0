@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.Geo.Interface;
 using Atlantis.Framework.Providers.Localization.Interface;
@@ -44,6 +45,10 @@ namespace Atlantis.Framework.Providers.Support.Tests
           break;
         case "SupportNumberGdSuccessWithTransperfectProxy":
           _container.RegisterProvider<IProxyContext, TransperfectTestWebProxy>();
+          _container.RegisterProvider<IGeoProvider, MockGeoProvider>();
+          _container.RegisterProvider<ILocalizationProvider, MockLocalizationProvider>();
+          break;
+        case "SupportNumberGdSuccessWithEsUsMarket":
           _container.RegisterProvider<IGeoProvider, MockGeoProvider>();
           _container.RegisterProvider<ILocalizationProvider, MockLocalizationProvider>();
           break;
@@ -773,6 +778,16 @@ namespace Atlantis.Framework.Providers.Support.Tests
     [TestMethod]
     public void SupportNumberGdSuccessWithTransperfectProxy()
     {
+      ISupportProvider provider = SupportProvider();
+      ISupportPhoneData supportPhoneData = provider.GetSupportPhone(SupportPhoneType.Technical);
+      Assert.AreEqual(true, supportPhoneData.Number == US_SPANISH_SUPPORT_NUMBER);
+    }
+
+    [TestMethod]
+    public void SupportNumberGdSuccessWithEsUsMarket()
+    {
+      IMarket marketInfo = new MockMarketInfo("es-US", "Estados Unidos - Español", false, "es-US");
+      _container.SetData(MockLocalizationProvider.MARKET_INFO, marketInfo);
       ISupportProvider provider = SupportProvider();
       ISupportPhoneData supportPhoneData = provider.GetSupportPhone(SupportPhoneType.Technical);
       Assert.AreEqual(true, supportPhoneData.Number == US_SPANISH_SUPPORT_NUMBER);

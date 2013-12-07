@@ -15,6 +15,7 @@ namespace Atlantis.Framework.Providers.Support
     const int PRIVATE_LABEL_CATEGORY_USER_SUPPORT_EMAIL = 45;
     const string WWW = "WWW";
     const string COUNTRY_CODE_US = "us";
+    private const string US_SPANISH_MARKET = "es-US";
     private const string US_SPANISH_SUPPORT_NUMBER = "(480) 463-8300";
 
     public const string AuctionsHelpPhone = "480-505-8892";
@@ -375,7 +376,9 @@ namespace Atlantis.Framework.Providers.Support
         {
           technicalSupportPhone = new SupportPhoneData(FormattedPrivateLabelSupportPhone, false);
         }
-        else if (CountryCode == COUNTRY_CODE_US && IsTransperfectProxyActive())
+        else if (CountryCode == COUNTRY_CODE_US &&
+          (_localizationProvider.Value != null && _localizationProvider.Value.MarketInfo != null && US_SPANISH_MARKET.Equals(_localizationProvider.Value.MarketInfo.Id, StringComparison.OrdinalIgnoreCase) || 
+          IsTransperfectProxyActive()))
         {
           technicalSupportPhone = new SupportPhoneData(US_SPANISH_SUPPORT_NUMBER, false);
         }

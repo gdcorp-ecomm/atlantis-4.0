@@ -114,6 +114,7 @@
   <ItemGroup>
     <Compile Include="MockGeoProvider.cs" />
     <Compile Include="MockLocalizationProvider.cs" />
+    <Compile Include="MockMarketInfo.cs" />
     <Compile Include="MockPrivateLabelDataRequest.cs" />
     <Compile Include="MockSupportPhoneDataFailRequest.cs" />
     <Compile Include="SupportProviderTests.cs" />

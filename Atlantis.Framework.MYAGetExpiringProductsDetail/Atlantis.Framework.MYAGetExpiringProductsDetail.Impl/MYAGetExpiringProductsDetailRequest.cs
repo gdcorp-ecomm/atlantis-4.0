@@ -23,6 +23,7 @@ namespace Atlantis.Framework.MYAGetExpiringProductsDetail.Impl
     private const string TOTAL_RECORDS_PARAM = "totalrecords";
     private const string TOTAL_PAGES_PARAM = "totalpages";
     private const string PRODUCT_TYPE_ID_LIST = "product_typeIDList";
+    private const string INCLUDE_AUTO_RENEW_PARAM = "includeAutoRenewingProducts";
 
     public IResponseData RequestHandler(RequestData oRequestData, ConfigElement oConfig)
     {
@@ -51,6 +52,7 @@ namespace Atlantis.Framework.MYAGetExpiringProductsDetail.Impl
             command.Parameters.Add(new SqlParameter(RETURN_ALL_FLAG_PARAM, request.ReturnAll));
             command.Parameters.Add(new SqlParameter(SYNCABLE_ONLY_PARAM, request.SyncableOnly));
             command.Parameters.Add(new SqlParameter(ISC_DATE_PARAM, request.IscDate));
+            command.Parameters.Add(new SqlParameter(INCLUDE_AUTO_RENEW_PARAM, request.IncludeAutoRenewingProducts));
             if (!string.IsNullOrEmpty(request.ProductTypeListString))
             {
               ProductTypeListSizeCheck(request);

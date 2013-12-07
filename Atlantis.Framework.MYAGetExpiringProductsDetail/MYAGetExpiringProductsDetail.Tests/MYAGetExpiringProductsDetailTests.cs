@@ -13,20 +13,31 @@ namespace MYAGetExpiringProductsDetail.Tests
     public void MYAGetExpiringProductsDetail()
     {
       //returns all products for shopper
-      MYAGetExpiringProductsDetailRequestData requestData = new MYAGetExpiringProductsDetailRequestData("822497", string.Empty, string.Empty, string.Empty, 0);     
+      var requestData = new MYAGetExpiringProductsDetailRequestData("822497");     
       
-      MYAGetExpiringProductsDetailResponseData response = (MYAGetExpiringProductsDetailResponseData)Engine.ProcessRequest(requestData, 194);
+      var response = (MYAGetExpiringProductsDetailResponseData)Engine.ProcessRequest(requestData, 194);
       
+      Assert.IsTrue(response.IsSuccess);
+    }
+
+    [TestMethod]
+    public void MYAGetExpiringProductsDetailWithAutoRenew()
+    {
+      //returns all products for shopper
+      var requestData = new MYAGetExpiringProductsDetailRequestData("822497", true);
+
+      var response = (MYAGetExpiringProductsDetailResponseData)Engine.ProcessRequest(requestData, 194);
+
       Assert.IsTrue(response.IsSuccess);
     }
 
     [TestMethod]
     public void MYASpecificExpiringProductsDetail()
     {
-      MYAGetExpiringProductsDetailRequestData requestData = new MYAGetExpiringProductsDetailRequestData("822497", string.Empty, string.Empty, string.Empty, 0);
+      var requestData = new MYAGetExpiringProductsDetailRequestData("822497");
       requestData.ProductTypeHashSet.Add("14");
 
-      MYAGetExpiringProductsDetailResponseData response = (MYAGetExpiringProductsDetailResponseData)Engine.ProcessRequest(requestData, 194);
+      var response = (MYAGetExpiringProductsDetailResponseData)Engine.ProcessRequest(requestData, 194);
 
       Assert.IsTrue(response.IsSuccess);
     }
@@ -34,7 +45,7 @@ namespace MYAGetExpiringProductsDetail.Tests
     [TestMethod]
     public void MYASpecificExpiringProductsDetailMoreThanFiveProductTypes()
     {
-      MYAGetExpiringProductsDetailRequestData requestData = new MYAGetExpiringProductsDetailRequestData("822497", string.Empty, string.Empty, string.Empty, 0);
+      var requestData = new MYAGetExpiringProductsDetailRequestData("822497");
       requestData.ProductTypeHashSet.Add("14");
       requestData.ProductTypeHashSet.Add("15");
       requestData.ProductTypeHashSet.Add("16");
@@ -42,7 +53,7 @@ namespace MYAGetExpiringProductsDetail.Tests
       requestData.ProductTypeHashSet.Add("18");
       requestData.ProductTypeHashSet.Add("20");
 
-      MYAGetExpiringProductsDetailResponseData response = (MYAGetExpiringProductsDetailResponseData)Engine.ProcessRequest(requestData, 194);
+      var response = (MYAGetExpiringProductsDetailResponseData)Engine.ProcessRequest(requestData, 194);
 
       Assert.IsTrue(response.IsSuccess);
     }

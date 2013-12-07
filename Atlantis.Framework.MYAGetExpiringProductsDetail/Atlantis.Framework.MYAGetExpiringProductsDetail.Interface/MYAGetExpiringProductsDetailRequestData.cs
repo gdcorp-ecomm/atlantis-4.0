@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Security.Cryptography;
 using System.Text;
 using Atlantis.Framework.Interface;
 
@@ -86,26 +85,24 @@ namespace Atlantis.Framework.MYAGetExpiringProductsDetail.Interface
       }
     }
 
+    public int IncludeAutoRenewingProducts { get; private set; }
+
     private readonly HashSet<string> _productTypeHashSet = new HashSet<string>();
     public HashSet<string> ProductTypeHashSet
     {
       get { return _productTypeHashSet; }
     }
 
-    public MYAGetExpiringProductsDetailRequestData(string shopperId,
-                                                   string sourceUrl,
-                                                   string orderId,
-                                                   string pathway,
-                                                   int pageCount) : base(shopperId, sourceUrl, orderId, pathway, pageCount)
+    public MYAGetExpiringProductsDetailRequestData(string shopperId, bool includeAutoRenewingProducts = false)
     {
-      RequestTimeout = TimeSpan.FromSeconds(5);
+      ShopperID = shopperId;
+      RequestTimeout = TimeSpan.FromSeconds(8);
+      IncludeAutoRenewingProducts = Convert.ToInt32(includeAutoRenewingProducts);
     }
 
     public override string GetCacheMD5()
     {
-      MD5 md5 = new MD5CryptoServiceProvider();
-
-      StringBuilder dataBuilder = new StringBuilder();
+      var dataBuilder = new StringBuilder();
       dataBuilder.Append(ShopperID);
       dataBuilder.AppendFormat(".{0}", Days);
       dataBuilder.AppendFormat(".{0}", RowsPerPage);
@@ -115,11 +112,7 @@ namespace Atlantis.Framework.MYAGetExpiringProductsDetail.Interface
       dataBuilder.AppendFormat(".{0}", IscDate.ToString("MM.dd.yyyy"));
       dataBuilder.AppendFormat(".{0}", ProductTypeListString);
 
-      var data = Encoding.UTF8.GetBytes(dataBuilder.ToString());
-
-      var hash = md5.ComputeHash(data);
-      var result = Encoding.UTF8.GetString(hash);
-      return result;
+      return BuildHashFromStrings(dataBuilder.ToString());
     }
   }
 }

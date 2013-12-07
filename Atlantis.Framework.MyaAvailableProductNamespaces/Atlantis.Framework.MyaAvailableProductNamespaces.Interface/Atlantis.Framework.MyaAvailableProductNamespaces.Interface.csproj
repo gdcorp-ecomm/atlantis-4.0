@@ -59,8 +59,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="LanguageResources\MyaAvailableProductNamespaces.de.resx" />
     <EmbeddedResource Include="LanguageResources\MyaAvailableProductNamespaces.en.resx" />
+    <EmbeddedResource Include="LanguageResources\MyaAvailableProductNamespaces.es.resx" />
+    <EmbeddedResource Include="LanguageResources\MyaAvailableProductNamespaces.pt-BR.resx" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -15,7 +15,7 @@ namespace Atlantis.Framework.MyaAvailableProductNamespaces.Test
     [DeploymentItem("Atlantis.Framework.MyaAvailableProductNamespaces.Impl.dll")]
     public void GetNamespaces()
     {
-      var request = new MyaAvailableProductNamespacesRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "de");
+      var request = new MyaAvailableProductNamespacesRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "pt-BR");
       var response = (MyaAvailableProductNamespacesResponseData)Engine.Engine.ProcessRequest(request, 494);
 
       var namespaceList = new StringBuilder();

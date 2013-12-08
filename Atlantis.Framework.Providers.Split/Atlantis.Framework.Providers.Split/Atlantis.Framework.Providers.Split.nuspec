@@ -1,0 +1,17 @@
+﻿<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Atlantis.Framework.Providers.Split</id>
+    <version>4.12.5.18</version> 
+    <title>Atlantis.Framework.Providers.Split</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <projectUrl>https://confluence.int.godaddy.com/display/ATLANTIS</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes>Created nuget spec</releaseNotes>
+    <copyright>$copyright$</copyright>
+    <tags>Atlantis.Framework.Providers.Split</tags>
+  </metadata>
+  <files />
+</package>

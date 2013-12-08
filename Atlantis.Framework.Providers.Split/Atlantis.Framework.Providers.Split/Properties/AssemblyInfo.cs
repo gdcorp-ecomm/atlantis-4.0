@@ -7,10 +7,11 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Atlantis.Framework.Providers.Split")]
 #if DEBUG
 [assembly: AssemblyDescription("Debug Build")]
+[assembly: AssemblyConfiguration("Debug Build")]
 #else
 [assembly: AssemblyDescription("Release Build")]
+[assembly: AssemblyConfiguration("Release Build")]
 #endif
-[assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("GoDaddy.com")]
 [assembly: AssemblyProduct("Atlantis.Framework.Providers.Split")]
 [assembly: AssemblyCopyright("Copyright © GoDaddy.com 2010-2012")]

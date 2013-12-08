@@ -5,13 +5,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Provider
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Providers.Split.Tests", "Atlantis.Framework.Providers.Split.Tests\Atlantis.Framework.Providers.Split.Tests.csproj", "{00BECE38-BC6D-4C43-8AB9-6631947907C4}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{6C128CD5-B926-4187-8C6D-22AC602109FD}"
-	ProjectSection(SolutionItems) = preProject
-		Atlantis.Framework.Providers.Split.vsmdi = Atlantis.Framework.Providers.Split.vsmdi
-		Local.testsettings = Local.testsettings
-		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Providers.Split.Interface", "Atlantis.Framework.Providers.Split.Interface\Atlantis.Framework.Providers.Split.Interface.csproj", "{797D9094-F4F7-4947-B3D2-23E4A0A60656}"
 EndProject
 Global

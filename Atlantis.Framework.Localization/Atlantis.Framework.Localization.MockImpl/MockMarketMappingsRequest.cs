@@ -1,6 +1,7 @@
 ﻿using System;
+using System.Linq;
 using System.Web;
-using System.Xml;
+using System.Xml.Linq;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Localization.Interface;
 
@@ -21,15 +22,10 @@ namespace Atlantis.Framework.Localization.MockImpl
           throw new Exception(this.GetType().Name + " requires a request derived from " + typeof(MarketMappingsRequestData).Name);
         }
         string strResp = HttpContext.Current.Items[MockLocalizationSettings.MarketMappingsTable] as string;
-        var xmldoc = new XmlDocument();
-        xmldoc.LoadXml(strResp);
-        var nodes = xmldoc.SelectNodes(String.Concat("/data/item[@catalog_marketID!='", request.MarketId, "']"));
-        foreach (XmlNode node in nodes)
-        {
-          node.ParentNode.RemoveChild(node);
-        }
-        string filteredResp = xmldoc.OuterXml;
-        result = MarketMappingsResponseData.FromCacheDataXml(filteredResp);
+        XDocument xDoc = XDocument.Parse(strResp);
+        xDoc.Descendants("item").Where(i => !((string) i.Attribute("catalog_marketID")).Equals(request.MarketId, StringComparison.OrdinalIgnoreCase)).Remove();
+
+        result = MarketMappingsResponseData.FromCacheDataXml(xDoc.ToString());
 
       }
       return result;

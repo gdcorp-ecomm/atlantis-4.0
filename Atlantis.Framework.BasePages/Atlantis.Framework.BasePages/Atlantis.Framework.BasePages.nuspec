@@ -12,9 +12,5 @@
     <releaseNotes>Updated JSON serialization to work with extended character sets</releaseNotes>
     <copyright>$copyright$</copyright>
     <tags>Atlantis Framework BasePages</tags>
-    <dependencies>
-      <dependency id="Atlantis.Framework.Manager.Impl" version="4.0.0.0" />
-      <dependency id="Atlantis.Framework.Shopper" version="4.0.0.0" />
-    </dependencies>
   </metadata>
 </package>

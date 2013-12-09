@@ -8,11 +8,16 @@ namespace Atlantis.Framework.Providers.Localization.Tests.Mocks.Http
   {
     private NameValueCollection _headers = new NameValueCollection();
 
-    public MockHttpRequest(HttpRequest request = null, string httpMethod = "GET", string virtualFolder = "") : base()
+    public MockHttpRequest(HttpRequest request = null, string httpMethod = "GET", string virtualFolder = "", bool autoSetHostHeader = true) : base()
     {
       BaseRequest = request;
       _httpMethod = httpMethod;
       _applicationPath = "/" + virtualFolder.ToLower();
+
+      if (request != null && autoSetHostHeader && string.IsNullOrEmpty(_headers["Host"]))
+      {
+        _headers["Host"] = request.Url.Host;
+      }
     }
 
     private HttpRequest BaseRequest { get; set; }

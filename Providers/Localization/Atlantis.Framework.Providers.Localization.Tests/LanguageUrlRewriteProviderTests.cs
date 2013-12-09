@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Globalization;
 using System.Reflection;
 using System.Web;
@@ -53,15 +55,22 @@ namespace Atlantis.Framework.Providers.Localization.Tests
         filename = string.Empty;
     }
 
-    private IProviderContainer SetCountrySubdomainContext(string url, string httpMethod = "GET", string virtualDirectoryName = "")
+    private IProviderContainer SetCountrySubdomainContext(string url, string httpMethod = "GET", string virtualDirectoryName = "", bool autoSetHostHeader = true)
     {
       MockHttpRequest request = new MockCustomHttpRequest(url, httpMethod, virtualDirectoryName);
       MockHttpContext.SetFromWorkerRequest(request);
+      if (autoSetHostHeader)
+      {
+        var hostHeader = new KeyValuePair<string, string>("Host", HttpContext.Current.Request.Url.Host);
+        var headers = new [] { hostHeader };
+        request.MockHeaderValues(headers);
+      }
 
       string filename;
       string queryString;
       ParseUrl(url, out filename, out queryString);
-      var mockRequest = new Mocks.Http.MockHttpRequest(new HttpRequest(filename, url, queryString), httpMethod, virtualDirectoryName);
+      var mockRequest = new Mocks.Http.MockHttpRequest(new HttpRequest(filename, url, queryString), httpMethod, virtualDirectoryName, autoSetHostHeader);
+
       var context = new Mocks.Http.MockHttpContext(mockRequest, new Mocks.Http.MockHttpResponse());
       HttpContextFactory.SetHttpContext(context);
 
@@ -73,15 +82,21 @@ namespace Atlantis.Framework.Providers.Localization.Tests
       return result;
     }
 
-    private IProviderContainer SetCountryCookieContext(string url, string countrySite, string httpMethod = "GET", string virtualDirectoryName = "")
+    private IProviderContainer SetCountryCookieContext(string url, string countrySite, string httpMethod = "GET", string virtualDirectoryName = "", bool autoSetHostHeader = true)
     {
       MockHttpRequest request = new MockCustomHttpRequest(url, httpMethod, virtualDirectoryName);
       MockHttpContext.SetFromWorkerRequest(request);
+      if (autoSetHostHeader)
+      {
+        var hostHeader = new KeyValuePair<string, string>("Host", HttpContext.Current.Request.Url.Host);
+        var headers = new[] { hostHeader };
+        request.MockHeaderValues(headers);
+      }
 
       string filename;
       string queryString;
       ParseUrl(url, out filename, out queryString);
-      var mockRequest = new Mocks.Http.MockHttpRequest(new HttpRequest(filename, url, queryString), httpMethod, virtualDirectoryName);
+      var mockRequest = new Mocks.Http.MockHttpRequest(new HttpRequest(filename, url, queryString), httpMethod, virtualDirectoryName, autoSetHostHeader);
       var context = new Mocks.Http.MockHttpContext(mockRequest, new Mocks.Http.MockHttpResponse());
       HttpContextFactory.SetHttpContext(context);
 

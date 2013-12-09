@@ -233,7 +233,7 @@ namespace Atlantis.Framework.Providers.Support.Tests
       try
       {
         DataCache.DataCacheEngineRequests.GetPrivateLabelData = 999;
-        _container.SetData<int>(MockSiteContextSettings.PrivateLabelId,440354);
+        _container.SetData<int>(MockSiteContextSettings.PrivateLabelId, 440354);
         ISupportPhoneData supportPhoneData = provider.GetSupportPhone(SupportPhoneType.Billing);
         Assert.AreEqual(true, supportPhoneData.Number == string.Empty);
       }
@@ -558,7 +558,7 @@ namespace Atlantis.Framework.Providers.Support.Tests
       ISupportPhoneData supportPhoneData = provider.GetSupportPhone(SupportPhoneType.SSL);
       Assert.AreEqual(true, supportPhoneData.Number != string.Empty);
     }
-    
+
     [TestMethod]
     public void DesignTeamSupportNumberGdSuccess()
     {
@@ -594,8 +594,27 @@ namespace Atlantis.Framework.Providers.Support.Tests
       try
       {
         DataCache.DataCacheEngineRequests.GetPrivateLabelData = 999;
-        _container.SetData<int>(MockSiteContextSettings.PrivateLabelId,441087);
+        _container.SetData<int>(MockSiteContextSettings.PrivateLabelId, 441087);
         ISupportPhoneData supportPhoneData = provider.GetSupportPhone(SupportPhoneType.ResellerSales);
+        Assert.AreEqual(true, supportPhoneData.Number != string.Empty);
+      }
+      finally
+      {
+        DataCache.DataCacheEngineRequests.GetPrivateLabelData = plDataRequest;
+      }
+    }
+
+    [TestMethod]
+    public void ResellerTechSupportNumberSuperResellerSuccess()
+    {
+      ISupportProvider provider = SupportProvider();
+      int plDataRequest = DataCache.DataCacheEngineRequests.GetPrivateLabelData;
+
+      try
+      {
+        DataCache.DataCacheEngineRequests.GetPrivateLabelData = 999;
+        _container.SetData<int>(MockSiteContextSettings.PrivateLabelId, 281896);
+        ISupportPhoneData supportPhoneData = provider.GetSupportPhone(SupportPhoneType.Technical);
         Assert.AreEqual(true, supportPhoneData.Number != string.Empty);
       }
       finally
@@ -747,7 +766,7 @@ namespace Atlantis.Framework.Providers.Support.Tests
     public void SupportNumberGdSuccessWithNonGlobalSite()
     {
       ISupportProvider provider = SupportProvider("uk", false);
-       ISupportPhoneData supportPhoneData = provider.GetSupportPhone(SupportPhoneType.Technical);
+      ISupportPhoneData supportPhoneData = provider.GetSupportPhone(SupportPhoneType.Technical);
       Assert.AreEqual(true, supportPhoneData.Number != string.Empty);
     }
 

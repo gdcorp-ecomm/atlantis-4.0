@@ -259,20 +259,24 @@ namespace Atlantis.Framework.Providers.Support
         if (_formattedPrivateLabelSupportPhone == null)
         {
           _formattedPrivateLabelSupportPhone = DataCache.DataCache.GetPLData(_siteContext.Value.PrivateLabelId, PRIVATE_LABEL_CATEGORY_USER_SUPPORT_PHONE);
-          switch (_formattedPrivateLabelSupportPhone.Trim().Length)
+          Int64 numericPhone;
+          if (Int64.TryParse(_formattedPrivateLabelSupportPhone, out numericPhone))
           {
-            case 7:
-              _formattedPrivateLabelSupportPhone = String.Format("{0:000-0000}", Convert.ToInt64(_formattedPrivateLabelSupportPhone));
-              break;
-            case 10:
-              _formattedPrivateLabelSupportPhone = String.Format("{0:(000) 000-0000}", Convert.ToInt64(_formattedPrivateLabelSupportPhone));
-              break;
-            case 11:
-              _formattedPrivateLabelSupportPhone = String.Format("{0:0-000-000-0000}", Convert.ToInt64(_formattedPrivateLabelSupportPhone));
-              break;
-            case 12:
-              _formattedPrivateLabelSupportPhone = String.Format("{0:+00-000-000-0000}", Convert.ToInt64(_formattedPrivateLabelSupportPhone));
-              break;
+            switch (_formattedPrivateLabelSupportPhone.Trim().Length)
+            {
+              case 7:
+                _formattedPrivateLabelSupportPhone = String.Format("{0:000-0000}", numericPhone);
+                break;
+              case 10:
+                _formattedPrivateLabelSupportPhone = String.Format("{0:(000) 000-0000}", numericPhone);
+                break;
+              case 11:
+                _formattedPrivateLabelSupportPhone = String.Format("{0:0-000-000-0000}", numericPhone);
+                break;
+              case 12:
+                _formattedPrivateLabelSupportPhone = String.Format("{0:+00-000-000-0000}", numericPhone);
+                break;
+            }
           }
         }
 

@@ -45,5 +45,12 @@ namespace Atlantis.Framework.Providers.Shopper.Interface
     /// <param name="updates">IDictionary where the key is the fieldname and the value is the value to update it to.</param>
     /// <returns>true if the shopper was successfully updated.</returns>
     bool TryUpdateShopper(IDictionary<string, string> updates);
+
+    /// <summary>
+    /// Updates the current IShopperContext shopper with the given field values.
+    /// </summary>
+    /// <param name="updates">IDictionary where the key is the fieldname and the value is the value to update it to.</param>
+    /// <returns>ShopperUpdateResultType enum.</returns>
+    ShopperUpdateResultType UpdateShopperInfo(IDictionary<string, string> updates);
   }
 }

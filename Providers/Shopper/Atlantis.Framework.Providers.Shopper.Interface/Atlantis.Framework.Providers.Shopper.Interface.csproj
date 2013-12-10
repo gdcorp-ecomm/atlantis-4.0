@@ -57,6 +57,7 @@
     <Compile Include="IShopperDataProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ShopperDataFields.cs" />
+    <Compile Include="ShopperUpdateResultType.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="atlantis.config" />

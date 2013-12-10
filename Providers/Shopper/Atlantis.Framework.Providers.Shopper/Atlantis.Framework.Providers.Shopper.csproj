@@ -69,6 +69,7 @@
     <Compile Include="ShopperDataProvider.cs" />
     <Compile Include="ShopperProviderEngineRequests.cs" />
     <Compile Include="ShopperSpecificSessionDataItem.cs" />
+    <Compile Include="ShopperUpdateErrorMapper.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Atlantis.Framework.Providers.Shopper.Interface\Atlantis.Framework.Providers.Shopper.Interface.csproj">

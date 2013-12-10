@@ -329,8 +329,8 @@ namespace Atlantis.Framework.Providers.Shopper.Tests
       Dictionary<string, string> updateFields = new Dictionary<string, string>();
       updateFields["city"] = "Springfield";
 
-      bool success = dataProvider.TryUpdateShopper(updateFields);
-      Assert.IsTrue(success);
+      ShopperUpdateResultType result = dataProvider.UpdateShopperInfo(updateFields);
+      Assert.IsTrue(result == ShopperUpdateResultType.Success);
     }
 
     [TestMethod]

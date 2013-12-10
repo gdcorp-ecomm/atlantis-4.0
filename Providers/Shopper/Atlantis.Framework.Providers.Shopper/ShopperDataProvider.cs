@@ -197,6 +197,38 @@ namespace Atlantis.Framework.Providers.Shopper
       return result;
     }
 
+    public ShopperUpdateResultType UpdateShopperInfo(IDictionary<string, string> updates)
+    {
+      var resultCode = ShopperUpdateResultType.UnknownError;
+
+      if (!string.IsNullOrEmpty(_shopperContext.Value.ShopperId))
+      {
+        try
+        {
+          var request = new UpdateShopperRequestData(_shopperContext.Value.ShopperId, GetOriginIpAddress(), GetRequestedBy(), updates);
+          var response = (UpdateShopperResponseData)Engine.Engine.ProcessRequest(request, ShopperProviderEngineRequests.UpdateShopper);
+          if (response.Status.Status == ShopperResponseStatusType.Success)
+          {
+            resultCode = ShopperUpdateResultType.Success;
+            _getShopperResponseCache.Value.ClearShopperData(_shopperContext.Value.ShopperId);
+            _getShopperFieldManager.Value.ClearShopper(_shopperContext.Value.ShopperId);
+          }
+          else if (!ShopperUpdateErrorMapper.ShopperUpdateErrorMap.TryGetValue(response.Status.ErrorCode, out resultCode))
+          {
+            resultCode = ShopperUpdateResultType.UnknownError;
+          }
+        }
+        catch (Exception ex)
+        {
+          string message = ex.Message + ex.StackTrace;
+          var exception = new AtlantisException("ShopperDataProvider.TryUpdateShopper", 0, message, string.Empty);
+          Engine.Engine.LogAtlantisException(exception);
+        }
+      }
+
+      return resultCode;
+    }
+
     private string GetOriginIpAddress()
     {
       if (_proxyContext.Value != null)

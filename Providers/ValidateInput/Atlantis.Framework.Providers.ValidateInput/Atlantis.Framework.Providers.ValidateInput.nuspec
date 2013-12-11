@@ -2,22 +2,15 @@
 <package >
   <metadata>
     <id>Atlantis.Framework.Providers.ValidateInput</id>
-    <!-- version should match the assembly FILE version -->
-    <version>4.0.0.0</version>
-    <!-- change word Title to match your project name with spaces instead of dots -->
-    <title>Atlantis Framework Title</title>
+    <version>4.13.12.3</version>
+    <title>Atlantis Framework Providers ValidateInput</title>
     <authors>$author$</authors>
     <owners>$author$</owners>
     <projectUrl>https://confluence.int.godaddy.com/display/ATLANTIS</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <!-- update release notes with latest change information -->
     <releaseNotes></releaseNotes>
     <copyright>$copyright$</copyright>
-    <!-- Make tags the same as title element -->
-    <tags>Atlantis Framework Title</tags>
-    <dependencies />
+    <tags>Atlantis Framework Providers ValidateInput</tags>
   </metadata>
-  <files>
-  </files>
 </package>

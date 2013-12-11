@@ -112,6 +112,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Atlantis.Framework.Interface.4.13.9.25\lib\net40\Atlantis.Framework.Interface.dll</HintPath>
     </Reference>
+    <Reference Include="Atlantis.Framework.MiniEncrypt">
+      <HintPath>..\packages\Atlantis.Framework.MiniEncrypt.4.13.11.13\lib\net40\Atlantis.Framework.MiniEncrypt.dll</HintPath>
+    </Reference>
     <Reference Include="Atlantis.Framework.PrivateLabel.Impl, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Atlantis.Framework.PrivateLabel.4.0.0.0\lib\net40\Atlantis.Framework.PrivateLabel.Impl.dll</HintPath>
@@ -201,6 +204,9 @@
     <Reference Include="Automation.Framework.ProductTiers">
       <HintPath>..\packages\Automation.Framework.ProductTiers.1.13.11.25\lib\net40\Automation.Framework.ProductTiers.dll</HintPath>
     </Reference>
+    <Reference Include="Automation.Framework.TestSetUpAndSettings">
+      <HintPath>..\packages\Automation.Framework.TestSetUpAndSettings.1.13.11.25\lib\net40\Automation.Framework.TestSetUpAndSettings.dll</HintPath>
+    </Reference>
     <Reference Include="Automation.Framework.TLDML">
       <HintPath>..\packages\Automation.Framework.TLDML.1.13.12.9\lib\net40\Automation.Framework.TLDML.dll</HintPath>
     </Reference>
@@ -222,9 +228,6 @@
     <Reference Include="System.Web" />
     <Reference Include="System.XML" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="TestSetUpAndSettings">
-      <HintPath>..\..\Atlantis.Framework.Testing\Atlantis.Framework.Testing.Automation\Reference\TestSetUpAndSettings.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <CodeAnalysisDependentAssemblyPaths Condition=" '$(VS100COMNTOOLS)' != '' " Include="$(VS100COMNTOOLS)..\IDE\PrivateAssemblies">
@@ -265,6 +268,8 @@
     <Content Include="DotTypesData.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Interop\Interop.gdMiniEncryptLib.dll" />
+    <Content Include="Interop\readme.txt" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

@@ -4,11 +4,11 @@ using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.Interface.ProviderContainer;
 using Atlantis.Framework.Testing.MockHttpContext;
 using Atlantis.Framework.Testing.MockProviders;
+using Automation.Framework.TestSetUpAndSettings;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
 using Automation.Framework.TLDML;
-using TestSetUpAndSettings;
 
 namespace Atlantis.Framework.DotTypeCache.Tests
 {

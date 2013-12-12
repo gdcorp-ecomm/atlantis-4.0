@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.ValidateInput.Factories;
 using Atlantis.Framework.Providers.ValidateInput.Interface;
+using Atlantis.Framework.Providers.ValidateInput.Interface.ErrorCodes;
 
 namespace Atlantis.Framework.Providers.ValidateInput
 {
@@ -17,11 +18,19 @@ namespace Atlantis.Framework.Providers.ValidateInput
     {
       IValidateInputResult result = ValidateInputResult.CreateFailureResult();
 
-      if (inputs == null) return result;
+      if (inputs == null || inputs.Count == 0)
+      {
+        result.ErrorCodes.Add(ErrorCodesBase.NoInputs);
+        return result;
+      }
 
       var handler = ValidateInputFactory.GetHandler(inputType);
 
-      if (handler == null) return result;
+      if (handler == null)
+      {
+        result.ErrorCodes.Add(ErrorCodesBase.InvalidInputType);
+        return result;
+      }
 
       try
       {
@@ -29,6 +38,7 @@ namespace Atlantis.Framework.Providers.ValidateInput
       }
       catch (Exception ex)
       {
+        result.ErrorCodes.Add(ErrorCodesBase.UnknownError);
         var data = "inputType: " + inputType + ", inputs: " + string.Join(",", inputs);
         var exception = new AtlantisException("ValidateInputProvider.ValidateInput", 0, ex.Message + ex.StackTrace, data);
         Engine.Engine.LogAtlantisException(exception);

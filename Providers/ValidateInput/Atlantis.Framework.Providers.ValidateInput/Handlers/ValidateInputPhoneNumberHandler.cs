@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.ValidateInput.Interface;
+using Atlantis.Framework.Providers.ValidateInput.Interface.ErrorCodes;
 using Atlantis.Framework.ValidateInput.Interface;
 
 namespace Atlantis.Framework.Providers.ValidateInput.Handlers
@@ -12,7 +13,11 @@ namespace Atlantis.Framework.Providers.ValidateInput.Handlers
     {
       IValidateInputResult result = ValidateInputResult.CreateFailureResult();
 
-      if (inputs == null) return result;
+      if (inputs == null || inputs.Count == 0)
+      {
+        result.ErrorCodes.Add(ErrorCodesBase.NoInputs);
+        return result;
+      }
 
       try
       {
@@ -22,6 +27,7 @@ namespace Atlantis.Framework.Providers.ValidateInput.Handlers
       }
       catch (Exception ex)
       {
+        result.ErrorCodes.Add(ErrorCodesBase.UnknownError);
         var data = "inputs: " + string.Join(",", inputs);
         var exception = new AtlantisException("ValidateInputPhoneNumberHandler.Validate", "0", ex.Message + ex.StackTrace, data, null, null);
         Engine.Engine.LogAtlantisException(exception);

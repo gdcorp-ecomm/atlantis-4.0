@@ -54,20 +54,14 @@
     <Reference Include="Atlantis.Framework.Providers.Preferences.Interface">
       <HintPath>..\packages\Atlantis.Framework.Providers.Preferences.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Providers.Preferences.Interface.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.Providers.ValidateInput.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.Providers.ValidateInput.Interface.4.13.12.3\lib\net40\Atlantis.Framework.Providers.ValidateInput.Interface.dll</HintPath>
-    </Reference>
     <Reference Include="Atlantis.Framework.Testing.MockProviders">
       <HintPath>..\packages\Atlantis.Framework.Testing.MockProviders.4.13.10.28\lib\net40\Atlantis.Framework.Testing.MockProviders.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.ValidateInput.Impl, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.ValidateInput.Impl.4.13.12.3\lib\net40\Atlantis.Framework.ValidateInput.Impl.dll</HintPath>
+    <Reference Include="Atlantis.Framework.ValidateInput.Impl">
+      <HintPath>..\packages\Atlantis.Framework.ValidateInput.Impl.4.13.12.11\lib\net40\Atlantis.Framework.ValidateInput.Impl.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.ValidateInput.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.ValidateInput.Interface.4.13.12.3\lib\net40\Atlantis.Framework.ValidateInput.Interface.dll</HintPath>
+    <Reference Include="Atlantis.Framework.ValidateInput.Interface">
+      <HintPath>..\packages\Atlantis.Framework.ValidateInput.Interface.4.13.12.11\lib\net40\Atlantis.Framework.ValidateInput.Interface.dll</HintPath>
     </Reference>
     <Reference Include="PhoneNumbers, Version=4.10.0.62, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -104,6 +98,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Atlantis.Framework.Providers.ValidateInput.Interface\Atlantis.Framework.Providers.ValidateInput.Interface.csproj">
+      <Project>{9d00b98e-1341-4c34-a314-914da0082f17}</Project>
+      <Name>Atlantis.Framework.Providers.ValidateInput.Interface</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.Providers.ValidateInput\Atlantis.Framework.Providers.ValidateInput.csproj">
       <Project>{80f98899-7601-4c4a-96ce-89a47dbd9d29}</Project>
       <Name>Atlantis.Framework.Providers.ValidateInput</Name>

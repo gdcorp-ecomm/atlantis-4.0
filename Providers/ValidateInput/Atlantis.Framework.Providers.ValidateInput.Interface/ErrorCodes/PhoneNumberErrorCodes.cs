@@ -1,12 +1,11 @@
 ﻿namespace Atlantis.Framework.Providers.ValidateInput.Interface.ErrorCodes
 {
-  public static class PhoneNumberErrorCodes
+  public class PhoneNumberErrorCodes : ErrorCodesBase
   {
-    public const int UnknownError = -1;
-    public const int InvalidCountryCode = 1;
-    public const int TooShort = 2;
-    public const int TooLong = 3;
-    public const int InvalidPhoneNumber = 4;
-    public const int EmptyPhoneNumber = 5;
+    public static readonly int PhoneNumberEmpty = 2;
+    public static readonly int TooShort = 5;
+    public static readonly int TooLong = 6;
+    public static readonly int InvalidPhoneNumber = 7;
+    public static readonly int InvalidCountryCode = 8;
   }
 }

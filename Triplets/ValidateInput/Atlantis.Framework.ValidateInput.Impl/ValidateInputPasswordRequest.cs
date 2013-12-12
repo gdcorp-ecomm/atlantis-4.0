@@ -12,42 +12,41 @@ namespace Atlantis.Framework.ValidateInput.Impl
 {
   public class ValidateInputPasswordRequest : IRequest
   {
-    private bool _isSuccess = false;
-    private List<int> _errorCodes = new List<int>();
-
     public IResponseData RequestHandler(RequestData requestData, ConfigElement config)
     {
-      var validateInputPasswordRequestData = (ValidateInputPasswordRequestData)requestData;
       ValidateInputPasswordResponseData responseData;
-      var result = ValidateInputResult.CreateFailureResult();
 
       try
       {
+        var validateInputPasswordRequestData = (ValidateInputPasswordRequestData)requestData;
+        var result = ValidateInputResult.CreateFailureResult();
+
         if (validateInputPasswordRequestData.Inputs != null)
         {
-          ValidatePassword(validateInputPasswordRequestData.Inputs);
-          result = new ValidateInputResult(_isSuccess, _errorCodes);
+          IList<int> errorCodes;
+          var isSuccess = ValidatePassword(validateInputPasswordRequestData.Inputs, out errorCodes);
+          result = new ValidateInputResult(isSuccess, errorCodes);
         }
 
         responseData = new ValidateInputPasswordResponseData(result);
       }
       catch (Exception ex)
       {
-        _isSuccess = false;
-        _errorCodes.Add(PasswordErrorCodes.UnknownError);
-        result = new ValidateInputResult(_isSuccess, _errorCodes);
-        responseData = new ValidateInputPasswordResponseData(result, requestData, ex);
+        var errorResult = new ValidateInputResult(false, new List<int> { PasswordErrorCodes.UnknownError });
+        responseData = new ValidateInputPasswordResponseData(errorResult, requestData, ex);
       }
 
       return responseData;
     }
 
-    private void ValidatePassword(IDictionary<ValidateInputKeys, string> inputs)
+    private bool ValidatePassword(IDictionary<ValidateInputKeys, string> inputs, out IList<int> errorCodes)
     {
+      errorCodes = new List<int>();
+
       string inputPassword;
       if (!inputs.TryGetValue(ValidateInputKeys.PasswordInput, out inputPassword) || string.IsNullOrEmpty(inputPassword))
       {
-        _errorCodes.Add(PasswordErrorCodes.EmptyPassword);
+        errorCodes.Add(PasswordErrorCodes.PasswordEmpty);
       }
       else
       {
@@ -55,7 +54,7 @@ namespace Atlantis.Framework.ValidateInput.Impl
 
         if (!FieldValidationData.TryGetFieldValidationXml("password", out fieldValidationXml) || string.IsNullOrEmpty(fieldValidationXml))
         {
-          _errorCodes.Add(PasswordErrorCodes.ValidationRulesLoadError);
+          errorCodes.Add(PasswordErrorCodes.ValidationRulesLoadError);
         }
         else
         {
@@ -63,14 +62,14 @@ namespace Atlantis.Framework.ValidateInput.Impl
 
           if (fieldValidationDoc.Root == null)
           {
-            _errorCodes.Add(PasswordErrorCodes.ValidationRulesLoadError);
+            errorCodes.Add(PasswordErrorCodes.ValidationRulesLoadError);
           }
           else
           {
             string inputPasswordMatch;
             if (inputs.TryGetValue(ValidateInputKeys.PasswordInputMatch, out inputPasswordMatch) && !inputPasswordMatch.Equals(inputPassword))
             {
-              _errorCodes.Add(PasswordErrorCodes.PasswordsNotEqual);
+              errorCodes.Add(PasswordErrorCodes.PasswordsNotEqual);
             }
 
             var lengthRuleElement = fieldValidationDoc.Root.Descendants("length").FirstOrDefault();
@@ -80,7 +79,7 @@ namespace Atlantis.Framework.ValidateInput.Impl
 
               if (!lengthRule.IsValid(inputPassword))
               {
-                _errorCodes.Add(lengthRule.FailureCode);
+                errorCodes.Add(lengthRule.FailureCode);
               }
             }
 
@@ -91,14 +90,14 @@ namespace Atlantis.Framework.ValidateInput.Impl
 
               if (!expressionRule.IsValid(inputPassword))
               {
-                _errorCodes.Add(expressionRule.FailureCode);
+                errorCodes.Add(expressionRule.FailureCode);
               }
             }
           }
         }
       }
 
-      _isSuccess = (_errorCodes.Count == 0);
+      return (errorCodes.Count == 0);
     }
   }
 }

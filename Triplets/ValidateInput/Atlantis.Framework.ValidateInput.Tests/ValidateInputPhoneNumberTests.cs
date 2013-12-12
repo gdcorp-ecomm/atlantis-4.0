@@ -29,6 +29,36 @@ namespace Atlantis.Framework.ValidateInput.Tests
       Assert.AreEqual(0, errors.Count);
     }
 
+    [TestMethod]
+    public void PhoneNumberValidNoDefaultRegion()
+    {
+      var request = new ValidateInputPhoneNumberRequestData(new Dictionary<ValidateInputKeys, string>(1)
+      {
+        {ValidateInputKeys.PhoneNumberInput, "+442083661177"}
+      });
+      var validator = (ValidateInputPhoneNumberResponseData)Engine.Engine.ProcessRequest(request, 769);
+
+      var errors = validator.Result.ErrorCodes;
+      var isValid = validator.Result.IsSuccess;
+      Assert.IsTrue(isValid);
+      Assert.AreEqual(0, errors.Count);
+    }
+
+    [TestMethod]
+    public void PhoneNumberValidNoDefaultRegionNoPlus()
+    {
+      var request = new ValidateInputPhoneNumberRequestData(new Dictionary<ValidateInputKeys, string>(1)
+      {
+        {ValidateInputKeys.PhoneNumberInput, "442083661177"}
+      });
+      var validator = (ValidateInputPhoneNumberResponseData)Engine.Engine.ProcessRequest(request, 769);
+
+      var errors = validator.Result.ErrorCodes;
+      var isValid = validator.Result.IsSuccess;
+      Assert.IsTrue(isValid);
+      Assert.AreEqual(0, errors.Count);
+    }
+
     private static bool HasFailureCode(IEnumerable<int> errors, int failureCode)
     {
       return errors.Any(error => error == failureCode);
@@ -95,7 +125,7 @@ namespace Atlantis.Framework.ValidateInput.Tests
       var errors = validator.Result.ErrorCodes;
       var isValid = validator.Result.IsSuccess;
       Assert.IsFalse(isValid);
-      Assert.IsTrue(HasFailureCode(errors, PhoneNumberErrorCodes.EmptyPhoneNumber));
+      Assert.IsTrue(HasFailureCode(errors, PhoneNumberErrorCodes.PhoneNumberEmpty));
     }
 
     [TestMethod]
@@ -115,11 +145,11 @@ namespace Atlantis.Framework.ValidateInput.Tests
     }
 
     [TestMethod]
-    public void PhoneNumberNoRegionOrCountryCode()
+    public void PhoneNumberNoRegionInvalidCountryCode()
     {
       var request = new ValidateInputPhoneNumberRequestData(new Dictionary<ValidateInputKeys, string>(1)
       {
-        {ValidateInputKeys.PhoneNumberInput, "2530000"}
+        {ValidateInputKeys.PhoneNumberInput, "0236618300"}
       });
       var validator = (ValidateInputPhoneNumberResponseData)Engine.Engine.ProcessRequest(request, 769);
 

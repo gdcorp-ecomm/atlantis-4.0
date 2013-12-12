@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Atlantis.Framework.Providers.ValidateInput.Interface;
+using Atlantis.Framework.Providers.ValidateInput.Interface.ErrorCodes;
 using Atlantis.Framework.Testing.MockProviders;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -53,6 +55,11 @@ namespace Atlantis.Framework.Providers.ValidateInput.Tests
       Assert.AreEqual(0, errors.Count);
     }
 
+    private static bool HasFailureCode(IEnumerable<int> errors, int failureCode)
+    {
+      return errors.Any(error => error == failureCode);
+    }
+
     [TestMethod]
     public void ValidateInputPasswordFailure()
     {
@@ -87,6 +94,34 @@ namespace Atlantis.Framework.Providers.ValidateInput.Tests
       var isValid = result.IsSuccess;
       Assert.IsFalse(isValid);
       Assert.AreNotEqual(0, errors.Count);
+    }
+
+    [TestMethod]
+    public void ValidateInputPasswordNoInputs()
+    {
+      var container = NewValidateInputProvider();
+      var provider = container.Resolve<IValidateInputProvider>();
+
+      var result = provider.ValidateInput(ValidateInputTypes.Password, new Dictionary<ValidateInputKeys, string>());
+
+      var errors = result.ErrorCodes;
+      var isValid = result.IsSuccess;
+      Assert.IsFalse(isValid);
+      Assert.IsTrue(HasFailureCode(errors, ErrorCodesBase.NoInputs));
+    }
+
+    [TestMethod]
+    public void ValidateInputPhoneNumberNoInputs()
+    {
+      var container = NewValidateInputProvider();
+      var provider = container.Resolve<IValidateInputProvider>();
+
+      var result = provider.ValidateInput(ValidateInputTypes.PhoneNumber, new Dictionary<ValidateInputKeys, string>());
+
+      var errors = result.ErrorCodes;
+      var isValid = result.IsSuccess;
+      Assert.IsFalse(isValid);
+      Assert.IsTrue(HasFailureCode(errors, ErrorCodesBase.NoInputs));
     }
   }
 }

@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ErrorCodes\ErrorCodesBase.cs" />
     <Compile Include="ErrorCodes\PasswordErrorCodes.cs" />
     <Compile Include="ErrorCodes\PhoneNumberErrorCodes.cs" />
     <Compile Include="IValidateInputHandler.cs" />

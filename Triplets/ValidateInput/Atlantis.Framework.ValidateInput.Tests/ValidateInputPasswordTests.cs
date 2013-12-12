@@ -201,7 +201,7 @@ namespace Atlantis.Framework.ValidateInput.Tests
       var errors = validator.Result.ErrorCodes;
       var isValid = validator.Result.IsSuccess;
       Assert.IsFalse(isValid);
-      Assert.IsTrue(HasFailureCode(errors, PasswordErrorCodes.EmptyPassword));
+      Assert.IsTrue(HasFailureCode(errors, PasswordErrorCodes.PasswordEmpty));
     }
   }
 }

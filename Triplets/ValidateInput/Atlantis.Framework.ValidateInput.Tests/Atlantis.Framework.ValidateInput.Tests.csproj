@@ -48,8 +48,12 @@
     <Reference Include="Atlantis.Framework.Interface">
       <HintPath>..\packages\Atlantis.Framework.Interface.4.13.9.25\lib\net40\Atlantis.Framework.Interface.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.Providers.ValidateInput.Interface">
-      <HintPath>..\packages\Atlantis.Framework.Providers.ValidateInput.Interface.4.13.12.11\lib\net40\Atlantis.Framework.Providers.ValidateInput.Interface.dll</HintPath>
+    <Reference Include="Atlantis.Framework.Providers.ValidateInput">
+      <HintPath>..\..\..\Providers\ValidateInput\Atlantis.Framework.Providers.ValidateInput\bin\Release\Atlantis.Framework.Providers.ValidateInput.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Providers.ValidateInput.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Providers\ValidateInput\Atlantis.Framework.Providers.ValidateInput\bin\Release\Atlantis.Framework.Providers.ValidateInput.Interface.dll</HintPath>
     </Reference>
     <Reference Include="PhoneNumbers">
       <HintPath>..\packages\libphonenumber-csharp.4.10.0.62\lib\PhoneNumbers.dll</HintPath>

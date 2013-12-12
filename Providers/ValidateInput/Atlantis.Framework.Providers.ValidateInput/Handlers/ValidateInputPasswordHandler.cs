@@ -28,8 +28,7 @@ namespace Atlantis.Framework.Providers.ValidateInput.Handlers
       catch (Exception ex)
       {
         result.ErrorCodes.Add(ErrorCodesBase.UnknownError);
-        var data = "inputs: " + string.Join(",", inputs);
-        var exception = new AtlantisException("ValidateInputPasswordHandler.Validate", "0", ex.Message + ex.StackTrace, data, null, null);
+        var exception = new AtlantisException("ValidateInputPasswordHandler.Validate", "0", ex.Message + ex.StackTrace, string.Empty, null, null);
         Engine.Engine.LogAtlantisException(exception);
       }
 

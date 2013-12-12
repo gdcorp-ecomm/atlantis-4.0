@@ -39,7 +39,7 @@ namespace Atlantis.Framework.Providers.ValidateInput
       catch (Exception ex)
       {
         result.ErrorCodes.Add(ErrorCodesBase.UnknownError);
-        var data = "inputType: " + inputType + ", inputs: " + string.Join(",", inputs);
+        var data = "inputType: " + inputType;
         var exception = new AtlantisException("ValidateInputProvider.ValidateInput", 0, ex.Message + ex.StackTrace, data);
         Engine.Engine.LogAtlantisException(exception);
       }

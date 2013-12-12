@@ -596,20 +596,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
         }
       }
     }
-
-    //[TestMethod, TestCategory("TLDMLEnabled")]
-    //public void GetRegistrationFieldsXml()
-    //{
-    //  foreach (string tld in tlds)
-    //  {
-    //    IDotTypeInfo dotTypeCache = DotTypeCache.GetDotTypeInfo(tld);
-    //    string registrationFieldsXml = dotTypeCache.GetRegistrationFieldsXml();
-
-    //    AssertHelper.AddResults(!string.IsNullOrEmpty(registrationFieldsXml),
-    //                            "GetRegistrationFieldsXml was not populated for " + tld);
-    //  }
-    //}
-
+    
     [TestMethod, TestCategory("TLDMLEnabled")]
     public void GetRenewalProductId()
     {
@@ -662,77 +649,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
         }
       }
     }
-
-    //[TestMethod, TestCategory("TLDMLEnabled")]
-    //public void GetValidExpiredAuctionRegLengths()
-    //{
-    //  foreach (string tld in tlds)
-    //  {
-    //    IDotTypeInfo dotTypeCache = DotTypeCache.GetDotTypeInfo(tld);
-
-    //    foreach (int dc in domainCount)
-    //    {
-    //      List<int> dotTypeCacheGetRenewalProductIds = dotTypeCache.GetValidExpiredAuctionRegLengths(dc,
-    //                                                                                                 standardRegLengths);
-    //      AssertHelper.AddResults(dotTypeCacheGetRenewalProductIds.Count > 0,
-    //                              "GetRenewalProductIds does not contain pfids for: " + tld + ". And domain count: " +
-    //                              dc);
-    //    }
-    //  }
-    //}
-
-    //[TestMethod, TestCategory("TLDMLEnabled")]
-    //public void GetValidExpiredAuctionRegProductIdList()
-    //{
-    //  foreach (string tld in tlds)
-    //  {
-    //    IDotTypeInfo dotTypeCache = DotTypeCache.GetDotTypeInfo(tld);
-
-    //    foreach (int dc in domainCount)
-    //    {
-    //      List<int> dotTypeCacheGetValidExpiredAuctionRegProductIdList =
-    //        dotTypeCache.GetValidExpiredAuctionRegProductIdList(dc, standardRegLengths);
-
-    //      AssertHelper.AddResults(dotTypeCacheGetValidExpiredAuctionRegProductIdList.Count > 0,
-    //                              "GetValidExpiredAuctionRegProductIdList does not contain pfids for: " + tld +
-    //                              ". And domain count: " + dc);
-    //    }
-    //  }
-    //}
-
-    //[TestMethod, TestCategory("TLDMLEnabled")]
-    //public void GetValidPreRegLengths()
-    //{
-    //  foreach (string tld in tlds)
-    //  {
-    //    IDotTypeInfo dotTypeCache = DotTypeCache.GetDotTypeInfo(tld);
-
-    //    foreach (int dc in domainCount)
-    //    {
-    //      List<int> dotTypeCacheGetValidPreRegLengths = dotTypeCache.GetValidPreRegLengths(PreRegPhases.GeneralAvailability, dc, standardRegLengths);
-
-    //      AssertHelper.AddResults(dotTypeCacheGetValidPreRegLengths.Count > 0,
-    //        "GetValidPreRegLengths does not contain pfids for: " + tld + ". And domain count: " + dc);
-    //    }
-    //  }
-    //}
-
-    //[TestMethod, TestCategory("TLDMLEnabled")]
-    //public void GetValidPreRegProductIdList()
-    //{
-    //  foreach (string tld in tlds)
-    //  {
-    //    IDotTypeInfo dotTypeCache = DotTypeCache.GetDotTypeInfo(tld);
-    //    foreach (int dc in domainCount)
-    //    {
-    //      List<int> preRegPidList = dotTypeCache.GetValidPreRegProductIdList(PreRegPhases.GeneralAvailability, dc, standardRegLengths);
-
-    //      AssertHelper.AddResults(preRegPidList.Count > 0,
-    //                              "GetValidPreRegProductIdList calls return a count of zero" + tld);
-    //    }
-    //  }
-    //}
-
+    
     [TestMethod, TestCategory("TLDMLEnabled")]
     public void GetValidRegistrationLengths()
     {

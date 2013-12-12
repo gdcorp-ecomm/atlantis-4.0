@@ -873,7 +873,7 @@ namespace Atlantis.Framework.Providers.Links.Tests
     {
       ILinkProvider links = NewLinkProvider("http://siteadmin.debug.intranet.gdg/default.aspx", 1, string.Empty);
       string url = links.GetRelativeUrl("/hosting/website-builder.aspx", QueryParamMode.ExplicitParameters);
-      Assert.AreEqual("http://siteadmin.debug.intranet.gdg/hosting/hosting.aspx", url);
+      Assert.AreEqual("http://siteadmin.debug.intranet.gdg/hosting/website-builder.aspx", url);
       Assert.IsTrue(url.IndexOf("//", 8) == -1);
 
       url = links.GetRelativeUrl("/");

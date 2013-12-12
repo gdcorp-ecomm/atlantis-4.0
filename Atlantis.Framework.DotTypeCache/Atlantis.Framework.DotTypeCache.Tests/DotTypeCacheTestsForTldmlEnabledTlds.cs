@@ -368,49 +368,6 @@ namespace Atlantis.Framework.DotTypeCache.Tests
       }
     }
 
-    //[TestMethod, TestCategory("TLDMLEnabled")]
-    //public void ProductPreregistrationYearsPropertiesAreValid()
-    //{
-    //  foreach (string tld in tlds)
-    //  {
-    //    IDotTypeInfo dotTypeCache = DotTypeCache.GetDotTypeInfo(tld);
-
-    //    List<int> preRegLengths = TLDML.TLDMLProduct.GetAllEnabledPreRegistrationLengths(tld);
-
-    //    AssertHelper.AddResults(dotTypeCache.Product.PreregistrationYears("GA").Max == preRegLengths.Max(),
-    //                            "Product.PreregistrationYears.Max did not match for " + tld +
-    //                            ". Expected: " + preRegLengths.Max() + ". Actual: " +
-    //                            dotTypeCache.Product.PreregistrationYears("GA").Max);
-
-    //    AssertHelper.AddResults(dotTypeCache.Product.PreregistrationYears("GA").Min == preRegLengths.Min(),
-    //                            "Product.PreregistrationYears.Min did not match for " + tld +
-    //                            ". Expected: " + preRegLengths.Min() + ". Actual: " +
-    //                            dotTypeCache.Product.PreregistrationYears("GA").Min);
-
-    //    AssertHelper.AddResults(dotTypeCache.Product.PreregistrationYears("GA").IsValid(1),
-    //                            "Product.PreregistrationYears.IsValid(1) is false for " + tld);
-    //  }
-    //}
-
-    //[TestMethod, TestCategory("TLDMLEnabled")]
-    //public void PreRegLengthPropertiesAreValid()
-    //{
-    //  foreach (string tld in tlds)
-    //  {
-    //    IDotTypeInfo dotTypeCache = DotTypeCache.GetDotTypeInfo(tld);
-
-    //    List<int> preRegLengths = TLDML.TLDMLProduct.GetAllEnabledPreRegistrationLengths(tld);
-
-    //    AssertHelper.AddResults(dotTypeCache.GetMaxPreRegLength(PreRegPhases.GeneralAvailability) == preRegLengths.Max(),
-    //                            "MaxPreRegLength did not match for " + tld +
-    //                            ". Expected: " + preRegLengths.Max() + ". Actual: " + dotTypeCache.GetMaxPreRegLength(PreRegPhases.GeneralAvailability));
-
-    //    AssertHelper.AddResults(dotTypeCache.GetMinPreRegLength(PreRegPhases.GeneralAvailability) == preRegLengths.Min(),
-    //                            "MinPreRegLength did not match for " + tld +
-    //                            ". Expected: " + preRegLengths.Min() + ". Actual: " + dotTypeCache.GetMinPreRegLength(PreRegPhases.GeneralAvailability));
-    //  }
-    //}
-
     [TestMethod, TestCategory("TLDMLEnabled")]
     public void DotTypeCacheIsValid()
     {
@@ -446,27 +403,6 @@ namespace Atlantis.Framework.DotTypeCache.Tests
         AssertHelper.AddResults(!dotTypeCache.IsMultiRegistry, "IsMultiRegistry was not false for: " + tld);
       }
     }
-
-    //[TestMethod]
-    //public void ExpiredAuctionRegLengthPropertiesAreValid()
-    //{
-    //  foreach (string tld in tlds)
-    //  {
-    //    IDotTypeInfo dotTypeCache = DotTypeCache.GetDotTypeInfo(tld);
-
-    //    List<int> expiredRegLengths = TLDML.TLDMLProduct.GetAllEnabledExpiredAuctionLengths(tld);
-
-    //    AssertHelper.AddResults(dotTypeCache.MaxExpiredAuctionRegLength == expiredRegLengths.Max(),
-    //                            "MaxExpiredAuctionRegLength did not match for " + tld +
-    //                            ". Expected: " + expiredRegLengths.Max() + ". Actual: " +
-    //                            dotTypeCache.MaxExpiredAuctionRegLength);
-
-    //    AssertHelper.AddResults(dotTypeCache.MinExpiredAuctionRegLength == expiredRegLengths.Min(),
-    //                            "MinExpiredAuctionRegLength did not match for " + tld +
-    //                            ". Expected: " + expiredRegLengths.Min() + ". Actual: " +
-    //                            dotTypeCache.MinExpiredAuctionRegLength);
-    //  }
-    //}
 
     [TestMethod, TestCategory("TLDMLEnabled")]
     public void MaxRegistrationLengthPropertyIsValid()
@@ -517,21 +453,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
                                 ". Expected: " + transferLengths.Min() + ". Actual: " + dotTypeCache.MinTransferLength);
       }
     }
-
-    //[TestMethod, TestCategory("TLDMLEnabled")]
-    //public void RenewProhibitedPeriodForExpirationPropertiesAreValid()
-    //{
-    //  foreach (string tld in tlds)
-    //  {
-    //    IDotTypeInfo dotTypeCache = DotTypeCache.GetDotTypeInfo(tld);
-
-    //    int temp = dotTypeCache.Tld.RenewProhibitedPeriodForExpiration;
-    //    string temp2 = dotTypeCache.Tld.RenewProhibitedPeriodForExpirationUnit;
-
-    //    AssertHelper.AddResults(false, "Not getting anything back from RenewProhibitedPeriodForExpiration and RenewProhibitedPeriodForExpirationUnit.");
-    //  }
-    //}
-
+    
     [TestMethod, TestCategory("TLDMLEnabled")]
     public void CanRenew()
     {
@@ -546,31 +468,6 @@ namespace Atlantis.Framework.DotTypeCache.Tests
         AssertHelper.AddResults(canRenewTldml, "Can renew returned false for: " + tld);
       }
     }
-
-    //[TestMethod]
-    //public void GetExpiredAuctionRegProductIds()
-    //{
-    //  foreach (string tld in tlds)
-    //  {
-    //    IDotTypeInfo dotTypeCache = DotTypeCache.GetDotTypeInfo(tld);
-
-    //    List<int> regLengths = TLDML.TLDMLProduct.GetAllEnabledExpiredAuctionLengths(tld);
-
-    //    foreach (int dc in domainCount)
-    //    {
-    //      foreach (int regLength in regLengths)
-    //      {
-    //        int prodId = Convert.ToInt32(TLDML.TLDMLProduct.GetPFID(tld, 1, productfamily.Registration));
-
-    //        int pid = dotTypeCache.GetExpiredAuctionRegProductId(regLength, dc);
-
-    //        AssertHelper.AddResults(pid != 0,
-    //                                "GetExpiredAuctionRegProductId for reg length: " + regLength +
-    //                                " year(s) and for domain count: " + dc + " was zero");
-    //      }
-    //    }
-    //  }
-    //}
 
     [TestMethod, TestCategory("TLDMLEnabled")]
     public void GetPreRegProductIds()

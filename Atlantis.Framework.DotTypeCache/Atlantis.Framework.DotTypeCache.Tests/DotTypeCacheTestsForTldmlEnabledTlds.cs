@@ -26,6 +26,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
   [DeploymentItem("Atlantis.Framework.PrivateLabel.Impl.dll")]
   [DeploymentItem("Atlantis.Framework.DataCacheGeneric.Impl.dll")]
   [DeploymentItem("Atlantis.Framework.Products.Impl.dll")]
+  [DeploymentItem("Atlantis.Framework.DomainSearch.Impl.dll")]
   public class DotTypeCacheTestsForTldmlEnabledTlds
   {
     private List<string> tlds;
@@ -115,18 +116,40 @@ namespace Atlantis.Framework.DotTypeCache.Tests
     {
       foreach (string tld in tlds)
       {
+        bool gaPhaseCurrent = TLDMLProduct.IsTldInPhase(tld, "GA");
+
         foreach (int dc in domainCount)
         {
-          List<int> reglengths = TLDMLProduct.GetAllEnabledRegistrationLengths(tld);
+          List<int> reglengths;
+
+          if (gaPhaseCurrent)
+          {
+            reglengths = TLDMLProduct.GetAllEnabledGeneralAvailabilityLengths(tld,1,8);
+          }
+          else
+          {
+           reglengths = TLDMLProduct.GetAllEnabledRegistrationLengths(tld);
+          }
+         
 
           foreach (int reglength in reglengths)
           {
             var dotTypeInfo = DotTypeProvider.GetDotTypeInfo(tld);
             IDomainProductLookup domainProductLookup = DomainProductLookup.Create(reglength, dc, LaunchPhases.GeneralAvailability, TLDProductTypes.Registration, 8);
             int dotTypeCacheGetRegistrationProductId = dotTypeInfo.GetProductId(domainProductLookup);
-            
+           
+          
             TLDMLPhase phase = new TLDMLPhase();
-            phase.PhaseName = "Registration";
+
+            if (gaPhaseCurrent)
+            {
+              phase.PhaseName = "General Availability";
+            }
+            else
+            {
+              phase.PhaseName = "Registration";
+            }
+           
             int prodIdFromDR = Convert.ToInt32(TLDMLProduct.GetPFID(tld, reglength, phase, dc));
 
             AssertHelper.AddResults(dotTypeCacheGetRegistrationProductId == prodIdFromDR && prodIdFromDR != 0,
@@ -179,14 +202,16 @@ namespace Atlantis.Framework.DotTypeCache.Tests
         {
           foreach (int dc in domainCount)
           {
+
+            var dotTypeInfo = DotTypeProvider.GetDotTypeInfo(tld);
+            //IDomainProductLookup domainProductLookup = DomainProductLookup.Create(reglength, dc, LaunchPhases.GeneralAvailability, TLDProductTypes.Transfer, 10);
+            var transferProductIds = dotTypeInfo.GetValidTransferProductIdList(dc, reglengths.ToArray());
+            var transferProductIds2 = dotTypeInfo.GetValidTransferProductIdList("1", dc, reglengths.ToArray());
+
             TLDMLPhase phase = new TLDMLPhase();
             phase.PhaseName = "Transfer";
-
-            List<int> transferProductIds = dotTypeCache.GetValidTransferProductIdList(dc, reglength);
-
-            int prodIdFromTdml =
-              Convert.ToInt32(TLDMLProduct.GetPFID(tld, reglength, phase, dc));
-
+            int prodIdFromTdml = Convert.ToInt32(TLDMLProduct.GetPFID(tld, reglength, phase, dc));
+            
             AssertHelper.AddResults(transferProductIds.Contains(prodIdFromTdml),
                                     "Product id from tdml was not found in the transferProductIds list for: " + tld +
                                     ". Expected in list: " +

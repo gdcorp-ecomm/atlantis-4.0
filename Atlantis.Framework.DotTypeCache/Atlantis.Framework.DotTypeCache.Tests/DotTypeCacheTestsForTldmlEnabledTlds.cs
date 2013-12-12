@@ -295,61 +295,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
         }
       }
     }
-
-    [TestMethod, TestCategory("TLDMLEnabled")]
-    public void GetDotTypeProductId()
-    {
-      foreach (string tld in tlds)
-      {
-        TLDMLPhase phase = new TLDMLPhase();
-        phase.PhaseName = "Registration";
-
-        int prodId = Convert.ToInt32(TLDMLProduct.GetPFID(tld, 1, phase));
-
-        IDotTypeInfo dotTypeCache = DotTypeCache.GetDotTypeInfo(tld);
-        string registryId = dotTypeCache.GetRegistryIdByProductId(prodId);
-
-        AssertHelper.AddResults(!string.IsNullOrEmpty(registryId), "GetRegistryIdByProductId not found for: : " + tld);
-      }
-    }
-
-    //[TestMethod]
-    //public void TldmlAttributesExists()
-    //{
-    //  foreach (string tld in tlds)
-    //  {
-    //    Dictionary<string, Dictionary<string, string>> dotTypeAttributesDictionary = DataCache.DataCache.GetExtendedTLDData(tld);
-    //    Dictionary<string, string> dotTypeAttributes = dotTypeAttributesDictionary[tld];
-
-    //    AssertHelper.AddResults(dotTypeAttributes.ContainsKey(TLDMLDotTypes.TLDMLSupportedFlag),
-    //                            "Key not found for: " + tld);
-    //  }
-    //}
-
-    //[TestMethod]
-    //public void ProductExpiredAuctionsYearsPropertiesAreValid()
-    //{
-    //  foreach (string tld in tlds)
-    //  {
-    //    IDotTypeInfo dotTypeCache = DotTypeCache.GetDotTypeInfo(tld);
-
-    //    List<int> expiredAuctionLengths = TLDML.TLDMLProduct.GetAllEnabledExpiredAuctionLengths(tld);
-
-    //    AssertHelper.AddResults(dotTypeCache.Product.ExpiredAuctionsYears.Max == expiredAuctionLengths.Max(),
-    //                            "Product.ExpiredAuctionsYears.Max is not correct for: " +
-    //                            tld + ". Expected: " + expiredAuctionLengths.Max() + ". Actual: " +
-    //                            dotTypeCache.Product.ExpiredAuctionsYears.Max);
-
-    //    AssertHelper.AddResults(dotTypeCache.Product.ExpiredAuctionsYears.Min == expiredAuctionLengths.Min(),
-    //                            "Product.ExpiredAuctionsYears.Min is not correct for: " +
-    //                            tld + ". Expected: " + expiredAuctionLengths.Min() + ". Actual: " +
-    //                            dotTypeCache.Product.ExpiredAuctionsYears.Min);
-
-    //    AssertHelper.AddResults(dotTypeCache.Product.ExpiredAuctionsYears.IsValid(1),
-    //                            "ExpiredAuctionsYears.IsValid(1) returned false for: " + tld);
-    //  }
-    //}
-
+    
     [TestMethod, TestCategory("TLDMLEnabled")]
     public void RegistrationYearsPropertiesAreValid()
     {

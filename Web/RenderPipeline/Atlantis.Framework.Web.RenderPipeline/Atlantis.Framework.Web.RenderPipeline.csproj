@@ -63,7 +63,9 @@
     <Reference Include="System.Web" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="WebStashManager.cs" />
     <Compile Include="JavaScriptWebStashManager.cs" />
+    <Compile Include="WebStashRenderHandler.cs" />
     <Compile Include="JavaScriptWebStashRenderHandler.cs" />
     <Compile Include="RenderPipelineBasePage.cs">
       <SubType>ASPXCodeBehind</SubType>
@@ -75,7 +77,9 @@
   <ItemGroup>
     <None Include="atlantis.config" />
     <None Include="Atlantis.Framework.Web.RenderPipeline.bat" />
-    <None Include="Atlantis.Framework.Web.RenderPipeline.nuspec" />
+    <None Include="Atlantis.Framework.Web.RenderPipeline.nuspec">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

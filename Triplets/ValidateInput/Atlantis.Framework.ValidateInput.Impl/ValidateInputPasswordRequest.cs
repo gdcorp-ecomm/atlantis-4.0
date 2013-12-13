@@ -36,12 +36,12 @@ namespace Atlantis.Framework.ValidateInput.Impl
       return responseData;
     }
 
-    private bool ValidatePassword(IDictionary<ValidateInputKeys, string> inputs, out IList<int> errorCodes)
+    private bool ValidatePassword(IDictionary<string, string> inputs, out IList<int> errorCodes)
     {
       errorCodes = new List<int>();
 
       string inputPassword;
-      if (!inputs.TryGetValue(ValidateInputKeys.PasswordInput, out inputPassword) || string.IsNullOrEmpty(inputPassword))
+      if (!inputs.TryGetValue("password", out inputPassword) || string.IsNullOrEmpty(inputPassword))
       {
         errorCodes.Add(5);
       }
@@ -64,7 +64,7 @@ namespace Atlantis.Framework.ValidateInput.Impl
           else
           {
             string inputPasswordMatch;
-            if (inputs.TryGetValue(ValidateInputKeys.PasswordInputMatch, out inputPasswordMatch) && !inputPasswordMatch.Equals(inputPassword))
+            if (inputs.TryGetValue("passwordconfirmation", out inputPasswordMatch) && !inputPasswordMatch.Equals(inputPassword))
             {
               errorCodes.Add(6);
             }

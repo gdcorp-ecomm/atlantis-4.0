@@ -35,12 +35,12 @@ namespace Atlantis.Framework.ValidateInput.Impl
       return responseData;
     }
 
-    private bool ValidatePhoneNumber(IDictionary<ValidateInputKeys, string> inputs, out IList<int> errorCodes)
+    private bool ValidatePhoneNumber(IDictionary<string, string> inputs, out IList<int> errorCodes)
     {
       errorCodes = new List<int>();
 
       string inputPhoneNumber;
-      if (!inputs.TryGetValue(ValidateInputKeys.PhoneNumberInput, out inputPhoneNumber) || string.IsNullOrEmpty(inputPhoneNumber))
+      if (!inputs.TryGetValue("phonenumber", out inputPhoneNumber) || string.IsNullOrEmpty(inputPhoneNumber))
       {
         errorCodes.Add(2);
       }
@@ -49,10 +49,10 @@ namespace Atlantis.Framework.ValidateInput.Impl
         var phoneUtil = PhoneNumberUtil.GetInstance();
 
         string regionCode;
-        if (!inputs.TryGetValue(ValidateInputKeys.PhoneNumberRegionCode, out regionCode) || string.IsNullOrEmpty(regionCode))
+        if (!inputs.TryGetValue("regioncode", out regionCode) || string.IsNullOrEmpty(regionCode))
         {
           string callingCode;
-          if (inputs.TryGetValue(ValidateInputKeys.PhoneNumberCountryCallingCode, out callingCode) && !string.IsNullOrEmpty(callingCode))
+          if (inputs.TryGetValue("countrycallingcode", out callingCode) && !string.IsNullOrEmpty(callingCode))
           {
             int code;
             if (int.TryParse(callingCode, out code))

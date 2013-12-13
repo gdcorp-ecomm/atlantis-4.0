@@ -14,10 +14,10 @@ namespace Atlantis.Framework.ValidateInput.Tests
     [TestMethod]
     public void PhoneNumberValid()
     {
-      var request = new ValidateInputPhoneNumberRequestData(new Dictionary<ValidateInputKeys, string>(2)
+      var request = new ValidateInputPhoneNumberRequestData(new Dictionary<string, string>(2)
       {
-        {ValidateInputKeys.PhoneNumberInput, "0236618300"},
-        {ValidateInputKeys.PhoneNumberRegionCode, RegionCode.IT}
+        {"phonenumber", "0236618300"},
+        {"regioncode", RegionCode.IT}
       });
       var validator = (ValidateInputPhoneNumberResponseData)Engine.Engine.ProcessRequest(request, 769);
 
@@ -30,9 +30,9 @@ namespace Atlantis.Framework.ValidateInput.Tests
     [TestMethod]
     public void PhoneNumberValidNoDefaultRegion()
     {
-      var request = new ValidateInputPhoneNumberRequestData(new Dictionary<ValidateInputKeys, string>(1)
+      var request = new ValidateInputPhoneNumberRequestData(new Dictionary<string, string>(1)
       {
-        {ValidateInputKeys.PhoneNumberInput, "+442083661177"}
+        {"phonenumber", "+442083661177"}
       });
       var validator = (ValidateInputPhoneNumberResponseData)Engine.Engine.ProcessRequest(request, 769);
 
@@ -45,9 +45,9 @@ namespace Atlantis.Framework.ValidateInput.Tests
     [TestMethod]
     public void PhoneNumberValidNoDefaultRegionNoPlus()
     {
-      var request = new ValidateInputPhoneNumberRequestData(new Dictionary<ValidateInputKeys, string>(1)
+      var request = new ValidateInputPhoneNumberRequestData(new Dictionary<string, string>(1)
       {
-        {ValidateInputKeys.PhoneNumberInput, "442083661177"}
+        {"phonenumber", "442083661177"}
       });
       var validator = (ValidateInputPhoneNumberResponseData)Engine.Engine.ProcessRequest(request, 769);
 
@@ -65,10 +65,10 @@ namespace Atlantis.Framework.ValidateInput.Tests
     [TestMethod]
     public void PhoneNumberInvalid()
     {
-      var request = new ValidateInputPhoneNumberRequestData(new Dictionary<ValidateInputKeys, string>(2)
+      var request = new ValidateInputPhoneNumberRequestData(new Dictionary<string, string>(2)
       {
-        {ValidateInputKeys.PhoneNumberInput, "2530000"},
-        {ValidateInputKeys.PhoneNumberRegionCode, RegionCode.US}
+        {"phonenumber", "2530000"},
+        {"regioncode", RegionCode.US}
       });
       var validator = (ValidateInputPhoneNumberResponseData)Engine.Engine.ProcessRequest(request, 769);
 
@@ -81,10 +81,10 @@ namespace Atlantis.Framework.ValidateInput.Tests
     [TestMethod]
     public void PhoneNumberTooShort()
     {
-      var request = new ValidateInputPhoneNumberRequestData(new Dictionary<ValidateInputKeys, string>(2)
+      var request = new ValidateInputPhoneNumberRequestData(new Dictionary<string, string>(2)
       {
-        {ValidateInputKeys.PhoneNumberInput, "65025"},
-        {ValidateInputKeys.PhoneNumberRegionCode, RegionCode.US}
+        {"phonenumber", "65025"},
+        {"regioncode", RegionCode.US}
       });
       var validator = (ValidateInputPhoneNumberResponseData)Engine.Engine.ProcessRequest(request, 769);
 
@@ -97,10 +97,10 @@ namespace Atlantis.Framework.ValidateInput.Tests
     [TestMethod]
     public void PhoneNumberTooLong()
     {
-      var request = new ValidateInputPhoneNumberRequestData(new Dictionary<ValidateInputKeys, string>(2)
+      var request = new ValidateInputPhoneNumberRequestData(new Dictionary<string, string>(2)
       {
-        {ValidateInputKeys.PhoneNumberInput, "65025300001"},
-        {ValidateInputKeys.PhoneNumberRegionCode, RegionCode.US}
+        {"phonenumber", "65025300001"},
+        {"regioncode", RegionCode.US}
       });
       var validator = (ValidateInputPhoneNumberResponseData)Engine.Engine.ProcessRequest(request, 769);
 
@@ -113,10 +113,10 @@ namespace Atlantis.Framework.ValidateInput.Tests
     [TestMethod]
     public void PhoneNumberEmpty()
     {
-      var request = new ValidateInputPhoneNumberRequestData(new Dictionary<ValidateInputKeys, string>(2)
+      var request = new ValidateInputPhoneNumberRequestData(new Dictionary<string, string>(2)
       {
-        {ValidateInputKeys.PhoneNumberInput, ""},
-        {ValidateInputKeys.PhoneNumberRegionCode, RegionCode.US}
+        {"phonenumber", ""},
+        {"regioncode", RegionCode.US}
       });
       var validator = (ValidateInputPhoneNumberResponseData)Engine.Engine.ProcessRequest(request, 769);
 
@@ -129,10 +129,10 @@ namespace Atlantis.Framework.ValidateInput.Tests
     [TestMethod]
     public void PhoneNumberInvalidCountryCode()
     {
-      var request = new ValidateInputPhoneNumberRequestData(new Dictionary<ValidateInputKeys, string>(2)
+      var request = new ValidateInputPhoneNumberRequestData(new Dictionary<string, string>(2)
       {
-        {ValidateInputKeys.PhoneNumberInput, "2530000"},
-        {ValidateInputKeys.PhoneNumberCountryCallingCode, "0"}
+        {"phonenumber", "2530000"},
+        {"countrycallingcode", "0"}
       });
       var validator = (ValidateInputPhoneNumberResponseData)Engine.Engine.ProcessRequest(request, 769);
 
@@ -145,9 +145,9 @@ namespace Atlantis.Framework.ValidateInput.Tests
     [TestMethod]
     public void PhoneNumberNoRegionInvalidCountryCode()
     {
-      var request = new ValidateInputPhoneNumberRequestData(new Dictionary<ValidateInputKeys, string>(1)
+      var request = new ValidateInputPhoneNumberRequestData(new Dictionary<string, string>(1)
       {
-        {ValidateInputKeys.PhoneNumberInput, "0236618300"}
+        {"phonenumber", "0236618300"}
       });
       var validator = (ValidateInputPhoneNumberResponseData)Engine.Engine.ProcessRequest(request, 769);
 

@@ -13,9 +13,9 @@ namespace Atlantis.Framework.ValidateInput.Tests
     [TestMethod]
     public void PasswordValid()
     {
-      var request = new ValidateInputPasswordRequestData(new Dictionary<ValidateInputKeys, string>(1)
+      var request = new ValidateInputPasswordRequestData(new Dictionary<string, string>(1)
       {
-        {ValidateInputKeys.PasswordInput, "Abasdf 9980"}
+        {"password", "Abasdf 9980"}
       });
       var validator = (ValidateInputPasswordResponseData)Engine.Engine.ProcessRequest(request, 770);
 
@@ -28,10 +28,10 @@ namespace Atlantis.Framework.ValidateInput.Tests
     [TestMethod]
     public void PasswordValidWithMatch()
     {
-      var request = new ValidateInputPasswordRequestData(new Dictionary<ValidateInputKeys, string>(2)
+      var request = new ValidateInputPasswordRequestData(new Dictionary<string, string>(2)
       {
-        {ValidateInputKeys.PasswordInput, "Abasdf 9980"},
-        {ValidateInputKeys.PasswordInputMatch, "Abasdf 9980"}
+        {"password", "Abasdf 9980"},
+        {"passwordconfirmation", "Abasdf 9980"}
       });
       var validator = (ValidateInputPasswordResponseData)Engine.Engine.ProcessRequest(request, 770);
 
@@ -49,10 +49,10 @@ namespace Atlantis.Framework.ValidateInput.Tests
     [TestMethod]
     public void PasswordValidNoMatch()
     {
-      var request = new ValidateInputPasswordRequestData(new Dictionary<ValidateInputKeys, string>(2)
+      var request = new ValidateInputPasswordRequestData(new Dictionary<string, string>(2)
       {
-        {ValidateInputKeys.PasswordInput, "Abasdf 9980"},
-        {ValidateInputKeys.PasswordInputMatch, "iajuiaytajfh562J#*FDS"}
+        {"password", "Abasdf 9980"},
+        {"passwordconfirmation", "iajuiaytajfh562J#*FDS"}
       });
       var validator = (ValidateInputPasswordResponseData)Engine.Engine.ProcessRequest(request, 770);
 
@@ -65,9 +65,9 @@ namespace Atlantis.Framework.ValidateInput.Tests
     [TestMethod]
     public void PasswordToShort()
     {
-      var request = new ValidateInputPasswordRequestData(new Dictionary<ValidateInputKeys, string>(1)
+      var request = new ValidateInputPasswordRequestData(new Dictionary<string, string>(1)
       {
-        {ValidateInputKeys.PasswordInput, "Aab4"}
+        {"password", "Aab4"}
       });
       var validator = (ValidateInputPasswordResponseData)Engine.Engine.ProcessRequest(request, 770);
 
@@ -80,9 +80,9 @@ namespace Atlantis.Framework.ValidateInput.Tests
     [TestMethod]
     public void PasswordToLong()
     {
-      var request = new ValidateInputPasswordRequestData(new Dictionary<ValidateInputKeys, string>(1)
+      var request = new ValidateInputPasswordRequestData(new Dictionary<string, string>(1)
       {
-        {ValidateInputKeys.PasswordInput, "Aab4".PadRight(256, 'x')}
+        {"password", "Aab4".PadRight(256, 'x')}
       });
       var validator = (ValidateInputPasswordResponseData)Engine.Engine.ProcessRequest(request, 770);
 
@@ -95,9 +95,9 @@ namespace Atlantis.Framework.ValidateInput.Tests
     [TestMethod]
     public void PasswordNoUpperCase()
     {
-      var request = new ValidateInputPasswordRequestData(new Dictionary<ValidateInputKeys, string>(1)
+      var request = new ValidateInputPasswordRequestData(new Dictionary<string, string>(1)
       {
-        {ValidateInputKeys.PasswordInput, "#abkd uzei8k<k>ej%-_"}
+        {"password", "#abkd uzei8k<k>ej%-_"}
       });
       var validator = (ValidateInputPasswordResponseData)Engine.Engine.ProcessRequest(request, 770);
 
@@ -110,9 +110,9 @@ namespace Atlantis.Framework.ValidateInput.Tests
     [TestMethod]
     public void PasswordNoNumber()
     {
-      var request = new ValidateInputPasswordRequestData(new Dictionary<ValidateInputKeys, string>(1)
+      var request = new ValidateInputPasswordRequestData(new Dictionary<string, string>(1)
       {
-        {ValidateInputKeys.PasswordInput, "#abkd uZeik<k>ej%-_"}
+        {"password", "#abkd uZeik<k>ej%-_"}
       });
       var validator = (ValidateInputPasswordResponseData)Engine.Engine.ProcessRequest(request, 770);
 
@@ -125,10 +125,10 @@ namespace Atlantis.Framework.ValidateInput.Tests
     [TestMethod]
     public void PasswordMultipleIssuesWithMatch()
     {
-      var request = new ValidateInputPasswordRequestData(new Dictionary<ValidateInputKeys, string>(2)
+      var request = new ValidateInputPasswordRequestData(new Dictionary<string, string>(2)
       {
-        {ValidateInputKeys.PasswordInput, "ABC"},
-        {ValidateInputKeys.PasswordInputMatch, "ABC"}
+        {"password", "ABC"},
+        {"passwordconfirmation", "ABC"}
       });
       var validator = (ValidateInputPasswordResponseData)Engine.Engine.ProcessRequest(request, 770);
 
@@ -142,10 +142,10 @@ namespace Atlantis.Framework.ValidateInput.Tests
     [TestMethod]
     public void PasswordMultipleIssuesNoMatch()
     {
-      var request = new ValidateInputPasswordRequestData(new Dictionary<ValidateInputKeys, string>(2)
+      var request = new ValidateInputPasswordRequestData(new Dictionary<string, string>(2)
       {
-        {ValidateInputKeys.PasswordInput, "ABC"},
-        {ValidateInputKeys.PasswordInputMatch, "iajuiaytajfh562J#*FDS"}
+        {"password", "ABC"},
+        {"passwordconfirmation", "iajuiaytajfh562J#*FDS"}
       });
       var validator = (ValidateInputPasswordResponseData)Engine.Engine.ProcessRequest(request, 770);
 
@@ -160,9 +160,9 @@ namespace Atlantis.Framework.ValidateInput.Tests
     [TestMethod]
     public void PasswordLeadingWhiteSpace()
     {
-      var request = new ValidateInputPasswordRequestData(new Dictionary<ValidateInputKeys, string>(1)
+      var request = new ValidateInputPasswordRequestData(new Dictionary<string, string>(1)
       {
-        {ValidateInputKeys.PasswordInput, "   1234Adj29"}
+        {"password", "   1234Adj29"}
       });
       var validator = (ValidateInputPasswordResponseData)Engine.Engine.ProcessRequest(request, 770);
 
@@ -175,9 +175,9 @@ namespace Atlantis.Framework.ValidateInput.Tests
     [TestMethod]
     public void PasswordTrailingWhiteSpace()
     {
-      var request = new ValidateInputPasswordRequestData(new Dictionary<ValidateInputKeys, string>(1)
+      var request = new ValidateInputPasswordRequestData(new Dictionary<string, string>(1)
       {
-        {ValidateInputKeys.PasswordInput, "1234Adj29   "}
+        {"password", "1234Adj29   "}
       });
       var validator = (ValidateInputPasswordResponseData)Engine.Engine.ProcessRequest(request, 770);
 
@@ -190,9 +190,9 @@ namespace Atlantis.Framework.ValidateInput.Tests
     [TestMethod]
     public void PasswordEmpty()
     {
-      var request = new ValidateInputPasswordRequestData(new Dictionary<ValidateInputKeys, string>(1)
+      var request = new ValidateInputPasswordRequestData(new Dictionary<string, string>(1)
       {
-        {ValidateInputKeys.PasswordInput, ""}
+        {"password", ""}
       });
       var validator = (ValidateInputPasswordResponseData)Engine.Engine.ProcessRequest(request, 770);
 

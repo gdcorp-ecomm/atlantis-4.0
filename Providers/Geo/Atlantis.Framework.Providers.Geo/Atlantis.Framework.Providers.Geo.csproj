@@ -80,6 +80,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GeoCallingCodeData.cs" />
     <Compile Include="GeoCountry.cs" />
     <Compile Include="GeoCountryData.cs" />
     <Compile Include="GeoLocation.cs" />

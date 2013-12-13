@@ -79,7 +79,10 @@ namespace Atlantis.Framework.Providers.Geo
 
     public string CallingCode
     {
-      get { return _country.CallingCode; }
+      get
+      {
+        return GeoCallingCodeData.GetCallingCodeByCountryCode(_country.Code, _country.CallingCode);
+      }
     }
 
     public bool HasStates

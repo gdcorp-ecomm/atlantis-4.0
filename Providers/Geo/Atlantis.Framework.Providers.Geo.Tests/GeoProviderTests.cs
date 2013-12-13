@@ -275,6 +275,48 @@ namespace Atlantis.Framework.Providers.Geo.Tests
     }
 
     [TestMethod]
+    public void TryGetCountryKy()
+    {
+      IGeoProvider geoProvider = CreateGeoProvider("1.179.3.3", false);
+      IGeoCountry country;
+      bool result = geoProvider.TryGetCountryByCode("ky", out country);
+      Assert.IsTrue(result);
+
+      Assert.AreEqual("ky", country.Code);
+      Assert.AreEqual(country.CallingCode, "1345");
+      Assert.AreNotEqual(0, country.Id);
+      Assert.IsNotNull(country.Name);
+    }
+
+    [TestMethod]
+    public void TryGetCountryZw()
+    {
+      IGeoProvider geoProvider = CreateGeoProvider("1.179.3.3", false);
+      IGeoCountry country;
+      bool result = geoProvider.TryGetCountryByCode("zw", out country);
+      Assert.IsTrue(result);
+
+      Assert.AreEqual("zw", country.Code);
+      Assert.AreEqual(country.CallingCode, "263");
+      Assert.AreNotEqual(0, country.Id);
+      Assert.IsNotNull(country.Name);
+    }
+
+    [TestMethod]
+    public void TryGetCallingCodeDefault()
+    {
+      IGeoProvider geoProvider = CreateGeoProvider("1.179.3.3", false);
+      IGeoCountry country;
+      bool result = geoProvider.TryGetCountryByCode("hm", out country);
+      Assert.IsTrue(result);
+
+      Assert.AreEqual("hm", country.Code);
+      Assert.AreEqual(country.CallingCode, "0");
+      Assert.AreNotEqual(0, country.Id);
+      Assert.IsNotNull(country.Name);
+    }
+
+    [TestMethod]
     public void TryGetCountryPtBr()
     {
       IGeoProvider geoProvider = CreateGeoProvider("1.179.3.3", false, language: "pt-br");

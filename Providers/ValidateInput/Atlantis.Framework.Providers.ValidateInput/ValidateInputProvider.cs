@@ -4,6 +4,7 @@ using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.ValidateInput.Factories;
 using Atlantis.Framework.Providers.ValidateInput.Interface;
 using Atlantis.Framework.Providers.ValidateInput.Interface.ErrorCodes;
+using Atlantis.Framework.ValidateInput.Interface;
 
 namespace Atlantis.Framework.Providers.ValidateInput
 {

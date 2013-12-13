@@ -3,7 +3,6 @@ using System.Linq;
 using Atlantis.Framework.Providers.ValidateInput.Interface;
 using Atlantis.Framework.Providers.ValidateInput.Interface.ErrorCodes;
 using Atlantis.Framework.Testing.MockProviders;
-using Atlantis.Framework.ValidateInput.Interface;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Atlantis.Framework.Providers.ValidateInput.Tests
@@ -27,7 +26,7 @@ namespace Atlantis.Framework.Providers.ValidateInput.Tests
       var container = NewValidateInputProvider();
       var provider = container.Resolve<IValidateInputProvider>();
 
-      var result = provider.ValidateInput(ValidateInputTypes.Password, new Dictionary<ValidateInputKeys, string>(1)
+      var result = provider.ValidateInput(ValidateInputTypes.Password, new Dictionary<string, string>(1)
       {
         {ValidateInputKeys.PasswordInput, "Abasdf 9980"}
       });
@@ -44,7 +43,7 @@ namespace Atlantis.Framework.Providers.ValidateInput.Tests
       var container = NewValidateInputProvider();
       var provider = container.Resolve<IValidateInputProvider>();
 
-      var result = provider.ValidateInput(ValidateInputTypes.PhoneNumber, new Dictionary<ValidateInputKeys, string>(2)
+      var result = provider.ValidateInput(ValidateInputTypes.PhoneNumber, new Dictionary<string, string>(2)
       {
         {ValidateInputKeys.PhoneNumberInput, "0236618300"},
         {ValidateInputKeys.PhoneNumberRegionCode, "IT"}
@@ -67,10 +66,10 @@ namespace Atlantis.Framework.Providers.ValidateInput.Tests
       var container = NewValidateInputProvider();
       var provider = container.Resolve<IValidateInputProvider>();
 
-      var result = provider.ValidateInput(ValidateInputTypes.Password, new Dictionary<ValidateInputKeys, string>(2)
+      var result = provider.ValidateInput(ValidateInputTypes.Password, new Dictionary<string, string>(2)
       {
         {ValidateInputKeys.PasswordInput, "ABC"},
-        {ValidateInputKeys.PasswordInputMatch, "iajuiaytajfh562J#*FDS"}
+        {ValidateInputKeys.PasswordConfirmation, "iajuiaytajfh562J#*FDS"}
       });
 
       var errors = result.ErrorCodes;
@@ -85,7 +84,7 @@ namespace Atlantis.Framework.Providers.ValidateInput.Tests
       var container = NewValidateInputProvider();
       var provider = container.Resolve<IValidateInputProvider>();
 
-      var result = provider.ValidateInput(ValidateInputTypes.PhoneNumber, new Dictionary<ValidateInputKeys, string>(2)
+      var result = provider.ValidateInput(ValidateInputTypes.PhoneNumber, new Dictionary<string, string>(2)
       {
         {ValidateInputKeys.PhoneNumberInput, "2530000"},
         {ValidateInputKeys.PhoneNumberRegionCode, "US"}
@@ -103,7 +102,7 @@ namespace Atlantis.Framework.Providers.ValidateInput.Tests
       var container = NewValidateInputProvider();
       var provider = container.Resolve<IValidateInputProvider>();
 
-      var result = provider.ValidateInput(ValidateInputTypes.Password, new Dictionary<ValidateInputKeys, string>());
+      var result = provider.ValidateInput(ValidateInputTypes.Password, new Dictionary<string, string>());
 
       var errors = result.ErrorCodes;
       var isValid = result.IsSuccess;
@@ -117,7 +116,7 @@ namespace Atlantis.Framework.Providers.ValidateInput.Tests
       var container = NewValidateInputProvider();
       var provider = container.Resolve<IValidateInputProvider>();
 
-      var result = provider.ValidateInput(ValidateInputTypes.PhoneNumber, new Dictionary<ValidateInputKeys, string>());
+      var result = provider.ValidateInput(ValidateInputTypes.PhoneNumber, new Dictionary<string, string>());
 
       var errors = result.ErrorCodes;
       var isValid = result.IsSuccess;

@@ -1,11 +1,11 @@
 ﻿namespace Atlantis.Framework.Providers.ValidateInput.Interface
 {
-  public enum ValidateInputKeys
+  public static class ValidateInputKeys
   {
-    PhoneNumberInput,
-    PasswordInput,
-    PasswordInputMatch,
-    PhoneNumberRegionCode,
-    PhoneNumberCountryCallingCode
+    public const string PasswordInput = "password";
+    public const string PasswordConfirmation = "passwordconfirmation";
+    public const string PhoneNumberInput = "phonenumber";
+    public const string PhoneNumberRegionCode = "regioncode";
+    public const string PhoneNumberCountryCallingCode = "countrycallingcode";
   }
 }

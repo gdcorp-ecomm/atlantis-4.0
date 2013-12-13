@@ -58,10 +58,10 @@
       <HintPath>..\packages\Atlantis.Framework.Testing.MockProviders.4.13.10.28\lib\net40\Atlantis.Framework.Testing.MockProviders.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.ValidateInput.Impl">
-      <HintPath>..\packages\Atlantis.Framework.ValidateInput.Impl.4.13.12.13\lib\net40\Atlantis.Framework.ValidateInput.Impl.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.ValidateInput.Impl.4.13.12.14\lib\net40\Atlantis.Framework.ValidateInput.Impl.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.ValidateInput.Interface">
-      <HintPath>..\packages\Atlantis.Framework.ValidateInput.Interface.4.13.12.13\lib\net40\Atlantis.Framework.ValidateInput.Interface.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.ValidateInput.Interface.4.13.12.14\lib\net40\Atlantis.Framework.ValidateInput.Interface.dll</HintPath>
     </Reference>
     <Reference Include="PhoneNumbers, Version=4.10.0.62, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

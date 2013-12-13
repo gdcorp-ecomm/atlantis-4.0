@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Atlantis.Framework.ValidateInput.Interface;
 using Atlantis.Framework.Providers.ValidateInput.Interface;
 
 namespace Atlantis.Framework.Providers.ValidateInput

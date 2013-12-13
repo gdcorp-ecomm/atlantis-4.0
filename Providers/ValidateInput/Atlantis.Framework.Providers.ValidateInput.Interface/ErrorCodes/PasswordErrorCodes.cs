@@ -1,10 +1,14 @@
 ﻿namespace Atlantis.Framework.Providers.ValidateInput.Interface.ErrorCodes
 {
-  public class PasswordErrorCodes : ErrorCodesBase
+  public static class PasswordErrorCodes
   {
-    public static readonly int PasswordLength = 2;
-    public static readonly int PasswordEmpty = 5;
-    public static readonly int PasswordsNotEqual = 6;
-    public static readonly int PasswordRegEx = 10;
+    public const int UnknownError = ErrorCodesBase.UnknownError;
+    public const int NoInputs = ErrorCodesBase.NoInputs;
+    public const int PasswordLength = 2;
+    public const int InvalidInputType = ErrorCodesBase.InvalidInputType;
+    public const int ValidationRulesLoadError = ErrorCodesBase.ValidationRulesLoadError;
+    public const int PasswordEmpty = 5;
+    public const int PasswordsNotEqual = 6;
+    public const int PasswordRegEx = 10;
   }
 }

@@ -9,7 +9,7 @@ namespace Atlantis.Framework.Providers.ValidateInput.Handlers
 {
   public class ValidateInputPasswordHandler : IValidateInputHandler
   {
-    public IValidateInputResult Validate(IDictionary<ValidateInputKeys, string> inputs)
+    public IValidateInputResult Validate(IDictionary<string, string> inputs)
     {
       IValidateInputResult result = ValidateInputResult.CreateFailureResult();
 

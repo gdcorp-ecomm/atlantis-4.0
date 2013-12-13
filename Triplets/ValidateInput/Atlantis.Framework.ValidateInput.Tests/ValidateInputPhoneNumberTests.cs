@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Atlantis.Framework.Providers.ValidateInput.Interface;
-using Atlantis.Framework.Providers.ValidateInput.Interface.ErrorCodes;
 using Atlantis.Framework.ValidateInput.Interface;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PhoneNumbers;
@@ -77,7 +75,7 @@ namespace Atlantis.Framework.ValidateInput.Tests
       var errors = validator.Result.ErrorCodes;
       var isValid = validator.Result.IsSuccess;
       Assert.IsFalse(isValid);
-      Assert.IsTrue(HasFailureCode(errors, PhoneNumberErrorCodes.InvalidPhoneNumber));
+      Assert.IsTrue(HasFailureCode(errors, 7));
     }
 
     [TestMethod]
@@ -93,7 +91,7 @@ namespace Atlantis.Framework.ValidateInput.Tests
       var errors = validator.Result.ErrorCodes;
       var isValid = validator.Result.IsSuccess;
       Assert.IsFalse(isValid);
-      Assert.IsTrue(HasFailureCode(errors, PhoneNumberErrorCodes.TooShort));
+      Assert.IsTrue(HasFailureCode(errors, 5));
     }
 
     [TestMethod]
@@ -109,7 +107,7 @@ namespace Atlantis.Framework.ValidateInput.Tests
       var errors = validator.Result.ErrorCodes;
       var isValid = validator.Result.IsSuccess;
       Assert.IsFalse(isValid);
-      Assert.IsTrue(HasFailureCode(errors, PhoneNumberErrorCodes.TooLong));
+      Assert.IsTrue(HasFailureCode(errors, 6));
     }
 
     [TestMethod]
@@ -125,7 +123,7 @@ namespace Atlantis.Framework.ValidateInput.Tests
       var errors = validator.Result.ErrorCodes;
       var isValid = validator.Result.IsSuccess;
       Assert.IsFalse(isValid);
-      Assert.IsTrue(HasFailureCode(errors, PhoneNumberErrorCodes.PhoneNumberEmpty));
+      Assert.IsTrue(HasFailureCode(errors, 2));
     }
 
     [TestMethod]
@@ -141,7 +139,7 @@ namespace Atlantis.Framework.ValidateInput.Tests
       var errors = validator.Result.ErrorCodes;
       var isValid = validator.Result.IsSuccess;
       Assert.IsFalse(isValid);
-      Assert.IsTrue(HasFailureCode(errors, PhoneNumberErrorCodes.InvalidCountryCode));
+      Assert.IsTrue(HasFailureCode(errors, 8));
     }
 
     [TestMethod]
@@ -156,7 +154,7 @@ namespace Atlantis.Framework.ValidateInput.Tests
       var errors = validator.Result.ErrorCodes;
       var isValid = validator.Result.IsSuccess;
       Assert.IsFalse(isValid);
-      Assert.IsTrue(HasFailureCode(errors, PhoneNumberErrorCodes.InvalidCountryCode));
+      Assert.IsTrue(HasFailureCode(errors, 8));
     }
   }
 }

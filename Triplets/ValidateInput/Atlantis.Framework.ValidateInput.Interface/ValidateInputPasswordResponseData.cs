@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Xml.Linq;
 using Atlantis.Framework.Interface;
-using Atlantis.Framework.Providers.ValidateInput.Interface;
 
 namespace Atlantis.Framework.ValidateInput.Interface
 {

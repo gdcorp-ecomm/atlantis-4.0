@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>Atlantis.Framework.ValidateInput.Interface</id>
-    <version>4.13.12.11</version>
+    <version>4.13.12.13</version>
     <title>Atlantis Framework ValidateInput Interface</title>
     <authors>$author$</authors>
     <owners>$author$</owners>

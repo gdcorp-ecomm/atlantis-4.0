@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Atlantis.Framework.Providers.ValidateInput.Interface;
-using Atlantis.Framework.Providers.ValidateInput.Interface.ErrorCodes;
 using Atlantis.Framework.ValidateInput.Interface;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -61,7 +59,7 @@ namespace Atlantis.Framework.ValidateInput.Tests
       var errors = validator.Result.ErrorCodes;
       var isValid = validator.Result.IsSuccess;
       Assert.IsFalse(isValid);
-      Assert.IsTrue(HasFailureCode(errors, PasswordErrorCodes.PasswordsNotEqual));
+      Assert.IsTrue(HasFailureCode(errors, 6));
     }
 
     [TestMethod]
@@ -76,7 +74,7 @@ namespace Atlantis.Framework.ValidateInput.Tests
       var errors = validator.Result.ErrorCodes;
       var isValid = validator.Result.IsSuccess;
       Assert.IsFalse(isValid);
-      Assert.IsTrue(HasFailureCode(errors, PasswordErrorCodes.PasswordLength));
+      Assert.IsTrue(HasFailureCode(errors, 2));
     }
 
     [TestMethod]
@@ -91,7 +89,7 @@ namespace Atlantis.Framework.ValidateInput.Tests
       var errors = validator.Result.ErrorCodes;
       var isValid = validator.Result.IsSuccess;
       Assert.IsFalse(isValid);
-      Assert.IsTrue(HasFailureCode(errors, PasswordErrorCodes.PasswordLength));
+      Assert.IsTrue(HasFailureCode(errors, 2));
     }
 
     [TestMethod]
@@ -106,7 +104,7 @@ namespace Atlantis.Framework.ValidateInput.Tests
       var errors = validator.Result.ErrorCodes;
       var isValid = validator.Result.IsSuccess;
       Assert.IsFalse(isValid);
-      Assert.IsTrue(HasFailureCode(errors, PasswordErrorCodes.PasswordRegEx));
+      Assert.IsTrue(HasFailureCode(errors, 10));
     }
 
     [TestMethod]
@@ -121,7 +119,7 @@ namespace Atlantis.Framework.ValidateInput.Tests
       var errors = validator.Result.ErrorCodes;
       var isValid = validator.Result.IsSuccess;
       Assert.IsFalse(isValid);
-      Assert.IsTrue(HasFailureCode(errors, PasswordErrorCodes.PasswordRegEx));
+      Assert.IsTrue(HasFailureCode(errors, 10));
     }
 
     [TestMethod]
@@ -137,8 +135,8 @@ namespace Atlantis.Framework.ValidateInput.Tests
       var errors = validator.Result.ErrorCodes;
       var isValid = validator.Result.IsSuccess;
       Assert.IsFalse(isValid);
-      Assert.IsTrue(HasFailureCode(errors, PasswordErrorCodes.PasswordRegEx));
-      Assert.IsTrue(HasFailureCode(errors, PasswordErrorCodes.PasswordLength));
+      Assert.IsTrue(HasFailureCode(errors, 10));
+      Assert.IsTrue(HasFailureCode(errors, 2));
     }
 
     [TestMethod]
@@ -154,9 +152,9 @@ namespace Atlantis.Framework.ValidateInput.Tests
       var errors = validator.Result.ErrorCodes;
       var isValid = validator.Result.IsSuccess;
       Assert.IsFalse(isValid);
-      Assert.IsTrue(HasFailureCode(errors, PasswordErrorCodes.PasswordRegEx));
-      Assert.IsTrue(HasFailureCode(errors, PasswordErrorCodes.PasswordLength));
-      Assert.IsTrue(HasFailureCode(errors, PasswordErrorCodes.PasswordsNotEqual));
+      Assert.IsTrue(HasFailureCode(errors, 10));
+      Assert.IsTrue(HasFailureCode(errors, 2));
+      Assert.IsTrue(HasFailureCode(errors, 6));
     }
 
     [TestMethod]
@@ -171,7 +169,7 @@ namespace Atlantis.Framework.ValidateInput.Tests
       var errors = validator.Result.ErrorCodes;
       var isValid = validator.Result.IsSuccess;
       Assert.IsFalse(isValid);
-      Assert.IsTrue(HasFailureCode(errors, PasswordErrorCodes.PasswordRegEx));
+      Assert.IsTrue(HasFailureCode(errors, 10));
     }
 
     [TestMethod]
@@ -186,7 +184,7 @@ namespace Atlantis.Framework.ValidateInput.Tests
       var errors = validator.Result.ErrorCodes;
       var isValid = validator.Result.IsSuccess;
       Assert.IsFalse(isValid);
-      Assert.IsTrue(HasFailureCode(errors, PasswordErrorCodes.PasswordRegEx));
+      Assert.IsTrue(HasFailureCode(errors, 10));
     }
 
     [TestMethod]
@@ -201,7 +199,7 @@ namespace Atlantis.Framework.ValidateInput.Tests
       var errors = validator.Result.ErrorCodes;
       var isValid = validator.Result.IsSuccess;
       Assert.IsFalse(isValid);
-      Assert.IsTrue(HasFailureCode(errors, PasswordErrorCodes.PasswordEmpty));
+      Assert.IsTrue(HasFailureCode(errors, 5));
     }
   }
 }

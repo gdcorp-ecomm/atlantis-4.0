@@ -1,5 +1,4 @@
 ﻿using System.Xml.Linq;
-using Atlantis.Framework.Providers.ValidateInput.Interface.ErrorCodes;
 
 namespace Atlantis.Framework.ValidateInput.Interface
 {
@@ -14,7 +13,7 @@ namespace Atlantis.Framework.ValidateInput.Interface
       int failureCode;
       if ((failureCodeAttribute == null) || (!int.TryParse(failureCodeAttribute.Value, out failureCode)))
       {
-        failureCode = PasswordErrorCodes.UnknownError;
+        failureCode = -1;
       }
 
       FailureCode = failureCode;

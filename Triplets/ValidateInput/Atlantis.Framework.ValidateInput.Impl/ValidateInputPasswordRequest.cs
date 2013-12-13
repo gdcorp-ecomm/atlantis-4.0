@@ -3,9 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
 using Atlantis.Framework.Interface;
-using Atlantis.Framework.Providers.ValidateInput.Interface;
-using Atlantis.Framework.Providers.ValidateInput.Interface.ErrorCodes;
-using Atlantis.Framework.ValidateInput.Impl.Data;
 using Atlantis.Framework.ValidateInput.Interface;
 
 namespace Atlantis.Framework.ValidateInput.Impl
@@ -32,7 +29,7 @@ namespace Atlantis.Framework.ValidateInput.Impl
       }
       catch (Exception ex)
       {
-        var errorResult = new ValidateInputResult(false, new List<int> { PasswordErrorCodes.UnknownError });
+        var errorResult = new ValidateInputResult(false, new List<int> { -1 });
         responseData = new ValidateInputPasswordResponseData(errorResult, requestData, ex);
       }
 
@@ -46,15 +43,15 @@ namespace Atlantis.Framework.ValidateInput.Impl
       string inputPassword;
       if (!inputs.TryGetValue(ValidateInputKeys.PasswordInput, out inputPassword) || string.IsNullOrEmpty(inputPassword))
       {
-        errorCodes.Add(PasswordErrorCodes.PasswordEmpty);
+        errorCodes.Add(5);
       }
       else
       {
         string fieldValidationXml;
 
-        if (!FieldValidationData.TryGetFieldValidationXml("password", out fieldValidationXml) || string.IsNullOrEmpty(fieldValidationXml))
+        if (!Data.FieldValidationData.TryGetFieldValidationXml("password", out fieldValidationXml) || string.IsNullOrEmpty(fieldValidationXml))
         {
-          errorCodes.Add(PasswordErrorCodes.ValidationRulesLoadError);
+          errorCodes.Add(4);
         }
         else
         {
@@ -62,14 +59,14 @@ namespace Atlantis.Framework.ValidateInput.Impl
 
           if (fieldValidationDoc.Root == null)
           {
-            errorCodes.Add(PasswordErrorCodes.ValidationRulesLoadError);
+            errorCodes.Add(4);
           }
           else
           {
             string inputPasswordMatch;
             if (inputs.TryGetValue(ValidateInputKeys.PasswordInputMatch, out inputPasswordMatch) && !inputPasswordMatch.Equals(inputPassword))
             {
-              errorCodes.Add(PasswordErrorCodes.PasswordsNotEqual);
+              errorCodes.Add(6);
             }
 
             var lengthRuleElement = fieldValidationDoc.Root.Descendants("length").FirstOrDefault();

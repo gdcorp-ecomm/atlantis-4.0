@@ -26,6 +26,7 @@ namespace Atlantis.Framework.Providers.Personalization.Tests
       _container.RegisterProvider<IManagerContext, MockNoManagerContext>();
       _container.RegisterProvider<IShopperContext, MockShopperContext>();
       _container.RegisterProvider<IPersonalizationProvider, PersonalizationProvider>();
+      PersonalizationConfig.TMSAppId = "2";
     }
 
     [TestMethod]
@@ -33,8 +34,9 @@ namespace Atlantis.Framework.Providers.Personalization.Tests
     {
       InitializeProvidersContexts();
       _container.Resolve<IShopperContext>().SetNewShopper("12345");
-      var targetMessage = _container.Resolve<IPersonalizationProvider>().GetTargetedMessages("2", "Homepage");
-
+      IPersonalizationProvider prov = _container.Resolve<IPersonalizationProvider>();
+      var targetMessage = prov.GetTargetedMessages("Homepage");
+      //targetMessage = prov.GetTargetedMessages("Homepage");  verified by debugging that the second call is returned the stored data in session
       XmlSerializer serializer = new XmlSerializer(typeof(TargetedMessages));
 
       using (var stringWriter = new StringWriter())

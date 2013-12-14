@@ -53,15 +53,15 @@
     </Reference>
     <Reference Include="Atlantis.Framework.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Interface.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.Interface.4.13.9.25\lib\net40\Atlantis.Framework.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Personalization.Impl, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.Personalization.Impl.4.13.11.25\lib\net40\Atlantis.Framework.Personalization.Impl.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.Personalization.Impl.4.13.12.11\lib\net40\Atlantis.Framework.Personalization.Impl.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Personalization.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.Personalization.Interface.4.13.11.25\lib\net40\Atlantis.Framework.Personalization.Interface.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.Personalization.Interface.4.13.12.11\lib\net40\Atlantis.Framework.Personalization.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Providers.Containers, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -74,10 +74,6 @@
     <Reference Include="Atlantis.Framework.Providers.RenderPipeline.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Atlantis.Framework.Providers.RenderPipeline.Interface.4.13.10.16\lib\net40\Atlantis.Framework.Providers.RenderPipeline.Interface.dll</HintPath>
-    </Reference>
-    <Reference Include="Atlantis.Framework.SessionCache, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.SessionCache.4.13.10.22\lib\net40\Atlantis.Framework.SessionCache.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Testing.MockHttpContext, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -112,7 +108,9 @@
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Atlantis.Framework.Providers.Personalization.Interface\Atlantis.Framework.Providers.Personalization.Interface.csproj">

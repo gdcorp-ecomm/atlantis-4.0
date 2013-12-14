@@ -35,7 +35,8 @@
   [@P[webControl:<data assembly="App_Code" type="WebControls.WebControlTwo"><Parameters><Parameter key="Text" value="Web control two" /></Parameters></data>]@P]
   <hr />
   Circular reference cdsDocument placeholder SHOULD NOT render below:
-  [@P[cdsDocument:<data app="atlantis" location="_global/circularreference" />]@P]
+  <%--[@P[cdsDocument:<data app="atlantis" location="_global/circularreference" />]@P]--%>
   <hr />
+  [@P[tmsDocument:<data interactionpoint="homepage"><MessageTags><MessageTag>tag1</MessageTag><MessageTag>tag2</MessageTag><MessageTag>tag3</MessageTag></MessageTags></data>]@P]
 </body>
 </html>

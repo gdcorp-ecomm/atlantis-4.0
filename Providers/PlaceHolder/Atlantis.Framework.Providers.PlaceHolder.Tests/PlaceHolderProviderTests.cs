@@ -14,6 +14,7 @@ using System.Diagnostics;
 using Atlantis.Framework.Providers.PlaceHolder.PlaceHolders;
 using Atlantis.Framework.Providers.Personalization;
 using Atlantis.Framework.Providers.Personalization.Interface;
+using Atlantis.Framework.Providers.Containers.DataToken.RenderHandlers;
 
 namespace Atlantis.Framework.Providers.PlaceHolder.Tests
 {
@@ -412,21 +413,41 @@ namespace Atlantis.Framework.Providers.PlaceHolder.Tests
     [TestMethod]
     public void RenderTMSDocumentValid()
     {
-      MockHttpRequest mockHttpRequest = new MockHttpRequest("http://www.debug.godaddy-com.ide/?QA--FakeShopperId=912111&version=atlantis/tms/_default|5293c0ecf778fc29c8ead7cf");
+      MockHttpRequest mockHttpRequest = new MockHttpRequest("http://www.debug.godaddy-com.ide/?QA--FakeShopperId=912111&version=tms/tag1/default_template|52a93378f778fc09f82f03d6");
       MockHttpContext.SetFromWorkerRequest(mockHttpRequest);
 
-      IPlaceHolder placeHolder = new TMSDocumentPlaceHolder("atlantis", "2", "homepage", "Tag1");
+      IPlaceHolder placeHolder = new TMSDocumentPlaceHolder("homepage", new List<string>(){"tag1"});
 
       IProviderContainer providerContainer = InitializeProviderContainer();
       providerContainer.SetData<bool>("MockSiteContextSettings.IsRequestInternal", true);
 
       IPlaceHolderProvider placeHolderProvider = providerContainer.Resolve<IPlaceHolderProvider>();
 
-      string renderedContent = placeHolderProvider.ReplacePlaceHolders(placeHolder.ToMarkup(), null);
+      string renderedContent = placeHolderProvider.ReplacePlaceHolders(placeHolder.ToMarkup(), new List<IRenderHandler>{ new ProviderContainerDataTokenRenderHandler() } );
 
       WriteOutput(renderedContent);
 
-      Assert.IsTrue(!string.IsNullOrEmpty(renderedContent), "Empty document returned!");
+      Assert.AreEqual(renderedContent, "tag1/name1/12345");
+    }
+
+    [TestMethod]
+    public void TMS_IsFirstMessageBeingReturned()
+    {
+      MockHttpRequest mockHttpRequest = new MockHttpRequest("http://www.debug.godaddy-com.ide/?QA--FakeShopperId=912117&version=tms/tag1/default_template|52a93378f778fc09f82f03d6");
+      MockHttpContext.SetFromWorkerRequest(mockHttpRequest);
+
+      IPlaceHolder placeHolder = new TMSDocumentPlaceHolder("homepage", new List<string>() { "tag1" });
+
+      IProviderContainer providerContainer = InitializeProviderContainer();
+      providerContainer.SetData<bool>("MockSiteContextSettings.IsRequestInternal", true);
+
+      IPlaceHolderProvider placeHolderProvider = providerContainer.Resolve<IPlaceHolderProvider>();
+
+      string renderedContent = placeHolderProvider.ReplacePlaceHolders(placeHolder.ToMarkup(), new List<IRenderHandler> { new ProviderContainerDataTokenRenderHandler() });
+
+      WriteOutput(renderedContent);
+
+      Assert.IsTrue(renderedContent.Contains("name20"));
     }
   }
 }

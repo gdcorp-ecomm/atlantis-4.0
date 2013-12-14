@@ -8,6 +8,8 @@ using Atlantis.Framework.Providers.PlaceHolder.Interface;
 using Atlantis.Framework.Providers.RenderPipeline;
 using Atlantis.Framework.Providers.RenderPipeline.Interface;
 using Atlantis.Framework.Testing.MockProviders;
+using Atlantis.Framework.Providers.Personalization.Interface;
+using Atlantis.Framework.Providers.Personalization;
 
 namespace Atlantis.Framework.Providers.PlaceHolder.WebTest
 {
@@ -22,6 +24,10 @@ namespace Atlantis.Framework.Providers.PlaceHolder.WebTest
       HttpProviderContainer.Instance.RegisterProvider<IPlaceHolderProvider, PlaceHolderProvider>();
       HttpProviderContainer.Instance.RegisterProvider<ICDSContentProvider, CDSContentProvider>();
       HttpProviderContainer.Instance.RegisterProvider<IRenderPipelineProvider, RenderPipelineProvider>();
+      HttpProviderContainer.Instance.RegisterProvider<IPersonalizationProvider, PersonalizationProvider>();
+
+      HttpProviderContainer.Instance.SetData<bool>("MockSiteContextSettings.IsRequestInternal", true);
+      
     }
 
     protected void Session_Start(object sender, EventArgs e)

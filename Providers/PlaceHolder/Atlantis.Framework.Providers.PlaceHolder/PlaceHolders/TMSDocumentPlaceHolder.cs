@@ -9,17 +9,14 @@ namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolders
 
     private static readonly IList<KeyValuePair<string, string>> _emptyParameters = new List<KeyValuePair<string, string>>(0);
 
-    private readonly PlaceHolderData _placeHolderData;
+    private readonly TMSPlaceHolderData _placeHolderData;
 
-    public TMSDocumentPlaceHolder(string application, string tmsAppId, string interactionPoint, string messageTag)
+    public TMSDocumentPlaceHolder(string interactionPoint, IList<string> messageTags)
     {
       IList<KeyValuePair<string, string>> attributes = new List<KeyValuePair<string, string>>(2);
-      attributes.Add(new KeyValuePair<string, string>(PlaceHolderAttributes.Application, application));
-      attributes.Add(new KeyValuePair<string, string>(PlaceHolderAttributes.TMSAppId, tmsAppId));
       attributes.Add(new KeyValuePair<string, string>(PlaceHolderAttributes.InteractionPoint, interactionPoint));
-      attributes.Add(new KeyValuePair<string, string>(PlaceHolderAttributes.MessageTag, messageTag));
-
-      _placeHolderData = new PlaceHolderData(attributes, _emptyParameters);
+      
+      _placeHolderData = new TMSPlaceHolderData(attributes, messageTags);
     }
 
     public string ToMarkup()

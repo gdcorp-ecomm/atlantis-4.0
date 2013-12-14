@@ -9,14 +9,17 @@ using Atlantis.Framework.Interface;
 using System.Web;
 using Atlantis.Framework.Providers.Personalization.Interface;
 using Atlantis.Framework.Personalization.Interface;
+using Atlantis.Framework.Providers.PlaceHolder.PlaceHolders;
 
 namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolderHandlers
 {
   internal class TMSDocumentPlaceHolderHandler : CDSDocumentPlaceHolderHandler
   {
+    private const string APP_NAME = "tms";
     private const string TMS_DATA_TOKEN_MESSAGE_NAME = "TMSMessageName";
     private const string TMS_DATA_TOKEN_MESSAGE_TAG = "TMSMessageTag";
-    private const string LOCATION_FORMAT = "tms/{0}";
+    private const string TMS_DATA_TOKEN_MESSAGE_TRACKING_ID = "TMSMessageTrackingId";
+    private const string LOCATION_FORMAT = "{0}/default_template";
     private const string DEFAULT_MESSAGE_NAME = "_default";
     private const string FAKE_DATA_QUERY_STRING = "QA--FakeShopperId";
 
@@ -35,30 +38,25 @@ namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolderHandlers
       {
         try
         {
-          PlaceHolderData placeHolderData = new PlaceHolderData(Context.Data);
+          TMSPlaceHolderData placeHolderData = new TMSPlaceHolderData(Context.Data);
 
-          string app;
           string interactionPoint;
-          string messageTag;
-          string tmsAppId;
-          if (placeHolderData.TryGetAttribute(PlaceHolderAttributes.Application, out app) &&
-              placeHolderData.TryGetAttribute(PlaceHolderAttributes.TMSAppId, out tmsAppId) &&
-              placeHolderData.TryGetAttribute(PlaceHolderAttributes.InteractionPoint, out interactionPoint) &&
-              placeHolderData.TryGetAttribute(PlaceHolderAttributes.MessageTag, out messageTag) &&
-              !string.IsNullOrEmpty(app) &&
-              !string.IsNullOrEmpty(tmsAppId) &&
+          if (placeHolderData.TryGetAttribute(PlaceHolderAttributes.InteractionPoint, out interactionPoint) &&
               !string.IsNullOrEmpty(interactionPoint) &&
-              !string.IsNullOrEmpty(messageTag)
+              placeHolderData.MessageTags.Count > 0 &&
+              !string.IsNullOrEmpty(placeHolderData.MessageTags[0])
             )
           {
-            string rawContent = cdsContentProvider.GetContent(app, GetLocation(personalizationProvider, tmsAppId, interactionPoint, messageTag)).Content;
+            TMSMessageData msgData = GetMessage(personalizationProvider, interactionPoint, placeHolderData.MessageTags);
+            UpdateContainerData(msgData);
+            string rawContent = cdsContentProvider.GetContent(APP_NAME, string.Format(LOCATION_FORMAT, msgData.SelectedTagName)).Content;
 
             IRenderPipelineProvider renderPipelineProvider = Context.ProviderContainer.Resolve<IRenderPipelineProvider>();
             renderContent = renderPipelineProvider.RenderContent(rawContent, Context.RenderHandlers);
           }
           else
           {
-            throw new Exception(string.Format("Attributes {0}, {1}, {2} and {3} are required", PlaceHolderAttributes.Application, PlaceHolderAttributes.TMSAppId, PlaceHolderAttributes.InteractionPoint, PlaceHolderAttributes.MessageTag));
+            throw new Exception(string.Format("Attributes {0} and {1} are required", PlaceHolderAttributes.InteractionPoint, PlaceHolderAttributes.MessageTag));
           }
         }
         catch (Exception ex)
@@ -71,7 +69,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolderHandlers
       return renderContent;
     }
 
-    private string GetLocation(IPersonalizationProvider personalizationProvider, string tmsAppId, string interactionPoint, string messageTag)
+    private TMSMessageData GetMessage(IPersonalizationProvider personalizationProvider, string interactionPoint, IList<string> messageTags)
     {
       TargetedMessages targetedMessages = null;
       ISiteContext siteContext;
@@ -85,11 +83,11 @@ namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolderHandlers
       {
         try
         {
-          targetedMessages = personalizationProvider.GetTargetedMessages(tmsAppId, interactionPoint);
+          targetedMessages = personalizationProvider.GetTargetedMessages(interactionPoint);
         }
-        catch (Exception)
+        catch (Exception ex)
         {
-          string errorMessage = string.Format("Exception occurred when calling the TMS webservice. TMSAppId: {0}, InteractionPoint: {1}", tmsAppId, interactionPoint);
+          string errorMessage = string.Format("Exception occurred when calling the TMS webservice. InteractionPoint: {0}. {1}", interactionPoint, ex.ToString());
           LogError(errorMessage, "TMSDocumentPlaceHolderHandler.GetLocation");
         }
       }
@@ -97,37 +95,37 @@ namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolderHandlers
       {
         targetedMessages = GetFakeData(showFakeDataForShopperId);
       }
-      string messageName = GetMessageName(targetedMessages, messageTag);
-      UpdateDataContainer(messageTag, messageName);
-      return string.Format(LOCATION_FORMAT, messageName);
+
+      return FindTheFirstMessageThatMatches(targetedMessages, messageTags);
     }
 
-    private string GetMessageName(TargetedMessages targetedMessages, string messageTag)
+    private TMSMessageData FindTheFirstMessageThatMatches(TargetedMessages targetedMessages, IList<string> messageTags)
     {
-      string messageName = null;
+      TMSMessageData msgData = null;
 
       if (targetedMessages != null && targetedMessages.Messages != null)
       {
-        var firstMessage = (from msg in targetedMessages.Messages
-                            where msg.MessageTags != null
-                            from msgTag
-                              in msg.MessageTags
-                            where msgTag.Name == messageTag
-                            select msg).FirstOrDefault();
-
-        if (firstMessage != null)
-        {
-          messageName = firstMessage.MessageName;
-        }
+        msgData = (from sourceMessage in targetedMessages.Messages
+                       where sourceMessage.MessageTags != null
+                       from sourceTag in sourceMessage.MessageTags
+                       join requestedTag in messageTags
+                       on sourceTag.Name equals requestedTag
+                   select new TMSMessageData(sourceMessage.MessageName, requestedTag, sourceMessage.MessageTrackingId)).FirstOrDefault();
       }
 
-      return messageName ?? DEFAULT_MESSAGE_NAME;
+      if (msgData == null)
+      {
+        msgData = new TMSMessageData(messageTags[0], DEFAULT_MESSAGE_NAME, string.Empty);
+      }
+      
+      return msgData;
     }
 
-    private void UpdateDataContainer(string messageTag, string messageName)
+    private void UpdateContainerData(TMSMessageData msgData)
     {
-      Context.ProviderContainer.SetData<string>(TMS_DATA_TOKEN_MESSAGE_NAME, messageName);
-      Context.ProviderContainer.SetData<string>(TMS_DATA_TOKEN_MESSAGE_TAG, messageTag);
+      Context.ProviderContainer.SetData<string>(TMS_DATA_TOKEN_MESSAGE_TAG, msgData.SelectedTagName);
+      Context.ProviderContainer.SetData<string>(TMS_DATA_TOKEN_MESSAGE_NAME, msgData.SelectedMessageName);
+      Context.ProviderContainer.SetData<string>(TMS_DATA_TOKEN_MESSAGE_TRACKING_ID, msgData.SelectedTrackingId);
     }
 
     #region Fake Data
@@ -141,15 +139,18 @@ namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolderHandlers
         messages = new List<Message>() { 
           new Message() { 
             MessageName = "name1", 
-            MessageTags = new List<MessageTag>() { new MessageTag() { Name = "tag9" }, new MessageTag() { Name = "tag1" }, new MessageTag() { Name = "tag10" } } 
+            MessageTags = new List<MessageTag>() { new MessageTag() { Name = "tag9" }, new MessageTag() { Name = "tag1" }, new MessageTag() { Name = "tag10" } } ,
+            MessageTrackingId = "12345"
           },
           new Message() { 
             MessageName = "name2", 
-            MessageTags = new List<MessageTag>() { new MessageTag() { Name = "tag11" }, new MessageTag() { Name = "tag12" }, new MessageTag() { Name = "tag2" } } 
+            MessageTags = new List<MessageTag>() { new MessageTag() { Name = "tag11" }, new MessageTag() { Name = "tag12" }, new MessageTag() { Name = "tag2" } },
+            MessageTrackingId = "23456"
           },
           new Message() { 
             MessageName = "name3", 
-            MessageTags = new List<MessageTag>() { new MessageTag() { Name = "tag20" }, new MessageTag() { Name = "tag21" }, new MessageTag() { Name = "tag23" } } 
+            MessageTags = new List<MessageTag>() { new MessageTag() { Name = "tag20" }, new MessageTag() { Name = "tag21" }, new MessageTag() { Name = "tag23" } },
+            MessageTrackingId = "34567"
           }
         };
       }
@@ -160,15 +161,19 @@ namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolderHandlers
           messages = new List<Message>() { 
           new Message() { 
             MessageName = "name1", 
-            MessageTags = new List<MessageTag>() { new MessageTag() { Name = "tag9" }, new MessageTag() { Name = "tag8" }, new MessageTag() { Name = "tag10" } } 
+            MessageTags = new List<MessageTag>() { new MessageTag() { Name = "tag9" }, new MessageTag() { Name = "tag8" }, new MessageTag() { Name = "tag10" } } ,
+            MessageTrackingId = "12345"
           },
           new Message() { 
             MessageName = "name20", 
-            MessageTags = new List<MessageTag>() { new MessageTag() { Name = "tag11" }, new MessageTag() { Name = "tag2" }, new MessageTag() { Name = "tag13" } } 
+            MessageTags = new List<MessageTag>() { new MessageTag() { Name = "tag11" }, new MessageTag() { Name = "tag2" }, new MessageTag() { Name = "tag1" } } ,
+            MessageTrackingId = "23456"
           },
           new Message() { 
             MessageName = "name3", 
-            MessageTags = new List<MessageTag>() { new MessageTag() { Name = "tag20" }, new MessageTag() { Name = "tag21" }, new MessageTag() { Name = "tag1" } } 
+            MessageTags = new List<MessageTag>() { new MessageTag() { Name = "tag20" }, new MessageTag() { Name = "tag8" }, new MessageTag() { Name = "tag1" } } ,
+            MessageTrackingId = "34567"
+
           }
         };
         }

@@ -4,11 +4,10 @@ using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Serialization;
 using Atlantis.Framework.Interface;
-using Atlantis.Framework.SessionCache;
 
 namespace Atlantis.Framework.Personalization.Interface
 {
-  public class TargetedMessagesResponseData : IResponseData, ISessionSerializableResponse
+  public class TargetedMessagesResponseData : IResponseData
   {
     public TargetedMessagesResponseData() { }
 

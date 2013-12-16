@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Atlantis.Framework.CDS.Interface;
 using System.Collections.ObjectModel;
 using System.Xml.Linq;
+using System.Collections.Generic;
 
 namespace Atlantis.Framework.CDS.Tests
 {
@@ -217,16 +218,22 @@ namespace Atlantis.Framework.CDS.Tests
       string packageId = "GridHostUnlDiabloLin1Yr_us";
       string shopperId = "12345";
       int requestType = 766;
-      string query = "content/packages/packagegrouping?docid=529fc20cf778fc1a64995f34";
+      string query = "content/packages/packagegrouping";
       CDSRequestData requestData = new CDSRequestData(query);
       requestData.ShopperID = shopperId;
 
       PackageGroupResponseData responseData = (PackageGroupResponseData)Engine.Engine.ProcessRequest(requestData, requestType);
 
       IPackageGroup packageGroup;
-
+      IEnumerable<string> packageIds;
       Assert.IsTrue(responseData.TryGetValue(packageId, out packageGroup));
       Assert.IsNotNull(packageGroup);
+      Assert.IsTrue(responseData.TryGetValue(packageGroup.Name, out packageIds));
+
+      List<string> packageIdList = (List<string>)packageIds;
+
+      Assert.IsTrue(packageIdList.Contains("GridHostUnlDiabloLin4Yr_us"));
+
     }
 
     [TestMethod()]

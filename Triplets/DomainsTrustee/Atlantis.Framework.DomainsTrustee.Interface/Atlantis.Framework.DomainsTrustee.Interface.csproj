@@ -62,9 +62,6 @@
     <Reference Include="Atlantis.Framework.DomainContactFields.Interface">
       <HintPath>..\packages\Atlantis.Framework.DomainContactFields.Impl.4.13.6.5\lib\net40\Atlantis.Framework.DomainContactFields.Interface.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.Domains.Interface">
-      <HintPath>..\packages\Atlantis.Framework.Domains.Interface.4.13.11.10\lib\net40\Atlantis.Framework.Domains.Interface.dll</HintPath>
-    </Reference>
     <Reference Include="Atlantis.Framework.DotTypeCache">
       <HintPath>..\packages\Atlantis.Framework.DotTypeCache.4.13.11.21\lib\net40\Atlantis.Framework.DotTypeCache.dll</HintPath>
     </Reference>
@@ -133,7 +130,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DomainsTrusteeContact.cs" />
-    <Compile Include="DomainsTrusteeContactsDomains.cs" />
+    <Compile Include="DomainsTrusteeContactsTlds.cs" />
     <Compile Include="DomainsTrusteeContactTypes.cs" />
     <Compile Include="DomainsTrusteeRequestData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

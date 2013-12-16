@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Atlantis.Framework.Domains.Interface;
 using Atlantis.Framework.Interface;
 using Newtonsoft.Json.Linq;
 using System.Xml.Linq;
@@ -19,18 +18,18 @@ namespace Atlantis.Framework.DomainsTrustee.Interface
       RequestTimeout = TimeSpan.FromSeconds(20);
     }
 
-    public IList<DomainsTrusteeContactsDomains> ContactsDomainsList { get; set; }
+    public IList<DomainsTrusteeContactsTlds> ContactsTldsList { get; set; }
 
     public string ToJson()
     {
       var finalArray = new JArray();
 
-      foreach (DomainsTrusteeContactsDomains contactsDomains in ContactsDomainsList)
+      foreach (DomainsTrusteeContactsTlds contactsDomains in ContactsTldsList)
       {
         var contactsDomainsObject = new JObject();
 
         var contacts = contactsDomains.Contacts;
-        var domains = contactsDomains.Domains;
+        var tlds = contactsDomains.Tlds;
 
         var jContacts = new JProperty("Contacts");
 
@@ -73,11 +72,10 @@ namespace Atlantis.Framework.DomainsTrustee.Interface
         var jDomains = new JProperty("Domains");
         var jDomainArray = new JArray();
 
-        foreach (var domain in domains)
+        foreach (var tld in tlds)
         {
           jDomainArray.Add(new JObject(
-                                      new JProperty("Name", domain.Sld),
-                                      new JProperty("Tld", domain.Tld)
+                                      new JProperty("Tld", tld)
                                       )); 
         }
         if (jDomainArray.Count > 0)
@@ -97,7 +95,7 @@ namespace Atlantis.Framework.DomainsTrustee.Interface
     {
       var items = new XElement("items");
 
-      foreach (DomainsTrusteeContactsDomains cd in ContactsDomainsList)
+      foreach (DomainsTrusteeContactsTlds cd in ContactsTldsList)
       {
         var item = new XElement("item");
 
@@ -111,12 +109,11 @@ namespace Atlantis.Framework.DomainsTrustee.Interface
           item.Add(contactElement);
         }
 
-        foreach (Domain domain in cd.Domains)
+        foreach (var tld in cd.Tlds)
         {
-          var domainElement = new XElement("domain");
+          var domainElement = new XElement("tlds");
 
-          domainElement.Add(new XAttribute("name", domain.Sld));
-          domainElement.Add(new XAttribute("tld", domain.Tld));
+          domainElement.Add(new XAttribute("tld", tld));
 
           item.Add(domainElement);
         }

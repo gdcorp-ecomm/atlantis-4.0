@@ -64,7 +64,7 @@ namespace Atlantis.Framework.DomainsTrustee.Interface
             VendorId = token["VendorId"].ToString(),
             Error = token["Error"].ToString()
           };
-          _domainsTrustees[item.NameWithoutExtension + "." + item.Tld] = item;
+          _domainsTrustees[item.Tld] = item;
         }
       }
 
@@ -73,10 +73,9 @@ namespace Atlantis.Framework.DomainsTrustee.Interface
 
     private Dictionary<string, DomainsTrusteeResponse> _domainsTrustees;
 
-    public bool TryGetDomainTrustee(string nameWithoutExtension, string tld, out DomainsTrusteeResponse domainTrustee)
+    public bool TryGetDomainTrustee(string tld, out DomainsTrusteeResponse domainTrustee)
     {
-      var key = nameWithoutExtension + "." + tld;
-      return _domainsTrustees.TryGetValue(key, out domainTrustee);
+      return _domainsTrustees.TryGetValue(tld, out domainTrustee);
     }
 
     public static IResponseData ParseRawResponse(string rawJson)

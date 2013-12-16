@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>Atlantis.Framework.DomainsTrustee.Interface</id>
-    <version>4.13.12.12</version>
+    <version>4.13.12.15</version>
     <title>Atlantis Framework DomainsTrustee Interface</title>
     <authors>$author$</authors>
     <owners>$author$</owners>

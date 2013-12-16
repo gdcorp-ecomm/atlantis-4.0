@@ -22,23 +22,15 @@ namespace Atlantis.Framework.DomainsTrustee.Tests
       var contactList = new List<DomainsTrusteeContact>
       {
         new DomainsTrusteeContact(DomainsTrusteeContactTypes.Registrant, "US"),
-        new DomainsTrusteeContact(DomainsTrusteeContactTypes.Billing, "US")
-      };
-      var tlds = new List<string> { "info", "mobi" };
-      var contactsDomains1 = new DomainsTrusteeContactsTlds(contactList, tlds);
-
-      contactList = new List<DomainsTrusteeContact>
-      {
-        new DomainsTrusteeContact(DomainsTrusteeContactTypes.Registrant, "US"),
         new DomainsTrusteeContact(DomainsTrusteeContactTypes.Billing, "US"),
         new DomainsTrusteeContact(DomainsTrusteeContactTypes.Administrative, "US"),
         new DomainsTrusteeContact(DomainsTrusteeContactTypes.Technical, "US")
       };
 
-      tlds = new List<string> { "us", "com" };
-      var contactsDomains2 = new DomainsTrusteeContactsTlds(contactList, tlds);
+      var tlds = new List<string> { "info", "mobi", "us", "com" };
+      var contactsDomains = new DomainsTrusteeContactsTlds(contactList, tlds);
 
-      requestData.ContactsTldsList = new List<DomainsTrusteeContactsTlds> { contactsDomains1, contactsDomains2 };
+      requestData.ContactsTldsList = new List<DomainsTrusteeContactsTlds> { contactsDomains };
 
       var toXml = requestData.ToXML();
       Assert.IsTrue(!string.IsNullOrEmpty(toXml));
@@ -53,13 +45,15 @@ namespace Atlantis.Framework.DomainsTrustee.Tests
       var contactList = new List<DomainsTrusteeContact>
       {
         new DomainsTrusteeContact(DomainsTrusteeContactTypes.Registrant, "US"),
-        new DomainsTrusteeContact(DomainsTrusteeContactTypes.Billing, "US")
+        new DomainsTrusteeContact(DomainsTrusteeContactTypes.Billing, "US"),
+        new DomainsTrusteeContact(DomainsTrusteeContactTypes.Administrative, "US"),
+        new DomainsTrusteeContact(DomainsTrusteeContactTypes.Technical, "US")
       };
 
       var tlds = new List<string> { "info", "mobi" };
-      var contactsDomains1 = new DomainsTrusteeContactsTlds(contactList, tlds);
+      var contactsDomains = new DomainsTrusteeContactsTlds(contactList, tlds);
 
-      requestData.ContactsTldsList = new List<DomainsTrusteeContactsTlds> { contactsDomains1 };
+      requestData.ContactsTldsList = new List<DomainsTrusteeContactsTlds> { contactsDomains };
 
       var hashMd5 = requestData.GetCacheMD5();
       Assert.IsTrue(!string.IsNullOrEmpty(hashMd5));
@@ -77,18 +71,10 @@ namespace Atlantis.Framework.DomainsTrustee.Tests
         new DomainsTrusteeContact(DomainsTrusteeContactTypes.Administrative, "US"),
         new DomainsTrusteeContact(DomainsTrusteeContactTypes.Technical, "US")
       };
-      var tlds = new List<string> { "info", "mobi" };
-      var contactsDomains1 = new DomainsTrusteeContactsTlds(contactList, tlds);
+      var tlds = new List<string> { "info", "mobi", "us", "com" };
+      var contactsDomains = new DomainsTrusteeContactsTlds(contactList, tlds);
 
-      contactList = new List<DomainsTrusteeContact>
-      {
-        new DomainsTrusteeContact(DomainsTrusteeContactTypes.Registrant, "US"),
-        new DomainsTrusteeContact(DomainsTrusteeContactTypes.Billing, "US")
-      };
-      tlds = new List<string> { "us", "com" };
-      var contactsDomains2 = new DomainsTrusteeContactsTlds(contactList, tlds);
-
-      requestData.ContactsTldsList = new List<DomainsTrusteeContactsTlds> { contactsDomains1, contactsDomains2 };
+      requestData.ContactsTldsList = new List<DomainsTrusteeContactsTlds> { contactsDomains };
 
       var response = (DomainsTrusteeResponseData)Engine.Engine.ProcessRequest(requestData, REQUESTID);
       Assert.IsTrue(response != null);

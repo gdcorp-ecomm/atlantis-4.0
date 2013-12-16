@@ -71,7 +71,7 @@ namespace Atlantis.Framework.Providers.DomainsRAAVerify.Tests
       IDomainsRAAStatus raaStatus;
       Assert.IsTrue(RAAProvider.TryGetStatus(requestItems, out raaStatus));
       Assert.IsTrue(raaStatus.HasVerifiedResponseItems);
-      Assert.IsTrue(raaStatus.VerifiedItems.FirstOrDefault(vi => vi.ItemTypeValue == verifiedEmail).ItemVerifiedCode == DomainsRAAVerifyCode.ShopperArtifactVerified);
+      Assert.IsTrue(raaStatus.VerifiedItems.FirstOrDefault(vi => vi.ItemTypeValue == verifiedEmail).ItemVerifiedCode == DomainsRAAVerifyCode.Verified);
       Assert.IsFalse(raaStatus.HasErrorCodes);
     }
 
@@ -97,11 +97,11 @@ namespace Atlantis.Framework.Providers.DomainsRAAVerify.Tests
       Assert.IsTrue(raaStatus.HasVerifiedResponseItems);
 
       var verifiedItem = raaStatus.VerifiedItems.FirstOrDefault(vi => vi.ItemTypeValue == verifiedEmail);
-      Assert.IsTrue(verifiedItem.ItemVerifiedCode == DomainsRAAVerifyCode.ShopperArtifactVerified);
+      Assert.IsTrue(verifiedItem.ItemVerifiedCode == DomainsRAAVerifyCode.Verified);
       Assert.IsTrue(verifiedItem.ItemTypeValue == verifiedEmail);
 
       var notVerifiedItem = raaStatus.VerifiedItems.FirstOrDefault(vi => vi.ItemTypeValue == notVerifiedEmail);
-      Assert.IsTrue(notVerifiedItem.ItemVerifiedCode == DomainsRAAVerifyCode.ShopperArtifactIsNotVerified);
+      Assert.IsTrue(notVerifiedItem.ItemVerifiedCode == DomainsRAAVerifyCode.NotVerified);
       
       
       Assert.IsFalse(raaStatus.HasErrorCodes);

@@ -3,7 +3,7 @@
   <metadata>
     <id>Atlantis.Framework.Providers.DomainsRAA.Interface</id>
     <!-- version should match the assembly FILE version -->
-    <version>4.13.12.16</version>
+    <version>4.13.12.17</version>
     <!-- change word Title to match your project name with spaces instead of dots -->
     <title>Atlantis Framework Providers DomainsRAA Interface</title>
     <authors>$author$</authors>

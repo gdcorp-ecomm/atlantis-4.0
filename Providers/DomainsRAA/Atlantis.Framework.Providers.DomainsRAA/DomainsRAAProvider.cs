@@ -21,8 +21,7 @@ namespace Atlantis.Framework.Providers.DomainsRAA
     {
       _shopperContext = new Lazy<IShopperContext>(() => Container.Resolve<IShopperContext>());
     }
-
-
+    
     public bool TryQueueVerification(IVerifyRequestItems verificationItems, out IEnumerable<DomainsRAAErrorCodes> errorCodes)
     {
       var isSuccess = false;
@@ -89,7 +88,31 @@ namespace Atlantis.Framework.Providers.DomainsRAA
 
       return isSuccess;
     }
-    
+
+    private DomainsRAAVerifyCode GetVerifyCode(DomainsRAAService.DomainsRAAVerifyCode serviceVerifyCode)
+    {
+      DomainsRAAVerifyCode verifyCode;
+
+      switch (serviceVerifyCode)
+      {
+        case DomainsRAAService.DomainsRAAVerifyCode.ShopperVerified:
+        case DomainsRAAService.DomainsRAAVerifyCode.DomainRecordVerified:
+        case DomainsRAAService.DomainsRAAVerifyCode.ShopperArtifactVerified:
+          verifyCode = DomainsRAAVerifyCode.Verified;
+          break;
+        case DomainsRAAService.DomainsRAAVerifyCode.ShopperVerifyPending:
+        case DomainsRAAService.DomainsRAAVerifyCode.ShopperArtifactVerifyPending:
+        case DomainsRAAService.DomainsRAAVerifyCode.DomainRecordPendingManualVerify:
+          verifyCode = DomainsRAAVerifyCode.VerifyPending;
+          break;
+        default:
+          verifyCode = DomainsRAAVerifyCode.NotVerified;
+          break;
+      }
+
+      return verifyCode;
+    }
+
 
     public bool TryGetStatus(IVerifyRequestItems requestItems, out IDomainsRAAStatus raaStatus)
     {
@@ -126,11 +149,7 @@ namespace Atlantis.Framework.Providers.DomainsRAA
           {
             foreach (var responseItem in response.VerifiedResponseItems)
             {
-               DomainsRAAVerifyCode verifyCode;
-              if (!Enum.TryParse(responseItem.ItemVerifiedCode.ToString(), out verifyCode))
-              {
-                verifyCode = DomainsRAAVerifyCode.None;
-              }
+              var verifyCode = GetVerifyCode(responseItem.ItemVerifiedCode);
 
               var verifiedStatusItem = VerifiedResponseItem.Create(responseItem.ItemType, responseItem.ItemTypeValue, verifyCode, responseItem.ItemValidationGuid);
 

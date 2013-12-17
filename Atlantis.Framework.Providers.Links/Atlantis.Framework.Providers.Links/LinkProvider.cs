@@ -1221,7 +1221,7 @@ namespace Atlantis.Framework.Providers.Links
       }
       else if (options.HasFlag(LinkProviderOptions.ProtocolHttps))
       {
-        if (isRelative || IsDebugInternal())
+        if (isRelative && IsDebugInternal())
         {
           scheme = _schemeNonSecure;
         }

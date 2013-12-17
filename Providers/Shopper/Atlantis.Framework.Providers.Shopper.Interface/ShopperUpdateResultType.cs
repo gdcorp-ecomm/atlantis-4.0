@@ -11,6 +11,7 @@ namespace Atlantis.Framework.Providers.Shopper.Interface
     InvalidShopperId,
     CountryMarketIdNotCompatible,
     LoginNameAlreadyExists,
+    LoginNameNumericShouldBeCustomerNumber,
     PasswordUnacceptable,
     PinUnacceptable,
     HintMatchesPassword

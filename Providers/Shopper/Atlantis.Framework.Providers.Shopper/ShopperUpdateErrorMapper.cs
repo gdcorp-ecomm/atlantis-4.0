@@ -20,6 +20,7 @@ namespace Atlantis.Framework.Providers.Shopper
         map.Add("0xC0044A21", ShopperUpdateResultType.PinUnacceptable);
         map.Add("0xC0044A22", ShopperUpdateResultType.HintMatchesPassword);
         map.Add("0x80040E2F", ShopperUpdateResultType.LoginNameAlreadyExists);
+        map.Add("0xC0044A1D", ShopperUpdateResultType.LoginNameNumericShouldBeCustomerNumber);
 
         return map;
       }

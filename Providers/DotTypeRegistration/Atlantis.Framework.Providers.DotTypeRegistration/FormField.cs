@@ -13,13 +13,14 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration
     public FormFieldTypes Type { get; set; }
 
     private string _name;
-    public string Name 
+    public string Name
     {
       get { return _name; }
       set { _name = VALIDATE_FIELD_PREFIX + value; } 
     }
 
     public string Value { get; set; }
+    public string LabelText { get; set; }
     public IList<IDotTypeFormsItem> ItemCollection { get; set; }
   }
 }

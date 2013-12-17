@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Provider
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Web.DotTypeRegistrationValidationHandler.TestWeb", "Atlantis.Framework.Web.DotTypeRegistrationValidationHandler.TestWeb\Atlantis.Framework.Web.DotTypeRegistrationValidationHandler.TestWeb.csproj", "{C7FB6940-3382-46D7-B447-55ADFDB1784A}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{D7768B9A-8B7A-43F0-B84F-0EA996E3DA21}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
 		SccNumberOfProjects = 6

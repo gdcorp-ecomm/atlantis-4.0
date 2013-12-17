@@ -38,13 +38,8 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration.Handlers
     private static IList<IFormField> ConvertToFormFields(IDotTypeFormsField field)
     {
       IList<IFormField> result = new List<IFormField>();
-
-      var formField = new FormField { Value = field.FieldLabel, Type = FormFieldTypes.Label };
+      var formField = new FormField { Name = field.FieldName, LabelText = field.FieldLabel, Type = FormFieldTypes.InputText };
       result.Add(formField);
-
-      formField = new FormField { Name = field.FieldName, Type = FormFieldTypes.InputText };
-      result.Add(formField);
-
       return result;
     }
   }

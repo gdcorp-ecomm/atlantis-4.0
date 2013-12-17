@@ -39,7 +39,7 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration.Tests
 
       var provider = container.Resolve<IDotTypeRegistrationProvider>();
 
-      IDotTypeFormLookup lookup = DotTypeFormLookup.Create("dpp", "j.borg", "MOBILE", "GA");
+      IDotTypeFormLookup lookup = DotTypeFormLookup.Create("dpp", "n.borg", "MOBILE", "GA");
       bool isSuccess = provider.GetDotTypeFormSchemas(lookup, domains, out dotTypeFormFieldsByDomain);
       Assert.AreEqual(true, isSuccess);
       Assert.AreEqual(true, dotTypeFormFieldsByDomain != null && dotTypeFormFieldsByDomain.FormFieldsByDomain.Count > 0);

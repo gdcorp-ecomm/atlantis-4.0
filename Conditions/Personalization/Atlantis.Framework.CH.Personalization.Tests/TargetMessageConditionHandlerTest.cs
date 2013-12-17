@@ -16,7 +16,7 @@ namespace Atlantis.Framework.CH.Personalization.Tests
   [DeploymentItem("Atlantis.Framework.CH.Personalization.dll")]
   public class TargetMessageConditionHandlerTest
   {
-    private const string CONDITION_NAME = "targetMessageTag";
+    private const string CONDITION_NAME = "targetMessageTagAny";
 
     private IProviderContainer _providerContainer;
     protected IProviderContainer ProviderContainer
@@ -65,37 +65,44 @@ namespace Atlantis.Framework.CH.Personalization.Tests
     [TestMethod]
     public void EvaluateCondition1()
     {
-      string expression = String.Format("{0}({1},{2},{3})", CONDITION_NAME, "EnGmtACtNewCusTSurvEyMObiLeDLP", "2", "Homepage");
+      string expression = String.Format("{0}({1},{2})", CONDITION_NAME, "Homepage", "EnGmtACtNewCusTSurvEyMObiLeDLP");
       bool actual = ExpressionParserManager.EvaluateExpression(expression);
       Assert.IsTrue(actual);
     }
     [TestMethod]
     public void EvaluateCondition2()
     {
-      string expression = String.Format("{0}({1},{2},{3})", CONDITION_NAME, "ENGMTActNEWCustSuRveyWEbDLP", "2", "Homepage");
+      string expression = String.Format("{0}({1},{2})", CONDITION_NAME, "Homepage", "ENGMTActNEWCustSuRveyWEbDLP");
       bool actual = ExpressionParserManager.EvaluateExpression(expression);
       Assert.IsTrue(actual);
     }
     [TestMethod]
     public void EvaluateCondition3()
     {
-      string expression = String.Format("{0}({1},{2},{3})", CONDITION_NAME, "engmtcustservmobileappmobilehp", "2", "Homepage");
+      string expression = String.Format("{0}({1},{2})", CONDITION_NAME, "Homepage", "engmtcustservmobileappmobilehp");
       bool actual = ExpressionParserManager.EvaluateExpression(expression);
       Assert.IsTrue(actual);
     }
     [TestMethod]
     public void EvaluateCondition4()
     {
-      string expression = String.Format("{0}({1},{2},{3})", CONDITION_NAME, "ENGMTCUSTSERVMOBILEAPPWEBHP", "2", "Homepage");
+      string expression = String.Format("{0}({1},{2})", CONDITION_NAME, "Homepage", "ENGMTCUSTSERVMOBILEAPPWEBHP");
       bool actual = ExpressionParserManager.EvaluateExpression(expression);
       Assert.IsTrue(actual);
     }
     [TestMethod]
     public void EvaluateCondition5()
     {
-      string expression = String.Format("{0}({1},{2},{3})", CONDITION_NAME, "TagDoesNotExist", "2", "Homepage");
+      string expression = String.Format("{0}({1},{2})", CONDITION_NAME, "Homepage", "TagDoesNotExist");
       bool actual = ExpressionParserManager.EvaluateExpression(expression);
       Assert.IsFalse(actual);
+    }
+    [TestMethod]
+    public void MultipleTagNames()
+    {
+      string expression = String.Format("{0}({1},{2},{3},{4})", CONDITION_NAME, "Homepage", "ENGMTCUSTSERVMOBILEAPPWEBH", "ENGMTCUSTSERVMOBILEAPPWEBHP", "ENGMTCUSTSERVMOBILEAPPWE");
+      bool actual = ExpressionParserManager.EvaluateExpression(expression);
+      Assert.IsTrue(actual);
     }
   }
 }

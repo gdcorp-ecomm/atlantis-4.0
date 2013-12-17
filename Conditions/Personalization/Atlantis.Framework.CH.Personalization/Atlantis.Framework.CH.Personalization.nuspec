@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Atlantis.Framework.CH.Personalization</id>
+    <version>4.13.12.17</version>
+    <title>Atlantis Framework CH Personalization</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <projectUrl>https://confluence.int.godaddy.com/display/ATLANTIS</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes></releaseNotes>
+    <copyright>$copyright$</copyright>
+    <tags>Atlantis Framework CH Personalization</tags>
+    <dependencies>
+      <dependency id="Atlantis.Framework.Conditions.Interface" version="4.0.0.0" />
+      <dependency id="Atlantis.Framework.Engine" version="4.0.0.0" />
+      <dependency id="Atlantis.Framework.Interface" version="4.0.0.0" />
+      <dependency id="Atlantis.Framework.Personalization.Interface" version="4.0.0.0" />
+      <dependency id="Atlantis.Framework.Providers.Personalization.Interface" version="4.0.0.0" />
+      <dependency id="Atlantis.Framework.Providers.RenderPipeline.Interface" version="4.0.0.0" />
+      <dependency id="Atlantis.Framework.Render.ExpressionParser" version="4.0.0.0" />
+      <dependency id="Atlantis.Framework.Render.MarkupParser" version="4.0.0.0" />
+    </dependencies>
+  </metadata>
+</package>

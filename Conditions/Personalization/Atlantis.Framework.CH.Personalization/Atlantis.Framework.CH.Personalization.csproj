@@ -54,6 +54,14 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Atlantis.Framework.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Interface.dll</HintPath>
     </Reference>
+    <Reference Include="Atlantis.Framework.Personalization.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Personalization.Interface.4.13.12.11\lib\net40\Atlantis.Framework.Personalization.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Providers.Personalization.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Providers.Personalization.Interface.4.13.12.11\lib\net40\Atlantis.Framework.Providers.Personalization.Interface.dll</HintPath>
+    </Reference>
     <Reference Include="Atlantis.Framework.Providers.RenderPipeline.Interface">
       <HintPath>..\packages\Atlantis.Framework.Providers.RenderPipeline.Interface.4.13.10.16\lib\net40\Atlantis.Framework.Providers.RenderPipeline.Interface.dll</HintPath>
     </Reference>
@@ -78,21 +86,8 @@
     <Compile Include="TargetedMessageConditionHandler.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Providers\Personalization\Atlantis.Framework.Providers.Personalization.Interface\Atlantis.Framework.Providers.Personalization.Interface.csproj">
-      <Project>{ebdb3c67-f790-46ef-bacb-43ac655624e6}</Project>
-      <Name>Atlantis.Framework.Providers.Personalization.Interface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Triplets\Personalization\Atlantis.Framework.Personalization.Impl\Atlantis.Framework.Personalization.Impl.csproj">
-      <Project>{73bd5560-e145-4eea-aed9-80bdc85bc728}</Project>
-      <Name>Atlantis.Framework.Personalization.Impl</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Triplets\Personalization\Atlantis.Framework.Personalization.Interface\Atlantis.Framework.Personalization.Interface.csproj">
-      <Project>{7101aed4-b7d3-452d-9616-9414aac4b60f}</Project>
-      <Name>Atlantis.Framework.Personalization.Interface</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="atlantis.config" />
+    <None Include="Atlantis.Framework.CH.Personalization.nuget.bat" />
+    <None Include="Atlantis.Framework.CH.Personalization.nuspec" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -59,6 +59,21 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Atlantis.Framework.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Interface.dll</HintPath>
     </Reference>
+    <Reference Include="Atlantis.Framework.Personalization.Impl, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Personalization.Impl.4.13.12.11\lib\net40\Atlantis.Framework.Personalization.Impl.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Personalization.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Personalization.Interface.4.13.12.11\lib\net40\Atlantis.Framework.Personalization.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Providers.Personalization">
+      <HintPath>..\packages\Atlantis.Framework.Providers.Personalization.4.13.12.11\lib\net40\Atlantis.Framework.Providers.Personalization.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Providers.Personalization.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Providers.Personalization.Interface.4.13.12.11\lib\net40\Atlantis.Framework.Providers.Personalization.Interface.dll</HintPath>
+    </Reference>
     <Reference Include="Atlantis.Framework.Providers.RenderPipeline.Interface">
       <HintPath>..\packages\Atlantis.Framework.Providers.RenderPipeline.Interface.4.13.10.16\lib\net40\Atlantis.Framework.Providers.RenderPipeline.Interface.dll</HintPath>
     </Reference>
@@ -100,18 +115,6 @@
     <ProjectReference Include="..\..\..\Atlantis.Framework.Testing\Atlantis.Framework.Testing.MockProviders\Atlantis.Framework.Testing.MockProviders.csproj">
       <Project>{5487def2-0fa7-4b77-9aad-0355784589d6}</Project>
       <Name>Atlantis.Framework.Testing.MockProviders</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Providers\Personalization\Atlantis.Framework.Providers.Personalization.Interface\Atlantis.Framework.Providers.Personalization.Interface.csproj">
-      <Project>{ebdb3c67-f790-46ef-bacb-43ac655624e6}</Project>
-      <Name>Atlantis.Framework.Providers.Personalization.Interface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Triplets\Personalization\Atlantis.Framework.Personalization.Impl\Atlantis.Framework.Personalization.Impl.csproj">
-      <Project>{73bd5560-e145-4eea-aed9-80bdc85bc728}</Project>
-      <Name>Atlantis.Framework.Personalization.Impl</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Triplets\Personalization\Atlantis.Framework.Personalization.Interface\Atlantis.Framework.Personalization.Interface.csproj">
-      <Project>{7101aed4-b7d3-452d-9616-9414aac4b60f}</Project>
-      <Name>Atlantis.Framework.Personalization.Interface</Name>
     </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.CH.Personalization\Atlantis.Framework.CH.Personalization.csproj">
       <Project>{2fd7ab00-78e0-42ac-8ca8-f05cb779de36}</Project>

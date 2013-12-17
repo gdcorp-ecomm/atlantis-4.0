@@ -13,28 +13,35 @@ namespace Atlantis.Framework.CH.Personalization
   /// </summary>
   public class TargetedMessageConditionHandler : IConditionHandler
   {
-    public string ConditionName { get { return "targetMessageTag"; } }
+    public string ConditionName { get { return "targetMessageTagAny"; } }
 
     public bool EvaluateCondition(string conditionName, IList<string> parameters, IProviderContainer providerContainer)
     {
       bool messageTagFound = false;
 
-      if (parameters != null && parameters.Count == 3)
+      if (parameters != null && parameters.Count > 1)
       {
         try
         {
           var personalizationProvider = providerContainer.Resolve<IPersonalizationProvider>();
-          TargetedMessages targetedMessages = personalizationProvider.GetTargetedMessages(parameters[1], parameters[2]);
+          string interactionPoint = parameters[0];
+          IEnumerable<string> messageTagNames = parameters.Skip(1);
+
+          TargetedMessages targetedMessages = personalizationProvider.GetTargetedMessages(interactionPoint);
 
           if (targetedMessages == null) return false;
 
           foreach (var message in targetedMessages.Messages)
           {
-            if (message.MessageTags.Any(messageTag => string.Compare(parameters[0], messageTag.Name, StringComparison.OrdinalIgnoreCase) == 0))
+            foreach (string messageTagName in messageTagNames)
             {
-              messageTagFound = true;
-              break;
+              if (message.MessageTags.Any(messageTag => string.Compare(messageTagName, messageTag.Name, StringComparison.OrdinalIgnoreCase) == 0))
+              {
+                messageTagFound = true;
+                break;
+              }
             }
+            if (messageTagFound) break;
           }
         }
         catch (Exception ex)

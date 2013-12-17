@@ -106,10 +106,10 @@ namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolderHandlers
       if (targetedMessages != null && targetedMessages.Messages != null)
       {
         msgData = (from sourceMessage in targetedMessages.Messages
-                       where sourceMessage.MessageTags != null
-                       from sourceTag in sourceMessage.MessageTags
-                       join requestedTag in messageTags
-                       on sourceTag.Name equals requestedTag
+                   where sourceMessage.MessageTags != null
+                   from sourceTag in sourceMessage.MessageTags
+                   from requestedTag in messageTags
+                   where string.Compare(sourceTag.Name, requestedTag, StringComparison.OrdinalIgnoreCase) == 0
                    select new TMSMessageData(sourceMessage.MessageName, requestedTag, sourceMessage.MessageTrackingId)).FirstOrDefault();
       }
 

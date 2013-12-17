@@ -209,7 +209,7 @@
     </Reference>
     <Reference Include="Automation.Framework.TLDML, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Automation.Framework.TLDML.1.13.12.12\lib\net40\Automation.Framework.TLDML.dll</HintPath>
+      <HintPath>..\packages\Automation.Framework.TLDML.1.13.12.16\lib\net40\Automation.Framework.TLDML.dll</HintPath>
     </Reference>
     <Reference Include="GDFCNet">
       <HintPath>..\packages\Automation.Framework.Data.1.13.11.25\lib\net40\GDFCNet.dll</HintPath>

@@ -285,17 +285,6 @@ namespace Atlantis.Framework.Providers.Shopper
         // trusted shopper id
         if (!string.IsNullOrEmpty(shopperId) && (shopperId == ShopperId) && (ShopperStatus == ShopperStatusType.PartiallyTrusted))
         {
-          if (Container.CanResolve<IAuthTokenProvider>())
-          {
-            var authTokenProvider = Container.Resolve<IAuthTokenProvider>();
-            var authToken = authTokenProvider.AuthToken;
-            if (authToken != null && authToken.Payload != null && shopperId != authToken.Payload.ShopperId && Container.CanResolve<IAuthenticationProvider>())
-            {
-              var authenticationProvider = Container.Resolve<IAuthenticationProvider>();
-              authenticationProvider.Deauthenticate();
-            }
-          }
-
           LoggedInShopperId = shopperId;
           _status = ShopperStatusType.Authenticated;
           result = true;

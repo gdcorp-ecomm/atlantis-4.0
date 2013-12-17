@@ -1,5 +1,6 @@
 ﻿using Atlantis.Framework.Interface;
 using Atlantis.Framework.MiniEncrypt;
+using Atlantis.Framework.Providers.SsoAuth.Interface;
 using Atlantis.Framework.Testing.MockHttpContext;
 using Atlantis.Framework.Testing.MockProviders;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -62,6 +63,21 @@ namespace Atlantis.Framework.Providers.Shopper.Tests
     }
 
     [TestMethod]
+    public void SetNewShopperWithAuthToken()
+    {
+      SetWebEmptyContext();
+      var container = SetProviders(1);
+      container.RegisterProvider<IAuthenticationProvider, MockAuthenticationProvider>();
+      MockAuthenticationProvider.ClearHistory();
+      Assert.IsFalse(MockAuthenticationProvider.DeauthenticateWasCalled);
+
+      var shopperContext = container.Resolve<IShopperContext>();
+      shopperContext.SetNewShopper("832652");
+
+      Assert.IsTrue(MockAuthenticationProvider.DeauthenticateWasCalled);
+    }
+
+    [TestMethod]
     public void ClearShopperBasic()
     {
       SetWebEmptyContext();
@@ -78,6 +94,24 @@ namespace Atlantis.Framework.Providers.Shopper.Tests
     }
 
     [TestMethod]
+    public void ClearShopperWithAuthToken()
+    {
+      SetWebEmptyContext();
+      var container = SetProviders(1);
+      container.RegisterProvider<IAuthenticationProvider, MockAuthenticationProvider>();
+
+      var shopperContext = container.Resolve<IShopperContext>();
+      shopperContext.SetNewShopper("832652");
+      Assert.AreEqual("832652", shopperContext.ShopperId);
+
+      MockAuthenticationProvider.ClearHistory();
+      Assert.IsFalse(MockAuthenticationProvider.DeauthenticateWasCalled);
+
+      shopperContext.ClearShopper();
+      Assert.IsTrue(MockAuthenticationProvider.DeauthenticateWasCalled);
+    }
+
+    [TestMethod]
     public void PublicShopperBasic()
     {
       var cookies = new NameValueCollection();
@@ -89,6 +123,25 @@ namespace Atlantis.Framework.Providers.Shopper.Tests
       var shopperContext = container.Resolve<IShopperContext>();
       Assert.AreEqual("832652", shopperContext.ShopperId);
       Assert.AreEqual(ShopperStatusType.Public, shopperContext.ShopperStatus);
+    }
+
+    [TestMethod]
+    public void AuthTokenShopperBasic()
+    {
+      var cookies = new NameValueCollection();
+      cookies["devShopperId1"] = CreateShopperCoookieData("832652");
+
+      SetWebEmptyContext(cookies);
+      var container = SetProviders(1);
+      container.RegisterProvider<IAuthTokenProvider, MockAuthTokenProvider>();
+      container.RegisterProvider<IAuthenticationProvider, MockAuthenticationProvider>();
+      MockAuthTokenProvider.IsMockTokenvalid = true;
+
+      var shopperContext = container.Resolve<IShopperContext>();
+      Assert.AreEqual("bogusshopperid", shopperContext.ShopperId);
+      Assert.AreEqual(ShopperStatusType.Authenticated, shopperContext.ShopperStatus);
+      Assert.AreEqual(1, HttpContext.Current.Response.Cookies.Count);
+      Assert.AreNotEqual(0, HttpContext.Current.Session.Keys.Count);
     }
 
     [TestMethod]
@@ -108,6 +161,26 @@ namespace Atlantis.Framework.Providers.Shopper.Tests
 
       shopperContext.SetLoggedInShopper("832652");
       Assert.AreEqual(0, shopperContext.ShopperPriceType);
+    }
+
+    [TestMethod]
+    public void NullSessionWithAuthToken()
+    {
+      var cookies = new NameValueCollection();
+      cookies["devShopperId1"] = CreateShopperCoookieData("832652");
+      cookies["devMemAuthId1"] = CreateMemAuthCookieData("832652", 1);
+
+      SetWebEmptyContext(cookies);
+      HttpContext.Current.Items.Remove("AspSession");
+      var container = SetProviders(1);
+      container.RegisterProvider<IAuthTokenProvider, MockAuthTokenProvider>();
+      container.RegisterProvider<IAuthenticationProvider, MockAuthenticationProvider>();
+
+      var shopperContext = container.Resolve<IShopperContext>();
+      MockAuthenticationProvider.ClearHistory();
+
+      shopperContext.SetLoggedInShopper("832652");
+      Assert.IsFalse(MockAuthenticationProvider.DeauthenticateWasCalled);
     }
 
     [TestMethod]
@@ -366,6 +439,24 @@ namespace Atlantis.Framework.Providers.Shopper.Tests
       Assert.AreEqual(ShopperStatusType.Authenticated, shopperContext.ShopperStatus);
       Assert.AreEqual(2, HttpContext.Current.Response.Cookies.Count);
       Assert.AreNotEqual(0, HttpContext.Current.Session.Keys.Count);
+    }
+
+    [TestMethod]
+    public void SetShopperLoggedInWithCookieOverrideWithAuthToken()
+    {
+      SetWebEmptyContext();
+      var container = SetProviders(1);
+      container.RegisterProvider<IAuthTokenProvider, MockAuthTokenProvider>();
+      container.RegisterProvider<IAuthenticationProvider, MockAuthenticationProvider>();
+      MockAuthenticationProvider.ClearHistory();
+
+      var shopperContext = container.Resolve<IShopperContext>();
+      shopperContext.SetLoggedInShopperWithCookieOverride("832652");
+      Assert.AreEqual("832652", shopperContext.ShopperId);
+      Assert.AreEqual(ShopperStatusType.Authenticated, shopperContext.ShopperStatus);
+      Assert.AreEqual(2, HttpContext.Current.Response.Cookies.Count);
+      Assert.AreNotEqual(0, HttpContext.Current.Session.Keys.Count);
+      Assert.IsTrue(MockAuthenticationProvider.DeauthenticateWasCalled);
     }
 
     [TestMethod]

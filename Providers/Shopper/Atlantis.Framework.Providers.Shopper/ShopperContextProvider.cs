@@ -1,5 +1,5 @@
 ﻿using Atlantis.Framework.Interface;
-using Atlantis.Framework.MiniEncrypt;
+using Atlantis.Framework.Providers.SsoAuth.Interface;
 using Atlantis.Framework.Shopper.Interface;
 using System;
 using System.Web;
@@ -161,68 +161,17 @@ namespace Atlantis.Framework.Providers.Shopper
 
       try
       {
-        if (IsManager)
+        if (CheckForManagerShopperId())
         {
-          _shopperId = SiteContext.Manager.ManagerShopperId;
-          _status = ShopperStatusType.Manager;
+          return;
         }
-        else
+
+        if (CheckForAuthTokenShopperId())
         {
-          string encryptedCrossDomainShopperId = GetShopperIdFromCrossDomainCookie();
-          string encryptedMemAuthShopperId = GetShopperIdFromMemAuthCookie();
-
-          // Validation
-          if (string.IsNullOrEmpty(encryptedCrossDomainShopperId))
-          {
-            if (!string.IsNullOrEmpty(encryptedMemAuthShopperId))
-            {
-              DeleteShopperIdMemAuthCookie();
-            }
-            LoggedInShopperId = string.Empty;
-          }
-          else // we have a shopper cookie
-          {
-            PublicCookieData crossDomainCookieData = new PublicCookieData(encryptedCrossDomainShopperId);
-            if (string.IsNullOrEmpty(crossDomainCookieData.ShopperId))
-            {
-              if (!string.IsNullOrEmpty(encryptedMemAuthShopperId))
-              {
-                DeleteShopperIdMemAuthCookie();
-              }
-              LoggedInShopperId = string.Empty;
-            }
-            else
-            {
-              _shopperId = crossDomainCookieData.ShopperId;
-              if (string.IsNullOrEmpty(encryptedMemAuthShopperId))
-              {
-                LoggedInShopperId = string.Empty;
-              }
-              else
-              {
-                MemAuthCookieData memAuthCookieData = new MemAuthCookieData(encryptedMemAuthShopperId);
-                if (memAuthCookieData.ShopperId != _shopperId)
-                {
-                  DeleteShopperIdMemAuthCookie();
-                  LoggedInShopperId = string.Empty;
-                }
-                else
-                {
-                  _status = ShopperStatusType.PartiallyTrusted;
-                  if (LoggedInShopperId != _shopperId)
-                  {
-                    LoggedInShopperId = string.Empty;
-                  }
-                  else
-                  {
-                    _status = ShopperStatusType.Authenticated;
-                  }
-                }
-
-              }
-            }
-          }
+          return;
         }
+
+        ReadIdpCookiesForShopperId();
       }
       catch (Exception ex)
       {
@@ -230,9 +179,100 @@ namespace Atlantis.Framework.Providers.Shopper
         AtlantisException aex = new AtlantisException("ShopperContextProvider.DetermineShopperId", 0, message, string.Empty);
         Engine.Engine.LogAtlantisException(aex);
       }
-
     }
 
+    /// <summary>
+    /// Checks the shopperId cookie and the mem cookie against the session to establish shopper id and authentication status.
+    /// This implementation will be obsolete when it IDP is fully replaced by the auth token used in CheckForAuthTokenShopperId()
+    /// </summary>
+    private void ReadIdpCookiesForShopperId()
+    {
+      string encryptedCrossDomainShopperId = GetShopperIdFromCrossDomainCookie();
+      string encryptedMemAuthShopperId = GetShopperIdFromMemAuthCookie();
+
+      // Validation
+      if (string.IsNullOrEmpty(encryptedCrossDomainShopperId))
+      {
+        if (!string.IsNullOrEmpty(encryptedMemAuthShopperId))
+        {
+          DeleteShopperIdMemAuthCookie();
+        }
+
+        LoggedInShopperId = string.Empty;
+        return;
+      }
+
+      // we have a shopper cookie
+      PublicCookieData crossDomainCookieData = new PublicCookieData(encryptedCrossDomainShopperId);
+      if (string.IsNullOrEmpty(crossDomainCookieData.ShopperId))
+      {
+        if (!string.IsNullOrEmpty(encryptedMemAuthShopperId))
+        {
+          DeleteShopperIdMemAuthCookie();
+        }
+
+        LoggedInShopperId = string.Empty;
+        return;
+      }
+
+      _shopperId = crossDomainCookieData.ShopperId;
+      if (string.IsNullOrEmpty(encryptedMemAuthShopperId))
+      {
+        LoggedInShopperId = string.Empty;
+        return;
+      }
+
+      MemAuthCookieData memAuthCookieData = new MemAuthCookieData(encryptedMemAuthShopperId);
+      if (memAuthCookieData.ShopperId != _shopperId)
+      {
+        DeleteShopperIdMemAuthCookie();
+        LoggedInShopperId = string.Empty;
+        return;
+      }
+
+      _status = ShopperStatusType.PartiallyTrusted;
+      if (LoggedInShopperId != _shopperId)
+      {
+        LoggedInShopperId = string.Empty;
+      }
+      else
+      {
+        _status = ShopperStatusType.Authenticated;
+      }
+    }
+
+    private bool CheckForAuthTokenShopperId()
+    {
+      if (Container.CanResolve<IAuthTokenProvider>())
+      {
+        var authTokenProvider = Container.Resolve<IAuthTokenProvider>();
+        var authToken = authTokenProvider.AuthToken;
+        if (authToken != null && authToken.Validate())
+        {
+          SaveShopperIdToCookie(authToken.Payload.ShopperId);
+          LoggedInShopperId = authToken.Payload.ShopperId;
+
+          _shopperId = authToken.Payload.ShopperId;
+          _status = ShopperStatusType.Authenticated;
+
+          return true;
+        }
+      }
+      return false;
+    }
+
+    private bool CheckForManagerShopperId()
+    {
+      if (IsManager)
+      {
+        _shopperId = SiteContext.Manager.ManagerShopperId;
+        _status = ShopperStatusType.Manager;
+        return true;
+      }
+      return false;
+    }
+
+    [Obsolete("The IDP system is being replaced by the SSO auth token. The redirect loop that results in this code is not required.")]
     public bool SetLoggedInShopper(string shopperId)
     {
       bool result = false;
@@ -245,6 +285,17 @@ namespace Atlantis.Framework.Providers.Shopper
         // trusted shopper id
         if (!string.IsNullOrEmpty(shopperId) && (shopperId == ShopperId) && (ShopperStatus == ShopperStatusType.PartiallyTrusted))
         {
+          if (Container.CanResolve<IAuthTokenProvider>())
+          {
+            var authTokenProvider = Container.Resolve<IAuthTokenProvider>();
+            var authToken = authTokenProvider.AuthToken;
+            if (authToken != null && authToken.Payload != null && shopperId != authToken.Payload.ShopperId && Container.CanResolve<IAuthenticationProvider>())
+            {
+              var authenticationProvider = Container.Resolve<IAuthenticationProvider>();
+              authenticationProvider.Deauthenticate();
+            }
+          }
+
           LoggedInShopperId = shopperId;
           _status = ShopperStatusType.Authenticated;
           result = true;
@@ -259,12 +310,24 @@ namespace Atlantis.Framework.Providers.Shopper
     /// are logging in a shopper via SSO and the hosts do not match so the cookies from SSO will not
     /// be readable by your app. Ensure you get a design review if you are using this method.
     /// </summary>
+    [Obsolete("The IDP system is being replaced by the SSO auth token. Domains will need to match for cross cookie usage. If a gap still exists, implement it in the SsoAuth Provider.")]
     public bool SetLoggedInShopperWithCookieOverride(string shopperId)
     {
       bool result = false;
 
       if (!IsManager)
       {
+        if (Container.CanResolve<IAuthTokenProvider>())
+        {
+          var authTokenProvider = Container.Resolve<IAuthTokenProvider>();
+          var authToken = authTokenProvider.AuthToken;
+          if (authToken != null && authToken.Payload != null && shopperId != authToken.Payload.ShopperId && Container.CanResolve<IAuthenticationProvider>())
+          {
+            var authenticationProvider = Container.Resolve<IAuthenticationProvider>();
+            authenticationProvider.Deauthenticate();
+          }
+        }
+
         SaveShopperIdToCookie(shopperId);
         SaveShopperAuthDataToMemCookie(shopperId);
         LoggedInShopperId = shopperId;
@@ -283,8 +346,15 @@ namespace Atlantis.Framework.Providers.Shopper
         LoggedInShopperId = string.Empty;
         DeleteShopperIdMemAuthCookie();
         SaveShopperIdToCookie(shopperId);
+        if (Container.CanResolve<IAuthenticationProvider>())
+        {
+          var authenticationProvider = Container.Resolve<IAuthenticationProvider>();
+          authenticationProvider.Deauthenticate();
+        }
+
         _shopperId = shopperId;
         _status = ShopperStatusType.Public;
+
       }
     }
 
@@ -295,6 +365,12 @@ namespace Atlantis.Framework.Providers.Shopper
         LoggedInShopperId = string.Empty;
         DeleteShopperIdMemAuthCookie();
         DeleteShopperIdCrossDomainCookie();
+        if (Container.CanResolve<IAuthenticationProvider>())
+        {
+          var authenticationProvider = Container.Resolve<IAuthenticationProvider>();
+          authenticationProvider.Deauthenticate();
+        }
+
         _shopperId = string.Empty;
         _status = ShopperStatusType.Public;
       }

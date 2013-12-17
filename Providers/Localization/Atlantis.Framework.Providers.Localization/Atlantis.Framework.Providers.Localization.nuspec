@@ -2,14 +2,14 @@
 <package >
   <metadata>
     <id>Atlantis.Framework.Providers.Localization</id>
-    <version>4.13.12.6</version>
+    <version>4.13.12.17</version>
     <title>Atlantis Framework Providers Localization</title>
     <authors>$author$</authors>
     <owners>$author$</owners>
     <projectUrl>https://confluence.int.godaddy.com/display/ATLANTIS</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes>ProcessLanguageUrl should only rewrite the url if a language is found in the path.</releaseNotes>
+    <releaseNotes>Added LocalizationProvider.GetMappedMarketsForCountrySite(string countrySite, bool includeInternalOnly);  Added ActiveMarketDisplayProviderGetActiveMarketDisplay(bool includeInternalOnly);</releaseNotes>
     <copyright>$copyright$</copyright>
     <tags>Atlantis Framework Providers Localization</tags>
   </metadata>

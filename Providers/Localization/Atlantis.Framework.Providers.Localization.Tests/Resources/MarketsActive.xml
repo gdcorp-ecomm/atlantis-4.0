@@ -1,20 +1,20 @@
 <data count="10">
-  <item catalog_marketID="en-US" marketDescription="English (United States)" MSCulture="en-US" isActive="1" internalOnly="0" />
-  <item catalog_marketID="es-US" marketDescription="Spanish (United States)" MSCulture="es-US" isActive="1" internalOnly="0" />
-  <item catalog_marketID="qa-QA" marketDescription="QA (Show Tags)" MSCulture="en-US" isActive="1" internalOnly="-1" />
-  <item catalog_marketID="qa-PS" marketDescription="QA (Pseudo)" MSCulture="en-US" isActive="1" internalOnly="-1" />
-  <item catalog_marketID="qa-PZ" marketDescription="QA (Zs)" MSCulture="en-US" isActive="1" internalOnly="-1" />
-  <item catalog_marketID="en-CA" marketDescription="English (Canada)" MSCulture="en-CA" isActive="1" internalOnly="0" />
-  <item catalog_marketID="fr-CA" marketDescription="French (Canada)" MSCulture="fr-CA" isActive="1" internalOnly="0" />
-  <item catalog_marketID="en-GB" marketDescription="English (United Kingdom)" MSCulture="en-GB" isActive="1" internalOnly="0" />
-  <item catalog_marketID="en-AU" marketDescription="English (Australia)" MSCulture="en-AU" isActive="1" internalOnly="0" />
-  <item catalog_marketID="en-IN" marketDescription="English (India)" MSCulture="en-IN" isActive="1" internalOnly="0" />
-  <item catalog_marketID='pt-BR' marketDescription='Portuguese (Brazil)' MSCulture='pt-BR' isActive='1' internalOnly='0' />  
-  <item catalog_marketID="es-ES" marketDescription="Spanish (Spain)" MSCulture="es-ES" isActive="1" internalOnly="0" />
-  <item catalog_marketID='pt-PT' marketDescription='Portuguese (Portugal)' MSCulture='pt-PT' isActive='1' internalOnly='0' />
-  <item catalog_marketID="fr-FR" marketDescription="French (France)" MSCulture="fr-FR" isActive="1" internalOnly="0" />
-  <item catalog_marketID="en-PH" marketDescription="English (Philippines)" MSCulture="en-PH" isActive="1" internalOnly="0" />
-  <item catalog_marketID="rc-RC" marketDescription="English (RC Land)" MSCulture="en-US" isActive="1" internalOnly="1" />
+  <item catalog_marketID="en-US" marketDescription="United States - English" MSCulture="en-US" isActive="1" internalOnly="0" />
+  <item catalog_marketID="es-US" marketDescription="Estados Unidos - Español" MSCulture="es-US" isActive="1" internalOnly="0" />
+  <item catalog_marketID="qa-QA" marketDescription="QA - Show Tags" MSCulture="en-US" isActive="1" internalOnly="-1" />
+  <item catalog_marketID="qa-PS" marketDescription="QA - Pseudo" MSCulture="en-US" isActive="1" internalOnly="-1" />
+  <item catalog_marketID="qa-PZ" marketDescription="QA - Zs" MSCulture="en-US" isActive="1" internalOnly="-1" />
+  <item catalog_marketID="en-CA" marketDescription="Canada - English" MSCulture="en-CA" isActive="1" internalOnly="0" />
+  <item catalog_marketID="fr-CA" marketDescription="Canada - Français" MSCulture="fr-CA" isActive="1" internalOnly="0" />
+  <item catalog_marketID="en-GB" marketDescription="United Kingdom - English" MSCulture="en-GB" isActive="1" internalOnly="0" />
+  <item catalog_marketID="en-AU" marketDescription="Australia - English" MSCulture="en-AU" isActive="1" internalOnly="0" />
+  <item catalog_marketID="en-IN" marketDescription="India - English" MSCulture="en-IN" isActive="1" internalOnly="0" />
+  <item catalog_marketID='pt-BR' marketDescription='Brasil - Português' MSCulture='pt-BR' isActive='1' internalOnly='0' />  
+  <item catalog_marketID="es-ES" marketDescription="España - Español" MSCulture="es-ES" isActive="1" internalOnly="0" />
+  <item catalog_marketID='pt-PT' marketDescription='Portugal - Português' MSCulture='pt-PT' isActive='1' internalOnly='0' />
+  <item catalog_marketID="fr-FR" marketDescription="France - Français" MSCulture="fr-FR" isActive="1" internalOnly="0" />
+  <item catalog_marketID="en-PH" marketDescription="Philippines - English" MSCulture="en-PH" isActive="1" internalOnly="0" />
+  <item catalog_marketID="rc-RC" marketDescription="RC Land - English" MSCulture="en-US" isActive="1" internalOnly="1" />
   <item catalog_marketID="00-00" marketDescription="Public CountrySite Internal Market" MSCulture="en-US" isActive="1" internalOnly="1" />
   <item catalog_marketID="01-01" marketDescription="Public CountrySite Public Market Internal Mapping" MSCulture="en-US" isActive="1" internalOnly="0" />
 </data>

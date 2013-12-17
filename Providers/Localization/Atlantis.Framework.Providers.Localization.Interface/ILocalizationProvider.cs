@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 
 namespace Atlantis.Framework.Providers.Localization.Interface
@@ -175,8 +176,17 @@ namespace Atlantis.Framework.Providers.Localization.Interface
     /// <summary>
     /// Gets the IMarket list for a given countrycode. If the country code is invalid returns the default www IMarket list.
     /// </summary>
-    /// <returns>IMarket list for a given countrycode or returns default www</returns>
+    /// <returns>IMarket list for a given countrycode or returns default www</returns>    
+    [Obsolete("Use GetMappedMarketsForCountrySite(string countrySite, bool includeInternalOnly)")]
     IEnumerable<IMarket> GetMarketsForCountryCode(string countryCode);
+
+    /// <summary>
+    /// Gets the IMarket list for a given CountrySite.  If the CountrySite is invalid then return empty collection or, if provided, mapped IMarkets for the specified default CountrySite.
+    /// </summary>
+    /// <param name="countrySite">CountrySite to get list of mapped IMarket</param>
+    /// <param name="includeInternalOnly">Include IMarkets for internal-only Mappings, Markets, and CountrySites</param>
+    /// <returns>IMarket list for a given countrycode</returns>        
+    IEnumerable<IMarket> GetMappedMarketsForCountrySite(string countrySite, bool includeInternalOnly);
 
   }
 }

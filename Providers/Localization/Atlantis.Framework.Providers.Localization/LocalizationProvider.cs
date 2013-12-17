@@ -438,6 +438,28 @@ namespace Atlantis.Framework.Providers.Localization
       return marketMappings;
     }
 
+    public IEnumerable<IMarket> GetMappedMarketsForCountrySite(string countrySite, bool includeInternalOnly)
+    {
+      var marketList = new List<IMarket>();
+      CountrySiteMarketMappingsResponseData marketMappings = GetOrLoadMarketMappingsForCountrySite(countrySite);
+      if (marketMappings != null)
+      {
+        foreach (var marketId in marketMappings.GetMarketIdsForCountry())
+        {
+          if (includeInternalOnly || marketMappings.IsPublicMapping(marketId))
+          {
+            IMarket market = TryGetMarket(marketId);
+            if (market != null && (includeInternalOnly || !market.IsInternalOnly))
+            {
+              marketList.Add(market);
+            }
+          }
+        }  
+      }
+
+      return marketList;
+    }
+
     private CountrySiteMarketMappingsResponseData LoadCountrySiteMarketMappings(string countrySiteId)
     {
       CountrySiteMarketMappingsResponseData result;

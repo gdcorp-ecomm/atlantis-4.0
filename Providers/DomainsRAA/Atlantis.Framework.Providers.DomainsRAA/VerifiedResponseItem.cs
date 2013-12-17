@@ -1,5 +1,5 @@
 ﻿using Atlantis.Framework.Providers.DomainsRAA.Interface;
-using Atlantis.Framework.Providers.DomainsRAA.Interface.Items;
+using Atlantis.Framework.Providers.DomainsRAA.Interface.VerificationItems;
 
 namespace Atlantis.Framework.Providers.DomainsRAA
 {

@@ -1,6 +1,6 @@
 ﻿namespace Atlantis.Framework.Providers.DomainsRAA.Interface
 {
-  public enum DomainsRAAReasonCodes
+  public enum ReasonCodes
   {
     None = -1,
 

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using Atlantis.Framework.Providers.DomainsRAA.Interface;
-using Atlantis.Framework.Providers.DomainsRAA.Interface.Items;
+using Atlantis.Framework.Providers.DomainsRAA.Interface.VerificationItems;
 
 namespace Atlantis.Framework.Providers.DomainsRAA
 {
@@ -11,9 +11,9 @@ namespace Atlantis.Framework.Providers.DomainsRAA
 
     public IEnumerable<IVerifiedResponseItem> VerifiedItems { get; private set; }
 
-    public IEnumerable<DomainsRAAErrorCodes> ErrorCodes { get; private set; }
+    public IEnumerable<Errors> ErrorCodes { get; private set; }
 
-    internal static DomainsRAAStatus Create(IList<IVerifiedResponseItem> verifiedResponseItems, IList<DomainsRAAErrorCodes> errorCodes)
+    internal static DomainsRAAStatus Create(IList<IVerifiedResponseItem> verifiedResponseItems, IList<Errors> errorCodes)
     {
       var status = new DomainsRAAStatus
       {

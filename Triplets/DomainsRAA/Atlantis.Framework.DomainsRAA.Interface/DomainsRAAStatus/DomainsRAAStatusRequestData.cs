@@ -9,11 +9,13 @@ namespace Atlantis.Framework.DomainsRAA.Interface.DomainsRAAStatus
 {
   public class DomainsRAAStatusRequestData : RequestData
   {
-    private readonly VerifyRequestItems _verificationItems;
+    private readonly IEnumerable<ItemElement> _itemElements;
+    private readonly string _requestedIp;
 
-    public DomainsRAAStatusRequestData(VerifyRequestItems verificationItems)
+    public DomainsRAAStatusRequestData(string requestedId, IEnumerable<ItemElement> itemElements)
     {
-      _verificationItems = verificationItems;
+      _itemElements = itemElements;
+      _requestedIp = requestedId;
       RequestTimeout = TimeSpan.FromSeconds(3);
     }
 
@@ -24,7 +26,7 @@ namespace Atlantis.Framework.DomainsRAA.Interface.DomainsRAAStatus
         throw new Exception("ConfigValue is missing AppName");
       }
 
-      var itemTypes = _verificationItems.Items as VerifyRequestItem[] ?? _verificationItems.Items.ToArray();
+      var itemTypes = _itemElements as ItemElement[] ?? _itemElements.ToArray();
 
       var itemElements = new List<XElement>(itemTypes.Length);
 
@@ -35,10 +37,10 @@ namespace Atlantis.Framework.DomainsRAA.Interface.DomainsRAAStatus
           new XAttribute("value", itemType.ItemTypeValue)
           ));
       }
-
+      
       var requestElement = new XElement("request",
         new XAttribute("requestedby", appName),
-        new XAttribute("requestedip", _verificationItems.RequestedIp),
+        new XAttribute("requestedip", _requestedIp),
         new XElement("items", itemElements)
         );
 

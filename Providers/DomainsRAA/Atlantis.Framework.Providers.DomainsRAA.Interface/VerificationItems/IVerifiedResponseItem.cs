@@ -1,4 +1,4 @@
-﻿namespace Atlantis.Framework.Providers.DomainsRAA.Interface.Items
+﻿namespace Atlantis.Framework.Providers.DomainsRAA.Interface.VerificationItems
 {
   public interface IVerifiedResponseItem
   {

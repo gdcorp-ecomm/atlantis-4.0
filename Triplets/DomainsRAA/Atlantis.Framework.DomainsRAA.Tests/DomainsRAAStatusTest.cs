@@ -59,10 +59,9 @@ namespace Atlantis.Framework.DomainsRAA.Tests
     {
       const string verifiedEmail = "aorellana@godaddy.com";
 
-      var itemType = VerifyRequestItem.Create(ItemTypes.EMAIL, verifiedEmail);
-      var itemTypes = VerifyRequestItems.Create(RegistrationTypes.SHOPPER, RequestIp, new List<VerifyRequestItem> { itemType });
-
-      var request = new DomainsRAAStatusRequestData(itemTypes);
+      var itemType = ItemElement.Create(ItemTypes.EMAIL, verifiedEmail);
+      
+      var request = new DomainsRAAStatusRequestData(RequestIp, new List<ItemElement>() { itemType });
 
       var response = Engine.Engine.ProcessRequest(request, REQUEST_ID) as DomainsRAAStatusResponseData;
 
@@ -77,19 +76,17 @@ namespace Atlantis.Framework.DomainsRAA.Tests
       const string verifiedEmail = "aorellana@godaddy.com";
       const string notVerifiedEmail = "notverfiedemail@godaddy.com";
 
-      var verfiedItem = VerifyRequestItem.Create(ItemTypes.EMAIL, verifiedEmail);
-      var notVerifiedItem = VerifyRequestItem.Create(ItemTypes.EMAIL, notVerifiedEmail);
+      var verfiedItem = ItemElement.Create(ItemTypes.EMAIL, verifiedEmail);
+      var notVerifiedItem = ItemElement.Create(ItemTypes.EMAIL, notVerifiedEmail);
 
-      var items = new List<VerifyRequestItem>
+      var items = new List<ItemElement>
       {
         verfiedItem, 
         notVerifiedItem
       };
 
-      var itemTypes = VerifyRequestItems.Create(RegistrationTypes.SHOPPER, RequestIp, items);
-
-      var request = new DomainsRAAStatusRequestData(itemTypes);
-
+      var request = new DomainsRAAStatusRequestData(RequestIp, items);
+      
       var response = Engine.Engine.ProcessRequest(request, REQUEST_ID) as DomainsRAAStatusResponseData;
 
       Assert.IsTrue(response.HasVerifiedResponseCodes);
@@ -110,17 +107,17 @@ namespace Atlantis.Framework.DomainsRAA.Tests
       const string veririedDomainId = "12776637";
       const string veririedShopperId = "28018";
 
-      var verfiedEmailItem1 = VerifyRequestItem.Create(ItemTypes.EMAIL, verifiedEmail1);
-      var verfiedEmailItem2 = VerifyRequestItem.Create(ItemTypes.EMAIL, verifiedEmail2);
+      var verfiedEmailItem1 = ItemElement.Create(ItemTypes.EMAIL, verifiedEmail1);
+      var verfiedEmailItem2 = ItemElement.Create(ItemTypes.EMAIL, verifiedEmail2);
 
-      var verifiedPhoneItem = VerifyRequestItem.Create(ItemTypes.PHONE, verifiedPhone);
+      var verifiedPhoneItem = ItemElement.Create(ItemTypes.PHONE, verifiedPhone);
 
-      var verifiedDomainIdItem = VerifyRequestItem.Create(ItemTypes.DOMAIN_ID, veririedDomainId);
+      var verifiedDomainIdItem = ItemElement.Create(ItemTypes.DOMAIN_ID, veririedDomainId);
 
-      var verifiedShopperIdItem = VerifyRequestItem.Create(ItemTypes.SHOPPER_ID, veririedShopperId);
+      var verifiedShopperIdItem = ItemElement.Create(ItemTypes.SHOPPER_ID, veririedShopperId);
       
 
-      var itemTypes = new List<VerifyRequestItem>
+      var itemTypes = new List<ItemElement>
       {
         verfiedEmailItem1, 
         verfiedEmailItem2,
@@ -129,9 +126,7 @@ namespace Atlantis.Framework.DomainsRAA.Tests
         verifiedShopperIdItem
       };
 
-      var requestItems = VerifyRequestItems.Create(RegistrationTypes.SHOPPER, RequestIp, itemTypes);
-
-      var request = new DomainsRAAStatusRequestData(requestItems);
+      var request = new DomainsRAAStatusRequestData(RequestIp, itemTypes);
 
       var response = Engine.Engine.ProcessRequest(request, REQUEST_ID) as DomainsRAAStatusResponseData;
 

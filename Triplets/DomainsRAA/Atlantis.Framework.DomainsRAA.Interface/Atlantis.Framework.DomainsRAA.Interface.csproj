@@ -53,15 +53,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DomainsRAAErrorCodes.cs" />
+    <Compile Include="DomainsRAASetVerified\DomainsRAASetVerifiedRequestData.cs" />
+    <Compile Include="DomainsRAASetVerified\DomainsRAASetVerifiedResponseData.cs" />
     <Compile Include="DomainsRAAStatus\DomainsRAAStatusRequestData.cs" />
     <Compile Include="DomainsRAAStatus\DomainsRAAStatusResponseData.cs" />
     <Compile Include="DomainsRAAReasonCodes.cs" />
+    <Compile Include="Items\VerificationItemElement.cs" />
     <Compile Include="DomainsRAAVerifyCodes.cs" />
-    <Compile Include="DomainsRAAVerify\DomainsRAAVerifyRequestData.cs" />
-    <Compile Include="DomainsRAAVerify\DomainsRAAVerifyResponseData.cs" />
+    <Compile Include="DomainsRAAQueueVerify\DomainsRAAQueueVerifyRequestData.cs" />
+    <Compile Include="DomainsRAAQueueVerify\DomainsRAAQueueVerifyResponseData.cs" />
     <Compile Include="Items\ItemTypes.cs" />
-    <Compile Include="Items\VerificationRequestItem.cs" />
-    <Compile Include="Items\VerificationRequestItems.cs" />
+    <Compile Include="Items\ItemElement.cs" />
+    <Compile Include="Items\VerificationItemsElement.cs" />
     <Compile Include="Items\VerifiedResponseItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegistrationTypes.cs" />

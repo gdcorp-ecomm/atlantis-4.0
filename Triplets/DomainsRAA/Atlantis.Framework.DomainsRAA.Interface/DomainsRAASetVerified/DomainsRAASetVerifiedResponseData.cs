@@ -4,13 +4,13 @@ using System.Linq;
 using System.Xml.Linq;
 using Atlantis.Framework.Interface;
 
-namespace Atlantis.Framework.DomainsRAA.Interface.DomainsRAAVerify
+namespace Atlantis.Framework.DomainsRAA.Interface.DomainsRAASetVerified
 {
-  public class DomainsRAAVerifyResponseData : IResponseData
+  public class DomainsRAASetVerifiedResponseData : IResponseData
   {
     private readonly string _responseXml = string.Empty;
 
-    private DomainsRAAVerifyResponseData(AtlantisException exception)
+    private DomainsRAASetVerifiedResponseData(AtlantisException exception)
     {
       _responseXml = string.Empty;
 
@@ -25,13 +25,13 @@ namespace Atlantis.Framework.DomainsRAA.Interface.DomainsRAAVerify
       Engine.Engine.LogAtlantisException(exception);
     }
 
-    private DomainsRAAVerifyResponseData(string responseXml)
+    private DomainsRAASetVerifiedResponseData(string responseXml)
     {
       _responseXml = responseXml;
       try
       {
         var responseElement = XElement.Parse(_responseXml);
-        
+
         var errorsElement = responseElement.Element("errors");
         if (responseElement.Name == "response")
         {
@@ -62,7 +62,7 @@ namespace Atlantis.Framework.DomainsRAA.Interface.DomainsRAAVerify
     }
 
     public bool IsSuccess { get; private set; }
-    
+
     private IList<DomainsRAAErrorCodes> _errorCodes;
     public IEnumerable<DomainsRAAErrorCodes> ErrorCodes
     {
@@ -85,14 +85,14 @@ namespace Atlantis.Framework.DomainsRAA.Interface.DomainsRAAVerify
       }
     }
 
-    public static DomainsRAAVerifyResponseData FromData(string responseXml)
+    public static DomainsRAASetVerifiedResponseData FromData(string responseXml)
     {
-      return new DomainsRAAVerifyResponseData(responseXml);
+      return new DomainsRAASetVerifiedResponseData(responseXml);
     }
 
-    public static DomainsRAAVerifyResponseData FromData(AtlantisException exception)
+    public static DomainsRAASetVerifiedResponseData FromData(AtlantisException exception)
     {
-      return new DomainsRAAVerifyResponseData(exception);
+      return new DomainsRAASetVerifiedResponseData(exception);
     }
 
     public string ToXML()

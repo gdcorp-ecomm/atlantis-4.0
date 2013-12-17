@@ -1,14 +1,14 @@
 ﻿using System.Collections.Generic;
-using Atlantis.Framework.Providers.DomainsRAA.Interface.Items;
+using Atlantis.Framework.Providers.DomainsRAA.Interface.VerificationItems;
 
 namespace Atlantis.Framework.Providers.DomainsRAA.Interface
 {
   public interface IDomainsRAAProvider
   {
-    bool TryQueueVerification(IVerifyRequestItems verficationItems, out IEnumerable<DomainsRAAErrorCodes> errorCodes);
+    bool TryQueueVerification(IVerification verfication, out IEnumerable<Errors> errorCodes);
 
-    bool TryGetStatus(IVerifyRequestItems requestItems, out IDomainsRAAStatus raaStatus);
+    bool TryGetStatus(IVerificationItems verificationItems, out IDomainsRAAStatus raaStatus);
+
+    bool TrySetVerifiedToken(IVerification verification, out IEnumerable<Errors> errorCodes);
   }
-
-
 }

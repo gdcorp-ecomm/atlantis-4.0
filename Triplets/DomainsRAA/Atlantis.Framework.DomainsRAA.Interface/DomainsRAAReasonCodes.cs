@@ -2,8 +2,6 @@
 {
   public enum DomainsRAAReasonCodes
   {
-    None = -1,
-
     /// <summary>
     /// Verified by FOS Email verification response page
     /// </summary>

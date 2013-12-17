@@ -105,7 +105,8 @@
   </Choose>
   <ItemGroup>
     <Compile Include="DomainsRAAStatusTest.cs" />
-    <Compile Include="DomainsRAAVerifyTest.cs" />
+    <Compile Include="DomainsRAASetVerifiedTest.cs" />
+    <Compile Include="DomainsRAAQueueVerifyTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

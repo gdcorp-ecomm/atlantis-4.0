@@ -34,8 +34,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Atlantis.Framework.DomainsRAA.Interface">
-      <HintPath>..\packages\Atlantis.Framework.DomainsRAA.Interface.4.13.12.17\lib\net40\Atlantis.Framework.DomainsRAA.Interface.dll</HintPath>
+    <Reference Include="Atlantis.Framework.DomainsRAA.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.DomainsRAA.Interface.4.13.12.18\lib\net40\Atlantis.Framework.DomainsRAA.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Engine">
       <HintPath>..\..\..\Triplets\DomainsRAA\DomainsRAAVerify\packages\Atlantis.Framework.Engine.4.0.0.0\lib\net40\Atlantis.Framework.Engine.dll</HintPath>
@@ -55,20 +56,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DomainsRAAErrorCodes.cs" />
-    <Compile Include="DomainsRAAReasonCodes.cs" />
+    <Compile Include="Errors.cs" />
+    <Compile Include="ReasonCodes.cs" />
     <Compile Include="IDomainsRAAStatus.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DomainsRAAVerifyCodes.cs" />
     <Compile Include="IDomainsRAAProvider.cs" />
-    <Compile Include="Items\ItemTypes.cs" />
-    <Compile Include="Items\IVerifiedResponseItem.cs" />
-    <Compile Include="Items\IVerifyRequestItem.cs" />
-    <Compile Include="Items\IVerifyRequestItems.cs" />
+    <Compile Include="VerificationItems\Item.cs" />
+    <Compile Include="VerificationItems\ItemTypes.cs" />
+    <Compile Include="VerificationItems\IItem.cs" />
+    <Compile Include="VerificationItems\IRequestItem.cs" />
+    <Compile Include="VerificationItems\IVerifiedResponseItem.cs" />
+    <Compile Include="VerificationItems\RequestItem.cs" />
+    <Compile Include="VerificationItems\IVerification.cs" />
+    <Compile Include="VerificationItems\Verification.cs" />
+    <Compile Include="VerificationItems\IVerificationItems.cs" />
+    <Compile Include="VerificationItems\VerificationItems.cs" />
+    <Compile Include="VerificationItems\VerifiedResponseItem.cs" />
     <Compile Include="RegistrationTypes.cs" />
-    <Compile Include="Items\VerificationRequestItem.cs" />
-    <Compile Include="Items\VerificationRequestItems.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <None Include="atlantis.config" />
     <None Include="Atlantis.Framework.Providers.DomainsRAA.Interface.nuget.bat" />

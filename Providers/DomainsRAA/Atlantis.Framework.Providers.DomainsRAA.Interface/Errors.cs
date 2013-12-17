@@ -1,6 +1,6 @@
-﻿namespace Atlantis.Framework.DomainsRAA.Interface
+﻿namespace Atlantis.Framework.Providers.DomainsRAA.Interface
 {
-  public enum DomainsRAAErrorCodes
+  public enum Errors
   {
     Exception = -1,
     FailedToAddMessage = 1,

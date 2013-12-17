@@ -3,7 +3,7 @@ using System.Linq;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.DomainsRAA;
 using Atlantis.Framework.Providers.DomainsRAA.Interface;
-using Atlantis.Framework.Providers.DomainsRAA.Interface.Items;
+using Atlantis.Framework.Providers.DomainsRAA.Interface.VerificationItems;
 using Atlantis.Framework.Testing.MockHttpContext;
 using Atlantis.Framework.Testing.MockProviders;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -11,7 +11,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Atlantis.Framework.Providers.DomainsRAAVerify.Tests
 {
   [TestClass]
-  public class DomainsRAAVerifyTest
+  public class DomainsRAASetVerifiedTest
   {
     private const string SHOPPER_ID = "28018";
 
@@ -60,51 +60,39 @@ namespace Atlantis.Framework.Providers.DomainsRAAVerify.Tests
     }
 
     [TestMethod]
-    public void TestQueueVerifyPhoneTest()
+    public void SetVerifiedTest()
     {
-      var itemTypes = new List<IVerifyRequestItem>(1);
+      var itemTypes = new List<IItem>(1);
 
-      var itemType = VerifyRequestItem.Create(ItemTypes.PHONE, "+1.3192943900");
+      var itemType = Item.Create(ItemTypes.TOKEN, "cd7163e1f6c332ddd10cda01aa1ee6cb29e7dc45cf14bdb0b189c38cfdfd32422daed747");
       itemTypes.Add(itemType);
 
-      var verificationItems = VerifyRequestItems.Create(RegistrationTypes.SHOPPER, itemTypes, DomainsRAAReasonCodes.VerifiedByFOSEmail);
+      var verificationItems = VerificationItems.Create(RegistrationTypes.SHOPPER, itemTypes, string.Empty, "1.1.1.1");
 
-      IEnumerable<DomainsRAAErrorCodes> errorCodes;
-      Assert.IsTrue(RAAProvider.TryQueueVerification(verificationItems, out errorCodes));
+      var verification = Verification.Create(ReasonCodes.VerifiedByFOSEmail, verificationItems);
+
+      IEnumerable<Errors> errorCodes;
+      Assert.IsTrue(RAAProvider.TrySetVerifiedToken(verification, out errorCodes));
       Assert.IsFalse(errorCodes.Any());
     }
 
     [TestMethod]
-    public void TestQueueVerifyRegistrantPhoneTest()
+    public void BadItemTypeTest()
     {
-      const string domainId = "12776637";
-      var itemTypes = new List<IVerifyRequestItem>(1);
+      var itemTypes = new List<IItem>(1);
 
-      var itemType = VerifyRequestItem.Create(ItemTypes.PHONE, "+1.3192943900");
+      var itemType = Item.Create(ItemTypes.PHONE, "cd7163e1f6c332ddd10cda01aa1ee6cb29e7dc45cf14bdb0b189c38cfdfd32422daed747");
       itemTypes.Add(itemType);
 
-      var verificationItems = VerifyRequestItems.Create(RegistrationTypes.REGISTRANT, itemTypes, DomainsRAAReasonCodes.VerifiedByFOSEmail, domainId);
+      var verificationItems = VerificationItems.Create(RegistrationTypes.SHOPPER, itemTypes, string.Empty, "1.1.1.1");
 
-      IEnumerable<DomainsRAAErrorCodes> erroCodes;
-      Assert.IsTrue(RAAProvider.TryQueueVerification(verificationItems, out erroCodes));
-      Assert.IsFalse(erroCodes.Any());
-    }
+      var verification = Verification.Create(ReasonCodes.VerifiedByFOSEmail, verificationItems);
 
-    [TestMethod]
-    public void TestQueueVerifyNoReasonCodeTest()
-    {
-      var itemTypes = new List<IVerifyRequestItem>(1);
-
-      var itemType = VerifyRequestItem.Create(ItemTypes.PHONE, "+1.3192943900");
-      itemTypes.Add(itemType);
-
-      var verificationItems = VerifyRequestItems.Create(RegistrationTypes.SHOPPER, itemTypes);
-
-      IEnumerable<DomainsRAAErrorCodes> errorCodes;
-      Assert.IsFalse(RAAProvider.TryQueueVerification(verificationItems, out errorCodes));
+      IEnumerable<Errors> errorCodes;
+      Assert.IsFalse(RAAProvider.TrySetVerifiedToken(verification, out errorCodes));
       Assert.IsTrue(errorCodes.Any());
 
-      Assert.IsTrue(errorCodes.ToArray()[0] == DomainsRAAErrorCodes.Exception);
+      Assert.IsTrue(errorCodes.ToArray()[0] == Errors.InvalidOrMissingItemType);
     } 
   }
 }

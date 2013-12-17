@@ -1,13 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Atlantis.Framework.DomainsRAA.Interface.DomainsRAASetVerified;
 using Atlantis.Framework.DomainsRAA.Interface.DomainsRAAStatus;
-using Atlantis.Framework.DomainsRAA.Interface.DomainsRAAVerify;
+using Atlantis.Framework.DomainsRAA.Interface.DomainsRAAQueueVerify;
 using Atlantis.Framework.Interface;
 using System;
 using Atlantis.Framework.Providers.DomainsRAA.Interface;
-using Atlantis.Framework.Providers.DomainsRAA.Interface.Items;
-
+using Atlantis.Framework.Providers.DomainsRAA.Interface.VerificationItems;
 using DomainsRAAService= Atlantis.Framework.DomainsRAA.Interface;
 
 namespace Atlantis.Framework.Providers.DomainsRAA
@@ -22,73 +22,6 @@ namespace Atlantis.Framework.Providers.DomainsRAA
       _shopperContext = new Lazy<IShopperContext>(() => Container.Resolve<IShopperContext>());
     }
     
-    public bool TryQueueVerification(IVerifyRequestItems verificationItems, out IEnumerable<DomainsRAAErrorCodes> errorCodes)
-    {
-      var isSuccess = false;
-      errorCodes = new List<DomainsRAAErrorCodes>(0);
-      try
-      {
-
-       var requestItemTypes = new List<DomainsRAAService.Items.VerifyRequestItem>(verificationItems.Items.Count());
-
-        foreach (var item in verificationItems.Items)
-        {
-          requestItemTypes.Add(DomainsRAAService.Items.VerifyRequestItem.Create(item.ItemType, item.ItemTypeValue));
-        }
-
-        DomainsRAAService.DomainsRAAReasonCodes reasonCode;
-        if (!Enum.TryParse(verificationItems.ReasonCode.ToString(), out reasonCode))
-        {
-          reasonCode = DomainsRAAService.DomainsRAAReasonCodes.None;
-        }
-
-        var domainsRAAVerifyItems = DomainsRAAService.Items.VerifyRequestItems.Create(
-          verificationItems.RegistrationType,
-          HttpContext.Current.Request.UserHostAddress,
-          requestItemTypes,
-          reasonCode,
-          verificationItems.DomainId
-          );
-
-        var request = new DomainsRAAVerifyRequestData(_shopperContext.Value.ShopperId, domainsRAAVerifyItems);
-
-        var response = (DomainsRAAVerifyResponseData)Engine.Engine.ProcessRequest(request, 765);
-
-        if (response != null)
-        {
-          isSuccess = response.IsSuccess;
-
-          if (!isSuccess && response.HasErrorCodes)
-          {
-            var codes = new List<DomainsRAAErrorCodes>(response.ErrorCodes.Count());
-
-            foreach (var code in response.ErrorCodes)
-            {
-              DomainsRAAErrorCodes errorCode;
-              Enum.TryParse(code.ToString(), out errorCode);
-
-              codes.Add(errorCode);
-            }
-
-            errorCodes = codes;
-          }
-        }
-      }
-      catch (Exception ex)
-      {
-        isSuccess = false;
-        var aex = new AtlantisException("DomainsRAAProvider.TryQueueVerification", "0", ex.StackTrace, ex.ToString(), null, null);
-        Engine.Engine.LogAtlantisException(aex); 
-      }
-
-      if (!isSuccess && !errorCodes.Any())
-      {
-        errorCodes = new List<DomainsRAAErrorCodes>(1) { DomainsRAAErrorCodes.Exception };
-      }
-
-      return isSuccess;
-    }
-
     private DomainsRAAVerifyCode GetVerifyCode(DomainsRAAService.DomainsRAAVerifyCode serviceVerifyCode)
     {
       DomainsRAAVerifyCode verifyCode;
@@ -113,32 +46,93 @@ namespace Atlantis.Framework.Providers.DomainsRAA
       return verifyCode;
     }
 
+    public bool TryQueueVerification(IVerification verification, out IEnumerable<Errors> errorCodes)
+    {
+      var isSuccess = false;
+      errorCodes = new List<Errors>(0);
+      try
+      {
 
-    public bool TryGetStatus(IVerifyRequestItems requestItems, out IDomainsRAAStatus raaStatus)
+        var requestItemTypes = new List<DomainsRAAService.Items.ItemElement>(verification.VerifyItems.Items.Count);
+
+        foreach (var item in verification.VerifyItems.Items)
+        {
+          requestItemTypes.Add(DomainsRAAService.Items.ItemElement.Create(item.ItemType, item.ItemTypeValue));
+        }
+
+        DomainsRAAService.DomainsRAAReasonCodes reasonCode;
+        if (!Enum.TryParse(verification.ReasonCode.ToString(), out reasonCode))
+        {
+          throw new Exception("DomainsRAAReasonCodes expected");
+        }
+
+        var domainsRAAVerifyItems = DomainsRAAService.Items.VerificationItemsElement.Create(
+          verification.VerifyItems.RegistrationType,
+          requestItemTypes,
+          verification.VerifyItems.DomainId
+          );
+
+        var verificationItem = DomainsRAAService.Items.VerificationItemElement.Create(_shopperContext.Value.ShopperId,
+          HttpContext.Current.Request.UserHostAddress,
+          domainsRAAVerifyItems,
+          reasonCode);
+
+        var request = new DomainsRAAQueueVerifyRequestData(verificationItem);
+
+        var response = (DomainsRAAQueueVerifyResponseData)Engine.Engine.ProcessRequest(request, 765);
+
+        if (response != null)
+        {
+          isSuccess = response.IsSuccess;
+
+          if (!isSuccess && response.HasErrorCodes)
+          {
+            var codes = new List<Errors>(response.ErrorCodes.Count());
+
+            foreach (var code in response.ErrorCodes)
+            {
+              Errors errorCode;
+              Enum.TryParse(code.ToString(), out errorCode);
+
+              codes.Add(errorCode);
+            }
+
+            errorCodes = codes;
+          }
+        }
+      }
+      catch (Exception ex)
+      {
+        isSuccess = false;
+        var aex = new AtlantisException("DomainsRAAProvider.TryQueueVerification", "0", ex.StackTrace, ex.ToString(), null, null);
+        Engine.Engine.LogAtlantisException(aex); 
+      }
+
+      if (!isSuccess && !errorCodes.Any())
+      {
+        errorCodes = new List<Errors>(1) { Errors.Exception };
+      }
+
+      return isSuccess;
+    }
+    
+    public bool TryGetStatus(IVerificationItems verificationItems, out IDomainsRAAStatus raaStatus)
     {
       raaStatus = null;
 
       try
       {
-        var serviceRequestTypes = new List<DomainsRAAService.Items.VerifyRequestItem>(requestItems.Items.Count());
+        var serviceRequestTypes = new List<DomainsRAAService.Items.ItemElement>(verificationItems.Items.Count());
 
 
-        foreach (var verifyRequestItem in requestItems.Items)
+        foreach (var verifyRequestItem in verificationItems.Items)
         {
-          var itemType = DomainsRAAService.Items.VerifyRequestItem.Create(verifyRequestItem.ItemType, verifyRequestItem.ItemTypeValue);
+          var itemType = DomainsRAAService.Items.ItemElement.Create(verifyRequestItem.ItemType, verifyRequestItem.ItemTypeValue);
           serviceRequestTypes.Add(itemType);
         }
 
-        DomainsRAAService.DomainsRAAReasonCodes reasonCode;
-        Enum.TryParse(requestItems.ReasonCode.ToString(), out reasonCode);
 
-        var serviceRequestItems = DomainsRAAService.Items.VerifyRequestItems.Create(requestItems.RegistrationType,
-          HttpContext.Current.Request.UserHostAddress,
-          serviceRequestTypes,
-          reasonCode,
-          requestItems.DomainId);
-
-        var request = new DomainsRAAStatusRequestData(serviceRequestItems);
+        var request = new DomainsRAAStatusRequestData(HttpContext.Current.Request.UserHostAddress, serviceRequestTypes);
 
         var response = Engine.Engine.ProcessRequest(request, 767) as DomainsRAAStatusResponseData;
 
@@ -157,13 +151,13 @@ namespace Atlantis.Framework.Providers.DomainsRAA
             }
           }
 
-          var errorCodes = new List<DomainsRAAErrorCodes>(response.ErrorCodes.Count());
+          var errorCodes = new List<Errors>(response.ErrorCodes.Count());
           if (response.HasErrorCodes)
           {
 
             foreach (var code in response.ErrorCodes)
             {
-              DomainsRAAErrorCodes errorCode;
+              Errors errorCode;
               Enum.TryParse(code.ToString(), out errorCode);
 
               errorCodes.Add(errorCode);
@@ -181,11 +175,82 @@ namespace Atlantis.Framework.Providers.DomainsRAA
 
       if (raaStatus == null)
       {
-        var errorCodes = new List<DomainsRAAErrorCodes>(1) {DomainsRAAErrorCodes.Exception};
+        var errorCodes = new List<Errors>(1) {Errors.Exception};
         raaStatus = DomainsRAAStatus.Create(null, errorCodes);
       }
 
       return !raaStatus.HasErrorCodes;
+    }
+
+    public bool TrySetVerifiedToken(IVerification verification, out IEnumerable<Errors> errorCodes)
+    {
+      var isSuccess = false;
+      errorCodes = new List<Errors>(0);
+      try
+      {
+
+        var requestItemTypes = new List<DomainsRAAService.Items.ItemElement>(verification.VerifyItems.Items.Count());
+
+        foreach (var item in verification.VerifyItems.Items)
+        {
+          requestItemTypes.Add(DomainsRAAService.Items.ItemElement.Create(item.ItemType, item.ItemTypeValue));
+        }
+
+        DomainsRAAService.DomainsRAAReasonCodes reasonCode;
+        if (!Enum.TryParse(verification.ReasonCode.ToString(), out reasonCode))
+        {
+          throw new Exception("DomainsRAAReasonCodes expected");
+        }
+
+        var domainsRAAVerifyItems = DomainsRAAService.Items.VerificationItemsElement.Create(
+          verification.VerifyItems.RegistrationType,
+          requestItemTypes,
+          verification.VerifyItems.DomainId,
+          verification.VerifyItems.VerfiedIp
+          );
+
+        var verificationItem = DomainsRAAService.Items.VerificationItemElement.Create(_shopperContext.Value.ShopperId,
+          HttpContext.Current.Request.UserHostAddress,
+          domainsRAAVerifyItems,
+          reasonCode);
+
+        var request = new DomainsRAASetVerifiedRequestData(verificationItem);
+
+        var response = (DomainsRAASetVerifiedResponseData)Engine.Engine.ProcessRequest(request, 783);
+
+        if (response != null)
+        {
+          isSuccess = response.IsSuccess;
+
+          if (!isSuccess && response.HasErrorCodes)
+          {
+            var codes = new List<Errors>(response.ErrorCodes.Count());
+
+            foreach (var code in response.ErrorCodes)
+            {
+              Errors errorCode;
+              Enum.TryParse(code.ToString(), out errorCode);
+
+              codes.Add(errorCode);
+            }
+
+            errorCodes = codes;
+          }
+        }
+      }
+      catch (Exception ex)
+      {
+        isSuccess = false;
+        var aex = new AtlantisException("DomainsRAAProvider.TrySetVerfiedToken", "0", ex.StackTrace, ex.ToString(), null, null);
+        Engine.Engine.LogAtlantisException(aex);
+      }
+
+      if (!isSuccess && !errorCodes.Any())
+      {
+        errorCodes = new List<Errors>(1) { Errors.Exception };
+      }
+
+      return isSuccess;
     }
   }
 }

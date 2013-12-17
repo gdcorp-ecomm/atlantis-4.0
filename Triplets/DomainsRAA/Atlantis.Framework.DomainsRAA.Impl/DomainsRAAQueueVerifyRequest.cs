@@ -1,19 +1,19 @@
 ﻿using System;
-using Atlantis.Framework.DomainsRAA.Interface.DomainsRAAVerify;
+using Atlantis.Framework.DomainsRAA.Interface.DomainsRAAQueueVerify;
 using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.DomainsRAA.Impl
 {
-   public class DomainsRAAVerifyRequest : IRequest
+   public class DomainsRAAQueueVerifyRequest : IRequest
   {
      public IResponseData RequestHandler(RequestData requestData, ConfigElement config)
      {
-       DomainsRAAVerifyResponseData responseData;
+       DomainsRAAQueueVerifyResponseData responseData;
        var requestXml = string.Empty;
 
        try
        {
-         var verifyRequestData = (DomainsRAAVerifyRequestData) requestData;
+         var verifyRequestData = (DomainsRAAQueueVerifyRequestData) requestData;
          var wsConfigElement = (WsConfigElement) config;
 
          var clientCertificate = wsConfigElement.GetClientCertificate();
@@ -24,13 +24,13 @@ namespace Atlantis.Framework.DomainsRAA.Impl
 
          var responseXml = domainsRAAServiceClient.QueueVerify(requestXml);
 
-         responseData = DomainsRAAVerifyResponseData.FromData(responseXml);
+         responseData = DomainsRAAQueueVerifyResponseData.FromData(responseXml);
 
        }
        catch (Exception ex)
        {
          var aex = new AtlantisException(requestData, "DomainsRAAVerifyResponseData", ex.Message, requestXml);
-         responseData = DomainsRAAVerifyResponseData.FromData(aex);
+         responseData = DomainsRAAQueueVerifyResponseData.FromData(aex);
        }
 
        return responseData;

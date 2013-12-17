@@ -4,7 +4,7 @@ using System.Linq;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.DomainsRAA;
 using Atlantis.Framework.Providers.DomainsRAA.Interface;
-using Atlantis.Framework.Providers.DomainsRAA.Interface.Items;
+using Atlantis.Framework.Providers.DomainsRAA.Interface.VerificationItems;
 using Atlantis.Framework.Testing.MockHttpContext;
 using Atlantis.Framework.Testing.MockProviders;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -65,8 +65,8 @@ namespace Atlantis.Framework.Providers.DomainsRAAVerify.Tests
     {
       const string verifiedEmail = "aorellana@godaddy.com";
 
-      var itemType = VerifyRequestItem.Create(ItemTypes.EMAIL, verifiedEmail);
-      var requestItems = VerifyRequestItems.Create(RegistrationTypes.SHOPPER, new List<IVerifyRequestItem> { itemType });
+      var itemType = Item.Create(ItemTypes.EMAIL, verifiedEmail);
+      var requestItems = VerificationItems.Create(RegistrationTypes.SHOPPER, new List<IItem> { itemType });
 
       IDomainsRAAStatus raaStatus;
       Assert.IsTrue(RAAProvider.TryGetStatus(requestItems, out raaStatus));
@@ -81,16 +81,16 @@ namespace Atlantis.Framework.Providers.DomainsRAAVerify.Tests
       const string verifiedEmail = "aorellana@godaddy.com";
       const string notVerifiedEmail = "notverfiedemail@godaddy.com";
 
-      var verfiedRequestItem = VerifyRequestItem.Create(ItemTypes.EMAIL, verifiedEmail);
-      var notVerifiedRequestItem = VerifyRequestItem.Create(ItemTypes.EMAIL, notVerifiedEmail);
+      var verfiedRequestItem = Item.Create(ItemTypes.EMAIL, verifiedEmail);
+      var notVerifiedRequestItem = Item.Create(ItemTypes.EMAIL, notVerifiedEmail);
 
-      var items = new List<IVerifyRequestItem>
+      var items = new List<IItem>
       {
         verfiedRequestItem, 
         notVerifiedRequestItem
       };
 
-      var requestItems = VerifyRequestItems.Create(RegistrationTypes.SHOPPER, items);
+      var requestItems = VerificationItems.Create(RegistrationTypes.SHOPPER, items);
 
       IDomainsRAAStatus raaStatus;
       Assert.IsTrue(RAAProvider.TryGetStatus(requestItems, out raaStatus));

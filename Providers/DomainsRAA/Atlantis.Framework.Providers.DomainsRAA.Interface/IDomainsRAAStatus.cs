@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Atlantis.Framework.Providers.DomainsRAA.Interface.Items;
+using Atlantis.Framework.Providers.DomainsRAA.Interface.VerificationItems;
 
 namespace Atlantis.Framework.Providers.DomainsRAA.Interface
 {
@@ -10,6 +10,6 @@ namespace Atlantis.Framework.Providers.DomainsRAA.Interface
 
     IEnumerable<IVerifiedResponseItem> VerifiedItems { get; }
 
-    IEnumerable<DomainsRAAErrorCodes> ErrorCodes { get; }
+    IEnumerable<Errors> ErrorCodes { get; }
   }
 }

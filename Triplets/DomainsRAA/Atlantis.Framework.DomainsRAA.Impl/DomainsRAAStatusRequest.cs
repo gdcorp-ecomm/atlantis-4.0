@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Security.Cryptography.X509Certificates;
-using System.ServiceModel;
-using Atlantis.Framework.DomainsRAA.Impl.DomainsRAAService;
-using Atlantis.Framework.DomainsRAA.Interface;
 using Atlantis.Framework.DomainsRAA.Interface.DomainsRAAStatus;
 using Atlantis.Framework.Interface;
 

@@ -66,7 +66,7 @@ namespace Atlantis.Framework.Providers.DomainsRAAVerify.Tests
       const string verifiedEmail = "aorellana@godaddy.com";
 
       var itemType = Item.Create(ItemTypes.EMAIL, verifiedEmail);
-      var requestItems = VerificationItems.Create(RegistrationTypes.SHOPPER, new List<IItem> { itemType });
+      var requestItems = new List<IItem> {itemType};
 
       IDomainsRAAStatus raaStatus;
       Assert.IsTrue(RAAProvider.TryGetStatus(requestItems, out raaStatus));
@@ -89,11 +89,9 @@ namespace Atlantis.Framework.Providers.DomainsRAAVerify.Tests
         verfiedRequestItem, 
         notVerifiedRequestItem
       };
-
-      var requestItems = VerificationItems.Create(RegistrationTypes.SHOPPER, items);
-
+      
       IDomainsRAAStatus raaStatus;
-      Assert.IsTrue(RAAProvider.TryGetStatus(requestItems, out raaStatus));
+      Assert.IsTrue(RAAProvider.TryGetStatus(items, out raaStatus));
       Assert.IsTrue(raaStatus.HasVerifiedResponseItems);
 
       var verifiedItem = raaStatus.VerifiedItems.FirstOrDefault(vi => vi.ItemTypeValue == verifiedEmail);

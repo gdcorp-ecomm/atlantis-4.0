@@ -116,16 +116,15 @@ namespace Atlantis.Framework.Providers.DomainsRAA
       return isSuccess;
     }
     
-    public bool TryGetStatus(IVerificationItems verificationItems, out IDomainsRAAStatus raaStatus)
+    public bool TryGetStatus(IList<IItem> requestItems, out IDomainsRAAStatus raaStatus)
     {
       raaStatus = null;
 
       try
       {
-        var serviceRequestTypes = new List<DomainsRAAService.Items.ItemElement>(verificationItems.Items.Count());
+        var serviceRequestTypes = new List<DomainsRAAService.Items.ItemElement>(requestItems.Count());
 
-
-        foreach (var verifyRequestItem in verificationItems.Items)
+        foreach (var verifyRequestItem in requestItems)
         {
           var itemType = DomainsRAAService.Items.ItemElement.Create(verifyRequestItem.ItemType, verifyRequestItem.ItemTypeValue);
           serviceRequestTypes.Add(itemType);

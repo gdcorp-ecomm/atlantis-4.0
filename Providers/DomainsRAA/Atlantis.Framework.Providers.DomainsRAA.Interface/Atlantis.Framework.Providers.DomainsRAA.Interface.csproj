@@ -66,9 +66,7 @@
     <Compile Include="VerificationItems\Item.cs" />
     <Compile Include="VerificationItems\ItemTypes.cs" />
     <Compile Include="VerificationItems\IItem.cs" />
-    <Compile Include="VerificationItems\IRequestItem.cs" />
     <Compile Include="VerificationItems\IVerifiedResponseItem.cs" />
-    <Compile Include="VerificationItems\RequestItem.cs" />
     <Compile Include="VerificationItems\IVerification.cs" />
     <Compile Include="VerificationItems\Verification.cs" />
     <Compile Include="VerificationItems\IVerificationItems.cs" />

@@ -7,7 +7,8 @@ using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.Personalization.Interface
 {
-  public class TargetedMessagesResponseData : IResponseData
+    [Serializable]
+    public class TargetedMessagesResponseData : IResponseData
   {
     public TargetedMessagesResponseData() { }
 
@@ -15,12 +16,14 @@ namespace Atlantis.Framework.Personalization.Interface
     private string _resultXML = string.Empty;
 
     public TargetedMessages TargetedMessagesData { get; private set; }
+    public string TMSUrl { get; private set; }
 
-    public TargetedMessagesResponseData(string xml)
+    public TargetedMessagesResponseData(string xml, string tmsURL)
     {
       try
       {
         _resultXML = xml;
+        TMSUrl = tmsURL;
         TargetedMessagesData = BuildTargetedMessages(_resultXML);
       }
       catch (Exception ex)
@@ -29,8 +32,9 @@ namespace Atlantis.Framework.Personalization.Interface
       }
     }
 
-    public TargetedMessagesResponseData(RequestData requestData, Exception exception)
+    public TargetedMessagesResponseData(RequestData requestData, Exception exception, string tmsURL)
     {
+      TMSUrl = tmsURL;
       _exception = new AtlantisException(requestData, "TargetedMessagesResponseData", exception.Message, requestData.ToXML());
     }
 

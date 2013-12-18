@@ -30,11 +30,11 @@ namespace Atlantis.Framework.Personalization.Impl
             }
           }
         }
-        responseData = new TargetedMessagesResponseData(output);
+        responseData = new TargetedMessagesResponseData(output, request.RequestUri.ToString());
       }
       catch (Exception ex)
       {
-        responseData = new TargetedMessagesResponseData(oRequestData, ex);
+        responseData = new TargetedMessagesResponseData(oRequestData, ex, request.RequestUri.ToString());
       }
       return responseData;
     }

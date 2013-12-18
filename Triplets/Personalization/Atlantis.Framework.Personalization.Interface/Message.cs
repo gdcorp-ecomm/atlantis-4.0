@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Xml.Serialization;
 
 namespace Atlantis.Framework.Personalization.Interface
 {
+  [Serializable]
   public class Message
   {
     [XmlElement("MessageTrackingID")]

@@ -25,9 +25,7 @@ namespace Atlantis.Framework.Web.DotTypeRegistrationValidationHandler.TestWeb
       HttpProviderContainer.Instance.RegisterProvider<IShopperContext, Atlantis.Framework.Providers.Shopper.ShopperContextProvider>();
       HttpProviderContainer.Instance.RegisterProvider<IManagerContext, GdgManagerContextProvider>();
 
-      var a = new Atlantis.Framework.Providers.DotTypeRegistrationValidationHandler.DotTypeRegistrationValidationDynamicRouteHandler();
-      var lst = new List<Assembly> { a.GetType().Assembly };
-      DynamicRouteHandlerRegistrationManager.AutoRegisterRouteHandlers(RouteTable.Routes, lst);
+      DynamicRouteHandlerRegistrationManager.AutoRegisterRouteHandlers(RouteTable.Routes, new List<string> { "Atlantis.Framework.Providers.DotTypeRegistrationValidationHandler*" }, null);
     }
 
     protected void Session_Start(object sender, EventArgs e)

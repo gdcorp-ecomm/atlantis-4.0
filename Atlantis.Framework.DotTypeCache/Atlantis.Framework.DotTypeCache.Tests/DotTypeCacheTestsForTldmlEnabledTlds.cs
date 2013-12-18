@@ -64,7 +64,10 @@ namespace Atlantis.Framework.DotTypeCache.Tests
 
       //tlds = TLDML.TLDMLDocument.GetTLDMLSupportedTLDs();
       tlds = new List<string>();
-      tlds.Add("CONSTRUCTION");
+      tlds.Add("DIAMONDS");
+      tlds.Add("ENTERPRISES");
+      tlds.Add("TIPS");
+      tlds.Add("VOYAGE");
 
       domainCount = new[] { 1 };
       standardRegLengths = new[] { 1 };
@@ -280,7 +283,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
 
             Automation.Framework.TLDML.DomainSearch domainSearch = new Automation.Framework.TLDML.DomainSearch(phase);
             int tier = domainSearch.GetPremiumTier();
-            
+
             IDomainProductLookup domainProductLookup = DomainProductLookup.Create(regLength, dc, LaunchPhases.GeneralAvailability, TLDProductTypes.Renewal, tier);
             int renewProductId = dotTypeInfo.GetProductId(domainProductLookup);
 
@@ -337,7 +340,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
       foreach (string tld in tlds)
       {
         IDotTypeInfo dotTypeInfo = DotTypeProvider.GetDotTypeInfo(tld);
-        
+
         List<int> regLengths = TLDMLProduct.GetAllEnabledRegistrationLengths(tld);
 
         AssertHelper.AddResults(regLengths.Max() == dotTypeInfo.Product.RegistrationYears.Max,

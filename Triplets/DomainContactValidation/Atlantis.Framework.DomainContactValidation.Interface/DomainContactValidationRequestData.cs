@@ -9,12 +9,12 @@ namespace Atlantis.Framework.DomainContactValidation.Interface
   public class DomainContactValidationRequestData : RequestData
   {
     private readonly DomainContactValidation _domainContactValidation;
-    private readonly DomainCheckType _domainCheckType;
-    private readonly DomainContactType _domainContactType;
+    private readonly string _domainCheckType;
+    private readonly int _domainContactType;
     private readonly string _tlds;
     private readonly int _privateLabelId;
 
-    public DomainContactValidationRequestData(DomainCheckType checkType, DomainContactType domainContactType,
+    public DomainContactValidationRequestData(string checkType, int domainContactType,
                                               DomainContactValidation domainContact, string tlds, int privateLabelId)
     {
       _domainContactValidation = domainContact;
@@ -52,7 +52,7 @@ namespace Atlantis.Framework.DomainContactValidation.Interface
       oXmlTextWriter.WriteProcessingInstruction("xml", "version=\"1.0\" encoding=\"UTF-16\" standalone=\"no\"");
 
       oXmlTextWriter.WriteStartElement("contact");
-      oXmlTextWriter.WriteAttributeString(DomainContactAttributes.Type, _domainCheckType == DomainCheckType.DomainTransfer ? "xfer" : "");
+      oXmlTextWriter.WriteAttributeString(DomainContactAttributes.Type, _domainCheckType == DomainCheckType.DOMAIN_TRANFER ? "xfer" : "");
       oXmlTextWriter.WriteAttributeString(DomainContactAttributes.DomainContactType, GetContactTypeString(_domainContactType));
       oXmlTextWriter.WriteAttributeString(DomainContactAttributes.Tlds, _tlds);
       oXmlTextWriter.WriteAttributeString(DomainContactAttributes.FirstName, _domainContactValidation.FirstName);
@@ -75,21 +75,21 @@ namespace Atlantis.Framework.DomainContactValidation.Interface
       return sbRequest.ToString();
     }
 
-    private static string GetContactTypeString(DomainContactType contactType)
+    private static string GetContactTypeString(int contactType)
     {
-      string result = contactType.ToString();
+      string result = string.Empty;
       switch (contactType)
       {
-        case DomainContactType.Registrant:
+        case DomainContactType.REGISTRANT:
           result = "registrant";
           break;
-        case DomainContactType.Technical:
+        case DomainContactType.TECHNICAL:
           result = "technical";
           break;
-        case DomainContactType.Administrative:
+        case DomainContactType.ADMINISTRATIVE:
           result = "administrative";
           break;
-        case DomainContactType.Billing:
+        case DomainContactType.BILLING:
           result = "billing";
           break;
       }

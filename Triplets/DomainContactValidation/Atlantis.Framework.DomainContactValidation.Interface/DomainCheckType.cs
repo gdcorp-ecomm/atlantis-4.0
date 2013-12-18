@@ -1,8 +1,8 @@
 ﻿namespace Atlantis.Framework.DomainContactValidation.Interface
 {
-  public enum DomainCheckType
+  internal static class DomainCheckType
   {
-    DomainTransfer,
-    Other
+    internal const string DOMAIN_TRANFER = "DomainTransfer";
+    internal const string OTHER = "Other";
   }
 }

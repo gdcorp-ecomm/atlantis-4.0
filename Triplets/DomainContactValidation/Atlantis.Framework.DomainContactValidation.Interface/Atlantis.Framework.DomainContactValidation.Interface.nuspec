@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>Atlantis.Framework.DomainContactValidation.Interface</id>
-    <version>4.13.12.16</version>
+    <version>4.13.12.17</version>
     <title>Atlantis Framework DomainContactValidation Interface</title>
     <authors>$author$</authors>
     <owners>$author$</owners>

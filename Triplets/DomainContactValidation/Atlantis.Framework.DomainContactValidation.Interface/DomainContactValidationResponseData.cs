@@ -76,19 +76,19 @@ namespace Atlantis.Framework.DomainContactValidation.Interface
           int contactType;
           if (contactTypeValue.Equals("billing", StringComparison.OrdinalIgnoreCase))
           {
-            contactType = (int) DomainContactType.Billing;
+            contactType = DomainContactType.BILLING;
           }
           else if (contactTypeValue.Equals("technical", StringComparison.OrdinalIgnoreCase))
           {
-            contactType = (int)DomainContactType.Technical;
+            contactType = DomainContactType.TECHNICAL;
           }
           else if (contactTypeValue.Equals("administrative", StringComparison.OrdinalIgnoreCase))
           {
-            contactType = (int)DomainContactType.Administrative;
+            contactType = DomainContactType.ADMINISTRATIVE;
           }
           else
           {
-            contactType = (int)DomainContactType.Registrant;
+            contactType = DomainContactType.REGISTRANT;
           }
           ResponseAttributes = contactNode.Attributes;
 

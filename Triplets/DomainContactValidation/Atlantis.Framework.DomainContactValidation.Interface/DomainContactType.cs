@@ -1,14 +1,10 @@
 ﻿namespace Atlantis.Framework.DomainContactValidation.Interface
 {
-  public enum DomainContactType
+  internal static class DomainContactType
   {
-    Registrant = 0,
-    Technical = 1,
-    Administrative = 2,
-    Billing = 3,
-    RegistrantUnicode = 4,
-    TechnicalUnicode = 5,
-    AdministrativeUnicode = 6,
-    BillingUnicode = 7,
+    internal const int REGISTRANT = 0;
+    internal const int TECHNICAL = 1;
+    internal const int ADMINISTRATIVE = 2;
+    internal const int BILLING = 3;
   }
 }

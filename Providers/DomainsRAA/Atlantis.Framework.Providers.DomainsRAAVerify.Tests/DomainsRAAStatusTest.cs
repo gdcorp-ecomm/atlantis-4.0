@@ -104,5 +104,30 @@ namespace Atlantis.Framework.Providers.DomainsRAAVerify.Tests
       
       Assert.IsFalse(raaStatus.HasErrorCodes);
     }
+
+    [TestMethod]
+    public void PhoneAndEmailTest()
+    {
+      const string phone = "+1.3192943900";
+      const string email = "aorellana@godaddy.com";
+
+      var items = new List<IItem>
+      {
+        Item.Create(ItemTypes.PHONE, phone), 
+        Item.Create(ItemTypes.EMAIL, email)
+      };
+
+      IDomainsRAAStatus raaStatus;
+      Assert.IsTrue(RAAProvider.TryGetStatus(items, out raaStatus));
+      Assert.IsTrue(raaStatus.HasVerifiedResponseItems);
+
+      Assert.IsFalse(raaStatus.HasErrorCodes);
+
+      var verfifiedPhoneItem = raaStatus.VerifiedItems.FirstOrDefault(vi => vi.ItemTypeValue == phone);
+      Assert.IsTrue(verfifiedPhoneItem.ItemVerifiedCode == DomainsRAAVerifyCode.VerifyPending);
+
+      var verfiedEmailItem = raaStatus.VerifiedItems.FirstOrDefault(vi => vi.ItemTypeValue == email);
+      Assert.IsTrue(verfiedEmailItem.ItemVerifiedCode == DomainsRAAVerifyCode.Verified);
+    }
   }
 }

@@ -1,4 +1,6 @@
-﻿using Atlantis.Framework.DotNetExtensions.StringBuilder;
+﻿using System.Diagnostics;
+using System.Linq;
+using Atlantis.Framework.DotNetExtensions.StringBuilder;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Links.Interface;
 using Atlantis.Framework.Providers.Interface.Links;
@@ -385,10 +387,20 @@ namespace Atlantis.Framework.Providers.Links
     private static void BuildUrlParameters(StringBuilder initialUrl, NameValueCollection queryParameters)
     {
       char delimiter = '?';
+      const string REGIONSITE_KEY = "regionsite";
+
+      if (queryParameters.AllKeys.Contains(REGIONSITE_KEY, StringComparer.OrdinalIgnoreCase) && !string.IsNullOrEmpty(queryParameters[REGIONSITE_KEY]))
+      {
+        initialUrl.Append(delimiter);
+        initialUrl.Append(REGIONSITE_KEY);
+        initialUrl.Append("=");
+        initialUrl.Append(queryParameters[REGIONSITE_KEY]);
+        delimiter = '&';
+      }
 
       foreach (string key in queryParameters.Keys)
       {
-        if (key != null)
+        if (key != null && !REGIONSITE_KEY.Equals(key, StringComparison.OrdinalIgnoreCase))
         {
           string value = queryParameters[key];
           if (!string.IsNullOrEmpty(value))

@@ -2,14 +2,14 @@
 <package >
   <metadata>
     <id>Atlantis.Framework.Providers.Links</id>
-    <version>4.13.12.12</version>
+    <version>4.13.12.17</version>
     <title>Atlantis Framework Providers Links</title>
     <authors>$author$</authors>
     <owners>$author$</owners>
     <projectUrl>https://confluence.int.godaddy.com/display/ATLANTIS</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes></releaseNotes>
+    <releaseNotes>Make sure regionsite is the first key in a rendered querystring.</releaseNotes>
     <copyright>$copyright$</copyright>
     <tags>Atlantis Framework  Providers Links</tags>
     <dependencies>

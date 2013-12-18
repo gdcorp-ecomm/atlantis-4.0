@@ -1294,6 +1294,42 @@ namespace Atlantis.Framework.Providers.Links.Tests
       Assert.IsTrue(url.StartsWith("http://mya.wildwestdomains.com/Default.aspx?isc=234"));
     }
 
+    [TestMethod]
+    public void RegionSiteQueryStringTests()
+    {      
+      string url;
+
+      //  GetRelativeUrl with regionsite
+      var links = NewLinkProvider("http://siteadmin.debug.intranet.gdg/default.aspx?isc=234", 1, string.Empty);
+      url = links.GetRelativeUrl("/hosting/hosting.aspx", new NameValueCollection { { "k1", "v1" }, { "regionsite", "ar" } }, LinkProviderOptions.DefaultOptions);
+      Assert.IsTrue(url.StartsWith("http://siteadmin.debug.intranet.gdg/hosting/hosting.aspx?regionsite=ar&k1=v1"));
+
+      //  GetRelativeUrl without regionsite
+      links = NewLinkProvider("http://siteadmin.debug.intranet.gdg/default.aspx?isc=234", 1, string.Empty);
+      url = links.GetRelativeUrl("/hosting/hosting.aspx", new NameValueCollection { { "k1", "v1" } }, LinkProviderOptions.DefaultOptions);
+      Assert.IsTrue(url.StartsWith("http://siteadmin.debug.intranet.gdg/hosting/hosting.aspx?k1=v1"));
+
+      //  GetUrl with regionsite
+      links = NewLinkProvider("http://siteadmin.debug.intranet.gdg/default.aspx?isc=234", 1, string.Empty);
+      url = links.GetUrl("SITEURL", "/hosting/hosting.aspx", new NameValueCollection { { "k1", "v1" }, { "regionsite", "ar" } }, LinkProviderOptions.ProtocolAgnostic);
+      Assert.AreEqual("//www.godaddy.com/hosting/hosting.aspx?regionsite=ar&k1=v1&isc=234", url);
+
+      //  GetUrl without regionsite
+      links = NewLinkProvider("http://siteadmin.debug.intranet.gdg/default.aspx?isc=234", 1, string.Empty);
+      url = links.GetUrl("SITEURL", "/hosting/hosting.aspx", new NameValueCollection { { "k1", "v1" } }, LinkProviderOptions.ProtocolAgnostic);
+      Assert.AreEqual("//www.godaddy.com/hosting/hosting.aspx?k1=v1&isc=234", url);
+
+      //  GetSpecificMarketUrl with regionsite
+      links = NewLinkProvider("http://www.bluerazor.com/default.aspx?isc=234", 1, string.Empty);
+      url = links.GetSpecificContextUrl("MYAURL", "Default.aspx", 1, new NameValueCollection { { "accid", "40" }, { "regionsite", "uk" } }, LinkProviderOptions.QueryStringExplicitParameters);
+      Assert.IsTrue(url.StartsWith("http://mya.godaddy.com/Default.aspx?regionsite=uk&accid=40"));
+
+      //  GetSpecificMarketUrl without regionsite
+      links = NewLinkProvider("http://www.bluerazor.com/default.aspx?isc=234", 1, string.Empty);
+      url = links.GetSpecificContextUrl("MYAURL", "Default.aspx", 1, new NameValueCollection { { "accid", "40" } }, LinkProviderOptions.QueryStringExplicitParameters);
+      Assert.IsTrue(url.StartsWith("http://mya.godaddy.com/Default.aspx?accid=40"));
+    }
+
     //[TestMethod]
     //public void TestFormatRelativeUrlLinkProviderOptions()
     //{

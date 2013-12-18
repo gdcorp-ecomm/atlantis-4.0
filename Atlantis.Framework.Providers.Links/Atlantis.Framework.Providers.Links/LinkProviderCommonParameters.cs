@@ -16,6 +16,16 @@ namespace Atlantis.Framework.Providers.Links
       set { _handleProgId = value; }
     }
 
+    private static bool _handlePlId = false;
+    /// <summary>
+    /// Setting this to false will turn off the LinkProvider's automatic handling of PlId
+    /// </summary>
+    public static bool HandlePlId
+    {
+      get { return _handlePlId; }
+      set { _handlePlId = value; }
+    }
+
     private static bool _handleISC = true;
     /// <summary>
     /// Setting this to false will turn off the LinkProvider's automatic handling of ISC

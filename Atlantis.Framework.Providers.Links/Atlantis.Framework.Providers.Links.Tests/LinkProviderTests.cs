@@ -461,43 +461,43 @@ namespace Atlantis.Framework.Providers.Links.Tests
       url = links.GetUrlArguments(QueryParamMode.ExplicitParameters, "x", "val", "y", "val2");
       Assert.IsTrue(url.Equals("?x=val&y=val2"));
 
-//      bool allowRel = LinkProvider.AllowRelativeUrls;
-//      try
-//      {
-//        LinkProvider.AllowRelativeUrls = true;
-//        Assert.IsTrue(LinkProvider.AllowRelativeUrls);
-//        LinkProvider.AllowRelativeUrls = false;
-//        Assert.IsFalse(LinkProvider.AllowRelativeUrls);
-//
-//        LinkProvider.AllowRelativeUrls = true;
-//        url = links.GetRelativeUrl("a.aspx", QueryParamMode.ExplicitParameters, parms);
-//        Assert.IsTrue(url.Contains("a.aspx?x=val&y=val2"));
-//        Assert.IsFalse(url.Contains("http"));
-//        Assert.IsTrue(url.IndexOf("//", 8) == -1);
-//
-//      }
-//      finally
-//      {
-//        LinkProvider.AllowRelativeUrls = allowRel;
-//      }
-//
-//      TestCleanup();
-//      TestInit();
-//
-//      allowRel = LinkProvider.AllowRelativeUrls;
-//      try
-//      {
-//        LinkProvider.AllowRelativeUrls = false;
-//        links = NewLinkProvider("https://www.godaddy.com/default.aspx", 1, "832652");
-//        url = links.GetRelativeUrl("a.aspx", QueryParamMode.ExplicitParameters, parms);
-//        Assert.IsTrue(url.Contains("a.aspx?x=val&y=val2"));
-//        Assert.IsTrue(url.IndexOf("//", 8) == -1);
-//        Assert.IsTrue(url.Contains("https://"));
-//      }
-//      finally
-//      {
-//        LinkProvider.AllowRelativeUrls = allowRel;
-//      }
+      //      bool allowRel = LinkProvider.AllowRelativeUrls;
+      //      try
+      //      {
+      //        LinkProvider.AllowRelativeUrls = true;
+      //        Assert.IsTrue(LinkProvider.AllowRelativeUrls);
+      //        LinkProvider.AllowRelativeUrls = false;
+      //        Assert.IsFalse(LinkProvider.AllowRelativeUrls);
+      //
+      //        LinkProvider.AllowRelativeUrls = true;
+      //        url = links.GetRelativeUrl("a.aspx", QueryParamMode.ExplicitParameters, parms);
+      //        Assert.IsTrue(url.Contains("a.aspx?x=val&y=val2"));
+      //        Assert.IsFalse(url.Contains("http"));
+      //        Assert.IsTrue(url.IndexOf("//", 8) == -1);
+      //
+      //      }
+      //      finally
+      //      {
+      //        LinkProvider.AllowRelativeUrls = allowRel;
+      //      }
+      //
+      //      TestCleanup();
+      //      TestInit();
+      //
+      //      allowRel = LinkProvider.AllowRelativeUrls;
+      //      try
+      //      {
+      //        LinkProvider.AllowRelativeUrls = false;
+      //        links = NewLinkProvider("https://www.godaddy.com/default.aspx", 1, "832652");
+      //        url = links.GetRelativeUrl("a.aspx", QueryParamMode.ExplicitParameters, parms);
+      //        Assert.IsTrue(url.Contains("a.aspx?x=val&y=val2"));
+      //        Assert.IsTrue(url.IndexOf("//", 8) == -1);
+      //        Assert.IsTrue(url.Contains("https://"));
+      //      }
+      //      finally
+      //      {
+      //        LinkProvider.AllowRelativeUrls = allowRel;
+      //      }
     }
 
     [TestMethod]
@@ -733,6 +733,30 @@ namespace Atlantis.Framework.Providers.Links.Tests
         LinkProvider.LowerCaseRelativeUrlsForSEO = lowercase;
       }
     }
+
+    [TestMethod]
+    public void LinkProviderReturnsPlidandProgId()
+    {
+
+      bool handleplid = LinkProviderCommonParameters.HandlePlId;
+      bool lowercase = LinkProvider.LowerCaseRelativeUrlsForSEO;
+      try
+      {
+        LinkProviderCommonParameters.HandlePlId = true;
+        var links = NewLinkProvider("http://siteadmin.debug.intranet.gdg/default.aspx", 1724, string.Empty);
+        string url = links.GetRelativeUrl("/test.aspx", QueryParamMode.CommonParameters);
+        Assert.IsTrue(url.Contains("pl_id="));
+        Assert.IsTrue(url.Contains("prog_id="));
+
+      }
+      finally
+      {
+        LinkProviderCommonParameters.HandlePlId = handleplid;
+        LinkProvider.LowerCaseRelativeUrlsForSEO = lowercase;
+      }
+    }
+
+
 
     [TestMethod]
     public void ISC()
@@ -1095,26 +1119,26 @@ namespace Atlantis.Framework.Providers.Links.Tests
       // test valid countrysite, non-default market
       string url = links.GetSpecificMarketUrl("SUPPORTURL", "/hosting/hosting.aspx", "ca", "fr-CA", null, LinkProviderOptions.QueryStringExplicitWithLocalizationParameters);
       Assert.IsTrue(url.StartsWith("http://support.godaddy.com/hosting/hosting.aspx?"));
-      Assert.IsTrue(url.IndexOf("cntry=ca", StringComparison.OrdinalIgnoreCase)!=-1);
-      Assert.IsTrue(url.IndexOf("lang=fr-ca", StringComparison.OrdinalIgnoreCase)!=-1);
+      Assert.IsTrue(url.IndexOf("cntry=ca", StringComparison.OrdinalIgnoreCase) != -1);
+      Assert.IsTrue(url.IndexOf("lang=fr-ca", StringComparison.OrdinalIgnoreCase) != -1);
 
       // if incorrect marketid, then default returns
       url = links.GetSpecificMarketUrl("SUPPORTURL", "/hosting/hosting.aspx", "ca", "xx-CA", null, LinkProviderOptions.QueryStringExplicitWithLocalizationParameters);
       Assert.IsTrue(url.StartsWith("http://support.godaddy.com/hosting/hosting.aspx?"));
-      Assert.IsTrue(url.IndexOf("cntry=ca", StringComparison.OrdinalIgnoreCase)!=-1);
-      Assert.IsTrue(url.IndexOf("lang=en-ca", StringComparison.OrdinalIgnoreCase)!=-1);
+      Assert.IsTrue(url.IndexOf("cntry=ca", StringComparison.OrdinalIgnoreCase) != -1);
+      Assert.IsTrue(url.IndexOf("lang=en-ca", StringComparison.OrdinalIgnoreCase) != -1);
 
       // if incorrect countryid, then current countrysite returns w/lang site of requested
       url = links.GetSpecificMarketUrl("SUPPORTURL", "/hosting/hosting.aspx", "12", "es-BR", null, LinkProviderOptions.QueryStringExplicitWithLocalizationParameters);
       Assert.IsTrue(url.StartsWith("http://support.godaddy.com/hosting/hosting.aspx?"));
-      Assert.IsTrue(url.IndexOf("cntry=www", StringComparison.OrdinalIgnoreCase)!=-1);
-      Assert.IsTrue(url.IndexOf("lang=es-br", StringComparison.OrdinalIgnoreCase)!=-1);
+      Assert.IsTrue(url.IndexOf("cntry=www", StringComparison.OrdinalIgnoreCase) != -1);
+      Assert.IsTrue(url.IndexOf("lang=es-br", StringComparison.OrdinalIgnoreCase) != -1);
 
       // if incorrect countryid, then current countrysite returns w/lang site of requested
       url = links.GetSpecificMarketUrl("SUPPORTURL", "/hosting/hosting.aspx", "12", "xx-BR", null, LinkProviderOptions.QueryStringExplicitWithLocalizationParameters);
       Assert.IsTrue(url.StartsWith("http://support.godaddy.com/hosting/hosting.aspx?"));
-      Assert.IsTrue(url.IndexOf("cntry=www", StringComparison.OrdinalIgnoreCase)!=-1);
-      Assert.IsTrue(url.IndexOf("lang=en-us", StringComparison.OrdinalIgnoreCase)!=-1);
+      Assert.IsTrue(url.IndexOf("cntry=www", StringComparison.OrdinalIgnoreCase) != -1);
+      Assert.IsTrue(url.IndexOf("lang=en-us", StringComparison.OrdinalIgnoreCase) != -1);
 
     }
 
@@ -1125,19 +1149,19 @@ namespace Atlantis.Framework.Providers.Links.Tests
 
       // test valid countrysite, non-default market
       string url = links.GetSpecificMarketUrl("SITEURL", "/hosting/hosting.aspx", "ca", "fr-CA", null, LinkProviderOptions.QueryStringExplicitWithLocalizationParameters);
-      Assert.AreEqual(url,"http://ca.godaddy.com/fr/hosting/hosting.aspx");
+      Assert.AreEqual(url, "http://ca.godaddy.com/fr/hosting/hosting.aspx");
 
       // test valid countrysite, invalid market ... should get default market
       url = links.GetSpecificMarketUrl("SITEURL", "/hosting/hosting.aspx", "ca", "xx-CA", null, LinkProviderOptions.QueryStringExplicitWithLocalizationParameters);
-      Assert.AreEqual(url,"http://ca.godaddy.com/hosting/hosting.aspx");
+      Assert.AreEqual(url, "http://ca.godaddy.com/hosting/hosting.aspx");
 
       // test invalid countrysite, valid market which is available for the default country (though not the default market for it) ... should get default countrysite and specified market
       url = links.GetSpecificMarketUrl("SITEURL", "/hosting/hosting.aspx", "12", "fr-CA", null, LinkProviderOptions.QueryStringExplicitWithLocalizationParameters);
-      Assert.AreEqual(url,"http://www.godaddy.com/hosting/hosting.aspx");
+      Assert.AreEqual(url, "http://www.godaddy.com/hosting/hosting.aspx");
 
       // test invalid countrysite, valid market which is NOT available for the default country ... should get default countrysite and its default market
       url = links.GetSpecificMarketUrl("SITEURL", "/hosting/hosting.aspx", "12", "es-BR", null, LinkProviderOptions.QueryStringExplicitWithLocalizationParameters);
-      Assert.AreEqual(url,"http://www.godaddy.com/es-br/hosting/hosting.aspx");
+      Assert.AreEqual(url, "http://www.godaddy.com/es-br/hosting/hosting.aspx");
     }
 
     [TestMethod]
@@ -1201,7 +1225,7 @@ namespace Atlantis.Framework.Providers.Links.Tests
     {
       var links = NewLinkProvider("http://siteadmin.debug.intranet.gdg/default.aspx?isc=234", 1, string.Empty);
 
-      string url = links.GetUrlArguments(new NameValueCollection { { "k1", "v1"} }, LinkProviderOptions.DefaultOptions );
+      string url = links.GetUrlArguments(new NameValueCollection { { "k1", "v1" } }, LinkProviderOptions.DefaultOptions);
       Assert.AreEqual("?k1=v1&isc=234", url);
 
       url = links.GetUrlArguments(null, LinkProviderOptions.DefaultOptions);
@@ -1212,7 +1236,7 @@ namespace Atlantis.Framework.Providers.Links.Tests
     public void TestGetUrlArgsWithLinkProviderOptionsAutoParams()
     {
       var links = NewLinkProvider("http://siteadmin.debug.intranet.gdg/default.aspx?isc=234", 1, string.Empty);
-      string url = links.GetUrlArguments( new NameValueCollection { { "k1", "v1" } }, LinkProviderOptions.DefaultOptions );
+      string url = links.GetUrlArguments(new NameValueCollection { { "k1", "v1" } }, LinkProviderOptions.DefaultOptions);
       Assert.AreEqual("?k1=v1&isc=234", url);
     }
 
@@ -1223,10 +1247,10 @@ namespace Atlantis.Framework.Providers.Links.Tests
       string url = links.GetSpecificMarketUrl("SUPPORTURL", "/hosting/hosting.aspx", "ca", "fr-CA", new NameValueCollection { { "k1", "v1" }, { "k2", "v2" } }, LinkProviderOptions.QueryStringExplicitWithLocalizationParameters);
 
       Assert.IsTrue(url.StartsWith("http://support.godaddy.com/hosting/hosting.aspx?"));
-      Assert.IsTrue(url.IndexOf("cntry=ca", StringComparison.OrdinalIgnoreCase)!=-1);
-      Assert.IsTrue(url.IndexOf("lang=fr-ca", StringComparison.OrdinalIgnoreCase)!=-1);
-      Assert.IsTrue(url.IndexOf("k1=v1", StringComparison.OrdinalIgnoreCase)!=-1);
-      Assert.IsTrue(url.IndexOf("k2=v2", StringComparison.OrdinalIgnoreCase)!=-1);
+      Assert.IsTrue(url.IndexOf("cntry=ca", StringComparison.OrdinalIgnoreCase) != -1);
+      Assert.IsTrue(url.IndexOf("lang=fr-ca", StringComparison.OrdinalIgnoreCase) != -1);
+      Assert.IsTrue(url.IndexOf("k1=v1", StringComparison.OrdinalIgnoreCase) != -1);
+      Assert.IsTrue(url.IndexOf("k2=v2", StringComparison.OrdinalIgnoreCase) != -1);
     }
 
     [TestMethod]
@@ -1235,8 +1259,8 @@ namespace Atlantis.Framework.Providers.Links.Tests
       var links = NewLinkProvider("http://siteadmin.debug.intranet.gdg/default.aspx?isc=234", 1, string.Empty);
       string url = links.GetUrl("SITEURL", null, null, LinkProviderOptions.QueryStringExplicitParameters);
 
-      Assert.IsTrue(url.IndexOf("www.godaddy.com", StringComparison.OrdinalIgnoreCase)!=-1);
-      Assert.IsFalse(url.IndexOf("www.godaddy.com/?", StringComparison.OrdinalIgnoreCase)!=-1);
+      Assert.IsTrue(url.IndexOf("www.godaddy.com", StringComparison.OrdinalIgnoreCase) != -1);
+      Assert.IsFalse(url.IndexOf("www.godaddy.com/?", StringComparison.OrdinalIgnoreCase) != -1);
     }
 
     [TestMethod]
@@ -1252,27 +1276,27 @@ namespace Atlantis.Framework.Providers.Links.Tests
     public void TestGetRelativeWithNullPath()
     {
       var links = NewLinkProvider("http://siteadmin.debug.intranet.gdg/default.aspx?isc=234", 1, string.Empty);
-      string url = links.GetRelativeUrl(null, new NameValueCollection {{"k1", "v1"}}, LinkProviderOptions.DefaultOptions);
+      string url = links.GetRelativeUrl(null, new NameValueCollection { { "k1", "v1" } }, LinkProviderOptions.DefaultOptions);
 
       Assert.IsTrue(url.StartsWith("http://siteadmin.debug.intranet.gdg?", StringComparison.OrdinalIgnoreCase));
-      Assert.IsTrue(url.IndexOf("k1=v1", StringComparison.OrdinalIgnoreCase)!=-1);
-      Assert.IsTrue(url.IndexOf("isc=234", StringComparison.OrdinalIgnoreCase)!=-1);
+      Assert.IsTrue(url.IndexOf("k1=v1", StringComparison.OrdinalIgnoreCase) != -1);
+      Assert.IsTrue(url.IndexOf("isc=234", StringComparison.OrdinalIgnoreCase) != -1);
     }
 
     [TestMethod]
     public void TestGetRelativeWithAutoParams()
     {
       var links = NewLinkProvider("http://siteadmin.debug.intranet.gdg/default.aspx?isc=234", 1, string.Empty);
-      string url = links.GetRelativeUrl("/hosting/hosting.aspx", new NameValueCollection {{"k1", "v1"}}, LinkProviderOptions.DefaultOptions);
+      string url = links.GetRelativeUrl("/hosting/hosting.aspx", new NameValueCollection { { "k1", "v1" } }, LinkProviderOptions.DefaultOptions);
 
-      Assert.IsTrue(url.IndexOf("/hosting/hosting.aspx?", StringComparison.OrdinalIgnoreCase)!=-1);
-      Assert.IsTrue(url.IndexOf("isc=234", StringComparison.OrdinalIgnoreCase)!=-1);
-      Assert.IsTrue(url.IndexOf("k1=v1", StringComparison.OrdinalIgnoreCase)!=-1);
+      Assert.IsTrue(url.IndexOf("/hosting/hosting.aspx?", StringComparison.OrdinalIgnoreCase) != -1);
+      Assert.IsTrue(url.IndexOf("isc=234", StringComparison.OrdinalIgnoreCase) != -1);
+      Assert.IsTrue(url.IndexOf("k1=v1", StringComparison.OrdinalIgnoreCase) != -1);
 
       url = links.GetRelativeUrl("/hosting/hosting.aspx");
 
-      Assert.IsTrue(url.IndexOf("/hosting/hosting.aspx?", StringComparison.OrdinalIgnoreCase)!=-1);
-      Assert.IsTrue(url.IndexOf("isc=234", StringComparison.OrdinalIgnoreCase)!=-1);
+      Assert.IsTrue(url.IndexOf("/hosting/hosting.aspx?", StringComparison.OrdinalIgnoreCase) != -1);
+      Assert.IsTrue(url.IndexOf("isc=234", StringComparison.OrdinalIgnoreCase) != -1);
 
     }
 
@@ -1286,7 +1310,7 @@ namespace Atlantis.Framework.Providers.Links.Tests
       Assert.IsTrue(url.StartsWith("http://mya.godaddy.com/Default.aspx"));
 
       // test valid contextid with queryMap, godaddy
-      url = links.GetSpecificContextUrl("MYAURL", "Default.aspx", 1, new NameValueCollection {{"accid", "40"}}, LinkProviderOptions.QueryStringExplicitParameters);
+      url = links.GetSpecificContextUrl("MYAURL", "Default.aspx", 1, new NameValueCollection { { "accid", "40" } }, LinkProviderOptions.QueryStringExplicitParameters);
       Assert.IsTrue(url.StartsWith("http://mya.godaddy.com/Default.aspx?accid=40"));
 
       // test valid contextid, wildwestdomains
@@ -1296,7 +1320,7 @@ namespace Atlantis.Framework.Providers.Links.Tests
 
     [TestMethod]
     public void RegionSiteQueryStringTests()
-    {      
+    {
       string url;
 
       //  GetRelativeUrl with regionsite
@@ -1352,27 +1376,27 @@ namespace Atlantis.Framework.Providers.Links.Tests
     //  }
     //}
 
-//    [TestMethod]
-//    public void TestFormatFullUrlLinkProviderOptions()
-//    {
-//      bool allowRel = LinkProvider.AllowRelativeUrls;
-//
-//      try
-//      {
-//        LinkProvider.AllowRelativeUrls = true;
-//        var links = NewLinkProvider("http://siteadmin.debug.intranet.gdg/default.aspx?isc=234", 1, string.Empty);
-//        string url = links.GetUrl("SITEURL", "/hosting/hosting.aspx", null, LinkProviderOptions.FormatRelativeUrl);
-//        Assert.AreEqual("/hosting/hosting.aspx?isc=234", url);
-//
-//        LinkProvider.AllowRelativeUrls = false;
-//        url = links.GetUrl("SITEURL", "/hosting/hosting.aspx", null, LinkProviderOptions.FormatRelativeUrl);
-//        Assert.AreEqual("http://www.godaddy.com/hosting/hosting.aspx?isc=234", url);
-//      }
-//      finally
-//      {
-//        LinkProvider.AllowRelativeUrls = allowRel;
-//      }
-//    }
-//
+    //    [TestMethod]
+    //    public void TestFormatFullUrlLinkProviderOptions()
+    //    {
+    //      bool allowRel = LinkProvider.AllowRelativeUrls;
+    //
+    //      try
+    //      {
+    //        LinkProvider.AllowRelativeUrls = true;
+    //        var links = NewLinkProvider("http://siteadmin.debug.intranet.gdg/default.aspx?isc=234", 1, string.Empty);
+    //        string url = links.GetUrl("SITEURL", "/hosting/hosting.aspx", null, LinkProviderOptions.FormatRelativeUrl);
+    //        Assert.AreEqual("/hosting/hosting.aspx?isc=234", url);
+    //
+    //        LinkProvider.AllowRelativeUrls = false;
+    //        url = links.GetUrl("SITEURL", "/hosting/hosting.aspx", null, LinkProviderOptions.FormatRelativeUrl);
+    //        Assert.AreEqual("http://www.godaddy.com/hosting/hosting.aspx?isc=234", url);
+    //      }
+    //      finally
+    //      {
+    //        LinkProvider.AllowRelativeUrls = allowRel;
+    //      }
+    //    }
+    //
   }
 }

@@ -470,6 +470,11 @@ namespace Atlantis.Framework.Providers.Links
           queryMap["prog_id"] = _siteContext.ProgId;
         }
 
+        if ((LinkProviderCommonParameters.HandlePlId) && (_siteContext.ContextId == _RESELLERCONTEXTID))
+        {
+          queryMap["pl_id"] = _siteContext.PrivateLabelId.ToString();
+        }
+
         if ((LinkProviderCommonParameters.HandleManager) && (_siteContext.Manager.IsManager))
         {
           foreach (string key in _siteContext.Manager.ManagerQuery.Keys)

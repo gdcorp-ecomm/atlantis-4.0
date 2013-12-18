@@ -12,10 +12,10 @@ namespace Atlantis.Framework.DomainsRAA.Interface.DomainsRAAStatus
     private readonly IEnumerable<ItemElement> _itemElements;
     private readonly string _requestedIp;
 
-    public DomainsRAAStatusRequestData(string requestedId, IEnumerable<ItemElement> itemElements)
+    public DomainsRAAStatusRequestData(string requestedIp, IEnumerable<ItemElement> itemElements)
     {
       _itemElements = itemElements;
-      _requestedIp = requestedId;
+      _requestedIp = requestedIp;
       RequestTimeout = TimeSpan.FromSeconds(3);
     }
 

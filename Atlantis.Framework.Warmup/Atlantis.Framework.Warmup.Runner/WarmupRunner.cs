@@ -1,4 +1,6 @@
-﻿namespace Atlantis.Framework.Warmup.Runner
+﻿using Atlantis.Framework.Warmup.Runner.TypeHelpers;
+
+namespace Atlantis.Framework.Warmup.Runner
 {
   using System;
   using System.Collections.Generic;
@@ -16,9 +18,11 @@
     public WarmupRunner()
     {
       this.AutoLogResults = true;
+      this.LookForWarmupClassesIfNoneProvided = false;
     }
 
     #region Properties
+
 
     public IWarmupSetup Setup { get; set; }
 
@@ -34,6 +38,8 @@
     }
 
     public bool AutoLogResults { get; set; }
+
+    public bool LookForWarmupClassesIfNoneProvided { get; set; }
 
     #endregion
 
@@ -133,7 +139,17 @@
 
     private List<Tuple<Object, Type>> GetListOfWarmupFixtures()
     {
-      var insts = new List<Tuple<Object, Type>>();
+      // if no classes are supplied, then search for them
+      if (this.LookForWarmupClassesIfNoneProvided && this.WarmupClasses.Count == 0)
+      {
+        var asms = AppDomain.CurrentDomain.GetAssemblies();
+        this.WarmupClasses = ClassFinder.GetClasses(
+          asms,
+          true,
+          new List<Type> {typeof (WarmupFixtureAttribute)}
+          );
+      }
+
       var testInsts = this.WarmupClasses
         .Where(
             o =>
@@ -142,7 +158,7 @@
         .Select(
             t => new Tuple<Object, Type>(Activator.CreateInstance(t), t)
           );
-      insts.AddRange(testInsts);
+      var insts = new List<Tuple<Object, Type>>(testInsts);
       return insts;
     }
 

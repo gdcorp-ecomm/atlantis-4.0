@@ -15,5 +15,8 @@
     WarmupResults Results { get; }
 
     bool AutoLogResults { set; }
+
+    bool LookForWarmupClassesIfNoneProvided { set; }
+
   }
 }

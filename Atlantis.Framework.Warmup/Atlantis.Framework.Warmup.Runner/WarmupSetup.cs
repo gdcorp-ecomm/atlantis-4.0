@@ -3,6 +3,9 @@
   using System.Collections.Generic;
   using Atlantis.Framework.Warmup.Fixtures;
 
+  /// <summary>
+  /// This should really be moved to Atlantis.Framework.Warmup.Runner.Common
+  /// </summary>
   public class WarmupSetup : IWarmupSetup
   {
     private IDictionary<string, object> _Properties;

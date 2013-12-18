@@ -57,15 +57,15 @@
     </Reference>
     <Reference Include="Atlantis.Framework.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Interface.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.Interface.4.13.9.25\lib\net40\Atlantis.Framework.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Personalization.Impl, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.Personalization.Impl.4.13.12.11\lib\net40\Atlantis.Framework.Personalization.Impl.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.Personalization.Impl.4.13.12.17\lib\net40\Atlantis.Framework.Personalization.Impl.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Personalization.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.Personalization.Interface.4.13.12.11\lib\net40\Atlantis.Framework.Personalization.Interface.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.Personalization.Interface.4.13.12.17\lib\net40\Atlantis.Framework.Personalization.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Providers.Personalization">
       <HintPath>..\packages\Atlantis.Framework.Providers.Personalization.4.13.12.11\lib\net40\Atlantis.Framework.Providers.Personalization.dll</HintPath>

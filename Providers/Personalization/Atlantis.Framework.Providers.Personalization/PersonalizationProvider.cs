@@ -11,9 +11,10 @@ namespace Atlantis.Framework.Providers.Personalization
   {
     private readonly Lazy<ISiteContext> _siteContext;
     private readonly Lazy<IShopperContext> _shopperContext;
+    private readonly Lazy<IDebugContext> _debugContext;
 
-    private Lazy<ShopperSpecificSessionDataItem<TargetedMessages>> _targetedMessagesSessionData =
-               new Lazy<ShopperSpecificSessionDataItem<TargetedMessages>>(() => { return new ShopperSpecificSessionDataItem<TargetedMessages>("PersonalizationProvider.TargetedMessages"); });
+    private Lazy<ShopperSpecificSessionDataItem<TargetedMessagesResponseData>> _targetedMessagesSessionData =
+               new Lazy<ShopperSpecificSessionDataItem<TargetedMessagesResponseData>>(() => { return new ShopperSpecificSessionDataItem<TargetedMessagesResponseData>("PersonalizationProvider.TargetedMessages"); });
 
 
     public PersonalizationProvider(IProviderContainer container)
@@ -21,20 +22,39 @@ namespace Atlantis.Framework.Providers.Personalization
     {
       _siteContext = new Lazy<ISiteContext>(() => Container.Resolve<ISiteContext>());
       _shopperContext = new Lazy<IShopperContext>(() => Container.Resolve<IShopperContext>());
+      _debugContext = new Lazy<IDebugContext>(() => Container.Resolve<IDebugContext>());
     }
 
     public TargetedMessages GetTargetedMessages(string interactionPoint)
     {
-      TargetedMessages targetedMessages;
+      TargetedMessages messages = null;
+      TargetedMessagesResponseData response;
 
-      if (!_targetedMessagesSessionData.Value.TryGetData(_shopperContext.Value.ShopperId, out targetedMessages))
+      if (string.IsNullOrEmpty(PersonalizationConfig.TMSAppId))
+      {
+        throw new ApplicationException("Config value, \"PersonalizationConfig.TMSAppId\" is empty.  Pleas set this in your application start event.");
+      }
+
+      if (!_targetedMessagesSessionData.Value.TryGetData(_shopperContext.Value.ShopperId, out response))
       {
         RequestData request = new TargetedMessagesRequestData(_shopperContext.Value.ShopperId, _siteContext.Value.PrivateLabelId.ToString(), PersonalizationConfig.TMSAppId, interactionPoint);
-        targetedMessages = ((TargetedMessagesResponseData)Engine.Engine.ProcessRequest(request, PersonalizationEngineRequests.RequestId)).TargetedMessagesData;
-        _targetedMessagesSessionData.Value.SetData(_shopperContext.Value.ShopperId, targetedMessages);
+        response = (TargetedMessagesResponseData)Engine.Engine.ProcessRequest(request, PersonalizationEngineRequests.RequestId);
+        _targetedMessagesSessionData.Value.SetData(_shopperContext.Value.ShopperId, response);
+        if (response != null)
+        {
+          if (_siteContext.Value.IsRequestInternal)
+          {
+            _debugContext.Value.LogDebugTrackingData("TMS Service URL", response.TMSUrl);
+          }
+        }
       }
-            
-      return targetedMessages;
+
+      if (response != null)
+      {
+        messages = response.TargetedMessagesData;
+      }
+      
+      return messages;
     }
   }
 }

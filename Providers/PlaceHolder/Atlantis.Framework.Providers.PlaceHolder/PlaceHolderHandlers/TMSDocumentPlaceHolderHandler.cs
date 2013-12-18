@@ -115,7 +115,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolderHandlers
 
       if (msgData == null)
       {
-        msgData = new TMSMessageData(messageTags[0], DEFAULT_MESSAGE_NAME, string.Empty);
+        msgData = new TMSMessageData(DEFAULT_MESSAGE_NAME, messageTags[0], string.Empty);
       }
       
       return msgData;

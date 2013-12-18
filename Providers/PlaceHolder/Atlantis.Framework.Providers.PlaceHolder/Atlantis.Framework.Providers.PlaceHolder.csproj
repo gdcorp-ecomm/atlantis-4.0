@@ -62,7 +62,7 @@
     </Reference>
     <Reference Include="Atlantis.Framework.Personalization.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.Personalization.Interface.4.13.12.11\lib\net40\Atlantis.Framework.Personalization.Interface.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.Personalization.Interface.4.13.12.17\lib\net40\Atlantis.Framework.Personalization.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.PrivateLabel.Interface">
       <HintPath>..\packages\Atlantis.Framework.PrivateLabel.Interface.4.0.0.0\lib\net40\Atlantis.Framework.PrivateLabel.Interface.dll</HintPath>
@@ -79,7 +79,7 @@
     </Reference>
     <Reference Include="Atlantis.Framework.Providers.Personalization.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.Providers.Personalization.Interface.4.13.12.11\lib\net40\Atlantis.Framework.Providers.Personalization.Interface.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.Providers.Personalization.Interface.4.13.12.17\lib\net40\Atlantis.Framework.Providers.Personalization.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Providers.RenderPipeline, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

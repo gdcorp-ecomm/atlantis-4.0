@@ -81,7 +81,7 @@ namespace Atlantis.Framework.Providers.Geo
     {
       get
       {
-        return GeoCallingCodeData.GetCallingCodeByCountryCode(_country.Code, _country.CallingCode);
+        return _country.CallingCode;
       }
     }
 

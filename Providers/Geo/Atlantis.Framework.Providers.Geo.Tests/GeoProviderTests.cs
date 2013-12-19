@@ -283,7 +283,7 @@ namespace Atlantis.Framework.Providers.Geo.Tests
       Assert.IsTrue(result);
 
       Assert.AreEqual("ky", country.Code);
-      Assert.AreEqual(country.CallingCode, "1345");
+      Assert.AreEqual(country.CallingCode, "1");
       Assert.AreNotEqual(0, country.Id);
       Assert.IsNotNull(country.Name);
     }
@@ -297,7 +297,7 @@ namespace Atlantis.Framework.Providers.Geo.Tests
       Assert.IsTrue(result);
 
       Assert.AreEqual("zw", country.Code);
-      Assert.AreEqual(country.CallingCode, "263");
+      Assert.AreEqual(country.CallingCode, "1");
       Assert.AreNotEqual(0, country.Id);
       Assert.IsNotNull(country.Name);
     }

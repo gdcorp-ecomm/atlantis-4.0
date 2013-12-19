@@ -6,7 +6,7 @@ using Atlantis.Framework.Providers.DomainContactValidation.Interface;
 
 namespace Atlantis.Framework.Providers.DomainContactValidation
 {
-  public sealed class DomainContact : XmlDocument, IDomainContact
+  public sealed class DomainContact : XmlDocument
   {
     private readonly XmlElement _contactElement;
 

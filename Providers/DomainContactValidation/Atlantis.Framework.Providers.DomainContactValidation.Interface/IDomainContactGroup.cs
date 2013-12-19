@@ -19,7 +19,7 @@ namespace Atlantis.Framework.Providers.DomainContactValidation.Interface
     /// <returns>true of explicity defined, false otherrwise</returns>
     bool HasExplicitDomainContact(DomainContactType domainContactType);
 
-    bool TrySetContact(DomainContactType contactType, IDomainContact domainContact);
+    bool TrySetContact(DomainContactType contactType, DomainContact domainContact);
 
     /// <summary>
     /// The SetContact function performs a validation of the contact against the existing
@@ -27,10 +27,10 @@ namespace Atlantis.Framework.Providers.DomainContactValidation.Interface
     /// </summary>
     /// <param name="contactType">Type of contact to be added</param>
     /// <param name="domainContact">Domain Contact</param>
-    bool SetContact(DomainContactType contactType, IDomainContact domainContact);
+    bool SetContact(DomainContactType contactType, DomainContact domainContact);
 
 
-    bool SetContacts(IDomainContact registrantContact, IDomainContact technicalContact, IDomainContact administrativeContact, IDomainContact billingContact);
+    bool SetContacts(DomainContact registrantContact, DomainContact technicalContact, DomainContact administrativeContact, DomainContact billingContact);
 
     /************************************************************************************/
 
@@ -39,7 +39,7 @@ namespace Atlantis.Framework.Providers.DomainContactValidation.Interface
     /// the existing set of tlds for all DomainContactTypes.
     /// </summary>
     /// <param name="domainContact">Domain Contact</param>
-    bool SetContact(IDomainContact domainContact);
+    bool SetContact(DomainContact domainContact);
 
     /************************************************************************************/
 
@@ -51,7 +51,7 @@ namespace Atlantis.Framework.Providers.DomainContactValidation.Interface
     /// <param name="domainContactType">Domain Contact Type</param>
     /// <param name="tlds">Enumerable of Selected DotTypes</param>
     /// <param name="domainContactError">Domain Contact Error</param>
-    void SetInvalidContact(IDomainContact domainContact, DomainContactType domainContactType, IEnumerable<string> tlds, IDomainContactError domainContactError);
+    void SetInvalidContact(DomainContact domainContact, DomainContactType domainContactType, IEnumerable<string> tlds, IDomainContactError domainContactError);
 
     /// <summary>
     /// The SetInvalidContact function sets Invalid contact bypassing
@@ -61,7 +61,7 @@ namespace Atlantis.Framework.Providers.DomainContactValidation.Interface
     /// <param name="domainContactType">Domain Contact Type</param>
     /// <param name="tlds">Enumerable of Selected DotTypes</param>
     /// <param name="domainContactErrors">List of Domain Contact Errors</param>
-    void SetInvalidContact(IDomainContact domainContact, DomainContactType domainContactType, IEnumerable<string> tlds, List<IDomainContactError> domainContactErrors);
+    void SetInvalidContact(DomainContact domainContact, DomainContactType domainContactType, IEnumerable<string> tlds, List<IDomainContactError> domainContactErrors);
 
     /************************************************************************************/
 
@@ -81,7 +81,7 @@ namespace Atlantis.Framework.Providers.DomainContactValidation.Interface
     /// </summary>
     /// <param name="contactType">Desired type of domain contact</param>
     /// <returns>Domain contact (may be null)</returns>
-    IDomainContact GetContact(DomainContactType contactType);
+    DomainContact GetContact(DomainContactType contactType);
 
     /// <summary>
     /// This function returns an xml string that can be used to copy the object.  It contains

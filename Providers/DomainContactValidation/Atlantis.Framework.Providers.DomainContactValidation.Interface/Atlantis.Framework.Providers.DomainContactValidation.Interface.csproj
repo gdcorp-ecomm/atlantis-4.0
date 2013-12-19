@@ -75,13 +75,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DomainContact.cs" />
+    <Compile Include="DomainContactError.cs" />
     <Compile Include="DomainContactErrorAttributes.cs" />
     <Compile Include="DomainCheckType.cs" />
     <Compile Include="IDomainContactGroup.cs" />
     <Compile Include="DomainContactType.cs" />
     <Compile Include="DomainContactAttributes.cs" />
     <Compile Include="IDomainContactError.cs" />
-    <Compile Include="IDomainContact.cs" />
+    <Compile Include="IContactValidation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <None Include="atlantis.config" />
     <None Include="Atlantis.Framework.Providers.DomainContactValidation.Interface.nuget.bat" />

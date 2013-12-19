@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Iris.Impl", "Atlantis.Framework.Iris.Impl\Atlantis.Framework.Iris.Impl.csproj", "{FE49AB30-2215-4B79-AB0D-713612C95955}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Iris.Tests", "Atlantis.Framework.Iris.Tests\Atlantis.Framework.Iris.Tests.csproj", "{C38A5D71-CFA3-453A-9DD4-D3FB0CA81512}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Iris.Interface", "Atlantis.Framework.Iris.Interface\Atlantis.Framework.Iris.Interface.csproj", "{46EFCA99-AD2A-4387-AE47-CF596667E562}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FE49AB30-2215-4B79-AB0D-713612C95955}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE49AB30-2215-4B79-AB0D-713612C95955}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE49AB30-2215-4B79-AB0D-713612C95955}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE49AB30-2215-4B79-AB0D-713612C95955}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C38A5D71-CFA3-453A-9DD4-D3FB0CA81512}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C38A5D71-CFA3-453A-9DD4-D3FB0CA81512}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C38A5D71-CFA3-453A-9DD4-D3FB0CA81512}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C38A5D71-CFA3-453A-9DD4-D3FB0CA81512}.Release|Any CPU.Build.0 = Release|Any CPU
+		{46EFCA99-AD2A-4387-AE47-CF596667E562}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46EFCA99-AD2A-4387-AE47-CF596667E562}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46EFCA99-AD2A-4387-AE47-CF596667E562}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46EFCA99-AD2A-4387-AE47-CF596667E562}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

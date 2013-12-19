@@ -105,6 +105,7 @@ namespace Atlantis.Framework.Warmup.Runner
         var iWarmupFixture = CurrentWarmupFixtureTuple.Item1 as IWarmupFixture;
         if (iWarmupFixture != null)
         {
+          Setup = Setup ?? new WarmupSetup();
           iWarmupFixture.SetupWarmup(Setup);
         }
       }

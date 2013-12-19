@@ -11,17 +11,12 @@ using Atlantis.Framework.Testing.MockHttpContext;
 using Atlantis.Framework.Testing.MockProviders;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Diagnostics;
-using Atlantis.Framework.Providers.PlaceHolder.PlaceHolders;
-using Atlantis.Framework.Providers.Personalization;
-using Atlantis.Framework.Providers.Personalization.Interface;
-using Atlantis.Framework.Providers.Containers.DataToken.RenderHandlers;
 
 namespace Atlantis.Framework.Providers.PlaceHolder.Tests
 {
   [TestClass]
   [DeploymentItem("atlantis.config")]
   [DeploymentItem("Atlantis.Framework.CDS.Impl.dll")]
-  [DeploymentItem("Atlantis.Framework.Personalization.Impl.dll")]
   public class PlaceHolderProviderTests
   {
     public static IProviderContainer InitializeProviderContainer()
@@ -33,7 +28,6 @@ namespace Atlantis.Framework.Providers.PlaceHolder.Tests
       providerContainer.RegisterProvider<IPlaceHolderProvider, PlaceHolderProvider>();
       providerContainer.RegisterProvider<ICDSContentProvider, CDSContentProvider>();
       providerContainer.RegisterProvider<IRenderPipelineProvider, RenderPipelineProvider>();
-      providerContainer.RegisterProvider<IPersonalizationProvider, PersonalizationProvider>();
 
 
       return providerContainer;
@@ -410,44 +404,5 @@ namespace Atlantis.Framework.Providers.PlaceHolder.Tests
       Assert.IsTrue(renderedContent.Contains("/>APPENDED RENDER HANDLER CONTENT!!!APPENDED RENDER HANDLER CONTENT!!!"));
     }
 
-    [TestMethod]
-    public void RenderTMSDocumentValid()
-    {
-      MockHttpRequest mockHttpRequest = new MockHttpRequest("http://www.debug.godaddy-com.ide/?QA--FakeShopperId=912111&version=tms/tag1/default_template|52a93378f778fc09f82f03d6");
-      MockHttpContext.SetFromWorkerRequest(mockHttpRequest);
-
-      IPlaceHolder placeHolder = new TMSDocumentPlaceHolder("homepage", new List<string>(){"tag1"});
-
-      IProviderContainer providerContainer = InitializeProviderContainer();
-      providerContainer.SetData<bool>("MockSiteContextSettings.IsRequestInternal", true);
-
-      IPlaceHolderProvider placeHolderProvider = providerContainer.Resolve<IPlaceHolderProvider>();
-
-      string renderedContent = placeHolderProvider.ReplacePlaceHolders(placeHolder.ToMarkup(), new List<IRenderHandler>{ new ProviderContainerDataTokenRenderHandler() } );
-
-      WriteOutput(renderedContent);
-
-      Assert.AreEqual(renderedContent, "tag1/name1/12345");
-    }
-
-    [TestMethod]
-    public void TMS_IsFirstMessageBeingReturned()
-    {
-      MockHttpRequest mockHttpRequest = new MockHttpRequest("http://www.debug.godaddy-com.ide/?QA--FakeShopperId=912117&version=tms/tag1/default_template|52a93378f778fc09f82f03d6");
-      MockHttpContext.SetFromWorkerRequest(mockHttpRequest);
-
-      IPlaceHolder placeHolder = new TMSDocumentPlaceHolder("homepage", new List<string>() { "tag1" });
-
-      IProviderContainer providerContainer = InitializeProviderContainer();
-      providerContainer.SetData<bool>("MockSiteContextSettings.IsRequestInternal", true);
-
-      IPlaceHolderProvider placeHolderProvider = providerContainer.Resolve<IPlaceHolderProvider>();
-
-      string renderedContent = placeHolderProvider.ReplacePlaceHolders(placeHolder.ToMarkup(), new List<IRenderHandler> { new ProviderContainerDataTokenRenderHandler() });
-
-      WriteOutput(renderedContent);
-
-      Assert.IsTrue(renderedContent.Contains("name20"));
-    }
   }
 }

@@ -35,23 +35,29 @@ namespace Atlantis.Framework.Providers.Personalization
         throw new ApplicationException("Config value, \"PersonalizationConfig.TMSAppId\" is empty.  Pleas set this in your application start event.");
       }
 
-      if (!_targetedMessagesSessionData.Value.TryGetData(_shopperContext.Value.ShopperId, out response))
+      bool foundInSession = _targetedMessagesSessionData.Value.TryGetData(_shopperContext.Value.ShopperId, interactionPoint, _siteContext.Value.PrivateLabelId.ToString(), out response);
+
+      if (foundInSession)
+      {
+        messages = response.TargetedMessagesData;
+        if (_siteContext.Value.IsRequestInternal)
+        {
+          _debugContext.Value.LogDebugTrackingData("TMS Service URL (from Session)", response.TMSUrl);
+        }
+      }
+      else 
       {
         RequestData request = new TargetedMessagesRequestData(_shopperContext.Value.ShopperId, _siteContext.Value.PrivateLabelId.ToString(), PersonalizationConfig.TMSAppId, interactionPoint);
         response = (TargetedMessagesResponseData)Engine.Engine.ProcessRequest(request, PersonalizationEngineRequests.RequestId);
-        _targetedMessagesSessionData.Value.SetData(_shopperContext.Value.ShopperId, response);
         if (response != null)
         {
+          _targetedMessagesSessionData.Value.SetData(_shopperContext.Value.ShopperId, interactionPoint, _siteContext.Value.PrivateLabelId.ToString(), response);
+          messages = response.TargetedMessagesData;
           if (_siteContext.Value.IsRequestInternal)
           {
             _debugContext.Value.LogDebugTrackingData("TMS Service URL", response.TMSUrl);
           }
         }
-      }
-
-      if (response != null)
-      {
-        messages = response.TargetedMessagesData;
       }
       
       return messages;

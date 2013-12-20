@@ -26,9 +26,9 @@ namespace Atlantis.Framework.Iris.Tests
       int privateLabelId = 1;
       string shopperId = "902185";
 
-      var request = new Iris.Interface.QuickCreateIncidentRequestData(subscriberId,subject, note, customerEmail, ipAddress, createdBy, privateLabelId, shopperId);
+      var request = new Iris.Interface.QuickCreateIncidentRequestData(subscriberId, subject, note, customerEmail, ipAddress, createdBy, privateLabelId, shopperId);
 
-      var response = Engine.Engine.ProcessRequest(request, 999) as Iris.Interface.QuickCreateIncidentResponseData;
+      var response = Engine.Engine.ProcessRequest(request, 784) as Iris.Interface.QuickCreateIncidentResponseData;
 
       Assert.IsNotNull(response);
       Assert.IsNotNull(response.ToXML());
@@ -53,7 +53,7 @@ namespace Atlantis.Framework.Iris.Tests
 
       var request = new Iris.Interface.CreateIncidentRequestData(subscriberId, subject, note, customerEmail, ipAddress, groupId, serviceId, createdBy, privateLabelId, shopperId);
 
-      var response = Engine.Engine.ProcessRequest(request, 998) as Iris.Interface.CreateIncidentResponseData;
+      var response = Engine.Engine.ProcessRequest(request, 785) as Iris.Interface.CreateIncidentResponseData;
 
       Assert.IsNotNull(response);
       Assert.IsNotNull(response.ToXML());
@@ -66,10 +66,10 @@ namespace Atlantis.Framework.Iris.Tests
     {
       string note = "More Notes from the unit tests for Adding Comments to existing tickets.";
       long incidentId = 1329192;
-      string customerId = "Customer"; 
+      string customerId = "Customer";
 
       var request = new Iris.Interface.AddIncidentNoteRequestData(incidentId, note, customerId);
-      var response = Engine.Engine.ProcessRequest(request, 997) as Iris.Interface.AddIncidentNoteResponseData;
+      var response = Engine.Engine.ProcessRequest(request, 786) as Iris.Interface.AddIncidentNoteResponseData;
 
       Assert.IsNotNull(response);
       Assert.IsNotNull(response.ToXML());
@@ -86,7 +86,7 @@ namespace Atlantis.Framework.Iris.Tests
       string customerId = "Customer";
 
       var request = new Iris.Interface.AddIncidentNoteRequestData(incidentId, note, customerId);
-      var response = Engine.Engine.ProcessRequest(request, 997) as Iris.Interface.AddIncidentNoteResponseData;
+      var response = Engine.Engine.ProcessRequest(request, 786) as Iris.Interface.AddIncidentNoteResponseData;
 
       Assert.IsNotNull(response);
       Assert.IsNotNull(response.ToXML());
@@ -100,12 +100,11 @@ namespace Atlantis.Framework.Iris.Tests
     {
 
       string shopperId = "902185";
-      DateTime startDate =  new DateTime(2013, 10, 1) ;
+      DateTime startDate = new DateTime(2013, 10, 1);
       DateTime endDate = DateTime.Now;
 
-      var request = new Iris.Interface.GetIncidentsByShopperIdAndDateRangeRequestData(startDate, endDate);
-      request.ShopperID = shopperId;
-      var response = Engine.Engine.ProcessRequest(request, 996) as Iris.Interface.GetIncidentsByShopperIdAndDateRangeResponseData;
+      var request = new Iris.Interface.GetIncidentsByShopperIdAndDateRangeRequestData(shopperId, startDate, endDate);
+      var response = Engine.Engine.ProcessRequest(request, 787) as Iris.Interface.GetIncidentsByShopperIdAndDateRangeResponseData;
 
       Assert.IsNotNull(response);
       Assert.IsNotNull(response.ToXML());
@@ -121,7 +120,7 @@ namespace Atlantis.Framework.Iris.Tests
       int noteId = 0;
 
       var request = new Iris.Interface.GetIncidentCustomerNotesRequestData(incidentId, noteId);
-      var response = Engine.Engine.ProcessRequest(request, 995) as Iris.Interface.GetIncidentCustomerNotesResponseData;
+      var response = Engine.Engine.ProcessRequest(request, 788) as Iris.Interface.GetIncidentCustomerNotesResponseData;
 
       Assert.IsNotNull(response);
       Assert.IsNotNull(response.ToXML());

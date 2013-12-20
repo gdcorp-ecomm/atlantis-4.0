@@ -10,6 +10,21 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Iris.Interface", "Atlantis.Framework.Iris.Interface\Atlantis.Framework.Iris.Interface.csproj", "{46EFCA99-AD2A-4387-AE47-CF596667E562}"
 EndProject
 Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 4
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
+		SccProjectUniqueName0 = Atlantis.Framework.Iris.Impl\\Atlantis.Framework.Iris.Impl.csproj
+		SccProjectName0 = Atlantis.Framework.Iris.Impl
+		SccLocalPath0 = Atlantis.Framework.Iris.Impl
+		SccProjectUniqueName1 = Atlantis.Framework.Iris.Interface\\Atlantis.Framework.Iris.Interface.csproj
+		SccProjectName1 = Atlantis.Framework.Iris.Interface
+		SccLocalPath1 = Atlantis.Framework.Iris.Interface
+		SccLocalPath2 = .
+		SccProjectUniqueName3 = Atlantis.Framework.Iris.Tests\\Atlantis.Framework.Iris.Tests.csproj
+		SccProjectName3 = Atlantis.Framework.Iris.Tests
+		SccLocalPath3 = Atlantis.Framework.Iris.Tests
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU

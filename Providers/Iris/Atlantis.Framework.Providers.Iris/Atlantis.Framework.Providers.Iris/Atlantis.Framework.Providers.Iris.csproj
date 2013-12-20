@@ -1,20 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{46EFCA99-AD2A-4387-AE47-CF596667E562}</ProjectGuid>
+    <ProjectGuid>{C1BC7421-9F0C-49A0-BE98-B7E7FCB478BC}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Atlantis.Framework.Iris.Interface</RootNamespace>
-    <AssemblyName>Atlantis.Framework.Iris.Interface</AssemblyName>
+    <RootNamespace>Atlantis.Framework.Providers.Iris</RootNamespace>
+    <AssemblyName>Atlantis.Framework.Providers.Iris</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <SccProjectName>SAK</SccProjectName>
-    <SccLocalPath>SAK</SccLocalPath>
-    <SccAuxPath>SAK</SccAuxPath>
-    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -38,7 +35,7 @@
       <HintPath>..\packages\Atlantis.Framework.Engine.4.0.0.0\lib\net40\Atlantis.Framework.Engine.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Engine.Monitor">
-      <HintPath>..\packages\Atlantis.Framework.Engine.Monitor.4.0.0.0\lib\net40\Atlantis.Framework.Engine.Monitor.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.Engine.Monitor.4.13.12.11\lib\net40\Atlantis.Framework.Engine.Monitor.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Engine.XmlSerializers">
       <HintPath>..\packages\Atlantis.Framework.Engine.4.0.0.0\lib\net40\Atlantis.Framework.Engine.XmlSerializers.dll</HintPath>
@@ -46,16 +43,23 @@
     <Reference Include="Atlantis.Framework.Interface">
       <HintPath>..\packages\Atlantis.Framework.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Interface.dll</HintPath>
     </Reference>
+    <Reference Include="Atlantis.Framework.Iris.Impl">
+      <HintPath>..\..\..\..\Triplets\Iris\Atlantis.Framework.Iris\Atlantis.Framework.Iris.Impl\bin\Debug\Atlantis.Framework.Iris.Impl.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Iris.Interface">
+      <HintPath>..\..\..\..\Triplets\Iris\Atlantis.Framework.Iris\Atlantis.Framework.Iris.Impl\bin\Debug\Atlantis.Framework.Iris.Interface.dll</HintPath>
+    </Reference>
     <Reference Include="Atlantis.Framework.Providers.Containers">
       <HintPath>..\packages\Atlantis.Framework.Providers.Containers.4.13.10.12\lib\net40\Atlantis.Framework.Providers.Containers.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Providers.Interface">
+      <HintPath>..\packages\Atlantis.Framework.Providers.Interface.4.13.12.2\lib\net40\Atlantis.Framework.Providers.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Providers.RenderPipeline.Interface">
       <HintPath>..\packages\Atlantis.Framework.Providers.RenderPipeline.Interface.4.13.10.16\lib\net40\Atlantis.Framework.Providers.RenderPipeline.Interface.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -63,24 +67,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AddIncidentNoteRequestData.cs" />
-    <Compile Include="AddIncidentNoteResponseData.cs" />
-    <Compile Include="CreateIncidentRequestData.cs" />
-    <Compile Include="CreateIncidentResponseData.cs" />
-    <Compile Include="GetIncidentCustomerNotesRequestData.cs" />
-    <Compile Include="GetIncidentCustomerNotesResponseData.cs" />
-    <Compile Include="GetIncidentsByShopperIdAndDateRangeRequestData.cs" />
-    <Compile Include="GetIncidentsByShopperIdAndDateRangeResponseData.cs" />
-    <Compile Include="Objects\Incident.cs" />
-    <Compile Include="Objects\IncidentsList.cs" />
-    <Compile Include="Objects\Note.cs" />
-    <Compile Include="Objects\NotesList.cs" />
-    <Compile Include="QuickCreateIncidentRequestData.cs" />
-    <Compile Include="QuickCreateIncidentResponseData.cs" />
+    <Compile Include="EngineRequest.cs" />
+    <Compile Include="IrisProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <None Include="Atlantis.Framework.Iris.nuget.bat" />
-    <None Include="Atlantis.Framework.Iris.nuspec" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="atlantis.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Atlantis.Framework.Providers.Iris.Interface\Atlantis.Framework.Providers.Iris.Interface.csproj">
+      <Project>{59d1c172-0c27-432d-9a25-4d45818708bd}</Project>
+      <Name>Atlantis.Framework.Providers.Iris.Interface</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

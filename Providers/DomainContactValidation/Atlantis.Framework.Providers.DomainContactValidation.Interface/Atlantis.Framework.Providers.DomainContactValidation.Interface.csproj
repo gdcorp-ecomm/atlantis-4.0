@@ -49,8 +49,9 @@
     <Reference Include="Atlantis.Framework.DomainContactValidation.Impl">
       <HintPath>..\packages\Atlantis.Framework.DomainContactValidation.Impl.4.13.12.16\lib\net40\Atlantis.Framework.DomainContactValidation.Impl.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.DomainContactValidation.Interface">
-      <HintPath>..\packages\Atlantis.Framework.DomainContactValidation.Interface.4.13.12.17\lib\net40\Atlantis.Framework.DomainContactValidation.Interface.dll</HintPath>
+    <Reference Include="Atlantis.Framework.DomainContactValidation.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.DomainContactValidation.Interface.4.13.12.18\lib\net40\Atlantis.Framework.DomainContactValidation.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Engine">
       <HintPath>..\packages\Atlantis.Framework.Engine.4.0.0.0\lib\net40\Atlantis.Framework.Engine.dll</HintPath>
@@ -67,18 +68,18 @@
     <Reference Include="Atlantis.Framework.Products.Interface">
       <HintPath>..\packages\Atlantis.Framework.Products.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Products.Interface.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.Providers.Interface">
-      <HintPath>..\packages\Atlantis.Framework.Providers.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Providers.Interface.dll</HintPath>
+    <Reference Include="Atlantis.Framework.Providers.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Providers.Interface.4.13.12.2\lib\net40\Atlantis.Framework.Providers.Interface.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DomainContact.cs" />
-    <Compile Include="DomainContactError.cs" />
     <Compile Include="DomainContactErrorAttributes.cs" />
     <Compile Include="DomainCheckType.cs" />
+    <Compile Include="IDomainContact.cs" />
     <Compile Include="IDomainContactGroup.cs" />
     <Compile Include="DomainContactType.cs" />
     <Compile Include="DomainContactAttributes.cs" />

@@ -8,7 +8,7 @@ using Atlantis.Framework.Providers.DomainContactValidation.Interface;
 
 namespace Atlantis.Framework.Providers.DomainContactValidation
 {
-  public class DomainContactGroup : ICloneable, IDomainContactGroup
+  public class DomainContactGroup : IDomainContactGroup
   {
     private const int DOMAIN_VALIDATION_CHECK = 782;
 
@@ -19,7 +19,7 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
     private const string CONTACT_TYPE_ATTRIBUTE_NAME = "contactType";
     public const string CONTACT_INFO_ELEMENT_NAME = "contactInfo";
 
-    private readonly Dictionary<DomainContactType, DomainContact> _domainContactGroup = new Dictionary<DomainContactType, DomainContact>();
+    private readonly Dictionary<DomainContactType, IDomainContact> _domainContactGroup = new Dictionary<DomainContactType, IDomainContact>();
 
     private readonly int _privateLabelId;
 
@@ -131,9 +131,9 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
     {
       var newDomainContactGroup = new DomainContactGroup(Tlds, _privateLabelId);
 
-      foreach (KeyValuePair<DomainContactType, DomainContact> pair in _domainContactGroup)
+      foreach (KeyValuePair<DomainContactType, IDomainContact> pair in _domainContactGroup)
       {
-        newDomainContactGroup._domainContactGroup[pair.Key] = (DomainContact)pair.Value.Clone();
+        newDomainContactGroup._domainContactGroup[pair.Key] = (IDomainContact)pair.Value.Clone();
       }
 
       return newDomainContactGroup;
@@ -207,11 +207,11 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
       return _domainContactGroup.ContainsKey(domainContactType);
     }
 
-    private bool SetContactInt(DomainContactType contactType, DomainContact domainContact, bool onlySetIfValid)
+    private bool SetContactInt(DomainContactType contactType, IDomainContact domainContact, bool onlySetIfValid)
     {
       if (!SkipValidation)
       {
-        ValidateContact(domainContact, GetTldString(Tlds), DomainCheckType.Other, contactType, true);
+        ValidateContact(domainContact, Tlds, DomainCheckType.Other, contactType, true);
       }
 
       if (!onlySetIfValid || domainContact.IsValid)
@@ -225,11 +225,11 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
             var oOldDomainContact = _domainContactGroup[DomainContactType.Registrant];
 
             if (!_domainContactGroup.ContainsKey(DomainContactType.Administrative))
-              _domainContactGroup[DomainContactType.Administrative] = oOldDomainContact.Clone() as DomainContact;
+              _domainContactGroup[DomainContactType.Administrative] = oOldDomainContact.Clone() as IDomainContact;
             if (!_domainContactGroup.ContainsKey(DomainContactType.Billing))
-              _domainContactGroup[DomainContactType.Billing] = oOldDomainContact.Clone() as DomainContact;
+              _domainContactGroup[DomainContactType.Billing] = oOldDomainContact.Clone() as IDomainContact;
             if (!_domainContactGroup.ContainsKey(DomainContactType.Technical))
-              _domainContactGroup[DomainContactType.Technical] = oOldDomainContact.Clone() as DomainContact;
+              _domainContactGroup[DomainContactType.Technical] = oOldDomainContact.Clone() as IDomainContact;
           }
         }
 
@@ -239,7 +239,7 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
       return domainContact.IsValid;
     }
 
-    public bool TrySetContact(DomainContactType contactType, DomainContact domainContact)
+    public bool TrySetContact(DomainContactType contactType, IDomainContact domainContact)
     {
       return SetContactInt(contactType, domainContact, true);
     }
@@ -250,20 +250,19 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
     /// </summary>
     /// <param name="contactType">Type of contact to be added</param>
     /// <param name="domainContact">Domain Contact</param>
-    public bool SetContact(DomainContactType contactType, DomainContact domainContact)
+    public bool SetContact(DomainContactType contactType, IDomainContact domainContact)
     {
       return SetContactInt(contactType, domainContact, false);
     }
 
-    public bool SetContacts(DomainContact registrantContact, DomainContact technicalContact, DomainContact administrativeContact, DomainContact billingContact)
+    public bool SetContacts(IDomainContact registrantContact, IDomainContact technicalContact, IDomainContact administrativeContact, IDomainContact billingContact)
     {
       if (!SkipValidation)
       {
-        string tldString = GetTldString(Tlds);
-        ValidateContact(registrantContact, tldString, DomainCheckType.Other, DomainContactType.Registrant, true);
-        ValidateContact(technicalContact, tldString, DomainCheckType.Other, DomainContactType.Technical, true);
-        ValidateContact(administrativeContact, tldString, DomainCheckType.Other, DomainContactType.Administrative, true);
-        ValidateContact(billingContact, tldString, DomainCheckType.Other, DomainContactType.Billing, true);
+        ValidateContact(registrantContact, Tlds, DomainCheckType.Other, DomainContactType.Registrant, true);
+        ValidateContact(technicalContact, Tlds, DomainCheckType.Other, DomainContactType.Technical, true);
+        ValidateContact(administrativeContact, Tlds, DomainCheckType.Other, DomainContactType.Administrative, true);
+        ValidateContact(billingContact, Tlds, DomainCheckType.Other, DomainContactType.Billing, true);
       }
       _domainContactGroup[DomainContactType.Registrant] = registrantContact;
       _domainContactGroup[DomainContactType.Administrative] = administrativeContact;
@@ -278,7 +277,7 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
     /// the existing set of tlds for all DomainContactTypes.
     /// </summary>
     /// <param name="domainContact">Domain Contact</param>
-    public bool SetContact(DomainContact domainContact)
+    public bool SetContact(IDomainContact domainContact)
     {
       _domainContactGroup[DomainContactType.Registrant] = domainContact;
 
@@ -303,7 +302,7 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
     /// <param name="domainContactType">Domain Contact Type</param>
     /// <param name="tlds">Enumerable of Selected DotTypes</param>
     /// <param name="domainContactError">Domain Contact Error</param>
-    public void SetInvalidContact(DomainContact domainContact, DomainContactType domainContactType, IEnumerable<string> tlds, IDomainContactError domainContactError)
+    public void SetInvalidContact(IDomainContact domainContact, DomainContactType domainContactType, IEnumerable<string> tlds, IDomainContactError domainContactError)
     {
       Tlds = CleanTlds(tlds);
       domainContact.InvalidateContact(domainContactError);      
@@ -318,7 +317,7 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
     /// <param name="domainContactType">Domain Contact Type</param>
     /// <param name="tlds">Enumerable of Selected DotTypes</param>
     /// <param name="domainContactErrors">List of Domain Contact Errors</param>
-    public void SetInvalidContact(DomainContact domainContact, DomainContactType domainContactType, IEnumerable<string> tlds, List<IDomainContactError> domainContactErrors)
+    public void SetInvalidContact(IDomainContact domainContact, DomainContactType domainContactType, IEnumerable<string> tlds, List<IDomainContactError> domainContactErrors)
     {
       Tlds = CleanTlds(tlds);
       domainContact.InvalidateContact(domainContactErrors);
@@ -336,9 +335,9 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
       switch (domainContactType)
       {
         case DomainContactType.Registrant:
-          throw new Exception("Cannot delete the default (Registrant) DomainContact.");
+          throw new Exception("Cannot delete the default (Registrant) IDomainContact.");
         case DomainContactType.RegistrantUnicode:
-          throw new Exception("Cannot delete the default (RegistrantUnicode) DomainContact.");
+          throw new Exception("Cannot delete the default (RegistrantUnicode) IDomainContact.");
         default:
           if (_domainContactGroup.ContainsKey(domainContactType))
           {
@@ -356,20 +355,20 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
     /// </summary>
     /// <param name="contactType">Desired type of domain contact</param>
     /// <returns>Domain contact (may be null)</returns>
-    public DomainContact GetContact(DomainContactType contactType)
+    public IDomainContact GetContact(DomainContactType contactType)
     {
-      DomainContact result = null;
+      IDomainContact result = null;
       var contact = GetContactInt(contactType);
       if (contact != null)
       {
-        result = contact.Clone() as DomainContact;
+        result = contact.Clone() as IDomainContact;
       }
       return result;
     }
 
-    private DomainContact GetContactInt(DomainContactType contactType)
+    private IDomainContact GetContactInt(DomainContactType contactType)
     {
-      DomainContact result = null;
+      IDomainContact result = null;
       if (_domainContactGroup.ContainsKey(contactType))
       {
         result = _domainContactGroup[contactType];
@@ -394,36 +393,6 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
       return result;
     }
 
-    /************************************************************************************/
-    /// <summary>
-    /// This function constructs a string in the format .Com.Net.JP.etc  
-    /// </summary>
-    /// <returns></returns>
-
-    private static string GetTldString(IEnumerable<string> tlds)
-    {
-      string result = String.Join("|", tlds.ToArray());
-      if (result.Length == 0)
-      {
-        throw new ArgumentException("TLD collection for Domain Contact Group cannot be empty.");
-      }
-      return result;
-    }
-
-    private static string RemoveDotFromTldString(string tlds)
-    {
-      string retTlds = tlds;
-      if (retTlds.Length > 0)
-      {
-        retTlds = retTlds.Replace("|.", "|");
-        if (retTlds.StartsWith("."))
-        {
-          retTlds = retTlds.Remove(0, 1);
-        }
-      }
-
-      return retTlds;
-    }
 
     /******************************************************************************/
     /// <summary>
@@ -503,8 +472,8 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
       IEnumerable<DomainContactType> contactTypes,
       bool clearExistingErrors)
     {
-      string tldString = GetTldString(tlds);
-
+      var tldArray = tlds as string[] ?? tlds.ToArray();
+     
       var domainContactTypes = contactTypes as DomainContactType[] ?? contactTypes.ToArray();
 
       if (clearExistingErrors)
@@ -524,12 +493,12 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
         var oDomainContact = GetContactInt(contactType);
         if (null != oDomainContact)
         {
-          ValidateContact(oDomainContact, tldString, checkType, contactType, false);
+          ValidateContact(oDomainContact, tldArray, checkType, contactType, false);
         }
       }
     }
 
-    private void AddContactErrorsToDomainContact(IEnumerable<DomainContactValidationError> responseErrors, DomainContact contact)
+    private void AddContactErrorsToDomainContact(IEnumerable<DomainContactValidationError> responseErrors, IDomainContact contact)
     {
       foreach (var responseError in responseErrors)
       {
@@ -543,8 +512,8 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
       }
     }
 
-    private void ValidateContact(DomainContact contact, 
-                                  string tldString, 
+    private void ValidateContact(IDomainContact contact, 
+                                  IEnumerable<string> tlds, 
                                   DomainCheckType checkType, 
                                   DomainContactType contactType, 
                                   bool clearErrors)
@@ -564,8 +533,8 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
         contact.Fax,
         contact.Email,
         contact.CanadianPresence);
-      
-      var request = new DomainContactValidationRequestData(checkType.ToString(), (int) contactType, domainContactValidation, RemoveDotFromTldString(tldString), PrivateLabelId);
+
+      var request = new DomainContactValidationRequestData(checkType.ToString(), (int)contactType, domainContactValidation, tlds, PrivateLabelId);
      
       var response = (DomainContactValidationResponseData)Engine.Engine.ProcessRequest(request, DOMAIN_VALIDATION_CHECK);
       

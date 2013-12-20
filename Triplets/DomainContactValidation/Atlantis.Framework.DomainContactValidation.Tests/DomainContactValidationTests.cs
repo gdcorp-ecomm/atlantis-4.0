@@ -19,7 +19,7 @@ namespace Atlantis.Framework.DomainContactValidation.Tests
       var dcv = new Interface.DomainContactValidation("Raj", "Vontela", string.Empty, "15500 N. Hayden Road", "Suite 100", "Scottsdale", "Ontario", "80130", "CA", "(480)-505-8800",
                                                       "(480)-505-8800", "rvontela@godaddy.com", "LGR");
 
-      var request = new DomainContactValidationRequestData("Other", 0, dcv, "ca", 1);
+      var request = new DomainContactValidationRequestData("Other", 0, dcv, new List<string> {"ca"}, 1);
       var response = (DomainContactValidationResponseData)Engine.Engine.ProcessRequest(request, REQUESTID);
       Assert.AreEqual(true, !string.IsNullOrEmpty(response.ToXML()));
     }
@@ -30,7 +30,7 @@ namespace Atlantis.Framework.DomainContactValidation.Tests
       var dcv = new Interface.DomainContactValidation("Raj", "Vontela", string.Empty, "15500 N. Hayden Road", "Suite 100", "Scottsdale", "Arizona", "80130", "US", "(480)-505-8800",
                                                       "(480)-505-8800", "rvontela@godaddy.com", string.Empty);
 
-      var request = new DomainContactValidationRequestData("Other", 0, dcv, "fr", 1);
+      var request = new DomainContactValidationRequestData("Other", 0, dcv, new List<string>{"ca"}, 1);
       var response = (DomainContactValidationResponseData)Engine.Engine.ProcessRequest(request, REQUESTID);
       var contactXml = response.ContactXml;
       Assert.AreEqual(true, !string.IsNullOrEmpty(contactXml));
@@ -42,7 +42,7 @@ namespace Atlantis.Framework.DomainContactValidation.Tests
       var dcv = new Interface.DomainContactValidation("Raj", "Vontela", string.Empty, "15500 N. Hayden Road", "Suite 100", "Scottsdale", "Arizona", "80130", "US", "(480)-505-8800",
                                                       "(480)-505-8800", "rvontela@godaddy.com", string.Empty);
 
-      var request = new DomainContactValidationRequestData("Other", 0, dcv, "fr", 1);
+      var request = new DomainContactValidationRequestData("Other", 0, dcv, new List<string> { "fr" }, 1);
       var response = (DomainContactValidationResponseData)Engine.Engine.ProcessRequest(request, REQUESTID);
       Assert.AreEqual(true, !string.IsNullOrEmpty(response.ToXML()));
     }
@@ -53,7 +53,7 @@ namespace Atlantis.Framework.DomainContactValidation.Tests
       var dcv = new Interface.DomainContactValidation("Raj", "Vontela", string.Empty, "15500 N. Hayden Road", "Suite 100", "Scottsdale", "Arizona", "80130", "FR", "(480)-505-8800",
                                                       "(480)-505-8800", "rvontela@godaddy.com", "");
 
-      var requestData = new DomainContactValidationRequestData("DomainTransfer", 0, dcv, "fr", 1);
+      var requestData = new DomainContactValidationRequestData("DomainTransfer", 0, dcv, new List<string> { "fr" }, 1);
       var toXml = requestData.ToXML();
       Assert.IsTrue(!string.IsNullOrEmpty(toXml));
     }
@@ -64,7 +64,7 @@ namespace Atlantis.Framework.DomainContactValidation.Tests
       var dcv = new Interface.DomainContactValidation("Raj", "Vontela", string.Empty, "15500 N. Hayden Road", "Suite 100", "Scottsdale", "Arizona", "80130", "CH", "(480)-505-8800",
                                                       "(480)-505-8800", "rvontela@godaddy.com", "LGR");
 
-      var requestData = new DomainContactValidationRequestData("DomainTransfer", 0, dcv, "com", 1);
+      var requestData = new DomainContactValidationRequestData("DomainTransfer", 0, dcv, new List<string> { "com" }, 1);
 
       try
       {

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Xml;
@@ -11,11 +12,11 @@ namespace Atlantis.Framework.DomainContactValidation.Interface
     private readonly DomainContactValidation _domainContactValidation;
     private readonly string _domainCheckType;
     private readonly int _domainContactType;
-    private readonly string _tlds;
+    private readonly IEnumerable<string> _tlds;
     private readonly int _privateLabelId;
 
     public DomainContactValidationRequestData(string checkType, int domainContactType,
-                                              DomainContactValidation domainContact, string tlds, int privateLabelId)
+                                              DomainContactValidation domainContact, IEnumerable<string> tlds, int privateLabelId)
     {
       _domainContactValidation = domainContact;
       _domainContactType = domainContactType;
@@ -54,7 +55,7 @@ namespace Atlantis.Framework.DomainContactValidation.Interface
       oXmlTextWriter.WriteStartElement("contact");
       oXmlTextWriter.WriteAttributeString(DomainContactAttributes.Type, _domainCheckType == DomainCheckType.DOMAIN_TRANFER ? "xfer" : "");
       oXmlTextWriter.WriteAttributeString(DomainContactAttributes.DomainContactType, GetContactTypeString(_domainContactType));
-      oXmlTextWriter.WriteAttributeString(DomainContactAttributes.Tlds, _tlds);
+      oXmlTextWriter.WriteAttributeString(DomainContactAttributes.Tlds, string.Join("|", _tlds));
       oXmlTextWriter.WriteAttributeString(DomainContactAttributes.FirstName, _domainContactValidation.FirstName);
       oXmlTextWriter.WriteAttributeString(DomainContactAttributes.LastName, _domainContactValidation.LastName);
       oXmlTextWriter.WriteAttributeString(DomainContactAttributes.Organization, _domainContactValidation.Company);

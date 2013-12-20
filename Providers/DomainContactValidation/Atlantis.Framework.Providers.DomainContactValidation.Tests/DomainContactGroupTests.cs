@@ -1,8 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Xml;
+using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.DomainContactValidation.Interface;
+using Atlantis.Framework.Testing.MockHttpContext;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Atlantis.Framework.Testing.MockProviders;
+
 
 namespace Atlantis.Framework.Providers.DomainContactValidation.Tests
 {
@@ -12,8 +16,46 @@ namespace Atlantis.Framework.Providers.DomainContactValidation.Tests
   [DeploymentItem("Atlantis.Framework.AppSettings.Impl.dll")]
   public class DomainContactGroupTests
   {
-    public DomainContactGroupTests()
-    { }
+    [TestInitialize]
+    public void Initialize()
+    {
+      var request = new MockHttpRequest("http://spoonymac.com/");
+      MockHttpContext.SetFromWorkerRequest(request);
+    }
+
+    private IProviderContainer _providerContainer;
+    private IProviderContainer ProviderContainer
+    {
+      get
+      {
+        if (_providerContainer == null)
+        {
+          _providerContainer = new MockProviderContainer();
+          ((MockProviderContainer)_providerContainer).SetMockSetting(MockSiteContextSettings.IsRequestInternal, true);
+
+          _providerContainer.RegisterProvider<ISiteContext, MockSiteContext>();
+          _providerContainer.RegisterProvider<IShopperContext, MockShopperContext>();
+          _providerContainer.RegisterProvider<IManagerContext, MockNoManagerContext>();
+          _providerContainer.RegisterProvider<IDomainContactValidationProvider, DomainContactValidationProvider>();
+        }
+
+        return _providerContainer;
+      }
+    }
+
+    private IDomainContactValidationProvider _domainContactProvider;
+    private IDomainContactValidationProvider DomainContactProvider
+    {
+      get
+      {
+        if (_domainContactProvider == null)
+        {
+          _domainContactProvider = ProviderContainer.Resolve<IDomainContactValidationProvider>();
+        }
+
+        return _domainContactProvider;
+      }
+    }
 
     public TestContext TestContext { get; set; }
 
@@ -25,14 +67,12 @@ namespace Atlantis.Framework.Providers.DomainContactValidation.Tests
     public void TestDotCOMContact()
     {
       var tlds = new List<string> { ".COM" };
-      var contactGroup = new DomainContactGroup(tlds, 1);
+      var contactGroup = DomainContactProvider.DomainContactGroupInstance(tlds, 1);
 
 
-      var registrantContact = new DomainContact(
-         "Bill", "Registrant", "bregistrant@bongo.com",
-           "MumboJumbo", true,
-          "101 N Street", "Suite 100", "Littleton", "CO",
-          "80130", "US", "(303)-555-1213", "(303)-555-2213");
+
+      var registrantContact = DomainContactProvider.DomainContactInstance("Bill", "Registrant", "bregistrant@bongo.com",
+           "MumboJumbo", true, "101 N Street", "Suite 100", "Littleton", "CO","80130", "US", "(303)-555-1213", "(303)-555-2213");
       contactGroup.SetContact(DomainContactType.Registrant, registrantContact);
       Assert.AreEqual(0, registrantContact.Errors.Count);
     }
@@ -41,10 +81,10 @@ namespace Atlantis.Framework.Providers.DomainContactValidation.Tests
     public void TestDotJPContact()
     {
       var tlds = new List<string> { ".JP" };
-      var contactGroup = new DomainContactGroup(tlds, 1);
+      var contactGroup = DomainContactProvider.DomainContactGroupInstance(tlds, 1);
 
 
-      var registrantContact = new DomainContact(
+      var registrantContact = DomainContactProvider.DomainContactInstance(
          "Bill", "Registrant", "bregistrant@bongo.com",
            "MumboJumbo", true,
           "101 N Street", "Suite 100", "Littleton", "CO",
@@ -56,7 +96,7 @@ namespace Atlantis.Framework.Providers.DomainContactValidation.Tests
     [TestMethod]
     public void DomainContactClone()
     {
-      var registrantContact = new DomainContact(
+      var registrantContact = DomainContactProvider.DomainContactInstance(
          "Bill", "Registrant", "bregistrant@bongo.com",
            "MumboJumbo", true,
           "101 N Street", "Suite 100", "Littleton", "CO",
@@ -76,7 +116,7 @@ namespace Atlantis.Framework.Providers.DomainContactValidation.Tests
     [TestMethod]
     public void DomainContactXmlConstructor()
     {
-      var registrantContact = new DomainContact(
+      var registrantContact = DomainContactProvider.DomainContactInstance(
          "Bill", "Registrant", "bregistrant@bongo.com",
            "MumboJumbo", true,
           "101 N Street", "Suite 100", "Littleton", "CO",
@@ -84,7 +124,7 @@ namespace Atlantis.Framework.Providers.DomainContactValidation.Tests
       string xml = registrantContact.GetContactXml(DomainContactType.Registrant);
       var contactDoc = new XmlDocument();
       contactDoc.LoadXml(xml);
-      var newContact = new DomainContact(contactDoc);
+      var newContact = DomainContactProvider.DomainContactInstance(contactDoc);
 
       Assert.AreEqual(registrantContact.GetContactXml(DomainContactType.Registrant),
         newContact.GetContactXml(DomainContactType.Registrant));
@@ -93,17 +133,17 @@ namespace Atlantis.Framework.Providers.DomainContactValidation.Tests
     [TestMethod]
     public void DomainContactXmlConstructorWithErrors()
     {
-      var registrantContact = new DomainContact(
+      var registrantContact = DomainContactProvider.DomainContactInstance(
          "Bill", "Registrant", "bregistrant@bongo.com",
            "MumboJumbo", true,
           "101 N Street", "Suite 100", "Littleton", "CO",
           "80130", "US", "(303)-555-1213", "(303)-555-2213");
-      registrantContact.Errors.Add(new DomainContactError("blue", 1, "blue error", (int)DomainContactType.Registrant));
+      registrantContact.Errors.Add(DomainContactProvider.DomainContactErrorInstance("blue", 1, "blue error", (int)DomainContactType.Registrant));
       string xml = registrantContact.GetContactXml(DomainContactType.Registrant);
       Console.WriteLine(xml);
       var contactDoc = new XmlDocument();
       contactDoc.LoadXml(xml);
-      var newContact = new DomainContact(contactDoc);
+      var newContact = DomainContactProvider.DomainContactInstance(contactDoc);
 
       Assert.AreEqual(registrantContact.GetContactXml(DomainContactType.Registrant),
         newContact.GetContactXml(DomainContactType.Registrant));
@@ -115,9 +155,9 @@ namespace Atlantis.Framework.Providers.DomainContactValidation.Tests
     public void DomainContactGroupErrors()
     {
       var tlds = new List<string> { "COM", "JP" };
-      var group = new DomainContactGroup(tlds, 1);
+      var group = DomainContactProvider.DomainContactGroupInstance(tlds, 1);
 
-      var registrantContact = new DomainContact(
+      var registrantContact = DomainContactProvider.DomainContactInstance(
        "Bill", "Registrant", "bregistrant@bongo.com",
          "MumboJumbo", true,
         "101 N Street", "Suite 100", "Littleton", "CO",
@@ -135,9 +175,9 @@ namespace Atlantis.Framework.Providers.DomainContactValidation.Tests
     public void DomainContactGroupErrorsSerialization()
     {
       var tlds = new List<string> { "COM", "JP" };
-      var group = new DomainContactGroup(tlds, 1);
+      var group = DomainContactProvider.DomainContactGroupInstance(tlds, 1);
 
-      var registrantContact = new DomainContact(
+      var registrantContact = DomainContactProvider.DomainContactInstance(
        "Bill", "Registrant", "bregistrant@bongo.com",
          "MumboJumbo", true,
         "101 N Street", "Suite 100", "Littleton", "CO",
@@ -147,7 +187,7 @@ namespace Atlantis.Framework.Providers.DomainContactValidation.Tests
       Assert.IsFalse(valid);
 
       string groupString = group.ToString();
-      var newGroup = new DomainContactGroup(groupString);
+      var newGroup = DomainContactProvider.DomainContactGroupInstance(groupString);
 
       Assert.IsFalse(newGroup.IsValid);
 
@@ -159,9 +199,9 @@ namespace Atlantis.Framework.Providers.DomainContactValidation.Tests
     public void DomainContactGroupNewTlds()
     {
       var tlds = new List<string> { "COM", "NET" };
-      var group = new DomainContactGroup(tlds, 1);
+      var group = DomainContactProvider.DomainContactGroupInstance(tlds, 1);
 
-      var registrantContact = new DomainContact(
+      var registrantContact = DomainContactProvider.DomainContactInstance(
        "Bill", "Registrant", "bregistrant@bongo.com",
          "MumboJumbo", true,
         "101 N Street", "Suite 100", "Littleton", "CO",
@@ -193,9 +233,9 @@ namespace Atlantis.Framework.Providers.DomainContactValidation.Tests
     public void DomainContactGroupTrySetContact()
     {
       var tlds = new List<string> { "COM", "JP" };
-      var group = new DomainContactGroup(tlds, 1);
+      var group = DomainContactProvider.DomainContactGroupInstance(tlds, 1);
 
-      var registrantContact = new DomainContact(
+      var registrantContact = DomainContactProvider.DomainContactInstance(
        "Bill", "Registrant", "bregistrant@bongo.com",
          "MumboJumbo", true,
         "101 N Street", "Suite 100", "Littleton", "CO",
@@ -215,9 +255,9 @@ namespace Atlantis.Framework.Providers.DomainContactValidation.Tests
     public void TestDotITContact()
     {
       var tlds = new List<string> { ".IT" };
-      var contactGroup = new DomainContactGroup(tlds, 1);
+      var contactGroup = DomainContactProvider.DomainContactGroupInstance(tlds, 1);
 
-      var registrantContact = new DomainContact(
+      var registrantContact = DomainContactProvider.DomainContactInstance(
          "Bill", "Registrant", "bregistrant@bongo.com",
            "MumboJumbo", true,
           "101 N Street", "Suite 100", "Littleton", "Geneva",
@@ -231,9 +271,9 @@ namespace Atlantis.Framework.Providers.DomainContactValidation.Tests
     public void TestTrusteeVendorIds()
     {
       var tlds = new List<string> { ".IT", ".FR" };
-      var contactGroup = new DomainContactGroup(tlds, 1);
+      var contactGroup = DomainContactProvider.DomainContactGroupInstance(tlds, 1);
 
-      var registrantContact = new DomainContact(
+      var registrantContact = DomainContactProvider.DomainContactInstance(
          "Bill", "Registrant", "bregistrant@bongo.com",
            string.Empty, false,
           "101 N Street", "Suite 100", "Littleton", "Colorado",
@@ -250,27 +290,27 @@ namespace Atlantis.Framework.Providers.DomainContactValidation.Tests
     public void TestHongKong()
     {
       var tlds = new List<string> { ".COM" };
-      var contactGroup = new DomainContactGroup(tlds, 1);
+      var contactGroup = DomainContactProvider.DomainContactGroupInstance(tlds, 1);
 
-      var registrantContact = new DomainContact(
+      var registrantContact = DomainContactProvider.DomainContactInstance(
          "Bill", "Registrant", "bregistrant@bongo.com",
            string.Empty, false,
           "101 N Street", "Suite 100", "Littleton", "Colorado",
           string.Empty, "HK", "(303)-555-1213", "(303)-555-2213");
 
-      var adminContact = new DomainContact(
+      var adminContact = DomainContactProvider.DomainContactInstance(
          "Bill", "Registrant", "bregistrant@bongo.com",
            string.Empty, false,
           "101 N Street", "Suite 100", "Littleton", "Colorado",
           string.Empty, "HK", "(303)-555-1213", "(303)-555-2213");
 
-      var billingContact = new DomainContact(
+      var billingContact = DomainContactProvider.DomainContactInstance(
          "Bill", "Registrant", "bregistrant@bongo.com",
            string.Empty, false,
           "101 N Street", "Suite 100", "Littleton", "Colorado",
           string.Empty, "HK", "(303)-555-1213", "(303)-555-2213");
 
-      var techContact = new DomainContact(
+      var techContact = DomainContactProvider.DomainContactInstance(
          "Bill", "Registrant", "bregistrant@bongo.com",
            string.Empty, false,
           "101 N Street", "Suite 100", "Littleton", "Colorado",
@@ -288,9 +328,9 @@ namespace Atlantis.Framework.Providers.DomainContactValidation.Tests
     public void TestDotCaContact()
     {
       var tlds = new List<string> { ".CA" };
-      var contactGroup = new DomainContactGroup(tlds, 1);
+      var contactGroup = DomainContactProvider.DomainContactGroupInstance(tlds, 1);
 
-      var registrantContact = new DomainContact(
+      var registrantContact = DomainContactProvider.DomainContactInstance(
          "Bill", "Registrant", "bregistrant@bongo.com",
            string.Empty, false,
           "101 N Street", "Suite 100", "Littleton", "Geneva",

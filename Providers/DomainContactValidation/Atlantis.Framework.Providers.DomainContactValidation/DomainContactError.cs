@@ -10,24 +10,13 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
     public const string ERROR_ELEMENT_NAME = "error";
     private readonly XmlElement _errorElement;
 
-    public DomainContactError()
+    internal DomainContactError()
     {
       _errorElement = CreateElement(ERROR_ELEMENT_NAME);
       AppendChild(_errorElement);
     }
-
-    public DomainContactError(string sAttribute, int iCode, string sDescription, int contactType)
-      : this()
-    {
-      _errorElement.SetAttribute(DomainContactErrorAttributes.Attribute, sAttribute);
-      _errorElement.SetAttribute(DomainContactErrorAttributes.Code, iCode.ToString(CultureInfo.InvariantCulture));
-      _errorElement.SetAttribute(DomainContactErrorAttributes.Description, sDescription);
-      _errorElement.SetAttribute(DomainContactErrorAttributes.ContactType, contactType.ToString(CultureInfo.InvariantCulture));
-      _errorElement.SetAttribute(DomainContactErrorAttributes.DisplayString, String.Empty);
-      _errorElement.SetAttribute(DomainContactErrorAttributes.DotType, String.Empty);
-    }
-
-    public DomainContactError(string sAttribute, int iCode, string sDescription, string displayString, string dotType, int contactType)
+    
+    internal DomainContactError(string sAttribute, int iCode, int contactType, string sDescription = "", string displayString = "", string dotType = "")
       : this()
     {
       _errorElement.SetAttribute(DomainContactErrorAttributes.Attribute, sAttribute);
@@ -38,7 +27,7 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
       _errorElement.SetAttribute(DomainContactErrorAttributes.DotType, dotType);
     }
 
-    public DomainContactError(XmlElement errorXml)
+    internal DomainContactError(XmlElement errorXml)
       : this()
     {
       _errorElement.SetAttribute(DomainContactErrorAttributes.Attribute, errorXml.GetAttribute(DomainContactErrorAttributes.Attribute));
@@ -97,7 +86,7 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
 
     public override XmlNode Clone()
     {
-      var result = new DomainContactError(Attribute, Code, Description, DisplayString, DotType, ContactType);
+      var result = new DomainContactError(Attribute, Code, ContactType, Description, DisplayString, DotType);
       return result;
     }
 

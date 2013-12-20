@@ -60,7 +60,7 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
       return result;
     }
 
-    public DomainContactGroup(IEnumerable<string> tlds, int privateLabelId)
+    internal DomainContactGroup(IEnumerable<string> tlds, int privateLabelId)
     {
       Tlds = CleanTlds(tlds);
 
@@ -73,7 +73,7 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
       ContactGroupId = Guid.NewGuid().ToString();
     }
 
-    public DomainContactGroup(string contactGroupXml)
+    internal DomainContactGroup(string contactGroupXml)
     {
       Tlds = new HashSet<string>();
       var xmlContactGroupDoc = new XmlDocument();
@@ -504,9 +504,9 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
       {
         var domainContactError = new DomainContactError(
           responseError.Attribute, 
-          responseError.Code, 
-          responseError.Description, 
-          responseError.ContactType);
+          responseError.Code,  
+          responseError.ContactType,
+          responseError.Description);
 
         contact.Errors.Add(domainContactError);
       }

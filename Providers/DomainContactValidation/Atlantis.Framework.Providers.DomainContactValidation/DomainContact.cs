@@ -10,7 +10,7 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
   {
     private readonly XmlElement _contactElement;
 
-    public const string CONTACT_ELEMENT_NAME = "contact"; 
+    internal const string CONTACT_ELEMENT_NAME = "contact"; 
 
     #region Properties
 
@@ -246,7 +246,7 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
       return result;
     }
 
-    public DomainContact()
+    internal DomainContact()  
     {
       TrusteeVendorIds = new Dictionary<string, string>();
       AdditionalContactAttributes = new Dictionary<string, string>();
@@ -255,7 +255,7 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
       AppendChild(_contactElement);
     }
 
-    public DomainContact(XmlDocument contactDoc) : this()
+    internal DomainContact(XmlDocument contactDoc) : this()
     {
       var root = contactDoc.SelectSingleNode("//" + CONTACT_ELEMENT_NAME) as XmlElement;
       if (root != null)
@@ -264,12 +264,13 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
       }
     }
 
-    public DomainContact(XmlElement xmlElement) : this()
+    internal DomainContact(XmlElement xmlElement)
+      : this()
     {
       LoadContactFromElement(xmlElement);
     }
 
-    public DomainContact( string firstName, string lastName, 
+    internal DomainContact(string firstName, string lastName, 
                           string email,     string company,   bool isLegalRegistrant, 
                           string address1,  string address2,  string city,
                           string state,     string zip,       string country,              
@@ -290,31 +291,13 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
       Country = country;
       Phone = phone;
       Fax = fax;
+      
       CanadianPresence = canadianPresence;
-      PreferredLanguage = preferredLanguage;
-    }
 
-    public DomainContact(string firstName, string lastName,
-                          string email, string company, bool isLegalRegistrant,
-                          string address1, string address2, string city,
-                          string state, string zip, string country,
-                          string phone, string fax)
-      : this()
-    {
-      FirstName = firstName;
-      LastName = lastName;
-      Email = email;
-      IsLegalRegistrant = isLegalRegistrant;
-      Company = company;
-      Address1 = address1;
-      Address2 = address2;
-      City = city;
-      State = state;
-      Zip = zip;
-      Country = country;
-      Phone = phone;
-      Fax = fax;
-      CanadianPresence = string.Empty;
+      if (preferredLanguage != null)
+      {
+        PreferredLanguage = preferredLanguage;
+      }
     }
 
     public void InvalidateContact(IDomainContactError error)

@@ -81,6 +81,7 @@
     <Compile Include="DomainContactError.cs" />
     <Compile Include="DomainContactGroup.cs" />
     <Compile Include="ContactValidation.cs" />
+    <Compile Include="DomainContactValidationProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <None Include="atlantis.config" />
     <None Include="Atlantis.Framework.Providers.DomainContactValidation.nuget.bat" />

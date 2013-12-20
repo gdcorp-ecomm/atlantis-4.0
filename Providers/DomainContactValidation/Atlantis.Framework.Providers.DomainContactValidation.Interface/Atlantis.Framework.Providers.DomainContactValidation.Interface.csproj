@@ -79,6 +79,7 @@
   <ItemGroup>
     <Compile Include="DomainContactErrorAttributes.cs" />
     <Compile Include="DomainCheckType.cs" />
+    <Compile Include="IDomainContactValidationProvider.cs" />
     <Compile Include="IDomainContact.cs" />
     <Compile Include="IDomainContactGroup.cs" />
     <Compile Include="DomainContactType.cs" />

@@ -141,7 +141,7 @@ namespace Atlantis.Framework.Warmup.Runner
     private List<Tuple<Object, Type>> GetListOfWarmupFixtures()
     {
       // if no classes are supplied, then search for them
-      if (this.LookForWarmupClassesIfNoneProvided && this.WarmupClasses.Count == 0)
+      if (this.LookForWarmupClassesIfNoneProvided && (this.WarmupClasses == null || this.WarmupClasses.Count == 0) )
       {
         var asms = AppDomain.CurrentDomain.GetAssemblies();
         this.WarmupClasses = ClassFinder.GetClasses(
@@ -151,7 +151,7 @@ namespace Atlantis.Framework.Warmup.Runner
           );
       }
 
-      var testInsts = this.WarmupClasses
+      var warmInsts = this.WarmupClasses
         .Where(
             o =>
               Attribute.GetCustomAttribute(o, this._TypeWarmupFixtureAttribute, false) != null
@@ -159,7 +159,7 @@ namespace Atlantis.Framework.Warmup.Runner
         .Select(
             t => new Tuple<Object, Type>(Activator.CreateInstance(t), t)
           );
-      var insts = new List<Tuple<Object, Type>>(testInsts);
+      var insts = new List<Tuple<Object, Type>>(warmInsts);
       return insts;
     }
 

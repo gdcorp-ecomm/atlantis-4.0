@@ -52,24 +52,31 @@
         {
           continue;
         }
-        foreach (var classType in asm.GetTypes())
-        {
-          bool add = (attrs == null);
-          if (!add)
+        try
+        {  // the try/catch maybe unnecessary w/GetExportedTypes, but since GetTypes sometimes failed...
+          var exportedTypes = asm.GetExportedTypes();
+          foreach (var classType in exportedTypes)
           {
-            foreach (var attr in attrs)
+            bool add = (attrs == null);
+            if (!add)
             {
-              if (Attribute.GetCustomAttribute(classType, attr) != null)
+              foreach (var attr in attrs)
               {
-                add = true;
-                break;
+                if (Attribute.GetCustomAttribute(classType, attr) != null)
+                {
+                  add = true;
+                  break;
+                }
               }
             }
+            if (add)
+            {
+              classesInSet.Add(classType);
+            }
           }
-          if (add)
-          {
-            classesInSet.Add(classType);
-          }
+        }
+        catch (Exception)
+        {
         }
       }
       return classesInSet;

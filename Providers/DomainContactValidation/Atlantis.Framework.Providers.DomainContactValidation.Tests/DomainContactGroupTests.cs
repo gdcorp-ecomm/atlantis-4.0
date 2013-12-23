@@ -14,6 +14,7 @@ namespace Atlantis.Framework.Providers.DomainContactValidation.Tests
   [DeploymentItem("atlantis.config")]
   [DeploymentItem("Atlantis.Framework.DomainContactValidation.Impl.dll")]
   [DeploymentItem("Atlantis.Framework.AppSettings.Impl.dll")]
+  [DeploymentItem("Atlantis.Framework.DomainsTrustee.Impl.dll")]
   public class DomainContactGroupTests
   {
     [TestInitialize]
@@ -366,6 +367,24 @@ namespace Atlantis.Framework.Providers.DomainContactValidation.Tests
           <error attribute="lname" code="3001" desc="CA Contact must contain at least one word from the valid non-individual CIRA word list" />
 
        * */
+    }
+
+    [TestMethod]
+    public void TestDotFRContactTuiFormInfo()
+    {
+      var tlds = new List<string> { "FR" };
+      var contactGroup = DomainContactProvider.DomainContactGroupInstance(tlds, 1);
+
+      var registrantContact = DomainContactProvider.DomainContactInstance(
+         "Bill", "Registrant", "bregistrant@bongo.com",
+           "MumboJumbo", true,
+          "101 N Street", "Suite 100", "Littleton", "CO",
+          "80130", "US", "(303)-555-1213", "(303)-555-2213");
+      contactGroup.SetContact(DomainContactType.Registrant, registrantContact);
+      contactGroup.SetContact(DomainContactType.Registrant, registrantContact);
+
+      var tuiFormInfo = contactGroup.GetTuiFormInfo(tlds);
+      Assert.AreEqual(true, tuiFormInfo != null && tuiFormInfo.ContainsKey("FR"));
     }
   }
 }

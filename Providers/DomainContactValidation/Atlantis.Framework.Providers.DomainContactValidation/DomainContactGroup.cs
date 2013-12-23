@@ -4,6 +4,8 @@ using System.Globalization;
 using System.Linq;
 using System.Xml;
 using Atlantis.Framework.DomainContactValidation.Interface;
+using Atlantis.Framework.DomainsTrustee.Interface;
+using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.DomainContactValidation.Interface;
 
 namespace Atlantis.Framework.Providers.DomainContactValidation
@@ -11,6 +13,7 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
   public class DomainContactGroup : IDomainContactGroup
   {
     private const int DOMAIN_VALIDATION_CHECK = 782;
+    private const int DOMAIN_TRUSTEE_REQUESTID = 781;
 
     private const string LINK_ID_ATTRIBUTE_NAME = "link_id";
     private const string CONTACT_GROUP_INFO_ELEMENT_NAME = "contactGroupInfo";
@@ -137,6 +140,79 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
       }
 
       return newDomainContactGroup;
+    }
+
+    public IDictionary<string, ITuiFormInfo> GetTuiFormInfo(IEnumerable<string> tlds)
+    {
+      var result = new Dictionary<string, ITuiFormInfo>(8, StringComparer.OrdinalIgnoreCase);
+
+      var contactList = new List<DomainsTrusteeContact>(8);
+
+      foreach (var pair in _domainContactGroup)
+      {
+        var domainsTrusteeContactType = DomainsTrusteeContactTypes.Registrant;
+        bool valid = false;
+        switch (pair.Key.ToString().ToLowerInvariant())
+        {
+          case "registrant":
+            domainsTrusteeContactType = DomainsTrusteeContactTypes.Registrant;
+            valid = true;
+            break;
+          case "billing":
+            domainsTrusteeContactType = DomainsTrusteeContactTypes.Billing;
+            valid = true;
+            break;
+          case "technical":
+            domainsTrusteeContactType = DomainsTrusteeContactTypes.Technical;
+            valid = true;
+            break;
+          case "administrative":
+            domainsTrusteeContactType = DomainsTrusteeContactTypes.Administrative;
+            valid = true;
+            break;
+        }
+
+        if (valid)
+        {
+          contactList.Add(new DomainsTrusteeContact(domainsTrusteeContactType, pair.Value.Country));
+        }
+      }
+
+      var tldArray = tlds as string[] ?? tlds.ToArray();
+      if (contactList.Count > 0 && tldArray.Length > 0)
+      {
+        var contactsDomains = new DomainsTrusteeContactsTlds(contactList, tldArray.ToList());
+        var requestData = new DomainsTrusteeRequestData
+        {
+          ContactsTldsList = new List<DomainsTrusteeContactsTlds> {contactsDomains}
+        };
+
+        DomainsTrusteeResponseData response;
+        try
+        {
+          response = (DomainsTrusteeResponseData)Engine.Engine.ProcessRequest(requestData, DOMAIN_TRUSTEE_REQUESTID);
+        }
+        catch (Exception ex)
+        {
+          var aex = new AtlantisException("DomainContactGroup.GetTuiFormInfo", string.Empty, "0", "Error running domains trustee triplet", string.Join("|", tldArray), string.Empty, string.Empty, string.Empty, string.Empty, 0);
+          Engine.Engine.LogAtlantisException(aex);
+          response = null;
+        }
+
+        if (response != null)
+        {
+          foreach (var tld in tldArray)
+          {
+            DomainsTrusteeResponse domainTrusteeResponse;
+            if (response.TryGetDomainTrustee(tld, out domainTrusteeResponse))
+            {
+              result.Add(tld, new TuiFormInfo(domainTrusteeResponse.TuiFormType, domainTrusteeResponse.VendorId));
+            }
+          }
+        }
+      }
+
+      return result;
     }
 
     #region Properties

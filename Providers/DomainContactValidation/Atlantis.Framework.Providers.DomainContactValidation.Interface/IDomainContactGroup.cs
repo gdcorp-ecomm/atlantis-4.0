@@ -111,6 +111,7 @@ namespace Atlantis.Framework.Providers.DomainContactValidation.Interface
     bool SetContactPreferredlanguage(DomainContactType contactType, string language);
 
     object Clone();
+
+    IDictionary<string, ITuiFormInfo> GetTuiFormInfo(IEnumerable<string> tlds);
   }
-  
 }

@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using Atlantis.Framework.Interface;
-using Atlantis.Framework.DomainContactCheck.Interface;
 using System.Xml.Linq;
 using System.Linq;
+using Atlantis.Framework.Providers.DomainContactValidation.Interface;
 
 namespace Atlantis.Framework.AddItem.Interface
 {
@@ -85,16 +85,16 @@ namespace Atlantis.Framework.AddItem.Interface
       }
     }
 
-    public void AddContactInfo(DomainContactGroup contactGroup)
+    public void AddContactInfo(IDomainContactGroup contactGroup)
     {
       if (!contactGroup.IsValid)
         throw new ArgumentException("Domain contact group has not been validated.");
 
       string xmlContactInfo = contactGroup.GetContactXml();
       XElement contactElement = XElement.Parse(xmlContactInfo);
-      if (contactElement.Name != DomainContactGroup.ContactInfoElementName)
+      if (contactElement.Name != "contactInfo")
       {
-        contactElement = contactElement.Descendants(DomainContactGroup.ContactInfoElementName).FirstOrDefault();
+        contactElement = contactElement.Descendants("contactInfo").FirstOrDefault();
       }
 
       _itemRequestElement.Add(contactElement);

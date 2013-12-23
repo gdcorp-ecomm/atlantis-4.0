@@ -72,9 +72,6 @@
     <Reference Include="Atlantis.Framework.DataCacheService">
       <HintPath>..\packages\Atlantis.Framework.DataCacheService.4.0.0.0\lib\net40\Atlantis.Framework.DataCacheService.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.DomainContactCheck.Interface">
-      <HintPath>..\packages\Atlantis.Framework.DomainContactCheck.Interface.4.13.01.10\lib\net40\Atlantis.Framework.DomainContactCheck.Interface.dll</HintPath>
-    </Reference>
     <Reference Include="Atlantis.Framework.Engine">
       <HintPath>..\packages\Atlantis.Framework.Engine.4.0.0.0\lib\net40\Atlantis.Framework.Engine.dll</HintPath>
     </Reference>
@@ -89,6 +86,10 @@
     </Reference>
     <Reference Include="Atlantis.Framework.Products.Interface">
       <HintPath>..\packages\Atlantis.Framework.Products.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Products.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Providers.DomainContactValidation.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Providers.DomainContactValidation.Interface.4.13.12.22\lib\net40\Atlantis.Framework.Providers.DomainContactValidation.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Providers.Interface">
       <HintPath>..\packages\Atlantis.Framework.Providers.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Providers.Interface.dll</HintPath>
@@ -126,6 +127,9 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <None Include="atlantis.config" />
+    <None Include="Atlantis.Framework.AddItem.Interface.nuget.bat" />
+    <None Include="Atlantis.Framework.AddItem.Interface.nuspec" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

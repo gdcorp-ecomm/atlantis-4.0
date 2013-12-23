@@ -30,19 +30,41 @@ namespace Atlantis.Framework.Testing.UnitTesting.Handlers
       set { _allowExternalRequestsToRunTests = value; }
     }
 
-    private static string _unitTestNamespace;
+    [Obsolete("Use the array: UnitTestNamespaces" )]
     public static string UnitTestNamespace
     {
       get
       {
-        return _unitTestNamespace ?? (_unitTestNamespace = "UnitTests");
+        return UnitTestNamespaces.Length == 0 ? String.Empty : UnitTestNamespaces[0];
       }
       set
       {
-        _unitTestNamespace = value;
+        if (_unitTestNamespaces == null || _unitTestNamespaces.Length == 0)
+        {
+          UnitTestNamespaces = new string[] {value};
+        }
+        else
+        {
+          var v = new List<string>(UnitTestNamespaces.Length + 1);
+          v.AddRange(UnitTestNamespaces);
+          v.Add(value);
+          UnitTestNamespaces = v.ToArray();
+        }
       }
     }
 
+    private static string[] _unitTestNamespaces;
+    public static string[] UnitTestNamespaces
+    {
+      get
+      {
+        return _unitTestNamespaces ?? (_unitTestNamespaces = new string[] { "UnitTests" });
+      }
+      set
+      {
+        _unitTestNamespaces = value;
+      }
+    }
     private static string[] _unitTestAssemblies;
     public static string[] UnitTestAssemblies
     {
@@ -137,7 +159,7 @@ namespace Atlantis.Framework.Testing.UnitTesting.Handlers
           LocalTestRunner = new TestRunner();
           LocalTestRunner.UnitTestAssemblies = UnitTestAssemblies;
 
-          LocalTestRunner.ExecuteTests(UnitTestNamespace, string.Join(".", classToTest), TestMethods);
+          LocalTestRunner.ExecuteTests(UnitTestNamespaces, string.Join(".", classToTest), TestMethods);
 
           ResponseOutput(context, LocalTestRunner.TestData);
         }
@@ -157,13 +179,13 @@ namespace Atlantis.Framework.Testing.UnitTesting.Handlers
 
     private void ResponseJson(HttpContextBase context, TestResultData results)
     {
-      string json = string.Empty;
+      string json;
       var jsonSer = new DataContractJsonSerializer(typeof(TestResultData));
 
       using (var ms = new MemoryStream())
       {
         jsonSer.WriteObject(ms, results);
-        json = String.Format("[{0}]", Encoding.Default.GetString(ms.ToArray()));
+        json = String.Join("[", Encoding.Default.GetString(ms.ToArray()), "]");
         ms.Close();
       }
 
@@ -175,7 +197,7 @@ namespace Atlantis.Framework.Testing.UnitTesting.Handlers
 
     private void ResponseXml(HttpContextBase context, TestResultData results)
     {
-      string xmlData = string.Empty;
+      string xmlData;
       var xmlSer = new DataContractSerializer(typeof(TestResultData));
 
       using (var ms1 = new MemoryStream())
@@ -193,7 +215,7 @@ namespace Atlantis.Framework.Testing.UnitTesting.Handlers
 
     private void ResponseXslt(HttpContextBase context, TestResultData results)
     {
-      string xmlData = string.Empty;
+      string xmlData;
       var xmlSer = new DataContractSerializer(typeof(TestResultData));
 
       using (var ms2 = new MemoryStream())
@@ -222,7 +244,7 @@ namespace Atlantis.Framework.Testing.UnitTesting.Handlers
 
     private void ResponseHtml(HttpContextBase context, TestResultData results)
     {
-      string xmlData = string.Empty;
+      string xmlData;
       var xmlSer = new DataContractSerializer(typeof(TestResultData));
 
       using (var ms3 = new MemoryStream())

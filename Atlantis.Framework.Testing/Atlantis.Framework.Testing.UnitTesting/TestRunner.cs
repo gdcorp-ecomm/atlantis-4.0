@@ -59,42 +59,54 @@ namespace Atlantis.Framework.Testing.UnitTesting
 
     #region public
 
-    private List<UnitTestBase> GetListOfTestClasses(string[] assemblyNames, string unitTestingNamespace, Type reqAttr)
+    private List<UnitTestBase> GetListOfTestClasses(string[] assemblyNames, string[] unitTestingNamespaces, Type reqAttr)
     {
       var listTestInsts = new List<UnitTestBase>();
       foreach (var asmName in assemblyNames)
       {
         var asm = Assembly.Load(asmName);
-        var testInsts = asm.GetTypes().Where(
-          o =>
-          (o.Namespace ?? String.Empty).StartsWith(unitTestingNamespace, StringComparison.Ordinal)
-          && o.IsSubclassOf(typeof(UnitTestBase)) // ensure the typecast will work
-          && o.GetCustomAttributes(typeof(TestFixtureAttribute), false).Length > 0
-          && (reqAttr == null // only if the required attribute is supplied, then search the classes and methods
-              || o.GetCustomAttributes(reqAttr, false).Length > 0 // if the required attribute is present on the class, then include the class
-              || o.GetMethods(BindingFlags.Public | BindingFlags.Instance).Any(
-                m => m.GetCustomAttributes(reqAttr, false).Length > 0 // if the required attribute is present on any method in the  class, then include the class
-                ))).Select<Type, UnitTestBase>(t => (UnitTestBase)Activator.CreateInstance(t));
+        var testInsts = asm.GetTypes().Where
+          (
+            o =>
+              unitTestingNamespaces.AsQueryable().Any
+                (
+                  ns => (o.Namespace ?? String.Empty).StartsWith(ns, StringComparison.Ordinal) 
+                )
+              && o.IsSubclassOf(typeof(UnitTestBase)) // ensure the typecast will work
+              && o.GetCustomAttributes(typeof(TestFixtureAttribute), false).Length > 0
+              &&  (
+                    reqAttr == null // only if the required attribute is supplied, then search the classes and methods
+                    || o.GetCustomAttributes(reqAttr, false).Length > 0 // if the required attribute is present on the class, then include the class
+                    || o.GetMethods(BindingFlags.Public | BindingFlags.Instance)
+                        .Any(m => m.GetCustomAttributes(reqAttr, false).Length > 0) // if the required attribute is present on any method in the  class, then include the class
+                  )
+          ).Select<Type, UnitTestBase>(t => (UnitTestBase)Activator.CreateInstance(t));
 
         listTestInsts.AddRange(testInsts);
       }
       return listTestInsts;
     }
 
-    public void ExecuteTests(string unitTestingNamespace, string relclassToTest, HashSet<string> testMethods)
+    public void ExecuteTests(string[] unitTestingNamespaces, string relclassToTest, HashSet<string> testMethods)
     {
-
       GetTestRunnerExecutionInformation();
 
-      string classToTest = String.Concat(unitTestingNamespace, ".", relclassToTest);
       try
       {
-
         // find the class in the list of client assemblies
         Type typeOfClassToTest = null;
+        string classToTest = String.Empty;
         foreach (var asm in UnitTestAssemblies)
         {
-          typeOfClassToTest = Assembly.Load(asm).GetType(classToTest);
+          foreach (var unitTestingNamespace in unitTestingNamespaces)
+          {
+            classToTest = String.Concat(unitTestingNamespace, ".", relclassToTest);
+            typeOfClassToTest = Assembly.Load(asm).GetType(classToTest);
+            if (typeOfClassToTest != null)
+            {
+              break;
+            }
+          }
           if (typeOfClassToTest != null)
           {
             break;
@@ -102,7 +114,7 @@ namespace Atlantis.Framework.Testing.UnitTesting
         }
         if (typeOfClassToTest == null)
         {
-          throw new TestClassNotInAssembliesException(String.Concat("Class '", classToTest, "' not found in these assemblies: ", String.Join(", ", UnitTestAssemblies), "."));
+          throw new TestClassNotInAssembliesException(String.Concat("Class '", relclassToTest, "' not found in these assemblies: ", String.Join(", ", UnitTestAssemblies), ", using these namespaces: ", String.Join(", ", unitTestingNamespaces), "."));
         }
 
         Type reqAttr = null;
@@ -137,7 +149,7 @@ namespace Atlantis.Framework.Testing.UnitTesting
               throw new InvalidTestClassException(String.Concat("Class ", classToTest, " was not derived from UnitTestBase nor was it a test collection"));
             }
           }
-          var classesInCollection = GetListOfTestClasses(UnitTestAssemblies, unitTestingNamespace, reqAttr);
+          var classesInCollection = GetListOfTestClasses(UnitTestAssemblies, unitTestingNamespaces, reqAttr);
           testClasses.AddRange(classesInCollection);
         }
 

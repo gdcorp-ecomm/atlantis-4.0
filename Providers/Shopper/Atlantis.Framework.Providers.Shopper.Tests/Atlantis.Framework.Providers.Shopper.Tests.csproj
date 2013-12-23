@@ -62,7 +62,7 @@
     </Reference>
     <Reference Include="Atlantis.Framework.Providers.SsoAuth.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.Providers.SsoAuth.Interface.4.13.12.16\lib\net40\Atlantis.Framework.Providers.SsoAuth.Interface.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.Providers.SsoAuth.Interface.4.13.12.23\lib\net40\Atlantis.Framework.Providers.SsoAuth.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Shopper.Impl">
       <HintPath>..\packages\Atlantis.Framework.Shopper.4.0.0.0\lib\net40\Atlantis.Framework.Shopper.Impl.dll</HintPath>

@@ -41,5 +41,5 @@ using System.Runtime.InteropServices;
 // example 4.13.6.1 for Jun 1, 2013
 //
 [assembly: AssemblyVersion("4.0.0.0")]
-[assembly: AssemblyFileVersion("4.13.12.17")]
+[assembly: AssemblyFileVersion("4.13.12.23")]
 [assembly: InternalsVisibleTo("Atlantis.Framework.Providers.Shopper.Tests")]

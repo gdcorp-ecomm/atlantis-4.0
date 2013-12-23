@@ -46,8 +46,9 @@
     <Reference Include="Atlantis.Framework.MiniEncrypt">
       <HintPath>..\packages\Atlantis.Framework.MiniEncrypt.4.0.0.0\lib\net40\Atlantis.Framework.MiniEncrypt.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.Providers.SsoAuth.Interface">
-      <HintPath>..\packages\Atlantis.Framework.Providers.SsoAuth.Interface.4.13.12.16\lib\net40\Atlantis.Framework.Providers.SsoAuth.Interface.dll</HintPath>
+    <Reference Include="Atlantis.Framework.Providers.SsoAuth.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Providers.SsoAuth.Interface.4.13.12.23\lib\net40\Atlantis.Framework.Providers.SsoAuth.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Shopper.Interface">
       <HintPath>..\packages\Atlantis.Framework.Shopper.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Shopper.Interface.dll</HintPath>

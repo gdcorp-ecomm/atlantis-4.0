@@ -11,7 +11,7 @@ namespace Atlantis.Framework.Providers.Shopper.Tests
     {
       private class MockPayload : IAuthTokenPayload
       {
-        public Dictionary<string, DateTime> AuthenticationFactors
+        public IDictionary<string, DateTime> AuthenticationFactors
         {
           get { throw new NotImplementedException(); }
         }
@@ -80,6 +80,19 @@ namespace Atlantis.Framework.Providers.Shopper.Tests
       public bool Validate()
       {
         return IsMockTokenvalid;
+      }
+
+
+      public TimeSpan RequestTimeout
+      {
+        get
+        {
+          return TimeSpan.FromSeconds(5);
+        }
+        set
+        {
+          throw new NotImplementedException();
+        }
       }
     }
 

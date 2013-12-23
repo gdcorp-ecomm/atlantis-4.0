@@ -17,7 +17,7 @@ namespace Atlantis.Framework.Providers.Shopper.Tests
       DeauthenticateWasCalled = false;
     }
 
-    public IAuthenticationResponse Authenticate(string username, string password, int privateLabelId, string clientIp, string appName)
+    public IAuthenticationResponse Authenticate(string username, string password, string clientIp, string appName)
     {
       throw new NotImplementedException();
     }

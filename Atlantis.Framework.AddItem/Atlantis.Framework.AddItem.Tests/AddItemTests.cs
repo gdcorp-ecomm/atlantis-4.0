@@ -7,11 +7,11 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Atlantis.Framework.AddItem.Tests
 {
   [TestClass]
+  [DeploymentItem("atlantis.config")]
+  [DeploymentItem("Atlantis.Framework.AddItem.Impl.dll")]
   public class AddItemTests
   {
     [TestMethod]
-    [DeploymentItem("atlantis.config")]
-    [DeploymentItem("Atlantis.Framework.AddItem.Impl.dll")]
     public void BasicAddItem()
     {
       AddItemRequestData request = new AddItemRequestData("832652", string.Empty, string.Empty, string.Empty, 0, "127.0.0.2");
@@ -22,8 +22,6 @@ namespace Atlantis.Framework.AddItem.Tests
     }
 
     [TestMethod]
-    [DeploymentItem("atlantis.config")]
-    [DeploymentItem("Atlantis.Framework.AddItem.Impl.dll")]
     public void AddItemWithCustomXmlString()
     {
       AddItemRequestData request = new AddItemRequestData("832652", string.Empty, string.Empty, string.Empty, 0, "127.0.0.2");
@@ -32,8 +30,6 @@ namespace Atlantis.Framework.AddItem.Tests
     }
 
     [TestMethod]
-    [DeploymentItem("atlantis.config")]
-    [DeploymentItem("Atlantis.Framework.AddItem.Impl.dll")]
     public void SplitTestAddItem()
     {
         AddItemRequestData request = new AddItemRequestData("832652", string.Empty, string.Empty, string.Empty, 0, "127.0.0.2");

@@ -2,14 +2,14 @@
 <package >
   <metadata>
     <id>Atlantis.Framework.Deployments</id>
-    <version>4.13.12.18</version>
+    <version>4.13.12.24</version>
     <title>Atlantis Framework Deployments</title>
     <authors>$author$</authors>
     <owners>$author$</owners>
     <projectUrl>https://confluence.int.godaddy.com/display/ATLANTIS</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes></releaseNotes>
+    <releaseNotes>updated dependencies to latest version of AF.Testing.UnitTesting</releaseNotes>
     <copyright>$copyright$</copyright>
     <tags>Atlantis Framework Deployments</tags>
   </metadata>

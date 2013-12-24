@@ -104,6 +104,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="DomainsRAAResendTest.cs" />
     <Compile Include="DomainsRAAStatusTest.cs" />
     <Compile Include="DomainsRAASetVerifiedTest.cs" />
     <Compile Include="DomainsRAAQueueVerifyTest.cs" />

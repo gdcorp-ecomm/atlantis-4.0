@@ -53,6 +53,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DomainsRAAErrorCodes.cs" />
+    <Compile Include="DomainsRAAResend\DomainsRAAResendRequestData.cs" />
+    <Compile Include="DomainsRAAResend\DomainsRAAResendResponseData.cs" />
     <Compile Include="DomainsRAASetVerified\DomainsRAASetVerifiedRequestData.cs" />
     <Compile Include="DomainsRAASetVerified\DomainsRAASetVerifiedResponseData.cs" />
     <Compile Include="DomainsRAAStatus\DomainsRAAStatusRequestData.cs" />

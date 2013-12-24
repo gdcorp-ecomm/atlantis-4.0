@@ -54,6 +54,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DomainsRAAResendRequest.cs" />
     <Compile Include="DomainsRAASetVerifiedRequest.cs" />
     <Compile Include="DomainsRAAStatusRequest.cs" />
     <Compile Include="DomainsRAAQueueVerifyRequest.cs" />

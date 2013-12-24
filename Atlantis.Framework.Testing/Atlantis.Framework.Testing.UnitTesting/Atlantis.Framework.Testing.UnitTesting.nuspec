@@ -2,14 +2,14 @@
 <package >
   <metadata>
     <id>Atlantis.Framework.Testing.UnitTesting</id>
-    <version>4.13.12.19</version>
+    <version>4.13.12.24</version>
     <title>Atlantis Framework Testing UnitTesting</title>
     <authors>$author$</authors>
     <owners>$author$</owners>
     <projectUrl>https://confluence.int.godaddy.com/display/ATLANTIS</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes></releaseNotes>
+    <releaseNotes>Improved support for framework bucket integration tests and fixed bug introduced in 12.19</releaseNotes>
     <copyright>$copyright$</copyright>
     <tags>Atlantis Framework Testing UnitTesting</tags>
   </metadata>

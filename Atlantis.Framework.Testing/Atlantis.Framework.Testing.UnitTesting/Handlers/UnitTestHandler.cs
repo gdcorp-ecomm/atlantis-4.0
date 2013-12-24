@@ -185,7 +185,7 @@ namespace Atlantis.Framework.Testing.UnitTesting.Handlers
       using (var ms = new MemoryStream())
       {
         jsonSer.WriteObject(ms, results);
-        json = String.Join("[", Encoding.Default.GetString(ms.ToArray()), "]");
+        json = String.Concat("[", Encoding.Default.GetString(ms.ToArray()), "]");
         ms.Close();
       }
 

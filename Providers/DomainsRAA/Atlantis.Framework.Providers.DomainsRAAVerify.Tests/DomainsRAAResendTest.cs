@@ -11,7 +11,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Atlantis.Framework.Providers.DomainsRAAVerify.Tests
 {
   [TestClass]
-  public class DomainsRAAQueueVerifyTest
+  public class DomainsRAAResendTest
   {
     private const string SHOPPER_ID = "28018";
 
@@ -60,7 +60,7 @@ namespace Atlantis.Framework.Providers.DomainsRAAVerify.Tests
     }
 
     [TestMethod]
-    public void TestQueueVerifyEmailTest()
+    public void TestResendEmailTest()
     {
       var itemTypes = new List<IItem>(1);
 
@@ -72,12 +72,12 @@ namespace Atlantis.Framework.Providers.DomainsRAAVerify.Tests
       var verification = Verification.Create(ReasonCodes.VerifiedByFOSEmail, verificationItems);
 
       IEnumerable<Errors> errorCodes;
-      Assert.IsTrue(RAAProvider.TryQueueVerification(verification, out errorCodes));
+      Assert.IsTrue(RAAProvider.TryResend(verification, out errorCodes));
       Assert.IsFalse(errorCodes.Any());
     }
 
     [TestMethod]
-    public void TestQueueVerifyPhoneTest()
+    public void TestResendPhoneTest()
     {
       var itemTypes = new List<IItem>(1);
 
@@ -89,12 +89,12 @@ namespace Atlantis.Framework.Providers.DomainsRAAVerify.Tests
       var verification = Verification.Create(ReasonCodes.VerifiedByFOSEmail, verificationItems);
 
       IEnumerable<Errors> errorCodes;
-      Assert.IsTrue(RAAProvider.TryQueueVerification(verification, out errorCodes));
+      Assert.IsTrue(RAAProvider.TryResend(verification, out errorCodes));
       Assert.IsFalse(errorCodes.Any());
     }
 
     [TestMethod]
-    public void TestQueueVerifyRegistrantPhoneTest()
+    public void TestResendRegistrantPhoneTest()
     {
       const string domainId = "12776637";
       var itemTypes = new List<IItem>(1);
@@ -107,7 +107,7 @@ namespace Atlantis.Framework.Providers.DomainsRAAVerify.Tests
       var verification = Verification.Create(ReasonCodes.VerifiedByFOSEmail, verificationItems);
 
       IEnumerable<Errors> erroCodes;
-      Assert.IsTrue(RAAProvider.TryQueueVerification(verification, out erroCodes));
+      Assert.IsTrue(RAAProvider.TryResend(verification, out erroCodes));
       Assert.IsFalse(erroCodes.Any());
     }
   }

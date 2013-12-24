@@ -39,16 +39,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Atlantis.Framework.DataCacheService">
-      <HintPath>..\packages\Atlantis.Framework.DataCacheService.4.0.0.0\lib\net40\Atlantis.Framework.DataCacheService.dll</HintPath>
+    <Reference Include="Atlantis.Framework.DataCacheService, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.DataCacheService.4.13.12.21\lib\net40\Atlantis.Framework.DataCacheService.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.DomainsRAA.Impl, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.DomainsRAA.Impl.4.13.12.18\lib\net40\Atlantis.Framework.DomainsRAA.Impl.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.DomainsRAA.Impl.4.13.12.23\lib\net40\Atlantis.Framework.DomainsRAA.Impl.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.DomainsRAA.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.DomainsRAA.Interface.4.13.12.18\lib\net40\Atlantis.Framework.DomainsRAA.Interface.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.DomainsRAA.Interface.4.13.12.23\lib\net40\Atlantis.Framework.DomainsRAA.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Engine">
       <HintPath>..\packages\Atlantis.Framework.Engine.4.0.0.0\lib\net40\Atlantis.Framework.Engine.dll</HintPath>
@@ -92,6 +93,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="DomainsRAAResendTest.cs" />
     <Compile Include="DomainsRAAStatusTest.cs" />
     <Compile Include="DomainsRAASetVerifiedTest.cs" />
     <Compile Include="DomainsRAAQueueVerifyTest.cs" />

@@ -7,6 +7,8 @@ namespace Atlantis.Framework.Providers.DomainsRAA.Interface
   {
     bool TryQueueVerification(IVerification verfication, out IEnumerable<Errors> errorCodes);
 
+    bool TryResend(IVerification verfication, out IEnumerable<Errors> errorCodes);
+
     bool TryGetStatus(IList<IItem> requestItems, out IDomainsRAAStatus raaStatus);
 
     bool TrySetVerifiedToken(IVerification verification, out IEnumerable<Errors> errorCodes);

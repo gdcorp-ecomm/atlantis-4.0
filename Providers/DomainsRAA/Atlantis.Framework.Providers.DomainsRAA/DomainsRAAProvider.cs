@@ -4,6 +4,7 @@ using System.Web;
 using Atlantis.Framework.DomainsRAA.Interface.DomainsRAASetVerified;
 using Atlantis.Framework.DomainsRAA.Interface.DomainsRAAStatus;
 using Atlantis.Framework.DomainsRAA.Interface.DomainsRAAQueueVerify;
+using Atlantis.Framework.DomainsRAA.Interface.DomainsRAAResend;
 using Atlantis.Framework.Interface;
 using System;
 using Atlantis.Framework.Providers.DomainsRAA.Interface;
@@ -106,6 +107,76 @@ namespace Atlantis.Framework.Providers.DomainsRAA
         isSuccess = false;
         var aex = new AtlantisException("DomainsRAAProvider.TryQueueVerification", "0", ex.StackTrace, ex.ToString(), null, null);
         Engine.Engine.LogAtlantisException(aex); 
+      }
+
+      if (!isSuccess && !errorCodes.Any())
+      {
+        errorCodes = new List<Errors>(1) { Errors.Exception };
+      }
+
+      return isSuccess;
+    }
+
+    public bool TryResend(IVerification verification, out IEnumerable<Errors> errorCodes)
+    {
+      var isSuccess = false;
+      errorCodes = new List<Errors>(0);
+      try
+      {
+
+        var requestItemTypes = new List<DomainsRAAService.Items.ItemElement>(verification.VerifyItems.Items.Count);
+
+        foreach (var item in verification.VerifyItems.Items)
+        {
+          requestItemTypes.Add(DomainsRAAService.Items.ItemElement.Create(item.ItemType, item.ItemTypeValue));
+        }
+
+        DomainsRAAService.DomainsRAAReasonCodes reasonCode;
+        if (!Enum.TryParse(verification.ReasonCode.ToString(), out reasonCode))
+        {
+          throw new Exception("DomainsRAAReasonCodes expected");
+        }
+
+        var domainsRAAVerifyItems = DomainsRAAService.Items.VerificationItemsElement.Create(
+          verification.VerifyItems.RegistrationType,
+          requestItemTypes,
+          verification.VerifyItems.DomainId
+          );
+
+        var verificationItem = DomainsRAAService.Items.VerificationItemElement.Create(_shopperContext.Value.ShopperId,
+          HttpContext.Current.Request.UserHostAddress,
+          domainsRAAVerifyItems,
+          reasonCode);
+
+        var request = new DomainsRAAResendRequestData(verificationItem);
+
+        var response = (DomainsRAAResendResponseData)Engine.Engine.ProcessRequest(request, 790);
+
+        if (response != null)
+        {
+          isSuccess = response.IsSuccess;
+
+          if (!isSuccess && response.HasErrorCodes)
+          {
+            var codes = new List<Errors>(response.ErrorCodes.Count());
+
+            foreach (var code in response.ErrorCodes)
+            {
+              Errors errorCode;
+              Enum.TryParse(code.ToString(), out errorCode);
+
+              codes.Add(errorCode);
+            }
+
+            errorCodes = codes;
+          }
+        }
+      }
+      catch (Exception ex)
+      {
+        isSuccess = false;
+        var aex = new AtlantisException("DomainsRAAProvider.TryResend", "0", ex.StackTrace, ex.ToString(), null, null);
+        Engine.Engine.LogAtlantisException(aex);
       }
 
       if (!isSuccess && !errorCodes.Any())

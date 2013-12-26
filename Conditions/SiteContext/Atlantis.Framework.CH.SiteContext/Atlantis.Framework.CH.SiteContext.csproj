@@ -71,9 +71,7 @@
     <Compile Include="ContextIds.cs" />
     <Compile Include="HasISCConditionHandler.cs" />
     <Compile Include="RequestIsInternalConditionHandler.cs" />
-    <Compile Include="SiteContextAnyConditionHandler.cs">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Compile>
+    <Compile Include="SiteContextAnyConditionHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

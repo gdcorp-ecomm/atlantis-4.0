@@ -345,6 +345,8 @@ namespace Atlantis.Framework.DotTypeCache
 
     private int InternalGetProductId(int registrationLength, int domainCount, DotTypeProductTypes productType)
     {
+      var result = 0;
+
       string registryId = null;
 
       if (productType == DotTypeProductTypes.Registration && _dotTypeRegistryData.Value != null)
@@ -356,7 +358,32 @@ namespace Atlantis.Framework.DotTypeCache
         registryId = _dotTypeRegistryData.Value.TransferAPI.Id;
       }
 
-      return InternalGetProductId(registryId, registrationLength, domainCount, productType);
+      int? registryIdValue = GetRegistryIdFromString(registryId);
+
+      IDomainProductLookup domainProductLookup;
+      switch (productType)
+      {
+        case DotTypeProductTypes.Registration:
+          domainProductLookup = DomainProductLookup.Create(registrationLength, domainCount, LaunchPhases.GeneralAvailability,
+                                                            TLDProductTypes.Registration, null, registryIdValue);
+          result = GetProductId(domainProductLookup);
+          break;
+        case DotTypeProductTypes.Transfer:
+          domainProductLookup = DomainProductLookup.Create(registrationLength, domainCount, LaunchPhases.GeneralAvailability,
+                                                            TLDProductTypes.Transfer, null, registryIdValue);
+          result = GetProductId(domainProductLookup);
+          break;
+        case DotTypeProductTypes.Renewal:
+          domainProductLookup = DomainProductLookup.Create(registrationLength, domainCount, LaunchPhases.GeneralAvailability,
+                                                            TLDProductTypes.Renewal, null, registryIdValue);
+          result = GetProductId(domainProductLookup);
+          break;
+        default:
+          result = InternalGetProductId(registryId, registrationLength, domainCount, productType);
+          break;
+      }
+
+      return result;
     }
 
     private int InternalGetProductId(string registryId, int registrationLength, int domainCount, DotTypeProductTypes productType)
@@ -433,32 +460,42 @@ namespace Atlantis.Framework.DotTypeCache
 
     public List<int> GetValidRegistrationProductIdList(int domainCount, params int[] registrationLengths)
     {
-      return InternalGetValidProductIds(DotTypeProductTypes.Registration, _tldml.Product.RegistrationYears, domainCount, registrationLengths);
+      IDomainProductListLookup domainProductListLookup = DomainProductListLookup.Create(registrationLengths, domainCount, LaunchPhases.GeneralAvailability, TLDProductTypes.Registration);
+      return GetProductIdList(domainProductListLookup);
     }
 
     public List<int> GetValidRegistrationProductIdList(string registryId, int domainCount, params int[] registrationLengths)
     {
-      return InternalGetValidProductIds(DotTypeProductTypes.Registration, _tldml.Product.RegistrationYears, registryId, domainCount, registrationLengths);
+      int? registryIdValue = GetRegistryIdFromString(registryId);
+
+      IDomainProductListLookup domainProductListLookup = DomainProductListLookup.Create(registrationLengths, domainCount, LaunchPhases.GeneralAvailability, TLDProductTypes.Registration, null, registryIdValue);
+      return GetProductIdList(domainProductListLookup);
     }
 
     public List<int> GetValidTransferProductIdList(int domainCount, params int[] registrationLengths)
     {
-      return InternalGetValidProductIds(DotTypeProductTypes.Transfer, _tldml.Product.TransferYears, domainCount, registrationLengths);
+      IDomainProductListLookup domainProductListLookup = DomainProductListLookup.Create(registrationLengths, domainCount, LaunchPhases.GeneralAvailability, TLDProductTypes.Transfer);
+      return GetProductIdList(domainProductListLookup);
     }
 
     public List<int> GetValidTransferProductIdList(string registryId, int domainCount, params int[] registrationLengths)
     {
-      return InternalGetValidProductIds(DotTypeProductTypes.Transfer, _tldml.Product.TransferYears, registryId, domainCount, registrationLengths);
+      int? registryIdValue = GetRegistryIdFromString(registryId);
+      IDomainProductListLookup domainProductListLookup = DomainProductListLookup.Create(registrationLengths, domainCount, LaunchPhases.GeneralAvailability, TLDProductTypes.Transfer, null, registryIdValue);
+      return GetProductIdList(domainProductListLookup);
     }
 
     public List<int> GetValidRenewalProductIdList(int domainCount, params int[] registrationLengths)
     {
-      return InternalGetValidProductIds(DotTypeProductTypes.Renewal, _tldml.Product.RenewalYears, domainCount, registrationLengths);
+      IDomainProductListLookup domainProductListLookup = DomainProductListLookup.Create(registrationLengths, domainCount, LaunchPhases.GeneralAvailability, TLDProductTypes.Renewal);
+      return GetProductIdList(domainProductListLookup);
     }
 
     public List<int> GetValidRenewalProductIdList(string registryId, int domainCount, params int[] registrationLengths)
     {
-      return InternalGetValidProductIds(DotTypeProductTypes.Renewal, _tldml.Product.RenewalYears, registryId, domainCount, registrationLengths);
+      int? registryIdValue = GetRegistryIdFromString(registryId);
+      IDomainProductListLookup domainProductListLookup = DomainProductListLookup.Create(registrationLengths, domainCount, LaunchPhases.GeneralAvailability, TLDProductTypes.Renewal, null, registryIdValue);
+      return GetProductIdList(domainProductListLookup);
     }
 
     private List<int> InternalGetValidProductIds(DotTypeProductTypes productType, ITLDValidYearsSet validYears, string registryId, int domainCount, params int[] requestedYears)
@@ -481,8 +518,7 @@ namespace Atlantis.Framework.DotTypeCache
     public List<int> GetValidPreRegLengths(LaunchPhases phase, int domainCount, params int[] registrationLengths)
     {
       IDomainProductListLookup domainProductListLookup = DomainProductListLookup.Create(registrationLengths, domainCount, phase, TLDProductTypes.Registration);
-
-      return GetProductIdList(domainProductListLookup);
+      return TldProducts(domainProductListLookup).ConvertAll(product => product.Years);
     }
 
     public List<int> GetValidRegistrationLengths(int domainCount, params int[] registrationLengths)
@@ -764,14 +800,25 @@ namespace Atlantis.Framework.DotTypeCache
 
     public List<int> GetProductIdList(IDomainProductListLookup domainProductListLookup)
     {
+      var result = TldProducts(domainProductListLookup);
+
+      return result.ConvertAll(product => product.UnifiedProductId);
+    }
+
+    private List<TLDProduct> TldProducts(IDomainProductListLookup domainProductListLookup)
+    {
       var result = new List<TLDProduct>(8);
 
-      var productTypeId = InternalGetTldProductTypeId(domainProductListLookup.DomainCount, domainProductListLookup.ProductType);
-      var productTiers = InternalGetProductTiers(domainProductListLookup.TldPhase, productTypeId, domainProductListLookup.RegistryId, domainProductListLookup.PriceTierId);
+      var productTypeId = InternalGetTldProductTypeId(domainProductListLookup.DomainCount,
+        domainProductListLookup.ProductType);
+      var productTiers = InternalGetProductTiers(domainProductListLookup.TldPhase, productTypeId,
+        domainProductListLookup.RegistryId, domainProductListLookup.PriceTierId);
       if (productTiers != null && !productTiers.ValidTierExist(domainProductListLookup.DomainCount))
       {
-        productTypeId = InternalGetTldProductTypeId(domainProductListLookup.DomainCount, domainProductListLookup.ProductType, false);
-        productTiers = InternalGetProductTiers(domainProductListLookup.TldPhase, productTypeId, domainProductListLookup.RegistryId, domainProductListLookup.PriceTierId);
+        productTypeId = InternalGetTldProductTypeId(domainProductListLookup.DomainCount, domainProductListLookup.ProductType,
+          false);
+        productTiers = InternalGetProductTiers(domainProductListLookup.TldPhase, productTypeId,
+          domainProductListLookup.RegistryId, domainProductListLookup.PriceTierId);
       }
 
       if (productTiers != null)
@@ -785,8 +832,7 @@ namespace Atlantis.Framework.DotTypeCache
           }
         }
       }
-
-      return result.ConvertAll(product => product.UnifiedProductId); 
+      return result;
     }
 
     private static int InternalGetTldProductTypeId(int domainCount, TLDProductTypes productType, bool getBulkBasedOnDomainCount = true)
@@ -814,14 +860,7 @@ namespace Atlantis.Framework.DotTypeCache
 
     private TLDProductTiers InternalGetProductTiers(LaunchPhases phase, int productTypeId, int? registryId, int? priceTierId)
     {
-      string phaseCode = LaunchPhaseMappings.GetCode(phase);
-      ITLDLaunchPhase lookupPhase = _tldml.Phase.GetLaunchPhase(phaseCode);
-
-      if ((productTypeId != TLDProductTypeIds.TLD_PRODUCT_TYPE_ID_REGISTRATION && productTypeId != TLDProductTypeIds.TLD_PRODUCT_TYPE_ID_BULK_REGISTRATION) ||
-           (phase == LaunchPhases.GeneralAvailability && lookupPhase.LivePeriod.IsActive))
-      {
-        phaseCode = ECOMM_GA_LIVE_PHASE_CODE;
-      }
+      var phaseCode = GetPhaseCode(phase, productTypeId);
 
       var productDomainAttributesResponse = LoadProductDomainAttributes(phaseCode, _siteContext.Value.PrivateLabelId, productTypeId);
 
@@ -849,6 +888,20 @@ namespace Atlantis.Framework.DotTypeCache
       }
 
       return productTiers;
+    }
+
+    private string GetPhaseCode(LaunchPhases phase, int productTypeId)
+    {
+      string phaseCode = LaunchPhaseMappings.GetCode(phase);
+      ITLDLaunchPhase lookupPhase = _tldml.Phase.GetLaunchPhase(phaseCode);
+
+      if ((productTypeId != TLDProductTypeIds.TLD_PRODUCT_TYPE_ID_REGISTRATION &&
+           productTypeId != TLDProductTypeIds.TLD_PRODUCT_TYPE_ID_BULK_REGISTRATION) ||
+          (phase == LaunchPhases.GeneralAvailability && lookupPhase.LivePeriod.IsActive))
+      {
+        phaseCode = ECOMM_GA_LIVE_PHASE_CODE;
+      }
+      return phaseCode;
     }
 
     public string GetRegistrationFieldsXml()

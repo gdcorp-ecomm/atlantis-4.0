@@ -65,60 +65,70 @@ namespace Atlantis.Framework.DotTypeCache
       return DotTypes.HasDotTypeInfo(dotType);
     }
 
+    [Obsolete("Use the new method GetProductId instead.")]
     public static int GetExpiredAuctionRegProductId(string dotType, int registrationLength, int domainCount)
     {
       IDotTypeInfo dotTypeInfo = GetDotTypeInfo(dotType);
       return dotTypeInfo.GetExpiredAuctionRegProductId(registrationLength, domainCount);
     }
 
+    [Obsolete("Use the new method GetProductId instead.")]
     public static int GetExpiredAuctionRegProductId(string dotType, string registrarId, int registrationLength, int domainCount)
     {
       IDotTypeInfo dotTypeInfo = GetDotTypeInfo(dotType);
       return dotTypeInfo.GetExpiredAuctionRegProductId(registrarId, registrationLength, domainCount);
     }
 
+    [Obsolete("Use the new method GetProductId instead.")]
     public static int GetPreRegProductId(string dotType, LaunchPhases phase, int registrationLength, int domainCount)
     {
       IDotTypeInfo dotTypeInfo = GetDotTypeInfo(dotType);
       return dotTypeInfo.GetPreRegProductId(phase, registrationLength, domainCount);
     }
 
+    [Obsolete("Use the new method GetProductId instead.")]
     public static int GetPreRegProductId(string dotType, LaunchPhases phase, string registryId, int registrationLength, int domainCount)
     {
       IDotTypeInfo dotTypeInfo = GetDotTypeInfo(dotType);
       return dotTypeInfo.GetPreRegProductId(phase, registryId, registrationLength, domainCount);
     }
 
+    [Obsolete("Use the new method GetProductId instead.")]
     public static int GetRegistrationProductId(string dotType, int registrationLength, int domainCount)
     {
       IDotTypeInfo dotTypeInfo = GetDotTypeInfo(dotType);
       return dotTypeInfo.GetRegistrationProductId(registrationLength, domainCount);
     }
 
+    [Obsolete("Use the new method GetProductId instead.")]
     public static int GetRegistrationProductId(string dotType, string registrarId, int registrationLength, int domainCount)
     {
       IDotTypeInfo dotTypeInfo = GetDotTypeInfo(dotType);
       return dotTypeInfo.GetRegistrationProductId(registrarId, registrationLength, domainCount);
     }
 
+    [Obsolete("Use the new method GetProductId instead.")]
     public static int GetTransferProductId(string dotType, int registrationLength, int domainCount)
     {
       IDotTypeInfo dotTypeInfo = GetDotTypeInfo(dotType);
       return dotTypeInfo.GetTransferProductId(registrationLength, domainCount);
     }
 
+    [Obsolete("Use the new method GetProductId instead.")]
     public static int GetTransferProductId(string dotType, string registrarId, int registrationLength, int domainCount)
     {
       IDotTypeInfo dotTypeInfo = GetDotTypeInfo(dotType);
       return dotTypeInfo.GetTransferProductId(registrarId, registrationLength, domainCount);
     }
 
+    [Obsolete("Use the new method GetProductId instead.")]
     public static int GetRenewalProductId(string dotType, int registrationLength, int domainCount)
     {
       IDotTypeInfo dotTypeInfo = GetDotTypeInfo(dotType);
       return dotTypeInfo.GetRenewalProductId(registrationLength, domainCount);
     }
 
+    [Obsolete("Use the new method GetProductId instead.")]
     public static int GetRenewalProductId(string dotType, string registrarId, int registrationLength, int domainCount)
     {
       IDotTypeInfo dotTypeInfo = GetDotTypeInfo(dotType);

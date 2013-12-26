@@ -23,26 +23,46 @@ namespace Atlantis.Framework.DotTypeCache.Interface
     RegistryLanguage GetLanguageById(int languageId);
     bool CanRenew(DateTime currentExpirationDate, out int maxValidRenewalLength);
 
+    [Obsolete("Use the new method GetProductId instead.")]
     int GetExpiredAuctionRegProductId(int registrationLength, int domainCount);
+    [Obsolete("Use the new method GetProductId instead.")]
     int GetExpiredAuctionRegProductId(string registryId, int registrationLength, int domainCount);
+    [Obsolete("Use the new method GetProductId instead.")]
     int GetPreRegProductId(LaunchPhases phase, int registrationLength, int domainCount);
+    [Obsolete("Use the new method GetProductId instead.")]
     int GetPreRegProductId(LaunchPhases phase, string registryId, int registrationLength, int domainCount);
+    [Obsolete("Use the new method GetProductId instead.")]
     int GetRegistrationProductId(int registrationLength, int domainCount);
+    [Obsolete("Use the new method GetProductId instead.")]
     int GetRegistrationProductId(string registryId, int registrationLength, int domainCount);
+    [Obsolete("Use the new method GetProductId instead.")]
     int GetTransferProductId(int registrationLength, int domainCount);
+    [Obsolete("Use the new method GetProductId instead.")]
     int GetTransferProductId(string registryId, int registrationLength, int domainCount);
+    [Obsolete("Use the new method GetProductId instead.")]
     int GetRenewalProductId(int registrationLength, int domainCount);
+    [Obsolete("Use the new method GetProductId instead.")]
     int GetRenewalProductId(string registryId, int registrationLength, int domainCount);
 
+    [Obsolete("Use the new method GetProductIdList instead.")]
     List<int> GetValidExpiredAuctionRegProductIdList(int domainCount, params int[] registrationLengths);
+    [Obsolete("Use the new method GetProductIdList instead.")]
     List<int> GetValidExpiredAuctionRegProductIdList(string registryId, int domainCount, params int[] registrationLengths);
+    [Obsolete("Use the new method GetProductIdList instead.")]
     List<int> GetValidPreRegProductIdList(LaunchPhases phase, int domainCount, params int[] registrationLengths);
+    [Obsolete("Use the new method GetProductIdList instead.")]
     List<int> GetValidPreRegProductIdList(LaunchPhases phase, string registryId, int domainCount, params int[] registrationLengths);
+    [Obsolete("Use the new method GetProductIdList instead.")]
     List<int> GetValidRegistrationProductIdList(int domainCount, params int[] registrationLengths);
+    [Obsolete("Use the new method GetProductIdList instead.")]
     List<int> GetValidRegistrationProductIdList(string registryId, int domainCount, params int[] registrationLengths);
+    [Obsolete("Use the new method GetProductIdList instead.")]
     List<int> GetValidTransferProductIdList(int domainCount, params int[] registrationLengths);
+    [Obsolete("Use the new method GetProductIdList instead.")]
     List<int> GetValidTransferProductIdList(string registryId, int domainCount, params int[] registrationLengths);
+    [Obsolete("Use the new method GetProductIdList instead.")]
     List<int> GetValidRenewalProductIdList(int domainCount, params int[] registrationLengths);
+    [Obsolete("Use the new method GetProductIdList instead.")]
     List<int> GetValidRenewalProductIdList(string registryId, int domainCount, params int[] registrationLengths);
 
     List<int> GetValidExpiredAuctionRegLengths(int domainCount, params int[] registrationLengths);

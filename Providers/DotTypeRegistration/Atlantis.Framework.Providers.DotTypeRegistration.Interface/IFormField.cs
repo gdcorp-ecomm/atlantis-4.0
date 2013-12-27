@@ -8,6 +8,7 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration.Interface
     string Name { get; set; }
     string Value { get; set; }
     string LabelText { get; set; }
+    string DescriptionText { get; set; }
     IList<IDotTypeFormsItem> ItemCollection { get; set; }
   }
 }

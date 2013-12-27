@@ -54,7 +54,14 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration.Handlers
       {
         if (!string.IsNullOrEmpty(noticeXml))
         {
-          var formField = new FormField {Name = field.FieldName, Value = noticeXml, LabelText = noticeXml, Type = FormFieldTypes.Checkbox};
+          var formField = new FormField
+          {
+            Name = field.FieldName, 
+            Value = noticeXml, 
+            LabelText = noticeXml,
+            DescriptionText = field.FieldDescription,
+            Type = FormFieldTypes.Checkbox
+          };
           result.Add(formField);
 
           formField = new FormField {Name = "acceptedDate", Type = FormFieldTypes.Hidden};

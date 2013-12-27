@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>Atlantis.Framework.Providers.DotTypeRegistration.Interface</id>
-    <version>4.13.12.17</version>
+    <version>4.13.12.26</version>
     <title>Atlantis Framework Providers DotTypeRegistration Interface</title>
     <authors>$author$</authors>
     <owners>$author$</owners>

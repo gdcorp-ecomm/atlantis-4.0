@@ -39,7 +39,14 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration.Handlers
     {
       IList<IFormField> result = new List<IFormField>();
 
-      var formField = new FormField { Name = field.FieldName, LabelText = field.FieldLabel, Type = FormFieldTypes.Radio, ItemCollection = field.ItemCollection };
+      var formField = new FormField
+      {
+        Name = field.FieldName, 
+        LabelText = field.FieldLabel,
+        DescriptionText = field.FieldDescription,
+        Type = FormFieldTypes.Radio, 
+        ItemCollection = field.ItemCollection
+      };
       result.Add(formField);
 
       return result;

@@ -39,7 +39,13 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration.Handlers
     {
       IList<IFormField> result = new List<IFormField>();
 
-      var formField = new FormField { Name = field.FieldName, LabelText = field.FieldLabel, Type = FormFieldTypes.Checkbox };
+      var formField = new FormField
+      {
+        Name = field.FieldName, 
+        LabelText = field.FieldLabel,
+        DescriptionText = field.FieldDescription,
+        Type = FormFieldTypes.Checkbox
+      };
       result.Add(formField);
 	  
       return result;

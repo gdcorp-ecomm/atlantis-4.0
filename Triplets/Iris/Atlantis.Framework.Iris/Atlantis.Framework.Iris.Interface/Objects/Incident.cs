@@ -5,8 +5,6 @@ using System.Xml.Serialization;
 
 namespace Atlantis.Framework.Iris.Interface.Objects
 {
-  [DataContract(Name = "Item")]
-  [XmlRoot(ElementName = "Item")]
   [XmlSerializerFormat]
   public class Incident
   {

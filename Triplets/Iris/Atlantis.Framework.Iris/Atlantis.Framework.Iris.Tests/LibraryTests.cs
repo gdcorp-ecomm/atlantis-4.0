@@ -117,7 +117,7 @@ namespace Atlantis.Framework.Iris.Tests
     public void GetIncidentCustomerNotes()
     {
       long incidentId = 1329192;
-      int noteId = 0;
+      int noteId = 1;
 
       var request = new Iris.Interface.GetIncidentCustomerNotesRequestData(incidentId, noteId);
       var response = Engine.Engine.ProcessRequest(request, 788) as Iris.Interface.GetIncidentCustomerNotesResponseData;

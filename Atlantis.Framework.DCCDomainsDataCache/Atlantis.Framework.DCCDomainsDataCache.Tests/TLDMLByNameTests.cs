@@ -15,14 +15,14 @@ namespace Atlantis.Framework.DCCDomainsDataCache.Tests
     [TestMethod]
     public void TLDMLFoundUpperCase()
     {
-      var request = new TLDMLByNameRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "COM.AU");
+      var request = new TLDMLByNameRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "BUILD");
       var response = (TLDMLByNameResponseData)DataCache.DataCache.GetProcessRequest(request, _GETBYNAMEREQUEST);
     }
 
     [TestMethod]
     public void TLDMLFoundLowerCase()
     {
-      var request = new TLDMLByNameRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "com.au");
+      var request = new TLDMLByNameRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "build");
       var response = (TLDMLByNameResponseData)DataCache.DataCache.GetProcessRequest(request, _GETBYNAMEREQUEST);
     }
 
@@ -30,7 +30,7 @@ namespace Atlantis.Framework.DCCDomainsDataCache.Tests
     [ExpectedException(typeof(AtlantisException))]
     public void TLDMLNotFound()
     {
-      var request = new TLDMLByNameRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "INFO");
+      var request = new TLDMLByNameRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "ORG");
       var response = (TLDMLByNameResponseData)DataCache.DataCache.GetProcessRequest(request, _GETBYNAMEREQUEST);
     }
 
@@ -51,6 +51,7 @@ namespace Atlantis.Framework.DCCDomainsDataCache.Tests
     }
 
     [TestMethod]
+    [ExpectedException(typeof(AtlantisException))]
     public void MinRegistrationOrg()
     {
       var request = new TLDMLByNameRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "org");
@@ -59,6 +60,7 @@ namespace Atlantis.Framework.DCCDomainsDataCache.Tests
     }
 
     [TestMethod]
+    [ExpectedException(typeof(AtlantisException))]
     public void MaxRegistrationOrg()
     {
       var request = new TLDMLByNameRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "Org");
@@ -67,6 +69,7 @@ namespace Atlantis.Framework.DCCDomainsDataCache.Tests
     }
 
     [TestMethod]
+    [ExpectedException(typeof(AtlantisException))]
     public void TLDMLFoundOrg()
     {
       var request = new TLDMLByNameRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "ORG");
@@ -77,13 +80,14 @@ namespace Atlantis.Framework.DCCDomainsDataCache.Tests
     [TestMethod]
     public void MinRegistrationComAu()
     {
-      var request = new TLDMLByNameRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "com.au");
+      var request = new TLDMLByNameRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "build");
       var response = (TLDMLByNameResponseData)DataCache.DataCache.GetProcessRequest(request, _GETBYNAMEREQUEST);
-      Assert.AreEqual(2, response.Product.RegistrationYears.Min);
-      Assert.AreEqual(2, response.Product.RegistrationYears.Max);
+      Assert.AreEqual(1, response.Product.RegistrationYears.Min);
+      Assert.AreEqual(10, response.Product.RegistrationYears.Max);
     }
 
     [TestMethod]
+    [ExpectedException(typeof(AtlantisException))]
     public void NoPreregLengthsOrg()
     {
       var request = new TLDMLByNameRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "ORG");
@@ -95,7 +99,7 @@ namespace Atlantis.Framework.DCCDomainsDataCache.Tests
     public void GetAllClientRequestPhases()
     {
       var result = false;
-      var request = new TLDMLByNameRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "O1.BORG");
+      var request = new TLDMLByNameRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "BUILD");
       var response = (TLDMLByNameResponseData)DataCache.DataCache.GetProcessRequest(request, _GETBYNAMEREQUEST);
 
       var allPhases = response.Phase.GetAllLaunchPhases();
@@ -109,27 +113,10 @@ namespace Atlantis.Framework.DCCDomainsDataCache.Tests
     }
 
     [TestMethod]
-    public void GetNoClientRequestPhases()
-    {
-      var result = false;
-      var request = new TLDMLByNameRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "LA");
-      var response = (TLDMLByNameResponseData)DataCache.DataCache.GetProcessRequest(request, _GETBYNAMEREQUEST);
-
-      var allPhases = response.Phase.GetAllLaunchPhases();
-
-      if (allPhases.Count == 0)
-      {
-        result = true;
-      }
-
-      Assert.IsTrue(result);
-    }
-
-    [TestMethod]
     public void GetActiveClientRequestPhases()
     {
       var result = false;
-      var request = new TLDMLByNameRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "O1.BORG");
+      var request = new TLDMLByNameRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "BUILD");
       var response = (TLDMLByNameResponseData)DataCache.DataCache.GetProcessRequest(request, _GETBYNAMEREQUEST);
 
       var allPhases = response.Phase.GetAllLaunchPhases(true);

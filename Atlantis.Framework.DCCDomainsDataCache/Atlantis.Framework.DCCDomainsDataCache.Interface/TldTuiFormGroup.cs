@@ -7,7 +7,6 @@ namespace Atlantis.Framework.DCCDomainsDataCache.Interface
   public class TldTuiFormGroup : ITLDTuiFormGroup
   {
     public string Type { get; private set; }
-    public string Value { get; private set; }
 
     private readonly HashSet<TldTuiFormGroupLaunchPhase> _formgroupLaunchPhases;
     public IEnumerable<ITLDTuiFormGroupLaunchPhase> FormGrouplaunchPhases
@@ -43,12 +42,6 @@ namespace Atlantis.Framework.DCCDomainsDataCache.Interface
       if (formType != null)
       {
         Type = formType.Value;
-      }
-
-      var formValue = formGroupElement.Attribute("value");
-      if (formValue != null)
-      {
-        Value = formValue.Value;
       }
 
       //populate form group launch phases

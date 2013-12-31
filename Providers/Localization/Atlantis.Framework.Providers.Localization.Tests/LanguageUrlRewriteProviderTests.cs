@@ -692,24 +692,22 @@ namespace Atlantis.Framework.Providers.Localization.Tests
     {
       Uri uri = new Uri("https://whois.godaddy.com");
       IProviderContainer container = SetCountrySubdomainContext(uri.ToString());
-      LanguageUrlRewriteProvider provider = (LanguageUrlRewriteProvider)container.Resolve<ILanguageUrlRewriteProvider>();
+      ILanguageUrlRewriteProvider provider = (LanguageUrlRewriteProvider)container.Resolve<ILanguageUrlRewriteProvider>();
 
-      MethodInfo method = GetPrivateMethod("IsValidLanguageCode");
+      Assert.IsFalse(provider.IsValidLanguageCodeForRequest(""));
+      Assert.IsFalse(provider.IsValidLanguageCodeForRequest("  "));
 
-      Assert.IsFalse((bool)method.Invoke(provider, new object[] { "" }));
-      Assert.IsFalse((bool)method.Invoke(provider, new object[] { "  " }));
+      Assert.IsFalse(provider.IsValidLanguageCodeForRequest("11"));
+      Assert.IsFalse(provider.IsValidLanguageCodeForRequest("22-33"));
 
-      Assert.IsFalse((bool)method.Invoke(provider, new object[] { "11" }));
-      Assert.IsFalse((bool)method.Invoke(provider, new object[] { "22-33" }));
+      Assert.IsFalse(provider.IsValidLanguageCodeForRequest("esx"));
+      Assert.IsFalse(provider.IsValidLanguageCodeForRequest("es-usx"));
+      Assert.IsFalse(provider.IsValidLanguageCodeForRequest("-us"));
+      Assert.IsFalse(provider.IsValidLanguageCodeForRequest("22-usx"));
+      Assert.IsFalse(provider.IsValidLanguageCodeForRequest("esx-us"));
 
-      Assert.IsFalse((bool)method.Invoke(provider, new object[] { "esx" }));
-      Assert.IsFalse((bool)method.Invoke(provider, new object[] { "es-usx" }));
-      Assert.IsFalse((bool)method.Invoke(provider, new object[] { "-us" }));
-      Assert.IsFalse((bool)method.Invoke(provider, new object[] { "22-usx" }));
-      Assert.IsFalse((bool)method.Invoke(provider, new object[] { "esx-us" }));
-
-      Assert.IsFalse((bool)method.Invoke(provider, new object[] { "12(*&)&)*" }));
-      Assert.IsFalse((bool)method.Invoke(provider, new object[] { "12(*&)&)*=us" }));
+      Assert.IsFalse(provider.IsValidLanguageCodeForRequest("12(*&)&)*"));
+      Assert.IsFalse(provider.IsValidLanguageCodeForRequest("12(*&)&)*=us"));
     }
 
     [TestMethod]
@@ -717,18 +715,17 @@ namespace Atlantis.Framework.Providers.Localization.Tests
     {
       Uri uri = new Uri("https://whois.godaddy.com");
       IProviderContainer container = SetCountrySubdomainContext(uri.ToString());
-      LanguageUrlRewriteProvider provider = (LanguageUrlRewriteProvider)container.Resolve<ILanguageUrlRewriteProvider>();
-
-      MethodInfo method = GetPrivateMethod("IsValidLanguageCode");
-      Assert.IsTrue((bool)method.Invoke(provider, new object[] { "es" }));
-      Assert.IsTrue((bool)method.Invoke(provider, new object[] { "Es" }));
-      Assert.IsTrue((bool)method.Invoke(provider, new object[] { "en" }));
-      Assert.IsFalse((bool)method.Invoke(provider, new object[] { "qa-qa" }));
-      Assert.IsFalse((bool)method.Invoke(provider, new object[] { "qa-ps" }));
+      ILanguageUrlRewriteProvider provider = (LanguageUrlRewriteProvider)container.Resolve<ILanguageUrlRewriteProvider>();
+      
+      Assert.IsTrue(provider.IsValidLanguageCodeForRequest("es"));
+      Assert.IsTrue(provider.IsValidLanguageCodeForRequest("Es"));
+      Assert.IsTrue(provider.IsValidLanguageCodeForRequest("en"));
+      Assert.IsFalse(provider.IsValidLanguageCodeForRequest("qa-qa"));
+      Assert.IsFalse(provider.IsValidLanguageCodeForRequest("qa-ps"));
 
       container.SetData(MockSiteContextSettings.IsRequestInternal, true);
-      Assert.IsTrue((bool)method.Invoke(provider, new object[] { "qa-qa" }));
-      Assert.IsTrue((bool)method.Invoke(provider, new object[] { "qa-ps" }));
+      Assert.IsTrue(provider.IsValidLanguageCodeForRequest("qa-qa"));
+      Assert.IsTrue(provider.IsValidLanguageCodeForRequest("qa-ps"));
     }
 
     [TestMethod]
@@ -736,19 +733,17 @@ namespace Atlantis.Framework.Providers.Localization.Tests
     {
       Uri uri = new Uri("https://whois.godaddy.com");
       IProviderContainer container = SetCountrySubdomainContext(uri.ToString());
-      LanguageUrlRewriteProvider provider = (LanguageUrlRewriteProvider)container.Resolve<ILanguageUrlRewriteProvider>();
+      ILanguageUrlRewriteProvider provider = (LanguageUrlRewriteProvider)container.Resolve<ILanguageUrlRewriteProvider>();
 
-      MethodInfo method = GetPrivateMethod("IsValidLanguageCode");
-      Assert.IsFalse((bool)method.Invoke(provider, new object[] { "fr" }));
-      Assert.IsFalse((bool)method.Invoke(provider, new object[] { "hi-us" }));
+      Assert.IsFalse(provider.IsValidLanguageCodeForRequest("fr"));
+      Assert.IsFalse(provider.IsValidLanguageCodeForRequest("hi-us"));
 
       uri = new Uri("https://ca.godaddy.com");
       container = SetCountrySubdomainContext(uri.ToString());
       provider = (LanguageUrlRewriteProvider)container.Resolve<ILanguageUrlRewriteProvider>();
 
-      method = GetPrivateMethod("IsValidLanguageCode");
-      Assert.IsFalse((bool)method.Invoke(provider, new object[] { "sw" }));
-      Assert.IsFalse((bool)method.Invoke(provider, new object[] { "sw-ca" }));
+      Assert.IsFalse(provider.IsValidLanguageCodeForRequest("sw"));
+      Assert.IsFalse(provider.IsValidLanguageCodeForRequest("sw-ca"));
     }
 
     #endregion

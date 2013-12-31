@@ -24,5 +24,12 @@ namespace Atlantis.Framework.Providers.Localization.Interface
     /// <param name="validMarketId">Saved market ID</param>
     /// <returns>True if saved language code was found.  False otherwise.</returns>
     bool TryGetSavedRequestLanguageUrlInfo(out string language, out string validMarketId);
+
+    /// <summary>
+    /// Returns whether or not the string passed in is a valid language code for the current Request CountrySite
+    /// </summary>
+    /// <param name="language">String to check</param>
+    /// <returns></returns>
+    bool IsValidLanguageCodeForRequest(string language);
   }
 }

@@ -276,7 +276,7 @@ namespace Atlantis.Framework.Providers.Localization
       return result;
     }
 
-    private bool IsValidLanguageCode(string language)
+    public bool IsValidLanguageCodeForRequest(string language)
     {
       bool result = false;
 
@@ -305,7 +305,7 @@ namespace Atlantis.Framework.Providers.Localization
           {
             IMarket market;
             string firstSegment = segments[0];
-            if (IsValidLanguageCode(firstSegment))
+            if (IsValidLanguageCodeForRequest(firstSegment))
             {
               result = true;
               language = firstSegment;

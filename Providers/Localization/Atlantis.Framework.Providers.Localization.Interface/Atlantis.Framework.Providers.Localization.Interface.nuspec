@@ -2,15 +2,18 @@
 <package >
   <metadata>
     <id>Atlantis.Framework.Providers.Localization.Interface</id>
-    <version>4.13.12.17</version>
+    <version>4.13.12.31</version>
     <title>Atlantis Framework Providers Localization Interface</title>
     <authors>$author$</authors>
     <owners>$author$</owners>
     <projectUrl>https://confluence.int.godaddy.com/display/ATLANTIS</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes>Added ILocalizationProvider.GetMappedMarketsForCountrySite(string countrySite, bool includeInternalOnly);  Added IActiveMarketDisplayProvider.GetActiveMarketDisplay(bool includeInternalOnly);</releaseNotes>
+    <releaseNotes>Added bool IsValidLanguageCodeForRequest(string language) to interface;</releaseNotes>
     <copyright>$copyright$</copyright>
     <tags>Atlantis Framework Providers Localization Interface</tags>
   </metadata>
+  <files>
+    <file src="bin\$configuration$\$id$.XML" />
+  </files>
 </package>

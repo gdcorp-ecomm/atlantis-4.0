@@ -1,11 +1,6 @@
-﻿using Atlantis.Framework.Iris.Interface.Objects;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
-using System.Text;
-using System.Xml;
 
 namespace Atlantis.Framework.Iris.Tests
 {

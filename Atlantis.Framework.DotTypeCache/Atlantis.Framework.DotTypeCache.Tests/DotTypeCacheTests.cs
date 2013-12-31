@@ -1586,11 +1586,11 @@ namespace Atlantis.Framework.DotTypeCache.Tests
     }
 
     [TestMethod]
-    public void TldGetApplicationProductIdListTldmlO2Borg()
+    public void TldGetApplicationProductIdListTldmlBuild()
     {
-      var dotTypeInfo = DotTypeProvider.GetDotTypeInfo("f.borg");
+      var dotTypeInfo = DotTypeProvider.GetDotTypeInfo("build");
 
-      var productIdList = dotTypeInfo.GetPhaseApplicationProductIdList(LaunchPhases.SunriseA);
+      var productIdList = dotTypeInfo.GetPhaseApplicationProductIdList(LaunchPhases.Landrush);
       Assert.IsTrue(productIdList.Any());
     }
 
@@ -1635,6 +1635,22 @@ namespace Atlantis.Framework.DotTypeCache.Tests
       var dotTypeInfo = DotTypeProvider.GetDotTypeInfo("COM");
       
       Assert.IsFalse(dotTypeInfo.Product.Trustee.IsRequired);
+    }
+
+    [TestMethod]
+    public void RequiresTuiFormTestCl()
+    {
+      var dotTypeInfo = DotTypeProvider.GetDotTypeInfo("CL");
+
+      Assert.IsTrue(dotTypeInfo.RequiresTuiForm(LaunchPhases.GeneralAvailability));
+    }
+
+    [TestMethod]
+    public void RequiresTuiFormTestSg()
+    {
+      var dotTypeInfo = DotTypeProvider.GetDotTypeInfo("SG");
+
+      Assert.IsTrue(dotTypeInfo.RequiresTuiForm(LaunchPhases.GeneralAvailability));
     }
   }
 }

@@ -741,6 +741,24 @@ namespace Atlantis.Framework.DotTypeCache
       return result;
     }
 
+    public bool RequiresTuiForm(LaunchPhases launchPhase)
+    {
+      bool result = false;
+
+      if (_tldml.Product != null && _tldml.Product.Trustee != null)
+      {
+        result = _tldml.Product.Trustee.IsRequired;
+      }
+      
+      if (!result)
+      {
+        var tuiFormTypes = GetTuiFormTypes(launchPhase);
+        result = tuiFormTypes.Count > 0;
+      }
+
+      return result;
+    }
+
     public int GetMinPreRegLength(LaunchPhases phase)
     {
       return _tldml.Product.PreregistrationYears(LaunchPhaseMappings.GetCode(phase)).Min;

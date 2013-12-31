@@ -89,18 +89,6 @@
     <Reference Include="Atlantis.Framework.DomainSearch.Interface">
       <HintPath>..\packages\Atlantis.Framework.DomainSearch.Interface.4.13.11.8\lib\net40\Atlantis.Framework.DomainSearch.Interface.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.DotTypeCache, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.DotTypeCache.4.13.11.21\lib\net40\Atlantis.Framework.DotTypeCache.dll</HintPath>
-    </Reference>
-    <Reference Include="Atlantis.Framework.DotTypeCache.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.DotTypeCache.Interface.4.13.11.20\lib\net40\Atlantis.Framework.DotTypeCache.Interface.dll</HintPath>
-    </Reference>
-    <Reference Include="Atlantis.Framework.DotTypeCache.Static, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.DotTypeCache.Static.4.13.11.19\lib\net40\Atlantis.Framework.DotTypeCache.Static.dll</HintPath>
-    </Reference>
     <Reference Include="Atlantis.Framework.Engine, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Atlantis.Framework.Engine.4.0.0.0\lib\net40\Atlantis.Framework.Engine.dll</HintPath>
@@ -243,16 +231,6 @@
     <Compile Include="DotTypeCacheTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Atlantis.Framework.DotTypeCache.Monitor\Atlantis.Framework.DotTypeCache.Monitor.csproj">
-      <Project>{196f69f1-fb8d-44d3-9946-471dc8f26949}</Project>
-      <Name>Atlantis.Framework.DotTypeCache.Monitor</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Atlantis.Framework.DotTypeCache.StaticTypes\Atlantis.Framework.DotTypeCache.StaticTypes.csproj">
-      <Project>{fc7381b1-66e0-462f-952b-4ec1f18e9c90}</Project>
-      <Name>Atlantis.Framework.DotTypeCache.StaticTypes</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="app.config" />
     <None Include="atlantis.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -272,7 +250,24 @@
     <Content Include="Interop\Interop.gdMiniEncryptLib.dll" />
     <Content Include="Interop\readme.txt" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Atlantis.Framework.DotTypeCache.Interface\Atlantis.Framework.DotTypeCache.Interface.csproj">
+      <Project>{95e67e48-7173-4f0c-854f-2f08cbfcf923}</Project>
+      <Name>Atlantis.Framework.DotTypeCache.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.DotTypeCache.StaticTypes\Atlantis.Framework.DotTypeCache.StaticTypes.csproj">
+      <Project>{fc7381b1-66e0-462f-952b-4ec1f18e9c90}</Project>
+      <Name>Atlantis.Framework.DotTypeCache.StaticTypes</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.DotTypeCache.Static\Atlantis.Framework.DotTypeCache.Static.csproj">
+      <Project>{c6714b5f-ce86-4d8b-a615-0482465d0619}</Project>
+      <Name>Atlantis.Framework.DotTypeCache.Static</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.DotTypeCache\Atlantis.Framework.DotTypeCache.csproj">
+      <Project>{c86da599-d09d-4c1e-934d-7e59d38ea9c2}</Project>
+      <Name>Atlantis.Framework.DotTypeCache</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

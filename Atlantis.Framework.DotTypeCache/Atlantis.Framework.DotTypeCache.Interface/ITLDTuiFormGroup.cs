@@ -6,8 +6,6 @@ namespace Atlantis.Framework.DotTypeCache.Interface
   {
     string Type { get; }
 
-    string Value { get; }
-
     IEnumerable<ITLDTuiFormGroupLaunchPhase> FormGrouplaunchPhases { get; }
   }
 }

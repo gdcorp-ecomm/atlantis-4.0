@@ -84,6 +84,7 @@ namespace Atlantis.Framework.DotTypeCache.Interface
     ITLDLaunchPhaseGroupCollection GetAllLaunchPhaseGroups(bool activeOnly = true);
     bool IsPreRegPhaseActive { get; }
     IList<string> GetTuiFormTypes(LaunchPhases launchPhase);
+    bool RequiresTuiForm(LaunchPhases launchPhase);
 
     int GetMinPreRegLength(LaunchPhases phase);
     int GetMaxPreRegLength(LaunchPhases phase);

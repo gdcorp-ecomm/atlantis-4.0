@@ -455,6 +455,11 @@ namespace Atlantis.Framework.DotTypeCache
       return new List<string>();
     }
 
+    public bool RequiresTuiForm(LaunchPhases launchPhase)
+    {
+      return _dotTypeInfo.RequiresTuiForm(launchPhase);
+    }
+
     public int GetMinPreRegLength(LaunchPhases phase)
     {
       return _dotTypeInfo.GetMinPreRegLength(phase);

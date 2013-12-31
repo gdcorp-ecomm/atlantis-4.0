@@ -272,6 +272,11 @@ namespace Atlantis.Framework.DotTypeCache.Interface
       return new List<string>();
     }
 
+    public bool RequiresTuiForm(LaunchPhases launchPhase)
+    {
+      return false;
+    }
+
     public int GetMinPreRegLength(LaunchPhases phase)
     {
       return 0;

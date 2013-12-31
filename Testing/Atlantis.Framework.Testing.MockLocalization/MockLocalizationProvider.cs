@@ -254,5 +254,10 @@ namespace Atlantis.Framework.Testing.MockLocalization
     {
       get { throw new NotImplementedException(); }
     }
+
+    public IEnumerable<IMarket> GetMappedMarketsForCountrySite(string countrySite, bool includeInternalOnly)
+    {
+      throw new NotImplementedException();
+    }
   }
 }

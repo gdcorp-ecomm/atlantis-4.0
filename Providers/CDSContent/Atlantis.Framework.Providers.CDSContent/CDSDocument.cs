@@ -9,6 +9,7 @@ namespace Atlantis.Framework.Providers.CDSContent
 {
   internal abstract class CDSDocument
   {
+    const string DOCUMENT_COUNTER_KEY = "CDS_DOCUMENT_COUNTER";
     const string CLIENT_SPOOF_PARAM_NAME = "version";
     const string SERVICE_SPOOF_PARAM_NAME = "docid";
     const string PATH_PREFIX = "content/";
@@ -75,6 +76,13 @@ namespace Atlantis.Framework.Providers.CDSContent
     private string ToQueryString(NameValueCollection nvc)
     {
       return string.Join("&", nvc.AllKeys.SelectMany(key => nvc.GetValues(key).Select(value => string.Format("{0}={1}", key, value))).ToArray());
+    }
+
+    protected int GetDocumentCounter()
+    {
+      int counter = Container.GetData<int>(DOCUMENT_COUNTER_KEY, 0);
+      Container.SetData<int>(DOCUMENT_COUNTER_KEY, ++counter);
+      return counter;
     }
   }
 }

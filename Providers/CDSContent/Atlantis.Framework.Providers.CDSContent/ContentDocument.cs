@@ -52,20 +52,21 @@ namespace Atlantis.Framework.Providers.CDSContent
         IDebugContext dc;
         if (Container.TryResolve<IDebugContext>(out dc))
         {
-          dc.LogDebugTrackingData("CDS Version Id", cv._id.oid);
-          dc.LogDebugTrackingData("CDS Doc Id", cv.DocumentId.oid);
-          dc.LogDebugTrackingData("CDS Doc Name", cv.Name);
-          dc.LogDebugTrackingData("CDS Query", cv.Url);
+          int counter = GetDocumentCounter();
+          dc.LogDebugTrackingData(counter + ". CDS Version Id", cv._id.oid);
+          dc.LogDebugTrackingData(counter + ". CDS Doc Id", cv.DocumentId.oid);
+          dc.LogDebugTrackingData(counter + ". CDS Doc Name", cv.Name);
+          dc.LogDebugTrackingData(counter + ". CDS Query", cv.Url);
           if (cv.ActiveDate != null)
           {
-            dc.LogDebugTrackingData("CDS ActiveDate", cv.ActiveDate.ADate ?? string.Empty);
+            dc.LogDebugTrackingData(counter + ". CDS ActiveDate", cv.ActiveDate.ADate ?? string.Empty);
           }
           if (cv.PublishDate != null)
           {
-            dc.LogDebugTrackingData("CDS PublishDate", cv.PublishDate.ADate ?? string.Empty);
+            dc.LogDebugTrackingData(counter + ". CDS PublishDate", cv.PublishDate.ADate ?? string.Empty);
           }
-          dc.LogDebugTrackingData("CDS Status", cv.Status ? "Published" : "Draft");
-          dc.LogDebugTrackingData("CDS Published By", cv.User.FullName);
+          dc.LogDebugTrackingData(counter + ". CDS Status", cv.Status ? "Published" : "Draft");
+          dc.LogDebugTrackingData(counter + ". CDS Published By", cv.User.FullName);
         }
       }
       catch { }

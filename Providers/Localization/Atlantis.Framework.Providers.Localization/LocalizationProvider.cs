@@ -351,10 +351,29 @@ namespace Atlantis.Framework.Providers.Localization
       {
         if (_cultureInfo == null)
         {
-          _cultureInfo = CultureInfo.GetCultureInfo(MarketInfo.MsCulture);
+          _cultureInfo = DetermineCultureInfo();
         }
         return _cultureInfo;
       }
+    }
+
+    
+    private CultureInfo DetermineCultureInfo()
+    {
+      CultureInfo result;
+
+      try
+      {
+        result = SupportedCultures.GetByName(MarketInfo.MsCulture) ?? CultureInfo.CurrentCulture;        
+      }
+      catch (CultureNotFoundException ex)
+      {
+        AtlantisException aex = new AtlantisException("LocalizationProvider.DetermineCultureInfo", 0, ex.Message + ex.StackTrace, MarketInfo.MsCulture);
+        Engine.Engine.LogAtlantisException(aex);
+        result = CultureInfo.CurrentCulture;
+      }
+
+      return result;
     }
 
     private string GetProxyLanguage()

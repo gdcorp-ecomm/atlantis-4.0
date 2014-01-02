@@ -107,6 +107,7 @@
     <Compile Include="LocalizationProvider.cs" />
     <Compile Include="LocalizationProviderEngineRequests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SupportedCultures.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="LocalizationRedirectProvider\CountrySiteRedirectRule.xml">

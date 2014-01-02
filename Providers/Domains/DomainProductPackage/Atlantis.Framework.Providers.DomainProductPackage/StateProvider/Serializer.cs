@@ -19,7 +19,7 @@ namespace Atlantis.Framework.Providers.DomainProductPackage.StateProvider
       catch (Exception ex)
       {
         isSuccess = false;
-        Engine.Engine.LogAtlantisException(new AtlantisException("DomainProductPackageStateProvider.TryRebuildDomainProductPackages", 0, ex.ToString(), packageDataSerializedString));
+        Engine.Engine.LogAtlantisException(new AtlantisException("Serializer.TryGetPackageDataItems", 0, ex.ToString(), packageDataSerializedString));
       }
 
       return isSuccess;

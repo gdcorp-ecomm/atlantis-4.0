@@ -18,17 +18,20 @@ namespace Atlantis.Framework.Providers.DomainProductPackage.StateProvider
     public bool TryGetDomainProductPackages(out IEnumerable<IDomainRegistrationProductPackageGroup> domainProductPackages)
     {
       bool success;
-      domainProductPackages = new List<IDomainRegistrationProductPackageGroup>(0);
+      domainProductPackages = new List<IDomainRegistrationProductPackageGroup>(8);
       var packageDataSerializedString = string.Empty;
 
       try
       {
         packageDataSerializedString = SessionState.Get(SESSION_PACKAGE_ID);
 
-        IEnumerable<PackageData> packageDataItems;
-        if (Serializer.TryGetPackageDataItems(packageDataSerializedString, out packageDataItems))
+        if (!string.IsNullOrEmpty(packageDataSerializedString))
         {
-          domainProductPackages = PackageBuilder.PackageDataToDomainRegistrationProduct(packageDataItems.ToList(), Container);
+          IEnumerable<PackageData> packageDataItems;
+          if (Serializer.TryGetPackageDataItems(packageDataSerializedString, out packageDataItems))
+          {
+            domainProductPackages = PackageBuilder.PackageDataToDomainRegistrationProduct(packageDataItems.ToList(), Container);
+          }
         }
 
         success = domainProductPackages.Any();
@@ -36,7 +39,7 @@ namespace Atlantis.Framework.Providers.DomainProductPackage.StateProvider
       catch (Exception ex)
       {
         success = false;
-        Engine.Engine.LogAtlantisException(new AtlantisException("DomainProductPackageStateProvider.TryRebuildDomainProductPackages", 0, ex.ToString(), packageDataSerializedString));
+        Engine.Engine.LogAtlantisException(new AtlantisException("PersistanceStoreProvider.TryGetDomainProductPackages", 0, ex.ToString(), packageDataSerializedString));
       }
 
       return success;

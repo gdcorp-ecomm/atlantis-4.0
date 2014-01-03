@@ -63,9 +63,9 @@
     <Reference Include="System.Web" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="WebStashManager.cs" />
+    <Compile Include="CssWebStashManager.cs" />
+    <Compile Include="CssWebStashRenderHandler.cs" />
     <Compile Include="JavaScriptWebStashManager.cs" />
-    <Compile Include="WebStashRenderHandler.cs" />
     <Compile Include="JavaScriptWebStashRenderHandler.cs" />
     <Compile Include="RenderPipelineBasePage.cs">
       <SubType>ASPXCodeBehind</SubType>

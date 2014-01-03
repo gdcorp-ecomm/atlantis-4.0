@@ -92,7 +92,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="CssWebStashTests.cs" />
+    <Compile Include="WebStashTests.cs" />
     <Compile Include="JavaScriptWebStashTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

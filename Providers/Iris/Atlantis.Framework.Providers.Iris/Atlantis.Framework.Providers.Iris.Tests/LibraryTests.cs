@@ -78,7 +78,7 @@ namespace Atlantis.Framework.Providers.Iris.Tests
       var irisProvider = theContainer.Resolve<IIrisProvider>();
 
       string note = "More Notes from the unit tests for Adding Comments to existing tickets.";
-      long incidentId = 1329192;
+      long incidentId = 1329225;
       
       var responseId = irisProvider.AddIncidentNote(incidentId, note, "Customer");
       Assert.IsTrue(responseId != -1);
@@ -110,13 +110,29 @@ namespace Atlantis.Framework.Providers.Iris.Tests
       var startDate = new DateTime(2013, 10, 1);
       var endDate = DateTime.Now;
 
-      var responseData = irisProvider.GetIncidents(shopperId, startDate, endDate);
+      var responseData = irisProvider.GetIncidents(shopperId, startDate, endDate,false);
 
       Assert.IsNotNull(responseData);
       Assert.IsNotNull(responseData.Incidents.Items.Count > 0);
       
     }
 
+    [TestMethod]
+    public void GetIncidentsByShopperIdAndDateRangeDeepLoad()
+    {
+      var theContainer = SetBasicContextAndProviders();
+      var irisProvider = theContainer.Resolve<IIrisProvider>();
+
+      const string shopperId = "902185";
+      var startDate = new DateTime(2013, 10, 1);
+      var endDate = DateTime.Now;
+
+      var responseData = irisProvider.GetIncidents(shopperId, startDate, endDate, true);
+
+      Assert.IsNotNull(responseData);
+      Assert.IsNotNull(responseData.Incidents.Items.Count > 0);
+
+    }
 
     [TestMethod]
     public void GetIncidentCustomerNotes()

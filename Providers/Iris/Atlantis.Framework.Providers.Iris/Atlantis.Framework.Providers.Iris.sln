@@ -9,7 +9,36 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Provider
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Providers.Iris.Tests", "Atlantis.Framework.Providers.Iris.Tests\Atlantis.Framework.Providers.Iris.Tests.csproj", "{438D37DE-756C-4211-B7A6-B1955D3AAE6E}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{7073CB15-5DB1-4536-8D2B-756681D6D48A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Iris.Interface", "..\..\..\Triplets\Iris\Atlantis.Framework.Iris\Atlantis.Framework.Iris.Interface\Atlantis.Framework.Iris.Interface.csproj", "{46EFCA99-AD2A-4387-AE47-CF596667E562}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Iris.Impl", "..\..\..\Triplets\Iris\Atlantis.Framework.Iris\Atlantis.Framework.Iris.Impl\Atlantis.Framework.Iris.Impl.csproj", "{FE49AB30-2215-4B79-AB0D-713612C95955}"
+EndProject
 Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 6
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
+		SccProjectUniqueName0 = ..\\..\\..\\Triplets\\Iris\\Atlantis.Framework.Iris\\Atlantis.Framework.Iris.Interface\\Atlantis.Framework.Iris.Interface.csproj
+		SccProjectTopLevelParentUniqueName0 = Atlantis.Framework.Providers.Iris.sln
+		SccProjectName0 = ../../../Triplets/Iris/Atlantis.Framework.Iris/Atlantis.Framework.Iris.Interface
+		SccLocalPath0 = ..\\..\\..\\Triplets\\Iris\\Atlantis.Framework.Iris\\Atlantis.Framework.Iris.Interface
+		SccProjectUniqueName1 = ..\\..\\..\\Triplets\\Iris\\Atlantis.Framework.Iris\\Atlantis.Framework.Iris.Impl\\Atlantis.Framework.Iris.Impl.csproj
+		SccProjectTopLevelParentUniqueName1 = Atlantis.Framework.Providers.Iris.sln
+		SccProjectName1 = ../../../Triplets/Iris/Atlantis.Framework.Iris/Atlantis.Framework.Iris.Impl
+		SccLocalPath1 = ..\\..\\..\\Triplets\\Iris\\Atlantis.Framework.Iris\\Atlantis.Framework.Iris.Impl
+		SccProjectUniqueName2 = Atlantis.Framework.Providers.Iris.Tests\\Atlantis.Framework.Providers.Iris.Tests.csproj
+		SccProjectName2 = Atlantis.Framework.Providers.Iris.Tests
+		SccLocalPath2 = Atlantis.Framework.Providers.Iris.Tests
+		SccProjectUniqueName3 = Atlantis.Framework.Providers.Iris\\Atlantis.Framework.Providers.Iris.csproj
+		SccProjectName3 = Atlantis.Framework.Providers.Iris
+		SccLocalPath3 = Atlantis.Framework.Providers.Iris
+		SccLocalPath4 = .
+		SccProjectUniqueName5 = Atlantis.Framework.Providers.Iris.Interface\\Atlantis.Framework.Providers.Iris.Interface.csproj
+		SccProjectName5 = Atlantis.Framework.Providers.Iris.Interface
+		SccLocalPath5 = Atlantis.Framework.Providers.Iris.Interface
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
@@ -27,8 +56,20 @@ Global
 		{438D37DE-756C-4211-B7A6-B1955D3AAE6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{438D37DE-756C-4211-B7A6-B1955D3AAE6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{438D37DE-756C-4211-B7A6-B1955D3AAE6E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{46EFCA99-AD2A-4387-AE47-CF596667E562}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46EFCA99-AD2A-4387-AE47-CF596667E562}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46EFCA99-AD2A-4387-AE47-CF596667E562}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46EFCA99-AD2A-4387-AE47-CF596667E562}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE49AB30-2215-4B79-AB0D-713612C95955}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE49AB30-2215-4B79-AB0D-713612C95955}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE49AB30-2215-4B79-AB0D-713612C95955}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE49AB30-2215-4B79-AB0D-713612C95955}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{46EFCA99-AD2A-4387-AE47-CF596667E562} = {7073CB15-5DB1-4536-8D2B-756681D6D48A}
+		{FE49AB30-2215-4B79-AB0D-713612C95955} = {7073CB15-5DB1-4536-8D2B-756681D6D48A}
 	EndGlobalSection
 EndGlobal

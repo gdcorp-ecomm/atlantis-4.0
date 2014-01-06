@@ -26,5 +26,7 @@ namespace Atlantis.Framework.Iris.Interface.Objects
     [DataMember, XmlAttribute(AttributeName = "ModDate")]
     public string ModDate { get; set; }
 
+    public Notes Notes { get; set; }
+
   }
 }

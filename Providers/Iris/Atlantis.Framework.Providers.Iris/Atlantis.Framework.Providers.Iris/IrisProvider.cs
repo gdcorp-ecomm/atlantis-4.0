@@ -88,7 +88,7 @@ namespace Atlantis.Framework.Providers.Iris
         return retValue;
       }
 
-      public IncidentsList GetIncidents(string shopperId, DateTime startDate, DateTime endDate)
+      public IncidentsList GetIncidents(string shopperId, DateTime startDate, DateTime endDate, bool deepLoad)
       {
         var retValue = new IncidentsList();
 
@@ -102,6 +102,16 @@ namespace Atlantis.Framework.Providers.Iris
           if (responseData != null && responseData.IsSuccess)
           {
             retValue = responseData.Incidents;
+
+            if (deepLoad)
+            {
+              foreach (var incident in responseData.Incidents.Incidents.Items)
+              {
+                //1 denotes ALL notes for ticket should be retrieved
+                incident.Notes = GetIncidentNotes(incident.IncidentId, 1).Notes;
+              }
+            }
+
           }
         }
         catch (Exception ex)
@@ -137,5 +147,6 @@ namespace Atlantis.Framework.Providers.Iris
 
         return retValue;
       }
+
     }
 }

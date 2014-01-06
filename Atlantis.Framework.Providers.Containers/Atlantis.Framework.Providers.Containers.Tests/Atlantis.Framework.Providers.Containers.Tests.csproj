@@ -49,9 +49,6 @@
     <Reference Include="Atlantis.Framework.Providers.Preferences.Interface">
       <HintPath>..\packages\Atlantis.Framework.Providers.Preferences.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Providers.Preferences.Interface.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.Providers.RenderPipeline.Interface">
-      <HintPath>..\packages\Atlantis.Framework.Providers.RenderPipeline.Interface.4.13.10.15\lib\net40\Atlantis.Framework.Providers.RenderPipeline.Interface.dll</HintPath>
-    </Reference>
     <Reference Include="Atlantis.Framework.Testing.MockHttpContext, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Atlantis.Framework.Testing.MockHttpContext.4.0.0.0\lib\net40\Atlantis.Framework.Testing.MockHttpContext.dll</HintPath>
@@ -81,7 +78,6 @@
     <Compile Include="HttpProviderContainerTests.cs" />
     <Compile Include="ObjectProviderContainerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RenderContent\SimpleProcessedRenderContent.cs" />
     <Compile Include="TestProviders\EmployeeProvider.cs" />
     <Compile Include="TestProviders\IEmployeeProvider.cs" />
     <Compile Include="TestProviders\IManagerProvider.cs" />
@@ -91,7 +87,6 @@
     <Compile Include="TestProviders\NameProvider.cs" />
     <Compile Include="TestProviders\NameProviderDoesNotImplementInterface.cs" />
     <Compile Include="TestProviders\PersonProvider.cs" />
-    <Compile Include="ProviderContainerDataTokenTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Atlantis.Framework.Providers.Containers\Atlantis.Framework.Providers.Containers.csproj">

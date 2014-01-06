@@ -205,6 +205,22 @@ namespace Atlantis.Framework.Providers.PlaceHolder.Tests
     }
 
     [TestMethod]
+    public void RenderWebControlPlaceHolderValidAssemblyInvalidClass()
+    {
+      IPlaceHolder placeHolder = new WebControlPlaceHolder(Assembly.GetExecutingAssembly().FullName,
+                                                           "Atlantis.Framework.Providers.PlaceHolder.Tests.WebControls.Invalid",
+                                                           new List<KeyValuePair<string, string>>(0));
+
+      IProviderContainer providerContainer = InitializeProviderContainer();
+      IPlaceHolderProvider placeHolderProvider = providerContainer.Resolve<IPlaceHolderProvider>();
+
+      string renderedContent = placeHolderProvider.ReplacePlaceHolders(placeHolder.ToMarkup(), null);
+
+      WriteOutput(renderedContent);
+      Assert.IsTrue(renderedContent.Equals(string.Empty));
+    }
+
+    [TestMethod]
     public void RenderWebControlPlaceHolderWithChildValid()
     {
       IPlaceHolder placeHolder = new WebControlPlaceHolder(Assembly.GetExecutingAssembly().FullName,

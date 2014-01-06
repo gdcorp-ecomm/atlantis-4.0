@@ -39,20 +39,25 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Atlantis.Framework.DataCacheService">
-      <HintPath>..\packages\Atlantis.Framework.DataCacheService.4.0.0.0\lib\net40\Atlantis.Framework.DataCacheService.dll</HintPath>
+    <Reference Include="Atlantis.Framework.DataCacheService, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.DataCacheService.4.13.12.21\lib\net40\Atlantis.Framework.DataCacheService.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.Engine">
-      <HintPath>..\packages\Atlantis.Framework.Engine.4.0.0.0\lib\net40\Atlantis.Framework.Engine.dll</HintPath>
+    <Reference Include="Atlantis.Framework.Engine, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Engine.4.13.12.22\lib\net40\Atlantis.Framework.Engine.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.Engine.XmlSerializers">
-      <HintPath>..\packages\Atlantis.Framework.Engine.4.0.0.0\lib\net40\Atlantis.Framework.Engine.XmlSerializers.dll</HintPath>
+    <Reference Include="Atlantis.Framework.Engine.XmlSerializers, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Engine.4.13.12.22\lib\net40\Atlantis.Framework.Engine.XmlSerializers.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.Interface">
-      <HintPath>..\packages\Atlantis.Framework.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Interface.dll</HintPath>
+    <Reference Include="Atlantis.Framework.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Interface.4.13.12.22\lib\net40\Atlantis.Framework.Interface.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.MiniEncrypt">
-      <HintPath>..\packages\Atlantis.Framework.MiniEncrypt.4.0.0.0\lib\net40\Atlantis.Framework.MiniEncrypt.dll</HintPath>
+    <Reference Include="Atlantis.Framework.MiniEncrypt, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.MiniEncrypt.4.13.12.21\lib\net40\Atlantis.Framework.MiniEncrypt.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Nimitz">
       <HintPath>..\packages\Atlantis.Framework.Nimitz.4.0.0.0\lib\net40\Atlantis.Framework.Nimitz.dll</HintPath>
@@ -64,11 +69,16 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Atlantis.Framework.Providers.SsoAuth.Interface.4.13.12.23\lib\net40\Atlantis.Framework.Providers.SsoAuth.Interface.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.Shopper.Impl">
-      <HintPath>..\packages\Atlantis.Framework.Shopper.4.0.0.0\lib\net40\Atlantis.Framework.Shopper.Impl.dll</HintPath>
+    <Reference Include="Atlantis.Framework.Shopper.Impl, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Shopper.4.13.9.30\lib\net40\Atlantis.Framework.Shopper.Impl.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.Shopper.Interface">
-      <HintPath>..\packages\Atlantis.Framework.Shopper.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Shopper.Interface.dll</HintPath>
+    <Reference Include="Atlantis.Framework.Shopper.Impl.XmlSerializers">
+      <HintPath>..\packages\Atlantis.Framework.Shopper.4.13.9.30\lib\net40\Atlantis.Framework.Shopper.Impl.XmlSerializers.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Shopper.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Shopper.Interface.4.13.11.22\lib\net40\Atlantis.Framework.Shopper.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Testing.MockEngine">
       <HintPath>..\packages\Atlantis.Framework.Testing.MockEngine.4.0.0.0\lib\net40\Atlantis.Framework.Testing.MockEngine.dll</HintPath>
@@ -76,8 +86,9 @@
     <Reference Include="Atlantis.Framework.Testing.MockHttpContext">
       <HintPath>..\packages\Atlantis.Framework.Testing.MockHttpContext.4.0.0.0\lib\net40\Atlantis.Framework.Testing.MockHttpContext.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.Testing.MockProviders">
-      <HintPath>..\packages\Atlantis.Framework.Testing.MockProviders.4.0.0.0\lib\net40\Atlantis.Framework.Testing.MockProviders.dll</HintPath>
+    <Reference Include="Atlantis.Framework.Testing.MockProviders, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Testing.MockProviders.4.13.10.28\lib\net40\Atlantis.Framework.Testing.MockProviders.dll</HintPath>
     </Reference>
     <Reference Include="netConnect">
       <HintPath>..\packages\Atlantis.Framework.Nimitz.4.0.0.0\lib\net40\netConnect.dll</HintPath>

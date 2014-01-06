@@ -8,15 +8,20 @@ namespace Atlantis.Framework.Iris.Interface.Objects
   [DataContract(Name = "NotesByIncident")]
   [XmlRoot(ElementName = "NotesByIncident")]
   [XmlSerializerFormat]
-  public class NotesList
+  public class NotesByIncident
   {
-    public NotesList()
+    public NotesByIncident()
     {
       Notes = new Notes();
     }
 
     [DataMember(Name = "Notes"), XmlElement(ElementName = "Notes")]
     public Notes Notes { get; set; }
+
+    public List<Note> ConvertToNotesList()
+    {
+      return this.Notes.Items ?? new List<Note>();
+    }
   }
 
   [DataContract(Name = "Notes")]

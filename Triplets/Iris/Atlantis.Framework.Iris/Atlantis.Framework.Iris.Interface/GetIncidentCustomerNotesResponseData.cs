@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
 using System.Xml;
 using System.Xml.Serialization;
 using Atlantis.Framework.Interface;
@@ -26,11 +27,11 @@ namespace Atlantis.Framework.Iris.Interface
 
         XmlDocument doc = new XmlDocument();
         doc.LoadXml(data);
-        var ser = new XmlSerializer(typeof (NotesList));
+        var ser = new XmlSerializer(typeof (NotesByIncident));
         if (doc.DocumentElement != null)
         {
-          var wrapper = (NotesList)ser.Deserialize(new StringReader(doc.DocumentElement.OuterXml));
-          Notes = wrapper;
+          var wrapper = (NotesByIncident)ser.Deserialize(new StringReader(doc.DocumentElement.OuterXml));
+          Notes = wrapper.ConvertToNotesList();
         }
       }
       catch (Exception ex)
@@ -50,7 +51,7 @@ namespace Atlantis.Framework.Iris.Interface
     public bool IsSuccess { get; set; }
 
     [DataMember]
-    public NotesList Notes { get; set; }
+    public List<Note> Notes { get; set; }
 
     public string RawXml { get; set; }
 

@@ -113,7 +113,7 @@ namespace Atlantis.Framework.Providers.Iris.Tests
       var responseData = irisProvider.GetIncidents(shopperId, startDate, endDate,false);
 
       Assert.IsNotNull(responseData);
-      Assert.IsNotNull(responseData.Incidents.Items.Count > 0);
+      Assert.IsNotNull(responseData.Count > 0);
       
     }
 
@@ -130,7 +130,7 @@ namespace Atlantis.Framework.Providers.Iris.Tests
       var responseData = irisProvider.GetIncidents(shopperId, startDate, endDate, true);
 
       Assert.IsNotNull(responseData);
-      Assert.IsNotNull(responseData.Incidents.Items.Count > 0);
+      Assert.IsNotNull(responseData.Count > 0);
 
     }
 
@@ -141,12 +141,12 @@ namespace Atlantis.Framework.Providers.Iris.Tests
       var irisProvider = theContainer.Resolve<IIrisProvider>();
 
       long incidentId = 1329192;
-      int noteId = 0;
+      int noteId = 1;
 
       var responseData = irisProvider.GetIncidentNotes(incidentId, noteId);
 
       Assert.IsNotNull(responseData);
-      Assert.IsNotNull(responseData.Notes.Items.Count > 0);
+      Assert.IsNotNull(responseData.Count > 0);
     }
   }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Iris.Interface;
 using Atlantis.Framework.Iris.Interface.Objects;
@@ -88,9 +89,9 @@ namespace Atlantis.Framework.Providers.Iris
         return retValue;
       }
 
-      public IncidentsList GetIncidents(string shopperId, DateTime startDate, DateTime endDate, bool deepLoad)
+      public List<Incident> GetIncidents(string shopperId, DateTime startDate, DateTime endDate, bool deepLoad)
       {
-        var retValue = new IncidentsList();
+        var retValue = new List<Incident>();
 
         try
         {
@@ -105,10 +106,10 @@ namespace Atlantis.Framework.Providers.Iris
 
             if (deepLoad)
             {
-              foreach (var incident in responseData.Incidents.Incidents.Items)
+              foreach (var incident in responseData.Incidents)
               {
                 //1 denotes ALL notes for ticket should be retrieved
-                incident.Notes = GetIncidentNotes(incident.IncidentId, 1).Notes;
+                incident.Notes = GetIncidentNotes(incident.IncidentId, 1);
               }
             }
 
@@ -123,9 +124,9 @@ namespace Atlantis.Framework.Providers.Iris
         return retValue;
       }
 
-      public NotesList GetIncidentNotes(long incidentId, int noteId)
+      public List<Note> GetIncidentNotes(long incidentId, int noteId)
       {
-        var retValue = new NotesList();
+        var retValue = new List<Note>();
 
         try
         {

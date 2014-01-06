@@ -72,9 +72,9 @@
     <Compile Include="GetIncidentsByShopperIdAndDateRangeRequestData.cs" />
     <Compile Include="GetIncidentsByShopperIdAndDateRangeResponseData.cs" />
     <Compile Include="Objects\Incident.cs" />
-    <Compile Include="Objects\IncidentsList.cs" />
+    <Compile Include="Objects\IncidentsForShoppers.cs" />
     <Compile Include="Objects\Note.cs" />
-    <Compile Include="Objects\NotesList.cs" />
+    <Compile Include="Objects\NotesByIncident.cs" />
     <Compile Include="QuickCreateIncidentRequestData.cs" />
     <Compile Include="QuickCreateIncidentResponseData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

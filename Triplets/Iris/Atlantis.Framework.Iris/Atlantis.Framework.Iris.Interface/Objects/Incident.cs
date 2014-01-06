@@ -1,11 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Xml.Serialization;
 
 namespace Atlantis.Framework.Iris.Interface.Objects
 {
-  [XmlSerializerFormat]
+  [DataContract, XmlSerializerFormat]
   public class Incident
   {
     [DataMember, XmlAttribute(AttributeName = "IncidentId")]
@@ -26,7 +27,8 @@ namespace Atlantis.Framework.Iris.Interface.Objects
     [DataMember, XmlAttribute(AttributeName = "ModDate")]
     public string ModDate { get; set; }
 
-    public Notes Notes { get; set; }
+    [DataMember, XmlElement(ElementName = "Notes")]
+    public List<Note> Notes { get; set; }
 
   }
 }

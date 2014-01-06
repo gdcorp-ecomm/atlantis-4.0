@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Atlantis.Framework.Interface;
+using Atlantis.Framework.Iris.Interface.Objects;
+using System;
 using System.IO;
 using System.Runtime.Serialization;
 using System.Xml;
 using System.Xml.Serialization;
-using Atlantis.Framework.Interface;
-using System.Xml.Linq;
-using Atlantis.Framework.Iris.Interface.Objects;
 
 namespace Atlantis.Framework.Iris.Interface
 {
@@ -29,11 +28,11 @@ namespace Atlantis.Framework.Iris.Interface
       {
         XmlDocument doc = new XmlDocument();
         doc.LoadXml(data);
-        var ser = new XmlSerializer(typeof(IncidentsList));
+        var ser = new XmlSerializer(typeof(IncidentsForShoppers));
         if (doc.DocumentElement != null)
         {
-          var wrapper = (IncidentsList)ser.Deserialize(new StringReader(doc.DocumentElement.OuterXml));
-          Incidents = wrapper;
+          var wrapper = (IncidentsForShoppers)ser.Deserialize(new StringReader(doc.DocumentElement.OuterXml));
+          Incidents = wrapper.ConvertToIncidentsList();
         }
       }
       catch (Exception ex)
@@ -54,7 +53,7 @@ namespace Atlantis.Framework.Iris.Interface
     public bool IsSuccess { get; set; }
 
     [DataMember]
-    public IncidentsList Incidents { get; set; }
+    public List<Incident> Incidents { get; set; }
 
     public string RawXml { get; set; }
 

@@ -19,7 +19,14 @@ namespace Atlantis.Framework.DotTypeClaims.Impl
         var dotTypeClaimsRequestData = (DotTypeClaimsRequestData)requestData;
         var wsConfigElement = ((WsConfigElement)config);
 
-        var fullUrl = wsConfigElement.WSURL + "/getclaimdata?d=" + string.Join(",", dotTypeClaimsRequestData.Domains);
+        var fullUrl = string.Format("{0}/api/schema/getclaimsxml?tldid={1}&pl={2}&ph={3}&marketid={4}&domain={5}",
+                                    wsConfigElement.WSURL,
+                                    dotTypeClaimsRequestData.TldId,
+                                    dotTypeClaimsRequestData.Placement,
+                                    dotTypeClaimsRequestData.Phase,
+                                    dotTypeClaimsRequestData.MarketId,
+                                    dotTypeClaimsRequestData.Domain);
+
 
         var webRequest = (HttpWebRequest) WebRequest.Create(fullUrl);
         webRequest.ContentType = "application/x-www-form-urlencoded";
@@ -49,12 +56,24 @@ namespace Atlantis.Framework.DotTypeClaims.Impl
 
         responseData = DotTypeClaimsResponseData.FromResponseXml(responseXml);
       }
+      catch (WebException ex)
+      {
+        if (ex.Response is HttpWebResponse && ((HttpWebResponse)ex.Response).StatusCode == HttpStatusCode.NotFound)
+        {
+          //no error logging is required
+          responseData = DotTypeClaimsResponseData.FromResponseXml(string.Empty);
+        }
+        else
+        {
+          var exception = new AtlantisException(requestData, "DotTypeClaimsRequest.RequestHandler", ex.Message + ex.StackTrace, requestData.ToXML());
+          responseData = DotTypeClaimsResponseData.FromException(exception);
+        }
+      }
       catch (Exception ex)
       {
         var exception = new AtlantisException(requestData, "DotTypeClaimsRequest.RequestHandler", ex.Message + ex.StackTrace, requestData.ToXML());
         responseData = DotTypeClaimsResponseData.FromException(exception);
       }
-
       return responseData;
     }
   }

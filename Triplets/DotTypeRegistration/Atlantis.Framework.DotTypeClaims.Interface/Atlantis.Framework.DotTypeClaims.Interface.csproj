@@ -63,7 +63,6 @@
   <ItemGroup>
     <Compile Include="DotTypeClaimsResponseData.cs" />
     <Compile Include="DotTypeClaimsRequestData.cs" />
-    <Compile Include="DotTypeClaimsSchema.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

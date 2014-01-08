@@ -11,6 +11,10 @@ namespace Atlantis.Framework.DotTypeForms.Interface
     public IDotTypeFormsForm Form { get; set; }
     public bool IsSuccess { get; set; }
 
+    public DotTypeFormsSchema()
+    {
+    }
+
     public DotTypeFormsSchema(string responseXml)
     {
       BuildModelFromXml(responseXml);

@@ -43,7 +43,8 @@ namespace Atlantis.Framework.DotTypeForms.Impl
         }
         else
         {
-          throw;
+          var exception = new AtlantisException(requestData, "DotTypeFormsHtmlRequest.RequestHandler", ex.Message + ex.StackTrace, requestData.ToXML());
+          responseData = new DotTypeFormsHtmlResponseData(responseHtml, exception);
         }
       }
       catch (Exception ex)

@@ -12,9 +12,7 @@ namespace Atlantis.Framework.DotTypeClaims.Tests
     [TestMethod]
     public void DotTypeClaimsGoodRequest()
     {
-      string[] domains = {"domain1.shop", "claim1.example"};
-
-      var request = new DotTypeClaimsRequestData(domains);
+      var request = new DotTypeClaimsRequestData(1764, "MOBILE", "LR", "en-US", "validateandt9st.lrclaim");
       var response = (DotTypeClaimsResponseData)Engine.Engine.ProcessRequest(request, 710);
       Assert.AreEqual(true, response.IsSuccess);
       Assert.AreEqual(true, !string.IsNullOrEmpty(response.ToXML()));
@@ -23,9 +21,7 @@ namespace Atlantis.Framework.DotTypeClaims.Tests
     [TestMethod]
     public void DotTypeClaimsBadRequest()
     {
-      string[] noDomains = { "" };
-
-      var request = new DotTypeClaimsRequestData(noDomains);
+      var request = new DotTypeClaimsRequestData(1734, "FOS", "GA", "en-US", "123.lrclaim");
       try
       {
         var response = (DotTypeClaimsResponseData)Engine.Engine.ProcessRequest(request, 710);

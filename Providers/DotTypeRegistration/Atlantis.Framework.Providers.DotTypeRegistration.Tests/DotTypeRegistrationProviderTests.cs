@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-using Atlantis.Framework.Interface;
+﻿using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.DotTypeRegistration.Interface;
 using Atlantis.Framework.Providers.Localization;
 using Atlantis.Framework.Providers.Localization.Interface;
+using Atlantis.Framework.Testing.MockHttpContext;
 using Atlantis.Framework.Testing.MockProviders;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -14,32 +14,46 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration.Tests
   [DeploymentItem("Atlantis.Framework.DotTypeClaims.Impl.dll")]
   [DeploymentItem("Atlantis.Framework.DotTypeValidation.Impl.dll")]
   [DeploymentItem("Atlantis.Framework.TLDDataCache.Impl.dll")]
+  [DeploymentItem("Atlantis.Framework.Localization.Impl.dll")]
   public class DotTypeRegistrationProviderTests
   {
-    private MockProviderContainer NewDotTypeRegistrationProvider()
+    [TestInitialize]
+    public void InitializeTests()
     {
-      var container = new MockProviderContainer();
-      container.RegisterProvider<ISiteContext, MockSiteContext>();
-      container.RegisterProvider<IManagerContext, MockNoManagerContext>();
-      container.RegisterProvider<IShopperContext, MockShopperContext>();
-      container.RegisterProvider<IDotTypeRegistrationProvider, DotTypeRegistrationProvider>();
-      container.RegisterProvider<ILocalizationProvider, CountrySubdomainLocalizationProvider>();
+      var request = new MockHttpRequest("http://spoonymac.com/");
+      MockHttpContext.SetFromWorkerRequest(request);
+    }
 
-      return container;
+    private IProviderContainer _providerContainer;
+    private IProviderContainer ProviderContainer
+    {
+      get
+      {
+        if (_providerContainer == null)
+        {
+          _providerContainer = new MockProviderContainer();
+          ((MockProviderContainer)_providerContainer).SetMockSetting(MockSiteContextSettings.IsRequestInternal, true);
+
+          _providerContainer.RegisterProvider<ISiteContext, MockSiteContext>();
+          _providerContainer.RegisterProvider<IShopperContext, MockShopperContext>();
+          _providerContainer.RegisterProvider<IManagerContext, MockNoManagerContext>();
+          _providerContainer.RegisterProvider<IDotTypeRegistrationProvider, DotTypeRegistrationProvider>();
+          _providerContainer.RegisterProvider<ILocalizationProvider, CountrySubdomainLocalizationProvider>();
+        }
+
+        return _providerContainer;
+      }
     }
 
     [TestMethod]
     public void DotTypeFormsSchemaSuccess()
     {
-      var container = NewDotTypeRegistrationProvider();
-      container.Resolve<ILocalizationProvider>();
-
       IDotTypeFormFieldsByDomain dotTypeFormFieldsByDomain;
       string[] domains = { "domain1.n.borg", "claim1.example" };
 
-      var provider = container.Resolve<IDotTypeRegistrationProvider>();
+      var provider = ProviderContainer.Resolve<IDotTypeRegistrationProvider>();
 
-      IDotTypeFormLookup lookup = DotTypeFormLookup.Create("dpp", "n.borg", "MOBILE", "GA");
+      var lookup = DotTypeFormSchemaLookup.Create("dpp", "cl", "MOBILE", "GA");
       bool isSuccess = provider.GetDotTypeFormSchemas(lookup, domains, out dotTypeFormFieldsByDomain);
       Assert.AreEqual(true, isSuccess);
       Assert.AreEqual(true, dotTypeFormFieldsByDomain != null && dotTypeFormFieldsByDomain.FormFieldsByDomain.Count > 0);
@@ -48,13 +62,11 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration.Tests
     [TestMethod]
     public void DotTypeFormsSchemaFailure()
     {
-      var container = NewDotTypeRegistrationProvider();
-      var provider = container.Resolve<IDotTypeRegistrationProvider>();
-      container.Resolve<ILocalizationProvider>();
+      var provider = ProviderContainer.Resolve<IDotTypeRegistrationProvider>();
 
       IDotTypeFormFieldsByDomain dotTypeFormFieldsByDomain;
       string[] domains = { "domain1.shop", "domain2.shop" };
-      IDotTypeFormLookup lookup = DotTypeFormLookup.Create("dpp", "abcd", "name of placement", "GA");
+      var lookup = DotTypeFormSchemaLookup.Create("dpp", "abcd", "name of placement", "GA");
 
       bool isSuccess = provider.GetDotTypeFormSchemas(lookup, domains, out dotTypeFormFieldsByDomain);
       Assert.AreEqual(false, isSuccess);
@@ -64,9 +76,7 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration.Tests
     [TestMethod]
     public void DotTypeFormsSuccess()
     {
-      var container = NewDotTypeRegistrationProvider();
-      var provider = container.Resolve<IDotTypeRegistrationProvider>();
-      container.Resolve<ILocalizationProvider>();
+      var provider = ProviderContainer.Resolve<IDotTypeRegistrationProvider>();
       
       string dotTypeFormsHtml;
       IDotTypeFormLookup lookup = DotTypeFormLookup.Create("trademark", "j.borg", "FOS", "GA", "abcd.com");
@@ -74,6 +84,20 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration.Tests
       bool isSuccess = provider.GetDotTypeForms(lookup, out dotTypeFormsHtml);
       Assert.AreEqual(true, isSuccess);
       Assert.AreEqual(true, !string.IsNullOrEmpty(dotTypeFormsHtml));
+    }
+
+    [TestMethod]
+    public void DotTypeFormsSuccess2()
+    {
+      var provider = ProviderContainer.Resolve<IDotTypeRegistrationProvider>();
+
+      IDotTypeFormFieldsByDomain dotTypeFormFieldsByDomain;
+      string[] domains = { "validateandt9st.lrclaim" };
+      var lookup = DotTypeFormSchemaLookup.Create("claims", "lrclaim", "mobile", "lr");
+
+      bool isSuccess = provider.GetDotTypeFormSchemas(lookup, domains, out dotTypeFormFieldsByDomain);
+      Assert.AreEqual(true, isSuccess);
+      Assert.AreEqual(true, dotTypeFormFieldsByDomain != null && dotTypeFormFieldsByDomain.FormFieldsByDomain.Count > 0);
     }
 
   }

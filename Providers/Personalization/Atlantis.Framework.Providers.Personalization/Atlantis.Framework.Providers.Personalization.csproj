@@ -46,10 +46,7 @@
     </Reference>
     <Reference Include="Atlantis.Framework.Personalization.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.Personalization.Interface.4.13.12.17\lib\net40\Atlantis.Framework.Personalization.Interface.dll</HintPath>
-    </Reference>
-    <Reference Include="Atlantis.Framework.SessionCache">
-      <HintPath>..\packages\Atlantis.Framework.SessionCache.4.13.10.22\lib\net40\Atlantis.Framework.SessionCache.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.Personalization.Interface.4.14.1.9\lib\net40\Atlantis.Framework.Personalization.Interface.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -71,7 +68,9 @@
   <ItemGroup>
     <None Include="atlantis.config" />
     <None Include="Atlantis.Framework.Providers.Personalization.nuget.bat" />
-    <None Include="Atlantis.Framework.Providers.Personalization.nuspec" />
+    <None Include="Atlantis.Framework.Providers.Personalization.nuspec">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>

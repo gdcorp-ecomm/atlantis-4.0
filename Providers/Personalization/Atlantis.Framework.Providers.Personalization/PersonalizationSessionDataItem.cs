@@ -2,7 +2,7 @@
 
 namespace Atlantis.Framework.Providers.Personalization
 {
-  internal class ShopperSpecificSessionDataItem<T>
+  internal class ShopperSpecificSessionDataItem<TInput, TOutput>
   {
     private string _sessionDataKey;
     private string _sessionDataBelongsToKey;
@@ -13,9 +13,9 @@ namespace Atlantis.Framework.Providers.Personalization
       _sessionDataBelongsToKey = sessionKey + ".DataBelongsTo";
     }
 
-    public bool TryGetData(string shopperId, string interactonPoint, string privateLabelId, out T data)
+    public bool TryGetData(TInput belongsTo, out TOutput output)
     {
-      if (TryGetDataFromSession(shopperId, interactonPoint, privateLabelId, out data))
+      if (TryGetDataFromSession(belongsTo, out output))
       {
         return true;
       }
@@ -23,17 +23,17 @@ namespace Atlantis.Framework.Providers.Personalization
       return false;
     }
 
-    private bool TryGetDataFromSession(string shopperId, string interactonPoint, string privateLabelId, out T data)
+    private bool TryGetDataFromSession(TInput belongsTo, out TOutput output)
     {
-      data = default(T);
+      output = default(TOutput);
 
-      string sessionBelongsTo = SafeSession.GetSessionItem(_sessionDataBelongsToKey) as string;
+      TInput sessionBelongsTo = (TInput)SafeSession.GetSessionItem(_sessionDataBelongsToKey);
       if (sessionBelongsTo == null)
       {
         return false;
       }
 
-      if (sessionBelongsTo != GetBelongsToValue(shopperId, interactonPoint, privateLabelId))
+      if (!sessionBelongsTo.Equals(belongsTo))
       {
         return false;
       }
@@ -46,7 +46,7 @@ namespace Atlantis.Framework.Providers.Personalization
 
       try
       {
-        data = (T)rawData;
+        output = (TOutput)rawData;
       }
       catch
       {
@@ -56,20 +56,15 @@ namespace Atlantis.Framework.Providers.Personalization
       return true;
     }
 
-    public void SetData(string shopperId, string interactonPoint, string privateLabelId, T data)
+    public void SetData(TInput belongsTo, TOutput output)
     {
-      SetDataIntoSession(shopperId, interactonPoint, privateLabelId, data);
+      SetDataIntoSession(belongsTo, output);
     }
 
-    private void SetDataIntoSession(string shopperId, string interactonPoint, string privateLabelId, T data)
+    private void SetDataIntoSession(TInput belongsTo, TOutput data)
     {
-      SafeSession.SetSessionItem(_sessionDataBelongsToKey, GetBelongsToValue(shopperId, interactonPoint, privateLabelId));
+      SafeSession.SetSessionItem(_sessionDataBelongsToKey, belongsTo);
       SafeSession.SetSessionItem(_sessionDataKey, data);
-    }
-
-    private string GetBelongsToValue(string shopperId, string interactonPoint, string privateLabelId)
-    {
-      return string.Format("{0}_{1}_{2}", shopperId ?? string.Empty, interactonPoint, privateLabelId);
     }
   }
 }

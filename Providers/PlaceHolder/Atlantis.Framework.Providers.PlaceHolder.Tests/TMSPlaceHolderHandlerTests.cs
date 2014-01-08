@@ -1,29 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Reflection;
+﻿using Atlantis.Framework.Engine;
 using Atlantis.Framework.Interface;
-using Atlantis.Framework.Providers.CDSContent;
 using Atlantis.Framework.Providers.CDSContent.Interface;
+using Atlantis.Framework.Providers.Personalization.Interface;
 using Atlantis.Framework.Providers.PlaceHolder.Interface;
+using Atlantis.Framework.Providers.PlaceHolder.PlaceHolders;
 using Atlantis.Framework.Providers.RenderPipeline;
 using Atlantis.Framework.Providers.RenderPipeline.Interface;
+using Atlantis.Framework.Render.Containers;
+using Atlantis.Framework.Testing.MockEngine;
 using Atlantis.Framework.Testing.MockHttpContext;
 using Atlantis.Framework.Testing.MockProviders;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Diagnostics;
-using Atlantis.Framework.Providers.PlaceHolder.PlaceHolders;
-using Atlantis.Framework.Providers.Personalization;
-using Atlantis.Framework.Providers.Personalization.Interface;
-using Atlantis.Framework.Providers.Containers.DataToken.RenderHandlers;
-using Atlantis.Framework.Engine;
-using Atlantis.Framework.Testing.MockEngine;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Atlantis.Framework.Providers.PlaceHolder.Tests
 {
   [TestClass]
-  public class TMSPlaceHolderTests
+  [DeploymentItem("Atlantis.Framework.AppSettings.Impl.dll")]
+  [DeploymentItem("atlantis.config")]
+  public class TMSPlaceHolderHandlerTests
   {
-    public static IProviderContainer InitializeProviderContainer()
+    private readonly Lazy<bool> _canCallTMS = new Lazy<bool>(() => DataCache.DataCache.GetAppSetting("ATLANTIS_PERSONALIZATION_TRIPLET_TMS_ON").Equals("true", StringComparison.OrdinalIgnoreCase));
+
+    public IProviderContainer InitializeProviderContainer()
     {
       IProviderContainer providerContainer = new MockProviderContainer();
       providerContainer.RegisterProvider<ISiteContext, MockSiteContext>();
@@ -37,7 +38,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder.Tests
       return providerContainer;
     }
 
-    public static IProviderContainer Error_InitializeProviderContainer()
+    public IProviderContainer Error_InitializeProviderContainer()
     {
       IProviderContainer providerContainer = new MockProviderContainer();
       providerContainer.RegisterProvider<ISiteContext, MockSiteContext>();
@@ -142,53 +143,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder.Tests
         EngineLogging.EngineLogger = oldLogger;
       }
     }
-
-    [TestMethod]
-    public void StoresAllMessageDataInTheProviderContainer()
-    {
-      IErrorLogger oldLogger = EngineLogging.EngineLogger;
-      var mockLogger = new MockErrorLogger();
-      EngineLogging.EngineLogger = mockLogger;
-      try
-      {
-        IPlaceHolder placeHolder1 = new TMSDocumentPlaceHolder("ProductUpsell", new List<string>() { "duplicate" });
-        IPlaceHolder placeHolder2 = new TMSDocumentPlaceHolder("ProductUpsell", new List<string>() { "engmtactnewcustsurveywebdlp", "", "engmtactnewcustsurveymobiledlp", "EngmtCustServMobileAppMobileHP" });
-        IPlaceHolder placeHolder3 = new TMSDocumentPlaceHolder("ProductUpsell", new List<string>() { "this is not to be found", "this too", "stddomxsmobiledlp" });
-
-
-        IProviderContainer providerContainer = InitializeProviderContainer();
-        IPlaceHolderProvider placeHolderProvider = providerContainer.Resolve<IPlaceHolderProvider>();
-
-        string renderedContent1 = placeHolderProvider.ReplacePlaceHolders(placeHolder1.ToMarkup(), new List<IRenderHandler> { new ProviderContainerDataTokenRenderHandler() });
-        string renderedContent2 = placeHolderProvider.ReplacePlaceHolders(placeHolder2.ToMarkup(), new List<IRenderHandler> { new ProviderContainerDataTokenRenderHandler() });
-        string renderedContent3 = placeHolderProvider.ReplacePlaceHolders(placeHolder3.ToMarkup(), new List<IRenderHandler> { new ProviderContainerDataTokenRenderHandler() });
-
-        Assert.IsTrue(mockLogger.Exceptions.Count == 0);
-        Assert.AreEqual(renderedContent1, "Id3 duplicate duplicate1 3");
-        Assert.AreEqual(renderedContent2, "Id1 engmtactnewcustsurveywebdlp engmtactnewcustsurvey 1");
-        Assert.AreEqual(renderedContent3, "Id2 stddomxsmobiledlp stddomxsdom 2");
-
-        List<TMSMessageData> requiredList = new List<TMSMessageData>() { 
-          new TMSMessageData("Id3", "duplicate1", "duplicate", "3"), 
-          new TMSMessageData("Id1",  "engmtactnewcustsurvey", "engmtactnewcustsurveywebdlp", "1"), 
-          new TMSMessageData("Id2",  "stddomxsdom", "stddomxsmobiledlp","2") };
-
-        List<TMSMessageData> actualList = providerContainer.GetData<List<TMSMessageData>>(TMSMessageData.DATA_TOKEN_MESSAGES, null);
-
-        Assert.AreEqual(requiredList.Count, actualList.Count);
-
-        for (int i = 0; i < requiredList.Count; i++)
-        {
-          Assert.IsTrue(requiredList[i].Equals(actualList[i]));
-        }
-
-      }
-      finally
-      {
-        EngineLogging.EngineLogger = oldLogger;
-      }
-    }
-
+        
     [TestMethod]
     public void LogsAnErrorWhenNoneOfTheRequestedTagsAreFound()
     {
@@ -205,8 +160,15 @@ namespace Atlantis.Framework.Providers.PlaceHolder.Tests
         string renderedContent = placeHolderProvider.ReplacePlaceHolders(placeHolder.ToMarkup(), new List<IRenderHandler> { new ProviderContainerDataTokenRenderHandler() });
 
         Assert.IsTrue(string.IsNullOrEmpty(renderedContent));
-        Assert.IsTrue(mockLogger.Exceptions.Count == 1);
-        Assert.IsTrue(mockLogger.Exceptions[0].ErrorDescription.Contains("None of the requested tags are found."));
+        if (_canCallTMS.Value)
+        {
+          Assert.IsTrue(mockLogger.Exceptions.Count == 1);
+          Assert.IsTrue(mockLogger.Exceptions[0].ErrorDescription.Contains("None of the requested tags are found."));
+        }
+        else
+        {
+          Assert.IsTrue(mockLogger.Exceptions.Count == 0);
+        }
       }
       finally
       {
@@ -307,6 +269,113 @@ namespace Atlantis.Framework.Providers.PlaceHolder.Tests
         Assert.IsTrue(string.IsNullOrEmpty(renderedContent));
         Assert.IsTrue(mockLogger.Exceptions.Count == 1);
         Assert.IsTrue(mockLogger.Exceptions[0].ErrorDescription.Contains("Could not resolve the required providers.  CDSContent and Personalization are required."));
+      }
+      finally
+      {
+        EngineLogging.EngineLogger = oldLogger;
+      }
+    }
+
+    [TestMethod]
+    public void DoesNotRepeatMessages()
+    {
+      IErrorLogger oldLogger = EngineLogging.EngineLogger;
+      var mockLogger = new MockErrorLogger();
+      EngineLogging.EngineLogger = mockLogger;
+      try
+      {
+        IPlaceHolder placeHolder1 = new TMSDocumentPlaceHolder("ProductUpsell", new List<string>() { "duplicate" });
+        IPlaceHolder placeHolder2 = new TMSDocumentPlaceHolder("ProductUpsell", new List<string>() { "duplicate" });
+        IPlaceHolder placeHolder3 = new TMSDocumentPlaceHolder("ProductUpsell", new List<string>() { "duplicate" });
+        IPlaceHolder placeHolder4 = new TMSDocumentPlaceHolder("ProductUpsell", new List<string>() { "duplicate" });
+        IPlaceHolder placeHolder5 = new TMSDocumentPlaceHolder("ProductUpsell", new List<string>() { "duplicate" });
+
+
+        IProviderContainer providerContainer2 = InitializeProviderContainer();
+        IPlaceHolderProvider placeHolderProvider = providerContainer2.Resolve<IPlaceHolderProvider>();
+
+        string renderedContent1 = placeHolderProvider.ReplacePlaceHolders(placeHolder1.ToMarkup(), new List<IRenderHandler> { new ProviderContainerDataTokenRenderHandler() });
+        Assert.IsTrue(mockLogger.Exceptions.Count == 0);
+        Assert.AreEqual(renderedContent1, "Id3 duplicate duplicate1 3");
+
+        string renderedContent2 = placeHolderProvider.ReplacePlaceHolders(placeHolder2.ToMarkup(), new List<IRenderHandler> { new ProviderContainerDataTokenRenderHandler() });
+        Assert.IsTrue(mockLogger.Exceptions.Count == 0);
+        Assert.AreEqual(renderedContent2, "Id4 duplicate duplicate2 4");
+
+        string renderedContent3 = placeHolderProvider.ReplacePlaceHolders(placeHolder3.ToMarkup(), new List<IRenderHandler> { new ProviderContainerDataTokenRenderHandler() });
+        Assert.IsTrue(mockLogger.Exceptions.Count == 0);
+        Assert.AreEqual(renderedContent3, "Id5 duplicate duplicate3 5");
+
+
+        string renderedContent4 = placeHolderProvider.ReplacePlaceHolders(placeHolder4.ToMarkup(), new List<IRenderHandler> { new ProviderContainerDataTokenRenderHandler() });
+        Assert.AreEqual(renderedContent4, string.Empty);
+        if (_canCallTMS.Value)
+        {
+          Assert.IsTrue(mockLogger.Exceptions.Count == 1);
+          Assert.IsTrue(mockLogger.Exceptions[0].ErrorDescription.Contains("None of the requested tags are found"));
+        }
+        else
+        {
+          Assert.IsTrue(mockLogger.Exceptions.Count == 0);
+        }
+       
+        string renderedContent5 = placeHolderProvider.ReplacePlaceHolders(placeHolder5.ToMarkup(), new List<IRenderHandler> { new ProviderContainerDataTokenRenderHandler() });
+        Assert.AreEqual(renderedContent5, string.Empty);
+        if (_canCallTMS.Value)
+        {
+          Assert.IsTrue(mockLogger.Exceptions.Count == 2);
+          Assert.IsTrue(mockLogger.Exceptions[0].ErrorDescription.Contains("None of the requested tags are found"));
+        }
+        else
+        {
+          Assert.IsTrue(mockLogger.Exceptions.Count == 0);
+        }
+      }
+      finally
+      {
+        EngineLogging.EngineLogger = oldLogger;
+      }
+    }
+
+    [TestMethod]
+    public void StoresAllMessageDataInTheProviderContainer()
+    {
+      IErrorLogger oldLogger = EngineLogging.EngineLogger;
+      var mockLogger = new MockErrorLogger();
+      EngineLogging.EngineLogger = mockLogger;
+      try
+      {
+        IPlaceHolder placeHolder1 = new TMSDocumentPlaceHolder("ProductUpsell", new List<string>() { "duplicate" });
+        IPlaceHolder placeHolder2 = new TMSDocumentPlaceHolder("ProductUpsell", new List<string>() { "engmtactnewcustsurveywebdlp", "", "engmtactnewcustsurveymobiledlp", "EngmtCustServMobileAppMobileHP" });
+        IPlaceHolder placeHolder3 = new TMSDocumentPlaceHolder("ProductUpsell", new List<string>() { "this is not to be found", "this too", "stddomxsmobiledlp" });
+        
+        IProviderContainer providerContainer = InitializeProviderContainer();
+        IPlaceHolderProvider placeHolderProvider = providerContainer.Resolve<IPlaceHolderProvider>();
+        
+        string renderedContent1 = placeHolderProvider.ReplacePlaceHolders(placeHolder1.ToMarkup(), new List<IRenderHandler> { new ProviderContainerDataTokenRenderHandler() });
+        string renderedContent2 = placeHolderProvider.ReplacePlaceHolders(placeHolder2.ToMarkup(), new List<IRenderHandler> { new ProviderContainerDataTokenRenderHandler() });
+        string renderedContent3 = placeHolderProvider.ReplacePlaceHolders(placeHolder3.ToMarkup(), new List<IRenderHandler> { new ProviderContainerDataTokenRenderHandler() });
+        
+        Assert.IsTrue(mockLogger.Exceptions.Count == 0);
+        Assert.AreEqual(renderedContent1, "Id3 duplicate duplicate1 3");
+        Assert.AreEqual(renderedContent2, "Id1 engmtactnewcustsurveywebdlp engmtactnewcustsurvey 1");
+        Assert.AreEqual(renderedContent3, "Id2 stddomxsmobiledlp stddomxsdom 2");
+        
+        List<ConsumedMessage> requiredList = new List<ConsumedMessage>() { 
+          new ConsumedMessage("Id3", "duplicate1", "duplicate", "3"), 
+          new ConsumedMessage("Id1",  "engmtactnewcustsurvey", "engmtactnewcustsurveywebdlp", "1"), 
+          new ConsumedMessage("Id2",  "stddomxsdom", "stddomxsmobiledlp","2") };
+
+        IPersonalizationProvider personalizationProvider = providerContainer.Resolve<IPersonalizationProvider>();
+
+        List<IConsumedMessage> actualList = personalizationProvider.ConsumedMessages.ToList<IConsumedMessage>();
+
+        Assert.AreEqual(requiredList.Count, actualList.Count());
+
+        for (int i = 0; i < requiredList.Count; i++)
+        {
+          Assert.IsTrue(requiredList[i].Equals(actualList[i] as ConsumedMessage));
+        }
       }
       finally
       {

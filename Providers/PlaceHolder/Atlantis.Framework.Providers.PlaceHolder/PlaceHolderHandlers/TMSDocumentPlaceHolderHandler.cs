@@ -1,15 +1,12 @@
-﻿using Atlantis.Framework.Providers.CDSContent.Interface;
-using Atlantis.Framework.Providers.Personalization;
+﻿using Atlantis.Framework.Personalization.Interface;
+using Atlantis.Framework.Providers.CDSContent.Interface;
+using Atlantis.Framework.Providers.Personalization.Interface;
 using Atlantis.Framework.Providers.PlaceHolder.Interface;
+using Atlantis.Framework.Providers.PlaceHolder.PlaceHolders;
 using Atlantis.Framework.Providers.RenderPipeline.Interface;
 using System;
-using System.Linq;
 using System.Collections.Generic;
-using Atlantis.Framework.Interface;
-using System.Web;
-using Atlantis.Framework.Providers.Personalization.Interface;
-using Atlantis.Framework.Personalization.Interface;
-using Atlantis.Framework.Providers.PlaceHolder.PlaceHolders;
+using System.Linq;
 
 namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolderHandlers
 {
@@ -17,6 +14,8 @@ namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolderHandlers
   {
     private const string APP_NAME = "tms";
     private const string LOCATION_FORMAT = "{0}/default_template";
+
+    private readonly Lazy<bool> _canCallTMS = new Lazy<bool>(() => DataCache.DataCache.GetAppSetting("ATLANTIS_PERSONALIZATION_TRIPLET_TMS_ON").Equals("true", StringComparison.OrdinalIgnoreCase));
 
     internal TMSDocumentPlaceHolderHandler(IPlaceHolderHandlerContext context)
       : base(context)
@@ -26,14 +25,14 @@ namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolderHandlers
     protected override string GetContent()
     {
       string renderContent = string.Empty;
-      ICDSContentProvider cdsContentProvider;
-      IPersonalizationProvider personalizationProvider;
 
       try
       {
-        if (Context.ProviderContainer.TryResolve(out cdsContentProvider) && Context.ProviderContainer.TryResolve(out personalizationProvider))
-        {
+        IPersonalizationProvider personalizationProvider;
+        ICDSContentProvider cdsProvider;
 
+        if (Context.ProviderContainer.TryResolve<IPersonalizationProvider>(out personalizationProvider) && Context.ProviderContainer.TryResolve<ICDSContentProvider>(out cdsProvider))
+        {
           TMSPlaceHolderData placeHolderData = new TMSPlaceHolderData(Context.Data);
 
           string interactionPoint;
@@ -41,18 +40,22 @@ namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolderHandlers
               !string.IsNullOrEmpty(interactionPoint) &&
               placeHolderData.MessageTags.Count > 0)
           {
-            TMSMessageData msgData = GetMessage(personalizationProvider, interactionPoint, placeHolderData.MessageTags);
-            if (msgData != null)
+            IConsumedMessage message = GetMessage(personalizationProvider, interactionPoint, placeHolderData.MessageTags);
+            if (message != null)
             {
-              UpdateContainerData(msgData);
-              string rawContent = cdsContentProvider.GetContent(APP_NAME, string.Format(LOCATION_FORMAT, msgData.TagName)).Content;
+              personalizationProvider.AddToConsumedMessages(message);
 
+              string rawContent = cdsProvider.GetContent(APP_NAME, string.Format(LOCATION_FORMAT, message.TagName)).Content;
+              
               IRenderPipelineProvider renderPipelineProvider = Context.ProviderContainer.Resolve<IRenderPipelineProvider>();
               renderContent = renderPipelineProvider.RenderContent(rawContent, Context.RenderHandlers);
             }
             else
             {
-              throw new Exception(string.Format("None of the requested tags are found.  Tags: \"{0}\"", string.Join(", ", placeHolderData.MessageTags)));
+              if (_canCallTMS.Value)
+              {
+                throw new Exception(string.Format("None of the requested tags are found.  Tags: \"{0}\"", string.Join(", ", placeHolderData.MessageTags)));
+              }
             }
           }
           else
@@ -70,11 +73,11 @@ namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolderHandlers
         string errorMessage = string.Format("PlaceHolder render error. Type: {0}, Message: {1}", Context.Type, ex.Message);
         LogError(errorMessage, "TMSDocumentPlaceHolderHandler.Render()");
       }
-            
+
       return renderContent;
     }
 
-    private TMSMessageData GetMessage(IPersonalizationProvider personalizationProvider, string interactionPoint, IList<string> messageTags)
+    private IConsumedMessage GetMessage(IPersonalizationProvider personalizationProvider, string interactionPoint, IList<string> messageTags)
     {
       TargetedMessages targetedMessages = null;
 
@@ -88,37 +91,26 @@ namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolderHandlers
         throw new Exception(errorMessage, ex);
       }
 
-      return FindTheFirstMessageThatMatches(targetedMessages, messageTags);
+      return FindTheFirstMessageThatMatches(personalizationProvider, targetedMessages, messageTags);
     }
 
-    private TMSMessageData FindTheFirstMessageThatMatches(TargetedMessages targetedMessages, IList<string> messageTags)
+    private IConsumedMessage FindTheFirstMessageThatMatches(IPersonalizationProvider personalizationProvider, TargetedMessages targetedMessages, IList<string> messageTags)
     {
-      TMSMessageData msgData = null;
+      IConsumedMessage message = null;
 
       if (targetedMessages != null && targetedMessages.Messages != null)
       {
-        msgData = (from sourceMessage in targetedMessages.Messages
+      
+        message = (from requestedTag in messageTags
+                   from sourceMessage in targetedMessages.Messages
                    where sourceMessage.MessageTags != null
                    from sourceTag in sourceMessage.MessageTags
-                   from requestedTag in messageTags
                    where string.Compare(sourceTag.Name, requestedTag, StringComparison.OrdinalIgnoreCase) == 0
-                   select new TMSMessageData(sourceMessage.MessageId, sourceMessage.MessageName, requestedTag, sourceMessage.MessageTrackingId)).FirstOrDefault();
+                   select new ConsumedMessage(sourceMessage.MessageId, sourceMessage.MessageName, requestedTag, sourceMessage.MessageTrackingId) as IConsumedMessage
+                  ).Except(personalizationProvider.ConsumedMessages).FirstOrDefault();
       }
       
-      return msgData;
+      return message;
     }
-
-    private void UpdateContainerData(TMSMessageData msgData)
-    {
-      Context.ProviderContainer.SetData<string>(TMSMessageData.DATA_TOKEN_MESSAGE_Id, msgData.MessageId);
-      Context.ProviderContainer.SetData<string>(TMSMessageData.DATA_TOKEN_MESSAGE_TAG, msgData.TagName);
-      Context.ProviderContainer.SetData<string>(TMSMessageData.DATA_TOKEN_MESSAGE_NAME, msgData.MessageName);
-      Context.ProviderContainer.SetData<string>(TMSMessageData.DATA_TOKEN_MESSAGE_TRACKING_ID, msgData.TrackingId);
-
-      var list = Context.ProviderContainer.GetData<List<TMSMessageData>>(TMSMessageData.DATA_TOKEN_MESSAGES, new List<TMSMessageData>());
-      list.Add(msgData);
-      Context.ProviderContainer.SetData<List<TMSMessageData>>(TMSMessageData.DATA_TOKEN_MESSAGES, list);
-    }
-
   }
 }

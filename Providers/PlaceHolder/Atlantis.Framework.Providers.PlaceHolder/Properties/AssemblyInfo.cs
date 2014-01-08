@@ -38,5 +38,5 @@ using System.Runtime.InteropServices;
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("4.0.0.0")]
-[assembly: AssemblyFileVersion("4.13.12.18")]
+[assembly: AssemblyFileVersion("4.13.1.6")]
 [assembly: InternalsVisibleTo("Atlantis.Framework.Providers.PlaceHolder.Tests")]

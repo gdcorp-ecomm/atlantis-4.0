@@ -24,8 +24,33 @@ namespace Atlantis.Framework.Iris.Interface.Objects
     [DataMember, XmlAttribute(AttributeName = "NoteId")]
     public int NoteId { get; set; }
 
+
+    private string _modDate = string.Empty;
     [DataMember, XmlAttribute(AttributeName = "ModDate")]
-    public string ModDate { get; set; }
+    public string ModDate {
+      get
+      {
+        return ModifiedDate.ToString("s");
+      }
+      set
+      {
+        _modDate = value;
+      }
+
+    }
+
+    [XmlIgnore]
+    private DateTime ModifiedDate
+    {
+      get
+      {
+        DateTime outDate;
+        DateTime.TryParse(_modDate, out outDate);
+        outDate = DateTime.SpecifyKind(outDate, DateTimeKind.Utc);
+        
+        return outDate;
+      }
+    }
 
     [DataMember, XmlElement(ElementName = "Notes")]
     public List<Note> Notes { get; set; }

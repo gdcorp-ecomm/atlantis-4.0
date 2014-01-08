@@ -4,7 +4,7 @@ using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.Render.Containers
 {
-  internal class ProviderContainerDataTokenManager
+  public class ProviderContainerDataTokenManager
   {
     private const string DATATOKEN_MATCH_KEY = "datakey";
 

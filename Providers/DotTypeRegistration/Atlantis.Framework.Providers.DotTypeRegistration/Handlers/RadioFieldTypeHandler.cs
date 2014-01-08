@@ -25,8 +25,8 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration.Handlers
       catch (Exception ex)
       {
         var message = ex.Message + Environment.NewLine + ex.StackTrace;
-        const string SOURCE = "RenderField - MobileRichRadioFieldTypeHandler";
-        var aex = new AtlantisException(SOURCE, "0", message, string.Empty, null, null);
+        const string source = "RenderField - RadioFieldTypeHandler";
+        var aex = new AtlantisException(source, "0", message, string.Empty, null, null);
         Engine.Engine.LogAtlantisException(aex);
 
         result = false;

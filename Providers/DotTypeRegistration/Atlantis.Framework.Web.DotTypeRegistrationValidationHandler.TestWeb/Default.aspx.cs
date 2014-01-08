@@ -18,9 +18,23 @@ namespace Atlantis.Framework.Web.DotTypeRegistrationValidationHandler.TestWeb
 
     protected void Page_Load(object sender, EventArgs e)
     {
-      string[] domains = { "domain1.n.borg", "claim1.example" };
+      //LoadEligibilityFormSchemas();
+      LoadClaimDataFormSchemas();
+    }
 
-      IDotTypeFormLookup lookup = DotTypeFormLookup.Create("dpp", "j.borg", "MOBILE", "GA");
+    private void LoadEligibilityFormSchemas()
+    {
+      string[] domains = {"domain1.n.borg", "claim1.example"};
+
+      var lookup = DotTypeFormSchemaLookup.Create("dpp", "j.borg", "MOBILE", "GA");
+      DotTypeRegistrationProvider.GetDotTypeFormSchemas(lookup, domains, out DotTypeFormFieldsByDomain);
+    }
+
+    private void LoadClaimDataFormSchemas()
+    {
+      string[] domains = { "validateandt9st.lrclaim" };
+
+      var lookup = DotTypeFormSchemaLookup.Create("claims", "lrclaim", "MOBILE", "LR");
       DotTypeRegistrationProvider.GetDotTypeFormSchemas(lookup, domains, out DotTypeFormFieldsByDomain);
     }
   }

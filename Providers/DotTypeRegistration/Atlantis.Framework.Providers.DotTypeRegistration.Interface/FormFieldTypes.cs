@@ -12,6 +12,7 @@
     Checkbox = 6,
     Select = 7,
     Radio = 8,
-    Hidden = 9
+    Hidden = 9,
+    Label = 10
   }
 }

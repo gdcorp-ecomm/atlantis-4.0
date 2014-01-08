@@ -14,6 +14,8 @@ namespace Atlantis.Framework.Providers.DotTypeRegistrationValidationHandler
   public class DotTypeRegistrationValidationDynamicRouteHandler : DynamicRouteHandlerBase
   {
     private const string VALIDATE_FIELD_PREFIX = "tui-";
+    private const string VALIDATE_CLAIMXML_FIELD_PREFIX = "tui-claimxml-";
+
     private static readonly IProviderContainer _providerContainer = HttpProviderContainer.Instance;
 
     private ISiteContext _siteContext;
@@ -64,7 +66,18 @@ namespace Atlantis.Framework.Providers.DotTypeRegistrationValidationHandler
               !item.key.Equals(VALIDATE_FIELD_PREFIX + "tld", StringComparison.OrdinalIgnoreCase) &&
               !item.key.Equals(VALIDATE_FIELD_PREFIX + "phase", StringComparison.OrdinalIgnoreCase))
           {
-            result[item.key.Substring(4)] = item.value;
+            if (item.key.StartsWith(VALIDATE_CLAIMXML_FIELD_PREFIX, StringComparison.OrdinalIgnoreCase))
+            {
+              var itemArray = item.key.Split(new[] {'-'}, StringSplitOptions.RemoveEmptyEntries);
+              if (itemArray.Length == 4)
+              {
+                result[itemArray[2]] = HttpContext.Current.Session[itemArray[3]] as string;
+              }
+            }
+            else
+            {
+              result[item.key.Substring(4)] = item.value;
+            }
           }
         }
 

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Web;
+using System.Web.Configuration;
 using Atlantis.Framework.DotTypeClaims.Interface;
 using Atlantis.Framework.DotTypeForms.Interface;
 using Atlantis.Framework.Interface;
@@ -17,26 +19,34 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration.Handlers
 
       try
       {
-        var additionalData = providerContainer.GetData(FieldTypeDataKeyConstants.CLAIM_DATA_KEY, new Tuple<IDotTypeFormsField, string>(new DotTypeFormsField(), string.Empty));
+        var additionalData = providerContainer.GetData(FieldTypeDataKeyConstants.CLAIM_DATA_KEY, 
+                                                      new Tuple<IDotTypeFormsField, string, int, string, string, string>(new DotTypeFormsField(), string.Empty, 0, string.Empty, string.Empty, string.Empty));
         if (additionalData.Item2.Length > 0)
         {
           var field = additionalData.Item1;
           var domain = additionalData.Item2;
-          var claimResponseData = LoadClaimData(domain);
+          var tldId = additionalData.Item3;
+          var placement = additionalData.Item4;
+          var phase = additionalData.Item5;
+          var marketId = additionalData.Item6;
 
-          var claims = claimResponseData.DotTypeClaims;
-          if (claims != null)
+          if (tldId > 0)
           {
-            formFields = ConvertToFormFields(field, domain, claims);
-            result = true;
+            var claimResponseData = LoadClaimData(tldId, placement, phase, marketId, domain);
+
+            if (claimResponseData != null && claimResponseData.IsSuccess)
+            {
+              formFields = ConvertToFormFields(field, domain, claimResponseData);
+              result = true;
+            }
           }
         }
       }
       catch (Exception ex)
       {
         var message = ex.Message + Environment.NewLine + ex.StackTrace;
-        const string SOURCE = "RenderField - MobileRichClaimDataSourceHandler";
-        var aex = new AtlantisException(SOURCE, "0", message, string.Empty, null, null);
+        const string source = "RenderField - MobileRichClaimDataSourceHandler";
+        var aex = new AtlantisException(source, "0", message, string.Empty, null, null);
         Engine.Engine.LogAtlantisException(aex);
 
         result = false;
@@ -45,49 +55,39 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration.Handlers
       return result;
     }
 
-    private static IList<IFormField> ConvertToFormFields(IDotTypeFormsField field, string domain, IDotTypeClaimsSchema claims)
+    private static IList<IFormField> ConvertToFormFields(IDotTypeFormsField field, string domain, DotTypeClaimsResponseData claimResponse)
     {
       var result = new List<IFormField>();
 
-      string noticeXml;
-      if (claims.TryGetNoticeXmlByDomain(domain, out noticeXml))
+      if (claimResponse !=null)
       {
-        if (!string.IsNullOrEmpty(noticeXml))
+        if (!string.IsNullOrEmpty(claimResponse.NoticeXml))
         {
           var formField = new FormField
           {
-            Name = field.FieldName, 
-            Value = noticeXml, 
-            LabelText = noticeXml,
+            Name = string.Format("claimhtml-{0}-{1}", field.FieldName, domain),
+            Value = claimResponse.HtmlData,
             DescriptionText = field.FieldDescription,
-            Type = FormFieldTypes.Checkbox
+            Type = FormFieldTypes.Label
           };
           result.Add(formField);
 
-          formField = new FormField {Name = "acceptedDate", Type = FormFieldTypes.Hidden};
+          HttpContext.Current.Session[domain] = claimResponse.NoticeXml;
+          formField = new FormField { Name = string.Format("claimxml-{0}-{1}", field.FieldName, domain), Type = FormFieldTypes.Hidden };
+          result.Add(formField);
+
+          formField = new FormField {Name = "acceptedDate", Value = "", Type = FormFieldTypes.Hidden};
           result.Add(formField);
         }
       }
 
-      //string claimsXml;
-      //if (claims.TryGetClaimsXmlByDomain(domain, out claimsXml))
-      //{
-      //  result.Append("<div class='section-row groove'>");
-      //  result.Append("<input type='checkbox' name='" + field.FieldName + "' value='" + claimsXml + "'>" + "</input>");
-      //  result.Append("<label class='pad-lt-sm'>" + HttpUtility.HtmlEncode(claimsXml) + "</label>");
-      //  result.Append("<input type='hidden' name='acceptedDate' value=''></input>");
-      //  result.Append("</div>");
-      //}
-
       return result;
     }
 
-    private static DotTypeClaimsResponseData LoadClaimData(string domain)
+    private static DotTypeClaimsResponseData LoadClaimData(int tldId, string placement, string phase, string marketId, string domain)
     {
-      string[] domains = { domain };
-
-      var request = new DotTypeClaimsRequestData(domains);
-      return (DotTypeClaimsResponseData)DataCache.DataCache.GetProcessRequest(request, DotTypeRegistrationEngineRequests.DotTypeClaimsRequest);
+      var request = new DotTypeClaimsRequestData( tldId, placement, phase, marketId, domain);
+      return (DotTypeClaimsResponseData)Engine.Engine.ProcessRequest(request, DotTypeRegistrationEngineRequests.DotTypeClaimsRequest);
     }
   }
 }

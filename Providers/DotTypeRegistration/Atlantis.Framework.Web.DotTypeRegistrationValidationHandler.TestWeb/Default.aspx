@@ -19,11 +19,11 @@
          if (DotTypeFormFieldsByDomain != null) { 
         foreach (var formFields in DotTypeFormFieldsByDomain.FormFieldsByDomain)
          {
-           if (i == 0)
-           {
-             i++;
-             continue;
-           }
+           //if (i == 0)
+           //{
+           //  i++;
+           //  continue;
+           //}
 
             var ffl = formFields.Value;
             foreach (var ffl2 in ffl)
@@ -44,11 +44,18 @@
               <div>
                 <input type='hidden' name='<%= ff.Name%>' value="<%=ff.Value %>"/>
               </div>
-<% }
-              }
+              <% }
+   if (ff.Type == FormFieldTypes.Label) 
+   {%>
+              <div>
+                <label><%= ff.Value %></label>
+              </div>
+    <%
+                }
               }
             }
-         } 
+          }
+        } 
       %>
     </div>
     <input type="submit" value="Submit">

@@ -82,7 +82,7 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration
       return success;
     }
 
-    public bool GetDotTypeFormSchemas(IDotTypeFormLookup dotTypeFormsLookup, string[] domains, out IDotTypeFormFieldsByDomain dotTypeFormFieldsByDomain)
+    public bool GetDotTypeFormSchemas(IDotTypeFormSchemaLookup dotTypeFormsLookup, string[] domains, out IDotTypeFormFieldsByDomain dotTypeFormFieldsByDomain)
     {
       dotTypeFormFieldsByDomain = null;
 
@@ -103,7 +103,7 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration
         if (success && dotTypeFormSchema != null)
         {
           IDictionary<string, IList<IList<IFormField>>> formFieldsByDomain;
-          success = TransformFormSchemaToFormFields(domains, dotTypeFormSchema, out formFieldsByDomain);
+          success = TransformFormSchemaToFormFields(domains, dotTypeFormSchema, tldId, placement, phase, language, out formFieldsByDomain);
           if (success)
           {
             var addtlFormFieldsByDomain = AddAdditionalFormFields(domains, dotTypeFormsLookup.Placement, dotTypeFormsLookup.Tld, dotTypeFormsLookup.Phase);
@@ -141,28 +141,51 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration
       var success = false;
       dotTypeFormSchema = null;
 
-      var request = new DotTypeFormsXmlRequestData(formType, tldId, placement, phase, language, SiteContext.ContextId);
-
-      try
+      if (formType.Equals("claims", StringComparison.OrdinalIgnoreCase))
       {
-        var response = (DotTypeFormsXmlResponseData)DataCache.DataCache.GetProcessRequest(request, DotTypeRegistrationEngineRequests.DotTypeFormsXmlRequest);
-        if (response.IsSuccess)
+        dotTypeFormSchema = new DotTypeFormsSchema();
+        var dotTypeFormsForm = new DotTypeFormsForm();
+
+        var dotTypeFormsField = new DotTypeFormsField
         {
-          dotTypeFormSchema = response.DotTypeFormsSchema;
-          success = true;
+          FieldName = "claims", //This will go as to the RegAppTokenWebSvc as the key. Should not be changed
+          FieldType = "claim"   //This is used to resolve the field type handler. Should not be changed
+        };
+        var fieldCollection = new List<IDotTypeFormsField> {dotTypeFormsField};
+
+        dotTypeFormsForm.FieldCollection = fieldCollection;
+        dotTypeFormSchema.Form = dotTypeFormsForm;
+
+        success = true;
+      }
+      else
+      {
+        var request = new DotTypeFormsXmlRequestData(formType, tldId, placement, phase, language, SiteContext.ContextId);
+
+        try
+        {
+          var response =
+            (DotTypeFormsXmlResponseData)
+              DataCache.DataCache.GetProcessRequest(request, DotTypeRegistrationEngineRequests.DotTypeFormsXmlRequest);
+          if (response.IsSuccess)
+          {
+            dotTypeFormSchema = response.DotTypeFormsSchema;
+            success = true;
+          }
+        }
+        catch (Exception ex)
+        {
+          var exception = new AtlantisException("DotTypeRegistrationProvider.GetDotTypeFormXmlSchema", "0", ex.Message,
+            request.ToXML(), null, null);
+          Engine.Engine.LogAtlantisException(exception);
+          success = false;
         }
       }
-      catch (Exception ex)
-      {
-        var exception = new AtlantisException("DotTypeRegistrationProvider.GetDotTypeFormXmlSchema", "0", ex.Message, request.ToXML(), null, null);
-        Engine.Engine.LogAtlantisException(exception);
-        success = false;
-      }
-
       return success;
     }
 
-    private bool TransformFormSchemaToFormFields(IEnumerable<string> domains, IDotTypeFormsSchema formSchema, out IDictionary<string, IList<IList<IFormField>>> formFieldsByDomain)
+    private bool TransformFormSchemaToFormFields(IEnumerable<string> domains, IDotTypeFormsSchema formSchema, int tldId, string placement, string phase, string language,
+                                                 out IDictionary<string, IList<IList<IFormField>>> formFieldsByDomain)
     {
       bool success = false;
       formFieldsByDomain = new Dictionary<string, IList<IList<IFormField>>>(StringComparer.OrdinalIgnoreCase);
@@ -182,7 +205,7 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration
               var formFieldType = TransformHandlerHelper.GetFormFieldType(field.FieldType);
               if (formFieldType != DotTypeFormFieldTypes.None)
               {
-                if (TransformHandlerHelper.SetFieldTypeData(formFieldType, Container, domain, field))
+                if (TransformHandlerHelper.SetFieldTypeData(formFieldType, Container, domain, field, tldId, placement, phase, language))
                 {
                   IDotTypeFormFieldTypeHandler fieldTypeHandler = DotTypeFormFieldTypeFactory.GetFormFieldTypeHandler(formFieldType);
                   if (fieldTypeHandler != null)

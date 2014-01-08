@@ -48,7 +48,8 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration.Handlers
       return formFieldType;
     }
 
-    public static bool SetFieldTypeData(DotTypeFormFieldTypes formFieldType, IProviderContainer providerContainer, string domain, IDotTypeFormsField field)
+    public static bool SetFieldTypeData(DotTypeFormFieldTypes formFieldType, IProviderContainer providerContainer, string domain, IDotTypeFormsField field,
+                                        int tldId, string placement, string phase, string language)
     {
       var result = true;
 
@@ -57,7 +58,7 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration.Handlers
         switch (formFieldType)
         {
           case DotTypeFormFieldTypes.Claims:
-            var tuple = new Tuple<IDotTypeFormsField, string>(field, domain);
+            var tuple = new Tuple<IDotTypeFormsField, string, int, string, string, string>(field, domain, tldId, placement, phase, language);
             providerContainer.SetData(FieldTypeDataKeyConstants.CLAIM_DATA_KEY, tuple);
             break;
           case DotTypeFormFieldTypes.Checkbox:

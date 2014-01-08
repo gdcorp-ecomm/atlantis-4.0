@@ -32,6 +32,7 @@ namespace Atlantis.Framework.CH.Personalization.Tests
           _providerContainer.RegisterProvider<IShopperContext, MockShopperContext>();
           _providerContainer.RegisterProvider<IManagerContext, MockManagerContext>();
           _providerContainer.RegisterProvider<IPersonalizationProvider, MockPersonalizationProvider>();
+
         }
 
         return _providerContainer;
@@ -63,46 +64,33 @@ namespace Atlantis.Framework.CH.Personalization.Tests
     }
 
     [TestMethod]
-    public void EvaluateCondition1()
+    public void FindsAPresentTag()
     {
-      string expression = String.Format("{0}({1},{2})", CONDITION_NAME, "Homepage", "EnGmtACtNewCusTSurvEyMObiLeDLP");
+      string expression = String.Format("{0}({1},{2})", CONDITION_NAME, "Homepage", "duplicate");
       bool actual = ExpressionParserManager.EvaluateExpression(expression);
       Assert.IsTrue(actual);
     }
     [TestMethod]
-    public void EvaluateCondition2()
+    public void FindsMultiplePresentTags()
     {
-      string expression = String.Format("{0}({1},{2})", CONDITION_NAME, "Homepage", "ENGMTActNEWCustSuRveyWEbDLP");
+      string expression = String.Format("{0}({1},{2},{3},{4})", CONDITION_NAME, "Homepage", "stddomxswebhp", "stddomxswebdlp", "engmtactnewcustsurveymobiledlp");
       bool actual = ExpressionParserManager.EvaluateExpression(expression);
       Assert.IsTrue(actual);
     }
     [TestMethod]
-    public void EvaluateCondition3()
+    public void DoesNotFindAnAbsentTag()
     {
-      string expression = String.Format("{0}({1},{2})", CONDITION_NAME, "Homepage", "engmtcustservmobileappmobilehp");
-      bool actual = ExpressionParserManager.EvaluateExpression(expression);
-      Assert.IsTrue(actual);
-    }
-    [TestMethod]
-    public void EvaluateCondition4()
-    {
-      string expression = String.Format("{0}({1},{2})", CONDITION_NAME, "Homepage", "ENGMTCUSTSERVMOBILEAPPWEBHP");
-      bool actual = ExpressionParserManager.EvaluateExpression(expression);
-      Assert.IsTrue(actual);
-    }
-    [TestMethod]
-    public void EvaluateCondition5()
-    {
-      string expression = String.Format("{0}({1},{2})", CONDITION_NAME, "Homepage", "TagDoesNotExist");
+      string expression = String.Format("{0}({1},{2})", CONDITION_NAME, "Homepage", "absent");
       bool actual = ExpressionParserManager.EvaluateExpression(expression);
       Assert.IsFalse(actual);
     }
     [TestMethod]
-    public void MultipleTagNames()
+    public void DoesNotFindMultipleAbsentTags()
     {
-      string expression = String.Format("{0}({1},{2},{3},{4})", CONDITION_NAME, "Homepage", "ENGMTCUSTSERVMOBILEAPPWEBH", "ENGMTCUSTSERVMOBILEAPPWEBHP", "ENGMTCUSTSERVMOBILEAPPWE");
+      string expression = String.Format("{0}({1},{2},{3},{4})", CONDITION_NAME, "Homepage", "absent", "absent1", "absent1");
       bool actual = ExpressionParserManager.EvaluateExpression(expression);
-      Assert.IsTrue(actual);
+      Assert.IsFalse(actual);
     }
+   
   }
 }

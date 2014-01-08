@@ -25,8 +25,8 @@ namespace Atlantis.Framework.Providers.Personalization
     private readonly List<IConsumedMessage> _emptyMessages;
     private readonly Lazy<string> _trackingData;
     
-    private Lazy<ShopperSpecificSessionDataItem<TargetedMessagesRequestData, TargetedMessagesResponseData>> _targetedMessagesSessionData =
-               new Lazy<ShopperSpecificSessionDataItem<TargetedMessagesRequestData, TargetedMessagesResponseData>>(() => { return new ShopperSpecificSessionDataItem<TargetedMessagesRequestData, TargetedMessagesResponseData>("PersonalizationProvider.TargetedMessages"); });
+    private Lazy<ShopperSpecificSessionDataItem<TargetedMessagesResponseData>> _targetedMessagesSessionData =
+               new Lazy<ShopperSpecificSessionDataItem<TargetedMessagesResponseData>>(() => { return new ShopperSpecificSessionDataItem<TargetedMessagesResponseData>("PersonalizationProvider.TargetedMessages"); });
 
 
     public PersonalizationProvider(IProviderContainer container)

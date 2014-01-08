@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Security.Cryptography;
-using System.Text;
-using Atlantis.Framework.Interface;
+﻿using Atlantis.Framework.Interface;
+using System;
 using System.Xml.Linq;
 
 namespace Atlantis.Framework.Personalization.Interface
 {
-  public class TargetedMessagesRequestData : RequestData, IEquatable<TargetedMessagesRequestData>, IEqualityComparer<TargetedMessagesRequestData>
+  public class TargetedMessagesRequestData : RequestData
   {
     private const int DEFAULT_TIMEOUT = 2;
     public string AppId { get; set; }
@@ -62,57 +59,19 @@ namespace Atlantis.Framework.Personalization.Interface
 
       return tagData.ToString();
     }
-    
-    public bool Equals(TargetedMessagesRequestData other)
-    {
-      bool equal =   (this.PrivateLabel == other.PrivateLabel) 
-                  && (this.AppId == other.AppId) 
-                  && (this.InteractionPoint == other.InteractionPoint) 
-                  && (this.Isc == other.Isc);
 
-      if (this.IsAnonymousShopper && other.IsAnonymousShopper)
-      {
-        equal = (this.AnonId == other.AnonId) && equal;
-      }
-      else
-      {
-        equal = (this.ShopperID == other.ShopperID) && equal;
-      }
-
-      return equal;
-    }
-
-    public bool Equals(TargetedMessagesRequestData x, TargetedMessagesRequestData y)
-    {
-      if (Object.ReferenceEquals(x, y)) return true;
-
-      return x.Equals(y);
-    }
-
-    public int GetHashCode(TargetedMessagesRequestData obj)
-    {
-      return obj.GetHashCode();
-    }
-
-    public override bool Equals(object obj)
-    {
-      if (obj is TargetedMessagesRequestData)
-        return this.Equals(obj as TargetedMessagesRequestData);
-      else
-        return false;
-    }
-
-    public override int GetHashCode()
+    public override string GetCacheMD5()
     {
       if (this.IsAnonymousShopper)
       {
-        return AnonId.GetHashCode() ^ PrivateLabel.GetHashCode() ^  AppId.GetHashCode() ^  InteractionPoint.GetHashCode() ^  Isc.GetHashCode();
+        return BuildHashFromStrings(AnonId, PrivateLabel, AppId, InteractionPoint, Isc);
       }
       else
       {
-        return ShopperID.GetHashCode() ^ PrivateLabel.GetHashCode() ^ AppId.GetHashCode() ^ InteractionPoint.GetHashCode() ^ Isc.GetHashCode();
+        return BuildHashFromStrings(ShopperID, PrivateLabel, AppId, InteractionPoint, Isc);
       }
     }
+    
   }
 }
 

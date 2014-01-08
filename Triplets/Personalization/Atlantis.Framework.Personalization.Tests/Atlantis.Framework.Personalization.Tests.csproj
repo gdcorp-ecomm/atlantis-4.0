@@ -96,7 +96,6 @@
   <ItemGroup>
     <Compile Include="GetTargetedMessagesTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TargetedMessagesRequestDataTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Atlantis.Framework.Personalization.Impl\Atlantis.Framework.Personalization.Impl.csproj">

@@ -1,8 +1,9 @@
-﻿using System.Web;
+﻿using Atlantis.Framework.Interface;
+using System.Web;
 
 namespace Atlantis.Framework.Providers.Personalization
 {
-  internal class ShopperSpecificSessionDataItem<TInput, TOutput>
+  internal class ShopperSpecificSessionDataItem<TOutput>
   {
     private string _sessionDataKey;
     private string _sessionDataBelongsToKey;
@@ -13,7 +14,7 @@ namespace Atlantis.Framework.Providers.Personalization
       _sessionDataBelongsToKey = sessionKey + ".DataBelongsTo";
     }
 
-    public bool TryGetData(TInput belongsTo, out TOutput output)
+    public bool TryGetData(RequestData belongsTo, out TOutput output)
     {
       if (TryGetDataFromSession(belongsTo, out output))
       {
@@ -23,17 +24,17 @@ namespace Atlantis.Framework.Providers.Personalization
       return false;
     }
 
-    private bool TryGetDataFromSession(TInput belongsTo, out TOutput output)
+    private bool TryGetDataFromSession(RequestData belongsTo, out TOutput output)
     {
       output = default(TOutput);
 
-      TInput sessionBelongsTo = (TInput)SafeSession.GetSessionItem(_sessionDataBelongsToKey);
+      string sessionBelongsTo = (string)SafeSession.GetSessionItem(_sessionDataBelongsToKey);
       if (sessionBelongsTo == null)
       {
         return false;
       }
 
-      if (!sessionBelongsTo.Equals(belongsTo))
+      if (sessionBelongsTo != belongsTo.GetCacheMD5())
       {
         return false;
       }
@@ -56,14 +57,14 @@ namespace Atlantis.Framework.Providers.Personalization
       return true;
     }
 
-    public void SetData(TInput belongsTo, TOutput output)
+    public void SetData(RequestData belongsTo, TOutput output)
     {
       SetDataIntoSession(belongsTo, output);
     }
 
-    private void SetDataIntoSession(TInput belongsTo, TOutput data)
+    private void SetDataIntoSession(RequestData belongsTo, TOutput data)
     {
-      SafeSession.SetSessionItem(_sessionDataBelongsToKey, belongsTo);
+      SafeSession.SetSessionItem(_sessionDataBelongsToKey, belongsTo.GetCacheMD5());
       SafeSession.SetSessionItem(_sessionDataKey, data);
     }
   }

@@ -7,8 +7,8 @@ using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.Personalization.Interface
 {
-    [Serializable]
-    public class TargetedMessagesResponseData : IResponseData
+  [Serializable]
+  public class TargetedMessagesResponseData : IResponseData
   {
     public TargetedMessagesResponseData() { }
 
@@ -17,6 +17,7 @@ namespace Atlantis.Framework.Personalization.Interface
 
     public TargetedMessages TargetedMessagesData { get; private set; }
     public string TMSUrl { get; private set; }
+    public bool TMSSwitchTurnedOff { get; set; }
 
     public TargetedMessagesResponseData(string xml, string tmsURL)
     {
@@ -36,6 +37,11 @@ namespace Atlantis.Framework.Personalization.Interface
     {
       TMSUrl = tmsURL;
       _exception = new AtlantisException(requestData, "TargetedMessagesResponseData", exception.Message, requestData.ToXML());
+    }
+
+    public TargetedMessagesResponseData(bool turnedOff)
+    {
+      TMSSwitchTurnedOff = true;
     }
 
     private TargetedMessages BuildTargetedMessages(string xmlResult)
@@ -77,20 +83,5 @@ namespace Atlantis.Framework.Personalization.Interface
     }
 
     #endregion
-
-    #region ISessionSerializableResponse Members
-    public string SerializeSessionData()
-    {
-      return ToXML();
-    }
-
-    public void DeserializeSessionData(string sessionData)
-    {
-      if (string.IsNullOrEmpty(sessionData)) return;
-
-      TargetedMessagesData = BuildTargetedMessages(sessionData);
-    }
-    #endregion
-
   }
 }

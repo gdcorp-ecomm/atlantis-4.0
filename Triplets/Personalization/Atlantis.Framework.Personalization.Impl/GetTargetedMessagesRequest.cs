@@ -11,57 +11,102 @@ namespace Atlantis.Framework.Personalization.Impl
 {
   public class GetTargetedMessagesRequest : IRequest
   {
+    private readonly Lazy<bool> _canCallTMS = new Lazy<bool>(() => DataCache.DataCache.GetAppSetting("ATLANTIS_PERSONALIZATION_TRIPLET_TMS_ON").Equals("true", StringComparison.OrdinalIgnoreCase));
+
     public IResponseData RequestHandler(RequestData oRequestData, ConfigElement oConfig)
     {
       TargetedMessagesResponseData responseData = null;
-      WsConfigElement serviceConfig = (WsConfigElement)oConfig;
-      WebRequest request = GetWebRequest(serviceConfig, oRequestData);
-
-      try
+      if (_canCallTMS.Value)
       {
-        string output;
-        using (WebResponse response = request.GetResponse())
+        TargetedMessagesRequestData requestData = (TargetedMessagesRequestData)oRequestData;
+
+        WsConfigElement serviceConfig = (WsConfigElement)oConfig;
+        string url;
+
+        if (serviceConfig.WSURL.EndsWith("/"))
         {
-          using (Stream receiveStream = response.GetResponseStream())
+          url = string.Concat(serviceConfig.WSURL, requestData.GetWebServicePath());
+        }
+        else
+        {
+          url = string.Concat(serviceConfig.WSURL, "/", requestData.GetWebServicePath());
+        }
+
+        Stream dataStream = null;
+
+        try
+        {
+          string postData = requestData.GetPostData();
+          var buffer = Encoding.UTF8.GetBytes(postData);
+
+          HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create((new UriBuilder(url)).Uri);
+
+          if (webRequest != null)
           {
-            using (StreamReader readStream = new StreamReader(receiveStream, Encoding.UTF8))
+            webRequest.Timeout = (int)requestData.RequestTimeout.TotalMilliseconds;
+            webRequest.CachePolicy = new RequestCachePolicy(RequestCacheLevel.BypassCache);
+            webRequest.Method = "POST";
+            webRequest.ContentType = "application/xml";
+            webRequest.Accept = "application/xml";
+            webRequest.ContentLength = buffer.Length;
+            webRequest.KeepAlive = false;
+            dataStream = webRequest.GetRequestStream();
+          }
+
+          if (dataStream != null)
+          {
+            dataStream.Write(buffer, 0, buffer.Length);
+            dataStream.Close();
+          }
+
+          string response = null;
+          if (webRequest != null)
+          {
+            var webResponse = webRequest.GetResponse() as HttpWebResponse;
+
+            if (webResponse != null)
             {
-              output = readStream.ReadToEnd();
+              var webResponseData = webResponse.GetResponseStream();
+              if (webResponseData != null)
+              {
+                StreamReader responseReader = null;
+                try
+                {
+                  responseReader = new StreamReader(webResponseData);
+                  response = responseReader.ReadToEnd();
+                }
+                finally
+                {
+                  if (responseReader != null)
+                  {
+                    responseReader.Dispose();
+                  }
+                }
+              }
             }
           }
+
+          responseData = new TargetedMessagesResponseData(response, url);
         }
-        responseData = new TargetedMessagesResponseData(output, request.RequestUri.ToString());
+        catch (Exception ex)
+        {
+          responseData = new TargetedMessagesResponseData(requestData, ex, url);
+        }
+        finally
+        {
+          if (dataStream != null)
+          {
+            dataStream.Dispose();
+          }
+        }
       }
-      catch (Exception ex)
+      else
       {
-        responseData = new TargetedMessagesResponseData(oRequestData, ex, request.RequestUri.ToString());
+        responseData = new TargetedMessagesResponseData(true);
       }
+
       return responseData;
     }
 
-    private WebRequest GetWebRequest(WsConfigElement config, RequestData oRequestData)
-    {
-      TargetedMessagesRequestData requestData = (TargetedMessagesRequestData)oRequestData;
-
-      string appID = requestData.AppId;
-      string interactionPoint = requestData.InteractionPoint;
-      string shopperId = requestData.ShopperID;
-      string privateLabel = requestData.PrivateLabel;
-
-      HttpWebRequest result;
-      UriBuilder urlBuilder = new UriBuilder(BuildRequestUrl(config.WSURL, appID, interactionPoint, shopperId, privateLabel));
-
-      Uri uri = urlBuilder.Uri;
-      result = (HttpWebRequest)WebRequest.Create(uri);
-      result.Timeout = (int)requestData.RequestTimeout.TotalMilliseconds;
-      result.CachePolicy = new RequestCachePolicy(RequestCacheLevel.BypassCache);
-      result.Accept = "text/xml";
-      return result;
-    }
-
-    private string BuildRequestUrl(string webServiceUrl, string appID, string interactionPoint, string shopperId, string privateLabel)
-    {
-      return String.Format("{0}/{1}/{2}?shopperData=shopperID={3}|privateLabelID={4}", webServiceUrl, appID, interactionPoint, shopperId, privateLabel);
-    }
   }
 }

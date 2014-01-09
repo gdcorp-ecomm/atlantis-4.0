@@ -118,7 +118,7 @@ namespace Atlantis.Framework.DCCDomainsDataCache.Interface
         PreRegistrationPeriod = new TldLaunchPhasePeriod { StartDateUtc = preRegStart, StopDateUtc = preRegEnd };
         LivePeriod = new TldLaunchPhasePeriod { StartDateUtc = liveStart, StopDateUtc = liveEnd };
 
-        if (periodType.Equals("claims"))
+        if (periodType.Equals("claimsacceptance"))
         {
           DateTime claimStart = DateTime.Parse(period.Attribute("utcstartdate").Value);
           DateTime claimEnd = DateTime.Parse(period.Attribute("utcstopdate").Value);

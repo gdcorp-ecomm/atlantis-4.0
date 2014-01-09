@@ -2,6 +2,7 @@
 using Atlantis.Framework.Providers.Interface.ProviderContainer;
 using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Configuration;
 
@@ -114,28 +115,31 @@ namespace Atlantis.Framework.BasePages.Providers
 
       string hostName = GetContextHost().ToLowerInvariant();
 
-      if (hostName.Contains(".ote.") || hostName.StartsWith("ote."))
+      Match match = Regex.Match(hostName, @"\.?ote[\.-]");
+      if (match.Success)
       {
         result = ServerLocationType.Ote;
       }
       else if (isRequestInternal)
       {
-        if (hostName.Contains(".test.") || hostName.StartsWith("test."))
+        match = Regex.Match(hostName, @"\.?test[\.-]");
+        if (match.Success)
         {
           result = ServerLocationType.Test;
         }
-        else if (hostName.Contains(".dev.") ||
-                 hostName.StartsWith("dev.") || 
-                 hostName.Contains(".debug.") ||
-                 hostName.StartsWith("debug."))
+        else
         {
-          if (WebConfigurationManager.AppSettings["EnvironmentOverride"] == "Test")
+          match = Regex.Match(hostName, @"\.?dev[\.-]|\.?debug[\.-]");
+          if (match.Success)
           {
-            result = ServerLocationType.Test;
-          }
-          else
-          {
-            result = ServerLocationType.Dev;
+            if (WebConfigurationManager.AppSettings["EnvironmentOverride"] == "Test")
+            {
+              result = ServerLocationType.Test;
+            }
+            else
+            {
+              result = ServerLocationType.Dev;
+            }
           }
         }
       }

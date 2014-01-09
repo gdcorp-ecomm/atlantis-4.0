@@ -66,8 +66,8 @@ namespace Atlantis.Framework.Providers.Iris.Tests
       const int groupId = 1;
       const int serviceId = 0;
 
-      var responseId = irisProvider.CreateIrisIncident(subscriberId, subject, note, customerEmail, ipAddress, createdBy, privateLabelId, groupId, serviceId, shopperId);
-      Assert.IsTrue(responseId != -1);
+      var incident = irisProvider.CreateIrisIncident(subscriberId, subject, note, customerEmail, ipAddress, createdBy, privateLabelId, groupId, serviceId, shopperId);
+      Assert.IsTrue(incident != null);
 
     }
 

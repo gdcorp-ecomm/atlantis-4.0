@@ -39,21 +39,26 @@ namespace Atlantis.Framework.Providers.Iris
         return retValue;
       }
 
-      public long CreateIrisIncident(int subscriberId, string subject, string note, string customerEmailAddress, string ipAddress,
+      public Incident CreateIrisIncident(int subscriberId, string subject, string note, string customerEmailAddress, string ipAddress,
         string createdBy, int privateLableId, int groupId, int serviceId, string shopperId)
       {
-        long retValue = -1;
+        Incident createdIncident = null;
+        long incidentId;
         try
         {
           var requestData = new CreateIncidentRequestData(subscriberId, subject, note, customerEmailAddress,
             ipAddress, groupId, serviceId, createdBy, privateLableId, shopperId);
-
+          DateTime requestDateTime = DateTime.Now;
           var responseData =
             Engine.Engine.ProcessRequest(requestData, EngineRequests.IrisCreate) as CreateIncidentResponseData;
 
           if (responseData != null && responseData.IsSuccess)
           {
-            retValue = responseData.IncidentId;
+            incidentId = responseData.IncidentId;
+            if (incidentId != 0)
+            {
+              createdIncident = FetchNewIncident(shopperId, incidentId, requestDateTime);
+            }
           }
         }
         catch (Exception ex)
@@ -62,7 +67,24 @@ namespace Atlantis.Framework.Providers.Iris
           Engine.Engine.LogAtlantisException(exception);
         }
 
-        return retValue;
+        return createdIncident;
+      }
+
+      private Incident FetchNewIncident(string shopperId, long incidentId, DateTime since)
+      {
+        Incident newIncident = null;
+        // I don't see a method for grabbing a specific incident by ID
+        // So, for now, we'll just grab for a very recent timeframe, and step through the return list and match ID - mjw 1/9/14
+        var incidents = GetIncidents(shopperId, since, DateTime.Now, true); 
+        foreach (Incident incident in incidents)
+        {
+            if (incident.IncidentId.Equals(incidentId))
+            {
+              newIncident = incident;
+              break;
+            }
+        }
+        return newIncident;
       }
 
       public long AddIncidentNote(long incidentId, string note, string loginId)

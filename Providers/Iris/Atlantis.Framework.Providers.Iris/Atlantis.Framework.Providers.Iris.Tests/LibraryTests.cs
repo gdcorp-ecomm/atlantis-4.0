@@ -80,8 +80,8 @@ namespace Atlantis.Framework.Providers.Iris.Tests
       string note = "More Notes from the unit tests for Adding Comments to existing tickets.";
       long incidentId = 1329225;
       
-      var responseId = irisProvider.AddIncidentNote(incidentId, note, "Customer");
-      Assert.IsTrue(responseId != -1);
+      var newNote = irisProvider.AddIncidentNote(incidentId, note, "Customer");
+      Assert.IsTrue(newNote != null);
       
     }
 
@@ -95,8 +95,8 @@ namespace Atlantis.Framework.Providers.Iris.Tests
       long incidentId = -9999999;
       string customerId = "Customer";
 
-      var responseId = irisProvider.AddIncidentNote(incidentId, note, "Customer");
-      Assert.IsTrue(responseId == -1);
+      var newNote = irisProvider.AddIncidentNote(incidentId, note, "Customer");
+      Assert.IsTrue(newNote == null);
 
     }
 

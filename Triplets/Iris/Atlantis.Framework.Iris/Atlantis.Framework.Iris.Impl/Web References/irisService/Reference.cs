@@ -525,7 +525,7 @@ namespace Atlantis.Framework.Iris.Impl.irisService {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/GetIncidentCustomerNotes", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public string GetIncidentCustomerNotes(long incidentId, int noteId) {
+        public string GetIncidentCustomerNotes(long incidentId, long noteId) {
             object[] results = this.Invoke("GetIncidentCustomerNotes", new object[] {
                         incidentId,
                         noteId});

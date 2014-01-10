@@ -4,13 +4,13 @@ namespace Atlantis.Framework.Iris.Interface
 {
   public class GetIncidentCustomerNotesRequestData : RequestData
   {
-    public GetIncidentCustomerNotesRequestData(long incidentId, int noteId)
+    public GetIncidentCustomerNotesRequestData(long incidentId, long noteId)
     {
       IncidentId = incidentId;
       NoteId = noteId;
     }
 
     public long IncidentId { get; set; }
-    public int NoteId { get; set; }
+    public long NoteId { get; set; }
   }
 }

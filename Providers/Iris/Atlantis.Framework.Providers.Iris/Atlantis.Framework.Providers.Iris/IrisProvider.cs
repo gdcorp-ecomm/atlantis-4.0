@@ -45,11 +45,12 @@ namespace Atlantis.Framework.Providers.Iris
       {
         Incident createdIncident = null;
         long incidentId;
+        DateTime requestDateTime = DateTime.Now;
         try
         {
           var requestData = new CreateIncidentRequestData(subscriberId, subject, note, customerEmailAddress,
             ipAddress, groupId, serviceId, createdBy, privateLableId, shopperId);
-          DateTime requestDateTime = DateTime.Now;
+
           var responseData =
             Engine.Engine.ProcessRequest(requestData, EngineRequests.IrisCreate) as CreateIncidentResponseData;
 
@@ -58,7 +59,7 @@ namespace Atlantis.Framework.Providers.Iris
             incidentId = responseData.IncidentId;
             if (incidentId != 0)
             {
-              createdIncident = FetchNewIncidentWithRetry(shopperId, incidentId, requestDateTime);
+              createdIncident = FetchNewIncidentWithRetry(shopperId, incidentId, requestDateTime, 5, 500);
             }
           }
         }
@@ -71,13 +72,18 @@ namespace Atlantis.Framework.Providers.Iris
         return createdIncident;
       }
 
-      private Incident FetchNewIncidentWithRetry(string shopperId, long incidentId, DateTime since)
+      private Incident FetchNewIncidentWithRetry(string shopperId, long incidentId, DateTime since, int numRetries, int intervalBetweenRetriesMillis)
       {
         Incident incident =  FetchNewIncident(shopperId, incidentId, since);
         if (incident == null)
         {
-          Thread.Sleep(500);
-          incident = FetchNewIncident(shopperId, incidentId, since);
+          int retries = 0;
+          do
+          {
+            Thread.Sleep(500);
+            incident = FetchNewIncident(shopperId, incidentId, since);
+            retries++;
+          } while (incident == null && retries < numRetries);
         }
         return incident;
       }
@@ -87,7 +93,8 @@ namespace Atlantis.Framework.Providers.Iris
         Incident newIncident = null;
         // I don't see a method for grabbing a specific incident by ID
         // So, for now, we'll just grab for a very recent timeframe, and step through the return list and match ID - mjw 1/9/14
-        var incidents = GetIncidents(shopperId, since, DateTime.Now, true);
+        var incidents = GetIncidents(shopperId, since.AddMinutes(-2), DateTime.Now.AddMinutes(2), true);
+
         foreach (Incident incident in incidents)
         {
           if (incident.IncidentId.Equals(incidentId))
@@ -99,9 +106,10 @@ namespace Atlantis.Framework.Providers.Iris
         return newIncident;
       }
 
-      public long AddIncidentNote(long incidentId, string note, string loginId)
+      public Note AddIncidentNote(long incidentId, string note, string loginId)
       {
-        long retValue = -1;
+        Note newNote = null;
+        long noteId = 0;
         try
         {
           var requestData = new AddIncidentNoteRequestData(incidentId, note, loginId);
@@ -111,7 +119,11 @@ namespace Atlantis.Framework.Providers.Iris
 
           if (responseData != null && responseData.IsSuccess)
           {
-            retValue = responseData.IncidentNoteId;
+            noteId = responseData.IncidentNoteId;
+            if (responseData.IsSuccess)
+            {
+              newNote = fetchNewNoteWithRetry(incidentId, noteId, 2, 300);
+            }
           }
         }
         catch (Exception ex)
@@ -120,7 +132,41 @@ namespace Atlantis.Framework.Providers.Iris
           Engine.Engine.LogAtlantisException(exception);
         }
 
-        return retValue;
+        return newNote;
+      }
+
+      private Note fetchNewNoteWithRetry( long incidentId, long noteId, int numRetries, int intervalBetweenRetriesMillis)
+      {
+        Note note = fetchNewNote(incidentId, noteId);
+        if (note == null)
+        {
+          int retries = 0;
+          do
+          {
+            Thread.Sleep(intervalBetweenRetriesMillis);
+            note = fetchNewNote(incidentId, noteId);
+            retries++;
+          } while (note == null && retries < numRetries);
+        }
+        return note;
+      }
+
+      private Note fetchNewNote( long incidentId, long noteId)
+      {
+        Note newNote = null;
+        List<Note> notes = GetIncidentNotes(incidentId, noteId - 1);
+        if (notes != null)
+        {
+          foreach (Note note in notes)
+          {
+            if (note.IncidentNoteId.Equals(noteId))
+            {
+              newNote = note;
+              break;
+            }
+          }
+        }
+        return newNote;
       }
 
       public List<Incident> GetIncidents(string shopperId, DateTime startDate, DateTime endDate, bool deepLoad)
@@ -158,7 +204,7 @@ namespace Atlantis.Framework.Providers.Iris
         return retValue;
       }
 
-      public List<Note> GetIncidentNotes(long incidentId, int noteId)
+      public List<Note> GetIncidentNotes(long incidentId, long noteId)
       {
         var retValue = new List<Note>();
 

@@ -12,7 +12,7 @@ namespace Atlantis.Framework.Iris.Interface.Objects
     public long IncidentId { get; set; }
 
     [DataMember, XmlAttribute]
-    public int IncidentNoteId { get; set; }
+    public long IncidentNoteId { get; set; }
 
     private string _createDate = string.Empty;
     [DataMember, XmlAttribute(AttributeName = "CreateDate")]

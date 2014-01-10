@@ -78,6 +78,7 @@
     <Compile Include="ShopperDataProvider.cs" />
     <Compile Include="ShopperProviderEngineRequests.cs" />
     <Compile Include="ShopperSpecificSessionDataItem.cs" />
+    <Compile Include="ShopperIdAndStatus.cs" />
     <Compile Include="ShopperUpdateErrorMapper.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -87,7 +88,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="atlantis.config" />
     <None Include="Atlantis.Framework.Providers.Shopper.nuget.bat" />
     <None Include="Atlantis.Framework.Providers.Shopper.nuspec">
       <SubType>Designer</SubType>

@@ -5,25 +5,33 @@ namespace Atlantis.Framework.Providers.Shopper
 {
   internal static class ShopperUpdateErrorMapper
   {
-    internal static Dictionary<string, ShopperUpdateResultType> ShopperUpdateErrorMap
+    private static readonly Dictionary<string, ShopperUpdateResultType> _updateErrorMap;
+ 
+    static ShopperUpdateErrorMapper()
     {
-      get
+      _updateErrorMap = new Dictionary<string, ShopperUpdateResultType>(10)
       {
-        var map = new Dictionary<string, ShopperUpdateResultType>(10);
+        {"0xC0044A10", ShopperUpdateResultType.InvalidShopperXml},
+        {"0xC0044A13", ShopperUpdateResultType.InvalidRequestField},
+        {"0xC0044A15", ShopperUpdateResultType.ShopperNotFound},
+        {"0xC0044A1A", ShopperUpdateResultType.InvalidShopperId},
+        {"0xC0044A1E", ShopperUpdateResultType.CountryMarketIdNotCompatible},
+        {"0xC0044A20", ShopperUpdateResultType.PasswordUnacceptable},
+        {"0xC0044A21", ShopperUpdateResultType.PinUnacceptable},
+        {"0xC0044A22", ShopperUpdateResultType.HintMatchesPassword},
+        {"0x80040E2F", ShopperUpdateResultType.LoginNameAlreadyExists},
+        {"0xC0044A1D", ShopperUpdateResultType.LoginNameNumericShouldBeCustomerNumber}
+      };
+    }
 
-        map.Add("0xC0044A10", ShopperUpdateResultType.InvalidShopperXml);
-        map.Add("0xC0044A13", ShopperUpdateResultType.InvalidRequestField);
-        map.Add("0xC0044A15", ShopperUpdateResultType.ShopperNotFound);
-        map.Add("0xC0044A1A", ShopperUpdateResultType.InvalidShopperId);
-        map.Add("0xC0044A1E", ShopperUpdateResultType.CountryMarketIdNotCompatible);
-        map.Add("0xC0044A20", ShopperUpdateResultType.PasswordUnacceptable);
-        map.Add("0xC0044A21", ShopperUpdateResultType.PinUnacceptable);
-        map.Add("0xC0044A22", ShopperUpdateResultType.HintMatchesPassword);
-        map.Add("0x80040E2F", ShopperUpdateResultType.LoginNameAlreadyExists);
-        map.Add("0xC0044A1D", ShopperUpdateResultType.LoginNameNumericShouldBeCustomerNumber);
-
-        return map;
+    internal static ShopperUpdateResultType GetUpdateResultType(string serviceErrorCode)
+    {
+      ShopperUpdateResultType result;
+      if (!_updateErrorMap.TryGetValue(serviceErrorCode, out result))
+      {
+        result = ShopperUpdateResultType.UnknownError;
       }
+      return result;
     }
   }
 }

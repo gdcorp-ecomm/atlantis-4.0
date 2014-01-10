@@ -130,6 +130,8 @@
     <Compile Include="ShopperDataFieldsTests.cs" />
     <Compile Include="ShopperDataProviderTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ShopperIdAndStatusTests.cs" />
+    <Compile Include="ShopperUpdateErrorMapperTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Atlantis.Framework.Providers.Shopper.Interface\Atlantis.Framework.Providers.Shopper.Interface.csproj">

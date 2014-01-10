@@ -213,15 +213,15 @@ namespace Atlantis.Framework.Providers.Shopper
             _getShopperResponseCache.Value.ClearShopperData(_shopperContext.Value.ShopperId);
             _getShopperFieldManager.Value.ClearShopper(_shopperContext.Value.ShopperId);
           }
-          else if (!ShopperUpdateErrorMapper.ShopperUpdateErrorMap.TryGetValue(response.Status.ErrorCode, out resultCode))
+          else
           {
-            resultCode = ShopperUpdateResultType.UnknownError;
+            resultCode = ShopperUpdateErrorMapper.GetUpdateResultType(response.Status.ErrorCode);
           }
         }
         catch (Exception ex)
         {
           string message = ex.Message + ex.StackTrace;
-          var exception = new AtlantisException("ShopperDataProvider.TryUpdateShopper", 0, message, string.Empty);
+          var exception = new AtlantisException("ShopperDataProvider.UpdateShoperInfo", 0, message, string.Empty);
           Engine.Engine.LogAtlantisException(exception);
         }
       }

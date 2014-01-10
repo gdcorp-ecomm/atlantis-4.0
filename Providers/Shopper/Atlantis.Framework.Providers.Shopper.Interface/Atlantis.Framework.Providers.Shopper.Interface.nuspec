@@ -2,18 +2,17 @@
 <package >
   <metadata>
     <id>Atlantis.Framework.Providers.Shopper.Interface</id>
-    <version>4.13.12.16</version>
-    <title>Atlantis Framework Providers Shopper Interface</title>
+    <version>4.14.1.4</version>
+    <title>Atlantis.Framework.Providers.Shopper.Interface</title>
     <authors>$author$</authors>
     <owners>$author$</owners>
     <projectUrl>https://confluence.int.godaddy.com/display/ATLANTIS</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes></releaseNotes>
+    <releaseNotes>
+      4.14.1.4: Nuspec file fix and removed unecessary Engine dependency
+    </releaseNotes>
     <copyright>$copyright$</copyright>
-    <tags>Atlantis Framework Providers Shopper Interface</tags>
-    <dependencies>
-      <dependency id="Atlantis.Framework.Engine" version="4.0.0.0" />
-    </dependencies>
+    <tags>Atlantis.Framework.Providers.Shopper.Interface</tags>
   </metadata>
 </package>

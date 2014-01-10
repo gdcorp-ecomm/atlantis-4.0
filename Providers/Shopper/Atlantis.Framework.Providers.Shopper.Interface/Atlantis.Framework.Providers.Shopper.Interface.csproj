@@ -61,7 +61,6 @@
     <Compile Include="ShopperUpdateResultType.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="atlantis.config" />
     <None Include="Atlantis.Framework.Providers.Shopper.Interface.nuget.bat" />
     <None Include="Atlantis.Framework.Providers.Shopper.Interface.nuspec">
       <SubType>Designer</SubType>

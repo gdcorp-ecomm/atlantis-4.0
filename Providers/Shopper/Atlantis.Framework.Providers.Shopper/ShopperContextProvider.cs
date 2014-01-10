@@ -8,30 +8,21 @@ namespace Atlantis.Framework.Providers.Shopper
 {
   public class ShopperContextProvider : ProviderBase, IShopperContext
   {
-    private const string SESSIONSECURESHOPPERKEY = "SecShopperId";
-    private const string COOKIE_MEMAUTH_MID = "MemAuthId";
-    private const string COOKIE_SHOPPER_MID = "ShopperId";
+    private const string _SESSIONSECURESHOPPERKEY = "SecShopperId";
+    private const string _COOKIE_MEMAUTH_MID = "MemAuthId";
+    private const string _COOKIE_SHOPPER_MID = "ShopperId";
 
-    private ISiteContext _siteContext;
-    private ISiteContext SiteContext
-    {
-      get
-      {
-        if (_siteContext == null)
-        {
-          _siteContext = Container.Resolve<ISiteContext>();
-        }
-
-        return _siteContext;
-      }
-    }
-
-    private string _shopperId;
-    private ShopperStatusType _status;
+    private readonly IManagerContext _managerContext;
+    private readonly ISiteContext _siteContext;
+    private readonly ShopperIdAndStatus _shopperIdAndStatus; 
 
     public ShopperContextProvider(IProviderContainer providerContainer)
       : base(providerContainer)
     {
+      _siteContext = Container.Resolve<ISiteContext>();
+      Container.TryResolve(out _managerContext);
+      _shopperIdAndStatus = new ShopperIdAndStatus(Container);
+
       DetermineShopperId();
     }
 
@@ -39,12 +30,12 @@ namespace Atlantis.Framework.Providers.Shopper
     {
       get
       {
-        string result = SafeSession.GetSessionItem(SESSIONSECURESHOPPERKEY) as string;
+        var result = SafeSession.GetSessionItem(_SESSIONSECURESHOPPERKEY) as string;
         return result ?? string.Empty;
       }
       set
       {
-        SafeSession.SetSessionItem(SESSIONSECURESHOPPERKEY, value);
+        SafeSession.SetSessionItem(_SESSIONSECURESHOPPERKEY, value);
       }
     }
 
@@ -53,15 +44,15 @@ namespace Atlantis.Framework.Providers.Shopper
       get
       {
         string result = string.Empty;
-        if (SiteContext.ServerLocation == ServerLocationType.Test)
+        if (_siteContext.ServerLocation == ServerLocationType.Test)
         {
           result = "test";
         }
-        else if (SiteContext.ServerLocation == ServerLocationType.Dev)
+        else if (_siteContext.ServerLocation == ServerLocationType.Dev)
         {
           result = "dev";
         }
-        else if (SiteContext.ServerLocation == ServerLocationType.Ote)
+        else if (_siteContext.ServerLocation == ServerLocationType.Ote)
         {
           result = "ote";
         }
@@ -71,12 +62,12 @@ namespace Atlantis.Framework.Providers.Shopper
 
     protected string ShopperMemAuthCookieName
     {
-      get { return CookieLocationPrefix + COOKIE_MEMAUTH_MID + SiteContext.PrivateLabelId; }
+      get { return CookieLocationPrefix + _COOKIE_MEMAUTH_MID + _siteContext.PrivateLabelId; }
     }
 
     protected string CrossDomainShopperCookieName
     {
-      get { return CookieLocationPrefix + COOKIE_SHOPPER_MID + SiteContext.PrivateLabelId; }
+      get { return CookieLocationPrefix + _COOKIE_SHOPPER_MID + _siteContext.PrivateLabelId; }
     }
 
     protected void DeleteShopperIdMemAuthCookie()
@@ -84,7 +75,7 @@ namespace Atlantis.Framework.Providers.Shopper
       HttpCookie memShopperCookie = HttpContext.Current.Request.Cookies[ShopperMemAuthCookieName];
       if (memShopperCookie != null)
       {
-        memShopperCookie = SiteContext.NewCrossDomainMemCookie(ShopperMemAuthCookieName);
+        memShopperCookie = _siteContext.NewCrossDomainMemCookie(ShopperMemAuthCookieName);
         memShopperCookie.Expires = DateTime.Now.AddDays(-1);
         memShopperCookie.Value = string.Empty;
         HttpContext.Current.Response.Cookies.Set(memShopperCookie);
@@ -96,7 +87,7 @@ namespace Atlantis.Framework.Providers.Shopper
       HttpCookie shopperCookie = HttpContext.Current.Request.Cookies[CrossDomainShopperCookieName];
       if (shopperCookie != null)
       {
-        shopperCookie = SiteContext.NewCrossDomainMemCookie(CrossDomainShopperCookieName);
+        shopperCookie = _siteContext.NewCrossDomainMemCookie(CrossDomainShopperCookieName);
         shopperCookie.Expires = DateTime.Now.AddDays(-1);
         shopperCookie.Value = string.Empty;
         HttpContext.Current.Response.Cookies.Set(shopperCookie);
@@ -135,7 +126,7 @@ namespace Atlantis.Framework.Providers.Shopper
 
       if (shopperCookie == null || shopperCookie.Value != shopperId)
       {
-        shopperCookie = SiteContext.NewCrossDomainCookie(CrossDomainShopperCookieName, DateTime.UtcNow.AddYears(10));
+        shopperCookie = _siteContext.NewCrossDomainCookie(CrossDomainShopperCookieName, DateTime.UtcNow.AddYears(10));
         string encryptedShopperId = string.Empty;
         if (!string.IsNullOrEmpty(shopperId))
         {
@@ -148,17 +139,14 @@ namespace Atlantis.Framework.Providers.Shopper
 
     private void SaveShopperAuthDataToMemCookie(string shopperId)
     {
-      string memAuthData = MemAuthCookieData.CreateEncrypted(shopperId, DateTime.Now, SiteContext.PrivateLabelId);
-      HttpCookie shopperCookie = SiteContext.NewCrossDomainMemCookie(ShopperMemAuthCookieName);
+      string memAuthData = MemAuthCookieData.CreateEncrypted(shopperId, DateTime.Now, _siteContext.PrivateLabelId);
+      HttpCookie shopperCookie = _siteContext.NewCrossDomainMemCookie(ShopperMemAuthCookieName);
       shopperCookie.Value = memAuthData;
       HttpContext.Current.Response.Cookies.Set(shopperCookie);
     }
 
     private void DetermineShopperId()
     {
-      _shopperId = string.Empty;
-      _status = ShopperStatusType.Public;
-
       try
       {
         if (CheckForManagerShopperId())
@@ -175,8 +163,8 @@ namespace Atlantis.Framework.Providers.Shopper
       }
       catch (Exception ex)
       {
-        string message = "Error determining ShopperId" + Environment.NewLine + ex.Message + Environment.NewLine + ex.StackTrace;
-        AtlantisException aex = new AtlantisException("ShopperContextProvider.DetermineShopperId", 0, message, string.Empty);
+        var message = "Error determining ShopperId" + Environment.NewLine + ex.Message + Environment.NewLine + ex.StackTrace;
+        var aex = new AtlantisException("ShopperContextProvider.DetermineShopperId", 0, message, string.Empty);
         Engine.Engine.LogAtlantisException(aex);
       }
     }
@@ -199,11 +187,13 @@ namespace Atlantis.Framework.Providers.Shopper
         }
 
         LoggedInShopperId = string.Empty;
+
+        _shopperIdAndStatus.SetShopperAndStatus(string.Empty, ShopperStatusType.Public, "IdpCookies");
         return;
       }
 
       // we have a shopper cookie
-      PublicCookieData crossDomainCookieData = new PublicCookieData(encryptedCrossDomainShopperId);
+      var crossDomainCookieData = new PublicCookieData(encryptedCrossDomainShopperId);
       if (string.IsNullOrEmpty(crossDomainCookieData.ShopperId))
       {
         if (!string.IsNullOrEmpty(encryptedMemAuthShopperId))
@@ -215,30 +205,34 @@ namespace Atlantis.Framework.Providers.Shopper
         return;
       }
 
-      _shopperId = crossDomainCookieData.ShopperId;
+      string foundShopperId = crossDomainCookieData.ShopperId;
       if (string.IsNullOrEmpty(encryptedMemAuthShopperId))
       {
         LoggedInShopperId = string.Empty;
+        _shopperIdAndStatus.SetShopperAndStatus(foundShopperId, ShopperStatusType.Public, "IdpCookies");
         return;
       }
 
-      MemAuthCookieData memAuthCookieData = new MemAuthCookieData(encryptedMemAuthShopperId);
-      if (memAuthCookieData.ShopperId != _shopperId)
+      var memAuthCookieData = new MemAuthCookieData(encryptedMemAuthShopperId);
+      if (memAuthCookieData.ShopperId != foundShopperId)
       {
         DeleteShopperIdMemAuthCookie();
         LoggedInShopperId = string.Empty;
+        _shopperIdAndStatus.SetShopperAndStatus(foundShopperId, ShopperStatusType.Public, "IdpCookies");
         return;
       }
 
-      _status = ShopperStatusType.PartiallyTrusted;
-      if (LoggedInShopperId != _shopperId)
+      var foundStatus = ShopperStatusType.PartiallyTrusted;
+      if (LoggedInShopperId != foundShopperId)
       {
         LoggedInShopperId = string.Empty;
       }
       else
       {
-        _status = ShopperStatusType.Authenticated;
+        foundStatus = ShopperStatusType.Authenticated;
       }
+
+      _shopperIdAndStatus.SetShopperAndStatus(foundShopperId, foundStatus, "IdpCookies");
     }
 
     private bool CheckForAuthTokenShopperId()
@@ -252,9 +246,7 @@ namespace Atlantis.Framework.Providers.Shopper
           SaveShopperIdToCookie(authToken.Payload.ShopperId);
           LoggedInShopperId = authToken.Payload.ShopperId;
 
-          _shopperId = authToken.Payload.ShopperId;
-          _status = ShopperStatusType.Authenticated;
-
+          _shopperIdAndStatus.SetShopperAndStatus(authToken.Payload.ShopperId, ShopperStatusType.Authenticated, "AuthToken");
           return true;
         }
       }
@@ -265,8 +257,7 @@ namespace Atlantis.Framework.Providers.Shopper
     {
       if (IsManager)
       {
-        _shopperId = SiteContext.Manager.ManagerShopperId;
-        _status = ShopperStatusType.Manager;
+        _shopperIdAndStatus.SetShopperAndStatus(_managerContext.ManagerShopperId, ShopperStatusType.Manager, "ManagerContext");
         return true;
       }
       return false;
@@ -286,7 +277,7 @@ namespace Atlantis.Framework.Providers.Shopper
         if (!string.IsNullOrEmpty(shopperId) && (shopperId == ShopperId) && (ShopperStatus == ShopperStatusType.PartiallyTrusted))
         {
           LoggedInShopperId = shopperId;
-          _status = ShopperStatusType.Authenticated;
+          _shopperIdAndStatus.SetShopperAndStatus(shopperId, ShopperStatusType.Authenticated, "SetLoggedInShopper");
           result = true;
         }
       }
@@ -320,8 +311,8 @@ namespace Atlantis.Framework.Providers.Shopper
         SaveShopperIdToCookie(shopperId);
         SaveShopperAuthDataToMemCookie(shopperId);
         LoggedInShopperId = shopperId;
-        _shopperId = shopperId;
-        _status = ShopperStatusType.Authenticated;
+
+        _shopperIdAndStatus.SetShopperAndStatus(shopperId, ShopperStatusType.Authenticated, "SetLoggedInShopperWithCookieOverride");
         result = true;
       }
 
@@ -341,9 +332,7 @@ namespace Atlantis.Framework.Providers.Shopper
           authenticationProvider.Deauthenticate();
         }
 
-        _shopperId = shopperId;
-        _status = ShopperStatusType.Public;
-
+        _shopperIdAndStatus.SetShopperAndStatus(shopperId, ShopperStatusType.Public, "SetNewShopper");
       }
     }
 
@@ -360,8 +349,7 @@ namespace Atlantis.Framework.Providers.Shopper
           authenticationProvider.Deauthenticate();
         }
 
-        _shopperId = string.Empty;
-        _status = ShopperStatusType.Public;
+        _shopperIdAndStatus.SetShopperAndStatus(string.Empty, ShopperStatusType.Public, "ClearShopper");
       }
     }
 
@@ -370,9 +358,9 @@ namespace Atlantis.Framework.Providers.Shopper
       get
       {
         bool result = false;
-        if (SiteContext.Manager != null)
+        if (_managerContext != null)
         {
-          result = SiteContext.Manager.IsManager;
+          result = _managerContext.IsManager;
         }
         return result;
       }
@@ -380,18 +368,18 @@ namespace Atlantis.Framework.Providers.Shopper
 
     public string ShopperId
     {
-      get { return _shopperId; }
+      get { return _shopperIdAndStatus.ShopperId; }
     }
 
     public ShopperStatusType ShopperStatus
     {
-      get { return _status; }
+      get { return _shopperIdAndStatus.Status; }
     }
 
     #region ShopperPriceType
 
-    private Lazy<ShopperSpecificSessionDataItem<int>> _shopperPriceTypeSessionData = 
-      new Lazy<ShopperSpecificSessionDataItem<int>>(() => { return new ShopperSpecificSessionDataItem<int>("ShopperContextProvider.ShopperPriceType");});
+    private readonly Lazy<ShopperSpecificSessionDataItem<int>> _shopperPriceTypeSessionData = 
+      new Lazy<ShopperSpecificSessionDataItem<int>>(() => new ShopperSpecificSessionDataItem<int>("ShopperContextProvider.ShopperPriceType"));
 
     public int ShopperPriceType
     {
@@ -416,7 +404,7 @@ namespace Atlantis.Framework.Providers.Shopper
 
       try
       {
-        var request = new ShopperPriceTypeRequestData(ShopperId, SiteContext.PrivateLabelId);
+        var request = new ShopperPriceTypeRequestData(ShopperId, _siteContext.PrivateLabelId);
         var response = (ShopperPriceTypeResponseData)Engine.Engine.ProcessRequest(request, ShopperProviderEngineRequests.ShopperPriceType);
         _shopperPriceTypeSessionData.Value.SetData(ShopperId, response.ActivePriceType);
         return response.ActivePriceType;
@@ -424,7 +412,7 @@ namespace Atlantis.Framework.Providers.Shopper
       catch(Exception ex)
       {
         string message = ex.Message + ex.StackTrace;
-        string data = "shopperid=" + ShopperId + ":" + SiteContext.PrivateLabelId.ToString();
+        string data = "shopperid=" + ShopperId + ":" + _siteContext.PrivateLabelId;
         var aex = new AtlantisException("ShopperContextProvider.GetShopperPriceType", 0, message, data);      
         Engine.Engine.LogAtlantisException(aex);
       }

@@ -47,6 +47,7 @@ namespace Atlantis.Framework.Providers.Shopper.Tests
       Assert.AreEqual(string.Empty, shopperContext.ShopperId);
       Assert.AreEqual(ShopperStatusType.Public, shopperContext.ShopperStatus);
       Assert.AreEqual(0, shopperContext.ShopperPriceType);
+      Assert.AreEqual(string.Empty, AtlantisExceptionWebState.ShopperId);
     }
 
     [TestMethod]
@@ -54,12 +55,28 @@ namespace Atlantis.Framework.Providers.Shopper.Tests
     {
       SetWebEmptyContext();
       var container = SetProviders(1);
+      container.RegisterProvider<IDebugContext, MockDebugContext>();
 
       var shopperContext = container.Resolve<IShopperContext>();
       shopperContext.SetNewShopper("832652");
       Assert.AreEqual("832652", shopperContext.ShopperId);
       Assert.AreEqual(ShopperStatusType.Public, shopperContext.ShopperStatus);
       Assert.AreNotEqual(0, HttpContext.Current.Response.Cookies.Count);
+      Assert.AreEqual("832652", AtlantisExceptionWebState.ShopperId);
+
+      var debug = container.Resolve<IDebugContext>();
+      var foundShopperId = false;
+
+      foreach (var keyValuePair in debug.GetDebugTrackingData())
+      {
+        if ("832652".Equals(keyValuePair.Value))
+        {
+          foundShopperId = true;
+          break;
+        }
+      }
+
+      Assert.IsTrue(foundShopperId);
     }
 
     [TestMethod]

@@ -65,12 +65,13 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Atlantis.Framework.DotTypeForms.Interface.4.14.1.7\lib\net40\Atlantis.Framework.DotTypeForms.Interface.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.DotTypeValidation.Impl">
-      <HintPath>..\packages\Atlantis.Framework.DotTypeValidation.Impl.4.13.11.12\lib\net40\Atlantis.Framework.DotTypeValidation.Impl.dll</HintPath>
+    <Reference Include="Atlantis.Framework.DotTypeValidation.Impl, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.DotTypeValidation.Impl.4.14.1.8\lib\net40\Atlantis.Framework.DotTypeValidation.Impl.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.DotTypeValidation.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.DotTypeValidation.Interface.4.13.11.18\lib\net40\Atlantis.Framework.DotTypeValidation.Interface.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.DotTypeValidation.Interface.4.14.1.8\lib\net40\Atlantis.Framework.DotTypeValidation.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Engine, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -120,6 +121,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />

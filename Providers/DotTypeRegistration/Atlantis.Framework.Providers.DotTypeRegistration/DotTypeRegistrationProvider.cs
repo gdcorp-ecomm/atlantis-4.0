@@ -268,7 +268,7 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration
       return new List<IFormField> {new FormField {Value = value, Type = FormFieldTypes.Hidden, Name = name}};
     }
 
-    public bool ValidateData(string clientApplication, string tld, string phase, Dictionary<string, string> fields,
+    public bool ValidateData(string clientApplication, string tld, string phase, Dictionary<string, IDotTypeValidationFieldValueData> fields,
       out DotTypeValidationResponseData validationResponseData)
     {
       var success = false;

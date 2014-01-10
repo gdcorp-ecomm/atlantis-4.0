@@ -24,7 +24,7 @@ namespace Atlantis.Framework.Web.DotTypeRegistrationValidationHandler.TestWeb
 
     private void LoadEligibilityFormSchemas()
     {
-      string[] domains = {"domain1.n.borg", "claim1.example"};
+      string[] domains = {"domain1.j.borg"};
 
       var lookup = DotTypeFormSchemaLookup.Create("dpp", "j.borg", "MOBILE", "GA");
       DotTypeRegistrationProvider.GetDotTypeFormSchemas(lookup, domains, out DotTypeFormFieldsByDomain);

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Web;
-using System.Web.Configuration;
 using Atlantis.Framework.DotTypeClaims.Interface;
 using Atlantis.Framework.DotTypeForms.Interface;
 using Atlantis.Framework.Interface;
@@ -45,7 +44,7 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration.Handlers
       catch (Exception ex)
       {
         var message = ex.Message + Environment.NewLine + ex.StackTrace;
-        const string source = "RenderField - MobileRichClaimDataSourceHandler";
+        const string source = "RenderField - ClaimFieldTypeHandler";
         var aex = new AtlantisException(source, "0", message, string.Empty, null, null);
         Engine.Engine.LogAtlantisException(aex);
 
@@ -72,11 +71,17 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration.Handlers
           };
           result.Add(formField);
 
-          HttpContext.Current.Session[domain] = claimResponse.NoticeXml;
+          if (HttpContext.Current != null)
+          {
+            HttpContext.Current.Session[domain] = claimResponse.NoticeXml;
+          }
           formField = new FormField { Name = string.Format("claimxml-{0}-{1}", field.FieldName, domain), Type = FormFieldTypes.Hidden };
           result.Add(formField);
 
-          formField = new FormField {Name = "acceptedDate", Value = "", Type = FormFieldTypes.Hidden};
+          formField = new FormField { Name = "acceptedDate", Value = DateTime.Now.ToUniversalTime().ToString("o"), Type = FormFieldTypes.Hidden };
+          result.Add(formField);
+
+          formField = new FormField { Name = "acceptedDate-novalidate", Type = FormFieldTypes.Hidden };
           result.Add(formField);
         }
       }

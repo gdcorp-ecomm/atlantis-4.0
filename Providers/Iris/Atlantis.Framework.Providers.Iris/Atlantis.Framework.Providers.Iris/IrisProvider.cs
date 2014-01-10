@@ -4,6 +4,7 @@ using Atlantis.Framework.Interface;
 using Atlantis.Framework.Iris.Interface;
 using Atlantis.Framework.Iris.Interface.Objects;
 using Atlantis.Framework.Providers.Iris.Interface;
+using System.Threading;
 
 namespace Atlantis.Framework.Providers.Iris
 {
@@ -57,7 +58,7 @@ namespace Atlantis.Framework.Providers.Iris
             incidentId = responseData.IncidentId;
             if (incidentId != 0)
             {
-              createdIncident = FetchNewIncident(shopperId, incidentId, requestDateTime);
+              createdIncident = FetchNewIncidentWithRetry(shopperId, incidentId, requestDateTime);
             }
           }
         }
@@ -70,19 +71,30 @@ namespace Atlantis.Framework.Providers.Iris
         return createdIncident;
       }
 
+      private Incident FetchNewIncidentWithRetry(string shopperId, long incidentId, DateTime since)
+      {
+        Incident incident =  FetchNewIncident(shopperId, incidentId, since);
+        if (incident == null)
+        {
+          Thread.Sleep(500);
+          incident = FetchNewIncident(shopperId, incidentId, since);
+        }
+        return incident;
+      }
+
       private Incident FetchNewIncident(string shopperId, long incidentId, DateTime since)
       {
         Incident newIncident = null;
         // I don't see a method for grabbing a specific incident by ID
         // So, for now, we'll just grab for a very recent timeframe, and step through the return list and match ID - mjw 1/9/14
-        var incidents = GetIncidents(shopperId, since, DateTime.Now, true); 
+        var incidents = GetIncidents(shopperId, since, DateTime.Now, true);
         foreach (Incident incident in incidents)
         {
-            if (incident.IncidentId.Equals(incidentId))
-            {
-              newIncident = incident;
-              break;
-            }
+          if (incident.IncidentId.Equals(incidentId))
+          {
+            newIncident = incident;
+            break;
+          }
         }
         return newIncident;
       }

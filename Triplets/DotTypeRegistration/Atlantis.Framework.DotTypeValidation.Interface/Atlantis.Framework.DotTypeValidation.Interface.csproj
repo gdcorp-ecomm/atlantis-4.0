@@ -57,6 +57,7 @@
   <ItemGroup>
     <Compile Include="DotTypeValidationResponseData.cs" />
     <Compile Include="DotTypeValidationRequestData.cs" />
+    <Compile Include="IDotTypeValidationFieldValueData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

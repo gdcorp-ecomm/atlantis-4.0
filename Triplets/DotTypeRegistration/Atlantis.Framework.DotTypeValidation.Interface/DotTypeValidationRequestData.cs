@@ -1,6 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Security.Cryptography;
-using System.Text;
 using System.Xml.Linq;
 using Atlantis.Framework.Interface;
 
@@ -14,10 +12,10 @@ namespace Atlantis.Framework.DotTypeValidation.Interface
     public string Phase { get; set; }
     public string Category { get; set; }
 
-    public Dictionary<string, string> Fields = new Dictionary<string, string>();
+    public Dictionary<string, IDotTypeValidationFieldValueData> Fields = new Dictionary<string, IDotTypeValidationFieldValueData>();
 
     public DotTypeValidationRequestData(string clientApplication, string serverName, int tldId, string phase, string category,
-                                        Dictionary<string, string> fields)
+                                        Dictionary<string, IDotTypeValidationFieldValueData> fields)
     {
       ClientApplication = clientApplication;
       ServerName = serverName;
@@ -40,10 +38,18 @@ namespace Atlantis.Framework.DotTypeValidation.Interface
       {
         foreach (var field in Fields)
         {
-          var fieldElement = new XElement("key");
-          fieldElement.Add(new XAttribute("name", field.Key));
-          fieldElement.Add(new XAttribute("value", field.Value));
-          rootElement.Add(fieldElement);
+          if (!string.IsNullOrEmpty(field.Key) && field.Value != null)
+          {
+            var fieldElement = new XElement("key");
+            fieldElement.Add(new XAttribute("name", field.Key));
+            fieldElement.Add(new XAttribute("value", field.Value.Value));
+
+            if (field.Value.NoValidate)
+            {
+              fieldElement.Add(new XAttribute("novalidate", field.Value.NoValidate));
+            }
+            rootElement.Add(fieldElement);
+          }
         }
       }
 

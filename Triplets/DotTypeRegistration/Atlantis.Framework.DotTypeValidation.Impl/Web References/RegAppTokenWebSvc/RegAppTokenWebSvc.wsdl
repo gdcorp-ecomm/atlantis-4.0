@@ -19,6 +19,20 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="VerifyPIIDataExt">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="requestXml" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyPIIDataExtResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VerifyPIIDataExtResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="RegisterPIIData">
         <s:complexType>
           <s:sequence>
@@ -65,6 +79,51 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="UpdatePIIDataExt">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="requestXml" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="lDomainId" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdatePIIDataExtResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UpdatePIIDataExtResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="MergePIIDataById">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="inXml" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="lDomainId" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="MergePIIDataByIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="MergePIIDataByIdResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="MergePIIDataByHash">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="inXml" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="strHashToken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="MergePIIDataByHashResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="MergePIIDataByHashResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="GetVersion">
         <s:complexType />
       </s:element>
@@ -93,6 +152,12 @@
   <wsdl:message name="VerifyPIIDataSoapOut">
     <wsdl:part name="parameters" element="tns:VerifyPIIDataResponse" />
   </wsdl:message>
+  <wsdl:message name="VerifyPIIDataExtSoapIn">
+    <wsdl:part name="parameters" element="tns:VerifyPIIDataExt" />
+  </wsdl:message>
+  <wsdl:message name="VerifyPIIDataExtSoapOut">
+    <wsdl:part name="parameters" element="tns:VerifyPIIDataExtResponse" />
+  </wsdl:message>
   <wsdl:message name="RegisterPIIDataSoapIn">
     <wsdl:part name="parameters" element="tns:RegisterPIIData" />
   </wsdl:message>
@@ -111,6 +176,24 @@
   <wsdl:message name="UpdatePIIDataSoapOut">
     <wsdl:part name="parameters" element="tns:UpdatePIIDataResponse" />
   </wsdl:message>
+  <wsdl:message name="UpdatePIIDataExtSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdatePIIDataExt" />
+  </wsdl:message>
+  <wsdl:message name="UpdatePIIDataExtSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdatePIIDataExtResponse" />
+  </wsdl:message>
+  <wsdl:message name="MergePIIDataByIdSoapIn">
+    <wsdl:part name="parameters" element="tns:MergePIIDataById" />
+  </wsdl:message>
+  <wsdl:message name="MergePIIDataByIdSoapOut">
+    <wsdl:part name="parameters" element="tns:MergePIIDataByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="MergePIIDataByHashSoapIn">
+    <wsdl:part name="parameters" element="tns:MergePIIDataByHash" />
+  </wsdl:message>
+  <wsdl:message name="MergePIIDataByHashSoapOut">
+    <wsdl:part name="parameters" element="tns:MergePIIDataByHashResponse" />
+  </wsdl:message>
   <wsdl:message name="GetVersionSoapIn">
     <wsdl:part name="parameters" element="tns:GetVersion" />
   </wsdl:message>
@@ -128,6 +211,10 @@
       <wsdl:input message="tns:VerifyPIIDataSoapIn" />
       <wsdl:output message="tns:VerifyPIIDataSoapOut" />
     </wsdl:operation>
+    <wsdl:operation name="VerifyPIIDataExt">
+      <wsdl:input message="tns:VerifyPIIDataExtSoapIn" />
+      <wsdl:output message="tns:VerifyPIIDataExtSoapOut" />
+    </wsdl:operation>
     <wsdl:operation name="RegisterPIIData">
       <wsdl:input message="tns:RegisterPIIDataSoapIn" />
       <wsdl:output message="tns:RegisterPIIDataSoapOut" />
@@ -139,6 +226,18 @@
     <wsdl:operation name="UpdatePIIData">
       <wsdl:input message="tns:UpdatePIIDataSoapIn" />
       <wsdl:output message="tns:UpdatePIIDataSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePIIDataExt">
+      <wsdl:input message="tns:UpdatePIIDataExtSoapIn" />
+      <wsdl:output message="tns:UpdatePIIDataExtSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="MergePIIDataById">
+      <wsdl:input message="tns:MergePIIDataByIdSoapIn" />
+      <wsdl:output message="tns:MergePIIDataByIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="MergePIIDataByHash">
+      <wsdl:input message="tns:MergePIIDataByHashSoapIn" />
+      <wsdl:output message="tns:MergePIIDataByHashSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="GetVersion">
       <wsdl:input message="tns:GetVersionSoapIn" />
@@ -153,6 +252,15 @@
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="VerifyPIIData">
       <soap:operation soapAction="http://m1pwdtvapp-v01.prod.mesa1.gdg/RegAppTokenWebSvc/VerifyPIIData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyPIIDataExt">
+      <soap:operation soapAction="http://m1pwdtvapp-v01.prod.mesa1.gdg/RegAppTokenWebSvc/VerifyPIIDataExt" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -180,6 +288,33 @@
     </wsdl:operation>
     <wsdl:operation name="UpdatePIIData">
       <soap:operation soapAction="http://m1pwdtvapp-v01.prod.mesa1.gdg/RegAppTokenWebSvc/UpdatePIIData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePIIDataExt">
+      <soap:operation soapAction="http://m1pwdtvapp-v01.prod.mesa1.gdg/RegAppTokenWebSvc/UpdatePIIDataExt" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MergePIIDataById">
+      <soap:operation soapAction="http://m1pwdtvapp-v01.prod.mesa1.gdg/RegAppTokenWebSvc/MergePIIDataById" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MergePIIDataByHash">
+      <soap:operation soapAction="http://m1pwdtvapp-v01.prod.mesa1.gdg/RegAppTokenWebSvc/MergePIIDataByHash" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -217,6 +352,15 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="VerifyPIIDataExt">
+      <soap12:operation soapAction="http://m1pwdtvapp-v01.prod.mesa1.gdg/RegAppTokenWebSvc/VerifyPIIDataExt" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="RegisterPIIData">
       <soap12:operation soapAction="http://m1pwdtvapp-v01.prod.mesa1.gdg/RegAppTokenWebSvc/RegisterPIIData" style="document" />
       <wsdl:input>
@@ -237,6 +381,33 @@
     </wsdl:operation>
     <wsdl:operation name="UpdatePIIData">
       <soap12:operation soapAction="http://m1pwdtvapp-v01.prod.mesa1.gdg/RegAppTokenWebSvc/UpdatePIIData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePIIDataExt">
+      <soap12:operation soapAction="http://m1pwdtvapp-v01.prod.mesa1.gdg/RegAppTokenWebSvc/UpdatePIIDataExt" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MergePIIDataById">
+      <soap12:operation soapAction="http://m1pwdtvapp-v01.prod.mesa1.gdg/RegAppTokenWebSvc/MergePIIDataById" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MergePIIDataByHash">
+      <soap12:operation soapAction="http://m1pwdtvapp-v01.prod.mesa1.gdg/RegAppTokenWebSvc/MergePIIDataByHash" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

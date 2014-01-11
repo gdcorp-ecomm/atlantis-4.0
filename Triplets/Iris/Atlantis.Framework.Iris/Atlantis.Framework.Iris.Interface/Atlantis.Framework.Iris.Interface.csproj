@@ -35,7 +35,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Atlantis.Framework.Interface">
-      <HintPath>..\..\..\..\Providers\Iris\Atlantis.Framework.Providers.Iris\packages\Atlantis.Framework.Interface.4.13.12.22\lib\net40\Atlantis.Framework.Interface.dll</HintPath>
+      <HintPath>..\..\..\..\Providers\Iris\Atlantis.Framework.Providers.Iris\packages\Atlantis.Framework.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Providers.Containers">
       <HintPath>..\..\..\..\Providers\Iris\Atlantis.Framework.Providers.Iris\packages\Atlantis.Framework.Providers.Containers.4.14.1.6\lib\net40\Atlantis.Framework.Providers.Containers.dll</HintPath>

@@ -15,6 +15,9 @@ namespace Atlantis.Framework.Providers.Iris.Tests
   [DeploymentItem("Atlantis.Framework.Provider.Iris.Interface.dll")]
   public class LibraryTests
   {
+
+    private const string SHOPPER_ID = "914983"; //902185
+
     private IProviderContainer SetBasicContextAndProviders()
     {
       var request = new MockHttpRequest("http://www.godaddy.com/");
@@ -42,7 +45,7 @@ namespace Atlantis.Framework.Providers.Iris.Tests
       const string ipAddress = "127.0.0.1";
       const string createdBy = "Mobile Application";
       const int privateLabelId = 1;
-      const string shopperId = "902185";
+      const string shopperId = SHOPPER_ID;
 
       var responseId = irisProvider.QuickCreateIrisIncident(subscriberId, subject, note, customerEmail, ipAddress, createdBy, privateLabelId, shopperId);
       Assert.IsTrue(responseId != -1);
@@ -62,7 +65,7 @@ namespace Atlantis.Framework.Providers.Iris.Tests
       const string ipAddress = "127.0.0.1";
       const string createdBy = "Mobile Application";
       const int privateLabelId = 1;
-      const string shopperId = "902185";
+      const string shopperId = SHOPPER_ID;
       const int groupId = 1;
       const int serviceId = 0;
 
@@ -106,7 +109,7 @@ namespace Atlantis.Framework.Providers.Iris.Tests
       var theContainer = SetBasicContextAndProviders();
       var irisProvider = theContainer.Resolve<IIrisProvider>();
 
-      const string shopperId = "902185";
+      const string shopperId = SHOPPER_ID;
       var startDate = new DateTime(2013, 10, 1);
       var endDate = DateTime.Now;
 
@@ -123,7 +126,7 @@ namespace Atlantis.Framework.Providers.Iris.Tests
       var theContainer = SetBasicContextAndProviders();
       var irisProvider = theContainer.Resolve<IIrisProvider>();
 
-      const string shopperId = "902185";
+      const string shopperId = SHOPPER_ID;
       var startDate = new DateTime(2013, 10, 1);
       var endDate = DateTime.Now;
 

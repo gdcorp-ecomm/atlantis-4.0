@@ -83,8 +83,8 @@ namespace Atlantis.Framework.Web.DebugControl
             .Replace("&quot;", "")
             .Replace("\"", "");
 
-        writer.Write("<style>.debugBtn{font-family: sans-serif; background: #70ac00; border-bottom: 3px solid #5a8c00; border: 0; color: #fff; display: " 
-        + "inline-block; font-size: 14px; line-height: 14px; padding: 13px 35px 11px; text-align: center; text-decoration: none;} " 
+        writer.Write("<style>.debugBtn{font-family: sans-serif; background: #70ac00; border-bottom: 3px solid #5a8c00; border: 0; color: #fff; display: "
+        + "inline-block; font-size: 16px; line-height: 16px; padding: 13px 35px 11px; text-align: center; text-decoration: none; font-weight:bold;} " 
         + ".debugBtn:hover{background: #97c534; border-color: #78aa17;} </style>");
         
         writer.Write("<script language=\"javascript\" type=\"text/javascript\">" +

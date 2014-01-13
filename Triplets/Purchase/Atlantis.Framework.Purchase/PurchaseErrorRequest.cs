@@ -63,7 +63,7 @@ namespace Atlantis.Framework.Purchase.Impl
       {
         requestURL.Append(currentRequest.LanguageCode);
       }
-      requestURL.Append("_");
+      requestURL.Append("-");
       if (string.IsNullOrEmpty(currentRequest.RegionCode))
       {
         requestURL.Append("us");

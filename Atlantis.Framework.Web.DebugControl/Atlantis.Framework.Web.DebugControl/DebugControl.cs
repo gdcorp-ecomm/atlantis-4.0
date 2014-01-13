@@ -83,6 +83,10 @@ namespace Atlantis.Framework.Web.DebugControl
             .Replace("&quot;", "")
             .Replace("\"", "");
 
+        writer.Write("<style>.debugBtn{font-family: sans-serif; background: #70ac00; border-bottom: 3px solid #5a8c00; border: 0; color: #fff; display: " 
+        + "inline-block; font-size: 14px; line-height: 14px; padding: 13px 35px 11px; text-align: center; text-decoration: none;} " 
+        + ".debugBtn:hover{background: #97c534; border-color: #78aa17;} </style>");
+        
         writer.Write("<script language=\"javascript\" type=\"text/javascript\">" +
                      "function GetSessionDebugInfo() {" +
                      " return '" + SessionInfoValue + "';" +
@@ -120,7 +124,7 @@ namespace Atlantis.Framework.Web.DebugControl
 
 
         writer.Write(
-          "<div id=\"submit\" class=\"g-btn-lg g-btn-prg flt-btn flt-btn-grn\" style=\"border: none; cursor: pointer\" onclick=\"PostForm(GetBrowserDebugInfo() , GetSessionDebugInfo())\">Report Feedback</div>");
+          "<div id=\"submit\" class=\"debugBtn\" style=\"border: none; cursor: pointer\" onclick=\"PostForm(GetBrowserDebugInfo() , GetSessionDebugInfo())\">Report Feedback</div>");
 
         writer.Write("</span>");
       }

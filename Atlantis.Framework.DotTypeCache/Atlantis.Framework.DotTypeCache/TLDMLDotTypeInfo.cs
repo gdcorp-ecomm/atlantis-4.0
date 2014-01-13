@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Web;
 using Atlantis.Framework.DCCDomainsDataCache.Interface;
 using Atlantis.Framework.DomainContactFields.Interface;
 using Atlantis.Framework.DotTypeCache.Interface;
@@ -703,10 +704,27 @@ namespace Atlantis.Framework.DotTypeCache
         string launchPhaseCode = LaunchPhaseMappings.GetCode(launchPhase);
 
         bool needsClaimCheck = false;
-        if (_tldml.Phase != null)
+
+        if (HttpContext.Current != null)
+        {
+          var tuiClaimsStarted = HttpContext.Current.Request.Params["qa--claimsstarted"];
+          if (!string.IsNullOrEmpty(tuiClaimsStarted) && tuiClaimsStarted == "1")
+          {
+            var overRideTlds = TLDsHelper.OverrideTlds();
+            if (overRideTlds.Contains(DotType))
+            {
+              needsClaimCheck = true;
+            }
+          }
+        }
+
+        if (!needsClaimCheck && _tldml.Phase != null)
         {
           var phase = _tldml.Phase.GetLaunchPhase(launchPhaseCode);
-          needsClaimCheck = phase.NeedsClaimCheck;
+          if (phase != null)
+          {
+            needsClaimCheck = phase.NeedsClaimCheck;
+          }
         }
 
         var formGroups = _tldml.ApplicationControl.TuiFormGroups;
@@ -912,12 +930,14 @@ namespace Atlantis.Framework.DotTypeCache
     {
       string phaseCode = LaunchPhaseMappings.GetCode(phase);
       ITLDLaunchPhase lookupPhase = _tldml.Phase.GetLaunchPhase(phaseCode);
-
-      if ((productTypeId != TLDProductTypeIds.TLD_PRODUCT_TYPE_ID_REGISTRATION &&
-           productTypeId != TLDProductTypeIds.TLD_PRODUCT_TYPE_ID_BULK_REGISTRATION) ||
-          (phase == LaunchPhases.GeneralAvailability && lookupPhase.LivePeriod.IsActive))
+      if (lookupPhase != null)
       {
-        phaseCode = ECOMM_GA_LIVE_PHASE_CODE;
+        if ((productTypeId != TLDProductTypeIds.TLD_PRODUCT_TYPE_ID_REGISTRATION &&
+             productTypeId != TLDProductTypeIds.TLD_PRODUCT_TYPE_ID_BULK_REGISTRATION) ||
+            (phase == LaunchPhases.GeneralAvailability && lookupPhase.LivePeriod.IsActive))
+        {
+          phaseCode = ECOMM_GA_LIVE_PHASE_CODE;
+        }
       }
       return phaseCode;
     }

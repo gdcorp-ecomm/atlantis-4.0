@@ -1622,6 +1622,17 @@ namespace Atlantis.Framework.DotTypeCache.Tests
     }
 
     [TestMethod]
+    public void TldGetTuiFormTypesLandrushSystems()
+    {
+      var request = new MockHttpRequest("http://siteadmin.debug.intranet.gdg/default.aspx?QA--CLAIMSSTARTED=1");
+      MockHttpContext.SetFromWorkerRequest(request);
+
+      var dotTypeInfo = DotTypeProvider.GetDotTypeInfo("systems");
+      var tuiFormTypes = dotTypeInfo.GetTuiFormTypes(LaunchPhases.GeneralAvailability);
+      Assert.IsTrue(tuiFormTypes.Any());
+    }
+
+    [TestMethod]
     public void TestTrusteeRequiredTestSG()
     {
       var dotTypeInfo = DotTypeProvider.GetDotTypeInfo("SG");
@@ -1652,5 +1663,13 @@ namespace Atlantis.Framework.DotTypeCache.Tests
 
       Assert.IsTrue(dotTypeInfo.RequiresTuiForm(LaunchPhases.GeneralAvailability));
     }
+
+    [TestMethod]
+    public void GetDotTypeProductIdForInvalid()
+    {
+      int productId = DotTypeCache.GetRegistrationProductId("SUNRISE-0930", 1, 1);
+      Assert.IsTrue(productId == 0);
+    }
+
   }
 }

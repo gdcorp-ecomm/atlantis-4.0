@@ -16,7 +16,6 @@ namespace Atlantis.Framework.Web.DebugControl
     private const string ENABLE_QA_DEBUGCONTROL = "QA_DEBUGCONTROL_ENABLED";
 
     private HtmlGenericControl _containerDiv;
-
     protected string BrowserInfoValue = string.Empty;
     protected string SessionInfoValue = string.Empty;
 

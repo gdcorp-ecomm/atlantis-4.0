@@ -3,7 +3,7 @@
   <metadata>
     <id>Atlantis.Framework.Shopper.Interface</id>
     <version>4.13.11.22</version>
-    <title>Atlantis Framework Shopper.Interface</title>
+    <title>Atlantis.Framework.Shopper.Interface</title>
     <authors>$author$</authors>
     <owners>$author$</owners>
     <projectUrl>https://confluence.int.godaddy.com/display/ATLANTIS</projectUrl>
@@ -11,9 +11,7 @@
     <description>$description$</description>
     <releaseNotes></releaseNotes>
     <copyright>$copyright$</copyright>
-    <tags>Atlantis Framework Shopper.Interface</tags>
-    <dependencies>
-      <dependency id="Atlantis.Framework.Engine" version="4.0.0.0" />
-    </dependencies>
+    <tags>Atlantis.Framework.Shopper.Interface</tags>
+    <dependencies/>
   </metadata>
 </package>

@@ -1,8 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{708A91A1-A425-4215-BBD6-9D696569A34B}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Shopper.Interface", "Atlantis.Framework.Shopper.Interface\Atlantis.Framework.Shopper.Interface.csproj", "{5BE1C108-7CC4-401E-B610-EB3A5331FC5A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Shopper.Impl", "Atlantis.Framework.Shopper.Impl\Atlantis.Framework.Shopper.Impl.csproj", "{B63887E6-BCAE-48A8-BBC1-1FCDAE96EAA3}"

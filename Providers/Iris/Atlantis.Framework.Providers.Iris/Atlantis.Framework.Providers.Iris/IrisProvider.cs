@@ -109,7 +109,7 @@ namespace Atlantis.Framework.Providers.Iris
       public Note AddIncidentNote(long incidentId, string note, string loginId)
       {
         Note newNote = null;
-        long noteId = 0;
+        int noteId = 0;
         try
         {
           var requestData = new AddIncidentNoteRequestData(incidentId, note, loginId);
@@ -135,7 +135,7 @@ namespace Atlantis.Framework.Providers.Iris
         return newNote;
       }
 
-      private Note fetchNewNoteWithRetry( long incidentId, long noteId, int numRetries, int intervalBetweenRetriesMillis)
+      private Note fetchNewNoteWithRetry( long incidentId, int noteId, int numRetries, int intervalBetweenRetriesMillis)
       {
         Note note = fetchNewNote(incidentId, noteId);
         if (note == null)
@@ -151,7 +151,7 @@ namespace Atlantis.Framework.Providers.Iris
         return note;
       }
 
-      private Note fetchNewNote( long incidentId, long noteId)
+      private Note fetchNewNote( long incidentId, int noteId)
       {
         Note newNote = null;
         List<Note> notes = GetIncidentNotes(incidentId, noteId - 1);
@@ -204,7 +204,7 @@ namespace Atlantis.Framework.Providers.Iris
         return retValue;
       }
 
-      public List<Note> GetIncidentNotes(long incidentId, long noteId)
+      public List<Note> GetIncidentNotes(long incidentId, int noteId)
       {
         var retValue = new List<Note>();
 

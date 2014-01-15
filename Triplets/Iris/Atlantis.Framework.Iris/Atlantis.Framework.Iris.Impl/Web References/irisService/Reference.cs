@@ -53,6 +53,8 @@ namespace Atlantis.Framework.Iris.Impl.irisService {
         
         private System.Threading.SendOrPostCallback AddIncidentNoteOperationCompleted;
         
+        private System.Threading.SendOrPostCallback AddIncidentNoteByNoteTypeIdOperationCompleted;
+        
         private System.Threading.SendOrPostCallback ResetStaticDataOperationCompleted;
         
         private System.Threading.SendOrPostCallback QuickResolveIncidentOperationCompleted;
@@ -140,6 +142,9 @@ namespace Atlantis.Framework.Iris.Impl.irisService {
         
         /// <remarks/>
         public event AddIncidentNoteCompletedEventHandler AddIncidentNoteCompleted;
+        
+        /// <remarks/>
+        public event AddIncidentNoteByNoteTypeIdCompletedEventHandler AddIncidentNoteByNoteTypeIdCompleted;
         
         /// <remarks/>
         public event ResetStaticDataCompletedEventHandler ResetStaticDataCompleted;
@@ -525,7 +530,7 @@ namespace Atlantis.Framework.Iris.Impl.irisService {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/GetIncidentCustomerNotes", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public string GetIncidentCustomerNotes(long incidentId, long noteId) {
+        public string GetIncidentCustomerNotes(long incidentId, int noteId) {
             object[] results = this.Invoke("GetIncidentCustomerNotes", new object[] {
                         incidentId,
                         noteId});
@@ -611,6 +616,41 @@ namespace Atlantis.Framework.Iris.Impl.irisService {
             if ((this.AddIncidentNoteCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.AddIncidentNoteCompleted(this, new AddIncidentNoteCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/AddIncidentNoteByNoteTypeId", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public int AddIncidentNoteByNoteTypeId(long incidentId, string note, string NTLogin, int noteTypeId) {
+            object[] results = this.Invoke("AddIncidentNoteByNoteTypeId", new object[] {
+                        incidentId,
+                        note,
+                        NTLogin,
+                        noteTypeId});
+            return ((int)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void AddIncidentNoteByNoteTypeIdAsync(long incidentId, string note, string NTLogin, int noteTypeId) {
+            this.AddIncidentNoteByNoteTypeIdAsync(incidentId, note, NTLogin, noteTypeId, null);
+        }
+        
+        /// <remarks/>
+        public void AddIncidentNoteByNoteTypeIdAsync(long incidentId, string note, string NTLogin, int noteTypeId, object userState) {
+            if ((this.AddIncidentNoteByNoteTypeIdOperationCompleted == null)) {
+                this.AddIncidentNoteByNoteTypeIdOperationCompleted = new System.Threading.SendOrPostCallback(this.OnAddIncidentNoteByNoteTypeIdOperationCompleted);
+            }
+            this.InvokeAsync("AddIncidentNoteByNoteTypeId", new object[] {
+                        incidentId,
+                        note,
+                        NTLogin,
+                        noteTypeId}, this.AddIncidentNoteByNoteTypeIdOperationCompleted, userState);
+        }
+        
+        private void OnAddIncidentNoteByNoteTypeIdOperationCompleted(object arg) {
+            if ((this.AddIncidentNoteByNoteTypeIdCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.AddIncidentNoteByNoteTypeIdCompleted(this, new AddIncidentNoteByNoteTypeIdCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -1154,6 +1194,32 @@ namespace Atlantis.Framework.Iris.Impl.irisService {
         private object[] results;
         
         internal AddIncidentNoteCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public int Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((int)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.18408")]
+    public delegate void AddIncidentNoteByNoteTypeIdCompletedEventHandler(object sender, AddIncidentNoteByNoteTypeIdCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.18408")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class AddIncidentNoteByNoteTypeIdCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal AddIncidentNoteByNoteTypeIdCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }

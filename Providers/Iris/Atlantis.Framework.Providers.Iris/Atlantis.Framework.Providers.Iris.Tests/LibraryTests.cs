@@ -81,7 +81,7 @@ namespace Atlantis.Framework.Providers.Iris.Tests
       var irisProvider = theContainer.Resolve<IIrisProvider>();
 
       string note = "More Notes from the unit tests for Adding Comments to existing tickets.";
-      long incidentId = 1329225;
+      long incidentId = 1332145;
       
       var newNote = irisProvider.AddIncidentNote(incidentId, note, "Customer");
       Assert.IsTrue(newNote != null);
@@ -143,7 +143,7 @@ namespace Atlantis.Framework.Providers.Iris.Tests
       var theContainer = SetBasicContextAndProviders();
       var irisProvider = theContainer.Resolve<IIrisProvider>();
 
-      long incidentId = 1329192;
+      long incidentId = 1332145;
       int noteId = 1;
 
       var responseData = irisProvider.GetIncidentNotes(incidentId, noteId);

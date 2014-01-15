@@ -9,12 +9,12 @@ namespace Atlantis.Framework.Iris.Interface
   {
     private AtlantisException atlEx = null;
 
-    public static AddIncidentNoteResponseData FromData(long data)
+    public static AddIncidentNoteResponseData FromData(int data)
     {
       return new AddIncidentNoteResponseData(data);
     }
 
-    private AddIncidentNoteResponseData(long responseCode)
+    private AddIncidentNoteResponseData(int responseCode)
     {
       IncidentNoteId = responseCode;
 
@@ -31,7 +31,7 @@ namespace Atlantis.Framework.Iris.Interface
     public bool IsSuccess { get; set; }
 
     [DataMember]
-    public long IncidentNoteId { get; set; }
+    public int IncidentNoteId { get; set; }
 
     public string ToXML()
     {

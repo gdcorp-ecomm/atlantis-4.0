@@ -18,9 +18,8 @@ namespace Atlantis.Framework.Iris.Impl
         irisWebService = ServiceHelpers.GetServiceReference(((WsConfigElement)config).WSURL);
         irisWebService.Timeout = (int)request.RequestTimeout.TotalMilliseconds;
 
-        var responseCode = irisWebService.AddIncidentNote(request.IncidentId, request.Note, request.LoginId);
-
-
+        var responseCode = irisWebService.AddIncidentNoteByNoteTypeId(request.IncidentId, request.Note, request.LoginId, 1);
+        
         responseData = AddIncidentNoteResponseData.FromData(responseCode);
       }
       catch (Exception ex)

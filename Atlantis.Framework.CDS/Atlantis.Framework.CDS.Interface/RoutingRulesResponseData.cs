@@ -8,7 +8,8 @@ namespace Atlantis.Framework.CDS.Interface
 {
   public class RoutingRulesResponseData : CDSResponseData
   {
-    public ContentId Id { get; private set; }
+    public ContentId VersionId { get; private set; }
+    public ContentId DocumentId { get; private set; }
     private static readonly ReadOnlyCollection<IRoutingRule> _nullRoutingRules = new ReadOnlyCollection<IRoutingRule>(new List<IRoutingRule>(0));
     private static readonly IDictionary<string, ReadOnlyCollection<IRoutingRule>> _emptyRulesDictionary = new Dictionary<string, ReadOnlyCollection<IRoutingRule>>(0);
 
@@ -17,7 +18,8 @@ namespace Atlantis.Framework.CDS.Interface
     public RoutingRulesResponseData(string responseData) : base(responseData)
     {
       ContentVersion contentVersion = JsonConvert.DeserializeObject<ContentVersion>(responseData);
-      Id = contentVersion._id;
+      VersionId = contentVersion._id;
+      DocumentId = contentVersion.DocumentId;
 
       List<RoutingRule> rulesList = JsonConvert.DeserializeObject<List<RoutingRule>>(contentVersion.Content);
 

@@ -104,6 +104,9 @@ namespace Atlantis.Framework.CDS.Tests
 
       Assert.IsFalse(responseData.CheckWhitelist("/hosting1/email-hosting").Exists);
       Assert.AreEqual(responseData.CheckWhitelist("/hosting1/email-hosting").UrlData["style"], "null");
+
+      Assert.AreEqual(responseData.VersionId.oid, "5175b13e8b29c70404bc0163");
+      Assert.IsTrue(!string.IsNullOrEmpty(responseData.DocumentId.oid));
     }
 
     [TestMethod()]
@@ -168,6 +171,8 @@ namespace Atlantis.Framework.CDS.Tests
           Assert.IsNotNull(rule.Data);
         }
       }
+      Assert.IsTrue(!string.IsNullOrEmpty(responseData.DocumentId.oid));
+      Assert.IsTrue(!string.IsNullOrEmpty(responseData.VersionId.oid));
     }
 
     [TestMethod()]
@@ -215,7 +220,7 @@ namespace Atlantis.Framework.CDS.Tests
     [DeploymentItem("Atlantis.Framework.CDS.Impl.dll")]
     public void PackageGroupRequestTest()
     {
-      string packageId = "GridHostUnlDiabloLin1Yr_us";
+      string packageId = "host_GridHostUnlDiabloLin1Yr_us";
       string shopperId = "12345";
       int requestType = 766;
       string query = "content/packages/packagegrouping";
@@ -232,7 +237,7 @@ namespace Atlantis.Framework.CDS.Tests
 
       List<string> packageIdList = (List<string>)packageIds;
 
-      Assert.IsTrue(packageIdList.Contains("GridHostUnlDiabloLin4Yr_us"));
+      Assert.IsTrue(packageIdList.Contains("host_GridHostUnlDiabloLin4Yr_us"));
 
     }
 

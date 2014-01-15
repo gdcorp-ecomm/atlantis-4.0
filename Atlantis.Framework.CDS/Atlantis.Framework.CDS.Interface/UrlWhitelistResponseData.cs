@@ -7,7 +7,8 @@ namespace Atlantis.Framework.CDS.Interface
 {
   public class UrlWhitelistResponseData : CDSResponseData
   {
-    public ContentId Id { get; private set; }
+    public ContentId VersionId { get; private set; }
+    public ContentId DocumentId { get; private set; }
     private readonly Dictionary<string, IWhitelistResult> _whitelistDictionary;
     private const string STYLE = "style";
 
@@ -18,7 +19,8 @@ namespace Atlantis.Framework.CDS.Interface
     public UrlWhitelistResponseData(string responseData) : base(responseData)
     {
       ContentVersion contentVersion = JsonConvert.DeserializeObject<ContentVersion>(responseData);
-      Id = contentVersion._id;
+      VersionId = contentVersion._id;
+      DocumentId = contentVersion.DocumentId;
 
       var deserializedWhiteList = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, string>>>(contentVersion.Content);
       

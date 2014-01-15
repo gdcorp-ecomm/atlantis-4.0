@@ -380,11 +380,32 @@ namespace Atlantis.Framework.Providers.DomainContactValidation.Tests
            "MumboJumbo", true,
           "101 N Street", "Suite 100", "Littleton", "CO",
           "80130", "US", "(303)-555-1213", "(303)-555-2213");
-      contactGroup.SetContact(DomainContactType.Registrant, registrantContact);
-      contactGroup.SetContact(DomainContactType.Registrant, registrantContact);
+      contactGroup.SetContact(registrantContact);
 
       var tuiFormInfo = contactGroup.GetTuiFormInfo(tlds);
       Assert.AreEqual(true, tuiFormInfo != null && tuiFormInfo.ContainsKey("FR"));
     }
+
+    [TestMethod]
+    public void TestDotCLContactTuiFormInfo()
+    {
+      var tlds = new List<string> { "my" };
+      var contactGroup = DomainContactProvider.DomainContactGroupInstance(tlds, 1);
+
+      var registrantContact = DomainContactProvider.DomainContactInstance(
+         "Bill", "Registrant", "bregistrant@bongo.com",
+           "MumboJumbo", true,
+          "101 N Street", "Suite 100", "La Cruz", "Quillota",
+          "80130", "my", "(303)-555-1213", "(303)-555-2213");
+
+      IDictionary<string, ITuiFormInfo> tuiFormInfo = new Dictionary<string, ITuiFormInfo>();
+      if (contactGroup.SetContact(registrantContact))
+      {
+        tuiFormInfo = contactGroup.GetTuiFormInfo(tlds);
+      }
+
+      Assert.AreEqual(true, tuiFormInfo != null && tuiFormInfo.Count > 0);
+    }
+
   }
 }

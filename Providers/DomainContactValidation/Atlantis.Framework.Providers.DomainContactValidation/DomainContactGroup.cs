@@ -175,6 +175,22 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
         if (valid)
         {
           contactList.Add(new DomainsTrusteeContact(domainsTrusteeContactType, pair.Value.Country));
+
+          if (pair.Key.ToString().ToLowerInvariant() == "registrant")
+          {
+            if (!_domainContactGroup.ContainsKey(DomainContactType.Billing))
+            {
+              contactList.Add(new DomainsTrusteeContact(DomainsTrusteeContactTypes.Billing, pair.Value.Country));
+            }
+            if (!_domainContactGroup.ContainsKey(DomainContactType.Technical))
+            {
+              contactList.Add(new DomainsTrusteeContact(DomainsTrusteeContactTypes.Technical, pair.Value.Country));
+            }
+            if (!_domainContactGroup.ContainsKey(DomainContactType.Administrative))
+            {
+              contactList.Add(new DomainsTrusteeContact(DomainsTrusteeContactTypes.Administrative, pair.Value.Country));
+            }
+          }
         }
       }
 

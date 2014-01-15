@@ -33,8 +33,12 @@ using System.Runtime.InteropServices;
 //      Build Number
 //      Revision
 //
-// You can specify all the values or you can default the Build and Revision Numbers 
-// by using the '*' as shown below:
-// [assembly: AssemblyVersion("1.0.*")]
+//
+// use 4.0.0.0 for the Assembly Version and Assembly File Version
+// use YY.M.D.# for the InformationalVersion. Do not use leading zeros.
+// example 14.6.4.1 for Jun 4, 2014, build 1
+// the fourth number is the build number which would increment only if you released multiple times in a day
+//
 [assembly: AssemblyVersion("4.0.0.0")]
-[assembly: AssemblyFileVersion("4.14.1.9")]
+[assembly: AssemblyFileVersion("4.0.0.0")]
+[assembly: AssemblyInformationalVersion("14.1.14.1")]

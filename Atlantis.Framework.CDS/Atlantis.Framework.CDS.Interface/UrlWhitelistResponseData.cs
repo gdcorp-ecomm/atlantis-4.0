@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Atlantis.Framework.CDS.Interface
 {
-  public class UrlWhitelistResponseData : CDSResponseData
+  public class UrlWhitelistResponseData : CDSResponseData, ICDSDebugInfo
   {
     public ContentId VersionId { get; private set; }
     public ContentId DocumentId { get; private set; }

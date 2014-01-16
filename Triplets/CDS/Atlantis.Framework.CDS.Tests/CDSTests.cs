@@ -105,8 +105,9 @@ namespace Atlantis.Framework.CDS.Tests
       Assert.IsFalse(responseData.CheckWhitelist("/hosting1/email-hosting").Exists);
       Assert.AreEqual(responseData.CheckWhitelist("/hosting1/email-hosting").UrlData["style"], "null");
 
-      Assert.AreEqual(responseData.VersionId.oid, "5175b13e8b29c70404bc0163");
-      Assert.IsTrue(!string.IsNullOrEmpty(responseData.DocumentId.oid));
+      ICDSDebugInfo debugInfo = responseData as ICDSDebugInfo;
+      Assert.AreEqual(debugInfo.VersionId.oid, "5175b13e8b29c70404bc0163");
+      Assert.IsTrue(!string.IsNullOrEmpty(debugInfo.DocumentId.oid));
     }
 
     [TestMethod()]
@@ -128,6 +129,9 @@ namespace Atlantis.Framework.CDS.Tests
       //Assert
       Assert.IsNotNull(responseData.Content);
 
+      ICDSDebugInfo debugInfo = responseData as ICDSDebugInfo;
+      Assert.IsTrue(!string.IsNullOrEmpty(debugInfo.VersionId.oid));
+      Assert.IsTrue(!string.IsNullOrEmpty(debugInfo.DocumentId.oid));
     }
 
     [TestMethod()]
@@ -171,8 +175,9 @@ namespace Atlantis.Framework.CDS.Tests
           Assert.IsNotNull(rule.Data);
         }
       }
-      Assert.IsTrue(!string.IsNullOrEmpty(responseData.DocumentId.oid));
-      Assert.IsTrue(!string.IsNullOrEmpty(responseData.VersionId.oid));
+      ICDSDebugInfo debugInfo = responseData as ICDSDebugInfo;
+      Assert.IsTrue(!string.IsNullOrEmpty(debugInfo.VersionId.oid));
+      Assert.IsTrue(!string.IsNullOrEmpty(debugInfo.DocumentId.oid));
     }
 
     [TestMethod()]

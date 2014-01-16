@@ -60,6 +60,7 @@
     <Compile Include="CDSResponseData.cs" />
     <Compile Include="ContentVersion.cs" />
     <Compile Include="ContentVersionResponseData.cs" />
+    <Compile Include="ICDSDebugInfo.cs" />
     <Compile Include="IPackageGroup.cs" />
     <Compile Include="IRoutingRule.cs" />
     <Compile Include="IWhitelistResult.cs" />

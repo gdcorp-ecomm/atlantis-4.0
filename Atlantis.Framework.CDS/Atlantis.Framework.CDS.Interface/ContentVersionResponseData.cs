@@ -5,7 +5,7 @@ using System;
 
 namespace Atlantis.Framework.CDS.Interface
 {
-  public class ContentVersionResponseData : CDSResponseData, IRenderContent
+  public class ContentVersionResponseData : CDSResponseData, IRenderContent, ICDSDebugInfo
   {
     private readonly ContentVersion _contentVersion;
 
@@ -35,6 +35,11 @@ namespace Atlantis.Framework.CDS.Interface
 
     public ContentVersionResponseData(RequestData requestData, Exception exception) : base(requestData, exception)
     {
+    }
+
+    public ContentId VersionId
+    {
+      get { return _id; }
     }
   }
 }

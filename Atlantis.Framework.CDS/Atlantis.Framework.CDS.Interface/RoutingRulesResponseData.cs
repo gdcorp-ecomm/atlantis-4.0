@@ -6,7 +6,7 @@ using System.Collections.ObjectModel;
 
 namespace Atlantis.Framework.CDS.Interface
 {
-  public class RoutingRulesResponseData : CDSResponseData
+  public class RoutingRulesResponseData : CDSResponseData, ICDSDebugInfo
   {
     public ContentId VersionId { get; private set; }
     public ContentId DocumentId { get; private set; }

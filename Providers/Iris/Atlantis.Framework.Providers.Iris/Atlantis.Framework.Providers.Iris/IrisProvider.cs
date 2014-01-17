@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Iris.Interface;
 using Atlantis.Framework.Iris.Interface.Objects;
@@ -217,7 +218,7 @@ namespace Atlantis.Framework.Providers.Iris
 
           if (responseData != null && responseData.IsSuccess)
           {
-            retValue = responseData.Notes;
+            retValue.AddRange(responseData.Notes.Where(note => note.Origin.ToLowerInvariant() != "internal"));
           }
         }
         catch (Exception ex)

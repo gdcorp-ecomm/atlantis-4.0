@@ -16,7 +16,7 @@ namespace Atlantis.Framework.Providers.Iris.Tests
   public class LibraryTests
   {
 
-    private const string SHOPPER_ID = "914983"; //902185
+    private const string SHOPPER_ID = "902185"; // "914983"; //902185
 
     private IProviderContainer SetBasicContextAndProviders()
     {

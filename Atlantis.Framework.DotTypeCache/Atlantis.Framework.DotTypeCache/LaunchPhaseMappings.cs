@@ -23,7 +23,7 @@ namespace Atlantis.Framework.DotTypeCache
       return codePrefix;
     }
 
-    internal static string GetCode(LaunchPhases launchPhase)
+    public static string GetCode(LaunchPhases launchPhase)
     {
       string code;
 

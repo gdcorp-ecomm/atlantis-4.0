@@ -1624,7 +1624,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
     [TestMethod]
     public void TldGetTuiFormTypesLandrushSystems()
     {
-      var request = new MockHttpRequest("http://siteadmin.debug.intranet.gdg/default.aspx?QA--CLAIMSSTARTED=1");
+      var request = new MockHttpRequest("http://siteadmin.debug.intranet.gdg/default.aspx");
       MockHttpContext.SetFromWorkerRequest(request);
 
       var dotTypeInfo = DotTypeProvider.GetDotTypeInfo("systems");
@@ -1671,5 +1671,11 @@ namespace Atlantis.Framework.DotTypeCache.Tests
       Assert.IsTrue(productId == 0);
     }
 
+    [TestMethod]
+    public void GetDotTypeLauchPhaseCodeFromLaunchPhase()
+    {
+      string phaseCode = LaunchPhaseMappings.GetCode(LaunchPhases.Landrush);
+      Assert.IsTrue(!string.IsNullOrEmpty(phaseCode));
+    }
   }
 }

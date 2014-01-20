@@ -100,5 +100,31 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration.Tests
       Assert.AreEqual(true, dotTypeFormFieldsByDomain != null && dotTypeFormFieldsByDomain.FormFieldsByDomain.Count > 0);
     }
 
+    [TestMethod]
+    public void DotTypeClaimsExist()
+    {
+      var provider = ProviderContainer.Resolve<IDotTypeRegistrationProvider>();
+
+      IDotTypeFormFieldsByDomain dotTypeFormFieldsByDomain;
+      const string domain = "validateandt9st.lrclaim";
+      var lookup = DotTypeFormSchemaLookup.Create("claims", "lrclaim", "mobile", "lr");
+
+      bool isSuccess = provider.DotTypeClaimsExist(lookup, domain);
+      Assert.AreEqual(true, isSuccess);
+    }
+
+    [TestMethod]
+    public void DotTypeClaimsNotExist()
+    {
+      var provider = ProviderContainer.Resolve<IDotTypeRegistrationProvider>();
+
+      IDotTypeFormFieldsByDomain dotTypeFormFieldsByDomain;
+      const string domain = "jhkjshkdfsdtrr.lrclaim";
+      var lookup = DotTypeFormSchemaLookup.Create("claims", "lrclaim", "mobile", "lr");
+
+      bool isSuccess = provider.DotTypeClaimsExist(lookup, domain);
+      Assert.AreEqual(false, isSuccess);
+    }
+
   }
 }

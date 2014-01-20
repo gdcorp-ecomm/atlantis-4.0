@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Atlantis.Framework.DotTypeClaims.Interface;
 using Atlantis.Framework.DotTypeValidation.Interface;
 using Atlantis.Framework.Providers.DotTypeRegistration.Factories;
 using Atlantis.Framework.Providers.DotTypeRegistration.Handlers;
@@ -266,6 +267,40 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration
     private static List<IFormField> GetHiddenFormField(string name, string value)
     {
       return new List<IFormField> {new FormField {Value = value, Type = FormFieldTypes.Hidden, Name = name}};
+    }
+
+    public bool DotTypeClaimsExist(IDotTypeFormSchemaLookup dotTypeFormsLookup, string domain)
+    {
+      bool result = false;
+
+      var tld = dotTypeFormsLookup.Tld;
+      var placement = dotTypeFormsLookup.Placement;
+      var phase = dotTypeFormsLookup.Phase;
+
+      var fullLanguage = LocalizationProvider.FullLanguage;
+      var tldId = GetTldId(tld);
+
+      try
+      {
+        var request = new DotTypeClaimsRequestData(tldId, placement, phase, fullLanguage, domain);
+        var response = (DotTypeClaimsResponseData)Engine.Engine.ProcessRequest(request, DotTypeRegistrationEngineRequests.DotTypeClaimsRequest);
+
+        if (response != null)
+        {
+          if (response.IsSuccess && !string.IsNullOrEmpty(response.NoticeXml))
+          {
+            result = true;
+          }
+        }
+      }
+      catch (Exception ex)
+      {
+        var data = "tldId: " + tldId + ", placement: " + placement + ", phase: " + phase + ", language: " + fullLanguage + ", domain: " + domain;
+        var exception = new AtlantisException("DotTypeRegistrationProvider.DotTypeClaimsExist", "0", ex.Message + ex.StackTrace, data, null, null);
+        Engine.Engine.LogAtlantisException(exception);
+      }
+
+      return result;
     }
 
     public bool ValidateData(string clientApplication, string tld, string phase, Dictionary<string, IDotTypeValidationFieldValueData> fields,

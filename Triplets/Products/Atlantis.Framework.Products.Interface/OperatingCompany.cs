@@ -6,16 +6,22 @@ namespace Atlantis.Framework.Products.Interface
 {
   public class OperatingCompany
   {
-    public OperatingCompany(string companyId, string countryCode)
+    internal OperatingCompany(string companyId, string countryCode)
     {
       CompanyId = companyId;
       CountryCode = countryCode;
     }
 
-    public string CountryCode { get;
-      set; }
+    public string CountryCode
+    {
+      get;
+      private set;
+    }
 
-    public string CompanyId { get;
-      set; }
+    public string CompanyId
+    {
+      get;
+      private set;
+    }
   }
 }

@@ -36,10 +36,11 @@
   <ItemGroup>
     <Reference Include="Atlantis.Framework.DataCacheService, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Atlantis.Framework.DataCache\Atlantis.Framework.DataCacheService\bin\Debug\Atlantis.Framework.DataCacheService.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.DataCacheService.4.13.12.21\lib\net40\Atlantis.Framework.DataCacheService.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.Interface">
-      <HintPath>..\..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\bin\Debug\Atlantis.Framework.Interface.dll</HintPath>
+    <Reference Include="Atlantis.Framework.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Interface.14.1.16.1\lib\net40\Atlantis.Framework.Interface.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -57,6 +58,12 @@
     </None>
     <None Include="Atlantis.Framework.AppSettings.Impl.nuget.bat" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Atlantis.Framework.AppSettings.Interface\Atlantis.Framework.AppSettings.Interface.csproj">
+      <Project>{638f2820-0ca4-43c1-8712-1823704389d3}</Project>
+      <Name>Atlantis.Framework.AppSettings.Interface</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

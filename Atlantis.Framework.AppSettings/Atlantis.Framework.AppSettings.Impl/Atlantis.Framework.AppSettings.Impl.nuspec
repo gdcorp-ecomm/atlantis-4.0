@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0"?>
 <package >
   <metadata>
-    <id>Atlantis.Framework.AppSettings</id>
-    <version>4.0.0.0</version>
-    <title>Atlantis Framework AppSettings Impl</title>
+    <id>Atlantis.Framework.AppSettings.Impl</id>
+    <version>$version$</version>
+    <title>Atlantis.Framework.AppSettings.Impl</title>
     <authors>$author$</authors>
     <owners>$author$</owners>
     <projectUrl>https://confluence.int.godaddy.com/display/ATLANTIS</projectUrl>
@@ -11,7 +11,7 @@
     <description>$description$</description>
     <releaseNotes></releaseNotes>
     <copyright>$copyright$</copyright>
-    <tags>Atlantis Framework AppSettings Impl</tags>
+    <tags>Atlantis.Framework.AppSettings.Impl</tags>
   </metadata>
   <files>
     <file src="atlantis.config.transform" target="content\atlantis.config.transform" />

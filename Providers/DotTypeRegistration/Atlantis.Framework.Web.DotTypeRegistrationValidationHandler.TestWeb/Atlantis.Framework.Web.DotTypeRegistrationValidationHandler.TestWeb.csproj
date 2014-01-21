@@ -98,7 +98,7 @@
     </Reference>
     <Reference Include="Atlantis.Framework.DotTypeClaims.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.DotTypeClaims.Interface.4.14.1.7\lib\net40\Atlantis.Framework.DotTypeClaims.Interface.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.DotTypeClaims.Interface.14.1.20.1\lib\net40\Atlantis.Framework.DotTypeClaims.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.DotTypeForms.Impl, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

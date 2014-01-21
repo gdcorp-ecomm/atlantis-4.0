@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0"?>
 <package >
   <metadata>
-    <id>Atlantis.Framework.DataCacheGeneric</id>
-    <version>4.0.0.0</version>
-    <title>Atlantis Framework DataCacheGeneric Impl</title>
+    <id>Atlantis.Framework.DataCacheGeneric.Impl</id>
+    <version>$version$</version>
+    <title>Atlantis.Framework.DataCacheGeneric.Impl</title>
     <authors>$author$</authors>
     <owners>$author$</owners>
     <projectUrl>https://confluence.int.godaddy.com/display/ATLANTIS</projectUrl>
@@ -11,7 +11,7 @@
     <description>$description$</description>
     <releaseNotes></releaseNotes>
     <copyright>$copyright$</copyright>
-    <tags>Atlantis Framework DataCacheGeneric Impl</tags>
+    <tags>Atlantis.Framework.DataCacheGeneric.Impl</tags>
   </metadata>
   <files>
     <file src="atlantis.config.transform" target="content\atlantis.config.transform" />

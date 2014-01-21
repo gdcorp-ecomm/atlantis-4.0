@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <package >
   <metadata>
-    <id>Atlantis.Framework.CDS</id>
-    <version>4.13.12.13</version>
-    <title>Atlantis Framework CDS Impl</title>
+    <id>Atlantis.Framework.CDS.Impl</id>
+    <version>$version$</version>
+    <title>Atlantis.Framework.CDS.Impl</title>
     <authors>$author$</authors>
     <owners>$author$</owners>
     <projectUrl>https://confluence.int.godaddy.com/display/CDS</projectUrl>
@@ -11,7 +11,7 @@
     <description>$description$</description>
     <releaseNotes></releaseNotes>
     <copyright>$copyright$</copyright>
-    <tags>Atlantis Framework CDS Impl</tags>
+    <tags>Atlantis.Framework.CDS.Impl</tags>
   </metadata>
   <files>
     <file src="atlantis.config.transform" target="content\atlantis.config.transform" />

@@ -3,7 +3,7 @@
   <metadata>
     <id>Atlantis.Framework.CDS.Interface</id>
     <version>$version$</version>
-    <title>Atlantis Framework CDS Interface</title>
+    <title>Atlantis.Framework.CDS.Interface</title>
     <authors>$author$</authors>
     <owners>$author$</owners>
     <projectUrl>https://confluence.int.godaddy.com/display/CDS</projectUrl>
@@ -11,6 +11,6 @@
     <description>$description$</description>
     <releaseNotes></releaseNotes>
     <copyright>$copyright$</copyright>
-    <tags>Atlantis Framework CDS Interface</tags>
+    <tags>Atlantis.Framework.CDS.Interface</tags>
   </metadata>
 </package>

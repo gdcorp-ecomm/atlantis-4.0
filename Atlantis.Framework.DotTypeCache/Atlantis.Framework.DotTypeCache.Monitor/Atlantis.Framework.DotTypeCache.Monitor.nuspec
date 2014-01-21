@@ -2,8 +2,8 @@
 <package >
   <metadata>
     <id>Atlantis.Framework.DotTypeCache.Monitor</id>
-    <version>4.14.1.7</version>
-    <title>Atlantis Framework DotTypeCache Monitor</title>
+    <version>$version$</version>
+    <title>Atlantis.Framework.DotTypeCache.Monitor</title>
     <authors>$author$</authors>
     <owners>$author$</owners>
     <projectUrl>https://confluence.int.godaddy.com/display/ATLANTIS</projectUrl>
@@ -11,7 +11,7 @@
     <description>$description$</description>
     <releaseNotes></releaseNotes>
     <copyright>$copyright$</copyright>
-    <tags>Atlantis Framework DotTypeCache Monitor</tags>
+    <tags>Atlantis.Framework.DotTypeCache.Monitor</tags>
   </metadata>
   <files />
 </package>

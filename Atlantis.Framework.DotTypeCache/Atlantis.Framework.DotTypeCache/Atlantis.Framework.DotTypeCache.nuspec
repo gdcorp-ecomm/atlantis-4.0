@@ -3,7 +3,7 @@
   <metadata>
     <id>Atlantis.Framework.DotTypeCache</id>
     <version>$version$</version>
-    <title>Atlantis Framework DotTypeCache</title>
+    <title>Atlantis.Framework.DotTypeCache</title>
     <authors>$author$</authors>
     <owners>$author$</owners>
     <projectUrl>https://confluence.int.godaddy.com/display/ATLANTIS</projectUrl>
@@ -11,6 +11,6 @@
     <description>$description$</description>
     <releaseNotes></releaseNotes>
     <copyright>$copyright$</copyright>
-    <tags>Atlantis Framework DotTypeCache</tags>
+    <tags>Atlantis.Framework.DotTypeCache</tags>
   </metadata>
 </package>

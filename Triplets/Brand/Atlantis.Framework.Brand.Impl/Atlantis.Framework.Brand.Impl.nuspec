@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0"?>
 <package >
   <metadata>
-    <id>Atlantis.Framework.Brand</id>
-    <version>4.0.0.0</version>
-    <title>Atlantis Framework Brand Impl</title>
+    <id>Atlantis.Framework.Brand.Impl</id>
+    <version>$version$</version>
+    <title>Atlantis.Framework.Brand.Impl</title>
     <authors>$author$</authors>
     <owners>$author$</owners>
     <projectUrl>https://confluence.int.godaddy.com/display/ATLANTIS</projectUrl>
@@ -11,7 +11,7 @@
     <description>$description$</description>
     <releaseNotes></releaseNotes>
     <copyright>$copyright$</copyright>
-    <tags>Atlantis Framework Brand Impl</tags>
+    <tags>Atlantis.Framework.Brand.Impl</tags>
   </metadata>
   <files>
     <file src="atlantis.config.transform" target="content\atlantis.config.transform" />

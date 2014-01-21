@@ -2,8 +2,8 @@
 <package >
   <metadata>
     <id>Atlantis.Framework.Brand.Interface</id>
-    <version>4.0.0.0</version>
-    <title>Atlantis Framework Brand Interface</title>
+    <version>$version$</version>
+    <title>Atlantis.Framework.Brand.Interface</title>
     <authors>$author$</authors>
     <owners>$author$</owners>
     <projectUrl>https://confluence.int.godaddy.com/display/ATLANTIS</projectUrl>
@@ -11,6 +11,6 @@
     <description>$description$</description>
     <releaseNotes></releaseNotes>
     <copyright>$copyright$</copyright>
-    <tags>Atlantis Framework Brand Interface</tags>
+    <tags>Atlantis.Framework.Brand.Interface</tags>
   </metadata>
 </package>

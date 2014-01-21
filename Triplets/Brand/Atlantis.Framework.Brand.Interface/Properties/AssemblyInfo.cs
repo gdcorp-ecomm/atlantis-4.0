@@ -40,4 +40,5 @@ using System.Runtime.InteropServices;
 // example 4.13.6.1 for Jun 1, 2013
 //
 [assembly: AssemblyVersion("4.0.0.0")]
-[assembly: AssemblyFileVersion("4.13.0.0")]
+[assembly: AssemblyFileVersion("4.0.0.0")]
+[assembly: AssemblyInformationalVersion("14.1.21.1")]

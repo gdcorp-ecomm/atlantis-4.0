@@ -4,7 +4,7 @@ using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.GetBasketPrice.Impl
 {
-  class GetBasketPriceAsyncRequest : IAsyncRequest
+  public class GetBasketPriceAsyncRequest : IAsyncRequest
   {
     #region IAsyncRequest Members
 

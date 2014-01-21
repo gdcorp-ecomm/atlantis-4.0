@@ -67,12 +67,12 @@ namespace Atlantis.Framework.DotTypeClaims.Interface
 
               if (!string.IsNullOrEmpty(noticeXmlAttr.Value))
               {
-                NoticeXml = WebUtility.HtmlDecode(noticeXmlAttr.Value);
+                NoticeXml = noticeXmlAttr.Value;
               }
 
               if (!string.IsNullOrEmpty(htmlDataAttr.Value))
               {
-                HtmlData = WebUtility.HtmlDecode(htmlDataAttr.Value);
+                HtmlData = htmlDataAttr.Value;
               }
             }
           }

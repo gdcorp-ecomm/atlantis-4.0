@@ -28,7 +28,6 @@ namespace Atlantis.Framework.DotTypeClaims.Interface
       element.Add(new XAttribute("placement", Placement));
       element.Add(new XAttribute("phase", Phase));
       element.Add(new XAttribute("marketId", MarketId));
-      element.Add(new XAttribute("domain", Domain.ToString(CultureInfo.InvariantCulture)));
       element.Add(new XAttribute("domain", Domain));
       return element.ToString();
     }

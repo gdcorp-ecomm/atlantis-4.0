@@ -14,7 +14,7 @@ namespace Atlantis.Framework.RegFreeProduct.Test
   public class GetRegFreeProductTests
   {
 
-    private const string _shopperId = "856907";
+    private const string _shopperId = "840420";
 
 
     public GetRegFreeProductTests()
@@ -71,21 +71,32 @@ namespace Atlantis.Framework.RegFreeProduct.Test
     {
       MockHttpContext.SetMockHttpContext(string.Empty, "http://localhost", string.Empty);
 
-      RegisterFreeProductRequestData request = new RegisterFreeProductRequestData(_shopperId, string.Empty, string.Empty, string.Empty, 0, string.Empty);
+      var request = new RegisterFreeProductRequestData(_shopperId, string.Empty);
       request.AddItem("2701", "1");
 
-      int _requestType = 679;
-      RegisterFreeProductResponseData response = (RegisterFreeProductResponseData)Engine.Engine.ProcessRequest(request, _requestType);
-
-      // Cache call
-      //RegFreeProductResponseData response = (RegFreeProductResponseData)DataCache.DataCache.GetProcessRequest(request, _requestType);
-
-      //
-      // TODO: Add test logic here
-      //
+      var _requestType = 679;
+      var response = (RegisterFreeProductResponseData)Engine.Engine.ProcessRequest(request, _requestType);
 
       Debug.WriteLine(response.ToXML());
       Assert.IsTrue(response.IsSuccess);
     }
+
+    [TestMethod]
+    [DeploymentItem("atlantis.config")]
+    [DeploymentItem("Atlantis.Framework.EcommFreeProduct.Impl.dll")]
+    public void RegFreeTrialProductTest()
+    {
+      MockHttpContext.SetMockHttpContext(string.Empty, "http://localhost", string.Empty);
+
+      var request = new RegisterFreeProductRequestData(_shopperId, string.Empty);
+      request.AddItem("2701", "1", "58071");
+
+      var _requestType = 679;
+      var response = (RegisterFreeProductResponseData)Engine.Engine.ProcessRequest(request, _requestType);
+
+      Debug.WriteLine(response.ToXML());
+      Assert.IsTrue(response.IsSuccess);
+    }
+
   }
 }

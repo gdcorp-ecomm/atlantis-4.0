@@ -10,21 +10,33 @@ namespace Atlantis.Framework.EcommFreeProduct.Interface
   {
     private readonly XElement _itemRequestElement;
     private readonly XDocument _requestDoc = new XDocument();
-    private static TimeSpan _DEFAULTIMEOUT = TimeSpan.FromSeconds(15.0);
+    private static TimeSpan _DEFAULTIMEOUT = TimeSpan.FromSeconds(15d);
 
-    public RegisterFreeProductRequestData(string shopperId, string sourceUrl, string orderId, string pathway, int pageCount, string clientIP)
-      : base(shopperId, sourceUrl, orderId, pathway, pageCount)
+    public RegisterFreeProductRequestData(string shopperId, string clientIP)
     {
+      ShopperID = shopperId;
       RequestTimeout = _DEFAULTIMEOUT;
       _itemRequestElement = new XElement("freeItemRequest");
       _requestDoc.Add(_itemRequestElement);
 
-      SetDefaults(clientIP);
+      if (!string.IsNullOrEmpty(clientIP))
+      {
+        SetItemRequestAttribute("addClientIP", clientIP);
+      }
     }
 
     public void AddItem(string unifiedProductId, string quantity)
     {
-      this._itemRequestElement.Add(CreateItemElement(CreateAttributes(unifiedProductId, quantity, null), null));
+      AddItem(unifiedProductId, quantity, string.Empty);
+    }
+
+    public void AddItem(string unifiedProductId, string quantity, string renewalShopperProfileID)
+    {
+      _itemRequestElement.Add(CreateItemElement(CreateAttributes(unifiedProductId, quantity, null), null));
+      if (!string.IsNullOrEmpty(renewalShopperProfileID))
+      {
+        SetItemRequestAttribute("renewalShopperProfileID", renewalShopperProfileID);
+      }
     }
 
     public override string GetCacheMD5()
@@ -34,7 +46,7 @@ namespace Atlantis.Framework.EcommFreeProduct.Interface
 
     public void SetItemRequestAttribute(string name, string value)
     {
-      XAttribute attribute = _itemRequestElement.Attribute(name);
+      var attribute = _itemRequestElement.Attribute(name);
       if (attribute != null)
       {
         attribute.Value = value;
@@ -52,7 +64,7 @@ namespace Atlantis.Framework.EcommFreeProduct.Interface
 
     private IEnumerable<KeyValuePair<string, string>> CreateAttributes(string unifiedProductId, string quantity, IEnumerable<KeyValuePair<string, string>> otherAttributes)
     {
-      List<KeyValuePair<string, string>> returnValue = new List<KeyValuePair<string, string>>
+      var returnValue = new List<KeyValuePair<string, string>>
               {
                 new KeyValuePair<string, string>("unifiedProductID", unifiedProductId),
                 new KeyValuePair<string, string>("quantity", quantity)
@@ -68,9 +80,9 @@ namespace Atlantis.Framework.EcommFreeProduct.Interface
 
     private XElement CreateItemElement(IEnumerable<KeyValuePair<string, string>> attributes, XElement customXmlElement)
     {
-      XElement returnValue = new XElement("item");
-      foreach (KeyValuePair<string, string> attr in attributes)
-      {
+      var returnValue = new XElement("item");
+      foreach (var attr in attributes)
+      {               
         returnValue.Add(new XAttribute(attr.Key, attr.Value));
       }
 
@@ -81,16 +93,5 @@ namespace Atlantis.Framework.EcommFreeProduct.Interface
 
       return returnValue;
     }
-
-    private void SetDefaults(string clientIP)
-    {
-      RequestTimeout = TimeSpan.FromSeconds(2d);
-
-      if (!string.IsNullOrEmpty(clientIP))
-      {
-        SetItemRequestAttribute("addClientIP", clientIP);
-      }
-    }
-
   }
 }

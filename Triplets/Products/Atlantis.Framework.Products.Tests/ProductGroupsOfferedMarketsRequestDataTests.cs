@@ -23,7 +23,7 @@ namespace Atlantis.Framework.Products.Tests
       var target = new ProductGroupsOfferedMarketsRequestData();
       Assert.IsNotNull(target);
 
-      var expected = DateTime.Now.AddMinutes(10).ToString("yyyyMMddHHmm");
+      var expected = "data";
       var actual = target.GetCacheMD5();
       Assert.AreEqual(expected, actual);
     }

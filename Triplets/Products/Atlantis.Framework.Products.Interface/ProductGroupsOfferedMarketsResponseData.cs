@@ -9,17 +9,7 @@ namespace Atlantis.Framework.Products.Interface
 {
   public class ProductGroupsOfferedMarketsResponseData : ResponseData
   {
-    public class ContentId
-    {
-      [JsonProperty("$oid")]
-      public string oid
-      {
-        get;
-        internal set;
-      }
-    }
-
-    private Dictionary<int, ProductGroupMarketData> _productGroups;
+    private Dictionary<int, ProductGroupMarketData> _productGroups = new Dictionary<int, ProductGroupMarketData>();
 
     public static ProductGroupsOfferedMarketsResponseData NotFound
     {
@@ -39,17 +29,12 @@ namespace Atlantis.Framework.Products.Interface
 
     private ProductGroupsOfferedMarketsResponseData(string responseData)
     {
-      _productGroups = new Dictionary<int, ProductGroupMarketData>();
-
-
       if (!string.IsNullOrEmpty(responseData))
       {
         var contentVersion = JsonConvert.DeserializeAnonymousType(responseData, new
         {
-          _id = new ContentId(),
           Content = string.Empty
         });
-        Id = contentVersion._id;
 
         if (!string.IsNullOrEmpty(contentVersion.Content))
         {
@@ -80,19 +65,14 @@ namespace Atlantis.Framework.Products.Interface
           }
         }
       }
-      Count = _productGroups.Count;
-    }
-
-    public ContentId Id
-    {
-      get;
-      private set;
     }
 
     public int Count
     {
-      get;
-      private set;
+      get
+      {
+        return _productGroups.Count;
+      }
     }
 
     public bool ContainsMarket(int productGroupId, string marketId)

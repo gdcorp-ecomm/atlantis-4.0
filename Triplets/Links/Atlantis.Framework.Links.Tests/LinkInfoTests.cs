@@ -157,7 +157,7 @@ namespace Atlantis.Framework.Links.Tests
     [TestMethod]
     public void LinkInfoGetLinkInfoByBaseUrl()
     {
-      string hostToFind = "idp.dev.GoDaDdy-CoM.IDE";
+      string hostToFind = "idp.dev-GoDaddy.com";
       
       var request = new LinkInfoRequestData((int)ContextIds.GoDaddy);
       var response = (LinkInfoResponseData)afe.Engine.ProcessRequest(request, kEngineRequest);

@@ -7,6 +7,8 @@ using Atlantis.Framework.Products.Tests.Properties;
 using Newtonsoft.Json;
 using Atlantis.Framework.Products.Impl;
 using Atlantis.Framework.Products.Interface;
+using System.Xml.Linq;
+using System.Linq;
 
 namespace Atlantis.Framework.Products.Tests
 {
@@ -37,6 +39,28 @@ namespace Atlantis.Framework.Products.Tests
 
       Assert.IsNotNull(actual);
       Assert.IsInstanceOfType(actual, typeof(ProductGroupsOfferedMarketsResponseData));
+
+      var data = Resources.ProductGroupsMarketsJson;
+      if (!string.IsNullOrEmpty(data))
+      {
+        var contentVersion = JsonConvert.DeserializeAnonymousType(data, new
+        {
+          Content = string.Empty
+        });
+        var privates = new PrivateObject(actual);
+        var prodGroups = privates.GetField("_productGroups") as IDictionary<int, ProductGroupMarketData>;
+        var items = XElement.Parse(contentVersion.Content).Descendants("productGroup");
+        foreach (var item in items.Where((i) => "99".Equals(i.Attribute("id").Value)))
+        {
+          CollectionAssert.Contains(prodGroups.Keys.ToList(), int.Parse(item.Attribute("id").Value));
+          var markets = item.Descendants("markets").Descendants("market");
+          foreach (var market in markets.Where((m) => !"es-XX".Equals(m.Attribute("id").Value, StringComparison.OrdinalIgnoreCase)))
+          {
+            HashSet<string> temp = prodGroups[int.Parse(item.Attribute("id").Value)].Markets;
+            CollectionAssert.Contains(temp.ToList(), market.Attribute("id").Value);
+          }
+        }
+      }
     }
 
     [TestMethod]
@@ -50,7 +74,28 @@ namespace Atlantis.Framework.Products.Tests
       var actual = Engine.Engine.ProcessRequest(request, _REQUESTTYPE) as ProductGroupsOfferedMarketsResponseData;
       Assert.IsNotNull(actual);
 
-      var expectedData = Resources.ProductGroupsMarketsJson;
+      var data = Resources.ProductGroupsMarketsJson;
+
+      if (!string.IsNullOrEmpty(data))
+      {
+        var contentVersion = JsonConvert.DeserializeAnonymousType(data, new
+        {
+          Content = string.Empty
+        });
+        var privates = new PrivateObject(actual);
+        var prodGroups = privates.GetField("_productGroups") as IDictionary<int, ProductGroupMarketData>;
+        var items = XElement.Parse(contentVersion.Content).Descendants("productGroup");
+        foreach (var item in items.Where((i) => "99".Equals(i.Attribute("id").Value)))
+        {
+          CollectionAssert.Contains(prodGroups.Keys.ToList(), int.Parse(item.Attribute("id").Value));
+          var markets = item.Descendants("markets").Descendants("market");
+          foreach (var market in markets.Where((m) => !"es-XX".Equals(m.Attribute("id").Value, StringComparison.OrdinalIgnoreCase)))
+          {
+            HashSet<string> temp = prodGroups[int.Parse(item.Attribute("id").Value)].Markets;
+            CollectionAssert.Contains(temp.ToList(), market.Attribute("id").Value);
+          }
+        }
+      }
     }
   }
 }

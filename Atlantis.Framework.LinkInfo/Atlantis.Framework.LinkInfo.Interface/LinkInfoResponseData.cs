@@ -27,10 +27,7 @@ namespace Atlantis.Framework.LinkInfo.Interface
     public LinkInfoResponseData(Dictionary<string, string> dictResult, RequestData oRequestData, Exception ex)
     {
       _resultDictionary = dictResult;
-      _exception = new AtlantisException(oRequestData,
-                                   "GetLinkInfoResponseData",
-                                   ex.Message,
-                                   oRequestData.ToXML());
+      _exception = new AtlantisException("GetLinkInfoResponseData", 0, ex.Message, oRequestData.ToXML());
     }
 
     public Dictionary<string, string> Links

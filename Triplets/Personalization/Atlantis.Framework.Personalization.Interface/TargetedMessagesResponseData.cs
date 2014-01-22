@@ -17,7 +17,6 @@ namespace Atlantis.Framework.Personalization.Interface
 
     public TargetedMessages TargetedMessagesData { get; private set; }
     public string TMSUrl { get; private set; }
-    public bool TMSSwitchTurnedOff { get; set; }
 
     public TargetedMessagesResponseData(string xml, string tmsURL)
     {
@@ -37,11 +36,6 @@ namespace Atlantis.Framework.Personalization.Interface
     {
       TMSUrl = tmsURL;
       _exception = new AtlantisException(requestData, "TargetedMessagesResponseData", exception.Message, requestData.ToXML());
-    }
-
-    public TargetedMessagesResponseData(bool turnedOff)
-    {
-      TMSSwitchTurnedOff = true;
     }
 
     private TargetedMessages BuildTargetedMessages(string xmlResult)

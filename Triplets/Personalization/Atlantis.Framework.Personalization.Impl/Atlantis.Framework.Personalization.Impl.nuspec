@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>Atlantis.Framework.Personalization.Impl</id>
-    <version>4.14.1.9</version>
+    <version>$version$</version>
     <title>Atlantis Framework Personalization Impl</title>
     <authors>$author$</authors>
     <owners>$author$</owners>

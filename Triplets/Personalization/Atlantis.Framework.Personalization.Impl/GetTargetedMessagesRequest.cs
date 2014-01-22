@@ -11,102 +11,93 @@ namespace Atlantis.Framework.Personalization.Impl
 {
   public class GetTargetedMessagesRequest : IRequest
   {
-    private readonly Lazy<bool> _canCallTMS = new Lazy<bool>(() => DataCache.DataCache.GetAppSetting("ATLANTIS_PERSONALIZATION_TRIPLET_TMS_ON").Equals("true", StringComparison.OrdinalIgnoreCase));
-
     public IResponseData RequestHandler(RequestData oRequestData, ConfigElement oConfig)
     {
+      TargetedMessagesRequestData requestData = (TargetedMessagesRequestData)oRequestData;
       TargetedMessagesResponseData responseData = null;
-      if (_canCallTMS.Value)
+      Stream dataStream = null;
+
+      string url;
+      WsConfigElement serviceConfig = (WsConfigElement)oConfig;
+
+      if (serviceConfig.WSURL.EndsWith("/"))
       {
-        TargetedMessagesRequestData requestData = (TargetedMessagesRequestData)oRequestData;
+        url = string.Concat(serviceConfig.WSURL, requestData.GetWebServicePath());
+      }
+      else
+      {
+        url = string.Concat(serviceConfig.WSURL, "/", requestData.GetWebServicePath());
+      }
 
-        WsConfigElement serviceConfig = (WsConfigElement)oConfig;
-        string url;
+      try
+      {
 
-        if (serviceConfig.WSURL.EndsWith("/"))
+        string postData = requestData.GetPostData();
+        var buffer = Encoding.UTF8.GetBytes(postData);
+
+        HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create((new UriBuilder(url)).Uri);
+
+        if (webRequest != null)
         {
-          url = string.Concat(serviceConfig.WSURL, requestData.GetWebServicePath());
+          webRequest.Timeout = (int)requestData.RequestTimeout.TotalMilliseconds;
+          webRequest.CachePolicy = new RequestCachePolicy(RequestCacheLevel.BypassCache);
+          webRequest.Method = "POST";
+          webRequest.ContentType = "application/xml";
+          webRequest.Accept = "application/xml";
+          webRequest.ContentLength = buffer.Length;
+          webRequest.KeepAlive = false;
+          dataStream = webRequest.GetRequestStream();
         }
-        else
+
+        if (dataStream != null)
         {
-          url = string.Concat(serviceConfig.WSURL, "/", requestData.GetWebServicePath());
+          dataStream.Write(buffer, 0, buffer.Length);
+          dataStream.Close();
         }
 
-        Stream dataStream = null;
-
-        try
+        string response = null;
+        if (webRequest != null)
         {
-          string postData = requestData.GetPostData();
-          var buffer = Encoding.UTF8.GetBytes(postData);
+          var webResponse = webRequest.GetResponse() as HttpWebResponse;
 
-          HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create((new UriBuilder(url)).Uri);
-
-          if (webRequest != null)
+          if (webResponse != null)
           {
-            webRequest.Timeout = (int)requestData.RequestTimeout.TotalMilliseconds;
-            webRequest.CachePolicy = new RequestCachePolicy(RequestCacheLevel.BypassCache);
-            webRequest.Method = "POST";
-            webRequest.ContentType = "application/xml";
-            webRequest.Accept = "application/xml";
-            webRequest.ContentLength = buffer.Length;
-            webRequest.KeepAlive = false;
-            dataStream = webRequest.GetRequestStream();
-          }
-
-          if (dataStream != null)
-          {
-            dataStream.Write(buffer, 0, buffer.Length);
-            dataStream.Close();
-          }
-
-          string response = null;
-          if (webRequest != null)
-          {
-            var webResponse = webRequest.GetResponse() as HttpWebResponse;
-
-            if (webResponse != null)
+            var webResponseData = webResponse.GetResponseStream();
+            if (webResponseData != null)
             {
-              var webResponseData = webResponse.GetResponseStream();
-              if (webResponseData != null)
+              StreamReader responseReader = null;
+              try
               {
-                StreamReader responseReader = null;
-                try
+                responseReader = new StreamReader(webResponseData);
+                response = responseReader.ReadToEnd();
+              }
+              finally
+              {
+                if (responseReader != null)
                 {
-                  responseReader = new StreamReader(webResponseData);
-                  response = responseReader.ReadToEnd();
-                }
-                finally
-                {
-                  if (responseReader != null)
-                  {
-                    responseReader.Dispose();
-                  }
+                  responseReader.Dispose();
                 }
               }
             }
           }
+        }
 
-          responseData = new TargetedMessagesResponseData(response, url);
-        }
-        catch (Exception ex)
-        {
-          responseData = new TargetedMessagesResponseData(requestData, ex, url);
-        }
-        finally
-        {
-          if (dataStream != null)
-          {
-            dataStream.Dispose();
-          }
-        }
+        responseData = new TargetedMessagesResponseData(response, url);
       }
-      else
+      catch (Exception ex)
       {
-        responseData = new TargetedMessagesResponseData(true);
+        responseData = new TargetedMessagesResponseData(requestData, ex, url);
+      }
+      finally
+      {
+        if (dataStream != null)
+        {
+          dataStream.Dispose();
+        }
       }
 
       return responseData;
     }
-
   }
 }
+  

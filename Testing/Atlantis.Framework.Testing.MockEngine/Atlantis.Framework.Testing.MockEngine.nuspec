@@ -2,18 +2,16 @@
 <package >
   <metadata>
     <id>Atlantis.Framework.Testing.MockEngine</id>
-    <version>4.0.0.0</version>
-    <title>Atlantis Framework Testing MockEngine</title>
+    <version>$version$</version>
+    <title>Atlantis.Framework.Testing.MockEngine</title>
     <authors>$author$</authors>
     <owners>$author$</owners>
     <projectUrl>https://confluence.int.godaddy.com/display/ATLANTIS</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes></releaseNotes>
+    <releaseNotes>14.1.16.1: Added EngineRequestMocking class which allows for test code to quickly mock a triplet implementation without using a class and atlantis.config.</releaseNotes>
     <copyright>$copyright$</copyright>
-    <tags>Atlantis Framework Testing MockEngine</tags>
-    <dependencies>
-      <dependency id="Atlantis.Framework.Engine" version="4.0.0.0" />
-    </dependencies>
+    <tags>Atlantis Framework Testing MockEngine MockErrorLogger EngineRequestMocking</tags>
+    <dependencies />
   </metadata>
 </package>

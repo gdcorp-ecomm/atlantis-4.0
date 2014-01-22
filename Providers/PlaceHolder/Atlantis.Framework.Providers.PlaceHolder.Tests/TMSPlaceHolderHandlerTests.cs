@@ -1,5 +1,6 @@
 ﻿using Atlantis.Framework.Engine;
 using Atlantis.Framework.Interface;
+using Atlantis.Framework.Providers.AppSettings.Interface;
 using Atlantis.Framework.Providers.CDSContent.Interface;
 using Atlantis.Framework.Providers.Personalization.Interface;
 using Atlantis.Framework.Providers.PlaceHolder.Interface;
@@ -22,7 +23,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder.Tests
   [DeploymentItem("atlantis.config")]
   public class TMSPlaceHolderHandlerTests
   {
-    private readonly Lazy<bool> _canCallTMS = new Lazy<bool>(() => DataCache.DataCache.GetAppSetting("ATLANTIS_PERSONALIZATION_TRIPLET_TMS_ON").Equals("true", StringComparison.OrdinalIgnoreCase));
+    private const string AppSetting = "A.F.Prov.Personalization.TMS.On";
 
     public IProviderContainer InitializeProviderContainer()
     {
@@ -34,6 +35,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder.Tests
       providerContainer.RegisterProvider<ICDSContentProvider, MockCDSContentProvider>();
       providerContainer.RegisterProvider<IRenderPipelineProvider, RenderPipelineProvider>();
       providerContainer.RegisterProvider<IPersonalizationProvider, MockPersonalizationProvider>();
+      providerContainer.RegisterProvider<IAppSettingsProvider, MockAppSettingsProvider>();
 
       return providerContainer;
     }
@@ -152,23 +154,18 @@ namespace Atlantis.Framework.Providers.PlaceHolder.Tests
       EngineLogging.EngineLogger = mockLogger;
       try
       {
+        IProviderContainer providerContainer = InitializeProviderContainer();
+
         IPlaceHolder placeHolder = new TMSDocumentPlaceHolder("ProductUpsell", new List<string>() { "this is not to be found", "this too" });
 
-        IProviderContainer providerContainer = InitializeProviderContainer();
         IPlaceHolderProvider placeHolderProvider = providerContainer.Resolve<IPlaceHolderProvider>();
 
         string renderedContent = placeHolderProvider.ReplacePlaceHolders(placeHolder.ToMarkup(), new List<IRenderHandler> { new ProviderContainerDataTokenRenderHandler() });
 
         Assert.IsTrue(string.IsNullOrEmpty(renderedContent));
-        if (_canCallTMS.Value)
-        {
-          Assert.IsTrue(mockLogger.Exceptions.Count == 1);
-          Assert.IsTrue(mockLogger.Exceptions[0].ErrorDescription.Contains("None of the requested tags are found."));
-        }
-        else
-        {
-          Assert.IsTrue(mockLogger.Exceptions.Count == 0);
-        }
+
+        Assert.IsTrue(mockLogger.Exceptions.Count == 1);
+        Assert.IsTrue(mockLogger.Exceptions[0].ErrorDescription.Contains("None of the requested tags are found."));
       }
       finally
       {
@@ -290,7 +287,6 @@ namespace Atlantis.Framework.Providers.PlaceHolder.Tests
         IPlaceHolder placeHolder4 = new TMSDocumentPlaceHolder("ProductUpsell", new List<string>() { "duplicate" });
         IPlaceHolder placeHolder5 = new TMSDocumentPlaceHolder("ProductUpsell", new List<string>() { "duplicate" });
 
-
         IProviderContainer providerContainer2 = InitializeProviderContainer();
         IPlaceHolderProvider placeHolderProvider = providerContainer2.Resolve<IPlaceHolderProvider>();
 
@@ -309,31 +305,48 @@ namespace Atlantis.Framework.Providers.PlaceHolder.Tests
 
         string renderedContent4 = placeHolderProvider.ReplacePlaceHolders(placeHolder4.ToMarkup(), new List<IRenderHandler> { new ProviderContainerDataTokenRenderHandler() });
         Assert.AreEqual(renderedContent4, string.Empty);
-        if (_canCallTMS.Value)
-        {
-          Assert.IsTrue(mockLogger.Exceptions.Count == 1);
-          Assert.IsTrue(mockLogger.Exceptions[0].ErrorDescription.Contains("None of the requested tags are found"));
-        }
-        else
-        {
-          Assert.IsTrue(mockLogger.Exceptions.Count == 0);
-        }
-       
+
+        Assert.IsTrue(mockLogger.Exceptions.Count == 1);
+        Assert.IsTrue(mockLogger.Exceptions[0].ErrorDescription.Contains("None of the requested tags are found"));
+
         string renderedContent5 = placeHolderProvider.ReplacePlaceHolders(placeHolder5.ToMarkup(), new List<IRenderHandler> { new ProviderContainerDataTokenRenderHandler() });
         Assert.AreEqual(renderedContent5, string.Empty);
-        if (_canCallTMS.Value)
-        {
-          Assert.IsTrue(mockLogger.Exceptions.Count == 2);
-          Assert.IsTrue(mockLogger.Exceptions[0].ErrorDescription.Contains("None of the requested tags are found"));
-        }
-        else
-        {
-          Assert.IsTrue(mockLogger.Exceptions.Count == 0);
-        }
+        Assert.IsTrue(mockLogger.Exceptions.Count == 2);
+        Assert.IsTrue(mockLogger.Exceptions[0].ErrorDescription.Contains("None of the requested tags are found"));
       }
       finally
       {
         EngineLogging.EngineLogger = oldLogger;
+      }
+    }
+
+    [TestMethod]
+    public void DoesNotLogAMessageWhenTMSIsOff()
+    {
+      IErrorLogger oldLogger = EngineLogging.EngineLogger;
+      var mockLogger = new MockErrorLogger();
+      EngineLogging.EngineLogger = mockLogger;
+      IProviderContainer providerContainer = InitializeProviderContainer();
+      try
+      {
+        IAppSettingsProvider settings = providerContainer.Resolve<IAppSettingsProvider>();
+        ((MockAppSettingsProvider)settings).ReturnValue = "false";
+
+        IPlaceHolder placeHolder = new TMSDocumentPlaceHolder("ProductUpsell", new List<string>() { "this is not to be found", "this too" });
+
+        IPlaceHolderProvider placeHolderProvider = providerContainer.Resolve<IPlaceHolderProvider>();
+
+        string renderedContent = placeHolderProvider.ReplacePlaceHolders(placeHolder.ToMarkup(), new List<IRenderHandler> { new ProviderContainerDataTokenRenderHandler() });
+
+        Assert.IsTrue(string.IsNullOrEmpty(renderedContent));
+
+        Assert.IsTrue(mockLogger.Exceptions.Count == 0);
+      }
+      finally
+      {
+        EngineLogging.EngineLogger = oldLogger;
+        IAppSettingsProvider settings = providerContainer.Resolve<IAppSettingsProvider>();
+        ((MockAppSettingsProvider)settings).ReturnValue = "true";
       }
     }
 

@@ -1,4 +1,5 @@
 ﻿using Atlantis.Framework.Personalization.Interface;
+using Atlantis.Framework.Providers.AppSettings.Interface;
 using Atlantis.Framework.Providers.CDSContent.Interface;
 using Atlantis.Framework.Providers.Personalization.Interface;
 using Atlantis.Framework.Providers.PlaceHolder.Interface;
@@ -14,8 +15,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolderHandlers
   {
     private const string APP_NAME = "tms";
     private const string LOCATION_FORMAT = "{0}/default_template";
-
-    private readonly Lazy<bool> _canCallTMS = new Lazy<bool>(() => DataCache.DataCache.GetAppSetting("ATLANTIS_PERSONALIZATION_TRIPLET_TMS_ON").Equals("true", StringComparison.OrdinalIgnoreCase));
+    private const string AppSetting = "A.F.Prov.Personalization.TMS.On";
 
     internal TMSDocumentPlaceHolderHandler(IPlaceHolderHandlerContext context)
       : base(context)
@@ -52,7 +52,13 @@ namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolderHandlers
             }
             else
             {
-              if (_canCallTMS.Value)
+              bool isTMSOn = true;
+              IAppSettingsProvider appSettings;
+              if (Context.ProviderContainer.TryResolve<IAppSettingsProvider>(out appSettings))
+              {
+                isTMSOn = appSettings.GetAppSetting(AppSetting).Equals("true", StringComparison.OrdinalIgnoreCase);
+              }
+              if (isTMSOn)
               {
                 throw new Exception(string.Format("None of the requested tags are found.  Tags: \"{0}\"", string.Join(", ", placeHolderData.MessageTags)));
               }

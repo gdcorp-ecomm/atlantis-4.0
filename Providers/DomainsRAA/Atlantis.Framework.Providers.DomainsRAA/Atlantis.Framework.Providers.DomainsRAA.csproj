@@ -36,7 +36,7 @@
   <ItemGroup>
     <Reference Include="Atlantis.Framework.DomainsRAA.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.DomainsRAA.Interface.4.14.1.22\lib\net40\Atlantis.Framework.DomainsRAA.Interface.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.DomainsRAA.Interface.14.1.22.1\lib\net40\Atlantis.Framework.DomainsRAA.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Engine">
       <HintPath>..\packages\Atlantis.Framework.Engine.4.0.0.0\lib\net40\Atlantis.Framework.Engine.dll</HintPath>

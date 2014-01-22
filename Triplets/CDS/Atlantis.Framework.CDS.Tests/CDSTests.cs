@@ -4,6 +4,7 @@ using Atlantis.Framework.CDS.Interface;
 using System.Collections.ObjectModel;
 using System.Xml.Linq;
 using System.Collections.Generic;
+using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.CDS.Tests
 {

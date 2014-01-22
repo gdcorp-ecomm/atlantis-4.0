@@ -59,6 +59,7 @@
     <Compile Include="ContentVersionRequest.cs" />
     <Compile Include="PackageJSONRequest .cs" />
     <Compile Include="PackageXMLRequest .cs" />
+    <Compile Include="ProductGroupsOfferedMarketsRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PackageGroupRequest.cs" />
     <Compile Include="RoutingRulesRequest.cs" />

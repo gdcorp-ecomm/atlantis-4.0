@@ -1,8 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{C3C614C7-FAB8-47FC-ACCE-C229E99AEF87}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.DotTypeEoi.Impl", "Atlantis.Framework.DotTypeEoi.Impl\Atlantis.Framework.DotTypeEoi.Impl.csproj", "{59FF3C50-A3DF-4CF2-9578-5C65B43C59B6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.DotTypeEoi.Interface", "Atlantis.Framework.DotTypeEoi.Interface\Atlantis.Framework.DotTypeEoi.Interface.csproj", "{7D931E9E-8088-4B73-BEBC-7BAE27A5083B}"

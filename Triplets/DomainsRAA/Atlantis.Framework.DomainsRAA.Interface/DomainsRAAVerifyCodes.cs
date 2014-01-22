@@ -7,7 +7,7 @@
     ShopperArtifactVerified = 100,
     ShopperArtifactVerifyPending = 101,
     ShopperArtifactVerifySuspended = 102,
-    ShopperArtifactIsNotVerified = 103,
+    ShopperArtifactIsNotVerifiedNotPending = 103,
 
     DomainRecordVerified = 200,
     DomainRecordNotVerified = 201,

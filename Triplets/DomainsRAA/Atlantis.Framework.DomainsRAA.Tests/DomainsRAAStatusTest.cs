@@ -95,7 +95,7 @@ namespace Atlantis.Framework.DomainsRAA.Tests
       Assert.IsTrue(shopperVerfiedItem.ItemVerifiedCode == DomainsRAAVerifyCode.ShopperArtifactVerified);
 
       var shopperNotVerfiedItem = response.VerifiedResponseItems.FirstOrDefault(vi => vi.ItemTypeValue == notVerifiedEmail);
-      Assert.IsTrue(shopperNotVerfiedItem.ItemVerifiedCode == DomainsRAAVerifyCode.ShopperArtifactIsNotVerified);
+      Assert.IsTrue(shopperNotVerfiedItem.ItemVerifiedCode == DomainsRAAVerifyCode.ShopperArtifactIsNotVerifiedNotPending);
     }
 
     [TestMethod]
@@ -139,7 +139,7 @@ namespace Atlantis.Framework.DomainsRAA.Tests
       Assert.IsTrue(verfiedItem.ItemVerifiedCode == DomainsRAAVerifyCode.ShopperArtifactVerified);
 
       verfiedItem = response.VerifiedResponseItems.FirstOrDefault(vi => vi.ItemTypeValue == verifiedPhone);
-      Assert.IsTrue(verfiedItem.ItemVerifiedCode == DomainsRAAVerifyCode.ShopperArtifactIsNotVerified);
+      Assert.IsTrue(verfiedItem.ItemVerifiedCode == DomainsRAAVerifyCode.ShopperArtifactIsNotVerifiedNotPending);
 
       verfiedItem = response.VerifiedResponseItems.FirstOrDefault(vi => vi.ItemTypeValue == veririedDomainId);
       Assert.IsTrue(verfiedItem.ItemVerifiedCode == DomainsRAAVerifyCode.DomainRecordNotEligibleForRAA);

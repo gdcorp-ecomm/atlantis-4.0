@@ -3,24 +3,9 @@
   public enum DomainsRAAVerifyCode
   {
     None = -1,
-
-    //ShopperArtifactVerified = 100,
     Verified = 100,
     VerifyPending = 101,
-    NotVerified = 102,
-
-    //ShopperArtifactVerifyPending = 101,
-    //ShopperArtifactVerifySuspended = 102,
-    //ShopperArtifactIsNotVerified = 103,
-
-    //DomainRecordVerified = 200,
-    //DomainRecordNotVerified = 201,
-    //DomainRecordPendingManualVerify = 202,
-    //DomainRecordVerifySuspended = 203,
-    //DomainRecordNotEligibleForRAA = 204,
-
-    //ShopperVerified = 300,
-    //ShopperVerifyPending = 301,
-    //ShopperVerifySuspended = 302
+    NotVerified = 102,   
+    VerifyNotRequired = 103
   }
 }

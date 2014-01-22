@@ -39,6 +39,9 @@ namespace Atlantis.Framework.Providers.DomainsRAA
         case DomainsRAAService.DomainsRAAVerifyCode.DomainRecordPendingManualVerify:
           verifyCode = DomainsRAAVerifyCode.VerifyPending;
           break;
+        case DomainsRAAService.DomainsRAAVerifyCode.ShopperArtifactIsNotVerifiedNotPending:
+          verifyCode = DomainsRAAVerifyCode.VerifyNotRequired;
+          break;
         default:
           verifyCode = DomainsRAAVerifyCode.NotVerified;
           break;

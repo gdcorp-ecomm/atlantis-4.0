@@ -129,5 +129,25 @@ namespace Atlantis.Framework.Providers.DomainsRAAVerify.Tests
       var verfiedEmailItem = raaStatus.VerifiedItems.FirstOrDefault(vi => vi.ItemTypeValue == email);
       Assert.IsTrue(verfiedEmailItem.ItemVerifiedCode == DomainsRAAVerifyCode.Verified);
     }
+
+    [TestMethod]
+    public void EmailVerifyNotRequired()
+    {
+      const string email = "pmccormack@godaddy.com";
+
+      var items = new List<IItem>
+      {
+        Item.Create(ItemTypes.EMAIL, email)
+      };
+
+      IDomainsRAAStatus raaStatus;
+      Assert.IsTrue(RAAProvider.TryGetStatus(items, out raaStatus));
+      Assert.IsTrue(raaStatus.HasVerifiedResponseItems);
+
+      Assert.IsFalse(raaStatus.HasErrorCodes);
+
+      var verfiedEmailItem = raaStatus.VerifiedItems.FirstOrDefault(vi => vi.ItemTypeValue == email);
+      Assert.IsTrue(verfiedEmailItem.ItemVerifiedCode == DomainsRAAVerifyCode.VerifyNotRequired);
+    }
   }
 }

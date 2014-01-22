@@ -9,7 +9,7 @@ namespace Atlantis.Framework.Products.Interface
   {
     public override string GetCacheMD5()
     {
-      return DateTime.Now.AddMinutes(10).ToString("yyyyMMddHHmm");
+      return "data";
     }
   }
 }

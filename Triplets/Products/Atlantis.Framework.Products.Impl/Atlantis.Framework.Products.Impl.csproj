@@ -58,7 +58,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CDSService.cs" />
     <Compile Include="NonUnifiedPfidRequest.cs" />
+    <Compile Include="ProductGroupsOfferedMarketsRequest.cs" />
     <Compile Include="ProductGroupsOfferedRequest.cs" />
     <Compile Include="ProductInfoRequest.cs" />
     <Compile Include="ProductGroupOfferedCountriesRequest.cs" />

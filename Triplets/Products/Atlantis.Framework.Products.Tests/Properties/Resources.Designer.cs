@@ -68,5 +68,23 @@ namespace Atlantis.Framework.Products.Tests.Properties {
                 return ResourceManager.GetString("ProductGroupCountries", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;productGroups&gt;&lt;productGroup id=&quot;99&quot;&gt;&lt;markets&gt;&lt;market id=&quot;en-US&quot; /&gt;&lt;market id=&quot;en-CA&quot; /&gt;&lt;market id=&quot;es-US&quot; /&gt;&lt;market id=&quot;en-GB&quot; /&gt;&lt;market id=&quot;pt-BR&quot; /&gt;&lt;market id=&quot;es-CL&quot; /&gt;&lt;market id=&quot;es-CO&quot; /&gt;&lt;market id=&quot;en-IE&quot; /&gt;&lt;market id=&quot;es-MX&quot; /&gt;&lt;market id=&quot;es-PE&quot; /&gt;&lt;market id=&quot;es-VE&quot; /&gt;&lt;/markets&gt;&lt;/productGroup&gt;&lt;/productGroups&gt;.
+        /// </summary>
+        internal static string ProductGroupMarkets {
+            get {
+                return ResourceManager.GetString("ProductGroupMarkets", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to { &quot;_id&quot; : { &quot;$oid&quot; : &quot;52def49ef778fc1d1c9b7c59&quot; }, &quot;Content&quot; : &quot;&lt;productGroups&gt;&lt;productGroup id=\&quot;99\&quot;&gt;&lt;markets&gt;&lt;market id=\&quot;en-US\&quot; /&gt;&lt;market id=\&quot;en-CA\&quot; /&gt;&lt;market id=\&quot;es-US\&quot; /&gt;&lt;market id=\&quot;en-GB\&quot; /&gt;&lt;market id=\&quot;pt-BR\&quot; /&gt;&lt;market id=\&quot;es-CL\&quot; /&gt;&lt;market id=\&quot;es-CO\&quot; /&gt;&lt;market id=\&quot;en-IE\&quot; /&gt;&lt;market id=\&quot;es-MX\&quot; /&gt;&lt;market id=\&quot;es-PE\&quot; /&gt;&lt;market id=\&quot;es-VE\&quot; /&gt;&lt;/markets&gt;&lt;/productGroup&gt;&lt;productGroup id=\&quot;99\&quot;&gt;&lt;markets&gt;&lt;market id=\&quot;es-XX\&quot; /&gt;&lt;/markets&gt;&lt;/productGroup&gt;&lt;productGroup id=\&quot;100\&quot;&gt;&lt;markets&gt;&lt;market [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string ProductGroupsMarketsJson {
+            get {
+                return ResourceManager.GetString("ProductGroupsMarketsJson", resourceCulture);
+            }
+        }
     }
 }

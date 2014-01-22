@@ -14,6 +14,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Atlantis.Framework.Providers.AppSettings.Interface;
 
 namespace Atlantis.Framework.Providers.Personalization.Tests
 {
@@ -33,8 +34,12 @@ namespace Atlantis.Framework.Providers.Personalization.Tests
       _container.RegisterProvider<IShopperContext, MockShopperContext>();
       _container.RegisterProvider<IPersonalizationProvider, PersonalizationProvider>();
       _container.RegisterProvider<IDebugContext, MockDebugContext>();
+      _container.RegisterProvider<IAppSettingsProvider, MockAppSettingsProvider>();
       PersonalizationConfig.TMSAppId = "2";
       _container.SetData<bool>("MockSiteContextSettings.IsRequestInternal", true);
+
+      IAppSettingsProvider settings = _container.Resolve<IAppSettingsProvider>();
+      ((MockAppSettingsProvider)settings).ReturnValue = "true";
     }
 
     [TestMethod]
@@ -58,8 +63,7 @@ namespace Atlantis.Framework.Providers.Personalization.Tests
     }
 
     [TestMethod]
-    [ExpectedException(typeof(ApplicationException))]
-    public void ThrowsAnExceptionWhenAppIdIsEmpty()
+    public void LogsAnExceptionWhenAppIdIsEmpty()
     {
       IErrorLogger oldLogger = EngineLogging.EngineLogger;
       var mockLogger = new MockErrorLogger();
@@ -72,6 +76,9 @@ namespace Atlantis.Framework.Providers.Personalization.Tests
         _container.Resolve<IShopperContext>().SetNewShopper("12345");
         IPersonalizationProvider prov = _container.Resolve<IPersonalizationProvider>();
         var targetMessage = prov.GetTargetedMessages("Homepage");
+
+        Assert.IsTrue(mockLogger.Exceptions.Count == 1);
+        Assert.IsTrue(mockLogger.Exceptions[0].ErrorDescription.Contains("PersonalizationConfig.TMSAppId"));
       }
       finally
       {
@@ -460,6 +467,7 @@ namespace Atlantis.Framework.Providers.Personalization.Tests
       try
       {
         InitializeProvidersContexts();
+
         ISiteContext siteContext = _container.Resolve<ISiteContext>();
         HttpCookie preferencesCookie = siteContext.NewCrossDomainMemCookie("visitor");
         string guid = Guid.NewGuid().ToString();
@@ -485,6 +493,37 @@ namespace Atlantis.Framework.Providers.Personalization.Tests
       finally
       {
         EngineLogging.EngineLogger = oldLogger;
+      }
+    }
+
+    [TestMethod]
+    public void DoesNotCallTripletWhenTurnedOff()
+    {
+      IErrorLogger oldLogger = EngineLogging.EngineLogger;
+      var mockLogger = new MockErrorLogger();
+      EngineLogging.EngineLogger = mockLogger;
+
+      try
+      {
+        InitializeProvidersContexts();
+
+        IAppSettingsProvider settings = _container.Resolve<IAppSettingsProvider>();
+        ((MockAppSettingsProvider)settings).ReturnValue = "false";
+
+        IPersonalizationProvider prov = _container.Resolve<IPersonalizationProvider>();
+        var targetMessage = prov.GetTargetedMessages("Homepage");
+        Assert.IsTrue(mockLogger.Exceptions.Count == 0);
+
+        
+        IDebugContext debugContext = _container.Resolve<IDebugContext>();
+        var list = debugContext.GetDebugTrackingData();
+        Assert.IsTrue(list.Count == 0);
+      }
+      finally
+      {
+        EngineLogging.EngineLogger = oldLogger;
+        IAppSettingsProvider settings = _container.Resolve<IAppSettingsProvider>();
+        ((MockAppSettingsProvider)settings).ReturnValue = "true";
       }
     }
   }

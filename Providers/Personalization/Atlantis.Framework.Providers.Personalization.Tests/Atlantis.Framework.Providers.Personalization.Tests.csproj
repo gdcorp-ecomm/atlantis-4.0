@@ -40,9 +40,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Atlantis.Framework.DataCacheService, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.DataCacheService.4.0.0.0\lib\net40\Atlantis.Framework.DataCacheService.dll</HintPath>
+    <Reference Include="Atlantis.Framework.AppSettings.Interface">
+      <HintPath>..\packages\Atlantis.Framework.AppSettings.Interface.4.0.0.0\lib\net40\Atlantis.Framework.AppSettings.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Engine, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -59,9 +58,19 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Atlantis.Framework.Personalization.Interface.4.14.1.10\lib\net40\Atlantis.Framework.Personalization.Interface.dll</HintPath>
     </Reference>
+    <Reference Include="Atlantis.Framework.Products.Interface">
+      <HintPath>..\packages\Atlantis.Framework.Products.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Products.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Providers.AppSettings.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Providers.AppSettings.Interface.4.13.12.17\lib\net40\Atlantis.Framework.Providers.AppSettings.Interface.dll</HintPath>
+    </Reference>
     <Reference Include="Atlantis.Framework.Providers.Containers, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Atlantis.Framework.Providers.Containers.4.13.10.12\lib\net40\Atlantis.Framework.Providers.Containers.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Providers.Interface">
+      <HintPath>..\packages\Atlantis.Framework.Providers.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Providers.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Providers.Preferences.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -99,6 +108,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="MockAppSettingsProvider.cs" />
     <Compile Include="MockConsumedMessage.cs" />
     <Compile Include="MockGetTargetedMessagesRequest.cs" />
     <Compile Include="PersonalizationMessageTests.cs" />

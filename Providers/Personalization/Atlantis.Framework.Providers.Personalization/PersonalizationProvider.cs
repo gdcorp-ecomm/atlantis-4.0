@@ -7,6 +7,7 @@ using Atlantis.Framework.Engine;
 using System.Text;
 using System.Web;
 using System.Linq;
+using Atlantis.Framework.Providers.AppSettings.Interface;
 
 namespace Atlantis.Framework.Providers.Personalization
 {
@@ -18,10 +19,13 @@ namespace Atlantis.Framework.Providers.Personalization
     const string DATA_TOKEN_MESSAGE_NAME = "TMSMessageName";
     const string DATA_TOKEN_MESSAGE_TAG = "TMSMessageTag";
     const string DATA_TOKEN_MESSAGE_TRACKING_ID = "TMSMessageTrackingId";
+    const string AppSetting = "A.F.Prov.Personalization.TMS.On";
+    const int TIMEOUT_MILLISECONDS = 100;
 
     private readonly Lazy<ISiteContext> _siteContext;
     private readonly Lazy<IShopperContext> _shopperContext;
     private readonly Lazy<IDebugContext> _debugContext;
+    private readonly Lazy<IAppSettingsProvider> _appSettingsProvider;
     private readonly List<IConsumedMessage> _emptyMessages;
     private readonly Lazy<string> _trackingData;
     
@@ -36,6 +40,7 @@ namespace Atlantis.Framework.Providers.Personalization
       _shopperContext = new Lazy<IShopperContext>(() => Container.Resolve<IShopperContext>());
       _debugContext = new Lazy<IDebugContext>(() => Container.Resolve<IDebugContext>());
       _trackingData = new Lazy<string>(() => GetTrackingData());
+      _appSettingsProvider = new Lazy<IAppSettingsProvider>(() => Container.Resolve<IAppSettingsProvider>());
       _emptyMessages = new List<IConsumedMessage>();
     }
 
@@ -58,30 +63,50 @@ namespace Atlantis.Framework.Providers.Personalization
     public virtual TargetedMessages GetTargetedMessages(string interactionPoint)
     {
       TargetedMessages messages = null;
-      TargetedMessagesResponseData response;
-
-      if (string.IsNullOrEmpty(PersonalizationConfig.TMSAppId))
-      {
-        throw new ApplicationException("Config value, \"PersonalizationConfig.TMSAppId\" is empty.  Pleas set this in your application start event.");
-      }
 
       TargetedMessagesRequestData request = new TargetedMessagesRequestData(_shopperContext.Value.ShopperId, _siteContext.Value.PrivateLabelId.ToString(), PersonalizationConfig.TMSAppId, interactionPoint, VisitorGuid, _siteContext.Value.ISC);
-      bool foundInSession = _targetedMessagesSessionData.Value.TryGetData(request, out response);
+      request.RequestTimeout = TimeSpan.FromMilliseconds(TIMEOUT_MILLISECONDS);
+      try
+      {
+        bool isTMSOn = _appSettingsProvider.Value.GetAppSetting(AppSetting).Equals("true", StringComparison.OrdinalIgnoreCase);
 
-      if (foundInSession)
-      {
-        messages = response.TargetedMessagesData;
-        LogDebugMessage("TMS Service URL (from Session)", response.TMSUrl);
-      }
-      else
-      {
-        response = (TargetedMessagesResponseData)Engine.Engine.ProcessRequest(request, PersonalizationEngineRequests.RequestId);
-        if (response != null)
+        if (isTMSOn)
         {
-          _targetedMessagesSessionData.Value.SetData(request, response);
-          messages = response.TargetedMessagesData;
-          LogDebugMessage("TMS Service URL", response.TMSUrl);
+          TargetedMessagesResponseData response;
+
+          if (string.IsNullOrEmpty(PersonalizationConfig.TMSAppId))
+          {
+            throw new ApplicationException("Config value, \"PersonalizationConfig.TMSAppId\" is empty.  Pleas set this in your application start event.");
+          }
+
+          bool foundInSession = _targetedMessagesSessionData.Value.TryGetData(request, out response);
+
+          if (foundInSession)
+          {
+            messages = response.TargetedMessagesData;
+            LogDebugMessage("TMS Service URL (from Session)", response.TMSUrl);
+          }
+          else
+          {
+            response = (TargetedMessagesResponseData)Engine.Engine.ProcessRequest(request, PersonalizationEngineRequests.RequestId);
+            if (response != null)
+            {
+              _targetedMessagesSessionData.Value.SetData(request, response);
+              messages = response.TargetedMessagesData;
+              LogDebugMessage("TMS Service URL", response.TMSUrl);
+            }
+          }
         }
+      }
+      catch (Exception ex)
+      {
+        AtlantisException aex = new AtlantisException(request,
+                                                    "PersonalizationProvider.GetTargetedMessages",
+                                                    ex.ToString(),
+                                                    request.GetWebServicePath(), 
+                                                    ex);
+
+        Engine.Engine.LogAtlantisException(aex);
       }
       
       return messages;

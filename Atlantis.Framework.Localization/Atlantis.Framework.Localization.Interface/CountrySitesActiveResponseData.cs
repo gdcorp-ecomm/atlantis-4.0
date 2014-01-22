@@ -79,15 +79,14 @@ namespace Atlantis.Framework.Localization.Interface
         }
         else
         {
-          var aex = new AtlantisException("Atlantis.Framework.Localization.CountrySitesActiveResponseData.FromCacheDataXml", "0",
-                                          "WS Response was empty string.", string.Empty, null, null);
+          var aex = new AtlantisException("Atlantis.Framework.Localization.CountrySitesActiveResponseData.FromCacheDataXml", 0, "WS Response was empty string.", string.Empty);
           Engine.EngineLogging.EngineLogger.LogAtlantisException(aex);
         }
       }
       catch (Exception ex)
       {
         string message = ex.Message + Environment.NewLine + ex.StackTrace;
-        var aex = new AtlantisException("Atlantis.Framework.Localization.CountrySitesActiveResponseData.FromCacheDataXml", "0", "WS Response contains invalid XML or invalid price values.", message, null, null);
+        var aex = new AtlantisException("Atlantis.Framework.Localization.CountrySitesActiveResponseData.FromCacheDataXml", 0, "WS Response contains invalid XML or invalid price values.", message);
         Engine.EngineLogging.EngineLogger.LogAtlantisException(aex);
       }
 

@@ -44,7 +44,7 @@ namespace Atlantis.Framework.Localization.Interface
         }
         else
         {
-          var aex = new AtlantisException("Atlantis.Framework.Localization.CountryCodeMarketIdsResponseData.FromCacheDataXml", "0", "WS Response was empty string.", string.Empty, null, null);
+          var aex = new AtlantisException("Atlantis.Framework.Localization.CountryCodeMarketIdsResponseData.FromCacheDataXml", 0, "WS Response was empty string.", string.Empty);
           Engine.EngineLogging.EngineLogger.LogAtlantisException(aex);
           response = NoMarketsResponse;
         }
@@ -52,7 +52,7 @@ namespace Atlantis.Framework.Localization.Interface
       catch (Exception ex)
       {
         var message = string.Concat(ex.Message, Environment.NewLine, ex.StackTrace);
-        var aex = new AtlantisException("Atlantis.Framework.Localization.CountryCodeMarketIdsResponseData.FromCacheDataXml", "0", "WS Response contains invalid XML", message, null, null);
+        var aex = new AtlantisException("Atlantis.Framework.Localization.CountryCodeMarketIdsResponseData.FromCacheDataXml", 0, "WS Response contains invalid XML", message);
         Engine.EngineLogging.EngineLogger.LogAtlantisException(aex);
         response = NoMarketsResponse;
       }

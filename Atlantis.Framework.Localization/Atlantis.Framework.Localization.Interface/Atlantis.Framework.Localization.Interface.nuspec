@@ -2,8 +2,8 @@
 <package >
   <metadata>
     <id>Atlantis.Framework.Localization.Interface</id>
-    <version>4.13.11.20</version>
-    <title>Atlantis Framework Localization Interface</title>
+    <version>$version$</version>
+    <title>Atlantis.Framework.Localization.Interface</title>
     <authors>$author$</authors>
     <owners>$author$</owners>
     <projectUrl>https://confluence.int.godaddy.com/display/ATLANTIS</projectUrl>
@@ -11,7 +11,7 @@
     <description>$description$</description>
     <releaseNotes>Added CountryCodeMarketIds triplet</releaseNotes>
     <copyright>$copyright$</copyright>
-    <tags>Atlantis Framework Localization Interface</tags>
+    <tags>Atlantis.Framework.Localization.Interface</tags>
     <dependencies>
     </dependencies>
   </metadata>

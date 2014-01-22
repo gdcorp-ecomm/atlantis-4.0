@@ -56,7 +56,7 @@ namespace Atlantis.Framework.Language.Tests
       catch (Exception ex)
       {
         //Assert
-        Assert.AreEqual("The remote name could not be resolved: 'cms.devtestingstuff.glbt1.gdg'", ex.Message);
+        Assert.AreEqual("The remote name could not be resolved: 'cms.devtestingstuff.glbt1.gdg'", ex.Message.Substring(0,70));
         throw;
       }
 

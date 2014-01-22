@@ -1,4 +1,5 @@
 ﻿using Atlantis.Framework.Interface;
+using System;
 using System.Xml.Linq;
 
 namespace Atlantis.Framework.Language.Interface
@@ -20,6 +21,7 @@ namespace Atlantis.Framework.Language.Interface
       ContextId = contextId;
     }
 
+    [Obsolete("Do not implement this constructor.")]
     public LanguagePhraseRequestData(string shopperId, string sourceURL, string orderId, string pathway, int pageCount, string dictionaryName, string phraseKey, string fullLanguage, string countrySite, int contextId)
       : base(shopperId, sourceURL, orderId, pathway, pageCount)
     {

@@ -71,11 +71,13 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration.Handlers
           };
           result.Add(formField);
 
+          var hyphenStrippedDomainName = domain.Replace("-", "");
+
           if (HttpContext.Current != null)
           {
-            HttpContext.Current.Session[domain] = claimResponse.NoticeXml;
+            HttpContext.Current.Session[hyphenStrippedDomainName] = claimResponse.NoticeXml;
           }
-          formField = new FormField { Name = string.Format("claimxml-{0}-{1}", field.FieldName, domain), Type = FormFieldTypes.Hidden };
+          formField = new FormField { Name = string.Format("claimxml-{0}-{1}", field.FieldName, hyphenStrippedDomainName), Type = FormFieldTypes.Hidden };
           result.Add(formField);
 
           formField = new FormField { Name = "acceptedDate", Value = DateTime.Now.ToUniversalTime().ToString("o"), Type = FormFieldTypes.Hidden };

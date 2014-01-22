@@ -15,7 +15,7 @@ namespace Atlantis.Framework.Products.Interface
       public string oid
       {
         get;
-        set;
+        internal set;
       }
     }
 

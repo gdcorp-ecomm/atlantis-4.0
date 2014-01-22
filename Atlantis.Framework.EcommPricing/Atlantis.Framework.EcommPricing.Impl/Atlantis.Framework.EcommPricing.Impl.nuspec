@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <package >
   <metadata>
-    <id>Atlantis.Framework.EcommPricing</id>
-    <version>4.0.0.0</version>
-    <title>Atlantis Framework EcommPricing</title>
+    <id>Atlantis.Framework.EcommPricing.Impl</id>
+    <version>$version$</version>
+    <title>Atlantis.Framework.EcommPricing.Impl</title>
     <authors>$author$</authors>
     <owners>$author$</owners>
     <projectUrl>https://confluence.int.godaddy.com/display/ATLANTIS</projectUrl>
@@ -11,11 +11,8 @@
     <description>$description$</description>
     <releaseNotes></releaseNotes>
     <copyright>$copyright$</copyright>
-    <tags>Atlantis Framework EcommPricing</tags>
-    <dependencies>
-      <dependency id="Atlantis.Framework.DataCacheService" version="4.0.0.0" />
-      <dependency id="Atlantis.Framework.Engine" version="4.0.0.0" />
-    </dependencies>
+    <tags>Atlantis.Framework.EcommPricing.Impl</tags>
+    <dependencies />
   </metadata>
   <files>
     <file src="atlantis.config.transform" target="content\atlantis.config.transform" />

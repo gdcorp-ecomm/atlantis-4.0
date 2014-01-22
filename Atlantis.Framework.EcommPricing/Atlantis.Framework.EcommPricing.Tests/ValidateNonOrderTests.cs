@@ -206,9 +206,7 @@ namespace Atlantis.Framework.EcommPricing.Tests
 
     private class WrongRequestType : RequestData
     {
-      public WrongRequestType()
-        : base(string.Empty, string.Empty, string.Empty, string.Empty, 0)
-      { }
+      public WrongRequestType() { }
 
       public override string GetCacheMD5()
       {

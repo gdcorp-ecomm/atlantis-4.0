@@ -44,7 +44,7 @@ namespace Atlantis.Framework.Shopper.Impl
       catch (Exception ex)
       {
         string message = ex.Message + ex.StackTrace;
-        var exception = new AtlantisException(requestData, "ShopperPriceTypeRequest.RequestHandler()", message, requestData.ToXML());
+        var exception = new AtlantisException("ShopperPriceTypeRequest.RequestHandler()", 0, message, requestData.ToXML());
         Engine.Engine.LogAtlantisException(exception);
         return ShopperPriceTypeResponseData.Standard;      
       }

@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <package >
   <metadata>
-    <id>Atlantis.Framework.Shopper</id>
-    <version>4.13.9.30</version>
+    <id>Atlantis.Framework.Shopper.Impl</id>
+    <version>$version$</version>
     <title>Atlantis.Framework.Shopper.Impl</title>
     <authors>$author$</authors>
     <owners>$author$</owners>

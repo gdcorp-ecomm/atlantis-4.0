@@ -60,10 +60,7 @@ namespace Atlantis.Framework.ManagerUser.Interface
       }
       catch (Exception ex)
       {
-        _ex = new AtlantisException(
-          "ManagerUserLookup.ctor",
-          string.Empty, string.Empty, ex.Message, responseXml,
-          string.Empty, string.Empty, string.Empty, string.Empty, 0);
+        _ex = new AtlantisException("ManagerUserLookup.ctor", 0, ex.Message, responseXml);
       }
     }
 
@@ -95,10 +92,7 @@ namespace Atlantis.Framework.ManagerUser.Interface
       }
       catch (Exception ex)
       {
-        _ex = new AtlantisException(
-          "ManagerUserLookup.ParseXml",
-          string.Empty, string.Empty, ex.Message, _responseXml.ToString(),
-          string.Empty, string.Empty, string.Empty, string.Empty, 0);
+        _ex = new AtlantisException("ManagerUserLookup.ParseXml", 0, ex.Message, _responseXml.ToString());
       }
     }
 
@@ -111,10 +105,7 @@ namespace Atlantis.Framework.ManagerUser.Interface
     public ManagerUserLookupResponseData(string responseXml, RequestData requestData, Exception ex)
     {
       _responseXml = null;
-      _ex = new AtlantisException(requestData,
-                                   "ManagerUserLookupResponseData",
-                                   ex.Message,
-                                   requestData.ToXML());
+      _ex = new AtlantisException("ManagerUserLookupResponseData", 0, ex.Message, requestData.ToXML());
     }
 
     #region IResponseData Members

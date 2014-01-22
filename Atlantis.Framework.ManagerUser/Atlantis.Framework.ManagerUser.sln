@@ -1,7 +1,5 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{21FB9155-9812-4ECD-98F5-5DAD45D328F3}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.ManagerUser.Interface", "Atlantis.Framework.ManagerUser.Interface\Atlantis.Framework.ManagerUser.Interface.csproj", "{55F48501-FE1B-441B-A786-A14001AD2F04}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.ManagerUser.Impl", "Atlantis.Framework.ManagerUser.Impl\Atlantis.Framework.ManagerUser.Impl.csproj", "{544997FA-FBE6-49F9-BEA0-D55E6B7D7E3F}"

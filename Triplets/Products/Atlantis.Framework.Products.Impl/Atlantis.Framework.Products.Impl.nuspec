@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0"?>
 <package >
   <metadata>
-    <id>Atlantis.Framework.Products</id>
+    <id>Atlantis.Framework.Products.Impl</id>
     <version>$version$</version>
-    <title>Atlantis Framework Products</title>
+    <title>Atlantis.Framework.Products.Impl</title>
     <authors>$author$</authors>
     <owners>$author$</owners>
     <projectUrl>https://confluence.int.godaddy.com/display/ATLANTIS</projectUrl>
@@ -13,7 +13,7 @@
       14.1.16 - Added ProductGroupOfferedCountries
     </releaseNotes>
     <copyright>$copyright$</copyright>
-    <tags>Atlantis Framework Products</tags>
+    <tags>Atlantis.Framework.Products.Impl</tags>
     <dependencies></dependencies>
   </metadata>
   <files>

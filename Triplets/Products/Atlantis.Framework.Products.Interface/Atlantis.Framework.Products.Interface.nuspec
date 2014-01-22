@@ -3,7 +3,7 @@
   <metadata>
     <id>Atlantis.Framework.Products.Interface</id>
     <version>$version$</version>
-    <title>Atlantis Framework Products Interface</title>
+    <title>Atlantis.Framework.Products.Interface</title>
     <authors>$author$</authors>
     <owners>$author$</owners>
     <projectUrl>https://confluence.int.godaddy.com/display/ATLANTIS</projectUrl>
@@ -13,7 +13,7 @@
       14.1.16 - Added ProductGroupOfferedCountries
     </releaseNotes>
     <copyright>$copyright$</copyright>
-    <tags>Atlantis Framework Products Interface</tags>
+    <tags>Atlantis.Framework.Products.Interface</tags>
     <dependencies></dependencies>
   </metadata>
 </package>

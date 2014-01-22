@@ -39,12 +39,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Atlantis.Framework.CDS.Impl">
-      <HintPath>..\packages\Atlantis.Framework.CDS.Impl.14.1.22.2\lib\net40\Atlantis.Framework.CDS.Impl.dll</HintPath>
-    </Reference>
-    <Reference Include="Atlantis.Framework.CDS.Interface">
-      <HintPath>..\packages\Atlantis.Framework.CDS.Interface.14.1.22.2\lib\net40\Atlantis.Framework.CDS.Interface.dll</HintPath>
-    </Reference>
     <Reference Include="Atlantis.Framework.DataCacheService, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Atlantis.Framework.DataCacheService.4.13.12.21\lib\net40\Atlantis.Framework.DataCacheService.dll</HintPath>

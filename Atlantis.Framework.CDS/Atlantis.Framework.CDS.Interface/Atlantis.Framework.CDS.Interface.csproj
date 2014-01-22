@@ -67,8 +67,6 @@
     <Compile Include="IWhitelistResult.cs" />
     <Compile Include="PackageJSONResponseData.cs" />
     <Compile Include="PackageXMLResponseData.cs" />
-    <Compile Include="ProductGroupMarketData.cs" />
-    <Compile Include="ProductGroupsOfferedMarketsResponseData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PackageGroup.cs" />
     <Compile Include="RoutingRule.cs" />

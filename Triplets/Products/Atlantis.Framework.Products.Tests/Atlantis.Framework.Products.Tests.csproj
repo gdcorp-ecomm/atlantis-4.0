@@ -55,6 +55,9 @@
     <Reference Include="Atlantis.Framework.Providers.Interface">
       <HintPath>..\packages\Atlantis.Framework.Providers.Interface.4.13.12.2\lib\net40\Atlantis.Framework.Providers.Interface.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.5.0.8\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -77,6 +80,9 @@
   <ItemGroup>
     <Compile Include="NonUnifiedPfidTests.cs" />
     <Compile Include="ProductGroupOfferedCountriesRequestTests.cs" />
+    <Compile Include="ProductGroupsOfferedMarketsRequestDataTests.cs" />
+    <Compile Include="ProductGroupsOfferedMarketsRequestTests.cs" />
+    <Compile Include="ProductGroupsOfferedMarketsResponseDataTests.cs" />
     <Compile Include="ProductGroupsOfferedTests.cs" />
     <Compile Include="ProductNamesTests.cs" />
     <Compile Include="ProductGroupOfferedCountriesResponseDataTests.cs" />

@@ -28,7 +28,7 @@ namespace Atlantis.Framework.Geo.Impl
       catch (Exception ex)
       {
         string message = ex.Message + ex.StackTrace;
-        AtlantisException aex = new AtlantisException("Geo.Impl.LoadCountryData", "0", message, _countryErrorData, null, null);
+        AtlantisException aex = new AtlantisException("Geo.Impl.LoadCountryData", 0, message, _countryErrorData);
         Engine.Engine.LogAtlantisException(aex);
       }
     }
@@ -51,7 +51,7 @@ namespace Atlantis.Framework.Geo.Impl
       }
       catch (Exception ex)
       {
-        AtlantisException exception = new AtlantisException(requestData, "IPCountryLookupRequest.RequestHandler", ex.Message + ex.StackTrace, requestData.ToXML());
+        AtlantisException exception = new AtlantisException("IPCountryLookupRequest.RequestHandler", 0, ex.Message + ex.StackTrace, requestData.ToXML());
         Engine.Engine.LogAtlantisException(exception);
       }
 

@@ -5,11 +5,7 @@ namespace Atlantis.Framework.Geo.Tests
 {
   internal class InvalidRequestData : RequestData
   {
-    public  InvalidRequestData()
-      :base(string.Empty, string.Empty, string.Empty, string.Empty, 0)
-    {
-
-    }
+    public InvalidRequestData() { }
 
     public override string GetCacheMD5()
     {

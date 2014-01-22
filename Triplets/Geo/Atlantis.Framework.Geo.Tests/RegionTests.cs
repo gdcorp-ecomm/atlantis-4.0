@@ -50,7 +50,7 @@ namespace Atlantis.Framework.Geo.Tests
     [TestMethod]
     public void RegionResponseException()
     {
-      AtlantisException exception = new AtlantisException("RegionTests.RegionResponseException", "0", "TestMessage", "TestData", null, null);
+      AtlantisException exception = new AtlantisException("RegionTests.RegionResponseException", 0, "TestMessage", "TestData");
       RegionResponseData response = RegionResponseData.FromException(exception);
       Assert.IsNotNull(response.GetException());
       Assert.AreEqual(0, response.Count);

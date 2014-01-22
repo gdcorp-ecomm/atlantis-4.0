@@ -46,7 +46,7 @@ namespace Atlantis.Framework.Geo.Tests
     [TestMethod]
     public void CountryResponseException()
     {
-      AtlantisException exception = new AtlantisException("CountryTests.CountryResponseException", "0", "TestMessage", "TestData", null, null);
+      AtlantisException exception = new AtlantisException("CountryTests.CountryResponseException", 0, "TestMessage", "TestData");
       CountryResponseData response = CountryResponseData.FromException(exception);
       Assert.IsNotNull(response.GetException());
     }

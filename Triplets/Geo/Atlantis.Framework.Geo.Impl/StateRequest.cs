@@ -24,7 +24,7 @@ namespace Atlantis.Framework.Geo.Impl
       }
       catch (Exception ex)
       {
-        AtlantisException exception = new AtlantisException(requestData, "StateRequest.RequestHandler", ex.Message + ex.StackTrace, requestData.ToXML());
+        AtlantisException exception = new AtlantisException("StateRequest.RequestHandler", 0, ex.Message + ex.StackTrace, requestData.ToXML());
         result = StateResponseData.FromException(exception);
       }
 

@@ -55,7 +55,7 @@ namespace Atlantis.Framework.Geo.Tests
     [TestMethod]
     public void StateResponseException()
     {
-      AtlantisException exception = new AtlantisException("StateTests.StateResponseException", "0", "TestMessage", "TestData", null, null);
+      AtlantisException exception = new AtlantisException("StateTests.StateResponseException", 0, "TestMessage", "TestData");
       StateResponseData response = StateResponseData.FromException(exception);
       Assert.IsNotNull(response.GetException());
       Assert.AreEqual(0, response.Count);
@@ -65,14 +65,14 @@ namespace Atlantis.Framework.Geo.Tests
     [ExpectedException(typeof(XmlException))]
     public void StateResponseBadXml()
     {
-      string cacheXml = "<state id=\"74\" code=\"AL\" name=\"Alabama\" country=\"226\"";
+      string cacheXml = "<state id=\"1\" code=\"AL\" name=\"Alabama\" country=\"226\"";
       StateResponseData response = StateResponseData.FromDataCacheXml(cacheXml);
     }
 
     [TestMethod]
     public void StateResponseValid()
     {
-      string cacheXml = "<states><state id=\"74\" code=\"AL\" name=\"Alabama\" country=\"226\" /></states>";
+      string cacheXml = "<states><state id=\"1\" code=\"AL\" name=\"Alabama\" country=\"226\" /></states>";
       StateResponseData response = StateResponseData.FromDataCacheXml(cacheXml);
       Assert.AreNotEqual(0, response.Count);
     }
@@ -114,7 +114,7 @@ namespace Atlantis.Framework.Geo.Tests
     {
       StateRequestData request = new StateRequestData(226);
       StateResponseData response = (StateResponseData)Engine.Engine.ProcessRequest(request, _STATEREQUESTTYPE);
-      State state = response.FindStateByName("arizonA");
+      State state = response.FindStateByName("arizona");
       Assert.IsNotNull(state);
     }
 
@@ -123,7 +123,7 @@ namespace Atlantis.Framework.Geo.Tests
     {
       StateRequestData request = new StateRequestData(226);
       StateResponseData response = (StateResponseData)Engine.Engine.ProcessRequest(request, _STATEREQUESTTYPE);
-      State state = response.FindStateById(78);
+      State state = response.FindStateById(70);
       Assert.IsNotNull(state);
     }
 

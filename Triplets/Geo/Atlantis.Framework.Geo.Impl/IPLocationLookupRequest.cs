@@ -31,7 +31,7 @@ namespace Atlantis.Framework.Geo.Impl
       catch (Exception ex)
       {
         string message = ex.Message + ex.StackTrace;
-        AtlantisException aex = new AtlantisException("Geo.Impl.LoadLocationData", "0", message, _locationErrorData, null, null);
+        AtlantisException aex = new AtlantisException("Geo.Impl.LoadLocationData", 0, message, _locationErrorData);
         Engine.Engine.LogAtlantisException(aex);
       }
     }
@@ -51,7 +51,7 @@ namespace Atlantis.Framework.Geo.Impl
       }
       catch (Exception ex)
       {
-        AtlantisException exception = new AtlantisException(requestData, "IPLocationLookupRequest.RequestHandler", ex.Message + ex.StackTrace, requestData.ToXML());
+        AtlantisException exception = new AtlantisException("IPLocationLookupRequest.RequestHandler", 0, ex.Message + ex.StackTrace, requestData.ToXML());
         Engine.Engine.LogAtlantisException(exception);
       }
 

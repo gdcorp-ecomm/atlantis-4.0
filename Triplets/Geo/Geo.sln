@@ -1,8 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{508F7E69-FE35-44D3-BE3E-942A9E890A74}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Geo.Interface", "Atlantis.Framework.Geo.Interface\Atlantis.Framework.Geo.Interface.csproj", "{27F0CD4D-3807-445B-AB34-2B96E7937492}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Geo.Impl", "Atlantis.Framework.Geo.Impl\Atlantis.Framework.Geo.Impl.csproj", "{95A7334D-A6EE-46D4-97C3-320E119ABC59}"

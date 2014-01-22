@@ -65,9 +65,9 @@ namespace Atlantis.Framework.DotTypeCache.Tests
       //tlds = TLDML.TLDMLDocument.GetTLDMLSupportedTLDs();
       tlds = new List<string>();
       tlds.Add("DIAMONDS");
-      tlds.Add("ENTERPRISES");
-      tlds.Add("TIPS");
-      tlds.Add("VOYAGE");
+      //tlds.Add("ENTERPRISES");
+      //tlds.Add("TIPS");
+      //tlds.Add("VOYAGE");
 
       domainCount = new[] { 1 };
       standardRegLengths = new[] { 1 };

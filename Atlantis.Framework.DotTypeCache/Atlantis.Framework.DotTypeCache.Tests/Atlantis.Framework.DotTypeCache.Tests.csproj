@@ -39,7 +39,7 @@
   <ItemGroup>
     <Reference Include="Atlantis.Framework.AppSettings.Impl, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.AppSettings.Impl.14.1.21.1\lib\net40\Atlantis.Framework.AppSettings.Impl.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.AppSettings.4.0.0.0\lib\net40\Atlantis.Framework.AppSettings.Impl.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.AppSettings.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -91,15 +91,15 @@
     </Reference>
     <Reference Include="Atlantis.Framework.DotTypeCache, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.DotTypeCache.14.1.20.1\lib\net40\Atlantis.Framework.DotTypeCache.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.DotTypeCache.14.1.21.1\lib\net40\Atlantis.Framework.DotTypeCache.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.DotTypeCache.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.DotTypeCache.Interface.4.13.12.29\lib\net40\Atlantis.Framework.DotTypeCache.Interface.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.DotTypeCache.Interface.14.1.21.1\lib\net40\Atlantis.Framework.DotTypeCache.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.DotTypeCache.Static, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.DotTypeCache.Static.4.14.1.7\lib\net40\Atlantis.Framework.DotTypeCache.Static.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.DotTypeCache.Static.14.1.21.1\lib\net40\Atlantis.Framework.DotTypeCache.Static.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Engine, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -210,9 +210,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Automation.Framework.TestSetUpAndSettings.1.14.1.2\lib\net40\Automation.Framework.TestSetUpAndSettings.dll</HintPath>
     </Reference>
-    <Reference Include="Automation.Framework.TLDML, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Automation.Framework.TLDML, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Automation.Framework.TLDML.1.13.12.16\lib\net40\Automation.Framework.TLDML.dll</HintPath>
+      <HintPath>..\packages\Automation.Framework.TLDML.14.1.22.1\lib\net40\Automation.Framework.TLDML.dll</HintPath>
     </Reference>
     <Reference Include="GDFCNet, Version=1.1.12024.185, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

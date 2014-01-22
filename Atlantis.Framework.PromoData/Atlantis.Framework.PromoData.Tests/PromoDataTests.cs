@@ -9,6 +9,7 @@ namespace Atlantis.Framework.PromoData.Tests
   {
     [TestMethod]
     [DeploymentItem("atlantis.config")]
+    [DeploymentItem("Atlantis.Framework.PromoData.Impl.dll")]
     public void GetPromoData()
     {
       int amount = 0;

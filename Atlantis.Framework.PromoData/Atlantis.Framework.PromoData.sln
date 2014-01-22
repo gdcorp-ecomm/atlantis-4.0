@@ -1,8 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{E34C685E-3BDD-4436-AFC4-828C3F9EFA25}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.PromoData.Tests", "Atlantis.Framework.PromoData.Tests\Atlantis.Framework.PromoData.Tests.csproj", "{C034777A-DB59-4460-8148-C32D5F19BA8F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{48957253-50A2-46FD-89F4-5B7DD0C1CEE1}"

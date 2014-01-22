@@ -146,7 +146,10 @@ namespace Atlantis.Framework.PromoData.Impl
     private void LogException(string sourceFunction, 
       string errorNumber, string description, string data)
     {
-      AtlantisException aex = new AtlantisException(sourceFunction, errorNumber, description, data, null, null);
+      int errorNum = 0;
+      Int32.TryParse(errorNumber, out errorNum);
+
+      AtlantisException aex = new AtlantisException(sourceFunction, errorNum, description, data);
       Engine.Engine.LogAtlantisException(aex);
     }
   }

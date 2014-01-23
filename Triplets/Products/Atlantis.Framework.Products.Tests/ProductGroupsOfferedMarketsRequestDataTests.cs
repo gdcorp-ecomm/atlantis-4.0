@@ -18,6 +18,7 @@ namespace Atlantis.Framework.Products.Tests
     }
 
     [TestMethod]
+    [ExcludeFromCodeCoverage]
     public void ProductGroupOfferedmarketsRequestData_GetCacheMD5Test()
     {
       var target = new ProductGroupsOfferedMarketsRequestData();

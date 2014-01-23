@@ -39,7 +39,6 @@ namespace Atlantis.Framework.Products.Interface
         if (!string.IsNullOrEmpty(contentVersion.Content))
         {
           var items = XElement.Parse(contentVersion.Content).Descendants("productGroup");
-          var marketId = string.Empty;
           var productGroupId = 0;
           ProductGroupMarketData temp = null;
           foreach (var item in items)
@@ -50,17 +49,9 @@ namespace Atlantis.Framework.Products.Interface
               var markets = item.Descendants("markets").Descendants("market");
               foreach (var market in markets)
               {
-                marketId = market.Attribute("id").Value;
-
-                if (!temp.Markets.Contains(marketId))
-                {
-                  temp.Markets.Add(marketId);
-                }
+                temp.AddMarket(market.Attribute("id").Value);
               }
-              if (!_productGroups.ContainsKey(temp.ProductGroupId))
-              {
-                _productGroups[productGroupId] = temp;
-              }
+              _productGroups[productGroupId] = temp;
             }
           }
         }
@@ -75,11 +66,9 @@ namespace Atlantis.Framework.Products.Interface
       }
     }
 
-    public bool ContainsMarket(int productGroupId, string marketId)
+    public bool TryGetMarketData(int productGroupId, out ProductGroupMarketData marketData)
     {
-      var rtnVal = _productGroups.ContainsKey(productGroupId);
-
-      return rtnVal && _productGroups[productGroupId].Markets.Contains(marketId);
+      return _productGroups.TryGetValue(productGroupId, out marketData);
     }
   }
 }

@@ -8,7 +8,7 @@ namespace Atlantis.Framework.Products.Impl
 {
   public class ProductGroupsOfferedMarketsRequest : IRequest
   {
-    private const string QUERY = "content/productgroup/availablemarkets";
+    private const string QUERY = "content/atlantis/productgroups/availablemarkets";
 
     public IResponseData RequestHandler(RequestData requestData, ConfigElement config)
     {

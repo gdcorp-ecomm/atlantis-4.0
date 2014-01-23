@@ -56,8 +56,7 @@ namespace Atlantis.Framework.Products.Tests
           var markets = item.Descendants("markets").Descendants("market");
           foreach (var market in markets.Where((m) => !"es-XX".Equals(m.Attribute("id").Value, StringComparison.OrdinalIgnoreCase)))
           {
-            HashSet<string> temp = prodGroups[int.Parse(item.Attribute("id").Value)].Markets;
-            CollectionAssert.Contains(temp.ToList(), market.Attribute("id").Value);
+            Assert.IsTrue(prodGroups[int.Parse(item.Attribute("id").Value)].ContainsMarket(market.Attribute("id").Value));
           }
         }
       }
@@ -91,8 +90,7 @@ namespace Atlantis.Framework.Products.Tests
           var markets = item.Descendants("markets").Descendants("market");
           foreach (var market in markets.Where((m) => !"es-XX".Equals(m.Attribute("id").Value, StringComparison.OrdinalIgnoreCase)))
           {
-            HashSet<string> temp = prodGroups[int.Parse(item.Attribute("id").Value)].Markets;
-            CollectionAssert.Contains(temp.ToList(), market.Attribute("id").Value);
+            Assert.IsTrue(prodGroups[int.Parse(item.Attribute("id").Value)].ContainsMarket(market.Attribute("id").Value));
           }
         }
       }

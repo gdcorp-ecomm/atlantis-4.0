@@ -19,7 +19,7 @@ namespace Atlantis.Framework.Products.Tests
     {
       var data = Resources.ProductGroupsMarketsJson;
 
-      var privates = new PrivateObject(typeof(ProductGroupsOfferedMarketsResponseData), new [] { data });
+      var privates = new PrivateObject(typeof(ProductGroupsOfferedMarketsResponseData), new[] { data });
       var target = privates.Target as ProductGroupsOfferedMarketsResponseData;
       Assert.IsNotNull(target);
 
@@ -39,7 +39,7 @@ namespace Atlantis.Framework.Products.Tests
           var markets = item.Descendants("markets").Descendants("market");
           foreach (var market in markets)
           {
-            CollectionAssert.Contains(actual[int.Parse(item.Attribute("id").Value)].Markets.ToList(), market.Attribute("id").Value);
+            Assert.IsTrue(actual[int.Parse(item.Attribute("id").Value)].ContainsMarket(market.Attribute("id").Value));
           }
         }
       }
@@ -47,45 +47,44 @@ namespace Atlantis.Framework.Products.Tests
 
     [TestMethod]
     [ExcludeFromCodeCoverage]
-    public void ProductOfferedCountriesResponseData_ContainsMarketTest()
+    public void ProductOfferedCountriesResponseData_TryGetMarketDataTest()
     {
       var data = Resources.ProductGroupsMarketsJson;
-      var privates = new PrivateObject(typeof(ProductGroupsOfferedMarketsResponseData), new [] { data });
+      var privates = new PrivateObject(typeof(ProductGroupsOfferedMarketsResponseData), new[] { data });
       var target = privates.Target as ProductGroupsOfferedMarketsResponseData;
       Assert.IsNotNull(target);
 
-      var actual = target.ContainsMarket(99, "en-us");
+      var actualMrktData = (ProductGroupMarketData)null;
+      var actual = target.TryGetMarketData(99, out actualMrktData);
       Assert.IsTrue(actual);
+      Assert.IsNotNull(actualMrktData);
 
       var contentVersion = JsonConvert.DeserializeAnonymousType(data, new
       {
         Content = string.Empty
       });
       var items = XElement.Parse(contentVersion.Content).Descendants("productGroup");
-
       foreach (var item in items)
       {
         var markets = item.Descendants("markets").Descendants("market");
         foreach (var market in markets)
         {
-          Assert.IsTrue(target.ContainsMarket(99, market.Attribute("id").Value));
+          Assert.IsTrue(actualMrktData.ContainsMarket(market.Attribute("id").Value));
         }
       }
     }
 
     [TestMethod]
     [ExcludeFromCodeCoverage]
-    public void ProductOfferedCountriesResponseData_ContainsMarketFalseTest()
+    public void ProductOfferedCountriesResponseData_TryGetMarketDataFailTest()
     {
       var data = Resources.ProductGroupsMarketsJson;
-      var privates = new PrivateObject(typeof(ProductGroupsOfferedMarketsResponseData), new [] { data });
+      var privates = new PrivateObject(typeof(ProductGroupsOfferedMarketsResponseData), new[] { data });
       var target = privates.Target as ProductGroupsOfferedMarketsResponseData;
       Assert.IsNotNull(target);
 
-      var actual = target.ContainsMarket(101, "en-us");
-      Assert.IsFalse(actual);
-
-      actual = target.ContainsMarket(99, "en-CB");
+      ProductGroupMarketData actualMktData;
+      var actual = target.TryGetMarketData(101, out actualMktData);
       Assert.IsFalse(actual);
     }
 
@@ -116,7 +115,7 @@ namespace Atlantis.Framework.Products.Tests
           var markets = item.Descendants("markets").Descendants("market");
           foreach (var market in markets)
           {
-            CollectionAssert.Contains(productGroupMarkets[int.Parse(item.Attribute("id").Value)].Markets.ToList(), market.Attribute("id").Value);
+            Assert.IsTrue(productGroupMarkets[int.Parse(item.Attribute("id").Value)].ContainsMarket(market.Attribute("id").Value));
           }
         }
       }

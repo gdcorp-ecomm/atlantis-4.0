@@ -57,6 +57,7 @@ namespace Atlantis.Framework.Products.Tests
     }
 
     [TestMethod]
+    [ExcludeFromCodeCoverage]
     public void ProductOfferedCountriesResponseData_TryGetOperatingCompanyTest()
     {
       string data = Resources.ProductGroupCountries;

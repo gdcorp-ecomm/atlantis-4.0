@@ -6,19 +6,23 @@ using System.Runtime.CompilerServices;
 [assembly: InternalsVisibleTo("Atlantis.Framework.Products.Tests")]
 namespace Atlantis.Framework.Products.Interface
 {
-  internal class ProductGroupMarketData
+  public class ProductGroupMarketData
   {
+    private HashSet<string> _markets;
     public ProductGroupMarketData(int productGroupId)
     {
       ProductGroupId = productGroupId;
-      Markets = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
-      ;
+      _markets = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
     }
 
-    public HashSet<string> Markets
+    internal void AddMarket(string marketId)
     {
-      get;
-      private set;
+      _markets.Add(marketId);
+    }
+
+    public bool ContainsMarket(string marketId)
+    {
+      return _markets.Contains(marketId);
     }
 
     public int ProductGroupId

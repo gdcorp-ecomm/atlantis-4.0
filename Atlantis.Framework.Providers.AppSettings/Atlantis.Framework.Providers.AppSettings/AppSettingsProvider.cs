@@ -1,8 +1,7 @@
 ﻿using System;
-//using Atlantis.Framework.DataCache;
 using System.Web;
 using Atlantis.Framework.Interface;
-using Atlantis.Framework.Providers.Interface.AppSettings;
+using Atlantis.Framework.Providers.AppSettings.Interface;
 
 namespace Atlantis.Framework.Providers.AppSettings
 {

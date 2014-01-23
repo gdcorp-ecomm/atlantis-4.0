@@ -2,8 +2,8 @@
 <package >
   <metadata>
     <id>Atlantis.Framework.Domains.Interface</id>
-    <version>4.13.11.10</version>
-    <title>Atlantis Framework Domains Interface</title>
+    <version>$version$</version>
+    <title>Atlantis.Framework.Domains.Interface</title>
     <authors>$author$</authors>
     <owners>$author$</owners>
     <projectUrl>https://confluence.int.godaddy.com/display/ATLANTIS</projectUrl>
@@ -11,6 +11,6 @@
     <description>$description$</description>
     <releaseNotes></releaseNotes>
     <copyright>$copyright$</copyright>
-    <tags>Atlantis Framework Domains Interface</tags>
+    <tags>Atlantis.Framework.Domains.Interface</tags>
   </metadata>
 </package>

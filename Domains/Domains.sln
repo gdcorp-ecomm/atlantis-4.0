@@ -1,11 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
-MinimumVisualStudioVersion = 10.0.40219.1
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Domains.Interface", "Atlantis.Framework.Domains.Interface\Atlantis.Framework.Domains.Interface.csproj", "{02F25A7D-D430-4E14-86CD-1E649FA001DB}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{2A1DBD05-E5AF-48FC-A20D-12F6F269173D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Domains.Interface.Tests", "Atlantis.Framework.Domains.Interface.Tests\Atlantis.Framework.Domains.Interface.Tests.csproj", "{01CF33E4-B094-400B-A721-E27FA51DF325}"
 EndProject

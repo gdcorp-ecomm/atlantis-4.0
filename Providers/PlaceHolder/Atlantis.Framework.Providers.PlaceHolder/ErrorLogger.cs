@@ -6,12 +6,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder
   {
     internal static void LogException(string message, string sourceFunction, string data)
     {
-      AtlantisException aex = new AtlantisException(sourceFunction,
-                                                    "0",
-                                                    message,
-                                                    data,
-                                                    null,
-                                                    null);
+      AtlantisException aex = new AtlantisException(sourceFunction, 0, message, data);
 
       Engine.Engine.LogAtlantisException(aex);
     }

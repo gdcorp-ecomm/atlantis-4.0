@@ -2,8 +2,8 @@
 <package >
   <metadata>
     <id>Atlantis.Framework.TH.Brand</id>
-    <version>4.13.9.3</version>
-    <title>Atlantis Framework Brand Token Handler</title>
+    <version>$version$</version>
+    <title>Atlantis.Framework.TH.Brand</title>
     <authors>$author$</authors>
     <owners>$author$</owners>
     <projectUrl>https://confluence.int.godaddy.com/display/ATLANTIS/Brand</projectUrl>
@@ -11,6 +11,6 @@
     <description>$description$</description>
     <releaseNotes></releaseNotes>
     <copyright>$copyright$</copyright>
-    <tags>Atlantis Framework TH Brand</tags>
+    <tags>Atlantis.Framework.TH.Brand</tags>
   </metadata>
 </package>

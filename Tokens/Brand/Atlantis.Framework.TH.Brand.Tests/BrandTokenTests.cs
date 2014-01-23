@@ -6,6 +6,10 @@ using Atlantis.Framework.Testing.MockHttpContext;
 using Atlantis.Framework.Testing.MockProviders;
 using Atlantis.Framework.Tokens.Interface;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Atlantis.Framework.Providers.Language.Interface;
+using Atlantis.Framework.Providers.Language;
+using Atlantis.Framework.Providers.Localization.Interface;
+using Atlantis.Framework.Providers.Localization;
 
 namespace Atlantis.Framework.TH.Brand.Tests
 {
@@ -43,6 +47,8 @@ namespace Atlantis.Framework.TH.Brand.Tests
       container.RegisterProvider<ISiteContext, MockSiteContext>();
       container.RegisterProvider<IManagerContext, MockNoManagerContext>();
       container.RegisterProvider<IBrandProvider, BrandProvider>();
+      container.RegisterProvider<ILanguageProvider, LanguageProvider>();
+      container.RegisterProvider<ILocalizationProvider, LocalizationProvider>();
       container.SetData(MockSiteContextSettings.PrivateLabelId, privateLabelId);
       container.Resolve<ISiteContext>();
 

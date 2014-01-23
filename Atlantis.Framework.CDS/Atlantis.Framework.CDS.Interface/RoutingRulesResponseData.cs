@@ -8,8 +8,13 @@ namespace Atlantis.Framework.CDS.Interface
 {
   public class RoutingRulesResponseData : CDSResponseData, ICDSDebugInfo
   {
+    const string DEBUG_KEY = "Rules";
+
+    public ContentId Id { get { return VersionId; } }
     public ContentId VersionId { get; private set; }
     public ContentId DocumentId { get; private set; }
+    public string DebugKey { get { return DEBUG_KEY; } }
+
     private static readonly ReadOnlyCollection<IRoutingRule> _nullRoutingRules = new ReadOnlyCollection<IRoutingRule>(new List<IRoutingRule>(0));
     private static readonly IDictionary<string, ReadOnlyCollection<IRoutingRule>> _emptyRulesDictionary = new Dictionary<string, ReadOnlyCollection<IRoutingRule>>(0);
 

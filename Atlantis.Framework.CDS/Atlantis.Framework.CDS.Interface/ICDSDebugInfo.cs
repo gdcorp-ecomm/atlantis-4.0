@@ -9,5 +9,6 @@ namespace Atlantis.Framework.CDS.Interface
   {
     ContentId VersionId { get; }
     ContentId DocumentId { get; }
+    string DebugKey { get; }
   }
 }

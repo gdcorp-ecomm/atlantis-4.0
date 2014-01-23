@@ -7,8 +7,13 @@ namespace Atlantis.Framework.CDS.Interface
 {
   public class UrlWhitelistResponseData : CDSResponseData, ICDSDebugInfo
   {
+    const string DEBUG_KEY = "Whitelist";
+
+    public ContentId Id { get { return VersionId; } }
     public ContentId VersionId { get; private set; }
     public ContentId DocumentId { get; private set; }
+    public string DebugKey { get { return DEBUG_KEY; } }
+
     private readonly Dictionary<string, IWhitelistResult> _whitelistDictionary;
     private const string STYLE = "style";
 

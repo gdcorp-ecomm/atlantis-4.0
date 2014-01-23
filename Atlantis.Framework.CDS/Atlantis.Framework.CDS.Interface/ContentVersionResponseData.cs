@@ -7,7 +7,10 @@ namespace Atlantis.Framework.CDS.Interface
 {
   public class ContentVersionResponseData : CDSResponseData, IRenderContent, ICDSDebugInfo
   {
+    const string DEBUG_KEY = "Content";
+
     private readonly ContentVersion _contentVersion;
+    public string DebugKey { get { return DEBUG_KEY; } }
 
     #region Content Version
 

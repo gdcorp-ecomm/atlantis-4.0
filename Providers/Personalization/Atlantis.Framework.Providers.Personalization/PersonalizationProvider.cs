@@ -65,10 +65,14 @@ namespace Atlantis.Framework.Providers.Personalization
       TargetedMessages messages = null;
 
       TargetedMessagesRequestData request = new TargetedMessagesRequestData(_shopperContext.Value.ShopperId, _siteContext.Value.PrivateLabelId.ToString(), PersonalizationConfig.TMSAppId, interactionPoint, VisitorGuid, _siteContext.Value.ISC);
-      request.RequestTimeout = TimeSpan.FromMilliseconds(TIMEOUT_MILLISECONDS);
+      if (_siteContext.Value.ServerLocation == ServerLocationType.Prod)
+      {
+        request.RequestTimeout = TimeSpan.FromMilliseconds(TIMEOUT_MILLISECONDS);
+      }
       try
       {
-        bool isTMSOn = _appSettingsProvider.Value.GetAppSetting(AppSetting).Equals("true", StringComparison.OrdinalIgnoreCase);
+        string appSettingValue = _appSettingsProvider.Value.GetAppSetting(AppSetting);
+        bool isTMSOn = (appSettingValue == null) ? false : appSettingValue.Equals("true", StringComparison.OrdinalIgnoreCase);
 
         if (isTMSOn)
         {

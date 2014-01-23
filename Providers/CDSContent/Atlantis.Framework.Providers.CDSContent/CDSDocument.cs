@@ -1,9 +1,12 @@
-﻿using Atlantis.Framework.Interface;
+﻿using System;
 using System.Collections.Specialized;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web;
-using System.Collections.Generic;
+
+using Atlantis.Framework.CDS.Interface;
+using Atlantis.Framework.Interface;
+using Atlantis.Framework.Providers.Interface.Links;
 
 namespace Atlantis.Framework.Providers.CDSContent
 {
@@ -13,6 +16,8 @@ namespace Atlantis.Framework.Providers.CDSContent
     const string CLIENT_SPOOF_PARAM_NAME = "version";
     const string SERVICE_SPOOF_PARAM_NAME = "docid";
     const string PATH_PREFIX = "content/";
+    internal const string SITE_ADMIN_URL_KEY = "SITEADMINURL";
+    internal const string CDSM_CONTENT_RELATIVE_PATH = "contentmanagement/content/index/{0}/{1}";
 
     protected IProviderContainer Container { get; set; }
     protected string DefaultContentPath { get; set; }
@@ -38,6 +43,30 @@ namespace Atlantis.Framework.Providers.CDSContent
           ContentPath += string.Concat(appendChar, ToQueryString(queryParams));
         }
       }
+    }
+
+    internal void LogCDSDebugInfo(ICDSDebugInfo cdsInfo)
+    {
+      try
+      {
+        IDebugContext dc;
+        ILinkProvider linkProvider;
+
+        if (Container.TryResolve<IDebugContext>(out dc) && 
+            Container.TryResolve<ILinkProvider>(out linkProvider) && 
+            cdsInfo != null &&
+            cdsInfo.DocumentId != null && !string.IsNullOrWhiteSpace(cdsInfo.DocumentId.oid) &&
+            cdsInfo.VersionId != null && !string.IsNullOrWhiteSpace(cdsInfo.VersionId.oid)
+            )
+        {
+          var contentRelativeUrl = string.Format(CDSM_CONTENT_RELATIVE_PATH, cdsInfo.DocumentId.oid, cdsInfo.VersionId.oid);
+          var cdsmUri = new Uri(new Uri(linkProvider.GetUrl(SITE_ADMIN_URL_KEY, null)), new Uri(contentRelativeUrl, UriKind.Relative)).AbsoluteUri;
+          var contentUrlHtml = string.Format("<a href='{0}' target='_blank'>{0}</a>", cdsmUri);
+
+          dc.LogDebugTrackingData(string.Format("CDS {0} URL",cdsInfo.DebugKey), contentUrlHtml);
+        }
+      }
+      catch { }
     }
 
     private string GetSpoofedVersionId(string key, string list)

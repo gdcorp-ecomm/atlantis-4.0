@@ -72,7 +72,7 @@ namespace Atlantis.Framework.Providers.DotTypeRegistrationValidationHandler
           {
             if (item.key.StartsWith(VALIDATE_CLAIMXML_FIELD_PREFIX, StringComparison.OrdinalIgnoreCase))
             {
-              var itemArray = item.key.Split(new[] {'-'}, StringSplitOptions.RemoveEmptyEntries);
+              var itemArray = item.key.Split(new[] {'-'}, 4, StringSplitOptions.RemoveEmptyEntries);
               if (itemArray.Length == 4)
               {
                 if (HttpContext.Current.Session != null)

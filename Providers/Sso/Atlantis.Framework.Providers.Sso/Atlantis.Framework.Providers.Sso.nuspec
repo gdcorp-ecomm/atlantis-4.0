@@ -2,8 +2,8 @@
 <package >
   <metadata>
     <id>Atlantis.Framework.Providers.Sso</id>
-    <version>4.13.10.21</version>
-    <title>Atlantis Framework Providers Sso</title>
+    <version>$version$</version>
+    <title>Atlantis.Framework.Providers.Sso</title>
     <authors>$author$</authors>
     <owners>$author$</owners>
     <projectUrl>https://confluence.int.godaddy.com/display/ATLANTIS</projectUrl>
@@ -11,28 +11,8 @@
     <description>$description$</description>
     <releaseNotes></releaseNotes>
     <copyright>$copyright$</copyright>
-    <tags>Atlantis Framework Providers Sso</tags>
-    <dependencies>
-      <dependency id="Atlantis.Framework.AppSettings.Interface" version="4.0.0.0" />
-      <dependency id="Atlantis.Framework.AuthRetrieve.Interface" version="4.0.0.0" />
-      <dependency id="Atlantis.Framework.Collections" version="4.0.0.0" />
-      <dependency id="Atlantis.Framework.DataCache" version="4.0.0.0" />
-      <dependency id="Atlantis.Framework.DataCacheGeneric.Interface" version="4.0.0.0" />
-      <dependency id="Atlantis.Framework.DataCacheService" version="4.0.0.0" />
-      <dependency id="Atlantis.Framework.DotNetExtensions" version="4.0.0.0" />
-      <dependency id="Atlantis.Framework.Engine" version="4.0.0.0" />
-      <dependency id="Atlantis.Framework.Interface" version="4.13.9.25" />
-      <dependency id="Atlantis.Framework.Links" version="4.13.10.1" />
-      <dependency id="Atlantis.Framework.Links.Interface" version="4.13.10.1" />
-      <dependency id="Atlantis.Framework.PrivateLabel.Interface" version="4.0.0.0" />
-      <dependency id="Atlantis.Framework.Products.Interface" version="4.0.0.0" />
-      <dependency id="Atlantis.Framework.Providers.Interface" version="4.13.10.17" />
-      <dependency id="Atlantis.Framework.Providers.Links" version="4.13.10.18" />
-      <dependency id="Atlantis.Framework.Providers.Links.Interface" version="4.13.9.27" />
-      <dependency id="Atlantis.Framework.Providers.Localization.Interface" version="4.0.0.0" />
-      <dependency id="Atlantis.Framework.Providers.Sso.Interface" version="4.13.10.16" />
-      <dependency id="Atlantis.Framework.Sso.Interface" version="4.13.10.16" />
-    </dependencies>
+    <tags>Atlantis.Framework.Providers.Sso</tags>
+    <dependencies></dependencies>
   </metadata>
   <files />
 </package>

@@ -35,12 +35,7 @@ namespace Atlantis.Framework.Providers.CDSContent
       }
       catch (Exception ex)
       {
-        Engine.Engine.LogAtlantisException(new AtlantisException("ContentDocument.GetContent()",
-                                                                 "0",
-                                                                 "CDSContentProvider error getting content. " + ex.Message,
-                                                                 ContentPath,
-                                                                 null,
-                                                                 null));
+        Engine.Engine.LogAtlantisException(new AtlantisException("ContentDocument.GetContent()", 0, "CDSContentProvider error getting content. " + ex.Message, ContentPath));
       }
 
       return contentVersion;

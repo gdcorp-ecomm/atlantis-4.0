@@ -39,12 +39,7 @@ namespace Atlantis.Framework.Providers.CDSContent
       }
       catch (Exception ex)
       {
-        Engine.Engine.LogAtlantisException(new AtlantisException("RulesDocument.GetRoutingRules()",
-                                                                 "0",
-                                                                 "CDSContentProvider error getting route rules. " + ex.Message,
-                                                                 ContentPath,
-                                                                 null,
-                                                                 null));
+        Engine.Engine.LogAtlantisException(new AtlantisException("RulesDocument.GetRoutingRules()", 0, "CDSContentProvider error getting route rules. " + ex.Message, ContentPath));
       }
 
       return routingRules;

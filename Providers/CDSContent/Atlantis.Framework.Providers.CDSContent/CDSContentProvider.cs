@@ -73,12 +73,7 @@ namespace Atlantis.Framework.Providers.CDSContent
         }
         catch (Exception ex)
         {
-          Engine.Engine.LogAtlantisException(new AtlantisException("CDSContentProvider.CheckRedirectRules()", 
-                                                                   "0", 
-                                                                   "CDSContentProvider redirect rule error. " + ex.Message,
-                                                                   appName + relativePath,
-                                                                   null,
-                                                                   null));
+          Engine.Engine.LogAtlantisException(new AtlantisException("CDSContentProvider.CheckRedirectRules()", 0, "CDSContentProvider redirect rule error. " + ex.Message, appName + relativePath));
         }
       }
 
@@ -118,12 +113,7 @@ namespace Atlantis.Framework.Providers.CDSContent
             }
             catch (Exception ex)
             {
-              Engine.Engine.LogAtlantisException(new AtlantisException("CDSContentProvider.GetRuleData()", 
-                                                                       "0", 
-                                                                       "CDSContentProvider error evaluating rule condition. " + ex.Message,
-                                                                       "Condition: " + resultText,
-                                                                       null,
-                                                                       null));
+              Engine.Engine.LogAtlantisException(new AtlantisException("CDSContentProvider.GetRuleData()", 0, "CDSContentProvider error evaluating rule condition. " + ex.Message, "Condition: " + resultText));
               result = false;
             }
             if (result && !string.IsNullOrEmpty(rule.Data))
@@ -167,12 +157,7 @@ namespace Atlantis.Framework.Providers.CDSContent
             }
             catch (Exception ex)
             {
-              Engine.Engine.LogAtlantisException(new AtlantisException("CDSContentProvider.GetContentPath()", 
-                                                                       "0", 
-                                                                       "CDSContentProvider error deserializing rule data. " + ex.Message,
-                                                                       contentPath,
-                                                                       null,
-                                                                       null));
+              Engine.Engine.LogAtlantisException(new AtlantisException("CDSContentProvider.GetContentPath()", 0, "CDSContentProvider error deserializing rule data. " + ex.Message, contentPath));
             }
           }
         }

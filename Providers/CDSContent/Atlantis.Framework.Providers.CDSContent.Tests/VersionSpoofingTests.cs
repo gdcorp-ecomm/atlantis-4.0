@@ -69,7 +69,7 @@ namespace Atlantis.Framework.Providers.CDSContent.Tests
     [TestMethod]
     public void Can_A_ContentVersion_Be_Spoofed()
     {
-      string url = "http://www.debug.godaddy-com.ide/home?version=sales/unittest/producthassavingsmorethan|52535572f778fc15d8df6d42";
+      string url = "http://dev-godaddy.com/home?version=sales/unittest/producthassavingsmorethan|52535572f778fc15d8df6d42";
       SetUrl(url);
 
       CDSContentProvider provider = new CDSContentProvider(ProviderContainer);

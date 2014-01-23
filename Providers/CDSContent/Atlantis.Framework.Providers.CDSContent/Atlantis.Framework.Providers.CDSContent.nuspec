@@ -3,7 +3,7 @@
   <metadata>
     <id>Atlantis.Framework.Providers.CDSContent</id>
     <version>$version$</version>
-    <title>Atlantis Framework Providers CDSContent</title>
+    <title>Atlantis.Framework.Providers.CDSContent</title>
     <authors>$author$</authors>
     <owners>$author$</owners>
     <projectUrl>https://confluence.int.godaddy.com/display/CDS</projectUrl>
@@ -11,7 +11,7 @@
     <description>$description$</description>
     <releaseNotes></releaseNotes>
     <copyright>$copyright$</copyright>
-    <tags>Atlantis Framework Providers CDSContent</tags>
+    <tags>Atlantis.Framework.Providers.CDSContent</tags>
     <dependencies></dependencies>
   </metadata>
 </package>

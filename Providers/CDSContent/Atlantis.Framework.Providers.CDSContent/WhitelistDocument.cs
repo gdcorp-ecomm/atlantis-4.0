@@ -33,12 +33,7 @@ namespace Atlantis.Framework.Providers.CDSContent
       {
         whitelistResult = UrlWhitelistResponseData.NullWhitelistResult;
 
-        Engine.Engine.LogAtlantisException(new AtlantisException("WhitelistDocument.CheckWhiteList()",
-                                                                 "0",
-                                                                 "CDSContentProvider whitelist error. " + ex.Message,
-                                                                 ContentPath,
-                                                                 null,
-                                                                 null));
+        Engine.Engine.LogAtlantisException(new AtlantisException("WhitelistDocument.CheckWhiteList()", 0, "CDSContentProvider whitelist error. " + ex.Message, ContentPath));
       }
 
       return whitelistResult;

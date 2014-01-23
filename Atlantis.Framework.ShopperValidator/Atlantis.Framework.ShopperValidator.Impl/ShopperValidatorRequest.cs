@@ -32,7 +32,7 @@ namespace Atlantis.Framework.ShopperValidator.Impl
 
         if (request.ShopperToValidate == null && request.ShopperBaseModel == null)
         {
-          throw new AtlantisException(requestData, "ShopperValidator::RequestHandler", "Both ShopperToValidate and ShopperBaseModel cannot be null", "--input data--");
+          throw new AtlantisException("ShopperValidator::RequestHandler", 0, "Both ShopperToValidate and ShopperBaseModel cannot be null", "--input data--");
         }
 
         ValidateShopper(request);
@@ -46,7 +46,7 @@ namespace Atlantis.Framework.ShopperValidator.Impl
       catch (Exception ex)
       {
         string message = ex.Message + Environment.NewLine + ex.StackTrace;
-        var aex = new AtlantisException(requestData, "ShopperValidator::RequestHandler", message, string.Empty);
+        var aex = new AtlantisException("ShopperValidator::RequestHandler", 0, message, string.Empty);
         responseData = new ShopperValidatorResponseData(aex);
       }
 
@@ -169,7 +169,7 @@ namespace Atlantis.Framework.ShopperValidator.Impl
 
       if (!success)
       {
-        throw new AtlantisException(requestData, "ShopperValidator::ValidateShopperWithRuleEngine", "Error reading SlimShopperValidation.xml", "--input data--");
+        throw new AtlantisException("ShopperValidator::ValidateShopperWithRuleEngine", 0, "Error reading SlimShopperValidation.xml", "--input data--");
       }
 
       var model = requestData.ShopperBaseModel;

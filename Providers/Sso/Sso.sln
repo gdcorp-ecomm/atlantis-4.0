@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Provider
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Providers.Sso.Tests", "Atlantis.Framework.Providers.Sso.Tests\Atlantis.Framework.Providers.Sso.Tests.csproj", "{D2055997-462F-4EF8-9ED5-9365DCEC6590}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{3D78BA9E-2771-4102-BE86-DA6C6AB6D49A}"
-EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
 		SccNumberOfProjects = 4

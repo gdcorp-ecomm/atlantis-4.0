@@ -31,10 +31,6 @@ namespace Atlantis.Framework.Iris.Impl
 
         responseData = QuickCreateIncidentResponseData.FromData(responseCode);
       }
-      catch (Exception ex)
-      {
-        responseData = new QuickCreateIncidentResponseData(request, ex);
-      }
       finally
       {
         if (irisWebService != null)

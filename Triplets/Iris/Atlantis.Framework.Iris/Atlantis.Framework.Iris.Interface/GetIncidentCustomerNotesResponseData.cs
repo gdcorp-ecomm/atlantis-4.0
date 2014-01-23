@@ -10,11 +10,9 @@ using Atlantis.Framework.Iris.Interface.Objects;
 namespace Atlantis.Framework.Iris.Interface
 {
   [DataContract]
-  public class GetIncidentCustomerNotesResponseData : IResponseData
+  public class GetIncidentCustomerNotesResponseData : ResponseData
   {
-    private AtlantisException atlEx = null;
-
-    public static GetIncidentCustomerNotesResponseData FromData(string data)
+   public static GetIncidentCustomerNotesResponseData FromData(string data)
     {
       return new GetIncidentCustomerNotesResponseData(data);
     }
@@ -41,12 +39,6 @@ namespace Atlantis.Framework.Iris.Interface
       IsSuccess = true;
     }
 
-    public GetIncidentCustomerNotesResponseData(GetIncidentCustomerNotesRequestData request, Exception ex)
-    {
-      atlEx = new AtlantisException(request, "GetIncidentCustomerNotes", ex.Message, string.Empty);
-      IsSuccess = false;
-    }
-
     [DataMember]
     public bool IsSuccess { get; set; }
 
@@ -55,29 +47,5 @@ namespace Atlantis.Framework.Iris.Interface
 
     public string RawXml { get; set; }
 
-    public string ToXML()
-    {
-      string xml;
-      try
-      {
-        var serializer = new DataContractSerializer(this.GetType());
-        using (var backing = new System.IO.StringWriter())
-        using (var writer = new System.Xml.XmlTextWriter(backing))
-        {
-          serializer.WriteObject(writer, this);
-          xml = backing.ToString();
-        }
-      }
-      catch (Exception)
-      {
-        xml = string.Empty;
-      }
-      return xml;
-    }
-
-    public AtlantisException GetException()
-    {
-      return atlEx;
-    }
   }
 }

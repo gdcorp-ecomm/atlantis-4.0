@@ -26,8 +26,6 @@ namespace Atlantis.Framework.Iris.Tests
       var response = Engine.Engine.ProcessRequest(request, 784) as Iris.Interface.QuickCreateIncidentResponseData;
 
       Assert.IsNotNull(response);
-      Assert.IsNotNull(response.ToXML());
-      Debug.WriteLine(response.ToXML());
       Assert.IsTrue(response.IsSuccess);
 
     }
@@ -51,8 +49,6 @@ namespace Atlantis.Framework.Iris.Tests
       var response = Engine.Engine.ProcessRequest(request, 785) as Iris.Interface.CreateIncidentResponseData;
 
       Assert.IsNotNull(response);
-      Assert.IsNotNull(response.ToXML());
-      Debug.WriteLine(response.ToXML());
       Assert.IsTrue(response.IsSuccess);
     }
 
@@ -67,8 +63,6 @@ namespace Atlantis.Framework.Iris.Tests
       var response = Engine.Engine.ProcessRequest(request, 786) as Iris.Interface.AddIncidentNoteResponseData;
 
       Assert.IsNotNull(response);
-      Assert.IsNotNull(response.ToXML());
-      Debug.WriteLine(response.ToXML());
       Assert.IsTrue(response.IsSuccess);
 
     }
@@ -84,8 +78,6 @@ namespace Atlantis.Framework.Iris.Tests
       var response = Engine.Engine.ProcessRequest(request, 786) as Iris.Interface.AddIncidentNoteResponseData;
 
       Assert.IsNotNull(response);
-      Assert.IsNotNull(response.ToXML());
-      Debug.WriteLine(response.ToXML());
       Assert.IsFalse(response.IsSuccess);
 
     }
@@ -102,8 +94,6 @@ namespace Atlantis.Framework.Iris.Tests
       var response = Engine.Engine.ProcessRequest(request, 787) as Iris.Interface.GetIncidentsByShopperIdAndDateRangeResponseData;
 
       Assert.IsNotNull(response);
-      Assert.IsNotNull(response.ToXML());
-      Debug.WriteLine(response.ToXML());
       Assert.IsTrue(response.IsSuccess);
     }
 
@@ -118,8 +108,6 @@ namespace Atlantis.Framework.Iris.Tests
       var response = Engine.Engine.ProcessRequest(request, 788) as Iris.Interface.GetIncidentCustomerNotesResponseData;
 
       Assert.IsNotNull(response);
-      Assert.IsNotNull(response.ToXML());
-      Debug.WriteLine(response.ToXML());
       Assert.IsTrue(response.IsSuccess);
     }
 

@@ -25,10 +25,6 @@ namespace Atlantis.Framework.Iris.Impl
 
         responseData = GetIncidentsByShopperIdAndDateRangeResponseData.FromData(responseXml);
       }
-      catch (Exception ex)
-      {
-        responseData = new GetIncidentsByShopperIdAndDateRangeResponseData(request, ex);
-      }
       finally
       {
         if (irisWebService != null)

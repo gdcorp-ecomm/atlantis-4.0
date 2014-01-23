@@ -10,9 +10,8 @@ using System.Xml.Serialization;
 namespace Atlantis.Framework.Iris.Interface
 {
   [DataContract]
-  public class GetIncidentsByShopperIdAndDateRangeResponseData : IResponseData
+  public class GetIncidentsByShopperIdAndDateRangeResponseData : ResponseData
   {
-    private AtlantisException atlEx = null;
 
     public static GetIncidentsByShopperIdAndDateRangeResponseData FromData(string data)
     {
@@ -38,17 +37,10 @@ namespace Atlantis.Framework.Iris.Interface
       catch (Exception ex)
       {
         IsSuccess = false;
-        atlEx = new AtlantisException(null, "GetIncidentsByShopperIdAndDateRangeResponseData", ex.Message, string.Empty);
       }
       IsSuccess = true;
     }
     
-    public GetIncidentsByShopperIdAndDateRangeResponseData(GetIncidentsByShopperIdAndDateRangeRequestData request, Exception ex)
-    {
-      atlEx = new AtlantisException(request, "GetIncidentsByShopperIdAndDateRange", ex.Message, string.Empty);
-      IsSuccess = false;
-    }
-
     [DataMember]
     public bool IsSuccess { get; set; }
 
@@ -57,29 +49,5 @@ namespace Atlantis.Framework.Iris.Interface
 
     public string RawXml { get; set; }
 
-    public string ToXML()
-    {
-      string xml;
-      try
-      {
-        var serializer = new DataContractSerializer(this.GetType());
-        using (var backing = new System.IO.StringWriter())
-        using (var writer = new System.Xml.XmlTextWriter(backing))
-        {
-          serializer.WriteObject(writer, this);
-          xml = backing.ToString();
-        }
-      }
-      catch (Exception)
-      {
-        xml = string.Empty;
-      }
-      return xml;
-    }
-
-    public AtlantisException GetException()
-    {
-      return atlEx;
-    }
   }
 }

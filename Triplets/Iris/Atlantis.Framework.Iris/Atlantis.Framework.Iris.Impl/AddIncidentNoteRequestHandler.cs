@@ -22,10 +22,6 @@ namespace Atlantis.Framework.Iris.Impl
         
         responseData = AddIncidentNoteResponseData.FromData(responseCode);
       }
-      catch (Exception ex)
-      {
-        responseData = new AddIncidentNoteResponseData(request, ex);
-      }
       finally
       {
         if (irisWebService != null)

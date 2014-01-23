@@ -1,17 +1,17 @@
-﻿using Atlantis.Framework.Engine;
+﻿using System.Collections.Generic;
+using Atlantis.Framework.Engine;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.Currency;
 using Atlantis.Framework.Providers.Interface.Currency;
-using Atlantis.Framework.Providers.Interface.Products;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Atlantis.Framework.Testing.MockHttpContext;
-using Atlantis.Framework.Testing.MockProviders;
 using Atlantis.Framework.Providers.Interface.Preferences;
-using System.Collections.Generic;
+using Atlantis.Framework.Providers.Interface.Products;
 using Atlantis.Framework.Providers.Localization.Interface;
 using Atlantis.Framework.Testing.MockEngine;
-using Atlantis.Framework.Testing.MockPreferencesProvider;
+using Atlantis.Framework.Testing.MockHttpContext;
 using Atlantis.Framework.Testing.MockLocalization;
+using Atlantis.Framework.Testing.MockPreferencesProvider;
+using Atlantis.Framework.Testing.MockProviders;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Atlantis.Framework.Providers.Products.Tests
 {
@@ -97,7 +97,7 @@ namespace Atlantis.Framework.Providers.Products.Tests
     {
       var container = SetContexts(1, string.Empty);
       var productProvider = container.Resolve<IProductProvider>();
-      List<IProduct> products = productProvider.NewProductList(new[] { 58, 59, 60 });
+      List<IProduct> products = productProvider.NewProductList(new[] {58, 59, 60});
       Assert.AreEqual(3, products.Count);
     }
 
@@ -256,14 +256,6 @@ namespace Atlantis.Framework.Providers.Products.Tests
       Assert.AreEqual(1, _testLogger.Exceptions.Count);
     }
 
-    [TestMethod]
-    public void ProductGroupOfferedBasic()
-    {
-      var container = SetContexts(1, string.Empty);
-      var productProvider = container.Resolve<IProductProvider>();
-      Assert.IsTrue(productProvider.IsProductGroupOffered(30));
-    }
-
     /* Test no longer valid; method removed
     [TestMethod]
     public void NonUnifiedPfidBasic()
@@ -318,12 +310,11 @@ namespace Atlantis.Framework.Providers.Products.Tests
         var productProvider = container.Resolve<IProductProvider>();
         var dotCom1Year = productProvider.GetProduct(101);
         description = dotCom1Year.Info.FriendlyDescription;
-        name = dotCom1Year.Info.Name;        
+        name = dotCom1Year.Info.Name;
       }
 
       Assert.AreNotEqual(descriptionEnglish, description);
       Assert.AreNotEqual(nameEnglish, name);
     }
-
   }
 }

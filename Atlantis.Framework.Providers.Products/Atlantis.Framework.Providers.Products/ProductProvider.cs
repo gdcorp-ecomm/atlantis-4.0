@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using Atlantis.Framework.Interface;
+using Atlantis.Framework.Products.Interface;
 using Atlantis.Framework.Providers.Interface.Currency;
 using Atlantis.Framework.Providers.Interface.Products;
-using System.Web;
-using Atlantis.Framework.Products.Interface;
-using Atlantis.Framework.Providers.Localization.Interface;
+using Atlantis.Framework.Providers.Products.Factories;
 
 namespace Atlantis.Framework.Providers.Products
 {
@@ -17,15 +16,15 @@ namespace Atlantis.Framework.Providers.Products
   {
     private Dictionary<int, IProduct> _products;
 
-    private Lazy<ProductGroupsOfferedResponseData> _productGroupsOffered;
-    private Lazy<ISiteContext> _siteContext;
-    private Lazy<ICurrencyProvider> _currency;
+    private readonly Lazy<ProductGroupsOfferedResponseData> _productGroupsOffered;
+    private readonly Lazy<ISiteContext> _siteContext;
+    private readonly Lazy<ICurrencyProvider> _currency;
 
     public ProductProvider(IProviderContainer providerContainer) : base(providerContainer)
     {
-      _siteContext = new Lazy<ISiteContext>(() => { return Container.Resolve<ISiteContext>(); });
-      _currency = new Lazy<ICurrencyProvider>(() => { return Container.Resolve<ICurrencyProvider>(); });
-      _productGroupsOffered = new Lazy<ProductGroupsOfferedResponseData>(() => { return LoadOfferedProducts(); });
+      _siteContext = new Lazy<ISiteContext>(() => Container.Resolve<ISiteContext>());
+      _currency = new Lazy<ICurrencyProvider>(() => Container.Resolve<ICurrencyProvider>());
+      _productGroupsOffered = new Lazy<ProductGroupsOfferedResponseData>(LoadOfferedProducts);
     }
 
     private ProductGroupsOfferedResponseData LoadOfferedProducts()
@@ -145,7 +144,8 @@ namespace Atlantis.Framework.Providers.Products
 
     public bool IsProductGroupOffered(int productGroupType)
     {
-      return _productGroupsOffered.Value.IsOffered(productGroupType);
+      var productGroupOfferedHandler = ProductGroupOfferedFactory.GetHandler(Container, productGroupType);
+      return productGroupOfferedHandler.IsProductGroupOffered(productGroupType, _productGroupsOffered.Value);
     }
 
     public int GetUnifiedProductIdByPfid(int pfid)

@@ -7,6 +7,8 @@
     public static int ProductInfo { get; set; }
     public static int NonUnifiedProductId { get; set; }
     public static int ProductNames { get; set; }
+    public static int ProductOfferCountries { get; set; }
+    public static int ProductOfferMarkets { get; set; }
 
     static ProductProviderEngineRequests()
     {
@@ -15,6 +17,8 @@
       ProductOffer = 701;
       ProductInfo = 702;
       ProductNames = 724;
+      ProductOfferCountries = 792;
+      ProductOfferMarkets = 793;
     }
   }
 }

@@ -20,7 +20,7 @@ namespace Atlantis.Framework.Iris.Interface.Objects
     {
       get
       {
-        return DateCreated.ToString("s");
+        return DateCreated.ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ssK");
       }
       set
       {
@@ -36,7 +36,7 @@ namespace Atlantis.Framework.Iris.Interface.Objects
       {
         DateTime outDate;
         DateTime.TryParse(_createDate, out outDate);
-        outDate = DateTime.SpecifyKind(outDate, DateTimeKind.Utc);
+        outDate = DateTime.SpecifyKind(outDate, DateTimeKind.Local);
 
         return outDate;
       }

@@ -30,7 +30,7 @@ namespace Atlantis.Framework.Iris.Interface.Objects
     public string ModDate {
       get
       {
-        return ModifiedDate.ToString("s");
+        return ModifiedDate.ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ssK");
       }
       set
       {
@@ -46,7 +46,7 @@ namespace Atlantis.Framework.Iris.Interface.Objects
       {
         DateTime outDate;
         DateTime.TryParse(_modDate, out outDate);
-        outDate = DateTime.SpecifyKind(outDate, DateTimeKind.Utc);
+        outDate = DateTime.SpecifyKind(outDate, DateTimeKind.Local);
         
         return outDate;
       }

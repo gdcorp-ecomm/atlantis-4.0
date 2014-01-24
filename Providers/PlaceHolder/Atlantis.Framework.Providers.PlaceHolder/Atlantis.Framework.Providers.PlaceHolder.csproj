@@ -81,8 +81,9 @@
     <Reference Include="Atlantis.Framework.Providers.AppSettings.Interface">
       <HintPath>..\packages\Atlantis.Framework.Providers.AppSettings.Interface.4.13.12.17\lib\net40\Atlantis.Framework.Providers.AppSettings.Interface.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.Providers.CDSContent.Interface">
-      <HintPath>..\packages\Atlantis.Framework.Providers.CDSContent.Interface.4.13.10.14\lib\net40\Atlantis.Framework.Providers.CDSContent.Interface.dll</HintPath>
+    <Reference Include="Atlantis.Framework.Providers.CDSContent.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Providers.CDSContent.Interface.14.1.23.1\lib\net40\Atlantis.Framework.Providers.CDSContent.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Providers.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

@@ -91,10 +91,11 @@
     </Reference>
     <Reference Include="Atlantis.Framework.Providers.CDSContent, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.Providers.CDSContent.4.14.1.7\lib\net40\Atlantis.Framework.Providers.CDSContent.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.Providers.CDSContent.14.1.23.1\lib\net40\Atlantis.Framework.Providers.CDSContent.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.Providers.CDSContent.Interface">
-      <HintPath>..\packages\Atlantis.Framework.Providers.CDSContent.Interface.4.13.10.14\lib\net40\Atlantis.Framework.Providers.CDSContent.Interface.dll</HintPath>
+    <Reference Include="Atlantis.Framework.Providers.CDSContent.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Providers.CDSContent.Interface.14.1.23.1\lib\net40\Atlantis.Framework.Providers.CDSContent.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Providers.Containers, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -104,6 +105,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Atlantis.Framework.Providers.Interface.4.13.12.2\lib\net40\Atlantis.Framework.Providers.Interface.dll</HintPath>
     </Reference>
+    <Reference Include="Atlantis.Framework.Providers.Links.Interface">
+      <HintPath>..\packages\Atlantis.Framework.Providers.Links.Interface.4.13.11.6\lib\net40\Atlantis.Framework.Providers.Links.Interface.dll</HintPath>
+    </Reference>
     <Reference Include="Atlantis.Framework.Providers.Personalization, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Atlantis.Framework.Providers.Personalization.14.1.21.1\lib\net40\Atlantis.Framework.Providers.Personalization.dll</HintPath>
@@ -111,10 +115,6 @@
     <Reference Include="Atlantis.Framework.Providers.Personalization.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Atlantis.Framework.Providers.Personalization.Interface.4.14.1.10\lib\net40\Atlantis.Framework.Providers.Personalization.Interface.dll</HintPath>
-    </Reference>
-    <Reference Include="Atlantis.Framework.Providers.RenderPipeline, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.Providers.RenderPipeline.4.13.11.18\lib\net40\Atlantis.Framework.Providers.RenderPipeline.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Providers.RenderPipeline.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

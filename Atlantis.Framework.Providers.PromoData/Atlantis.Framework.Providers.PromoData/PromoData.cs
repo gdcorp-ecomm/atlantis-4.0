@@ -108,7 +108,7 @@ namespace Atlantis.Framework.Providers.PromoData
 
     private void LogException(string sourceFunction, string message, string source)
     {
-      AtlantisException aex = new AtlantisException(sourceFunction, "0", message, source, null, null);
+      AtlantisException aex = new AtlantisException(sourceFunction, 0, message, source);
       Engine.Engine.LogAtlantisException(aex);
     }
 

@@ -2,8 +2,8 @@
 <package >
   <metadata>
     <id>Atlantis.Framework.Providers.PromoData</id>
-    <version>4.0.0.0</version>
-    <title>Atlantis Framework Providers PromoData</title>
+    <version>$version$</version>
+    <title>Atlantis.Framework.Providers.PromoData</title>
     <authors>$author$</authors>
     <owners>$author$</owners>
     <projectUrl>https://confluence.int.godaddy.com/display/ATLANTIS</projectUrl>
@@ -11,10 +11,7 @@
     <description>$description$</description>
     <releaseNotes></releaseNotes>
     <copyright>$copyright$</copyright>
-    <tags>Atlantis Framework Providers PromoData</tags>
-    <dependencies>
-      <dependency id="Atlantis.Framework.DataCache" version="4.0.0.0" />
-      <dependency id="Atlantis.Framework.PromoData" version="4.0.0.0" />
-    </dependencies>
+    <tags>Atlantis.Framework.Providers.PromoData</tags>
+    <dependencies></dependencies>
   </metadata>
 </package>

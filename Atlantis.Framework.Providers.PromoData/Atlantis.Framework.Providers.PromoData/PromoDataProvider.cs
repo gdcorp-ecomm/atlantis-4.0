@@ -160,9 +160,7 @@ namespace Atlantis.Framework.Providers.PromoData
 
     private void LogException(string sourceFunction, string message, string source)
     {
-      AtlantisException aex = new AtlantisException(sourceFunction, HttpContext.Current.Request.Url.ToString(),
-      "0", message, source, this.ShopperContext.ShopperId, string.Empty,
-      HttpContext.Current.Request.UserHostAddress, this.SiteContext.Pathway, this.SiteContext.PageCount);
+      AtlantisException aex = new AtlantisException(sourceFunction, 0, message, source);
       Engine.Engine.LogAtlantisException(aex);
     }
 

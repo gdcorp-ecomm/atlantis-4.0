@@ -399,6 +399,35 @@ namespace Atlantis.Framework.Providers.SplitTesting.Tests
       Assert.AreEqual(-1, actualSide.SideId);
     }
 
+    [TestMethod]
+    public void GetSplitTestingSide_NoLongerEligibleAfterBeingBucketed()
+    {
+      var privateLabelId = "1";
+      var cookieName = ComputeCookieName(privateLabelId);
+      var cookieKey = "1-1";
+      var cookieValue = "2";
+      var cookies = new NameValueCollection();
+      cookies.Add(cookieName, cookieKey + "=" + cookieValue);
+      
+      SplitTestingConfiguration.DefaultCategoryName = "Sales";
+      var mockHttpRequest = new MockHttpRequest("http://www.debug.godaddy-com.ide/");
+      MockHttpContext.SetFromWorkerRequest(mockHttpRequest);
+      mockHttpRequest.MockCookies(cookies);
+
+      var splitProvider = InitializeProviders(1, "858884");
+      SplitTestingEngineRequests.ActiveSplitTests = MockEngineRequests.ActiveSplitTests_1Tests_WithNeverEligibleElgibilityRules;
+      SplitTestingEngineRequests.ActiveSplitTestDetails = MockEngineRequests.ActiveSplitTestDetails_AB_50_50;
+
+      var side1 = splitProvider.GetSplitTestingSide(1);
+      Assert.IsNotNull(side1);
+      Assert.AreEqual("A", side1.Name);
+      Assert.AreEqual(0, side1.SideId);
+
+
+    }
+
+
+
     #region IsManager related tests
 
     [TestMethod]
@@ -634,6 +663,8 @@ namespace Atlantis.Framework.Providers.SplitTesting.Tests
       MockHttpContext.SetFromWorkerRequest(mockHttpRequest);
 
       var splitProvider = InitializeProviders(1, "858884");
+      SplitTestingEngineRequests.ActiveSplitTests = MockEngineRequests.ActiveSplitTests_1Tests_WithMalformedEligibilityRules;
+      SplitTestingEngineRequests.ActiveSplitTestDetails = MockEngineRequests.ActiveSplitTestDetails_AB_80_20;
       var tests = splitProvider.GetAllActiveTests;
       Assert.IsNotNull(tests);
       var iter = tests.GetEnumerator();

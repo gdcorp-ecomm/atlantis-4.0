@@ -146,40 +146,33 @@ namespace Atlantis.Framework.Providers.SplitTesting
         IActiveSplitTest activeSplitTest;
         if (!IsActiveTest(splitTestId, out activeSplitTest) || activeSplitTest == null || activeSplitTest.VersionNumber < 1)
         {
-          splitTestSide = _defaultSideA;
+          return _defaultSideA;
         }
-        else
+        
+        var key = CreateStateKey(splitTestId, activeSplitTest);
+        var sideId = GetSplitSideIdFromState(key) ?? string.Empty;
+        if (sideId == NOT_ELIGIBLE_SIDE_ID || !IsEligibleForTest(activeSplitTest))
         {
-          var key = CreateStateKey(splitTestId, activeSplitTest);
-          string sideId = GetSplitSideIdFromState(key) ?? string.Empty;
-          switch (sideId)
-          {
-            case "":
-              if (IsEligibleForTest(activeSplitTest))
-              {
-                sideId = GetSplitSideIdFromTriplet(activeSplitTest);
-                if (!string.IsNullOrEmpty(sideId))
-                {
-                  UpdateRequestCache(activeSplitTest, sideId);
-                  UpdateState(key, sideId);
-                }
-              }
-              else
-              {
-                sideId = NOT_ELIGIBLE_SIDE_ID;
-                UpdateState(key, sideId);
-              }
-              break;
-            case NOT_ELIGIBLE_SIDE_ID:
-              UpdateState(key, sideId);
-              break;
-            default:
+          UpdateState(key, NOT_ELIGIBLE_SIDE_ID);
+          return _defaultSideNotEligible;
+        }
+        switch (sideId)
+        {
+          case "":
+            sideId = GetSplitSideIdFromTriplet(activeSplitTest);
+            if (!string.IsNullOrEmpty(sideId))
+            {
               UpdateRequestCache(activeSplitTest, sideId);
               UpdateState(key, sideId);
-              break;
-          }
-          splitTestSide = FindIActiveSplitTestSide(splitTestId, sideId);
+            }
+            break;
+          default:
+            UpdateRequestCache(activeSplitTest, sideId);
+            UpdateState(key, sideId);
+            break;
         }
+        splitTestSide = FindIActiveSplitTestSide(splitTestId, sideId);
+        
       }
       catch (Exception ex)
       {
@@ -193,26 +186,19 @@ namespace Atlantis.Framework.Providers.SplitTesting
       IActiveSplitTestSide splitTestSide = null;
       if (!string.IsNullOrEmpty(sideId))
       {
-        if (sideId == NOT_ELIGIBLE_SIDE_ID)
+        int iSideId;
+        if (Int32.TryParse(sideId, out iSideId) && iSideId > 0)
         {
-          splitTestSide = _defaultSideNotEligible;
-        }
-        else
-        {
-          int iSideId;
-          if (Int32.TryParse(sideId, out iSideId) && iSideId > 0)
-          {
-            var activeTestDetailsResponse = LoadActiveTestDetails(splitTestId);
+          var activeTestDetailsResponse = LoadActiveTestDetails(splitTestId);
 
-            if (activeTestDetailsResponse != null && activeTestDetailsResponse.SplitTestDetails.Any())
+          if (activeTestDetailsResponse != null && activeTestDetailsResponse.SplitTestDetails.Any())
+          {
+            var details = activeTestDetailsResponse.SplitTestDetails.ToList();
+            foreach (var dtl in details)
             {
-              var details = activeTestDetailsResponse.SplitTestDetails.ToList();
-              foreach (var dtl in details)
+              if (dtl.SideId == iSideId)
               {
-                if (dtl.SideId == iSideId)
-                {
-                  splitTestSide = dtl;
-                }
+                splitTestSide = dtl;
               }
             }
           }

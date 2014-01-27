@@ -10,7 +10,14 @@ namespace Atlantis.Framework.TLDDataCache.Interface
     private AtlantisException _exception;
     private string _xmlData;
 
-    private Dictionary<string, HashSet<string>> _tldSetsByActiveFlags;
+    private readonly Dictionary<string, HashSet<string>> _tldSetsByActiveFlags;
+    public Dictionary<string, HashSet<string>> TldSetsByActiveFlags
+    {
+      get
+      {
+        return _tldSetsByActiveFlags;
+      }
+    }
 
     public static ActiveTLDsResponseData FromException(RequestData requestData, Exception ex)
     {

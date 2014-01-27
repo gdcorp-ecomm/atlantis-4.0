@@ -9,6 +9,7 @@ namespace Atlantis.Framework.TLDDataCache.Tests
   [TestClass]
   [DeploymentItem("atlantis.config")]
   [DeploymentItem("Atlantis.Framework.TLDDataCache.Impl.dll")]
+  [DeploymentItem("Atlantis.Framework.AppSettings.Impl.dll")]
   [DeploymentItem("Interop.gdDataCacheLib.dll")]
   public class ActiveTLDsTests
   {

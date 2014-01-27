@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>Atlantis.Framework.TLDDataCache.Interface</id>
-    <version>4.13.10.14</version>
+    <version>$version$</version>
     <title>Atlantis Framework TLDDataCache Interface</title>
     <authors>$author$</authors>
     <owners>$author$</owners>

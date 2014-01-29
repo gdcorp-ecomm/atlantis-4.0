@@ -63,6 +63,23 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
       return result;
     }
 
+    private static HashSet<string> RemoveLeadingPeriodsOnTlds(IEnumerable<string> tlds)
+    {
+      var result = new HashSet<string>();
+      foreach (string sTld in tlds)
+      {
+        if (sTld[0] == '.')
+        {
+          result.Add(sTld.ToUpperInvariant().Substring(1));
+        }
+        else
+        {
+          result.Add(sTld.ToUpperInvariant());
+        }
+      }
+      return result;
+    }
+
     internal DomainContactGroup(IEnumerable<string> tlds, int privateLabelId)
     {
       Tlds = CleanTlds(tlds);
@@ -144,6 +161,7 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
 
     public IDictionary<string, ITuiFormInfo> GetTuiFormInfo(IEnumerable<string> tlds)
     {
+      tlds = RemoveLeadingPeriodsOnTlds(tlds);
       var result = new Dictionary<string, ITuiFormInfo>(8, StringComparer.OrdinalIgnoreCase);
 
       var contactList = new List<DomainsTrusteeContact>(8);
@@ -382,6 +400,15 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
         ValidateGroupForTlds(Tlds, DomainCheckType.Other, contactTypes, true);
       }
 
+      if (domainContact.IsValid)
+      {
+        IDictionary<string, ITuiFormInfo> tuiFormsInfo = GetTuiFormInfo(Tlds);
+        foreach (var tuiFormInfo in tuiFormsInfo)
+        {
+          domainContact.AddTuiFormsInfo(tuiFormInfo.Key, tuiFormInfo.Value);
+        }
+      }
+
       return domainContact.IsValid;
     }
 
@@ -455,6 +482,7 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
       {
         result = contact.Clone() as IDomainContact;
       }
+
       return result;
     }
 

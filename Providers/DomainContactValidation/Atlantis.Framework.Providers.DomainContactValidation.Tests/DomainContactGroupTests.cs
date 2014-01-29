@@ -407,5 +407,84 @@ namespace Atlantis.Framework.Providers.DomainContactValidation.Tests
       Assert.AreEqual(true, tuiFormInfo != null && tuiFormInfo.Count > 0);
     }
 
+    [TestMethod]
+    public void DomainContactCreateMethodPassTest()
+    {
+      string firstname = string.Empty;
+      string lastname = string.Empty;
+      string email = string.Empty;
+      string company = string.Empty;
+      string addr1 = string.Empty;
+      string addr2 = string.Empty;
+      string city = string.Empty;
+      string state = string.Empty;
+      string zip = string.Empty;
+      string country = string.Empty;
+      string phone = string.Empty;
+      string fax = string.Empty;
+      string caPresence = string.Empty;
+
+      ContactValidation newUser = ContactValidation.Create(firstname, lastname, email, company, addr1, addr2, city, state, zip, country, phone, fax, caPresence);
+
+      Assert.IsNotNull(newUser.Address1);
+    }
+
+
+    [TestMethod]
+    public void DomainContactCreateMethodFailTest()
+    {
+      string firstname = null;
+      string lastname = null;
+      string email = null;
+      string company = null;
+      string addr1 = null;
+      string addr2 = null;
+      string city = null;
+      string state = null;
+      string zip = null;
+      string country = null;
+      string phone = null;
+      string fax = null;
+      string caPresence = null;
+
+      ContactValidation newUser = ContactValidation.Create(firstname, lastname, email, company, addr1, addr2, city, state, zip, country, phone, fax, caPresence);
+
+      Assert.IsNull(newUser.Address1);
+    }
+
+    [TestMethod]
+    public void ComDotBrTrusteeIdTest()
+    {
+      var tlds = new List<string> { "COM.BR", "NET.BR"  };
+      var contactGroup = DomainContactProvider.DomainContactGroupInstance(tlds, 1);
+
+      var registrantContact = DomainContactProvider.DomainContactInstance(
+         "Bill", "Registrant", "bregistrant@bongo.com",
+           "MumboJumbo", true,
+          "101 N Street", "Suite 100", "Littleton", "CO",
+          "80130", "US", "(303)-555-1213", "(303)-555-2213");
+      contactGroup.SetContact(registrantContact);
+      var newContact = contactGroup.GetContact(DomainContactType.Registrant);
+
+      Assert.AreEqual(true, newContact.TuiFormsInfo != null && newContact.TuiFormsInfo.ContainsKey("COM.BR"));
+    }
+
+    [TestMethod]
+    public void GetAllTrusteeIds()
+    {
+      var tlds = new List<string> { "FR", "IT", "COM.BR", "NET.BR" };
+      var contactGroup = DomainContactProvider.DomainContactGroupInstance(tlds, 1);
+
+      var registrantContact = DomainContactProvider.DomainContactInstance(
+         "Bill", "Registrant", "bregistrant@bongo.com",
+           "MumboJumbo", true,
+          "101 N Street", "Suite 100", "Littleton", "CO",
+          "80130", "US", "(303)-555-1213", "(303)-555-2213");
+      contactGroup.SetContact(registrantContact);
+
+      var tuiFormInfo = contactGroup.GetTuiFormInfo(tlds);
+      Assert.AreEqual(true, tuiFormInfo != null && tuiFormInfo.ContainsKey("FR"));
+    }
   }
 }
+

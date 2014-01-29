@@ -17,10 +17,17 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
     public List<IDomainContactError> Errors { get; private set; }
     public Dictionary<string, string> AdditionalContactAttributes { get; private set; }
     public Dictionary<string, string> TrusteeVendorIds { get; private set; }
+
+    public Dictionary<string, ITuiFormInfo> TuiFormsInfo { get; private set; }
     
     public void AddTrusteeVendorIds(string key, string value)
     {
       TrusteeVendorIds[key] = value;
+    }
+
+    public void AddTuiFormsInfo(string tld, ITuiFormInfo tuiFormInfo)
+    {
+      TuiFormsInfo[tld] = tuiFormInfo;
     }
 
     public bool IsValid
@@ -243,12 +250,18 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
         result.AddTrusteeVendorIds(pair.Key, pair.Value);
       }
 
+      foreach (KeyValuePair<string, ITuiFormInfo> pair in TuiFormsInfo)
+      {
+        result.AddTuiFormsInfo(pair.Key, pair.Value);
+      }
+
       return result;
     }
 
     internal DomainContact()  
     {
       TrusteeVendorIds = new Dictionary<string, string>();
+      TuiFormsInfo = new Dictionary<string, ITuiFormInfo>();
       AdditionalContactAttributes = new Dictionary<string, string>();
       Errors = new List<IDomainContactError>();
       _contactElement = CreateElement(CONTACT_ELEMENT_NAME);

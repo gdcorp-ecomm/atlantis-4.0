@@ -3,7 +3,7 @@
   <metadata>
     <id>Atlantis.Framework.Providers.DomainContactValidation</id>
     <!-- version should match the assembly FILE version -->
-    <version>4.14.1.8</version>
+    <version>$version$</version>
     <!-- change word Title to match your project name with spaces instead of dots -->
     <title>Atlantis Framework Providers DomainContactValidation</title>
     <authors>$author$</authors>
@@ -12,7 +12,9 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
     <!-- update release notes with latest change information -->
-    <releaseNotes></releaseNotes>
+    <releaseNotes>
+      14.1.29.1: Added TuiFormsInfo to DomainContactGroup
+    </releaseNotes>
     <copyright>$copyright$</copyright>
     <!-- Make tags the same as title element -->
     <tags>Atlantis Framework Providers DomainContactValidation</tags>

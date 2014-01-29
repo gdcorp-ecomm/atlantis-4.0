@@ -11,7 +11,11 @@ namespace Atlantis.Framework.Providers.DomainContactValidation.Interface
 
     Dictionary<string, string> TrusteeVendorIds { get; }
 
+    Dictionary<string, ITuiFormInfo> TuiFormsInfo { get; }
+
     void AddTrusteeVendorIds(string key, string value);
+
+    void AddTuiFormsInfo(string tld, ITuiFormInfo tuiFormInfo);
 
     bool IsValid { get; }
 

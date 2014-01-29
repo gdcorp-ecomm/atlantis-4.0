@@ -100,7 +100,7 @@
     </Reference>
     <Reference Include="Atlantis.Framework.Providers.AppSettings.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.Providers.AppSettings.Interface.4.13.12.17\lib\net40\Atlantis.Framework.Providers.AppSettings.Interface.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.Providers.AppSettings.Interface.14.1.23.1\lib\net40\Atlantis.Framework.Providers.AppSettings.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Providers.CDSContent, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -128,6 +128,10 @@
     <Reference Include="Atlantis.Framework.Providers.Personalization.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Atlantis.Framework.Providers.Personalization.Interface.4.14.1.10\lib\net40\Atlantis.Framework.Providers.Personalization.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Providers.RenderPipeline, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Providers.RenderPipeline.4.13.11.18\lib\net40\Atlantis.Framework.Providers.RenderPipeline.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Providers.RenderPipeline.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -158,7 +162,7 @@
     </Reference>
     <Reference Include="Atlantis.Framework.Web.RenderPipeline, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.Web.RenderPipeline.4.13.12.11\lib\net40\Atlantis.Framework.Web.RenderPipeline.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.Web.RenderPipeline.14.1.28.1\lib\net40\Atlantis.Framework.Web.RenderPipeline.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">

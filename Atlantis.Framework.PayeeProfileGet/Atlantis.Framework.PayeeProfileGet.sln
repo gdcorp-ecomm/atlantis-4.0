@@ -1,11 +1,7 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{6374397C-047E-41FA-9828-0C526067F282}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine", "..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj", "{D30157B2-C1B3-4073-BA5E-632E2337A997}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.PayeeProfileGet.Impl", "Atlantis.Framework.PayeeProfileGet.Impl\Atlantis.Framework.PayeeProfileGet.Impl.csproj", "{FA5C8097-B3D5-4319-B656-6052E607D599}"
 EndProject
@@ -24,31 +20,23 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.PayeePro
 EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 7
+		SccNumberOfProjects = 5
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
 		SccLocalPath0 = .
-		SccProjectUniqueName1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
-		SccProjectTopLevelParentUniqueName1 = Atlantis.Framework.PayeeProfileGet.sln
-		SccProjectName1 = ../Atlantis.Framework.Engine/Atlantis.Framework.Engine
-		SccLocalPath1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
-		SccProjectUniqueName2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
-		SccProjectTopLevelParentUniqueName2 = Atlantis.Framework.PayeeProfileGet.sln
-		SccProjectName2 = ../Atlantis.Framework.Engine/Atlantis.Framework.Interface
-		SccLocalPath2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
-		SccProjectUniqueName3 = Atlantis.Framework.PayeeProfileGet.Impl\\Atlantis.Framework.PayeeProfileGet.Impl.csproj
-		SccProjectName3 = Atlantis.Framework.PayeeProfileGet.Impl
-		SccLocalPath3 = Atlantis.Framework.PayeeProfileGet.Impl
-		SccProjectUniqueName4 = Atlantis.Framework.PayeeProfileGet.Interface\\Atlantis.Framework.PayeeProfileGet.Interface.csproj
-		SccProjectName4 = Atlantis.Framework.PayeeProfileGet.Interface
-		SccLocalPath4 = Atlantis.Framework.PayeeProfileGet.Interface
-		SccProjectUniqueName5 = Atlantis.Framework.PayeeProfileGet.Tests\\Atlantis.Framework.PayeeProfileGet.Tests.csproj
-		SccProjectName5 = Atlantis.Framework.PayeeProfileGet.Tests
-		SccLocalPath5 = Atlantis.Framework.PayeeProfileGet.Tests
-		SccProjectUniqueName6 = ..\\Atlantis.Framework.PayeeProfile\\Atlantis.Framework.PayeeProfile.Interface\\Atlantis.Framework.PayeeProfile.Interface.csproj
-		SccProjectTopLevelParentUniqueName6 = Atlantis.Framework.PayeeProfileGet.sln
-		SccProjectName6 = ../Atlantis.Framework.PayeeProfile/Atlantis.Framework.PayeeProfile.Interface
-		SccLocalPath6 = ..\\Atlantis.Framework.PayeeProfile\\Atlantis.Framework.PayeeProfile.Interface
+		SccProjectUniqueName1 = Atlantis.Framework.PayeeProfileGet.Impl\\Atlantis.Framework.PayeeProfileGet.Impl.csproj
+		SccProjectName1 = Atlantis.Framework.PayeeProfileGet.Impl
+		SccLocalPath1 = Atlantis.Framework.PayeeProfileGet.Impl
+		SccProjectUniqueName2 = Atlantis.Framework.PayeeProfileGet.Interface\\Atlantis.Framework.PayeeProfileGet.Interface.csproj
+		SccProjectName2 = Atlantis.Framework.PayeeProfileGet.Interface
+		SccLocalPath2 = Atlantis.Framework.PayeeProfileGet.Interface
+		SccProjectUniqueName3 = Atlantis.Framework.PayeeProfileGet.Tests\\Atlantis.Framework.PayeeProfileGet.Tests.csproj
+		SccProjectName3 = Atlantis.Framework.PayeeProfileGet.Tests
+		SccLocalPath3 = Atlantis.Framework.PayeeProfileGet.Tests
+		SccProjectUniqueName4 = ..\\Atlantis.Framework.PayeeProfile\\Atlantis.Framework.PayeeProfile.Interface\\Atlantis.Framework.PayeeProfile.Interface.csproj
+		SccProjectTopLevelParentUniqueName4 = Atlantis.Framework.PayeeProfileGet.sln
+		SccProjectName4 = ../Atlantis.Framework.PayeeProfile/Atlantis.Framework.PayeeProfile.Interface
+		SccLocalPath4 = ..\\Atlantis.Framework.PayeeProfile\\Atlantis.Framework.PayeeProfile.Interface
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = Atlantis.Framework.PayeeProfileGet.vsmdi
@@ -58,14 +46,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.Build.0 = Release|Any CPU
 		{FA5C8097-B3D5-4319-B656-6052E607D599}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{FA5C8097-B3D5-4319-B656-6052E607D599}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FA5C8097-B3D5-4319-B656-6052E607D599}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -87,8 +67,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {6374397C-047E-41FA-9828-0C526067F282}
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {6374397C-047E-41FA-9828-0C526067F282}
 		{9913F741-D65D-41D1-9BFE-634C8779FFE0} = {6374397C-047E-41FA-9828-0C526067F282}
 	EndGlobalSection
 EndGlobal

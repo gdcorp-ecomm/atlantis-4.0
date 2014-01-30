@@ -58,6 +58,7 @@ namespace Atlantis.Framework.PayeeProfileGet.Tests
 
     [TestMethod]
     [DeploymentItem("atlantis.config")]
+    [DeploymentItem("Atlantis.Framework.PayeeProfileGet.Impl.dll")]
     public void TestMethod1()
     {
       PayeeProfileGetRequestData request = new PayeeProfileGetRequestData(

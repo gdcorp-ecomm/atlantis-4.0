@@ -1,6 +1,7 @@
 ﻿using Atlantis.Framework.TLDDataCache.Interface;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
+using System.Xml.Linq;
 
 namespace Atlantis.Framework.TLDDataCache.Tests
 {
@@ -17,7 +18,7 @@ namespace Atlantis.Framework.TLDDataCache.Tests
     {
       var request = new OfferedTLDsRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, 1, OfferedTLDProductTypes.Invalid);
       var response = (OfferedTLDsResponseData)DataCache.DataCache.GetProcessRequest(request, _OFFEREDTLDREQUEST);
-      Assert.IsTrue(response.OfferedTLDs.Count() == 0);
+      Assert.IsTrue(!response.OfferedTLDs.Any());
     }
 
     [TestMethod]
@@ -25,35 +26,7 @@ namespace Atlantis.Framework.TLDDataCache.Tests
     {
       var request = new OfferedTLDsRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, 1, OfferedTLDProductTypes.Registration);
       var response = (OfferedTLDsResponseData)DataCache.DataCache.GetProcessRequest(request, _OFFEREDTLDREQUEST);
-      Assert.IsTrue(response.OfferedTLDs.Count() > 0);
-    }
-
-    [TestMethod]
-    public void OfferedTldsIsOffered()
-    {
-      var request = new OfferedTLDsRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, 1, OfferedTLDProductTypes.Registration);
-      var response = (OfferedTLDsResponseData)DataCache.DataCache.GetProcessRequest(request, _OFFEREDTLDREQUEST);
-
-      string tld = response.OfferedTLDs.First();
-      Assert.IsTrue(response.IsTLDOffered(tld));
-    }
-
-    [TestMethod]
-    public void OfferedTldsNotOffered()
-    {
-      var request = new OfferedTLDsRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, 1, OfferedTLDProductTypes.Registration);
-      var response = (OfferedTLDsResponseData)DataCache.DataCache.GetProcessRequest(request, _OFFEREDTLDREQUEST);
-
-      Assert.IsFalse(response.IsTLDOffered("notavalidtldever"));
-    }
-
-    [TestMethod]
-    public void OfferedTldsIsOfferedNull()
-    {
-      var request = new OfferedTLDsRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, 1, OfferedTLDProductTypes.Registration);
-      var response = (OfferedTLDsResponseData)DataCache.DataCache.GetProcessRequest(request, _OFFEREDTLDREQUEST);
-
-      Assert.IsFalse(response.IsTLDOffered(null));
+      Assert.IsTrue(response.OfferedTLDs.Any());
     }
 
     [TestMethod]
@@ -69,16 +42,20 @@ namespace Atlantis.Framework.TLDDataCache.Tests
     }
 
     [TestMethod]
-    public void OfferedTldSortOrder()
+    public void OfferedTldsRequestToXml()
     {
       var request = new OfferedTLDsRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, 1, OfferedTLDProductTypes.Registration);
-      var response = (OfferedTLDsResponseData)DataCache.DataCache.GetProcessRequest(request, _OFFEREDTLDREQUEST);
-
-      var sortOrder = response.GetSortOrder();
-      int itemCount = response.OfferedTLDs.Count();
-
-      Assert.AreEqual(itemCount, sortOrder.Count);
+      var requestXml = request.ToXML();
+      var requestXmlElement = XElement.Parse(requestXml);
+      Assert.IsTrue(!string.IsNullOrEmpty(requestXml) && requestXmlElement != null);
     }
 
+    [TestMethod]
+    public void OfferedTldsRequestGetCacheMd5()
+    {
+      var request = new OfferedTLDsRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, 1, OfferedTLDProductTypes.Registration);
+      var requestCacheMd5 = request.GetCacheMD5();
+      Assert.IsTrue(!string.IsNullOrEmpty(requestCacheMd5));
+    }
   }
 }

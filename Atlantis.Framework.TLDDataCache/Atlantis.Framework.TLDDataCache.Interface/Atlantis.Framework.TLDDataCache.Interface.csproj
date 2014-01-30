@@ -99,7 +99,6 @@
     <Compile Include="OfferedTLDsResponseData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ActiveTLDsResponseData.cs" />
-    <Compile Include="TLDsHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="atlantis.config" />

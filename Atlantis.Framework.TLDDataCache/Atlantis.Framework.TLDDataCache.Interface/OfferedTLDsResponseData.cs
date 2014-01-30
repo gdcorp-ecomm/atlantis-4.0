@@ -17,7 +17,6 @@ namespace Atlantis.Framework.TLDDataCache.Interface
     }
 
     private AtlantisException _exception;
-    private HashSet<string> _offeredTLDs;
     private List<string> _offeredTLDsInOrder;
 
     public static OfferedTLDsResponseData FromException(AtlantisException exception)
@@ -45,18 +44,6 @@ namespace Atlantis.Framework.TLDDataCache.Interface
         }
       }
 
-      var overrideTlds = TLDsHelper.OverrideTlds();
-      if (overrideTlds.Count > 0)
-      {
-        foreach (var item in overrideTlds)
-        {
-          if (!tlds.Contains(item, StringComparer.OrdinalIgnoreCase))
-          {
-            tlds.Add(item);
-          }
-        }
-      }
-
       if (tlds.Count == 0)
       {
         return Empty;
@@ -67,35 +54,17 @@ namespace Atlantis.Framework.TLDDataCache.Interface
 
     private OfferedTLDsResponseData()
     {
-      _offeredTLDs = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
       _offeredTLDsInOrder = new List<string>();
     }
 
     private OfferedTLDsResponseData(List<string> tlds)
     {
       _offeredTLDsInOrder = tlds;
-      _offeredTLDs = new HashSet<string>(tlds, StringComparer.OrdinalIgnoreCase);
     }
 
     public IEnumerable<string> OfferedTLDs
     {
       get { return _offeredTLDsInOrder; }
-    }
-
-    public bool IsTLDOffered(string tld)
-    {
-      return _offeredTLDs.Contains(tld);
-    }
-
-    public Dictionary<string, int> GetSortOrder()
-    {
-      Dictionary<string, int> result = new Dictionary<string, int>(_offeredTLDsInOrder.Count, StringComparer.OrdinalIgnoreCase);
-      int sortOrder = 0;
-      foreach (string tld in _offeredTLDsInOrder)
-      {
-        result[tld] = (++sortOrder);
-      }
-      return result;
     }
 
     public string ToXML()

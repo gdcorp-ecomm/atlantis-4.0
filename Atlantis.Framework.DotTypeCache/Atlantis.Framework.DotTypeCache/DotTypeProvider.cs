@@ -28,11 +28,11 @@ namespace Atlantis.Framework.DotTypeCache
     {
       _dotTypesRequestCache = new Dictionary<string, IDotTypeInfo>(100, StringComparer.OrdinalIgnoreCase);
 
-      _tldDataForInvalid = new TLDDataImpl(SiteContext.PrivateLabelId, OfferedTLDProductTypes.Invalid);
-      _tldDataForRegistration = new TLDDataImpl(SiteContext.PrivateLabelId, OfferedTLDProductTypes.Registration);
-      _tldDataForTransfer = new TLDDataImpl(SiteContext.PrivateLabelId, OfferedTLDProductTypes.Transfer);
-      _tldDataForBulk = new TLDDataImpl(SiteContext.PrivateLabelId, OfferedTLDProductTypes.Bulk);
-      _tldDataForBulkTransfer = new TLDDataImpl(SiteContext.PrivateLabelId, OfferedTLDProductTypes.BulkTransfer);
+      _tldDataForInvalid = new TLDDataImpl(container, SiteContext.PrivateLabelId, OfferedTLDProductTypes.Invalid);
+      _tldDataForRegistration = new TLDDataImpl(container, SiteContext.PrivateLabelId, OfferedTLDProductTypes.Registration);
+      _tldDataForTransfer = new TLDDataImpl(container, SiteContext.PrivateLabelId, OfferedTLDProductTypes.Transfer);
+      _tldDataForBulk = new TLDDataImpl(container, SiteContext.PrivateLabelId, OfferedTLDProductTypes.Bulk);
+      _tldDataForBulkTransfer = new TLDDataImpl(container, SiteContext.PrivateLabelId, OfferedTLDProductTypes.BulkTransfer);
 
       _container = container;
     }
@@ -86,7 +86,7 @@ namespace Atlantis.Framework.DotTypeCache
 
     public bool HasDotTypeInfo(string dotType)
     {
-      return TLDMLDotTypes.TLDMLIsAvailable(dotType) || StaticDotTypes.HasDotType(dotType);
+      return TLDMLDotTypes.TLDMLIsAvailable(dotType, _container) || StaticDotTypes.HasDotType(dotType);
     }
 
     public ITLDDataImpl GetTLDDataForInvalid

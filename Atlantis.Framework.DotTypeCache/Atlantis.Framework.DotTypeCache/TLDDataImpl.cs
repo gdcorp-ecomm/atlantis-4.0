@@ -5,6 +5,8 @@ using System.Web.Configuration;
 using Atlantis.Framework.DotTypeCache.Interface;
 using System;
 using System.Collections.Generic;
+using Atlantis.Framework.Interface;
+using Atlantis.Framework.Providers.TLDDataCache.Interface;
 using Atlantis.Framework.TLDDataCache.Interface;
 using System.Linq;
 
@@ -18,42 +20,39 @@ namespace Atlantis.Framework.DotTypeCache
 
     private readonly int _privateLabelId;
     private readonly OfferedTLDProductTypes _productType;
+    private readonly Lazy<ITLDDataCacheProvider> _tldDataCacheProvider;
 
-    internal TLDDataImpl(int privateLabelId, OfferedTLDProductTypes productType)
+    internal TLDDataImpl(IProviderContainer container, int privateLabelId, OfferedTLDProductTypes productType)
     {
+      _tldDataCacheProvider = new Lazy<ITLDDataCacheProvider>(container.Resolve<ITLDDataCacheProvider>);
       _privateLabelId = privateLabelId;
       _productType = productType;
     }
 
-    private ActiveTLDsResponseData _activeTldsResponse;
-    private ActiveTLDsResponseData ActiveTldsResponse
+    private ITldsActive _tldsActive;
+    private ITldsActive TldsActive
     {
       get
       {
-        if (_activeTldsResponse == null)
+        if (_tldsActive == null)
         {
-          var aRequest = new ActiveTLDsRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0);
-          var aResponse = (ActiveTLDsResponseData) DataCache.DataCache.GetProcessRequest(aRequest, _ACTIVETLDREQUEST);
-
-          _activeTldsResponse = aResponse;
+          _tldsActive = _tldDataCacheProvider.Value.GetActiveTlds();
         }
-        return _activeTldsResponse;
+        return _tldsActive;
 
       }
     }
 
-    private OfferedTLDsResponseData _offeredTldsResponse;
-    private OfferedTLDsResponseData OfferedTldsResponse
+    private ITldsOffered _tldsOffered;
+    private ITldsOffered TldsOffered
     {
       get
       {
-        if (_offeredTldsResponse == null)
+        if (_tldsOffered == null)
         {
-          var oRequest = new OfferedTLDsRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, _privateLabelId, _productType);
-          var oResponse = (OfferedTLDsResponseData) DataCache.DataCache.GetProcessRequest(oRequest, _OFFEREDTLDREQUEST);
-          _offeredTldsResponse =  oResponse;
+          _tldsOffered = _tldDataCacheProvider.Value.GetOfferedTlds(_privateLabelId, _productType);
         }
-        return _offeredTldsResponse;
+        return _tldsOffered;
       }
     }
 
@@ -62,23 +61,37 @@ namespace Atlantis.Framework.DotTypeCache
       tldNames = tldNames ?? new string[0];
       var tldInfo = new Dictionary<string, Dictionary<string, bool>>(1);
 
-      var allFlags = ActiveTldsResponse.AllFlagNames.ToList();
-      var oResponse = OfferedTldsResponse;
+      var allFlags = new List<string>();
 
+      ITldsOffered tldsOffered = null;
       var offeredTlds = new List<string>();
+      if (_tldDataCacheProvider.Value != null)
+      {
+        if (TldsActive != null)
+        {
+          allFlags = TldsActive.AllFlagNames.ToList();
+        }
+      }
+
       if (tldNames.Length > 0)
       {
-        foreach (var tld in tldNames)
+        if (TldsOffered != null)
         {
-          if (oResponse.OfferedTLDs.Contains(tld, StringComparer.OrdinalIgnoreCase))
+          foreach (var tld in tldNames)
           {
-            offeredTlds.Add(tld);
+            if (TldsOffered.OfferedTLDs.Contains(tld, StringComparer.OrdinalIgnoreCase))
+            {
+              offeredTlds.Add(tld);
+            }
           }
         }
       }
       else
       {
-        offeredTlds = oResponse.OfferedTLDs.ToList();
+        if (TldsOffered != null)
+        {
+          offeredTlds = TldsOffered.OfferedTLDs.ToList();
+        }
       }
 
       foreach (var offeredTld in offeredTlds)
@@ -86,9 +99,12 @@ namespace Atlantis.Framework.DotTypeCache
         var flagSets = new Dictionary<string, bool>();
         if (allFlags.Any())
         {
-          foreach (var flag in allFlags)
+          if (TldsActive != null)
           {
-            flagSets.Add(flag, ActiveTldsResponse.IsTLDActive(offeredTld, flag));
+            foreach (var flag in allFlags)
+            {
+              flagSets.Add(flag, TldsActive.IsTLDActive(offeredTld, flag));
+            }
           }
         }
         if (!tldInfo.ContainsKey(offeredTld))
@@ -109,9 +125,9 @@ namespace Atlantis.Framework.DotTypeCache
         {
           _offeredTldsSet = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
 
-          if (OfferedTldsResponse != null && OfferedTldsResponse.OfferedTLDs.Any())
+          if (TldsOffered != null && TldsOffered.OfferedTLDs.Any())
           {
-            foreach (var tld in OfferedTldsResponse.OfferedTLDs)
+            foreach (var tld in TldsOffered.OfferedTLDs)
             {
               _offeredTldsSet.Add(tld);
             }
@@ -123,14 +139,14 @@ namespace Atlantis.Framework.DotTypeCache
 
     public HashSet<string> GetTLDsSetForAllFlags(params string[] flagNames)
     {
-      HashSet<string> aTlds = ActiveTldsResponse.GetActiveTLDIntersect(flagNames);
+      HashSet<string> aTlds = TldsActive.GetActiveTLDIntersect(flagNames);
 
       return aTlds;
     }
 
     private IEnumerable<string> GetTLDsSetForAnyFlags(params string[] flagNames)
     {
-      HashSet<string> aTlds = ActiveTldsResponse.GetActiveTLDUnion(flagNames);
+      HashSet<string> aTlds = TldsActive.GetActiveTLDUnion(flagNames);
 
       return aTlds;
     }
@@ -176,9 +192,9 @@ namespace Atlantis.Framework.DotTypeCache
         {
           _offeredTldsList = new List<string>();
 
-          if (OfferedTldsResponse != null && OfferedTldsResponse.OfferedTLDs.Any())
+          if (TldsOffered != null && TldsOffered.OfferedTLDs.Any())
           {
-            _offeredTldsList = OfferedTldsResponse.OfferedTLDs.ToList();
+            _offeredTldsList = TldsOffered.OfferedTLDs.ToList();
           }
         }
         return _offeredTldsList;

@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Diagnostics;
 using System.Xml.Linq;
+using Atlantis.Framework.Providers.Interface.ProviderContainer;
+using Atlantis.Framework.Providers.TLDDataCache;
+using Atlantis.Framework.Providers.TLDDataCache.Interface;
 using Atlantis.Framework.TLDDataCache.Interface;
 
 namespace Atlantis.Framework.DotTypeCache.Monitor
@@ -10,6 +13,13 @@ namespace Atlantis.Framework.DotTypeCache.Monitor
   internal class ActiveTLDs : IMonitor
   {
     const int ActiveTldRequest = 635;
+
+    private readonly ITLDDataCacheProvider _tldDataCacheProvider;
+    public ActiveTLDs()
+    {
+      HttpProviderContainer.Instance.RegisterProvider<ITLDDataCacheProvider, TLDDataCacheProvider>();
+      _tldDataCacheProvider = HttpProviderContainer.Instance.Resolve<ITLDDataCacheProvider>();
+    }
 
     public XDocument GetMonitorData(NameValueCollection qsc)
     {
@@ -21,16 +31,18 @@ namespace Atlantis.Framework.DotTypeCache.Monitor
 
       try
       {
-        var request = new ActiveTLDsRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0);
-        var response = (ActiveTLDsResponseData)DataCache.DataCache.GetProcessRequest(request, ActiveTldRequest);
+        var activeTlds = _tldDataCacheProvider.GetActiveTlds();
 
         var tldInfo = new XElement("TLDInfo");
 
-        foreach (var flag in response.AllFlagNames)
+        if (activeTlds != null)
         {
-          var tlds = response.GetActiveTLDUnion(flag);
+          foreach (var flag in activeTlds.AllFlagNames)
+          {
+            var tlds = activeTlds.GetActiveTLDUnion(flag);
 
-          tldInfo.Add(GetTldElement(flag, tlds));
+            tldInfo.Add(GetTldElement(flag, tlds));
+          }
         }
         root.Add(tldInfo);
       }

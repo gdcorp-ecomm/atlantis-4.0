@@ -7,6 +7,7 @@ using Atlantis.Framework.DotTypeCache.Interface;
 using Atlantis.Framework.DotTypeCache.Static;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.PrivateLabel.Interface;
+using Atlantis.Framework.Providers.TLDDataCache;
 using Atlantis.Framework.RegDotTypeProductIds.Interface;
 using Atlantis.Framework.RegDotTypeRegistry.Interface;
 using Atlantis.Framework.TLDDataCache.Interface;
@@ -710,7 +711,7 @@ namespace Atlantis.Framework.DotTypeCache
           var tuiClaimsStarted = HttpContext.Current.Request.Params["qa--claimsstarted"];
           if (!string.IsNullOrEmpty(tuiClaimsStarted) && tuiClaimsStarted == "1")
           {
-            var overRideTlds = TLDsHelper.OverrideTlds();
+            var overRideTlds = TldsHelper.OverrideTlds();
             if (overRideTlds.Contains(DotType))
             {
               needsClaimCheck = true;

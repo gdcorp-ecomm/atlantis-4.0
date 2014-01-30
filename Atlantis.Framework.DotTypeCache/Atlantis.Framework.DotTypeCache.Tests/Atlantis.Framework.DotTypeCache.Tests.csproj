@@ -89,18 +89,6 @@
     <Reference Include="Atlantis.Framework.DomainSearch.Interface">
       <HintPath>..\packages\Atlantis.Framework.DomainSearch.Interface.4.13.11.8\lib\net40\Atlantis.Framework.DomainSearch.Interface.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.DotTypeCache, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.DotTypeCache.14.1.21.1\lib\net40\Atlantis.Framework.DotTypeCache.dll</HintPath>
-    </Reference>
-    <Reference Include="Atlantis.Framework.DotTypeCache.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.DotTypeCache.Interface.14.1.21.1\lib\net40\Atlantis.Framework.DotTypeCache.Interface.dll</HintPath>
-    </Reference>
-    <Reference Include="Atlantis.Framework.DotTypeCache.Static, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.DotTypeCache.Static.14.1.21.1\lib\net40\Atlantis.Framework.DotTypeCache.Static.dll</HintPath>
-    </Reference>
     <Reference Include="Atlantis.Framework.Engine, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Atlantis.Framework.Engine.14.1.16.1\lib\net40\Atlantis.Framework.Engine.dll</HintPath>
@@ -154,6 +142,14 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Atlantis.Framework.Providers.ProxyContext.4.14.1.4\lib\net40\Atlantis.Framework.Providers.ProxyContext.dll</HintPath>
     </Reference>
+    <Reference Include="Atlantis.Framework.Providers.TLDDataCache, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Providers.TLDDataCache.14.1.30.1\lib\net40\Atlantis.Framework.Providers.TLDDataCache.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Providers.TLDDataCache.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Providers.TLDDataCache.Interface.14.1.30.1\lib\net40\Atlantis.Framework.Providers.TLDDataCache.Interface.dll</HintPath>
+    </Reference>
     <Reference Include="Atlantis.Framework.RegDotTypeProductIds.Impl, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Atlantis.Framework.RegDotTypeProductIds.Impl.4.13.10.30\lib\net40\Atlantis.Framework.RegDotTypeProductIds.Impl.dll</HintPath>
@@ -192,7 +188,7 @@
     </Reference>
     <Reference Include="Atlantis.Framework.TLDDataCache.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.TLDDataCache.Interface.4.13.10.14\lib\net40\Atlantis.Framework.TLDDataCache.Interface.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.TLDDataCache.Interface.14.1.28.1\lib\net40\Atlantis.Framework.TLDDataCache.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Automation.Framework.Data, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -267,13 +263,25 @@
     <Content Include="readme.txt" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Interop\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Atlantis.Framework.DotTypeCache.Interface\Atlantis.Framework.DotTypeCache.Interface.csproj">
+      <Project>{95e67e48-7173-4f0c-854f-2f08cbfcf923}</Project>
+      <Name>Atlantis.Framework.DotTypeCache.Interface</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.DotTypeCache.StaticTypes\Atlantis.Framework.DotTypeCache.StaticTypes.csproj">
       <Project>{fc7381b1-66e0-462f-952b-4ec1f18e9c90}</Project>
       <Name>Atlantis.Framework.DotTypeCache.StaticTypes</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Interop\" />
+    <ProjectReference Include="..\Atlantis.Framework.DotTypeCache.Static\Atlantis.Framework.DotTypeCache.Static.csproj">
+      <Project>{c6714b5f-ce86-4d8b-a615-0482465d0619}</Project>
+      <Name>Atlantis.Framework.DotTypeCache.Static</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.DotTypeCache\Atlantis.Framework.DotTypeCache.csproj">
+      <Project>{c86da599-d09d-4c1e-934d-7e59d38ea9c2}</Project>
+      <Name>Atlantis.Framework.DotTypeCache</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

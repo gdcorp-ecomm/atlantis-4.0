@@ -3,6 +3,8 @@ using Atlantis.Framework.DotTypeCache.Interface;
 using Atlantis.Framework.DotTypeCache.Static;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.Interface.ProviderContainer;
+using Atlantis.Framework.Providers.TLDDataCache;
+using Atlantis.Framework.Providers.TLDDataCache.Interface;
 using Atlantis.Framework.TLDDataCache.Interface;
 using Atlantis.Framework.Testing.MockHttpContext;
 using Atlantis.Framework.Testing.MockProviders;
@@ -61,6 +63,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
       HttpProviderContainer.Instance.RegisterProvider<IShopperContext, MockShopperContext>();
       HttpProviderContainer.Instance.RegisterProvider<IManagerContext, MockNoManagerContext>();
       HttpProviderContainer.Instance.RegisterProvider<IDotTypeProvider, DotTypeProvider>();
+      HttpProviderContainer.Instance.RegisterProvider<ITLDDataCacheProvider, TLDDataCacheProvider>();
       MockHttpRequest request = new MockHttpRequest("http://siteadmin.debug.intranet.gdg/default.aspx");
       MockHttpContext.SetFromWorkerRequest(request);
 
@@ -180,7 +183,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
     private bool TLDMLIsAvailable(string dotType)
     {
       MethodInfo TLDMLIsAvailableMethod = (typeof(TLDMLDotTypes)).GetMethod("TLDMLIsAvailable", BindingFlags.Static | BindingFlags.NonPublic);
-      var args = new object[1] { dotType };
+      var args = new object[2] { dotType, HttpProviderContainer.Instance };
       return (bool)TLDMLIsAvailableMethod.Invoke(null, args);
     }
 
@@ -1622,13 +1625,13 @@ namespace Atlantis.Framework.DotTypeCache.Tests
     }
 
     [TestMethod]
-    public void TldGetTuiFormTypesLandrushSystems()
+    public void TldGetTuiFormTypeSystemsSunRiseA()
     {
       var request = new MockHttpRequest("http://siteadmin.debug.intranet.gdg/default.aspx");
       MockHttpContext.SetFromWorkerRequest(request);
 
       var dotTypeInfo = DotTypeProvider.GetDotTypeInfo("systems");
-      var tuiFormTypes = dotTypeInfo.GetTuiFormTypes(LaunchPhases.GeneralAvailability);
+      var tuiFormTypes = dotTypeInfo.GetTuiFormTypes(LaunchPhases.SunriseA);
       Assert.IsTrue(tuiFormTypes.Any());
     }
 

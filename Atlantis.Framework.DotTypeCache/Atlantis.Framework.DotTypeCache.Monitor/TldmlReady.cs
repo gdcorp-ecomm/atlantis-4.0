@@ -7,7 +7,8 @@ using System.Linq;
 using System.Xml.Linq;
 using Atlantis.Framework.DotTypeCache.Interface;
 using Atlantis.Framework.Providers.Interface.ProviderContainer;
-using Atlantis.Framework.TLDDataCache.Interface;
+using Atlantis.Framework.Providers.TLDDataCache;
+using Atlantis.Framework.Providers.TLDDataCache.Interface;
 
 namespace Atlantis.Framework.DotTypeCache.Monitor
 {
@@ -16,10 +17,15 @@ namespace Atlantis.Framework.DotTypeCache.Monitor
     const int ActiveTldRequest = 635;
 
     private readonly IDotTypeProvider _dotTypeProvider;
+    private readonly ITLDDataCacheProvider _tldDataCacheProvider;
     public TldmlReady()
     {
       HttpProviderContainer.Instance.RegisterProvider<IDotTypeProvider, DotTypeProvider>();
+      HttpProviderContainer.Instance.RegisterProvider<ITLDDataCacheProvider, TLDDataCacheProvider>();
+
       _dotTypeProvider = HttpProviderContainer.Instance.Resolve<IDotTypeProvider>();
+      _tldDataCacheProvider = HttpProviderContainer.Instance.Resolve<ITLDDataCacheProvider>();
+
     }
 
     public XDocument GetMonitorData(NameValueCollection qsc)
@@ -53,8 +59,10 @@ namespace Atlantis.Framework.DotTypeCache.Monitor
         ITLDDataImpl tldDataBulk = _dotTypeProvider.GetTLDDataForBulk;
         ITLDDataImpl tldDataBulkTransfer = _dotTypeProvider.GetTLDDataForBulkTransfer;
 
-        var activeTldsRequest = new ActiveTLDsRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0);
-        var activeTldsResponse = (ActiveTLDsResponseData)DataCache.DataCache.GetProcessRequest(activeTldsRequest, ActiveTldRequest);
+        //var activeTldsRequest = new ActiveTLDsRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0);
+        //var activeTldsResponse = (ActiveTLDsResponseData)DataCache.DataCache.GetProcessRequest(activeTldsRequest, ActiveTldRequest);
+
+        var activeTlds = _tldDataCacheProvider.GetActiveTlds();
 
         var offeredTldsRegistration = tldDataRegistration.GetDiagnosticsOfferedTLDFlags(tldNames);
         var offeredTldsTransfer = tldDataTransfer.GetDiagnosticsOfferedTLDFlags(tldNames);
@@ -124,25 +132,25 @@ namespace Atlantis.Framework.DotTypeCache.Monitor
           //                   regProductId > 0 && xferProductId > 0 && renewalProductId > 0;
 
           bool isTldmlReadyForRegistration = dotTypeInfo.GetType().Name == "TLDMLDotTypeInfo" &&
-                             activeTldsResponse.IsTLDActive(tldName, "availcheckstatus") &&
+                             activeTlds.IsTLDActive(tldName, "availcheckstatus") &&
                              offeredTldsRegistration.TryGetValue(tldName, out flags) &&
                              minRegLength > 0 && maxRegLength > 0 &&
                              regProductId > 0;
 
           bool isTldmlReadyForTransfer = dotTypeInfo.GetType().Name == "TLDMLDotTypeInfo" &&
-                             activeTldsResponse.IsTLDActive(tldName, "availcheckstatus") &&
+                             activeTlds.IsTLDActive(tldName, "availcheckstatus") &&
                              offeredTldsTransfer.TryGetValue(tldName, out flags) &&
                              minXferLength > 0 && maxXferLength > 0 &&
                              xferProductId > 0;
 
           bool isTldmlReadyForBulk = dotTypeInfo.GetType().Name == "TLDMLDotTypeInfo" &&
-                             activeTldsResponse.IsTLDActive(tldName, "availcheckstatus") &&
+                             activeTlds.IsTLDActive(tldName, "availcheckstatus") &&
                              offeredTldsBulk.TryGetValue(tldName, out flags) &&
                              minRegLength > 0 && maxRegLength > 0 &&
                              regProductId > 0;
 
           bool isTldmlReadyForBulkTransfer = dotTypeInfo.GetType().Name == "TLDMLDotTypeInfo" &&
-                             activeTldsResponse.IsTLDActive(tldName, "availcheckstatus") &&
+                             activeTlds.IsTLDActive(tldName, "availcheckstatus") &&
                              offeredTldsBulkTransfer.TryGetValue(tldName, out flags) &&
                              minXferLength > 0 && maxXferLength > 0 &&
                              xferProductId > 0;
@@ -156,7 +164,7 @@ namespace Atlantis.Framework.DotTypeCache.Monitor
 
           var tldInfo = new XElement("TldInfo");
           tldInfo.Add(new XAttribute("TldmlSupported", dotTypeInfo.GetType().Name == "TLDMLDotTypeInfo"));
-          tldInfo.Add(new XAttribute("IsActiveTld", activeTldsResponse.IsTLDActive(tldName, "availcheckstatus")));
+          tldInfo.Add(new XAttribute("IsActiveTld", activeTlds.IsTLDActive(tldName, "availcheckstatus")));
 
           tldInfo.Add(new XAttribute("IsOfferedForRegistration", offeredTldsRegistration.TryGetValue(tldName, out flags)));
           tldInfo.Add(new XAttribute("IsOfferedForTransfer", offeredTldsTransfer.TryGetValue(tldName, out flags)));

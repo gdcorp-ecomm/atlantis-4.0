@@ -1,9 +1,8 @@
 ﻿using Atlantis.Framework.DotTypeCache.Interface;
 using System;
-using System.Collections.Generic;
 using Atlantis.Framework.DotTypeCache.Static;
 using Atlantis.Framework.Interface;
-using Atlantis.Framework.TLDDataCache.Interface;
+using Atlantis.Framework.Providers.TLDDataCache.Interface;
 
 namespace Atlantis.Framework.DotTypeCache
 {
@@ -11,7 +10,7 @@ namespace Atlantis.Framework.DotTypeCache
   {
     public const string TLDMLSupportedFlag = "tldml_supported";
 
-    internal static bool TLDMLIsAvailable(string dotType)
+    internal static bool TLDMLIsAvailable(string dotType, IProviderContainer container)
     {
       bool result = false;
 
@@ -19,12 +18,12 @@ namespace Atlantis.Framework.DotTypeCache
       {
         try
         {
-          var request = new ActiveTLDsRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0);
-          var response = (ActiveTLDsResponseData)DataCache.DataCache.GetProcessRequest(request, DotTypeEngineRequests.ActiveTlds);
+          var provider = container.Resolve<ITLDDataCacheProvider>();
+          var activeTlds = provider.GetActiveTlds();
 
-          if (response != null)
+          if (activeTlds != null)
           {
-            result = response.IsTLDActive(dotType, TLDMLSupportedFlag);
+            result = activeTlds.IsTLDActive(dotType, TLDMLSupportedFlag);
           }
         }
         catch (Exception ex)
@@ -41,7 +40,7 @@ namespace Atlantis.Framework.DotTypeCache
     {
       IDotTypeInfo result = null;
 
-      if (TLDMLIsAvailable(dotType))
+      if (TLDMLIsAvailable(dotType, container))
       {
         try
         {

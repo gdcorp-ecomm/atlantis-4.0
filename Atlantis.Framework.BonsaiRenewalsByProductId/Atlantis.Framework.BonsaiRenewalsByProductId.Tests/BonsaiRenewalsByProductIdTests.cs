@@ -15,9 +15,10 @@ namespace Atlantis.Framework.BonsaiRenewalsByProductId.Tests
 
     [TestMethod]
     [DeploymentItem("atlantis.config")]
+    [DeploymentItem("Atlantis.Framework.BonsaiRenewalsByProductId.Impl.dll")]
     public void TestGetRenewals()
     {
-      var requestData = new BonsaiRenewalsRequestData("857527", "http://localhost", string.Empty, string.Empty, 0, 42114, 1);
+      var requestData = new BonsaiRenewalsRequestData("840420", "http://localhost", string.Empty, string.Empty, 0, 2712, 1);
       var responseData = (BonsaiRenewalsResponseData) Engine.Engine.ProcessRequest(requestData, 403);
 
       Assert.IsNull(responseData.AtlantisException);

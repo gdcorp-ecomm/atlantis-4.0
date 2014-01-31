@@ -297,31 +297,30 @@ namespace Atlantis.Framework.Providers.DomainContactValidation.Tests
          "Bill", "Registrant", "bregistrant@bongo.com",
            string.Empty, false,
           "101 N Street", "Suite 100", "Littleton", "Colorado",
-          string.Empty, "HK", "(303)-555-1213", "(303)-555-2213");
+          "00000", "HK", "(303)-555-1213", "(303)-555-2213");
 
       var adminContact = DomainContactProvider.DomainContactInstance(
          "Bill", "Registrant", "bregistrant@bongo.com",
            string.Empty, false,
           "101 N Street", "Suite 100", "Littleton", "Colorado",
-          string.Empty, "HK", "(303)-555-1213", "(303)-555-2213");
+          "00000", "HK", "(303)-555-1213", "(303)-555-2213");
 
       var billingContact = DomainContactProvider.DomainContactInstance(
          "Bill", "Registrant", "bregistrant@bongo.com",
            string.Empty, false,
           "101 N Street", "Suite 100", "Littleton", "Colorado",
-          string.Empty, "HK", "(303)-555-1213", "(303)-555-2213");
+          "00000", "HK", "(303)-555-1213", "(303)-555-2213");
 
       var techContact = DomainContactProvider.DomainContactInstance(
          "Bill", "Registrant", "bregistrant@bongo.com",
            string.Empty, false,
           "101 N Street", "Suite 100", "Littleton", "Colorado",
-          string.Empty, "HK", "(303)-555-1213", "(303)-555-2213");
+          "00000", "HK", "(303)-555-1213", "(303)-555-2213");
 
       contactGroup.SetContacts(registrantContact, techContact, adminContact, billingContact);
-      int trusteesCount = registrantContact.TrusteeVendorIds.Count;
-      var reg = contactGroup.GetContact(DomainContactType.Registrant);
-      int regTrusteesCount = reg.TrusteeVendorIds.Count;
-      Assert.AreEqual(true, contactGroup.GetAllErrors().Count == 0);
+      
+      int contactGroupErrors = contactGroup.GetAllErrors().Count;
+      Assert.AreEqual(contactGroupErrors, 0);
     }
 
     [TestMethod]
@@ -382,8 +381,8 @@ namespace Atlantis.Framework.Providers.DomainContactValidation.Tests
           "80130", "US", "(303)-555-1213", "(303)-555-2213");
       contactGroup.SetContact(registrantContact);
 
-      var tuiFormInfo = contactGroup.GetTuiFormInfo(tlds);
-      Assert.AreEqual(true, tuiFormInfo != null && tuiFormInfo.ContainsKey("FR"));
+      var tuiFormInfo = contactGroup.GetContact(DomainContactType.Registrant);
+      Assert.AreEqual(true, tuiFormInfo != null && tuiFormInfo.TuiFormsInfo.ContainsKey("FR"));
     }
 
     [TestMethod]
@@ -482,8 +481,8 @@ namespace Atlantis.Framework.Providers.DomainContactValidation.Tests
           "80130", "US", "(303)-555-1213", "(303)-555-2213");
       contactGroup.SetContact(registrantContact);
 
-      var tuiFormInfo = contactGroup.GetTuiFormInfo(tlds);
-      Assert.AreEqual(true, tuiFormInfo != null && tuiFormInfo.ContainsKey("FR"));
+      var tuiFormInfo = contactGroup.GetContact(DomainContactType.Registrant);
+      Assert.AreEqual(true, tuiFormInfo.TuiFormsInfo != null && tuiFormInfo.TuiFormsInfo.ContainsKey("FR"));
     }
   }
 }

@@ -217,7 +217,7 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
       {
         errorXml.Append(error.InnerXml);
       }
-
+      //tODO: CHECK TO MAKE SURE THIS GETS ALL ITEMS
       var trusteeXml = new StringBuilder();
       foreach (KeyValuePair<string, string> trustee in TrusteeVendorIds)
       {
@@ -245,15 +245,16 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
         result.Errors.Add(error.Clone() as IDomainContactError);
       }
 
-      foreach (KeyValuePair<string, string> pair in TrusteeVendorIds)
-      {
-        result.AddTrusteeVendorIds(pair.Key, pair.Value);
-      }
-
       foreach (KeyValuePair<string, ITuiFormInfo> pair in TuiFormsInfo)
       {
         result.AddTuiFormsInfo(pair.Key, pair.Value);
+        result.AddTrusteeVendorIds(pair.Key, pair.Value.VendorId);
       }
+
+      //foreach (KeyValuePair<string, string> pair in TrusteeVendorIds)
+      //{
+      //  result.AddTrusteeVendorIds(pair.Key, pair.Value);
+      //}
 
       return result;
     }

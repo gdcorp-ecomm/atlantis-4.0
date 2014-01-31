@@ -14,6 +14,7 @@
     <!-- update release notes with latest change information -->
     <releaseNotes>
       14.1.29.1: Added TuiFormsInfo to DomainContactGroup
+      14.1.31.1: Found some use cases that weren't handled with the previous updates to TuiFormsInfo
     </releaseNotes>
     <copyright>$copyright$</copyright>
     <!-- Make tags the same as title element -->

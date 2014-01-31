@@ -346,6 +346,17 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
         _domainContactGroup[contactType] = domainContact;
       }
 
+      if (domainContact.IsValid)
+      {
+        IDictionary<string, ITuiFormInfo> tuiFormsInfo = GetTuiFormInfo(Tlds);
+        foreach (var tuiFormInfo in tuiFormsInfo)
+        {
+          domainContact.AddTuiFormsInfo(tuiFormInfo.Key, tuiFormInfo.Value);
+          domainContact.AddTrusteeVendorIds(tuiFormInfo.Key, tuiFormInfo.Value.VendorId);
+        }
+        
+      }
+
       return domainContact.IsValid;
     }
 
@@ -378,6 +389,23 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
       _domainContactGroup[DomainContactType.Administrative] = administrativeContact;
       _domainContactGroup[DomainContactType.Billing] = billingContact;
       _domainContactGroup[DomainContactType.Technical] = technicalContact;
+
+      IDictionary<string, ITuiFormInfo> tuiFormsInfo = GetTuiFormInfo(Tlds);
+        foreach (var tuiFormInfo in tuiFormsInfo)
+        {
+          _domainContactGroup[DomainContactType.Registrant].AddTuiFormsInfo(tuiFormInfo.Key, tuiFormInfo.Value);
+          _domainContactGroup[DomainContactType.Registrant].AddTrusteeVendorIds(tuiFormInfo.Key, tuiFormInfo.Value.VendorId);
+
+          _domainContactGroup[DomainContactType.Administrative].AddTuiFormsInfo(tuiFormInfo.Key, tuiFormInfo.Value);
+          _domainContactGroup[DomainContactType.Administrative].AddTrusteeVendorIds(tuiFormInfo.Key, tuiFormInfo.Value.VendorId);
+
+          _domainContactGroup[DomainContactType.Billing].AddTuiFormsInfo(tuiFormInfo.Key, tuiFormInfo.Value);
+          _domainContactGroup[DomainContactType.Billing].AddTrusteeVendorIds(tuiFormInfo.Key, tuiFormInfo.Value.VendorId);
+
+          _domainContactGroup[DomainContactType.Technical].AddTuiFormsInfo(tuiFormInfo.Key, tuiFormInfo.Value);
+          _domainContactGroup[DomainContactType.Technical].AddTrusteeVendorIds(tuiFormInfo.Key, tuiFormInfo.Value.VendorId);
+        }
+
       return (((registrantContact.IsValid && technicalContact.IsValid) && administrativeContact.IsValid) && billingContact.IsValid);
     }
 
@@ -406,6 +434,7 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
         foreach (var tuiFormInfo in tuiFormsInfo)
         {
           domainContact.AddTuiFormsInfo(tuiFormInfo.Key, tuiFormInfo.Value);
+          domainContact.AddTrusteeVendorIds(tuiFormInfo.Key, tuiFormInfo.Value.VendorId);
         }
       }
 
@@ -509,10 +538,20 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
             result = _domainContactGroup[DomainContactType.RegistrantUnicode];
           }
         }
+
+        if (result != null)
+        {
+          IDictionary<string, ITuiFormInfo> tuiFormsInfo = GetTuiFormInfo(Tlds);
+          foreach (var tuiFormInfo in tuiFormsInfo)
+          {
+            result.AddTuiFormsInfo(tuiFormInfo.Key, tuiFormInfo.Value);
+            result.AddTrusteeVendorIds(tuiFormInfo.Key, tuiFormInfo.Value.VendorId);
+          }
+          
+        }
       }
       return result;
     }
-
 
     /******************************************************************************/
     /// <summary>
@@ -670,13 +709,15 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
         contact.AddAdditionalContactAttributes(response.ResponseAttributes);
       }
 
-      if (response.TrusteeVendorIds.Count > 0)
-      {
-        foreach (KeyValuePair<string, string> trustee in response.TrusteeVendorIds)
-        {
-          contact.AddTrusteeVendorIds(trustee.Key,trustee.Value);
-        }
-      }
+
+
+      //if (response.TrusteeVendorIds.Count > 0)
+      //{
+      //  foreach (KeyValuePair<string, string> trustee in response.TrusteeVendorIds)
+      //  {
+      //    contact.AddTrusteeVendorIds(trustee.Key,trustee.Value);
+      //  }
+      //}
     }
 
     #region TLDs

@@ -57,6 +57,14 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Atlantis.Framework.Engine, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Web Applications\MYA\MUI\Main\MUISite\Bin\Atlantis.Framework.Engine.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Web Applications\MYA\MUI\Main\MUISite\Bin\Atlantis.Framework.Interface.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -124,10 +132,6 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj">
-      <Project>{a083a52e-c3c3-42e0-8dfd-54719e4c3b25}</Project>
-      <Name>Atlantis.Framework.Interface</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\..\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz.csproj">
       <Project>{3213e6db-f026-4f17-a46a-7127f79f6620}</Project>
       <Name>Atlantis.Framework.Nimitz</Name>

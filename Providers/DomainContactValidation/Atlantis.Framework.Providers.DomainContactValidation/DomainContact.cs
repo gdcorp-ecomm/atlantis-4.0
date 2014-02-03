@@ -217,14 +217,20 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
       {
         errorXml.Append(error.InnerXml);
       }
-      //tODO: CHECK TO MAKE SURE THIS GETS ALL ITEMS
+
       var trusteeXml = new StringBuilder();
       foreach (KeyValuePair<string, string> trustee in TrusteeVendorIds)
       {
         trusteeXml.Append("<trustee tld=\"" + trustee.Key + "\" vendorid=\"" + trustee.Value + "\"/>");
       }
 
-      _contactElement.InnerXml = errorXml + trusteeXml.ToString();
+      var tuiFormsXml = new StringBuilder();
+      foreach (KeyValuePair<string, ITuiFormInfo> tuiFormInfo in TuiFormsInfo)
+      {
+        tuiFormsXml.Append("<tuiForm  tld=\"" + tuiFormInfo.Key + "\" tuiFormType=\"" + tuiFormInfo.Value.TuiFormType + "\" vendorid=\"" + tuiFormInfo.Value.VendorId + "\"/>");
+      }
+
+      _contactElement.InnerXml = errorXml + trusteeXml.ToString() + tuiFormsXml;
 
       return InnerXml;
     }
@@ -250,11 +256,6 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
         result.AddTuiFormsInfo(pair.Key, pair.Value);
         result.AddTrusteeVendorIds(pair.Key, pair.Value.VendorId);
       }
-
-      //foreach (KeyValuePair<string, string> pair in TrusteeVendorIds)
-      //{
-      //  result.AddTrusteeVendorIds(pair.Key, pair.Value);
-      //}
 
       return result;
     }
@@ -414,6 +415,16 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
         string vendorId = trustee.GetAttribute("vendorid");
         TrusteeVendorIds[dotType] = vendorId;
       }
+
+      XmlNodeList tuiFormNodes = element.SelectNodes("./tuiForm");
+      foreach (XmlElement tuiForm in tuiFormNodes)
+      {
+        string dotType = tuiForm.GetAttribute("tld");
+        string tuiFormType = tuiForm.GetAttribute("tuiFormType");
+        string vendorId = tuiForm.GetAttribute("vendorid");
+        TuiFormsInfo[dotType] = new TuiFormInfo(tuiFormType, vendorId);
+      }
+
     }
   }
 }

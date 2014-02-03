@@ -709,15 +709,6 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
         contact.AddAdditionalContactAttributes(response.ResponseAttributes);
       }
 
-
-
-      //if (response.TrusteeVendorIds.Count > 0)
-      //{
-      //  foreach (KeyValuePair<string, string> trustee in response.TrusteeVendorIds)
-      //  {
-      //    contact.AddTrusteeVendorIds(trustee.Key,trustee.Value);
-      //  }
-      //}
     }
 
     #region TLDs

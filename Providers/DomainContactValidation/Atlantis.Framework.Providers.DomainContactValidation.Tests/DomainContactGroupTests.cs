@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Web;
 using System.Xml;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.DomainContactValidation.Interface;
@@ -366,6 +367,33 @@ namespace Atlantis.Framework.Providers.DomainContactValidation.Tests
           <error attribute="lname" code="3001" desc="CA Contact must contain at least one word from the valid non-individual CIRA word list" />
 
        * */
+    }
+
+    [TestMethod]
+    public void TestUpdatedContactForTrusteeIds()
+    {
+      
+    }
+
+    [TestMethod]
+    public void TestContactSessionForTrusteeIds()
+    {
+       string DEFAULTGROUPSESSION = "Domains.Contacts.Default";
+      var tlds = new List<string> { "COM.BR", "NET.BR" };
+      var contactGroup = DomainContactProvider.DomainContactGroupInstance(tlds, 1);
+
+      var registrantContact = DomainContactProvider.DomainContactInstance(
+         "Bill", "Registrant", "bregistrant@bongo.com",
+           "MumboJumbo", true,
+          "101 N Street", "Suite 100", "Littleton", "CO",
+          "80130", "US", "(303)-555-1213", "(303)-555-2213");
+      contactGroup.SetContact(registrantContact);
+      string contactSessionString = contactGroup.ToString();
+      HttpContext.Current.Session[DEFAULTGROUPSESSION] = contactSessionString;
+      string fromSession = HttpContext.Current.Session[DEFAULTGROUPSESSION].ToString();
+      var domainContactGroup = DomainContactProvider.DomainContactGroupInstance(fromSession);
+      var tuiFormInfo = domainContactGroup.GetContact(DomainContactType.Registrant);
+      Assert.AreEqual(true, tuiFormInfo != null && tuiFormInfo.TuiFormsInfo.ContainsKey("COM.BR"));
     }
 
     [TestMethod]

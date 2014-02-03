@@ -65,6 +65,8 @@ namespace Atlantis.Framework.EcommDelayedPayment.Test
 
     [TestMethod]
     [DeploymentItem("atlantis.config")]
+    [DeploymentItem("Atlantis.Framework.EcommDelayedPayment.Interface.dll")]
+    [DeploymentItem("Atlantis.Framework.EcommDelayedPayment.Impl.dll")]
     public void EcommDelayedPaymentTest()
     {
       EcommDelayedPaymentRequestData request = new EcommDelayedPaymentRequestData("75866", string.Empty, "443734", string.Empty, 0, "https://cart.test.godaddy-com.ide/NetGiroPaymentReturn.aspx", "AliPay");

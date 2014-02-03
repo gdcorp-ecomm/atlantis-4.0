@@ -10,6 +10,8 @@ namespace Atlantis.Framework.EcommDelayedPayment.Interface
   {
     private AtlantisException _exception = null;
     private string _resultXML = string.Empty;
+    private string _errorXML = string.Empty;
+
     private bool _success = false;
     private Dictionary<string, string> _formValues = new Dictionary<string, string>();
 
@@ -43,6 +45,7 @@ namespace Atlantis.Framework.EcommDelayedPayment.Interface
         InvoiceID = string.Empty;
         _success = true;
         _resultXML = redirectXML;
+        _errorXML = errorXML;
         if (!string.IsNullOrEmpty(redirectXML))
         {
           XmlDocument redirectDoc = new XmlDocument();
@@ -124,6 +127,11 @@ namespace Atlantis.Framework.EcommDelayedPayment.Interface
     public string ToXML()
     {
       return _resultXML;
+    }
+
+    public string ErrorXML()
+    {
+      return _errorXML;
     }
 
     public AtlantisException GetException()

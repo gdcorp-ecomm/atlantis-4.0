@@ -73,7 +73,7 @@ namespace Atlantis.Framework.Providers.CDSContent.Tests
       var docId = new ContentId { oid = "12345" };
       var verId = new ContentId { oid = "testVersionId" };
       var relativeUrl = string.Format(CDSDocument.CDSM_CONTENT_RELATIVE_PATH, docId.oid, verId.oid);
-      var resultHtml = string.Format("<a href='{0}' target='_blank'>{0}</a>", fakeUrl + relativeUrl);
+      var resultHtml = string.Format("<a href='{0}' target='_blank'>{1}/{2}</a>", fakeUrl + relativeUrl, docId.oid, verId.oid);
       var debugInfoKey = "DebugKey";
 
       IDebugContext mockedDebugProider;

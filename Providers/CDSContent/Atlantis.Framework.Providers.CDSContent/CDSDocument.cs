@@ -61,9 +61,9 @@ namespace Atlantis.Framework.Providers.CDSContent
         {
           var contentRelativeUrl = string.Format(CDSM_CONTENT_RELATIVE_PATH, cdsInfo.DocumentId.oid, cdsInfo.VersionId.oid);
           var cdsmUri = new Uri(new Uri(linkProvider.GetUrl(SITE_ADMIN_URL_KEY, null)), new Uri(contentRelativeUrl, UriKind.Relative)).AbsoluteUri;
-          var contentUrlHtml = string.Format("<a href='{0}' target='_blank'>{0}</a>", cdsmUri);
+          var contentUrlHtml = string.Format("<a href='{0}' target='_blank'>{1}/{2}</a>", cdsmUri, cdsInfo.DocumentId.oid, cdsInfo.VersionId.oid);
 
-          dc.LogDebugTrackingData(string.Format("CDS {0} URL",cdsInfo.DebugKey), contentUrlHtml);
+          dc.LogDebugTrackingData(string.Format("{0}. CDS {1} URL", GetDocumentCounter(), cdsInfo.DebugKey), contentUrlHtml);
         }
       }
       catch { }

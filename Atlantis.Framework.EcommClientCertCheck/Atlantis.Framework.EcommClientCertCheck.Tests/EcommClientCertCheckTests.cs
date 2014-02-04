@@ -5,6 +5,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Atlantis.Framework.EcommClientCertCheck.Tests
 {
   [TestClass]
+  [DeploymentItem("atlantis.config")]
+  [DeploymentItem("Atlantis.Framework.EcommClientCertCheck.Impl.dll")]
   public class EcommClientCertCheckTests
   {
     private const string APPLICATION_TEAM = "mobile";
@@ -20,7 +22,6 @@ namespace Atlantis.Framework.EcommClientCertCheck.Tests
     private const string UN_AUTH_CERTIFICATE_SUBJECT = "CN=corp.web.sales.dev.client.godaddy.com, OU=Domain Control Validated, O=corp.web.sales.dev.client.godaddy.com";
 
     [TestMethod]
-    [DeploymentItem("atlantis.config")]
     public void AuthorizedClientCheck()
     {
       EcommClientCertCheckRequestData request = new EcommClientCertCheckRequestData(CERTIFICATE_SUBJECT,
@@ -40,7 +41,6 @@ namespace Atlantis.Framework.EcommClientCertCheck.Tests
     }
 
     [TestMethod]
-    [DeploymentItem("atlantis.config")]
     public void AuthorizedClientCheckMultipleRequests()
     {
       EcommClientCertCheckRequestData request = new EcommClientCertCheckRequestData(CERTIFICATE_SUBJECT,
@@ -65,7 +65,6 @@ namespace Atlantis.Framework.EcommClientCertCheck.Tests
     }
 
     [TestMethod]
-    [DeploymentItem("atlantis.config")]
     public void UnAuthorizedClientCertCheck()
     {
       EcommClientCertCheckRequestData request = new EcommClientCertCheckRequestData(UN_AUTH_CERTIFICATE_SUBJECT,
@@ -85,7 +84,6 @@ namespace Atlantis.Framework.EcommClientCertCheck.Tests
     }
 
     [TestMethod]
-    [DeploymentItem("atlantis.config")]
     public void BadMethodNameCheck()
     {
       EcommClientCertCheckRequestData request = new EcommClientCertCheckRequestData(CERTIFICATE_SUBJECT,
@@ -105,7 +103,6 @@ namespace Atlantis.Framework.EcommClientCertCheck.Tests
     }
 
     [TestMethod]
-    [DeploymentItem("atlantis.config")]
     public void BadApplicatioNameCheck()
     {
       EcommClientCertCheckRequestData request = new EcommClientCertCheckRequestData(CERTIFICATE_SUBJECT,
@@ -125,7 +122,6 @@ namespace Atlantis.Framework.EcommClientCertCheck.Tests
     }
 
     [TestMethod]
-    [DeploymentItem("atlantis.config")]
     public void BadApplicatioTeamCheck()
     {
       EcommClientCertCheckRequestData request = new EcommClientCertCheckRequestData(CERTIFICATE_SUBJECT,

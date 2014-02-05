@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>Atlantis.Framework.Providers.MobileRedirect</id>
-    <version>4.14.2.4</version>
+    <version>$version$</version>
     <title>Atlantis Framework Providers MobileRedirect</title>
     <authors>$author$</authors>
     <owners>$author$</owners>

@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>Atlantis.Framework.DCCDomainsDataCache.Interface</id>
-    <version>4.14.1.7</version>
+    <version>$version$</version>
     <title>Atlantis Framework DCCDomainsDataCache Interface</title>
     <authors>$author$</authors>
     <owners>$author$</owners>

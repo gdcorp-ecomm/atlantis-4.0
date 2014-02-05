@@ -108,7 +108,7 @@ namespace Atlantis.Framework.DCCDomainsDataCache.Interface
           preRegStart = DateTime.Parse(period.Attribute("utcstartdate").Value);
         }
 
-        if (periodType.Equals("serversubmission"))
+        if (periodType.Equals("clientsubmission"))
         {
           preRegEnd = DateTime.Parse(period.Attribute("utcstartdate").Value);
           liveStart = DateTime.Parse(period.Attribute("utcstartdate").Value);

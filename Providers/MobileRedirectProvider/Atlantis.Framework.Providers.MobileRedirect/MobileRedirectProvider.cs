@@ -2,7 +2,6 @@
 using System.Collections.Specialized;
 using System.Web;
 using Atlantis.Framework.BasePages;
-using Atlantis.Framework.BasePages.Cookies;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.Interface.Links;
 using Atlantis.Framework.Providers.MobileRedirect.Interface;
@@ -13,7 +12,7 @@ namespace Atlantis.Framework.Providers.MobileRedirect
   public class MobileRedirectProvider : ProviderBase, IMobileRedirectProvider
   {
     private const int RESELLER_MOBILE_SITE_ENABLED_CATEGORY = 388;
-    public const string MOBILE_SITE_LINK_TYPE = "MDOTMOBILEURL";
+    private const string MOBILE_SITE_LINK_TYPE = "MDOTMOBILEURL";
 
     public MobileRedirectProvider(IProviderContainer container) : base(container)
     {
@@ -35,12 +34,6 @@ namespace Atlantis.Framework.Providers.MobileRedirect
     private ISiteContext SiteContext
     {
       get { return _siteContext ?? (_siteContext = Container.Resolve<ISiteContext>()); } 
-    }
-
-    private IShopperContext _shopperContext;
-    private IShopperContext ShopperContext
-    {
-      get { return _shopperContext ?? (_shopperContext = Container.Resolve<IShopperContext>()); }
     }
 
     private bool IsMobileSiteEnabled
@@ -221,12 +214,6 @@ namespace Atlantis.Framework.Providers.MobileRedirect
 
       NameValueCollection redirectQueryParameters = new NameValueCollection(additionalQueryParameters);
 
-      string mrs = string.Empty;
-      if (!string.IsNullOrEmpty(ShopperContext.ShopperId))
-      {
-        mrs = CookieHelper.EncryptCookieValue(ShopperContext.ShopperId);
-      }
-
       string mrf;
       try
       {
@@ -238,7 +225,6 @@ namespace Atlantis.Framework.Providers.MobileRedirect
       }
 
       redirectQueryParameters.Add("mrk", redirectKey ?? string.Empty);
-      redirectQueryParameters.Add("mrs", mrs);
       redirectQueryParameters.Add("mrf", mrf);
 
       string publisherHashAndDate;

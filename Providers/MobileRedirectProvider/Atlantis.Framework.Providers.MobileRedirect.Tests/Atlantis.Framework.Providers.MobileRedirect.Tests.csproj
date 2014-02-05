@@ -60,8 +60,9 @@
     <Reference Include="Atlantis.Framework.DataCacheGeneric.Interface">
       <HintPath>..\packages\Atlantis.Framework.DataCacheGeneric.Interface.4.0.0.0\lib\net40\Atlantis.Framework.DataCacheGeneric.Interface.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.DataCacheService">
-      <HintPath>..\packages\Atlantis.Framework.DataCacheService.4.0.0.0\lib\net40\Atlantis.Framework.DataCacheService.dll</HintPath>
+    <Reference Include="Atlantis.Framework.DataCacheService, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.DataCacheService.4.13.12.21\lib\net40\Atlantis.Framework.DataCacheService.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.DotNetExtensions">
       <HintPath>..\packages\Atlantis.Framework.DotNetExtensions.4.0.0.0\lib\net40\Atlantis.Framework.DotNetExtensions.dll</HintPath>
@@ -72,17 +73,24 @@
     <Reference Include="Atlantis.Framework.Engine.XmlSerializers">
       <HintPath>..\packages\Atlantis.Framework.Engine.4.0.0.0\lib\net40\Atlantis.Framework.Engine.XmlSerializers.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.Interface">
-      <HintPath>..\packages\Atlantis.Framework.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Interface.dll</HintPath>
+    <Reference Include="Atlantis.Framework.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Interface.14.1.16.1\lib\net40\Atlantis.Framework.Interface.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.LinkInfo.Impl">
-      <HintPath>..\packages\Atlantis.Framework.LinkInfo.4.0.0.0\lib\net40\Atlantis.Framework.LinkInfo.Impl.dll</HintPath>
+    <Reference Include="Atlantis.Framework.LinkInfo.Impl, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.LinkInfo.Impl.14.1.21.1\lib\net40\Atlantis.Framework.LinkInfo.Impl.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.LinkInfo.Interface">
-      <HintPath>..\packages\Atlantis.Framework.LinkInfo.Interface.4.0.0.0\lib\net40\Atlantis.Framework.LinkInfo.Interface.dll</HintPath>
+    <Reference Include="Atlantis.Framework.LinkInfo.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.LinkInfo.Interface.14.1.21.1\lib\net40\Atlantis.Framework.LinkInfo.Interface.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.Links.Interface">
-      <HintPath>..\packages\Atlantis.Framework.Links.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Links.Interface.dll</HintPath>
+    <Reference Include="Atlantis.Framework.Links.Impl">
+      <HintPath>..\packages\Atlantis.Framework.Links.Impl.14.1.21.1\lib\net40\Atlantis.Framework.Links.Impl.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Links.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Links.Interface.14.1.21.1\lib\net40\Atlantis.Framework.Links.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.ManagerUser.Impl">
       <HintPath>..\packages\Atlantis.Framework.ManagerUser.4.0.0.0\lib\net40\Atlantis.Framework.ManagerUser.Impl.dll</HintPath>

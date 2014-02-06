@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Collections.Specialized;
 using System.Collections.Generic;
+using Atlantis.Framework.Providers.Interface.Links;
 
 namespace Atlantis.Framework.Providers.Language.Handlers
 {
@@ -16,9 +17,11 @@ namespace Atlantis.Framework.Providers.Language.Handlers
     const string CLIENT_SPOOF_PARAM_NAME = "version";
     const string SERVICE_SPOOF_PARAM_NAME = "docid";
     const string CDSDictionaryUrlFormat = "localization/{0}/{1}";
-    const string DebugInfoKey = "CDS Language Dictionary";
-    const string DebugInfoValueFormat = "{0}, Version Id: {1}";
-
+    const string DebugInfoKeyFormat = "{0}. CDS Language Dictionary";
+    internal const string SITE_ADMIN_URL_KEY = "SITEADMINURL";
+    internal const string CDSM_CONTENT_RELATIVE_PATH = "contentmanagement/content/index/{0}/{1}";
+    const string HyperLinkFormat = "<a href='{0}' target='_blank'>{1}/{2}</a>";
+ 
     private readonly IProviderContainer _container;
     private readonly Lazy<ISiteContext> _siteContext;
     private readonly Lazy<ILocalizationProvider> _localization;
@@ -71,11 +74,9 @@ namespace Atlantis.Framework.Providers.Language.Handlers
       {
         response = (CDSLanguageResponseData)DataCache.DataCache.GetProcessRequest(request, LanguageProviderEngineRequests.CDSLanguagePhrase);
       }
-      //Commenting debug info logging since printing debug info happens even before language tokens are parsed.
-      //Will revist this code when this changes.
-      if (!string.IsNullOrEmpty(response.VersionId))
+      if (response != null && !string.IsNullOrEmpty(response.VersionId) && !string.IsNullOrEmpty(response.DocumentId))
       {
-        LogCDSDebugInfo(dictionaryUrl, response.VersionId);
+        LogCDSDebugInfo(response.VersionId, response.DocumentId);
       }
       return response;
     }
@@ -140,9 +141,10 @@ namespace Atlantis.Framework.Providers.Language.Handlers
       return string.Join("&", nvc.AllKeys.SelectMany(key => nvc.GetValues(key).Select(value => string.Format("{0}={1}", key, value))).ToArray());
     }
 
-    private void LogCDSDebugInfo(string url, string versionId)
+    private void LogCDSDebugInfo(string versionId, string documentId)
     {
-      if (_siteContext.Value.IsRequestInternal)
+      ILinkProvider linkProvider; 
+      if (_siteContext.Value.IsRequestInternal && _container.TryResolve<ILinkProvider>(out linkProvider))
       {
         try
         {
@@ -156,7 +158,9 @@ namespace Atlantis.Framework.Providers.Language.Handlers
             if (!loggedVersionIds.Contains(versionId))
             {
               loggedVersionIds.Add(versionId);
-              _debugContext.Value.LogDebugTrackingData(DebugInfoKey, string.Format(DebugInfoValueFormat, url, versionId));
+              string debugInfoKey = string.Format(DebugInfoKeyFormat, loggedVersionIds.Count);
+              string hyperlink = GetDebugInfoHyperLink(versionId, documentId, linkProvider);
+              _debugContext.Value.LogDebugTrackingData(debugInfoKey, hyperlink);
               _container.SetData<HashSet<string>>(DebugInfoLogTrackingKey, loggedVersionIds);
             }
           }
@@ -166,6 +170,17 @@ namespace Atlantis.Framework.Providers.Language.Handlers
           //intentionally left blank
         }
       }
+    }
+
+    private string GetDebugInfoHyperLink(string versionId, string documentId, ILinkProvider linkProvider)
+    {
+      string hyperlink = null;
+
+      var contentRelativeUrl = string.Format(CDSM_CONTENT_RELATIVE_PATH, documentId, versionId);
+      var cdsmUri = new Uri(new Uri(linkProvider.GetUrl(SITE_ADMIN_URL_KEY, null)), new Uri(contentRelativeUrl, UriKind.Relative)).AbsoluteUri;
+      hyperlink = string.Format(HyperLinkFormat, cdsmUri, documentId, versionId);
+
+      return hyperlink;
     }
 
     private bool TryGetPhraseText(CDSLanguageResponseData response, string phraseKey, string language, out string phraseText)

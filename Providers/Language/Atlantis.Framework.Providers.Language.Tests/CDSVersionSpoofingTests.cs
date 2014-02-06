@@ -1,6 +1,8 @@
 ﻿using Atlantis.Framework.BasePages.Providers;
 using Atlantis.Framework.Interface;
+using Atlantis.Framework.Providers.Interface.Links;
 using Atlantis.Framework.Providers.Language.Interface;
+using Atlantis.Framework.Providers.Links;
 using Atlantis.Framework.Providers.Localization.Interface;
 using Atlantis.Framework.Providers.RenderPipeline;
 using Atlantis.Framework.Providers.RenderPipeline.Interface;
@@ -15,7 +17,7 @@ namespace Atlantis.Framework.Providers.Language.Tests
 {
   [TestClass]
   [DeploymentItem("atlantis.config")]
-  [DeploymentItem("Atlantis.Framework.Language.Impl.dll")]
+  [DeploymentItem("Atlantis.Framework.Links.Impl.dll")]
   public class CDSVersionSpoofingTests
   {
     private IProviderContainer NewLanguageProviderContainer(int privateLabelId, string countrySite, string language, bool isInternal = false)
@@ -37,6 +39,7 @@ namespace Atlantis.Framework.Providers.Language.Tests
       container.RegisterProvider<ILanguageProvider, LanguageProvider>();
       container.RegisterProvider<IRenderPipelineProvider, RenderPipelineProvider>();
       container.RegisterProvider<IDebugContext, DebugProvider>();
+      container.RegisterProvider<ILinkProvider, LinkProvider>();
       return container;
     }
 
@@ -45,13 +48,11 @@ namespace Atlantis.Framework.Providers.Language.Tests
       MockHttpRequest mockHttpRequest = new MockHttpRequest(url);
       MockHttpContext.SetFromWorkerRequest(mockHttpRequest);
     }
-
     [TestMethod]
     public void CanOneDictionaryVersionBeSpoofed()
     {
       string url = "http://www.debug.godaddy-com.ide/home?version=localization/sales/atlantistests/en|52697dcdf778fc3e88f8934e";
       SetUrl(url);
-
       IProviderContainer container = NewLanguageProviderContainer(1, "www", "en", true);
 
       IRenderPipelineProvider renderPipelineProvider = container.Resolve<IRenderPipelineProvider>();
@@ -67,7 +68,6 @@ namespace Atlantis.Framework.Providers.Language.Tests
     {
       string url = "http://www.debug.godaddy-com.ide/home?version=localization/sales/atlantistests2/en|52697d55f778fc3e88f8934d,localization/sales/atlantistests/en|52697dcdf778fc3e88f8934e";
       SetUrl(url);
-
       IProviderContainer container = NewLanguageProviderContainer(1, "www", "en", true);
 
       IRenderPipelineProvider renderPipelineProvider = container.Resolve<IRenderPipelineProvider>();
@@ -83,7 +83,6 @@ namespace Atlantis.Framework.Providers.Language.Tests
     {
       string url = "http://www.debug.godaddy-com.ide/home?version=52532ac4f778fc15d8df6d32";
       SetUrl(url);
-
       IProviderContainer container = NewLanguageProviderContainer(1, "www", "en", true);
 
       IRenderPipelineProvider renderPipelineProvider = container.Resolve<IRenderPipelineProvider>();
@@ -100,7 +99,6 @@ namespace Atlantis.Framework.Providers.Language.Tests
     {
       string url = "http://www.debug.godaddy-com.ide/home?version=localization/sales/atlantistests2/en|52697d55f778fc3e88f8934d,localization/sales/atlantistests/en|52697dcdf778fc3e88f8934e";
       SetUrl(url);
-
       IProviderContainer container = NewLanguageProviderContainer(1, "www", "en", true);
 
       IRenderPipelineProvider renderPipelineProvider = container.Resolve<IRenderPipelineProvider>();
@@ -109,9 +107,11 @@ namespace Atlantis.Framework.Providers.Language.Tests
       string output = renderPipelineProvider.RenderContent(content, new List<IRenderHandler> { new LanguageRenderHandler() });
 
       IDebugContext dc = container.Resolve<IDebugContext>();
-      Assert.IsTrue((from kvp in dc.GetDebugTrackingData() where kvp.Value.EndsWith("52697d55f778fc3e88f8934d") select kvp).Any());
-
-      Assert.IsTrue((from kvp in dc.GetDebugTrackingData() where kvp.Value.EndsWith("52697dcdf778fc3e88f8934e") select kvp).Any());
+      var list = dc.GetDebugTrackingData();
+      Assert.AreEqual(list[0].Key, "1. CDS Language Dictionary");
+      Assert.AreEqual(list[0].Value, "<a href='http://siteadmin.dev.intranet.gdg/contentmanagement/content/index/docid/52697dcdf778fc3e88f8934e' target='_blank'>docid/52697dcdf778fc3e88f8934e</a>");
+      Assert.AreEqual(list[1].Key, "2. CDS Language Dictionary");
+      Assert.AreEqual(list[1].Value, "<a href='http://siteadmin.dev.intranet.gdg/contentmanagement/content/index/docid/52697d55f778fc3e88f8934d' target='_blank'>docid/52697d55f778fc3e88f8934d</a>");
     }
 
     [TestMethod]
@@ -119,7 +119,6 @@ namespace Atlantis.Framework.Providers.Language.Tests
     {
       string url = "http://www.debug.godaddy-com.ide/home?version=52532ac4f778fc15d8df6d32";
       SetUrl(url);
-
       IProviderContainer container = NewLanguageProviderContainer(1, "www", "en", false);
 
       IRenderPipelineProvider renderPipelineProvider = container.Resolve<IRenderPipelineProvider>();

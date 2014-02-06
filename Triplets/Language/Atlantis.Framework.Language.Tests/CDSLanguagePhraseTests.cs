@@ -21,6 +21,7 @@ namespace Atlantis.Framework.Language.Tests
 
       // Assert
       Assert.IsNotNull(response.VersionId);
+      Assert.IsNotNull(response.DocumentId);
       Assert.IsNotNull(response);
       Assert.IsNotNull(response.Phrases);
       Assert.IsNotNull(phrase);

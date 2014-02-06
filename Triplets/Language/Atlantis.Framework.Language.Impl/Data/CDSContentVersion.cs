@@ -4,6 +4,7 @@ namespace Atlantis.Framework.Language.Impl.Data
   internal class CDSContentVersion
   {
     public ContentId _id { get; set; }
+    public ContentId DocumentId { get; set; }
     public string Content { get; set; }
   }
 

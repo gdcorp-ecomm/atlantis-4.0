@@ -45,7 +45,7 @@ namespace Atlantis.Framework.Language.Impl
                   var dictionary = new PhraseDictionary(false);
                   PhraseDictionary.Parse(dictionary,content.Content, cdsRequestData.DictionaryName,
                                                    cdsRequestData.Language);
-                  result = new CDSLanguageResponseData(dictionary, content._id.oid);
+                  result = new CDSLanguageResponseData(dictionary, content._id.oid, content.DocumentId.oid);
                 }
               }
             }

@@ -109,7 +109,7 @@ namespace Atlantis.Framework.Providers.DomainProductPackage.StateProvider
           Sld = domainGroup.Domain.Sld,
           PunyCodeTld = domainGroup.Domain.PunyCodeTld,
           PunyCodeSld = domainGroup.Domain.PunyCodeSld,
-          PunyCodeDomainName = domainGroup.Domain.PunyCodeDomainName,
+          PunyCodeDomainName = domainGroup.Domain.PunyCodeDomainName
         };
 
         packageData.InLaunchPhase = domainGroup.InPreRegPhase;
@@ -158,7 +158,7 @@ namespace Atlantis.Framework.Providers.DomainProductPackage.StateProvider
               {PACKAGE_NAME, productPackageItem.Name},
               {PRODUCT_ID, productPackageItem.ProductId},
               {QUANTITY, productPackageItem.Quantity},
-              {TIER_ID, packageData.TierId}
+              {TIER_ID, productPackage.TierId}
             };
 
             packageData.RegistrationPackage = dataItem;

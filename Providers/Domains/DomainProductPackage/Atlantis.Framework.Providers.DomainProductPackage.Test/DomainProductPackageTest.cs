@@ -466,5 +466,28 @@ namespace Atlantis.Framework.Providers.DomainProductPackage.Test
 
     //  Assert.IsTrue(domainProductPackage.DomainProductPackageItem.ProductId == 42774);
     //}
+
+    [TestMethod]
+    public void DomainProductPackageGuruTierIdTest()
+    {
+      var domainSearchResponse = DomainSearch.SearchDomain("ant.guru", SOURCE_CODE, string.Empty, new List<string> { "guru" });
+
+      var packageGroups = DomainProductPackageProvider.BuildDomainProductPackageGroups(domainSearchResponse.GetDomainsByGroup(DomainGroupTypes.EXACT_MATCH));
+
+      StoreProvider.SaveDomainProductPackages(packageGroups);
+
+      packageGroups = null;
+      Assert.IsTrue(StoreProvider.TryGetDomainProductPackages(out packageGroups));
+
+
+      Assert.IsTrue(packageGroups.Count() > 0);
+
+      foreach (var packageGroup in packageGroups)
+      {
+        IDomainProductPackage registrationPackage;
+        Assert.IsTrue(packageGroup.TryGetRegistrationPackage(out registrationPackage));
+        Assert.IsTrue(registrationPackage.TierId == 6);
+      }
+    }
   }
 }

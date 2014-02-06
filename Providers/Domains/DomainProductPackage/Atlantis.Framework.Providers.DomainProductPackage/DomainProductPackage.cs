@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using Atlantis.Framework.Domains.Interface;
-using Atlantis.Framework.DotTypeCache;
 using Atlantis.Framework.DotTypeCache.Interface;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.Currency;

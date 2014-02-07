@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Xml;
-using Atlantis.Framework.Interface;
-using System;
 
 namespace Atlantis.Framework.Providers.DomainContactValidation.Interface
 {

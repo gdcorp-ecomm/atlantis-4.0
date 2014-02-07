@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>Atlantis.Framework.DotTypeAvailability.Impl</id>
-    <version>4.13.10.22</version>
+    <version>$version$</version>
     <title>Atlantis Framework DotTypeAvailability</title>
     <authors>$author$</authors>
     <owners>$author$</owners>

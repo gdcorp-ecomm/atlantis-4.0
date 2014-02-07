@@ -80,11 +80,17 @@ namespace Atlantis.Framework.DotTypeAvailability.Impl
 
         if (!ContainsUnicodeCharacter(tldAvailability.TldName))
         {
-          tldAvailabilityList.Add(tldAvailability.TldName, tldAvailability);
+          if (!tldAvailabilityList.ContainsKey(tldAvailability.TldName))
+          {
+            tldAvailabilityList.Add(tldAvailability.TldName, tldAvailability);
+          }
         }
         else
         {
-          tldAvailabilityList.Add(tldAvailability.TldPunyCodeName, tldAvailability);
+          if (!tldAvailabilityList.ContainsKey(tldAvailability.TldPunyCodeName))
+          {
+            tldAvailabilityList.Add(tldAvailability.TldPunyCodeName, tldAvailability);
+          }
         }
       }
 

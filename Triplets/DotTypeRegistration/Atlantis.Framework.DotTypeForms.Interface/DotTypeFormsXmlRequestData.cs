@@ -96,7 +96,7 @@ namespace Atlantis.Framework.DotTypeForms.Interface
       element.Add(new XAttribute("marketId", MarketId));
       element.Add(new XAttribute("contextid", ContextId.ToString(CultureInfo.InvariantCulture)));
 
-      if (DotTypeFormContacts.Any())
+      if (DotTypeFormContacts != null && DotTypeFormContacts.Any())
       {
         var contactsElement = new XElement("contacts");
         foreach (var contact in DotTypeFormContacts)

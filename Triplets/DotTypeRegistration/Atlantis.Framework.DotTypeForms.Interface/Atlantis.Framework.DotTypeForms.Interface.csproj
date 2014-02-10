@@ -54,6 +54,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Atlantis.Framework.Providers.DotTypeRegistration.Interface.4.13.11.11\lib\net40\Atlantis.Framework.Providers.DotTypeRegistration.Interface.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.1\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
@@ -65,6 +69,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DotTypeFormContact.cs" />
+    <Compile Include="DotTypeFormContactTypes.cs" />
     <Compile Include="DotTypeFormsHtmlResponseData.cs" />
     <Compile Include="DotTypeFormsHtmlRequestData.cs" />
     <Compile Include="DotTypeFormsBaseRequestData.cs" />
@@ -79,6 +85,7 @@
   <ItemGroup>
     <None Include="Atlantis.Framework.DotTypeForms.Interface.nuget.bat" />
     <None Include="Atlantis.Framework.DotTypeForms.Interface.nuspec" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

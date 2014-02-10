@@ -1,4 +1,6 @@
-﻿using System.Net;
+﻿using System.IO;
+using System.Net;
+using System.Text;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.DotTypeForms.Interface;
 using System;
@@ -9,46 +11,92 @@ namespace Atlantis.Framework.DotTypeForms.Impl
   {
     public IResponseData RequestHandler(RequestData requestData, ConfigElement config)
     {
-      DotTypeFormsXmlResponseData responseData;
-      var responseXml = string.Empty;
+      DotTypeFormsXmlResponseData result;
+      Stream post = null;
+      string response = string.Empty;
 
       try
       {
-        var dotTypeFormsXmlSchemaRequestData = (DotTypeFormsXmlRequestData)requestData;
-        var wsConfigElement = ((WsConfigElement)config);
+        var requestBody = new StringBuilder();
 
-        var fullUrl = string.Format("{0}/api/schema/getxml?formtype={1}&tldid={2}&pl={3}&ph={4}&marketid={5}&contextid={6}",
-                                    wsConfigElement.WSURL,
-                                    dotTypeFormsXmlSchemaRequestData.FormType,
-                                    dotTypeFormsXmlSchemaRequestData.TldId,
-                                    dotTypeFormsXmlSchemaRequestData.Placement,
-                                    dotTypeFormsXmlSchemaRequestData.Phase,
-                                    dotTypeFormsXmlSchemaRequestData.MarketId,
-                                    dotTypeFormsXmlSchemaRequestData.ContextId);
+        var searchData = ((DotTypeFormsXmlRequestData)requestData).ToJson();
 
-        responseXml = HttpWebRequestHelper.SendWebRequest(dotTypeFormsXmlSchemaRequestData, fullUrl, wsConfigElement);
+        requestBody.Append(searchData);
 
-        responseData = new DotTypeFormsXmlResponseData(responseXml);
+        var buffer = Encoding.UTF8.GetBytes(requestBody.ToString());
+
+        var wsConfigElement = ((WsConfigElement) config);
+        var wsUrl = wsConfigElement != null ? wsConfigElement.WSURL : string.Empty;
+        if (!string.IsNullOrEmpty(wsUrl))
+        {
+          wsUrl = wsUrl.TrimEnd('/');
+          wsUrl = string.Format("{0}{1}", wsUrl, "/api/schema/FetchXml");
+        }
+
+        var webRequest = WebRequest.Create(wsUrl) as HttpWebRequest;
+
+        if (webRequest != null)
+        {
+          webRequest.Timeout = (int)requestData.RequestTimeout.TotalMilliseconds;
+          webRequest.Method = "POST";
+          webRequest.ContentType = "application/json";
+          webRequest.ContentLength = buffer.Length;
+          webRequest.KeepAlive = false;
+          post = webRequest.GetRequestStream();
+        }
+
+        if (post != null)
+        {
+          post.Write(buffer, 0, buffer.Length);
+          post.Close();
+        }
+
+        if (webRequest != null)
+        {
+          var webResponse = webRequest.GetResponse() as HttpWebResponse;
+          if (webResponse != null)
+          {
+            var webResponseData = webResponse.GetResponseStream();
+            if (webResponseData != null)
+            {
+              StreamReader responseReader = null;
+              try
+              {
+                responseReader = new StreamReader(webResponseData);
+                response = responseReader.ReadToEnd().Trim();
+              }
+              finally
+              {
+                if (responseReader != null)
+                {
+                  responseReader.Dispose();
+                }
+              }
+            }
+          }
+        }
+
+        result = new DotTypeFormsXmlResponseData(response);
       }
       catch (WebException ex)
       {
         if (ex.Response is HttpWebResponse && ((HttpWebResponse)ex.Response).StatusCode == HttpStatusCode.NotFound)
         {
           //no error logging is required
-          responseData = new DotTypeFormsXmlResponseData(string.Empty);
+          result = new DotTypeFormsXmlResponseData(string.Empty);
         }
         else
         {
           var exception = new AtlantisException(requestData, "DotTypeFormsXmlRequest.RequestHandler", ex.Message + ex.StackTrace, requestData.ToXML());
-          responseData = new DotTypeFormsXmlResponseData(responseXml, exception);
+          result = new DotTypeFormsXmlResponseData(response, exception);
         }
       }
       catch (Exception ex)
       {
-        responseData = new DotTypeFormsXmlResponseData(responseXml, requestData, ex);
+        result = new DotTypeFormsXmlResponseData(response, requestData, ex);
       }
 
-      return responseData;
+      return result;
     }
   }
 }

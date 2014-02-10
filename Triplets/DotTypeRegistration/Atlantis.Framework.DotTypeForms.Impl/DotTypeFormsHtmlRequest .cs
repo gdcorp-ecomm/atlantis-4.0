@@ -1,6 +1,4 @@
-﻿using System.IO;
-using System.Net;
-using System.Security.Cryptography.X509Certificates;
+﻿using System.Net;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.DotTypeForms.Interface;
 using System;
@@ -18,11 +16,15 @@ namespace Atlantis.Framework.DotTypeForms.Impl
       {
         var dotTypeFormsHtmlSchemaRequestData = (DotTypeFormsHtmlRequestData)requestData;
         var wsConfigElement = ((WsConfigElement)config);
-
+        var wsUrl = wsConfigElement != null ? wsConfigElement.WSURL : string.Empty;
+        if (!string.IsNullOrEmpty(wsUrl))
+        {
+          wsUrl = wsUrl.TrimEnd('/');
+        }
         const string formatString = "{0}/form/{1}?tldid={2}&pl={3}&ph={4}&marketid={5}&contextid={6}&domain={7}";
 
         var fullUrl = string.Format(formatString,
-                                    wsConfigElement.WSURL,
+                                    wsUrl,
                                     dotTypeFormsHtmlSchemaRequestData.FormType,
                                     dotTypeFormsHtmlSchemaRequestData.TldId, 
                                     dotTypeFormsHtmlSchemaRequestData.Placement,

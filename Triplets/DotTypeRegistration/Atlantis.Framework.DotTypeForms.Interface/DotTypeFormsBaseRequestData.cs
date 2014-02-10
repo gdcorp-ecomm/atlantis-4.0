@@ -1,6 +1,4 @@
-﻿using System.Globalization;
-using System.Xml.Linq;
-using Atlantis.Framework.Interface;
+﻿using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.DotTypeForms.Interface
 {

@@ -101,22 +101,24 @@ namespace Atlantis.Framework.DotTypeForms.Interface
         var contactsElement = new XElement("contacts");
         foreach (var contact in DotTypeFormContacts)
         {
-          contactsElement.Add(new XAttribute("contacttype", contact.ContactType.ToString()));
-          contactsElement.Add(new XAttribute("firstname", contact.FirstName));
-          contactsElement.Add(new XAttribute("lastname", contact.LastName));
-          contactsElement.Add(new XAttribute("company", contact.Company));
-          contactsElement.Add(new XAttribute("address1", contact.Address1));
-          contactsElement.Add(new XAttribute("address2", contact.Address2));
-          contactsElement.Add(new XAttribute("city", contact.City));
-          contactsElement.Add(new XAttribute("state", contact.State));
-          contactsElement.Add(new XAttribute("zip", contact.Zip));
-          contactsElement.Add(new XAttribute("country", contact.CountryCode));
-          contactsElement.Add(new XAttribute("phone", contact.Phone));
-          contactsElement.Add(new XAttribute("fax", contact.Fax));
-          contactsElement.Add(new XAttribute("email", contact.Email));
+          var contactElement = new XElement("contact");
+          contactElement.Add(new XAttribute("contacttype", contact.ContactType.ToString()));
+          contactElement.Add(new XAttribute("firstname", contact.FirstName));
+          contactElement.Add(new XAttribute("lastname", contact.LastName));
+          contactElement.Add(new XAttribute("company", contact.Company));
+          contactElement.Add(new XAttribute("address1", contact.Address1));
+          contactElement.Add(new XAttribute("address2", contact.Address2));
+          contactElement.Add(new XAttribute("city", contact.City));
+          contactElement.Add(new XAttribute("state", contact.State));
+          contactElement.Add(new XAttribute("zip", contact.Zip));
+          contactElement.Add(new XAttribute("country", contact.CountryCode));
+          contactElement.Add(new XAttribute("phone", contact.Phone));
+          contactElement.Add(new XAttribute("fax", contact.Fax));
+          contactElement.Add(new XAttribute("email", contact.Email));
 
-          element.Add(contactsElement);
+          contactsElement.Add(contactElement);
         }
+        element.Add(contactsElement);
       }
 
       return element.ToString();

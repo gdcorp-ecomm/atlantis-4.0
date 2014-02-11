@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Atlantis.Framework.DotTypeClaims.Interface;
 using Atlantis.Framework.DotTypeValidation.Interface;
+using Atlantis.Framework.Providers.DomainContactValidation.Interface;
 using Atlantis.Framework.Providers.DotTypeRegistration.Factories;
 using Atlantis.Framework.Providers.DotTypeRegistration.Handlers;
 using Atlantis.Framework.Providers.DotTypeRegistration.Interface;
@@ -83,14 +84,13 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration
       return success;
     }
 
-    public bool GetDotTypeFormSchemas(IDotTypeFormSchemaLookup dotTypeFormsLookup, string[] domains, out IDotTypeFormFieldsByDomain dotTypeFormFieldsByDomain)
+    public bool GetDotTypeFormSchemas(IDotTypeFormSchemaLookup dotTypeFormSchemaLookup, string[] domains, out IDotTypeFormFieldsByDomain dotTypeFormFieldsByDomain)
     {
       dotTypeFormFieldsByDomain = null;
 
-      var tld = dotTypeFormsLookup.Tld;
-      var formType = dotTypeFormsLookup.FormType;
-      var placement = dotTypeFormsLookup.Placement;
-      var phase = dotTypeFormsLookup.Phase;
+      var tld = dotTypeFormSchemaLookup.Tld;
+      var placement = dotTypeFormSchemaLookup.Placement;
+      var phase = dotTypeFormSchemaLookup.Phase;
 
       var success = false;
       var language = LocalizationProvider.FullLanguage;
@@ -99,7 +99,7 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration
       try
       {
         IDotTypeFormsSchema dotTypeFormSchema;
-        success = GetDotTypeFormXmlSchema(formType, tldId, placement, phase, language, out dotTypeFormSchema);
+        success = GetDotTypeFormXmlSchema(dotTypeFormSchemaLookup, out dotTypeFormSchema);
 
         if (success && dotTypeFormSchema != null)
         {
@@ -107,7 +107,7 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration
           success = TransformFormSchemaToFormFields(domains, dotTypeFormSchema, tldId, placement, phase, language, out formFieldsByDomain);
           if (success)
           {
-            var addtlFormFieldsByDomain = AddAdditionalFormFields(domains, dotTypeFormsLookup.Placement, dotTypeFormsLookup.Tld, dotTypeFormsLookup.Phase);
+            var addtlFormFieldsByDomain = AddAdditionalFormFields(domains, dotTypeFormSchemaLookup.Placement, dotTypeFormSchemaLookup.Tld, dotTypeFormSchemaLookup.Phase);
 
             foreach (var main in formFieldsByDomain)
             {
@@ -137,8 +137,10 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration
       return success;
     }
 
-    private bool GetDotTypeFormXmlSchema(string formType, int tldId, string placement, string phase, string language, out IDotTypeFormsSchema dotTypeFormSchema)
+    private bool GetDotTypeFormXmlSchema(IDotTypeFormSchemaLookup dotTypeFormSchemaLookup, out IDotTypeFormsSchema dotTypeFormSchema)
     {
+      var formType = dotTypeFormSchemaLookup.FormType;
+
       var success = false;
       dotTypeFormSchema = null;
 
@@ -161,7 +163,22 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration
       }
       else
       {
+        var tld = dotTypeFormSchemaLookup.Tld;
+        var placement = dotTypeFormSchemaLookup.Placement;
+        var phase = dotTypeFormSchemaLookup.Phase;
+        var language = LocalizationProvider.FullLanguage;
+        var tldId = GetTldId(tld);
+
         var request = new DotTypeFormsXmlRequestData(formType, tldId, placement, phase, language, SiteContext.ContextId);
+        var domainContactGroup = dotTypeFormSchemaLookup.DomainContactGroup;
+        if (domainContactGroup != null)
+        {
+          var dotTypeFormContacts = GetDotTypeFormContacts(domainContactGroup);
+          if (dotTypeFormContacts.Count > 0)
+          {
+            request.DotTypeFormContacts = dotTypeFormContacts;
+          }
+        }
 
         try
         {
@@ -183,6 +200,78 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration
         }
       }
       return success;
+    }
+
+    private static List<DotTypeFormContact> GetDotTypeFormContacts(IDomainContactGroup domainContactGroup)
+    {
+      var dotTypeFormContacts = new List<DotTypeFormContact>();
+
+      var regDotTypeContact = GetDotTypeFormContactByDomainContactType(domainContactGroup, DomainContactType.Registrant);
+      if (regDotTypeContact != null)
+      {
+        dotTypeFormContacts.Add(regDotTypeContact);
+      }
+
+      var adminDotTypeContact = GetDotTypeFormContactByDomainContactType(domainContactGroup, DomainContactType.Administrative);
+      if (adminDotTypeContact != null)
+      {
+        dotTypeFormContacts.Add(adminDotTypeContact);
+      }
+
+      var billingDotTypeContact = GetDotTypeFormContactByDomainContactType(domainContactGroup, DomainContactType.Billing);
+      if (billingDotTypeContact != null)
+      {
+        dotTypeFormContacts.Add(billingDotTypeContact);
+      }
+
+      var technicalDotTypeContact = GetDotTypeFormContactByDomainContactType(domainContactGroup, DomainContactType.Technical);
+      if (technicalDotTypeContact != null)
+      {
+        dotTypeFormContacts.Add(technicalDotTypeContact);
+      }
+
+      return dotTypeFormContacts;
+    }
+
+    private static DotTypeFormContact GetDotTypeFormContactByDomainContactType(IDomainContactGroup domainContactGroup, DomainContactType contactType)
+    {
+      DotTypeFormContact result = null;
+
+      var regContact = domainContactGroup.GetContact(contactType);
+      if (regContact != null)
+      {
+        var dotTypeFormContactType = DotTypeFormContactTypes.Registrant;
+        bool valid = false;
+        switch (contactType)
+        {
+          case DomainContactType.Registrant:
+            dotTypeFormContactType = DotTypeFormContactTypes.Registrant;
+            valid = true;
+            break;
+          case DomainContactType.Administrative:
+            dotTypeFormContactType = DotTypeFormContactTypes.Administrative;
+            valid = true;
+            break;
+          case DomainContactType.Technical:
+            dotTypeFormContactType = DotTypeFormContactTypes.Technical;
+            valid = true;
+            break;
+          case DomainContactType.Billing:
+            dotTypeFormContactType = DotTypeFormContactTypes.Billing;
+            valid = true;
+            break;
+        }
+
+        if (valid)
+        {
+          result = new DotTypeFormContact(dotTypeFormContactType, regContact.FirstName,
+            regContact.LastName, regContact.Company,
+            regContact.Address1, regContact.Address2, regContact.City, regContact.State, regContact.Zip,
+            regContact.Country, regContact.Phone, regContact.Fax, regContact.Email);
+        }
+      }
+
+      return result;
     }
 
     private bool TransformFormSchemaToFormFields(IEnumerable<string> domains, IDotTypeFormsSchema formSchema, int tldId, string placement, string phase, string language,

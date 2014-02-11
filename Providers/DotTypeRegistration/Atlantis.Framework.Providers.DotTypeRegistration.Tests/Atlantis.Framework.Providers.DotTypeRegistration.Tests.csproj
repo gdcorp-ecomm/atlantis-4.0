@@ -39,6 +39,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Atlantis.Framework.AppSettings.Impl">
+      <HintPath>..\packages\Atlantis.Framework.AppSettings.4.0.0.0\lib\net40\Atlantis.Framework.AppSettings.Impl.dll</HintPath>
+    </Reference>
     <Reference Include="Atlantis.Framework.AppSettings.Interface">
       <HintPath>..\packages\Atlantis.Framework.AppSettings.Interface.4.0.0.0\lib\net40\Atlantis.Framework.AppSettings.Interface.dll</HintPath>
     </Reference>
@@ -51,6 +54,15 @@
     <Reference Include="Atlantis.Framework.DataCacheService">
       <HintPath>..\packages\Atlantis.Framework.DataCacheService.4.0.0.0\lib\net40\Atlantis.Framework.DataCacheService.dll</HintPath>
     </Reference>
+    <Reference Include="Atlantis.Framework.DomainContactValidation.Impl">
+      <HintPath>..\packages\Atlantis.Framework.DomainContactValidation.Impl.4.13.12.16\lib\net40\Atlantis.Framework.DomainContactValidation.Impl.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.DomainContactValidation.Interface">
+      <HintPath>..\packages\Atlantis.Framework.DomainContactValidation.Interface.4.13.12.18\lib\net40\Atlantis.Framework.DomainContactValidation.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.DomainsTrustee.Interface">
+      <HintPath>..\packages\Atlantis.Framework.DomainsTrustee.Interface.4.13.12.16\lib\net40\Atlantis.Framework.DomainsTrustee.Interface.dll</HintPath>
+    </Reference>
     <Reference Include="Atlantis.Framework.DotTypeClaims.Impl, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Atlantis.Framework.DotTypeClaims.Impl.4.14.1.7\lib\net40\Atlantis.Framework.DotTypeClaims.Impl.dll</HintPath>
@@ -61,11 +73,11 @@
     </Reference>
     <Reference Include="Atlantis.Framework.DotTypeForms.Impl, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.DotTypeForms.Impl.4.14.1.7\lib\net40\Atlantis.Framework.DotTypeForms.Impl.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.DotTypeForms.Impl.14.2.6.1\lib\net40\Atlantis.Framework.DotTypeForms.Impl.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.DotTypeForms.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.DotTypeForms.Interface.4.14.1.7\lib\net40\Atlantis.Framework.DotTypeForms.Interface.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.DotTypeForms.Interface.14.2.10.2\lib\net40\Atlantis.Framework.DotTypeForms.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.DotTypeValidation.Impl, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -97,6 +109,13 @@
     <Reference Include="Atlantis.Framework.Products.Interface">
       <HintPath>..\packages\Atlantis.Framework.Products.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Products.Interface.dll</HintPath>
     </Reference>
+    <Reference Include="Atlantis.Framework.Providers.DomainContactValidation">
+      <HintPath>..\packages\Atlantis.Framework.Providers.DomainContactValidation.4.14.1.8\lib\net40\Atlantis.Framework.Providers.DomainContactValidation.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Providers.DomainContactValidation.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Providers.DomainContactValidation.Interface.4.13.12.22\lib\net40\Atlantis.Framework.Providers.DomainContactValidation.Interface.dll</HintPath>
+    </Reference>
     <Reference Include="Atlantis.Framework.Providers.Geo.Interface">
       <HintPath>..\packages\Atlantis.Framework.Providers.Geo.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Providers.Geo.Interface.dll</HintPath>
     </Reference>
@@ -127,6 +146,10 @@
     <Reference Include="Atlantis.Framework.TLDDataCache.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Atlantis.Framework.TLDDataCache.Interface.4.13.10.14\lib\net40\Atlantis.Framework.TLDDataCache.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.1\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">

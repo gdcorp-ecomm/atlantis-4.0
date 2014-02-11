@@ -1,4 +1,7 @@
-﻿using Atlantis.Framework.Interface;
+﻿using System.Collections.Generic;
+using Atlantis.Framework.Interface;
+using Atlantis.Framework.Providers.DomainContactValidation;
+using Atlantis.Framework.Providers.DomainContactValidation.Interface;
 using Atlantis.Framework.Providers.DotTypeRegistration.Interface;
 using Atlantis.Framework.Providers.Localization;
 using Atlantis.Framework.Providers.Localization.Interface;
@@ -15,6 +18,9 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration.Tests
   [DeploymentItem("Atlantis.Framework.DotTypeValidation.Impl.dll")]
   [DeploymentItem("Atlantis.Framework.TLDDataCache.Impl.dll")]
   [DeploymentItem("Atlantis.Framework.Localization.Impl.dll")]
+  [DeploymentItem("Atlantis.Framework.DomainContactValidation.Impl.dll")]
+  [DeploymentItem("Atlantis.Framework.AppSettings.Impl.dll")]
+  [DeploymentItem("Atlantis.Framework.DomainsTrustee.Impl.dll")]
   public class DotTypeRegistrationProviderTests
   {
     [TestInitialize]
@@ -39,9 +45,24 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration.Tests
           _providerContainer.RegisterProvider<IManagerContext, MockNoManagerContext>();
           _providerContainer.RegisterProvider<IDotTypeRegistrationProvider, DotTypeRegistrationProvider>();
           _providerContainer.RegisterProvider<ILocalizationProvider, CountrySubdomainLocalizationProvider>();
+          _providerContainer.RegisterProvider<IDomainContactValidationProvider, DomainContactValidationProvider>();
         }
 
         return _providerContainer;
+      }
+    }
+
+    private IDomainContactValidationProvider _domainContactProvider;
+    private IDomainContactValidationProvider DomainContactProvider
+    {
+      get
+      {
+        if (_domainContactProvider == null)
+        {
+          _domainContactProvider = ProviderContainer.Resolve<IDomainContactValidationProvider>();
+        }
+
+        return _domainContactProvider;
       }
     }
 
@@ -54,6 +75,39 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration.Tests
       var provider = ProviderContainer.Resolve<IDotTypeRegistrationProvider>();
 
       var lookup = DotTypeFormSchemaLookup.Create("dpp", "cl", "MOBILE", "GA");
+      bool isSuccess = provider.GetDotTypeFormSchemas(lookup, domains, out dotTypeFormFieldsByDomain);
+      Assert.AreEqual(true, isSuccess);
+      Assert.AreEqual(true, dotTypeFormFieldsByDomain != null && dotTypeFormFieldsByDomain.FormFieldsByDomain.Count > 0);
+    }
+
+    [TestMethod]
+    public void DotTypeFormsSchemaSuccessForDK()
+    {
+      IDotTypeFormFieldsByDomain dotTypeFormFieldsByDomain;
+      string[] domains = { "domain1.n.borg" };
+
+      var provider = ProviderContainer.Resolve<IDotTypeRegistrationProvider>();
+
+      var lookup = DotTypeFormSchemaLookup.Create("dpp", "dk", "MOBILE", "GA");
+
+      var tlds = new List<string> { "DK" };
+      var contactGroup = DomainContactProvider.DomainContactGroupInstance(tlds, 1);
+
+      var registrantContact = DomainContactProvider.DomainContactInstance(
+         "Bill", "Registrant", "bregistrant@bongo.com",
+           "MumboJumbo", true,
+          "101 N Street", "Suite 100", "Littleton", "CO",
+          "80130", "US", "(303)-555-1213", "(303)-555-2213");
+      contactGroup.TrySetContact(DomainContactType.Registrant, registrantContact);
+
+      var adminContact = DomainContactProvider.DomainContactInstance(
+         "Bill", "Admin", "badmin@bongo.com",
+           "MumboJumbo", true,
+          "101 N Street", "Suite 100", "Littleton", "CO",
+          "80130", "US", "(303)-555-1213", "(303)-555-2213");
+      contactGroup.TrySetContact(DomainContactType.Administrative, adminContact);
+      lookup.DomainContactGroup = contactGroup;
+
       bool isSuccess = provider.GetDotTypeFormSchemas(lookup, domains, out dotTypeFormFieldsByDomain);
       Assert.AreEqual(true, isSuccess);
       Assert.AreEqual(true, dotTypeFormFieldsByDomain != null && dotTypeFormFieldsByDomain.FormFieldsByDomain.Count > 0);

@@ -1,4 +1,5 @@
-﻿using Atlantis.Framework.Providers.DotTypeRegistration.Interface;
+﻿using Atlantis.Framework.Providers.DomainContactValidation.Interface;
+using Atlantis.Framework.Providers.DotTypeRegistration.Interface;
 
 namespace Atlantis.Framework.Providers.DotTypeRegistration
 {
@@ -9,6 +10,7 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration
     public string Tld { get; set; }
     public string Placement { get; set; }
     public string Phase { get; set; }
+    public IDomainContactGroup DomainContactGroup { get; set; }
 
     private DotTypeFormSchemaLookup(string formType, string tld, string placement, string phase)
     {

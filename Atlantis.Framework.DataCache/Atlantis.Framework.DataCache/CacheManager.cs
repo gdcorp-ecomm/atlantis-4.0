@@ -49,5 +49,17 @@ namespace Atlantis.Framework.DataCache
         }
       }
     }
+
+    public void ClearCacheData(string cacheName, string key)
+    {
+      Cache<T> cacheToClear = null;
+      using (SlimRead read = _cacheLock.GetReadLock())
+      {
+        if (_cacheMap.TryGetValue(cacheName, out cacheToClear))
+        {
+          cacheToClear.Clear(key);
+        }
+      }
+    }
   }
 }

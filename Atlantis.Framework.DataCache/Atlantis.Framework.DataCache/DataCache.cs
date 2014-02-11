@@ -41,8 +41,6 @@ namespace Atlantis.Framework.DataCache
 
     private static void ProcessRequest(string request)
     {
-      HashSet<int> privateLabelIds = new HashSet<int>();
-
       try
       {
         int index = request.IndexOf('/');
@@ -53,8 +51,16 @@ namespace Atlantis.Framework.DataCache
 
         if (!string.IsNullOrEmpty(request))
         {
-          _customObjectCacheManager.ClearCacheData(request);
-          _responseDataCacheManager.ClearCacheData(request);
+          var clearParameters = request.Split('|');
+          if (clearParameters.Length == 1 || string.IsNullOrEmpty(clearParameters[1]))
+          {
+            _customObjectCacheManager.ClearCacheData(request);
+            _responseDataCacheManager.ClearCacheData(request);
+          }
+          else
+          {
+            _responseDataCacheManager.ClearCacheData(clearParameters[0], clearParameters[1]);
+          }
         }
       }
       catch (ThreadAbortException)
@@ -112,7 +118,7 @@ namespace Atlantis.Framework.DataCache
       }
     }
 
-    [Obsolete("Please take the time to create a cacheable triplet and using ClearCahcedData instead of using this method. This method will be removed in a future version.")]
+    [Obsolete("Please take the time to create a cacheable triplet and using ClearCachedData instead of using this method. This method will be removed in a future version.")]
     public static void ClearCustomCachedData<T>()
     {
       _customObjectCacheManager.ClearCacheData(CustomCacheName<T>());
@@ -233,37 +239,43 @@ namespace Atlantis.Framework.DataCache
       return result;
     }
 
-    [Obsolete("Please use the DataCacheGeneric Triplet instead or consider creating a proper triplet for your generic cache data.")]
+    [Obsolete("This method will be removed. Please use the DataCacheGeneric Triplet instead or consider creating a proper triplet for your generic cache data.")]
     public static string GetCacheData(string requestXml)
     {
       return DataCacheEngineRequests.ExecuteGetCacheData(requestXml);
     }
 
+    [Obsolete("This method will be removed. Please use the AppSettings Triplet directly.")]
     public static string GetAppSetting(string settingName)
     {
       return DataCacheEngineRequests.ExecuteAppSetting(settingName);
     }
 
+    [Obsolete("This method will be removed. Please use the PrivateLabel provider's IPrivateLabel.GetPrivateLabelData method or PrivateLabelDataRequest of the PrivateLabel triplet directly.")]
     public static string GetPLData(int privateLabelId, int dataCategoryId)
     {
       return DataCacheEngineRequests.ExecuteGetPrivateLabelData(privateLabelId, dataCategoryId);
     }
 
+    [Obsolete("This method will be removed. Please use the PrivateLabel provider's IPrivateLabel.PrivateLabelId property or PrivateLabelIdRequest of the PrivateLabel triplet directly.")]
     public static int GetPrivateLabelId(string progId)
     {
       return DataCacheEngineRequests.ExecuteGetPrivateLabelId(progId);
     }
 
+    [Obsolete("This method will be removed. Please use the PrivateLabel provider's IPrivateLabel.PrivateLabelType property or PrivateLabelTypeRequest of the PrivateLabel triplet directly.")]
     public static int GetPrivateLabelType(int privateLabelId)
     {
       return DataCacheEngineRequests.ExecuteGetPrivateLabelType(privateLabelId);
     }
 
+    [Obsolete("This method will be removed. Please use the PrivateLabel provider's IPrivateLabel.ProgId property or ProgIdRequest of the PrivateLabel triplet directly.")]
     public static string GetProgID(int privateLabelId)
     {
       return DataCacheEngineRequests.ExecuteGetProgId(privateLabelId);
     }
 
+    [Obsolete("This method will be removed. Please use the PrivateLabel provider's IPrivateLabel.IsActive property or IsPrivateLabelActiveRequest of the PrivateLabel triplet directly.")]
     public static bool IsPrivateLabelActive(int privateLabelId)
     {
       return DataCacheEngineRequests.ExecuteIsPrivateLabelActive(privateLabelId);

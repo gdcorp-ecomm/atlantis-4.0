@@ -139,7 +139,7 @@ namespace Atlantis.Framework.DataCache
         _cachedValuesDictionary[newCachedValue.Key] = newCachedValue;
         _cachedValuesLinkList.AddLast(new WeakReference(newCachedValue));
       }
-    }
+    }    
 
     public void Clear()
     {
@@ -147,6 +147,20 @@ namespace Atlantis.Framework.DataCache
       {
         _cachedValuesLinkList.Clear();
         _cachedValuesDictionary.Clear();
+      }
+    }
+
+    public void Clear(string key)
+    {
+      CachedValue<T> cachedValue;
+
+      using (SlimWrite write = _cacheLock.GetWriteLock())
+      {
+        if (_cachedValuesDictionary.TryGetValue(key, out cachedValue))
+        {
+          QuickClean(cachedValue);
+          _cachedValuesDictionary.Remove(key);
+        }
       }
     }
 

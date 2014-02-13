@@ -1,5 +1,4 @@
-﻿
-namespace Atlantis.Framework.LogDomainSearchResults.Interface
+﻿namespace Atlantis.Framework.LogDomainSearchResults.Interface
 {
   public static class SuggestedRegistrationType
   {

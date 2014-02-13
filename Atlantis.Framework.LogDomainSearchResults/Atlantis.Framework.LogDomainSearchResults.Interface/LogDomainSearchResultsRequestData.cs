@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Text;
 using System.Xml;
@@ -7,24 +8,20 @@ using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.LogDomainSearchResults.Interface
 {
-
   public class LogDomainSearchResultsRequestData : RequestData
   {
-    private List<SuggestedDomain> _suggestedDomains = new List<SuggestedDomain>();
+    private readonly List<SuggestedDomain> _suggestedDomains = new List<SuggestedDomain>();
     public string Domain { get; private set; }
     public int Availability { get; private set; }
 
     public HashSet<int> AreasToLog { get; private set; }
 
-    public LogDomainSearchResultsRequestData(string shopperId, string sourceUrl, string orderId, string pathway, int pageCount,
-      string domain, int availability)
-      : base(shopperId, sourceUrl, orderId, pathway, pageCount)
+    public LogDomainSearchResultsRequestData(string shopperId, string sourceUrl, string orderId, string pathway, int pageCount, string domain, int availability) : base(shopperId, sourceUrl, orderId, pathway, pageCount)
     {
       Domain = domain;
       Availability = availability;
       AreasToLog = new HashSet<int>();
       RequestTimeout = TimeSpan.FromSeconds(5);
-
     }
 
     public void AddSuggestedDomain(string domain, int registrationType, int area, int position, string price, int isPriceDisplayed, int spunName, int available)
@@ -36,7 +33,6 @@ namespace Atlantis.Framework.LogDomainSearchResults.Interface
     public override string GetCacheMD5()
     {
       throw new NotImplementedException("LogDomainSearchResults is not a cachable Request");
-
     }
 
     public override string ToXML()
@@ -46,16 +42,16 @@ namespace Atlantis.Framework.LogDomainSearchResults.Interface
 
       xtwRequest.WriteStartElement("domainSearch");
       xtwRequest.WriteStartElement("search");
-      xtwRequest.WriteAttributeString("visitGuid", this.Pathway);
-      xtwRequest.WriteAttributeString("time", DateTime.Now.ToString());
-      xtwRequest.WriteAttributeString("pageCount", this.PageCount.ToString());
-      xtwRequest.WriteAttributeString("domain", this.Domain);
-      xtwRequest.WriteAttributeString("isAvailable", this.Availability.ToString());
-      xtwRequest.WriteAttributeString("availability", this.Availability.ToString());
+      xtwRequest.WriteAttributeString("visitGuid", Pathway);
+      xtwRequest.WriteAttributeString("time", DateTime.Now.ToString(CultureInfo.InvariantCulture));
+      xtwRequest.WriteAttributeString("pageCount", PageCount.ToString(CultureInfo.InvariantCulture));
+      xtwRequest.WriteAttributeString("domain", Domain);
+      xtwRequest.WriteAttributeString("isAvailable", Availability.ToString(CultureInfo.InvariantCulture));
+      xtwRequest.WriteAttributeString("availability", Availability.ToString(CultureInfo.InvariantCulture));
 
       foreach (int area in AreasToLog)
       {
-        xtwRequest.WriteAttributeString("area", area.ToString());
+        xtwRequest.WriteAttributeString("area", area.ToString(CultureInfo.InvariantCulture));
         break;
       }
 
@@ -63,18 +59,18 @@ namespace Atlantis.Framework.LogDomainSearchResults.Interface
       {
         xtwRequest.WriteStartElement("results");
 
-        foreach (SuggestedDomain suggestedDomain in _suggestedDomains)
+        foreach (var suggestedDomain in _suggestedDomains)
         {
           xtwRequest.WriteStartElement("suggested");
           xtwRequest.WriteAttributeString("domain", suggestedDomain.Domain);
-          xtwRequest.WriteAttributeString("registrationType", suggestedDomain.RegistrationType.ToString());
-          xtwRequest.WriteAttributeString("area", suggestedDomain.Area.ToString());
-          xtwRequest.WriteAttributeString("position", suggestedDomain.Position.ToString());
+          xtwRequest.WriteAttributeString("registrationType", suggestedDomain.RegistrationType.ToString(CultureInfo.InvariantCulture));
+          xtwRequest.WriteAttributeString("area", suggestedDomain.Area.ToString(CultureInfo.InvariantCulture));
+          xtwRequest.WriteAttributeString("position", suggestedDomain.Position.ToString(CultureInfo.InvariantCulture));
           xtwRequest.WriteAttributeString("price", suggestedDomain.Price);
-          xtwRequest.WriteAttributeString("isPriceDisplayed", suggestedDomain.IsPriceDisplayed.ToString());
-          xtwRequest.WriteAttributeString("spunName", suggestedDomain.SpunName.ToString());
-          xtwRequest.WriteAttributeString("availability", suggestedDomain.Availability.ToString());
-          xtwRequest.WriteEndElement();  //suggested
+          xtwRequest.WriteAttributeString("isPriceDisplayed", suggestedDomain.IsPriceDisplayed.ToString(CultureInfo.InvariantCulture));
+          xtwRequest.WriteAttributeString("spunName", suggestedDomain.SpunName.ToString(CultureInfo.InvariantCulture));
+          xtwRequest.WriteAttributeString("availability", suggestedDomain.Availability.ToString(CultureInfo.InvariantCulture));
+          xtwRequest.WriteEndElement(); //suggested
         }
 
         xtwRequest.WriteEndElement(); //results

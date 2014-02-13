@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="Atlantis_Framework_LogDomainSearchResults_Impl_LogDomainSearchResultsWS_Service" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">http://devciaapp01/fbiVisitDomainService/VisitDomainService.asmx</Value>
+      <Value Profile="(Default)">http://sitetracking.dev.glbt1.gdg/fbiVisitDomainService/VisitDomainService.asmx</Value>
     </Setting>
   </Settings>
 </SettingsFile>

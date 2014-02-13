@@ -7,34 +7,28 @@ namespace Atlantis.Framework.LogDomainSearchResults.Impl
 {
   public class LogDomainSearchResultsRequest : IRequest
   {
-
     #region IRequest Members
 
     public IResponseData RequestHandler(RequestData oRequestData, ConfigElement oConfig)
     {
-      LogDomainSearchResultsResponseData oResponseData = null;
+      LogDomainSearchResultsResponseData oResponseData;
 
-      LogDomainSearchResultsWS.Service service = null;
-      try
-      {
-        LogDomainSearchResultsRequestData request = (LogDomainSearchResultsRequestData)oRequestData;
-        service = new Service();
-        service.Url = ((WsConfigElement)oConfig).WSURL;
-        service.Timeout = (int)request.RequestTimeout.TotalMilliseconds;
+      var request = (LogDomainSearchResultsRequestData)oRequestData;
 
-        service.LogDomainSearchResults(request.ToXML());
-
-        oResponseData = new LogDomainSearchResultsResponseData();
-      }
-      catch (Exception ex)
-      {
-        oResponseData = new LogDomainSearchResultsResponseData(oRequestData, ex);
-      }
-      finally
-      {
-        if (service != null)
+      using (var service = new Service
         {
-          service.Dispose();
+          Url = ((WsConfigElement)oConfig).WSURL,
+          Timeout = (int)request.RequestTimeout.TotalMilliseconds
+        })
+      {
+        try
+        {
+          service.LogDomainSearchResults(request.ToXML());
+          oResponseData = new LogDomainSearchResultsResponseData();
+        }
+        catch (Exception ex)
+        {
+          oResponseData = new LogDomainSearchResultsResponseData(oRequestData, ex);
         }
       }
 

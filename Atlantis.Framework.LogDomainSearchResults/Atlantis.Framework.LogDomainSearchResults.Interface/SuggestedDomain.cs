@@ -1,5 +1,4 @@
-﻿
-namespace Atlantis.Framework.LogDomainSearchResults.Interface
+﻿namespace Atlantis.Framework.LogDomainSearchResults.Interface
 {
   internal class SuggestedDomain
   {
@@ -23,6 +22,5 @@ namespace Atlantis.Framework.LogDomainSearchResults.Interface
       SpunName = spunName;
       Availability = availability;
     }
-
   }
 }

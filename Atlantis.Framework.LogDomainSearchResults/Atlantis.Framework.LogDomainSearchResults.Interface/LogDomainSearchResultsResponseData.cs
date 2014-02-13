@@ -5,27 +5,17 @@ namespace Atlantis.Framework.LogDomainSearchResults.Interface
 {
   public class LogDomainSearchResultsResponseData : IResponseData
   {
-    private bool _success = false;
-    private AtlantisException _ex;
+    private readonly AtlantisException _ex;
+    public bool IsSuccess { get; private set; }
 
     public LogDomainSearchResultsResponseData()
     {
-      _success = true;
-    }
-
-    public bool IsSuccess
-    {
-      get { return _success; }
-    }
-
-    public LogDomainSearchResultsResponseData(AtlantisException ex)
-    {
-      _ex = ex;
+      IsSuccess = true;
     }
 
     public LogDomainSearchResultsResponseData(RequestData oRequestData, Exception ex)
     {
-      _ex = new AtlantisException(oRequestData, "LogDomainSearchResultsResponseData", ex.Message, oRequestData.ToXML());
+      _ex = new AtlantisException("LogDomainSearchResultsResponseData", 0, ex.Message, oRequestData.ToXML());
     }
 
     #region IResponseData Members

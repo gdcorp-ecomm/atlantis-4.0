@@ -20,12 +20,12 @@ namespace Atlantis.Framework.TH.Links.Tests
   {
     private const string TokenFormat = "[@T[link:{0}]@T]";
 
-    private const string GoDaddyDebugNonSecureSiteUrl = "http://www.debug.godaddy-com.ide/default.aspx?ci=1";
-    private const string GoDaddyDebugSecureSiteUrl = "https://www.debug.godaddy-com.ide/default.aspx?ci=1";
-    private const string GoDaddyDebugNonSecureSiteUrlWithIsc = "http://www.debug.godaddy-com.ide/default.aspx?ci=1&isc=123456";
+    private const string GoDaddyDebugNonSecureSiteUrl = "http://www.debug.godaddy-com.ide?ci=1";
+    private const string GoDaddyDebugSecureSiteUrl = "https://www.debug.godaddy-com.ide?ci=1";
+    private const string GoDaddyDebugNonSecureSiteUrlWithIsc = "http://www.debug.godaddy-com.ide?ci=1&isc=123456";
 
-    private const string GoDaddyNonSecureSiteUrl = "http://www.godaddy.com/default.aspx?ci=1";
-    private const string GoDaddySecureSiteUrl = "https://www.godaddy.com/default.aspx?ci=1";
+    private const string GoDaddyNonSecureSiteUrl = "http://www.godaddy.com?ci=1";
+    private const string GoDaddySecureSiteUrl = "https://www.godaddy.com?ci=1";
 
     [TestInitialize]
     public void InitializeTests()
@@ -103,7 +103,7 @@ namespace Atlantis.Framework.TH.Links.Tests
       string token = string.Format(TokenFormat, "name");
       TokenEvaluationResult result = TokenManager.ReplaceTokens(token, container, out outputText);
       Assert.AreEqual(TokenEvaluationResult.Errors, result);
-      Assert.AreNotEqual(string.Empty, outputText);
+      Assert.AreEqual(string.Empty, outputText);
     }
 
     [TestMethod]
@@ -157,7 +157,7 @@ namespace Atlantis.Framework.TH.Links.Tests
       var container = SetBasicContextAndProviders(GoDaddyNonSecureSiteUrl);
       ILinkProvider links = container.Resolve<ILinkProvider>();
 
-      string expectedUrl = "http://www.godaddy.com/";
+      string expectedUrl = "http://www.godaddy.com";
       string actualUrl = this.TokenSuccess("<relative />", GoDaddyNonSecureSiteUrl);
 
       Debug.WriteLine(string.Format("Expected: {0}", expectedUrl));
@@ -172,7 +172,7 @@ namespace Atlantis.Framework.TH.Links.Tests
       var container = SetBasicContextAndProviders(GoDaddySecureSiteUrl);
       ILinkProvider links = container.Resolve<ILinkProvider>();
 
-      string expectedUrl = "https://www.godaddy.com:80/";
+      string expectedUrl = "https://www.godaddy.com:80";
       string actualUrl = this.TokenSuccess("<relative />", GoDaddySecureSiteUrl);
 
       Debug.WriteLine(string.Format("Expected: {0}", expectedUrl));
@@ -187,7 +187,7 @@ namespace Atlantis.Framework.TH.Links.Tests
       var container = SetBasicContextAndProviders(GoDaddyDebugNonSecureSiteUrl);
       ILinkProvider links = container.Resolve<ILinkProvider>();
 
-      string expectedUrl = "http://www.debug.godaddy-com.ide/?ci=1";
+      string expectedUrl = "http://www.debug.godaddy-com.ide?ci=1";
       string actualUrl = this.TokenSuccess("<relative><param name=\"ci\" value=\"1\" /></relative>", GoDaddyDebugNonSecureSiteUrl);
 
       Debug.WriteLine(string.Format("Expected: {0}", expectedUrl));
@@ -202,7 +202,7 @@ namespace Atlantis.Framework.TH.Links.Tests
       var container = SetBasicContextAndProviders(GoDaddyDebugNonSecureSiteUrlWithIsc);
       ILinkProvider links = container.Resolve<ILinkProvider>();
 
-      string expectedUrl = "http://www.debug.godaddy-com.ide/?isc=123456";
+      string expectedUrl = "http://www.debug.godaddy-com.ide?isc=123456";
       string actualUrl = this.TokenSuccess("<relative parammode=\"common\" />", GoDaddyDebugNonSecureSiteUrlWithIsc);
 
       Debug.WriteLine(string.Format("Expected: {0}", expectedUrl));
@@ -217,7 +217,7 @@ namespace Atlantis.Framework.TH.Links.Tests
       var container = SetBasicContextAndProviders(GoDaddyDebugNonSecureSiteUrlWithIsc);
       ILinkProvider links = container.Resolve<ILinkProvider>();
 
-      string expectedUrl = "http://www.debug.godaddy-com.ide/";
+      string expectedUrl = "http://www.debug.godaddy-com.ide";
       string actualUrl = this.TokenSuccess("<relative parammode=\"explicit\" />", GoDaddyDebugNonSecureSiteUrlWithIsc);
 
       Debug.WriteLine(string.Format("Expected: {0}", expectedUrl));

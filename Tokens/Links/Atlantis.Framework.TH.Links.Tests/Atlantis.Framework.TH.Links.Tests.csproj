@@ -165,6 +165,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="LinkRenderContextTests.cs" />
     <Compile Include="LinkTokenTests.cs" />
     <Compile Include="MobileRedirectLinkTokenTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

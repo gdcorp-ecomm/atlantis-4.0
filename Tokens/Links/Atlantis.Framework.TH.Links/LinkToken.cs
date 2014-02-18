@@ -2,7 +2,6 @@
 using System.Collections.Specialized;
 using System.Linq;
 using System.Xml.Linq;
-
 using Atlantis.Framework.Providers.Interface.Links;
 using Atlantis.Framework.Tokens.Interface;
 
@@ -18,50 +17,50 @@ namespace Atlantis.Framework.TH.Links
     public string LinkType { get; private set; }
     public QueryParamMode ParamMode { get; private set; }
     public string Path { get; private set; }
+    public string MinifiedPath { get; private set; }
     public bool? Secure { get; private set; }
     public NameValueCollection Params { get; private set; }
 
     public LinkToken(string key, string data, string fullTokenString)
       : base(key, data, fullTokenString)
     {
-      LinkType = this.GetAttributeText("linktype", string.Empty);
+      LinkType = GetAttributeText("linktype", string.Empty);
       
-      string textParamMode = this.GetAttributeText("parammode", "common");
-      if (textParamMode == "explicit")
-      {
-        ParamMode = QueryParamMode.ExplicitParameters;
-      }
-      else
-      {
-        ParamMode = QueryParamMode.CommonParameters;
-      }
+      string textParamMode = GetAttributeText("parammode", "common");
 
-      Path = this.GetAttributeText("path", string.Empty);
+      ParamMode = textParamMode == "explicit" ? QueryParamMode.ExplicitParameters : QueryParamMode.CommonParameters;
 
-      if (TokenData.Attributes("secure").Any())
-      {
-        Secure = this.GetAttributeBool("secure", false);
-      }
-      else
-      {
-        Secure = null;
-      }
+      Path = GetAttributeText("path", string.Empty);
+      MinifiedPath = GetAttributeText("minifiedpath", string.Empty);
 
-      if (TokenData.HasElements && TokenData.Elements("param").Any())
+      if (TokenData != null)
       {
-        Params = new NameValueCollection();
-
-        IEnumerable<XElement> tokenParams = TokenData.Elements("param");
-        foreach (XElement tokenParam in tokenParams)
+        if (TokenData.Attributes("secure").Any())
         {
-          string name = (tokenParam.Attribute("name") != null ) ? tokenParam.Attribute("name").Value : null;
-          string value = (tokenParam.Attribute("value") != null ) ? tokenParam.Attribute("value").Value : null;
+          Secure = GetAttributeBool("secure", false);
+        }
+        else
+        {
+          Secure = null;
+        }
 
-          if (!string.IsNullOrEmpty(name) && value != null)
+        if (TokenData.HasElements && TokenData.Elements("param").Any())
+        {
+          Params = new NameValueCollection();
+
+          IEnumerable<XElement> tokenParams = TokenData.Elements("param");
+          foreach (XElement tokenParam in tokenParams)
           {
-            Params[name] = value;
+            string name = (tokenParam.Attribute("name") != null) ? tokenParam.Attribute("name").Value : null;
+            string value = (tokenParam.Attribute("value") != null) ? tokenParam.Attribute("value").Value : null;
+
+            if (!string.IsNullOrEmpty(name) && value != null)
+            {
+              Params[name] = value;
+            }
           }
         }
+        
       }
     }
   }

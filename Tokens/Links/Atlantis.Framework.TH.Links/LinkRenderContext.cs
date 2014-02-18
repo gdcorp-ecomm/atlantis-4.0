@@ -1,25 +1,37 @@
 ﻿using System;
+using System.Runtime.CompilerServices;
 using System.Web;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.Interface.Links;
 using Atlantis.Framework.Tokens.Interface;
 
+[assembly: InternalsVisibleTo("Atlantis.Framework.TH.Links.Tests")]
 namespace Atlantis.Framework.TH.Links
 {
   internal class LinkRenderContext
   {
-    private Lazy<ILinkProvider> _linkProvider;
+    private readonly Lazy<ISiteContext> _siteContext;
+    private readonly Lazy<ILinkProvider> _linkProvider;
 
     internal LinkRenderContext(IProviderContainer container)
     {
       _linkProvider = new Lazy<ILinkProvider>(container.Resolve<ILinkProvider>);
+      _siteContext = new Lazy<ISiteContext>(container.Resolve<ISiteContext>);
+    }
+
+    public ISiteContext SiteContext
+    {
+      get
+      {
+        return _siteContext.Value;
+      }
     }
 
     internal bool RenderToken(IToken token)
     {
       bool result;
 
-      LinkToken linkToken = token as LinkToken;
+      var linkToken = token as LinkToken;
 
       if (linkToken != null)
       {
@@ -35,6 +47,10 @@ namespace Atlantis.Framework.TH.Links
             break;
           case "external":
             result = GetExternalUrl(linkToken);
+            break;
+          case "js":
+          case "css":
+            result = CreateMinifiedPath(linkToken);
             break;
           default:
             result = false;
@@ -53,24 +69,74 @@ namespace Atlantis.Framework.TH.Links
       return result;
     }
 
+    private bool CreateMinifiedPath(LinkToken token)
+    {
+      bool result = false;
+
+      if (!ReferenceEquals(null, token) && ("css".Equals(token.RenderType, StringComparison.OrdinalIgnoreCase) || "js".Equals(token.RenderType, StringComparison.OrdinalIgnoreCase)))
+      {
+        string qaMinify = HttpContext.Current.Request.QueryString["qaminify"];
+        bool showMinFile = ShowMinFile(qaMinify);
+        string fileExt = FileExtensionUpdate(token, showMinFile);
+        string rtnVal = NamedRoot(token);
+
+        if (!string.IsNullOrEmpty(token.MinifiedPath))
+        {
+          token.TokenResult = String.Concat(rtnVal, token.MinifiedPath);
+          result = true;
+        }
+        else if (!string.IsNullOrEmpty(token.Path))
+        {
+          int lastDot = token.Path.LastIndexOf('.');
+          token.TokenResult = String.Concat(rtnVal, token.Path.Substring(0, lastDot), fileExt);
+          result = true;
+        }
+      }
+
+      return result;
+    }
+
+    private bool ShowMinFile(string qaMinify)
+    {
+      bool showMinFile;
+
+      switch (SiteContext.ServerLocation)
+      {
+        case ServerLocationType.Dev:
+          showMinFile = false;
+          break;
+        case ServerLocationType.Test:
+          showMinFile = true;
+          break;
+        case ServerLocationType.Ote:
+          showMinFile = true;
+          break;
+        case ServerLocationType.Prod:
+          showMinFile = true;
+          break;
+        case ServerLocationType.Undetermined:
+        default:
+          showMinFile = false;
+          break;
+      }
+
+      switch (qaMinify)
+      {
+        case "true":
+          showMinFile = true;
+          break;
+        case "false":
+          showMinFile = false;
+          break;
+      }
+      return showMinFile;
+    }
+
     private bool GetNamedRoot(LinkToken token)
     {
       bool result = false;
 
-      string namedRoot = string.Empty;
-
-      switch (token.RenderType.ToLowerInvariant())
-      {
-        case "imageroot":
-          namedRoot = _linkProvider.Value.ImageRoot;
-          break;
-        case "cssroot":
-          namedRoot = _linkProvider.Value.CssRoot;
-          break;
-        case "javascriptroot":
-          namedRoot = _linkProvider.Value.JavascriptRoot;
-          break;
-      }
+      var namedRoot = NamedRoot(token);
 
       if (!string.IsNullOrEmpty(namedRoot))
       {
@@ -79,6 +145,44 @@ namespace Atlantis.Framework.TH.Links
 
       token.TokenResult = namedRoot;
       return result;
+    }
+
+    private string FileExtensionUpdate(LinkToken token, bool showMinFile)
+    {
+      string minifiedExt;
+      switch (token.RenderType.ToLowerInvariant())
+      {
+        case "css":
+          minifiedExt = showMinFile ? ".min.css" : ".css";
+          break;
+        case "js":
+        default:
+          minifiedExt = showMinFile ? ".min.js" : ".js";
+          break;
+      }
+
+      return minifiedExt;
+    }
+
+    private string NamedRoot(LinkToken token)
+    {
+      string namedRoot = string.Empty;
+
+      switch (token.RenderType.ToLowerInvariant())
+      {
+        case "imageroot":
+          namedRoot = _linkProvider.Value.ImageRoot;
+          break;
+        case "cssroot":
+        case "css":
+          namedRoot = _linkProvider.Value.CssRoot;
+          break;
+        case "javascriptroot":
+        case "js":
+          namedRoot = _linkProvider.Value.JavascriptRoot;
+          break;
+      }
+      return namedRoot;
     }
 
     private bool GetRelativeUrl(LinkToken token)

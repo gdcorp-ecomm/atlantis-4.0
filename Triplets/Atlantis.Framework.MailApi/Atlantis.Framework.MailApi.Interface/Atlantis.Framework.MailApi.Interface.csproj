@@ -52,6 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Exceptions\MailApiException.cs" />
     <Compile Include="GetFolderListRequestData.cs" />
     <Compile Include="GetFolderListResponseData.cs" />
     <Compile Include="GetMessageListRequestData.cs" />

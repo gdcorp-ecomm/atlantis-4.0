@@ -61,6 +61,12 @@
     <None Include="Atlantis.Framework.MailApi.Impl.nuspec" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Atlantis.Framework.MailApi.Interface\Atlantis.Framework.MailApi.Interface.csproj">
+      <Project>{bcff5567-3a11-4fd6-9de9-51f2895ac5b3}</Project>
+      <Name>Atlantis.Framework.MailApi.Interface</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -39,6 +39,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Atlantis.Framework.Interface">
+      <HintPath>..\packages\Atlantis.Framework.Interface.14.1.16.1\lib\net40\Atlantis.Framework.Interface.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -59,8 +62,17 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="LibraryTests.cs" />
+    <Compile Include="LoginTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Atlantis.Framework.MailApi.Interface\Atlantis.Framework.MailApi.Interface.csproj">
+      <Project>{bcff5567-3a11-4fd6-9de9-51f2895ac5b3}</Project>
+      <Name>Atlantis.Framework.MailApi.Interface</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

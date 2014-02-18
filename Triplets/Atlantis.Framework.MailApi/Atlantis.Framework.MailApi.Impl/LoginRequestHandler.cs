@@ -1,4 +1,5 @@
 ﻿using Atlantis.Framework.Interface;
+using Atlantis.Framework.MailApi.Interface;
 
 namespace Atlantis.Framework.MailApi.Impl
 {
@@ -9,6 +10,8 @@ namespace Atlantis.Framework.MailApi.Impl
   {
     public IResponseData RequestHandler(RequestData requestData, ConfigElement config)
     {
+      var request = (LoginRequestData) requestData;
+
       IResponseData result = null;
 
       // Handle the request and return the IResponseData object for the request

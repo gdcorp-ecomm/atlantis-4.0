@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Atlantis.Framework.LogDomainSearchResults.Impl")]
+[assembly: AssemblyTitle("Atlantis.Framework.LogDomainSearchResults.Interface")]
 #if DEBUG
 [assembly: AssemblyDescription("Debug Build")]
 [assembly: AssemblyConfiguration("Debug Build")]
@@ -13,7 +13,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("Release Build")]
 #endif
 [assembly: AssemblyCompany("GoDaddy.com")]
-[assembly: AssemblyProduct("Atlantis.Framework.LogDomainSearchResults.Impl")]
+[assembly: AssemblyProduct("Atlantis.Framework.LogDomainSearchResults.Interface")]
 [assembly: AssemblyCopyright("Copyright © GoDaddy.com, Inc. 2009-2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -24,7 +24,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("78fab4b3-ffad-4e86-990e-16653453b193")]
+[assembly: Guid("d91f15c4-f47e-4d6f-b5fc-46c9d59e05ee")]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -37,4 +37,4 @@ using System.Runtime.InteropServices;
 // by using the '*' as shown below:
 [assembly: AssemblyVersion("4.0.0.0")]
 [assembly: AssemblyFileVersion("4.0.0.0")]
-[assembly: AssemblyInformationalVersion("14.2.12.1")]
+[assembly: AssemblyInformationalVersion("14.2.18.1")]

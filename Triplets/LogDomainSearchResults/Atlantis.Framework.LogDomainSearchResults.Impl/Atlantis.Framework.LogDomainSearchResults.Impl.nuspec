@@ -10,7 +10,8 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
     <releaseNotes>
-      14.2.12.1: Created provider Impl
+      14.2.12.1: Created Impl nuget
+      14.2.18.1: Web service updates
     </releaseNotes>
     <copyright>$copyright$</copyright>
     <tags>Atlantis.Framework.LogDomainSearchResults.Impl</tags>

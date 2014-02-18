@@ -9,30 +9,30 @@ namespace Atlantis.Framework.LogDomainSearchResults.Impl
   {
     #region IRequest Members
 
-    public IResponseData RequestHandler(RequestData oRequestData, ConfigElement oConfig)
+    public IResponseData RequestHandler(RequestData requestData, ConfigElement config)
     {
-      LogDomainSearchResultsResponseData oResponseData;
+      LogDomainSearchResultsResponseData responseData;
 
-      var request = (LogDomainSearchResultsRequestData)oRequestData;
+      var request = (LogDomainSearchResultsRequestData)requestData;
 
       using (var service = new Service
         {
-          Url = ((WsConfigElement)oConfig).WSURL,
+          Url = ((WsConfigElement)config).WSURL,
           Timeout = (int)request.RequestTimeout.TotalMilliseconds
         })
       {
         try
         {
           service.LogDomainSearchResults(request.ToXML());
-          oResponseData = new LogDomainSearchResultsResponseData();
+          responseData = new LogDomainSearchResultsResponseData();
         }
         catch (Exception ex)
         {
-          oResponseData = new LogDomainSearchResultsResponseData(oRequestData, ex);
+          responseData = new LogDomainSearchResultsResponseData(requestData, ex);
         }
       }
 
-      return oResponseData;
+      return responseData;
     }
 
     #endregion

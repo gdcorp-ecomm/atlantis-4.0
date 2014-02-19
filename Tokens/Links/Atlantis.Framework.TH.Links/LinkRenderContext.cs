@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Runtime.CompilerServices;
+using System.Text.RegularExpressions;
 using System.Web;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.Interface.Links;
+using Atlantis.Framework.Providers.Localization.Interface;
 using Atlantis.Framework.Tokens.Interface;
 
 [assembly: InternalsVisibleTo("Atlantis.Framework.TH.Links.Tests")]
@@ -12,11 +14,13 @@ namespace Atlantis.Framework.TH.Links
   {
     private readonly Lazy<ISiteContext> _siteContext;
     private readonly Lazy<ILinkProvider> _linkProvider;
+    private readonly Lazy<ILocalizationProvider> _localization;
 
     internal LinkRenderContext(IProviderContainer container)
     {
       _linkProvider = new Lazy<ILinkProvider>(container.Resolve<ILinkProvider>);
       _siteContext = new Lazy<ISiteContext>(container.Resolve<ISiteContext>);
+      _localization = new Lazy<ILocalizationProvider>(container.Resolve<ILocalizationProvider>);
     }
 
     public ISiteContext SiteContext
@@ -62,8 +66,11 @@ namespace Atlantis.Framework.TH.Links
       else
       {
         result = false;
-        token.TokenError = "Cannot convert IToken to LinkToken";
-        token.TokenResult = string.Empty;
+        token = new LinkToken(string.Empty, string.Empty, string.Empty)
+        {
+          TokenError = "Cannot convert IToken to LinkToken",
+          TokenResult = string.Empty
+        };
       }
 
       return result;
@@ -72,23 +79,55 @@ namespace Atlantis.Framework.TH.Links
     private bool CreateMinifiedPath(LinkToken token)
     {
       bool result = false;
+      string tokenPath = token.Path;
 
-      if (!ReferenceEquals(null, token) && ("css".Equals(token.RenderType, StringComparison.OrdinalIgnoreCase) || "js".Equals(token.RenderType, StringComparison.OrdinalIgnoreCase)))
+      if (tokenPath.Contains("{"))
+      {
+        var dataToken = Regex.Match(token.Path, @"\{([^}]*)\}").Groups[1].Value;
+
+        switch (dataToken)
+        {
+          case "marketid":
+            tokenPath = tokenPath.Replace("{marketid}", _localization.Value.MarketInfo.Id.ToLower());
+            break;
+          case "regionsite":
+            tokenPath = tokenPath.Replace("{regionsite}", _localization.Value.CountrySite.ToLower());
+            break;
+          case "contextid":
+            tokenPath = tokenPath.Replace("{contextid}", SiteContext.ContextId.ToString());
+            break;
+          default:
+            tokenPath = token.Path;
+            break;
+        }
+      }
+
+      if ("css".Equals(token.RenderType, StringComparison.OrdinalIgnoreCase) || "js".Equals(token.RenderType, StringComparison.OrdinalIgnoreCase))
       {
         string qaMinify = HttpContext.Current.Request.QueryString["qaminify"];
         bool showMinFile = ShowMinFile(qaMinify);
         string fileExt = FileExtensionUpdate(token, showMinFile);
         string rtnVal = NamedRoot(token);
+        int lastDot = tokenPath.LastIndexOf('.');
 
-        if (!string.IsNullOrEmpty(token.MinifiedPath))
+        if (!string.IsNullOrEmpty(token.NameMode))
         {
-          token.TokenResult = String.Concat(rtnVal, token.MinifiedPath);
+          switch (token.NameMode)
+          {
+            case "explicit":
+              token.TokenResult = String.Concat(rtnVal, tokenPath);
+              break;
+            case "auto":
+            default:
+              token.TokenResult = String.Concat(rtnVal, tokenPath.Substring(0, lastDot), fileExt);
+              break;
+          }
+
           result = true;
         }
-        else if (!string.IsNullOrEmpty(token.Path))
+        else if (!string.IsNullOrEmpty(tokenPath))
         {
-          int lastDot = token.Path.LastIndexOf('.');
-          token.TokenResult = String.Concat(rtnVal, token.Path.Substring(0, lastDot), fileExt);
+          token.TokenResult = String.Concat(rtnVal, tokenPath.Substring(0, lastDot), fileExt);
           result = true;
         }
       }
@@ -132,21 +171,6 @@ namespace Atlantis.Framework.TH.Links
       return showMinFile;
     }
 
-    private bool GetNamedRoot(LinkToken token)
-    {
-      bool result = false;
-
-      var namedRoot = NamedRoot(token);
-
-      if (!string.IsNullOrEmpty(namedRoot))
-      {
-        result = true;
-      }
-
-      token.TokenResult = namedRoot;
-      return result;
-    }
-
     private string FileExtensionUpdate(LinkToken token, bool showMinFile)
     {
       string minifiedExt;
@@ -183,6 +207,21 @@ namespace Atlantis.Framework.TH.Links
           break;
       }
       return namedRoot;
+    }
+
+    private bool GetNamedRoot(LinkToken token)
+    {
+      bool result = false;
+
+      var namedRoot = NamedRoot(token);
+
+      if (!string.IsNullOrEmpty(namedRoot))
+      {
+        result = true;
+      }
+
+      token.TokenResult = namedRoot;
+      return result;
     }
 
     private bool GetRelativeUrl(LinkToken token)

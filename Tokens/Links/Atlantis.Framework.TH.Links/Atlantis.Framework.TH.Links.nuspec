@@ -10,7 +10,8 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
     <releaseNotes>
-      14.2.18.1: Updated to force minification in test and production files. Plus added a query param to spoof the minified and nonminified versions
+      14.2.18.1 : Updated to force minification in test and production files. Plus added a query param to spoof the minified and nonminified versions
+      14.2.19.1 : Added the localization provider find the market id and region site
     </releaseNotes>
     <copyright>$copyright$</copyright>
     <tags>Atlantis Framework TH Links</tags>

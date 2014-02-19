@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Xml.Linq;
 using Atlantis.Framework.Providers.Interface.Links;
 using Atlantis.Framework.Tokens.Interface;
@@ -17,7 +18,7 @@ namespace Atlantis.Framework.TH.Links
     public string LinkType { get; private set; }
     public QueryParamMode ParamMode { get; private set; }
     public string Path { get; private set; }
-    public string MinifiedPath { get; private set; }
+    public string NameMode { get; private set; }
     public bool? Secure { get; private set; }
     public NameValueCollection Params { get; private set; }
 
@@ -31,7 +32,8 @@ namespace Atlantis.Framework.TH.Links
       ParamMode = textParamMode == "explicit" ? QueryParamMode.ExplicitParameters : QueryParamMode.CommonParameters;
 
       Path = GetAttributeText("path", string.Empty);
-      MinifiedPath = GetAttributeText("minifiedpath", string.Empty);
+
+      NameMode = GetAttributeText("namemode", string.Empty);
 
       if (TokenData != null)
       {

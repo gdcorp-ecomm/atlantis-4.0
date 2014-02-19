@@ -1,20 +1,42 @@
-﻿using Atlantis.Framework.Interface;
+﻿using System.IO;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Json;
+using System.Text;
+using Atlantis.Framework.Interface;
 using System.Xml.Linq;
 
 namespace Atlantis.Framework.MailApi.Interface
 {
+  [DataContract]
   public class LoginResponseData : IResponseData
   {
-    // Sample static method for creating the response (ref Clean Code)
-    public static LoginResponseData FromData(object data)
+
+    [DataMember(Name = "hash")]
+    public string Hash { get; set; }
+
+    [DataMember(Name = "baseurl")]
+    public string BaseUrl { get; set; }
+
+    [DataMember(Name = "clienturl")]
+    public string ClientUrl { get; set; }
+
+    public LoginResponseData()
     {
-      return new LoginResponseData(data);
+      Hash = "";
+      BaseUrl = "";
+      ClientUrl = "";
     }
 
-    // Sample private constructor
-    private LoginResponseData(object data)
+    public static LoginResponseData FromJsonData(string jsonString)
     {
-      // Sample: Create member data as necessary
+
+      MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(jsonString));
+
+      DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(LoginResponseData));
+
+      LoginResponseData result = (LoginResponseData)serializer.ReadObject(stream);
+
+      return result;
     }
 
     public string ToXML()

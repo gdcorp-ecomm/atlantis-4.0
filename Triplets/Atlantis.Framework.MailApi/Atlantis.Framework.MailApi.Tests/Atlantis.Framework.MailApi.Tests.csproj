@@ -77,6 +77,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Atlantis.Framework.MailApi.Impl\Atlantis.Framework.MailApi.Impl.csproj">
+      <Project>{188f77da-de53-4666-80a4-48dd76a1176d}</Project>
+      <Name>Atlantis.Framework.MailApi.Impl</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.MailApi.Interface\Atlantis.Framework.MailApi.Interface.csproj">
       <Project>{bcff5567-3a11-4fd6-9de9-51f2895ac5b3}</Project>
       <Name>Atlantis.Framework.MailApi.Interface</Name>

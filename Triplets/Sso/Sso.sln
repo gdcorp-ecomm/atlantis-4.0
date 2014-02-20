@@ -1,8 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{E45089CA-84E3-4C99-8DBA-9040A221815B}"
-EndProject
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Sso.Impl", "Atlantis.Framework.Sso.Impl\Atlantis.Framework.Sso.Impl.csproj", "{F4084106-345B-4832-A163-41393C51E5D6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Sso.Interface", "Atlantis.Framework.Sso.Interface\Atlantis.Framework.Sso.Interface.csproj", "{0244B4EE-6257-4019-9FF0-079F884A2E07}"

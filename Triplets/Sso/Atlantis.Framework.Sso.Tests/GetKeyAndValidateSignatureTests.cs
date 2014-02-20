@@ -14,9 +14,9 @@ namespace Atlantis.Framework.Sso.Tests
   [DeploymentItem("Atlantis.Framework.Sso.Impl.dll")]
   public class GetKeyAndValidateSignatureTests
   {
-    private string username = "syukna";
-    private string shopperId = "867900";
-    private string password = "Seth1seth";
+    private string username = "trwalkerdev2";
+    private string shopperId = "847235";
+    private string password = "MonkeY2522";
     private int privateLabelId = 1;
     private string clientIp = "172.23.44.142";
 

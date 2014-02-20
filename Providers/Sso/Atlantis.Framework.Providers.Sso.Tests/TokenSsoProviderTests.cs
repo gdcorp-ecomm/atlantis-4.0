@@ -93,6 +93,7 @@ namespace Atlantis.Framework.Providers.Sso.Tests
 
 
     [TestMethod]
+    [Ignore]
     public void TokenIsValid()
     {
       var prov = GetProviderContainer("http://www.godaddy.com");

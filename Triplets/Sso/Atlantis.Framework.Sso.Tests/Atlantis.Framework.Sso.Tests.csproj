@@ -40,53 +40,46 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Atlantis.Framework.AppSettings.Interface">
-      <HintPath>..\packages\Atlantis.Framework.AppSettings.Interface.4.0.0.0\lib\net40\Atlantis.Framework.AppSettings.Interface.dll</HintPath>
-    </Reference>
-    <Reference Include="Atlantis.Framework.BasePages">
-      <HintPath>..\packages\Atlantis.Framework.BasePages.4.13.11.1\lib\net40\Atlantis.Framework.BasePages.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.AppSettings.Interface.14.1.21.1\lib\net40\Atlantis.Framework.AppSettings.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.DataCache">
-      <HintPath>..\packages\Atlantis.Framework.DataCache.4.0.0.0\lib\net40\Atlantis.Framework.DataCache.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.DataCache.14.2.19.1\lib\net40\Atlantis.Framework.DataCache.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.DataCacheGeneric.Interface">
-      <HintPath>..\packages\Atlantis.Framework.DataCacheGeneric.Interface.4.0.0.0\lib\net40\Atlantis.Framework.DataCacheGeneric.Interface.dll</HintPath>
-    </Reference>
-    <Reference Include="Atlantis.Framework.DataCacheService">
-      <HintPath>..\packages\Atlantis.Framework.DataCacheService.4.0.0.0\lib\net40\Atlantis.Framework.DataCacheService.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.DataCacheGeneric.Interface.14.1.21.1\lib\net40\Atlantis.Framework.DataCacheGeneric.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Engine">
-      <HintPath>..\packages\Atlantis.Framework.Engine.4.0.0.0\lib\net40\Atlantis.Framework.Engine.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.Engine.14.1.16.1\lib\net40\Atlantis.Framework.Engine.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Engine.XmlSerializers">
-      <HintPath>..\packages\Atlantis.Framework.Engine.4.0.0.0\lib\net40\Atlantis.Framework.Engine.XmlSerializers.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.Engine.14.1.16.1\lib\net40\Atlantis.Framework.Engine.XmlSerializers.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Interface.dll</HintPath>
+    <Reference Include="Atlantis.Framework.Interface">
+      <HintPath>..\packages\Atlantis.Framework.Interface.14.1.16.1\lib\net40\Atlantis.Framework.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.ManagerUser.Interface">
-      <HintPath>..\packages\Atlantis.Framework.ManagerUser.Interface.4.0.0.0\lib\net40\Atlantis.Framework.ManagerUser.Interface.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.ManagerUser.Interface.14.1.22.1\lib\net40\Atlantis.Framework.ManagerUser.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.MiniEncrypt">
-      <HintPath>..\packages\Atlantis.Framework.MiniEncrypt.4.0.0.0\lib\net40\Atlantis.Framework.MiniEncrypt.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.MiniEncrypt.4.13.12.21\lib\net40\Atlantis.Framework.MiniEncrypt.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.PrivateLabel.Interface">
-      <HintPath>..\packages\Atlantis.Framework.PrivateLabel.Interface.4.0.0.0\lib\net40\Atlantis.Framework.PrivateLabel.Interface.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.PrivateLabel.Interface.14.1.21.1\lib\net40\Atlantis.Framework.PrivateLabel.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Products.Interface">
-      <HintPath>..\packages\Atlantis.Framework.Products.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Products.Interface.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.Products.Interface.14.2.19.1\lib\net40\Atlantis.Framework.Products.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Providers.Containers">
-      <HintPath>..\packages\Atlantis.Framework.Providers.Containers.4.13.10.12\lib\net40\Atlantis.Framework.Providers.Containers.dll</HintPath>
-    </Reference>
-    <Reference Include="Atlantis.Framework.Providers.Interface">
-      <HintPath>..\packages\Atlantis.Framework.Providers.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Providers.Interface.dll</HintPath>
-    </Reference>
-    <Reference Include="Atlantis.Framework.Providers.RenderPipeline.Interface">
-      <HintPath>..\packages\Atlantis.Framework.Providers.RenderPipeline.Interface.4.13.10.16\lib\net40\Atlantis.Framework.Providers.RenderPipeline.Interface.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.Providers.Containers.4.14.1.6\lib\net40\Atlantis.Framework.Providers.Containers.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Shopper.Interface">
-      <HintPath>..\packages\Atlantis.Framework.Shopper.Interface.4.13.10.29\lib\net40\Atlantis.Framework.Shopper.Interface.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.Shopper.Interface.14.1.22.1\lib\net40\Atlantis.Framework.Shopper.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Sso.Impl">
+      <HintPath>..\packages\Atlantis.Framework.Sso.Impl.4.13.11.27\lib\net40\Atlantis.Framework.Sso.Impl.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Sso.Interface">
+      <HintPath>..\packages\Atlantis.Framework.Sso.Interface.14.2.14.1\lib\net40\Atlantis.Framework.Sso.Interface.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
@@ -118,16 +111,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Atlantis.Framework.Sso.Impl\Atlantis.Framework.Sso.Impl.csproj">
-      <Project>{f4084106-345b-4832-a163-41393c51e5d6}</Project>
-      <Name>Atlantis.Framework.Sso.Impl</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Atlantis.Framework.Sso.Interface\Atlantis.Framework.Sso.Interface.csproj">
-      <Project>{0244b4ee-6257-4019-9ff0-079f884a2e07}</Project>
-      <Name>Atlantis.Framework.Sso.Interface</Name>
-    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

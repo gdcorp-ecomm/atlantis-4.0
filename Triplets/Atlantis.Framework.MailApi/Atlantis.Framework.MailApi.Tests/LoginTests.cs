@@ -54,10 +54,6 @@ namespace Atlantis.Framework.MailApi.Tests
     [TestMethod]
     public void LoginDataFromWSValid()
     {
-
-      var username = System.Web.HttpUtility.UrlEncode("tester@qa-emailpod04.com");  // Merc #159866
-      var password = System.Web.HttpUtility.UrlEncode("Godaddy25");  // this is ALREADY escaped in GDAndroid code
-
       var request = new LoginRequestData(username, password, ANDROID_APP_KEY);
 
       var response = (LoginResponseData)Engine.Engine.ProcessRequest(request, 10350);

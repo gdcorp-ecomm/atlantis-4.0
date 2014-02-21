@@ -17,8 +17,8 @@ namespace Atlantis.Framework.MailApi.Impl
     public IResponseData RequestHandler(RequestData requestData, ConfigElement config)
     {
       var request = (LoginRequestData)requestData;
-      string username = request.Username;
-      string password = request.Password;
+      string username = System.Web.HttpUtility.UrlEncode(request.Username); // Merc #159866
+      string password = System.Web.HttpUtility.UrlEncode(request.Password); // this is ALREADY escaped in GDAndroid code
       string appKey = request.Appkey;
 
       string webServiceUrl = ((WsConfigElement) config).WSURL;

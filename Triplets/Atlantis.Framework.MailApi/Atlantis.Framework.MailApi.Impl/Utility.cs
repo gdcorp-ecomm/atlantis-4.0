@@ -28,7 +28,7 @@ namespace Atlantis.Framework.MailApi.Impl
       return PostRequest(request, url, messageBody);
     }
 
-    public static string PostRequest(HttpWebRequest request, string url, string messageBody)
+    public static string PostRequest(HttpWebRequest request, string url, string messageBody, Dictionary<string, string> cookiesDictionary)
     {
       string jsonResponse = null;
 

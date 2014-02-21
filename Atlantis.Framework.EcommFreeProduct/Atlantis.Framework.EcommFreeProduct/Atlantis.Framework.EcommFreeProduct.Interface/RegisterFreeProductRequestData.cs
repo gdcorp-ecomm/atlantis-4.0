@@ -27,17 +27,23 @@ namespace Atlantis.Framework.EcommFreeProduct.Interface
 
     public void AddItem(string unifiedProductId, string quantity)
     {
-      AddItem(unifiedProductId, quantity, string.Empty);
+      AddItem(unifiedProductId, quantity, string.Empty, null);
     }
 
     public void AddItem(string unifiedProductId, string quantity, string renewalShopperProfileID)
     {
-      _itemRequestElement.Add(CreateItemElement(CreateAttributes(unifiedProductId, quantity, null), null));
+      AddItem(unifiedProductId, quantity, renewalShopperProfileID, null);
+    }
+
+    public void AddItem(string unifiedProductId, string quantity, string renewalShopperProfileID, IEnumerable<KeyValuePair<string, string>> otherAttributes)
+    {
+      _itemRequestElement.Add(CreateItemElement(CreateAttributes(unifiedProductId, quantity, otherAttributes), null));
       if (!string.IsNullOrEmpty(renewalShopperProfileID))
       {
         SetItemRequestAttribute("renewalShopperProfileID", renewalShopperProfileID);
       }
     }
+
 
     public override string GetCacheMD5()
     {

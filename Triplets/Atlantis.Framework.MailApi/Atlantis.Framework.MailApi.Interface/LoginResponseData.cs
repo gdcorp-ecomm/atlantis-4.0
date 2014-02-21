@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Atlantis.Framework.Interface;
 using System.IO;
-using System.Linq;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Xml.Linq;
-using System.Xml.Serialization;
-using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.MailApi.Interface
 {

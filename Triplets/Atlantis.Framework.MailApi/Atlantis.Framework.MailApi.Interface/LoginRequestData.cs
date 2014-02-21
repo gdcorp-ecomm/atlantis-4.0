@@ -1,5 +1,4 @@
-﻿using System.Security.Cryptography.X509Certificates;
-using Atlantis.Framework.Interface;
+﻿using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.MailApi.Interface
 {

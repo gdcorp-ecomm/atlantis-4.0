@@ -42,8 +42,7 @@ namespace Atlantis.Framework.MailApi.Impl
       request.ContentType = "application/x-www-form-urlencoded";
       request.ContentLength = bodyBytes.Length;
 
-      var requestStream = request.GetRequestStream();
-      using (requestStream)
+      using (var requestStream = request.GetRequestStream())
       {
         requestStream.Write(bodyBytes, 0, bodyBytes.Length);
         requestStream.Close();
@@ -51,22 +50,19 @@ namespace Atlantis.Framework.MailApi.Impl
 
       var loginResponse = (HttpWebResponse)request.GetResponse();
 
-      var responseStream = loginResponse.GetResponseStream();
-
-      if (responseStream != null)
+      using (var responseStream = loginResponse.GetResponseStream())
       {
-        using (responseStream)
+        if (responseStream != null)
         {
-          var responseReader = new StreamReader(responseStream, Encoding.UTF8);
-          using (responseReader)
+          using (var responseReader = new StreamReader(responseStream, Encoding.UTF8))
           {
             jsonResponse = responseReader.ReadToEnd();
             responseReader.Close();
           }
-
           responseStream.Close();
         }
       }
+
 
       return LoginResponseData.FromJsonData(jsonResponse);
     }

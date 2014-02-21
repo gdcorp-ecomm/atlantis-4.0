@@ -14,6 +14,12 @@ namespace Atlantis.Framework.Providers.RenderPipeline
 
     public string RenderContent(string content, IList<IRenderHandler> renderHandlers)
     {
+      if (Container.CanResolve<IRenderPipelineStatusProvider>())
+      {
+        var statusProvider = Container.Resolve<IRenderPipelineStatusProvider>();
+        statusProvider.Reset();
+      }
+
       string finalContent;
 
       if (renderHandlers == null || string.IsNullOrEmpty(content))

@@ -22,7 +22,7 @@ namespace Atlantis.Framework.MailApi.Impl
 
       string messageBody = String.Format(BodyString, username, password, appKey);
 
-      string loginResponseString = Utility.LoginRequest(webServiceUrl, messageBody);
+      string loginResponseString = Utility.PostRequest(webServiceUrl, messageBody, null, null, null);
 
       LoginResponseData loginResponse = LoginResponseData.FromJsonData(loginResponseString);
 

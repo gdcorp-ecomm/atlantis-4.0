@@ -10,27 +10,12 @@ namespace Atlantis.Framework.MailApi.Impl
 {
   class Utility
   {
-
-    public static string LoginRequest(string url, string messageBody)
-    {
-      var request = (HttpWebRequest)WebRequest.Create(url);
-      request.Method = WebRequestMethods.Http.Post;
-      return PostRequest(request, url, messageBody);
-    }
-
-    public static string GetMessageListRequest(string url, string messageBody, string appKey, string mailHash)
-    {
-      var request = (HttpWebRequest)WebRequest.Create(url);
-      request.Method = WebRequestMethods.Http.Post;
-
-      // Add cookies required for messageList
-
-      return PostRequest(request, url, messageBody);
-    }
-
-    public static string PostRequest(HttpWebRequest request, string url, string messageBody, Dictionary<string, string> cookiesDictionary)
+    public static string PostRequest(string url, string messageBody, string session, string appKey, string key)
     {
       string jsonResponse = null;
+
+      var request = (HttpWebRequest)WebRequest.Create(url);
+      request.Method = WebRequestMethods.Http.Post;
 
       byte[] bodyBytes = Encoding.UTF8.GetBytes(messageBody);
 

@@ -23,19 +23,11 @@ namespace Atlantis.Framework.MailApi.Impl
 
       string webServiceUrl = ((WsConfigElement) config).WSURL;
 
-      username = System.Web.HttpUtility.UrlEncode(username);  // Merc #159866
-
       string messageBody = String.Format(BodyString, username, password, appKey);
 
       LoginResponseData loginResponse = PostRequest(webServiceUrl, messageBody);
 
-
-      IResponseData result = null;
-
-      // Handle the request and return the IResponseData object for the request
-      // Returning null will cause an exception
-
-      return result;
+      return loginResponse;
     }
 
     private LoginResponseData PostRequest(string url, string messageBody)

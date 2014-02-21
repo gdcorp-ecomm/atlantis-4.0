@@ -58,8 +58,10 @@
     <Compile Include="GetFolderListResponseData.cs" />
     <Compile Include="GetMessageListRequestData.cs" />
     <Compile Include="GetMessageListResponseData.cs" />
-    <Compile Include="LoginRequestData.cs" />
     <Compile Include="LoginResponseData.cs" />
+    <Compile Include="LoginRequestData.cs" />
+    <Compile Include="LoginData.cs" />
+    <Compile Include="MailApiResponseState.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <None Include="atlantis.config" />
     <None Include="Atlantis.Framework.MailApi.Interface.nuget.bat" />

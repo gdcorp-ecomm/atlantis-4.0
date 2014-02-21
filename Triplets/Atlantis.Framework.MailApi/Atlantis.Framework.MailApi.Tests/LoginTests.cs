@@ -37,10 +37,28 @@ namespace Atlantis.Framework.MailApi.Tests
     }
 
     [TestMethod]
-    public void GetLoginData()
+    public void FromMockJsonDataValid()
     {
 
-      var request = new LoginRequestData("tester@qa-emailpod04.com", "Godaddy25", ANDROID_APP_KEY);
+      var response = LoginResponseData.FromJsonData(Resources.ValidLoginData);
+
+      Assert.IsNotNull(response.LoginData);
+      Assert.IsNotNull(response.State);
+      Assert.AreEqual("3ec646ddd52660180db869372bf86c36", response.LoginData.Hash);
+      Assert.AreEqual("mailapi04.secureserver.net:443", response.LoginData.BaseUrl);
+      Assert.AreEqual("https://mailapi04.secureserver.net/client.php?h=1a9605207194ceb558b40b1b9edc19ad", response.LoginData.ClientUrl);
+      Assert.AreEqual("tv2YfSzBx6zdjHAjIhW9mNe5", response.State.AppKey);
+
+    }
+
+    [TestMethod]
+    public void LoginDataFromWSValid()
+    {
+
+      var username = System.Web.HttpUtility.UrlEncode("tester@qa-emailpod04.com");  // Merc #159866
+      var password = System.Web.HttpUtility.UrlEncode("Godaddy25");  // this is ALREADY escaped in GDAndroid code
+
+      var request = new LoginRequestData(username, password, ANDROID_APP_KEY);
 
       var response = (LoginResponseData)Engine.Engine.ProcessRequest(request, 10350);
       Assert.IsNotNull(response);

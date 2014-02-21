@@ -1,31 +1,25 @@
-﻿using System.IO;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Json;
 using System.Text;
-using Atlantis.Framework.Interface;
 using System.Xml.Linq;
+using System.Xml.Serialization;
+using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.MailApi.Interface
 {
   [DataContract]
   public class LoginResponseData : IResponseData
   {
+    [DataMember(Name = "response")]
+    public LoginData LoginData { get; set; }
 
-    [DataMember(Name = "hash")]
-    public string Hash { get; set; }
+    [DataMember(Name = "state")]
+    public MailApiResponseState State { get; set; }
 
-    [DataMember(Name = "baseurl")]
-    public string BaseUrl { get; set; }
-
-    [DataMember(Name = "clienturl")]
-    public string ClientUrl { get; set; }
-
-    public LoginResponseData()
-    {
-      Hash = "";
-      BaseUrl = "";
-      ClientUrl = "";
-    }
 
     public static LoginResponseData FromJsonData(string jsonString)
     {

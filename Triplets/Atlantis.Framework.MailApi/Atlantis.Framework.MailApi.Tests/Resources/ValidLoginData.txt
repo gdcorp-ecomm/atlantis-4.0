@@ -1,1 +1,1 @@
-{"LoginData":{"hash":"testhash","baseurl":"testURL","clienturl":"clientURL"}}
+{"response":{"hash":"3ec646ddd52660180db869372bf86c36","baseurl":"mailapi04.secureserver.net:443","clienturl":"https://mailapi04.secureserver.net/client.php?h=1a9605207194ceb558b40b1b9edc19ad"},"state":{"app_key":"tv2YfSzBx6zdjHAjIhW9mNe5"}}

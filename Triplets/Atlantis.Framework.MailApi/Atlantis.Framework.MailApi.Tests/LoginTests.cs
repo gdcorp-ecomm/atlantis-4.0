@@ -11,7 +11,6 @@ namespace Atlantis.Framework.MailApi.Tests
   [DeploymentItem("atlantis.config")]
   public class LoginTests
   {
-
     private const string ANDROID_APP_KEY = "tv2YfSzBx6zdjHAjIhW9mNe5";
     private const string IOS_APP_KEY = "PAiycbPel3SL1H6tj7UxNwUU";
 
@@ -39,7 +38,6 @@ namespace Atlantis.Framework.MailApi.Tests
     [TestMethod]
     public void FromMockJsonDataValid()
     {
-
       var response = LoginResponseData.FromJsonData(Resources.ValidLoginData);
 
       Assert.IsNotNull(response.LoginData);
@@ -48,7 +46,6 @@ namespace Atlantis.Framework.MailApi.Tests
       Assert.AreEqual("mailapi04.secureserver.net:443", response.LoginData.BaseUrl);
       Assert.AreEqual("https://mailapi04.secureserver.net/client.php?h=1a9605207194ceb558b40b1b9edc19ad", response.LoginData.ClientUrl);
       Assert.AreEqual("tv2YfSzBx6zdjHAjIhW9mNe5", response.State.AppKey);
-
     }
 
     [TestMethod]
@@ -59,6 +56,5 @@ namespace Atlantis.Framework.MailApi.Tests
       var response = (LoginResponseData)Engine.Engine.ProcessRequest(request, 10350);
       Assert.IsNotNull(response);
     }
-
   }
 }

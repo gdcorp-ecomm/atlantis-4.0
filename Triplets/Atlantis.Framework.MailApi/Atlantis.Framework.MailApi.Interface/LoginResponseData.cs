@@ -39,8 +39,9 @@ namespace Atlantis.Framework.MailApi.Interface
     public AtlantisException GetException()
     {
       // Use an AtlantisException member variable if your triplet request needs to create a response
-      // with an exception 
+      // with an exception 
       return null;
     }
+
   }
 }

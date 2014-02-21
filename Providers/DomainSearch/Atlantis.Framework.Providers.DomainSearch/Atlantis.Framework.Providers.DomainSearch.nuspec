@@ -2,15 +2,17 @@
 <package >
   <metadata>
     <id>Atlantis.Framework.Providers.DomainSearch</id>
-    <version>4.13.11.8</version>
-    <title>Atlantis Framework Providers DomainSearch</title>
+    <version>$version$</version>
+    <title>Atlantis.Framework.Providers.DomainSearch</title>
     <authors>$author$</authors>
     <owners>$author$</owners>
     <projectUrl>https://confluence.int.godaddy.com/display/ATLANTIS</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes></releaseNotes>
+    <releaseNotes>
+      14.2.20.1 Added call to LogDomainSearchResultsProvider to SearchDomain call
+    </releaseNotes>
     <copyright>$copyright$</copyright>
-    <tags>Atlantis Framework.Providers DomainSearch</tags>
+    <tags>Atlantis.Framework.Providers.DomainSearch</tags>
   </metadata>
 </package>

@@ -14,7 +14,7 @@ using System.Runtime.InteropServices;
 #endif
 [assembly: AssemblyCompany("GoDaddy.com")]
 [assembly: AssemblyProduct("Atlantis.Framework.Providers.DomainSearch.Interface")]
-[assembly: AssemblyCopyright("Copyright © GoDaddy.com 2013")]
+[assembly: AssemblyCopyright("Copyright © GoDaddy.com 2013-2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -40,4 +40,5 @@ using System.Runtime.InteropServices;
 // example 4.13.6.1 for Jun 1, 2013
 //
 [assembly: AssemblyVersion("4.0.0.0")]
-[assembly: AssemblyFileVersion("4.13.11.8")]
+[assembly: AssemblyFileVersion("4.0.0.0")]
+[assembly: AssemblyInformationalVersion("14.2.20.1")]

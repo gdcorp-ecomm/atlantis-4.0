@@ -20,16 +20,16 @@ Global
 		SccNumberOfProjects = 4
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = Atlantis.Framework.LogDomainSearchResults.Interface\\Atlantis.Framework.LogDomainSearchResults.Interface.csproj
-		SccProjectName1 = Atlantis.Framework.LogDomainSearchResults.Interface
-		SccLocalPath1 = Atlantis.Framework.LogDomainSearchResults.Interface
-		SccProjectUniqueName2 = Atlantis.Framework.LogDomainSearchResults.Impl\\Atlantis.Framework.LogDomainSearchResults.Impl.csproj
-		SccProjectName2 = Atlantis.Framework.LogDomainSearchResults.Impl
-		SccLocalPath2 = Atlantis.Framework.LogDomainSearchResults.Impl
-		SccProjectUniqueName3 = Atlantis.Framework.LogDomainSearchResults.Tests\\Atlantis.Framework.LogDomainSearchResults.Tests.csproj
-		SccProjectName3 = Atlantis.Framework.LogDomainSearchResults.Tests
-		SccLocalPath3 = Atlantis.Framework.LogDomainSearchResults.Tests
+		SccProjectUniqueName0 = Atlantis.Framework.LogDomainSearchResults.Interface\\Atlantis.Framework.LogDomainSearchResults.Interface.csproj
+		SccProjectName0 = Atlantis.Framework.LogDomainSearchResults.Interface
+		SccLocalPath0 = Atlantis.Framework.LogDomainSearchResults.Interface
+		SccProjectUniqueName1 = Atlantis.Framework.LogDomainSearchResults.Impl\\Atlantis.Framework.LogDomainSearchResults.Impl.csproj
+		SccProjectName1 = Atlantis.Framework.LogDomainSearchResults.Impl
+		SccLocalPath1 = Atlantis.Framework.LogDomainSearchResults.Impl
+		SccProjectUniqueName2 = Atlantis.Framework.LogDomainSearchResults.Tests\\Atlantis.Framework.LogDomainSearchResults.Tests.csproj
+		SccProjectName2 = Atlantis.Framework.LogDomainSearchResults.Tests
+		SccLocalPath2 = Atlantis.Framework.LogDomainSearchResults.Tests
+		SccLocalPath3 = .
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

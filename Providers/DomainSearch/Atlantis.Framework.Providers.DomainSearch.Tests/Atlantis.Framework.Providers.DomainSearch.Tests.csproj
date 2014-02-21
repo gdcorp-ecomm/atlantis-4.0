@@ -41,22 +41,29 @@
   <ItemGroup>
     <Reference Include="Atlantis.Framework.AppSettings.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.AppSettings.Interface.4.0.0.0\lib\net40\Atlantis.Framework.AppSettings.Interface.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.AppSettings.Interface.14.1.21.1\lib\net40\Atlantis.Framework.AppSettings.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.DataCache, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.DataCache.4.0.0.0\lib\net40\Atlantis.Framework.DataCache.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.DataCache.14.2.19.1\lib\net40\Atlantis.Framework.DataCache.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.DataCacheGeneric.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.DataCacheGeneric.Interface.4.0.0.0\lib\net40\Atlantis.Framework.DataCacheGeneric.Interface.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.DataCacheGeneric.Interface.14.1.21.1\lib\net40\Atlantis.Framework.DataCacheGeneric.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.DataCacheService, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.DataCacheService.4.0.0.0\lib\net40\Atlantis.Framework.DataCacheService.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.DataCacheService.4.13.12.21\lib\net40\Atlantis.Framework.DataCacheService.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.DCCDomainsDataCache.Interface">
-      <HintPath>..\packages\Atlantis.Framework.DCCDomainsDataCache.Interface.4.13.10.15\lib\net40\Atlantis.Framework.DCCDomainsDataCache.Interface.dll</HintPath>
+    <Reference Include="Atlantis.Framework.DCCDomainsDataCache.Impl">
+      <HintPath>..\packages\Atlantis.Framework.DCCDomainsDataCache.Impl.4.13.1.28\lib\net40\Atlantis.Framework.DCCDomainsDataCache.Impl.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.DCCDomainsDataCache.Impl.XmlSerializers">
+      <HintPath>..\packages\Atlantis.Framework.DCCDomainsDataCache.Impl.4.13.1.28\lib\net40\Atlantis.Framework.DCCDomainsDataCache.Impl.XmlSerializers.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.DCCDomainsDataCache.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.DCCDomainsDataCache.Interface.14.02.04.1\lib\net40\Atlantis.Framework.DCCDomainsDataCache.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.DomainContactFields.Impl">
       <HintPath>..\packages\Atlantis.Framework.DomainContactFields.Impl.4.13.6.5\lib\net40\Atlantis.Framework.DomainContactFields.Impl.dll</HintPath>
@@ -66,7 +73,7 @@
     </Reference>
     <Reference Include="Atlantis.Framework.Domains.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.Domains.Interface.4.13.11.9\lib\net40\Atlantis.Framework.Domains.Interface.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.Domains.Interface.14.1.22.1\lib\net40\Atlantis.Framework.Domains.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.DomainSearch.Impl, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -76,61 +83,73 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Atlantis.Framework.DomainSearch.Interface.4.13.11.8\lib\net40\Atlantis.Framework.DomainSearch.Interface.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.DotTypeCache">
-      <HintPath>..\packages\Atlantis.Framework.DotTypeCache.4.13.10.22\lib\net40\Atlantis.Framework.DotTypeCache.dll</HintPath>
+    <Reference Include="Atlantis.Framework.DotTypeCache, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.DotTypeCache.14.1.30.1\lib\net40\Atlantis.Framework.DotTypeCache.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.DotTypeCache.Interface">
-      <HintPath>..\packages\Atlantis.Framework.DotTypeCache.Interface.4.13.10.22\lib\net40\Atlantis.Framework.DotTypeCache.Interface.dll</HintPath>
+    <Reference Include="Atlantis.Framework.DotTypeCache.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.DotTypeCache.Interface.14.1.30.1\lib\net40\Atlantis.Framework.DotTypeCache.Interface.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.DotTypeCache.Static">
-      <HintPath>..\packages\Atlantis.Framework.DotTypeCache.Static.4.13.10.22\lib\net40\Atlantis.Framework.DotTypeCache.Static.dll</HintPath>
+    <Reference Include="Atlantis.Framework.DotTypeCache.Static, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.DotTypeCache.Static.14.1.21.1\lib\net40\Atlantis.Framework.DotTypeCache.Static.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Engine, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.Engine.4.0.0.0\lib\net40\Atlantis.Framework.Engine.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.Engine.14.1.16.1\lib\net40\Atlantis.Framework.Engine.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.Engine.XmlSerializers">
-      <HintPath>..\packages\Atlantis.Framework.Engine.4.0.0.0\lib\net40\Atlantis.Framework.Engine.XmlSerializers.dll</HintPath>
+    <Reference Include="Atlantis.Framework.Engine.XmlSerializers, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Engine.14.1.16.1\lib\net40\Atlantis.Framework.Engine.XmlSerializers.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.Interface.4.13.9.25\lib\net40\Atlantis.Framework.Interface.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.Interface.14.1.16.1\lib\net40\Atlantis.Framework.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.PrivateLabel.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.PrivateLabel.Interface.4.0.0.0\lib\net40\Atlantis.Framework.PrivateLabel.Interface.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.PrivateLabel.Interface.14.1.21.1\lib\net40\Atlantis.Framework.PrivateLabel.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Products.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.Products.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Products.Interface.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.Products.Interface.14.2.19.1\lib\net40\Atlantis.Framework.Products.Interface.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.Providers.Containers">
-      <HintPath>..\packages\Atlantis.Framework.Providers.Containers.4.13.10.12\lib\net40\Atlantis.Framework.Providers.Containers.dll</HintPath>
+    <Reference Include="Atlantis.Framework.Providers.AppSettings.Interface">
+      <HintPath>..\packages\Atlantis.Framework.Providers.AppSettings.Interface.14.1.23.1\lib\net40\Atlantis.Framework.Providers.AppSettings.Interface.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.Providers.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Atlantis.Framework.Providers.Containers, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.Providers.Interface.4.13.10.25\lib\net40\Atlantis.Framework.Providers.Interface.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.Providers.Containers.4.14.1.6\lib\net40\Atlantis.Framework.Providers.Containers.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.Providers.Localization.Interface">
-      <HintPath>..\packages\Atlantis.Framework.Providers.Localization.Interface.4.13.9.27\lib\net40\Atlantis.Framework.Providers.Localization.Interface.dll</HintPath>
+    <Reference Include="Atlantis.Framework.Providers.Localization.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Providers.Localization.Interface.4.13.12.31\lib\net40\Atlantis.Framework.Providers.Localization.Interface.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.Providers.Preferences.Interface">
-      <HintPath>..\packages\Atlantis.Framework.Providers.Preferences.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Providers.Preferences.Interface.dll</HintPath>
+    <Reference Include="Atlantis.Framework.Providers.Logging.Interface">
+      <HintPath>..\packages\Atlantis.Framework.Providers.Logging.Interface.14.2.20.1\lib\net40\Atlantis.Framework.Providers.Logging.Interface.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.Providers.ProxyContext">
-      <HintPath>..\packages\Atlantis.Framework.Providers.ProxyContext.4.0.0.0\lib\net40\Atlantis.Framework.Providers.ProxyContext.dll</HintPath>
+    <Reference Include="Atlantis.Framework.Providers.ProxyContext, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Providers.ProxyContext.14.1.27.1\lib\net40\Atlantis.Framework.Providers.ProxyContext.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.Providers.RenderPipeline.Interface">
-      <HintPath>..\packages\Atlantis.Framework.Providers.RenderPipeline.Interface.4.13.10.16\lib\net40\Atlantis.Framework.Providers.RenderPipeline.Interface.dll</HintPath>
+    <Reference Include="Atlantis.Framework.Providers.TLDDataCache">
+      <HintPath>..\packages\Atlantis.Framework.Providers.TLDDataCache.14.1.30.1\lib\net40\Atlantis.Framework.Providers.TLDDataCache.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.RegDotTypeProductIds.Impl">
-      <HintPath>..\packages\Atlantis.Framework.RegDotTypeProductIds.Impl.4.11.12.16\lib\net40\Atlantis.Framework.RegDotTypeProductIds.Impl.dll</HintPath>
+    <Reference Include="Atlantis.Framework.Providers.TLDDataCache.Interface">
+      <HintPath>..\packages\Atlantis.Framework.Providers.TLDDataCache.Interface.14.1.30.1\lib\net40\Atlantis.Framework.Providers.TLDDataCache.Interface.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.RegDotTypeProductIds.Impl.XmlSerializers">
-      <HintPath>..\packages\Atlantis.Framework.RegDotTypeProductIds.Impl.4.11.12.16\lib\net40\Atlantis.Framework.RegDotTypeProductIds.Impl.XmlSerializers.dll</HintPath>
+    <Reference Include="Atlantis.Framework.RegDotTypeProductIds.Impl, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.RegDotTypeProductIds.Impl.4.13.10.30\lib\net40\Atlantis.Framework.RegDotTypeProductIds.Impl.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.RegDotTypeProductIds.Interface">
-      <HintPath>..\packages\Atlantis.Framework.RegDotTypeProductIds.Impl.4.11.12.16\lib\net40\Atlantis.Framework.RegDotTypeProductIds.Interface.dll</HintPath>
+    <Reference Include="Atlantis.Framework.RegDotTypeProductIds.Impl.XmlSerializers, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.RegDotTypeProductIds.Impl.4.13.10.30\lib\net40\Atlantis.Framework.RegDotTypeProductIds.Impl.XmlSerializers.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.RegDotTypeProductIds.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.RegDotTypeProductIds.Interface.4.0.0.0\lib\net40\Atlantis.Framework.RegDotTypeProductIds.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.RegDotTypeRegistry.Impl">
       <HintPath>..\packages\Atlantis.Framework.RegDotTypeRegistry.Impl.4.13.10.30\lib\net40\Atlantis.Framework.RegDotTypeRegistry.Impl.dll</HintPath>
@@ -141,18 +160,20 @@
     <Reference Include="Atlantis.Framework.RegDotTypeRegistry.Interface">
       <HintPath>..\packages\Atlantis.Framework.RegDotTypeRegistry.Interface.4.13.1.7\lib\net40\Atlantis.Framework.RegDotTypeRegistry.Interface.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.Testing.MockHttpContext">
-      <HintPath>..\packages\Atlantis.Framework.Testing.MockHttpContext.4.0.0.0\lib\net40\Atlantis.Framework.Testing.MockHttpContext.dll</HintPath>
-    </Reference>
-    <Reference Include="Atlantis.Framework.Testing.MockProviders">
-      <HintPath>..\packages\Atlantis.Framework.Testing.MockProviders.4.13.10.28\lib\net40\Atlantis.Framework.Testing.MockProviders.dll</HintPath>
-    </Reference>
-    <Reference Include="Atlantis.Framework.TLDDataCache.Interface">
-      <HintPath>..\packages\Atlantis.Framework.TLDDataCache.Interface.4.13.10.14\lib\net40\Atlantis.Framework.TLDDataCache.Interface.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+    <Reference Include="Atlantis.Framework.Testing.MockHttpContext, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Newtonsoft.Json.5.0.8\lib\net40\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.Testing.MockHttpContext.14.1.25.1\lib\net40\Atlantis.Framework.Testing.MockHttpContext.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Testing.MockProviders, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Testing.MockProviders.4.14.1.13\lib\net40\Atlantis.Framework.Testing.MockProviders.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.TLDDataCache.Impl">
+      <HintPath>..\packages\Atlantis.Framework.TLDDataCache.Impl.4.13.10.14\lib\net40\Atlantis.Framework.TLDDataCache.Impl.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.TLDDataCache.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.TLDDataCache.Interface.14.1.28.1\lib\net40\Atlantis.Framework.TLDDataCache.Interface.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
@@ -175,7 +196,21 @@
   <ItemGroup>
     <Compile Include="DomainSearchTests.cs" />
     <Compile Include="LocalizationProviderTestProxy.cs" />
+    <Compile Include="MockAppSettingsProvider.cs" />
+    <Compile Include="MockLogDomainSearchResultsProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="atlantis.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="readme.txt" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Atlantis.Framework.Providers.DomainSearch.Interface\Atlantis.Framework.Providers.DomainSearch.Interface.csproj">
@@ -187,16 +222,6 @@
       <Name>Atlantis.Framework.Providers.DomainSearch</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="atlantis.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

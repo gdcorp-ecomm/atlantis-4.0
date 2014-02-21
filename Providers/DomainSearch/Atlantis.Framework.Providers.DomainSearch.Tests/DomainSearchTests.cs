@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Linq;
-using Atlantis.Framework.Domains.Interface;
 using Atlantis.Framework.Interface;
+using Atlantis.Framework.Providers.AppSettings.Interface;
 using Atlantis.Framework.Providers.DomainSearch.Interface;
 using Atlantis.Framework.Providers.Localization.Interface;
+using Atlantis.Framework.Providers.Logging.Interface;
 using Atlantis.Framework.Providers.ProxyContext;
 using Atlantis.Framework.Testing.MockHttpContext;
 using Atlantis.Framework.Testing.MockProviders;
@@ -12,7 +13,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Atlantis.Framework.Providers.DomainSearch.Tests
 {
   [TestClass]
-   [DeploymentItem("App.config")]
+  [DeploymentItem("App.config")]
   [DeploymentItem("atlantis.config")]
   [DeploymentItem("Atlantis.Framework.AppSettings.Impl.dll")]
   [DeploymentItem("Atlantis.Framework.DomainSearch.Impl.dll")]
@@ -20,6 +21,7 @@ namespace Atlantis.Framework.Providers.DomainSearch.Tests
   public class DomainSearchTests
   {
     private const string SOURCE_CODE = "mblDPPSearch";
+    private const string _LOGDOMAINSEARCHTRAFFICAPPSETTING = "ATLANTIS.LOGDOMAINSEARCHTRAFFIC";
 
     [TestInitialize]
     public void Initialize()
@@ -36,7 +38,7 @@ namespace Atlantis.Framework.Providers.DomainSearch.Tests
         if (_providerContainer == null)
         {
           _providerContainer = new MockProviderContainer();
-          ((MockProviderContainer)_providerContainer).SetMockSetting(MockSiteContextSettings.IsRequestInternal, true);
+          _providerContainer.SetData(MockSiteContextSettings.IsRequestInternal, true);
 
           _providerContainer.RegisterProvider<ISiteContext, MockSiteContext>();
           _providerContainer.RegisterProvider<IShopperContext, MockShopperContext>();
@@ -44,6 +46,7 @@ namespace Atlantis.Framework.Providers.DomainSearch.Tests
           _providerContainer.RegisterProvider<IProxyContext, WebProxyContext>();
           _providerContainer.RegisterProvider<ILocalizationProvider, LocalizationProviderTestProxy>();
           _providerContainer.RegisterProvider<IDomainSearchProvider, DomainSearchProvider>();
+          _providerContainer.RegisterProvider<IAppSettingsProvider, MockAppSettingsProvider>();
         }
 
         return _providerContainer;
@@ -53,15 +56,7 @@ namespace Atlantis.Framework.Providers.DomainSearch.Tests
     private IDomainSearchProvider _domainSearch;
     private IDomainSearchProvider DomainSearch
     {
-      get
-      {
-        if (_domainSearch == null)
-        {
-          _domainSearch = ProviderContainer.Resolve<IDomainSearchProvider>();
-        }
-
-        return _domainSearch;
-      }
+      get { return _domainSearch ?? (_domainSearch = ProviderContainer.Resolve<IDomainSearchProvider>()); }
     }
 
     [TestMethod]
@@ -76,6 +71,21 @@ namespace Atlantis.Framework.Providers.DomainSearch.Tests
 
     [TestMethod]
     public void DomainSearchExactMatchTest()
+    {
+      ProviderContainer.RegisterProvider<ILogDomainSearchResultsProvider, MockLogDomainSearchResultsProvider>();
+      ProviderContainer.SetData("appsetting." + _LOGDOMAINSEARCHTRAFFICAPPSETTING, "true");
+
+      const string searchPhrase = "уичтрдеычиикктуйггфф.com";
+
+      var domainSearchResult = DomainSearch.SearchDomain(searchPhrase, SOURCE_CODE, string.Empty);
+      Assert.IsTrue(domainSearchResult.IsSuccess);
+
+      var domains = domainSearchResult.GetDomainsByGroup(DomainGroupTypes.EXACT_MATCH);
+      Assert.IsTrue(domains.Any(d => d.Domain.DomainName.ToLowerInvariant() == searchPhrase));
+    }
+
+    [TestMethod]
+    public void DomainSearchExactMatchNoLogTest()
     {
       const string searchPhrase = "уичтрдеычиикктуйггфф.com";
 
@@ -102,7 +112,7 @@ namespace Atlantis.Framework.Providers.DomainSearch.Tests
     [TestMethod]
     public void DomainSearchMultipleExactMatchAvailableTest()
     {
-      const string searchPhrase = "spoonymacou812.com,maseratii8a4re.net";
+      const string searchPhrase = "spoonymacou812134.com,maseratii8a4re134.net";
 
       var domainSearchResult = DomainSearch.SearchDomain(searchPhrase, SOURCE_CODE, string.Empty);
       Assert.IsTrue(domainSearchResult.IsSuccess);
@@ -187,7 +197,6 @@ namespace Atlantis.Framework.Providers.DomainSearch.Tests
       Assert.IsTrue(hasCcTld);
     }
 
-
     // FAILS - NO Privates as of initial unit testing
     [TestMethod]
     public void DomainSearchPrivateTest()
@@ -203,7 +212,7 @@ namespace Atlantis.Framework.Providers.DomainSearch.Tests
       Assert.IsTrue(hasPrivates);
     }
 
-     // FAILS - NO Auction as of initial unit testing
+    // FAILS - NO Auction as of initial unit testing
     [TestMethod]
     public void DomainSearchAuctionTest()
     {
@@ -217,7 +226,7 @@ namespace Atlantis.Framework.Providers.DomainSearch.Tests
 
       Assert.IsTrue(hasAuctions);
     }
-    
+
     [TestMethod]
     public void DomainSearchCrossCheckTest()
     {
@@ -243,7 +252,7 @@ namespace Atlantis.Framework.Providers.DomainSearch.Tests
       var domains = domainSearchResult.GetDomainsByGroup(DomainGroupTypes.EXACT_MATCH);
 
       Assert.IsTrue(domains[0].InPreRegPhase);
-      Assert.IsTrue(domains[0].LaunchPhaseItems.Count() > 0);
+      Assert.IsTrue(domains[0].LaunchPhaseItems.Any());
     }
   }
 }

@@ -1,29 +1,40 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
-using Atlantis.Framework.DomainSearch.Interface;
 using Atlantis.Framework.Domains.Interface;
+using Atlantis.Framework.DomainSearch.Interface;
 using Atlantis.Framework.Interface;
-using System;
+using Atlantis.Framework.Providers.AppSettings.Interface;
 using Atlantis.Framework.Providers.DomainSearch.Interface;
 using Atlantis.Framework.Providers.Localization.Interface;
+using Atlantis.Framework.Providers.Logging.Interface;
 
 namespace Atlantis.Framework.Providers.DomainSearch
 {
-  public class DomainSearchProvider : ProviderBase, IDomainSearchProvider 
+  public class DomainSearchProvider : ProviderBase, IDomainSearchProvider
   {
-    private readonly Dictionary<string, IList<IFindResponseDomain>> _emptyResponse = new Dictionary<string, IList<IFindResponseDomain>>(0); 
+    private const string _LOGDOMAINSEARCHTRAFFICAPPSETTING = "ATLANTIS.LOGDOMAINSEARCHTRAFFIC";
+
+    private readonly Dictionary<string, IList<IFindResponseDomain>> _emptyResponse = new Dictionary<string, IList<IFindResponseDomain>>(0);
 
     private readonly Lazy<ISiteContext> _siteContext;
     private readonly Lazy<IShopperContext> _shopperContext;
+    private readonly Lazy<ILogDomainSearchResultsProvider> _logDomainSearchResultsProvider;
+    private readonly Lazy<IAppSettingsProvider> _appSettingsProvider;
 
-    private readonly IList<string> _domainSearchDatabases = new List<string> { "affix,auctions,cctld,private,premium,similar,crosscheck" };
+    private readonly IList<string> _domainSearchDatabases = new List<string>
+    {
+      "affix,auctions,cctld,private,premium,similar,crosscheck"
+    };
+
     private const bool INCLUDE_SPINS = true;
 
-    public DomainSearchProvider(IProviderContainer container)
-      : base(container)
+    public DomainSearchProvider(IProviderContainer container) : base(container)
     {
       _siteContext = new Lazy<ISiteContext>(() => Container.Resolve<ISiteContext>());
       _shopperContext = new Lazy<IShopperContext>(() => Container.Resolve<IShopperContext>());
+      _logDomainSearchResultsProvider = new Lazy<ILogDomainSearchResultsProvider>(() => Container.CanResolve<ILogDomainSearchResultsProvider>() ? Container.Resolve<ILogDomainSearchResultsProvider>() : null);
+      _appSettingsProvider = new Lazy<IAppSettingsProvider>(() => Container.Resolve<IAppSettingsProvider>());
     }
 
     private ILocalizationProvider _localization;
@@ -44,12 +55,32 @@ namespace Atlantis.Framework.Providers.DomainSearch
       }
     }
 
-    private static Dictionary<string, IList<IFindResponseDomain>> GroupDomainResponse(DomainSearchResponseData responseData)
+    private bool? _submitSearchLog;
+    private bool SubmitSearchLog
     {
-     var domainResult = new Dictionary<string, IList<IFindResponseDomain>>(responseData.Domains.Count);
+      get
+      {
+        if (!_submitSearchLog.HasValue)
+        {
+          _submitSearchLog = "true".Equals(_appSettingsProvider.Value.GetAppSetting(_LOGDOMAINSEARCHTRAFFICAPPSETTING), StringComparison.OrdinalIgnoreCase);
+        }
+        return _submitSearchLog.Value;
+      }
+    }
+
+    private Dictionary<string, IList<IFindResponseDomain>> GroupDomainResponse(DomainSearchResponseData responseData)
+    {
+      var domainResult = new Dictionary<string, IList<IFindResponseDomain>>(responseData.Domains.Count);
       if (responseData.ExactMatchDomains != null)
       {
         domainResult.Add(DomainGroupTypes.EXACT_MATCH, responseData.ExactMatchDomains);
+        if (_logDomainSearchResultsProvider.Value != null && SubmitSearchLog)
+        {
+          foreach (var domain in responseData.ExactMatchDomains)
+          {
+            LogSearchDomain(domain);
+          }
+        }
       }
 
       var responseDomainList = responseData.Domains.ToList();
@@ -92,7 +123,7 @@ namespace Atlantis.Framework.Providers.DomainSearch
         domainResult.Add(DomainGroupTypes.SIMILIAR, similiarDomains);
       }
 
-       var crossCheckDomains = responseDomainList.FindAll(d => d.DomainSearchDataBase != null && d.DomainSearchDataBase.ToLowerInvariant() == DomainGroupTypes.CROSS_CHECK);
+      var crossCheckDomains = responseDomainList.FindAll(d => d.DomainSearchDataBase != null && d.DomainSearchDataBase.ToLowerInvariant() == DomainGroupTypes.CROSS_CHECK);
       if (crossCheckDomains.Count != 0)
       {
         domainResult.Add(DomainGroupTypes.CROSS_CHECK, crossCheckDomains);
@@ -113,18 +144,18 @@ namespace Atlantis.Framework.Providers.DomainSearch
       try
       {
         var request = new DomainSearchRequestData(_shopperContext.Value.ShopperId, sourceUrl, string.Empty, _siteContext.Value.Pathway, 0)
-                        {
-                          ClientIp = Proxy.OriginIP,
-                          CountrySite = Localization.CountrySite,
-                          DomainSearchDataBases = _domainSearchDatabases,
-                          IncludeSpins = INCLUDE_SPINS,
-                          Language = Localization.FullLanguage,
-                          PrivateLabelId = _siteContext.Value.PrivateLabelId,
-                          SearchPhrase = searchPhrase,
-                          ShopperStatus = _shopperContext.Value.ShopperStatus,
-                          SourceCode = sourceCode,
-                          Tlds = tldsToSearch
-                        };
+        {
+          ClientIp = Proxy.OriginIP,
+          CountrySite = Localization.CountrySite,
+          DomainSearchDataBases = _domainSearchDatabases,
+          IncludeSpins = INCLUDE_SPINS,
+          Language = Localization.FullLanguage,
+          PrivateLabelId = _siteContext.Value.PrivateLabelId,
+          SearchPhrase = searchPhrase,
+          ShopperStatus = _shopperContext.Value.ShopperStatus,
+          SourceCode = sourceCode,
+          Tlds = tldsToSearch
+        };
 
         var requestType = RequestTypeLookUp.GetCurrentRequestType();
 
@@ -136,9 +167,9 @@ namespace Atlantis.Framework.Providers.DomainSearch
 
           if (exception == null)
           {
-            var domainResult =  GroupDomainResponse(response);
+            var domainResult = GroupDomainResponse(response);
             domainSearchResult = new DomainSearchResult(true, domainResult);
-            
+
             if (_siteContext.Value.IsRequestInternal)
             {
               domainSearchResult.JsonResponse = response.ToJson();
@@ -146,7 +177,7 @@ namespace Atlantis.Framework.Providers.DomainSearch
           }
           else
           {
-            throw exception; 
+            throw exception;
           }
         }
       }
@@ -156,17 +187,37 @@ namespace Atlantis.Framework.Providers.DomainSearch
 
         var message = ex.Message + Environment.NewLine + ex.StackTrace;
         var data = string.Format("searchPhrase:{0}, sourceCode:{1}, sourceUrl:{2}", searchPhrase, sourceCode, sourceUrl);
-        var aex = new AtlantisException("Atlantis.Framework.Providers.DomainSearch.TrySearchDomain", "0", message, data, _siteContext.Value, _shopperContext.Value);
+        var aex = new AtlantisException("Atlantis.Framework.Providers.DomainSearch.TrySearchDomain", 0, message, data);
         Engine.Engine.LogAtlantisException(aex);
-
       }
 
-      if (domainSearchResult == null)
-      {
-        domainSearchResult = new DomainSearchResult(false, _emptyResponse);
-      }
-
-      return domainSearchResult;
+      return domainSearchResult ?? new DomainSearchResult(false, _emptyResponse);
     }
+
+    private void LogSearchDomain(IFindResponseDomain domain)
+    {
+      if (_logDomainSearchResultsProvider.Value == null) return;
+
+      var domainName = string.Concat(domain.Domain.Sld, ".", domain.Domain.Tld);
+      var availability = DomainAvailability.NotAvailable;
+
+      if (domain.IsAvailable)
+      {
+        availability = DomainAvailability.Available;
+      }
+      else if (domain.IsBackOrderAvailable)
+      {
+        availability = DomainAvailability.Backorder;
+      }
+
+      _logDomainSearchResultsProvider.Value.SubmitLog(domainName, availability);
+    }
+  }
+
+  internal class DomainAvailability
+  {
+    public const int NotAvailable = 0;
+    public const int Available = 1;
+    public const int Backorder = 2;
   }
 }

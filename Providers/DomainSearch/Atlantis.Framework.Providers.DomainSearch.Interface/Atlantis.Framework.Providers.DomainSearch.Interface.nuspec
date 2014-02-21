@@ -2,15 +2,17 @@
 <package >
   <metadata>
     <id>Atlantis.Framework.Providers.DomainSearch.Interface</id>
-    <version>4.13.11.8</version>
-    <title>Atlantis Framework Providers DomainSearch Interface</title>
+    <version>$version$</version>
+    <title>Atlantis.Framework.Providers.DomainSearch.Interface</title>
     <authors>$author$</authors>
     <owners>$author$</owners>
     <projectUrl>https://confluence.int.godaddy.com/display/ATLANTIS</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes></releaseNotes>
+    <releaseNotes>
+      14.2.20.1 Updating nuget and version info
+    </releaseNotes>
     <copyright>$copyright$</copyright>
-    <tags>Atlantis Framework Providers DomainSearch Interface</tags>
+    <tags>Atlantis.Framework.Providers.DomainSearch.Interface</tags>
   </metadata>
 </package>

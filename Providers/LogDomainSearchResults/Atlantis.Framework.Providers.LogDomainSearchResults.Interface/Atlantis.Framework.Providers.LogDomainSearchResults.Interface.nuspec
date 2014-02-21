@@ -1,0 +1,19 @@
+﻿<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>Atlantis.Framework.Providers.LogDomainSearchResults.Interface</id>
+    <version>$version$</version>
+    <title>Atlantis.Framework.Providers.LogDomainSearchResults.Interface</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <projectUrl>https://confluence.int.godaddy.com/display/ATLANTIS</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes>
+      14.2.20.1 Created provider Interface
+    </releaseNotes>
+    <copyright>$copyright$</copyright>
+    <tags>Atlantis.Framework.Providers.LogDomainSearchResults.Interface</tags>
+    <dependencies />
+  </metadata>
+</package>

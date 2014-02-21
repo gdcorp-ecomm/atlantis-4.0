@@ -1,0 +1,49 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30110.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Providers.LogDomainSearchResults", "Atlantis.Framework.Providers.LogDomainSearchResults\Atlantis.Framework.Providers.LogDomainSearchResults.csproj", "{A577A5A5-9ADE-437A-AD0F-1D215F22F283}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Providers.LogDomainSearchResults.Tests", "Atlantis.Framework.Providers.LogDomainSearchResults.Tests\Atlantis.Framework.Providers.LogDomainSearchResults.Tests.csproj", "{2D485DFB-0E08-43BE-BDC9-0C3E113C1E29}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Providers.LogDomainSearchResults.Interface", "Atlantis.Framework.Providers.LogDomainSearchResults.Interface\Atlantis.Framework.Providers.LogDomainSearchResults.Interface.csproj", "{AF60EF5B-477A-4EF8-AA8E-44597B1781A2}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 4
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Atlantis.Framework.Providers.LogDomainSearchResults.Interface\\Atlantis.Framework.Providers.LogDomainSearchResults.Interface.csproj
+		SccProjectName1 = Atlantis.Framework.Providers.LogDomainSearchResults.Interface
+		SccLocalPath1 = Atlantis.Framework.Providers.LogDomainSearchResults.Interface
+		SccProjectUniqueName2 = Atlantis.Framework.Providers.LogDomainSearchResults.Tests\\Atlantis.Framework.Providers.LogDomainSearchResults.Tests.csproj
+		SccProjectName2 = Atlantis.Framework.Providers.LogDomainSearchResults.Tests
+		SccLocalPath2 = Atlantis.Framework.Providers.LogDomainSearchResults.Tests
+		SccProjectUniqueName3 = Atlantis.Framework.Providers.LogDomainSearchResults\\Atlantis.Framework.Providers.LogDomainSearchResults.csproj
+		SccProjectName3 = Atlantis.Framework.Providers.LogDomainSearchResults
+		SccLocalPath3 = Atlantis.Framework.Providers.LogDomainSearchResults
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A577A5A5-9ADE-437A-AD0F-1D215F22F283}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A577A5A5-9ADE-437A-AD0F-1D215F22F283}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A577A5A5-9ADE-437A-AD0F-1D215F22F283}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A577A5A5-9ADE-437A-AD0F-1D215F22F283}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D485DFB-0E08-43BE-BDC9-0C3E113C1E29}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D485DFB-0E08-43BE-BDC9-0C3E113C1E29}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D485DFB-0E08-43BE-BDC9-0C3E113C1E29}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D485DFB-0E08-43BE-BDC9-0C3E113C1E29}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AF60EF5B-477A-4EF8-AA8E-44597B1781A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF60EF5B-477A-4EF8-AA8E-44597B1781A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF60EF5B-477A-4EF8-AA8E-44597B1781A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF60EF5B-477A-4EF8-AA8E-44597B1781A2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

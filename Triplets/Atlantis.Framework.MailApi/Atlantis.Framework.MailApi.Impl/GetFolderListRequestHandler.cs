@@ -2,11 +2,12 @@
 
 namespace Atlantis.Framework.MailApi.Impl
 {
-  // Possible atlantis.config entry - remove this before peer review
-  // <ConfigElement progid="Atlantis.Framework.MailApi.Impl.GetFolderListRequestHandler" assembly="Atlantis.Framework.MailApi.Impl.dll" request_type="###" />
 
   public class GetFolderListRequestHandler : IRequest
   {
+
+    private string BodyString = "method=getFolderList&params={\"extended_info\":\"true\"}";
+
     public IResponseData RequestHandler(RequestData requestData, ConfigElement config)
     {
       IResponseData result = null;

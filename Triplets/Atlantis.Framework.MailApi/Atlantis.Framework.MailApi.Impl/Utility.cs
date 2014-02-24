@@ -14,6 +14,8 @@ namespace Atlantis.Framework.MailApi.Impl
     {
       string jsonResponse = null;
 
+      // Add cookie data
+
       var request = (HttpWebRequest)WebRequest.Create(url);
       request.Method = WebRequestMethods.Http.Post;
 

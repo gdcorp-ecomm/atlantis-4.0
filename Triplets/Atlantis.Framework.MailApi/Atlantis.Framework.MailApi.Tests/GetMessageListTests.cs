@@ -10,42 +10,49 @@ namespace Atlantis.Framework.MailApi.Tests
     [TestMethod]
     public void FolderNumProperty()
     {
-      var request = new GetMessageListRequestData("folderNum", "offset", "count", "filter", "mailHash", "appKey");
+      var request = new GetMessageListRequestData("folderNum", "offset", "count", "filter", "mailHash", "mailBaseUrl", "appKey");
       Assert.AreEqual("folderNum", request.FolderNum);
     }
 
     [TestMethod]
     public void OffsetProperty()
     {
-      var request = new GetMessageListRequestData("folderNum", "offset", "count", "filter", "mailHash", "appKey");
+      var request = new GetMessageListRequestData("folderNum", "offset", "count", "filter", "mailHash", "mailBaseUrl", "appKey");
       Assert.AreEqual("offset", request.Offset);
     }
 
     [TestMethod]
     public void CountProperty()
     {
-      var request = new GetMessageListRequestData("folderNum", "offset", "count", "filter", "mailHash", "appKey");
+      var request = new GetMessageListRequestData("folderNum", "offset", "count", "filter", "mailHash", "mailBaseUrl", "appKey");
       Assert.AreEqual("count", request.Count);
     }
 
     [TestMethod]
     public void FilterProperty()
     {
-      var request = new GetMessageListRequestData("folderNum", "offset", "count", "filter", "mailHash", "appKey");
+      var request = new GetMessageListRequestData("folderNum", "offset", "count", "filter", "mailHash", "mailBaseUrl", "appKey");
       Assert.AreEqual("filter", request.Filter);
     }
 
     [TestMethod]
     public void MailHashProperty()
     {
-      var request = new GetMessageListRequestData("folderNum", "offset", "count", "filter", "mailHash", "appKey");
+      var request = new GetMessageListRequestData("folderNum", "offset", "count", "filter", "mailHash", "mailBaseUrl", "appKey");
       Assert.AreEqual("mailHash", request.MailHash);
+    }
+
+    [TestMethod]
+    public void MailBaseUrl()
+    {
+      var request = new GetMessageListRequestData("folderNum", "offset", "count", "filter", "mailHash", "mailBaseUrl", "appKey");
+      Assert.AreEqual("mailBaseUrl", request.MailBaseUrl);
     }
 
     [TestMethod]
     public void AppKeyProperty()
     {
-      var request = new GetMessageListRequestData("folderNum", "offset", "count", "filter", "mailHash", "appKey");
+      var request = new GetMessageListRequestData("folderNum", "offset", "count", "filter", "mailHash", "mailBaseUrl", "appKey");
       Assert.AreEqual("appKey", request.AppKey);
     }
   }

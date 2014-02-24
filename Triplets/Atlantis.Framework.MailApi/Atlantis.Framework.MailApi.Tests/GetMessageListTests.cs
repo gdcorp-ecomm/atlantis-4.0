@@ -10,36 +10,43 @@ namespace Atlantis.Framework.MailApi.Tests
     [TestMethod]
     public void FolderNumProperty()
     {
-      var request = new GetMessageListRequestData("folderNum", "offset", "count", "filter", "mailBaseUrl");
+      var request = new GetMessageListRequestData("folderNum", "offset", "count", "filter", "mailHash", "appKey");
       Assert.AreEqual("folderNum", request.FolderNum);
     }
 
     [TestMethod]
     public void OffsetProperty()
     {
-      var request = new GetMessageListRequestData("folderNum", "offset", "count", "filter", "mailBaseUrl");
+      var request = new GetMessageListRequestData("folderNum", "offset", "count", "filter", "mailHash", "appKey");
       Assert.AreEqual("offset", request.Offset);
     }
 
     [TestMethod]
     public void CountProperty()
     {
-      var request = new GetMessageListRequestData("folderNum", "offset", "count", "filter", "mailBaseUrl");
+      var request = new GetMessageListRequestData("folderNum", "offset", "count", "filter", "mailHash", "appKey");
       Assert.AreEqual("count", request.Count);
     }
 
     [TestMethod]
     public void FilterProperty()
     {
-      var request = new GetMessageListRequestData("folderNum", "offset", "count", "filter", "mailBaseUrl");
+      var request = new GetMessageListRequestData("folderNum", "offset", "count", "filter", "mailHash", "appKey");
       Assert.AreEqual("filter", request.Filter);
     }
 
     [TestMethod]
-    public void MailBaseUrl()
+    public void MailHashProperty()
     {
-      var request = new GetMessageListRequestData("folderNum", "offset", "count", "filter", "mailBaseUrl");
-      Assert.AreEqual("mailBaseUrl", request.MailBaseUrl);
+      var request = new GetMessageListRequestData("folderNum", "offset", "count", "filter", "mailHash", "appKey");
+      Assert.AreEqual("mailHash", request.MailHash);
+    }
+
+    [TestMethod]
+    public void AppKeyProperty()
+    {
+      var request = new GetMessageListRequestData("folderNum", "offset", "count", "filter", "mailHash", "appKey");
+      Assert.AreEqual("appKey", request.AppKey);
     }
   }
 }

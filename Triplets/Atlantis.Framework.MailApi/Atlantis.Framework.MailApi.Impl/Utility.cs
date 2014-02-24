@@ -10,11 +10,12 @@ namespace Atlantis.Framework.MailApi.Impl
 {
   class Utility
   {
+    private const string COOKIE_STRING = "{{\"session\":\"{0}\",\"app_key\":\"{1}\"}}";
+    private const string COOKIE_STRING_RESTRICTED = "{{\"session\":\"{0}\",\"app_key\":\"{1}\",\"key\":\"{2}\"}}";
+
     public static string PostRequest(string url, string messageBody, string session, string appKey, string key)
     {
       string jsonResponse = null;
-
-      // Add cookie data
 
       var request = (HttpWebRequest)WebRequest.Create(url);
       request.Method = WebRequestMethods.Http.Post;
@@ -23,6 +24,11 @@ namespace Atlantis.Framework.MailApi.Impl
 
       request.ContentType = "application/x-www-form-urlencoded";
       request.ContentLength = bodyBytes.Length;
+
+      if (!string.IsNullOrEmpty(session))
+      {
+        AddStateCookieToRequest(request, url, session, appKey, key);
+      }
 
       using (var requestStream = request.GetRequestStream())
       {
@@ -48,5 +54,12 @@ namespace Atlantis.Framework.MailApi.Impl
       return jsonResponse;
     }
 
+    private static void AddStateCookieToRequest(HttpWebRequest request, string url, string mailHash, string appkey, string key)
+    {
+      string encodedCookieValue = string.IsNullOrEmpty(key) ? HttpUtility.UrlEncode(String.Format(COOKIE_STRING, mailHash, appkey)) : HttpUtility.UrlEncode(String.Format(COOKIE_STRING_RESTRICTED, mailHash, appkey, key));
+      Cookie sessionCookie = new Cookie("state", encodedCookieValue);
+      request.CookieContainer = new CookieContainer();
+      request.CookieContainer.Add(new Uri(url), sessionCookie);
+    }
   }
 }

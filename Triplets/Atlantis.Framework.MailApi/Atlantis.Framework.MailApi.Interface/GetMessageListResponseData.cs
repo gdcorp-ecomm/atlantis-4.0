@@ -6,15 +6,9 @@ namespace Atlantis.Framework.MailApi.Interface
   public class GetMessageListResponseData : IResponseData
   {
     // Sample static method for creating the response (ref Clean Code)
-    public static GetMessageListResponseData FromData(object data)
+    public static GetMessageListResponseData FromJsonData(string jsonString)
     {
-      return new GetMessageListResponseData(data);
-    }
-
-    // Sample private constructor
-    private GetMessageListResponseData(object data)
-    {
-      // Sample: Create member data as necessary
+      return new GetMessageListResponseData();
     }
 
     public string ToXML()

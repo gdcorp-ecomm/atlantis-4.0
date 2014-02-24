@@ -8,15 +8,17 @@ namespace Atlantis.Framework.MailApi.Interface
     public string Offset { get; private set; }
     public string Count { get; private set; }
     public string Filter { get; private set; }
-    public string MailBaseUrl { get; private set; }
+    public string MailHash { get; private set; }
+    public string AppKey { get; private set; }
 
-    public GetMessageListRequestData(string folderNum, string offset, string count, string filter, string mailBaseUrl)
+    public GetMessageListRequestData(string folderNum, string offset, string count, string filter, string mailHash, string appKey)
     {
       FolderNum = folderNum;
       Offset = offset;
       Count = count;
       Filter = filter;
-      MailBaseUrl = mailBaseUrl;
+      MailHash = mailHash;
+      AppKey = appKey;
     }
   }
 }

@@ -56,12 +56,13 @@ namespace Atlantis.Framework.MailApi.Tests
     }
 
     [TestMethod]
-    public void LoginDataFromWSInValid()
+    public void LoginDataFromWSInvalid()
     {
       var request = new LoginRequestData("tester@qa-emailpod04.com", "Godaddy25!!", ANDROID_APP_KEY);
 
       var response = (LoginResponseData)Engine.Engine.ProcessRequest(request, 10350);
       Assert.IsNotNull(response);
+      Assert.IsTrue(response.IsJsoapFault);
     }
   }
 }

@@ -1,0 +1,66 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30110.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Providers.MailApi", "Atlantis.Framework.Providers.MailApi\Atlantis.Framework.Providers.MailApi.csproj", "{6F2A2270-FB30-4094-9417-AE0A464BA136}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Providers.MailApi.Tests", "Atlantis.Framework.Providers.MailApi.Tests\Atlantis.Framework.Providers.MailApi.Tests.csproj", "{0DD4FA63-93FE-4CAF-B95B-1F3253299D18}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{C57489AA-ED42-4BA4-A93B-C17D24430619}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.MailApi.Impl", "..\..\Triplets\Atlantis.Framework.MailApi\Atlantis.Framework.MailApi.Impl\Atlantis.Framework.MailApi.Impl.csproj", "{188F77DA-DE53-4666-80A4-48DD76A1176D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.MailApi.Interface", "..\..\Triplets\Atlantis.Framework.MailApi\Atlantis.Framework.MailApi.Interface\Atlantis.Framework.MailApi.Interface.csproj", "{BCFF5567-3A11-4FD6-9DE9-51F2895AC5B3}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 5
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Atlantis.Framework.Providers.MailApi\\Atlantis.Framework.Providers.MailApi.csproj
+		SccProjectName1 = Atlantis.Framework.Providers.MailApi
+		SccLocalPath1 = Atlantis.Framework.Providers.MailApi
+		SccProjectUniqueName2 = Atlantis.Framework.Providers.MailApi.Tests\\Atlantis.Framework.Providers.MailApi.Tests.csproj
+		SccProjectName2 = Atlantis.Framework.Providers.MailApi.Tests
+		SccLocalPath2 = Atlantis.Framework.Providers.MailApi.Tests
+		SccProjectUniqueName3 = ..\\..\\Triplets\\Atlantis.Framework.MailApi\\Atlantis.Framework.MailApi.Impl\\Atlantis.Framework.MailApi.Impl.csproj
+		SccProjectTopLevelParentUniqueName3 = MailApi.sln
+		SccProjectName3 = ../../Triplets/Atlantis.Framework.MailApi/Atlantis.Framework.MailApi.Impl
+		SccLocalPath3 = ..\\..\\Triplets\\Atlantis.Framework.MailApi\\Atlantis.Framework.MailApi.Impl
+		SccProjectUniqueName4 = ..\\..\\Triplets\\Atlantis.Framework.MailApi\\Atlantis.Framework.MailApi.Interface\\Atlantis.Framework.MailApi.Interface.csproj
+		SccProjectTopLevelParentUniqueName4 = MailApi.sln
+		SccProjectName4 = ../../Triplets/Atlantis.Framework.MailApi/Atlantis.Framework.MailApi.Interface
+		SccLocalPath4 = ..\\..\\Triplets\\Atlantis.Framework.MailApi\\Atlantis.Framework.MailApi.Interface
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6F2A2270-FB30-4094-9417-AE0A464BA136}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F2A2270-FB30-4094-9417-AE0A464BA136}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F2A2270-FB30-4094-9417-AE0A464BA136}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F2A2270-FB30-4094-9417-AE0A464BA136}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0DD4FA63-93FE-4CAF-B95B-1F3253299D18}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0DD4FA63-93FE-4CAF-B95B-1F3253299D18}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0DD4FA63-93FE-4CAF-B95B-1F3253299D18}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0DD4FA63-93FE-4CAF-B95B-1F3253299D18}.Release|Any CPU.Build.0 = Release|Any CPU
+		{188F77DA-DE53-4666-80A4-48DD76A1176D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{188F77DA-DE53-4666-80A4-48DD76A1176D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{188F77DA-DE53-4666-80A4-48DD76A1176D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{188F77DA-DE53-4666-80A4-48DD76A1176D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BCFF5567-3A11-4FD6-9DE9-51F2895AC5B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BCFF5567-3A11-4FD6-9DE9-51F2895AC5B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BCFF5567-3A11-4FD6-9DE9-51F2895AC5B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BCFF5567-3A11-4FD6-9DE9-51F2895AC5B3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{188F77DA-DE53-4666-80A4-48DD76A1176D} = {C57489AA-ED42-4BA4-A93B-C17D24430619}
+		{BCFF5567-3A11-4FD6-9DE9-51F2895AC5B3} = {C57489AA-ED42-4BA4-A93B-C17D24430619}
+	EndGlobalSection
+EndGlobal

@@ -43,5 +43,21 @@ namespace Atlantis.Framework.MailApi.Tests
       Assert.AreEqual("inbox", getFolderResponse.MailFolder.DisplayName.ToLowerInvariant());
 
     }
+
+    [TestMethod]
+    public void GetFolderRequest_InvalidFolderIdTest()
+    {
+      var loginRequest = new LoginRequestData("tester@qa-emailpod04.com", "Godaddy25", ANDROID_APP_KEY);
+      var loginResponse = (LoginResponseData)Engine.Engine.ProcessRequest(loginRequest, 10350);
+      string sessionHash = loginResponse.LoginData.Hash;
+      var key = string.Empty;
+
+      var getFolderRequest = new GetFolderRequestData("-9999999x2", sessionHash, ANDROID_APP_KEY, key, loginResponse.LoginData.BaseUrl);
+      var getFolderResponse = (GetFolderResponseData)Engine.Engine.ProcessRequest(getFolderRequest, 10353);
+
+      Assert.IsNotNull(getFolderResponse);
+      Assert.IsTrue(getFolderResponse.IsJsoapFault);
+      Assert.IsNull(getFolderResponse.MailFolder);
+    }
   }
 }

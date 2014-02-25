@@ -40,7 +40,7 @@ namespace Atlantis.Framework.MailApi.Tests
 
       Assert.IsNotNull(getFolderResponse);
       Assert.IsNotNull(getFolderResponse.MailFolder);
-      Assert.Equals("inbox", getFolderResponse.MailFolder.DisplayName.ToLowerInvariant());
+      Assert.AreEqual("inbox", getFolderResponse.MailFolder.DisplayName.ToLowerInvariant());
 
     }
   }

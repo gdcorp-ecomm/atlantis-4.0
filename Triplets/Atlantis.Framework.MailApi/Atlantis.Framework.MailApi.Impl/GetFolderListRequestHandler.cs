@@ -15,9 +15,7 @@ namespace Atlantis.Framework.MailApi.Impl
     {
       var request = (GetFolderListRequestData)requestData;
 
-      string webServiceUrl = request.MailBaseUrl.Contains("80") ? "http://" : "https://";
-      webServiceUrl += request.MailBaseUrl;
-      webServiceUrl += ((WsConfigElement)config).WSURL;
+      string webServiceUrl = Utility.BuildWebServiceUrl(request.MailBaseUrl, ((WsConfigElement)config).WSURL);
 
       string loginResponseString = Utility.PostRequest(webServiceUrl, BodyString, request.Session, request.AppKey, request.Key);
 

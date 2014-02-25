@@ -10,6 +10,7 @@ namespace Atlantis.Framework.MailApi.Impl
   {
     private const string COOKIE_STRING = "{{\"session\":\"{0}\",\"app_key\":\"{1}\"}}";
     private const string COOKIE_STRING_RESTRICTED = "{{\"session\":\"{0}\",\"app_key\":\"{1}\",\"key\":\"{2}\"}}";
+    private const string DefaultBaseUrl = "mailapi.secureserver.net";
 
     public static string PostRequest(string url, string messageBody, string session, string appKey, string key)
     {
@@ -50,6 +51,14 @@ namespace Atlantis.Framework.MailApi.Impl
       }
 
       return jsonResponse;
+    }
+
+    public static string BuildWebServiceUrl(string mailBaseUrl, string wsUrl)
+    {
+      string webServiceUrl = mailBaseUrl.Contains("80") ? "http://" : "https://";
+      webServiceUrl += !string.IsNullOrEmpty(mailBaseUrl) ? mailBaseUrl : DefaultBaseUrl;
+      webServiceUrl += wsUrl;
+      return webServiceUrl;
     }
 
     private static void AddStateCookieToRequest(HttpWebRequest request, string url, string mailHash, string appkey, string key)

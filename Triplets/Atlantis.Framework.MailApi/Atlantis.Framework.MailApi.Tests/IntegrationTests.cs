@@ -11,7 +11,7 @@ namespace Atlantis.Framework.MailApi.Tests
     private const string IOS_APP_KEY = "PAiycbPel3SL1H6tj7UxNwUU";
     private const string FOLDER_NUMBER = "821720";
     private const string OFFSET = "0";
-    private const string COUNT = "5";
+    private const string COUNT = "50";
     private const string FILTER = "none";
 
     [TestMethod]
@@ -19,11 +19,13 @@ namespace Atlantis.Framework.MailApi.Tests
     {
       var loginRequest = new LoginRequestData("tester@qa-emailpod04.com", "Godaddy25", ANDROID_APP_KEY);
       var loginResponse = (LoginResponseData)Engine.Engine.ProcessRequest(loginRequest, 10350);
+      string sessionHash = loginResponse.LoginData.Hash;
 
-      var getMessageListRequest = new GetMessageListRequestData(FOLDER_NUMBER, OFFSET, COUNT, FILTER, loginResponse.LoginData.Hash, loginResponse.LoginData.BaseUrl, ANDROID_APP_KEY);
+      var getMessageListRequest = new GetMessageListRequestData(FOLDER_NUMBER, OFFSET, COUNT, FILTER, sessionHash, loginResponse.LoginData.BaseUrl, ANDROID_APP_KEY);
       var getMessageListResponse = (GetMessageListResponseData)Engine.Engine.ProcessRequest(getMessageListRequest, 10352);
 
-      Assert.Fail();
+      Assert.AreEqual(50, getMessageListResponse.MessageListData.MailHeaderList.Count);
+      Assert.AreEqual(sessionHash, getMessageListResponse.State.Session);
     }
   }
 }

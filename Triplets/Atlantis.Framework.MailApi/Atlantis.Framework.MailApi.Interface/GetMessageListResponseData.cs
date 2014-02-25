@@ -1,14 +1,30 @@
-﻿using Atlantis.Framework.Interface;
+﻿using System.IO;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Json;
+using System.Text;
+using Atlantis.Framework.Interface;
 using System.Xml.Linq;
 
 namespace Atlantis.Framework.MailApi.Interface
 {
+  [DataContract]
   public class GetMessageListResponseData : IResponseData
   {
-    // Sample static method for creating the response (ref Clean Code)
+    [DataMember(Name = "response")]
+    public GetMessageListData MessageListData { get; set; }
+
+    [DataMember(Name = "state")]
+    public MailApiResponseState State { get; set; }
+
     public static GetMessageListResponseData FromJsonData(string jsonString)
     {
-      return new GetMessageListResponseData();
+      MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(jsonString));
+
+      DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(GetMessageListResponseData));
+
+      GetMessageListResponseData result = (GetMessageListResponseData)serializer.ReadObject(stream);
+
+      return result;
     }
 
     public string ToXML()

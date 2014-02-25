@@ -22,7 +22,7 @@ namespace Atlantis.Framework.MailApi.Impl
       string messageBody = String.Format(MessageListBodyString, request.FolderNum, request.Offset, request.Count, request.Filter);
       string getMessageListResponseString = Utility.PostRequest(webServiceUrl, messageBody, request.MailHash, request.AppKey, null);
 
-      GetMessageListResponseData getMessageListResponse = GetMessageListResponseData.FromJsonData("nothing yet");
+      GetMessageListResponseData getMessageListResponse = GetMessageListResponseData.FromJsonData(getMessageListResponseString);
 
       return getMessageListResponse;
     }

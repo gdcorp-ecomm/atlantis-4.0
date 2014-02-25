@@ -7,5 +7,8 @@ namespace Atlantis.Framework.MailApi.Interface
   {
     [DataMember(Name = "app_key")]
     public string AppKey { get; set; }
+
+    [DataMember(Name = "session")]
+    public string Session { get; set; }
   }
 }

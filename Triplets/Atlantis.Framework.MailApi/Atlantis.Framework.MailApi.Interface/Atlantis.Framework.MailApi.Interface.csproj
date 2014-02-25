@@ -62,9 +62,11 @@
     <Compile Include="GetFolderResponseData.cs" />
     <Compile Include="GetMessageListRequestData.cs" />
     <Compile Include="GetMessageListResponseData.cs" />
+    <Compile Include="IMailApiResponse.cs" />
     <Compile Include="LoginResponseData.cs" />
     <Compile Include="LoginRequestData.cs" />
     <Compile Include="LoginData.cs" />
+    <Compile Include="MailApiResponseBase.cs" />
     <Compile Include="MailApiResponseState.cs" />
     <Compile Include="MailHeader.cs" />
     <Compile Include="MailFolder.cs" />

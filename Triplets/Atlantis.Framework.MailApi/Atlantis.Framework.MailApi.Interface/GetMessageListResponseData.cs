@@ -1,14 +1,12 @@
-﻿using Atlantis.Framework.Interface;
-using System.IO;
+﻿using System.IO;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Json;
 using System.Text;
-using System.Xml.Linq;
 
 namespace Atlantis.Framework.MailApi.Interface
 {
   [DataContract]
-  public class GetMessageListResponseData : IResponseData
+  public class GetMessageListResponseData : MailApiResponseBase
   {
     [DataMember(Name = "response")]
     public GetMessageListData MessageListData { get; set; }
@@ -27,18 +25,5 @@ namespace Atlantis.Framework.MailApi.Interface
       return result;
     }
 
-    public string ToXML()
-    {
-      // Use this method to output small debug xml.
-      XElement element = new XElement("GetMessageListResponseData");
-      return element.ToString(SaveOptions.DisableFormatting);
-    }
-
-    public AtlantisException GetException()
-    {
-      // Use an AtlantisException member variable if your triplet request needs to create a response
-      // with an exception 
-      return null;
-    }
   }
 }

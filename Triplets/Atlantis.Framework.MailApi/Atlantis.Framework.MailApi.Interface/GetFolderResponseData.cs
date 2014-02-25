@@ -1,14 +1,12 @@
-﻿using Atlantis.Framework.Interface;
-using System.IO;
+﻿using System.IO;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Json;
 using System.Text;
-using System.Xml.Linq;
 
 namespace Atlantis.Framework.MailApi.Interface
 {
   [DataContract]
-  public class GetFolderResponseData : IResponseData
+  public class GetFolderResponseData : MailApiResponseBase
   {
     [DataMember(Name = "response")]
     public MailFolder MailFolder { get; set; }
@@ -25,14 +23,5 @@ namespace Atlantis.Framework.MailApi.Interface
       return resultFolder;
     }
 
-    public string ToXML()
-    {
-      return new XElement((XName)this.GetType().FullName).ToString(SaveOptions.DisableFormatting);
-    }
-
-    public AtlantisException GetException()
-    {
-      return (AtlantisException)null;
-    }
   }
 }

@@ -5,14 +5,32 @@ namespace Atlantis.Framework.Providers.MailApi
 {
   public class MailApiProvider : ProviderBase, IMailApiProvider
   {
-    public MailApiProvider(IProviderContainer container) : base(container)
+    public string RestrictedKey { get; set; }
+    public string AppKey { get; set; }
+    public string MailHash { get; set; }
+
+    public MailApiProvider(IProviderContainer container)
+      : base(container)
     {
+    }
+
+    public MailApiProvider(IProviderContainer container, string mailHash, string appKey, string restrictedKey) : base(container)
+    {
+      MailHash = mailHash;
+      AppKey = appKey;
+      RestrictedKey = restrictedKey;
+    }
+
+    public object Login(string username, string password, string appKey)
+    {
+      throw new System.NotImplementedException();
     }
 
     public object Login(string username, string password)
     {
       throw new System.NotImplementedException();
     }
+
 
     public MailFolder GetFolder(string folderNumber)
     {

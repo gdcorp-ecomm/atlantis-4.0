@@ -12,6 +12,8 @@ namespace Atlantis.Framework.MailApi.Tests
     private const string OFFSET = "0";
     private const string COUNT = "50";
     private const string FILTER = "none";
+    private const string BAD_SESSION_HASH = "3ec646ddd52660180db869372bf86c36";
+    private const string BAD_BASE_URL = "mailapi.secureserver.net";
 
     [TestMethod]
     public void GetMessageListRequestTest()
@@ -19,12 +21,81 @@ namespace Atlantis.Framework.MailApi.Tests
       var loginRequest = new LoginRequestData("tester@qa-emailpod04.com", "Godaddy25", ANDROID_APP_KEY);
       var loginResponse = (LoginResponseData)Engine.Engine.ProcessRequest(loginRequest, 10350);
       string sessionHash = loginResponse.LoginData.Hash;
+      string baseUrl = loginResponse.LoginData.BaseUrl;
 
-      var getMessageListRequest = new GetMessageListRequestData(FOLDER_NUMBER, OFFSET, COUNT, FILTER, sessionHash, loginResponse.LoginData.BaseUrl, ANDROID_APP_KEY);
+      var getMessageListRequest = new GetMessageListRequestData(FOLDER_NUMBER, OFFSET, COUNT, FILTER, sessionHash, baseUrl, ANDROID_APP_KEY);
       var getMessageListResponse = (GetMessageListResponseData)Engine.Engine.ProcessRequest(getMessageListRequest, 10352);
 
       Assert.AreEqual(50, getMessageListResponse.MessageListData.MailHeaderList.Count);
       Assert.AreEqual(sessionHash, getMessageListResponse.State.Session);
+    }
+
+    [TestMethod]
+    public void GetMessageListRequestJsoapFaultBadSessionHashTest()
+    {
+      var loginRequest = new LoginRequestData("tester@qa-emailpod04.com", "Godaddy25", ANDROID_APP_KEY);
+      var loginResponse = (LoginResponseData)Engine.Engine.ProcessRequest(loginRequest, 10350);
+      string baseUrl = loginResponse.LoginData.BaseUrl;
+
+      var getMessageListRequest = new GetMessageListRequestData(FOLDER_NUMBER, OFFSET, COUNT, FILTER, BAD_SESSION_HASH, baseUrl, ANDROID_APP_KEY);
+      var getMessageListResponse = (GetMessageListResponseData)Engine.Engine.ProcessRequest(getMessageListRequest, 10352);
+
+      Assert.IsNull(getMessageListResponse.MessageListData);
+      Assert.IsTrue(getMessageListResponse.IsJsoapFault);
+      Assert.AreEqual("Error validating session", getMessageListResponse.JsoapDetail);
+      Assert.AreEqual("INVALID_SESSION", getMessageListResponse.JsoapMessage);
+      Assert.AreEqual(0, getMessageListResponse.ResultCode);
+    }
+
+    [TestMethod]
+    public void GetMessageListRequestJsoapFaultEmptySessionHashTest()
+    {
+      var loginRequest = new LoginRequestData("tester@qa-emailpod04.com", "Godaddy25", ANDROID_APP_KEY);
+      var loginResponse = (LoginResponseData)Engine.Engine.ProcessRequest(loginRequest, 10350);
+      string baseUrl = loginResponse.LoginData.BaseUrl;
+
+      var getMessageListRequest = new GetMessageListRequestData(FOLDER_NUMBER, OFFSET, COUNT, FILTER, string.Empty, baseUrl, ANDROID_APP_KEY);
+      var getMessageListResponse = (GetMessageListResponseData)Engine.Engine.ProcessRequest(getMessageListRequest, 10352);
+
+      Assert.IsNull(getMessageListResponse.MessageListData);
+      Assert.IsTrue(getMessageListResponse.IsJsoapFault);
+      Assert.AreEqual("Error validating session", getMessageListResponse.JsoapDetail);
+      Assert.AreEqual("INVALID_SESSION", getMessageListResponse.JsoapMessage);
+      Assert.AreEqual(0, getMessageListResponse.ResultCode);
+    }
+
+    [TestMethod]
+    public void GetMessageListRequestJsoapBadBaseUrlTest()
+    {
+      var loginRequest = new LoginRequestData("tester@qa-emailpod04.com", "Godaddy25", ANDROID_APP_KEY);
+      var loginResponse = (LoginResponseData)Engine.Engine.ProcessRequest(loginRequest, 10350);
+      string sessionHash = loginResponse.LoginData.Hash;
+
+      var getMessageListRequest = new GetMessageListRequestData(FOLDER_NUMBER, OFFSET, COUNT, FILTER, sessionHash, BAD_BASE_URL, ANDROID_APP_KEY);
+      var getMessageListResponse = (GetMessageListResponseData)Engine.Engine.ProcessRequest(getMessageListRequest, 10352);
+
+      Assert.IsNull(getMessageListResponse.MessageListData);
+      Assert.IsTrue(getMessageListResponse.IsJsoapFault);
+      Assert.AreEqual("Error validating session", getMessageListResponse.JsoapDetail);
+      Assert.AreEqual("INVALID_SESSION", getMessageListResponse.JsoapMessage);
+      Assert.AreEqual(0, getMessageListResponse.ResultCode);
+    }
+
+    [TestMethod]
+    public void GetMessageListRequestJsoapEmptyBaseUrlTest()
+    {
+      var loginRequest = new LoginRequestData("tester@qa-emailpod04.com", "Godaddy25", ANDROID_APP_KEY);
+      var loginResponse = (LoginResponseData)Engine.Engine.ProcessRequest(loginRequest, 10350);
+      string sessionHash = loginResponse.LoginData.Hash;
+
+      var getMessageListRequest = new GetMessageListRequestData(FOLDER_NUMBER, OFFSET, COUNT, FILTER, sessionHash, string.Empty, ANDROID_APP_KEY);
+      var getMessageListResponse = (GetMessageListResponseData)Engine.Engine.ProcessRequest(getMessageListRequest, 10352);
+
+      Assert.IsNull(getMessageListResponse.MessageListData);
+      Assert.IsTrue(getMessageListResponse.IsJsoapFault);
+      Assert.AreEqual("Error validating session", getMessageListResponse.JsoapDetail);
+      Assert.AreEqual("INVALID_SESSION", getMessageListResponse.JsoapMessage);
+      Assert.AreEqual(0, getMessageListResponse.ResultCode);
     }
 
     [TestMethod]

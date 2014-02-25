@@ -10,7 +10,7 @@ namespace Atlantis.Framework.MailApi.Impl
   public class GetFolderRequestHandler : IRequest
   {
     private const string GET_FOLDER_BODY_STRING = "method=getFolderByFolderNum&params={{\"folder_num\":\"{0}\",\"extended_info\":\"true\"}}";
-
+    private const string DefaultBaseUrl = "mailapi.secureserver.net";
 
     public IResponseData RequestHandler(RequestData requestData, ConfigElement config)
     {
@@ -20,7 +20,7 @@ namespace Atlantis.Framework.MailApi.Impl
       string messageBody = String.Format(GET_FOLDER_BODY_STRING, request.FolderNum);
 
       string webServiceUrl = request.MailBaseUrl.Contains("80") ? "http://" : "https://";
-      webServiceUrl += request.MailBaseUrl;
+      webServiceUrl += !string.IsNullOrEmpty(request.MailBaseUrl) ? request.MailBaseUrl : DefaultBaseUrl;
       webServiceUrl += ((WsConfigElement)config).WSURL; 
 
       string jsonResponse = Utility.PostRequest(webServiceUrl, messageBody, request.Session, request.AppKey, request.Key);

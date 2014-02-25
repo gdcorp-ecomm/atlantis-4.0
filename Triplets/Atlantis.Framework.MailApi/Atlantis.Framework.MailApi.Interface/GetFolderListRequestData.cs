@@ -1,15 +1,23 @@
-﻿using Atlantis.Framework.Interface;
+﻿using System;
+using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.MailApi.Interface
 {
   public class GetFolderListRequestData : RequestData
   {
-    // Sample constructor
-    // Do not use the base constructor any more, create a constructor like this that requires only what you need
-    public GetFolderListRequestData(object inputData)
+
+    public GetFolderListRequestData(string session, string appKey, string key, string mailBaseUrl)
     {
-      // store input data into member properties
-      // that will be accessible by the IRequest handler
+      Session = session;
+      AppKey = appKey;
+      Key = key;
+      MailBaseUrl = mailBaseUrl;
     }
+
+    public string MailBaseUrl { get; set; }
+    public string Session { get; set; }
+    public string AppKey { get; set; }
+    public string Key { get; set; }
+
   }
 }

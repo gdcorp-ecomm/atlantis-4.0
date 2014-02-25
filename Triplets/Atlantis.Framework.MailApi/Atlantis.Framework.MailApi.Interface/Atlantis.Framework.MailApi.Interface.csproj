@@ -68,6 +68,7 @@
     <Compile Include="LoginData.cs" />
     <Compile Include="MailApiResponseBase.cs" />
     <Compile Include="MailApiResponseState.cs" />
+    <Compile Include="MailFolderArray.cs" />
     <Compile Include="MailHeader.cs" />
     <Compile Include="MailFolder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

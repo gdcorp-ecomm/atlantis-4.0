@@ -79,6 +79,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="GetFolderListTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Atlantis.Framework.MailApi.Impl\Atlantis.Framework.MailApi.Impl.csproj">
@@ -106,6 +107,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\ValidGetFolderListData.txt" />
     <Content Include="Resources\ValidGetMessageListData.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

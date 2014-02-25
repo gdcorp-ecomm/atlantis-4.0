@@ -130,5 +130,20 @@ namespace Atlantis.Framework.MailApi.Tests
       Assert.IsTrue(getFolderResponse.IsJsoapFault);
       Assert.IsNull(getFolderResponse.MailFolder);
     }
+	
+	[TestMethod]
+    public void GetFolderListRequestTest()
+    {
+      var loginRequest = new LoginRequestData("tester@qa-emailpod04.com", "Godaddy25", ANDROID_APP_KEY);
+      var loginResponse = (LoginResponseData)Engine.Engine.ProcessRequest(loginRequest, 10350);
+      string sessionHash = loginResponse.LoginData.Hash;
+      var key = string.Empty;
+
+      var getFolderListRequest = new GetFolderListRequestData(sessionHash, ANDROID_APP_KEY, key, loginResponse.LoginData.BaseUrl);
+      var getFolderListResponse = (GetFolderListResponseData)Engine.Engine.ProcessRequest(getFolderListRequest, 10351);
+
+      Assert.IsNotNull(getFolderListResponse);
+      Assert.IsNotNull(getFolderListResponse.MailFolders);
+    }
   }
 }

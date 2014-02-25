@@ -1,4 +1,6 @@
-﻿using System.IO;
+﻿using System.Xml.Serialization;
+using Atlantis.Framework.Interface;
+using System.IO;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Json;
 using System.Text;
@@ -12,6 +14,7 @@ namespace Atlantis.Framework.MailApi.Interface
     public LoginData LoginData { get; set; }
 
     [DataMember(Name = "state")]
+    [XmlElement(ElementName = "state")]
     public MailApiResponseState State { get; set; }
 
     public string JsonResponseData { get; set; }

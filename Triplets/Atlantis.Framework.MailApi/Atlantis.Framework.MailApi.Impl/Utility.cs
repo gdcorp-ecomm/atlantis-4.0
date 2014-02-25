@@ -34,9 +34,9 @@ namespace Atlantis.Framework.MailApi.Impl
         requestStream.Close();
       }
 
-      var loginResponse = (HttpWebResponse)request.GetResponse();
+      var response = (HttpWebResponse)request.GetResponse();
 
-      using (var responseStream = loginResponse.GetResponseStream())
+      using (var responseStream = response.GetResponseStream())
       {
         if (responseStream != null)
         {

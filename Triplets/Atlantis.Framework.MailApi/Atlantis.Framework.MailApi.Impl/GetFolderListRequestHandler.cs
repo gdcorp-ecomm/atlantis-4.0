@@ -1,4 +1,7 @@
-﻿using Atlantis.Framework.Interface;
+﻿using System;
+using System.Net;
+using Atlantis.Framework.Interface;
+using Atlantis.Framework.MailApi.Interface;
 
 namespace Atlantis.Framework.MailApi.Impl
 {
@@ -10,12 +13,17 @@ namespace Atlantis.Framework.MailApi.Impl
 
     public IResponseData RequestHandler(RequestData requestData, ConfigElement config)
     {
-      IResponseData result = null;
+      var request = (GetFolderListRequestData)requestData;
 
-      // Handle the request and return the IResponseData object for the request
-      // Returning null will cause an exception
+      string webServiceUrl = request.MailBaseUrl.Contains("80") ? "http://" : "https://";
+      webServiceUrl += request.MailBaseUrl;
+      webServiceUrl += ((WsConfigElement)config).WSURL;
 
-      return result;
+      string loginResponseString = Utility.PostRequest(webServiceUrl, BodyString, request.Session, request.AppKey, request.Key);
+
+      GetFolderListResponseData response = GetFolderListResponseData.FromJsonData(loginResponseString);
+
+      return response;
     }
   }
 }

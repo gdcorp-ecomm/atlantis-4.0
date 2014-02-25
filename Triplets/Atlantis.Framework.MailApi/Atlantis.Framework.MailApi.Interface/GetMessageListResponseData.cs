@@ -1,8 +1,8 @@
-﻿using System.IO;
+﻿using Atlantis.Framework.Interface;
+using System.IO;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Json;
 using System.Text;
-using Atlantis.Framework.Interface;
 using System.Xml.Linq;
 
 namespace Atlantis.Framework.MailApi.Interface

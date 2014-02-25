@@ -1,6 +1,6 @@
-﻿using System;
-using Atlantis.Framework.Interface;
+﻿using Atlantis.Framework.Interface;
 using Atlantis.Framework.MailApi.Interface;
+using System;
 
 namespace Atlantis.Framework.MailApi.Impl
 {

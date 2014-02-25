@@ -69,6 +69,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="GetFolderTests.cs" />
     <Compile Include="GetMessageListTests.cs" />
     <Compile Include="IntegrationTests.cs" />
     <Compile Include="LoginTests.cs" />

@@ -1,5 +1,4 @@
-﻿using System;
-using Atlantis.Framework.MailApi.Interface;
+﻿using Atlantis.Framework.MailApi.Interface;
 using Atlantis.Framework.MailApi.Tests.Properties;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 

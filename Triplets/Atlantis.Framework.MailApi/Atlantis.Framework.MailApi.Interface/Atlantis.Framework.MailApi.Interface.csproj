@@ -54,9 +54,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Exceptions\MailApiException.cs" />
+    <Compile Include="FolderPreference.cs" />
     <Compile Include="GetFolderListRequestData.cs" />
     <Compile Include="GetFolderListResponseData.cs" />
     <Compile Include="GetMessageListData.cs" />
+    <Compile Include="GetFolderRequestData.cs" />
+    <Compile Include="GetFolderResponseData.cs" />
     <Compile Include="GetMessageListRequestData.cs" />
     <Compile Include="GetMessageListResponseData.cs" />
     <Compile Include="LoginResponseData.cs" />
@@ -64,6 +67,7 @@
     <Compile Include="LoginData.cs" />
     <Compile Include="MailApiResponseState.cs" />
     <Compile Include="MailHeader.cs" />
+    <Compile Include="MailFolder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <None Include="atlantis.config" />
     <None Include="Atlantis.Framework.MailApi.Interface.nuget.bat" />

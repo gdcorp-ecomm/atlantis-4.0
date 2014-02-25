@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GetFolderListRequestHandler.cs" />
+    <Compile Include="GetFolderRequestHandler.cs" />
     <Compile Include="GetMessageListRequestHandler.cs" />
     <Compile Include="LoginRequestHandler.cs" />
     <Compile Include="Utility.cs" />

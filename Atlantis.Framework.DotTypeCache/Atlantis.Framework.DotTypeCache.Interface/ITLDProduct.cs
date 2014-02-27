@@ -20,5 +20,7 @@ namespace Atlantis.Framework.DotTypeCache.Interface
     List<int> GetPhaseApplicationProductIdList(string applicationProductType);
 
     ITLDTrustee Trustee { get; }
+
+    ITLDRegistryPremiumDomains RegistryPremiumDomains { get; }
   }
 }

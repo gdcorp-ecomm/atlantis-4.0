@@ -97,6 +97,7 @@
     <Compile Include="IDomainProductLookup.cs" />
     <Compile Include="ITLDLaunchPhaseGroup.cs" />
     <Compile Include="ITLDLaunchPhaseGroupCollection.cs" />
+    <Compile Include="ITLDRegistryPremiumDomains.cs" />
     <Compile Include="ITLDTuiFormGroupLaunchPhase.cs" />
     <Compile Include="ITLDTuiFormGroup.cs" />
     <Compile Include="ITLDLaunchPhase.cs" />

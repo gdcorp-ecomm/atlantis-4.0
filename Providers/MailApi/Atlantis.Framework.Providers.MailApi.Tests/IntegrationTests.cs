@@ -1,4 +1,5 @@
 ﻿using System;
+using Atlantis.Framework.Providers.MailApi.DTOs;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Testing.MockHttpContext;
@@ -52,7 +53,7 @@ namespace Atlantis.Framework.Providers.MailApi.Tests
 
 
       //assert
-
+      Assert.Fail("Test not implemented");
 
     }
   }

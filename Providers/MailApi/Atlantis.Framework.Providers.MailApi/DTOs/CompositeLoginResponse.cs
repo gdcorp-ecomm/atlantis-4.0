@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Atlantis.Framework.Providers.MailApi
+﻿namespace Atlantis.Framework.Providers.MailApi.DTOs
 {
 
   // CompositeLoginResponse is just a temp name for now

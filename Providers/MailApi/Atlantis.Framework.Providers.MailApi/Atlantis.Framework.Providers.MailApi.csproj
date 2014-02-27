@@ -59,7 +59,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CompositeLoginResponse.cs" />
+    <Compile Include="DTOs\CompositeLoginResponse.cs" />
     <Compile Include="EngineRequests.cs" />
     <Compile Include="IMailApiProvider.cs" />
     <Compile Include="MailApiProvider.cs" />
@@ -79,9 +79,7 @@
       <Name>Atlantis.Framework.MailApi.Interface</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="DTO\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -1,5 +1,6 @@
 ﻿using Atlantis.Framework.Interface;
 using Atlantis.Framework.MailApi.Interface;
+using Atlantis.Framework.Providers.MailApi.DTOs;
 
 namespace Atlantis.Framework.Providers.MailApi
 {

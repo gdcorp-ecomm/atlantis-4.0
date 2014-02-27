@@ -37,7 +37,9 @@ namespace Atlantis.Framework.DCCDomainsDataCache.Interface
       _offeredPreregistrationYears = LoadPreregistrationYears();
 
       LoadTrustee();
+      LoadRegistryPremiumDomains();
     }
+
 
     private ITLDValidYearsSet LoadValidYears(string periodCollectionName, string periodItemName)
     {
@@ -95,6 +97,11 @@ namespace Atlantis.Framework.DCCDomainsDataCache.Interface
           }
         }
       }
+    }
+
+    private void LoadRegistryPremiumDomains()
+    {
+      RegistryPremiumDomains = TLDMLRegistryPremiumDomains.Create(NamespaceElement.Descendants("registrypremiumdomains"));
     }
 
     private void LoadTrustee()
@@ -174,5 +181,7 @@ namespace Atlantis.Framework.DCCDomainsDataCache.Interface
     }
 
     public ITLDTrustee  Trustee { get; private set; }
+
+    public ITLDRegistryPremiumDomains RegistryPremiumDomains { get; private set; }
   }
 }

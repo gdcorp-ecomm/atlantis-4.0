@@ -52,7 +52,7 @@
     </Reference>
     <Reference Include="Atlantis.Framework.DotTypeCache.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.DotTypeCache.Interface.4.13.12.29\lib\net40\Atlantis.Framework.DotTypeCache.Interface.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.DotTypeCache.Interface.14.2.27.1\lib\net40\Atlantis.Framework.DotTypeCache.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Engine, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -92,7 +92,7 @@
     </Reference>
     <Reference Include="Atlantis.Framework.TLDDataCache.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.TLDDataCache.Interface.4.13.10.14\lib\net40\Atlantis.Framework.TLDDataCache.Interface.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.TLDDataCache.Interface.14.1.28.1\lib\net40\Atlantis.Framework.TLDDataCache.Interface.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -107,6 +107,7 @@
     <Compile Include="TldLaunchPhaseGroupCollection.cs" />
     <Compile Include="TldLaunchPhasePeriod.cs" />
     <Compile Include="TldLaunchPhaseGroup.cs" />
+    <Compile Include="TLDMLRegistryPremiumDomains.cs" />
     <Compile Include="TLDMLTrustee.cs" />
     <Compile Include="TLDMLPhase.cs" />
     <Compile Include="TLDMLApplicationControl.cs" />

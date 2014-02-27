@@ -153,5 +153,13 @@ namespace Atlantis.Framework.DCCDomainsDataCache.Tests
       var response = (TLDMLByNameResponseData)DataCache.DataCache.GetProcessRequest(request, _GETBYNAMEREQUEST);
       Assert.IsTrue(response.Product.Trustee.IsRequired);
     }
+
+    [TestMethod]
+    public void RegistryPremiumDomainsTestReviews()
+    {
+      var request = new TLDMLByNameRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "REVIEWS");
+      var response = (TLDMLByNameResponseData)DataCache.DataCache.GetProcessRequest(request, _GETBYNAMEREQUEST);
+      Assert.IsTrue(response.Product.RegistryPremiumDomains.DefaultPremiumTier > 0);
+    }
   }
 }

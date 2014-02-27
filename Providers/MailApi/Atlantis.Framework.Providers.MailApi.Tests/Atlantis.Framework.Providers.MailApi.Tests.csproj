@@ -39,10 +39,26 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Atlantis.Framework.DataCacheService">
+      <HintPath>..\packages\Atlantis.Framework.DataCacheService.4.13.12.21\lib\net40\Atlantis.Framework.DataCacheService.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Interface">
+      <HintPath>..\packages\Atlantis.Framework.Interface.4.13.12.22\lib\net40\Atlantis.Framework.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Providers.Containers">
+      <HintPath>..\packages\Atlantis.Framework.Providers.Containers.4.14.1.6\lib\net40\Atlantis.Framework.Providers.Containers.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Testing.MockHttpContext">
+      <HintPath>..\packages\Atlantis.Framework.Testing.MockHttpContext.14.1.25.1\lib\net40\Atlantis.Framework.Testing.MockHttpContext.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Testing.MockProviders">
+      <HintPath>..\packages\Atlantis.Framework.Testing.MockProviders.4.14.1.13\lib\net40\Atlantis.Framework.Testing.MockProviders.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Xml" />
   </ItemGroup>
@@ -61,6 +77,26 @@
   <ItemGroup>
     <Compile Include="IntegrationTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="atlantis.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Triplets\Atlantis.Framework.MailApi\Atlantis.Framework.MailApi.Impl\Atlantis.Framework.MailApi.Impl.csproj">
+      <Project>{188f77da-de53-4666-80a4-48dd76a1176d}</Project>
+      <Name>Atlantis.Framework.MailApi.Impl</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Triplets\Atlantis.Framework.MailApi\Atlantis.Framework.MailApi.Interface\Atlantis.Framework.MailApi.Interface.csproj">
+      <Project>{bcff5567-3a11-4fd6-9de9-51f2895ac5b3}</Project>
+      <Name>Atlantis.Framework.MailApi.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.Providers.MailApi\Atlantis.Framework.Providers.MailApi.csproj">
+      <Project>{6f2a2270-fb30-4094-9417-ae0a464ba136}</Project>
+      <Name>Atlantis.Framework.Providers.MailApi</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

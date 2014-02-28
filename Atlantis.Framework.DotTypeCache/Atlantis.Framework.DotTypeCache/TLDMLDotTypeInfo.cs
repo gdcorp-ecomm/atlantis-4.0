@@ -814,13 +814,22 @@ namespace Atlantis.Framework.DotTypeCache
       var result = 0;
 
       var productTypeId = InternalGetTldProductTypeId(domainProductLookup.DomainCount, domainProductLookup.ProductType);
+      var priceTierId = domainProductLookup.PriceTierId;
 
-      var productTiers = InternalGetProductTiers(domainProductLookup.TldPhase, productTypeId, domainProductLookup.RegistryId, domainProductLookup.PriceTierId);
+      if (priceTierId == null)
+      {
+        if (_tldml.Product != null && _tldml.Product.RegistryPremiumDomains != null && _tldml.Product.RegistryPremiumDomains.DefaultPremiumTier > 0)
+        {
+          priceTierId = _tldml.Product.RegistryPremiumDomains.DefaultPremiumTier;
+        }
+      }
+
+      var productTiers = InternalGetProductTiers(domainProductLookup.TldPhase, productTypeId, domainProductLookup.RegistryId, priceTierId);
       if (productTiers != null && !productTiers.ValidTierExist(domainProductLookup.DomainCount))
       {
         productTypeId = InternalGetTldProductTypeId(domainProductLookup.DomainCount, domainProductLookup.ProductType, false);
 
-        productTiers = InternalGetProductTiers(domainProductLookup.TldPhase, productTypeId, domainProductLookup.RegistryId, domainProductLookup.PriceTierId);
+        productTiers = InternalGetProductTiers(domainProductLookup.TldPhase, productTypeId, domainProductLookup.RegistryId, priceTierId);
       }
 
       if (productTiers != null)
@@ -845,17 +854,27 @@ namespace Atlantis.Framework.DotTypeCache
     private List<TLDProduct> TldProducts(IDomainProductListLookup domainProductListLookup)
     {
       var result = new List<TLDProduct>(8);
+      var priceTierId = domainProductListLookup.PriceTierId;
+
+      if (priceTierId == null)
+      {
+        if (_tldml.Product != null && _tldml.Product.RegistryPremiumDomains != null && _tldml.Product.RegistryPremiumDomains.DefaultPremiumTier > 0)
+        {
+          priceTierId = _tldml.Product.RegistryPremiumDomains.DefaultPremiumTier;
+        }
+      }
+
 
       var productTypeId = InternalGetTldProductTypeId(domainProductListLookup.DomainCount,
         domainProductListLookup.ProductType);
       var productTiers = InternalGetProductTiers(domainProductListLookup.TldPhase, productTypeId,
-        domainProductListLookup.RegistryId, domainProductListLookup.PriceTierId);
+        domainProductListLookup.RegistryId, priceTierId);
       if (productTiers != null && !productTiers.ValidTierExist(domainProductListLookup.DomainCount))
       {
         productTypeId = InternalGetTldProductTypeId(domainProductListLookup.DomainCount, domainProductListLookup.ProductType,
           false);
         productTiers = InternalGetProductTiers(domainProductListLookup.TldPhase, productTypeId,
-          domainProductListLookup.RegistryId, domainProductListLookup.PriceTierId);
+          domainProductListLookup.RegistryId, priceTierId);
       }
 
       if (productTiers != null)

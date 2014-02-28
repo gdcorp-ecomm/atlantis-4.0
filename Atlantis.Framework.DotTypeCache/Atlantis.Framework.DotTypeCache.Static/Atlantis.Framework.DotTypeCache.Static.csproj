@@ -55,7 +55,7 @@
     </Reference>
     <Reference Include="Atlantis.Framework.DCCDomainsDataCache.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.DCCDomainsDataCache.Interface.4.14.1.7\lib\net40\Atlantis.Framework.DCCDomainsDataCache.Interface.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.DCCDomainsDataCache.Interface.14.2.27.1\lib\net40\Atlantis.Framework.DCCDomainsDataCache.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.DomainContactFields.Impl">
       <HintPath>..\packages\Atlantis.Framework.DomainContactFields.Impl.4.13.6.5\lib\net40\Atlantis.Framework.DomainContactFields.Impl.dll</HintPath>
@@ -63,6 +63,10 @@
     <Reference Include="Atlantis.Framework.DomainContactFields.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Atlantis.Framework.DomainContactFields.Impl.4.13.6.5\lib\net40\Atlantis.Framework.DomainContactFields.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.DotTypeCache.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.DotTypeCache.Interface.14.2.27.1\lib\net40\Atlantis.Framework.DotTypeCache.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Engine, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -102,7 +106,7 @@
     </Reference>
     <Reference Include="Atlantis.Framework.TLDDataCache.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.TLDDataCache.Interface.4.13.10.14\lib\net40\Atlantis.Framework.TLDDataCache.Interface.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.TLDDataCache.Interface.14.1.28.1\lib\net40\Atlantis.Framework.TLDDataCache.Interface.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -139,12 +143,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Atlantis.Framework.DotTypeCache.Interface\Atlantis.Framework.DotTypeCache.Interface.csproj">
-      <Project>{95e67e48-7173-4f0c-854f-2f08cbfcf923}</Project>
-      <Name>Atlantis.Framework.DotTypeCache.Interface</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

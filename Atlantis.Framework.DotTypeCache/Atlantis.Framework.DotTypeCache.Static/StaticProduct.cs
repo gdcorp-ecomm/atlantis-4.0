@@ -74,5 +74,10 @@ namespace Atlantis.Framework.DotTypeCache.Static
     {
       get { return new StaticTrustee(); }
     }
+
+    public ITLDRegistryPremiumDomains RegistryPremiumDomains
+    {
+      get { return null; }
+    }
   }
 }

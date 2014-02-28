@@ -1580,12 +1580,12 @@ namespace Atlantis.Framework.DotTypeCache.Tests
     [TestMethod]
     public void TldGetProductIdTldmlMenuInvalidPhase()
     {
-      var dotTypeInfo = DotTypeProvider.GetDotTypeInfo("menu");
+      var dotTypeInfo = DotTypeProvider.GetDotTypeInfo("reviews");
 
-      IDomainProductLookup domainProductLookup = DomainProductLookup.Create(dotTypeInfo.MinRegistrationLength, 1, LaunchPhases.Invalid, TLDProductTypes.Registration);
+      IDomainProductLookup domainProductLookup = DomainProductLookup.Create(dotTypeInfo.MinRegistrationLength, 1, LaunchPhases.GeneralAvailability, TLDProductTypes.Registration);
 
       int productId = dotTypeInfo.GetProductId(domainProductLookup);
-      Assert.IsTrue(productId == 0);
+      Assert.IsTrue(productId > 0);
     }
 
     [TestMethod]

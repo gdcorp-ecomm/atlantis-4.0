@@ -9,90 +9,109 @@ namespace Atlantis.Framework.Providers.MailApi
   public class MailApiProvider : ProviderBase, IMailApiProvider
   {
 
-    const string offset = "0";
-    const string count = "20";
-    const string filter = ""; // not sure what this is yet
-
-    //public string RestrictedKey { get; set; }
-    //public string AppKey { get; set; }
-    //public string MailHash { get; set; }
+    const int DEFAULT_OFFSET = 0;
+    const int DEFAULT_MESSAGE_COUNT = 20;
+    const string DEFAULT_FILTER = ""; // not sure what this is yet
 
     public MailApiProvider(IProviderContainer container)
       : base(container)
     {
     }
 
-    public MailApiProvider(IProviderContainer container, string mailHash, string appKey, string restrictedKey) : base(container)
-    {
-      //MailHash = mailHash;
-      //AppKey = appKey;
-      //RestrictedKey = restrictedKey;
-    }
-
-    public CompositeLoginResponse LoginAndFetchFoldersAndInbox(string username, string password, string appKey)
+    public LoginFoldersInboxResponse LoginFetchFoldersAndInbox(string username, string password, string appKey)
     {
       LoginResponseData loginResponseData = null;
       GetFolderListResponseData getFolderListResponseData;
       GetMessageListResponseData getMessageListResponseData;
+      LoginFoldersInboxResponse response = null; // consolidates login/folders/messages and gets returned
+
+      loginResponseData = Login(username, password, appKey);
+      // check for login failure here
+      if (valid(loginResponseData))
+      {
+        getFolderListResponseData = GetFolderList(loginResponseData.LoginData.Hash, appKey, loginResponseData.LoginData.BaseUrl);
+        // check for folder list failure here
+
+        getMessageListResponseData = GetMessageList(getFolderListResponseData.State.Session, appKey, loginResponseData.LoginData.BaseUrl, DetermineInboxFolderNum(getFolderListResponseData), DEFAULT_OFFSET, DEFAULT_MESSAGE_COUNT, DEFAULT_FILTER);
+
+        response = new LoginFoldersInboxResponse(getMessageListResponseData.State, loginResponseData.LoginData, getFolderListResponseData.MailFolders, getMessageListResponseData.MessageListData);
+      }
+      return response;
+    }
+
+    private bool valid(LoginResponseData loginResponseData)
+    {
+      bool valid = true;
+      if (loginResponseData == null)
+      {
+        valid = false;
+      }
+      else if (loginResponseData.IsJsoapFault)
+      {
+        valid = false;
+      }
+      return valid;
+    }
+
+
+
+    public LoginResponseData Login(string username, string password, string appKey)
+    {
+      LoginRequestData loginReqData = null;
+      LoginResponseData loginResponseData = null;
 
       try
       {
-        LoginRequestData loginReqData = new LoginRequestData(username, password, appKey);
+        loginReqData = new LoginRequestData(username, password, appKey);
         loginResponseData = (LoginResponseData)Engine.Engine.ProcessRequest(loginReqData, EngineRequests.MAILAPI_LOGIN);
       }
       catch (Exception ex)
       {
-        var exception = new AtlantisException("IrisProvider.AddIncidentNote", "0", ex.Message, string.Empty, null, null);
+        var exception = new AtlantisException("MailApiProvider.GetFolderList", "0", ex.Message, GetLoginExceptionData(loginReqData), null, null);
         Engine.Engine.LogAtlantisException(exception);
       }
-      // check for login failure here
 
-      //GetFolderListRequestData getFolderListReqData = new GetFolderListRequestData(loginResponseData.LoginData.Hash, appKey, string.Empty, loginResponseData.LoginData.BaseUrl);
-      getFolderListResponseData = GetFolderList(loginResponseData.LoginData.Hash, appKey, loginResponseData.LoginData.BaseUrl);
-
-      // check for folder list failure here
-
-      GetMessageListRequestData getMessageListReqData = new GetMessageListRequestData(DetermineInboxFolderNum(getFolderListResponseData).ToString(), offset, count, filter, getFolderListResponseData.State.Session, loginResponseData.LoginData.BaseUrl, appKey);
-      getMessageListResponseData = (GetMessageListResponseData)Engine.Engine.ProcessRequest(getMessageListReqData, EngineRequests.MAILAPI_MSG_LIST);
-
-      CompositeLoginResponse response = new CompositeLoginResponse(getMessageListResponseData.State, loginResponseData.LoginData, getFolderListResponseData.MailFolders, getMessageListResponseData.MessageListData);
-      
-      return response;
+      return loginResponseData;
     }
 
-    private int DetermineInboxFolderNum(GetFolderListResponseData getFolderListResponseData)
+    public GetFolderResponseData GetFolder(string sessionHash, string appKey, string baseUrl, int folderNumber)
     {
-      int inboxFolderNum = -1;
-      foreach (MailFolder mailFolder in getFolderListResponseData.MailFolders)
+      GetFolderRequestData getFolderReqData = null;
+      GetFolderResponseData getFolderResponseData = null;
+      try
       {
-        if (mailFolder.DisplayName.Equals("INBOX", System.StringComparison.InvariantCultureIgnoreCase))
-        {
-          inboxFolderNum = mailFolder.FolderNum;
-          break;
-        }
+        getFolderReqData = new GetFolderRequestData(folderNumber.ToString(), sessionHash, appKey, string.Empty, baseUrl);
+        getFolderResponseData = (GetFolderResponseData)Engine.Engine.ProcessRequest(getFolderReqData, EngineRequests.MAILAPI_GET_FOLDER);
       }
-      if (inboxFolderNum == -1)
+      catch (Exception ex)
       {
-        throw new Exception("Could not determine INBOX FolderNum after login");
+        var exception = new AtlantisException("MailApiProvider.GetFolder", "0", ex.Message, GetFolderExceptionData(getFolderReqData),  null, null);
+        Engine.Engine.LogAtlantisException(exception);
       }
-      return inboxFolderNum;
+      return getFolderResponseData;
     }
 
-    public object Login(string username, string password)
+
+
+    public GetMessageListResponseData GetMessageList(string sessionHash, string appKey, string baseUrl, int folderNumber, int offset, int count, string filter)
     {
-      throw new System.NotImplementedException();
+      GetMessageListRequestData getMessageListReqData = null;
+      GetMessageListResponseData getMessageListResponseData = null;
+
+      try
+      {
+        getMessageListReqData = new GetMessageListRequestData(folderNumber.ToString(), offset.ToString(), count.ToString(), filter, sessionHash, baseUrl, appKey);
+        getMessageListResponseData = (GetMessageListResponseData)Engine.Engine.ProcessRequest(getMessageListReqData, EngineRequests.MAILAPI_MSG_LIST);
+      }
+      catch (Exception ex)
+      {
+        var exception = new AtlantisException("MailApiProvider.GetMessageList", "0", ex.Message, GetMessageListExceptionData(getMessageListReqData),  null, null);
+        Engine.Engine.LogAtlantisException(exception);
+      }
+
+      return getMessageListResponseData;
     }
 
-
-    public MailFolder GetFolder(string sessionHash, string folderNumber)
-    {
-      throw new System.NotImplementedException();
-    }
-
-    public object GetMessageList(string sessionHash, string folderNumber, int offset, int count, string filter)
-    {
-      throw new System.NotImplementedException();
-    }
 
     public GetFolderListResponseData GetFolderList(string sessionHash, string appKey, string baseUrl)
     {
@@ -105,21 +124,76 @@ namespace Atlantis.Framework.Providers.MailApi
       }
       catch (Exception ex)
       {
-        var exception = new AtlantisException("MailApiProvider.GetFolderList", "0", ex.Message, getFolderListExceptionData(getFolderListReqData),  null, null);
+        var exception = new AtlantisException("MailApiProvider.GetFolderList", "0", ex.Message, GetFolderListExceptionData(getFolderListReqData),  null, null);
         Engine.Engine.LogAtlantisException(exception);
       }
+
       return getFolderListResponseData;
     }
 
-    private static string getFolderListExceptionData(GetFolderListRequestData getFolderListReqData)
+    private int DetermineInboxFolderNum(GetFolderListResponseData getFolderListResponseData)
+    {
+      int inboxFolderNum = -1;
+      foreach (MailFolder mailFolder in getFolderListResponseData.MailFolders)
+      {
+        if (mailFolder.Folder.Equals("INBOX", System.StringComparison.InvariantCultureIgnoreCase))
+        {
+          inboxFolderNum = mailFolder.FolderNum;
+          break;
+        }
+      }
+      if (inboxFolderNum == -1)
+      {
+        throw new Exception("Could not determine INBOX FolderNum after login");
+      }
+      return inboxFolderNum;
+    }
+
+    private string GetLoginExceptionData(LoginRequestData loginReqData)
     {
       StringBuilder sb = new StringBuilder();
-      sb.Append("(request: mailApi url: ");
+      sb.Append("(login request: email: ");
+      sb.Append(loginReqData.Username);
+      sb.Append(" appKey: ");
+      sb.Append(loginReqData.Appkey);
+      sb.Append(")");
+      return sb.ToString();
+    }
+
+    private string GetFolderExceptionData(GetFolderRequestData getFolderReqData)
+    {
+      StringBuilder sb = new StringBuilder();
+      sb.Append("(folder request: mailApi url: ");
+      sb.Append(getFolderReqData.MailBaseUrl);
+      sb.Append(" folderNum: ");
+      sb.Append(getFolderReqData.FolderNum);
+      sb.Append(" session: ");
+      sb.Append(getFolderReqData.Session);
+      sb.Append(")");
+      return sb.ToString();
+    }
+
+    private static string GetFolderListExceptionData(GetFolderListRequestData getFolderListReqData)
+    {
+      StringBuilder sb = new StringBuilder();
+      sb.Append("(folderList request: mailApi url: ");
       sb.Append(getFolderListReqData.MailBaseUrl);
       sb.Append(" session: ");
       sb.Append(getFolderListReqData.Session);
       sb.Append(")");
       return sb.ToString();
     }
+
+    private string GetMessageListExceptionData(GetMessageListRequestData getMessageListReqData)
+    {
+      StringBuilder sb = new StringBuilder();
+      sb.Append("(msgList request: mailApi url: ");
+      sb.Append(getMessageListReqData.MailBaseUrl);
+      sb.Append(" session: ");
+      sb.Append(getMessageListReqData.MailHash);
+      sb.Append(")");
+      return sb.ToString();
+    }
+
   }
 }

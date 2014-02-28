@@ -4,6 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Testing.MockHttpContext;
 using Atlantis.Framework.Testing.MockProviders;
+using Atlantis.Framework.MailApi.Interface;
 
 namespace Atlantis.Framework.Providers.MailApi.Tests
 {
@@ -12,6 +13,9 @@ namespace Atlantis.Framework.Providers.MailApi.Tests
   {
     private const string ANDROID_APP_KEY = "tv2YfSzBx6zdjHAjIhW9mNe5";
     private const string IOS_APP_KEY = "PAiycbPel3SL1H6tj7UxNwUU";
+    private const string MOONFAIRY_EMAIL = "andy@jonathanthemoonfairy.com";
+    private const string MOONFAIRY_PW = "abcd123";
+    private const string BAD_PW = "BADBAD";
 
     private IProviderContainer InitializeProviderContainer()
     {
@@ -27,14 +31,14 @@ namespace Atlantis.Framework.Providers.MailApi.Tests
     }
 
     [TestMethod]
-    public void LoginSuccessTest()
+    public void LoginFoldersInboxSuccessTest()
     {
       //arrange 
       var providerContainer = InitializeProviderContainer();
       var mailApiProvider = providerContainer.Resolve<IMailApiProvider>();
 
       //act 
-      CompositeLoginResponse result = mailApiProvider.LoginAndFetchFoldersAndInbox("andy@jonathanthemoonfairy.com", "abcd123", ANDROID_APP_KEY);
+      LoginFoldersInboxResponse result = mailApiProvider.LoginFetchFoldersAndInbox(MOONFAIRY_EMAIL, MOONFAIRY_PW, ANDROID_APP_KEY);
 
       //assert
       Assert.IsNotNull(result);
@@ -42,18 +46,34 @@ namespace Atlantis.Framework.Providers.MailApi.Tests
     }
 
     [TestMethod]
-    public void LoginFailureTest()
+    public void LoginFoldersInboxFailureTest()
     {
       //arrange 
-
-
+      var providerContainer = InitializeProviderContainer();
+      var mailApiProvider = providerContainer.Resolve<IMailApiProvider>();
 
       //act 
-
-
+      LoginFoldersInboxResponse result = mailApiProvider.LoginFetchFoldersAndInbox(MOONFAIRY_EMAIL, BAD_PW, ANDROID_APP_KEY);
 
       //assert
       Assert.Fail("Test not implemented");
+
+    }
+
+    [TestMethod]
+    public void LoginFailureTest()
+    {
+      //arrange 
+      var providerContainer = InitializeProviderContainer();
+      var mailApiProvider = providerContainer.Resolve<IMailApiProvider>();
+
+      //act 
+      LoginResponseData result = mailApiProvider.Login(MOONFAIRY_EMAIL, BAD_PW, ANDROID_APP_KEY);
+
+      //assert
+      Assert.IsNotNull(result);
+      Assert.IsTrue(result.IsJsoapFault);
+      Assert.IsNull(result.LoginData);
 
     }
   }

@@ -5,7 +5,7 @@
   // holds login data, folders list, message list
 
 
-  public class CompositeLoginResponse
+  public class LoginFoldersInboxResponse
   {
     private Framework.MailApi.Interface.MailApiResponseState mailApiResponseState;
     private Framework.MailApi.Interface.GetMessageListData getMessageListData;
@@ -36,7 +36,7 @@
       set { getMessageListData = value; }
     }
 
-    public CompositeLoginResponse(Framework.MailApi.Interface.MailApiResponseState mailApiResponseState, Framework.MailApi.Interface.LoginData loginData, Framework.MailApi.Interface.MailFolderArray mailFolderArray, Framework.MailApi.Interface.GetMessageListData getMessageListData)
+    public LoginFoldersInboxResponse(Framework.MailApi.Interface.MailApiResponseState mailApiResponseState, Framework.MailApi.Interface.LoginData loginData, Framework.MailApi.Interface.MailFolderArray mailFolderArray, Framework.MailApi.Interface.GetMessageListData getMessageListData)
     {
       // TODO: Complete member initialization
       this.mailApiResponseState = mailApiResponseState;

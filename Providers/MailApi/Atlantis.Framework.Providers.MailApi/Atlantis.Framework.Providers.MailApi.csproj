@@ -59,7 +59,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DTOs\CompositeLoginResponse.cs" />
+    <Compile Include="DTOs\LoginFoldersInboxResponse.cs" />
     <Compile Include="EngineRequests.cs" />
     <Compile Include="IMailApiProvider.cs" />
     <Compile Include="MailApiProvider.cs" />

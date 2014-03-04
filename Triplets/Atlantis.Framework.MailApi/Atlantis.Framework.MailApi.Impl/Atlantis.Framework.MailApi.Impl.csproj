@@ -62,7 +62,7 @@
     <Compile Include="LoginRequestHandler.cs" />
     <Compile Include="Utility.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <None Include="atlantis.config" />
+    <None Include="atlantis.config.transform" />
     <None Include="Atlantis.Framework.MailApi.Impl.nuget.bat" />
     <None Include="Atlantis.Framework.MailApi.Impl.nuspec" />
     <None Include="packages.config" />

@@ -12,7 +12,7 @@
       Christopher Galindo
     </authors>
     <owners>Kristopher Klink</owners>
-    <projectUrl>$/Delta/Services/AtlantisFramework/4.0/Triplets/Atlantis.Framework.MailApi</projectUrl>
+    <projectUrl>https://confluence.int.godaddy.com/display/ATLANTIS</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Collection of calls to mail service</description>
     <!-- update release notes with latest change information -->

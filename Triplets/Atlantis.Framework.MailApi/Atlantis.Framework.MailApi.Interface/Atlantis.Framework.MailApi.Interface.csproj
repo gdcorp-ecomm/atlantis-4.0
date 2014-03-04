@@ -72,7 +72,6 @@
     <Compile Include="MailHeader.cs" />
     <Compile Include="MailFolder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <None Include="atlantis.config" />
     <None Include="Atlantis.Framework.MailApi.Interface.nuget.bat" />
     <None Include="Atlantis.Framework.MailApi.Interface.nuspec" />
     <None Include="packages.config" />

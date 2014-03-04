@@ -5,14 +5,18 @@
     <!-- version should match the assembly FILE version -->
     <version>4.0.0.0</version>
     <!-- change word Title to match your project name with spaces instead of dots -->
-    <title>Atlantis Framework MailApi</title>
-    <authors>$author$</authors>
-    <owners>$author$</owners>
-    <projectUrl>https://confluence.int.godaddy.com/display/ATLANTIS</projectUrl>
+    <title>Atlantis Framework MailApi Impl</title>
+    <authors>
+      Kristopher Klink
+      Aaron Smentkowski
+      Christopher Galindo
+    </authors>
+    <owners>Kristopher Klink</owners>
+    <projectUrl>$/Delta/Services/AtlantisFramework/4.0/Triplets/Atlantis.Framework.MailApi</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>$description$</description>
+    <description>Collection of calls to mail service</description>
     <!-- update release notes with latest change information -->
-    <releaseNotes></releaseNotes>
+    <releaseNotes>Initial Release</releaseNotes>
     <copyright>$copyright$</copyright>
     <!-- Make tags the same as title element -->
     <tags>Atlantis Framework MailApi</tags>

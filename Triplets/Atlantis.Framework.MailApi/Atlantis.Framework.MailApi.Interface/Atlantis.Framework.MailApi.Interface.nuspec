@@ -22,7 +22,4 @@
     <tags>Atlantis Framework MailApi</tags>
     <dependencies />
   </metadata>
-  <files>
-    <file src="atlantis.config.transform" target="content\atlantis.config.transform" />
-  </files>
 </package>

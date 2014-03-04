@@ -3,7 +3,7 @@
   <metadata>
     <id>Atlantis.Framework.MailApi.Interface</id>
     <!-- version should match the assembly FILE version -->
-    <version>4.0.0.0</version>
+    <version>$version$</version>
     <!-- change word Title to match your project name with spaces instead of dots -->
     <title>Atlantis Framework MailApi Interface</title>
     <authors>
@@ -19,7 +19,7 @@
     <releaseNotes>Initial Release</releaseNotes>
     <copyright>$copyright$</copyright>
     <!-- Make tags the same as title element -->
-    <tags>Atlantis Framework Title</tags>
+    <tags>Atlantis Framework MailApi</tags>
     <dependencies />
   </metadata>
   <files>

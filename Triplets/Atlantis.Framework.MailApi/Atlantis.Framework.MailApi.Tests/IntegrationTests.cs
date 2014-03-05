@@ -19,12 +19,12 @@ namespace Atlantis.Framework.MailApi.Tests
     public void GetMessageListRequestTest()
     {
       var loginRequest = new LoginRequestData("tester@qa-emailpod04.com", "Godaddy25", ANDROID_APP_KEY);
-      var loginResponse = (LoginResponseData)Engine.Engine.ProcessRequest(loginRequest, 10350);
+      var loginResponse = (LoginResponseData)Engine.Engine.ProcessRequest(loginRequest, 804);
       string sessionHash = loginResponse.LoginData.Hash;
       string baseUrl = loginResponse.LoginData.BaseUrl;
 
       var getMessageListRequest = new GetMessageListRequestData(FOLDER_NUMBER, OFFSET, COUNT, FILTER, sessionHash, baseUrl, ANDROID_APP_KEY);
-      var getMessageListResponse = (GetMessageListResponseData)Engine.Engine.ProcessRequest(getMessageListRequest, 10352);
+      var getMessageListResponse = (GetMessageListResponseData)Engine.Engine.ProcessRequest(getMessageListRequest, 806);
 
       Assert.AreEqual(50, getMessageListResponse.MessageListData.MailHeaderList.Count);
       Assert.AreEqual(sessionHash, getMessageListResponse.State.Session);
@@ -34,11 +34,11 @@ namespace Atlantis.Framework.MailApi.Tests
     public void GetMessageListRequestJsoapFaultBadSessionHashTest()
     {
       var loginRequest = new LoginRequestData("tester@qa-emailpod04.com", "Godaddy25", ANDROID_APP_KEY);
-      var loginResponse = (LoginResponseData)Engine.Engine.ProcessRequest(loginRequest, 10350);
+      var loginResponse = (LoginResponseData)Engine.Engine.ProcessRequest(loginRequest, 804);
       string baseUrl = loginResponse.LoginData.BaseUrl;
 
       var getMessageListRequest = new GetMessageListRequestData(FOLDER_NUMBER, OFFSET, COUNT, FILTER, BAD_SESSION_HASH, baseUrl, ANDROID_APP_KEY);
-      var getMessageListResponse = (GetMessageListResponseData)Engine.Engine.ProcessRequest(getMessageListRequest, 10352);
+      var getMessageListResponse = (GetMessageListResponseData)Engine.Engine.ProcessRequest(getMessageListRequest, 806);
 
       Assert.IsNull(getMessageListResponse.MessageListData);
       Assert.IsTrue(getMessageListResponse.IsJsoapFault);
@@ -51,11 +51,11 @@ namespace Atlantis.Framework.MailApi.Tests
     public void GetMessageListRequestJsoapFaultEmptySessionHashTest()
     {
       var loginRequest = new LoginRequestData("tester@qa-emailpod04.com", "Godaddy25", ANDROID_APP_KEY);
-      var loginResponse = (LoginResponseData)Engine.Engine.ProcessRequest(loginRequest, 10350);
+      var loginResponse = (LoginResponseData)Engine.Engine.ProcessRequest(loginRequest, 804);
       string baseUrl = loginResponse.LoginData.BaseUrl;
 
       var getMessageListRequest = new GetMessageListRequestData(FOLDER_NUMBER, OFFSET, COUNT, FILTER, string.Empty, baseUrl, ANDROID_APP_KEY);
-      var getMessageListResponse = (GetMessageListResponseData)Engine.Engine.ProcessRequest(getMessageListRequest, 10352);
+      var getMessageListResponse = (GetMessageListResponseData)Engine.Engine.ProcessRequest(getMessageListRequest, 806);
 
       Assert.IsNull(getMessageListResponse.MessageListData);
       Assert.IsTrue(getMessageListResponse.IsJsoapFault);
@@ -68,11 +68,11 @@ namespace Atlantis.Framework.MailApi.Tests
     public void GetMessageListRequestJsoapBadBaseUrlTest()
     {
       var loginRequest = new LoginRequestData("tester@qa-emailpod04.com", "Godaddy25", ANDROID_APP_KEY);
-      var loginResponse = (LoginResponseData)Engine.Engine.ProcessRequest(loginRequest, 10350);
+      var loginResponse = (LoginResponseData)Engine.Engine.ProcessRequest(loginRequest, 804);
       string sessionHash = loginResponse.LoginData.Hash;
 
       var getMessageListRequest = new GetMessageListRequestData(FOLDER_NUMBER, OFFSET, COUNT, FILTER, sessionHash, BAD_BASE_URL, ANDROID_APP_KEY);
-      var getMessageListResponse = (GetMessageListResponseData)Engine.Engine.ProcessRequest(getMessageListRequest, 10352);
+      var getMessageListResponse = (GetMessageListResponseData)Engine.Engine.ProcessRequest(getMessageListRequest, 806);
 
       Assert.IsNull(getMessageListResponse.MessageListData);
       Assert.IsTrue(getMessageListResponse.IsJsoapFault);
@@ -85,11 +85,11 @@ namespace Atlantis.Framework.MailApi.Tests
     public void GetMessageListRequestJsoapEmptyBaseUrlTest()
     {
       var loginRequest = new LoginRequestData("tester@qa-emailpod04.com", "Godaddy25", ANDROID_APP_KEY);
-      var loginResponse = (LoginResponseData)Engine.Engine.ProcessRequest(loginRequest, 10350);
+      var loginResponse = (LoginResponseData)Engine.Engine.ProcessRequest(loginRequest, 804);
       string sessionHash = loginResponse.LoginData.Hash;
 
       var getMessageListRequest = new GetMessageListRequestData(FOLDER_NUMBER, OFFSET, COUNT, FILTER, sessionHash, string.Empty, ANDROID_APP_KEY);
-      var getMessageListResponse = (GetMessageListResponseData)Engine.Engine.ProcessRequest(getMessageListRequest, 10352);
+      var getMessageListResponse = (GetMessageListResponseData)Engine.Engine.ProcessRequest(getMessageListRequest, 806);
 
       Assert.IsNull(getMessageListResponse.MessageListData);
       Assert.IsTrue(getMessageListResponse.IsJsoapFault);
@@ -102,12 +102,12 @@ namespace Atlantis.Framework.MailApi.Tests
     public void GetFolderRequestTest()
     {
       var loginRequest = new LoginRequestData("tester@qa-emailpod04.com", "Godaddy25", ANDROID_APP_KEY);
-      var loginResponse = (LoginResponseData)Engine.Engine.ProcessRequest(loginRequest, 10350);
+      var loginResponse = (LoginResponseData)Engine.Engine.ProcessRequest(loginRequest, 804);
       string sessionHash = loginResponse.LoginData.Hash;
       var key = string.Empty;
 
       var getFolderRequest = new GetFolderRequestData(FOLDER_NUMBER, sessionHash, ANDROID_APP_KEY, key, loginResponse.LoginData.BaseUrl);
-      var getFolderResponse = (GetFolderResponseData)Engine.Engine.ProcessRequest(getFolderRequest, 10353);
+      var getFolderResponse = (GetFolderResponseData)Engine.Engine.ProcessRequest(getFolderRequest, 807);
 
       Assert.IsNotNull(getFolderResponse);
       Assert.IsNotNull(getFolderResponse.MailFolder);
@@ -119,12 +119,12 @@ namespace Atlantis.Framework.MailApi.Tests
     public void GetFolderRequest_InvalidFolderIdTest()
     {
       var loginRequest = new LoginRequestData("tester@qa-emailpod04.com", "Godaddy25", ANDROID_APP_KEY);
-      var loginResponse = (LoginResponseData)Engine.Engine.ProcessRequest(loginRequest, 10350);
+      var loginResponse = (LoginResponseData)Engine.Engine.ProcessRequest(loginRequest, 804);
       string sessionHash = loginResponse.LoginData.Hash;
       var key = string.Empty;
 
       var getFolderRequest = new GetFolderRequestData("-9999999x2", sessionHash, ANDROID_APP_KEY, key, loginResponse.LoginData.BaseUrl);
-      var getFolderResponse = (GetFolderResponseData)Engine.Engine.ProcessRequest(getFolderRequest, 10353);
+      var getFolderResponse = (GetFolderResponseData)Engine.Engine.ProcessRequest(getFolderRequest, 807);
 
       Assert.IsNotNull(getFolderResponse);
       Assert.IsTrue(getFolderResponse.IsJsoapFault);
@@ -135,12 +135,12 @@ namespace Atlantis.Framework.MailApi.Tests
     public void GetFolderListRequestTest()
     {
       var loginRequest = new LoginRequestData("tester@qa-emailpod04.com", "Godaddy25", ANDROID_APP_KEY);
-      var loginResponse = (LoginResponseData)Engine.Engine.ProcessRequest(loginRequest, 10350);
+      var loginResponse = (LoginResponseData)Engine.Engine.ProcessRequest(loginRequest, 804);
       string sessionHash = loginResponse.LoginData.Hash;
       var key = string.Empty;
 
       var getFolderListRequest = new GetFolderListRequestData(sessionHash, ANDROID_APP_KEY, key, loginResponse.LoginData.BaseUrl);
-      var getFolderListResponse = (GetFolderListResponseData)Engine.Engine.ProcessRequest(getFolderListRequest, 10351);
+      var getFolderListResponse = (GetFolderListResponseData)Engine.Engine.ProcessRequest(getFolderListRequest, 805);
 
       Assert.IsNotNull(getFolderListResponse);
       Assert.IsNotNull(getFolderListResponse.MailFolders);

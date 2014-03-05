@@ -51,7 +51,7 @@ namespace Atlantis.Framework.MailApi.Tests
     {
       var request = new LoginRequestData("tester@qa-emailpod04.com", "Godaddy25", ANDROID_APP_KEY);
 
-      var response = (LoginResponseData)Engine.Engine.ProcessRequest(request, 10350);
+      var response = (LoginResponseData)Engine.Engine.ProcessRequest(request, 804);
       Assert.IsNotNull(response);
     }
 
@@ -60,7 +60,7 @@ namespace Atlantis.Framework.MailApi.Tests
     {
       var request = new LoginRequestData("tester@qa-emailpod04.com", "Godaddy25!!", ANDROID_APP_KEY);
 
-      var response = (LoginResponseData)Engine.Engine.ProcessRequest(request, 10350);
+      var response = (LoginResponseData)Engine.Engine.ProcessRequest(request, 804);
       Assert.IsNotNull(response);
       Assert.IsTrue(response.IsJsoapFault);
     }

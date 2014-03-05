@@ -19,7 +19,7 @@
     <releaseNotes>Initial Release</releaseNotes>
     <copyright>$copyright$</copyright>
     <!-- Make tags the same as title element -->
-    <tags>Atlantis Framework MailApi</tags>
+    <tags>Atlantis Framework MailApi Impl</tags>
     <dependencies />
   </metadata>
   <files>

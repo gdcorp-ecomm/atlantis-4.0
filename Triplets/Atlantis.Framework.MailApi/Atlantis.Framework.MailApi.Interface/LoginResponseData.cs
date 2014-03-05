@@ -17,7 +17,7 @@ namespace Atlantis.Framework.MailApi.Interface
     [XmlElement(ElementName = "state")]
     public MailApiResponseState State { get; set; }
 
-    public string JsonResponseData { get; set; }
+    public LoginRequestData request { get; set; }
 
     public static LoginResponseData FromJsonData(string jsonString)
     {
@@ -27,8 +27,6 @@ namespace Atlantis.Framework.MailApi.Interface
       DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(LoginResponseData));
 
       LoginResponseData result = (LoginResponseData)serializer.ReadObject(stream);
-      
-      result.JsonResponseData = jsonString;
       
       return result;
     }

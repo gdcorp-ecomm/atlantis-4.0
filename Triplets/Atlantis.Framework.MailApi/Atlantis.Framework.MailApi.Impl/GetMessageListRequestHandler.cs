@@ -22,6 +22,8 @@ namespace Atlantis.Framework.MailApi.Impl
 
       GetMessageListResponseData getMessageListResponse = GetMessageListResponseData.FromJsonData(getMessageListResponseString);
 
+      getMessageListResponse.request = request;
+
       return getMessageListResponse;
     }
   }

@@ -28,6 +28,8 @@ namespace Atlantis.Framework.MailApi.Tests
 
       Assert.AreEqual(50, getMessageListResponse.MessageListData.MailHeaderList.Count);
       Assert.AreEqual(sessionHash, getMessageListResponse.State.Session);
+      Assert.IsNotNull(getMessageListResponse.request);
+      Assert.AreEqual(getMessageListResponse.request, getMessageListRequest);
     }
 
     [TestMethod]
@@ -45,6 +47,8 @@ namespace Atlantis.Framework.MailApi.Tests
       Assert.AreEqual("Error validating session", getMessageListResponse.JsoapDetail);
       Assert.AreEqual("INVALID_SESSION", getMessageListResponse.JsoapMessage);
       Assert.AreEqual(0, getMessageListResponse.ResultCode);
+      Assert.IsNotNull(getMessageListResponse.request);
+      Assert.AreEqual(getMessageListResponse.request, getMessageListRequest);
     }
 
     [TestMethod]
@@ -62,6 +66,8 @@ namespace Atlantis.Framework.MailApi.Tests
       Assert.AreEqual("Error validating session", getMessageListResponse.JsoapDetail);
       Assert.AreEqual("INVALID_SESSION", getMessageListResponse.JsoapMessage);
       Assert.AreEqual(0, getMessageListResponse.ResultCode);
+      Assert.IsNotNull(getMessageListResponse.request);
+      Assert.AreEqual(getMessageListResponse.request, getMessageListRequest);
     }
 
     [TestMethod]
@@ -79,6 +85,8 @@ namespace Atlantis.Framework.MailApi.Tests
       Assert.AreEqual("Error validating session", getMessageListResponse.JsoapDetail);
       Assert.AreEqual("INVALID_SESSION", getMessageListResponse.JsoapMessage);
       Assert.AreEqual(0, getMessageListResponse.ResultCode);
+      Assert.IsNotNull(getMessageListResponse.request);
+      Assert.AreEqual(getMessageListResponse.request, getMessageListRequest);
     }
 
     [TestMethod]
@@ -96,6 +104,8 @@ namespace Atlantis.Framework.MailApi.Tests
       Assert.AreEqual("Error validating session", getMessageListResponse.JsoapDetail);
       Assert.AreEqual("INVALID_SESSION", getMessageListResponse.JsoapMessage);
       Assert.AreEqual(0, getMessageListResponse.ResultCode);
+      Assert.IsNotNull(getMessageListResponse.request);
+      Assert.AreEqual(getMessageListResponse.request, getMessageListRequest);
     }
 
     [TestMethod]
@@ -112,6 +122,8 @@ namespace Atlantis.Framework.MailApi.Tests
       Assert.IsNotNull(getFolderResponse);
       Assert.IsNotNull(getFolderResponse.MailFolder);
       Assert.AreEqual("inbox", getFolderResponse.MailFolder.DisplayName.ToLowerInvariant());
+      Assert.IsNotNull(getFolderResponse.request);
+      Assert.AreEqual(getFolderResponse.request, getFolderRequest);
 
     }
 
@@ -129,6 +141,8 @@ namespace Atlantis.Framework.MailApi.Tests
       Assert.IsNotNull(getFolderResponse);
       Assert.IsTrue(getFolderResponse.IsJsoapFault);
       Assert.IsNull(getFolderResponse.MailFolder);
+      Assert.IsNotNull(getFolderResponse.request);
+      Assert.AreEqual(getFolderResponse.request, getFolderRequest);
     }
 	
 	[TestMethod]
@@ -144,6 +158,8 @@ namespace Atlantis.Framework.MailApi.Tests
 
       Assert.IsNotNull(getFolderListResponse);
       Assert.IsNotNull(getFolderListResponse.MailFolders);
+      Assert.IsNotNull(getFolderListResponse.request);
+      Assert.AreEqual(getFolderListRequest, getFolderListResponse.request);
     }
   }
 }

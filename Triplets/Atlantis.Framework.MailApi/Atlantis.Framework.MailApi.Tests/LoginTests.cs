@@ -53,6 +53,8 @@ namespace Atlantis.Framework.MailApi.Tests
 
       var response = (LoginResponseData)Engine.Engine.ProcessRequest(request, 804);
       Assert.IsNotNull(response);
+      Assert.IsNotNull(response.request);
+      Assert.AreEqual(response.request, request);
     }
 
     [TestMethod]
@@ -63,6 +65,8 @@ namespace Atlantis.Framework.MailApi.Tests
       var response = (LoginResponseData)Engine.Engine.ProcessRequest(request, 804);
       Assert.IsNotNull(response);
       Assert.IsTrue(response.IsJsoapFault);
+      Assert.IsNotNull(response.request);
+      Assert.AreEqual(response.request, request);
     }
   }
 }

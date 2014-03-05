@@ -19,6 +19,8 @@ namespace Atlantis.Framework.MailApi.Interface
     [XmlElement(ElementName = "state")]
     public MailApiResponseState State { get; set; }
 
+    public GetFolderListRequestData request { get; set; }
+
     public static GetFolderListResponseData FromJsonData(string jsonString)
     {
 

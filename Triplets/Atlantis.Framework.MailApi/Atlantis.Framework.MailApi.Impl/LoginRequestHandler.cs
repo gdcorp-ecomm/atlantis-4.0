@@ -23,6 +23,8 @@ namespace Atlantis.Framework.MailApi.Impl
 
       LoginResponseData loginResponse = LoginResponseData.FromJsonData(loginResponseString);
 
+      loginResponse.request = request;
+
       return loginResponse;
     }
   }

@@ -21,6 +21,8 @@ namespace Atlantis.Framework.MailApi.Impl
 
       GetFolderListResponseData response = GetFolderListResponseData.FromJsonData(loginResponseString);
 
+      response.request = request;
+
       return response;
     }
   }

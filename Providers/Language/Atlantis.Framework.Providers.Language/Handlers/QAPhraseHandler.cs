@@ -2,9 +2,10 @@
 {
   internal class QAPhraseHandler : ILanguagePhraseHandler
   {
-    public string GetLanguagePhrase(string dictionaryName, string phraseKey)
+    public bool TryGetLanguagePhrase(string dictionaryName, string phraseKey, out string phrase)
     {
-      return string.Concat("[", dictionaryName, ":", phraseKey, "]");
+      phrase = string.Concat("[", dictionaryName, ":", phraseKey, "]");
+      return true;
     }
   }
 }

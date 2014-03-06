@@ -18,13 +18,13 @@ namespace Atlantis.Framework.Providers.Language.Tests
     private ILanguageProvider NewLanguageProvider(int privateLabelId, string countrySite, string language, bool isInternal = false)
     {
       var container = new MockProviderContainer();
-      container.SetMockSetting(MockLocalizationProviderSettings.CountrySite, countrySite);
-      container.SetMockSetting(MockLocalizationProviderSettings.FullLanguage, language);
-      container.SetMockSetting(MockSiteContextSettings.PrivateLabelId, privateLabelId);
+      container.SetData(MockLocalizationProviderSettings.CountrySite, countrySite);
+      container.SetData(MockLocalizationProviderSettings.FullLanguage, language);
+      container.SetData(MockSiteContextSettings.PrivateLabelId, privateLabelId);
 
       if (isInternal)
       {
-        container.SetMockSetting(MockSiteContextSettings.IsRequestInternal, true);
+        container.SetData(MockSiteContextSettings.IsRequestInternal, true);
       }
 
       container.RegisterProvider<ISiteContext, MockSiteContext>();
@@ -69,6 +69,14 @@ namespace Atlantis.Framework.Providers.Language.Tests
       ILanguageProvider language = NewLanguageProvider(1, "www", "qa-qa", true);
       string phrase = language.GetLanguagePhrase("testdictionary", "testkey");
       Assert.AreEqual("[testdictionary:testkey]", phrase);
+    }
+
+    [TestMethod]
+    public void PhraseKeyMissing()
+    {
+      ILanguageProvider language = NewLanguageProvider(1, "www", "en");
+      string phrase = language.GetLanguagePhrase("cds.sales/integrationtests/hosting/web-hosting", "foo");
+      Assert.IsTrue(string.IsNullOrWhiteSpace(phrase));
     }
   }
 }

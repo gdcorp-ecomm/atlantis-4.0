@@ -21,13 +21,13 @@ namespace Atlantis.Framework.Providers.Language.Tests
     private IProviderContainer NewLanguageProviderContainer(int privateLabelId, string countrySite, string language, bool isInternal = false)
     {
       var container = new MockProviderContainer();
-      container.SetMockSetting(MockLocalizationProviderSettings.CountrySite, countrySite);
-      container.SetMockSetting(MockLocalizationProviderSettings.FullLanguage, language);
-      container.SetMockSetting(MockSiteContextSettings.PrivateLabelId, privateLabelId);
+      container.SetData(MockLocalizationProviderSettings.CountrySite, countrySite);
+      container.SetData(MockLocalizationProviderSettings.FullLanguage, language);
+      container.SetData(MockSiteContextSettings.PrivateLabelId, privateLabelId);
 
       if (isInternal)
       {
-        container.SetMockSetting(MockSiteContextSettings.IsRequestInternal, true);
+        container.SetData(MockSiteContextSettings.IsRequestInternal, true);
       }
 
       container.RegisterProvider<ISiteContext, MockSiteContext>();
@@ -182,5 +182,116 @@ namespace Atlantis.Framework.Providers.Language.Tests
       Assert.AreEqual("<div>Purple River</div>", output);
     }
 
+    #region RenderPipelineStatusProvider tests
+
+    [TestMethod]
+    public void RenderPipelineStatus_CdsPhraseHandler_Success()
+    {
+      IProviderContainer container = NewLanguageProviderContainer(1, "uk", "en");
+      container.RegisterProvider<IRenderPipelineStatusProvider, RenderPipelineStatusProvider>();
+
+      IRenderPipelineProvider renderPipelineProvider = container.Resolve<IRenderPipelineProvider>();
+
+      string content = "<div>[@L[cds.sales/integrationtests/hosting/web-hosting:testkey]@L]</div>";
+      string output = renderPipelineProvider.RenderContent(content, new List<IRenderHandler> { new LanguageRenderHandler() });
+
+      IRenderPipelineStatusProvider statusProvider = container.Resolve<IRenderPipelineStatusProvider>();
+
+      Assert.IsNotNull(statusProvider);
+      Assert.AreEqual(statusProvider.Status, RenderPipelineResult.Success);
+      Assert.AreEqual("<div>Purple River</div>", output);
+    }
+
+    [TestMethod]
+    public void RenderPipelineStatus_CdsPhraseHandler_MissingKey()
+    {
+      IProviderContainer container = NewLanguageProviderContainer(1, "uk", "en");
+      container.RegisterProvider<IRenderPipelineStatusProvider, RenderPipelineStatusProvider>();
+
+      IRenderPipelineProvider renderPipelineProvider = container.Resolve<IRenderPipelineProvider>();
+
+      string content = "<div>[@L[cds.sales/integrationtests/hosting/web-hosting:foo]@L]</div>";
+      string output = renderPipelineProvider.RenderContent(content, new List<IRenderHandler> { new LanguageRenderHandler() });
+
+      IRenderPipelineStatusProvider statusProvider = container.Resolve<IRenderPipelineStatusProvider>();
+
+      Assert.IsNotNull(statusProvider);
+      Assert.AreEqual(statusProvider.Status, RenderPipelineResult.SuccessWithErrors);
+      Assert.AreEqual("<div></div>", output);
+    }
+
+    [TestMethod]
+    public void RenderPipelineStatus_CdsPhraseHandler_MissingDictionary()
+    {
+      IProviderContainer container = NewLanguageProviderContainer(1, "uk", "en");
+      container.RegisterProvider<IRenderPipelineStatusProvider, RenderPipelineStatusProvider>();
+
+      IRenderPipelineProvider renderPipelineProvider = container.Resolve<IRenderPipelineProvider>();
+
+      string content = "<div>[@L[cds.sales/integrationtests/hosting/foo:testkey]@L]</div>";
+      string output = renderPipelineProvider.RenderContent(content, new List<IRenderHandler> { new LanguageRenderHandler() });
+
+      IRenderPipelineStatusProvider statusProvider = container.Resolve<IRenderPipelineStatusProvider>();
+
+      Assert.IsNotNull(statusProvider);
+      Assert.AreEqual(statusProvider.Status, RenderPipelineResult.SuccessWithErrors);
+      Assert.AreEqual("<div></div>", output);
+    }
+
+    [TestMethod]
+    public void RenderPipelineStatus_FilePhraseHandler_Success()
+    {
+      IProviderContainer container = NewLanguageProviderContainer(1, "uk", "en");
+      container.RegisterProvider<IRenderPipelineStatusProvider, RenderPipelineStatusProvider>();
+
+      IRenderPipelineProvider renderPipelineProvider = container.Resolve<IRenderPipelineProvider>();
+
+      string content = "<div>[@L[testdictionary:testkey]@L]</div>";
+      string output = renderPipelineProvider.RenderContent(content, new List<IRenderHandler> { new LanguageRenderHandler() });
+
+      IRenderPipelineStatusProvider statusProvider = container.Resolve<IRenderPipelineStatusProvider>();
+
+      Assert.IsNotNull(statusProvider);
+      Assert.AreEqual(statusProvider.Status, RenderPipelineResult.Success);
+      Assert.AreEqual("<div>Thames River</div>", output);
+    }
+
+    [TestMethod]
+    public void RenderPipelineStatus_FilePhraseHandler_MissingKey()
+    {
+      IProviderContainer container = NewLanguageProviderContainer(1, "uk", "en");
+      container.RegisterProvider<IRenderPipelineStatusProvider, RenderPipelineStatusProvider>();
+
+      IRenderPipelineProvider renderPipelineProvider = container.Resolve<IRenderPipelineProvider>();
+
+      string content = "<div>[@L[testdictionary:foo]@L]</div>";
+      string output = renderPipelineProvider.RenderContent(content, new List<IRenderHandler> { new LanguageRenderHandler() });
+
+      IRenderPipelineStatusProvider statusProvider = container.Resolve<IRenderPipelineStatusProvider>();
+
+      Assert.IsNotNull(statusProvider);
+      Assert.AreEqual(statusProvider.Status, RenderPipelineResult.Success);
+      Assert.AreEqual("<div></div>", output);
+    }
+
+    [TestMethod]
+    public void RenderPipelineStatus_FilePhraseHandler_MissingDictionary()
+    {
+      IProviderContainer container = NewLanguageProviderContainer(1, "uk", "en");
+      container.RegisterProvider<IRenderPipelineStatusProvider, RenderPipelineStatusProvider>();
+
+      IRenderPipelineProvider renderPipelineProvider = container.Resolve<IRenderPipelineProvider>();
+
+      string content = "<div>[@L[foo:testkey]@L]</div>";
+      string output = renderPipelineProvider.RenderContent(content, new List<IRenderHandler> { new LanguageRenderHandler() });
+
+      IRenderPipelineStatusProvider statusProvider = container.Resolve<IRenderPipelineStatusProvider>();
+
+      Assert.IsNotNull(statusProvider);
+      Assert.AreEqual(statusProvider.Status, RenderPipelineResult.Success);
+      Assert.AreEqual("<div></div>", output);
+    }
+
+    #endregion //RenderPipelineStatusProvider tests
   }
 }

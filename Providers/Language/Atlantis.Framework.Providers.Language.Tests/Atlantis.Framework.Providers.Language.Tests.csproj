@@ -39,125 +39,58 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Atlantis.Framework.AppSettings.Interface">
-      <HintPath>..\packages\Atlantis.Framework.AppSettings.Interface.4.0.0.0\lib\net40\Atlantis.Framework.AppSettings.Interface.dll</HintPath>
-    </Reference>
-    <Reference Include="Atlantis.Framework.BasePages">
-      <HintPath>..\packages\Atlantis.Framework.BasePages.4.13.11.18\lib\net40\Atlantis.Framework.BasePages.dll</HintPath>
-    </Reference>
-    <Reference Include="Atlantis.Framework.Collections">
-      <HintPath>..\packages\Atlantis.Framework.Collections.4.0.0.0\lib\net40\Atlantis.Framework.Collections.dll</HintPath>
-    </Reference>
-    <Reference Include="Atlantis.Framework.DataCache">
-      <HintPath>..\packages\Atlantis.Framework.DataCache.4.0.0.0\lib\net40\Atlantis.Framework.DataCache.dll</HintPath>
-    </Reference>
-    <Reference Include="Atlantis.Framework.DataCacheGeneric.Interface">
-      <HintPath>..\packages\Atlantis.Framework.DataCacheGeneric.Interface.4.0.0.0\lib\net40\Atlantis.Framework.DataCacheGeneric.Interface.dll</HintPath>
-    </Reference>
     <Reference Include="Atlantis.Framework.DataCacheService, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Atlantis.Framework.DataCacheService.4.13.12.21\lib\net40\Atlantis.Framework.DataCacheService.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.DotNetExtensions">
-      <HintPath>..\packages\Atlantis.Framework.DotNetExtensions.4.0.0.0\lib\net40\Atlantis.Framework.DotNetExtensions.dll</HintPath>
+    <Reference Include="Atlantis.Framework.Engine, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Engine.14.1.16.1\lib\net40\Atlantis.Framework.Engine.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.Engine">
-      <HintPath>..\packages\Atlantis.Framework.Engine.4.0.0.0\lib\net40\Atlantis.Framework.Engine.dll</HintPath>
-    </Reference>
-    <Reference Include="Atlantis.Framework.Engine.XmlSerializers">
-      <HintPath>..\packages\Atlantis.Framework.Engine.4.0.0.0\lib\net40\Atlantis.Framework.Engine.XmlSerializers.dll</HintPath>
+    <Reference Include="Atlantis.Framework.Engine.XmlSerializers, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Engine.14.1.16.1\lib\net40\Atlantis.Framework.Engine.XmlSerializers.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Atlantis.Framework.Interface.14.1.16.1\lib\net40\Atlantis.Framework.Interface.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.Language.Impl, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.Language.4.13.10.25\lib\net40\Atlantis.Framework.Language.Impl.dll</HintPath>
+    <Reference Include="Atlantis.Framework.Language.Impl">
+      <HintPath>..\packages\Atlantis.Framework.Language.Impl.14.1.28.1\lib\net40\Atlantis.Framework.Language.Impl.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Language.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Atlantis.Framework.Language.Interface.14.1.28.1\lib\net40\Atlantis.Framework.Language.Interface.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.Links.Impl">
-      <HintPath>..\packages\Atlantis.Framework.Links.Impl.14.1.21.1\lib\net40\Atlantis.Framework.Links.Impl.dll</HintPath>
-    </Reference>
-    <Reference Include="Atlantis.Framework.Links.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Atlantis.Framework.Parsers.LanguageFile, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.Links.Interface.14.1.21.1\lib\net40\Atlantis.Framework.Links.Interface.dll</HintPath>
-    </Reference>
-    <Reference Include="Atlantis.Framework.Manager.Impl">
-      <HintPath>..\packages\Atlantis.Framework.Manager.Impl.4.13.11.12\lib\net40\Atlantis.Framework.Manager.Impl.dll</HintPath>
-    </Reference>
-    <Reference Include="Atlantis.Framework.Manager.Interface">
-      <HintPath>..\packages\Atlantis.Framework.Manager.Interface.4.13.11.25\lib\net40\Atlantis.Framework.Manager.Interface.dll</HintPath>
-    </Reference>
-    <Reference Include="Atlantis.Framework.MiniEncrypt">
-      <HintPath>..\packages\Atlantis.Framework.MiniEncrypt.4.13.11.13\lib\net40\Atlantis.Framework.MiniEncrypt.dll</HintPath>
-    </Reference>
-    <Reference Include="Atlantis.Framework.Nimitz">
-      <HintPath>..\packages\Atlantis.Framework.Nimitz.4.0.0.0\lib\net40\Atlantis.Framework.Nimitz.dll</HintPath>
-    </Reference>
-    <Reference Include="Atlantis.Framework.Parsers.LanguageFile">
       <HintPath>..\packages\Atlantis.Framework.Parsers.LanguageFile.4.0.0.0\lib\net40\Atlantis.Framework.Parsers.LanguageFile.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.PrivateLabel.Interface">
-      <HintPath>..\packages\Atlantis.Framework.PrivateLabel.Interface.4.0.0.0\lib\net40\Atlantis.Framework.PrivateLabel.Interface.dll</HintPath>
-    </Reference>
-    <Reference Include="Atlantis.Framework.Products.Interface">
-      <HintPath>..\packages\Atlantis.Framework.Products.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Products.Interface.dll</HintPath>
-    </Reference>
-    <Reference Include="Atlantis.Framework.Providers.Containers">
-      <HintPath>..\packages\Atlantis.Framework.Providers.Containers.4.13.10.12\lib\net40\Atlantis.Framework.Providers.Containers.dll</HintPath>
-    </Reference>
-    <Reference Include="Atlantis.Framework.Providers.Interface">
-      <HintPath>..\packages\Atlantis.Framework.Providers.Interface.4.13.12.2\lib\net40\Atlantis.Framework.Providers.Interface.dll</HintPath>
-    </Reference>
-    <Reference Include="Atlantis.Framework.Providers.Links">
-      <HintPath>..\packages\Atlantis.Framework.Providers.Links.4.13.12.18\lib\net40\Atlantis.Framework.Providers.Links.dll</HintPath>
-    </Reference>
-    <Reference Include="Atlantis.Framework.Providers.Links.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Atlantis.Framework.Providers.Localization.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.Providers.Links.Interface.4.13.11.6\lib\net40\Atlantis.Framework.Providers.Links.Interface.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.Providers.Localization.Interface.4.13.12.31\lib\net40\Atlantis.Framework.Providers.Localization.Interface.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.Providers.Localization.Interface">
-      <HintPath>..\packages\Atlantis.Framework.Providers.Localization.Interface.4.13.12.2\lib\net40\Atlantis.Framework.Providers.Localization.Interface.dll</HintPath>
+    <Reference Include="Atlantis.Framework.Providers.RenderPipeline, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Providers.RenderPipeline.14.2.21.1\lib\net40\Atlantis.Framework.Providers.RenderPipeline.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.Providers.Preferences.Interface">
-      <HintPath>..\packages\Atlantis.Framework.Providers.Preferences.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Providers.Preferences.Interface.dll</HintPath>
+    <Reference Include="Atlantis.Framework.Providers.RenderPipeline.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Providers.RenderPipeline.14.2.21.1\lib\net40\Atlantis.Framework.Providers.RenderPipeline.Interface.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.Providers.RenderPipeline">
-      <HintPath>..\packages\Atlantis.Framework.Providers.RenderPipeline.4.13.11.18\lib\net40\Atlantis.Framework.Providers.RenderPipeline.dll</HintPath>
+    <Reference Include="Atlantis.Framework.Testing.MockHttpContext, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Testing.MockHttpContext.14.1.25.1\lib\net40\Atlantis.Framework.Testing.MockHttpContext.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.Providers.RenderPipeline.Interface">
-      <HintPath>..\packages\Atlantis.Framework.Providers.RenderPipeline.4.13.11.18\lib\net40\Atlantis.Framework.Providers.RenderPipeline.Interface.dll</HintPath>
+    <Reference Include="Atlantis.Framework.Testing.MockLocalization, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Testing.MockLocalization.4.13.12.31\lib\net40\Atlantis.Framework.Testing.MockLocalization.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.SessionCache">
-      <HintPath>..\packages\Atlantis.Framework.SessionCache.4.13.10.22\lib\net40\Atlantis.Framework.SessionCache.dll</HintPath>
-    </Reference>
-    <Reference Include="Atlantis.Framework.Shopper.Impl">
-      <HintPath>..\packages\Atlantis.Framework.Shopper.4.13.9.30\lib\net40\Atlantis.Framework.Shopper.Impl.dll</HintPath>
-    </Reference>
-    <Reference Include="Atlantis.Framework.Shopper.Impl.XmlSerializers">
-      <HintPath>..\packages\Atlantis.Framework.Shopper.4.13.9.30\lib\net40\Atlantis.Framework.Shopper.Impl.XmlSerializers.dll</HintPath>
-    </Reference>
-    <Reference Include="Atlantis.Framework.Shopper.Interface">
-      <HintPath>..\packages\Atlantis.Framework.Shopper.Interface.4.13.11.22\lib\net40\Atlantis.Framework.Shopper.Interface.dll</HintPath>
-    </Reference>
-    <Reference Include="Atlantis.Framework.Testing.MockHttpContext">
-      <HintPath>..\packages\Atlantis.Framework.Testing.MockHttpContext.4.0.0.0\lib\net40\Atlantis.Framework.Testing.MockHttpContext.dll</HintPath>
-    </Reference>
-    <Reference Include="Atlantis.Framework.Testing.MockLocalization">
-      <HintPath>..\packages\Atlantis.Framework.Testing.MockLocalization.4.13.11.4\lib\net40\Atlantis.Framework.Testing.MockLocalization.dll</HintPath>
-    </Reference>
-    <Reference Include="Atlantis.Framework.Testing.MockProviders">
-      <HintPath>..\packages\Atlantis.Framework.Testing.MockProviders.4.13.10.28\lib\net40\Atlantis.Framework.Testing.MockProviders.dll</HintPath>
-    </Reference>
-    <Reference Include="netConnect">
-      <HintPath>..\packages\Atlantis.Framework.Nimitz.4.0.0.0\lib\net40\netConnect.dll</HintPath>
+    <Reference Include="Atlantis.Framework.Testing.MockProviders, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Testing.MockProviders.4.14.1.13\lib\net40\Atlantis.Framework.Testing.MockProviders.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.5.0.8\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
@@ -186,22 +119,6 @@
     <Compile Include="CDSVersionSpoofingTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\Obsolete\Atlantis.Framework.ShopperPriceType\Atlantis.Framework.ShopperPriceType.Impl\Atlantis.Framework.ShopperPriceType.Impl.csproj">
-      <Project>{b328af05-4bee-45bb-9913-c836e5593e50}</Project>
-      <Name>Atlantis.Framework.ShopperPriceType.Impl</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\..\Obsolete\Atlantis.Framework.ShopperPriceType\Atlantis.Framework.ShopperPriceType.Interface\Atlantis.Framework.ShopperPriceType.Interface.csproj">
-      <Project>{f310fe92-7999-46f3-a64e-36f90243ba02}</Project>
-      <Name>Atlantis.Framework.ShopperPriceType.Interface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\..\Obsolete\Atlantis.Framework.VerifyShopper\Atlantis.Framework.VerifyShopper.Impl\Atlantis.Framework.VerifyShopper.Impl.csproj">
-      <Project>{fb8a1912-7114-4fe2-9e96-9698635fbeb1}</Project>
-      <Name>Atlantis.Framework.VerifyShopper.Impl</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\..\Obsolete\Atlantis.Framework.VerifyShopper\Atlantis.Framework.VerifyShopper.Interface\Atlantis.Framework.VerifyShopper.Interface.csproj">
-      <Project>{8cdd515f-375e-4fa5-9e41-f95227396675}</Project>
-      <Name>Atlantis.Framework.VerifyShopper.Interface</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.Providers.Language.Interface\Atlantis.Framework.Providers.Language.Interface.csproj">
       <Project>{3a4f8e16-d9c2-40e1-9273-f2c4b9c7d306}</Project>
       <Name>Atlantis.Framework.Providers.Language.Interface</Name>
@@ -225,10 +142,6 @@
     <None Include="testdictionary-es.language">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Interop\Interop.gdMiniEncryptLib.dll" />
-    <Content Include="Interop\readme.txt" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

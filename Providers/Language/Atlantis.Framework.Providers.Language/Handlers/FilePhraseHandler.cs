@@ -16,11 +16,14 @@ namespace Atlantis.Framework.Providers.Language.Handlers
       _localization = new Lazy<ILocalizationProvider>(container.Resolve<ILocalizationProvider>);
     }
 
-    public string GetLanguagePhrase(string dictionaryName, string phraseKey)
+    public bool TryGetLanguagePhrase(string dictionaryName, string phraseKey, out string phrase)
     {
       var request = new LanguagePhraseRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, dictionaryName, phraseKey, _localization.Value.FullLanguage, _localization.Value.CountrySite, _siteContext.Value.ContextId);
       var response = (LanguagePhraseResponseData)DataCache.DataCache.GetProcessRequest(request, LanguageProviderEngineRequests.FileLanguagePhrase);
-      return response.LanguagePhrase;
+
+      phrase = response.LanguagePhrase;
+
+      return true;
     }
   }
 }

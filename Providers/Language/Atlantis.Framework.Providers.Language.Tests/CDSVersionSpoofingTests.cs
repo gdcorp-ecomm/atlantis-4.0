@@ -1,8 +1,5 @@
-﻿using Atlantis.Framework.BasePages.Providers;
-using Atlantis.Framework.Interface;
-using Atlantis.Framework.Providers.Interface.Links;
+﻿using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.Language.Interface;
-using Atlantis.Framework.Providers.Links;
 using Atlantis.Framework.Providers.Localization.Interface;
 using Atlantis.Framework.Providers.RenderPipeline;
 using Atlantis.Framework.Providers.RenderPipeline.Interface;
@@ -11,7 +8,6 @@ using Atlantis.Framework.Testing.MockLocalization;
 using Atlantis.Framework.Testing.MockProviders;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Atlantis.Framework.Providers.Language.Tests
 {
@@ -23,13 +19,13 @@ namespace Atlantis.Framework.Providers.Language.Tests
     private IProviderContainer NewLanguageProviderContainer(int privateLabelId, string countrySite, string language, bool isInternal = false)
     {
       var container = new MockProviderContainer();
-      container.SetMockSetting(MockLocalizationProviderSettings.CountrySite, countrySite);
-      container.SetMockSetting(MockLocalizationProviderSettings.FullLanguage, language);
-      container.SetMockSetting(MockSiteContextSettings.PrivateLabelId, privateLabelId);
+      container.SetData(MockLocalizationProviderSettings.CountrySite, countrySite);
+      container.SetData(MockLocalizationProviderSettings.FullLanguage, language);
+      container.SetData(MockSiteContextSettings.PrivateLabelId, privateLabelId);
 
       if (isInternal)
       {
-        container.SetMockSetting(MockSiteContextSettings.IsRequestInternal, true);
+        container.SetData(MockSiteContextSettings.IsRequestInternal, true);
       }
 
       container.RegisterProvider<ISiteContext, MockSiteContext>();
@@ -38,8 +34,7 @@ namespace Atlantis.Framework.Providers.Language.Tests
       container.RegisterProvider<ILocalizationProvider, MockLocalizationProvider>();
       container.RegisterProvider<ILanguageProvider, LanguageProvider>();
       container.RegisterProvider<IRenderPipelineProvider, RenderPipelineProvider>();
-      container.RegisterProvider<IDebugContext, DebugProvider>();
-      container.RegisterProvider<ILinkProvider, LinkProvider>();
+      container.RegisterProvider<IDebugContext, MockDebugContext>();
       return container;
     }
 
@@ -92,7 +87,7 @@ namespace Atlantis.Framework.Providers.Language.Tests
 
       Assert.AreEqual("<div>third eye</div>", output);
     }
-
+    /*
     //commenting this test because debug info. logging is commented out.
     [TestMethod]
     public void DoesLogDebugInfoWhenInternal()
@@ -113,7 +108,7 @@ namespace Atlantis.Framework.Providers.Language.Tests
       Assert.AreEqual(list[1].Key, "2. CDS Language Dictionary");
       Assert.AreEqual(list[1].Value, "<a href='http://siteadmin.dev.intranet.gdg/contentmanagement/content/index/docid/52697d55f778fc3e88f8934d' target='_blank'>docid/52697d55f778fc3e88f8934d</a>");
     }
-
+    */
     [TestMethod]
     public void DoesNotLogDebugInfoWhenExternal()
     {

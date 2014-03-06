@@ -2,15 +2,18 @@
 <package >
   <metadata>
     <id>Atlantis.Framework.Providers.Language.Interface</id>
-    <version>4.13.10.12</version>
+    <version>$version$</version>
     <title>Atlantis Framework Providers Language Interface</title>
     <authors>$author$</authors>
     <owners>$author$</owners>
     <projectUrl>https://confluence.int.godaddy.com/display/ATLANTIS</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes></releaseNotes>
+    <releaseNotes>
+      14.3.6.1:  (ATLANTIS-391) Extended LanguageRenderHandler to track match failures within an IRenderPipelineStatusProvider so the caller can determine if any key-phrases were not found
+    </releaseNotes>
     <copyright>$copyright$</copyright>
     <tags>Atlantis Framework Providers Language Interface</tags>
+    <dependencies />
   </metadata>
 </package>

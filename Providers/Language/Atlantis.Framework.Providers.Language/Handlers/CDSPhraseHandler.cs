@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Collections.Specialized;
 using System.Collections.Generic;
-using Atlantis.Framework.Providers.Interface.Links;
 
 namespace Atlantis.Framework.Providers.Language.Handlers
 {
@@ -39,24 +38,26 @@ namespace Atlantis.Framework.Providers.Language.Handlers
       }
     }
 
-    public string GetLanguagePhrase(string dictionaryName, string phraseKey)
+    public bool TryGetLanguagePhrase(string dictionaryName, string phraseKey, out string phrase)
     {
+      bool retVal;
+      
       dictionaryName = dictionaryName.Substring(4);
-      string phraseText;
       var fullLanguage = _localization.Value.FullLanguage;
       var fullLanguageDictionary = GetLanguageResponse(dictionaryName, fullLanguage);
-      if (!TryGetPhraseText(fullLanguageDictionary, phraseKey, fullLanguage, out phraseText) && fullLanguage != _defaultLanguage)
+
+      if (!(retVal = TryGetPhraseText(fullLanguageDictionary, phraseKey, fullLanguage, out phrase) && fullLanguage != _defaultLanguage))
       {
         var shortLanguage = _localization.Value.ShortLanguage;
         var shortLanguageDictionary = GetLanguageResponse(dictionaryName, shortLanguage);
-        if (!TryGetPhraseText(shortLanguageDictionary, phraseKey, shortLanguage, out phraseText) && shortLanguage != _defaultLanguage)
+        if (!(retVal = TryGetPhraseText(shortLanguageDictionary, phraseKey, shortLanguage, out phrase) && shortLanguage != _defaultLanguage))
         {
           var defaultLanguageDictionary = GetLanguageResponse(dictionaryName, _defaultLanguage);
-          TryGetPhraseText(defaultLanguageDictionary, phraseKey, _defaultLanguage, out phraseText);
+          retVal = TryGetPhraseText(defaultLanguageDictionary, phraseKey, _defaultLanguage, out phrase);
         }
       }
-      return phraseText;
-      
+
+      return retVal;
     }
 
     private CDSLanguageResponseData GetLanguageResponse(string dictionaryName, string language)
@@ -143,8 +144,7 @@ namespace Atlantis.Framework.Providers.Language.Handlers
 
     private void LogCDSDebugInfo(string versionId, string documentId)
     {
-      ILinkProvider linkProvider; 
-      if (_siteContext.Value.IsRequestInternal && _container.TryResolve<ILinkProvider>(out linkProvider))
+      if (_siteContext.Value.IsRequestInternal)
       {
         try
         {
@@ -159,7 +159,7 @@ namespace Atlantis.Framework.Providers.Language.Handlers
             {
               loggedVersionIds.Add(versionId);
               string debugInfoKey = string.Format(DebugInfoKeyFormat, loggedVersionIds.Count);
-              string hyperlink = GetDebugInfoHyperLink(versionId, documentId, linkProvider);
+              string hyperlink = GetDebugInfoHyperLink(versionId, documentId);
               _debugContext.Value.LogDebugTrackingData(debugInfoKey, hyperlink);
               _container.SetData<HashSet<string>>(DebugInfoLogTrackingKey, loggedVersionIds);
             }
@@ -172,13 +172,12 @@ namespace Atlantis.Framework.Providers.Language.Handlers
       }
     }
 
-    private string GetDebugInfoHyperLink(string versionId, string documentId, ILinkProvider linkProvider)
+    private string GetDebugInfoHyperLink(string versionId, string documentId)
     {
       string hyperlink = null;
 
       var contentRelativeUrl = string.Format(CDSM_CONTENT_RELATIVE_PATH, documentId, versionId);
-      var cdsmUri = new Uri(new Uri(linkProvider.GetUrl(SITE_ADMIN_URL_KEY, null)), new Uri(contentRelativeUrl, UriKind.Relative)).AbsoluteUri;
-      hyperlink = string.Format(HyperLinkFormat, cdsmUri, documentId, versionId);
+      hyperlink = string.Format(HyperLinkFormat, contentRelativeUrl, documentId, versionId);
 
       return hyperlink;
     }

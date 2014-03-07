@@ -42,8 +42,21 @@
     <Reference Include="Atlantis.Framework.DataCacheService">
       <HintPath>..\packages\Atlantis.Framework.DataCacheService.4.13.12.21\lib\net40\Atlantis.Framework.DataCacheService.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.Interface">
-      <HintPath>..\packages\Atlantis.Framework.Interface.4.13.12.22\lib\net40\Atlantis.Framework.Interface.dll</HintPath>
+    <Reference Include="Atlantis.Framework.Engine, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Engine.14.3.1.1\lib\net40\Atlantis.Framework.Engine.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Engine.XmlSerializers, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Engine.14.3.1.1\lib\net40\Atlantis.Framework.Engine.XmlSerializers.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Interface.14.1.16.1\lib\net40\Atlantis.Framework.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.MailApi.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.MailApi.Interface.14.3.3.2\lib\net40\Atlantis.Framework.MailApi.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Providers.Containers">
       <HintPath>..\packages\Atlantis.Framework.Providers.Containers.4.14.1.6\lib\net40\Atlantis.Framework.Providers.Containers.dll</HintPath>
@@ -85,14 +98,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Triplets\Atlantis.Framework.MailApi\Atlantis.Framework.MailApi.Impl\Atlantis.Framework.MailApi.Impl.csproj">
-      <Project>{188f77da-de53-4666-80a4-48dd76a1176d}</Project>
-      <Name>Atlantis.Framework.MailApi.Impl</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Triplets\Atlantis.Framework.MailApi\Atlantis.Framework.MailApi.Interface\Atlantis.Framework.MailApi.Interface.csproj">
-      <Project>{bcff5567-3a11-4fd6-9de9-51f2895ac5b3}</Project>
-      <Name>Atlantis.Framework.MailApi.Interface</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.Providers.MailApi\Atlantis.Framework.Providers.MailApi.csproj">
       <Project>{6f2a2270-fb30-4094-9417-ae0a464ba136}</Project>
       <Name>Atlantis.Framework.Providers.MailApi</Name>

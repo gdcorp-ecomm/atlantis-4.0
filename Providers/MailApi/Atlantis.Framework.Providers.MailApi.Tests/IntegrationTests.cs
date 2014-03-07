@@ -1,10 +1,12 @@
 ﻿using System;
-using Atlantis.Framework.Providers.MailApi.DTOs;
+
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Testing.MockHttpContext;
 using Atlantis.Framework.Testing.MockProviders;
+using Atlantis.Framework.Providers.MailApi.DTOs;
 using Atlantis.Framework.MailApi.Interface;
+
 
 namespace Atlantis.Framework.Providers.MailApi.Tests
 {

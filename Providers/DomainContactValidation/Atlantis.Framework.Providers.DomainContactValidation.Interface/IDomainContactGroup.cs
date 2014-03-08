@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using Atlantis.Framework.DotTypeCache.Interface;
 
 namespace Atlantis.Framework.Providers.DomainContactValidation.Interface
 {
@@ -112,6 +114,9 @@ namespace Atlantis.Framework.Providers.DomainContactValidation.Interface
 
     object Clone();
 
+    [Obsolete("Use the new GetTuiFormInfo which takes in the dictionary of tlds with launch phases.")]
     IDictionary<string, ITuiFormInfo> GetTuiFormInfo(IEnumerable<string> tlds);
+
+    IDictionary<string, ITuiFormInfo> GetTuiFormInfo(Dictionary<string, LaunchPhases> tlds);
   }
 }

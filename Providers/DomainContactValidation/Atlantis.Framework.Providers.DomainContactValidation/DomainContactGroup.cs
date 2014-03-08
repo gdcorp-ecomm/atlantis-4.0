@@ -5,8 +5,11 @@ using System.Linq;
 using System.Xml;
 using Atlantis.Framework.DomainContactValidation.Interface;
 using Atlantis.Framework.DomainsTrustee.Interface;
+using Atlantis.Framework.DotTypeCache;
+using Atlantis.Framework.DotTypeCache.Interface;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.DomainContactValidation.Interface;
+using Atlantis.Framework.Providers.Interface.ProviderContainer;
 
 namespace Atlantis.Framework.Providers.DomainContactValidation
 {
@@ -44,6 +47,12 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
       }
     }
 
+    private IDotTypeProvider _dotTypeProvider;
+    private IDotTypeProvider GetDotTypeProvider
+    {
+      get { return _dotTypeProvider ?? (_dotTypeProvider = _container.Resolve<IDotTypeProvider>()); }
+    }
+
     #region Constructors
 
     private static HashSet<string> CleanTlds(IEnumerable<string> tlds)
@@ -63,7 +72,7 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
       return result;
     }
 
-    private static HashSet<string> RemoveLeadingPeriodsOnTlds(IEnumerable<string> tlds)
+    private static IEnumerable<string> RemoveLeadingPeriodsOnTlds(IEnumerable<string> tlds)
     {
       var result = new HashSet<string>();
       foreach (string sTld in tlds)
@@ -80,8 +89,29 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
       return result;
     }
 
-    internal DomainContactGroup(IEnumerable<string> tlds, int privateLabelId)
+    private static Dictionary<string, LaunchPhases> RemoveLeadingPeriodsOnTlds(Dictionary<string, LaunchPhases> tlds)
     {
+      var result = new Dictionary<string, LaunchPhases>();
+      foreach (var sTld in tlds)
+      {
+        if (sTld.Key[0] == '.')
+        {
+          result.Add(sTld.Key.ToUpperInvariant().Substring(1), sTld.Value);
+        }
+        else
+        {
+          result.Add(sTld.Key.ToUpperInvariant(), sTld.Value);
+        }
+      }
+      return result;
+    }
+
+    private readonly IProviderContainer _container;
+
+    internal DomainContactGroup(IProviderContainer container, IEnumerable<string> tlds, int privateLabelId)
+    {
+      _container = container;
+
       Tlds = CleanTlds(tlds);
 
       if (Tlds.Count == 0)
@@ -93,8 +123,10 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
       ContactGroupId = Guid.NewGuid().ToString();
     }
 
-    internal DomainContactGroup(string contactGroupXml)
+    internal DomainContactGroup(IProviderContainer container, string contactGroupXml)
     {
+      _container = container;
+
       Tlds = new HashSet<string>();
       var xmlContactGroupDoc = new XmlDocument();
       xmlContactGroupDoc.LoadXml(contactGroupXml);
@@ -149,7 +181,7 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
     /// <returns>a near-deep copy of the existing DomainContactGroup</returns>
     public object Clone()
     {
-      var newDomainContactGroup = new DomainContactGroup(Tlds, _privateLabelId);
+      var newDomainContactGroup = new DomainContactGroup(_container, Tlds, _privateLabelId);
 
       foreach (KeyValuePair<DomainContactType, IDomainContact> pair in _domainContactGroup)
       {
@@ -218,7 +250,7 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
         var contactsDomains = new DomainsTrusteeContactsTlds(contactList, tldArray.ToList());
         var requestData = new DomainsTrusteeRequestData
         {
-          ContactsTldsList = new List<DomainsTrusteeContactsTlds> {contactsDomains}
+          ContactsTldsList = new List<DomainsTrusteeContactsTlds> { contactsDomains }
         };
 
         DomainsTrusteeResponseData response;
@@ -241,6 +273,126 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
             if (response.TryGetDomainTrustee(tld, out domainTrusteeResponse))
             {
               result.Add(tld, new TuiFormInfo(domainTrusteeResponse.TuiFormType, domainTrusteeResponse.VendorId));
+            }
+          }
+        }
+      }
+
+      return result;
+    }
+
+
+    public IDictionary<string, ITuiFormInfo> GetTuiFormInfo(Dictionary<string, LaunchPhases> tlds)
+    {
+      var result = new Dictionary<string, ITuiFormInfo>(8, StringComparer.OrdinalIgnoreCase);
+
+      tlds = RemoveLeadingPeriodsOnTlds(tlds);
+
+      var tldsTrusteeEnabled = new HashSet<string>();
+      foreach (var tld in tlds)
+      {
+        var dotTypeInfo = GetDotTypeProvider.GetDotTypeInfo(tld.Key);
+        if (dotTypeInfo != null && dotTypeInfo.GetType().Name != "InvalidDotType")
+        {
+          if (dotTypeInfo.Product != null && dotTypeInfo.Product.Trustee != null)
+          {
+            if (dotTypeInfo.Product.Trustee.IsRequired)
+            {
+              tldsTrusteeEnabled.Add(tld.Key);
+            }
+            else
+            {
+              var formTypes = dotTypeInfo.GetTuiFormTypes(tld.Value);
+              if (formTypes != null && formTypes.Any())
+              {
+                result[tld.Key] = new TuiFormInfo(formTypes[0], "0");
+              }
+              else
+              {
+                result[tld.Key] = new TuiFormInfo(string.Empty, "0");
+              }
+            }
+          }
+        }
+      }
+      
+      var contactList = new List<DomainsTrusteeContact>(8);
+
+      foreach (var pair in _domainContactGroup)
+      {
+        var domainsTrusteeContactType = DomainsTrusteeContactTypes.Registrant;
+        bool valid = false;
+        switch (pair.Key.ToString().ToLowerInvariant())
+        {
+          case "registrant":
+            domainsTrusteeContactType = DomainsTrusteeContactTypes.Registrant;
+            valid = true;
+            break;
+          case "billing":
+            domainsTrusteeContactType = DomainsTrusteeContactTypes.Billing;
+            valid = true;
+            break;
+          case "technical":
+            domainsTrusteeContactType = DomainsTrusteeContactTypes.Technical;
+            valid = true;
+            break;
+          case "administrative":
+            domainsTrusteeContactType = DomainsTrusteeContactTypes.Administrative;
+            valid = true;
+            break;
+        }
+
+        if (valid)
+        {
+          contactList.Add(new DomainsTrusteeContact(domainsTrusteeContactType, pair.Value.Country));
+
+          if (pair.Key.ToString().ToLowerInvariant() == "registrant")
+          {
+            if (!_domainContactGroup.ContainsKey(DomainContactType.Billing))
+            {
+              contactList.Add(new DomainsTrusteeContact(DomainsTrusteeContactTypes.Billing, pair.Value.Country));
+            }
+            if (!_domainContactGroup.ContainsKey(DomainContactType.Technical))
+            {
+              contactList.Add(new DomainsTrusteeContact(DomainsTrusteeContactTypes.Technical, pair.Value.Country));
+            }
+            if (!_domainContactGroup.ContainsKey(DomainContactType.Administrative))
+            {
+              contactList.Add(new DomainsTrusteeContact(DomainsTrusteeContactTypes.Administrative, pair.Value.Country));
+            }
+          }
+        }
+      }
+
+      var tldArray = tldsTrusteeEnabled.ToArray();
+      if (contactList.Count > 0 && tldArray.Length > 0)
+      {
+        var contactsDomains = new DomainsTrusteeContactsTlds(contactList, tldArray.ToList());
+        var requestData = new DomainsTrusteeRequestData
+        {
+          ContactsTldsList = new List<DomainsTrusteeContactsTlds> {contactsDomains}
+        };
+
+        DomainsTrusteeResponseData response;
+        try
+        {
+          response = (DomainsTrusteeResponseData)Engine.Engine.ProcessRequest(requestData, DOMAIN_TRUSTEE_REQUESTID);
+        }
+        catch (Exception ex)
+        {
+          var aex = new AtlantisException("DomainContactGroup.GetTuiFormInfo", string.Empty, "0", "Error running domains trustee triplet", string.Join("|", tldArray), string.Empty, string.Empty, string.Empty, string.Empty, 0);
+          Engine.Engine.LogAtlantisException(aex);
+          response = null;
+        }
+
+        if (response != null)
+        {
+          foreach (var tld in tldArray)
+          {
+            DomainsTrusteeResponse domainTrusteeResponse;
+            if (response.TryGetDomainTrustee(tld, out domainTrusteeResponse))
+            {
+              result[tld] = new TuiFormInfo(domainTrusteeResponse.TuiFormType, domainTrusteeResponse.VendorId);
             }
           }
         }

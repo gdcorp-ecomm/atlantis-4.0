@@ -8,7 +8,10 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
 {
   public class DomainContactValidationProvider : ProviderBase, IDomainContactValidationProvider // Framework providers should implement a corresponding interface
   {
-    public DomainContactValidationProvider(IProviderContainer container): base(container){}
+    public DomainContactValidationProvider(IProviderContainer container) : base(container)
+    {
+      
+    }
 
     public IDomainContact DomainContactInstance()
     {
@@ -46,12 +49,12 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
 
     public IDomainContactGroup DomainContactGroupInstance(IEnumerable<string> tlds, int privateLabelId)
     {
-      return new DomainContactGroup(tlds, privateLabelId);
+      return new DomainContactGroup(Container, tlds, privateLabelId);
     }
 
     public IDomainContactGroup DomainContactGroupInstance(string contactGroupXml)
     {
-      return new DomainContactGroup(contactGroupXml);
+      return new DomainContactGroup(Container, contactGroupXml);
     }
 
     public IDomainContactError DomainContactErrorInstance()

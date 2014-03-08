@@ -50,12 +50,39 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Atlantis.Framework.DataCacheService.4.0.0.0\lib\net40\Atlantis.Framework.DataCacheService.dll</HintPath>
     </Reference>
+    <Reference Include="Atlantis.Framework.DCCDomainsDataCache.Impl">
+      <HintPath>..\packages\Atlantis.Framework.DCCDomainsDataCache.Impl.4.13.1.28\lib\net40\Atlantis.Framework.DCCDomainsDataCache.Impl.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.DCCDomainsDataCache.Impl.XmlSerializers">
+      <HintPath>..\packages\Atlantis.Framework.DCCDomainsDataCache.Impl.4.13.1.28\lib\net40\Atlantis.Framework.DCCDomainsDataCache.Impl.XmlSerializers.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.DCCDomainsDataCache.Interface">
+      <HintPath>..\packages\Atlantis.Framework.DCCDomainsDataCache.Interface.14.2.27.1\lib\net40\Atlantis.Framework.DCCDomainsDataCache.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.DomainContactFields.Impl">
+      <HintPath>..\packages\Atlantis.Framework.DomainContactFields.Impl.4.13.6.5\lib\net40\Atlantis.Framework.DomainContactFields.Impl.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.DomainContactFields.Interface">
+      <HintPath>..\packages\Atlantis.Framework.DomainContactFields.Impl.4.13.6.5\lib\net40\Atlantis.Framework.DomainContactFields.Interface.dll</HintPath>
+    </Reference>
     <Reference Include="Atlantis.Framework.DomainContactValidation.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Atlantis.Framework.DomainContactValidation.Interface.4.13.12.18\lib\net40\Atlantis.Framework.DomainContactValidation.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.DomainsTrustee.Interface">
       <HintPath>..\packages\Atlantis.Framework.DomainsTrustee.Interface.4.13.12.16\lib\net40\Atlantis.Framework.DomainsTrustee.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.DotTypeCache">
+      <HintPath>..\packages\Atlantis.Framework.DotTypeCache.14.2.27.1\lib\net40\Atlantis.Framework.DotTypeCache.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.DotTypeCache.Interface">
+      <HintPath>..\packages\Atlantis.Framework.DotTypeCache.Interface.14.2.27.1\lib\net40\Atlantis.Framework.DotTypeCache.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.DotTypeCache.Static">
+      <HintPath>..\packages\Atlantis.Framework.DotTypeCache.Static.14.2.27.1\lib\net40\Atlantis.Framework.DotTypeCache.Static.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.DotTypeCache.StaticTypes">
+      <HintPath>..\packages\Atlantis.Framework.DotTypeCache.StaticTypes.14.1.21.1\lib\net40\Atlantis.Framework.DotTypeCache.StaticTypes.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Engine">
       <HintPath>..\packages\Atlantis.Framework.Engine.4.0.0.0\lib\net40\Atlantis.Framework.Engine.dll</HintPath>
@@ -74,9 +101,45 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Atlantis.Framework.Products.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Products.Interface.dll</HintPath>
     </Reference>
+    <Reference Include="Atlantis.Framework.Providers.Containers">
+      <HintPath>..\packages\Atlantis.Framework.Providers.Containers.4.14.1.6\lib\net40\Atlantis.Framework.Providers.Containers.dll</HintPath>
+    </Reference>
     <Reference Include="Atlantis.Framework.Providers.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Atlantis.Framework.Providers.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Providers.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Providers.RenderPipeline.Interface">
+      <HintPath>..\packages\Atlantis.Framework.Providers.RenderPipeline.Interface.4.13.10.16\lib\net40\Atlantis.Framework.Providers.RenderPipeline.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Providers.TLDDataCache">
+      <HintPath>..\packages\Atlantis.Framework.Providers.TLDDataCache.14.1.30.1\lib\net40\Atlantis.Framework.Providers.TLDDataCache.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Providers.TLDDataCache.Interface">
+      <HintPath>..\packages\Atlantis.Framework.Providers.TLDDataCache.Interface.14.1.30.1\lib\net40\Atlantis.Framework.Providers.TLDDataCache.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.RegDotTypeProductIds.Impl">
+      <HintPath>..\packages\Atlantis.Framework.RegDotTypeProductIds.Impl.4.13.10.30\lib\net40\Atlantis.Framework.RegDotTypeProductIds.Impl.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.RegDotTypeProductIds.Impl.XmlSerializers">
+      <HintPath>..\packages\Atlantis.Framework.RegDotTypeProductIds.Impl.4.13.10.30\lib\net40\Atlantis.Framework.RegDotTypeProductIds.Impl.XmlSerializers.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.RegDotTypeProductIds.Interface">
+      <HintPath>..\packages\Atlantis.Framework.RegDotTypeProductIds.Interface.4.0.0.0\lib\net40\Atlantis.Framework.RegDotTypeProductIds.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.RegDotTypeRegistry.Impl">
+      <HintPath>..\packages\Atlantis.Framework.RegDotTypeRegistry.Impl.4.13.10.30\lib\net40\Atlantis.Framework.RegDotTypeRegistry.Impl.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.RegDotTypeRegistry.Impl.XmlSerializers">
+      <HintPath>..\packages\Atlantis.Framework.RegDotTypeRegistry.Impl.4.13.10.30\lib\net40\Atlantis.Framework.RegDotTypeRegistry.Impl.XmlSerializers.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.RegDotTypeRegistry.Interface">
+      <HintPath>..\packages\Atlantis.Framework.RegDotTypeRegistry.Interface.4.13.1.7\lib\net40\Atlantis.Framework.RegDotTypeRegistry.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.TLDDataCache.Impl">
+      <HintPath>..\packages\Atlantis.Framework.TLDDataCache.Impl.4.13.10.14\lib\net40\Atlantis.Framework.TLDDataCache.Impl.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.TLDDataCache.Interface">
+      <HintPath>..\packages\Atlantis.Framework.TLDDataCache.Interface.14.1.28.1\lib\net40\Atlantis.Framework.TLDDataCache.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.5.0.8\lib\net40\Newtonsoft.Json.dll</HintPath>

@@ -1,9 +1,10 @@
 ﻿using Atlantis.Framework.Interface;
 using Atlantis.Framework.MailApi.Interface;
 using Atlantis.Framework.Providers.MailApi.Interface.Response;
-using Atlantis.Framework.Providers.MailApi.Response;
+
 using System;
 using System.Text;
+
 
 // triplet helper - makes calls through Triplets and converts their responses to provider objects
 
@@ -134,7 +135,7 @@ namespace Atlantis.Framework.Providers.MailApi
       return sb.ToString();
     }
 
-    internal static IFolderResult Convert(GetFolderResponseData data)
+    internal static FolderResult Convert(GetFolderResponseData data)
     {
       FolderResult result = new FolderResult();
       result.Folder = Convert(data.MailFolder);
@@ -142,7 +143,7 @@ namespace Atlantis.Framework.Providers.MailApi
       return result;
     }
 
-    internal static IFolder Convert(MailFolder mailFolder)
+    internal static Folder Convert(MailFolder mailFolder)
     {
       Folder folder = new Folder();
       folder.DisplayName = mailFolder.DisplayName;
@@ -157,22 +158,21 @@ namespace Atlantis.Framework.Providers.MailApi
       return folder;
     }
 
-    internal static IMessageListResult Convert(GetMessageListResponseData data)
+    internal static MessageListResult Convert(GetMessageListResponseData data)
     {
       MessageListResult messageListResult = new MessageListResult();
-      messageListResult.ResultCode = data.ResultCode;
-      messageListResult.IsMailApiFault = data.IsJsoapFault;
+
       messageListResult.Session = data.State.Session;
 
       foreach (MailHeader header in data.MessageListData.MailHeaderList)
       {
-        IMessageHeader mailHeader = Convert(header);
+        MessageHeader mailHeader = Convert(header);
         messageListResult.MessageHeaderList.Add(mailHeader);
       }
       return messageListResult;
     }
 
-    private static IMessageHeader Convert(MailHeader header)
+    private static MessageHeader Convert(MailHeader header)
     {
       MessageHeader msgHeader = new MessageHeader();
       msgHeader.Cc = header.Cc;
@@ -206,7 +206,7 @@ namespace Atlantis.Framework.Providers.MailApi
       return msgHeader;
     }
 
-    internal static IFolderListResult Convert(GetFolderListResponseData data)
+    internal static FolderListResult Convert(GetFolderListResponseData data)
     {
       FolderListResult result = new FolderListResult();
       result.ResultCode = data.ResultCode;
@@ -214,16 +214,16 @@ namespace Atlantis.Framework.Providers.MailApi
 
       foreach (MailFolder mailFolder in data.MailFolders )
       {
-        IFolder folder = Convert(mailFolder);
+        Folder folder = Convert(mailFolder);
         result.FolderList.Add(folder);
       }
       return result;
     }
 
-    internal static ILoginResult Convert(LoginResponseData data)
+    internal static LoginResult Convert(LoginResponseData data)
     {
       LoginResult loginResult = new LoginResult();
-      loginResult.IsMailApiFault = data.IsJsoapFault;
+
       loginResult.Session = data.State.Session;
       loginResult.BaseUrl = data.LoginData.BaseUrl;
       return loginResult;

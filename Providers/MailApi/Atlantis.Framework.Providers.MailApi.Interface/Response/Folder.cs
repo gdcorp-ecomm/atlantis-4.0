@@ -2,10 +2,10 @@
 using Atlantis.Framework.Providers.MailApi.Interface.Response;
 using System.Runtime.Serialization;
 
-namespace Atlantis.Framework.Providers.MailApi.Response
+namespace Atlantis.Framework.Providers.MailApi.Interface.Response
 {
   [DataContract]
-  public class Folder : IFolder
+  public class Folder
   {
     [DataMember]
     public string DisplayName { get; set; }

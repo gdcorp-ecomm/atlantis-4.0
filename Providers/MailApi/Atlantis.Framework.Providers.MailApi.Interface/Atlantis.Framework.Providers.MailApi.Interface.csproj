@@ -44,16 +44,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Response\IFolder.cs" />
-    <Compile Include="Response\IFolderListResult.cs" />
-    <Compile Include="Response\IFolderResult.cs" />
+    <Compile Include="Exceptions\MailApiException.cs" />
     <Compile Include="IMailApiProvider.cs" />
-    <Compile Include="Response\ILoginFullResult.cs" />
-    <Compile Include="Response\ILoginResult.cs" />
-    <Compile Include="Response\IMessageHeader.cs" />
-    <Compile Include="Response\IMessageListResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Response\Folder.cs" />
+    <Compile Include="Response\FolderListResult.cs" />
+    <Compile Include="Response\FolderResult.cs" />
+    <Compile Include="Response\LoginFullResult.cs" />
+    <Compile Include="Response\LoginResult.cs" />
     <Compile Include="Response\MailApiResult.cs" />
+    <Compile Include="Response\MessageHeader.cs" />
+    <Compile Include="Response\MessageListResult.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Atlantis.Framework.Providers.MailApi.Interface.nuget.bat" />

@@ -2,18 +2,17 @@
 using Atlantis.Framework.Providers.MailApi.Interface.Response;
 using System.Runtime.Serialization;
 
-namespace Atlantis.Framework.Providers.MailApi.Response
+namespace Atlantis.Framework.Providers.MailApi.Interface.Response
 {
   [DataContract]
-  public class FolderResult : IFolderResult
+  public class FolderResult : MailApiResult
   {
     [DataMember]
-    public IFolder Folder { get; set; }
+    public Folder Folder { get; set; }
 
     [DataMember]
     public int ResultCode { get; set; }
 
-    [DataMember]
-    public bool IsJsoapFault { get; set; }
+
   }
 }

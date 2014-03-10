@@ -2,8 +2,10 @@
 using Atlantis.Framework.MailApi.Interface;
 using Atlantis.Framework.Providers.MailApi.Interface;
 using Atlantis.Framework.Providers.MailApi.Interface.Response;
-using Atlantis.Framework.Providers.MailApi.Response;
+
 using System;
+using System.Text;
+using Atlantis.Framework.Providers.MailApi.Interface.Exceptions;
 
 namespace Atlantis.Framework.Providers.MailApi
 {
@@ -19,10 +21,10 @@ namespace Atlantis.Framework.Providers.MailApi
     {
     }
 
-    public ILoginFullResult
+    public LoginFullResult
       LoginFetchFoldersAndInbox(string username, string password, string appKey)
     {
-      ILoginFullResult result = null;
+      LoginFullResult result = null;
 
       LoginResponseData loginResponseData = null;
       GetFolderListResponseData getFolderListResponseData;
@@ -59,31 +61,44 @@ namespace Atlantis.Framework.Providers.MailApi
       return valid;
     }
 
-    public ILoginResult Login(string username, string password, string appKey)
+    public LoginResult Login(string username, string password, string appKey)
     {
        LoginResponseData data = MailApiTriplets.LoginViaTriplet(username, password, appKey);
-       ILoginResult result = MailApiTriplets.Convert(data);
+
+       if (data.IsJsoapFault)
+       {
+         MailApiException ex = new MailApiException(data.JsoapMessage, username, string.Empty, string.Empty, string.Empty);
+         throw (ex);
+       }
+       LoginResult result = MailApiTriplets.Convert(data);
        return result;
     }
 
-    public IFolderResult GetFolder(string sessionHash, string appKey, string baseUrl, int folderNumber)
+    public FolderResult GetFolder(string sessionHash, string appKey, string baseUrl, int folderNumber)
     {
       GetFolderResponseData data =  MailApiTriplets.GetFolderFromTriplet(sessionHash, appKey, baseUrl, folderNumber);
-      IFolderResult result = MailApiTriplets.Convert(data);
+      
+      if (data.IsJsoapFault)
+      {
+        MailApiException ex = new MailApiException(data.JsoapMessage, string.Empty, baseUrl, string.Empty, string.Empty);
+        throw (ex);
+      }
+      
+      FolderResult result = MailApiTriplets.Convert(data);
       return result;
     }
 
-    public IMessageListResult GetMessageList(string sessionHash, string appKey, string baseUrl, int folderNumber, int offset, int count, string filter)
+    public MessageListResult GetMessageList(string sessionHash, string appKey, string baseUrl, int folderNumber, int offset, int count, string filter)
     {
       GetMessageListResponseData data =  MailApiTriplets.GetMessageListFromTriplet(sessionHash, appKey, baseUrl, folderNumber, offset, count, filter);
-      IMessageListResult result = MailApiTriplets.Convert(data);
+      MessageListResult result = MailApiTriplets.Convert(data);
       return result;
     }
 
-    public IFolderListResult GetFolderList(string sessionHash, string appKey, string baseUrl)
+    public FolderListResult GetFolderList(string sessionHash, string appKey, string baseUrl)
     {
        GetFolderListResponseData data = MailApiTriplets.GetFolderListFromTriplet(sessionHash, appKey, baseUrl);
-       IFolderListResult result = MailApiTriplets.Convert(data);
+       FolderListResult result = MailApiTriplets.Convert(data);
        return result;
     }
 

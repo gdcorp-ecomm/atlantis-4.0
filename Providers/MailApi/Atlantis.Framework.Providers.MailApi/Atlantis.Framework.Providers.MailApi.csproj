@@ -48,7 +48,7 @@
     </Reference>
     <Reference Include="Atlantis.Framework.MailApi.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.MailApi.Interface.14.3.3.2\lib\net40\Atlantis.Framework.MailApi.Interface.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.MailApi.Interface.14.3.10.1\lib\net40\Atlantis.Framework.MailApi.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Providers.Containers">
       <HintPath>..\packages\Atlantis.Framework.Providers.Containers.4.14.1.6\lib\net40\Atlantis.Framework.Providers.Containers.dll</HintPath>
@@ -66,16 +66,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Response\Folder.cs" />
-    <Compile Include="Response\LoginFullResult.cs" />
     <Compile Include="EngineRequests.cs" />
-    <Compile Include="Response\FolderResult.cs" />
-    <Compile Include="Response\LoginResult.cs" />
-    <Compile Include="Response\FolderListResult.cs" />
     <Compile Include="MailApiTriplets.cs" />
     <Compile Include="MailApiProvider.cs" />
-    <Compile Include="Response\MessageHeader.cs" />
-    <Compile Include="Response\MessageListResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <None Include="atlantis.config" />
     <None Include="Atlantis.Framework.Providers.MailApi.nuget.bat" />

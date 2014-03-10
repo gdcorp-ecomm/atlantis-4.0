@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>Atlantis.Framework.MailApi.Impl</id>
-    <!-- version should match the assembly FILE version -->
+
     <version>$version$</version>
     <!-- change word Title to match your project name with spaces instead of dots -->
     <title>Atlantis Framework MailApi Impl</title>

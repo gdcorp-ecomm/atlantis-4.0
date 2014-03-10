@@ -1,7 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
-namespace Atlantis.Framework.MailApi.Interface.Exceptions
+namespace Atlantis.Framework.Providers.MailApi.Interface.Exceptions
 {
+
   public class MailApiException : Exception
   {
     public string EmailAddress { get; set; }

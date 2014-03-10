@@ -2,10 +2,10 @@
 using Atlantis.Framework.Providers.MailApi.Interface.Response;
 using System.Runtime.Serialization;
 
-namespace Atlantis.Framework.Providers.MailApi.Response
+namespace Atlantis.Framework.Providers.MailApi.Interface.Response
 {
   [DataContract]
-  public class MessageHeader : IMessageHeader
+  public class MessageHeader
   {
     [DataMember]
     public string Cc { get; set; }

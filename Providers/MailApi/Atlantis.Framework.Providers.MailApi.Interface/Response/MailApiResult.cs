@@ -1,10 +1,8 @@
 ﻿
 namespace Atlantis.Framework.Providers.MailApi.Interface.Response
 {
-  public interface MailApiResult
+  public class MailApiResult
   {
-    string Session { get; set; }
-
-    bool IsMailApiFault { get; set; }
+    public string Session { get; set; }
   }
 }

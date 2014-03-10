@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0"?>
 <package >
   <metadata>
-    <id>Atlantis.Framework.Providers.MailApi.Interface</id>
-    <!-- version should match the assembly FILE version -->
-    <version>14.3.10.1</version>
+    <id>$id$</id>
+
+    <version>$version$</version>
     <!-- change word Title to match your project name with spaces instead of dots -->
     <title>Atlantis Framework Providers MailApi Interface</title>
     <authors>Go Daddy</authors>

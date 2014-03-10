@@ -4,7 +4,13 @@ using Atlantis.Framework.Providers.MailApi.Interface;
 using Atlantis.Framework.Providers.MailApi.Interface.Response;
 using Atlantis.Framework.Testing.MockHttpContext;
 using Atlantis.Framework.Testing.MockProviders;
+
+using Atlantis.Framework.MailApi.Interface;
+using Atlantis.Framework.Providers.MailApi.Interface;
+using Atlantis.Framework.Providers.MailApi.Interface.Response;
+using Atlantis.Framework.Providers.MailApi.Interface.Exceptions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+
 
 
 namespace Atlantis.Framework.Providers.MailApi.Tests
@@ -16,7 +22,7 @@ namespace Atlantis.Framework.Providers.MailApi.Tests
     private const string IOS_APP_KEY = "PAiycbPel3SL1H6tj7UxNwUU";
     private const string MOONFAIRY_EMAIL = "andy@jonathanthemoonfairy.com";
     private const string MOONFAIRY_PW = "abcd123";
-    private const string BAD_PW = "BADBAD";
+    private const string BAD_BAD = "STRONGBAD";
 
     private IProviderContainer InitializeProviderContainer()
     {
@@ -39,7 +45,7 @@ namespace Atlantis.Framework.Providers.MailApi.Tests
       var mailApiProvider = providerContainer.Resolve<IMailApiProvider>();
 
       //act 
-      ILoginFullResult result = mailApiProvider.LoginFetchFoldersAndInbox(MOONFAIRY_EMAIL, MOONFAIRY_PW, ANDROID_APP_KEY);
+      LoginFullResult result = mailApiProvider.LoginFetchFoldersAndInbox(MOONFAIRY_EMAIL, MOONFAIRY_PW, ANDROID_APP_KEY);
 
       //assert
       Assert.IsNotNull(result);
@@ -48,20 +54,6 @@ namespace Atlantis.Framework.Providers.MailApi.Tests
      // Assert.IsNotNull(result);
     }
 
-    [TestMethod]
-    public void LoginFoldersInboxFailureTest()
-    {
-      //arrange 
-      var providerContainer = InitializeProviderContainer();
-      var mailApiProvider = providerContainer.Resolve<IMailApiProvider>();
-
-      //act 
-      ILoginFullResult result = mailApiProvider.LoginFetchFoldersAndInbox(MOONFAIRY_EMAIL, BAD_PW, ANDROID_APP_KEY);
-
-      //assert
-      Assert.Fail("Test not implemented");
-
-    }
 
     [TestMethod]
     public void LoginFailureTest()
@@ -71,12 +63,17 @@ namespace Atlantis.Framework.Providers.MailApi.Tests
       var mailApiProvider = providerContainer.Resolve<IMailApiProvider>();
 
       //act 
-      ILoginResult result = mailApiProvider.Login(MOONFAIRY_EMAIL, BAD_PW, ANDROID_APP_KEY);
+      try
+      {
+        LoginResult result = mailApiProvider.Login(MOONFAIRY_EMAIL, BAD_BAD, ANDROID_APP_KEY);
+        Assert.Fail("This should've caused an exception");
+    }
+      catch (MailApiException ex)
+    {
+        Assert.IsNotNull(ex.EmailAddress);
+        Assert.IsNotNull(ex.Data);
+      }
 
-      //assert
-      Assert.IsNotNull(result);
-      Assert.IsTrue(result.IsMailApiFault);
-      //Assert.IsNull(result.
 
     }
   }

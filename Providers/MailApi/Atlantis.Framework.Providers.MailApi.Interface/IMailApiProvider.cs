@@ -1,5 +1,6 @@
 ﻿using Atlantis.Framework.Providers.MailApi.Interface.Response;
 
+
 namespace Atlantis.Framework.Providers.MailApi.Interface
 {
   public interface IMailApiProvider
@@ -11,7 +12,7 @@ namespace Atlantis.Framework.Providers.MailApi.Interface
     /// <param name="password"></param>
     /// <param name="appKey"></param>
     /// <returns></returns>
-    ILoginFullResult LoginFetchFoldersAndInbox(string username, string password, string appKey);
+    LoginFullResult LoginFetchFoldersAndInbox(string username, string password, string appKey);
 
     /// <summary>
     /// 
@@ -20,7 +21,7 @@ namespace Atlantis.Framework.Providers.MailApi.Interface
     /// <param name="password"></param>
     /// <param name="appKey"></param>
     /// <returns></returns>
-    ILoginResult Login(string username, string password, string appKey);  //object should be replaced with the DTO defined for composite call
+    LoginResult Login(string username, string password, string appKey);  //object should be replaced with the DTO defined for composite call
 
     /// <summary>
     /// Get a single Folder
@@ -30,8 +31,8 @@ namespace Atlantis.Framework.Providers.MailApi.Interface
     /// <param name="baseUrl"></param>
     /// <param name="folderNumber"></param>
     /// <returns></returns>
-    IFolderResult GetFolder(string sessionHash, string appKey, string baseUrl, int folderNumber);
-    IMessageListResult GetMessageList(string sessionHash, string appKey, string baseUrl, int folderNumber, int offset, int count, string filter);
-    IFolderListResult GetFolderList(string sessionHash, string appKey, string baseUrl);
+    FolderResult GetFolder(string sessionHash, string appKey, string baseUrl, int folderNumber);
+    MessageListResult GetMessageList(string sessionHash, string appKey, string baseUrl, int folderNumber, int offset, int count, string filter);
+    FolderListResult GetFolderList(string sessionHash, string appKey, string baseUrl);
   }
 }

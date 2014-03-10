@@ -11,12 +11,10 @@ namespace Atlantis.Framework.MailApi.Interface
     [DataMember(Name = "response")]
     public MailFolder MailFolder { get; set; }
 
-    public GetFolderRequestData request { get; set; }
-
     public static GetFolderResponseData FromJsonData(string jsonString)
     {
       var resultFolder = new GetFolderResponseData(){MailFolder = new MailFolder()};
-      resultFolder.JsonResponse = jsonString;
+      resultFolder.MailApiResponseString = jsonString;
       if (string.IsNullOrEmpty(jsonString)) return resultFolder;
 
       var stream = new MemoryStream(Encoding.UTF8.GetBytes(jsonString));

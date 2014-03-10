@@ -14,8 +14,6 @@ namespace Atlantis.Framework.MailApi.Interface
     [DataMember(Name = "state")]
     public MailApiResponseState State { get; set; }
 
-    public GetMessageListRequestData request { get; set; }
-
     public static GetMessageListResponseData FromJsonData(string jsonString)
     {
       MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(jsonString));
@@ -23,7 +21,7 @@ namespace Atlantis.Framework.MailApi.Interface
       DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(GetMessageListResponseData));
 
       GetMessageListResponseData result = (GetMessageListResponseData)serializer.ReadObject(stream);
-      result.JsonResponse = jsonString;
+      result.MailApiResponseString = jsonString;
       return result;
     }
 

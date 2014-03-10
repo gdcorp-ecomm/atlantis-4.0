@@ -12,10 +12,10 @@ namespace Atlantis.Framework.MailApi.Interface
     public int ResultCode { get; set; }
 
     [XmlIgnore]
-    public string JsonResponse { get; set; }
+    public string MailApiResponseString { get; set; }
 
     [XmlIgnore]
-    public string JsonRequest { get; set; }
+    public string MailApiRequestString { get; set; }
 
     // JSOAP_FAULT (the bool, the message, and the detail)
     // DataMembers defined so we can deserialize from mailapi, but we won't return in MSA response

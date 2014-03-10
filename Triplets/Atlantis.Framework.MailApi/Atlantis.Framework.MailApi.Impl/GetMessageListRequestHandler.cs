@@ -21,9 +21,7 @@ namespace Atlantis.Framework.MailApi.Impl
       string getMessageListResponseString = Utility.PostRequest(webServiceUrl, messageBody, request.MailHash, request.AppKey, null);
 
       GetMessageListResponseData getMessageListResponse = GetMessageListResponseData.FromJsonData(getMessageListResponseString);
-
-      getMessageListResponse.request = request;
-
+      getMessageListResponse.MailApiRequestString = messageBody;
       return getMessageListResponse;
     }
   }

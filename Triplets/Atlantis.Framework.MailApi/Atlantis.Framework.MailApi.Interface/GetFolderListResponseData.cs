@@ -19,8 +19,6 @@ namespace Atlantis.Framework.MailApi.Interface
     [XmlElement(ElementName = "state")]
     public MailApiResponseState State { get; set; }
 
-    public GetFolderListRequestData request { get; set; }
-
     public static GetFolderListResponseData FromJsonData(string jsonString)
     {
       var resultFolderList = new GetFolderListResponseData() {MailFolders = new MailFolderArray()};
@@ -29,7 +27,7 @@ namespace Atlantis.Framework.MailApi.Interface
       var stream = new MemoryStream(Encoding.UTF8.GetBytes(jsonString));
       var serializer = new DataContractJsonSerializer(typeof(GetFolderListResponseData));
       resultFolderList = (GetFolderListResponseData)serializer.ReadObject(stream);
-      resultFolderList.JsonResponse = jsonString;
+      resultFolderList.MailApiResponseString = jsonString;
       return resultFolderList;
     }	
   }

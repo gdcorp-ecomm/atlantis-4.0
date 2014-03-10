@@ -28,7 +28,6 @@ namespace Atlantis.Framework.Providers.MailApi
       LoginResponseData loginResponseData = null;
       GetFolderListResponseData getFolderListResponseData;
       GetMessageListResponseData getMessageListResponseData;
-      LoginFullResult response = null; // consolidates login/folders/messages and gets returned
 
       loginResponseData = MailApiTriplets.LoginViaTriplet(username, password, appKey);
       // check for login failure here
@@ -38,8 +37,11 @@ namespace Atlantis.Framework.Providers.MailApi
         // check for folder list failure here
 
         getMessageListResponseData = MailApiTriplets.GetMessageListFromTriplet(getFolderListResponseData.State.Session, appKey, loginResponseData.LoginData.BaseUrl, DetermineInboxFolderNum(getFolderListResponseData), DEFAULT_OFFSET, DEFAULT_MESSAGE_COUNT, DEFAULT_FILTER);
-
-        //response = new LoginFullResult(getMessageListResponseData.State, loginResponseData.LoginData, getFolderListResponseData.MailFolders, getMessageListResponseData.MessageListData);
+        result = new LoginFullResult();
+        result.Session = getFolderListResponseData.State.Session;
+        result.BaseUrl = loginResponseData.LoginData.BaseUrl;
+        result.MessageHeaderList = MailApiTriplets.Convert(getMessageListResponseData).MessageHeaderList;
+        result.FolderList = MailApiTriplets.Convert(getFolderListResponseData).FolderList;
       }
       return result;
     }

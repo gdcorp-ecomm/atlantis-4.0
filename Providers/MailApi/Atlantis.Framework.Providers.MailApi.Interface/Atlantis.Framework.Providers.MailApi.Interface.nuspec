@@ -1,21 +1,21 @@
 ﻿<?xml version="1.0"?>
 <package >
   <metadata>
-    <id>Atlantis.Framework.Providers.MailApi</id>
+    <id>Atlantis.Framework.Providers.MailApi.Interface</id>
     <!-- version should match the assembly FILE version -->
-    <version>14.3.10.2</version>
+    <version>14.3.10.1</version>
     <!-- change word Title to match your project name with spaces instead of dots -->
-    <title>Atlantis Framework Providers MailApi</title>
-    <authors>$author$</authors>
-    <owners>$author$</owners>
+    <title>Atlantis Framework Providers MailApi Interface</title>
+    <authors>Go Daddy</authors>
+    <owners></owners>
     <projectUrl>https://confluence.int.godaddy.com/display/ATLANTIS</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>$description$</description>
+    <description>Interface for some basic mailApi requests</description>
     <!-- update release notes with latest change information -->
     <releaseNotes></releaseNotes>
     <copyright>$copyright$</copyright>
     <!-- Make tags the same as title element -->
-    <tags>mailapi email mail provider</tags>
+    <tags>mailapi email mail provider interface</tags>
     <dependencies />
   </metadata>
   <files>

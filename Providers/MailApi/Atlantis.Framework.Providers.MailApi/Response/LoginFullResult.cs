@@ -11,11 +11,11 @@ namespace Atlantis.Framework.Providers.MailApi.Response
   {
     private List<IMessageHeader> msgList = new List<IMessageHeader>();
 
-    public List<IMessageHeader> MessageHeaderList { get { return msgList; } }
+    public List<IMessageHeader> MessageHeaderList { get { return msgList; } set { msgList = value; } }
 
     private List<IFolder> folderList = new List<IFolder>();
 
-    public List<IFolder> FolderList { get { return folderList; } }
+    public List<IFolder> FolderList { get { return folderList; } set { folderList = value; } }
 
     public string BaseUrl { get; set; }
 

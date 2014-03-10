@@ -46,6 +46,8 @@ namespace Atlantis.Framework.Providers.MailApi.Tests
 
       //assert
       Assert.IsNotNull(result);
+      Assert.IsNotNull(result.FolderList);
+      Assert.IsNotNull(result.MessageHeaderList);
      // Assert.IsNotNull(result);
     }
 
@@ -77,7 +79,7 @@ namespace Atlantis.Framework.Providers.MailApi.Tests
       //assert
       Assert.IsNotNull(result);
       Assert.IsTrue(result.IsMailApiFault);
-      //Assert.IsNull(result.LoginData);
+      //Assert.IsNull(result.
 
     }
   }

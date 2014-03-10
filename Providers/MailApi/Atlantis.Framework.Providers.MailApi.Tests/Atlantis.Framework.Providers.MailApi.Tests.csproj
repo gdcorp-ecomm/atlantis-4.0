@@ -54,6 +54,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Atlantis.Framework.Interface.14.1.16.1\lib\net40\Atlantis.Framework.Interface.dll</HintPath>
     </Reference>
+    <Reference Include="Atlantis.Framework.MailApi.Impl">
+      <HintPath>..\packages\Atlantis.Framework.MailApi.Impl.14.3.3.2\lib\net40\Atlantis.Framework.MailApi.Impl.dll</HintPath>
+    </Reference>
     <Reference Include="Atlantis.Framework.MailApi.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Atlantis.Framework.MailApi.Interface.14.3.3.2\lib\net40\Atlantis.Framework.MailApi.Interface.dll</HintPath>

@@ -65,10 +65,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DTOs\LoginFoldersInboxResponse.cs" />
+    <Compile Include="Response\Folder.cs" />
+    <Compile Include="Response\LoginFullResult.cs" />
     <Compile Include="EngineRequests.cs" />
-    <Compile Include="IMailApiProvider.cs" />
+    <Compile Include="Response\FolderResult.cs" />
+    <Compile Include="Response\LoginResult.cs" />
+    <Compile Include="Response\FolderListResult.cs" />
+    <Compile Include="MailApiTriplets.cs" />
     <Compile Include="MailApiProvider.cs" />
+    <Compile Include="Response\MessageHeader.cs" />
+    <Compile Include="Response\MessageListResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <None Include="atlantis.config" />
     <None Include="Atlantis.Framework.Providers.MailApi.nuget.bat" />
@@ -77,6 +83,12 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Atlantis.Framework.Providers.MailApi.Interface\Atlantis.Framework.Providers.MailApi.Interface.csproj">
+      <Project>{023a5f1f-cd65-47f6-8d52-f2ae9d003090}</Project>
+      <Name>Atlantis.Framework.Providers.MailApi.Interface</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,7 +1,5 @@
-﻿using Atlantis.Framework.MailApi.Interface;
-using Atlantis.Framework.Providers.MailApi.DTOs;
-
-namespace Atlantis.Framework.Providers.MailApi
+﻿using Atlantis.Framework.Providers.MailApi.Interface.Response;
+namespace Atlantis.Framework.Providers.MailApi.Interface
 {
   public interface IMailApiProvider
   {
@@ -12,7 +10,7 @@ namespace Atlantis.Framework.Providers.MailApi
     /// <param name="password"></param>
     /// <param name="appKey"></param>
     /// <returns></returns>
-    LoginFoldersInboxResponse LoginFetchFoldersAndInbox(string username, string password, string appKey);
+    ILoginFullResult LoginFetchFoldersAndInbox(string username, string password, string appKey);
 
     /// <summary>
     /// 
@@ -21,7 +19,7 @@ namespace Atlantis.Framework.Providers.MailApi
     /// <param name="password"></param>
     /// <param name="appKey"></param>
     /// <returns></returns>
-    LoginResponseData Login(string username, string password, string appKey);  //object should be replaced with the DTO defined for composite call
+    ILoginResult Login(string username, string password, string appKey);  //object should be replaced with the DTO defined for composite call
 
     /// <summary>
     /// Get a single Folder
@@ -31,8 +29,8 @@ namespace Atlantis.Framework.Providers.MailApi
     /// <param name="baseUrl"></param>
     /// <param name="folderNumber"></param>
     /// <returns></returns>
-    GetFolderResponseData GetFolder(string sessionHash, string appKey, string baseUrl, int folderNumber);
-    GetMessageListResponseData GetMessageList(string sessionHash, string appKey, string baseUrl, int folderNumber, int offset, int count, string filter);
-    GetFolderListResponseData GetFolderList(string sessionHash, string appKey, string baseUrl);
+    IFolderResult GetFolder(string sessionHash, string appKey, string baseUrl, int folderNumber);
+    IMessageListResult GetMessageList(string sessionHash, string appKey, string baseUrl, int folderNumber, int offset, int count, string filter);
+    IFolderListResult GetFolderList(string sessionHash, string appKey, string baseUrl);
   }
 }

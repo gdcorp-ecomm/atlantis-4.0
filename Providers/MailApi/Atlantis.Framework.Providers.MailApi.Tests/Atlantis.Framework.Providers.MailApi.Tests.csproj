@@ -98,6 +98,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Atlantis.Framework.Providers.MailApi.Interface\Atlantis.Framework.Providers.MailApi.Interface.csproj">
+      <Project>{023a5f1f-cd65-47f6-8d52-f2ae9d003090}</Project>
+      <Name>Atlantis.Framework.Providers.MailApi.Interface</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.Providers.MailApi\Atlantis.Framework.Providers.MailApi.csproj">
       <Project>{6f2a2270-fb30-4094-9417-ae0a464ba136}</Project>
       <Name>Atlantis.Framework.Providers.MailApi</Name>

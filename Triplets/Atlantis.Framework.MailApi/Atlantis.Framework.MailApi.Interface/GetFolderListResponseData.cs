@@ -23,14 +23,13 @@ namespace Atlantis.Framework.MailApi.Interface
 
     public static GetFolderListResponseData FromJsonData(string jsonString)
     {
-
       var resultFolderList = new GetFolderListResponseData() {MailFolders = new MailFolderArray()};
       if (string.IsNullOrEmpty(jsonString)) return resultFolderList;
 
       var stream = new MemoryStream(Encoding.UTF8.GetBytes(jsonString));
       var serializer = new DataContractJsonSerializer(typeof(GetFolderListResponseData));
       resultFolderList = (GetFolderListResponseData)serializer.ReadObject(stream);
-
+      resultFolderList.JsonResponse = jsonString;
       return resultFolderList;
     }	
   }

@@ -21,13 +21,12 @@ namespace Atlantis.Framework.MailApi.Interface
 
     public static LoginResponseData FromJsonData(string jsonString)
     {
-    
       MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(jsonString));
 
       DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(LoginResponseData));
 
       LoginResponseData result = (LoginResponseData)serializer.ReadObject(stream);
-      
+      result.JsonResponse = jsonString;
       return result;
     }
 

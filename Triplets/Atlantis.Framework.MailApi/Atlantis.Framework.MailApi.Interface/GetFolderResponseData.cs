@@ -16,6 +16,7 @@ namespace Atlantis.Framework.MailApi.Interface
     public static GetFolderResponseData FromJsonData(string jsonString)
     {
       var resultFolder = new GetFolderResponseData(){MailFolder = new MailFolder()};
+      resultFolder.JsonResponse = jsonString;
       if (string.IsNullOrEmpty(jsonString)) return resultFolder;
 
       var stream = new MemoryStream(Encoding.UTF8.GetBytes(jsonString));

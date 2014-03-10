@@ -23,7 +23,7 @@ namespace Atlantis.Framework.MailApi.Interface
       DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(GetMessageListResponseData));
 
       GetMessageListResponseData result = (GetMessageListResponseData)serializer.ReadObject(stream);
-
+      result.JsonResponse = jsonString;
       return result;
     }
 

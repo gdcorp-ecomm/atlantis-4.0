@@ -1,10 +1,8 @@
 ﻿using Atlantis.Framework.Interface;
 using Atlantis.Framework.MailApi.Interface;
-using Atlantis.Framework.Providers.MailApi.Response;
 using Atlantis.Framework.Providers.MailApi.Interface.Response;
+using Atlantis.Framework.Providers.MailApi.Response;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 
 // triplet helper - makes calls through Triplets and converts their responses to provider objects

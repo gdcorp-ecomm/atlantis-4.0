@@ -1,5 +1,4 @@
-﻿using System;
-namespace Atlantis.Framework.Providers.MailApi.Interface.Response
+﻿namespace Atlantis.Framework.Providers.MailApi.Interface.Response
 {
   public interface IFolder
   {

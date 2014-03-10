@@ -1,10 +1,9 @@
 ﻿using Atlantis.Framework.Interface;
 using Atlantis.Framework.MailApi.Interface;
-using Atlantis.Framework.Providers.MailApi.Response;
 using Atlantis.Framework.Providers.MailApi.Interface;
 using Atlantis.Framework.Providers.MailApi.Interface.Response;
+using Atlantis.Framework.Providers.MailApi.Response;
 using System;
-using System.Text;
 
 namespace Atlantis.Framework.Providers.MailApi
 {

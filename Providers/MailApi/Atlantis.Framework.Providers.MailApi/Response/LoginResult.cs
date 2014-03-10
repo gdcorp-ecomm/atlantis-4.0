@@ -1,17 +1,19 @@
-﻿using Atlantis.Framework.Providers.MailApi.Interface.Response;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿
+using Atlantis.Framework.Providers.MailApi.Interface.Response;
+using System.Runtime.Serialization;
 
 namespace Atlantis.Framework.Providers.MailApi.Response
 {
-  class LoginResult : ILoginResult
+  [DataContract]
+  public class LoginResult : ILoginResult
   {
+    [DataMember]
     public bool IsMailApiFault { get; set; }
 
+    [DataMember]
     public string Session { get; set; }
 
+    [DataMember]
     public string BaseUrl { get; set; }
   }
 }

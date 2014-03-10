@@ -1,4 +1,5 @@
 ﻿using Atlantis.Framework.Providers.MailApi.Interface.Response;
+
 namespace Atlantis.Framework.Providers.MailApi.Interface
 {
   public interface IMailApiProvider

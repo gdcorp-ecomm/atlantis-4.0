@@ -47,7 +47,7 @@ namespace Atlantis.Framework.Providers.MailApi.Tests
       var mailApiProvider = providerContainer.Resolve<IMailApiProvider>();
 
       //act 
-      LoginFullResult result = mailApiProvider.LoginFetchFoldersAndInbox(MOONFAIRY_EMAIL, MOONFAIRY_PW, ANDROID_APP_KEY);
+      LoginFullResult result = mailApiProvider.LoginFull(MOONFAIRY_EMAIL, MOONFAIRY_PW, ANDROID_APP_KEY);
 
       //assert
       Assert.IsNotNull(result);

@@ -12,7 +12,7 @@ namespace Atlantis.Framework.Providers.MailApi.Interface
     /// <param name="password"></param>
     /// <param name="appKey"></param>
     /// <returns></returns>
-    LoginFullResult LoginFetchFoldersAndInbox(string username, string password, string appKey);
+    LoginFullResult LoginFull(string username, string password, string appKey);
 
     /// <summary>
     /// 

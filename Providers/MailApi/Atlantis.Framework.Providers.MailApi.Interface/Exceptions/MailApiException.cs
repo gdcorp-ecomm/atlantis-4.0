@@ -31,8 +31,24 @@ namespace Atlantis.Framework.Providers.MailApi.Interface.Exceptions
       MailPod = mailPod;
       RequestJson = requestJson;
       ResponseJson = responseJson;
+      Session = session;
     }
 
+    public string Message()
+    {
+      StringBuilder sb = new StringBuilder(base.Message);
+      sb.Append(" email:");
+      sb.Append(EmailAddress);
+      sb.Append(" mailPod:");
+      sb.Append(MailPod);
+      sb.Append(" session:");
+      sb.Append(Session);
+      sb.Append(" request:");
+      sb.Append(RequestJson);
+      sb.Append(" response:");
+      sb.Append(ResponseJson);
+      return sb.ToString();
+    }
 
   }
 }

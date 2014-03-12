@@ -67,7 +67,7 @@ namespace Atlantis.Framework.Providers.MailApi
 
        if (data.IsJsoapFault)
        {
-         MailApiException ex = new MailApiException(data.JsoapMessage, username, string.Empty, string.Empty, string.Empty);
+         MailApiException ex = new MailApiException(data.JsoapMessage, string.Empty, username, string.Empty, data.MailApiRequestString, data.MailApiResponseString);
          throw (ex);
        }
        LoginResult result = MailApiTriplets.Convert(data);
@@ -80,7 +80,7 @@ namespace Atlantis.Framework.Providers.MailApi
       
       if (data.IsJsoapFault)
       {
-        MailApiException ex = new MailApiException(data.JsoapMessage, string.Empty, baseUrl, string.Empty, string.Empty);
+        MailApiException ex = new MailApiException(data.JsoapMessage, sessionHash, string.Empty, baseUrl, data.MailApiRequestString, data.MailApiResponseString);
         throw (ex);
       }
       
@@ -91,6 +91,13 @@ namespace Atlantis.Framework.Providers.MailApi
     public MessageListResult GetMessageList(string sessionHash, string appKey, string baseUrl, int folderNumber, int offset, int count, string filter)
     {
       GetMessageListResponseData data =  MailApiTriplets.GetMessageListFromTriplet(sessionHash, appKey, baseUrl, folderNumber, offset, count, filter);
+
+      if (data.IsJsoapFault)
+      {
+        MailApiException ex = new MailApiException(data.JsoapMessage, sessionHash, string.Empty, baseUrl, data.MailApiRequestString, data.MailApiResponseString);
+        throw (ex);
+      }
+      
       MessageListResult result = MailApiTriplets.Convert(data);
       return result;
     }
@@ -98,6 +105,13 @@ namespace Atlantis.Framework.Providers.MailApi
     public FolderListResult GetFolderList(string sessionHash, string appKey, string baseUrl)
     {
        GetFolderListResponseData data = MailApiTriplets.GetFolderListFromTriplet(sessionHash, appKey, baseUrl);
+
+       if (data.IsJsoapFault)
+       {
+         MailApiException ex = new MailApiException(data.JsoapMessage, sessionHash, string.Empty, baseUrl, data.MailApiRequestString, data.MailApiResponseString);
+         throw (ex);
+       }
+
        FolderListResult result = MailApiTriplets.Convert(data);
        return result;
     }

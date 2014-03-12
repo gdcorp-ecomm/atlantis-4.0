@@ -22,6 +22,8 @@ namespace Atlantis.Framework.Providers.MailApi.Tests
     private const string IOS_APP_KEY = "PAiycbPel3SL1H6tj7UxNwUU";
     private const string MOONFAIRY_EMAIL = "andy@jonathanthemoonfairy.com";
     private const string MOONFAIRY_PW = "abcd123";
+    private const int  MOONFAIRY_INBOX = 841229;
+    private const string MOONFAIRY_BASE_URL = "mailapi10.secureserver.net:443";
     private const string BAD_BAD = "STRONGBAD";
 
     private IProviderContainer InitializeProviderContainer()
@@ -38,7 +40,7 @@ namespace Atlantis.Framework.Providers.MailApi.Tests
     }
 
     [TestMethod]
-    public void LoginFoldersInboxSuccessTest()
+    public void LoginFullTest()
     {
       //arrange 
       var providerContainer = InitializeProviderContainer();
@@ -51,7 +53,42 @@ namespace Atlantis.Framework.Providers.MailApi.Tests
       Assert.IsNotNull(result);
       Assert.IsNotNull(result.FolderList);
       Assert.IsNotNull(result.MessageHeaderList);
-     // Assert.IsNotNull(result);
+      // Assert.IsNotNull(result);
+    }
+
+    [TestMethod]
+    public void BadSessionFolder()
+    {
+      var providerContainer = InitializeProviderContainer();
+      var mailApiProvider = providerContainer.Resolve<IMailApiProvider>();
+      try
+      {
+        FolderResult result = mailApiProvider.GetFolder(BAD_BAD, IOS_APP_KEY, MOONFAIRY_BASE_URL, MOONFAIRY_INBOX);
+        Assert.Fail("This should've caused an exception");
+      }
+      catch (MailApiException ex)
+      {
+        Assert.IsNotNull(ex.Session);
+        Assert.IsNotNull(ex.Data);
+      }
+    }
+
+    [TestMethod]
+    public void BadSessionMessageList()
+    {
+      var providerContainer = InitializeProviderContainer();
+      var mailApiProvider = providerContainer.Resolve<IMailApiProvider>();
+
+      try
+      {
+        mailApiProvider.GetMessageList(BAD_BAD, ANDROID_APP_KEY, MOONFAIRY_BASE_URL, MOONFAIRY_INBOX, 10, 10, string.Empty);
+
+      }
+      catch (MailApiException ex)
+      {
+        Assert.IsNotNull(ex.Session);
+        Assert.IsNotNull(ex.Data);
+      }
     }
 
 
@@ -67,9 +104,9 @@ namespace Atlantis.Framework.Providers.MailApi.Tests
       {
         LoginResult result = mailApiProvider.Login(MOONFAIRY_EMAIL, BAD_BAD, ANDROID_APP_KEY);
         Assert.Fail("This should've caused an exception");
-    }
+      }
       catch (MailApiException ex)
-    {
+      {
         Assert.IsNotNull(ex.EmailAddress);
         Assert.IsNotNull(ex.Data);
       }

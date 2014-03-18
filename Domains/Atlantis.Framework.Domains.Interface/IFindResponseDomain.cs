@@ -23,6 +23,9 @@ namespace Atlantis.Framework.Domains.Interface
     bool HasLeafPage { get; }
     bool InPreRegPhase { get; }
 
+    //Adding new error message for blocked domain names
+    int InvalidReasonCode { get; }
+
     DateTime AuctionEndTimeStamp { get; } 
     DateTime LastUpdateTimeStamp { get; }
     DateTime WhoIsExpiration { get; }

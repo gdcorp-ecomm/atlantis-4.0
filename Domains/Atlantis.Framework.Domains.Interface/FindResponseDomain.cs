@@ -243,6 +243,13 @@ namespace Atlantis.Framework.Domains.Interface
                 IsValid = boolValue;
               }
               break;
+            //Error code to show blocked list of domain names
+            case "invaliddomainreasoncode":
+              if (int.TryParse(domainTokenValue, out intValue))
+              {
+                  InvalidReasonCode = intValue;
+              }
+              break;
           }
         }
       }
@@ -310,6 +317,9 @@ namespace Atlantis.Framework.Domains.Interface
     public DateTime AuctionEndTimeStamp { get; private set; }
 
     public DateTime LastUpdateTimeStamp { get; private set; }
+
+    //Adding new property to show error message for blocked domain names
+    public int InvalidReasonCode { get; private set; }
 
     /// <summary>
     /// If the domain is available for internal transfer, this is the Who Is expiration data that was present on the Avail Check call.

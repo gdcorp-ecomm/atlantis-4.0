@@ -144,6 +144,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DomainCheckResultCodes.cs" />
     <Compile Include="Domain.cs" />
     <Compile Include="FindResponseDomain.cs" />
     <Compile Include="IDomain.cs" />

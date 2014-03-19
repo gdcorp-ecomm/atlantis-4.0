@@ -14,8 +14,16 @@ namespace Atlantis.Framework.DotTypeForms.Interface
     {
       _responseXml = responseXml;
       _exception = null;
-      _dotTypeFormsSchema = new DotTypeFormsSchema(responseXml);
-      _isSuccess = string.IsNullOrEmpty(responseXml) || _dotTypeFormsSchema.IsSuccess;
+
+      if (!string.IsNullOrEmpty(responseXml))
+      {
+        _dotTypeFormsSchema = new DotTypeFormsSchema(responseXml);
+        _isSuccess = _dotTypeFormsSchema.IsSuccess;
+      }
+      else
+      {
+        _isSuccess = true;
+      }
     }
 
     public DotTypeFormsXmlResponseData(string responseXml, AtlantisException exAtlantis)

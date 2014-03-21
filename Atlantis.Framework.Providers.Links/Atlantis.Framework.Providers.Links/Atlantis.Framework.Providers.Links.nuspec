@@ -2,14 +2,16 @@
 <package >
   <metadata>
     <id>Atlantis.Framework.Providers.Links</id>
-    <version>4.13.12.18</version>
+    <version>$version$</version>
     <title>Atlantis Framework Providers Links</title>
     <authors>$author$</authors>
     <owners>$author$</owners>
     <projectUrl>https://confluence.int.godaddy.com/display/ATLANTIS</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes>Make sure regionsite is the first key in a rendered querystring. Linkprovider checks plid if needed.</releaseNotes>
+    <releaseNotes>Make sure regionsite is the first key in a rendered querystring. Linkprovider checks plid if needed.
+    14.3.21.1 - Adding logic to use secure server link name if it exists and user is browsing under secure server
+    </releaseNotes>
     <copyright>$copyright$</copyright>
     <tags>Atlantis Framework  Providers Links</tags>
     <dependencies>

@@ -298,7 +298,7 @@ namespace Atlantis.Framework.Providers.Links
         // use this as a flag to not change the database's linkinfo url
         bool bTargetSiteIsGlobal;
         string targetSiteDefaultMarketId;
-        if ( _localizationProvider.Value != null && (linkInfo.CountrySupportType != LinkTypeCountrySupport.NoSupport || linkInfo.LanguageSupportType != LinkTypeLanguageSupport.NoSupport) )
+        if (_localizationProvider.Value != null && (linkInfo.CountrySupportType != LinkTypeCountrySupport.NoSupport || linkInfo.LanguageSupportType != LinkTypeLanguageSupport.NoSupport))
         {
           var countrySite = _localizationProvider.Value.TryGetCountrySite(countrySiteId ?? _localizationProvider.Value.CountrySite) ?? _localizationProvider.Value.CountrySiteInfo;
           countrySiteId = countrySite.Id;
@@ -440,7 +440,7 @@ namespace Atlantis.Framework.Providers.Links
       return urlStringBuilder.ToString();
     }
 
-    private void HandleCommonParameters(NameValueCollection queryMap, LinkProviderOptions options, string countrySiteId=null, string marketId=null, ILinkInfo linkInfo=null)
+    private void HandleCommonParameters(NameValueCollection queryMap, LinkProviderOptions options, string countrySiteId = null, string marketId = null, ILinkInfo linkInfo = null)
     {
       if (!options.HasFlag(LinkProviderOptions.QueryStringExplicitParameters) && linkInfo != null)
       {
@@ -595,15 +595,15 @@ namespace Atlantis.Framework.Providers.Links
       return GetRelativeUrl_Int(relativePath, options, new NameValueCollection());
     }
 
-//    public string GetRelativeUrl(string relativePath, LinkProviderOptions options = LinkProviderOptions.DefaultOptions, params string[] additionalQueryParameters)
-//    {
-//      var queryMap = ConvertStringArrayToQueryMap(additionalQueryParameters);
-//      return GetRelativeUrl_Int(relativePath, options, queryMap);
-//    }
+    //    public string GetRelativeUrl(string relativePath, LinkProviderOptions options = LinkProviderOptions.DefaultOptions, params string[] additionalQueryParameters)
+    //    {
+    //      var queryMap = ConvertStringArrayToQueryMap(additionalQueryParameters);
+    //      return GetRelativeUrl_Int(relativePath, options, queryMap);
+    //    }
 
     public string GetRelativeUrl(string relativePath = null, NameValueCollection queryMap = null, LinkProviderOptions options = LinkProviderOptions.DefaultOptions)
     {
-      queryMap =  queryMap == null ? new NameValueCollection() : new NameValueCollection(queryMap);
+      queryMap = queryMap == null ? new NameValueCollection() : new NameValueCollection(queryMap);
       return GetRelativeUrl_Int(relativePath, options, queryMap);
     }
 
@@ -873,11 +873,11 @@ namespace Atlantis.Framework.Providers.Links
       return GetUrl_Int(linkName, relativePath, new NameValueCollection(), options, null, null, null);
     }
 
-//    public string GetUrl(string linkName, string relativePath, LinkProviderOptions options, string countrySiteId, string marketId, params string[] additionalQueryParameters)
-//    {
-//      var queryMap = ConvertStringArrayToQueryMap(additionalQueryParameters);
-//      return GetUrl_Int(linkName, relativePath, queryMap, options, countrySiteId, marketId);
-//    }
+    //    public string GetUrl(string linkName, string relativePath, LinkProviderOptions options, string countrySiteId, string marketId, params string[] additionalQueryParameters)
+    //    {
+    //      var queryMap = ConvertStringArrayToQueryMap(additionalQueryParameters);
+    //      return GetUrl_Int(linkName, relativePath, queryMap, options, countrySiteId, marketId);
+    //    }
 
     public string GetUrl(string linkName, string relativePath = null, NameValueCollection queryMap = null, LinkProviderOptions options = LinkProviderOptions.DefaultOptions)
     {
@@ -897,14 +897,31 @@ namespace Atlantis.Framework.Providers.Links
       return GetUrl_Int(linkName, relativePath, localQueryMap, options, null, null, contextId);
     }
 
-//    public string GetUrl(string linkName, string relativePath = null, NameValueCollection queryMap = null, LinkProviderOptions options = LinkProviderOptions.DefaultOptions, string countrySiteId = null, string marketId = null)
-//    {
-//      var localQueryMap = queryMap == null ? new NameValueCollection() : new NameValueCollection(queryMap);
-//      return GetUrl_Int(linkName, relativePath, localQueryMap, options, countrySiteId, marketId);
-//    }
+    //    public string GetUrl(string linkName, string relativePath = null, NameValueCollection queryMap = null, LinkProviderOptions options = LinkProviderOptions.DefaultOptions, string countrySiteId = null, string marketId = null)
+    //    {
+    //      var localQueryMap = queryMap == null ? new NameValueCollection() : new NameValueCollection(queryMap);
+    //      return GetUrl_Int(linkName, relativePath, localQueryMap, options, countrySiteId, marketId);
+    //    }
 
     private string GetUrl_Int(string linkName, string relativePath, NameValueCollection queryMap, LinkProviderOptions options, string countrySiteId, string marketId, int? contextId)
     {
+      if (!string.IsNullOrEmpty(ContextHost))
+      {
+        bool isSecureServerRequest = ContextHost.Contains("secureserver.net");
+
+        if (isSecureServerRequest)
+        {
+          string linkSecureServerCounterPart = string.Concat(linkName, ".SS");
+          var siteContextId = contextId.HasValue ? contextId.Value : _siteContext.ContextId;
+          bool linkTypeMapForContextExists = _linkMaps.ContainsKey(siteContextId);
+
+          if (linkTypeMapForContextExists && _linkMaps[siteContextId].ContainsKey(linkSecureServerCounterPart))
+          {
+            linkName = linkSecureServerCounterPart;
+          }
+        }
+      }
+
       return BuildUrl(linkName, relativePath, options, countrySiteId, marketId, contextId, queryMap);
     }
 
@@ -989,11 +1006,11 @@ namespace Atlantis.Framework.Providers.Links
       return GetUrlArguments_Int(queryMap, options);
     }
 
-//    public string GetUrlArguments(LinkProviderOptions options, params string[] queryParameters)
-//    {
-//      var queryMap = ConvertStringArrayToQueryMap(queryParameters);
-//      return GetUrlArguments_Int(queryMap, options);
-//    }
+    //    public string GetUrlArguments(LinkProviderOptions options, params string[] queryParameters)
+    //    {
+    //      var queryMap = ConvertStringArrayToQueryMap(queryParameters);
+    //      return GetUrlArguments_Int(queryMap, options);
+    //    }
 
     private string GetUrlArguments_Int(NameValueCollection queryMap, LinkProviderOptions options)
     {
@@ -1299,6 +1316,6 @@ namespace Atlantis.Framework.Providers.Links
     }
     */
     #endregion
-  
+
   }
 }

@@ -4,6 +4,7 @@
   {
     Registration,
     Transfer,
-    Renewal
+    Renewal,
+    Trustee
   }
 }

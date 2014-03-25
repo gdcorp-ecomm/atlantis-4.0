@@ -27,5 +27,6 @@ namespace Atlantis.Framework.RegDotTypeProductIds.Interface
     SunriseCApplication,
     [Description("Landrush Application")]
     LandrushApplication,
+    Trustee
   }
 }

@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Web;
 using System.Xml;
-using Atlantis.Framework.DotTypeCache;
-using Atlantis.Framework.DotTypeCache.Interface;
+//using Atlantis.Framework.DotTypeCache;
+//using Atlantis.Framework.DotTypeCache.Interface;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.DomainContactValidation.Interface;
-using Atlantis.Framework.Providers.TLDDataCache;
-using Atlantis.Framework.Providers.TLDDataCache.Interface;
+//using Atlantis.Framework.Providers.TLDDataCache;
+//using Atlantis.Framework.Providers.TLDDataCache.Interface;
 using Atlantis.Framework.Testing.MockHttpContext;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Atlantis.Framework.Testing.MockProviders;
@@ -53,8 +53,8 @@ namespace Atlantis.Framework.Providers.DomainContactValidation.Tests
           _providerContainer.RegisterProvider<IShopperContext, MockShopperContext>();
           _providerContainer.RegisterProvider<IManagerContext, MockNoManagerContext>();
           _providerContainer.RegisterProvider<IDomainContactValidationProvider, DomainContactValidationProvider>();
-          _providerContainer.RegisterProvider<IDotTypeProvider, DotTypeProvider>();
-          _providerContainer.RegisterProvider<ITLDDataCacheProvider, TLDDataCacheProvider>();
+          //_providerContainer.RegisterProvider<IDotTypeProvider, DotTypeProvider>();
+          //_providerContainer.RegisterProvider<ITLDDataCacheProvider, TLDDataCacheProvider>();
 
         }
 
@@ -514,6 +514,23 @@ namespace Atlantis.Framework.Providers.DomainContactValidation.Tests
     }
 
     [TestMethod]
+    public void DotBrLocalPresenceTest()
+    {
+      var tlds = new List<string> { "COM.BR" };
+      var contactGroup = DomainContactProvider.DomainContactGroupInstance(tlds, 1);
+
+      var registrantContact = DomainContactProvider.DomainContactInstance(
+         "Bill", "Registrant", "bregistrant@bongo.com",
+           "MumboJumbo", true,
+          "101 N Street", "Suite 100", "Littleton", "ac",
+          "80130", "br", "(303)-555-1213", "(303)-555-2213");
+      contactGroup.SetContact(registrantContact);
+      var newContact = contactGroup.GetContact(DomainContactType.Registrant);
+
+      Assert.IsFalse(newContact.TrusteeVendorIds.ContainsKey("COM.BR"));
+    }
+
+    [TestMethod]
     public void GetAllTrusteeIds()
     {
       var tlds = new List<string> { "FR", "IT", "COM.BR", "NET.BR" };
@@ -533,30 +550,30 @@ namespace Atlantis.Framework.Providers.DomainContactValidation.Tests
     [TestMethod]
     public void DKTuiFormInfoTest()
     {
-      var tlds = new List<string> { "DK", "ORG" };
-      var contactGroup = DomainContactProvider.DomainContactGroupInstance(tlds, 1);
+    //  var tlds = new List<string> { "DK", "ORG" };
+    //  var contactGroup = DomainContactProvider.DomainContactGroupInstance(tlds, 1);
 
-      var registrantContact = DomainContactProvider.DomainContactInstance(
-         "Bill", "Registrant", "bregistrant@bongo.com",
-           "MumboJumbo", true,
-          "101 N Street", "Suite 100", "Littleton", "CO",
-          "80130", "DK", "(303)-555-1213", "(303)-555-2213");
-      contactGroup.SetContact(DomainContactType.Registrant, registrantContact);
-      contactGroup.SetContact(DomainContactType.Administrative, registrantContact);
-      contactGroup.SetContact(DomainContactType.Technical, registrantContact);
-      contactGroup.SetContact(DomainContactType.Billing, registrantContact);
+    //  var registrantContact = DomainContactProvider.DomainContactInstance(
+    //     "Bill", "Registrant", "bregistrant@bongo.com",
+    //       "MumboJumbo", true,
+    //      "101 N Street", "Suite 100", "Littleton", "CO",
+    //      "80130", "DK", "(303)-555-1213", "(303)-555-2213");
+    //  contactGroup.SetContact(DomainContactType.Registrant, registrantContact);
+    //  contactGroup.SetContact(DomainContactType.Administrative, registrantContact);
+    //  contactGroup.SetContact(DomainContactType.Technical, registrantContact);
+    //  contactGroup.SetContact(DomainContactType.Billing, registrantContact);
 
-      var input = new Dictionary<string, LaunchPhases>
-      {
-        {"DK", LaunchPhases.GeneralAvailability},
-        {"ORG", LaunchPhases.GeneralAvailability}
-      };
+    //  var input = new Dictionary<string, LaunchPhases>
+    //  {
+    //    {"DK", LaunchPhases.GeneralAvailability},
+    //    {"ORG", LaunchPhases.GeneralAvailability}
+    //  };
 
 
-      IDictionary<string, ITuiFormInfo> result = contactGroup.GetTuiFormInfo(input);
-      ITuiFormInfo tuiFormInfo;
-      Assert.AreEqual(true, result != null && result.TryGetValue("DK", out tuiFormInfo) && !string.IsNullOrEmpty(tuiFormInfo.TuiFormType));
-      Assert.AreEqual(true, result != null && result.TryGetValue("ORG", out tuiFormInfo) && string.IsNullOrEmpty(tuiFormInfo.TuiFormType));
+    //  IDictionary<string, ITuiFormInfo> result = contactGroup.GetTuiFormInfo(input);
+    //  ITuiFormInfo tuiFormInfo;
+    //  Assert.AreEqual(true, result != null && result.TryGetValue("DK", out tuiFormInfo) && !string.IsNullOrEmpty(tuiFormInfo.TuiFormType));
+    //  Assert.AreEqual(true, result != null && result.TryGetValue("ORG", out tuiFormInfo) && string.IsNullOrEmpty(tuiFormInfo.TuiFormType));
     }
   }
 }

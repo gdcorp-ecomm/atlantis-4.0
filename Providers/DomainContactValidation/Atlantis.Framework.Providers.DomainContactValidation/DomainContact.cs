@@ -22,7 +22,10 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
     
     public void AddTrusteeVendorIds(string key, string value)
     {
-      TrusteeVendorIds[key] = value;
+      if (!string.IsNullOrEmpty(value))
+      {
+        TrusteeVendorIds[key] = value;
+      }
     }
 
     public void AddTuiFormsInfo(string tld, ITuiFormInfo tuiFormInfo)

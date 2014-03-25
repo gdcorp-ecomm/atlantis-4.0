@@ -15,7 +15,8 @@
     <releaseNotes>
       14.1.29.1: Added TuiFormsInfo to DomainContactGroup
       14.1.31.1: Found some use cases that weren't handled with the previous updates to TuiFormsInfo
-      14.2.3.1 : Fixed an issue handling the xml correctly for domain contacts. 
+      14.2.3.1 : Fixed an issue handling the xml correctly for domain contacts.
+      14.3.25.1 : Fixed an issue with empty TrusteeVendorids entries
     </releaseNotes>
     <copyright>$copyright$</copyright>
     <!-- Make tags the same as title element -->

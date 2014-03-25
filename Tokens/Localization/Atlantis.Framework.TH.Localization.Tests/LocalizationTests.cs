@@ -1,9 +1,6 @@
-﻿using System;
-using Atlantis.Framework.Interface;
-using Atlantis.Framework.Providers.Localization;
+﻿using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.Localization.Interface;
-using Atlantis.Framework.Providers.Interface.ProviderContainer;
-using Atlantis.Framework.Testing.MockHttpContext;
+using Atlantis.Framework.Testing.MockLocalization;
 using Atlantis.Framework.Testing.MockProviders;
 using Atlantis.Framework.Tokens.Interface;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -22,26 +19,24 @@ namespace Atlantis.Framework.TH.Localization.Tests
       TokenManager.RegisterTokenHandler(new LocalizationTokenHandler());
     }
 
-    private IProviderContainer SetContext(string url)
+    private IProviderContainer SetContext(string marketId)
     {
-      MockHttpContext.SetMockHttpContext("default.aspx", "http://www.godaddy.com/default.aspx?ci=1", "ci=1");
-
       IProviderContainer result = new MockProviderContainer();
       result.RegisterProvider<ISiteContext, MockSiteContext>();
-      result.RegisterProvider<ILocalizationProvider, CountryCookieLocalizationProvider>();
+      result.RegisterProvider<ILocalizationProvider, MockLocalizationProvider>();
+      result.SetData(MockLocalizationProviderSettings.MarketInfo, new MockMarketInfo(marketId, marketId, "en-US", false));
       return result;
     }
 
     private string TokenSuccess(string xmlTokenData)
     {
-      IProviderContainer container = SetContext("http://www.godaddy.com/");
+      IProviderContainer container = SetContext("fr-CA");
 
       string outputText;
 
       string token = string.Format(_TOKEN_FORMAT, xmlTokenData);
       TokenEvaluationResult result = TokenManager.ReplaceTokens(token, container, out outputText);
       Assert.AreEqual(TokenEvaluationResult.Success, result);
-      Assert.AreNotEqual(string.Empty, outputText);
 
       return outputText;
     }
@@ -49,7 +44,7 @@ namespace Atlantis.Framework.TH.Localization.Tests
     // Negative test
     private string TokenFail(string xmlTokenData)
     {
-      IProviderContainer container = SetContext("http://www.godaddy.com/");
+      IProviderContainer container = SetContext("fr-CA");
 
       string outputText;
 
@@ -64,14 +59,14 @@ namespace Atlantis.Framework.TH.Localization.Tests
     public void ShortLanguage()
     {
       string output = TokenSuccess("<language />");
-      Assert.IsNotNull(output);
+      Assert.AreEqual("fr", output);
     }
 
     [TestMethod]
     public void FullLanguage()
     {
       string output = TokenSuccess("<language full=\"true\" />");
-      Assert.IsNotNull(output);
+      Assert.AreEqual("fr-CA", output);
     }
 
     // Negative tests

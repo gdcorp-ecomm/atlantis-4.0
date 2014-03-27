@@ -9,9 +9,14 @@ namespace Atlantis.Framework.Providers.Language
   public class LanguageProvider : ProviderBase, ILanguageProvider
   {
     const string _QALANGUAGESHOW = "qa-qa";
+    const string _QAPSLANGUAGESHOW = "qa-ps";
+    const string _QAPZLANGUAGESHOW = "qa-pz";
 
     private readonly Lazy<ISiteContext> _siteContext;
     private readonly Lazy<QAPhraseHandler> _qaPhraseHandler;
+    private readonly Lazy<QaPsPhraseHandler> _qaPSPhraseHandler;
+    private readonly Lazy<QaPzPhraseHandler> _qaPZPhraseHandler;
+
     private readonly Lazy<CDSPhraseHandler> _cdsPhraseHandler;
     private readonly Lazy<FilePhraseHandler> _filePhraseHandler; 
 
@@ -19,6 +24,8 @@ namespace Atlantis.Framework.Providers.Language
       :base(container)
     {
       _qaPhraseHandler = new Lazy<QAPhraseHandler>(() => new QAPhraseHandler());
+      _qaPSPhraseHandler = new Lazy<QaPsPhraseHandler>(() => new QaPsPhraseHandler(Container));
+      _qaPZPhraseHandler = new Lazy<QaPzPhraseHandler>(() => new QaPzPhraseHandler(Container));
       _cdsPhraseHandler = new Lazy<CDSPhraseHandler>(() => new CDSPhraseHandler(Container));
       _filePhraseHandler = new Lazy<FilePhraseHandler>(() => new FilePhraseHandler(Container));
       _siteContext = new Lazy<ISiteContext>(() => Container.Resolve<ISiteContext>());
@@ -60,7 +67,14 @@ namespace Atlantis.Framework.Providers.Language
       {
         return _qaPhraseHandler.Value;
       }
-
+      if (ShowQAPSPhrase)
+      {
+        return _qaPSPhraseHandler.Value;
+      }
+      if (ShowQAPZPhrase)
+      {
+        return _qaPZPhraseHandler.Value;
+      }
       if (dictionaryName.StartsWith("cds.", StringComparison.OrdinalIgnoreCase))
       {
         return _cdsPhraseHandler.Value;
@@ -85,6 +99,44 @@ namespace Atlantis.Framework.Providers.Language
           }
         }
         return _showDictionaryAndKeyRaw.Value;
+      }
+    }
+
+    private bool? _showQA_PSPhrase;
+    private bool ShowQAPSPhrase
+    {
+      get
+      {
+        if (!_showQA_PSPhrase.HasValue)
+        {
+          _showQA_PSPhrase = false;
+          ILocalizationProvider localization;
+
+          if ((_siteContext.Value.IsRequestInternal) && (Container.TryResolve(out localization)))
+          {
+            _showQA_PSPhrase = localization.IsActiveLanguage(_QAPSLANGUAGESHOW);
+          }
+        }
+        return _showQA_PSPhrase.Value;
+      }
+    }
+
+    private bool? _showQA_PZPhrase;
+    private bool ShowQAPZPhrase
+    {
+      get
+      {
+        if (!_showQA_PZPhrase.HasValue)
+        {
+          _showQA_PZPhrase = false;
+          ILocalizationProvider localization;
+
+          if ((_siteContext.Value.IsRequestInternal) && (Container.TryResolve(out localization)))
+          {
+            _showQA_PZPhrase = localization.IsActiveLanguage(_QAPZLANGUAGESHOW);
+          }
+        }
+        return _showQA_PZPhrase.Value;
       }
     }
   }

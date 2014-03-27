@@ -1,4 +1,5 @@
-﻿using Atlantis.Framework.Interface;
+﻿using System.Text.RegularExpressions;
+using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.Language.Interface;
 using Atlantis.Framework.Providers.Localization.Interface;
 using Atlantis.Framework.Testing.MockLocalization;
@@ -69,6 +70,165 @@ namespace Atlantis.Framework.Providers.Language.Tests
       ILanguageProvider language = NewLanguageProvider(1, "www", "qa-qa", true);
       string phrase = language.GetLanguagePhrase("testdictionary", "testkey");
       Assert.AreEqual("[testdictionary:testkey]", phrase);
+    }
+
+    [TestMethod]
+    public void DefaultPhraseQAPS()
+    {
+      ILanguageProvider language = NewLanguageProvider(1, "www", "qa-ps", true);
+      string phrase = language.GetLanguagePhrase("testdictionary", "testkey");
+      Assert.IsNotNull(phrase);
+      Assert.IsTrue(phrase.Contains("!!!"));
+    }
+
+    [TestMethod]
+    public void DefaultPhraseWithHtmlQAPS()
+    {
+      ILanguageProvider language = NewLanguageProvider(1, "www", "qa-ps", true);
+      string phrase = language.GetLanguagePhrase("testdictionary", "testkeywithhtml");
+      Assert.IsNotNull(phrase);
+      Assert.IsTrue(phrase.Contains("!!!"));
+      Assert.IsTrue(phrase.Contains("<ul>"));
+    }
+
+    [TestMethod]
+    public void DefaultPhraseWithRandomHtmlQAPS()
+    {
+      ILanguageProvider language = NewLanguageProvider(1, "www", "qa-ps", true);
+      string phrase = language.GetLanguagePhrase("testdictionary", "textkeywithrandomhtml");
+      Assert.IsNotNull(phrase);
+      Assert.IsTrue(phrase.Contains("!!!"));
+      Assert.IsTrue(phrase.Contains("<strong>"));
+    }
+
+    [TestMethod]
+    public void DefaultPhraseWithComplexHtmlQAPS()
+    {
+      ILanguageProvider language = NewLanguageProvider(1, "www", "qa-ps", true);
+      string phrase = language.GetLanguagePhrase("testdictionary", "textkeywithcomplexhtml");
+      Assert.IsNotNull(phrase);
+      Assert.IsTrue(phrase.Contains("!!!"));
+      Assert.IsTrue(phrase.Contains("<span onmouseover"));
+    }
+
+    [TestMethod]
+    public void DefaultPhraseWithTokenQAPS()
+    {
+      ILanguageProvider language = NewLanguageProvider(1, "www", "qa-ps", true);
+      string phrase = language.GetLanguagePhrase("testdictionary", "textkeywithtoken");
+      Assert.IsNotNull(phrase);
+      Assert.IsTrue(phrase.Contains("!!!"));
+      Assert.IsTrue(phrase.Contains("[@T[companyname:name]@T]"));
+
+    }
+
+    [TestMethod]
+    public void DefaultPhraseWithTwoTokensQAPS()
+    {
+      ILanguageProvider language = NewLanguageProvider(1, "www", "qa-ps", true);
+      string phrase = language.GetLanguagePhrase("testdictionary", "textkeywithtwotokens");
+      Assert.IsNotNull(phrase);
+      Assert.IsTrue(phrase.Contains("!!!"));
+      Assert.IsTrue(Regex.Matches(phrase, "\\[@T[^\\s]*]@T\\]").Count == 2);
+    }
+
+    [TestMethod]
+    public void DefaultPhraseWithSpecialCharQAPS()
+    {
+      ILanguageProvider language = NewLanguageProvider(1, "www", "qa-ps", true);
+      string phrase = language.GetLanguagePhrase("testdictionary", "textkeywithspecialcharacter");
+      Assert.IsNotNull(phrase);
+      Assert.IsTrue(phrase.Contains("!!!"));
+      Assert.IsTrue(phrase.Contains("®"));
+    }
+
+    [TestMethod]
+    public void DefaultPhraseWithManySpecialCharsQAPS()
+    {
+      ILanguageProvider language = NewLanguageProvider(1, "www", "qa-ps", true);
+      string phrase = language.GetLanguagePhrase("testdictionary", "textkeywithmanydifferentspecialchars");
+      Assert.IsNotNull(phrase);
+      Assert.IsTrue(phrase.Contains("!!!"));
+      Assert.IsTrue(phrase.Contains("Ã"));
+    }
+
+    [TestMethod]
+    public void DefaultPhraseQAPZ()
+    {
+      ILanguageProvider language = NewLanguageProvider(1, "www", "qa-pz", true);
+      string phrase = language.GetLanguagePhrase("testdictionary", "testkey");
+      Assert.IsNotNull(phrase);
+      Assert.IsTrue(phrase.Contains("zzz"));
+    }
+
+    [TestMethod]
+    public void DefaultPhraseWithHtmlQAPZ()
+    {
+      ILanguageProvider language = NewLanguageProvider(1, "www", "qa-pz", true);
+      string phrase = language.GetLanguagePhrase("testdictionary", "testkeywithhtml");
+      Assert.IsNotNull(phrase);
+      Assert.IsTrue(phrase.Contains("zzz"));
+      Assert.IsTrue(phrase.Contains("<ul>"));
+    }
+
+    [TestMethod]
+    public void DefaultPhraseWithRandomHtmlQAPZ()
+    {
+      ILanguageProvider language = NewLanguageProvider(1, "www", "qa-pz", true);
+      string phrase = language.GetLanguagePhrase("testdictionary", "textkeywithrandomhtml");
+      Assert.IsNotNull(phrase);
+      Assert.IsTrue(phrase.Contains("zzz"));
+      Assert.IsTrue(phrase.Contains("<strong>"));
+    }
+
+    [TestMethod]
+    public void DefaultPhraseWithComplexHtmlQAPZ()
+    {
+      ILanguageProvider language = NewLanguageProvider(1, "www", "qa-pz", true);
+      string phrase = language.GetLanguagePhrase("testdictionary", "textkeywithcomplexhtml");
+      Assert.IsNotNull(phrase);
+      Assert.IsTrue(phrase.Contains("zzz"));
+      Assert.IsTrue(phrase.Contains("<span onmouseover"));
+    }
+
+    [TestMethod]
+    public void DefaultPhraseWithTokenQAPZ()
+    {
+      ILanguageProvider language = NewLanguageProvider(1, "www", "qa-pz", true);
+      string phrase = language.GetLanguagePhrase("testdictionary", "textkeywithtoken");
+      Assert.IsNotNull(phrase);
+      Assert.IsTrue(phrase.Contains("zzz"));
+      Assert.IsTrue(phrase.Contains("[@T[companyname:name]@T]"));
+    }
+
+    [TestMethod]
+    public void DefaultPhraseWithTwoTokensQAPZ()
+    {
+      ILanguageProvider language = NewLanguageProvider(1, "www", "qa-pz", true);
+      string phrase = language.GetLanguagePhrase("testdictionary", "textkeywithtwotokens");
+      Assert.IsNotNull(phrase);
+      Assert.IsTrue(phrase.Contains("zzz"));
+      Assert.IsTrue(Regex.Matches(phrase, "\\[@T[^\\s]*]@T\\]").Count == 2);
+    }
+
+    [TestMethod]
+    public void DefaultPhraseWithSpecialCharQAPZ()
+    {
+      ILanguageProvider language = NewLanguageProvider(1, "www", "qa-pz", true);
+      string phrase = language.GetLanguagePhrase("testdictionary", "textkeywithspecialcharacter");
+      Assert.IsNotNull(phrase);
+      Assert.IsTrue(phrase.Contains("zzz"));
+      Assert.IsTrue(phrase.Contains("®"));
+    }
+
+    [TestMethod]
+    public void DefaultPhraseWithManySpecialCharsQAPZ()
+    {
+      ILanguageProvider language = NewLanguageProvider(1, "www", "qa-pz", true);
+      string phrase = language.GetLanguagePhrase("testdictionary", "textkeywithmanydifferentspecialchars");
+      Assert.IsNotNull(phrase);
+      Assert.IsTrue(phrase.Contains("zzz"));
+      Assert.IsTrue(phrase.Contains("Ã"));
     }
 
     [TestMethod]

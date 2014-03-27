@@ -4,3 +4,38 @@ Green River
 GoDaddy Green River
 <phrase key="testkey" countrysite="uk" />
 Thames River
+<phrase key="testkeywithhtml" />
+<ul>
+  <li>This is a list item 1</li>
+  <li>This is a list item 2</li>
+  <li>This is a list item 3</li>
+</ul>
+<phrase key="textkeywithrandomhtml"/>
+<p>
+  <strong>SSL</strong> stands for Secure Socket Layer. It might sound complex, but it's really not. <strong>SSL Certificates</strong> authenticate your
+  website's identity, and encrypt the information visitors enter on your site. This keeps thieves from "overhearing" any exchange between that Web page and
+  another computer. When you have an <strong>SSL Certificate</strong> protecting your website, your customers can rest assured that the information they send is
+  secured and can't be viewed by cyber crooks.
+</p>
+<phrase key="textkeywithcomplexhtml"/>
+<strong>Free </strong><span onmouseover="atl_ShowQuickHelp(event, 'sslMalwareScanner');setToolTipWidth(302);" onmouseout="atl_HideQuickHelp();" class="ndash pointer">Malware Scanner</span>
+<phrase key="textkeywithtoken"/>
+Find out why the world's biggest companies trust [@T[companyname:name]@T] SSL certificates!
+<phrase key="textkeywithtwotokens"/>
+Find out why the world's biggest companies trust [@T[companyname:name]@T] SSL certificates! Second instance of [@T[companyname:name]@T] token!
+<phrase key="textkeywithspecialcharacter"/>
+Text phrase with an r-ball® contained in it.
+<phrase key="textkeywithmanydifferentspecialchars"/>
+dot: '•', 
+infinity: '∞', 
+pound: '£', 
+um..euro: '€', 
+u with tilde: '\u0169', 
+diamond: '�', 
+an i with mark: 'í', 
+this is empty?: '­', 
+bunch of letters: 'Ã', 'á', 'ã', 'ô', 'Î', 'é', 'ü', 'ï',
+upside down question mark: '¿', 
+one half: '½', 
+w with circumflex:'\u0174', 
+some other crazy stuff: '‡', '¢', '°', '‘', '»', ' ', '”', '“','²', '®', '™', '’', '…', '—', '†', '–'

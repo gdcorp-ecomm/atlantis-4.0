@@ -155,7 +155,16 @@ namespace Atlantis.Framework.Providers.Language.Handlers
       {
         paddedParagraph = paragraph;
         string xdocParagraph = String.Format("<root>{0}</root>", paragraph);
-        XDocument xdoc = XDocument.Parse(xdocParagraph);
+        XDocument xdoc;
+        try
+        {
+          xdoc = XDocument.Parse(xdocParagraph);
+        }
+        catch
+        {
+          xdocParagraph = HttpUtility.HtmlDecode(xdocParagraph);
+          xdoc = XDocument.Parse(xdocParagraph);
+        }
         foreach (XNode docNode in xdoc.DescendantNodes())
         {
           if (docNode.NodeType == System.Xml.XmlNodeType.Text)

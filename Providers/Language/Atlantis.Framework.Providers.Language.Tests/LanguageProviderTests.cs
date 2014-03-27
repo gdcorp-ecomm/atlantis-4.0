@@ -232,6 +232,16 @@ namespace Atlantis.Framework.Providers.Language.Tests
     }
 
     [TestMethod]
+    public void DefaultPhraseWithHtmlCharsQAPZ()
+    {
+      ILanguageProvider language = NewLanguageProvider(1, "www", "qa-pz", true);
+      string phrase = language.GetLanguagePhrase("testdictionary", "textkeywithhtmlchars");
+      Assert.IsNotNull(phrase);
+      Assert.IsTrue(phrase.Contains("zzz"));
+      Assert.IsTrue(phrase.Contains("&nbsp;"));
+    }
+
+    [TestMethod]
     public void PhraseKeyMissing()
     {
       ILanguageProvider language = NewLanguageProvider(1, "www", "en");

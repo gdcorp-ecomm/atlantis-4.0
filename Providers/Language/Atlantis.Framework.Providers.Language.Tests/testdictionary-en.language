@@ -26,16 +26,18 @@ Find out why the world's biggest companies trust [@T[companyname:name]@T] SSL ce
 <phrase key="textkeywithspecialcharacter"/>
 Text phrase with an r-ball® contained in it.
 <phrase key="textkeywithmanydifferentspecialchars"/>
-dot: '•', 
-infinity: '∞', 
-pound: '£', 
-um..euro: '€', 
-u with tilde: '\u0169', 
-diamond: '�', 
-an i with mark: 'í', 
-this is empty?: '­', 
+dot: '•',
+infinity: '∞',
+pound: '£',
+um..euro: '€',
+u with tilde: '\u0169',
+diamond: '�',
+an i with mark: 'í',
+this is empty?: '­',
 bunch of letters: 'Ã', 'á', 'ã', 'ô', 'Î', 'é', 'ü', 'ï',
-upside down question mark: '¿', 
-one half: '½', 
-w with circumflex:'\u0174', 
+upside down question mark: '¿',
+one half: '½',
+w with circumflex:'\u0174',
 some other crazy stuff: '‡', '¢', '°', '‘', '»', ' ', '”', '“','²', '®', '™', '’', '…', '—', '†', '–'
+<phrase key="textkeywithhtmlchars" comment="Title for the maintenance notice" />
+NOTICE...&nbsp;

@@ -150,6 +150,15 @@ namespace Atlantis.Framework.Providers.Interface.Currency
     string PriceFormat(ICurrencyPrice price, PriceFormatOptions priceOptions = PriceFormatOptions.None);
 
     /// <summary>
+    /// Formats a price based on the currency info for display
+    /// </summary>
+    /// <param name="price">Price to format</param>
+    /// <param name="priceOptions"><see cref="PriceFormatOptions"/></param>
+    /// <param name="symbolFormatter">The <see cref="ISymbolFormatter"/> used for formatting the currency symbol.</param>
+    /// <returns></returns>
+    string PriceFormat(ICurrencyPrice price, PriceFormatOptions options, ISymbolFormatter symbolFormatter);
+
+    /// <summary>
     /// Returns true if a product is marked as 'onsale'
     /// </summary>
     /// <param name="unifiedProductId">unified product id</param>
@@ -157,27 +166,40 @@ namespace Atlantis.Framework.Providers.Interface.Currency
     /// <param name="transactionCurrency">currencyType to use. If not given the shoppers transactional currencyType will be used.<see cref="ICurrencyInfo"/></param>
     /// <param name="isc">isc to use. If not given the site context ISC will be used.</param>
     /// <returns>true of the product is marked as 'onsale'</returns>
-    bool IsProductOnSale(int unifiedProductId, int shopperPriceType = -1, ICurrencyInfo transactionCurrency = null, string isc = null );
+    bool IsProductOnSale(int unifiedProductId, int shopperPriceType = -1, ICurrencyInfo transactionCurrency = null, string isc = null);
 
     /// <summary>
     /// Returns the shoppers selected display currency info
     /// </summary>
-    ICurrencyInfo SelectedDisplayCurrencyInfo { get; }
+    ICurrencyInfo SelectedDisplayCurrencyInfo
+    {
+      get;
+    }
 
     /// <summary>
     /// Returns the shoppers selected display currency type.  This can also be set to update the shoppers display currency type.
     /// </summary>
-    string SelectedDisplayCurrencyType { get; set; }
+    string SelectedDisplayCurrencyType
+    {
+      get;
+      set;
+    }
 
     /// <summary>
     /// Returns the shoppers transactional currency info based on their selected display currency info
     /// </summary>
-    ICurrencyInfo SelectedTransactionalCurrencyInfo { get; }
+    ICurrencyInfo SelectedTransactionalCurrencyInfo
+    {
+      get;
+    }
 
     /// <summary>
     /// Returns the shoppers transactional currency type based on their selected display currency info.
     /// </summary>
-    string SelectedTransactionalCurrencyType { get; }
+    string SelectedTransactionalCurrencyType
+    {
+      get;
+    }
 
     /// <summary>
     /// Because the IsTransactional flag is not the source of record for all contexts,
@@ -206,7 +228,10 @@ namespace Atlantis.Framework.Providers.Interface.Currency
     /// <summary>
     /// Gets an enumerable list of currency info data
     /// </summary>
-    IEnumerable<ICurrencyInfo> CurrencyInfoList { get; }
+    IEnumerable<ICurrencyInfo> CurrencyInfoList
+    {
+      get;
+    }
 
     /// <summary>
     /// Creates a new ICurrencyPrice object

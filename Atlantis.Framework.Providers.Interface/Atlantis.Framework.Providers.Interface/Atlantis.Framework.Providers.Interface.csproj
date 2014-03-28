@@ -52,6 +52,7 @@
     <Compile Include="Currency\ICurrencyInfo.cs" />
     <Compile Include="Currency\ICurrencyPrice.cs" />
     <Compile Include="Currency\ICurrencyProvider.cs" />
+    <Compile Include="Currency\ISymbolFormatter.cs" />
     <Compile Include="Currency\PriceFormatOptions.cs" />
     <Compile Include="Currency\PriceTextOptions.cs" />
     <Compile Include="Pricing\IPricingProvider.cs" />

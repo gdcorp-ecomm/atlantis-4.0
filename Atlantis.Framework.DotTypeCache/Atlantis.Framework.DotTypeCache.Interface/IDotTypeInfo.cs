@@ -93,5 +93,7 @@ namespace Atlantis.Framework.DotTypeCache.Interface
 
     int GetProductId(IDomainProductLookup domainProductLookup);
     List<int> GetProductIdList(IDomainProductListLookup domainProductListLookup);
+    List<int> GetTrusteeProductId(TLDProductTypes productType);
+
   }
 }

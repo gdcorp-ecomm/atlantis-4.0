@@ -313,6 +313,10 @@ namespace Atlantis.Framework.DotTypeCache.Interface
       return string.Empty;
     }
 
+    public List<int> GetTrusteeProductId(TLDProductTypes productType) {
+        return new List<int>();
+    }
+
     #endregion
 
     public class InvalidApplicationControl : ITLDApplicationControl

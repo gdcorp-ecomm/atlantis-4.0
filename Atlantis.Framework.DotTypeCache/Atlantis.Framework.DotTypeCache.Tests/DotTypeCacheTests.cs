@@ -1680,5 +1680,22 @@ namespace Atlantis.Framework.DotTypeCache.Tests
       string phaseCode = LaunchPhaseMappings.GetCode(LaunchPhases.Landrush);
       Assert.IsTrue(!string.IsNullOrEmpty(phaseCode));
     }
+
+    [TestMethod]
+    public void GetTrusteeProductIdForRegistration()
+    {
+        var dotTypeInfo = DotTypeProvider.GetDotTypeInfo("SG");
+        List<int> trusteeProductIds = dotTypeInfo.GetTrusteeProductId(TLDProductTypes.Registration);
+        Assert.IsTrue(trusteeProductIds.Any());
+    }
+
+    [TestMethod]
+    public void GetTrusteeProductIdForRenewal()
+    {
+        var dotTypeInfo = DotTypeProvider.GetDotTypeInfo("SG");
+        List<int> trusteeProductIds = dotTypeInfo.GetTrusteeProductId(TLDProductTypes.Renewal);
+        Assert.IsTrue(trusteeProductIds.Any());
+    }
+
   }
 }

@@ -51,6 +51,11 @@ namespace Atlantis.Framework.DotTypeCache.Static
       get { return 1; }
     }
 
+    public List<int> GetTrusteeProductId(TLDProductTypes productType)
+    {
+        return new List<int>();
+    }
+
     public virtual int MinRegistrationLength
     {
       get { return 1; }

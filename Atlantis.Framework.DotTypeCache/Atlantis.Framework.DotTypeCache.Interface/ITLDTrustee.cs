@@ -3,5 +3,6 @@
   public interface ITLDTrustee
   {
     bool IsRequired { get; }
+    int  TrusteeVendorId { get; }
   }
 }

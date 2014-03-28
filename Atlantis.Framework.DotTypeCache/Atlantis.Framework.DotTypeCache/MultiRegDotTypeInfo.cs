@@ -219,6 +219,11 @@ namespace Atlantis.Framework.DotTypeCache
       return GetValidProductIdList(_registerProducts, MinRegistrationLength, MaxRegistrationLength, domainCount, registrationLengths);
     }
 
+    public List<int> GetTrusteeProductId(TLDProductTypes productType)
+    {
+        return new List<int>();
+    }
+
     public List<int> GetValidTransferProductIdList(int domainCount, params int[] registrationLengths)
     {
       if (_transferProducts == null)

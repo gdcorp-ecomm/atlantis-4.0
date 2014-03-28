@@ -52,7 +52,7 @@
     </Reference>
     <Reference Include="Atlantis.Framework.DotTypeCache.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.DotTypeCache.Interface.14.2.27.1\lib\net40\Atlantis.Framework.DotTypeCache.Interface.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.DotTypeCache.Interface.14.3.26.3\lib\net40\Atlantis.Framework.DotTypeCache.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Engine, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -129,6 +129,9 @@
     <None Include="Atlantis.Framework.DCCDomainsDataCache.Interface.nuget.bat" />
     <None Include="Atlantis.Framework.DCCDomainsDataCache.Interface.nuspec" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="nuget.exe" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

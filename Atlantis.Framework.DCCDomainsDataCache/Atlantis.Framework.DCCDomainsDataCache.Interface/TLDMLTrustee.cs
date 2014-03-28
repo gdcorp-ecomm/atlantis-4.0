@@ -18,7 +18,14 @@ namespace Atlantis.Framework.DCCDomainsDataCache.Interface
 
         if (trusterItems.Length > 0)
         {
-          tldmlTrustee.IsRequired = trusterItems[0].IsEnabled();
+            tldmlTrustee.IsRequired = trusterItems[0].IsEnabled();
+
+            XAttribute trusteeVendorId = trusterItems[0].Attribute("trusteevendorid");
+            int trusteeValue = 0;
+            if (trusteeVendorId != null && int.TryParse(trusteeVendorId.Value, out trusteeValue))
+            {
+                tldmlTrustee.TrusteeVendorId = trusteeValue;
+            }
         }
       }
 
@@ -26,5 +33,11 @@ namespace Atlantis.Framework.DCCDomainsDataCache.Interface
     }
 
     public bool IsRequired { get; private set; }
+
+    public int TrusteeVendorId
+    {
+        get;
+        private set;
+    }
   }
 }

@@ -1,0 +1,312 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="maxLengthError" xml:space="preserve">
+    <value>Kohteessa {0} voi olla enintään {1} merkkiä.</value>
+  </data>
+  <data name="minLengthError" xml:space="preserve">
+    <value>Kohteessa {0} on oltava enemmän kuin {1} merkkiä.</value>
+  </data>
+  <data name="invalidData" xml:space="preserve">
+    <value>Virheelliset tiedot</value>
+  </data>
+  <data name="equalLengthAlpha" xml:space="preserve">
+    <value>Kohteen {0} on oltava {1} merkkiä.</value>
+  </data>
+  <data name="equalLengthNumeric" xml:space="preserve">
+    <value>Kohteen {0} on oltava {1} numeroa.</value>
+  </data>
+  <data name="invalidCharacters" xml:space="preserve">
+    <value>{0} sisältää virheellisiä merkkejä.</value>
+  </data>
+  <data name="match" xml:space="preserve">
+    <value>Kohteen {0} on oltava sama kuin {1}.</value>
+  </data>
+  <data name="notMatch" xml:space="preserve">
+    <value>{0} ei voi olla sama kuin {1}.</value>
+  </data>
+  <data name="numericRule" xml:space="preserve">
+    <value>Arvon {0} on sisällettävä pelkkiä numeroita.</value>
+  </data>
+  <data name="isInvalid" xml:space="preserve">
+    <value>{0} ei kelpaa.</value>
+  </data>
+  <data name="phoneMustStartAndContain" xml:space="preserve">
+    <value>{0} ei saa alkaa numerolla 0 tai 1.  On sisällettävä {1} merkkiä </value>
+  </data>
+  <data name="phoneMustContainCharacters" xml:space="preserve">
+    <value>Kohteen {0} on sisällettävä {1} merkkiä</value>
+  </data>
+  <data name="mustBeNumeric" xml:space="preserve">
+    <value>Kohteen {0} on oltava numeerinen.</value>
+  </data>
+  <data name="invalidFormat" xml:space="preserve">
+    <value>{0} on virheellinen muoto.</value>
+  </data>
+  <data name="required" xml:space="preserve">
+    <value>{0} on pakollinen.</value>
+  </data>
+  <data name="birthdayValid" xml:space="preserve">
+    <value>Jos annat syntymäpäivän, sinun on annettava kelvollisia arvoja.</value>
+  </data>
+  <data name="straightNumerical" xml:space="preserve">
+    <value>{0} ei voi olla mikään suora numerosarja.</value>
+  </data>
+  <data name="commonPhrase" xml:space="preserve">
+    <value>{0} ei voi sisältää tavallista sanaa tai lausetta.</value>
+  </data>
+  <data name="lastFive" xml:space="preserve">
+    <value>Et voi käyttää 5 edellistä salasanaa uudelleen.</value>
+  </data>
+  <data name="matchesHint" xml:space="preserve">
+    <value>{0} ei voi olla sama kuin salasanavihje.</value>
+  </data>
+  <data name="samePassword" xml:space="preserve">
+    <value>Et voi käyttää samaa salasanaa 30 päivän sisällä.</value>
+  </data>
+  <data name="isInvalidStatusCode" xml:space="preserve">
+    <value>{0} ei kelpaa. Tilakoodi: {1}</value>
+  </data>
+  <data name="passwordConfirm" xml:space="preserve">
+    <value>{0} voi olla korkeintaan {1} merkkiä.  Leikkaa kohdetta {0}, ennen kuin lähetät sen tarkistukseen.</value>
+  </data>
+  <data name="usernameExists" xml:space="preserve">
+    <value>Käyttäjänimi on jo luotu.</value>
+  </data>
+  <data name="username" xml:space="preserve">
+    <value>Käyttäjänimi</value>
+  </data>
+  <data name="birthday" xml:space="preserve">
+    <value>Syntymäaika</value>
+  </data>
+  <data name="address1" xml:space="preserve">
+    <value>Osoite 1</value>
+  </data>
+  <data name="address2" xml:space="preserve">
+    <value>Osoite 2</value>
+  </data>
+  <data name="phone" xml:space="preserve">
+    <value>Puhelin</value>
+  </data>
+  <data name="callInPin" xml:space="preserve">
+    <value>Soiton PIN-koodi</value>
+  </data>
+  <data name="city" xml:space="preserve">
+    <value>Paikkakunta</value>
+  </data>
+  <data name="country" xml:space="preserve">
+    <value>Maa</value>
+  </data>
+  <data name="email" xml:space="preserve">
+    <value>Sähköposti</value>
+  </data>
+  <data name="firstName" xml:space="preserve">
+    <value>Etunimi</value>
+  </data>
+  <data name="lastName" xml:space="preserve">
+    <value>Sukunimi</value>
+  </data>
+  <data name="password" xml:space="preserve">
+    <value>Salasana</value>
+  </data>
+  <data name="confirmPassword" xml:space="preserve">
+    <value>Vahvista salasana</value>
+  </data>
+  <data name="passwordHint" xml:space="preserve">
+    <value>Salasanavihje</value>
+  </data>
+  <data name="ext" xml:space="preserve">
+    <value>Alanumero</value>
+  </data>
+  <data name="state" xml:space="preserve">
+    <value>Osavaltio/provinssi</value>
+  </data>
+  <data name="zip" xml:space="preserve">
+    <value>Postinumero</value>
+  </data>
+  <data name="alreadyExists" xml:space="preserve">
+    <value>{0} on jo olemassa</value>
+  </data>
+  <data name="cannotBeNumeric" xml:space="preserve">
+    <value>{0} ei voi olla pelkkiä numeroita</value>
+  </data>
+  <data name="pinOneDigit" xml:space="preserve">
+    <value>PIN-koodissa on oltava enemmän kuin yksi numero.</value>
+  </data>
+  <data name="errorEmailInvalidFormat" xml:space="preserve">
+    <value>Sähköpostiosoite on virheellinen muoto.</value>
+  </data>
+  <data name="errorEmailMaxLength" xml:space="preserve">
+    <value>Sähköpostiosoite voi olla enintään {0} merkkiä pitkä.</value>
+    <comment>{0} replaced with the max email length</comment>
+  </data>
+  <data name="errorEmailRequired" xml:space="preserve">
+    <value>Sähköpostiosoite vaaditaan</value>
+  </data>
+  <data name="errorPassword2Required" xml:space="preserve">
+    <value>Vahvistussalasana on pakollinen.</value>
+  </data>
+  <data name="errorPasswordInvalidFormat" xml:space="preserve">
+    <value>Salasanassa on oltava vähintään yksi iso kirjain ja yksi numero, eikä se voi alkaa välilyönnillä.</value>
+  </data>
+  <data name="errorPasswordMaxLength" xml:space="preserve">
+    <value>Salasana voi olla enintään {0} merkkiä pitkä.</value>
+    <comment>{0} replaced with the max password length</comment>
+  </data>
+  <data name="errorPasswordMinLength" xml:space="preserve">
+    <value>Salasanan on oltava vähintään {0} merkkiä pitkä.</value>
+    <comment>{0} replaced with the min password length</comment>
+  </data>
+  <data name="errorPasswordMismatch" xml:space="preserve">
+    <value>Salasanojen on vastattava toisiaan.</value>
+  </data>
+  <data name="errorPasswordRequired" xml:space="preserve">
+    <value>Salasana on pakollinen.</value>
+  </data>
+  <data name="errorPinMaxLength" xml:space="preserve">
+    <value>PIN voi olla enintään {0} merkkiä pitkä.</value>
+    <comment>{0} replaced with the max PIN length</comment>
+  </data>
+  <data name="errorPinMinLength" xml:space="preserve">
+    <value>PIN-koodin on oltava vähintään {0} merkkiä pitkä.</value>
+    <comment>{0} replaced with the min PIN length</comment>
+  </data>
+  <data name="errorPinNumeric" xml:space="preserve">
+    <value>PIN-koodin on sisällettävä pelkkiä numeroita.</value>
+  </data>
+  <data name="errorPinRequired" xml:space="preserve">
+    <value>PIN on pakollinen tieto.</value>
+  </data>
+  <data name="errorPinSequential" xml:space="preserve">
+    <value>PIN ei voi olla mikään suora numerosarja.</value>
+  </data>
+  <data name="errorUsernameInvalidCharacters" xml:space="preserve">
+    <value>Käyttäjänimi sisältää virheellisiä merkkejä.</value>
+  </data>
+  <data name="errorUsernameMaxLength" xml:space="preserve">
+    <value>Käyttäjänimi voi olla enintään {0} merkkiä pitkä.</value>
+    <comment>{0} replaced with the max username length</comment>
+  </data>
+  <data name="errorUsernameNumericOnly" xml:space="preserve">
+    <value>Käyttäjänimi ei voi olla pelkkiä numeroita.</value>
+  </data>
+  <data name="errorUsernameRequired" xml:space="preserve">
+    <value>Käyttäjänimi on pakollinen.</value>
+  </data>
+</root>

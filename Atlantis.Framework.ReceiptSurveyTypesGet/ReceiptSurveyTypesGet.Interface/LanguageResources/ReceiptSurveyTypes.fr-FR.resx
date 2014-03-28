@@ -1,0 +1,246 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="surveySelectOne" xml:space="preserve">
+    <value>Sélectionnez une...</value>
+  </data>
+  <data name="surveyTvOther" xml:space="preserve">
+    <value>TV - Autres</value>
+  </data>
+  <data name="surveyRBy" xml:space="preserve">
+    <value>Par l'intermédiaire de quelqu'un/un ami</value>
+  </data>
+  <data name="surveySE" xml:space="preserve">
+    <value>Un moteur de recherche </value>
+  </data>
+  <data name="surveyPA" xml:space="preserve">
+    <value>Annonce imprimée (magazines, etc.)</value>
+  </data>
+  <data name="surveyAlreadyCust" xml:space="preserve">
+    <value>Je suis déjà un client existant.</value>
+  </data>
+  <data name="surveyOther" xml:space="preserve">
+    <value>Autre</value>
+  </data>
+  <data name="surveyTvSB" xml:space="preserve">
+    <value>TV - Super Bowl</value>
+  </data>
+  <data name="surveyTvIndy" xml:space="preserve">
+    <value>TV - Indy Racing</value>
+  </data>
+  <data name="surveyTvNC" xml:space="preserve">
+    <value>TV - NASCAR</value>
+  </data>
+  <data name="surveyTvMLB" xml:space="preserve">
+    <value>TV - Major League Baseball</value>
+  </data>
+  <data name="surveyTvCBB" xml:space="preserve">
+    <value>TV - Basket-ball universitaire</value>
+  </data>
+  <data name="surveyTvFB" xml:space="preserve">
+    <value>TV - Football</value>
+  </data>
+  <data name="surveyTvCF" xml:space="preserve">
+    <value>TV - Football américain universitaire</value>
+  </data>
+  <data name="surveyTvBB" xml:space="preserve">
+    <value>TV - Basket-ball</value>
+  </data>
+  <data name="surveyTvNBA" xml:space="preserve">
+    <value>TV - NBA</value>
+  </data>
+  <data name="surveyMNS" xml:space="preserve">
+    <value>Dans les médias/les informations</value>
+  </data>
+  <data name="surveyTvMMA" xml:space="preserve">
+    <value>TV - Arts martiaux mixtes</value>
+  </data>
+  <data name="surveyTvSEF" xml:space="preserve">
+    <value>TV - Soccer / Football européen</value>
+  </data>
+  <data name="surveySM" xml:space="preserve">
+    <value>Twitter, Facebook, LinkedIn</value>
+  </data>
+  <data name="surveyTvBoxing" xml:space="preserve">
+    <value>TV - Boxe</value>
+  </data>
+  <data name="surveyTvTennis" xml:space="preserve">
+    <value>TV - Tennis</value>
+  </data>
+  <data name="surveyBillboard" xml:space="preserve">
+    <value>Un panneau d'affichage</value>
+  </data>
+  <data name="surveyTvHockey" xml:space="preserve">
+    <value>TV - Hockey</value>
+  </data>
+  <data name="surveyTvRugby" xml:space="preserve">
+    <value>TV - Rugby</value>
+  </data>
+  <data name="surveyTvNFL" xml:space="preserve">
+    <value>TV - NFL</value>
+  </data>
+  <data name="surveyTvDewTour" xml:space="preserve">
+    <value>TV - The Dew Tour</value>
+  </data>
+  <data name="surveyTvGDB" xml:space="preserve">
+    <value>TV - GoDaddy Bowl</value>
+  </data>
+  <data name="surveyTvCricket" xml:space="preserve">
+    <value>TV - Cricket</value>
+  </data>
+  <data name="surveyTvAFL" xml:space="preserve">
+    <value>TV - AFL</value>
+  </data>
+  <data name="surveyTvSoccer" xml:space="preserve">
+    <value>TV - Soccer</value>
+  </data>
+  <data name="surveyTvFutbol" xml:space="preserve">
+    <value>TV - Futbol</value>
+  </data>
+  <data name="surveyTvFO" xml:space="preserve">
+    <value>TV - Formule Un</value>
+  </data>
+  <data name="surveyTvV8" xml:space="preserve">
+    <value>TV - Course V8</value>
+  </data>
+  <data name="surveyTvFooty" xml:space="preserve">
+    <value>TV - Foot</value>
+  </data>
+  <data name="surveyTvSLTV" xml:space="preserve">
+    <value>TV - Télévision en espagnol</value>
+  </data>
+  <data name="surveyTvTTS" xml:space="preserve">
+    <value>TV - The Today Show</value>
+  </data>
+  <data name="surveyTvYT" xml:space="preserve">
+    <value>YouTube</value>
+  </data>
+  <data name="surveyTvDD" xml:space="preserve">
+    <value>TV - Dragon's Den</value>
+  </data>
+  <data name="surveyEventOnlineTraining" xml:space="preserve">
+    <value>Formation en ligne</value>
+  </data>
+  <data name="surveyEventTradeshowExpo" xml:space="preserve">
+    <value>Salon/Expo</value>
+  </data>
+  <data name="surveyEventWorkshop" xml:space="preserve">
+    <value>Atelier</value>
+  </data>
+</root>

@@ -1,0 +1,312 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="maxLengthError" xml:space="preserve">
+    <value>{0} en fazla {1} karakter olabilir.</value>
+  </data>
+  <data name="minLengthError" xml:space="preserve">
+    <value>{0} en az {1} karakter olabilir.</value>
+  </data>
+  <data name="invalidData" xml:space="preserve">
+    <value>Geçersiz Veri</value>
+  </data>
+  <data name="equalLengthAlpha" xml:space="preserve">
+    <value>{0} {1} karakter olmalıdır.</value>
+  </data>
+  <data name="equalLengthNumeric" xml:space="preserve">
+    <value>{0} {1} basamak olmalıdır.</value>
+  </data>
+  <data name="invalidCharacters" xml:space="preserve">
+    <value>{0} geçersiz karakterler içeriyor</value>
+  </data>
+  <data name="match" xml:space="preserve">
+    <value>{0} ile {1} eşit olmalıdır</value>
+  </data>
+  <data name="notMatch" xml:space="preserve">
+    <value>{0} ile {1} eşit olamaz</value>
+  </data>
+  <data name="numericRule" xml:space="preserve">
+    <value>{0} yalnızca rakamlardan oluşmalıdır.</value>
+  </data>
+  <data name="isInvalid" xml:space="preserve">
+    <value>{0} geçersiz;</value>
+  </data>
+  <data name="phoneMustStartAndContain" xml:space="preserve">
+    <value>{0} 0 veya 1 ile başlayamaz.  {1} karakter olmalıdır </value>
+  </data>
+  <data name="phoneMustContainCharacters" xml:space="preserve">
+    <value>{0} {1} karakter olmalıdır</value>
+  </data>
+  <data name="mustBeNumeric" xml:space="preserve">
+    <value>{0} sayısal bir değer olmalıdır</value>
+  </data>
+  <data name="invalidFormat" xml:space="preserve">
+    <value>{0} geçersiz bir biçim.</value>
+  </data>
+  <data name="required" xml:space="preserve">
+    <value>{0} gereklidir</value>
+  </data>
+  <data name="birthdayValid" xml:space="preserve">
+    <value>Doğum tarihi giriyorsanız geçerli değerlerden oluşmalıdır</value>
+  </data>
+  <data name="straightNumerical" xml:space="preserve">
+    <value>{0} ardışık sayı dizisi olamaz.</value>
+  </data>
+  <data name="commonPhrase" xml:space="preserve">
+    <value>{0} ortak bir kelime veya kelime öbeği içeremez.</value>
+  </data>
+  <data name="lastFive" xml:space="preserve">
+    <value>Son 5 şifre tekrar kullanılamaz.</value>
+  </data>
+  <data name="matchesHint" xml:space="preserve">
+    <value>{0} Şifre İpucu ile aynı olamaz.</value>
+  </data>
+  <data name="samePassword" xml:space="preserve">
+    <value>Aynı şifre 30 gün içinde kullanılamaz.</value>
+  </data>
+  <data name="isInvalidStatusCode" xml:space="preserve">
+    <value>{0} geçersiz. Durum Kodu: {1}</value>
+  </data>
+  <data name="passwordConfirm" xml:space="preserve">
+    <value>{0} en fazla {1} karakter olabilir.  Doğrulama için göndermeden önce {0} bölümlerini kırpın.</value>
+  </data>
+  <data name="usernameExists" xml:space="preserve">
+    <value>Kullanıcı adı zaten var</value>
+  </data>
+  <data name="username" xml:space="preserve">
+    <value>Kullanıcı adı</value>
+  </data>
+  <data name="birthday" xml:space="preserve">
+    <value>Doğum Tarihi</value>
+  </data>
+  <data name="address1" xml:space="preserve">
+    <value>Adres 1</value>
+  </data>
+  <data name="address2" xml:space="preserve">
+    <value>Adres 2</value>
+  </data>
+  <data name="phone" xml:space="preserve">
+    <value>Telefon</value>
+  </data>
+  <data name="callInPin" xml:space="preserve">
+    <value>Çağrı PIN'i</value>
+  </data>
+  <data name="city" xml:space="preserve">
+    <value>Şehir</value>
+  </data>
+  <data name="country" xml:space="preserve">
+    <value>Ülke</value>
+  </data>
+  <data name="email" xml:space="preserve">
+    <value>E-posta</value>
+  </data>
+  <data name="firstName" xml:space="preserve">
+    <value>Adı</value>
+  </data>
+  <data name="lastName" xml:space="preserve">
+    <value>Soyadı</value>
+  </data>
+  <data name="password" xml:space="preserve">
+    <value>Şifre</value>
+  </data>
+  <data name="confirmPassword" xml:space="preserve">
+    <value>Şifreyi onayla</value>
+  </data>
+  <data name="passwordHint" xml:space="preserve">
+    <value>Şifre ipucu</value>
+  </data>
+  <data name="ext" xml:space="preserve">
+    <value>Dahili No.</value>
+  </data>
+  <data name="state" xml:space="preserve">
+    <value>Eyalet / İl</value>
+  </data>
+  <data name="zip" xml:space="preserve">
+    <value>Posta kodu</value>
+  </data>
+  <data name="alreadyExists" xml:space="preserve">
+    <value>{0} zaten var</value>
+  </data>
+  <data name="cannotBeNumeric" xml:space="preserve">
+    <value>{0} yalnızca sayılardan oluşamaz</value>
+  </data>
+  <data name="pinOneDigit" xml:space="preserve">
+    <value>PIN tek basamaklı olamaz</value>
+  </data>
+  <data name="errorEmailInvalidFormat" xml:space="preserve">
+    <value>E-posta geçersiz biçimde.</value>
+  </data>
+  <data name="errorEmailMaxLength" xml:space="preserve">
+    <value>E-posta en fazla {0} karakter uzunluğunda olabilir.</value>
+    <comment>{0} replaced with the max email length</comment>
+  </data>
+  <data name="errorEmailRequired" xml:space="preserve">
+    <value>E-posta zorunludur.</value>
+  </data>
+  <data name="errorPassword2Required" xml:space="preserve">
+    <value>Şifre Onayı gerekiyor.</value>
+  </data>
+  <data name="errorPasswordInvalidFormat" xml:space="preserve">
+    <value>Şifrede en az 1 büyük harf ve 1 rakam olmalıdır ve şifrenin ilk ya da son karakteri boşluk olamaz.</value>
+  </data>
+  <data name="errorPasswordMaxLength" xml:space="preserve">
+    <value>Şifre en fazla {0} karakter uzunluğunda olabilir.</value>
+    <comment>{0} replaced with the max password length</comment>
+  </data>
+  <data name="errorPasswordMinLength" xml:space="preserve">
+    <value>Şifre en az {0} karakter uzunluğunda olmalıdır.</value>
+    <comment>{0} replaced with the min password length</comment>
+  </data>
+  <data name="errorPasswordMismatch" xml:space="preserve">
+    <value>Şifreler eşleşmelidir.</value>
+  </data>
+  <data name="errorPasswordRequired" xml:space="preserve">
+    <value>Şifre gerekli.</value>
+  </data>
+  <data name="errorPinMaxLength" xml:space="preserve">
+    <value>PIN en fazla {0} karakter uzunluğunda olabilir.</value>
+    <comment>{0} replaced with the max PIN length</comment>
+  </data>
+  <data name="errorPinMinLength" xml:space="preserve">
+    <value>PIN en az {0} karakter uzunluğunda olmalıdır.</value>
+    <comment>{0} replaced with the min PIN length</comment>
+  </data>
+  <data name="errorPinNumeric" xml:space="preserve">
+    <value>PIN yalnızca rakamlardan oluşmalıdır.</value>
+  </data>
+  <data name="errorPinRequired" xml:space="preserve">
+    <value>PIN girilmesi gereklidir.</value>
+  </data>
+  <data name="errorPinSequential" xml:space="preserve">
+    <value>PIN ardışık sayı dizisi olamaz.</value>
+  </data>
+  <data name="errorUsernameInvalidCharacters" xml:space="preserve">
+    <value>Kullanıcı adı geçersiz karakterler içeriyor.</value>
+  </data>
+  <data name="errorUsernameMaxLength" xml:space="preserve">
+    <value>Kullanıcı adı en fazla {0} karakter uzunluğunda olabilir.</value>
+    <comment>{0} replaced with the max username length</comment>
+  </data>
+  <data name="errorUsernameNumericOnly" xml:space="preserve">
+    <value>Kullanıcı adı yalnızca sayılardan oluşamaz.</value>
+  </data>
+  <data name="errorUsernameRequired" xml:space="preserve">
+    <value>Kullanıcı adı gerekiyor.</value>
+  </data>
+</root>

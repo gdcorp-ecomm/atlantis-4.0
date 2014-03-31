@@ -13,8 +13,22 @@
     <tags>Atlantis.Framework.ShopperValidator.Interface</tags>
   </metadata>
   <files>
+    <file src="bin\Release\da\Atlantis.Framework.ShopperValidator.Interface.resources.dll" target="lib\net40\da\Atlantis.Framework.ShopperValidator.Interface.resources.dll" />
+    <file src="bin\Release\de\Atlantis.Framework.ShopperValidator.Interface.resources.dll" target="lib\net40\de\Atlantis.Framework.ShopperValidator.Interface.resources.dll" />
+    <file src="bin\Release\el\Atlantis.Framework.ShopperValidator.Interface.resources.dll" target="lib\net40\el\Atlantis.Framework.ShopperValidator.Interface.resources.dll" />
     <file src="bin\Release\en\Atlantis.Framework.ShopperValidator.Interface.resources.dll" target="lib\net40\en\Atlantis.Framework.ShopperValidator.Interface.resources.dll" />
     <file src="bin\Release\es\Atlantis.Framework.ShopperValidator.Interface.resources.dll" target="lib\net40\es\Atlantis.Framework.ShopperValidator.Interface.resources.dll" />
+    <file src="bin\Release\fi\Atlantis.Framework.ShopperValidator.Interface.resources.dll" target="lib\net40\fi\Atlantis.Framework.ShopperValidator.Interface.resources.dll" />
+    <file src="bin\Release\fr\Atlantis.Framework.ShopperValidator.Interface.resources.dll" target="lib\net40\fr\Atlantis.Framework.ShopperValidator.Interface.resources.dll" />
+    <file src="bin\Release\it\Atlantis.Framework.ShopperValidator.Interface.resources.dll" target="lib\net40\it\Atlantis.Framework.ShopperValidator.Interface.resources.dll" />
+    <file src="bin\Release\nb\Atlantis.Framework.ShopperValidator.Interface.resources.dll" target="lib\net40\nb\Atlantis.Framework.ShopperValidator.Interface.resources.dll" />
+    <file src="bin\Release\nl\Atlantis.Framework.ShopperValidator.Interface.resources.dll" target="lib\net40\nl\Atlantis.Framework.ShopperValidator.Interface.resources.dll" />
+    <file src="bin\Release\pl\Atlantis.Framework.ShopperValidator.Interface.resources.dll" target="lib\net40\pl\Atlantis.Framework.ShopperValidator.Interface.resources.dll" />
     <file src="bin\Release\pt-BR\Atlantis.Framework.ShopperValidator.Interface.resources.dll" target="lib\net40\pt-BR\Atlantis.Framework.ShopperValidator.Interface.resources.dll" />
+    <file src="bin\Release\pt-PT\Atlantis.Framework.ShopperValidator.Interface.resources.dll" target="lib\net40\pt-PT\Atlantis.Framework.ShopperValidator.Interface.resources.dll" />
+    <file src="bin\Release\ru\Atlantis.Framework.ShopperValidator.Interface.resources.dll" target="lib\net40\ru\Atlantis.Framework.ShopperValidator.Interface.resources.dll" />
+    <file src="bin\Release\sv\Atlantis.Framework.ShopperValidator.Interface.resources.dll" target="lib\net40\sv\Atlantis.Framework.ShopperValidator.Interface.resources.dll" />
+    <file src="bin\Release\tr\Atlantis.Framework.ShopperValidator.Interface.resources.dll" target="lib\net40\tr\Atlantis.Framework.ShopperValidator.Interface.resources.dll" />
+    <file src="bin\Release\uk\Atlantis.Framework.ShopperValidator.Interface.resources.dll" target="lib\net40\uk\Atlantis.Framework.ShopperValidator.Interface.resources.dll" />
   </files>
 </package>

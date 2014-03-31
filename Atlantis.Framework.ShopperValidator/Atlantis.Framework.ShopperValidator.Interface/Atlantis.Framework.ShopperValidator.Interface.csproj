@@ -99,7 +99,7 @@
     </Reference>
     <Reference Include="Atlantis.Framework.ValidateField.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.ValidateField.Interface.4.13.12.2\lib\net40\Atlantis.Framework.ValidateField.Interface.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.ValidateField.Interface.4.14.4.1\lib\net40\Atlantis.Framework.ValidateField.Interface.dll</HintPath>
     </Reference>
     <Reference Include="netConnect">
       <HintPath>..\packages\Atlantis.Framework.Nimitz.4.0.0.0\lib\net40\netConnect.dll</HintPath>
@@ -164,9 +164,23 @@
     <Compile Include="Validator\ShopperRuleValidator.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="LanguageResources\ShopperValidator.da.resx" />
+    <EmbeddedResource Include="LanguageResources\ShopperValidator.de.resx" />
+    <EmbeddedResource Include="LanguageResources\ShopperValidator.el.resx" />
     <EmbeddedResource Include="LanguageResources\ShopperValidator.en.resx" />
     <EmbeddedResource Include="LanguageResources\ShopperValidator.es.resx" />
+    <EmbeddedResource Include="LanguageResources\ShopperValidator.fi.resx" />
+    <EmbeddedResource Include="LanguageResources\ShopperValidator.fr.resx" />
+    <EmbeddedResource Include="LanguageResources\ShopperValidator.it.resx" />
+    <EmbeddedResource Include="LanguageResources\ShopperValidator.nb.resx" />
+    <EmbeddedResource Include="LanguageResources\ShopperValidator.nl.resx" />
+    <EmbeddedResource Include="LanguageResources\ShopperValidator.pl.resx" />
     <EmbeddedResource Include="LanguageResources\ShopperValidator.pt-BR.resx" />
+    <EmbeddedResource Include="LanguageResources\ShopperValidator.pt-PT.resx" />
+    <EmbeddedResource Include="LanguageResources\ShopperValidator.ru.resx" />
+    <EmbeddedResource Include="LanguageResources\ShopperValidator.sv.resx" />
+    <EmbeddedResource Include="LanguageResources\ShopperValidator.tr.resx" />
+    <EmbeddedResource Include="LanguageResources\ShopperValidator.uk.resx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="atlantis.config" />

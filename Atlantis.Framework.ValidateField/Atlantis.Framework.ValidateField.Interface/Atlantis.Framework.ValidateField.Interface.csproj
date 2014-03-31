@@ -64,9 +64,23 @@
     <Compile Include="ValidationRuleRegEx.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="LanguageResources\ValidateField.da.resx" />
+    <EmbeddedResource Include="LanguageResources\ValidateField.de.resx" />
+    <EmbeddedResource Include="LanguageResources\ValidateField.el.resx" />
     <EmbeddedResource Include="LanguageResources\ValidateField.en.resx" />
     <EmbeddedResource Include="LanguageResources\ValidateField.es.resx" />
+    <EmbeddedResource Include="LanguageResources\ValidateField.fi.resx" />
+    <EmbeddedResource Include="LanguageResources\ValidateField.fr.resx" />
+    <EmbeddedResource Include="LanguageResources\ValidateField.it.resx" />
+    <EmbeddedResource Include="LanguageResources\ValidateField.nb.resx" />
+    <EmbeddedResource Include="LanguageResources\ValidateField.nl.resx" />
+    <EmbeddedResource Include="LanguageResources\ValidateField.pl.resx" />
     <EmbeddedResource Include="LanguageResources\ValidateField.pt-BR.resx" />
+    <EmbeddedResource Include="LanguageResources\ValidateField.pt-PT.resx" />
+    <EmbeddedResource Include="LanguageResources\ValidateField.ru.resx" />
+    <EmbeddedResource Include="LanguageResources\ValidateField.sv.resx" />
+    <EmbeddedResource Include="LanguageResources\ValidateField.tr.resx" />
+    <EmbeddedResource Include="LanguageResources\ValidateField.uk.resx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Atlantis.Framework.ValidateField.Interface.nuget.bat" />

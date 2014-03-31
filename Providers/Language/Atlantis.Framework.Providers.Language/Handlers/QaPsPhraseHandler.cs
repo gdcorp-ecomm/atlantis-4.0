@@ -84,10 +84,10 @@ namespace Atlantis.Framework.Providers.Language.Handlers
         // this is done by searching for {plceholder} instead of {{placeholder}}
 
         //protect all html entities ex: '&dagger;', '&nbsp;', '&deg;', etc.
-        paragraph = Regex.Replace(paragraph, "&[^\\s]*;", AddProtection);
+        paragraph = Regex.Replace(paragraph, "&(.*?);", AddProtection);
 
         // protect all tokens ex: [@T[companyname:name]@T]
-        paragraph = Regex.Replace(paragraph, "\\[@T[^\\s]*]@T\\]", AddProtection);
+        paragraph = Regex.Replace(paragraph, "\\[@T(.*?)\\@T\\]", AddProtection);
 
         // protect all \u notated characters ex: \u00A9, \u2193, etc.
         paragraph = Regex.Replace(paragraph, @"[^\u0000-\u007F]", AddProtection);
@@ -99,18 +99,20 @@ namespace Atlantis.Framework.Providers.Language.Handlers
       {
         paragraph = RemoveProtections(paragraph);
       }
-
       return paragraph;
     }
 
     private static string AddProtection(Match match)
     {
-      return "<protect entity='" + match.ToString() + "'></protect>";
+      string phraseToProtect = match.ToString();
+      phraseToProtect = HttpUtility.HtmlEncode(phraseToProtect);
+      return "<protect entity='" + phraseToProtect + "'></protect>";
     }
 
     private static string RemoveProtections(string paragraph)
     {
-      return paragraph.Replace("<protect entity='", String.Empty).Replace("'></protect>", String.Empty);
+      string unprotectParagraph = paragraph.Replace("<protect entity='", String.Empty).Replace("'></protect>", String.Empty);
+      return HttpUtility.HtmlDecode(unprotectParagraph);
     }
 
     private string[] process_chars =
@@ -155,16 +157,9 @@ namespace Atlantis.Framework.Providers.Language.Handlers
       {
         paddedParagraph = paragraph;
         string xdocParagraph = String.Format("<root>{0}</root>", paragraph);
-        XDocument xdoc;
-        try
-        {
-          xdoc = XDocument.Parse(xdocParagraph);
-        }
-        catch
-        {
-          xdocParagraph = HttpUtility.HtmlDecode(xdocParagraph);
-          xdoc = XDocument.Parse(xdocParagraph);
-        }
+        XDocument xdoc = XDocument.Parse(xdocParagraph);
+
+
         foreach (XNode docNode in xdoc.DescendantNodes())
         {
           if (docNode.NodeType == System.Xml.XmlNodeType.Text)

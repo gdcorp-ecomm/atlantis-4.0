@@ -153,6 +153,16 @@ namespace Atlantis.Framework.Providers.Language.Tests
     }
 
     [TestMethod]
+    public void DefaultPhraseWithHtmlCharsQAPS()
+    {
+      ILanguageProvider language = NewLanguageProvider(1, "www", "qa-ps", true);
+      string phrase = language.GetLanguagePhrase("testdictionary", "textkeywithhtmlchars");
+      Assert.IsNotNull(phrase);
+      Assert.IsTrue(phrase.Contains("!!!"));
+      Assert.IsTrue(phrase.Contains("&nbsp;"));
+    }
+
+    [TestMethod]
     public void DefaultPhraseQAPZ()
     {
       ILanguageProvider language = NewLanguageProvider(1, "www", "qa-pz", true);
@@ -240,6 +250,27 @@ namespace Atlantis.Framework.Providers.Language.Tests
       Assert.IsTrue(phrase.Contains("zzz"));
       Assert.IsTrue(phrase.Contains("&nbsp;"));
     }
+
+    [TestMethod]
+    public void DefaultPhraseWithXmlTokenQAPZ()
+    {
+      ILanguageProvider language = NewLanguageProvider(1, "www", "qa-pz", true);
+      string phrase = language.GetLanguagePhrase("testdictionary", "textkeywithxmltypetoken");
+      Assert.IsNotNull(phrase);
+      Assert.IsTrue(phrase.Contains("zzz"));
+      Assert.IsTrue(phrase.Contains("[@T[productline:<Auctions contextid=\"1\" />]@T]"));
+    }
+    
+    [TestMethod]
+    public void DefaultPhraseWithXmlTokenQAPS()
+    {
+      ILanguageProvider language = NewLanguageProvider(1, "www", "qa-ps", true);
+      string phrase = language.GetLanguagePhrase("testdictionary", "textkeywithxmltypetoken");
+      Assert.IsNotNull(phrase);
+      Assert.IsTrue(phrase.Contains("!!!"));
+      Assert.IsTrue(phrase.Contains("[@T[productline:<Auctions contextid=\"1\" />]@T]"));
+    }
+
 
     [TestMethod]
     public void PhraseKeyMissing()

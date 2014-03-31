@@ -41,3 +41,5 @@ w with circumflex:'\u0174',
 some other crazy stuff: '‡', '¢', '°', '‘', '»', ' ', '”', '“','²', '®', '™', '’', '…', '—', '†', '–'
 <phrase key="textkeywithhtmlchars" comment="Title for the maintenance notice" />
 NOTICE...&nbsp;
+<phrase key="textkeywithxmltypetoken"/>
+Customer already owns [@T[productline:<Auctions contextid="1" />]@T] membership.

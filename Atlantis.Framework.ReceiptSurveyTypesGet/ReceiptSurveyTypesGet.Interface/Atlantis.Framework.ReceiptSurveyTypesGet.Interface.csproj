@@ -79,12 +79,26 @@
     <Compile Include="SurveyTypeGroups.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="LanguageResources\ReceiptSurveyTypes.da.resx" />
+    <EmbeddedResource Include="LanguageResources\ReceiptSurveyTypes.de.resx" />
+    <EmbeddedResource Include="LanguageResources\ReceiptSurveyTypes.el.resx" />
     <EmbeddedResource Include="LanguageResources\ReceiptSurveyTypes.en.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>ReceiptSurveyTypes.en.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="LanguageResources\ReceiptSurveyTypes.es.resx" />
+    <EmbeddedResource Include="LanguageResources\ReceiptSurveyTypes.fi.resx" />
+    <EmbeddedResource Include="LanguageResources\ReceiptSurveyTypes.fr.resx" />
+    <EmbeddedResource Include="LanguageResources\ReceiptSurveyTypes.it.resx" />
+    <EmbeddedResource Include="LanguageResources\ReceiptSurveyTypes.nb.resx" />
+    <EmbeddedResource Include="LanguageResources\ReceiptSurveyTypes.nl.resx" />
+    <EmbeddedResource Include="LanguageResources\ReceiptSurveyTypes.pl.resx" />
     <EmbeddedResource Include="LanguageResources\ReceiptSurveyTypes.pt-BR.resx" />
+    <EmbeddedResource Include="LanguageResources\ReceiptSurveyTypes.pt-PT.resx" />
+    <EmbeddedResource Include="LanguageResources\ReceiptSurveyTypes.ru.resx" />
+    <EmbeddedResource Include="LanguageResources\ReceiptSurveyTypes.sv.resx" />
+    <EmbeddedResource Include="LanguageResources\ReceiptSurveyTypes.tr.resx" />
+    <EmbeddedResource Include="LanguageResources\ReceiptSurveyTypes.uk.resx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="atlantis.config" />

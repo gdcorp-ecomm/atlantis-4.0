@@ -20,6 +20,18 @@ namespace Atlantis.Framework.TH.Currency
       public bool HtmlSymbol { get; private set; }
       public string NegativeFormat { get; private set; }
 
+      public string WrapTagName
+      {
+        get;
+        private set;
+      }
+
+      public string WrapCssClass
+      {
+        get;
+        private set;
+      }
+
       public CurrencyPriceToken(string key, string data, string fullTokenString)
         : base(key, data, fullTokenString)
       {
@@ -29,6 +41,8 @@ namespace Atlantis.Framework.TH.Currency
         DropDecimal = GetAttributeBool("dropdecimal", false);
         DropSymbol = GetAttributeBool("dropsymbol", false);
         CurrencyType = GetAttributeText("currencytype", null);
+        WrapTagName = GetAttributeText("symboltagname", string.Empty);
+        WrapCssClass = GetAttributeText("symbolcssclass", string.Empty);
       }
     }
 }

@@ -81,6 +81,10 @@ namespace Atlantis.Framework.TH.Currency
       {
         result |= PriceFormatOptions.DropSymbol;
       }
+      else if (token.HtmlSymbol)
+      {
+        result |= PriceFormatOptions.HtmlSymbol;
+      }
       else if (!token.HtmlSymbol)
       {
         result |= PriceFormatOptions.AsciiSymbol;
@@ -117,15 +121,26 @@ namespace Atlantis.Framework.TH.Currency
       if (price != null)
       {
         PriceFormatOptions formatOptions = GetPriceFormatOptions(token);
+        ISymbolFormatter symbolFormatter = null;
+
+        if (formatOptions.HasFlag(PriceFormatOptions.HtmlSymbol) && !formatOptions.HasFlag(PriceFormatOptions.DropSymbol))
+        {
+          string tagName = token.WrapTagName;
+          if (!string.IsNullOrEmpty(tagName))
+          {
+            string className = token.WrapCssClass;
+            symbolFormatter = new HtmlTagWrapFormatter(tagName, className);
+          }
+        }
 
         if (token.CurrencyType != null)
         {
-          priceText = _currency.PriceFormat(price, formatOptions);
+          priceText = _currency.PriceFormat(price, formatOptions, symbolFormatter);
         }
         else
         {
           PriceTextOptions textOptions = GetPriceTextOptions(token);
-          priceText = _currency.PriceText(price, textOptions, formatOptions);
+          priceText = _currency.PriceText(price, symbolFormatter, textOptions, formatOptions);
         }
 
         result = true;

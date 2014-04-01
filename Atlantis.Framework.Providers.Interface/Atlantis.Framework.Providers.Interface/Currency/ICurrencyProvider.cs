@@ -120,6 +120,16 @@ namespace Atlantis.Framework.Providers.Interface.Currency
     string PriceText(ICurrencyPrice price, PriceTextOptions textOptions = PriceTextOptions.None, PriceFormatOptions formatOptions = PriceFormatOptions.None);
 
     /// <summary>
+    /// Converts a price to the shoppers display currency, then formats it for display based on currency info.
+    /// </summary>
+    /// <param name="price">Price to format</param>
+    /// <param name="textOptions"><see cref="PriceTextOptions" /></param>
+    /// <param name="formatOptions"><see cref="PriceFormatOptions" /></param>
+    /// <param name="symbolFormatter">The <see cref="ISymbolFormatter"/> used for formatting the currency symbol.</param>
+    /// <returns>Price text for display</returns>
+    string PriceText(ICurrencyPrice price, PriceTextOptions textOptions = PriceTextOptions.None, PriceFormatOptions formatOptions = PriceFormatOptions.None, ISymbolFormatter symbolFormatter = null);
+
+    /// <summary>
     /// Formats a price based on the currency info for display
     /// Negative prices will show with a minus sign
     /// </summary>

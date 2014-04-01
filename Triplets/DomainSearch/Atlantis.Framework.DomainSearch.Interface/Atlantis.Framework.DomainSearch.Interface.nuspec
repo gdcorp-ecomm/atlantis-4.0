@@ -2,14 +2,16 @@
 <package >
   <metadata>
     <id>Atlantis.Framework.DomainSearch.Interface</id>
-    <version>4.13.11.8</version>
+    <version>$version$</version>
     <title>Atlantis Framework DomainSearch Interface</title>
     <authors>$author$</authors>
     <owners>$author$</owners>
     <projectUrl>https://confluence.int.godaddy.com/display/ATLANTIS</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes></releaseNotes>
+    <releaseNotes>
+      14.4.1.1 : Adding GEO information to domain search request
+    </releaseNotes>
     <copyright>$copyright$</copyright>
     <tags>Atlantis Framework DomainSearch Interface</tags>
   </metadata>

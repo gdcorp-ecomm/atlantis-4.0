@@ -8,6 +8,7 @@ using Atlantis.Framework.Providers.AppSettings.Interface;
 using Atlantis.Framework.Providers.DomainSearch.Interface;
 using Atlantis.Framework.Providers.Localization.Interface;
 using Atlantis.Framework.Providers.Logging.Interface;
+using Atlantis.Framework.Providers.Geo.Interface;
 
 namespace Atlantis.Framework.Providers.DomainSearch
 {
@@ -21,6 +22,7 @@ namespace Atlantis.Framework.Providers.DomainSearch
     private readonly Lazy<IShopperContext> _shopperContext;
     private readonly Lazy<ILogDomainSearchResultsProvider> _logDomainSearchResultsProvider;
     private readonly Lazy<IAppSettingsProvider> _appSettingsProvider;
+    private readonly Lazy<IGeoProvider> _geoProvider;
 
     private readonly IList<string> _domainSearchDatabases = new List<string>
     {
@@ -35,6 +37,7 @@ namespace Atlantis.Framework.Providers.DomainSearch
       _shopperContext = new Lazy<IShopperContext>(() => Container.Resolve<IShopperContext>());
       _logDomainSearchResultsProvider = new Lazy<ILogDomainSearchResultsProvider>(() => Container.CanResolve<ILogDomainSearchResultsProvider>() ? Container.Resolve<ILogDomainSearchResultsProvider>() : null);
       _appSettingsProvider = new Lazy<IAppSettingsProvider>(() => Container.Resolve<IAppSettingsProvider>());
+      _geoProvider = new Lazy<IGeoProvider>(() => Container.Resolve<IGeoProvider>());
     }
 
     private ILocalizationProvider _localization;
@@ -141,6 +144,8 @@ namespace Atlantis.Framework.Providers.DomainSearch
     {
       IDomainSearchResult domainSearchResult = null;
 
+      var geoLocation = _geoProvider.Value.RequestGeoLocation;
+
       try
       {
         var request = new DomainSearchRequestData(_shopperContext.Value.ShopperId, sourceUrl, string.Empty, _siteContext.Value.Pathway, 0)
@@ -154,7 +159,12 @@ namespace Atlantis.Framework.Providers.DomainSearch
           SearchPhrase = searchPhrase,
           ShopperStatus = _shopperContext.Value.ShopperStatus,
           SourceCode = sourceCode,
-          Tlds = tldsToSearch
+          Tlds = tldsToSearch,
+          ClientIpLatitude = geoLocation.Latitude,
+          ClientIpLongitude = geoLocation.Longitude,
+          ClientIpCity = geoLocation.City,
+          ClientIpCountry = geoLocation.CountryCode,
+          ClientIpRegion = geoLocation.GeoRegionName
         };
 
         var requestType = RequestTypeLookUp.GetCurrentRequestType();

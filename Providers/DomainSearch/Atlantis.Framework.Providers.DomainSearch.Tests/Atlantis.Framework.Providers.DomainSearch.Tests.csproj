@@ -61,9 +61,8 @@
     <Reference Include="Atlantis.Framework.DCCDomainsDataCache.Impl.XmlSerializers">
       <HintPath>..\packages\Atlantis.Framework.DCCDomainsDataCache.Impl.4.13.1.28\lib\net40\Atlantis.Framework.DCCDomainsDataCache.Impl.XmlSerializers.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.DCCDomainsDataCache.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.DCCDomainsDataCache.Interface.14.02.04.1\lib\net40\Atlantis.Framework.DCCDomainsDataCache.Interface.dll</HintPath>
+    <Reference Include="Atlantis.Framework.DCCDomainsDataCache.Interface">
+      <HintPath>..\packages\Atlantis.Framework.DCCDomainsDataCache.Interface.14.3.26.1\lib\net40\Atlantis.Framework.DCCDomainsDataCache.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.DomainContactFields.Impl">
       <HintPath>..\packages\Atlantis.Framework.DomainContactFields.Impl.4.13.6.5\lib\net40\Atlantis.Framework.DomainContactFields.Impl.dll</HintPath>
@@ -75,21 +74,18 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Atlantis.Framework.Domains.Interface.14.1.22.1\lib\net40\Atlantis.Framework.Domains.Interface.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.DomainSearch.Impl, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.DomainSearch.Impl.4.13.11.8\lib\net40\Atlantis.Framework.DomainSearch.Impl.dll</HintPath>
+    <Reference Include="Atlantis.Framework.DomainSearch.Impl">
+      <HintPath>..\packages\Atlantis.Framework.DomainSearch.Impl.14.4.1.1\lib\net40\Atlantis.Framework.DomainSearch.Impl.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.DomainSearch.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.DomainSearch.Interface.4.13.11.8\lib\net40\Atlantis.Framework.DomainSearch.Interface.dll</HintPath>
+    <Reference Include="Atlantis.Framework.DomainSearch.Interface">
+      <HintPath>..\packages\Atlantis.Framework.DomainSearch.Interface.14.4.1.1\lib\net40\Atlantis.Framework.DomainSearch.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.DotTypeCache, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Atlantis.Framework.DotTypeCache.14.1.30.1\lib\net40\Atlantis.Framework.DotTypeCache.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.DotTypeCache.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.DotTypeCache.Interface.14.1.30.1\lib\net40\Atlantis.Framework.DotTypeCache.Interface.dll</HintPath>
+    <Reference Include="Atlantis.Framework.DotTypeCache.Interface">
+      <HintPath>..\packages\Atlantis.Framework.DotTypeCache.Interface.14.3.26.3\lib\net40\Atlantis.Framework.DotTypeCache.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.DotTypeCache.Static, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -121,6 +117,9 @@
     <Reference Include="Atlantis.Framework.Providers.Containers, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Atlantis.Framework.Providers.Containers.4.14.1.6\lib\net40\Atlantis.Framework.Providers.Containers.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Providers.Geo.Interface">
+      <HintPath>..\packages\Atlantis.Framework.Providers.Geo.Interface.14.1.24.1\lib\net40\Atlantis.Framework.Providers.Geo.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Providers.Localization.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -196,6 +195,7 @@
   <ItemGroup>
     <Compile Include="DomainSearchTests.cs" />
     <Compile Include="LocalizationProviderTestProxy.cs" />
+    <Compile Include="MocGeoProvider.cs" />
     <Compile Include="MockAppSettingsProvider.cs" />
     <Compile Include="MockLogDomainSearchResultsProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -210,6 +210,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="nuget.exe" />
     <Content Include="readme.txt" />
   </ItemGroup>
   <ItemGroup>

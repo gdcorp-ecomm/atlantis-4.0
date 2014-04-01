@@ -9,6 +9,7 @@ using Atlantis.Framework.Providers.ProxyContext;
 using Atlantis.Framework.Testing.MockHttpContext;
 using Atlantis.Framework.Testing.MockProviders;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Atlantis.Framework.Providers.Geo.Interface;
 
 namespace Atlantis.Framework.Providers.DomainSearch.Tests
 {
@@ -47,6 +48,7 @@ namespace Atlantis.Framework.Providers.DomainSearch.Tests
           _providerContainer.RegisterProvider<ILocalizationProvider, LocalizationProviderTestProxy>();
           _providerContainer.RegisterProvider<IDomainSearchProvider, DomainSearchProvider>();
           _providerContainer.RegisterProvider<IAppSettingsProvider, MockAppSettingsProvider>();
+          _providerContainer.RegisterProvider<IGeoProvider, MocGeoProvider>();
         }
 
         return _providerContainer;
@@ -57,6 +59,13 @@ namespace Atlantis.Framework.Providers.DomainSearch.Tests
     private IDomainSearchProvider DomainSearch
     {
       get { return _domainSearch ?? (_domainSearch = ProviderContainer.Resolve<IDomainSearchProvider>()); }
+    }
+
+    [TestMethod]
+    public void DomainSearchWithGeoInformationTest()
+    {
+      const string searchPhrase = "spoonymac.com";
+      var domainSearchResult = DomainSearch.SearchDomain(searchPhrase, SOURCE_CODE, string.Empty);
     }
 
     [TestMethod]

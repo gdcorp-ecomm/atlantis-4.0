@@ -56,9 +56,23 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="LanguageResources\MyaAvailableProductNamespaces.da.resx" />
+    <EmbeddedResource Include="LanguageResources\MyaAvailableProductNamespaces.de.resx" />
+    <EmbeddedResource Include="LanguageResources\MyaAvailableProductNamespaces.el.resx" />
     <EmbeddedResource Include="LanguageResources\MyaAvailableProductNamespaces.en.resx" />
     <EmbeddedResource Include="LanguageResources\MyaAvailableProductNamespaces.es.resx" />
+    <EmbeddedResource Include="LanguageResources\MyaAvailableProductNamespaces.fi.resx" />
+    <EmbeddedResource Include="LanguageResources\MyaAvailableProductNamespaces.fr.resx" />
+    <EmbeddedResource Include="LanguageResources\MyaAvailableProductNamespaces.it.resx" />
+    <EmbeddedResource Include="LanguageResources\MyaAvailableProductNamespaces.nb.resx" />
+    <EmbeddedResource Include="LanguageResources\MyaAvailableProductNamespaces.nl.resx" />
+    <EmbeddedResource Include="LanguageResources\MyaAvailableProductNamespaces.pl.resx" />
     <EmbeddedResource Include="LanguageResources\MyaAvailableProductNamespaces.pt-BR.resx" />
+    <EmbeddedResource Include="LanguageResources\MyaAvailableProductNamespaces.pt-PT.resx" />
+    <EmbeddedResource Include="LanguageResources\MyaAvailableProductNamespaces.ru.resx" />
+    <EmbeddedResource Include="LanguageResources\MyaAvailableProductNamespaces.sv.resx" />
+    <EmbeddedResource Include="LanguageResources\MyaAvailableProductNamespaces.tr.resx" />
+    <EmbeddedResource Include="LanguageResources\MyaAvailableProductNamespaces.uk.resx" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

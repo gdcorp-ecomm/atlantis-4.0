@@ -127,7 +127,7 @@ namespace Atlantis.Framework.Providers.Interface.Currency
     /// <param name="formatOptions"><see cref="PriceFormatOptions" /></param>
     /// <param name="symbolFormatter">The <see cref="ISymbolFormatter"/> used for formatting the currency symbol.</param>
     /// <returns>Price text for display</returns>
-    string PriceText(ICurrencyPrice price, PriceTextOptions textOptions = PriceTextOptions.None, PriceFormatOptions formatOptions = PriceFormatOptions.None, ISymbolFormatter symbolFormatter = null);
+    string PriceText(ICurrencyPrice price, ISymbolFormatter symbolFormatter, PriceTextOptions textOptions = PriceTextOptions.None, PriceFormatOptions formatOptions = PriceFormatOptions.None);
 
     /// <summary>
     /// Formats a price based on the currency info for display

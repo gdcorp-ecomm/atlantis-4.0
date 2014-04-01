@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>Atlantis.Framework.Providers.Interface</id>
-    <version>4.13.12.2</version>
+    <version>4.14.4.2</version>
     <title>Atlantis Framework Providers Interface</title>
     <authors>$author$</authors>
     <owners>$author$</owners>
@@ -12,6 +12,7 @@
     <releaseNotes>
       4.14.3.28 - Added methods for currency provider to accept symbol formatter.
       NOTE: Requires Atlantis.Framework.Providers.Currency minimum version 14.3.28
+      4.14.4.2 - Added methods for currency provider to accept symbol formatter.
     </releaseNotes>
     <copyright>$copyright$</copyright>
     <tags>Atlantis Framework Providers Interface</tags>

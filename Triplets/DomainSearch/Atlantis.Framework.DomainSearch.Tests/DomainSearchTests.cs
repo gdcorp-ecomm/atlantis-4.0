@@ -42,7 +42,12 @@ namespace Atlantis.Framework.DomainSearch.Tests
                             ShopperStatus = ShopperStatusType.Public,
                             SourceCode = "mblDPPSearch",
                             Tlds = new List<string>(0),
-                            DomainSearchDataBases = _databases
+                            DomainSearchDataBases = _databases,
+                            ClientIpLatitude = 34.1,
+                            ClientIpLongitude = -111.1,
+                            ClientIpCity = "scottsdale",
+                            ClientIpCountry = "us",
+                            ClientIpRegion = "arizona"
                           };
 
       var response = (DomainSearchResponseData)Engine.Engine.ProcessRequest(requestData, REQUESTID);

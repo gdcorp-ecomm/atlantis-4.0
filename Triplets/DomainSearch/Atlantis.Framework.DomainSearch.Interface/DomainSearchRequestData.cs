@@ -24,6 +24,41 @@ namespace Atlantis.Framework.DomainSearch.Interface
     public bool IncludeSpins { get; set; }
     public int PrivateLabelId { get; set; }
     public IList<string> DomainSearchDataBases { get; set; }
+
+    private double _clientIpLatitude = 0d;
+    public double ClientIpLatitude
+    {
+      get { return _clientIpLatitude; }
+      set { _clientIpLatitude = value; }
+    }
+
+    private double _clientIpLongitude = 0d;
+    public double ClientIpLongitude
+    {
+      get { return _clientIpLongitude; }
+      set { _clientIpLongitude = value; }
+    }
+
+    private string _clientIpCity = string.Empty;
+    public string ClientIpCity
+    {
+      get { return _clientIpCity; }
+      set { _clientIpCity = value; }
+    }
+
+    private string _clientIpRegion = string.Empty;
+    public string ClientIpRegion
+    {
+      get { return _clientIpRegion; }
+      set { _clientIpRegion = value; }
+    }
+
+    private string _clientIpCountry = string.Empty;
+    public string ClientIpCountry
+    {
+      get { return _clientIpCountry; }
+      set { _clientIpCountry = value; }
+    }
     
     public string ToJson()
     {
@@ -63,6 +98,26 @@ namespace Atlantis.Framework.DomainSearch.Interface
                         new JObject(
                           new JProperty("Name", "pathway"),
                           new JProperty("Data", Pathway)
+                          ),
+                        new JObject(
+                          new JProperty("Name", "clientiplongitude"),
+                          new JProperty("Data", ClientIpLongitude)
+                          ),
+                        new JObject(
+                          new JProperty("Name", "clientiplatitude"),
+                          new JProperty("Data", ClientIpLatitude)
+                          ),
+                        new JObject(
+                          new JProperty("Name", "clientipcity"),
+                          new JProperty("Data", ClientIpCity.ToLowerInvariant())
+                          ),
+                        new JObject(
+                          new JProperty("Name", "clientipregion"),
+                          new JProperty("Data", ClientIpRegion.ToLowerInvariant())
+                          ),
+                        new JObject(
+                          new JProperty("Name", "clientipcountry"),
+                          new JProperty("Data", ClientIpCountry.ToLowerInvariant())
                           )
                         )
           )

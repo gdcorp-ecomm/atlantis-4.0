@@ -59,6 +59,20 @@ namespace Atlantis.Framework.DomainSearch.Interface
       get { return _clientIpCountry; }
       set { _clientIpCountry = value; }
     }
+
+    private string _splitTestId = string.Empty;
+    public string SplitTestId
+    {
+      get { return _splitTestId; }
+      set { _splitTestId = value; }
+    }
+
+    private string _splitTestSideName = string.Empty;
+    public string SplitTestSideName
+    {
+      get { return _splitTestSideName; }
+      set { _splitTestSideName = value; }
+    }
     
     public string ToJson()
     {
@@ -118,6 +132,10 @@ namespace Atlantis.Framework.DomainSearch.Interface
                         new JObject(
                           new JProperty("Name", "clientipcountry"),
                           new JProperty("Data", ClientIpCountry.ToLowerInvariant())
+                          ),
+                        new JObject(
+                          new JProperty("Name", "splitprovider"),
+                          new JProperty("Data", GetSplitProviderValue())
                           )
                         )
           )
@@ -142,6 +160,18 @@ namespace Atlantis.Framework.DomainSearch.Interface
       }
 
       return jsonSearchData.ToString();
+    }
+
+    private string GetSplitProviderValue()
+    {
+      var result = string.Empty;
+
+      if (!string.IsNullOrEmpty(_splitTestId) && !string.IsNullOrEmpty(_splitTestSideName))
+      {
+        result = string.Concat(_splitTestId, ".", _splitTestSideName);
+      }
+
+      return result;
     }
   }
 }

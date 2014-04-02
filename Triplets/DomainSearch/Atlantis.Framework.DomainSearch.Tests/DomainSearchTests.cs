@@ -47,7 +47,9 @@ namespace Atlantis.Framework.DomainSearch.Tests
                             ClientIpLongitude = -111.1,
                             ClientIpCity = "scottsdale",
                             ClientIpCountry = "us",
-                            ClientIpRegion = "arizona"
+                            ClientIpRegion = "arizona",
+                            SplitTestId = "01234",
+                            SplitTestSideName = "A"
                           };
 
       var response = (DomainSearchResponseData)Engine.Engine.ProcessRequest(requestData, REQUESTID);

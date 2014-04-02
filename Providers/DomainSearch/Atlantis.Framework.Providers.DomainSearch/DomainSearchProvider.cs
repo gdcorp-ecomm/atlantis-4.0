@@ -182,6 +182,7 @@ namespace Atlantis.Framework.Providers.DomainSearch
 
             if (_siteContext.Value.IsRequestInternal)
             {
+              domainSearchResult.JsonRequest = request.ToJson();
               domainSearchResult.JsonResponse = response.ToJson();
             }
           }

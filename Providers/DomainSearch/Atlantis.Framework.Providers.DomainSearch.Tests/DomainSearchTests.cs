@@ -66,6 +66,8 @@ namespace Atlantis.Framework.Providers.DomainSearch.Tests
     {
       const string searchPhrase = "spoonymac.com";
       var domainSearchResult = DomainSearch.SearchDomain(searchPhrase, SOURCE_CODE, string.Empty);
+      Assert.IsTrue(domainSearchResult.IsSuccess);
+      Assert.IsTrue(domainSearchResult.FindResponseDomains.Count != 0);
     }
 
     [TestMethod]

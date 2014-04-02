@@ -8,6 +8,7 @@ namespace Atlantis.Framework.Providers.DomainSearch.Interface
     bool IsSuccess { get; }
     Dictionary<string, IList<IFindResponseDomain>> FindResponseDomains { get; }
     IList<IFindResponseDomain> GetDomainsByGroup(string domainGroupType);
+    string JsonRequest { get; set; }
     string JsonResponse { get; set; }
   }
 }

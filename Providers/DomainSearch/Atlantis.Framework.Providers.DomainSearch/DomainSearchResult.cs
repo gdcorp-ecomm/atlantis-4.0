@@ -41,6 +41,13 @@ namespace Atlantis.Framework.Providers.DomainSearch
       return domains;
     }
 
+    private string _jsonRequest;
+    public string JsonRequest
+    {
+      get { return _jsonRequest ?? string.Empty; }
+      set { _jsonRequest = value; }
+    }
+
     private string _jsonResponse;
     public string JsonResponse 
     {

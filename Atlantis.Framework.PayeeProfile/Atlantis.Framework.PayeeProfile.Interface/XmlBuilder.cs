@@ -5,16 +5,29 @@ namespace Atlantis.Framework.PayeeProfileClass.Interface
   public class XmlBuilder
   {
     #region Private Constants
-    private const string CheckingPaymentType = "2";
-    private const string GAGPaymentType = "3";
-    private const string PayPalPaymentType = "4";
-    private const string W9AddressType = "W9";
     private const string PaymentAddressType = "Payment";
     #endregion
 
     public static string BuildAddPayeeXml(string shopperId, PayeeProfile payee)
     {
-      XElement payeeXml = new XElement("AcctPayable",
+      bool isExternalPayee = false;
+      switch (payee.PaymentMethodTypeID)
+      {
+        case PayeePaymentTypeId.CheckingPaymentType:
+        case PayeePaymentTypeId.GagPaymentType:
+        case PayeePaymentTypeId.PayPalPaymentType:
+          break;
+        default:
+          isExternalPayee = true;
+          break;
+      }
+
+      XElement payeeXml = isExternalPayee ? new XElement("AcctPayable",
+        new XAttribute("shopperID", shopperId),
+        new XAttribute("friendlyName", payee.FriendlyName),
+        new XAttribute("paymentMethodTypeID", payee.PaymentMethodTypeID)) 
+        : 
+        new XElement("AcctPayable",
         new XAttribute("shopperID", shopperId),
         new XAttribute("friendlyName", payee.FriendlyName),
         new XAttribute("taxDeclarationTypeID", payee.TaxDeclarationTypeID),
@@ -108,17 +121,17 @@ namespace Atlantis.Framework.PayeeProfileClass.Interface
     {
       switch (payee.PaymentMethodTypeID)
       {
-        case GAGPaymentType:
+        case PayeePaymentTypeId.GagPaymentType:
           XElement gag = new XElement("GAG",
             new XAttribute("shopperID", shopperId));
           payeeXml.Add(gag);
           break;
-        case PayPalPaymentType:
+        case PayeePaymentTypeId.PayPalPaymentType:
           XElement paypal = new XElement("PayPal",
             new XAttribute("email", payee.PayPal.Email));
           payeeXml.Add(paypal);
           break;
-        case CheckingPaymentType:
+        case PayeePaymentTypeId.CheckingPaymentType:
           if (isUpdate)
           {
             if (originalPayee.ACH.AchBankName != payee.ACH.AchBankName)

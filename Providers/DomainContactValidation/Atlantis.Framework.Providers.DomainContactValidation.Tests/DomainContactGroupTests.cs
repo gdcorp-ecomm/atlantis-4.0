@@ -217,8 +217,7 @@ namespace Atlantis.Framework.Providers.DomainContactValidation.Tests
     [TestMethod]
     public void DomainContactGroupNewTlds()
     {
-      var tlds = new List<string> { "COM", "NET" };
-      var group = DomainContactProvider.DomainContactGroupInstance(tlds, 1);
+      var group = DomainContactProvider.DomainContactGroupInstance(new List<string> { "COM", "NET" }, 1);
 
       var registrantContact = DomainContactProvider.DomainContactInstance(
        "Bill", "Registrant", "bregistrant@bongo.com",
@@ -229,19 +228,16 @@ namespace Atlantis.Framework.Providers.DomainContactValidation.Tests
 
       Assert.IsTrue(valid);
 
-      tlds.Remove("NET");
-      group.SetTlds(tlds);
+      group.SetTlds(new List<string> { "COM" });
 
       Assert.IsTrue(group.IsValid);
 
-      tlds.Add("JP");
-      group.SetTlds(tlds);
+      group.SetTlds(new List<string> { "COM", "JP" });
 
       Assert.IsFalse(group.IsValid);
       List<IDomainContactError> errors = group.GetAllErrors();
 
-      tlds.Remove("JP");
-      group.SetTlds(tlds);
+      group.SetTlds(new List<string> { "COM", "NET" });
 
       Assert.IsTrue(group.IsValid);
       errors = group.GetAllErrors();
@@ -574,6 +570,36 @@ namespace Atlantis.Framework.Providers.DomainContactValidation.Tests
     //  ITuiFormInfo tuiFormInfo;
     //  Assert.AreEqual(true, result != null && result.TryGetValue("DK", out tuiFormInfo) && !string.IsNullOrEmpty(tuiFormInfo.TuiFormType));
     //  Assert.AreEqual(true, result != null && result.TryGetValue("ORG", out tuiFormInfo) && string.IsNullOrEmpty(tuiFormInfo.TuiFormType));
+    }
+
+    [TestMethod]
+    public void TestInvalidDotSgAdminContact()
+    {
+      var tlds = new List<string> { "SG" };
+      var contactGroup = DomainContactProvider.DomainContactGroupInstance(tlds, 1);
+
+      var registrantContact = DomainContactProvider.DomainContactInstance(
+         "Bill", "Registrant", "bregistrant@bongo.com",
+           "GoDaddy", true,
+          "101 N Street", "Suite 100", "Littleton", "Geneva",
+          "80130", "CH", "(303)-555-1213", "(303)-555-2213", "LGR", "ENG");
+      var success = contactGroup.SetContact(DomainContactType.Administrative, registrantContact);
+      Assert.IsFalse(success);
+    }
+
+    [TestMethod]
+    public void TestInvalidUkAddressContact()
+    {
+      var tlds = new List<string> { "gallery" };
+      var contactGroup = DomainContactProvider.DomainContactGroupInstance(tlds, 1);
+
+      var registrantContact = DomainContactProvider.DomainContactInstance(
+         "Bill", "Registrant", "hamish@canongate.org",
+           "Canongate Limited", true,
+          "14 Kinnear Road", "Suite 100", "Edinburgh", "Edinburgh",
+          "EH35PE4E", "UK", "+44", string.Empty, string.Empty, string.Empty);
+      var success = contactGroup.SetContact(DomainContactType.Registrant, registrantContact);
+      Assert.IsFalse(success);
     }
   }
 }

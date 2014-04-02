@@ -1,15 +1,13 @@
-﻿using System;
+﻿using Atlantis.Framework.DomainContactValidation.Interface;
+using Atlantis.Framework.DomainsTrustee.Interface;
+using Atlantis.Framework.DotTypeCache.Interface;
+using Atlantis.Framework.Interface;
+using Atlantis.Framework.Providers.DomainContactValidation.Interface;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Xml;
-using Atlantis.Framework.DomainContactValidation.Interface;
-using Atlantis.Framework.DomainsTrustee.Interface;
-using Atlantis.Framework.DotTypeCache;
-using Atlantis.Framework.DotTypeCache.Interface;
-using Atlantis.Framework.Interface;
-using Atlantis.Framework.Providers.DomainContactValidation.Interface;
-using Atlantis.Framework.Providers.Interface.ProviderContainer;
 
 namespace Atlantis.Framework.Providers.DomainContactValidation
 {
@@ -17,16 +15,13 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
   {
     private const int DOMAIN_VALIDATION_CHECK = 782;
     private const int DOMAIN_TRUSTEE_REQUESTID = 781;
-
     private const string LINK_ID_ATTRIBUTE_NAME = "link_id";
     private const string CONTACT_GROUP_INFO_ELEMENT_NAME = "contactGroupInfo";
     private const string TLD_ELEMENT_NAME = "tld";
     private const string PRIVATE_LABEL_ID_ATTRIBUTE_NAME = "privateLabelId";
     private const string CONTACT_TYPE_ATTRIBUTE_NAME = "contactType";
     public const string CONTACT_INFO_ELEMENT_NAME = "contactInfo";
-
     private readonly Dictionary<DomainContactType, IDomainContact> _domainContactGroup = new Dictionary<DomainContactType, IDomainContact>();
-
     private readonly int _privateLabelId;
 
     private bool? _skipValidation;
@@ -34,16 +29,18 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
     {
       get
       {
-        if (_skipValidation == null)
+        if (!_skipValidation.HasValue)
         {
           _skipValidation = false;
           bool skip;
+
           if (bool.TryParse(DataCache.DataCache.GetAppSetting("AVAIL_NO_VALIDATE_CONTACT"), out skip))
           {
             _skipValidation = skip;
           }
         }
-        return (bool)_skipValidation;
+
+        return _skipValidation.Value;
       }
     }
 
@@ -55,54 +52,27 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
 
     #region Constructors
 
-    private static HashSet<string> CleanTlds(IEnumerable<string> tlds)
-    {
-      var result = new HashSet<string>();
-      foreach (string sTld in tlds)
-      {
-        if (sTld[0] != '.')
-        {
-          result.Add(sTld.ToUpperInvariant().Insert(0, "."));
-        }
-        else
-        {
-          result.Add(sTld.ToUpperInvariant());
-        }
-      }
-      return result;
-    }
-
     private static IEnumerable<string> RemoveLeadingPeriodsOnTlds(IEnumerable<string> tlds)
     {
       var result = new HashSet<string>();
-      foreach (string sTld in tlds)
+
+      foreach (var sTld in tlds)
       {
-        if (sTld[0] == '.')
-        {
-          result.Add(sTld.ToUpperInvariant().Substring(1));
-        }
-        else
-        {
-          result.Add(sTld.ToUpperInvariant());
-        }
+        result.Add(sTld[0] == '.' ? sTld.ToUpperInvariant().Substring(1) : sTld.ToUpperInvariant());
       }
+
       return result;
     }
 
     private static Dictionary<string, LaunchPhases> RemoveLeadingPeriodsOnTlds(Dictionary<string, LaunchPhases> tlds)
     {
       var result = new Dictionary<string, LaunchPhases>();
+
       foreach (var sTld in tlds)
       {
-        if (sTld.Key[0] == '.')
-        {
-          result.Add(sTld.Key.ToUpperInvariant().Substring(1), sTld.Value);
-        }
-        else
-        {
-          result.Add(sTld.Key.ToUpperInvariant(), sTld.Value);
-        }
+        result.Add(sTld.Key[0] == '.' ? sTld.Key.ToUpperInvariant().Substring(1) : sTld.Key.ToUpperInvariant(), sTld.Value);
       }
+
       return result;
     }
 
@@ -111,10 +81,9 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
     internal DomainContactGroup(IProviderContainer container, IEnumerable<string> tlds, int privateLabelId)
     {
       _container = container;
+      Tlds = tlds;
 
-      Tlds = CleanTlds(tlds);
-
-      if (Tlds.Count == 0)
+      if (!Tlds.Any())
       {
         throw new Exception("TLD collection for Domain Contact Group cannot be empty.");
       }
@@ -149,18 +118,19 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
       {
         foreach (XmlNode sTldNode in xmlTldNodes)
         {
-          string sTld = sTldNode.InnerText;
-          Tlds.Add(sTld);
+          var sTld = sTldNode.InnerText;
+          Tlds = Tlds.Concat(new List<string>() { sTld });
         }
       }
 
       var xmlContactNodes = xmlContactGroupDoc.SelectNodes("//" + DomainContact.CONTACT_ELEMENT_NAME);
+
       if (xmlContactNodes != null)
       {
         foreach (XmlNode xmlContactNode in xmlContactNodes)
         {
           var xmlContactElement = (XmlElement) xmlContactNode;
-          string sContactType = xmlContactElement.GetAttribute(CONTACT_TYPE_ATTRIBUTE_NAME);
+          var sContactType = xmlContactElement.GetAttribute(CONTACT_TYPE_ATTRIBUTE_NAME);
           var oDomainContact = new DomainContact(xmlContactElement);
           var contactType = (DomainContactType) Enum.Parse(typeof (DomainContactType), sContactType);
 
@@ -183,7 +153,7 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
     {
       var newDomainContactGroup = new DomainContactGroup(_container, Tlds, _privateLabelId);
 
-      foreach (KeyValuePair<DomainContactType, IDomainContact> pair in _domainContactGroup)
+      foreach (var pair in _domainContactGroup)
       {
         newDomainContactGroup._domainContactGroup[pair.Key] = (IDomainContact)pair.Value.Clone();
       }
@@ -201,7 +171,8 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
       foreach (var pair in _domainContactGroup)
       {
         var domainsTrusteeContactType = DomainsTrusteeContactTypes.Registrant;
-        bool valid = false;
+        var valid = false;
+
         switch (pair.Key.ToString().ToLowerInvariant())
         {
           case "registrant":
@@ -245,6 +216,7 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
       }
 
       var tldArray = tlds as string[] ?? tlds.ToArray();
+
       if (contactList.Count > 0 && tldArray.Length > 0)
       {
         var contactsDomains = new DomainsTrusteeContactsTlds(contactList, tldArray.ToList());
@@ -289,9 +261,11 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
       tlds = RemoveLeadingPeriodsOnTlds(tlds);
 
       var tldsTrusteeEnabled = new HashSet<string>();
+
       foreach (var tld in tlds)
       {
         var dotTypeInfo = GetDotTypeProvider.GetDotTypeInfo(tld.Key);
+
         if (dotTypeInfo != null && dotTypeInfo.GetType().Name != "InvalidDotType")
         {
           if (dotTypeInfo.Product != null && dotTypeInfo.Product.Trustee != null)
@@ -321,7 +295,8 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
       foreach (var pair in _domainContactGroup)
       {
         var domainsTrusteeContactType = DomainsTrusteeContactTypes.Registrant;
-        bool valid = false;
+        var valid = false;
+
         switch (pair.Key.ToString().ToLowerInvariant())
         {
           case "registrant":
@@ -365,6 +340,7 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
       }
 
       var tldArray = tldsTrusteeEnabled.ToArray();
+
       if (contactList.Count > 0 && tldArray.Length > 0)
       {
         var contactsDomains = new DomainsTrusteeContactsTlds(contactList, tldArray.ToList());
@@ -409,7 +385,7 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
       return result;
     }
 
-    private HashSet<string> Tlds { get; set; }
+    private IEnumerable<string> Tlds { get; set; }
 
     public int PrivateLabelId
     {
@@ -428,12 +404,12 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
 
       if (!HasExplicitDomainContact(DomainContactType.Registrant))
       {
-        string sText = "Cannot generate contact XML, no " + DomainContactType.Registrant + " defined.";
+        var sText = "Cannot generate contact XML, no " + DomainContactType.Registrant + " defined.";
         throw new Exception(sText);
       }
 
       var xmlContactInfoDoc = new XmlDocument();
-      XmlElement xmlContactInfo = xmlContactInfoDoc.CreateElement(CONTACT_INFO_ELEMENT_NAME);
+      var xmlContactInfo = xmlContactInfoDoc.CreateElement(CONTACT_INFO_ELEMENT_NAME);
       xmlContactInfoDoc.AppendChild(xmlContactInfo);
       xmlContactInfo.SetAttribute(LINK_ID_ATTRIBUTE_NAME, ContactGroupId);
 
@@ -442,11 +418,13 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
       foreach (DomainContactType domainContactType in Enum.GetValues(typeof(DomainContactType)))
       {
         var oDomainContact = GetContactInt(domainContactType);
+
         if (oDomainContact != null)
         {
           string sContactXml = oDomainContact.GetContactXml(domainContactType);
           xmlContactDoc.LoadXml(sContactXml);
           XmlNode xmlContactNode = xmlContactDoc.SelectSingleNode("//" + DomainContact.CONTACT_ELEMENT_NAME);
+
           if (xmlContactNode != null)
           {
             xmlContactNode = xmlContactInfoDoc.ImportNode(xmlContactNode, true);
@@ -500,7 +478,7 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
 
       if (domainContact.IsValid)
       {
-        IDictionary<string, ITuiFormInfo> tuiFormsInfo = GetTuiFormInfo(Tlds);
+        var tuiFormsInfo = GetTuiFormInfo(Tlds);
         foreach (var tuiFormInfo in tuiFormsInfo)
         {
           domainContact.AddTuiFormsInfo(tuiFormInfo.Key, tuiFormInfo.Value);
@@ -542,21 +520,22 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
       _domainContactGroup[DomainContactType.Billing] = billingContact;
       _domainContactGroup[DomainContactType.Technical] = technicalContact;
 
-      IDictionary<string, ITuiFormInfo> tuiFormsInfo = GetTuiFormInfo(Tlds);
-        foreach (var tuiFormInfo in tuiFormsInfo)
-        {
-          _domainContactGroup[DomainContactType.Registrant].AddTuiFormsInfo(tuiFormInfo.Key, tuiFormInfo.Value);
-          _domainContactGroup[DomainContactType.Registrant].AddTrusteeVendorIds(tuiFormInfo.Key, tuiFormInfo.Value.VendorId);
+      var tuiFormsInfo = GetTuiFormInfo(Tlds);
 
-          _domainContactGroup[DomainContactType.Administrative].AddTuiFormsInfo(tuiFormInfo.Key, tuiFormInfo.Value);
-          _domainContactGroup[DomainContactType.Administrative].AddTrusteeVendorIds(tuiFormInfo.Key, tuiFormInfo.Value.VendorId);
+      foreach (var tuiFormInfo in tuiFormsInfo)
+      {
+        _domainContactGroup[DomainContactType.Registrant].AddTuiFormsInfo(tuiFormInfo.Key, tuiFormInfo.Value);
+        _domainContactGroup[DomainContactType.Registrant].AddTrusteeVendorIds(tuiFormInfo.Key, tuiFormInfo.Value.VendorId);
 
-          _domainContactGroup[DomainContactType.Billing].AddTuiFormsInfo(tuiFormInfo.Key, tuiFormInfo.Value);
-          _domainContactGroup[DomainContactType.Billing].AddTrusteeVendorIds(tuiFormInfo.Key, tuiFormInfo.Value.VendorId);
+        _domainContactGroup[DomainContactType.Administrative].AddTuiFormsInfo(tuiFormInfo.Key, tuiFormInfo.Value);
+        _domainContactGroup[DomainContactType.Administrative].AddTrusteeVendorIds(tuiFormInfo.Key, tuiFormInfo.Value.VendorId);
 
-          _domainContactGroup[DomainContactType.Technical].AddTuiFormsInfo(tuiFormInfo.Key, tuiFormInfo.Value);
-          _domainContactGroup[DomainContactType.Technical].AddTrusteeVendorIds(tuiFormInfo.Key, tuiFormInfo.Value.VendorId);
-        }
+        _domainContactGroup[DomainContactType.Billing].AddTuiFormsInfo(tuiFormInfo.Key, tuiFormInfo.Value);
+        _domainContactGroup[DomainContactType.Billing].AddTrusteeVendorIds(tuiFormInfo.Key, tuiFormInfo.Value.VendorId);
+
+        _domainContactGroup[DomainContactType.Technical].AddTuiFormsInfo(tuiFormInfo.Key, tuiFormInfo.Value);
+        _domainContactGroup[DomainContactType.Technical].AddTrusteeVendorIds(tuiFormInfo.Key, tuiFormInfo.Value.VendorId);
+      }
 
       return (((registrantContact.IsValid && technicalContact.IsValid) && administrativeContact.IsValid) && billingContact.IsValid);
     }
@@ -582,7 +561,8 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
 
       if (domainContact.IsValid)
       {
-        IDictionary<string, ITuiFormInfo> tuiFormsInfo = GetTuiFormInfo(Tlds);
+        var tuiFormsInfo = GetTuiFormInfo(Tlds);
+
         foreach (var tuiFormInfo in tuiFormsInfo)
         {
           domainContact.AddTuiFormsInfo(tuiFormInfo.Key, tuiFormInfo.Value);
@@ -604,7 +584,7 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
     /// <param name="domainContactError">Domain Contact Error</param>
     public void SetInvalidContact(IDomainContact domainContact, DomainContactType domainContactType, IEnumerable<string> tlds, IDomainContactError domainContactError)
     {
-      Tlds = CleanTlds(tlds);
+      Tlds = tlds;
       domainContact.InvalidateContact(domainContactError);      
       _domainContactGroup[domainContactType] = domainContact;
     }
@@ -619,7 +599,7 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
     /// <param name="domainContactErrors">List of Domain Contact Errors</param>
     public void SetInvalidContact(IDomainContact domainContact, DomainContactType domainContactType, IEnumerable<string> tlds, List<IDomainContactError> domainContactErrors)
     {
-      Tlds = CleanTlds(tlds);
+      Tlds = tlds;
       domainContact.InvalidateContact(domainContactErrors);
       _domainContactGroup[domainContactType] = domainContact;
     }
@@ -659,6 +639,7 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
     {
       IDomainContact result = null;
       var contact = GetContactInt(contactType);
+
       if (contact != null)
       {
         result = contact.Clone() as IDomainContact;
@@ -670,6 +651,7 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
     private IDomainContact GetContactInt(DomainContactType contactType)
     {
       IDomainContact result = null;
+
       if (_domainContactGroup.ContainsKey(contactType))
       {
         result = _domainContactGroup[contactType];
@@ -693,7 +675,7 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
 
         if (result != null)
         {
-          IDictionary<string, ITuiFormInfo> tuiFormsInfo = GetTuiFormInfo(Tlds);
+          var tuiFormsInfo = GetTuiFormInfo(Tlds);
           foreach (var tuiFormInfo in tuiFormsInfo)
           {
             result.AddTuiFormsInfo(tuiFormInfo.Key, tuiFormInfo.Value);
@@ -702,6 +684,7 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
           
         }
       }
+
       return result;
     }
 
@@ -725,10 +708,10 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
         if (HasExplicitDomainContact(domainContactType))
         {
           var oDomainContact = GetContactInt(domainContactType);
-
-          string sContactXml = oDomainContact.GetContactXmlForSession(domainContactType);
+          var sContactXml = oDomainContact.GetContactXmlForSession(domainContactType);
           xmlContactDoc.LoadXml(sContactXml);
           var xmlContactNode = xmlContactDoc.SelectSingleNode("//" + DomainContact.CONTACT_ELEMENT_NAME);
+
           if (xmlContactNode != null)
           {
             var xmlContactElement = (XmlElement)xmlContactInfoDoc.ImportNode(xmlContactNode, true);
@@ -738,9 +721,9 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
         }
       }
 
-      foreach (string tld in Tlds)
+      foreach (var tld in Tlds)
       {
-        XmlElement xmlTldElement = xmlContactInfoDoc.CreateElement(TLD_ELEMENT_NAME);
+        var xmlTldElement = xmlContactInfoDoc.CreateElement(TLD_ELEMENT_NAME);
         xmlTldElement.InnerText = tld;
         xmlContactInfo.AppendChild(xmlTldElement);
       }
@@ -755,15 +738,18 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
     {
       get
       {
-        bool isValid = false;
-        if ((Tlds.Count > 0) && (_domainContactGroup.Count > 0))
+        var isValid = false;
+
+        if ((Tlds.Any()) && (_domainContactGroup.Count > 0))
         {
           isValid = true;
+
           foreach (DomainContactType contactType in Enum.GetValues(typeof(DomainContactType)))
           {
             if (HasExplicitDomainContact(contactType))
             {
               var contact = GetContactInt(contactType);
+
               if (!contact.IsValid)
               {
                 isValid = false;
@@ -802,6 +788,7 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
       foreach (DomainContactType contactType in domainContactTypes)
       {
         var oDomainContact = GetContactInt(contactType);
+
         if (null != oDomainContact)
         {
           ValidateContact(oDomainContact, tldArray, checkType, contactType, false);
@@ -848,6 +835,7 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
       var request = new DomainContactValidationRequestData(checkType.ToString(), (int)contactType, domainContactValidation, tlds, PrivateLabelId);
      
       var response = (DomainContactValidationResponseData)Engine.Engine.ProcessRequest(request, DOMAIN_VALIDATION_CHECK);
+      var xml = response.ToXML();
       
       if (clearErrors)
       {
@@ -872,13 +860,12 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
     /// <returns>true if revalidation occurred</returns>
     public bool SetTlds(IEnumerable<string> tlds)
     {
-      bool isValid = IsValid;
-
-      HashSet<string> existingTlds = Tlds;
-      HashSet<string> newTlds = CleanTlds(tlds);
+      var isValid = IsValid;
+      var existingTlds = Tlds;
+      var newTlds = tlds;
       var newlyAddedTlds = new HashSet<string>();
 
-      foreach (string tld in newTlds)
+      foreach (var tld in newTlds)
       {
         if (!existingTlds.Contains(tld))
         {
@@ -886,13 +873,13 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
         }
       }
 
-      bool doNewValidation = (newlyAddedTlds.Count > 0);
-      bool doReValidation = false;
+      var doNewValidation = (newlyAddedTlds.Count > 0);
+      var doReValidation = false;
 
       // If removing Tlds and group was invalid, group could become valid again.
       if (!isValid)
       {
-        int diff = existingTlds.Count - (newTlds.Count - newlyAddedTlds.Count);
+        var diff = existingTlds.ToArray().Length - (newTlds.ToArray().Length - newlyAddedTlds.Count);
         doReValidation = (diff > 0);
       }
 
@@ -901,8 +888,9 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
 
       if (doNewValidation || doReValidation)
       {
-        HashSet<string> validationTlds;
+        IEnumerable<string> validationTlds;
         bool clearExistingErrors;
+
         if (doReValidation)
         {
           validationTlds = Tlds;
@@ -932,11 +920,13 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
         if (_allContactTypes == null)
         {
           _allContactTypes = new List<DomainContactType>(8);
+
           foreach (DomainContactType contactType in Enum.GetValues(typeof(DomainContactType)))
           {
             _allContactTypes.Add(contactType);
           }
         }
+
         return _allContactTypes;
       }
     }
@@ -946,7 +936,8 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
     public List<IDomainContactError> GetAllErrors()
     {
       var result = new List<IDomainContactError>();
-      foreach (DomainContactType contactType in AllContactTypes)
+
+      foreach (var contactType in AllContactTypes)
       {
         if (HasExplicitDomainContact(contactType))
         {
@@ -954,12 +945,14 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
           result.AddRange(contact.Errors);
         }
       }
+
       return result;
     }
 
     public Dictionary<int, List<IDomainContactError>> GetAllErrorsByContactType()
     {
       var result = new Dictionary<int, List<IDomainContactError>>();
+
       foreach (var contactType in AllContactTypes)
       {
         var typeErrors = new List<IDomainContactError>();
@@ -971,6 +964,7 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
           result.Add((int)contactType, typeErrors);
         }
       }
+
       return result;
     }
 
@@ -981,13 +975,14 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
     /// <param name="language">Language string</param>
     public bool SetContactPreferredlanguage(DomainContactType contactType, string language)
     {
-      bool bRet = false;
+      var bRet = false;
 
       if (HasExplicitDomainContact(contactType))
       {
         _domainContactGroup[contactType].PreferredLanguage = language;
         bRet = true;
       }
+
       return bRet;
     }
   }

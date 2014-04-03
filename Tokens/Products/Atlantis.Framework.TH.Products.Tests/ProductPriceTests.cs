@@ -11,10 +11,13 @@ using Atlantis.Framework.Providers.Products;
 using Atlantis.Framework.Providers.Interface.Preferences;
 using System.Web;
 using Atlantis.Framework.Testing.MockPreferencesProvider;
+using System.Diagnostics.CodeAnalysis;
+using System.Collections.Generic;
 
 namespace Atlantis.Framework.TH.Products.Tests
 {
   [TestClass]
+  [ExcludeFromCodeCoverage]
   [DeploymentItem("atlantis.config")]
   [DeploymentItem("Atlantis.Framework.PLSignupInfo.Impl.dll")]
   [DeploymentItem("Atlantis.Framework.ProductOffer.Impl.dll")]
@@ -24,6 +27,19 @@ namespace Atlantis.Framework.TH.Products.Tests
   public class ProductPriceTests
   {
     const string _tokenFormat = "[@T[productprice:{0}]@T]";
+    private TestContext _testContextInstance;
+
+    public TestContext TestContext
+    {
+      get
+      {
+        return _testContextInstance;
+      }
+      set
+      {
+        _testContextInstance = value;
+      }
+    }
 
     [TestInitialize]
     public void InitializeTests()
@@ -143,5 +159,144 @@ namespace Atlantis.Framework.TH.Products.Tests
       Assert.IsTrue(outputHtml.Contains("strike"));
     }
 
+    [TestMethod]
+    public void WrapSymbolTest()
+    {
+      string expectedTagName = "span";
+      string expectedCssClass = "myClass";
+      string data = string.Format("<current productid=\"58\" htmlsymbol=\"true\" currencytype=\"USD\" symboltagname=\"{0}\" symbolcssclass=\"{1}\" />", expectedTagName, expectedCssClass);
+      string key = "productprice";
+      string tokenString = string.Format("[@T[{1}:{0}]@T]", data, key);
+      var token = new ProductPriceToken(key, data, tokenString);
+      Assert.IsNotNull(token);
+
+      Assert.AreEqual(expectedTagName, token.WrapTagName);
+      Assert.AreEqual(expectedCssClass, token.WrapCssClass);
+
+      var target = new ProductPriceTokenHandler();
+      IProviderContainer providerContainer = SetBasicContextAndProviders();
+      TokenEvaluationResult actual = target.EvaluateTokens(new List<IToken>() { token }, providerContainer);
+      Assert.AreEqual(TokenEvaluationResult.Success, actual);
+
+      TestContext.WriteLine(token.TokenResult);
+      Assert.IsTrue(token.TokenResult.Contains(string.Format("<{0} class=\"{1}\">$</{0}>", expectedTagName, expectedCssClass)));
+
+      data = string.Format("<list productid=\"58\" htmlsymbol=\"true\" currencytype=\"USD\" symboltagname=\"{0}\" symbolcssclass=\"{1}\" />", expectedTagName, expectedCssClass);
+      tokenString = string.Format("[@T[{1}:{0}]@T]", data, key);
+      token = new ProductPriceToken(key, data, tokenString);
+      Assert.IsNotNull(token);
+      Assert.AreEqual(expectedTagName, token.WrapTagName);
+      Assert.AreEqual(expectedCssClass, token.WrapCssClass);
+
+      target = new ProductPriceTokenHandler();
+      providerContainer = SetBasicContextAndProviders();
+      actual = target.EvaluateTokens(new List<IToken>() { token }, providerContainer);
+      Assert.AreEqual(TokenEvaluationResult.Success, actual);
+
+      TestContext.WriteLine(token.TokenResult);
+      Assert.IsTrue(token.TokenResult.Contains(string.Format("<{0} class=\"{1}\">$</{0}>", expectedTagName, expectedCssClass)));
+
+      expectedTagName = "span";
+      expectedCssClass = string.Empty;
+      data = string.Format("<current productid=\"58\" htmlsymbol=\"true\" currencytype=\"USD\" symboltagname=\"{0}\" symbolcssclass=\"{1}\" />", expectedTagName, expectedCssClass);
+      tokenString = string.Format("[@T[{1}:{0}]@T]", data, key);
+      token = new ProductPriceToken(key, data, tokenString);
+      Assert.IsNotNull(token);
+      Assert.AreEqual(expectedTagName, token.WrapTagName);
+      Assert.AreEqual(expectedCssClass, token.WrapCssClass);
+
+      target = new ProductPriceTokenHandler();
+      providerContainer = SetBasicContextAndProviders();
+      actual = target.EvaluateTokens(new List<IToken>() { token }, providerContainer);
+      Assert.AreEqual(TokenEvaluationResult.Success, actual);
+
+      TestContext.WriteLine(token.TokenResult);
+      Assert.IsTrue(token.TokenResult.Contains(string.Format("<{0}>$</{0}>", expectedTagName, expectedCssClass)));
+
+      data = string.Format("<list productid=\"58\" htmlsymbol=\"true\" currencytype=\"USD\" symboltagname=\"{0}\" symbolcssclass=\"{1}\" />", expectedTagName, expectedCssClass);
+      tokenString = string.Format("[@T[{1}:{0}]@T]", data, key);
+      token = new ProductPriceToken(key, data, tokenString);
+      Assert.IsNotNull(token);
+      Assert.AreEqual(expectedTagName, token.WrapTagName);
+      Assert.AreEqual(expectedCssClass, token.WrapCssClass);
+
+      target = new ProductPriceTokenHandler();
+      providerContainer = SetBasicContextAndProviders();
+      actual = target.EvaluateTokens(new List<IToken>() { token }, providerContainer);
+      Assert.AreEqual(TokenEvaluationResult.Success, actual);
+
+      TestContext.WriteLine(token.TokenResult);
+      Assert.IsTrue(token.TokenResult.Contains(string.Format("<{0}>$</{0}>", expectedTagName, expectedCssClass)));
+
+      expectedTagName = string.Empty;
+      expectedCssClass = "myClass";
+      data = string.Format("<current productid=\"58\" htmlsymbol=\"true\" currencytype=\"USD\" symboltagname=\"{0}\" symbolcssclass=\"{1}\" />", expectedTagName, expectedCssClass);
+      tokenString = string.Format("[@T[{1}:{0}]@T]", data, key);
+      token = new ProductPriceToken(key, data, tokenString);
+      Assert.IsNotNull(token);
+      Assert.AreEqual(expectedTagName, token.WrapTagName);
+      Assert.AreEqual(expectedCssClass, token.WrapCssClass);
+
+      target = new ProductPriceTokenHandler();
+      providerContainer = SetBasicContextAndProviders();
+      actual = target.EvaluateTokens(new List<IToken>() { token }, providerContainer);
+      Assert.AreEqual(TokenEvaluationResult.Success, actual);
+
+      TestContext.WriteLine(token.TokenResult);
+      Assert.IsTrue(token.TokenResult.Contains("$"));
+      Assert.IsFalse(token.TokenResult.Contains(string.Format("<{0} class=\"{1}\">$</{0}>", expectedTagName, expectedCssClass)));
+      Assert.IsFalse(token.TokenResult.Contains(string.Format("<{0}>$</{0}>", expectedTagName, expectedCssClass)));
+
+      data = string.Format("<list productid=\"58\" htmlsymbol=\"true\" currencytype=\"USD\" symboltagname=\"{0}\" symbolcssclass=\"{1}\" />", expectedTagName, expectedCssClass);
+      tokenString = string.Format("[@T[{1}:{0}]@T]", data, key);
+      token = new ProductPriceToken(key, data, tokenString);
+      Assert.IsNotNull(token);
+      Assert.AreEqual(expectedTagName, token.WrapTagName);
+      Assert.AreEqual(expectedCssClass, token.WrapCssClass);
+
+      target = new ProductPriceTokenHandler();
+      providerContainer = SetBasicContextAndProviders();
+      actual = target.EvaluateTokens(new List<IToken>() { token }, providerContainer);
+      Assert.AreEqual(TokenEvaluationResult.Success, actual);
+
+      TestContext.WriteLine(token.TokenResult);
+      Assert.IsTrue(token.TokenResult.Contains("$"));
+      Assert.IsFalse(token.TokenResult.Contains(string.Format("<{0} class=\"{1}\">$</{0}>", expectedTagName, expectedCssClass)));
+      Assert.IsFalse(token.TokenResult.Contains(string.Format("<{0}>$</{0}>", expectedTagName, expectedCssClass)));
+
+      expectedTagName = "span";
+      expectedCssClass = "myClass";
+      data = string.Format("<current productid=\"58\" htmlsymbol=\"false\" currencytype=\"USD\" symboltagname=\"{0}\" symbolcssclass=\"{1}\" />", expectedTagName, expectedCssClass);
+      tokenString = string.Format("[@T[{1}:{0}]@T]", data, key);
+      token = new ProductPriceToken(key, data, tokenString);
+      Assert.IsNotNull(token);
+      Assert.AreEqual(expectedTagName, token.WrapTagName);
+      Assert.AreEqual(expectedCssClass, token.WrapCssClass);
+
+      target = new ProductPriceTokenHandler();
+      providerContainer = SetBasicContextAndProviders();
+      actual = target.EvaluateTokens(new List<IToken>() { token }, providerContainer);
+      Assert.AreEqual(TokenEvaluationResult.Success, actual);
+
+      TestContext.WriteLine(token.TokenResult);
+      Assert.IsFalse(token.TokenResult.Contains(string.Format("<{0} class=\"{1}\">$</{0}>", expectedTagName, expectedCssClass)));
+      Assert.IsFalse(token.TokenResult.Contains(string.Format("<{0}>$</{0}>", expectedTagName, expectedCssClass)));
+
+      data = string.Format("<list productid=\"58\" htmlsymbol=\"false\" currencytype=\"USD\" symboltagname=\"{0}\" symbolcssclass=\"{1}\" />", expectedTagName, expectedCssClass);
+      tokenString = string.Format("[@T[{1}:{0}]@T]", data, key);
+      token = new ProductPriceToken(key, data, tokenString);
+      Assert.IsNotNull(token);
+      Assert.AreEqual(expectedTagName, token.WrapTagName);
+      Assert.AreEqual(expectedCssClass, token.WrapCssClass);
+
+      target = new ProductPriceTokenHandler();
+      providerContainer = SetBasicContextAndProviders();
+      actual = target.EvaluateTokens(new List<IToken>() { token }, providerContainer);
+      Assert.AreEqual(TokenEvaluationResult.Success, actual);
+
+      TestContext.WriteLine(token.TokenResult);
+      Assert.IsFalse(token.TokenResult.Contains(string.Format("<{0} class=\"{1}\">$</{0}>", expectedTagName, expectedCssClass)));
+      Assert.IsFalse(token.TokenResult.Contains(string.Format("<{0}>$</{0}>", expectedTagName, expectedCssClass)));
+    }
   }
 }

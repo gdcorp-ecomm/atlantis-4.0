@@ -117,7 +117,7 @@ namespace Atlantis.Framework.TH.Products
       return result;
     }
 
-    private PriceFormatOptions GetPriceFormatOptions(ProductPriceToken token)
+    private static PriceFormatOptions GetPriceFormatOptions(ProductPriceToken token)
     {
       PriceFormatOptions result = PriceFormatOptions.None;
 
@@ -129,6 +129,10 @@ namespace Atlantis.Framework.TH.Products
       if (token.DropSymbol)
       {
         result |= PriceFormatOptions.DropSymbol;
+      }
+      else if (token.HtmlSymbol)
+      {
+        result |= PriceFormatOptions.HtmlSymbol;
       }
       else if (!token.HtmlSymbol)
       {
@@ -172,15 +176,16 @@ namespace Atlantis.Framework.TH.Products
       if (price != null)
       {
         PriceFormatOptions formatOptions = GetPriceFormatOptions(token);
+        ISymbolFormatter symbolFormatter = GetSymbolFormatter(token, formatOptions);
 
         if (token.CurrencyType != null)
         {
-          priceText = _currency.PriceFormat(price, formatOptions);
+          priceText = _currency.PriceFormat(price, formatOptions, symbolFormatter);
         }
         else
         {
           PriceTextOptions textOptions = GetPriceTextOptions(token);
-          priceText = _currency.PriceText(price, textOptions, formatOptions);
+          priceText = _currency.PriceText(price, symbolFormatter, textOptions, formatOptions);
         }
 
         result = true;
@@ -188,6 +193,26 @@ namespace Atlantis.Framework.TH.Products
 
       token.TokenResult = priceText;
       return result;
+    }
+
+    private static ISymbolFormatter GetSymbolFormatter(ProductPriceToken token, PriceFormatOptions formatOptions)
+    {
+      ISymbolFormatter returnValue = new HtmlTagWrapFormatter(string.Empty);
+
+      if (!ReferenceEquals(null, token))
+      {
+        if (formatOptions.HasFlag(PriceFormatOptions.HtmlSymbol) && !formatOptions.HasFlag(PriceFormatOptions.DropSymbol))
+        {
+          string tagName = token.WrapTagName;
+          if (!string.IsNullOrEmpty(tagName))
+          {
+            string className = token.WrapCssClass;
+            returnValue = new HtmlTagWrapFormatter(tagName, className);
+          }
+        }
+      }
+
+      return returnValue;
     }
 
     private bool RenderTemplatePrice(ProductPriceToken token)
@@ -204,16 +229,18 @@ namespace Atlantis.Framework.TH.Products
         string listText;
         string currentText;
 
+        ISymbolFormatter symbolFormatter = GetSymbolFormatter(token, formatOptions);
+
         if (token.CurrencyType != null)
         {
-          listText = _currency.PriceFormat(listPrice, formatOptions);
-          currentText = _currency.PriceFormat(currentPrice, formatOptions);
+          listText = _currency.PriceFormat(listPrice, formatOptions, symbolFormatter);
+          currentText = _currency.PriceFormat(currentPrice, formatOptions, symbolFormatter);
         }
         else
         {
           PriceTextOptions textOptions = GetPriceTextOptions(token);
-          listText = _currency.PriceText(listPrice, textOptions, formatOptions);
-          currentText = _currency.PriceText(currentPrice, textOptions, formatOptions);
+          listText = _currency.PriceText(listPrice, symbolFormatter, textOptions, formatOptions);
+          currentText = _currency.PriceText(currentPrice, symbolFormatter, textOptions, formatOptions);
         }
 
         string formatTemplate = token.NoStrikeTemplate;

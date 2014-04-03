@@ -2,14 +2,16 @@
 <package >
   <metadata>
     <id>Atlantis.Framework.TH.Products</id>
-    <version>4.13.12.4</version>
+    <version>4.14.4.3</version>
     <title>Atlantis Framework Products Token Handler</title>
     <authors>$author$</authors>
     <owners>$author$</owners>
     <projectUrl>https://confluence.int.godaddy.com/display/ATLANTIS</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes></releaseNotes>
+    <releaseNotes>
+      4.14.4.3: ATLANTIS-433 - Added functionality for wrapping symbol.
+    </releaseNotes>
     <copyright>$copyright$</copyright>
     <tags>Atlantis Framework TH Products</tags>
     <dependencies />

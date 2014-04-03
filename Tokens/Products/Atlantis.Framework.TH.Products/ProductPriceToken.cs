@@ -21,7 +21,22 @@ namespace Atlantis.Framework.TH.Products
     public int PriceType { get; private set; }
     public string ISC { get; private set; }
     public string NoStrikeTemplate { get; private set; }
-    public string StrikeTemplate { get; private set; }
+    public string StrikeTemplate
+    {
+      get;
+      private set;
+    }
+    public string WrapTagName
+    {
+      get;
+      private set;
+    }
+
+    public string WrapCssClass
+    {
+      get;
+      private set;
+    }
 
     public ProductPriceToken(string key, string data, string fullTokenString)
       : base(key, data, fullTokenString)
@@ -36,6 +51,8 @@ namespace Atlantis.Framework.TH.Products
       CurrencyType = GetAttributeText("currencytype", null);
       Period = GetAttributeText("period", string.Empty);
       AllowMask = GetAttributeBool("allowmask", true);
+      WrapTagName = GetAttributeText("symboltagname", string.Empty);
+      WrapCssClass = GetAttributeText("symbolcssclass", string.Empty);
 
       if (TokenData.Elements("nostrike").Any())
       {

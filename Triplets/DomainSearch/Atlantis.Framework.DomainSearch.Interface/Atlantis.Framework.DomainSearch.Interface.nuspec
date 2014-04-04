@@ -12,6 +12,7 @@
     <releaseNotes>
       14.4.1.1 : Adding GEO information to domain search request
       14.4.2.1 : Added SplitTest information to domain search request
+      14.4.4.1 : Updated SplitTest logic to not iclude empty values
     </releaseNotes>
     <copyright>$copyright$</copyright>
     <tags>Atlantis Framework DomainSearch Interface</tags>

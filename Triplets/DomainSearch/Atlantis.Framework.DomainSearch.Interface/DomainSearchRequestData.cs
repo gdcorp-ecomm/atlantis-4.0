@@ -83,8 +83,33 @@ namespace Atlantis.Framework.DomainSearch.Interface
         new JProperty("TimeoutInMilliSeconds", (int) RequestTimeout.TotalMilliseconds),
         new JProperty("SourceCode", SourceCode),
         new JProperty("PrivateLabelID", PrivateLabelId),
-        new JProperty("Data",
-                      new JArray(
+        new JProperty("Data", GetRequestData())
+        );
+
+      if (Tlds != null && Tlds.Count > 0)
+      {
+        var tldsToken = new JObject(
+          new JProperty("Name", "tlds"), // Not an option  for phase 1
+          new JProperty("Data", string.Join(",", Tlds)) // Not an option  for phase 1
+          );
+        jsonSearchData["Data"].Last.AddAfterSelf(tldsToken);
+      }
+
+      if (DomainCount > 0)
+      {
+        var domainCountToken = new JObject(
+          new JProperty("Name", "maxdomainsperdatabase"), // Not an option  for phase 1
+          new JProperty("Data", DomainCount) // Not an option  for phase 1
+          );
+        jsonSearchData["Data"].Last.AddAfterSelf(domainCountToken);
+      }
+
+      return jsonSearchData.ToString();
+    }
+
+    private JArray GetRequestData()
+    {
+      var arr = new JArray(
                         new JObject(
                           new JProperty("Name", "searchdatabase"),
                           new JProperty("Data", string.Join(",", DomainSearchDataBases))
@@ -94,11 +119,11 @@ namespace Atlantis.Framework.DomainSearch.Interface
                           new JProperty("Data", ShopperID)
                           ),
                         new JObject(
-                          new JProperty("Name", "shopperstatus"), 
+                          new JProperty("Name", "shopperstatus"),
                           new JProperty("Data", ShopperStatus.ToString())
                           ),
                         new JObject(
-                          new JProperty("Name", "countrysite"), 
+                          new JProperty("Name", "countrysite"),
                           new JProperty("Data", CountrySite.ToLowerInvariant())
                           ),
                         new JObject(
@@ -106,7 +131,7 @@ namespace Atlantis.Framework.DomainSearch.Interface
                           new JProperty("Data", Language.ToLowerInvariant())
                           ),
                         new JObject(
-                          new JProperty("Name", "includespins"), 
+                          new JProperty("Name", "includespins"),
                           new JProperty("Data", IncludeSpins)
                           ),
                         new JObject(
@@ -132,34 +157,19 @@ namespace Atlantis.Framework.DomainSearch.Interface
                         new JObject(
                           new JProperty("Name", "clientipcountry"),
                           new JProperty("Data", ClientIpCountry.ToLowerInvariant())
-                          ),
-                        new JObject(
+                          ));
+
+      var splittestinfo = GetSplitProviderValue();
+
+      if (!string.IsNullOrEmpty(splittestinfo))
+      {
+        arr.Add(new JObject(
                           new JProperty("Name", "splitprovider"),
                           new JProperty("Data", GetSplitProviderValue())
-                          )
-                        )
-          )
-        );
-
-      if (Tlds != null && Tlds.Count > 0)
-      {
-        var tldsToken = new JObject(
-          new JProperty("Name", "tlds"), // Not an option  for phase 1
-          new JProperty("Data", string.Join(",", Tlds)) // Not an option  for phase 1
-          );
-        jsonSearchData["Data"].Last.AddAfterSelf(tldsToken);
+                          ));
       }
 
-      if (DomainCount > 0)
-      {
-        var domainCountToken = new JObject(
-          new JProperty("Name", "maxdomainsperdatabase"), // Not an option  for phase 1
-          new JProperty("Data", DomainCount) // Not an option  for phase 1
-          );
-        jsonSearchData["Data"].Last.AddAfterSelf(domainCountToken);
-      }
-
-      return jsonSearchData.ToString();
+      return arr;
     }
 
     private string GetSplitProviderValue()

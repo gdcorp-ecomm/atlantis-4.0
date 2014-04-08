@@ -135,12 +135,12 @@ namespace Atlantis.Framework.Providers.DomainSearch
       return domainResult;
     }
 
-    public IDomainSearchResult SearchDomain(string searchPhrase, string sourceCode, string sourceUrl)
+    public IDomainSearchResult SearchDomain(string searchPhrase, string sourceCode, string sourceUrl, ISplitTestInfo splitTestInfo = null)
     {
-      return SearchDomain(searchPhrase, sourceCode, sourceUrl, new List<string>(0));
+      return SearchDomain(searchPhrase, sourceCode, sourceUrl, new List<string>(0), splitTestInfo);
     }
 
-    public IDomainSearchResult SearchDomain(string searchPhrase, string sourceCode, string sourceUrl, IList<string> tldsToSearch)
+    public IDomainSearchResult SearchDomain(string searchPhrase, string sourceCode, string sourceUrl, IList<string> tldsToSearch, ISplitTestInfo splitTestInfo = null)
     {
       IDomainSearchResult domainSearchResult = null;
 
@@ -160,11 +160,13 @@ namespace Atlantis.Framework.Providers.DomainSearch
           ShopperStatus = _shopperContext.Value.ShopperStatus,
           SourceCode = sourceCode,
           Tlds = tldsToSearch,
-          ClientIpLatitude = geoLocation.Latitude,
-          ClientIpLongitude = geoLocation.Longitude,
-          ClientIpCity = geoLocation.City,
-          ClientIpCountry = geoLocation.CountryCode,
-          ClientIpRegion = geoLocation.GeoRegionName
+          ClientIpLatitude = geoLocation == null ? 0d : geoLocation.Latitude,
+          ClientIpLongitude = geoLocation == null ? 0d : geoLocation.Longitude,
+          ClientIpCity = geoLocation == null ? string.Empty : geoLocation.City,
+          ClientIpCountry = geoLocation == null ? string.Empty : geoLocation.CountryCode,
+          ClientIpRegion = geoLocation == null ? string.Empty : geoLocation.GeoRegionName,
+          SplitTestId = splitTestInfo == null ? string.Empty : splitTestInfo.SplitTestid,
+          SplitTestSideName = splitTestInfo == null ? string.Empty : splitTestInfo.SplitTestSideName
         };
 
         var requestType = RequestTypeLookUp.GetCurrentRequestType();

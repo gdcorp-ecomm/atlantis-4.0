@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.AppSettings.Interface;
 using Atlantis.Framework.Providers.DomainSearch.Interface;
@@ -264,6 +265,15 @@ namespace Atlantis.Framework.Providers.DomainSearch.Tests
 
       Assert.IsTrue(domains[0].InPreRegPhase);
       Assert.IsTrue(domains[0].LaunchPhaseItems.Any());
+    }
+
+    [TestMethod]
+    public void DomainSearchWithSplitInfoTest()
+    {
+      const string searchPhrase = "spoonymac.com";
+      var domainSearchResult = DomainSearch.SearchDomain(searchPhrase, SOURCE_CODE, string.Empty, SplitTestInfo.GetSplitTestInfo("01234", "A"));
+      Assert.IsTrue(domainSearchResult.IsSuccess);
+      Assert.IsTrue(domainSearchResult.FindResponseDomains.Count != 0);
     }
   }
 }

@@ -77,8 +77,9 @@
     <Reference Include="Atlantis.Framework.DomainSearch.Impl">
       <HintPath>..\packages\Atlantis.Framework.DomainSearch.Impl.14.4.1.1\lib\net40\Atlantis.Framework.DomainSearch.Impl.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.DomainSearch.Interface">
-      <HintPath>..\packages\Atlantis.Framework.DomainSearch.Interface.14.4.1.1\lib\net40\Atlantis.Framework.DomainSearch.Interface.dll</HintPath>
+    <Reference Include="Atlantis.Framework.DomainSearch.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.DomainSearch.Interface.14.4.4.1\lib\net40\Atlantis.Framework.DomainSearch.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.DotTypeCache, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

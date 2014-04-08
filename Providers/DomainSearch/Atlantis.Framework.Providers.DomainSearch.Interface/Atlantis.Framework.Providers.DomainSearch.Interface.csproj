@@ -72,8 +72,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Atlantis.Framework.Domains.Interface.14.1.22.1\lib\net40\Atlantis.Framework.Domains.Interface.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.DomainSearch.Interface">
-      <HintPath>..\packages\Atlantis.Framework.DomainSearch.Interface.14.4.1.1\lib\net40\Atlantis.Framework.DomainSearch.Interface.dll</HintPath>
+    <Reference Include="Atlantis.Framework.DomainSearch.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.DomainSearch.Interface.14.4.4.1\lib\net40\Atlantis.Framework.DomainSearch.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.DotTypeCache, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -160,6 +161,7 @@
   <ItemGroup>
     <Compile Include="IDomainSearchProvider.cs" />
     <Compile Include="IDomainSearchResult.cs" />
+    <Compile Include="ISplitTestInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

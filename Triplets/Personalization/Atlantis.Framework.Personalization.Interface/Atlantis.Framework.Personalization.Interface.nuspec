@@ -2,8 +2,8 @@
 <package >
   <metadata>
     <id>Atlantis.Framework.Personalization.Interface</id>
-    <version>4.14.1.10</version>
-    <title>Atlantis Framework Personalization Interface</title>
+    <version>$version$</version>
+    <title>Atlantis.Framework.Personalization.Interface</title>
     <authors>$author$</authors>
     <owners>$author$</owners>
     <projectUrl>https://confluence.int.godaddy.com/display/CDS</projectUrl>
@@ -11,7 +11,7 @@
     <description>$description$</description>
     <releaseNotes></releaseNotes>
     <copyright>$copyright$</copyright>
-    <tags>Atlantis Framework Personalization Interface</tags>
+    <tags>Atlantis.Framework.Personalization.Interface</tags>
     <dependencies>
     </dependencies>
   </metadata>

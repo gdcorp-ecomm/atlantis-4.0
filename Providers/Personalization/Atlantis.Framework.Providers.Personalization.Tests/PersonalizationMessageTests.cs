@@ -1,16 +1,18 @@
-﻿using System.Diagnostics;
+﻿using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
 using System.Xml.Serialization;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Personalization.Interface;
+using Atlantis.Framework.Providers.Localization.Interface;
 using Atlantis.Framework.Providers.Personalization.Interface;
 using Atlantis.Framework.Testing.MockHttpContext;
+using Atlantis.Framework.Testing.MockLocalization;
 using Atlantis.Framework.Testing.MockProviders;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Atlantis.Framework.Engine;
 using Atlantis.Framework.Testing.MockEngine;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -32,11 +34,14 @@ namespace Atlantis.Framework.Providers.Personalization.Tests
       _container.RegisterProvider<ISiteContext, MockSiteContext>();
       _container.RegisterProvider<IManagerContext, MockNoManagerContext>();
       _container.RegisterProvider<IShopperContext, MockShopperContext>();
-      _container.RegisterProvider<IPersonalizationProvider, PersonalizationProvider>();
-      _container.RegisterProvider<IDebugContext, MockDebugContext>();
       _container.RegisterProvider<IAppSettingsProvider, MockAppSettingsProvider>();
+      _container.RegisterProvider<ILocalizationProvider, MockLocalizationProvider>();
+      _container.RegisterProvider<IPersonalizationProvider, PersonalizationProvider>();
+      _container.RegisterProvider<IPersonalizationDataProvider, PersonalizationDataProvider>();
+      _container.RegisterProvider<IDebugContext, MockDebugContext>();
+
       PersonalizationConfig.TMSAppId = "2";
-      _container.SetData<bool>("MockSiteContextSettings.IsRequestInternal", true);
+      _container.SetData(MockSiteContextSettings.IsRequestInternal, true);
 
       IAppSettingsProvider settings = _container.Resolve<IAppSettingsProvider>();
       ((MockAppSettingsProvider)settings).ReturnValue = "true";
@@ -525,6 +530,32 @@ namespace Atlantis.Framework.Providers.Personalization.Tests
         IAppSettingsProvider settings = _container.Resolve<IAppSettingsProvider>();
         ((MockAppSettingsProvider)settings).ReturnValue = "true";
       }
+    }
+
+    [TestMethod]
+    public void CheckProviderData()
+    {
+      InitializeProvidersContexts();
+
+      IPersonalizationDataProvider dataProvider = _container.Resolve<IPersonalizationDataProvider>();
+
+      MockHttpRequest mockHttpRequest = new MockHttpRequest("http://www.godaddy.com/?isc=abc123");
+      MockHttpContext.SetFromWorkerRequest(mockHttpRequest);
+
+      _container.SetData(MockLocalizationProviderSettings.CountrySite, "www");
+      _container.SetData(MockLocalizationProviderSettings.FullLanguage, "en-us");
+
+      // Set AppSettings
+      var result = dataProvider.GetChannelSessionData();
+      Assert.IsNotNull(result);
+      Assert.IsTrue(result.ContainsKey("isc"));
+      Assert.IsTrue(result.ContainsKey("countrysite"));
+      Assert.IsTrue(result.ContainsKey("market"));
+      Assert.IsTrue(result.ContainsKey("lang"));
+      Assert.AreEqual("abc123", result["isc"]);
+      Assert.AreEqual("www", result["countrysite"]);
+      Assert.AreEqual("en-us", result["market"]);
+      Assert.AreEqual("en", result["lang"]);
     }
   }
 }

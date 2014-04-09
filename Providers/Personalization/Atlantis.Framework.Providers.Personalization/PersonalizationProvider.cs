@@ -1,37 +1,37 @@
 ﻿using Atlantis.Framework.Interface;
 using Atlantis.Framework.Personalization.Interface;
+using Atlantis.Framework.Providers.AppSettings.Interface;
 using Atlantis.Framework.Providers.Personalization.Interface;
 using System;
 using System.Collections.Generic;
-using Atlantis.Framework.Engine;
+using System.Globalization;
 using System.Text;
 using System.Web;
 using System.Linq;
-using Atlantis.Framework.Providers.AppSettings.Interface;
 
 namespace Atlantis.Framework.Providers.Personalization
 {
   public class PersonalizationProvider : ProviderBase, IPersonalizationProvider
   {
-    const string DELIM = "^";
-    const string CONTAINER_KEY = "A.F.PersonalizationProvider.ConsumedMessages";
-    const string DATA_TOKEN_MESSAGE_Id = "TMSMessageId";
-    const string DATA_TOKEN_MESSAGE_NAME = "TMSMessageName";
-    const string DATA_TOKEN_MESSAGE_TAG = "TMSMessageTag";
-    const string DATA_TOKEN_MESSAGE_TRACKING_ID = "TMSMessageTrackingId";
-    const string AppSetting = "A.F.Prov.Personalization.TMS.On";
-    const int TIMEOUT_MILLISECONDS = 100;
+    private const string DELIM = "^";
+    private const string CONTAINER_KEY = "A.F.PersonalizationProvider.ConsumedMessages";
+    private const string DATA_TOKEN_MESSAGE_Id = "TMSMessageId";
+    private const string DATA_TOKEN_MESSAGE_NAME = "TMSMessageName";
+    private const string DATA_TOKEN_MESSAGE_TAG = "TMSMessageTag";
+    private const string DATA_TOKEN_MESSAGE_TRACKING_ID = "TMSMessageTrackingId";
+    private const string AppSetting = "A.F.Prov.Personalization.TMS.On";
+    private const int TIMEOUT_MILLISECONDS = 100;
 
     private readonly Lazy<ISiteContext> _siteContext;
     private readonly Lazy<IShopperContext> _shopperContext;
     private readonly Lazy<IDebugContext> _debugContext;
     private readonly Lazy<IAppSettingsProvider> _appSettingsProvider;
+    private readonly Lazy<IPersonalizationDataProvider> _personalizationData;
     private readonly List<IConsumedMessage> _emptyMessages;
     private readonly Lazy<string> _trackingData;
-    
-    private Lazy<ShopperSpecificSessionDataItem<TargetedMessagesResponseData>> _targetedMessagesSessionData =
-               new Lazy<ShopperSpecificSessionDataItem<TargetedMessagesResponseData>>(() => { return new ShopperSpecificSessionDataItem<TargetedMessagesResponseData>("PersonalizationProvider.TargetedMessages"); });
 
+    private readonly Lazy<ShopperSpecificSessionDataItem<TargetedMessagesResponseData>> _targetedMessagesSessionData =
+      new Lazy<ShopperSpecificSessionDataItem<TargetedMessagesResponseData>>(() => new ShopperSpecificSessionDataItem<TargetedMessagesResponseData>("PersonalizationProvider.TargetedMessages"));
 
     public PersonalizationProvider(IProviderContainer container)
       : base(container)
@@ -41,6 +41,7 @@ namespace Atlantis.Framework.Providers.Personalization
       _debugContext = new Lazy<IDebugContext>(() => Container.Resolve<IDebugContext>());
       _trackingData = new Lazy<string>(() => GetTrackingData());
       _appSettingsProvider = new Lazy<IAppSettingsProvider>(() => Container.Resolve<IAppSettingsProvider>());
+      _personalizationData = new Lazy<IPersonalizationDataProvider>(() => Container.Resolve<IPersonalizationDataProvider>());
       _emptyMessages = new List<IConsumedMessage>();
     }
 
@@ -64,7 +65,11 @@ namespace Atlantis.Framework.Providers.Personalization
     {
       TargetedMessages messages = null;
 
-      TargetedMessagesRequestData request = new TargetedMessagesRequestData(_shopperContext.Value.ShopperId, _siteContext.Value.PrivateLabelId.ToString(), PersonalizationConfig.TMSAppId, interactionPoint, VisitorGuid, _siteContext.Value.ISC);
+      string shopperId = _shopperContext.Value.ShopperId;
+      string privateLabelId = _siteContext.Value.PrivateLabelId.ToString(CultureInfo.InvariantCulture);
+      Dictionary<string, string> channelSessionData = _personalizationData.Value.GetChannelSessionData();
+      TargetedMessagesRequestData request = new TargetedMessagesRequestData(shopperId, privateLabelId, PersonalizationConfig.TMSAppId, interactionPoint, VisitorGuid,
+        channelSessionData);
       if (_siteContext.Value.ServerLocation == ServerLocationType.Prod)
       {
         request.RequestTimeout = TimeSpan.FromMilliseconds(TIMEOUT_MILLISECONDS);
@@ -112,7 +117,7 @@ namespace Atlantis.Framework.Providers.Personalization
 
         Engine.Engine.LogAtlantisException(aex);
       }
-      
+
       return messages;
     }
 
@@ -123,7 +128,7 @@ namespace Atlantis.Framework.Providers.Personalization
         _debugContext.Value.LogDebugTrackingData(key, value);
       }
     }
-    
+
     public void AddToConsumedMessages(IConsumedMessage message)
     {
       Container.SetData<string>(DATA_TOKEN_MESSAGE_Id, message.MessageId);
@@ -138,22 +143,22 @@ namespace Atlantis.Framework.Providers.Personalization
 
     private string GetTrackingData()
     {
-        string trackingData = string.Empty;
+      string trackingData = string.Empty;
 
-        var messages = Container.GetData<List<IConsumedMessage>>(CONTAINER_KEY, null);
+      var messages = Container.GetData<List<IConsumedMessage>>(CONTAINER_KEY, null);
 
-        if (messages != null)
+      if (messages != null)
+      {
+        StringBuilder sb = new StringBuilder(messages.Count * 50);
+        foreach (IConsumedMessage message in messages)
         {
-          StringBuilder sb = new StringBuilder(messages.Count * 50);
-          foreach (IConsumedMessage message in messages)
-          {
-            if (sb.Length > 0) sb.Append(DELIM);
-            sb.Append(message.TrackingData);
-          }
-          trackingData = sb.ToString();
+          if (sb.Length > 0) sb.Append(DELIM);
+          sb.Append(message.TrackingData);
         }
+        trackingData = sb.ToString();
+      }
 
-        return trackingData;
+      return trackingData;
     }
 
     public IEnumerable<IConsumedMessage> ConsumedMessages
@@ -163,7 +168,7 @@ namespace Atlantis.Framework.Providers.Personalization
         return Container.GetData<List<IConsumedMessage>>(CONTAINER_KEY, _emptyMessages) as IEnumerable<IConsumedMessage>;
       }
     }
-    
+
     public string TrackingData
     {
       get { return _trackingData.Value; }

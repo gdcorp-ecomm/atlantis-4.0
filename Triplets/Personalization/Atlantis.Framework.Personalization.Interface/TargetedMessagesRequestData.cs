@@ -1,4 +1,6 @@
-﻿using Atlantis.Framework.Interface;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Atlantis.Framework.Interface;
 using System;
 using System.Xml.Linq;
 
@@ -11,18 +13,18 @@ namespace Atlantis.Framework.Personalization.Interface
     public string InteractionPoint { get; set; }
     public string PrivateLabel { get; set; }
     public string AnonId { get; set; }
-    public string Isc { get; set; }
+    public Dictionary<string,string> ChannelSessionData { get; set; }
 
     private bool IsAnonymousShopper { get { return string.IsNullOrEmpty(ShopperID); } }
 
-    public TargetedMessagesRequestData(string shopperId, string privateLabel, string appId, string interactionPoint, string anonId, string isc)
+    public TargetedMessagesRequestData(string shopperId, string privateLabel, string appId, string interactionPoint, string anonId, Dictionary<string,string> channelSessionData) 
     {
       AppId = appId;
       InteractionPoint = interactionPoint;
       ShopperID = shopperId;
       PrivateLabel = privateLabel;
       AnonId = anonId;
-      Isc = isc;
+      ChannelSessionData = channelSessionData;
 
       if (IsAnonymousShopper && string.IsNullOrEmpty(AnonId))
       {
@@ -48,30 +50,47 @@ namespace Atlantis.Framework.Personalization.Interface
 
     public string GetPostData()
     {
-      var tagData = new XElement("tagData",
-                      new XElement("section",
-                      new XAttribute("name", "Channel"),
-                          new XElement("category",
-                          new XAttribute("name", "session"),
-                            new XElement("attribute",
-                            new XAttribute("name", "isc"),
-                                new XElement("value", Isc ?? string.Empty)))));
+      if ((ChannelSessionData != null) && (ChannelSessionData.Any()))
+      {
+        XElement tagDataXml = new XElement("tagData");
 
-      return tagData.ToString();
+        XElement channelDataXml;
+        tagDataXml.Add(channelDataXml = new XElement("section",
+          new XAttribute("name", "Channel")));
+
+        XElement channelSessionDataXml;
+        channelDataXml.Add(channelSessionDataXml = new XElement("category",
+          new XAttribute("name", "session")));
+
+        foreach (var item in ChannelSessionData)
+        {
+          channelSessionDataXml.Add(new XElement("attribute",
+            new XAttribute("name", item.Key),
+            new XElement("value", item.Value ?? string.Empty)));
+        }
+
+        return tagDataXml.ToString();
+      }
+
+      return String.Empty;
     }
 
     public override string GetCacheMD5()
     {
+      string channelSessionData = ((ChannelSessionData != null) && (ChannelSessionData.Any())) ?
+        String.Join(",", from item in ChannelSessionData
+                         select String.Join("=", item.Key, item.Value ?? String.Empty)) : String.Empty;
+
       if (this.IsAnonymousShopper)
       {
-        return BuildHashFromStrings(AnonId, PrivateLabel, AppId, InteractionPoint, Isc);
+        return BuildHashFromStrings(AnonId, PrivateLabel, AppId, InteractionPoint, channelSessionData);
       }
       else
       {
-        return BuildHashFromStrings(ShopperID, PrivateLabel, AppId, InteractionPoint, Isc);
+        return BuildHashFromStrings(ShopperID, PrivateLabel, AppId, InteractionPoint, channelSessionData);
       }
     }
-    
+
   }
 }
 

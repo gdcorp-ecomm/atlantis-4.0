@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Net.Cache;
@@ -31,28 +30,34 @@ namespace Atlantis.Framework.Personalization.Impl
 
       try
       {
-
-        string postData = requestData.GetPostData();
-        var buffer = Encoding.UTF8.GetBytes(postData);
-
         HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create((new UriBuilder(url)).Uri);
 
         if (webRequest != null)
         {
           webRequest.Timeout = (int)requestData.RequestTimeout.TotalMilliseconds;
           webRequest.CachePolicy = new RequestCachePolicy(RequestCacheLevel.BypassCache);
-          webRequest.Method = "POST";
-          webRequest.ContentType = "application/xml";
           webRequest.Accept = "application/xml";
-          webRequest.ContentLength = buffer.Length;
           webRequest.KeepAlive = false;
-          dataStream = webRequest.GetRequestStream();
-        }
 
-        if (dataStream != null)
-        {
-          dataStream.Write(buffer, 0, buffer.Length);
-          dataStream.Close();
+          string postData = requestData.GetPostData();
+          if (String.IsNullOrWhiteSpace(postData))
+          {
+            webRequest.Method = "GET";
+          }
+          else
+          {
+            var buffer = Encoding.UTF8.GetBytes(postData);
+
+            webRequest.Method = "POST";
+            webRequest.ContentType = "application/xml";
+            webRequest.ContentLength = buffer.Length;
+            dataStream = webRequest.GetRequestStream();
+            if (dataStream != null)
+            {
+              dataStream.Write(buffer, 0, buffer.Length);
+              dataStream.Close();
+            }
+          }
         }
 
         string response = null;

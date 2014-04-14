@@ -12,6 +12,7 @@
     <releaseNotes>
       14.3.6.1:  (ATLANTIS-391) Extended LanguageRenderHandler to track match failures within an IRenderPipelineStatusProvider so the caller can determine if any key-phrases were not found
       14.3.26.1: (FOS-16856) Automated creation of qa-pz and qa-ps language process so that external files are not needed.
+      14.4.11.1: (ATLANTIS-467) Added EncodedLanguageRenderHandler class to allow use of [@EL[...]@EL] tokens to HtmlEncode language phrases, especially useful in JavaScript
     </releaseNotes>
     <copyright>$copyright$</copyright>
     <tags>Atlantis Framework Providers.Language</tags>

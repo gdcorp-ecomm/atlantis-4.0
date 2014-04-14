@@ -92,6 +92,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EncodedLanguageRenderHandler.cs" />
     <Compile Include="Handlers\CDSPhraseHandler.cs" />
     <Compile Include="Handlers\QaPzPhraseHandler.cs" />
     <Compile Include="Handlers\FilePhraseHandler.cs" />

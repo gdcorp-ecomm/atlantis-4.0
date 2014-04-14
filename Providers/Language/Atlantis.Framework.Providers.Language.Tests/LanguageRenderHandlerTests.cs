@@ -182,6 +182,49 @@ namespace Atlantis.Framework.Providers.Language.Tests
       Assert.AreEqual("<div>Purple River</div>", output);
     }
 
+    #region Encoded Language Tests
+
+    [TestMethod]
+    public void ValidEncodedLanaguagePhraseReplacementWww()
+    {
+      IProviderContainer container = NewLanguageProviderContainer(1, "www", "en");
+
+      IRenderPipelineProvider renderPipelineProvider = container.Resolve<IRenderPipelineProvider>();
+
+      const string content = "[@EL[testdictionary:textkeywithquotes]@EL]";
+      string output = renderPipelineProvider.RenderContent(content, new List<IRenderHandler> { new EncodedLanguageRenderHandler() });
+
+      Assert.AreEqual("It might sound complex, but it&#39;s really not. Click &quot;Add to Cart&quot; for more.", output);
+    }
+
+    [TestMethod]
+    public void ValidEncodedAndNotEncodedLanguagePhraseReplacementWww()
+    {
+      IProviderContainer container = NewLanguageProviderContainer(1, "www", "en");
+
+      IRenderPipelineProvider renderPipelineProvider = container.Resolve<IRenderPipelineProvider>();
+
+      const string content = "<h1>no phrase</h1> <div>[@EL[testdictionary:textkeywithquotes]@EL]</div> <div>[@L[testdictionary:testkey]@L]</div>";
+      string output = renderPipelineProvider.RenderContent(content, new List<IRenderHandler> {new LanguageRenderHandler(), new EncodedLanguageRenderHandler() });
+
+      Assert.AreEqual("<h1>no phrase</h1> <div>It might sound complex, but it&#39;s really not. Click &quot;Add to Cart&quot; for more.</div> <div>GoDaddy Green River</div>", output);
+    }
+
+    [TestMethod]
+    public void EncodedLanaguageNoPhraseTest()
+    {
+      IProviderContainer container = NewLanguageProviderContainer(1, "www", "en");
+
+      IRenderPipelineProvider renderPipelineProvider = container.Resolve<IRenderPipelineProvider>();
+
+      const string content = "<h1>no phrase</h1>";
+      string output = renderPipelineProvider.RenderContent(content, new List<IRenderHandler> { new EncodedLanguageRenderHandler() });
+
+      Assert.AreEqual("<h1>no phrase</h1>", output);
+    }
+
+    #endregion Encoded Language Tests
+
     #region RenderPipelineStatusProvider tests
 
     [TestMethod]

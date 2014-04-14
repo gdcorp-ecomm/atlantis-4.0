@@ -11,9 +11,9 @@ namespace Atlantis.Framework.Providers.Language
     private const string PHRASE_GROUP_KEY = "phrasekey";
     private const string LANGUAGE_TOKEN_PATTERN = @"\[@L\[(?<dictionary>[a-zA-z0-9\.\-\/]*?):(?<phrasekey>[a-zA-z0-9\.\-]*?)\]@L\]";
 
-    private static readonly Regex _languagePhraseTokenPattern = new Regex(LANGUAGE_TOKEN_PATTERN, RegexOptions.Singleline | RegexOptions.Compiled);
+    protected Regex _languagePhraseTokenPattern = new Regex(LANGUAGE_TOKEN_PATTERN, RegexOptions.Singleline | RegexOptions.Compiled);
 
-    private string PhraseMatchEvaluator(Match phraseMatch, ILanguageProvider languageProvider, IRenderPipelineStatus languageRenderStatus)
+    protected string PhraseMatchEvaluator(Match phraseMatch, ILanguageProvider languageProvider, IRenderPipelineStatus languageRenderStatus)
     {
       string dictionary = phraseMatch.Groups[DICTIONARY_GROUP_KEY].Captures[0].Value;
       string phrasekey = phraseMatch.Groups[PHRASE_GROUP_KEY].Captures[0].Value;
@@ -33,7 +33,7 @@ namespace Atlantis.Framework.Providers.Language
       return phrase;
     }
 
-    public void ProcessContent(IProcessedRenderContent processRenderContent, IProviderContainer providerContainer)
+    public virtual void ProcessContent(IProcessedRenderContent processRenderContent, IProviderContainer providerContainer)
     {
       ILanguageProvider languageProvider = providerContainer.Resolve<ILanguageProvider>();
       IRenderPipelineStatus languageRenderStatus = null;

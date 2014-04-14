@@ -6,28 +6,34 @@ using System.Web;
 
 namespace Atlantis.Framework.Providers.Language
 {
-  public class EncodedLanguageRenderHandler : IRenderHandler
+  public class EncodedLanguageRenderHandler : LanguageRenderHandler
   {
-    private static readonly Regex _languagePhraseTokenPattern = new Regex("\\[@EL\\[(?<dictionary>[a-zA-z0-9\\.\\-\\/]*?):(?<phrasekey>[a-zA-z0-9\\.\\-]*?)\\]@EL\\]", RegexOptions.Compiled | RegexOptions.Singleline);
-    private const string DICTIONARY_GROUP_KEY = "dictionary";
-    private const string PHRASE_GROUP_KEY = "phrasekey";
+    private const string LANGUAGE_TOKEN_PATTERN = @"\[@EL\[(?<dictionary>[a-zA-z0-9\.\-\/]*?):(?<phrasekey>[a-zA-z0-9\.\-]*?)\]@EL\]";
 
-    static EncodedLanguageRenderHandler()
+    public EncodedLanguageRenderHandler()
     {
+      _languagePhraseTokenPattern = new Regex(LANGUAGE_TOKEN_PATTERN, RegexOptions.Singleline | RegexOptions.Compiled);
     }
 
-    private string PhraseMatchEvaluator(Match phraseMatch, ILanguageProvider languageProvider)
+    public override void ProcessContent(IProcessedRenderContent processRenderContent, IProviderContainer providerContainer)
     {
-      var dictionaryName = phraseMatch.Groups[DICTIONARY_GROUP_KEY].Captures[0].Value;
-      var phraseKey = phraseMatch.Groups[PHRASE_GROUP_KEY].Captures[0].Value;
-      return HttpUtility.HtmlEncode(languageProvider.GetLanguagePhrase(dictionaryName, phraseKey));
-    }
+      ILanguageProvider languageProvider = providerContainer.Resolve<ILanguageProvider>();
+      IRenderPipelineStatus languageRenderStatus = null;
+      IRenderPipelineStatusProvider statusProvider;
 
-    public void ProcessContent(IProcessedRenderContent processRenderContent, IProviderContainer providerContainer)
-    {
-      var languageProvider = providerContainer.Resolve<ILanguageProvider>();
-      var content = _languagePhraseTokenPattern.Replace(processRenderContent.Content, match => PhraseMatchEvaluator(match, languageProvider));
-      processRenderContent.OverWriteContent(content);
+      if (providerContainer.TryResolve(out statusProvider))
+      {
+        languageRenderStatus = statusProvider.CreateNewStatus(RenderPipelineResult.Success, "EncodedLanguageRenderHandler");
+      }
+
+      string modifiedContent = _languagePhraseTokenPattern.Replace(processRenderContent.Content, match => HttpUtility.HtmlEncode(PhraseMatchEvaluator(match, languageProvider, languageRenderStatus)));
+
+      if (languageRenderStatus != null)
+      {
+        statusProvider.Add(languageRenderStatus);
+      }
+
+      processRenderContent.OverWriteContent(modifiedContent);
     }
   }
 }

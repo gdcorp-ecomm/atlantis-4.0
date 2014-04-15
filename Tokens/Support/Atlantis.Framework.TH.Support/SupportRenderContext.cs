@@ -39,10 +39,10 @@ namespace Atlantis.Framework.TH.Support
         if (!ReferenceEquals(null, location) && !ReferenceEquals(null, location.Contacts))
         {
           KeyValuePair<string, ISupportContact> firstContact = location.Contacts.FirstOrDefault();
-          
+
           if (!ReferenceEquals(null, firstContact) && !ReferenceEquals(null, firstContact.Value))
           {
-            token.TokenResult = firstContact.Value.Value; 
+            token.TokenResult = firstContact.Value.Value;
           }
         }
 
@@ -63,14 +63,18 @@ namespace Atlantis.Framework.TH.Support
       if (!ReferenceEquals(null, token))
       {
         IMarketSupportLocations marketLocations = SupportContactProvider.GetAllMarketSupportLocations(token.RenderType);
-        if (!string.IsNullOrEmpty(token.CityId))
+        if (!string.IsNullOrEmpty(token.CityId) && !ReferenceEquals(null, marketLocations.Cities))
         {
-          // Is it in the Cities dictionary (id is key)
           returnValue = marketLocations.Cities[token.CityId];
         }
 
-        // Return the market property or the first city from the Cities dictionary
-        returnValue = returnValue ?? marketLocations.Market ?? marketLocations.Cities.FirstOrDefault().Value;
+        ISupportLocation firstCitySupportLocation = null;
+        if (!ReferenceEquals(null, marketLocations.Cities))
+        {
+          firstCitySupportLocation = marketLocations.Cities.FirstOrDefault().Value;
+        }
+
+        returnValue = returnValue ?? marketLocations.Market ?? firstCitySupportLocation;
       }
 
       return returnValue;

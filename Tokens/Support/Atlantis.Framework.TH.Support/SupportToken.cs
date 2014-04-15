@@ -28,25 +28,8 @@ namespace Atlantis.Framework.TH.Support
     {
       get
       {
-        return (!ReferenceEquals(null, TokenData) && !string.Equals("empty", TokenData.Name.ToString(), StringComparison.OrdinalIgnoreCase)) ? TokenData.Name.LocalName : string.Empty;
+        return (!ReferenceEquals(null, TokenData) && !string.Equals("empty", TokenData.Name.ToString(), StringComparison.OrdinalIgnoreCase)) ? TokenData.Name.ToString() : string.Empty;
       }
     }
-
-    //public SupportRenderType RenderType
-    //{
-    //  get
-    //  {
-    //    SupportRenderType returnValue = SupportRenderType.None;
-
-    //    if (!ReferenceEquals(null, TokenData))
-    //    {
-    //      if (!Enum.TryParse(TokenData.Name.ToString(), true, out returnValue))
-    //      {
-    //        returnValue = SupportRenderType.None;
-    //      }
-    //    }
-    //    return returnValue;
-    //  }
-    //}
   }
 }

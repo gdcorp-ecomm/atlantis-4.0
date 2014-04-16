@@ -20,6 +20,22 @@ namespace Atlantis.Framework.Providers.Interface.Currency
     ICurrencyPrice GetCurrentPrice(int unifiedProductId, int shopperPriceType = -1, ICurrencyInfo transactionCurrency = null, string isc = null);
 
     /// <summary>
+    /// Looks up the current price of a product for a specfic region's PriceGroupId 
+    /// If pricetype is not given, it will use the shoppers pricetype
+    /// If currencyInfo is not given it will use the shoppers selected transaction currency
+    /// If the given currencytype is not transactional, the price will be converted to the given currencytype
+    /// If isc is not given, it will use the ISiteContext.ISC
+    /// </summary>
+    /// <param name="unifiedProductId">unified product id</param>
+    /// <param name="priceGroupId">PriceGroupId for region</param>
+    /// <param name="shopperPriceType">shopper price type to use.  If not given the shoppers pricetype will be used</param>
+    /// <param name="transactionCurrency">currencyType to use. If not given the shoppers transactional currencyType will be used.<see cref="ICurrencyInfo"/></param>
+    /// <param name="isc">isc to use. If not given the site context ISC will be used.</param>
+    /// <returns>The current price of a product.</returns>
+    ICurrencyPrice GetRegionalCurrentPrice(int unifiedProductId, int priceGroupId, int shopperPriceType = -1,
+      ICurrencyInfo transactionCurrency = null, string isc = null);
+
+    /// <summary>
     /// Looks up the current price of a product.
     /// If pricetype is not given, it will use the shoppers pricetype
     /// If currencyInfo is not given it will use the shoppers selected transaction currency
@@ -34,6 +50,21 @@ namespace Atlantis.Framework.Providers.Interface.Currency
     ICurrencyPrice GetCurrentPriceByQuantity(int unifiedProductId, int quantity, int shopperPriceType = -1, ICurrencyInfo transactionCurrency = null);
 
     /// <summary>
+    /// Looks up the current price of a product for a specfic region's PriceGroupId
+    /// If pricetype is not given, it will use the shoppers pricetype
+    /// If currencyInfo is not given it will use the shoppers selected transaction currency
+    /// If the given currencytype is not transactional, the price will be converted to the given currencytype
+    /// If isc is not given, it will use the ISiteContext.ISC
+    /// </summary>
+    /// <param name="unifiedProductId">unified product id</param>
+    /// <param name="priceGroupId">PriceGroupId for region</param>
+    /// <param name="quantity">quantity of product</param>
+    /// <param name="shopperPriceType">shopper price type to use.  If not given the shoppers pricetype will be used</param>
+    /// <param name="transactionCurrency">currencyType to use. If not given the shoppers transactional currencyType will be used.<see cref="ICurrencyInfo"/></param>
+    /// <returns>The current price of a product.</returns>
+    ICurrencyPrice GetRegionalCurrentPriceByQuantity(int unifiedProductId, int priceGroupId, int quantity, int shopperPriceType = -1, ICurrencyInfo transactionCurrency = null);
+
+    /// <summary>
     /// Looks up the list price of a product.
     /// If pricetype is not given, it will use the shoppers pricetype
     /// If currencyInfo is not given it will use the shoppers selected transaction currency
@@ -45,6 +76,20 @@ namespace Atlantis.Framework.Providers.Interface.Currency
     /// <param name="transactionCurrency">currencyType to use. If not given the shoppers transactional currencyType will be used.<see cref="ICurrencyInfo"/></param>
     /// <returns>The list price of a product.</returns>
     ICurrencyPrice GetListPrice(int unifiedProductId, int shopperPriceType = -1, ICurrencyInfo transactionCurrency = null);
+
+    /// <summary>
+    /// Looks up the list price of a product for a specfic region's PriceGroupId
+    /// If pricetype is not given, it will use the shoppers pricetype
+    /// If currencyInfo is not given it will use the shoppers selected transaction currency
+    /// If the given currencytype is not transactional, the price will be converted to the given currencytype
+    /// If isc is not given, it will use the ISiteContext.ISC
+    /// </summary>
+    /// <param name="unifiedProductId">unified product id</param>
+    /// <param name="priceGroupId">PriceGroupId for region</param>
+    /// <param name="shopperPriceType">shopper price type to use.  If not given the shoppers pricetype will be used</param>
+    /// <param name="transactionCurrency">currencyType to use. If not given the shoppers transactional currencyType will be used.<see cref="ICurrencyInfo"/></param>
+    /// <returns>The list price of a product.</returns>
+    ICurrencyPrice GetRegionalListPrice(int unifiedProductId, int priceGroupId, int shopperPriceType = -1, ICurrencyInfo transactionCurrency = null);
 
     /// <summary>
     /// Converts a price to the shoppers display currency, then formats it for display based on currency info.
@@ -177,6 +222,17 @@ namespace Atlantis.Framework.Providers.Interface.Currency
     /// <param name="isc">isc to use. If not given the site context ISC will be used.</param>
     /// <returns>true of the product is marked as 'onsale'</returns>
     bool IsProductOnSale(int unifiedProductId, int shopperPriceType = -1, ICurrencyInfo transactionCurrency = null, string isc = null);
+
+    /// <summary>
+    /// Returns true if a product is marked as 'onsale' for a specific region's PriceGroupId
+    /// </summary>
+    /// <param name="unifiedProductId">unified product id</param>
+    /// <param name="priceGroupId">PriceGroupId for a region</param>
+    /// <param name="shopperPriceType">shopper price type to use.  If not given the shoppers pricetype will be used</param>
+    /// <param name="transactionCurrency">currencyType to use. If not given the shoppers transactional currencyType will be used.<see cref="ICurrencyInfo"/></param>
+    /// <param name="isc">isc to use. If not given the site context ISC will be used.</param>
+    /// <returns>true of the product is marked as 'onsale'</returns>
+    bool IsRegionalProductOnSale(int unifiedProductId, int priceGroupId, int shopperPriceType = -1, ICurrencyInfo transactionCurrency = null, string isc = null);
 
     /// <summary>
     /// Returns the shoppers selected display currency info

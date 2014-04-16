@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>Atlantis.Framework.Providers.Interface</id>
-    <version>4.14.4.2</version>
+    <version>$version$</version>
     <title>Atlantis Framework Providers Interface</title>
     <authors>$author$</authors>
     <owners>$author$</owners>
@@ -10,9 +10,10 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
     <releaseNotes>
+      14.4.16.1 - Added Regional pricing methods that accept PriceGroupId
+      4.14.4.2 - Added methods for currency provider to accept symbol formatter.
       4.14.3.28 - Added methods for currency provider to accept symbol formatter.
       NOTE: Requires Atlantis.Framework.Providers.Currency minimum version 14.3.28
-      4.14.4.2 - Added methods for currency provider to accept symbol formatter.
     </releaseNotes>
     <copyright>$copyright$</copyright>
     <tags>Atlantis Framework Providers Interface</tags>

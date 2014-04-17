@@ -53,42 +53,42 @@ namespace Atlantis.Framework.CH.Products.Tests
     [TestMethod]
     public void EvaluateValidConditionNameGDTrue()
     {
-      MockProviderContainer.SetMockSetting(MockSiteContextSettings.PrivateLabelId, 1);
+      MockProviderContainer.SetData(MockSiteContextSettings.PrivateLabelId, 1);
       Assert.IsTrue(ConditionHandlerManager.EvaluateCondition("productIsOffered", new[] { "WebHosting" }, MockProviderContainer));
     }
 
     [TestMethod]
     public void EvaluateValidConditionNameBlueRazorTrue()
     {
-      MockProviderContainer.SetMockSetting(MockSiteContextSettings.PrivateLabelId, 2);
+      MockProviderContainer.SetData(MockSiteContextSettings.PrivateLabelId, 2);
       Assert.IsTrue(ConditionHandlerManager.EvaluateCondition("productIsOffered", new[] { "email" }, MockProviderContainer));
     }
 
     [TestMethod]
     public void EvaluateValidConditionNameWwdFalse()
     {
-      MockProviderContainer.SetMockSetting(MockSiteContextSettings.PrivateLabelId, 1387);
+      MockProviderContainer.SetData(MockSiteContextSettings.PrivateLabelId, 1387);
       Assert.IsFalse(ConditionHandlerManager.EvaluateCondition("productIsOffered", new[] { "shoppingcart" }, MockProviderContainer));
     }
 
     [TestMethod]
     public void EvaluateValidConditionGDTrue()
     {
-      MockProviderContainer.SetMockSetting(MockSiteContextSettings.PrivateLabelId, 1);
+      MockProviderContainer.SetData(MockSiteContextSettings.PrivateLabelId, 1);
       Assert.IsTrue(ConditionHandlerManager.EvaluateCondition("productIsOffered", new[] { "1" }, MockProviderContainer));
     }
 
     [TestMethod]
     public void EvaluateValidConditionBlueRazorTrue()
     {
-      MockProviderContainer.SetMockSetting(MockSiteContextSettings.PrivateLabelId, 2);
+      MockProviderContainer.SetData(MockSiteContextSettings.PrivateLabelId, 2);
       Assert.IsTrue(ConditionHandlerManager.EvaluateCondition("productIsOffered", new[] { "1" }, MockProviderContainer));
     }
 
     [TestMethod]
     public void EvaluateValidConditionWwdFalse()
     {
-      MockProviderContainer.SetMockSetting(MockSiteContextSettings.PrivateLabelId, 1387);
+      MockProviderContainer.SetData(MockSiteContextSettings.PrivateLabelId, 1387);
       Assert.IsFalse(ConditionHandlerManager.EvaluateCondition("productIsOffered", new[] { "23" }, MockProviderContainer));
     }
 

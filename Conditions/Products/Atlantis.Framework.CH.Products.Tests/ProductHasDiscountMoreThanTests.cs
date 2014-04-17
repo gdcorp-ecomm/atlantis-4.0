@@ -38,7 +38,7 @@ namespace Atlantis.Framework.CH.Products.Tests
         {
           _mockProviderContainer = new MockProviderContainer();
           _mockProviderContainer.RegisterProvider<ISiteContext, MockSiteContext>();
-          _mockProviderContainer.SetMockSetting(MockSiteContextSettings.PrivateLabelId, "1");
+          _mockProviderContainer.SetData(MockSiteContextSettings.PrivateLabelId, "1");
           _mockProviderContainer.RegisterProvider<IShopperContext, MockShopperContext>();
           _mockProviderContainer.RegisterProvider<IProductProvider, ProductProvider>();
           _mockProviderContainer.RegisterProvider<ICurrencyProvider, CurrencyProvider>();

@@ -16,6 +16,7 @@ namespace Atlantis.Framework.TH.Support.Tests
   [DeploymentItem("Atlantis.Framework.Providers.Support.Interface.dll")]
   [DeploymentItem("Atlantis.Framework.Support.Impl.dll")]
   [DeploymentItem("Atlantis.Framework.PrivateLabel.Impl.dll")]
+  [DeploymentItem("Atlantis.Framework.SupportApi.Impl.dll")]
   public class SupportPhoneTokenTests
   {
     const string TOKEN_FORMAT = "[@T[supportphone:{0}]@T]";
@@ -34,6 +35,7 @@ namespace Atlantis.Framework.TH.Support.Tests
       IProviderContainer result = new MockProviderContainer();
       result.RegisterProvider<ISiteContext, MockSiteContext>();
       result.RegisterProvider<ISupportProvider, SupportProvider>();
+      result.RegisterProvider<ISupportContactProvider, SupportContactProvider>();
       result.RegisterProvider<ILocalizationProvider, CountrySubdomainLocalizationProvider>();
 
       return result;

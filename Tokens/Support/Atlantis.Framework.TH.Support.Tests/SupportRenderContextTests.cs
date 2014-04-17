@@ -35,7 +35,7 @@ namespace Atlantis.Framework.TH.Support.Tests
     [TestMethod]
     public void ConstructorTest()
     {
-      IProviderContainer container = TestHelpers.SetBasicContextAndProviders(1);
+      IProviderContainer container = TestHelpers.SetBasicContextAndProviders(1, "en-US");
       var target = new SupportRenderContext(container);
       Assert.IsNotNull(target);
 
@@ -51,7 +51,7 @@ namespace Atlantis.Framework.TH.Support.Tests
       //var responseData = SupportContactsResponseData.FromMarketSupportContacts(TestHelpers.GetTestContacts());
       //EngineRequestMocking.RegisterOverride(REQUEST_TYPE, responseData);
 
-      IProviderContainer container = TestHelpers.SetBasicContextAndProviders(1);
+      IProviderContainer container = TestHelpers.SetBasicContextAndProviders(1, "en-US");
       var target = new SupportRenderContext(container);
       Assert.IsNotNull(target);
 
@@ -63,7 +63,7 @@ namespace Atlantis.Framework.TH.Support.Tests
       var actual = target.RenderToken(token);
       Assert.IsTrue(actual);
       TestContext.WriteLine(token.TokenResult);
-      var expected = "24/7";
+      var expected = "24/7 Support";
       Assert.AreEqual(expected, token.TokenResult);
 
       data = string.Format("<{0} cityid=\"PHX\" />", SupportType.TechnicalSupportHours);
@@ -72,14 +72,14 @@ namespace Atlantis.Framework.TH.Support.Tests
       actual = target.RenderToken(token);
       Assert.IsTrue(actual);
       TestContext.WriteLine(token.TokenResult);
-      expected = "24/7";
+      expected = "24/7 Support";
       Assert.AreEqual(expected, token.TokenResult);
     }
 
     [TestMethod]
     public void RenderTokenFailureTest()
     {
-      IProviderContainer container = TestHelpers.SetBasicContextAndProviders(1);
+      IProviderContainer container = TestHelpers.SetBasicContextAndProviders(1, "en-US");
       var target = new SupportRenderContext(container);
       Assert.IsNotNull(target);
 
@@ -95,7 +95,7 @@ namespace Atlantis.Framework.TH.Support.Tests
     [TestMethod]
     public void RenderTokenInvalidRenderTypeTest()
     {
-      IProviderContainer container = TestHelpers.SetBasicContextAndProviders(1);
+      IProviderContainer container = TestHelpers.SetBasicContextAndProviders(1, "en-US");
       var target = new SupportRenderContext(container);
       Assert.IsNotNull(target);
 

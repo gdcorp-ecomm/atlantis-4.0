@@ -73,7 +73,7 @@ namespace Atlantis.Framework.TH.Support.Tests
       var target = new SupportTokenHandler();
       Assert.IsNotNull(target);
 
-      IProviderContainer container = TestHelpers.SetBasicContextAndProviders(1);
+      IProviderContainer container = TestHelpers.SetBasicContextAndProviders(1, "en-US");
       string data = string.Format("<{0} />", SupportType.TechnicalSupportHours);
       string fullTokenString = string.Format(TestHelpers.SUPPORT_TOKEN_FORMAT, data);
       IEnumerable<IToken> tokens = Enumerable.Repeat(new SupportToken(TestHelpers.SUPPORT_TOKEN_KEY, data, fullTokenString), 1);
@@ -95,7 +95,7 @@ namespace Atlantis.Framework.TH.Support.Tests
 
       string data = String.Empty;
       string fullTokenString = string.Format(TestHelpers.SUPPORT_TOKEN_FORMAT, data);
-      IProviderContainer container = TestHelpers.SetBasicContextAndProviders(1);
+      IProviderContainer container = TestHelpers.SetBasicContextAndProviders(1, "en-US");
       IEnumerable<IToken> tokens = Enumerable.Repeat(new SupportToken(TestHelpers.SUPPORT_TOKEN_KEY, data, fullTokenString), 1);
       var actual = target.EvaluateTokens(tokens, container);
 

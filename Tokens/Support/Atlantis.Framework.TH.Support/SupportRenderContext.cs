@@ -63,7 +63,7 @@ namespace Atlantis.Framework.TH.Support
       if (!ReferenceEquals(null, token))
       {
         IMarketSupportLocations marketLocations = SupportContactProvider.GetAllMarketSupportLocations(token.RenderType);
-        if (!string.IsNullOrEmpty(token.CityId) && !ReferenceEquals(null, marketLocations.Cities))
+        if (!string.IsNullOrEmpty(token.CityId) && !ReferenceEquals(null, marketLocations.Cities) && marketLocations.Cities.ContainsKey(token.CityId))
         {
           returnValue = marketLocations.Cities[token.CityId];
         }

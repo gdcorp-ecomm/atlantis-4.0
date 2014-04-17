@@ -23,7 +23,7 @@ namespace Atlantis.Framework.TH.Support.Tests
     //public const string HOURS_TOKEN_FORMAT = "[@T[support: <hours cityid={0} />]@T]";
     //public const string LOCATION_TOKEN_FORMAT = "[@T[support:<location cityid=1 />]@T]";
 
-    public static IProviderContainer SetBasicContextAndProviders(int privateLabelId)
+    public static IProviderContainer SetBasicContextAndProviders(int privateLabelId, string marketId)
     {
       MockHttpRequest request = new MockHttpRequest("http://www.godaddy.com/");
       MockHttpContext.SetFromWorkerRequest(request);
@@ -33,8 +33,9 @@ namespace Atlantis.Framework.TH.Support.Tests
       result.RegisterProvider<ISupportProvider, SupportProvider>();
       result.RegisterProvider<ISupportContactProvider, SupportContactProvider>();
       result.RegisterProvider<ILocalizationProvider, MockLocalizationProvider>();
+      result.RegisterProvider<SupportContactInfoDataCacheLoader, SupportContactInfoDataCacheLoader>();
 
-      result.SetData(MockLocalizationProvider.MARKET_INFO, new MockMarketInfo("en-US", "DESC", true, "en-US"));
+      result.SetData(MockLocalizationProvider.MARKET_INFO, new MockMarketInfo(marketId, "DESC", true, "en-US"));
       result.SetData(MockSiteContextSettings.PrivateLabelId, privateLabelId);
       return result;
     }

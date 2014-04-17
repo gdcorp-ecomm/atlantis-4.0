@@ -107,30 +107,33 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Atlantis.Framework.Providers.Localization.Interface.14.2.24.1\lib\net40\Atlantis.Framework.Providers.Localization.Interface.dll</HintPath>
     </Reference>
+    <Reference Include="Atlantis.Framework.Providers.PrivateLabel.Interface">
+      <HintPath>..\packages\Atlantis.Framework.Providers.PrivateLabel.Interface.14.1.31.1\lib\net40\Atlantis.Framework.Providers.PrivateLabel.Interface.dll</HintPath>
+    </Reference>
     <Reference Include="Atlantis.Framework.Providers.RenderPipeline.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Atlantis.Framework.Providers.RenderPipeline.Interface.14.2.21.1\lib\net40\Atlantis.Framework.Providers.RenderPipeline.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Providers.Support, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.Providers.Support.14.4.15.1\lib\net40\Atlantis.Framework.Providers.Support.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.Providers.Support.14.4.17.1\lib\net40\Atlantis.Framework.Providers.Support.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Providers.Support.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.Providers.Support.Interface.14.4.11.1\lib\net40\Atlantis.Framework.Providers.Support.Interface.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.Providers.Support.Interface.14.4.16.1\lib\net40\Atlantis.Framework.Providers.Support.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Rest">
       <HintPath>..\packages\Atlantis.Framework.Rest.14.1.2.1\lib\net40\Atlantis.Framework.Rest.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.Support.Impl, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.Support.Impl.14.3.21.1\lib\net40\Atlantis.Framework.Support.Impl.dll</HintPath>
+    <Reference Include="Atlantis.Framework.Support.Impl">
+      <HintPath>..\packages\Atlantis.Framework.Support.Impl.14.4.17.1\lib\net40\Atlantis.Framework.Support.Impl.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Support.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.Support.Interface.14.3.4.1\lib\net40\Atlantis.Framework.Support.Interface.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.Support.Interface.14.4.17.1\lib\net40\Atlantis.Framework.Support.Interface.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.SupportApi.Impl">
+    <Reference Include="Atlantis.Framework.SupportApi.Impl, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Atlantis.Framework.SupportApi.Impl.14.4.4.2\lib\net40\Atlantis.Framework.SupportApi.Impl.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.SupportApi.Interface">

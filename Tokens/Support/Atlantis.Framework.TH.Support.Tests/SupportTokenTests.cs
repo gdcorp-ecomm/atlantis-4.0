@@ -70,12 +70,32 @@ namespace Atlantis.Framework.TH.Support.Tests
     }
 
     [TestMethod]
+    public void ERGRStuffTest()
+    {
+
+    }
+
+    [TestMethod]
+    public void GetLocationTest()
+    {
+      Atlantis.Framework.Interface.IProviderContainer provider = TestHelpers.SetBasicContextAndProviders(1, "el-GR");
+      var target = new SupportRenderContext(provider);
+      var privates = new PrivateObject(target);
+      
+      var data = string.Format("<{0} />", SupportType.TechnicalSupportPhone);
+      var fullTokenString = string.Format(TestHelpers.SUPPORT_TOKEN_FORMAT, data);
+      string key = TestHelpers.SUPPORT_TOKEN_KEY;
+      SupportToken token = new SupportToken(key, data, fullTokenString);
+      privates.Invoke("GetSupportLocation", token);
+    }
+
+    [TestMethod]
     public void TokenSuccessIntegrationTest()
     {
       //var responseData = SupportContactsResponseData.FromMarketSupportContacts(TestHelpers.GetTestContacts());
       //EngineRequestMocking.RegisterOverride(REQUEST_TYPE, responseData);
 
-      var container = TestHelpers.SetBasicContextAndProviders(1);
+      var container = TestHelpers.SetBasicContextAndProviders(1, "en-US");
       TokenManager.RegisterTokenHandler(new SupportTokenHandler());
 
       string outputText;
@@ -87,7 +107,7 @@ namespace Atlantis.Framework.TH.Support.Tests
       Assert.AreEqual(TokenEvaluationResult.Success, result);
       TestContext.WriteLine(outputText);
       Assert.AreNotEqual(string.Empty, outputText);
-      var expected = "24/7";
+      var expected = "24/7 Support";
       Assert.AreEqual(expected, outputText);
 
       xmlTokenData = string.Format("<{0} cityid=\"PHX\" />", SupportType.TechnicalSupportHours);

@@ -25,10 +25,18 @@ namespace Atlantis.Framework.DomainSearch.Interface
     public int PrivateLabelId { get; set; }
     public IList<string> DomainSearchDataBases { get; set; }
 
-    private double _clientIpLatitude = 0d;
+    private double _clientIpLatitude;
     public double ClientIpLatitude
     {
-      get { return _clientIpLatitude; }
+      get
+      {
+        if (_clientIpLatitude == null)
+        {
+          _clientIpLatitude = 0d;
+        }
+
+        return _clientIpLatitude;
+      }
       set { _clientIpLatitude = value; }
     }
 
@@ -39,24 +47,24 @@ namespace Atlantis.Framework.DomainSearch.Interface
       set { _clientIpLongitude = value; }
     }
 
-    private string _clientIpCity = string.Empty;
+    private string _clientIpCity;
     public string ClientIpCity
     {
-      get { return _clientIpCity; }
+      get { return _clientIpCity ?? (_clientIpCity = string.Empty); }
       set { _clientIpCity = value; }
     }
 
-    private string _clientIpRegion = string.Empty;
+    private string _clientIpRegion;
     public string ClientIpRegion
     {
-      get { return _clientIpRegion; }
+      get { return _clientIpRegion ?? (_clientIpRegion = string.Empty); }
       set { _clientIpRegion = value; }
     }
 
-    private string _clientIpCountry = string.Empty;
+    private string _clientIpCountry;
     public string ClientIpCountry
     {
-      get { return _clientIpCountry; }
+      get { return _clientIpCountry ?? (_clientIpCountry = string.Empty); }
       set { _clientIpCountry = value; }
     }
 
@@ -165,7 +173,7 @@ namespace Atlantis.Framework.DomainSearch.Interface
       {
         arr.Add(new JObject(
                           new JProperty("Name", "splitprovider"),
-                          new JProperty("Data", GetSplitProviderValue())
+                          new JProperty("Data", splittestinfo)
                           ));
       }
 

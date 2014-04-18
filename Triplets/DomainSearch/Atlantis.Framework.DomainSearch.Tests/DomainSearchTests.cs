@@ -60,6 +60,44 @@ namespace Atlantis.Framework.DomainSearch.Tests
     }
 
     [TestMethod]
+    public void TestInvalidGeoData()
+    {
+      var request = new MockHttpRequest("http://www.spoonymac.com");
+      MockHttpContext.SetFromWorkerRequest(request);
+
+      var domainName = string.Format("my-randoms-{0}.com", Guid.NewGuid().ToString().Substring(0, 15));
+
+      var requestData = new DomainSearchRequestData(SHOPPER_ID, string.Empty, string.Empty, string.Empty, 0)
+      {
+        RequestTimeout = TimeSpan.FromSeconds(10),
+        ClientIp = "172.16.172.211",
+        CountrySite = "WWW",
+        //DomainCount = 10,
+        IncludeSpins = true,
+        Language = "en",
+        PrivateLabelId = 1,
+        SearchPhrase = domainName,
+        ShopperStatus = ShopperStatusType.Public,
+        SourceCode = "mblDPPSearch",
+        Tlds = new List<string>(0),
+        DomainSearchDataBases = _databases,
+        ClientIpLatitude = 34.1,
+        ClientIpLongitude = -111.1,
+        ClientIpCity = null,
+        ClientIpCountry = null,
+        ClientIpRegion = null,
+        SplitTestId = "01234",
+        SplitTestSideName = null
+      };
+
+      var response = (DomainSearchResponseData)Engine.Engine.ProcessRequest(requestData, REQUESTID);
+      Assert.IsTrue(response != null);
+      Assert.IsTrue(response.Domains.Count > 0
+        && response.ExactMatchDomains.Count > 0
+        && response.ExactMatchDomains[0].Domain.DomainName.ToLowerInvariant() == domainName);
+    }
+
+    [TestMethod]
     public void TestUnavailableDomains()
     {
       var request = new MockHttpRequest("http://www.spoonymac.com");

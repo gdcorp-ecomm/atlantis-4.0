@@ -25,18 +25,11 @@ namespace Atlantis.Framework.DomainSearch.Interface
     public int PrivateLabelId { get; set; }
     public IList<string> DomainSearchDataBases { get; set; }
 
-    private double _clientIpLatitude;
+    private double _clientIpLatitude = 0d;
     public double ClientIpLatitude
     {
-      get
-      {
-        if (_clientIpLatitude == null)
-        {
-          _clientIpLatitude = 0d;
-        }
 
-        return _clientIpLatitude;
-      }
+      get { return _clientIpLatitude; }
       set { _clientIpLatitude = value; }
     }
 

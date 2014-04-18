@@ -87,7 +87,7 @@ namespace Atlantis.Framework.DomainSearch.Tests
         ClientIpCountry = null,
         ClientIpRegion = null,
         SplitTestId = "01234",
-        SplitTestSideName = null
+        SplitTestSideName = "A"
       };
 
       var response = (DomainSearchResponseData)Engine.Engine.ProcessRequest(requestData, REQUESTID);

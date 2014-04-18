@@ -10,7 +10,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
     <releaseNotes>
-      14.4.16.1 - Added Regional pricing methods that accept PriceGroupId
+      14.4.18.1 - Added Regional pricing methods that accept PriceGroupId
       4.14.4.2 - Added methods for currency provider to accept symbol formatter.
       4.14.3.28 - Added methods for currency provider to accept symbol formatter.
       NOTE: Requires Atlantis.Framework.Providers.Currency minimum version 14.3.28

@@ -13,6 +13,20 @@ namespace Atlantis.Framework.Geo.Tests
   public class IPLocationLookupTests
   {
     [TestMethod]
+    public void IpLocationInstanceTest()
+    {
+      var ipl = new IPLocation();
+      Assert.IsTrue(ipl.CountryCode != null);
+      Assert.IsTrue(ipl.City != null);
+      Assert.IsTrue(ipl.PostalCode != null);
+      Assert.IsTrue(ipl.Region != null);
+      Assert.IsTrue(ipl.RegionName != null);
+      Assert.IsTrue(ipl.MetroCode == 0);
+      Assert.IsTrue(ipl.Latitude < 1);
+      Assert.IsTrue(ipl.Longitude < 1);
+    }
+
+    [TestMethod]
     public void IPLocationLookupRequestDataProperties()
     {
       IPLocationLookupRequestData request = new IPLocationLookupRequestData("127.0.0.1");
@@ -141,6 +155,5 @@ namespace Atlantis.Framework.Geo.Tests
 
       Assert.IsFalse(response.LocationFound);
     }
-
   }
 }

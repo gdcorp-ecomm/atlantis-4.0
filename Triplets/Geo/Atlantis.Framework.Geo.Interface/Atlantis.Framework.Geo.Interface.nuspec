@@ -9,7 +9,9 @@
     <projectUrl>https://confluence.int.godaddy.com/display/ATLANTIS</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes></releaseNotes>
+    <releaseNotes>
+      14.4.18.1 : Fixing properties of IPLocation class
+    </releaseNotes>
     <copyright>$copyright$</copyright>
     <tags>Atlantis.Framework.Geo.Interface</tags>
     <dependencies />

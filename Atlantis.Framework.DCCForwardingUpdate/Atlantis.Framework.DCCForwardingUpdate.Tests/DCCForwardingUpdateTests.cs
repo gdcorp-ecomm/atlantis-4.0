@@ -10,6 +10,7 @@ namespace Atlantis.Framework.DCCForwardingUpdate.Tests
   {
     [TestMethod]
     [DeploymentItem("atlantis.config")]
+    [DeploymentItem("Atlantis.Framework.DCCForwardingUpdate.Impl.dll")]
     public void ForwardingUpdatePermanentValid()
     {
       DCCForwardingUpdateRequestData request = new DCCForwardingUpdateRequestData("857020", 
@@ -36,6 +37,7 @@ namespace Atlantis.Framework.DCCForwardingUpdate.Tests
 
     [TestMethod]
     [DeploymentItem("atlantis.config")]
+    [DeploymentItem("Atlantis.Framework.DCCForwardingUpdate.Impl.dll")]
     public void ForwardingUpdateTemporaryValid()
     {
       DCCForwardingUpdateRequestData request = new DCCForwardingUpdateRequestData("857020", 
@@ -62,6 +64,7 @@ namespace Atlantis.Framework.DCCForwardingUpdate.Tests
 
     [TestMethod]
     [DeploymentItem("atlantis.config")]
+    [DeploymentItem("Atlantis.Framework.DCCForwardingUpdate.Impl.dll")]
     public void ForwardingUpdateForDomainThatShopperDoesNotOwn()
     {
       DCCForwardingUpdateRequestData request = new DCCForwardingUpdateRequestData("847235", 

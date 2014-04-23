@@ -6,17 +6,9 @@ namespace Atlantis.Framework.DCCSetAutoRenew.Interface
 {
   public class DCCSetAutoRenewRequestData : RequestData
   {
-    private static readonly TimeSpan _requestTimeout = TimeSpan.FromSeconds(12);
+    private readonly TimeSpan _requestTimeout = TimeSpan.FromSeconds(12);
 
-    private bool IsManager { get; set; }
-    private string ManagerUserId { get; set; }
-
-    public DCCSetAutoRenewRequestData(string shopperId,
-                                            int privateLabelID,
-                                            int domainId,
-                                            int autoRenewValue,
-                                            string applicationName, bool isManager, string managerUserId)
-
+    public DCCSetAutoRenewRequestData(string shopperId, int privateLabelID, int domainId, int autoRenewValue, string applicationName, bool isManager, string managerUserId)
     {
       ShopperID = shopperId;
       _privateLabelID = privateLabelID;
@@ -26,28 +18,31 @@ namespace Atlantis.Framework.DCCSetAutoRenew.Interface
       AppName = applicationName;
       IsManager = isManager;
       ManagerUserId = managerUserId;
+      MarketId = "en-US";
     }
 
+    public string MarketId { get; set; }
+    private bool IsManager { get; set; }
+    private string ManagerUserId { get; set; }
+    private string AppName { get; set; }
     
-    private int _domainId;
+    private readonly int _domainId;
     public int DomainID
     {
       get { return _domainId; }
     }
 
-    private int _autoRenewValue;
+    private readonly int _autoRenewValue;
     public int AutoRenewValue
     {
       get { return _autoRenewValue; }
     }
 
-    private int _privateLabelID;
+    private readonly int _privateLabelID;
     public int PrivateLabelID
     {
       get { return _privateLabelID; }
     }
-
-    private string AppName { get; set;}
 
     private XmlNode AddNode(XmlNode parentNode, string sChildNodeName)
     {
@@ -65,7 +60,7 @@ namespace Atlantis.Framework.DCCSetAutoRenew.Interface
 
     public void XmlToVerify(out string actionXml, out string domainXML)
     {
-      XmlDocument actionDoc = new XmlDocument();
+      var actionDoc = new XmlDocument();
       actionDoc.LoadXml("<ACTION/>");
 
       XmlElement oRoot = actionDoc.DocumentElement;
@@ -75,14 +70,15 @@ namespace Atlantis.Framework.DCCSetAutoRenew.Interface
       AddAttribute(oRoot, "UserId", IsManager ? ManagerUserId : ShopperID);
       AddAttribute(oRoot, "PrivateLabelId", _privateLabelID.ToString());
       AddAttribute(oRoot, "RequestingApplication", AppName);
+      AddAttribute(oRoot, "MarketId", MarketId);
 
-      XmlElement oAutoRenew = (XmlElement)AddNode(oRoot, "AUTORENEW");
+      var oAutoRenew = (XmlElement)AddNode(oRoot, "AUTORENEW");
       AddAttribute(oAutoRenew, "Status", _autoRenewValue.ToString());
 
-      XmlDocument domainDoc = new XmlDocument();
+      var domainDoc = new XmlDocument();
       domainDoc.LoadXml("<DOMAINS/>");
       XmlElement oDomains = domainDoc.DocumentElement;
-      XmlElement oDomain = (XmlElement)AddNode(oDomains, "DOMAIN");
+      var oDomain = (XmlElement)AddNode(oDomains, "DOMAIN");
       AddAttribute(oDomain, "id", _domainId.ToString());
 
       actionXml = actionDoc.InnerXml;
@@ -91,12 +87,12 @@ namespace Atlantis.Framework.DCCSetAutoRenew.Interface
 
     public override string ToXML()
     {
-      XmlDocument requestDoc = new XmlDocument();
+      var requestDoc = new XmlDocument();
       requestDoc.LoadXml("<REQUEST/>");
 
       XmlElement oRoot = requestDoc.DocumentElement;
 
-      XmlElement oAction = (XmlElement)AddNode(oRoot, "ACTION");
+      var oAction = (XmlElement)AddNode(oRoot, "ACTION");
       AddAttribute(oAction, "ActionName", "DomainSetAutoRenew");
       AddAttribute(oAction, "ShopperId", ShopperID);
       AddAttribute(oAction, "UserType", IsManager ? "Administrator" : "Shopper");
@@ -107,26 +103,21 @@ namespace Atlantis.Framework.DCCSetAutoRenew.Interface
       AddAttribute(oAction, "RequestedByIp", System.Net.Dns.GetHostEntry(Environment.MachineName).AddressList[0].ToString());
       AddAttribute(oAction, "ModifiedBy", "1");
 
-      XmlElement oAutoRenew = (XmlElement)AddNode(oAction, "AUTORENEW");
+      var oAutoRenew = (XmlElement)AddNode(oAction, "AUTORENEW");
       AddAttribute(oAutoRenew, "Status", _autoRenewValue.ToString());
 
-      XmlElement oResources = (XmlElement)AddNode(oRoot, "RESOURCES");
+      var oResources = (XmlElement)AddNode(oRoot, "RESOURCES");
       AddAttribute(oResources, "ResourceType", "1");
 
-      XmlElement oID = (XmlElement)AddNode(oResources, "ID");
+      var oID = (XmlElement)AddNode(oResources, "ID");
       oID.InnerText = _domainId.ToString();
 
       return requestDoc.InnerXml;
     }
 
-
-    #region RequestData Members
-
     public override string GetCacheMD5()
     {
       throw new Exception("DCCSetAutoRenew is not a cacheable request.");
     }
-
-    #endregion
   }
 }

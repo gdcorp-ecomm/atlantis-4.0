@@ -190,6 +190,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="Atlantis.Framework.DCCSetNameservers.Impl.nuget.bat" />
+    <None Include="Atlantis.Framework.DCCSetNameservers.Impl.nuspec" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

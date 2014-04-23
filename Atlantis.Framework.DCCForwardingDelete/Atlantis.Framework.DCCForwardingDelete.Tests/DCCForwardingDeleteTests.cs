@@ -9,6 +9,7 @@ namespace Atlantis.Framework.DCCForwardingDelete.Tests
   {
     [TestMethod]
     [DeploymentItem("atlantis.config")]
+    [DeploymentItem("Atlantis.Framework.DCCForwardingDelete.Impl.dll")]
     public void DCCForwardingDeleteValid()
     {
       DCCForwardingDeleteRequestData request = new DCCForwardingDeleteRequestData("857020", string.Empty, string.Empty, string.Empty, 0, 1, 1667126, "MOBILE_CSA_DCC");
@@ -23,6 +24,7 @@ namespace Atlantis.Framework.DCCForwardingDelete.Tests
 
     [TestMethod]
     [DeploymentItem("atlantis.config")]
+    [DeploymentItem("Atlantis.Framework.DCCForwardingDelete.Impl.dll")]
     public void DCCForwardingDeleteForDomainThatShopperDoesNotOwn()
     {
       DCCForwardingDeleteRequestData request = new DCCForwardingDeleteRequestData("847235", string.Empty, string.Empty, string.Empty, 0, 1, 1665499, "MOBILE_CSA_DCC");

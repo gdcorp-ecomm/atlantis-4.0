@@ -195,6 +195,7 @@ namespace Atlantis.Framework.DCCSetNameservers.Tests
     {
       DCCSetNameserversRequestData request = new DCCSetNameserversRequestData("840820", string.Empty, string.Empty, string.Empty, 0, DCCSetNameserversRequestData.NameserverType.Park, 1, 1667576, "MOBILE_CSA_DCC");
       request.TldId = 101;
+      request.MarketId = "pt-BR";
       request.AddCustomNameserver("NS1.SECURESERVER.NET");
       request.AddCustomNameserver("NS1.SECURESERVER.NET"); 
 

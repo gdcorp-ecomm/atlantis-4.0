@@ -6,37 +6,22 @@ namespace Atlantis.Framework.DCCForwardingDelete.Interface
 {
   public class DCCForwardingDeleteRequestData : RequestData
   {
-    int _privateLabelID;
-    int _domainId;
-    string AppName;
-    private TimeSpan _requestTimeout = TimeSpan.FromSeconds(20);
+    private readonly TimeSpan _requestTimeout = TimeSpan.FromSeconds(20);
 
-    public DCCForwardingDeleteRequestData(string shopperId,
-                                    string sourceUrl,
-                                    string orderId,
-                                    string pathway,
-                                    int pageCount,
-                                    int privateLabelID,
-                                    int domainId,
-                                    string applicationName)
+    public DCCForwardingDeleteRequestData(string shopperId, string sourceUrl, string orderId, string pathway, int pageCount, int privateLabelID, int domainId, string applicationName)
       : base(shopperId, sourceUrl, orderId, pathway, pageCount)
     {
-      _privateLabelID = privateLabelID;
-      _domainId = domainId;
+      PrivateLabelID = privateLabelID;
+      DomainID = domainId;
       AppName = applicationName;
       RequestTimeout = _requestTimeout;
+      MarketId = "en-US";
     }
 
-    public int DomainID
-    {
-      get { return _domainId; }
-    }
-
-    public int PrivateLabelID
-    {
-      get { return _privateLabelID; }
-    }
-
+    private string AppName { get; set; }
+    public int DomainID { get; private set; }
+    public int PrivateLabelID { get; private set; }
+    public string MarketId { get; set; }
    
     private XmlNode AddNode(XmlNode parentNode, string sChildNodeName)
     {
@@ -52,50 +37,36 @@ namespace Atlantis.Framework.DCCForwardingDelete.Interface
       attribute.Value = sAttributeValue;
     }
 
-    /*
-<REQUEST>
- <ACTION ActionName="ContactDelete" ShopperId="111111" UserType="Shopper" UserId="111111" PrivateLabelId="1" RequestingServer="SERVERNAME" RequestedByIp="1.2.3.4" ModifiedBy="1" >
- </ACTION>
- <RESOURCES ResourceType="1">
-   <ID>12345</ID>
- </RESOURCES>
-</REQUEST>
-   */
     public string XmlToSubmit()
     {
-      XmlDocument requestDoc = new XmlDocument();
+      var requestDoc = new XmlDocument();
       requestDoc.LoadXml("<REQUEST/>");
 
       XmlElement oRoot = requestDoc.DocumentElement;
 
-      XmlElement oAction = (XmlElement)AddNode(oRoot, "ACTION");
+      var oAction = (XmlElement)AddNode(oRoot, "ACTION");
       AddAttribute(oAction, "ActionName", "DomainForwardingDelete");
       AddAttribute(oAction, "ShopperId", ShopperID);
       AddAttribute(oAction, "UserType", "Shopper");
       AddAttribute(oAction, "UserId", ShopperID);
-      AddAttribute(oAction, "PrivateLabelId", _privateLabelID.ToString());
+      AddAttribute(oAction, "PrivateLabelId", PrivateLabelID.ToString());
       AddAttribute(oAction, "RequestingApplication", AppName);
       AddAttribute(oAction, "RequestingServer", Environment.MachineName);
       AddAttribute(oAction, "RequestedByIp", System.Net.Dns.GetHostEntry(Environment.MachineName).AddressList[0].ToString());
       AddAttribute(oAction, "ModifiedBy", "1");
 
-      XmlElement oResources = (XmlElement)AddNode(oRoot, "RESOURCES");
+      var oResources = (XmlElement)AddNode(oRoot, "RESOURCES");
       AddAttribute(oResources, "ResourceType", "1");
 
-      XmlElement oID = (XmlElement)AddNode(oResources, "ID");
-      oID.InnerText = _domainId.ToString();
+      var oID = (XmlElement)AddNode(oResources, "ID");
+      oID.InnerText = DomainID.ToString();
 
       return requestDoc.InnerXml;
     }
-
-    /*
-<ACTION ActionName="DomainForwardingDelete" ShopperId="111111" PrivateLabelId="1" >
-</ACTION>
-*/
-
+    
     public void XmlToVerify(out string actionXml, out string domainXML)
     {
-      XmlDocument actionDoc = new XmlDocument();
+      var actionDoc = new XmlDocument();
       actionDoc.LoadXml("<ACTION/>");
 
       XmlElement oRoot = actionDoc.DocumentElement;
@@ -103,26 +74,23 @@ namespace Atlantis.Framework.DCCForwardingDelete.Interface
       AddAttribute(oRoot, "ShopperId", ShopperID);
       AddAttribute(oRoot, "UserType", "Shopper");
       AddAttribute(oRoot, "UserId", ShopperID);
-      AddAttribute(oRoot, "PrivateLabelId", _privateLabelID.ToString());
+      AddAttribute(oRoot, "PrivateLabelId", PrivateLabelID.ToString());
       AddAttribute(oRoot, "RequestingApplication", AppName);
+      AddAttribute(oRoot, "MarketId", MarketId);
 
-      XmlDocument domainDoc = new XmlDocument();
+      var domainDoc = new XmlDocument();
       domainDoc.LoadXml("<DOMAINS/>");
       XmlElement oDomains = domainDoc.DocumentElement;
-      XmlElement oDomain = (XmlElement)AddNode(oDomains, "DOMAIN");
-      AddAttribute(oDomain, "id", _domainId.ToString());
+      var oDomain = (XmlElement)AddNode(oDomains, "DOMAIN");
+      AddAttribute(oDomain, "id", DomainID.ToString());
 
       actionXml = actionDoc.InnerXml;
       domainXML = domainDoc.InnerXml;
     }
 
-    #region RequestData Members
-
     public override string GetCacheMD5()
     {
       throw new Exception("DCCSetLocking is not a cacheable request.");
     }
-
-    #endregion
   }
 }

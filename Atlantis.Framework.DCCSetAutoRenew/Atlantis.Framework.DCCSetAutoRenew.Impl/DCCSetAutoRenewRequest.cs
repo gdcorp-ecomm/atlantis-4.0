@@ -14,21 +14,25 @@ namespace Atlantis.Framework.DCCSetAutoRenew.Impl
 
       try
       {
-        DCCSetAutoRenewRequestData oRequest = (DCCSetAutoRenewRequestData)oRequestData;
+        var oRequest = (DCCSetAutoRenewRequestData)oRequestData;
         
         string verifyAction;
         string verifyDomains;
         oRequest.XmlToVerify(out verifyAction, out verifyDomains);
-        regDccVerifyWebService = new DsWebVerify.RegDCCVerifyWS();
-        regDccVerifyWebService.Url = oConfig.GetConfigValue("VerifyUrl");
-        regDccVerifyWebService.Timeout = (int)oRequest.RequestTimeout.TotalMilliseconds;
+        regDccVerifyWebService = new DsWebVerify.RegDCCVerifyWS
+        {
+          Url = oConfig.GetConfigValue("VerifyUrl"),
+          Timeout = (int) oRequest.RequestTimeout.TotalMilliseconds
+        };
         responseXml = regDccVerifyWebService.VerifyDomainSetAutoRenew(verifyAction, verifyDomains);
 
         if (responseXml.Contains("ActionResultID=\"0\""))
         {
-          DsWebSubmit.RegDCCRequestWS oDsWeb = new DsWebSubmit.RegDCCRequestWS();
-          oDsWeb.Url = ((WsConfigElement)oConfig).WSURL;
-          oDsWeb.Timeout = (int)oRequest.RequestTimeout.TotalMilliseconds;
+          var oDsWeb = new DsWebSubmit.RegDCCRequestWS
+          {
+            Url = ((WsConfigElement) oConfig).WSURL,
+            Timeout = (int) oRequest.RequestTimeout.TotalMilliseconds
+          };
 
           responseXml = oDsWeb.SubmitRequestStandard(oRequest.ToXML());
           responseData = new DCCSetAutoRenewResponseData(responseXml);

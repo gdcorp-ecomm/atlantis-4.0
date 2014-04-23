@@ -12,67 +12,47 @@ namespace Atlantis.Framework.DCCSetContacts.Interface
     private const int DomainNameChangeRegistrantAgreement = 26;
     private const int ActOnBehalfAgreement = 47;
 
-    private static readonly TimeSpan _requestTimeout = TimeSpan.FromSeconds(12);
-
-    private bool _domainRegAgreement = false;
-    private bool _UTOS = false;
-    private bool _domainNameChange = false;
-    private bool _actOnBehalf = false;
-
-    private int _privateLabelID;
-    private int _domainId;
-    private string AppName { get; set; }
-
-    Dictionary<int, Dictionary<string, string>> _contacts = new Dictionary<int, Dictionary<string, string>>();
+    private readonly TimeSpan _requestTimeout = TimeSpan.FromSeconds(12);
+    readonly Dictionary<int, Dictionary<string, string>> _contacts = new Dictionary<int, Dictionary<string, string>>();
     //(registrant = 0, technical = 1, admin = 2, billing = 3)
-
-
-    public DCCSetContactsRequestData(string shopperId,
-                                    string sourceUrl,
-                                    string orderId,
-                                    string pathway,
-                                    int pageCount,
-                                    int privateLabelID,
-                                    int domainId,
-                                    string applicationName)
+    
+    public DCCSetContactsRequestData(string shopperId, string sourceUrl, string orderId, string pathway, int pageCount, int privateLabelID, int domainId, string applicationName)
       : base(shopperId, sourceUrl, orderId, pathway, pageCount)
     {
-      _privateLabelID = privateLabelID;
-      _domainId = domainId;
+      PrivateLabelID = privateLabelID;
+      DomainID = domainId;
       AppName = applicationName;
       RequestTimeout = _requestTimeout;
+      MarketId = "en-US";
     }
 
-    public int DomainID
-    {
-      get { return _domainId; }
-    }
-
-    public int PrivateLabelID
-    {
-      get { return _privateLabelID; }
-    }
-
+    private string AppName { get; set; }
+    public int DomainID { get; private set; }
+    public int PrivateLabelID { get; private set; }
+    public string MarketId { get; set; }
+    private bool _domainRegAgreement;
     public bool SetDomainRegAgreement
     {
       set { _domainRegAgreement = value; }
     }
 
+    private bool _utos;
     public bool SetUTOSAgreement
     {
-      set { _UTOS = value; }
+      set { _utos = value; }
     }
 
+    private bool _domainNameChange;
     public bool SetDomainNameChangeAgreement
     {
       set { _domainNameChange = value; }
     }
 
+    private bool _actOnBehalf;
     public bool SetActOnBehalfAgreemnt
     {
       set { _actOnBehalf = value; }
     }
-
 
     public bool addContact(int iType, Dictionary<string, string> oContact)
     {
@@ -99,56 +79,35 @@ namespace Atlantis.Framework.DCCSetContacts.Interface
       attribute.Value = sAttributeValue;
     }
 
-    /*
-<REQUEST>
- <ACTION ActionName="ContactUpdate" ShopperId="111111" UserType="Shopper" UserId="111111" PrivateLabelId="1" RequestingServer="SERVERNAME" RequestedByIp="1.2.3.4" ModifiedBy="1" >
-   <CONTACTS>
-     <CONTACT Type="0" FirstName="John" LastName="Doe" Company="John Doe, Inc" Address1="123 Some Street" Address2="" City="Anytown" State="Iowa" Zip="52402" Country="United States" Phone="319-555-1234" Fax="319-555-5678" Email="john@doe.com" />
-     <CONTACT Type="1" FirstName="John" LastName="Doe" Company="John Doe, Inc" Address1="123 Some Street" Address2="" City="Anytown" State="Iowa" Zip="52402" Country="United States" Phone="319-555-1234" Fax="319-555-5678" Email="john@doe.com" />
-     <CONTACT Type="2" FirstName="John" LastName="Doe" Company="John Doe, Inc" Address1="123 Some Street" Address2="" City="Anytown" State="Iowa" Zip="52402" Country="United States" Phone="319-555-1234" Fax="319-555-5678" Email="john@doe.com" />
-     <CONTACT Type="3" FirstName="John" LastName="Doe" Company="John Doe, Inc" Address1="123 Some Street" Address2="" City="Anytown" State="Iowa" Zip="52402" Country="United States" Phone="319-555-1234" Fax="319-555-5678" Email="john@doe.com" />
-   </CONTACTS>
-   <AGREEMENTS>
-     <AGREEMENT ID="26" NotePrefix="ContactsUpdate" />
-    <AGREEMENT ID="1" NotePrefix="ContactsUpdate" />
-    <AGREEMENT ID="46" NotePrefix="ContactsUpdate" />
-    <AGREEMENT ID="47" NotePrefix="ContactsUpdate" />
-  </AGREEMENTS>
- </ACTION>
- <RESOURCES ResourceType="1">
-   <ID>12345</ID>
- </RESOURCES>
-</REQUEST>
-   */
     public string XmlToSubmit()
     {
-      XmlDocument requestDoc = new XmlDocument();
+      var requestDoc = new XmlDocument();
       requestDoc.LoadXml("<REQUEST/>");
 
       XmlElement oRoot = requestDoc.DocumentElement;
 
-      XmlElement oAction = (XmlElement)AddNode(oRoot, "ACTION");
+      var oAction = (XmlElement)AddNode(oRoot, "ACTION");
       AddAttribute(oAction, "ActionName", "ContactUpdate");
       AddAttribute(oAction, "ShopperId", ShopperID);
       AddAttribute(oAction, "UserType", "Shopper");
       AddAttribute(oAction, "UserId", ShopperID);
-      AddAttribute(oAction, "PrivateLabelId", _privateLabelID.ToString());
+      AddAttribute(oAction, "PrivateLabelId", PrivateLabelID.ToString());
       AddAttribute(oAction, "RequestingServer", Environment.MachineName);
       AddAttribute(oAction, "RequestingApplication", AppName);
       AddAttribute(oAction, "RequestedByIp", System.Net.Dns.GetHostEntry(Environment.MachineName).AddressList[0].ToString());
       AddAttribute(oAction, "ModifiedBy", "1");
 
-      XmlElement oContacts = (XmlElement)AddNode(oAction, "CONTACTS");
+      var oContacts = (XmlElement)AddNode(oAction, "CONTACTS");
       BuildContactXml(oContacts);
 
-      XmlElement oAgreements = (XmlElement)AddNode(oAction, "AGREEMENTS");
+      var oAgreements = (XmlElement)AddNode(oAction, "AGREEMENTS");
       BuildAgreementsXml(oAgreements);
 
-      XmlElement oResources = (XmlElement)AddNode(oRoot, "RESOURCES");
+      var oResources = (XmlElement)AddNode(oRoot, "RESOURCES");
       AddAttribute(oResources, "ResourceType", "1");
 
-      XmlElement oID = (XmlElement)AddNode(oResources, "ID");
-      oID.InnerText = _domainId.ToString();
+      var oID = (XmlElement)AddNode(oResources, "ID");
+      oID.InnerText = DomainID.ToString();
 
       return requestDoc.InnerXml;
     }
@@ -163,7 +122,7 @@ namespace Atlantis.Framework.DCCSetContacts.Interface
       }
       else
       {
-        XmlDocument actionDoc = new XmlDocument();
+        var actionDoc = new XmlDocument();
         actionDoc.LoadXml("<ACTION/>");
 
         XmlElement oRoot = actionDoc.DocumentElement;
@@ -171,17 +130,18 @@ namespace Atlantis.Framework.DCCSetContacts.Interface
         AddAttribute(oRoot, "ShopperId", ShopperID);
         AddAttribute(oRoot, "UserType", "Shopper");
         AddAttribute(oRoot, "UserId", ShopperID);
-        AddAttribute(oRoot, "PrivateLabelId", _privateLabelID.ToString());
+        AddAttribute(oRoot, "PrivateLabelId", PrivateLabelID.ToString());
         AddAttribute(oRoot, "RequestingApplication", AppName);
+        AddAttribute(oRoot, "MarketId", MarketId);
 
-        XmlElement oContacts = (XmlElement)AddNode(oRoot, "Contacts");
+        var oContacts = (XmlElement)AddNode(oRoot, "Contacts");
         BuildContactXml(oContacts);
 
-        XmlDocument domainDoc = new XmlDocument();
+        var domainDoc = new XmlDocument();
         domainDoc.LoadXml("<DOMAINS/>");
         XmlElement oDomains = domainDoc.DocumentElement;
-        XmlElement oDomain = (XmlElement)AddNode(oDomains, "DOMAIN");
-        AddAttribute(oDomain, "id", _domainId.ToString());
+        var oDomain = (XmlElement)AddNode(oDomains, "DOMAIN");
+        AddAttribute(oDomain, "id", DomainID.ToString());
 
         actionXml = actionDoc.InnerXml;
         domainXml = domainDoc.InnerXml;
@@ -192,28 +152,28 @@ namespace Atlantis.Framework.DCCSetContacts.Interface
     {
       if (_domainRegAgreement)
       {
-        XmlElement oAgreement = (XmlElement)AddNode(oAgreements, "Agreement");
+        var oAgreement = (XmlElement)AddNode(oAgreements, "Agreement");
         AddAttribute(oAgreement, "ID", DomainRegistrationAgreement.ToString());
         AddAttribute(oAgreement, "NotePrefix", "ContactsUpdate");
       }
 
-      if (_UTOS)
+      if (_utos)
       {
-        XmlElement oAgreement = (XmlElement)AddNode(oAgreements, "Agreement");
+        var oAgreement = (XmlElement)AddNode(oAgreements, "Agreement");
         AddAttribute(oAgreement, "ID", UniversalTermsOfService.ToString());
         AddAttribute(oAgreement, "NotePrefix", "ContactsUpdate");
       }
 
       if (_domainNameChange)
       {
-        XmlElement oAgreement = (XmlElement)AddNode(oAgreements, "Agreement");
+        var oAgreement = (XmlElement)AddNode(oAgreements, "Agreement");
         AddAttribute(oAgreement, "ID", DomainNameChangeRegistrantAgreement.ToString());
         AddAttribute(oAgreement, "NotePrefix", "ContactsUpdate");
       }
 
       if (_actOnBehalf)
       {
-        XmlElement oAgreement = (XmlElement)AddNode(oAgreements, "Agreement");
+        var oAgreement = (XmlElement)AddNode(oAgreements, "Agreement");
         AddAttribute(oAgreement, "ID", ActOnBehalfAgreement.ToString());
         AddAttribute(oAgreement, "NotePrefix", "ContactsUpdate");
       }
@@ -224,7 +184,7 @@ namespace Atlantis.Framework.DCCSetContacts.Interface
       //(registrant = 0, technical = 1, admin = 2, billing = 3)      
       foreach (var key in _contacts.Keys)
       {
-        XmlElement oContactXml = (XmlElement)AddNode(oContacts, "CONTACT");
+        var oContactXml = (XmlElement)AddNode(oContacts, "CONTACT");
         Dictionary<string, string> oContact = _contacts[key];
         AddAttribute(oContactXml, "Type", oContact["Type"]);
         AddAttribute(oContactXml, "FirstName", oContact["FirstName"]);

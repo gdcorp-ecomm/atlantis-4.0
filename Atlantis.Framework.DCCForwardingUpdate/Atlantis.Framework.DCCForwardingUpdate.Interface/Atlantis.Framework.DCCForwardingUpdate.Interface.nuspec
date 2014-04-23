@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>Atlantis.Framework.DCCForwardingUpdate.Interface</id>
+    <version>$version$</version>
+    <title>Atlantis.Framework.DCCForwardingUpdate.Interface</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <projectUrl>https://confluence.int.godaddy.com/display/ATLANTIS</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes>
+      14.4.23.1: ATLANTIS-387 Update the DCCAPI triplets to take in marketId as the addtl parameter
+    </releaseNotes>
+    <copyright>$copyright$</copyright>
+    <tags>Atlantis.Framework.DCCForwardingUpdate.Interface</tags>
+  </metadata>
+  <files>
+  </files>
+</package>

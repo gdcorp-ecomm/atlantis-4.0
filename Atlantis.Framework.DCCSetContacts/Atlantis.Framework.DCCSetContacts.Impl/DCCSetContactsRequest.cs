@@ -10,12 +10,11 @@ namespace Atlantis.Framework.DCCSetContacts.Impl
     {
       DCCSetContactsResponseData responseData;
       string responseXml = string.Empty;
-      string verifyResponseXml;
       DsWebValidate.RegDCCValidateWebSvc validationService = null;
 
       try
       {
-        DCCSetContactsRequestData oRequest = (DCCSetContactsRequestData)oRequestData;
+        var oRequest = (DCCSetContactsRequestData)oRequestData;
 
         string verifyAction;
         string verifyDomains;
@@ -28,16 +27,20 @@ namespace Atlantis.Framework.DCCSetContacts.Impl
 
         if (validateResponseXml.Contains("<ACTIONRESULTS></ACTIONRESULTS>"))
         {
-          DsWebVerify.RegDCCVerifyWS oDsWebVerify = new DsWebVerify.RegDCCVerifyWS();
-          oDsWebVerify.Url = oConfig.GetConfigValue("VerifyUrl");
-          oDsWebVerify.Timeout = (int)oRequest.RequestTimeout.TotalMilliseconds;
-          verifyResponseXml = oDsWebVerify.VerifyContactUpdate(verifyAction, verifyDomains);
+          var oDsWebVerify = new DsWebVerify.RegDCCVerifyWS
+          {
+            Url = oConfig.GetConfigValue("VerifyUrl"),
+            Timeout = (int) oRequest.RequestTimeout.TotalMilliseconds
+          };
+          string verifyResponseXml = oDsWebVerify.VerifyContactUpdate(verifyAction, verifyDomains);
 
           if (verifyResponseXml.Contains("ActionResultID=\"0\""))
           {
-            DsWebSubmit.RegDCCRequestWS oDsWeb = new DsWebSubmit.RegDCCRequestWS();
-            oDsWeb.Url = ((WsConfigElement)oConfig).WSURL;
-            oDsWeb.Timeout = (int)oRequest.RequestTimeout.TotalMilliseconds;
+            var oDsWeb = new DsWebSubmit.RegDCCRequestWS
+            {
+              Url = ((WsConfigElement) oConfig).WSURL,
+              Timeout = (int) oRequest.RequestTimeout.TotalMilliseconds
+            };
 
             responseXml = oDsWeb.SubmitRequestStandard(oRequest.XmlToSubmit());
             responseData = new DCCSetContactsResponseData(responseXml);

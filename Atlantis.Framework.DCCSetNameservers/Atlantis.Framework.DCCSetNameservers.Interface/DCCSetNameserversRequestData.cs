@@ -17,36 +17,25 @@ namespace Atlantis.Framework.DCCSetNameservers.Interface
       Custom
     };
     
-    private TimeSpan _requestTimeout = TimeSpan.FromSeconds(20);
+    private readonly TimeSpan _requestTimeout = TimeSpan.FromSeconds(20);
     
     internal IDictionary<string, string> CustomNameservers { get; set; }
 
 
-    private IList<string> _premiumNameservers; 
-    internal IList<string> PremiumNameservers {
-      get
-      {
-        if (_premiumNameservers == null)
-        {
-          _premiumNameservers = new List<string>(0);
-        }
-        return _premiumNameservers;
-      }
+    private IList<string> _premiumNameservers;
+    internal IList<string> PremiumNameservers
+    {
+      get { return _premiumNameservers ?? (_premiumNameservers = new List<string>(0)); }
       set { _premiumNameservers = value; }
     }
 
     public NameserverType RequestType { get; private set; }
-
     public int DomainId { get; private set; }
-
     public int TldId { get; set; }
-
     public int PrivateLabelId { get; private set; }
-
     public string AppName { get; private set; }
-
     public string RegistrarId { get; set; }
-
+    public string MarketId { get; set; }
 
     public bool IsPremium
     {
@@ -70,6 +59,7 @@ namespace Atlantis.Framework.DCCSetNameservers.Interface
       PremiumNameservers = new List<string>(16);
       AppName = applicationName;
       RequestTimeout = _requestTimeout;
+      MarketId = "en-US";
     }
 
     public void AddPremiumNameserver(string premiumNameserver)
@@ -89,21 +79,14 @@ namespace Atlantis.Framework.DCCSetNameservers.Interface
     }
 
     public void AddCustomNameserverWithIp(string customNameserver, string ip)
-    {   
+    {
       // Remove from dictionary and take new value
       if(CustomNameservers.ContainsKey(customNameserver))
       {
         CustomNameservers.Remove(customNameserver);
       }
 
-      if (string.IsNullOrEmpty(ip))
-      {
-        CustomNameservers.Add(customNameserver, string.Empty);
-      }
-      else
-      {
-        CustomNameservers.Add(customNameserver, ip);
-      }
+      CustomNameservers.Add(customNameserver, string.IsNullOrEmpty(ip) ? string.Empty : ip);
     }
 
     private static XmlNode AddNode(XmlNode parentNode, string sChildNodeName)
@@ -137,7 +120,7 @@ namespace Atlantis.Framework.DCCSetNameservers.Interface
     {
       foreach (string nameserver in CustomNameservers.Keys)
       {
-        XmlElement oNameserver = (XmlElement)AddNode(oNameservers, "NAMESERVER");
+        var oNameserver = (XmlElement)AddNode(oNameservers, "NAMESERVER");
         AddAttribute(oNameserver, "Name", nameserver);
         AddAttribute(oNameserver, "NameServerIP", CustomNameservers[nameserver]);
       }
@@ -145,7 +128,7 @@ namespace Atlantis.Framework.DCCSetNameservers.Interface
     
     public void XmlToVerify(out string actionXml, out string domainXml)
     {
-      XmlDocument actionDoc = new XmlDocument();
+      var actionDoc = new XmlDocument();
       actionDoc.LoadXml("<ACTION/>");
 
       XmlElement oRoot = actionDoc.DocumentElement;
@@ -153,15 +136,16 @@ namespace Atlantis.Framework.DCCSetNameservers.Interface
       AddAttribute(oRoot, "ShopperId", ShopperID);
       AddAttribute(oRoot, "PrivateLabelId", PrivateLabelId.ToString(CultureInfo.InvariantCulture));
       AddAttribute(oRoot, "RequestingApplication", AppName);
+      AddAttribute(oRoot, "MarketId", MarketId);
 
-      XmlElement oNameservers = (XmlElement)AddNode(oRoot, "NAMESERVERS");
+      var oNameservers = (XmlElement)AddNode(oRoot, "NAMESERVERS");
       AddAttribute(oNameservers, "NameServerType", NameserverTypeToString(RequestType));
       if (CustomNameservers.Count > 1 && CustomNameservers.Count < 14)
       {
         AddNameservers(oNameservers);
       }
 
-      XmlDocument domainDoc = new XmlDocument();
+      var domainDoc = new XmlDocument();
       domainDoc.LoadXml("<DOMAINS/>");
       XmlElement oDomains = domainDoc.DocumentElement;
       var oDomain = (XmlElement)AddNode(oDomains, "DOMAIN");
@@ -203,6 +187,7 @@ namespace Atlantis.Framework.DCCSetNameservers.Interface
                      new XAttribute("ParentShopperId", ShopperID),
                      new XAttribute("PrivateLabelId", PrivateLabelId),
                      new XAttribute("RequestingApplication", AppName),
+                     new XAttribute("MarketId", MarketId),
                      new XElement("Items",
                                   new XElement("Item",
                                                new XAttribute("ObjectId", DomainId),
@@ -216,12 +201,12 @@ namespace Atlantis.Framework.DCCSetNameservers.Interface
 
     public override string ToXML()
     {
-      XmlDocument requestDoc = new XmlDocument();
+      var requestDoc = new XmlDocument();
       requestDoc.LoadXml("<REQUEST/>");
 
       XmlElement oRoot = requestDoc.DocumentElement;
 
-      XmlElement oAction = (XmlElement)AddNode(oRoot, "ACTION");
+      var oAction = (XmlElement)AddNode(oRoot, "ACTION");
       AddAttribute(oAction, "ActionName", "NameServerUpdate");
       AddAttribute(oAction, "ShopperId", ShopperID);
       AddAttribute(oAction, "UserType", "Shopper");
@@ -232,7 +217,7 @@ namespace Atlantis.Framework.DCCSetNameservers.Interface
       AddAttribute(oAction, "RequestedByIp", System.Net.Dns.GetHostEntry(Environment.MachineName).AddressList[0].ToString());
       AddAttribute(oAction, "ModifiedBy", "1");
 
-      XmlElement oNameservers = (XmlElement)AddNode(oAction, "NAMESERVERS");
+      var oNameservers = (XmlElement)AddNode(oAction, "NAMESERVERS");
       AddAttribute(oNameservers, "NameServerType", NameserverTypeToString(RequestType));
       
       if (CustomNameservers.Count > 1 && CustomNameservers.Count < 14)
@@ -240,7 +225,7 @@ namespace Atlantis.Framework.DCCSetNameservers.Interface
         AddNameservers(oNameservers);
       }
 
-      XmlElement oResources = (XmlElement)AddNode(oRoot, "RESOURCES");
+      var oResources = (XmlElement)AddNode(oRoot, "RESOURCES");
       AddAttribute(oResources, "ResourceType", "1");
 
       var id = (XmlElement)AddNode(oResources, "ID");

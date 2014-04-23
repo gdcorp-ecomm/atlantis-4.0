@@ -9,7 +9,9 @@
     <projectUrl>https://confluence.int.godaddy.com/display/ATLANTIS</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes></releaseNotes>
+    <releaseNotes>
+      14.4.23.1 : Fixed a dictionaly lookup bug in RegionName class
+    </releaseNotes>
     <copyright>$copyright$</copyright>
     <tags>Atlantis.Framework.Geo.Impl</tags>
     <dependencies />

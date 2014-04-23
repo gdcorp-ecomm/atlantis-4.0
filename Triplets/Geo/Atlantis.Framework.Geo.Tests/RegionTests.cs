@@ -1,5 +1,8 @@
-﻿using Atlantis.Framework.Geo.Interface;
+﻿using System.Runtime.CompilerServices;
+using Atlantis.Framework.Geo.Impl.IPLookup;
+using Atlantis.Framework.Geo.Interface;
 using Atlantis.Framework.Interface;
+using Atlantis.Framework.Geo.Impl;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
 using System.Xml;
@@ -122,8 +125,23 @@ namespace Atlantis.Framework.Geo.Tests
       var response = (RegionResponseData)Engine.Engine.ProcessRequest(request, _REGIONREQUESTTYPE);
     }
 
-
-
-
+    [TestMethod]
+    public void GetRegionNameTest()
+    {
+      const string countryCode1 = "AF";
+      const string region1 = "01";
+      const string countryCode2 = "Badakhshan";
+      const string region2 = "Badakhshan";
+      const string countryCode3 = "AD";
+      const string region3 = "00";
+      var regionName1 = RegionName.GetRegionName(countryCode1, region1);
+      var regionName2 = RegionName.GetRegionName(countryCode2, region2);
+      var regionName3 = RegionName.GetRegionName(countryCode3, region3);
+      var regionName4 = RegionName.GetRegionName(countryCode3, null);
+      Assert.IsTrue(regionName1.Equals("Badakhshan"));
+      Assert.IsTrue(regionName2.Equals(string.Empty));
+      Assert.IsTrue(regionName3.Equals(string.Empty));
+      Assert.IsTrue(regionName4.Equals(string.Empty));
+    }
   }
 }

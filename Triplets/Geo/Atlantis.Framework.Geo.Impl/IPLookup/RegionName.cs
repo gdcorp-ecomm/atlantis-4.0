@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 
 namespace Atlantis.Framework.Geo.Impl.IPLookup
 {
@@ -19,19 +20,19 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
         return string.Empty;
       }
 
-      if (!_regionNamesByRegion.ContainsKey(countryCode))
+      if (!_regionNamesByRegion.ContainsKey(countryCode) || !_regionNamesByRegion[countryCode].ContainsKey(region))
       {
         return string.Empty;
       }
 
-      return (_regionNamesByRegion[countryCode])[region] ?? string.Empty;
+      return (_regionNamesByRegion[countryCode])[region];
     }
 
     private static void LoadRegionNames()
     {
       _regionNamesByRegion = new Dictionary<string, Dictionary<string, string>>(StringComparer.OrdinalIgnoreCase);
 
-      Dictionary<string, string> cc_reg_AD = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      var cc_reg_AD = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_AD.Add("02", "Canillo");
       cc_reg_AD.Add("03", "Encamp");
       cc_reg_AD.Add("04", "La Massana");
@@ -40,7 +41,8 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_AD.Add("07", "Andorra la Vella");
       cc_reg_AD.Add("08", "Escaldes-Engordany");
       _regionNamesByRegion.Add("AD", cc_reg_AD);
-      Dictionary<string, string> cc_reg_AE = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+      var cc_reg_AE = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_AE.Add("01", "Abu Dhabi");
       cc_reg_AE.Add("02", "Ajman");
       cc_reg_AE.Add("03", "Dubai");
@@ -49,7 +51,8 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_AE.Add("06", "Sharjah");
       cc_reg_AE.Add("07", "Umm Al Quwain");
       _regionNamesByRegion.Add("AE", cc_reg_AE);
-      Dictionary<string, string> cc_reg_AF = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+      var cc_reg_AF = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_AF.Add("01", "Badakhshan");
       cc_reg_AF.Add("02", "Badghis");
       cc_reg_AF.Add("03", "Baghlan");
@@ -85,7 +88,8 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_AF.Add("41", "Daykondi");
       cc_reg_AF.Add("42", "Panjshir");
       _regionNamesByRegion.Add("AF", cc_reg_AF);
-      Dictionary<string, string> cc_reg_AG = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+      var cc_reg_AG = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_AG.Add("01", "Barbuda");
       cc_reg_AG.Add("03", "Saint George");
       cc_reg_AG.Add("04", "Saint John");
@@ -95,7 +99,8 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_AG.Add("08", "Saint Philip");
       cc_reg_AG.Add("09", "Redonda");
       _regionNamesByRegion.Add("AG", cc_reg_AG);
-      Dictionary<string, string> cc_reg_AL = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+      var cc_reg_AL = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_AL.Add("40", "Berat");
       cc_reg_AL.Add("41", "Diber");
       cc_reg_AL.Add("42", "Durres");
@@ -109,7 +114,8 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_AL.Add("50", "Tirane");
       cc_reg_AL.Add("51", "Vlore");
       _regionNamesByRegion.Add("AL", cc_reg_AL);
-      Dictionary<string, string> cc_reg_AM = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+      var cc_reg_AM = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_AM.Add("01", "Aragatsotn");
       cc_reg_AM.Add("02", "Ararat");
       cc_reg_AM.Add("03", "Armavir");
@@ -122,7 +128,8 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_AM.Add("10", "Vayots' Dzor");
       cc_reg_AM.Add("11", "Yerevan");
       _regionNamesByRegion.Add("AM", cc_reg_AM);
-      Dictionary<string, string> cc_reg_AO = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+      var cc_reg_AO = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_AO.Add("01", "Benguela");
       cc_reg_AO.Add("02", "Bie");
       cc_reg_AO.Add("03", "Cabinda");
@@ -142,7 +149,8 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_AO.Add("19", "Bengo");
       cc_reg_AO.Add("20", "Luanda");
       _regionNamesByRegion.Add("AO", cc_reg_AO);
-      Dictionary<string, string> cc_reg_AR = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+      var cc_reg_AR = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_AR.Add("01", "Buenos Aires");
       cc_reg_AR.Add("02", "Catamarca");
       cc_reg_AR.Add("03", "Chaco");
@@ -168,7 +176,8 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_AR.Add("23", "Tierra del Fuego");
       cc_reg_AR.Add("24", "Tucuman");
       _regionNamesByRegion.Add("AR", cc_reg_AR);
-      Dictionary<string, string> cc_reg_AT = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+      var cc_reg_AT = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_AT.Add("01", "Burgenland");
       cc_reg_AT.Add("02", "Karnten");
       cc_reg_AT.Add("03", "Niederosterreich");
@@ -179,7 +188,7 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_AT.Add("08", "Vorarlberg");
       cc_reg_AT.Add("09", "Wien");
       _regionNamesByRegion.Add("AT", cc_reg_AT);
-      Dictionary<string, string> cc_reg_AU = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      var cc_reg_AU = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_AU.Add("01", "Australian Capital Territory");
       cc_reg_AU.Add("02", "New South Wales");
       cc_reg_AU.Add("03", "Northern Territory");
@@ -189,7 +198,8 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_AU.Add("07", "Victoria");
       cc_reg_AU.Add("08", "Western Australia");
       _regionNamesByRegion.Add("AU", cc_reg_AU);
-      Dictionary<string, string> cc_reg_AZ = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+      var cc_reg_AZ = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_AZ.Add("01", "Abseron");
       cc_reg_AZ.Add("02", "Agcabadi");
       cc_reg_AZ.Add("03", "Agdam");
@@ -262,11 +272,13 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_AZ.Add("70", "Zaqatala");
       cc_reg_AZ.Add("71", "Zardab");
       _regionNamesByRegion.Add("AZ", cc_reg_AZ);
-      Dictionary<string, string> cc_reg_BA = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+      var cc_reg_BA = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_BA.Add("01", "Federation of Bosnia and Herzegovina");
       cc_reg_BA.Add("02", "Republika Srpska");
       _regionNamesByRegion.Add("BA", cc_reg_BA);
-      Dictionary<string, string> cc_reg_BB = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+      var cc_reg_BB = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_BB.Add("01", "Christ Church");
       cc_reg_BB.Add("02", "Saint Andrew");
       cc_reg_BB.Add("03", "Saint George");
@@ -279,7 +291,8 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_BB.Add("10", "Saint Philip");
       cc_reg_BB.Add("11", "Saint Thomas");
       _regionNamesByRegion.Add("BB", cc_reg_BB);
-      Dictionary<string, string> cc_reg_BD = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+      var cc_reg_BD = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_BD.Add("81", "Dhaka");
       cc_reg_BD.Add("82", "Khulna");
       cc_reg_BD.Add("83", "Rajshahi");
@@ -287,7 +300,8 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_BD.Add("85", "Barisal");
       cc_reg_BD.Add("86", "Sylhet");
       _regionNamesByRegion.Add("BD", cc_reg_BD);
-      Dictionary<string, string> cc_reg_BE = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+      var cc_reg_BE = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_BE.Add("01", "Antwerpen");
       cc_reg_BE.Add("03", "Hainaut");
       cc_reg_BE.Add("04", "Liege");
@@ -302,7 +316,8 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_BE.Add("13", "Flanders");
       cc_reg_BE.Add("14", "Wallonia");
       _regionNamesByRegion.Add("BE", cc_reg_BE);
-      Dictionary<string, string> cc_reg_BF = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+      var cc_reg_BF = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_BF.Add("15", "Bam");
       cc_reg_BF.Add("19", "Boulkiemde");
       cc_reg_BF.Add("20", "Ganzourgou");
@@ -349,7 +364,8 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_BF.Add("77", "Ziro");
       cc_reg_BF.Add("78", "Zondoma");
       _regionNamesByRegion.Add("BF", cc_reg_BF);
-      Dictionary<string, string> cc_reg_BG = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+      var cc_reg_BG = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_BG.Add("33", "Mikhaylovgrad");
       cc_reg_BG.Add("38", "Blagoevgrad");
       cc_reg_BG.Add("39", "Burgas");
@@ -380,7 +396,8 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_BG.Add("64", "Vratsa");
       cc_reg_BG.Add("65", "Yambol");
       _regionNamesByRegion.Add("BG", cc_reg_BG);
-      Dictionary<string, string> cc_reg_BH = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+      var cc_reg_BH = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_BH.Add("01", "Al Hadd");
       cc_reg_BH.Add("02", "Al Manamah");
       cc_reg_BH.Add("05", "Jidd Hafs");
@@ -398,7 +415,8 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_BH.Add("18", "Ash Shamaliyah");
       cc_reg_BH.Add("19", "Al Wusta");
       _regionNamesByRegion.Add("BH", cc_reg_BH);
-      Dictionary<string, string> cc_reg_BI = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+      var cc_reg_BI = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_BI.Add("02", "Bujumbura");
       cc_reg_BI.Add("09", "Bubanza");
       cc_reg_BI.Add("10", "Bururi");
@@ -416,7 +434,8 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_BI.Add("22", "Muramvya");
       cc_reg_BI.Add("23", "Mwaro");
       _regionNamesByRegion.Add("BI", cc_reg_BI);
-      Dictionary<string, string> cc_reg_BJ = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+      var cc_reg_BJ = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_BJ.Add("07", "Alibori");
       cc_reg_BJ.Add("08", "Atakora");
       cc_reg_BJ.Add("09", "Atlanyique");
@@ -430,7 +449,8 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_BJ.Add("17", "Plateau");
       cc_reg_BJ.Add("18", "Zou");
       _regionNamesByRegion.Add("BJ", cc_reg_BJ);
-      Dictionary<string, string> cc_reg_BM = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+      var cc_reg_BM = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_BM.Add("01", "Devonshire");
       cc_reg_BM.Add("02", "Hamilton");
       cc_reg_BM.Add("03", "Hamilton");
@@ -443,7 +463,8 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_BM.Add("10", "Southampton");
       cc_reg_BM.Add("11", "Warwick");
       _regionNamesByRegion.Add("BM", cc_reg_BM);
-      Dictionary<string, string> cc_reg_BN = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+      var cc_reg_BN = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_BN.Add("07", "Alibori");
       cc_reg_BN.Add("08", "Belait");
       cc_reg_BN.Add("09", "Brunei and Muara");
@@ -457,7 +478,8 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_BN.Add("17", "Plateau");
       cc_reg_BN.Add("18", "Zou");
       _regionNamesByRegion.Add("BN", cc_reg_BN);
-      Dictionary<string, string> cc_reg_BO = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+      var cc_reg_BO = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_BO.Add("01", "Chuquisaca");
       cc_reg_BO.Add("02", "Cochabamba");
       cc_reg_BO.Add("03", "El Beni");
@@ -468,7 +490,8 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_BO.Add("08", "Santa Cruz");
       cc_reg_BO.Add("09", "Tarija");
       _regionNamesByRegion.Add("BO", cc_reg_BO);
-      Dictionary<string, string> cc_reg_BR = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+      var cc_reg_BR = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_BR.Add("01", "Acre");
       cc_reg_BR.Add("02", "Alagoas");
       cc_reg_BR.Add("03", "Amapa");
@@ -497,7 +520,8 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_BR.Add("30", "Pernambuco");
       cc_reg_BR.Add("31", "Tocantins");
       _regionNamesByRegion.Add("BR", cc_reg_BR);
-      Dictionary<string, string> cc_reg_BS = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+      var cc_reg_BS = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_BS.Add("05", "Bimini");
       cc_reg_BS.Add("06", "Cat Island");
       cc_reg_BS.Add("10", "Exuma");
@@ -520,7 +544,8 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_BS.Add("34", "Sandy Point");
       cc_reg_BS.Add("35", "San Salvador and Rum Cay");
       _regionNamesByRegion.Add("BS", cc_reg_BS);
-      Dictionary<string, string> cc_reg_BT = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+      var cc_reg_BT = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_BT.Add("05", "Bumthang");
       cc_reg_BT.Add("06", "Chhukha");
       cc_reg_BT.Add("07", "Chirang");
@@ -540,7 +565,8 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_BT.Add("21", "Tongsa");
       cc_reg_BT.Add("22", "Wangdi Phodrang");
       _regionNamesByRegion.Add("BT", cc_reg_BT);
-      Dictionary<string, string> cc_reg_BW = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+      var cc_reg_BW = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_BW.Add("01", "Central");
       cc_reg_BW.Add("03", "Ghanzi");
       cc_reg_BW.Add("04", "Kgalagadi");
@@ -551,7 +577,8 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_BW.Add("10", "Southern");
       cc_reg_BW.Add("11", "North-West");
       _regionNamesByRegion.Add("BW", cc_reg_BW);
-      Dictionary<string, string> cc_reg_BY = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+      var cc_reg_BY = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_BY.Add("01", "Brestskaya Voblasts'");
       cc_reg_BY.Add("02", "Homyel'skaya Voblasts'");
       cc_reg_BY.Add("03", "Hrodzyenskaya Voblasts'");
@@ -560,7 +587,8 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_BY.Add("06", "Mahilyowskaya Voblasts'");
       cc_reg_BY.Add("07", "Vitsyebskaya Voblasts'");
       _regionNamesByRegion.Add("BY", cc_reg_BY);
-      Dictionary<string, string> cc_reg_BZ = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+      var cc_reg_BZ = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_BZ.Add("01", "Belize");
       cc_reg_BZ.Add("02", "Cayo");
       cc_reg_BZ.Add("03", "Corozal");
@@ -568,7 +596,8 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_BZ.Add("05", "Stann Creek");
       cc_reg_BZ.Add("06", "Toledo");
       _regionNamesByRegion.Add("BZ", cc_reg_BZ);
-      Dictionary<string, string> cc_reg_CA = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+      var cc_reg_CA = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_CA.Add("AB", "Alberta");
       cc_reg_CA.Add("BC", "British Columbia");
       cc_reg_CA.Add("MB", "Manitoba");
@@ -583,7 +612,8 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_CA.Add("SK", "Saskatchewan");
       cc_reg_CA.Add("YT", "Yukon Territory");
       _regionNamesByRegion.Add("CA", cc_reg_CA);
-      Dictionary<string, string> cc_reg_CD = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+      var cc_reg_CD = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_CD.Add("01", "Bandundu");
       cc_reg_CD.Add("02", "Equateur");
       cc_reg_CD.Add("04", "Kasai-Oriental");
@@ -595,7 +625,8 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_CD.Add("11", "Nord-Kivu");
       cc_reg_CD.Add("12", "Sud-Kivu");
       _regionNamesByRegion.Add("CD", cc_reg_CD);
-      Dictionary<string, string> cc_reg_CF = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+      var cc_reg_CF = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_CF.Add("01", "Bamingui-Bangoran");
       cc_reg_CF.Add("02", "Basse-Kotto");
       cc_reg_CF.Add("03", "Haute-Kotto");
@@ -614,7 +645,8 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_CF.Add("17", "Ombella-Mpoko");
       cc_reg_CF.Add("18", "Bangui");
       _regionNamesByRegion.Add("CF", cc_reg_CF);
-      Dictionary<string, string> cc_reg_CG = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+      var cc_reg_CG = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_CG.Add("01", "Bouenza");
       cc_reg_CG.Add("04", "Kouilou");
       cc_reg_CG.Add("05", "Lekoumou");
@@ -627,7 +659,8 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_CG.Add("13", "Cuvette");
       cc_reg_CG.Add("14", "Cuvette-Ouest");
       _regionNamesByRegion.Add("CG", cc_reg_CG);
-      Dictionary<string, string> cc_reg_CH = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+      var cc_reg_CH = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_CH.Add("01", "Aargau");
       cc_reg_CH.Add("02", "Ausser-Rhoden");
       cc_reg_CH.Add("03", "Basel-Landschaft");
@@ -655,7 +688,8 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_CH.Add("25", "Zurich");
       cc_reg_CH.Add("26", "Jura");
       _regionNamesByRegion.Add("CH", cc_reg_CH);
-      Dictionary<string, string> cc_reg_CI = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+      var cc_reg_CI = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_CI.Add("74", "Agneby");
       cc_reg_CI.Add("75", "Bafing");
       cc_reg_CI.Add("76", "Bas-Sassandra");
@@ -676,7 +710,8 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_CI.Add("91", "Worodougou");
       cc_reg_CI.Add("92", "Zanzan");
       _regionNamesByRegion.Add("CI", cc_reg_CI);
-      Dictionary<string, string> cc_reg_CL = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+      var cc_reg_CL = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_CL.Add("01", "Valparaiso");
       cc_reg_CL.Add("02", "Aisen del General Carlos Ibanez del Campo");
       cc_reg_CL.Add("03", "Antofagasta");
@@ -695,7 +730,8 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_CL.Add("16", "Arica y Parinacota");
       cc_reg_CL.Add("17", "Los Rios");
       _regionNamesByRegion.Add("CL", cc_reg_CL);
-      Dictionary<string, string> cc_reg_CM = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+      var cc_reg_CM = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_CM.Add("04", "Est");
       cc_reg_CM.Add("05", "Littoral");
       cc_reg_CM.Add("07", "Nord-Ouest");
@@ -707,7 +743,8 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_CM.Add("13", "Nord");
       cc_reg_CM.Add("14", "Sud");
       _regionNamesByRegion.Add("CM", cc_reg_CM);
-      Dictionary<string, string> cc_reg_CN = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+      var cc_reg_CN = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_CN.Add("01", "Anhui");
       cc_reg_CN.Add("02", "Zhejiang");
       cc_reg_CN.Add("03", "Jiangxi");
@@ -740,7 +777,7 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_CN.Add("32", "Sichuan");
       cc_reg_CN.Add("33", "Chongqing");
       _regionNamesByRegion.Add("CN", cc_reg_CN);
-      Dictionary<string, string> cc_reg_CO = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      var cc_reg_CO = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_CO.Add("01", "Amazonas");
       cc_reg_CO.Add("02", "Antioquia");
       cc_reg_CO.Add("03", "Arauca");
@@ -775,7 +812,7 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_CO.Add("37", "Caldas");
       cc_reg_CO.Add("38", "Magdalena");
       _regionNamesByRegion.Add("CO", cc_reg_CO);
-      Dictionary<string, string> cc_reg_CR = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      var cc_reg_CR = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_CR.Add("01", "Alajuela");
       cc_reg_CR.Add("02", "Cartago");
       cc_reg_CR.Add("03", "Guanacaste");
@@ -784,7 +821,7 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_CR.Add("07", "Puntarenas");
       cc_reg_CR.Add("08", "San Jose");
       _regionNamesByRegion.Add("CR", cc_reg_CR);
-      Dictionary<string, string> cc_reg_CU = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      var cc_reg_CU = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_CU.Add("01", "Pinar del Rio");
       cc_reg_CU.Add("02", "Ciudad de la Habana");
       cc_reg_CU.Add("03", "Matanzas");
@@ -801,7 +838,7 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_CU.Add("15", "Santiago de Cuba");
       cc_reg_CU.Add("16", "Villa Clara");
       _regionNamesByRegion.Add("CU", cc_reg_CU);
-      Dictionary<string, string> cc_reg_CV = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      var cc_reg_CV = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_CV.Add("01", "Boa Vista");
       cc_reg_CV.Add("02", "Brava");
       cc_reg_CV.Add("04", "Maio");
@@ -819,7 +856,7 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_CV.Add("19", "Sao Miguel");
       cc_reg_CV.Add("20", "Tarrafal");
       _regionNamesByRegion.Add("CV", cc_reg_CV);
-      Dictionary<string, string> cc_reg_CY = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      var cc_reg_CY = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_CY.Add("01", "Famagusta");
       cc_reg_CY.Add("02", "Kyrenia");
       cc_reg_CY.Add("03", "Larnaca");
@@ -827,7 +864,7 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_CY.Add("05", "Limassol");
       cc_reg_CY.Add("06", "Paphos");
       _regionNamesByRegion.Add("CY", cc_reg_CY);
-      Dictionary<string, string> cc_reg_CZ = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      var cc_reg_CZ = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_CZ.Add("52", "Hlavni mesto Praha");
       cc_reg_CZ.Add("78", "Jihomoravsky kraj");
       cc_reg_CZ.Add("79", "Jihocesky kraj");
@@ -843,7 +880,7 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_CZ.Add("89", "Ustecky kraj");
       cc_reg_CZ.Add("90", "Zlinsky kraj");
       _regionNamesByRegion.Add("CZ", cc_reg_CZ);
-      Dictionary<string, string> cc_reg_DE = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      var cc_reg_DE = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_DE.Add("01", "Baden-Wurttemberg");
       cc_reg_DE.Add("02", "Bayern");
       cc_reg_DE.Add("03", "Bremen");
@@ -861,7 +898,7 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_DE.Add("15", "Thuringen");
       cc_reg_DE.Add("16", "Berlin");
       _regionNamesByRegion.Add("DE", cc_reg_DE);
-      Dictionary<string, string> cc_reg_DJ = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      var cc_reg_DJ = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_DJ.Add("01", "Ali Sabieh");
       cc_reg_DJ.Add("04", "Obock");
       cc_reg_DJ.Add("05", "Tadjoura");
@@ -869,14 +906,14 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_DJ.Add("07", "Djibouti");
       cc_reg_DJ.Add("08", "Arta");
       _regionNamesByRegion.Add("DJ", cc_reg_DJ);
-      Dictionary<string, string> cc_reg_DK = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      var cc_reg_DK = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_DK.Add("17", "Hovedstaden");
       cc_reg_DK.Add("18", "Midtjylland");
       cc_reg_DK.Add("19", "Nordjylland");
       cc_reg_DK.Add("20", "Sjelland");
       cc_reg_DK.Add("21", "Syddanmark");
       _regionNamesByRegion.Add("DK", cc_reg_DK);
-      Dictionary<string, string> cc_reg_DM = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      var cc_reg_DM = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_DM.Add("02", "Saint Andrew");
       cc_reg_DM.Add("03", "Saint David");
       cc_reg_DM.Add("04", "Saint George");
@@ -888,7 +925,7 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_DM.Add("10", "Saint Paul");
       cc_reg_DM.Add("11", "Saint Peter");
       _regionNamesByRegion.Add("DM", cc_reg_DM);
-      Dictionary<string, string> cc_reg_DO = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      var cc_reg_DO = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_DO.Add("01", "Azua");
       cc_reg_DO.Add("02", "Baoruco");
       cc_reg_DO.Add("03", "Barahona");
@@ -924,7 +961,7 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_DO.Add("36", "San Jose de Ocoa");
       cc_reg_DO.Add("37", "Santo Domingo");
       _regionNamesByRegion.Add("DO", cc_reg_DO);
-      Dictionary<string, string> cc_reg_DZ = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      var cc_reg_DZ = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_DZ.Add("01", "Alger");
       cc_reg_DZ.Add("03", "Batna");
       cc_reg_DZ.Add("04", "Constantine");
@@ -974,7 +1011,7 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_DZ.Add("55", "Tipaza");
       cc_reg_DZ.Add("56", "Tissemsilt");
       _regionNamesByRegion.Add("DZ", cc_reg_DZ);
-      Dictionary<string, string> cc_reg_EC = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      var cc_reg_EC = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_EC.Add("01", "Galapagos");
       cc_reg_EC.Add("02", "Azuay");
       cc_reg_EC.Add("03", "Bolivar");
@@ -998,7 +1035,7 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_EC.Add("23", "Napo");
       cc_reg_EC.Add("24", "Orellana");
       _regionNamesByRegion.Add("EC", cc_reg_EC);
-      Dictionary<string, string> cc_reg_EE = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      var cc_reg_EE = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_EE.Add("01", "Harjumaa");
       cc_reg_EE.Add("02", "Hiiumaa");
       cc_reg_EE.Add("03", "Ida-Virumaa");
@@ -1021,7 +1058,7 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_EE.Add("20", "Viljandimaa");
       cc_reg_EE.Add("21", "Vorumaa");
       _regionNamesByRegion.Add("EE", cc_reg_EE);
-      Dictionary<string, string> cc_reg_EG = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      var cc_reg_EG = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_EG.Add("01", "Ad Daqahliyah");
       cc_reg_EG.Add("02", "Al Bahr al Ahmar");
       cc_reg_EG.Add("03", "Al Buhayrah");
@@ -1049,7 +1086,7 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_EG.Add("26", "Janub Sina'");
       cc_reg_EG.Add("27", "Shamal Sina'");
       _regionNamesByRegion.Add("EG", cc_reg_EG);
-      Dictionary<string, string> cc_reg_ER = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      var cc_reg_ER = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_ER.Add("01", "Anseba");
       cc_reg_ER.Add("02", "Debub");
       cc_reg_ER.Add("03", "Debubawi K'eyih Bahri");
@@ -1057,7 +1094,7 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_ER.Add("05", "Ma'akel");
       cc_reg_ER.Add("06", "Semenawi K'eyih Bahri");
       _regionNamesByRegion.Add("ER", cc_reg_ER);
-      Dictionary<string, string> cc_reg_ES = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      var cc_reg_ES = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_ES.Add("07", "Islas Baleares");
       cc_reg_ES.Add("27", "La Rioja");
       cc_reg_ES.Add("29", "Madrid");
@@ -1076,7 +1113,7 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_ES.Add("59", "Pais Vasco");
       cc_reg_ES.Add("60", "Comunidad Valenciana");
       _regionNamesByRegion.Add("ES", cc_reg_ES);
-      Dictionary<string, string> cc_reg_ET = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      var cc_reg_ET = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_ET.Add("44", "Adis Abeba");
       cc_reg_ET.Add("45", "Afar");
       cc_reg_ET.Add("46", "Amara");
@@ -1089,7 +1126,7 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_ET.Add("53", "Tigray");
       cc_reg_ET.Add("54", "YeDebub Biheroch Bihereseboch na Hizboch");
       _regionNamesByRegion.Add("ET", cc_reg_ET);
-      Dictionary<string, string> cc_reg_FI = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      var cc_reg_FI = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_FI.Add("01", "Aland");
       cc_reg_FI.Add("06", "Lapland");
       cc_reg_FI.Add("08", "Oulu");
@@ -1097,20 +1134,20 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_FI.Add("14", "Eastern Finland");
       cc_reg_FI.Add("15", "Western Finland");
       _regionNamesByRegion.Add("FI", cc_reg_FI);
-      Dictionary<string, string> cc_reg_FJ = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      var cc_reg_FJ = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_FJ.Add("01", "Central");
       cc_reg_FJ.Add("02", "Eastern");
       cc_reg_FJ.Add("03", "Northern");
       cc_reg_FJ.Add("04", "Rotuma");
       cc_reg_FJ.Add("05", "Western");
       _regionNamesByRegion.Add("FJ", cc_reg_FJ);
-      Dictionary<string, string> cc_reg_FM = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      var cc_reg_FM = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_FM.Add("01", "Kosrae");
       cc_reg_FM.Add("02", "Pohnpei");
       cc_reg_FM.Add("03", "Chuuk");
       cc_reg_FM.Add("04", "Yap");
       _regionNamesByRegion.Add("FM", cc_reg_FM);
-      Dictionary<string, string> cc_reg_FR = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      var cc_reg_FR = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_FR.Add("97", "Aquitaine");
       cc_reg_FR.Add("98", "Auvergne");
       cc_reg_FR.Add("99", "Basse-Normandie");
@@ -1134,7 +1171,7 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_FR.Add("B9", "Rhone-Alpes");
       cc_reg_FR.Add("C1", "Alsace");
       _regionNamesByRegion.Add("FR", cc_reg_FR);
-      Dictionary<string, string> cc_reg_GA = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      var cc_reg_GA = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_GA.Add("01", "Estuaire");
       cc_reg_GA.Add("02", "Haut-Ogooue");
       cc_reg_GA.Add("03", "Moyen-Ogooue");
@@ -1145,7 +1182,7 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_GA.Add("08", "Ogooue-Maritime");
       cc_reg_GA.Add("09", "Woleu-Ntem");
       _regionNamesByRegion.Add("GA", cc_reg_GA);
-      Dictionary<string, string> cc_reg_GB = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      var cc_reg_GB = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_GB.Add("A1", "Barking and Dagenham");
       cc_reg_GB.Add("A2", "Barnet");
       cc_reg_GB.Add("A3", "Barnsley");
@@ -1381,7 +1418,7 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_GB.Add("Z8", "Cheshire West and Chester");
       cc_reg_GB.Add("Z9", "Isles of Scilly");
       _regionNamesByRegion.Add("GB", cc_reg_GB);
-      Dictionary<string, string> cc_reg_GD = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      var cc_reg_GD = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_GD.Add("01", "Saint Andrew");
       cc_reg_GD.Add("02", "Saint David");
       cc_reg_GD.Add("03", "Saint George");
@@ -1389,7 +1426,7 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_GD.Add("05", "Saint Mark");
       cc_reg_GD.Add("06", "Saint Patrick");
       _regionNamesByRegion.Add("GD", cc_reg_GD);
-      Dictionary<string, string> cc_reg_GE = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      var cc_reg_GE = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_GE.Add("01", "Abashis Raioni");
       cc_reg_GE.Add("02", "Abkhazia");
       cc_reg_GE.Add("03", "Adigenis Raioni");
@@ -1455,7 +1492,7 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_GE.Add("63", "Zugdidi");
       cc_reg_GE.Add("64", "Zugdidis Raioni");
       _regionNamesByRegion.Add("GE", cc_reg_GE);
-      Dictionary<string, string> cc_reg_GH = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      var cc_reg_GH = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_GH.Add("01", "Greater Accra");
       cc_reg_GH.Add("02", "Ashanti");
       cc_reg_GH.Add("03", "Brong-Ahafo");
@@ -1467,12 +1504,12 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_GH.Add("10", "Upper East");
       cc_reg_GH.Add("11", "Upper West");
       _regionNamesByRegion.Add("GH", cc_reg_GH);
-      Dictionary<string, string> cc_reg_GL = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      var cc_reg_GL = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_GL.Add("01", "Nordgronland");
       cc_reg_GL.Add("02", "Ostgronland");
       cc_reg_GL.Add("03", "Vestgronland");
       _regionNamesByRegion.Add("GL", cc_reg_GL);
-      Dictionary<string, string> cc_reg_GM = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      var cc_reg_GM = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_GM.Add("01", "Banjul");
       cc_reg_GM.Add("02", "Lower River");
       cc_reg_GM.Add("03", "Central River");
@@ -1480,7 +1517,7 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_GM.Add("05", "Western");
       cc_reg_GM.Add("07", "North Bank");
       _regionNamesByRegion.Add("GM", cc_reg_GM);
-      Dictionary<string, string> cc_reg_GN = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      var cc_reg_GN = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_GN.Add("01", "Beyla");
       cc_reg_GN.Add("02", "Boffa");
       cc_reg_GN.Add("03", "Boke");
@@ -1516,7 +1553,7 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_GN.Add("38", "Nzerekore");
       cc_reg_GN.Add("39", "Siguiri");
       _regionNamesByRegion.Add("GN", cc_reg_GN);
-      Dictionary<string, string> cc_reg_GQ = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      var cc_reg_GQ = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_GQ.Add("03", "Annobon");
       cc_reg_GQ.Add("04", "Bioko Norte");
       cc_reg_GQ.Add("05", "Bioko Sur");
@@ -1525,7 +1562,7 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_GQ.Add("08", "Litoral");
       cc_reg_GQ.Add("09", "Wele-Nzas");
       _regionNamesByRegion.Add("GQ", cc_reg_GQ);
-      Dictionary<string, string> cc_reg_GR = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      var cc_reg_GR = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_GR.Add("01", "Evros");
       cc_reg_GR.Add("02", "Rodhopi");
       cc_reg_GR.Add("03", "Xanthi");
@@ -1578,7 +1615,7 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_GR.Add("50", "Khios");
       cc_reg_GR.Add("51", "Lesvos");
       _regionNamesByRegion.Add("GR", cc_reg_GR);
-      Dictionary<string, string> cc_reg_GT = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      var cc_reg_GT = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_GT.Add("01", "Alta Verapaz");
       cc_reg_GT.Add("02", "Baja Verapaz");
       cc_reg_GT.Add("03", "Chimaltenango");
@@ -1602,7 +1639,7 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_GT.Add("21", "Totonicapan");
       cc_reg_GT.Add("22", "Zacapa");
       _regionNamesByRegion.Add("GT", cc_reg_GT);
-      Dictionary<string, string> cc_reg_GW = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      var cc_reg_GW = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_GW.Add("01", "Bafata");
       cc_reg_GW.Add("02", "Quinara");
       cc_reg_GW.Add("04", "Oio");
@@ -1613,7 +1650,7 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_GW.Add("11", "Bissau");
       cc_reg_GW.Add("12", "Biombo");
       _regionNamesByRegion.Add("GW", cc_reg_GW);
-      Dictionary<string, string> cc_reg_GY = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      var cc_reg_GY = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_GY.Add("10", "Barima-Waini");
       cc_reg_GY.Add("11", "Cuyuni-Mazaruni");
       cc_reg_GY.Add("12", "Demerara-Mahaica");
@@ -1625,7 +1662,7 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_GY.Add("18", "Upper Demerara-Berbice");
       cc_reg_GY.Add("19", "Upper Takutu-Upper Essequibo");
       _regionNamesByRegion.Add("GY", cc_reg_GY);
-      Dictionary<string, string> cc_reg_HN = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      var cc_reg_HN = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_HN.Add("01", "Atlantida");
       cc_reg_HN.Add("02", "Choluteca");
       cc_reg_HN.Add("03", "Colon");
@@ -1645,7 +1682,7 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_HN.Add("17", "Valle");
       cc_reg_HN.Add("18", "Yoro");
       _regionNamesByRegion.Add("HN", cc_reg_HN);
-      Dictionary<string, string> cc_reg_HR = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      var cc_reg_HR = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_HR.Add("01", "Bjelovarsko-Bilogorska");
       cc_reg_HR.Add("02", "Brodsko-Posavska");
       cc_reg_HR.Add("03", "Dubrovacko-Neretvanska");
@@ -1668,7 +1705,7 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_HR.Add("20", "Zagrebacka");
       cc_reg_HR.Add("21", "Grad Zagreb");
       _regionNamesByRegion.Add("HR", cc_reg_HR);
-      Dictionary<string, string> cc_reg_HT = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      var cc_reg_HT = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_HT.Add("03", "Nord-Ouest");
       cc_reg_HT.Add("06", "Artibonite");
       cc_reg_HT.Add("07", "Centre");
@@ -1680,7 +1717,7 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_HT.Add("14", "Grand' Anse");
       cc_reg_HT.Add("15", "Nippes");
       _regionNamesByRegion.Add("HT", cc_reg_HT);
-      Dictionary<string, string> cc_reg_HU = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      var cc_reg_HU = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_HU.Add("01", "Bacs-Kiskun");
       cc_reg_HU.Add("02", "Baranya");
       cc_reg_HU.Add("03", "Bekes");
@@ -1725,7 +1762,7 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_HU.Add("42", "Szekszard");
       cc_reg_HU.Add("43", "Erd");
       _regionNamesByRegion.Add("HU", cc_reg_HU);
-      Dictionary<string, string> cc_reg_ID = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      var cc_reg_ID = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_ID.Add("01", "Aceh");
       cc_reg_ID.Add("02", "Bali");
       cc_reg_ID.Add("03", "Bengkulu");
@@ -1760,7 +1797,7 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_ID.Add("40", "Kepulauan Riau");
       cc_reg_ID.Add("41", "Sulawesi Barat");
       _regionNamesByRegion.Add("ID", cc_reg_ID);
-      Dictionary<string, string> cc_reg_IE = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      var cc_reg_IE = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_IE.Add("01", "Carlow");
       cc_reg_IE.Add("02", "Cavan");
       cc_reg_IE.Add("03", "Clare");
@@ -1788,7 +1825,7 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_IE.Add("30", "Wexford");
       cc_reg_IE.Add("31", "Wicklow");
       _regionNamesByRegion.Add("IE", cc_reg_IE);
-      Dictionary<string, string> cc_reg_IL = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      var cc_reg_IL = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_IL.Add("01", "HaDarom");
       cc_reg_IL.Add("02", "HaMerkaz");
       cc_reg_IL.Add("03", "HaZafon");
@@ -1796,7 +1833,7 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_IL.Add("05", "Tel Aviv");
       cc_reg_IL.Add("06", "Yerushalayim");
       _regionNamesByRegion.Add("IL", cc_reg_IL);
-      Dictionary<string, string> cc_reg_IN = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      var cc_reg_IN = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_IN.Add("01", "Andaman and Nicobar Islands");
       cc_reg_IN.Add("02", "Andhra Pradesh");
       cc_reg_IN.Add("03", "Assam");
@@ -1833,7 +1870,7 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_IN.Add("38", "Jharkhand");
       cc_reg_IN.Add("39", "Uttarakhand");
       _regionNamesByRegion.Add("IN", cc_reg_IN);
-      Dictionary<string, string> cc_reg_IQ = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      var cc_reg_IQ = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_IQ.Add("01", "Al Anbar");
       cc_reg_IQ.Add("02", "Al Basrah");
       cc_reg_IQ.Add("03", "Al Muthanna");
@@ -1853,7 +1890,7 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_IQ.Add("17", "An Najaf");
       cc_reg_IQ.Add("18", "Salah ad Din");
       _regionNamesByRegion.Add("IQ", cc_reg_IQ);
-      Dictionary<string, string> cc_reg_IR = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      var cc_reg_IR = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_IR.Add("01", "Azarbayjan-e Bakhtari");
       cc_reg_IR.Add("03", "Chahar Mahall va Bakhtiari");
       cc_reg_IR.Add("04", "Sistan va Baluchestan");
@@ -1895,7 +1932,7 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_IR.Add("43", "Khorasan-e Shemali");
       cc_reg_IR.Add("44", "Alborz");
       _regionNamesByRegion.Add("IR", cc_reg_IR);
-      Dictionary<string, string> cc_reg_IS = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      var cc_reg_IS = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_IS.Add("03", "Arnessysla");
       cc_reg_IS.Add("05", "Austur-Hunavatnssysla");
       cc_reg_IS.Add("06", "Austur-Skaftafellssysla");
@@ -1925,7 +1962,7 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_IS.Add("44", "Vestfiroir");
       cc_reg_IS.Add("45", "Vesturland");
       _regionNamesByRegion.Add("IS", cc_reg_IS);
-      Dictionary<string, string> cc_reg_IT = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      var cc_reg_IT = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_IT.Add("01", "Abruzzi");
       cc_reg_IT.Add("02", "Basilicata");
       cc_reg_IT.Add("03", "Calabria");
@@ -1947,7 +1984,7 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_IT.Add("19", "Valle d'Aosta");
       cc_reg_IT.Add("20", "Veneto");
       _regionNamesByRegion.Add("IT", cc_reg_IT);
-      Dictionary<string, string> cc_reg_JM = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      var cc_reg_JM = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_JM.Add("01", "Clarendon");
       cc_reg_JM.Add("02", "Hanover");
       cc_reg_JM.Add("04", "Manchester");
@@ -1963,7 +2000,7 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_JM.Add("16", "Westmoreland");
       cc_reg_JM.Add("17", "Kingston");
       _regionNamesByRegion.Add("JM", cc_reg_JM);
-      Dictionary<string, string> cc_reg_JO = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      var cc_reg_JO = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_JO.Add("02", "Al Balqa'");
       cc_reg_JO.Add("09", "Al Karak");
       cc_reg_JO.Add("12", "At Tafilah");
@@ -1977,7 +2014,7 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_JO.Add("22", "Jarash");
       cc_reg_JO.Add("23", "Madaba");
       _regionNamesByRegion.Add("JO", cc_reg_JO);
-      Dictionary<string, string> cc_reg_JP = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      var cc_reg_JP = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_JP.Add("01", "Aichi");
       cc_reg_JP.Add("02", "Akita");
       cc_reg_JP.Add("03", "Aomori");
@@ -2026,7 +2063,7 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_JP.Add("46", "Yamanashi");
       cc_reg_JP.Add("47", "Okinawa");
       _regionNamesByRegion.Add("JP", cc_reg_JP);
-      Dictionary<string, string> cc_reg_KE = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      var cc_reg_KE = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_KE.Add("01", "Central");
       cc_reg_KE.Add("02", "Coast");
       cc_reg_KE.Add("03", "Eastern");
@@ -2036,7 +2073,7 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_KE.Add("08", "Rift Valley");
       cc_reg_KE.Add("09", "Western");
       _regionNamesByRegion.Add("KE", cc_reg_KE);
-      Dictionary<string, string> cc_reg_KG = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      var cc_reg_KG = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_KG.Add("01", "Bishkek");
       cc_reg_KG.Add("02", "Chuy");
       cc_reg_KG.Add("03", "Jalal-Abad");
@@ -2047,7 +2084,7 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_KG.Add("08", "Osh");
       cc_reg_KG.Add("09", "Batken");
       _regionNamesByRegion.Add("KG", cc_reg_KG);
-      Dictionary<string, string> cc_reg_KH = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      var cc_reg_KH = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_KH.Add("01", "Batdambang");
       cc_reg_KH.Add("02", "Kampong Cham");
       cc_reg_KH.Add("03", "Kampong Chhnang");
@@ -2071,17 +2108,17 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_KH.Add("29", "Batdambang");
       cc_reg_KH.Add("30", "Pailin");
       _regionNamesByRegion.Add("KH", cc_reg_KH);
-      Dictionary<string, string> cc_reg_KI = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      var cc_reg_KI = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_KI.Add("01", "Gilbert Islands");
       cc_reg_KI.Add("02", "Line Islands");
       cc_reg_KI.Add("03", "Phoenix Islands");
       _regionNamesByRegion.Add("KI", cc_reg_KI);
-      Dictionary<string, string> cc_reg_KM = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      var cc_reg_KM = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_KM.Add("01", "Anjouan");
       cc_reg_KM.Add("02", "Grande Comore");
       cc_reg_KM.Add("03", "Moheli");
       _regionNamesByRegion.Add("KM", cc_reg_KM);
-      Dictionary<string, string> cc_reg_KN = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      var cc_reg_KN = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_KN.Add("01", "Christ Church Nichola Town");
       cc_reg_KN.Add("02", "Saint Anne Sandy Point");
       cc_reg_KN.Add("03", "Saint George Basseterre");
@@ -2097,7 +2134,7 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_KN.Add("13", "Saint Thomas Middle Island");
       cc_reg_KN.Add("15", "Trinity Palmetto Point");
       _regionNamesByRegion.Add("KN", cc_reg_KN);
-      Dictionary<string, string> cc_reg_KP = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      var cc_reg_KP = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_KP.Add("01", "Chagang-do");
       cc_reg_KP.Add("03", "Hamgyong-namdo");
       cc_reg_KP.Add("06", "Hwanghae-namdo");
@@ -2112,7 +2149,7 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_KP.Add("17", "Hamgyong-bukto");
       cc_reg_KP.Add("18", "Najin Sonbong-si");
       _regionNamesByRegion.Add("KP", cc_reg_KP);
-      Dictionary<string, string> cc_reg_KR = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      var cc_reg_KR = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_KR.Add("01", "Cheju-do");
       cc_reg_KR.Add("03", "Cholla-bukto");
       cc_reg_KR.Add("05", "Ch'ungch'ong-bukto");
@@ -2130,7 +2167,7 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_KR.Add("20", "Kyongsang-namdo");
       cc_reg_KR.Add("21", "Ulsan-gwangyoksi");
       _regionNamesByRegion.Add("KR", cc_reg_KR);
-      Dictionary<string, string> cc_reg_KW = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      var cc_reg_KW = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_KW.Add("01", "Al Ahmadi");
       cc_reg_KW.Add("02", "Al Kuwayt");
       cc_reg_KW.Add("05", "Al Jahra");
@@ -2138,7 +2175,7 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_KW.Add("08", "Hawalli");
       cc_reg_KW.Add("09", "Mubarak al Kabir");
       _regionNamesByRegion.Add("KW", cc_reg_KW);
-      Dictionary<string, string> cc_reg_KY = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      var cc_reg_KY = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_KY.Add("01", "Creek");
       cc_reg_KY.Add("02", "Eastern");
       cc_reg_KY.Add("03", "Midland");
@@ -2148,7 +2185,7 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_KY.Add("07", "West End");
       cc_reg_KY.Add("08", "Western");
       _regionNamesByRegion.Add("KY", cc_reg_KY);
-      Dictionary<string, string> cc_reg_KZ = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      var cc_reg_KZ = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_KZ.Add("01", "Almaty");
       cc_reg_KZ.Add("02", "Almaty City");
       cc_reg_KZ.Add("03", "Aqmola");
@@ -2167,7 +2204,7 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_KZ.Add("16", "North Kazakhstan");
       cc_reg_KZ.Add("17", "Zhambyl");
       _regionNamesByRegion.Add("KZ", cc_reg_KZ);
-      Dictionary<string, string> cc_reg_LA = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      var cc_reg_LA = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_LA.Add("01", "Attapu");
       cc_reg_LA.Add("02", "Champasak");
       cc_reg_LA.Add("03", "Houaphan");
@@ -2182,7 +2219,7 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_LA.Add("14", "Xiangkhoang");
       cc_reg_LA.Add("17", "Louangphrabang");
       _regionNamesByRegion.Add("LA", cc_reg_LA);
-      Dictionary<string, string> cc_reg_LB = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      var cc_reg_LB = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_LB.Add("01", "Beqaa");
       cc_reg_LB.Add("02", "Al Janub");
       cc_reg_LB.Add("03", "Liban-Nord");
@@ -2195,7 +2232,7 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_LB.Add("10", "Aakk,r");
       cc_reg_LB.Add("11", "Baalbek-Hermel");
       _regionNamesByRegion.Add("LB", cc_reg_LB);
-      Dictionary<string, string> cc_reg_LC = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      var cc_reg_LC = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_LC.Add("01", "Anse-la-Raye");
       cc_reg_LC.Add("02", "Dauphin");
       cc_reg_LC.Add("03", "Castries");
@@ -2208,7 +2245,7 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_LC.Add("10", "Vieux-Fort");
       cc_reg_LC.Add("11", "Praslin");
       _regionNamesByRegion.Add("LC", cc_reg_LC);
-      Dictionary<string, string> cc_reg_LI = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      var cc_reg_LI = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_LI.Add("01", "Balzers");
       cc_reg_LI.Add("02", "Eschen");
       cc_reg_LI.Add("03", "Gamprin");
@@ -2223,7 +2260,7 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_LI.Add("21", "Gbarpolu");
       cc_reg_LI.Add("22", "River Gee");
       _regionNamesByRegion.Add("LI", cc_reg_LI);
-      Dictionary<string, string> cc_reg_LK = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      var cc_reg_LK = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_LK.Add("29", "Central");
       cc_reg_LK.Add("30", "North Central");
       cc_reg_LK.Add("32", "North Western");
@@ -2234,7 +2271,7 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_LK.Add("37", "Eastern");
       cc_reg_LK.Add("38", "Northern");
       _regionNamesByRegion.Add("LK", cc_reg_LK);
-      Dictionary<string, string> cc_reg_LR = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      var cc_reg_LR = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_LR.Add("01", "Bong");
       cc_reg_LR.Add("04", "Grand Cape Mount");
       cc_reg_LR.Add("05", "Lofa");
@@ -2253,7 +2290,7 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_LR.Add("21", "Gbarpolu");
       cc_reg_LR.Add("22", "River Gee");
       _regionNamesByRegion.Add("LR", cc_reg_LR);
-      Dictionary<string, string> cc_reg_LS = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      var cc_reg_LS = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_LS.Add("10", "Berea");
       cc_reg_LS.Add("11", "Butha-Buthe");
       cc_reg_LS.Add("12", "Leribe");
@@ -2265,7 +2302,7 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_LS.Add("18", "Quthing");
       cc_reg_LS.Add("19", "Thaba-Tseka");
       _regionNamesByRegion.Add("LS", cc_reg_LS);
-      Dictionary<string, string> cc_reg_LT = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      var cc_reg_LT = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_LT.Add("56", "Alytaus Apskritis");
       cc_reg_LT.Add("57", "Kauno Apskritis");
       cc_reg_LT.Add("58", "Klaipedos Apskritis");
@@ -2277,12 +2314,12 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_LT.Add("64", "Utenos Apskritis");
       cc_reg_LT.Add("65", "Vilniaus Apskritis");
       _regionNamesByRegion.Add("LT", cc_reg_LT);
-      Dictionary<string, string> cc_reg_LU = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      var cc_reg_LU = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_LU.Add("01", "Diekirch");
       cc_reg_LU.Add("02", "Grevenmacher");
       cc_reg_LU.Add("03", "Luxembourg");
       _regionNamesByRegion.Add("LU", cc_reg_LU);
-      Dictionary<string, string> cc_reg_LV = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      var cc_reg_LV = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_LV.Add("01", "Aizkraukles");
       cc_reg_LV.Add("02", "Aluksnes");
       cc_reg_LV.Add("03", "Balvu");
@@ -2317,7 +2354,7 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_LV.Add("32", "Ventspils");
       cc_reg_LV.Add("33", "Ventspils");
       _regionNamesByRegion.Add("LV", cc_reg_LV);
-      Dictionary<string, string> cc_reg_LY = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      var cc_reg_LY = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_LY.Add("03", "Al Aziziyah");
       cc_reg_LY.Add("05", "Al Jufrah");
       cc_reg_LY.Add("08", "Al Kufrah");
@@ -2344,7 +2381,7 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_LY.Add("61", "Tarabulus");
       cc_reg_LY.Add("62", "Yafran");
       _regionNamesByRegion.Add("LY", cc_reg_LY);
-      Dictionary<string, string> cc_reg_MA = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      var cc_reg_MA = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_MA.Add("45", "Grand Casablanca");
       cc_reg_MA.Add("46", "Fes-Boulemane");
       cc_reg_MA.Add("47", "Marrakech-Tensift-Al Haouz");
@@ -2361,12 +2398,12 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_MA.Add("58", "Taza-Al Hoceima-Taounate");
       cc_reg_MA.Add("59", "La,youne-Boujdour-Sakia El Hamra");
       _regionNamesByRegion.Add("MA", cc_reg_MA);
-      Dictionary<string, string> cc_reg_MC = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      var cc_reg_MC = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_MC.Add("01", "La Condamine");
       cc_reg_MC.Add("02", "Monaco");
       cc_reg_MC.Add("03", "Monte-Carlo");
       _regionNamesByRegion.Add("MC", cc_reg_MC);
-      Dictionary<string, string> cc_reg_MD = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      var cc_reg_MD = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_MD.Add("51", "Gagauzia");
       cc_reg_MD.Add("57", "Chisinau");
       cc_reg_MD.Add("58", "Stinga Nistrului");
@@ -2405,7 +2442,7 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_MD.Add("91", "Telenesti");
       cc_reg_MD.Add("92", "Ungheni");
       _regionNamesByRegion.Add("MD", cc_reg_MD);
-      Dictionary<string, string> cc_reg_MG = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      var cc_reg_MG = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_MG.Add("01", "Antsiranana");
       cc_reg_MG.Add("02", "Fianarantsoa");
       cc_reg_MG.Add("03", "Mahajanga");
@@ -2413,7 +2450,7 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_MG.Add("05", "Antananarivo");
       cc_reg_MG.Add("06", "Toliara");
       _regionNamesByRegion.Add("MG", cc_reg_MG);
-      Dictionary<string, string> cc_reg_MK = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      var cc_reg_MK = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_MK.Add("01", "Aracinovo");
       cc_reg_MK.Add("02", "Bac");
       cc_reg_MK.Add("03", "Belcista");
@@ -2538,7 +2575,7 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_MK.Add("C5", "Zletovo");
       cc_reg_MK.Add("C6", "Zrnovci");
       _regionNamesByRegion.Add("MK", cc_reg_MK);
-      Dictionary<string, string> cc_reg_ML = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      var cc_reg_ML = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_ML.Add("01", "Bamako");
       cc_reg_ML.Add("03", "Kayes");
       cc_reg_ML.Add("04", "Mopti");
@@ -2549,7 +2586,7 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_ML.Add("09", "Gao");
       cc_reg_ML.Add("10", "Kidal");
       _regionNamesByRegion.Add("ML", cc_reg_ML);
-      Dictionary<string, string> cc_reg_MM = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      var cc_reg_MM = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_MM.Add("01", "Rakhine State");
       cc_reg_MM.Add("02", "Chin State");
       cc_reg_MM.Add("03", "Irrawaddy");
@@ -2566,7 +2603,7 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_MM.Add("14", "Rangoon");
       cc_reg_MM.Add("17", "Yangon");
       _regionNamesByRegion.Add("MM", cc_reg_MM);
-      Dictionary<string, string> cc_reg_MN = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      var cc_reg_MN = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_MN.Add("01", "Arhangay");
       cc_reg_MN.Add("02", "Bayanhongor");
       cc_reg_MN.Add("03", "Bayan-Olgiy");
@@ -2592,11 +2629,11 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_MN.Add("24", "Govisumber");
       cc_reg_MN.Add("25", "Orhon");
       _regionNamesByRegion.Add("MN", cc_reg_MN);
-      Dictionary<string, string> cc_reg_MO = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      var cc_reg_MO = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_MO.Add("01", "Ilhas");
       cc_reg_MO.Add("02", "Macau");
       _regionNamesByRegion.Add("MO", cc_reg_MO);
-      Dictionary<string, string> cc_reg_MR = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      var cc_reg_MR = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_MR.Add("01", "Hodh Ech Chargui");
       cc_reg_MR.Add("02", "Hodh El Gharbi");
       cc_reg_MR.Add("03", "Assaba");
@@ -2610,12 +2647,12 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_MR.Add("11", "Tiris Zemmour");
       cc_reg_MR.Add("12", "Inchiri");
       _regionNamesByRegion.Add("MR", cc_reg_MR);
-      Dictionary<string, string> cc_reg_MS = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      var cc_reg_MS = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_MS.Add("01", "Saint Anthony");
       cc_reg_MS.Add("02", "Saint Georges");
       cc_reg_MS.Add("03", "Saint Peter");
       _regionNamesByRegion.Add("MS", cc_reg_MS);
-      Dictionary<string, string> cc_reg_MU = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      var cc_reg_MU = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_MU.Add("12", "Black River");
       cc_reg_MU.Add("13", "Flacq");
       cc_reg_MU.Add("14", "Grand Port");
@@ -2629,7 +2666,7 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_MU.Add("22", "Cargados Carajos");
       cc_reg_MU.Add("23", "Rodrigues");
       _regionNamesByRegion.Add("MU", cc_reg_MU);
-      Dictionary<string, string> cc_reg_MV = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      var cc_reg_MV = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_MV.Add("01", "Seenu");
       cc_reg_MV.Add("05", "Laamu");
       cc_reg_MV.Add("30", "Alifu");
@@ -2651,7 +2688,7 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_MV.Add("46", "Thaa");
       cc_reg_MV.Add("47", "Vaavu");
       _regionNamesByRegion.Add("MV", cc_reg_MV);
-      Dictionary<string, string> cc_reg_MW = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      var cc_reg_MW = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_MW.Add("02", "Chikwawa");
       cc_reg_MW.Add("03", "Chiradzulu");
       cc_reg_MW.Add("04", "Chitipa");
@@ -2680,7 +2717,7 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_MW.Add("29", "Mulanje");
       cc_reg_MW.Add("30", "Phalombe");
       _regionNamesByRegion.Add("MW", cc_reg_MW);
-      Dictionary<string, string> cc_reg_MX = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      var cc_reg_MX = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_MX.Add("01", "Aguascalientes");
       cc_reg_MX.Add("02", "Baja California");
       cc_reg_MX.Add("03", "Baja California Sur");
@@ -2714,7 +2751,7 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_MX.Add("31", "Yucatan");
       cc_reg_MX.Add("32", "Zacatecas");
       _regionNamesByRegion.Add("MX", cc_reg_MX);
-      Dictionary<string, string> cc_reg_MY = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      var cc_reg_MY = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_MY.Add("01", "Johor");
       cc_reg_MY.Add("02", "Kedah");
       cc_reg_MY.Add("03", "Kelantan");
@@ -2732,7 +2769,7 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_MY.Add("16", "Sabah");
       cc_reg_MY.Add("17", "Putrajaya");
       _regionNamesByRegion.Add("MY", cc_reg_MY);
-      Dictionary<string, string> cc_reg_MZ = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      var cc_reg_MZ = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_MZ.Add("01", "Cabo Delgado");
       cc_reg_MZ.Add("02", "Gaza");
       cc_reg_MZ.Add("03", "Inhambane");
@@ -2745,7 +2782,7 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_MZ.Add("10", "Manica");
       cc_reg_MZ.Add("11", "Maputo");
       _regionNamesByRegion.Add("MZ", cc_reg_MZ);
-      Dictionary<string, string> cc_reg_NA = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      var cc_reg_NA = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_NA.Add("01", "Bethanien");
       cc_reg_NA.Add("02", "Caprivi Oos");
       cc_reg_NA.Add("03", "Boesmanland");
@@ -2785,7 +2822,7 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_NA.Add("38", "Oshikoto");
       cc_reg_NA.Add("39", "Otjozondjupa");
       _regionNamesByRegion.Add("NA", cc_reg_NA);
-      Dictionary<string, string> cc_reg_NE = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      var cc_reg_NE = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_NE.Add("01", "Agadez");
       cc_reg_NE.Add("02", "Diffa");
       cc_reg_NE.Add("03", "Dosso");
@@ -2795,7 +2832,7 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_NE.Add("07", "Zinder");
       cc_reg_NE.Add("08", "Niamey");
       _regionNamesByRegion.Add("NE", cc_reg_NE);
-      Dictionary<string, string> cc_reg_NG = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      var cc_reg_NG = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_NG.Add("05", "Lagos");
       cc_reg_NG.Add("11", "Federal Capital Territory");
       cc_reg_NG.Add("16", "Ogun");
@@ -2834,7 +2871,7 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_NG.Add("56", "Nassarawa");
       cc_reg_NG.Add("57", "Zamfara");
       _regionNamesByRegion.Add("NG", cc_reg_NG);
-      Dictionary<string, string> cc_reg_NI = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      var cc_reg_NI = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_NI.Add("01", "Boaco");
       cc_reg_NI.Add("02", "Carazo");
       cc_reg_NI.Add("03", "Chinandega");
@@ -2854,7 +2891,7 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_NI.Add("17", "Autonoma Atlantico Norte");
       cc_reg_NI.Add("18", "Region Autonoma Atlantico Sur");
       _regionNamesByRegion.Add("NI", cc_reg_NI);
-      Dictionary<string, string> cc_reg_NL = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      var cc_reg_NL = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_NL.Add("01", "Drenthe");
       cc_reg_NL.Add("02", "Friesland");
       cc_reg_NL.Add("03", "Gelderland");
@@ -2868,7 +2905,7 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_NL.Add("15", "Overijssel");
       cc_reg_NL.Add("16", "Flevoland");
       _regionNamesByRegion.Add("NL", cc_reg_NL);
-      Dictionary<string, string> cc_reg_NO = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      var cc_reg_NO = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_NO.Add("01", "Akershus");
       cc_reg_NO.Add("02", "Aust-Agder");
       cc_reg_NO.Add("04", "Buskerud");
@@ -2889,7 +2926,7 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_NO.Add("19", "Vest-Agder");
       cc_reg_NO.Add("20", "Vestfold");
       _regionNamesByRegion.Add("NO", cc_reg_NO);
-      Dictionary<string, string> cc_reg_NP = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      var cc_reg_NP = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_NP.Add("01", "Bagmati");
       cc_reg_NP.Add("02", "Bheri");
       cc_reg_NP.Add("03", "Dhawalagiri");
@@ -2905,7 +2942,7 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_NP.Add("13", "Sagarmatha");
       cc_reg_NP.Add("14", "Seti");
       _regionNamesByRegion.Add("NP", cc_reg_NP);
-      Dictionary<string, string> cc_reg_NR = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      var cc_reg_NR = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_NR.Add("01", "Aiwo");
       cc_reg_NR.Add("02", "Anabar");
       cc_reg_NR.Add("03", "Anetan");
@@ -2921,7 +2958,7 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_NR.Add("13", "Uaboe");
       cc_reg_NR.Add("14", "Yaren");
       _regionNamesByRegion.Add("NR", cc_reg_NR);
-      Dictionary<string, string> cc_reg_NZ = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      var cc_reg_NZ = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_NZ.Add("10", "Chatham Islands");
       cc_reg_NZ.Add("E7", "Auckland");
       cc_reg_NZ.Add("E8", "Bay of Plenty");
@@ -2939,7 +2976,7 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_NZ.Add("G2", "Wellington");
       cc_reg_NZ.Add("G3", "West Coast");
       _regionNamesByRegion.Add("NZ", cc_reg_NZ);
-      Dictionary<string, string> cc_reg_OM = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      var cc_reg_OM = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_OM.Add("01", "Ad Dakhiliyah");
       cc_reg_OM.Add("02", "Al Batinah");
       cc_reg_OM.Add("03", "Al Wusta");
@@ -2949,7 +2986,7 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_OM.Add("07", "Musandam");
       cc_reg_OM.Add("08", "Zufar");
       _regionNamesByRegion.Add("OM", cc_reg_OM);
-      Dictionary<string, string> cc_reg_PA = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      var cc_reg_PA = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_PA.Add("01", "Bocas del Toro");
       cc_reg_PA.Add("02", "Chiriqui");
       cc_reg_PA.Add("03", "Cocle");
@@ -2961,7 +2998,7 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_PA.Add("09", "San Blas");
       cc_reg_PA.Add("10", "Veraguas");
       _regionNamesByRegion.Add("PA", cc_reg_PA);
-      Dictionary<string, string> cc_reg_PE = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      var cc_reg_PE = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_PE.Add("01", "Amazonas");
       cc_reg_PE.Add("02", "Ancash");
       cc_reg_PE.Add("03", "Apurimac");
@@ -2988,7 +3025,7 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_PE.Add("24", "Tumbes");
       cc_reg_PE.Add("25", "Ucayali");
       _regionNamesByRegion.Add("PE", cc_reg_PE);
-      Dictionary<string, string> cc_reg_PG = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      var cc_reg_PG = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_PG.Add("01", "Central");
       cc_reg_PG.Add("02", "Gulf");
       cc_reg_PG.Add("03", "Milne Bay");
@@ -3010,7 +3047,7 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_PG.Add("19", "Enga");
       cc_reg_PG.Add("20", "National Capital");
       _regionNamesByRegion.Add("PG", cc_reg_PG);
-      Dictionary<string, string> cc_reg_PH = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      var cc_reg_PH = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_PH.Add("01", "Abra");
       cc_reg_PH.Add("02", "Agusan del Norte");
       cc_reg_PH.Add("03", "Agusan del Sur");
@@ -3159,7 +3196,7 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_PH.Add("P1", "Zambales");
       cc_reg_PH.Add("P2", "Zamboanga");
       _regionNamesByRegion.Add("PH", cc_reg_PH);
-      Dictionary<string, string> cc_reg_PK = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      var cc_reg_PK = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_PK.Add("01", "Federally Administered Tribal Areas");
       cc_reg_PK.Add("02", "Balochistan");
       cc_reg_PK.Add("03", "North-West Frontier");
@@ -3169,7 +3206,7 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_PK.Add("07", "Northern Areas");
       cc_reg_PK.Add("08", "Islamabad");
       _regionNamesByRegion.Add("PK", cc_reg_PK);
-      Dictionary<string, string> cc_reg_PL = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      var cc_reg_PL = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_PL.Add("72", "Dolnoslaskie");
       cc_reg_PL.Add("73", "Kujawsko-Pomorskie");
       cc_reg_PL.Add("74", "Lodzkie");
@@ -3187,11 +3224,11 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_PL.Add("86", "Wielkopolskie");
       cc_reg_PL.Add("87", "Zachodniopomorskie");
       _regionNamesByRegion.Add("PL", cc_reg_PL);
-      Dictionary<string, string> cc_reg_PS = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      var cc_reg_PS = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_PS.Add("GZ", "Gaza");
       cc_reg_PS.Add("WE", "West Bank");
       _regionNamesByRegion.Add("PS", cc_reg_PS);
-      Dictionary<string, string> cc_reg_PT = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      var cc_reg_PT = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_PT.Add("02", "Aveiro");
       cc_reg_PT.Add("03", "Beja");
       cc_reg_PT.Add("04", "Braga");
@@ -3213,7 +3250,7 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_PT.Add("22", "Viseu");
       cc_reg_PT.Add("23", "Azores");
       _regionNamesByRegion.Add("PT", cc_reg_PT);
-      Dictionary<string, string> cc_reg_PY = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      var cc_reg_PY = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_PY.Add("01", "Alto Parana");
       cc_reg_PY.Add("02", "Amambay");
       cc_reg_PY.Add("03", "Boqueron");
@@ -3234,7 +3271,8 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_PY.Add("21", "Nueva Asuncion");
       cc_reg_PY.Add("23", "Alto Paraguay");
       _regionNamesByRegion.Add("PY", cc_reg_PY);
-      Dictionary<string, string> cc_reg_QA = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+      var cc_reg_QA = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_QA.Add("01", "Ad Dawhah");
       cc_reg_QA.Add("02", "Al Ghuwariyah");
       cc_reg_QA.Add("03", "Al Jumaliyah");
@@ -3247,7 +3285,8 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_QA.Add("11", "Jariyan al Batnah");
       cc_reg_QA.Add("12", "Umm Sa'id");
       _regionNamesByRegion.Add("QA", cc_reg_QA);
-      Dictionary<string, string> cc_reg_RO = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+      var cc_reg_RO = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_RO.Add("01", "Alba");
       cc_reg_RO.Add("02", "Arad");
       cc_reg_RO.Add("03", "Arges");
@@ -3291,11 +3330,13 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_RO.Add("42", "Giurgiu");
       cc_reg_RO.Add("43", "Ilfov");
       _regionNamesByRegion.Add("RO", cc_reg_RO);
-      Dictionary<string, string> cc_reg_RS = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+      var cc_reg_RS = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_RS.Add("01", "Kosovo");
       cc_reg_RS.Add("02", "Vojvodina");
       _regionNamesByRegion.Add("RS", cc_reg_RS);
-      Dictionary<string, string> cc_reg_RU = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+      var cc_reg_RU = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_RU.Add("01", "Adygeya, Republic of");
       cc_reg_RU.Add("02", "Aginsky Buryatsky AO");
       cc_reg_RU.Add("03", "Gorno-Altay");
@@ -3390,7 +3431,8 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_RU.Add("92", "Kamchatskiy Kray");
       cc_reg_RU.Add("93", "Zabaykal'skiy Kray");
       _regionNamesByRegion.Add("RU", cc_reg_RU);
-      Dictionary<string, string> cc_reg_RW = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+      var cc_reg_RW = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_RW.Add("01", "Butare");
       cc_reg_RW.Add("06", "Gitarama");
       cc_reg_RW.Add("07", "Kibungo");
@@ -3401,7 +3443,8 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_RW.Add("14", "Ouest");
       cc_reg_RW.Add("15", "Sud");
       _regionNamesByRegion.Add("RW", cc_reg_RW);
-      Dictionary<string, string> cc_reg_SA = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+      var cc_reg_SA = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_SA.Add("02", "Al Bahah");
       cc_reg_SA.Add("05", "Al Madinah");
       cc_reg_SA.Add("06", "Ash Sharqiyah");
@@ -3416,7 +3459,8 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_SA.Add("19", "Tabuk");
       cc_reg_SA.Add("20", "Al Jawf");
       _regionNamesByRegion.Add("SA", cc_reg_SA);
-      Dictionary<string, string> cc_reg_SB = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+      var cc_reg_SB = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_SB.Add("03", "Malaita");
       cc_reg_SB.Add("06", "Guadalcanal");
       cc_reg_SB.Add("07", "Isabel");
@@ -3427,7 +3471,8 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_SB.Add("12", "Choiseul");
       cc_reg_SB.Add("13", "Rennell and Bellona");
       _regionNamesByRegion.Add("SB", cc_reg_SB);
-      Dictionary<string, string> cc_reg_SC = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+      var cc_reg_SC = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_SC.Add("01", "Anse aux Pins");
       cc_reg_SC.Add("02", "Anse Boileau");
       cc_reg_SC.Add("03", "Anse Etoile");
@@ -3452,7 +3497,8 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_SC.Add("22", "Saint Louis");
       cc_reg_SC.Add("23", "Takamaka");
       _regionNamesByRegion.Add("SC", cc_reg_SC);
-      Dictionary<string, string> cc_reg_SD = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+      var cc_reg_SD = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_SD.Add("27", "Al Wusta");
       cc_reg_SD.Add("28", "Al Istiwa'iyah");
       cc_reg_SD.Add("29", "Al Khartum");
@@ -3465,7 +3511,8 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_SD.Add("40", "Al Wahadah State");
       cc_reg_SD.Add("44", "Central Equatoria State");
       _regionNamesByRegion.Add("SD", cc_reg_SD);
-      Dictionary<string, string> cc_reg_SE = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+      var cc_reg_SE = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_SE.Add("02", "Blekinge Lan");
       cc_reg_SE.Add("03", "Gavleborgs Lan");
       cc_reg_SE.Add("05", "Gotlands Lan");
@@ -3488,12 +3535,14 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_SE.Add("27", "Skane Lan");
       cc_reg_SE.Add("28", "Vastra Gotaland");
       _regionNamesByRegion.Add("SE", cc_reg_SE);
-      Dictionary<string, string> cc_reg_SH = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+      var cc_reg_SH = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_SH.Add("01", "Ascension");
       cc_reg_SH.Add("02", "Saint Helena");
       cc_reg_SH.Add("03", "Tristan da Cunha");
       _regionNamesByRegion.Add("SH", cc_reg_SH);
-      Dictionary<string, string> cc_reg_SI = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+      var cc_reg_SI = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_SI.Add("01", "Ajdovscina Commune");
       cc_reg_SI.Add("02", "Beltinci Commune");
       cc_reg_SI.Add("03", "Bled Commune");
@@ -3690,7 +3739,7 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_SI.Add("N9", "Apace Commune");
       cc_reg_SI.Add("O1", "Cirkulane Commune");
       _regionNamesByRegion.Add("SI", cc_reg_SI);
-      Dictionary<string, string> cc_reg_SK = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      var cc_reg_SK = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_SK.Add("01", "Banska Bystrica");
       cc_reg_SK.Add("02", "Bratislava");
       cc_reg_SK.Add("03", "Kosice");
@@ -3700,13 +3749,15 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_SK.Add("07", "Trnava");
       cc_reg_SK.Add("08", "Zilina");
       _regionNamesByRegion.Add("SK", cc_reg_SK);
-      Dictionary<string, string> cc_reg_SL = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+      var cc_reg_SL = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_SL.Add("01", "Eastern");
       cc_reg_SL.Add("02", "Northern");
       cc_reg_SL.Add("03", "Southern");
       cc_reg_SL.Add("04", "Western Area");
       _regionNamesByRegion.Add("SL", cc_reg_SL);
-      Dictionary<string, string> cc_reg_SM = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+      var cc_reg_SM = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_SM.Add("01", "Acquaviva");
       cc_reg_SM.Add("02", "Chiesanuova");
       cc_reg_SM.Add("03", "Domagnano");
@@ -3717,7 +3768,8 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_SM.Add("08", "Monte Giardino");
       cc_reg_SM.Add("09", "Serravalle");
       _regionNamesByRegion.Add("SM", cc_reg_SM);
-      Dictionary<string, string> cc_reg_SN = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+      var cc_reg_SN = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_SN.Add("01", "Dakar");
       cc_reg_SN.Add("03", "Diourbel");
       cc_reg_SN.Add("05", "Tambacounda");
@@ -3730,7 +3782,8 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_SN.Add("14", "Saint-Louis");
       cc_reg_SN.Add("15", "Matam");
       _regionNamesByRegion.Add("SN", cc_reg_SN);
-      Dictionary<string, string> cc_reg_SO = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+      var cc_reg_SO = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_SO.Add("01", "Bakool");
       cc_reg_SO.Add("02", "Banaadir");
       cc_reg_SO.Add("03", "Bari");
@@ -3752,7 +3805,8 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_SO.Add("21", "Awdal");
       cc_reg_SO.Add("22", "Sool");
       _regionNamesByRegion.Add("SO", cc_reg_SO);
-      Dictionary<string, string> cc_reg_SR = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+      var cc_reg_SR = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_SR.Add("10", "Brokopondo");
       cc_reg_SR.Add("11", "Commewijne");
       cc_reg_SR.Add("12", "Coronie");
@@ -3764,7 +3818,8 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_SR.Add("18", "Sipaliwini");
       cc_reg_SR.Add("19", "Wanica");
       _regionNamesByRegion.Add("SR", cc_reg_SR);
-      Dictionary<string, string> cc_reg_SS = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+      var cc_reg_SS = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_SS.Add("01", "Central Equatoria");
       cc_reg_SS.Add("02", "Eastern Equatoria");
       cc_reg_SS.Add("03", "Jonglei");
@@ -3776,11 +3831,13 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_SS.Add("09", "Western Bahr el Ghazal");
       cc_reg_SS.Add("10", "Western Equatoria");
       _regionNamesByRegion.Add("SS", cc_reg_SS);
-      Dictionary<string, string> cc_reg_ST = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+      var cc_reg_ST = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_ST.Add("01", "Principe");
       cc_reg_ST.Add("02", "Sao Tome");
       _regionNamesByRegion.Add("ST", cc_reg_ST);
-      Dictionary<string, string> cc_reg_SV = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+      var cc_reg_SV = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_SV.Add("01", "Ahuachapan");
       cc_reg_SV.Add("02", "Cabanas");
       cc_reg_SV.Add("03", "Chalatenango");
@@ -3796,7 +3853,8 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_SV.Add("13", "Sonsonate");
       cc_reg_SV.Add("14", "Usulutan");
       _regionNamesByRegion.Add("SV", cc_reg_SV);
-      Dictionary<string, string> cc_reg_SY = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+      var cc_reg_SY = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_SY.Add("01", "Al Hasakah");
       cc_reg_SY.Add("02", "Al Ladhiqiyah");
       cc_reg_SY.Add("03", "Al Qunaytirah");
@@ -3812,14 +3870,16 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_SY.Add("13", "Dimashq");
       cc_reg_SY.Add("14", "Tartus");
       _regionNamesByRegion.Add("SY", cc_reg_SY);
-      Dictionary<string, string> cc_reg_SZ = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+      var cc_reg_SZ = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_SZ.Add("01", "Hhohho");
       cc_reg_SZ.Add("02", "Lubombo");
       cc_reg_SZ.Add("03", "Manzini");
       cc_reg_SZ.Add("04", "Shiselweni");
       cc_reg_SZ.Add("05", "Praslin");
       _regionNamesByRegion.Add("SZ", cc_reg_SZ);
-      Dictionary<string, string> cc_reg_TD = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+      var cc_reg_TD = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_TD.Add("01", "Batha");
       cc_reg_TD.Add("02", "Biltine");
       cc_reg_TD.Add("03", "Borkou-Ennedi-Tibesti");
@@ -3835,14 +3895,16 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_TD.Add("13", "Salamat");
       cc_reg_TD.Add("14", "Tandjile");
       _regionNamesByRegion.Add("TD", cc_reg_TD);
-      Dictionary<string, string> cc_reg_TG = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+      var cc_reg_TG = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_TG.Add("22", "Centrale");
       cc_reg_TG.Add("23", "Kara");
       cc_reg_TG.Add("24", "Maritime");
       cc_reg_TG.Add("25", "Plateaux");
       cc_reg_TG.Add("26", "Savanes");
       _regionNamesByRegion.Add("TG", cc_reg_TG);
-      Dictionary<string, string> cc_reg_TH = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+      var cc_reg_TH = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_TH.Add("01", "Mae Hong Son");
       cc_reg_TH.Add("02", "Chiang Mai");
       cc_reg_TH.Add("03", "Chiang Rai");
@@ -3923,19 +3985,22 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_TH.Add("79", "Nong Bua Lamphu");
       cc_reg_TH.Add("80", "Sa Kaeo");
       _regionNamesByRegion.Add("TH", cc_reg_TH);
-      Dictionary<string, string> cc_reg_TJ = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+      var cc_reg_TJ = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_TJ.Add("01", "Kuhistoni Badakhshon");
       cc_reg_TJ.Add("02", "Khatlon");
       cc_reg_TJ.Add("03", "Sughd");
       _regionNamesByRegion.Add("TJ", cc_reg_TJ);
-      Dictionary<string, string> cc_reg_TM = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+      var cc_reg_TM = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_TM.Add("01", "Ahal");
       cc_reg_TM.Add("02", "Balkan");
       cc_reg_TM.Add("03", "Dashoguz");
       cc_reg_TM.Add("04", "Lebap");
       cc_reg_TM.Add("05", "Mary");
       _regionNamesByRegion.Add("TM", cc_reg_TM);
-      Dictionary<string, string> cc_reg_TN = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+      var cc_reg_TN = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_TN.Add("02", "Kasserine");
       cc_reg_TN.Add("03", "Kairouan");
       cc_reg_TN.Add("06", "Jendouba");
@@ -3961,12 +4026,14 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_TN.Add("38", "Aiana");
       cc_reg_TN.Add("39", "Manouba");
       _regionNamesByRegion.Add("TN", cc_reg_TN);
-      Dictionary<string, string> cc_reg_TO = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+      var cc_reg_TO = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_TO.Add("01", "Ha");
       cc_reg_TO.Add("02", "Tongatapu");
       cc_reg_TO.Add("03", "Vava");
       _regionNamesByRegion.Add("TO", cc_reg_TO);
-      Dictionary<string, string> cc_reg_TR = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+      var cc_reg_TR = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_TR.Add("02", "Adiyaman");
       cc_reg_TR.Add("03", "Afyonkarahisar");
       cc_reg_TR.Add("04", "Agri");
@@ -4049,7 +4116,8 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_TR.Add("92", "Yalova");
       cc_reg_TR.Add("93", "Duzce");
       _regionNamesByRegion.Add("TR", cc_reg_TR);
-      Dictionary<string, string> cc_reg_TT = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+      var cc_reg_TT = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_TT.Add("01", "Arima");
       cc_reg_TT.Add("02", "Caroni");
       cc_reg_TT.Add("03", "Mayaro");
@@ -4063,13 +4131,15 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_TT.Add("11", "Tobago");
       cc_reg_TT.Add("12", "Victoria");
       _regionNamesByRegion.Add("TT", cc_reg_TT);
-      Dictionary<string, string> cc_reg_TW = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+      var cc_reg_TW = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_TW.Add("01", "Fu-chien");
       cc_reg_TW.Add("02", "Kao-hsiung");
       cc_reg_TW.Add("03", "T'ai-pei");
       cc_reg_TW.Add("04", "T'ai-wan");
       _regionNamesByRegion.Add("TW", cc_reg_TW);
-      Dictionary<string, string> cc_reg_TZ = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+      var cc_reg_TZ = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_TZ.Add("02", "Pwani");
       cc_reg_TZ.Add("03", "Dodoma");
       cc_reg_TZ.Add("04", "Iringa");
@@ -4097,7 +4167,8 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_TZ.Add("26", "Arusha");
       cc_reg_TZ.Add("27", "Manyara");
       _regionNamesByRegion.Add("TZ", cc_reg_TZ);
-      Dictionary<string, string> cc_reg_UA = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+      var cc_reg_UA = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_UA.Add("01", "Cherkas'ka Oblast'");
       cc_reg_UA.Add("02", "Chernihivs'ka Oblast'");
       cc_reg_UA.Add("03", "Chernivets'ka Oblast'");
@@ -4126,7 +4197,8 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_UA.Add("26", "Zaporiz'ka Oblast'");
       cc_reg_UA.Add("27", "Zhytomyrs'ka Oblast'");
       _regionNamesByRegion.Add("UA", cc_reg_UA);
-      Dictionary<string, string> cc_reg_UG = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+      var cc_reg_UG = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_UG.Add("26", "Apac");
       cc_reg_UG.Add("28", "Bundibugyo");
       cc_reg_UG.Add("29", "Bushenyi");
@@ -4183,7 +4255,8 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_UG.Add("96", "Wakiso");
       cc_reg_UG.Add("97", "Yumbe");
       _regionNamesByRegion.Add("UG", cc_reg_UG);
-      Dictionary<string, string> cc_reg_US = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+      var cc_reg_US = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_US.Add("AA", "Armed Forces Americas");
       cc_reg_US.Add("AE", "Armed Forces Europe, Middle East, & Canada");
       cc_reg_US.Add("AK", "Alaska");
@@ -4247,7 +4320,8 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_US.Add("WV", "West Virginia");
       cc_reg_US.Add("WY", "Wyoming");
       _regionNamesByRegion.Add("US", cc_reg_US);
-      Dictionary<string, string> cc_reg_UY = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+      var cc_reg_UY = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_UY.Add("01", "Artigas");
       cc_reg_UY.Add("02", "Canelones");
       cc_reg_UY.Add("03", "Cerro Largo");
@@ -4268,7 +4342,8 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_UY.Add("18", "Tacuarembo");
       cc_reg_UY.Add("19", "Treinta y Tres");
       _regionNamesByRegion.Add("UY", cc_reg_UY);
-      Dictionary<string, string> cc_reg_UZ = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+      var cc_reg_UZ = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_UZ.Add("01", "Andijon");
       cc_reg_UZ.Add("02", "Bukhoro");
       cc_reg_UZ.Add("03", "Farghona");
@@ -4284,7 +4359,8 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_UZ.Add("13", "Toshkent");
       cc_reg_UZ.Add("14", "Toshkent");
       _regionNamesByRegion.Add("UZ", cc_reg_UZ);
-      Dictionary<string, string> cc_reg_VC = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+      var cc_reg_VC = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_VC.Add("01", "Charlotte");
       cc_reg_VC.Add("02", "Saint Andrew");
       cc_reg_VC.Add("03", "Saint David");
@@ -4292,7 +4368,8 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_VC.Add("05", "Saint Patrick");
       cc_reg_VC.Add("06", "Grenadines");
       _regionNamesByRegion.Add("VC", cc_reg_VC);
-      Dictionary<string, string> cc_reg_VE = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+      var cc_reg_VE = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_VE.Add("01", "Amazonas");
       cc_reg_VE.Add("02", "Anzoategui");
       cc_reg_VE.Add("03", "Apure");
@@ -4319,7 +4396,8 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_VE.Add("25", "Distrito Federal");
       cc_reg_VE.Add("26", "Vargas");
       _regionNamesByRegion.Add("VE", cc_reg_VE);
-      Dictionary<string, string> cc_reg_VN = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+      var cc_reg_VN = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_VN.Add("01", "An Giang");
       cc_reg_VN.Add("03", "Ben Tre");
       cc_reg_VN.Add("05", "Cao Bang");
@@ -4384,7 +4462,8 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_VN.Add("92", "Dien Bien");
       cc_reg_VN.Add("93", "Hau Giang");
       _regionNamesByRegion.Add("VN", cc_reg_VN);
-      Dictionary<string, string> cc_reg_VU = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+      var cc_reg_VU = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_VU.Add("05", "Ambrym");
       cc_reg_VU.Add("06", "Aoba");
       cc_reg_VU.Add("07", "Torba");
@@ -4400,7 +4479,8 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_VU.Add("17", "Penama");
       cc_reg_VU.Add("18", "Shefa");
       _regionNamesByRegion.Add("VU", cc_reg_VU);
-      Dictionary<string, string> cc_reg_WS = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+      var cc_reg_WS = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_WS.Add("02", "Aiga-i-le-Tai");
       cc_reg_WS.Add("03", "Atua");
       cc_reg_WS.Add("04", "Fa");
@@ -4412,7 +4492,8 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_WS.Add("10", "Tuamasaga");
       cc_reg_WS.Add("11", "Vaisigano");
       _regionNamesByRegion.Add("WS", cc_reg_WS);
-      Dictionary<string, string> cc_reg_YE = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+      var cc_reg_YE = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_YE.Add("01", "Abyan");
       cc_reg_YE.Add("02", "Adan");
       cc_reg_YE.Add("03", "Al Mahrah");
@@ -4439,7 +4520,8 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_YE.Add("24", "Lahij");
       cc_reg_YE.Add("25", "Taizz");
       _regionNamesByRegion.Add("YE", cc_reg_YE);
-      Dictionary<string, string> cc_reg_ZA = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+      var cc_reg_ZA = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_ZA.Add("01", "North-Western Province");
       cc_reg_ZA.Add("02", "KwaZulu-Natal");
       cc_reg_ZA.Add("03", "Free State");
@@ -4451,7 +4533,8 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_ZA.Add("10", "North-West");
       cc_reg_ZA.Add("11", "Western Cape");
       _regionNamesByRegion.Add("ZA", cc_reg_ZA);
-      Dictionary<string, string> cc_reg_ZM = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+      var cc_reg_ZM = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_ZM.Add("01", "Western");
       cc_reg_ZM.Add("02", "Central");
       cc_reg_ZM.Add("03", "Eastern");
@@ -4462,7 +4545,8 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       cc_reg_ZM.Add("08", "Copperbelt");
       cc_reg_ZM.Add("09", "Lusaka");
       _regionNamesByRegion.Add("ZM", cc_reg_ZM);
-      Dictionary<string, string> cc_reg_ZW = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+      var cc_reg_ZW = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       cc_reg_ZW.Add("01", "Manicaland");
       cc_reg_ZW.Add("02", "Midlands");
       cc_reg_ZW.Add("03", "Mashonaland Central");

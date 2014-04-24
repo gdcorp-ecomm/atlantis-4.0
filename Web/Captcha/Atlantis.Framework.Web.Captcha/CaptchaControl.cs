@@ -183,6 +183,7 @@ ToolboxData(
         {
           _currentCaptchaControl = new Captcha(CaptchaID);
           _currentCaptchaControl.Locale = SupportedLocales.GetLocaleOrReturnDefaultIfNotSupported(Locale);
+          BotDetect.Web.CaptchaPersistence.Save(_currentCaptchaControl.CaptchaControl);
         }
         return _currentCaptchaControl;
       }

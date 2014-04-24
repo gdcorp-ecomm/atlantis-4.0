@@ -759,7 +759,7 @@ namespace BotDetect.Web.UI
         if (!IsDesignMode)
         {
           // determine the Captcha identifier
-          string captchaId = this.AppRelativeCaptchaId;
+          string captchaId = this.CaptchaId;
 
           // load any saved values
           CaptchaPersistence.Load(captchaControl, captchaId);

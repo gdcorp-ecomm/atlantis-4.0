@@ -37,6 +37,10 @@
     <Reference Include="Atlantis.Framework.Web.Stash">
       <HintPath>..\packages\Atlantis.Framework.Web.Stash.4.13.7.17\lib\net40\Atlantis.Framework.Web.Stash.dll</HintPath>
     </Reference>
+    <Reference Include="BotDetect, Version=3.13.12.1, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\BotDetect.14.4.24.2\lib\net40\BotDetect.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
@@ -50,12 +54,6 @@
     <Compile Include="CaptchaControl.cs" />
     <Compile Include="Constants\SupportedLocales.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Component\BotDetect\BotDetect.csproj">
-      <Project>{db71a246-51e3-4495-8840-bdf31cec0e2c}</Project>
-      <Name>BotDetect</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="Atlantis.Framework.Web.CaptchaCtl.nuget.bat" />

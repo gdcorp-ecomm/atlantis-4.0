@@ -19,7 +19,7 @@ using System.Web.UI;
 
 #endif
 
-[assembly: AssemblyDescription("ASP.NET 4.0 Captcha Web Control - GODADDY UPDATE")]
+[assembly: AssemblyDescription("BotDetect ASP.NET 4.0 CAPTCHA - GODADDY UPDATE")]
 [assembly: AssemblyCompany("Lanapsoft, Inc.")]
 [assembly: AssemblyProduct("BotDetect")]
 [assembly: AssemblyCopyright("Copyright © Lanapsoft, Inc. 2004-2012")]
@@ -27,7 +27,8 @@ using System.Web.UI;
 [assembly: AssemblyCulture("")]	
 [assembly: TagPrefix("BotDetect", "BotDetect")]
 [assembly: AssemblyVersion("3.13.12.1")]
-[assembly: AssemblyFileVersion("4.13.09.23")]
+[assembly: AssemblyFileVersion("4.0.0.0")]
+[assembly: AssemblyInformationalVersion("14.4.24.2")]
 
 
 // assembly settings

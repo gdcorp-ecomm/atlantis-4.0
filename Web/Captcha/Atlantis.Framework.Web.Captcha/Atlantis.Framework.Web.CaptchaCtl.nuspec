@@ -2,14 +2,16 @@
 <package >
   <metadata>
     <id>Atlantis.Framework.Web.CaptchaCtl</id>
-    <version>4.13.11.27</version>
+    <version>$version$</version>
     <title>Atlantis Framework Web CaptchaCtl</title>
     <authors>$author$</authors>
     <owners>$author$</owners>
     <projectUrl>https://confluence.int.godaddy.com/display/ATLANTIS</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes></releaseNotes>
+    <releaseNotes>
+      14.4.24.1 - Save the captcha session information as soon as we set locale.
+    </releaseNotes>
     <copyright>$copyright$</copyright>
     <tags>Atlantis Framework Web CaptchaCtl</tags>
     <dependencies>

@@ -1,0 +1,20 @@
+﻿<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>BotDetect</id>
+    <version>$version$</version>
+    <title>BotDetect - GoDaddy Updates</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <projectUrl>https://confluence.int.godaddy.com/display/ATLANTIS</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes>
+      14.4.24.1 - Updated code to always save session data using the captcha ID we set in the templated control.
+    </releaseNotes>
+    <copyright>$copyright$</copyright>
+    <tags>BotDetect</tags>
+    <dependencies></dependencies>
+  </metadata>
+  <files></files>
+</package>

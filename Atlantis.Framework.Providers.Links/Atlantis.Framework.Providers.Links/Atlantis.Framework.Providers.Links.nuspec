@@ -9,8 +9,11 @@
     <projectUrl>https://confluence.int.godaddy.com/display/ATLANTIS</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes>Make sure regionsite is the first key in a rendered querystring. Linkprovider checks plid if needed.
-    14.3.21.1 - Adding logic to use secure server link name if it exists and user is browsing under secure server
+    <releaseNotes>
+      Make sure regionsite is the first key in a rendered querystring. Linkprovider checks plid if needed.
+      14.3.21.1 - Adding logic to use secure server link name if it exists and user is browsing under secure server
+      14.4.29.1 - fixed issue where lookup of ss.net link type was using private _linkMaps variable which defaults to empty.
+
     </releaseNotes>
     <copyright>$copyright$</copyright>
     <tags>Atlantis Framework  Providers Links</tags>

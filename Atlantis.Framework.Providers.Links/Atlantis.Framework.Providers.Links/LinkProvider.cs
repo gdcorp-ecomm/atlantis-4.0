@@ -913,9 +913,9 @@ namespace Atlantis.Framework.Providers.Links
         {
           string linkSecureServerCounterPart = string.Concat(linkName, ".SS");
           var siteContextId = contextId.HasValue ? contextId.Value : _siteContext.ContextId;
-          bool linkTypeMapForContextExists = _linkMaps.ContainsKey(siteContextId);
+          bool linkTypeMapForContextExists = GetLinkMap(siteContextId).Count > 0;
 
-          if (linkTypeMapForContextExists && _linkMaps[siteContextId].ContainsKey(linkSecureServerCounterPart))
+          if (linkTypeMapForContextExists && GetLinkMap(siteContextId).ContainsKey(linkSecureServerCounterPart))
           {
             linkName = linkSecureServerCounterPart;
           }

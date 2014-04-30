@@ -1,7 +1,0 @@
-<data count="5">
-  <item catalog_countrySite="au" catalog_priceGroupID="0" countrySiteDescription="Australia" isActive="1" internalOnly="0" defaultMarketID="en-AU" defaultCurrencyType="AUD"/>
-  <item catalog_countrySite="ca" catalog_priceGroupID="0" countrySiteDescription="Canada" isActive="1" internalOnly="0" defaultMarketID="en-CA" defaultCurrencyType="CAD"/>
-  <item catalog_countrySite="in" catalog_priceGroupID="0" countrySiteDescription="India" isActive="1" internalOnly="0" defaultMarketID="en-IN" defaultCurrencyType="INR"/>
-  <item catalog_countrySite="uk" catalog_priceGroupID="0" countrySiteDescription="United Kingdom" isActive="1" internalOnly="0" defaultMarketID="en-GB" defaultCurrencyType="GBP"/>
-  <item catalog_countrySite="www" catalog_priceGroupID="0" countrySiteDescription="Global US" isActive="1" internalOnly="0" defaultMarketID="en-US" defaultCurrencyType="USD"/>
-</data>

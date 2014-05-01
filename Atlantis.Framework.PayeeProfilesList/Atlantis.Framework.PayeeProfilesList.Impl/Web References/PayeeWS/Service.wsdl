@@ -1,0 +1,409 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="GetEnumerationDescriptions">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sType" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetEnumerationDescriptionsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetEnumerationDescriptionsResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateAccount">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sUpdateXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateAccountResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UpdateAccountResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddAccount">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sAddXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddAccountResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AddAccountResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAccountsForShopper">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sShopperID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAccountsForShopperResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAccountsForShopperResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAccountDetail">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sShopperID" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="iCAPID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAccountDetailResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAccountDetailResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ShopperHasAccount">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sShopperID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ShopperHasAccountResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ShopperHasAccountResult" type="s:boolean" />
+            <s:element minOccurs="0" maxOccurs="1" name="sErrorDesc" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetPayability">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="iCAPID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="bIsPayable" type="s:boolean" />
+            <s:element minOccurs="0" maxOccurs="1" name="sNonPayableReason" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetPayabilityResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SetPayabilityResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="NotifyExternalAccountAccess">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sShopperID" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="iCAPID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="sAddlData" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="NotifyExternalAccountAccessResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="NotifyExternalAccountAccessResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetExternalAccountProviderAuthData">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sShopperID" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="iPaymentMethodID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="sAddlData" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetExternalAccountProviderAuthDataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetExternalAccountProviderAuthDataResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetEnumerationDescriptionsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetEnumerationDescriptions" />
+  </wsdl:message>
+  <wsdl:message name="GetEnumerationDescriptionsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetEnumerationDescriptionsResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateAccountSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateAccount" />
+  </wsdl:message>
+  <wsdl:message name="UpdateAccountSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateAccountResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddAccountSoapIn">
+    <wsdl:part name="parameters" element="tns:AddAccount" />
+  </wsdl:message>
+  <wsdl:message name="AddAccountSoapOut">
+    <wsdl:part name="parameters" element="tns:AddAccountResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAccountsForShopperSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAccountsForShopper" />
+  </wsdl:message>
+  <wsdl:message name="GetAccountsForShopperSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAccountsForShopperResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAccountDetailSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAccountDetail" />
+  </wsdl:message>
+  <wsdl:message name="GetAccountDetailSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAccountDetailResponse" />
+  </wsdl:message>
+  <wsdl:message name="ShopperHasAccountSoapIn">
+    <wsdl:part name="parameters" element="tns:ShopperHasAccount" />
+  </wsdl:message>
+  <wsdl:message name="ShopperHasAccountSoapOut">
+    <wsdl:part name="parameters" element="tns:ShopperHasAccountResponse" />
+  </wsdl:message>
+  <wsdl:message name="SetPayabilitySoapIn">
+    <wsdl:part name="parameters" element="tns:SetPayability" />
+  </wsdl:message>
+  <wsdl:message name="SetPayabilitySoapOut">
+    <wsdl:part name="parameters" element="tns:SetPayabilityResponse" />
+  </wsdl:message>
+  <wsdl:message name="NotifyExternalAccountAccessSoapIn">
+    <wsdl:part name="parameters" element="tns:NotifyExternalAccountAccess" />
+  </wsdl:message>
+  <wsdl:message name="NotifyExternalAccountAccessSoapOut">
+    <wsdl:part name="parameters" element="tns:NotifyExternalAccountAccessResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetExternalAccountProviderAuthDataSoapIn">
+    <wsdl:part name="parameters" element="tns:GetExternalAccountProviderAuthData" />
+  </wsdl:message>
+  <wsdl:message name="GetExternalAccountProviderAuthDataSoapOut">
+    <wsdl:part name="parameters" element="tns:GetExternalAccountProviderAuthDataResponse" />
+  </wsdl:message>
+  <wsdl:portType name="ServiceSoap">
+    <wsdl:operation name="GetEnumerationDescriptions">
+      <wsdl:input message="tns:GetEnumerationDescriptionsSoapIn" />
+      <wsdl:output message="tns:GetEnumerationDescriptionsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateAccount">
+      <wsdl:input message="tns:UpdateAccountSoapIn" />
+      <wsdl:output message="tns:UpdateAccountSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddAccount">
+      <wsdl:input message="tns:AddAccountSoapIn" />
+      <wsdl:output message="tns:AddAccountSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAccountsForShopper">
+      <wsdl:input message="tns:GetAccountsForShopperSoapIn" />
+      <wsdl:output message="tns:GetAccountsForShopperSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAccountDetail">
+      <wsdl:input message="tns:GetAccountDetailSoapIn" />
+      <wsdl:output message="tns:GetAccountDetailSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ShopperHasAccount">
+      <wsdl:input message="tns:ShopperHasAccountSoapIn" />
+      <wsdl:output message="tns:ShopperHasAccountSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetPayability">
+      <wsdl:input message="tns:SetPayabilitySoapIn" />
+      <wsdl:output message="tns:SetPayabilitySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="NotifyExternalAccountAccess">
+      <wsdl:input message="tns:NotifyExternalAccountAccessSoapIn" />
+      <wsdl:output message="tns:NotifyExternalAccountAccessSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetExternalAccountProviderAuthData">
+      <wsdl:input message="tns:GetExternalAccountProviderAuthDataSoapIn" />
+      <wsdl:output message="tns:GetExternalAccountProviderAuthDataSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ServiceSoap" type="tns:ServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetEnumerationDescriptions">
+      <soap:operation soapAction="http://tempuri.org/GetEnumerationDescriptions" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateAccount">
+      <soap:operation soapAction="http://tempuri.org/UpdateAccount" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddAccount">
+      <soap:operation soapAction="http://tempuri.org/AddAccount" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAccountsForShopper">
+      <soap:operation soapAction="http://tempuri.org/GetAccountsForShopper" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAccountDetail">
+      <soap:operation soapAction="http://tempuri.org/GetAccountDetail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ShopperHasAccount">
+      <soap:operation soapAction="http://tempuri.org/ShopperHasAccount" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetPayability">
+      <soap:operation soapAction="http://tempuri.org/SetPayability" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NotifyExternalAccountAccess">
+      <soap:operation soapAction="http://tempuri.org/NotifyExternalAccountAccess" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetExternalAccountProviderAuthData">
+      <soap:operation soapAction="http://tempuri.org/GetExternalAccountProviderAuthData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ServiceSoap12" type="tns:ServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetEnumerationDescriptions">
+      <soap12:operation soapAction="http://tempuri.org/GetEnumerationDescriptions" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateAccount">
+      <soap12:operation soapAction="http://tempuri.org/UpdateAccount" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddAccount">
+      <soap12:operation soapAction="http://tempuri.org/AddAccount" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAccountsForShopper">
+      <soap12:operation soapAction="http://tempuri.org/GetAccountsForShopper" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAccountDetail">
+      <soap12:operation soapAction="http://tempuri.org/GetAccountDetail" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ShopperHasAccount">
+      <soap12:operation soapAction="http://tempuri.org/ShopperHasAccount" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetPayability">
+      <soap12:operation soapAction="http://tempuri.org/SetPayability" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NotifyExternalAccountAccess">
+      <soap12:operation soapAction="http://tempuri.org/NotifyExternalAccountAccess" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetExternalAccountProviderAuthData">
+      <soap12:operation soapAction="http://tempuri.org/GetExternalAccountProviderAuthData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Service">
+    <wsdl:port name="ServiceSoap" binding="tns:ServiceSoap">
+      <soap:address location="https://customerap.dev.glbt1.gdg/WSgdCAP/Service.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ServiceSoap12" binding="tns:ServiceSoap12">
+      <soap12:address location="https://customerap.dev.glbt1.gdg/WSgdCAP/Service.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

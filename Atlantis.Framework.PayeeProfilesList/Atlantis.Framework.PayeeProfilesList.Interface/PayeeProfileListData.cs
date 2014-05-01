@@ -3,21 +3,20 @@ namespace Atlantis.Framework.PayeeProfilesList.Interface
 {
   public class PayeeProfileListData
   {
-    private readonly string _capId;
-    public string CapId
-    {
-      get { return _capId; }
-    }
-    private readonly string _friendlyName;
-    public string FriendlyName
-    {
-      get { return _friendlyName; }
-    }
+    public string CapId{ get; set; }
 
-    internal PayeeProfileListData(string capId, string friendlyName)
+    public string FriendlyName{ get; set; }
+
+
+    public bool IsPayable { get; set; }
+    public string NonPayableReason { get; set; }
+
+    internal PayeeProfileListData(string capId, string friendlyName, string isPayable, string nonPayableReason)
     {
-      _capId = capId;
-      _friendlyName = friendlyName;
+      CapId = capId;
+      FriendlyName = friendlyName;
+      IsPayable = string.Equals(isPayable, "1");
+      NonPayableReason = nonPayableReason;
     }
   }
 }

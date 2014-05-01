@@ -50,11 +50,7 @@ namespace Atlantis.Framework.PayeeProfilesList.Tests
     [TestMethod]
     public void PayeeProfilesListTest()
     {
-      PayeeProfilesListRequestData request = new PayeeProfilesListRequestData(_shopperId
-        , string.Empty
-        , string.Empty
-        , string.Empty
-        , 0);
+      PayeeProfilesListRequestData request = new PayeeProfilesListRequestData(_shopperId);
 
       PayeeProfilesListResponseData response = (PayeeProfilesListResponseData)Engine.Engine.ProcessRequest(request, _requestType);
 

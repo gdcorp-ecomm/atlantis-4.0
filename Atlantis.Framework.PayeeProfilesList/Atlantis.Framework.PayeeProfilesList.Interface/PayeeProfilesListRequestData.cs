@@ -6,19 +6,11 @@ namespace Atlantis.Framework.PayeeProfilesList.Interface
   public class PayeeProfilesListRequestData : RequestData
   {
 
-    public PayeeProfilesListRequestData(string shopperId
-      , string sourceUrl
-      , string orderId
-      , string pathway
-      , int pageCount)
-      : base(shopperId, sourceUrl, orderId, pathway, pageCount)
+    public PayeeProfilesListRequestData(string shopperId)
     {
-      RequestTimeout = TimeSpan.FromSeconds(5);
+      ShopperID = shopperId;
+      RequestTimeout = TimeSpan.FromSeconds(50);
     }
 
-    public override string GetCacheMD5()
-    {
-      throw new NotImplementedException("GetCacheMD5 not implemented in PayeeProfilesListRequestData");     
-    }
   }
 }

@@ -57,6 +57,9 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Atlantis.Framework.Interface">
+      <HintPath>..\packages\Atlantis.Framework.Interface.14.4.4.2\lib\net40\Atlantis.Framework.Interface.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -94,6 +97,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="Atlantis.Framework.PayeeProfilesList.Impl.nuget.bat" />
+    <None Include="Atlantis.Framework.PayeeProfilesList.Impl.nuspec" />
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -102,7 +108,7 @@
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <None Include="Web References\PayeeWS\WSCgdCAP.wsdl" />
+    <None Include="Web References\PayeeWS\Service.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
@@ -122,27 +128,26 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj">
-      <Project>{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}</Project>
-      <Name>Atlantis.Framework.Interface</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.PayeeProfilesList.Interface\Atlantis.Framework.PayeeProfilesList.Interface.csproj">
       <Project>{E95FC5C8-3875-430C-987E-018496AFBBFD}</Project>
       <Name>Atlantis.Framework.PayeeProfilesList.Interface</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <WebReferenceUrl Include="https://customerap.dev.glbt1.gdg/WSCgdCAP/WSCgdCAP.dll%3fHandler=GenWSCgdCAPWSDL">
+    <WebReferenceUrl Include="https://customerap.dev.glbt1.gdg/WSgdCAP/Service.asmx">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\PayeeWS\</RelPath>
-      <UpdateFromURL>https://customerap.dev.glbt1.gdg/WSCgdCAP/WSCgdCAP.dll%3fHandler=GenWSCgdCAPWSDL</UpdateFromURL>
+      <UpdateFromURL>https://customerap.dev.glbt1.gdg/WSgdCAP/Service.asmx</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>
       </CachedDynamicPropName>
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
-      <CachedSettingsPropName>Atlantis_Framework_PayeeProfilesList_Impl_PayeeWS_WSCgdCAPService</CachedSettingsPropName>
+      <CachedSettingsPropName>Atlantis_Framework_PayeeProfilesList_Impl_PayeeWS_Service</CachedSettingsPropName>
     </WebReferenceUrl>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Web References\PayeeWS\Service.disco" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

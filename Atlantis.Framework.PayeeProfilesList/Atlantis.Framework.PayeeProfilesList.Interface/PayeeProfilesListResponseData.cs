@@ -31,10 +31,7 @@ namespace Atlantis.Framework.PayeeProfilesList.Interface
 
     public PayeeProfilesListResponseData(RequestData requestData, Exception exception)
     {
-      _exception = new AtlantisException(requestData
-        , "PayeeProfilesListResponseData"
-        , exception.Message
-        , requestData.ToXML());
+      _exception = new AtlantisException("PayeeProfilesListResponseData", 0, exception.Message, requestData.ToXML());
     }
 
     private void ProcessResponseXml(string xml)
@@ -42,24 +39,28 @@ namespace Atlantis.Framework.PayeeProfilesList.Interface
       try
       {
         XDocument xDoc = XDocument.Parse(xml);
-        XElement msg = xDoc.Element("RESPONSE").Element("MESSAGE");
-        if (msg.Value.ToLowerInvariant() != "success")
+        XElement responseElem = xDoc.Element("RESPONSE");
+        XElement msg = responseElem != null ? responseElem.Element("MESSAGE") : null;
+        if (msg != null)
         {
-          _exception = new AtlantisException("PayeeProfilesListResponseData::ProcessResponseXml", "0", "Payee GetAccountListForShopper Unsuccessful", xml, null, null);
-        }
-        else
-        {
-          XElement accounts = xDoc.Element("RESPONSE").Element("ACCOUNTS");
-          if (accounts != null)
+          if (msg.Value.ToLowerInvariant() != "success")
           {
-            foreach (XElement account in accounts.Elements())
+            _exception = new AtlantisException("PayeeProfilesListResponseData::ProcessResponseXml", 0,
+              "Payee GetAccountListForShopper Unsuccessful", xml);
+          }
+          else
+          {
+            XElement accounts = responseElem.Element("ACCOUNTS");
+            if (accounts != null)
             {
-              XElement capId = account.Element("capID");
-              XElement friendlyName = account.Element("friendlyName");
-
-              if (capId != null && friendlyName != null)
+              foreach (XElement account in accounts.Elements())
               {
-                PayeeProfileListData ppld = new PayeeProfileListData(capId.Value, friendlyName.Value);
+                XElement capId = account.Element("capID");
+                XElement friendlyName = account.Element("friendlyName");
+                XElement isPayable = account.Element("isPayable");
+                XElement nonPayableReason = account.Element("nonPayableReason");
+
+                PayeeProfileListData ppld = new PayeeProfileListData(GetValueOrEmpty(capId), GetValueOrEmpty(friendlyName), GetValueOrEmpty(isPayable), GetValueOrEmpty(nonPayableReason));
                 PayeeList.Add(ppld);
               }
             }
@@ -68,8 +69,13 @@ namespace Atlantis.Framework.PayeeProfilesList.Interface
       }
       catch (Exception ex)
       {
-        _exception = new AtlantisException("PayeeProfilesListResponseData::ProcessResponseXml", "0", ex.Message, xml, null, null);
+        _exception = new AtlantisException("PayeeProfilesListResponseData::ProcessResponseXml", 0, ex.Message, xml);
       }
+    }
+
+    private string GetValueOrEmpty(XElement elem)
+    {
+      return elem != null ? elem.Value : string.Empty;
     }
 
 

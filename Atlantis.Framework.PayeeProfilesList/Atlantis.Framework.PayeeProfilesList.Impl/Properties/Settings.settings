@@ -2,8 +2,8 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Atlantis.Framework.PayeeProfilesList.Impl.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="Atlantis_Framework_PayeeProfilesList_Impl_PayeeWS_WSCgdCAPService" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">https://customerap.dev.glbt1.gdg:443/WSCgdCAP/WSCgdCAP.dll?Handler=Default</Value>
+    <Setting Name="Atlantis_Framework_PayeeProfilesList_Impl_PayeeWS_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://customerap.dev.glbt1.gdg/WSgdCAP/Service.asmx</Value>
     </Setting>
   </Settings>
 </SettingsFile>

@@ -4,10 +4,14 @@ using System.Web;
 using System.Xml;
 //using Atlantis.Framework.DotTypeCache;
 //using Atlantis.Framework.DotTypeCache.Interface;
+using Atlantis.Framework.DotTypeCache;
+using Atlantis.Framework.DotTypeCache.Interface;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.DomainContactValidation.Interface;
 //using Atlantis.Framework.Providers.TLDDataCache;
 //using Atlantis.Framework.Providers.TLDDataCache.Interface;
+using Atlantis.Framework.Providers.TLDDataCache;
+using Atlantis.Framework.Providers.TLDDataCache.Interface;
 using Atlantis.Framework.Testing.MockHttpContext;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Atlantis.Framework.Testing.MockProviders;
@@ -53,8 +57,8 @@ namespace Atlantis.Framework.Providers.DomainContactValidation.Tests
           _providerContainer.RegisterProvider<IShopperContext, MockShopperContext>();
           _providerContainer.RegisterProvider<IManagerContext, MockNoManagerContext>();
           _providerContainer.RegisterProvider<IDomainContactValidationProvider, DomainContactValidationProvider>();
-          //_providerContainer.RegisterProvider<IDotTypeProvider, DotTypeProvider>();
-          //_providerContainer.RegisterProvider<ITLDDataCacheProvider, TLDDataCacheProvider>();
+          _providerContainer.RegisterProvider<IDotTypeProvider, DotTypeProvider>();
+          _providerContainer.RegisterProvider<ITLDDataCacheProvider, TLDDataCacheProvider>();
 
         }
 
@@ -507,6 +511,25 @@ namespace Atlantis.Framework.Providers.DomainContactValidation.Tests
       var newContact = contactGroup.GetContact(DomainContactType.Registrant);
 
       Assert.AreEqual(true, newContact.TuiFormsInfo != null && newContact.TuiFormsInfo.ContainsKey("COM.BR"));
+    }
+
+    [TestMethod]
+    public void ComDotBrEligibilityTest()
+    {
+      var tlds = new List<string> { "COM.BR", "COM" };
+      var contactGroup = DomainContactProvider.DomainContactGroupInstance(tlds, 1);
+      var phases = new Dictionary<string, LaunchPhases>();
+      phases["COM.BR"] = LaunchPhases.GeneralAvailability;
+      phases["COM"] = LaunchPhases.GeneralAvailability;
+
+      var registrantContact = DomainContactProvider.DomainContactInstance(
+         "Bill", "Registrant", "bregistrant@bongo.com",
+           string.Empty, false,
+          "Street", "Suite 100", "Littleton", "Amapa",
+          "55555-555", "br", "+1 3031234567", string.Empty);
+      contactGroup.SetContact(registrantContact);
+      var tuiFormInfo = (Dictionary<string, ITuiFormInfo>)contactGroup.GetTuiFormInfo(phases);
+      Assert.IsTrue(tuiFormInfo["com.br"].TuiFormType.Equals("dpp"));
     }
 
     [TestMethod]

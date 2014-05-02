@@ -165,56 +165,7 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
     {
       tlds = RemoveLeadingPeriodsOnTlds(tlds);
       var result = new Dictionary<string, ITuiFormInfo>(8, StringComparer.OrdinalIgnoreCase);
-
-      var contactList = new List<DomainsTrusteeContact>(8);
-
-      foreach (var pair in _domainContactGroup)
-      {
-        var domainsTrusteeContactType = DomainsTrusteeContactTypes.Registrant;
-        var valid = false;
-
-        switch (pair.Key.ToString().ToLowerInvariant())
-        {
-          case "registrant":
-            domainsTrusteeContactType = DomainsTrusteeContactTypes.Registrant;
-            valid = true;
-            break;
-          case "billing":
-            domainsTrusteeContactType = DomainsTrusteeContactTypes.Billing;
-            valid = true;
-            break;
-          case "technical":
-            domainsTrusteeContactType = DomainsTrusteeContactTypes.Technical;
-            valid = true;
-            break;
-          case "administrative":
-            domainsTrusteeContactType = DomainsTrusteeContactTypes.Administrative;
-            valid = true;
-            break;
-        }
-
-        if (valid)
-        {
-          contactList.Add(new DomainsTrusteeContact(domainsTrusteeContactType, pair.Value.Country));
-
-          if (pair.Key.ToString().ToLowerInvariant() == "registrant")
-          {
-            if (!_domainContactGroup.ContainsKey(DomainContactType.Billing))
-            {
-              contactList.Add(new DomainsTrusteeContact(DomainsTrusteeContactTypes.Billing, pair.Value.Country));
-            }
-            if (!_domainContactGroup.ContainsKey(DomainContactType.Technical))
-            {
-              contactList.Add(new DomainsTrusteeContact(DomainsTrusteeContactTypes.Technical, pair.Value.Country));
-            }
-            if (!_domainContactGroup.ContainsKey(DomainContactType.Administrative))
-            {
-              contactList.Add(new DomainsTrusteeContact(DomainsTrusteeContactTypes.Administrative, pair.Value.Country));
-            }
-          }
-        }
-      }
-
+      var contactList = GetDomainsTrusteeContacts(_domainContactGroup);
       var tldArray = tlds as string[] ?? tlds.ToArray();
 
       if (contactList.Count > 0 && tldArray.Length > 0)
@@ -226,6 +177,7 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
         };
 
         DomainsTrusteeResponseData response;
+
         try
         {
           response = (DomainsTrusteeResponseData)Engine.Engine.ProcessRequest(requestData, DOMAIN_TRUSTEE_REQUESTID);
@@ -242,7 +194,8 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
           foreach (var tld in tldArray)
           {
             DomainsTrusteeResponse domainTrusteeResponse;
-            if (response.TryGetDomainTrustee(tld, out domainTrusteeResponse))
+
+            if (response.TryGetDomainTrustee(tld, out domainTrusteeResponse) && !string.IsNullOrEmpty(domainTrusteeResponse.TuiFormType))
             {
               result.Add(tld, new TuiFormInfo(domainTrusteeResponse.TuiFormType, domainTrusteeResponse.VendorId));
             }
@@ -253,103 +206,23 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
       return result;
     }
 
-
     public IDictionary<string, ITuiFormInfo> GetTuiFormInfo(Dictionary<string, LaunchPhases> tlds)
     {
       var result = new Dictionary<string, ITuiFormInfo>(8, StringComparer.OrdinalIgnoreCase);
-
       tlds = RemoveLeadingPeriodsOnTlds(tlds);
+      var contactList = GetDomainsTrusteeContacts(_domainContactGroup);
+      var tldArray = tlds.Keys.ToList();
 
-      var tldsTrusteeEnabled = new HashSet<string>();
-
-      foreach (var tld in tlds)
+      if (contactList.Count > 0 && tldArray.Count > 0)
       {
-        var dotTypeInfo = GetDotTypeProvider.GetDotTypeInfo(tld.Key);
-
-        if (dotTypeInfo != null && dotTypeInfo.GetType().Name != "InvalidDotType")
-        {
-          if (dotTypeInfo.Product != null && dotTypeInfo.Product.Trustee != null)
-          {
-            if (dotTypeInfo.Product.Trustee.IsRequired)
-            {
-              tldsTrusteeEnabled.Add(tld.Key);
-            }
-            else
-            {
-              var formTypes = dotTypeInfo.GetTuiFormTypes(tld.Value);
-              if (formTypes != null && formTypes.Any())
-              {
-                result[tld.Key] = new TuiFormInfo(formTypes[0], "0");
-              }
-              else
-              {
-                result[tld.Key] = new TuiFormInfo(string.Empty, "0");
-              }
-            }
-          }
-        }
-      }
-      
-      var contactList = new List<DomainsTrusteeContact>(8);
-
-      foreach (var pair in _domainContactGroup)
-      {
-        var domainsTrusteeContactType = DomainsTrusteeContactTypes.Registrant;
-        var valid = false;
-
-        switch (pair.Key.ToString().ToLowerInvariant())
-        {
-          case "registrant":
-            domainsTrusteeContactType = DomainsTrusteeContactTypes.Registrant;
-            valid = true;
-            break;
-          case "billing":
-            domainsTrusteeContactType = DomainsTrusteeContactTypes.Billing;
-            valid = true;
-            break;
-          case "technical":
-            domainsTrusteeContactType = DomainsTrusteeContactTypes.Technical;
-            valid = true;
-            break;
-          case "administrative":
-            domainsTrusteeContactType = DomainsTrusteeContactTypes.Administrative;
-            valid = true;
-            break;
-        }
-
-        if (valid)
-        {
-          contactList.Add(new DomainsTrusteeContact(domainsTrusteeContactType, pair.Value.Country));
-
-          if (pair.Key.ToString().ToLowerInvariant() == "registrant")
-          {
-            if (!_domainContactGroup.ContainsKey(DomainContactType.Billing))
-            {
-              contactList.Add(new DomainsTrusteeContact(DomainsTrusteeContactTypes.Billing, pair.Value.Country));
-            }
-            if (!_domainContactGroup.ContainsKey(DomainContactType.Technical))
-            {
-              contactList.Add(new DomainsTrusteeContact(DomainsTrusteeContactTypes.Technical, pair.Value.Country));
-            }
-            if (!_domainContactGroup.ContainsKey(DomainContactType.Administrative))
-            {
-              contactList.Add(new DomainsTrusteeContact(DomainsTrusteeContactTypes.Administrative, pair.Value.Country));
-            }
-          }
-        }
-      }
-
-      var tldArray = tldsTrusteeEnabled.ToArray();
-
-      if (contactList.Count > 0 && tldArray.Length > 0)
-      {
-        var contactsDomains = new DomainsTrusteeContactsTlds(contactList, tldArray.ToList());
+        var contactsDomains = new DomainsTrusteeContactsTlds(contactList, tldArray);
         var requestData = new DomainsTrusteeRequestData
         {
           ContactsTldsList = new List<DomainsTrusteeContactsTlds> {contactsDomains}
         };
 
         DomainsTrusteeResponseData response;
+
         try
         {
           response = (DomainsTrusteeResponseData)Engine.Engine.ProcessRequest(requestData, DOMAIN_TRUSTEE_REQUESTID);
@@ -366,7 +239,8 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
           foreach (var tld in tldArray)
           {
             DomainsTrusteeResponse domainTrusteeResponse;
-            if (response.TryGetDomainTrustee(tld, out domainTrusteeResponse))
+
+            if (response.TryGetDomainTrustee(tld, out domainTrusteeResponse) && !string.IsNullOrEmpty(domainTrusteeResponse.TuiFormType))
             {
               result[tld] = new TuiFormInfo(domainTrusteeResponse.TuiFormType, domainTrusteeResponse.VendorId);
             }
@@ -375,6 +249,55 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
       }
 
       return result;
+    }
+    private List<DomainsTrusteeContact> GetDomainsTrusteeContacts(Dictionary<DomainContactType, IDomainContact> domainContacts)
+    {
+      var contactList = new List<DomainsTrusteeContact>(4);
+
+      foreach (var pair in domainContacts)
+      {
+        var domainsTrusteeContactType = DomainsTrusteeContactTypes.Registrant;
+
+        switch (pair.Key)
+        {
+          case DomainContactType.Registrant:
+          case DomainContactType.RegistrantUnicode:
+            domainsTrusteeContactType = DomainsTrusteeContactTypes.Registrant;
+            break;
+          case DomainContactType.Billing:
+          case DomainContactType.BillingUnicode:
+            domainsTrusteeContactType = DomainsTrusteeContactTypes.Billing;
+            break;
+          case DomainContactType.Technical:
+          case DomainContactType.TechnicalUnicode:
+            domainsTrusteeContactType = DomainsTrusteeContactTypes.Technical;
+            break;
+          case DomainContactType.Administrative:
+          case DomainContactType.AdministrativeUnicode:
+            domainsTrusteeContactType = DomainsTrusteeContactTypes.Administrative;
+            break;
+        }
+
+        contactList.Add(new DomainsTrusteeContact(domainsTrusteeContactType, pair.Value.Country));
+
+        if (domainsTrusteeContactType == DomainsTrusteeContactTypes.Registrant)
+        {
+          if (!domainContacts.ContainsKey(DomainContactType.Billing))
+          {
+            contactList.Add(new DomainsTrusteeContact(DomainsTrusteeContactTypes.Billing, pair.Value.Country));
+          }
+          if (!domainContacts.ContainsKey(DomainContactType.Technical))
+          {
+            contactList.Add(new DomainsTrusteeContact(DomainsTrusteeContactTypes.Technical, pair.Value.Country));
+          }
+          if (!domainContacts.ContainsKey(DomainContactType.Administrative))
+          {
+            contactList.Add(new DomainsTrusteeContact(DomainsTrusteeContactTypes.Administrative, pair.Value.Country));
+          }
+        }
+      }
+
+      return contactList;
     }
 
     #region Properties

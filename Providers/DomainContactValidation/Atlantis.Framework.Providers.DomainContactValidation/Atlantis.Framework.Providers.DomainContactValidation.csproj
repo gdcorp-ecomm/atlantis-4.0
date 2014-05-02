@@ -65,9 +65,8 @@
     <Reference Include="Atlantis.Framework.DomainContactFields.Interface">
       <HintPath>..\packages\Atlantis.Framework.DomainContactFields.Impl.4.13.6.5\lib\net40\Atlantis.Framework.DomainContactFields.Interface.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.DomainContactValidation.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.DomainContactValidation.Interface.4.13.12.18\lib\net40\Atlantis.Framework.DomainContactValidation.Interface.dll</HintPath>
+    <Reference Include="Atlantis.Framework.DomainContactValidation.Interface">
+      <HintPath>..\packages\Atlantis.Framework.DomainContactValidation.Interface.14.5.2.1\lib\net40\Atlantis.Framework.DomainContactValidation.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.DomainsTrustee.Interface">
       <HintPath>..\packages\Atlantis.Framework.DomainsTrustee.Interface.4.13.12.16\lib\net40\Atlantis.Framework.DomainsTrustee.Interface.dll</HintPath>
@@ -107,6 +106,9 @@
     <Reference Include="Atlantis.Framework.Providers.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Atlantis.Framework.Providers.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Providers.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Providers.Localization.Interface">
+      <HintPath>..\packages\Atlantis.Framework.Providers.Localization.Interface.14.2.24.1\lib\net40\Atlantis.Framework.Providers.Localization.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Providers.RenderPipeline.Interface">
       <HintPath>..\packages\Atlantis.Framework.Providers.RenderPipeline.Interface.4.13.10.16\lib\net40\Atlantis.Framework.Providers.RenderPipeline.Interface.dll</HintPath>

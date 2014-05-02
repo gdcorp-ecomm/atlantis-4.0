@@ -12,7 +12,8 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
     <!-- update release notes with latest change information -->
-    <releaseNotes>
+      <releaseNotes>
+      14.5.2.2 : Added MarketId for translated errors
       14.5.2.1 : Fixed a bug with empty TuiForm values in GetTuiFormInfo
       14.4.2.1 : Removed code to append '.' to TLDs before contact validation
       14.3.25.1 : Fixed an issue with empty TrusteeVendorids entries

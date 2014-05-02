@@ -77,7 +77,7 @@
     </Reference>
     <Reference Include="Atlantis.Framework.DomainContactValidation.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.DomainContactValidation.Interface.4.13.12.18\lib\net40\Atlantis.Framework.DomainContactValidation.Interface.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.DomainContactValidation.Interface.14.5.2.1\lib\net40\Atlantis.Framework.DomainContactValidation.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.DomainsTrustee.Impl">
       <HintPath>..\packages\Atlantis.Framework.DomainsTrustee.Impl.4.13.12.16\lib\net40\Atlantis.Framework.DomainsTrustee.Impl.dll</HintPath>

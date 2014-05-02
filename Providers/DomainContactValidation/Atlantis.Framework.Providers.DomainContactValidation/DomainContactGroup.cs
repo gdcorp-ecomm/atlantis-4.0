@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Xml;
+using Atlantis.Framework.Providers.Localization.Interface;
 
 namespace Atlantis.Framework.Providers.DomainContactValidation
 {
@@ -755,7 +756,14 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
         contact.Email,
         contact.CanadianPresence);
 
-      var request = new DomainContactValidationRequestData(checkType.ToString(), (int)contactType, domainContactValidation, tlds, PrivateLabelId);
+      string marketId = "en-us";
+      if (_container.CanResolve<ILocalizationProvider>())
+      {
+        var localizationProvider = _container.Resolve<ILocalizationProvider>();
+        marketId = localizationProvider.MarketInfo.Id;
+      }
+      
+      var request = new DomainContactValidationRequestData(checkType.ToString(), (int)contactType, domainContactValidation, tlds, PrivateLabelId, marketId);
      
       var response = (DomainContactValidationResponseData)Engine.Engine.ProcessRequest(request, DOMAIN_VALIDATION_CHECK);
       var xml = response.ToXML();

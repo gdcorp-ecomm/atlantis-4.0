@@ -19,7 +19,7 @@ namespace Atlantis.Framework.DomainContactValidation.Tests
       var dcv = new Interface.DomainContactValidation("Raj", "Vontela", string.Empty, "15500 N. Hayden Road", "Suite 100", "Scottsdale", "Ontario", "80130", "CA", "(480)-505-8800",
                                                       "(480)-505-8800", "rvontela@godaddy.com", "LGR");
 
-      var request = new DomainContactValidationRequestData("Other", 0, dcv, new List<string> {"ca"}, 1);
+      var request = new DomainContactValidationRequestData("Other", 0, dcv, new List<string> {"ca"}, 1, "es-us");
       var response = (DomainContactValidationResponseData)Engine.Engine.ProcessRequest(request, REQUESTID);
       Assert.AreEqual(true, !string.IsNullOrEmpty(response.ToXML()));
     }

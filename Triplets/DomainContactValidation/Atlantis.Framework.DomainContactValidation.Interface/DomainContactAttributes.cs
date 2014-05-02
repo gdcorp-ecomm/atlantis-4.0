@@ -21,5 +21,6 @@
     public const string Type = "type";
     public const string PreferredLanguage = "preferredLanguage";
     public const string CanadianPresence = "cacpr";
+    public const string MarketId = "marketid";
   }
 }

@@ -2,14 +2,14 @@
 <package >
   <metadata>
     <id>Atlantis.Framework.DomainContactValidation.Interface</id>
-    <version>4.13.12.18</version>
+    <version>$version$</version>
     <title>Atlantis Framework DomainContactValidation Interface</title>
     <authors>$author$</authors>
     <owners>$author$</owners>
     <projectUrl>https://confluence.int.godaddy.com/display/ATLANTIS</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes></releaseNotes>
+    <releaseNotes>14.5.2.1 Added MarketId for translated errors</releaseNotes>
     <copyright>$copyright$</copyright>
     <tags>Atlantis Framework DomainContactValidation Interface</tags>
     <dependencies>

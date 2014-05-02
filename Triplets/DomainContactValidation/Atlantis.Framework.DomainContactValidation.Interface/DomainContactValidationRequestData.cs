@@ -14,7 +14,9 @@ namespace Atlantis.Framework.DomainContactValidation.Interface
     private readonly int _domainContactType;
     private readonly IEnumerable<string> _tlds;
     private readonly int _privateLabelId;
+    private readonly string _marketId;
 
+    [Obsolete("Market ID needed for error translation. Use non-obsolete constructor.")]
     public DomainContactValidationRequestData(string checkType, int domainContactType,
                                               DomainContactValidation domainContact, IEnumerable<string> tlds, int privateLabelId)
     {
@@ -23,6 +25,18 @@ namespace Atlantis.Framework.DomainContactValidation.Interface
       _domainCheckType = checkType;
       _tlds = tlds;
       _privateLabelId = privateLabelId;
+      RequestTimeout = TimeSpan.FromSeconds(4d);
+    }
+
+    public DomainContactValidationRequestData(string checkType, int domainContactType,
+                                              DomainContactValidation domainContact, IEnumerable<string> tlds, int privateLabelId, string marketId)
+    {
+      _domainContactValidation = domainContact;
+      _domainContactType = domainContactType;
+      _domainCheckType = checkType;
+      _tlds = tlds;
+      _privateLabelId = privateLabelId;
+      _marketId = marketId;
       RequestTimeout = TimeSpan.FromSeconds(4d);
     }
 
@@ -70,6 +84,10 @@ namespace Atlantis.Framework.DomainContactValidation.Interface
       oXmlTextWriter.WriteAttributeString(DomainContactAttributes.Email, _domainContactValidation.Email);
       oXmlTextWriter.WriteAttributeString(DomainContactAttributes.PrivateLabelId, _privateLabelId.ToString());
       oXmlTextWriter.WriteAttributeString(DomainContactAttributes.CanadianPresence, _domainContactValidation.CanadianPresence);
+      if (!string.IsNullOrEmpty(_marketId))
+      {
+        oXmlTextWriter.WriteAttributeString(DomainContactAttributes.MarketId, _marketId);        
+      }
 
       oXmlTextWriter.WriteEndElement();
 

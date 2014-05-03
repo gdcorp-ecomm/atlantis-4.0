@@ -64,14 +64,19 @@ namespace Atlantis.Framework.Localization.Interface
             XAttribute internalOnly = item.Attribute("internalOnly");
             XAttribute defaultCurrencyType = item.Attribute("defaultCurrencyType");
             XAttribute defaultMarketId = item.Attribute("defaultMarketID");
+            XAttribute displayTaxesAndFees = item.Attribute("displayTaxesAndFees");
+            XAttribute taxCountry = item.Attribute("taxCountry");
 
             if (id != null && id.Value != String.Empty)
             {
+              int displayTaxesAndFeesValue = displayTaxesAndFees != null ? int.Parse(displayTaxesAndFees.Value) : 0;
+              string taxCountryValue = taxCountry != null ? taxCountry.Value : String.Empty;
+
               countrySites[id.Value] =
                   new CountrySite(id.Value, description.Value, int.Parse(priceGroupId.Value),
                                   internalOnly.Value != "0",
-                                  defaultCurrencyType.Value, 
-                                  defaultMarketId.Value);
+                                  defaultCurrencyType.Value,
+                                  defaultMarketId.Value, displayTaxesAndFeesValue, taxCountryValue);
             }
           }
 

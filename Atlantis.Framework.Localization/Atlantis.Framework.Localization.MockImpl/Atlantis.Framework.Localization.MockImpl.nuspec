@@ -9,7 +9,7 @@
     <projectUrl>https://confluence.int.godaddy.com/display/ATLANTIS</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes></releaseNotes>
+    <releaseNotes>Updated references</releaseNotes>
     <copyright>$copyright$</copyright>
     <tags>Atlantis.Framework.Localization.MockImpl</tags>
     <dependencies />

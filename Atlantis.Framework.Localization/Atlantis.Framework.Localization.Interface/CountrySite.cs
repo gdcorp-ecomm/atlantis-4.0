@@ -5,7 +5,7 @@ namespace Atlantis.Framework.Localization.Interface
   public class CountrySite : ICountrySite
   {
     internal CountrySite(string id, string description, int priceGroupId, bool isInternalOnly,
-                       string defaultCurrencyType, string defaultMarketId)
+                       string defaultCurrencyType, string defaultMarketId, int displayTaxesAndFees, string taxCountry)
     {
       Id = id;
       Description = description;
@@ -13,6 +13,8 @@ namespace Atlantis.Framework.Localization.Interface
       IsInternalOnly = isInternalOnly;
       DefaultCurrencyType = defaultCurrencyType;
       DefaultMarketId = defaultMarketId;
+      DisplayTaxesAndFees = displayTaxesAndFees;
+      TaxCountry = taxCountry;
     }
 
     #region ICountrySite Members
@@ -28,6 +30,10 @@ namespace Atlantis.Framework.Localization.Interface
     public string DefaultCurrencyType { get; private set; }
 
     public string DefaultMarketId { get; private set; }
+
+    public int DisplayTaxesAndFees { get; private set; }
+
+    public string TaxCountry { get; private set; }
 
     #endregion
   }

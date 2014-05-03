@@ -121,6 +121,71 @@ namespace Atlantis.Framework.Localization.Tests
       Assert.IsFalse(response.IsValidCountrySite(" ", false));
     }
 
+    [TestMethod]
+    public void CountrySiteActiveResponse_TaxCountry_IsNotNull()
+    {
+      const string xml = @"<data count=""3"">
+          <item catalog_countrySite=""au"" catalog_priceGroupID=""0"" countrySiteDescription=""Australia"" isActive=""-1"" internalOnly=""0"" defaultMarketID=""en-AU"" defaultCurrencyType=""AUD""/>
+          <item catalog_countrySite=""ca"" catalog_priceGroupID=""0"" countrySiteDescription=""Canada"" isActive=""-1"" internalOnly=""0"" defaultMarketID=""en-CA"" defaultCurrencyType=""CAD""/>
+          <item catalog_countrySite=""ar"" catalog_priceGroupID=""0"" countrySiteDescription=""Argentina"" isActive=""-1"" internalOnly=""1"" defaultMarketID=""es-AR"" defaultCurrencyType=""ARP""/>
+        </data>";
+
+      var response = CountrySitesActiveResponseData.FromCacheDataXml(xml);
+      ICountrySite countrySite;
+
+      response.TryGetCountrySiteById("au", out countrySite);
+      Assert.IsNotNull(countrySite.TaxCountry);
+    }
+
+    [TestMethod]
+    public void CountrySiteActiveResponse_DisplayTaxAndFeesNotInData_Returns0()
+    {
+      const string xml = @"<data count=""3"">
+          <item catalog_countrySite=""au"" catalog_priceGroupID=""0"" countrySiteDescription=""Australia"" isActive=""-1"" internalOnly=""0"" defaultMarketID=""en-AU"" defaultCurrencyType=""AUD""/>
+          <item catalog_countrySite=""ca"" catalog_priceGroupID=""0"" countrySiteDescription=""Canada"" isActive=""-1"" internalOnly=""0"" defaultMarketID=""en-CA"" defaultCurrencyType=""CAD""/>
+          <item catalog_countrySite=""ar"" catalog_priceGroupID=""0"" countrySiteDescription=""Argentina"" isActive=""-1"" internalOnly=""1"" defaultMarketID=""es-AR"" defaultCurrencyType=""ARP""/>
+        </data>";
+
+      var response = CountrySitesActiveResponseData.FromCacheDataXml(xml);
+      ICountrySite countrySite;
+      int displayTaxAndFeeOut;
+
+      response.TryGetCountrySiteById("au", out countrySite);
+      Assert.IsTrue(countrySite.DisplayTaxesAndFees == 0);
+    }
+
+    [TestMethod]
+    public void CountrySiteActiveResponse_GetTaxCountry_ValidXml()
+    {
+      const string xml = @"<data count=""3"">
+          <item catalog_countrySite=""au"" catalog_priceGroupID=""0"" countrySiteDescription=""Australia"" isActive=""-1"" internalOnly=""0"" defaultMarketID=""en-AU"" defaultCurrencyType=""AUD"" displayTaxesAndFees=""1"" taxCountry=""DE""/>
+          <item catalog_countrySite=""ca"" catalog_priceGroupID=""0"" countrySiteDescription=""Canada"" isActive=""-1"" internalOnly=""0"" defaultMarketID=""en-CA"" defaultCurrencyType=""CAD""/>
+          <item catalog_countrySite=""ar"" catalog_priceGroupID=""0"" countrySiteDescription=""Argentina"" isActive=""-1"" internalOnly=""1"" defaultMarketID=""es-AR"" defaultCurrencyType=""ARP""/>
+        </data>";
+
+      var response = CountrySitesActiveResponseData.FromCacheDataXml(xml);
+      ICountrySite countrySite;
+
+      response.TryGetCountrySiteById("au", out countrySite);
+      Assert.IsTrue(countrySite.TaxCountry.Equals("DE"));
+    }
+
+    [TestMethod]
+    public void CountrySiteActiveResponse_GetDisplayTaxAndFees_ValidXml()
+    {
+      const string xml = @"<data count=""3"">
+          <item catalog_countrySite=""au"" catalog_priceGroupID=""0"" countrySiteDescription=""Australia"" isActive=""-1"" internalOnly=""0"" defaultMarketID=""en-AU"" defaultCurrencyType=""AUD"" displayTaxesAndFees=""1"" taxCountry=""DE""/>
+          <item catalog_countrySite=""ca"" catalog_priceGroupID=""0"" countrySiteDescription=""Canada"" isActive=""-1"" internalOnly=""0"" defaultMarketID=""en-CA"" defaultCurrencyType=""CAD""/>
+          <item catalog_countrySite=""ar"" catalog_priceGroupID=""0"" countrySiteDescription=""Argentina"" isActive=""-1"" internalOnly=""1"" defaultMarketID=""es-AR"" defaultCurrencyType=""ARP""/>
+        </data>";
+
+      var response = CountrySitesActiveResponseData.FromCacheDataXml(xml);
+      ICountrySite countrySite;
+
+      response.TryGetCountrySiteById("au", out countrySite);
+      Assert.IsTrue(countrySite.DisplayTaxesAndFees == 1);
+    }
+
     #region Miscellaneous tests
 
     [TestMethod]

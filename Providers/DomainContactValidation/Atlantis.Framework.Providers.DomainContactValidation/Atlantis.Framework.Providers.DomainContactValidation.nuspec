@@ -13,6 +13,7 @@
     <description>$description$</description>
     <!-- update release notes with latest change information -->
       <releaseNotes>
+      14.5.5.1 : Fixed a bug with empty DisplayString always returned
       14.5.2.2 : Added MarketId for translated errors
       14.5.2.1 : Fixed a bug with empty TuiForm values in GetTuiFormInfo
       14.4.2.1 : Removed code to append '.' to TLDs before contact validation

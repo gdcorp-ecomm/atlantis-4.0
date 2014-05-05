@@ -728,7 +728,9 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
           responseError.Attribute, 
           responseError.Code,  
           responseError.ContactType,
-          responseError.Description);
+          responseError.Description,
+          responseError.DisplayString,
+          responseError.Tld);
 
         contact.Errors.Add(domainContactError);
       }

@@ -114,6 +114,8 @@ namespace Atlantis.Framework.Providers.DomainContactValidation.Tests
           "80130", "US", "(303)-555-1213", "(303)-555-2213");
       contactGroup.SetContact(DomainContactType.Registrant, registrantContact);
       Assert.AreNotEqual(0, registrantContact.Errors.Count);
+      Assert.AreNotEqual("", registrantContact.Errors[0].DisplayString);
+      Assert.IsNotNull(registrantContact.Errors[0].DisplayString);
     }
 
     [TestMethod]

@@ -1,0 +1,18 @@
+﻿<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Atlantis.Framework.Web.DebugControl</id>
+    <version>$version$</version>
+    <title>Atlantis Framework Web DebugControl</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <projectUrl>https://confluence.int.godaddy.com/display/ATLANTIS</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes>initial nuget package</releaseNotes>
+    <copyright>$copyright$</copyright>
+    <tags>Atlantis Framework Web DebugControl</tags>
+    <dependencies></dependencies>
+  </metadata>
+  <files></files>
+</package>

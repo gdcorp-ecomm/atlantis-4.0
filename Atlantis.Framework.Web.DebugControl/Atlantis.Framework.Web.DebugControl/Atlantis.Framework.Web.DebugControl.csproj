@@ -99,6 +99,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Atlantis.Framework.Web.DebugControl.nuget.bat" />
+    <None Include="Atlantis.Framework.Web.DebugControl.nuspec" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -6,6 +6,8 @@ using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.DomainProductPackage.Interface;
 using Atlantis.Framework.Providers.DomainProductPackage.PackageItems;
 using Atlantis.Framework.Providers.Interface.Products;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 
 namespace Atlantis.Framework.Providers.DomainProductPackage.StateProvider
@@ -34,7 +36,7 @@ namespace Atlantis.Framework.Providers.DomainProductPackage.StateProvider
       var name = packageDataItem[PACKAGE_NAME].ToString();
       
       var productPackageItem = ProductPackageItem.Create(name, productId, quantity, duration, container);
-      productPackageItem.BasketAttributes = packageDataItem[BASKET_ATTRIBUTES] as Dictionary<string, string>;
+      productPackageItem.BasketAttributes = ((JObject)packageDataItem[BASKET_ATTRIBUTES]).ToObject<IDictionary<string, string>>();
 
       return productPackageItem;
     }

@@ -65,6 +65,8 @@ namespace Atlantis.Framework.Providers.DomainProductPackage
           var domainProductPackage = new DomainProductPackage(Container) { Domain = findResponseDomain.Domain, TierId = launchPhaseItem.TierId};
 
           var productPackageItem = ProductPackageItem.Create(DomainProductPackage.PACKAGE_NAME, productid, 1, years, Container);
+          productPackageItem.BasketAttributes = findResponseDomain.CartAttributes;
+
           domainProductPackage.PackageItems.Add(productPackageItem);
 
           SetApplicationFee(launchPhaseItem.LaunchPhase, domainProductPackage, dotTypeInfo);
@@ -81,6 +83,8 @@ namespace Atlantis.Framework.Providers.DomainProductPackage
         var domainProductPackage = new DomainProductPackage(Container) { Domain = findResponseDomain.Domain, TierId = findResponseDomain.InternalTier };
 
         var productPackageItem = ProductPackageItem.Create(DomainProductPackage.PACKAGE_NAME, productid, 1, years, Container);
+        productPackageItem.BasketAttributes = findResponseDomain.CartAttributes;
+
         domainProductPackage.PackageItems.Add(productPackageItem);
 
         SetTrusteePackageItem(domainProductPackage, dotTypeInfo);

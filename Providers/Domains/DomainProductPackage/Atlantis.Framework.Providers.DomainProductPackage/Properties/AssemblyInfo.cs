@@ -36,10 +36,10 @@ using System.Runtime.InteropServices;
 //      Revision
 //
 // use 4.0.0.0 for the Assembly Version
-// use 4.YY.M.D for teh FileVersion.  Do not use leading zeros.
+// use 4.YY.M.D for the FileVersion.  Do not use leading zeros.
 // example 4.13.6.1 for Jun 1, 2013
 //
 [assembly: AssemblyVersion("4.0.0.0")]
-[assembly: AssemblyFileVersion("14.2.5.1")]
-[assembly: AssemblyInformationalVersion("14.3.28.1")]
+[assembly: AssemblyFileVersion("14.5.7.2")]
+[assembly: AssemblyInformationalVersion("14.5.7.2")]
 

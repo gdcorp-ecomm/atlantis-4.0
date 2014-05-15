@@ -10,8 +10,9 @@ namespace Atlantis.Framework.DomainCheck.Interface
     private readonly string _punyCode;
     private readonly string _idnScript;
     private readonly string _languageId;
+    private readonly int _internalTierId;
 
-    public DomainAttributes(int availableCode, int syntaxCode, string syntaxDescription, bool wasTyped, string punyCode, string idnScript, string languageId)
+    public DomainAttributes(int availableCode, int syntaxCode, string syntaxDescription, bool wasTyped, string punyCode, string idnScript, string languageId, int internalTierId)
     {
       _availableCode = availableCode;
       _syntaxCode = syntaxCode;
@@ -20,6 +21,7 @@ namespace Atlantis.Framework.DomainCheck.Interface
       _punyCode = punyCode;
       _idnScript = idnScript;
       _languageId = languageId;
+      _internalTierId = internalTierId;
     }
 
     public int AvailableCode
@@ -55,6 +57,10 @@ namespace Atlantis.Framework.DomainCheck.Interface
     public string IdnScript
     {
       get { return _idnScript; }
+    }
+    public int InternalTierId
+    {
+      get { return _internalTierId; }
     }
   }
 }

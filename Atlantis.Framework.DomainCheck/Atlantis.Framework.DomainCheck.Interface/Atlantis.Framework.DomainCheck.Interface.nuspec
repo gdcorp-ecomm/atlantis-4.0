@@ -1,0 +1,21 @@
+﻿<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Atlantis.Framework.DomainCheck.Interface</id>
+    <version>$version$</version>
+    <title>Atlantis Framework DomainCheck Interface</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <projectUrl>https://confluence.int.godaddy.com/display/ATLANTIS</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes>
+      
+    </releaseNotes>
+    <copyright>$copyright$</copyright>
+    <tags>Atlantis Framework DomainCheck Inteface</tags>
+    <dependencies>
+      <dependency id="Atlantis.Framework.Interface" version="4.13.9.25" />
+    </dependencies>
+  </metadata>
+</package>

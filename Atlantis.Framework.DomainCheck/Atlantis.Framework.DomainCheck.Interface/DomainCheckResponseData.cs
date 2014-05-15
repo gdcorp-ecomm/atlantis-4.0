@@ -112,6 +112,7 @@ namespace Atlantis.Framework.DomainCheck.Interface
         var wasTyped = false;
         var idnScript = "ENG";
         var languageId = "35";
+        var internalTierId = 0;
 
         var name = xlDomain.GetAttribute("find");
 
@@ -119,6 +120,10 @@ namespace Atlantis.Framework.DomainCheck.Interface
 
         attribute = xlDomain.GetAttribute("result");
         Int32.TryParse(attribute, out availableCode);
+        attribute = String.Empty;
+
+        attribute = xlDomain.GetAttribute("internaltierid");
+        int.TryParse(attribute, out internalTierId);
         attribute = String.Empty;
 
         var strTyped = xlDomain.GetAttribute("wasTyped");
@@ -152,7 +157,7 @@ namespace Atlantis.Framework.DomainCheck.Interface
           syntaxDescription = xlSyntax.GetAttribute("description");
         }
 
-        _domainsDictionary[name.ToUpper()] = new DomainAttributes(availableCode, syntaxCode, syntaxDescription, wasTyped, punyCode, idnScript, languageId);
+        _domainsDictionary[name.ToUpper()] = new DomainAttributes(availableCode, syntaxCode, syntaxDescription, wasTyped, punyCode, idnScript, languageId, internalTierId);
       }
     }
 

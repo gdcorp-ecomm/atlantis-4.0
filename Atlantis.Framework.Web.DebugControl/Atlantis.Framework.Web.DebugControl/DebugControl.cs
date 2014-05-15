@@ -170,6 +170,7 @@ namespace Atlantis.Framework.Web.DebugControl
             .Replace("<", "&lt;")
             .Replace(">", "&gt;")
             .Replace("&quot;", "")
+            .Replace("\"", "")
             .Replace(@"\",@"/");
       }
       catch

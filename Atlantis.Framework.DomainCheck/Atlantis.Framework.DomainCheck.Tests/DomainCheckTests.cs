@@ -262,6 +262,7 @@ namespace Atlantis.Framework.DomainCheck.Tests
       Assert.IsTrue(response.IsSuccess);
       Assert.IsTrue(response.FirstDomain.Key.Equals("ДОМЕННОЕИМЯ.COM"));
       Assert.IsTrue(response.FirstDomain.Value.WasTyped);
+      Assert.IsTrue(response.FirstDomain.Value.InternalTierId < 0);
       Assert.IsTrue(response.FirstDomain.Value.SyntaxCode > -1);
       Assert.IsTrue(response.FirstDomain.Value.AvailableCode > -1);
       Assert.IsTrue(response.FirstDomain.Value.PunyCode.Equals("XN--D1ACAMRDEAFE4Q.COM"));

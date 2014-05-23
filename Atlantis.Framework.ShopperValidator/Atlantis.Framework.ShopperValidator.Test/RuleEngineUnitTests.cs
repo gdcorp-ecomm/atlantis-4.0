@@ -13,6 +13,7 @@ namespace Atlantis.Framework.ShopperValidator.Test
   [DeploymentItem("Atlantis.Framework.SearchShoppers.Impl.dll")]
   [DeploymentItem("Atlantis.Framework.ValidateField.Impl.dll")]
   [DeploymentItem("Atlantis.Framework.AuthValidatePassword.Impl.dll")]
+  [DeploymentItem("Atlantis.Framework.Shopper.Impl.dll")]
   public class RuleEngineUnitTests
   {
     private const string _CULTURE = "en-US";

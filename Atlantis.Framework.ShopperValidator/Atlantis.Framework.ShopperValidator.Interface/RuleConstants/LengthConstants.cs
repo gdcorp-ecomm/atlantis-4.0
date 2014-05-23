@@ -3,7 +3,7 @@ namespace Atlantis.Framework.ShopperValidator.Interface.RuleConstants
 {
   public class LengthConstants
   {
-    public const int EmailMaxLength = 100;
+    public const int EmailMaxLength = 254;
     public const int FirstNameMaxLength = 30;
     public const int LastNameMaxLength = 50;
     public const int AddressMaxLength = 100;

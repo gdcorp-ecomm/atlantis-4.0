@@ -272,7 +272,7 @@ namespace Atlantis.Framework.ShopperValidator.Test
       var notMatch = new NotMatchRule(_culture, "notmatch", "asdf", "notmatch2nd", "asdf");
       var numeric = new NumericRule("numeric", "asdf", _culture);
       var phone = new PhoneRule("asdf", "phone", culture: _culture);
-      var regex = new RegexRule(_culture, "reggy", "asdf", new Regex(@"^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,6}$"));
+      var regex = new RegexRule(_culture, "reggy", "asdf", new Regex(@"^\S+@\S+\.\S+$"));
       var required = new RequiredRule("required", "", _culture);
       var xss = new XssRule("xss", "<script alert('hi');</script>", _culture);
 

@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Collections;
 using System.Globalization;
+using System.Linq;
 using System.Xml;
 using Atlantis.Framework.Providers.DomainContactValidation.Interface;
+using System.Collections.Generic;
 
 namespace Atlantis.Framework.Providers.DomainContactValidation
 {
@@ -47,11 +50,33 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
 
     public int Code
     {
-      get 
+      get
       {
         int result;
         Int32.TryParse(_errorElement.GetAttribute(DomainContactErrorAttributes.Code), out result);
         return result;
+      }
+    }
+
+    public int MinorCode
+    {
+      get
+      {
+        int result;
+        Int32.TryParse(_errorElement.GetAttribute(DomainContactErrorAttributes.MinorCode), out result);
+        return result;
+      }
+    }
+
+    public IEnumerable<string> Domains
+    {
+      get
+      {
+        return
+          from d in _errorElement.GetElementsByTagName(DomainContactErrorAttributes.Domains).OfType<XmlElement>()
+          let n = d.Attributes[DomainContactErrorAttributes.DomainName]
+          where n != null
+          select n.Value;
       }
     }
 
@@ -79,7 +104,15 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
     {
       get { return _errorElement.GetAttribute(DomainContactErrorAttributes.DotType); }
     }
-    
+
+    public string Country
+    {
+      get
+      {
+        return _errorElement.GetAttribute(DomainContactErrorAttributes.Country);
+      }
+    }
+
     #endregion
 
     #region ICloneable Members

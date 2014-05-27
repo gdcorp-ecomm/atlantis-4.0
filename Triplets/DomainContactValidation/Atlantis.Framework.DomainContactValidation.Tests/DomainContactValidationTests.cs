@@ -92,6 +92,21 @@ namespace Atlantis.Framework.DomainContactValidation.Tests
       }
     }
 
+    [TestMethod]
+    public void DomainContactValidationWithDoaminsGoodRequest()
+    {
+      var dcv = new Interface.DomainContactValidation("Raj", "Vontela", string.Empty, "15500 N. Hayden Road", "Suite 100", "Scottsdale", "Arizona", "80130", "FR", "(480)-505-8800",
+                                                "(480)-505-8800", "rvontela@godaddy.com", "");
+
+      var requestData = new DomainContactValidationRequestData("DomainTransfer", 0, dcv, new List<string> { "fr" }, 1, "en-US", new string[] { "oberon-1api-de.uk" });
+      var toXml = requestData.ToXML();
+      Assert.IsTrue(!string.IsNullOrEmpty(toXml));
+
+      var response = (DomainContactValidationResponseData)Engine.Engine.ProcessRequest(requestData, REQUESTID);
+      Assert.IsTrue(!string.IsNullOrEmpty(response.ToXML()));
+
+    }
+
     internal class XData : RequestData
     {
       internal XData(string shopperId, string sourceUrl, string orderId, string pathway, int pageCount)

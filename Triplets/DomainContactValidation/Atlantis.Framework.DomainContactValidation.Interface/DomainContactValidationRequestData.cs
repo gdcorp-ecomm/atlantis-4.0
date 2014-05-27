@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Xml;
 using Atlantis.Framework.Interface;
@@ -15,7 +16,8 @@ namespace Atlantis.Framework.DomainContactValidation.Interface
     private readonly IEnumerable<string> _tlds;
     private readonly int _privateLabelId;
     private readonly string _marketId;
-
+    private readonly IEnumerable<string> _domains;
+      
     [Obsolete("Market ID needed for error translation. Use non-obsolete constructor.")]
     public DomainContactValidationRequestData(string checkType, int domainContactType,
                                               DomainContactValidation domainContact, IEnumerable<string> tlds, int privateLabelId)
@@ -28,6 +30,7 @@ namespace Atlantis.Framework.DomainContactValidation.Interface
       RequestTimeout = TimeSpan.FromSeconds(4d);
     }
 
+    [Obsolete(".UK changes require the domains are also passed to the validation service")]
     public DomainContactValidationRequestData(string checkType, int domainContactType,
                                               DomainContactValidation domainContact, IEnumerable<string> tlds, int privateLabelId, string marketId)
     {
@@ -38,6 +41,19 @@ namespace Atlantis.Framework.DomainContactValidation.Interface
       _privateLabelId = privateLabelId;
       _marketId = marketId;
       RequestTimeout = TimeSpan.FromSeconds(4d);
+    }
+
+    public DomainContactValidationRequestData(string checkType, int domainContactType, DomainContactValidation domainContact, IEnumerable<string> tlds, 
+                                              int privateLabelId, string marketId, IEnumerable<string> domains )
+    {
+      _domainContactValidation = domainContact;
+      _domainContactType = domainContactType;
+      _domainCheckType = checkType;
+      _tlds = tlds;
+      _privateLabelId = privateLabelId;
+      _marketId = marketId;
+      _domains = domains;
+      RequestTimeout = TimeSpan.FromSeconds(4d);   
     }
 
     #region RequestData Members
@@ -87,6 +103,18 @@ namespace Atlantis.Framework.DomainContactValidation.Interface
       if (!string.IsNullOrEmpty(_marketId))
       {
         oXmlTextWriter.WriteAttributeString(DomainContactAttributes.MarketId, _marketId);        
+      }
+
+      if (_domains != null && _domains.Any())
+      {
+        oXmlTextWriter.WriteStartElement(DomainContactAttributes.Domains);
+        oXmlTextWriter.WriteStartElement(DomainContactAttributes.Domain);
+        foreach (string domain in _domains)
+        {
+          oXmlTextWriter.WriteAttributeString(DomainContactAttributes.DomainName, domain);
+          oXmlTextWriter.WriteEndElement();
+        }
+        oXmlTextWriter.WriteEndElement();
       }
 
       oXmlTextWriter.WriteEndElement();

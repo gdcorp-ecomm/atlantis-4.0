@@ -10,6 +10,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
     <releaseNotes>
+      14.5.28.1 Fixed bug when multiple domains were passed in
       14.5.27.1 Added enumerable doamians for .UK changes
       14.5.2.1 Added MarketId for translated errors
     </releaseNotes>

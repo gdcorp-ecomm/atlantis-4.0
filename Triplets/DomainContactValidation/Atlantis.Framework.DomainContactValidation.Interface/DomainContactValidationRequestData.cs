@@ -108,9 +108,10 @@ namespace Atlantis.Framework.DomainContactValidation.Interface
       if (_domains != null && _domains.Any())
       {
         oXmlTextWriter.WriteStartElement(DomainContactAttributes.Domains);
-        oXmlTextWriter.WriteStartElement(DomainContactAttributes.Domain);
+        
         foreach (string domain in _domains)
         {
+          oXmlTextWriter.WriteStartElement(DomainContactAttributes.Domain);
           oXmlTextWriter.WriteAttributeString(DomainContactAttributes.DomainName, domain);
           oXmlTextWriter.WriteEndElement();
         }

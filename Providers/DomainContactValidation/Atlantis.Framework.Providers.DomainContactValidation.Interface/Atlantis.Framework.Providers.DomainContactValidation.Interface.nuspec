@@ -13,6 +13,7 @@
     <description>$description$</description>
     <!-- update release notes with latest change information -->
     <releaseNotes>
+      14.5.29.1 : Updates for .UK to validate contacts per domain
       14.1.29.1: Added TuiFormsInfo to DomainContactGroup
       14.2.7.1 : fixing issue with nuget not grabbing new dll
     </releaseNotes>

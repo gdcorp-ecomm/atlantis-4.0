@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Configuration;
 using System.Globalization;
 using System.Linq;
 using System.Xml;
@@ -15,19 +16,32 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
 
     internal DomainContactError()
     {
-      _errorElement = CreateElement(ERROR_ELEMENT_NAME);
-      AppendChild(_errorElement);
+      _errorElement = base.CreateElement(ERROR_ELEMENT_NAME);
+      base.AppendChild(_errorElement);
     }
     
-    internal DomainContactError(string sAttribute, int iCode, int contactType, string sDescription = "", string displayString = "", string dotType = "")
+    internal DomainContactError(string sAttribute, int iCode, int minorCode, int contactType, string description = "", bool showError = false, bool removeDomain = false, string displayString = "", string dotType = "", string country = "", IEnumerable<string> domains = null )
       : this()
     {
       _errorElement.SetAttribute(DomainContactErrorAttributes.Attribute, sAttribute);
       _errorElement.SetAttribute(DomainContactErrorAttributes.Code, iCode.ToString(CultureInfo.InvariantCulture));
-      _errorElement.SetAttribute(DomainContactErrorAttributes.Description, sDescription);
+      _errorElement.SetAttribute(DomainContactErrorAttributes.MinorCode, minorCode.ToString(CultureInfo.InvariantCulture));
+      _errorElement.SetAttribute(DomainContactErrorAttributes.Description, description);
       _errorElement.SetAttribute(DomainContactErrorAttributes.ContactType, contactType.ToString(CultureInfo.InvariantCulture));
+      _errorElement.SetAttribute(DomainContactErrorAttributes.ShowError, showError ? "1" : "0");
+      _errorElement.SetAttribute(DomainContactErrorAttributes.RemoveDomain, removeDomain ? "1" : "0");
       _errorElement.SetAttribute(DomainContactErrorAttributes.DisplayString, displayString);
       _errorElement.SetAttribute(DomainContactErrorAttributes.DotType, dotType);
+      _errorElement.SetAttribute(DomainContactErrorAttributes.Country, country);
+      XmlElement domainsElement =
+        (XmlElement)_errorElement.AppendChild(_errorElement.OwnerDocument.CreateElement(DomainContactErrorAttributes.Domains));
+      if (domains != null)
+      {
+        foreach (var domain in domains)
+        {
+          ((XmlElement)domainsElement.AppendChild(_errorElement.OwnerDocument.CreateElement(DomainContactErrorAttributes.Domain))).SetAttribute(DomainContactErrorAttributes.DomainName, domain);
+        } 
+      }
     }
 
     internal DomainContactError(XmlElement errorXml)
@@ -35,10 +49,21 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
     {
       _errorElement.SetAttribute(DomainContactErrorAttributes.Attribute, errorXml.GetAttribute(DomainContactErrorAttributes.Attribute));
       _errorElement.SetAttribute(DomainContactErrorAttributes.Code, errorXml.GetAttribute(DomainContactErrorAttributes.Code));
+      _errorElement.SetAttribute(DomainContactErrorAttributes.MinorCode, errorXml.GetAttribute(DomainContactErrorAttributes.MinorCode));
       _errorElement.SetAttribute(DomainContactErrorAttributes.Description, errorXml.GetAttribute(DomainContactErrorAttributes.Description));
       _errorElement.SetAttribute(DomainContactErrorAttributes.ContactType, errorXml.GetAttribute(DomainContactErrorAttributes.ContactType));
+      _errorElement.SetAttribute(DomainContactErrorAttributes.ShowError, errorXml.GetAttribute(DomainContactErrorAttributes.ShowError));
+      _errorElement.SetAttribute(DomainContactErrorAttributes.RemoveDomain, errorXml.GetAttribute(DomainContactErrorAttributes.RemoveDomain));
       _errorElement.SetAttribute(DomainContactErrorAttributes.DisplayString, errorXml.GetAttribute(DomainContactErrorAttributes.DisplayString));
       _errorElement.SetAttribute(DomainContactErrorAttributes.DotType, errorXml.GetAttribute(DomainContactErrorAttributes.DotType));
+      _errorElement.SetAttribute(DomainContactErrorAttributes.Country, errorXml.GetAttribute(DomainContactErrorAttributes.Country));
+      XmlNodeList doamiansNodeList = errorXml.GetElementsByTagName(DomainContactErrorAttributes.Domains);
+      if (doamiansNodeList != null && doamiansNodeList.Count > 0)
+      {
+        XmlNode node = _errorElement.OwnerDocument.ImportNode(doamiansNodeList[0], true);
+        _errorElement.AppendChild(node);
+	    }
+      
     }
 
     #region Properties
@@ -73,7 +98,8 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
       get
       {
         return
-          from d in _errorElement.GetElementsByTagName(DomainContactErrorAttributes.Domains).OfType<XmlElement>()
+          from ds in _errorElement.GetElementsByTagName(DomainContactErrorAttributes.Domains).OfType<XmlElement>()
+          from d in ds.GetElementsByTagName(DomainContactErrorAttributes.Domain).OfType<XmlElement>()
           let n = d.Attributes[DomainContactErrorAttributes.DomainName]
           where n != null
           select n.Value;
@@ -99,6 +125,23 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
     {
       get { return _errorElement.GetAttribute(DomainContactErrorAttributes.DisplayString); }
     }
+
+    public bool ShowError
+    {
+      get
+      {
+        return _errorElement.GetAttribute(DomainContactErrorAttributes.ShowError) == "1";
+      }
+    }
+
+    public bool RemoveDomain
+    {
+      get
+      {
+        return _errorElement.GetAttribute(DomainContactErrorAttributes.RemoveDomain) == "1";
+      }
+    }
+
     
     public string DotType
     {
@@ -119,8 +162,7 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
 
     public override XmlNode Clone()
     {
-      var result = new DomainContactError(Attribute, Code, ContactType, Description, DisplayString, DotType);
-      return result;
+      return new DomainContactError(Attribute, Code, MinorCode, ContactType, Description, ShowError, RemoveDomain, DisplayString, DotType, Country, Domains);
     }
 
     #endregion

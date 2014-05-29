@@ -1,4 +1,6 @@
-﻿using System.Xml;
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.Xml;
 
 namespace Atlantis.Framework.Providers.DomainContactValidation.Interface
 {
@@ -8,6 +10,8 @@ namespace Atlantis.Framework.Providers.DomainContactValidation.Interface
 
     int Code { get; }
 
+    int MinorCode { get; }
+
     string Description  { get; }
 
     int ContactType  { get; }
@@ -16,8 +20,17 @@ namespace Atlantis.Framework.Providers.DomainContactValidation.Interface
     
     string DotType  { get; }
 
+    string Country { get; }
+
+    bool ShowError { get; }
+
+    bool RemoveDomain { get; }
+
+    IEnumerable<string> Domains { get; }
+
     XmlNode Clone();
 
     string InnerXml { get; }
+
   }
 }

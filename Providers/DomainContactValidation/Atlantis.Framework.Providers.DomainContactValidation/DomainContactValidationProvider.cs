@@ -47,9 +47,9 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
         preferredLanguage);
     }
 
-    public IDomainContactGroup DomainContactGroupInstance(IEnumerable<string> tlds, int privateLabelId)
+    public IDomainContactGroup DomainContactGroupInstance(IEnumerable<string> tlds, IEnumerable<string> domains , int privateLabelId)
     {
-      return new DomainContactGroup(Container, tlds, privateLabelId);
+      return new DomainContactGroup(Container, tlds, domains, privateLabelId);
     }
 
     public IDomainContactGroup DomainContactGroupInstance(string contactGroupXml)
@@ -62,9 +62,9 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
       return new DomainContactError();
     }
 
-    public IDomainContactError DomainContactErrorInstance(string attribute, int code, string description, int contactType)
+    public IDomainContactError DomainContactErrorInstance(string attribute, int code, int minorCode, string description, int contactType)
     {
-      return new DomainContactError(attribute, code, contactType, description);
+      return new DomainContactError(attribute, code, minorCode, contactType, description);
     }
 
     public IDomainContactError DomainContactErrorInstance(XmlElement errorXml)

@@ -18,13 +18,13 @@ namespace Atlantis.Framework.Providers.DomainContactValidation.Interface
       string phone, string fax, string canadianPresence = "",
       string preferredLanguage = null);
 
-    IDomainContactGroup DomainContactGroupInstance(IEnumerable<string> tlds, int privateLabelId);
+    IDomainContactGroup DomainContactGroupInstance(IEnumerable<string> tlds, IEnumerable<string> domains , int privateLabelId);
 
     IDomainContactGroup DomainContactGroupInstance(string contactGroupXml);
 
     IDomainContactError DomainContactErrorInstance();
 
-    IDomainContactError DomainContactErrorInstance(string attribute, int code, string description, int contactType);
+    IDomainContactError DomainContactErrorInstance(string attribute, int code, int minorCode, string description, int contactType);
 
     IDomainContactError DomainContactErrorInstance(XmlElement errorXml);
   }

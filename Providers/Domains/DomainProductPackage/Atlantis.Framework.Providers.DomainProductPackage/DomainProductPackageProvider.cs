@@ -99,7 +99,12 @@ namespace Atlantis.Framework.Providers.DomainProductPackage
     public IEnumerable<IDomainRegistrationProductPackageGroup> BuildDomainProductPackageGroups(IList<IFindResponseDomain> findResponseDomains)
     {
       var domainProductPackageGroups = new List<IDomainRegistrationProductPackageGroup>(findResponseDomains.Count);
-      var domainCount = findResponseDomains.Count;
+
+      // This value is used to determine the correct productId and price
+      // If the value is > 1 then a bulk pricing product id will be returned as the logic will interpret that as buying multiple domains
+      // This value should be 1 as the findResponse holds all the domains returned from the search. The customer is not purchasing all the returned domains.
+      // A single price / product Id is required here.
+      var domainCount = 1;
 
       foreach (var findResponseDomain in findResponseDomains)
       {

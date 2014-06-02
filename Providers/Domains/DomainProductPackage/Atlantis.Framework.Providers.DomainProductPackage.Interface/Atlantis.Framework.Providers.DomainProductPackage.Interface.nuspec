@@ -3,7 +3,7 @@
   <metadata>
     <id>Atlantis.Framework.Providers.DomainProductPackage.Interface</id>
     <version>$version$</version>
-    <title>Atlantis Framework Providers DomainProductPackage Interface</title>
+    <title>Atlantis.Framework.Providers.DomainProductPackage.Interface</title>
     <authors>$author$</authors>
     <owners>$author$</owners>
     <projectUrl>https://confluence.int.godaddy.com/display/ATLANTIS</projectUrl>
@@ -11,7 +11,7 @@
     <description>$description$</description>
     <releaseNotes></releaseNotes>
     <copyright>$copyright$</copyright>
-    <tags>Atlantis Framework Providers DomainProductPackage Interface</tags>
+    <tags>Atlantis.Framework.Providers.DomainProductPackage.Interface</tags>
     <dependencies />
   </metadata>
   <files>

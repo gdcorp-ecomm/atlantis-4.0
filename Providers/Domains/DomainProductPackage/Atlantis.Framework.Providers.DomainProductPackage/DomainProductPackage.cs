@@ -4,7 +4,6 @@ using System.Linq;
 using Atlantis.Framework.Domains.Interface;
 using Atlantis.Framework.DotTypeCache.Interface;
 using Atlantis.Framework.Interface;
-using Atlantis.Framework.Providers.Currency;
 using Atlantis.Framework.Providers.DomainProductPackage.Interface;
 using Atlantis.Framework.Providers.Interface.Currency;
 using Atlantis.Framework.Providers.Interface.Products;
@@ -76,7 +75,7 @@ namespace Atlantis.Framework.Providers.DomainProductPackage
         if (totalAmount > 0)
         {
           var currencyInfo = _currentPrice.CurrencyInfo;
-          _currentPrice = new CurrencyPrice(totalAmount, currencyInfo, CurrencyPriceType.Transactional);
+          _currentPrice = _currencyProvider.Value.NewCurrencyPrice(totalAmount, currencyInfo, CurrencyPriceType.Transactional);
 
         }
 
@@ -99,7 +98,7 @@ namespace Atlantis.Framework.Providers.DomainProductPackage
 
         if (totalAmount > 0)
         {
-          _listPrice = new CurrencyPrice(totalAmount, _listPrice.CurrencyInfo, CurrencyPriceType.Transactional);
+          _listPrice =  _currencyProvider.Value.NewCurrencyPrice(totalAmount, _listPrice.CurrencyInfo, CurrencyPriceType.Transactional);
 
         }
         return _listPrice;
@@ -133,57 +132,7 @@ namespace Atlantis.Framework.Providers.DomainProductPackage
       return trusteeRegistrationProductPackage != null;
     }
 
-    //public bool TryGetPrivacyPackage(out IProductPackageItem privatePackageItem)
-    //{
-    //  privatePackageItem = PackageItems.FirstOrDefault(package => package.Name == PRIVACY_NAME);
-
-    //  return privatePackageItem != null;
-    //}
-
     public int? TierId { get; set; }
 
-    //public bool TrySetRegistrationLength(int registrationLength, int domainCount, LaunchPhases launchPhase)
-    //{
-    //  bool success = false;
-
-    //  var adjustedLength = registrationLength;
-
-    //  var dotTypeInfo = _dotTypeProvider.Value.GetDotTypeInfo(Domain.Tld);
-
-    //  IList<int> validRegLengths;
-
-    //  if (launchPhase == LaunchPhases.GeneralAvailability)
-    //  {
-    //    validRegLengths = dotTypeInfo.GetValidRegistrationLengths(domainCount, new[] {registrationLength});
-    //  }
-    //  else
-    //  {
-    //    validRegLengths = dotTypeInfo.GetValidPreRegLengths(launchPhase, domainCount, new[] {registrationLength});
-    //  }
-
-    //  foreach (var validLength in validRegLengths)
-    //  {
-    //    if (validLength <= registrationLength)
-    //    {
-    //      adjustedLength = registrationLength;
-    //    }
-    //  }
-
-    //  var domainProductLookup = DomainProductLookup.Create(adjustedLength, domainCount, launchPhase, TLDProductTypes.Registration, TierId);
-    //  var productId = dotTypeInfo.GetProductId(domainProductLookup);
-
-    //  if (productId > 0)
-    //  {
-    //    DomainProductPackageItem.ProductId = dotTypeInfo.GetProductId(domainProductLookup);
-    //    success = true;
-    //  }
-
-    //  return success;
-    //}
-    
-    //public void SetPrivacy(string privacyPackageItemName)
-    //{
-      
-    //}
   }
 }

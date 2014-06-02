@@ -1,7 +1,6 @@
-﻿using System.Collections.Generic;
-using Atlantis.Framework.DotTypeCache.Interface;
-using Atlantis.Framework.Providers.Interface.Currency;
+﻿using Atlantis.Framework.Providers.Interface.Currency;
 using Atlantis.Framework.Providers.Interface.Products;
+using System.Collections.Generic;
 
 namespace Atlantis.Framework.Providers.DomainProductPackage.Interface
 {

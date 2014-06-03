@@ -31,18 +31,6 @@ namespace Atlantis.Framework.Providers.DomainProductPackage
       }
     }
 
-    private void SetTrusteePackageItem(IDomainProductPackage domainProductPackage, IDotTypeInfo dotTypeInfo)
-    {
-      var productIds = dotTypeInfo.GetTrusteeProductId(TLDProductTypes.Registration);
-
-      if (productIds != null && productIds.Count > 0)
-      {
-        IProductPackageItem trusteeRegistrationItem = ProductPackageItem.Create(DomainProductPackage.TRUSTEE_NAME, productIds[0], 1, 1, Container);
-
-        domainProductPackage.PackageItems.Add(trusteeRegistrationItem);
-      }
-    }
-
     private DomainRegistrationProductPackageGroup GetDomainRegistrationProductPackageGroup(IFindResponseDomain findResponseDomain, int domainCount)
     {
       var dotTypeInfo = _dotTypeProvider.Value.GetDotTypeInfo(findResponseDomain.Domain.Tld);
@@ -87,9 +75,7 @@ namespace Atlantis.Framework.Providers.DomainProductPackage
 
         domainProductPackage.PackageItems.Add(productPackageItem);
 
-        SetTrusteePackageItem(domainProductPackage, dotTypeInfo);
-
-        domainRegProductPackageGroup.RegistrationPackage = domainProductPackage;
+       domainRegProductPackageGroup.RegistrationPackage = domainProductPackage;
       }
 
         

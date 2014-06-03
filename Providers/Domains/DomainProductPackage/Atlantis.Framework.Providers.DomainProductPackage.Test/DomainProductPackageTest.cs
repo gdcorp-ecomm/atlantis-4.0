@@ -17,9 +17,6 @@ using Atlantis.Framework.Providers.ProxyContext;
 using Atlantis.Framework.Testing.MockHttpContext;
 using Atlantis.Framework.Testing.MockProviders;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Atlantis.Framework.Providers.Interface.ProviderContainer;
-using Atlantis.Framework.Providers.TLDDataCache.Interface;
-using Atlantis.Framework.Providers.TLDDataCache;
 using Atlantis.Framework.Providers.Geo.Interface;
 using Atlantis.Framework.Providers.Geo;
 using Atlantis.Framework.Providers.AppSettings.Interface;
@@ -83,8 +80,6 @@ namespace Atlantis.Framework.Providers.DomainProductPackage.Test
           _providerContainer.RegisterProvider<IDotTypeProvider, DotTypeProvider>();
           _providerContainer.RegisterProvider<ICurrencyProvider, Currency.CurrencyProvider>();
           _providerContainer.RegisterProvider<IPersistanceStoreProvider, PersistanceStoreProvider>();
-          _providerContainer.RegisterProvider<IDotTypeProvider, DotTypeProvider>();
-          _providerContainer.RegisterProvider<ITLDDataCacheProvider, TLDDataCacheProvider>();
           _providerContainer.RegisterProvider<IGeoProvider, GeoProvider>();
           _providerContainer.RegisterProvider<IAppSettingsProvider, AppSettingsProvider>();
 
@@ -93,22 +88,6 @@ namespace Atlantis.Framework.Providers.DomainProductPackage.Test
         return _providerContainer;
       }
     }
-
-    private IDomainProductPackage _domainProductPackage;
-
-    private IDomainProductPackage DomainProductPackage
-    {
-        get
-        {
-            if (_domainProductPackage == null)
-            {
-                _domainProductPackage = ProviderContainer.Resolve<IDomainProductPackage>();
-            }
-            return _domainProductPackage;
-        }
-    }
-
-
 
     private IDomainSearchProvider _domainSearch;
 
@@ -194,29 +173,6 @@ namespace Atlantis.Framework.Providers.DomainProductPackage.Test
       var domains = DomainSearch.SearchDomain("spoonymac-rastaman.com", SOURCE_CODE, string.Empty);
 
       var domainProductPackages = DomainProductPackageProvider.BuildDomainProductPackageGroups(domains.GetDomainsByGroup(DomainGroupTypes.EXACT_MATCH));
-    }
-
-    [TestMethod]
-    [Ignore]  // The test relies on specific data values
-    public void DomainTrusteeRegistrationProductIdTest()
-    {
-        var domainSearchResponse = DomainSearch.SearchDomain("ihopethisdomaindoesnotexist.SG", SOURCE_CODE, string.Empty);
-
-        var packageGroups = DomainProductPackageProvider.BuildDomainProductPackageGroups(domainSearchResponse.GetDomainsByGroup(DomainGroupTypes.EXACT_MATCH));
-
-        Assert.IsTrue(packageGroups.Count() > 0);
-
-        foreach (var packageGroup in packageGroups)
-        {
-            IDomainProductPackage domainProdPackage;
-            packageGroup.TryGetRegistrationPackage(out domainProdPackage);
-
-            IProductPackageItem trusteePrdPackage;
-            Assert.IsTrue(domainProdPackage.TryGetTrusteePackage(out trusteePrdPackage));
-
-            Assert.IsTrue(trusteePrdPackage.ProductId != 0);
-            Assert.IsTrue(trusteePrdPackage.ProductId == 46307);
-        }
     }
 
     [TestMethod]

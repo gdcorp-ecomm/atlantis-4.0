@@ -7,7 +7,6 @@ using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.DomainProductPackage.Interface;
 using Atlantis.Framework.Providers.Interface.Currency;
 using Atlantis.Framework.Providers.Interface.Products;
-using Atlantis.Framework.Providers.DomainProductPackage.PackageItems;
 
 namespace Atlantis.Framework.Providers.DomainProductPackage
 {
@@ -16,7 +15,6 @@ namespace Atlantis.Framework.Providers.DomainProductPackage
     public const string PACKAGE_NAME = "DomainProductPackage.DomainProductPackageItem";
     public const string APPLICATION_FEE_NAME = "DomainProductPackage.ApplicationFeePackageItem";
     public const string PRIVACY_NAME = "DomainProductPackage.PrivacyPackageItem";
-    public const string TRUSTEE_NAME = "DomainProductPackage.TrusteePackageItem";
 
     private readonly Lazy<ICurrencyProvider> _currencyProvider;
     private readonly Lazy<IDotTypeProvider> _dotTypeProvider;
@@ -123,13 +121,6 @@ namespace Atlantis.Framework.Providers.DomainProductPackage
       applicationFeePackageItem = PackageItems.FirstOrDefault(package => package.Name == APPLICATION_FEE_NAME);
 
       return applicationFeePackageItem != null;
-    }
-
-    public bool TryGetTrusteePackage(out IProductPackageItem trusteeRegistrationProductPackage)
-    {
-      trusteeRegistrationProductPackage = PackageItems.FirstOrDefault(package => package.Name == TRUSTEE_NAME);
-
-      return trusteeRegistrationProductPackage != null;
     }
 
     public int? TierId { get; set; }

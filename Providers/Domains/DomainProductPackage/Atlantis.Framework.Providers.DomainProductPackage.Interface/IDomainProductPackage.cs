@@ -19,8 +19,6 @@ namespace Atlantis.Framework.Providers.DomainProductPackage.Interface
 
     bool TryGetApplicationFeePackage(out IProductPackageItem productPackageItem);
 
-    bool TryGetTrusteePackage(out IProductPackageItem trusteeRegistrationProductPackage);
-
     //bool TrySetRegistrationLength(int registrationLength, int domainCount, LaunchPhases launchPhase);
 
     //void SetPrivacy(string privacyPackageItemName);

@@ -166,7 +166,7 @@
     <value>Τηλεόραση - NBA</value>
   </data>
   <data name="surveyMNS" xml:space="preserve">
-    <value>Μέσα ενημέρωσης/Θέμα ειδήσεων</value>
+    <value>Ρεπορτάζ/άρθρο</value>
   </data>
   <data name="surveyTvMMA" xml:space="preserve">
     <value>Τηλεόραση - Μικτές πολεμικές τέχνες</value>
@@ -184,7 +184,7 @@
     <value>Τηλεόραση - Τένις</value>
   </data>
   <data name="surveyBillboard" xml:space="preserve">
-    <value>Πίνακας ανακοινώσεων</value>
+    <value>Διαφημιστική πινακίδα</value>
   </data>
   <data name="surveyTvHockey" xml:space="preserve">
     <value>Τηλεόραση - Χόκεϊ</value>

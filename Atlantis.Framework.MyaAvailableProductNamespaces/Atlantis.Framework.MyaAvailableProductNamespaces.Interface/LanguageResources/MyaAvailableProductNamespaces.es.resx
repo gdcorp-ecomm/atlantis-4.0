@@ -162,7 +162,7 @@
     <comment>These values should be handled as separate values. Split by the pipe |</comment>
   </data>
   <data name="myaNswst" xml:space="preserve">
-    <value>Website Builder|anydomainname.com|Un nombre de dominio (no necesariamente configurada con esta cuenta) asociado con una cuenta de Website Builder configurada con esta cuenta.</value>
+    <value>Creador de sitios|anydomainname.com|Un nombre de dominio (no necesariamente configurada con esta cuenta) asociado con una cuenta de Creador de sitios configurada con esta cuenta.</value>
     <comment>These values should be handled as separate values. Split by the pipe |</comment>
   </data>
 </root>

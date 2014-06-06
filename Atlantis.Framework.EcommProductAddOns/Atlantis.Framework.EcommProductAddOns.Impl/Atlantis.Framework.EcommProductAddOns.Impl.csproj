@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{7E98657D-D90F-4FE6-8BC7-ECE09CF7ECC4}</ProjectGuid>
+    <ProjectGuid>{E6F29F7A-DA09-4C50-91D8-A230D7F445C2}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Atlantis.Framework.EcommProductAddOns.Impl</RootNamespace>
@@ -57,6 +57,30 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Atlantis.Framework.AppSettings.Interface">
+      <HintPath>..\packages\Atlantis.Framework.AppSettings.Interface.14.1.21.1\lib\net40\Atlantis.Framework.AppSettings.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.DataCache">
+      <HintPath>..\packages\Atlantis.Framework.DataCache.14.2.19.1\lib\net40\Atlantis.Framework.DataCache.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.DataCacheGeneric.Interface">
+      <HintPath>..\packages\Atlantis.Framework.DataCacheGeneric.Interface.14.1.21.1\lib\net40\Atlantis.Framework.DataCacheGeneric.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Engine">
+      <HintPath>..\packages\Atlantis.Framework.Engine.14.1.16.1\lib\net40\Atlantis.Framework.Engine.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Engine.XmlSerializers">
+      <HintPath>..\packages\Atlantis.Framework.Engine.14.1.16.1\lib\net40\Atlantis.Framework.Engine.XmlSerializers.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Interface">
+      <HintPath>..\packages\Atlantis.Framework.Interface.14.5.15.2\lib\net40\Atlantis.Framework.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.PrivateLabel.Interface">
+      <HintPath>..\packages\Atlantis.Framework.PrivateLabel.Interface.14.1.21.1\lib\net40\Atlantis.Framework.PrivateLabel.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Products.Interface">
+      <HintPath>..\packages\Atlantis.Framework.Products.Interface.14.2.19.1\lib\net40\Atlantis.Framework.Products.Interface.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -89,6 +113,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -117,14 +142,6 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Atlantis.Framework.DataCache\Atlantis.Framework.DataCache\Atlantis.Framework.DataCache.csproj">
-      <Project>{7f2738f8-683c-49e7-88cd-e986c70f0321}</Project>
-      <Name>Atlantis.Framework.DataCache</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj">
-      <Project>{a083a52e-c3c3-42e0-8dfd-54719e4c3b25}</Project>
-      <Name>Atlantis.Framework.Interface</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.EcommProductAddOns.Interface\Atlantis.Framework.EcommProductAddOns.Interface.csproj">
       <Project>{51abac11-1534-45e4-9f30-f191541551e6}</Project>
       <Name>Atlantis.Framework.EcommProductAddOns.Interface</Name>

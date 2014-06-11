@@ -61,8 +61,14 @@
     <Reference Include="Atlantis.Framework.DataCache">
       <HintPath>..\packages\Atlantis.Framework.DataCache.14.2.19.1\lib\net40\Atlantis.Framework.DataCache.dll</HintPath>
     </Reference>
+    <Reference Include="Atlantis.Framework.DataCacheGeneric.Impl">
+      <HintPath>..\packages\Atlantis.Framework.DataCacheGeneric.Impl.14.1.21.1\lib\net40\Atlantis.Framework.DataCacheGeneric.Impl.dll</HintPath>
+    </Reference>
     <Reference Include="Atlantis.Framework.DataCacheGeneric.Interface">
       <HintPath>..\packages\Atlantis.Framework.DataCacheGeneric.Interface.14.1.21.1\lib\net40\Atlantis.Framework.DataCacheGeneric.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.DataCacheService">
+      <HintPath>..\packages\Atlantis.Framework.DataCacheService.4.13.12.21\lib\net40\Atlantis.Framework.DataCacheService.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Engine">
       <HintPath>..\packages\Atlantis.Framework.Engine.14.1.16.1\lib\net40\Atlantis.Framework.Engine.dll</HintPath>
@@ -72,6 +78,9 @@
     </Reference>
     <Reference Include="Atlantis.Framework.Interface">
       <HintPath>..\packages\Atlantis.Framework.Interface.14.5.15.2\lib\net40\Atlantis.Framework.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.PrivateLabel.Impl">
+      <HintPath>..\packages\Atlantis.Framework.PrivateLabel.Impl.14.1.21.1\lib\net40\Atlantis.Framework.PrivateLabel.Impl.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.PrivateLabel.Interface">
       <HintPath>..\packages\Atlantis.Framework.PrivateLabel.Interface.14.1.21.1\lib\net40\Atlantis.Framework.PrivateLabel.Interface.dll</HintPath>

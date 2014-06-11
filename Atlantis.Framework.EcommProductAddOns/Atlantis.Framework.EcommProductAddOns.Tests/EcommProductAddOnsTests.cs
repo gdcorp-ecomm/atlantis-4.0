@@ -6,6 +6,8 @@ namespace Atlantis.Framework.EcommProductAddOns.Tests
 {
   [TestClass]
   [DeploymentItem("atlantis.config")]
+  [DeploymentItem("atlantis.framework.privatelabel.impl.dll")]
+  [DeploymentItem("atlantis.framework.datacachegeneric.impl.dll")]
   [DeploymentItem("atlantis.framework.ecommproductaddons.impl.dll")]
   public class GetEcommProductAddOnsTests
   {
@@ -63,14 +65,14 @@ namespace Atlantis.Framework.EcommProductAddOns.Tests
     [TestMethod]
     public void EcommProductHasAddOnsTest()
     {
-      var request = new EcommProductAddOnsRequestData(SHOPPER_ID
+      var request = new EcommProductAddOnsRequestData("83439"
         , string.Empty
         , string.Empty
         , string.Empty
         , 0
         , 1
-        , "d423f0f3-0d15-11df-a185-005056956427"
-        , "dedhost");
+        , "9cf56fc3-14f3-11e3-9fc8-005056953ce3"
+        , "outlook");
 
       var response = (EcommProductAddOnsResponseData)Engine.Engine.ProcessRequest(request, REQUEST_TYPE);
 

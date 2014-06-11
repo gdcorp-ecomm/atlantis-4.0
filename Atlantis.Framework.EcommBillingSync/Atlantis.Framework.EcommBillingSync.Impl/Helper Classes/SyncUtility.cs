@@ -193,7 +193,6 @@ namespace Atlantis.Framework.EcommBillingSync.Impl.Helper_Classes
 
     private List<AddToCartItem> CreateAddOnItems(EcommBillingSyncRequestData ebsRequest, IEnumerable<AddOnProduct> addOnProducts, BillingSyncProduct bsp, string guid, int index, string duration)
     {
-      const int QUANTITY = 1;
       var addToCartItems = new List<AddToCartItem>();
 
       foreach (var addOnProduct in addOnProducts)
@@ -203,7 +202,7 @@ namespace Atlantis.Framework.EcommBillingSync.Impl.Helper_Classes
           continue;
         }
         var durationHash = GetDurationHash(ebsRequest, addOnProduct.RenewalUnifiedProductId, Convert.ToDouble(duration), bsp);
-        var item = new AddToCartItem(string.Format("{0}_{1}", bsp.BillingResourceId, index), addOnProduct.RenewalUnifiedProductId, bsp.BillingResourceId, QUANTITY, ebsRequest.ItemTrackingCode, duration, durationHash);
+        var item = new AddToCartItem(string.Format("{0}_{1}", bsp.BillingResourceId, index), addOnProduct.RenewalUnifiedProductId, bsp.BillingResourceId, addOnProduct.Quantity, ebsRequest.ItemTrackingCode, duration, durationHash);
 
         // Only add Guid Info. Do not add TARGET_EXPIRATION_DATE for any add-ons. Will cause cart to fail on 
         // duration, as duration validation compares target date to this billing date, which is null for add-ons.

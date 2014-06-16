@@ -357,6 +357,26 @@ namespace Atlantis.Framework.DomainLookup.Interface
               bool.TryParse(dr["hasActiveSuspectTerms"].ToString(), out _hasActiveSuspectTerms);
             }
           }
+
+          if (dr.Table.Columns.Contains("invalidWhoIs"))
+          {
+            if (dr["invalidWhoIs"] != DBNull.Value)
+            {
+              bool invalidWhoIs = false;
+
+              if (bool.TryParse(dr["invalidWhoIs"].ToString(), out invalidWhoIs))
+              {
+                if (invalidWhoIs)
+                {
+                  _invalidWhoIsStatus = 1;
+                }
+                else
+                {
+                  _invalidWhoIsStatus = 0;
+                }
+              }
+            }
+          }
         }
 
         if (domaindata.Tables.Count > 1 && domaindata.Tables[1].Rows != null && domaindata.Tables[1].Rows.Count > 0)
@@ -459,11 +479,14 @@ namespace Atlantis.Framework.DomainLookup.Interface
             }
           }
 
-          if (drPdDomain.Table.Columns.Contains("InvalidWhoIsStatus"))
+          if (_invalidWhoIsStatus < 0)
           {
-            if (drPdDomain["InvalidWhoIsStatus"] != DBNull.Value)
+            if (drPdDomain.Table.Columns.Contains("InvalidWhoIsStatus"))
             {
-              int.TryParse(drPdDomain["InvalidWhoIsStatus"].ToString(), out _invalidWhoIsStatus);
+              if (drPdDomain["InvalidWhoIsStatus"] != DBNull.Value)
+              {
+                int.TryParse(drPdDomain["InvalidWhoIsStatus"].ToString(), out _invalidWhoIsStatus);
+              }
             }
           }
 

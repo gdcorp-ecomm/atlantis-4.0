@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>Atlantis.Framework.DomainLookup.Impl</id>
-    <version>4.13.10.28</version>
+    <version>4.14.6.16</version>
     <title>Atlantis Framework Domain Lookup Impl</title>
     <authors>$author$</authors>
     <owners>$author$</owners>

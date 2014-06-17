@@ -19,7 +19,7 @@ namespace Atlantis.Framework.PromoData.Tests
       //PromoDataRequestData request = new PromoDataRequestData("77311", string.Empty,
       //  String.Empty, string.Empty, 0, "iscSSLStd1299");
       PromoDataRequestData request = new PromoDataRequestData("77311", string.Empty,
-       String.Empty, string.Empty, 0, "iscSSLStd1299");
+       String.Empty, string.Empty, 0, "MNIJRFAILMW");
       request.RequestTimeout = new TimeSpan(0,0,60);
       PromoDataResponseData response
         = (PromoDataResponseData)Engine.Engine.ProcessRequest(request, 365);

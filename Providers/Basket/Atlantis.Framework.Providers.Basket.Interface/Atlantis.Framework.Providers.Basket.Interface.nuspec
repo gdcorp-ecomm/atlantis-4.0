@@ -2,14 +2,16 @@
 <package >
   <metadata>
     <id>Atlantis.Framework.Providers.Basket.Interface</id>
-    <version>4.13.11.5</version> 
+    <version>$version$</version> 
     <title>Atlantis Framework Basket Provider Interface</title>
     <authors>$author$</authors>
     <owners>$author$</owners>
     <projectUrl>https://confluence.int.godaddy.com/display/ATLANTIS</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes>Added property to get basket item count</releaseNotes>
+    <releaseNotes>
+      14.6.19.1: Add Delete related interface
+    </releaseNotes>
     <copyright>$copyright$</copyright>
     <tags>Atlantis Framework Basket Provider Interface</tags>
   </metadata>

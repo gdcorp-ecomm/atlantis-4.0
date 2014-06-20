@@ -1,4 +1,5 @@
-﻿using Atlantis.Framework.Basket.Interface;
+﻿using System.Linq;
+using Atlantis.Framework.Basket.Interface;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.Basket.Interface;
 using System;
@@ -6,25 +7,40 @@ using Atlantis.Framework.Providers.Shopper.Interface;
 
 namespace Atlantis.Framework.Providers.Basket
 {
-  public abstract class BasketProvider : ProviderBase, IBasketProvider
+  public abstract class BasketProvider: ProviderBase, IBasketProvider
   {
-    private readonly Lazy<ISiteContext> _siteContext;
-    private readonly Lazy<IShopperContext> _shopperContext;
-    private readonly Lazy<IShopperDataProvider> _shopperDataProvider; 
+    private readonly ISiteContext _siteContext;
+    private readonly IShopperContext _shopperContext;
+    private readonly IShopperDataProvider _shopperDataProvider;
+    private readonly IBasketDeleteRequestBuilder _basketDeleteRequestBuilder;
 
-    protected BasketProvider(IProviderContainer container)
-      : base(container)
+    protected BasketProvider(IProviderContainer container) : base(container)
     {
-      _siteContext = new Lazy<ISiteContext>(() => Container.Resolve<ISiteContext>());
-      _shopperContext = new Lazy<IShopperContext>(() => Container.Resolve<IShopperContext>());
-      _shopperDataProvider = new Lazy<IShopperDataProvider>(() => Container.Resolve<IShopperDataProvider>());
+      _siteContext = container.Resolve<ISiteContext>();
+      _shopperContext = container.Resolve<IShopperContext>();
+      _shopperDataProvider = container.Resolve<IShopperDataProvider>();
+    }
+
+    protected BasketProvider(ISiteContext siteContext, IShopperContext shopperContext,
+      IShopperDataProvider shopperDataProvider) : this(siteContext, shopperContext, shopperDataProvider, null)
+    {
+    }
+
+    internal BasketProvider(ISiteContext siteContext, IShopperContext shopperContext,
+      IShopperDataProvider shopperDataProvider, IBasketDeleteRequestBuilder basketDeleteRequestBuilder)
+      : base(null)
+    {
+      _siteContext = siteContext;
+      _shopperContext = shopperContext;
+      _shopperDataProvider = shopperDataProvider;
+      _basketDeleteRequestBuilder = basketDeleteRequestBuilder ?? new BasketDeleteRequestBuilder();
     }
 
     protected ISiteContext SiteContext
     {
       get
       {
-        return _siteContext.Value;
+        return _siteContext;
       }
     }
 
@@ -32,7 +48,7 @@ namespace Atlantis.Framework.Providers.Basket
     {
       get
       {
-        return _shopperContext.Value;
+        return _shopperContext;
       }
     }
 
@@ -40,7 +56,7 @@ namespace Atlantis.Framework.Providers.Basket
     {
       get
       {
-        return _shopperDataProvider.Value;
+        return _shopperDataProvider;
       }
     }
 
@@ -51,14 +67,60 @@ namespace Atlantis.Framework.Providers.Basket
       return result;
     }
 
+    public IBasketDeleteRequest NewDeleteRequest()
+    {
+      return new BasketDeleteRequest();
+    }
+
     protected virtual void SetInitialAddRequestProperties(IBasketAddRequest basketAddRequest)
     {
       basketAddRequest.ISC = SiteContext.ISC;
     }
 
+    public IBasketResponse DeleteFromBasket(IBasketDeleteRequest deleteRequest)
+    {
+      if (deleteRequest == null)
+      {
+        throw new ArgumentException("deleteRequest is null");
+      }
+
+      if (deleteRequest.ItemsToDelete.Any())
+      {
+        if (string.IsNullOrEmpty(ShopperContext.ShopperId))
+        {
+          return CreateBasketResponse(new ArgumentException("Shopper id is null or empty"));
+        }
+
+        try
+        {
+          var request = _basketDeleteRequestBuilder.BuildRequestData(ShopperContext.ShopperId, deleteRequest);
+          var response =
+            (BasketDeleteResponseData) Engine.Engine.ProcessRequest(request, BasketEngineRequests.DeleteItem);
+
+          return CreateBasketResponse(response.Status);
+        }
+        catch (Exception ex)
+        {
+          return CreateBasketResponse(ex);
+        }
+      }
+
+      return ProviderBasketResponse.FromException(new ArgumentException("Items to delete in delete request is empty"));
+    }
+
+    protected virtual IBasketResponse CreateBasketResponse(BasketResponseStatus status)
+    {
+      return ProviderBasketResponse.FromBasketResponseStatus(status);
+    }
+
+    protected virtual IBasketResponse CreateBasketResponse(Exception exception)
+    {
+      return ProviderBasketResponse.FromException(exception);
+    }
+
     public IBasketAddItem NewBasketAddItem(int unifiedProductId, string itemTrackingCode)
     {
-      var result = new BasketAddItem(Container, unifiedProductId, itemTrackingCode);
+      var result = new BasketAddItem(_siteContext, unifiedProductId, itemTrackingCode);
       SetInitialAddItemProperties(result);
       return result;
     }

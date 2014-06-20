@@ -1,11 +1,20 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30501.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Providers.Basket.Interface", "Atlantis.Framework.Providers.Basket.Interface\Atlantis.Framework.Providers.Basket.Interface.csproj", "{0150B6C1-FD9F-45E2-96C3-ED919D37E367}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Providers.Basket", "Atlantis.Framework.Providers.Basket\Atlantis.Framework.Providers.Basket.csproj", "{0A0354A7-7B95-49FB-BC43-6D8C863256EF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Providers.Basket.Tests", "Atlantis.Framework.Providers.Basket.Tests\Atlantis.Framework.Providers.Basket.Tests.csproj", "{97974B34-7021-413C-A1EF-C0A4527BB85B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{C809AB64-E3DE-479C-89C0-2B5D37938B36}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution

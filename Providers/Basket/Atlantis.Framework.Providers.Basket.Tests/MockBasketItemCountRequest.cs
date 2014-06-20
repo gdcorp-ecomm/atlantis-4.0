@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using Atlantis.Framework.Basket.Interface;
 using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.Providers.Basket.Tests
 {
+  [ExcludeFromCodeCoverage]
   public class MockBasketItemCountRequest : IRequest
   {
     public IResponseData RequestHandler(RequestData requestData, ConfigElement config)

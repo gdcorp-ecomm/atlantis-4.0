@@ -42,6 +42,7 @@ using System.Runtime.InteropServices;
 //
 [assembly: AssemblyVersion("4.0.0.0")]
 [assembly: AssemblyFileVersion("4.0.0.0")]
-[assembly: AssemblyInformationalVersion("14.5.16.1")]
+[assembly: AssemblyInformationalVersion("14.6.19.1")]
 [assembly: InternalsVisibleTo("Atlantis.Framework.Providers.Basket.Tests")]
+[assembly: InternalsVisibleTo("DynamicProxyGenAssembly2")]
 

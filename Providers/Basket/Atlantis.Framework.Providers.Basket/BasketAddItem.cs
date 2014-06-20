@@ -1,6 +1,5 @@
 ﻿using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.Basket.Interface;
-using System;
 using System.Collections.Generic;
 using System.Xml.Linq;
 
@@ -8,20 +7,17 @@ namespace Atlantis.Framework.Providers.Basket
 {
   public class BasketAddItem : IBasketAddItem
   {
-    private readonly IProviderContainer _container;
     private readonly List<IBasketAddItem> _childItems;
-    private readonly Lazy<ISiteContext> _siteContext;
+    private readonly ISiteContext _siteContext;
     private IBasketAddPriceOverride _priceOverride;
- 
-    internal BasketAddItem(IProviderContainer container, int unifiedProductId, string itemTrackingCode)
+
+    internal BasketAddItem(ISiteContext siteContext, int unifiedProductId, string itemTrackingCode)
     {
-      _container = container;
+      _siteContext = siteContext;
       _childItems = new List<IBasketAddItem>(4);
       Quantity = 1;
       UnifiedProductId = unifiedProductId;
       ItemTrackingCode = itemTrackingCode;
-
-      _siteContext = new Lazy<ISiteContext>(() => _container.Resolve<ISiteContext>());
     }
 
     public int UnifiedProductId {get; set;}
@@ -44,7 +40,7 @@ namespace Atlantis.Framework.Providers.Basket
 
     public void SetOverridePrice(int overrideListPriceUSD, int overrideCurrentPriceUSD)
     {
-      _priceOverride = new BasketAddPriceOverride(_siteContext.Value.PrivateLabelId, UnifiedProductId, overrideCurrentPriceUSD, overrideListPriceUSD);
+      _priceOverride = new BasketAddPriceOverride(_siteContext.PrivateLabelId, UnifiedProductId, overrideCurrentPriceUSD, overrideListPriceUSD);
     }
 
     public IBasketAddPriceOverride OverridePrice

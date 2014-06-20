@@ -1,8 +1,8 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text.RegularExpressions;
 using System.Xml.Linq;
 using Atlantis.Framework.Basket.Interface;
 using Atlantis.Framework.Engine;
@@ -14,9 +14,12 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Testing.MockProviders;
 using Atlantis.Framework.Providers.Basket.Interface;
+using Moq;
+using Moq.Protected;
 
 namespace Atlantis.Framework.Providers.Basket.Tests
 {
+  [ExcludeFromCodeCoverage]
   [TestClass]
   [DeploymentItem("atlantis.config")]
   public class BasketProviderTests
@@ -36,6 +39,160 @@ namespace Atlantis.Framework.Providers.Basket.Tests
       }
 
       return result;
+    }
+
+    [TestCleanup]
+    public void CleanUp()
+    {
+      EngineRequestMocking.ClearOverrides();
+    }
+
+    [TestMethod]
+    public void WillDependencyInjectionConstructorSetSiteContext()
+    {
+      var siteContext = new Mock<ISiteContext>();
+      var testBasketProvider = new TestBasketProvider(siteContext.Object, new Mock<IShopperContext>().Object,
+        new Mock<IShopperDataProvider>().Object);
+
+      Assert.AreEqual(siteContext.Object, testBasketProvider.SiteContext);
+    }
+
+    [TestMethod]
+    public void WillDependencyInjectionConstructorSetShopperContext()
+    {
+      var shopperContext = new Mock<IShopperContext>();
+      var testBasketProvider = new TestBasketProvider(new Mock<ISiteContext>().Object, shopperContext.Object,
+        new Mock<IShopperDataProvider>().Object);
+
+      Assert.AreEqual(shopperContext.Object, testBasketProvider.ShopperContext);
+    }
+
+    [TestMethod]
+    public void WillDependencyInjectionConstructorSetShopperDataProvider()
+    {
+      var shopperDataProvider = new Mock<IShopperDataProvider>();
+      var testBasketProvider = new TestBasketProvider(new Mock<ISiteContext>().Object,
+        new Mock<IShopperContext>().Object,
+        shopperDataProvider.Object);
+
+      Assert.AreEqual(shopperDataProvider.Object, testBasketProvider.ShopperDataProvider);
+    }
+
+    [TestMethod]
+    public void WillNewDeleteRequestCreateCorrectRequest()
+    {
+      var basketProvider = new Mock<BasketProvider>(new Mock<ISiteContext>().Object, new Mock<IShopperContext>().Object,
+        new Mock<IShopperDataProvider>().Object) {CallBase = true};
+      var deleteRequest = basketProvider.Object.NewDeleteRequest();
+
+      Assert.IsNotNull(deleteRequest);
+      Assert.IsInstanceOfType(deleteRequest, typeof(IBasketDeleteRequest));
+    }
+
+    [TestMethod]
+    [ExpectedException(typeof(ArgumentException))]
+    public void WillDeleteFromBasketThrowIfDeleteRequestIsNull()
+    {
+      var basketProvider = new Mock<BasketProvider>(new Mock<ISiteContext>().Object, new Mock<IShopperContext>().Object,
+        new Mock<IShopperDataProvider>().Object) { CallBase = true };
+      basketProvider.Object.DeleteFromBasket(null);
+    }
+
+    [TestMethod]
+    public void WillDeleteFromBasketThrowIfItemsToDeleteIsEmpty()
+    {
+      var basketProvider = new Mock<BasketProvider>(new Mock<ISiteContext>().Object, new Mock<IShopperContext>().Object,
+        new Mock<IShopperDataProvider>().Object) { CallBase = true };
+      var response = basketProvider.Object.DeleteFromBasket(new BasketDeleteRequest());
+
+      Assert.IsTrue(string.Equals("Items to delete in delete request is empty", response.Message));
+      Assert.AreEqual(1, response.ErrorCount);
+    }
+
+    [TestMethod]
+    public void WillDeleteFromBasketReturnErrorIfShopperIdIsNull()
+    {
+      var shopperContext = new Mock<IShopperContext>();
+      var basketProvider = new Mock<BasketProvider>(new Mock<ISiteContext>().Object, shopperContext.Object,
+        new Mock<IShopperDataProvider>().Object) { CallBase = true };
+      shopperContext.Setup(s => s.ShopperId).Returns((string)null);
+      var deleteRequest = basketProvider.Object.NewDeleteRequest();
+      deleteRequest.AddItemToDelete(0, 0);
+      var response = basketProvider.Object.DeleteFromBasket(deleteRequest);
+
+      Assert.IsTrue(string.Equals("Shopper id is null or empty", response.Message));
+      Assert.AreEqual(1, response.ErrorCount);
+    }
+
+    [TestMethod]
+    public void WillDeleteFromBasketReturnErrorIfShopperIdIsEmpty()
+    {
+      var shopperContext = new Mock<IShopperContext>();
+      var basketProvider = new Mock<BasketProvider>(new Mock<ISiteContext>().Object, shopperContext.Object,
+        new Mock<IShopperDataProvider>().Object) { CallBase = true };
+      shopperContext.Setup(s => s.ShopperId).Returns(string.Empty);
+      var deleteRequest = basketProvider.Object.NewDeleteRequest();
+      deleteRequest.AddItemToDelete(0,0);
+      var response = basketProvider.Object.DeleteFromBasket(deleteRequest);
+
+      Assert.IsTrue(string.Equals("Shopper id is null or empty", response.Message));
+      Assert.AreEqual(1, response.ErrorCount);
+    }
+
+    [TestMethod]
+    public void WillDeleteFromBasketReturnIfNoExceptionIsThrown()
+    {
+      var basketDeleteResponse = BasketDeleteResponseData.FromResponseXml(
+        new XElement("Response", new XElement("MESSAGE", "Success")).ToString(SaveOptions.DisableFormatting));
+      EngineRequestMocking.RegisterOverride(BasketEngineRequests.DeleteItem, basketDeleteResponse);
+
+      var shopperContext = new Mock<IShopperContext>();
+      var requestBuilder = new Mock<IBasketDeleteRequestBuilder>();
+      var basketProvider = new Mock<BasketProvider>(new Mock<ISiteContext>().Object, shopperContext.Object,
+        new Mock<IShopperDataProvider>().Object, requestBuilder.Object) { CallBase = true };
+     
+      shopperContext.Setup(s => s.ShopperId).Returns("1234");
+      requestBuilder.Setup(b => b.BuildRequestData(It.IsAny<string>(), It.IsAny<IBasketDeleteRequest>()))
+        .Returns((BasketDeleteRequestData)null);
+      basketProvider.Protected()
+        .Setup<IBasketResponse>("CreateBasketResponse", ItExpr.IsAny<BasketResponseStatus>())
+        .Returns(new Mock<IBasketResponse>().Object);
+      basketProvider.Protected()
+        .Setup<IBasketResponse>("CreateBasketResponse", ItExpr.IsAny<Exception>())
+        .Returns(new Mock<IBasketResponse>().Object);
+      
+      var deleteRequest = basketProvider.Object.NewDeleteRequest();
+      deleteRequest.AddItemToDelete(0, 0);
+      var response = basketProvider.Object.DeleteFromBasket(deleteRequest);
+
+      Assert.IsNotNull(response);
+      Assert.IsInstanceOfType(response, typeof(IBasketResponse));
+    }
+
+    [TestMethod]
+    public void WillDeleteFromBasketReturnIfExceptionsAreThrown()
+    {
+      var shopperContext = new Mock<IShopperContext>();
+      var requestBuilder = new Mock<IBasketDeleteRequestBuilder>();
+      var basketProvider = new Mock<BasketProvider>(new Mock<ISiteContext>().Object, shopperContext.Object,
+        new Mock<IShopperDataProvider>().Object, requestBuilder.Object) { CallBase = true };
+
+      shopperContext.Setup(s => s.ShopperId).Returns("1234");
+      requestBuilder.Setup(b => b.BuildRequestData(It.IsAny<string>(), It.IsAny<IBasketDeleteRequest>()))
+        .Throws(new Exception());
+      basketProvider.Protected()
+        .Setup<IBasketResponse>("CreateBasketResponse", ItExpr.IsAny<BasketResponseStatus>())
+        .Returns(new Mock<IBasketResponse>().Object);
+      basketProvider.Protected()
+        .Setup<IBasketResponse>("CreateBasketResponse", ItExpr.IsAny<Exception>())
+        .Returns(new Mock<IBasketResponse>().Object);
+
+      var deleteRequest = basketProvider.Object.NewDeleteRequest();
+      deleteRequest.AddItemToDelete(0, 0);
+      var response = basketProvider.Object.DeleteFromBasket(deleteRequest);
+
+      Assert.IsNotNull(response);
+      Assert.IsInstanceOfType(response, typeof(IBasketResponse));
     }
 
     [TestMethod]

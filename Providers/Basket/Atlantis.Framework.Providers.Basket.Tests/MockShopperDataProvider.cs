@@ -1,9 +1,12 @@
-﻿using Atlantis.Framework.Interface;
+﻿using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
+using Atlantis.Framework.Interface;
 using System;
 using Atlantis.Framework.Providers.Shopper.Interface;
 
 namespace Atlantis.Framework.Providers.Basket.Tests
 {
+  [ExcludeFromCodeCoverage]
   public class MockShopperDataProvider : ProviderBase, IShopperDataProvider
   {
     public const string MockCreatedShopperId = "832652";
@@ -34,7 +37,7 @@ namespace Atlantis.Framework.Providers.Basket.Tests
       return !string.IsNullOrEmpty(_shopperContext.Value.ShopperId) && (_shopperContext.Value.ShopperId != MockBadShopperId);      
     }
 
-    public void RegisterNeededFields(System.Collections.Generic.IEnumerable<string> fields)
+    public void RegisterNeededFields(IEnumerable<string> fields)
     {
     }
 
@@ -59,9 +62,14 @@ namespace Atlantis.Framework.Providers.Basket.Tests
       return false;
     }
 
-    public bool TryUpdateShopper(System.Collections.Generic.IDictionary<string, string> updates)
+    public bool TryUpdateShopper(IDictionary<string, string> updates)
     {
       return false;
+    }
+
+    public ShopperUpdateResultType UpdateShopperInfo(IDictionary<string, string> updates)
+    {
+      throw new NotImplementedException();
     }
   }
 }

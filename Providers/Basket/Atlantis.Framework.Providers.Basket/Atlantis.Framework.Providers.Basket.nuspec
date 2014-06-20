@@ -10,8 +10,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
     <releaseNotes>
-      14.5.16.1 : Fixed nuspec and brought up to spec
-      Added property to get basket item count
+      14.6.19.1: Add Delete related classes
     </releaseNotes>
     <copyright>$copyright$</copyright>
     <tags>Atlantis.Framework.Providers.Basket</tags>

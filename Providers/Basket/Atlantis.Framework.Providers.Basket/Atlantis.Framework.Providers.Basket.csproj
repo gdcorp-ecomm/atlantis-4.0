@@ -15,6 +15,8 @@
     <SccLocalPath>SAK</SccLocalPath>
     <SccAuxPath>SAK</SccAuxPath>
     <SccProvider>SAK</SccProvider>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -36,17 +38,19 @@
   <ItemGroup>
     <Reference Include="Atlantis.Framework.Basket.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.Basket.Interface.4.13.11.5\lib\net40\Atlantis.Framework.Basket.Interface.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.Basket.Interface.14.6.16.1\lib\net40\Atlantis.Framework.Basket.Interface.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.Engine">
-      <HintPath>..\packages\Atlantis.Framework.Engine.4.0.0.0\lib\net40\Atlantis.Framework.Engine.dll</HintPath>
+    <Reference Include="Atlantis.Framework.Engine, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Engine.14.3.1.1\lib\net40\Atlantis.Framework.Engine.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.Engine.XmlSerializers">
-      <HintPath>..\packages\Atlantis.Framework.Engine.4.0.0.0\lib\net40\Atlantis.Framework.Engine.XmlSerializers.dll</HintPath>
+    <Reference Include="Atlantis.Framework.Engine.XmlSerializers, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Engine.14.3.1.1\lib\net40\Atlantis.Framework.Engine.XmlSerializers.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.Interface.4.13.9.25\lib\net40\Atlantis.Framework.Interface.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.Interface.14.5.15.2\lib\net40\Atlantis.Framework.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Providers.Shopper.Interface">
       <HintPath>..\packages\Atlantis.Framework.Providers.Shopper.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Providers.Shopper.Interface.dll</HintPath>
@@ -62,17 +66,22 @@
   <ItemGroup>
     <Compile Include="BasketAddItem.cs" />
     <Compile Include="BasketAddRequestBuilder.cs" />
+    <Compile Include="BasketDeleteItem.cs" />
+    <Compile Include="BasketDeleteRequest.cs" />
+    <Compile Include="BasketDeleteRequestBuilder.cs" />
     <Compile Include="Constants\BasketItemAttributes.cs" />
     <Compile Include="BasketAddRequest.cs" />
     <Compile Include="BasketAddPriceOverride.cs" />
     <Compile Include="Constants\BasketAttributes.cs" />
     <Compile Include="BasketEngineRequests.cs" />
+    <Compile Include="IBasketDeleteRequestBuilder.cs" />
     <Compile Include="ProviderBasketError.cs" />
     <Compile Include="BasketProvider.cs" />
     <Compile Include="ProviderBasketResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="atlantis.config" />
     <None Include="Atlantis.Framework.Providers.Basket.nuget.bat" />
     <None Include="Atlantis.Framework.Providers.Basket.nuspec" />
     <None Include="packages.config" />
@@ -85,6 +94,13 @@
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

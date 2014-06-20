@@ -68,7 +68,7 @@
       <HintPath>..\packages\Atlantis.Framework.Engine.14.3.1.1\lib\net40\Atlantis.Framework.Engine.XmlSerializers.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Interface">
-      <HintPath>..\packages\Atlantis.Framework.Interface.14.1.16.1\lib\net40\Atlantis.Framework.Interface.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.Interface.14.5.15.2\lib\net40\Atlantis.Framework.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Nimitz">
       <HintPath>..\packages\Atlantis.Framework.Nimitz.14.2.21.1\lib\net40\Atlantis.Framework.Nimitz.dll</HintPath>
@@ -77,26 +77,32 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Atlantis.Framework.PLSignupInfo.Interface.4.0.0.0\lib\net40\Atlantis.Framework.PLSignupInfo.Interface.dll</HintPath>
     </Reference>
+    <Reference Include="Atlantis.Framework.Pricing.Interface">
+      <HintPath>..\packages\Atlantis.Framework.Pricing.Interface.14.5.12.1\lib\net40\Atlantis.Framework.Pricing.Interface.dll</HintPath>
+    </Reference>
     <Reference Include="Atlantis.Framework.PrivateLabel.Interface">
       <HintPath>..\packages\Atlantis.Framework.PrivateLabel.Interface.14.1.21.1\lib\net40\Atlantis.Framework.PrivateLabel.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Products.Interface">
       <HintPath>..\packages\Atlantis.Framework.Products.Interface.14.2.19.1\lib\net40\Atlantis.Framework.Products.Interface.dll</HintPath>
     </Reference>
+    <Reference Include="Atlantis.Framework.Providers.AppSettings.Interface">
+      <HintPath>..\packages\Atlantis.Framework.Providers.AppSettings.Interface.14.1.23.1\lib\net40\Atlantis.Framework.Providers.AppSettings.Interface.dll</HintPath>
+    </Reference>
     <Reference Include="Atlantis.Framework.Providers.Currency">
-      <HintPath>..\packages\Atlantis.Framework.Providers.Currency.14.4.1.1\lib\net40\Atlantis.Framework.Providers.Currency.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.Providers.Currency.14.5.12.1\lib\net40\Atlantis.Framework.Providers.Currency.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Providers.Currency.Interface">
-      <HintPath>..\packages\Atlantis.Framework.Providers.Currency.Interface.14.4.1.1\lib\net40\Atlantis.Framework.Providers.Currency.Interface.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.Providers.Currency.Interface.14.4.18.1\lib\net40\Atlantis.Framework.Providers.Currency.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Providers.Geo.Interface">
-      <HintPath>..\packages\Atlantis.Framework.Providers.Geo.Interface.14.1.24.1\lib\net40\Atlantis.Framework.Providers.Geo.Interface.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.Providers.Geo.Interface.14.5.21.1\lib\net40\Atlantis.Framework.Providers.Geo.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Providers.Interface">
-      <HintPath>..\packages\Atlantis.Framework.Providers.Interface.4.14.4.2\lib\net40\Atlantis.Framework.Providers.Interface.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.Providers.Interface.14.4.18.1\lib\net40\Atlantis.Framework.Providers.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Providers.Localization.Interface">
-      <HintPath>..\packages\Atlantis.Framework.Providers.Localization.Interface.14.2.24.1\lib\net40\Atlantis.Framework.Providers.Localization.Interface.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.Providers.Localization.Interface.14.5.3.1\lib\net40\Atlantis.Framework.Providers.Localization.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Providers.Preferences.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -106,13 +112,13 @@
       <HintPath>..\packages\Atlantis.Framework.Providers.RenderPipeline.Interface.14.2.21.1\lib\net40\Atlantis.Framework.Providers.RenderPipeline.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Providers.Shopper.Interface">
-      <HintPath>..\packages\Atlantis.Framework.Providers.Shopper.Interface.4.14.1.4\lib\net40\Atlantis.Framework.Providers.Shopper.Interface.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.Providers.Shopper.Interface.14.6.17.1\lib\net40\Atlantis.Framework.Providers.Shopper.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Testing.MockHttpContext">
-      <HintPath>..\packages\Atlantis.Framework.Testing.MockHttpContext.14.1.25.1\lib\net40\Atlantis.Framework.Testing.MockHttpContext.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.Testing.MockHttpContext.14.6.5.1\lib\net40\Atlantis.Framework.Testing.MockHttpContext.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Testing.MockProviders">
-      <HintPath>..\packages\Atlantis.Framework.Testing.MockProviders.4.14.1.13\lib\net40\Atlantis.Framework.Testing.MockProviders.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.Testing.MockProviders.14.4.4.2\lib\net40\Atlantis.Framework.Testing.MockProviders.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Tokens.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

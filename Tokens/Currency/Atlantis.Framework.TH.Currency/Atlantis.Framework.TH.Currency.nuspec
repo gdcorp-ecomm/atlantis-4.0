@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>Atlantis.Framework.TH.Currency</id>
-    <version>4.14.4.1</version>
+    <version>$version$</version>
     <title>Atlantis Framework Currency Token Handler</title>
     <authors>$author$</authors>
     <owners>$author$</owners>
@@ -10,7 +10,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
     <releaseNotes>
-      4.14.4.1: ATLANTIS-433 - Added functionality for wrapping symbol.
+      $version$: Updated references
     </releaseNotes>
     <copyright>$copyright$</copyright>
     <tags>Atlantis Framework TH Currency</tags>

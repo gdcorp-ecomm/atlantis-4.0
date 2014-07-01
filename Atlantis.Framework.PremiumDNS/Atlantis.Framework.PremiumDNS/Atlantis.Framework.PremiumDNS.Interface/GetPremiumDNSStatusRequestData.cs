@@ -9,7 +9,16 @@ namespace Atlantis.Framework.PremiumDNS.Interface
 
     private TimeSpan _requestTimeout = TimeSpan.FromSeconds(3);
 
-    public GetPremiumDNSStatusRequestData(string shopperId, string sourceURL, string orderId, string pathway, int pageCount, int privateLabelId) : base(shopperId, sourceURL, orderId, pathway, pageCount)
+    public GetPremiumDNSStatusRequestData(string shopperId, int privateLabelId)
+    {
+      PrivateLabelId = privateLabelId;
+      RequestTimeout = _requestTimeout;
+      ShopperID = shopperId;
+    }
+
+    [Obsolete("Please use simple constructor")]
+    public GetPremiumDNSStatusRequestData(string shopperId, string sourceURL, string orderId, string pathway, int pageCount, int privateLabelId)
+      : base(shopperId, sourceURL, orderId, pathway, pageCount)
     {
       PrivateLabelId = privateLabelId;
       RequestTimeout = _requestTimeout;

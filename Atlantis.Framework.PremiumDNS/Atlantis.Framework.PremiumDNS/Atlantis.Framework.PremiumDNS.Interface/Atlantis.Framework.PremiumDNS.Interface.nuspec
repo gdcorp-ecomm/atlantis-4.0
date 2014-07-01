@@ -1,0 +1,25 @@
+﻿<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Atlantis.Framework.PremiumDNS.Interface</id>
+    <version>$version$</version>
+    <title>Atlantis.Framework.PremiumDNS.Interface</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <!-- projectUrl should be the GitHub repostory url. If TFS leave default confluence link -->
+    <projectUrl>https://confluence.int.godaddy.com/display/ATLANTIS</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <!-- update release notes with latest change information -->
+    <releaseNotes>
+      14.7.1.1: Adding Solution to Nuget
+    </releaseNotes>
+    <copyright>$copyright$</copyright>
+    <tags>Atlantis.Framework.PremiumDNS.Interface</tags>
+    <!-- Use dependencies to add things like Impl nuget packages to a provider (where there is no direct reference)-->
+    <dependencies />
+  </metadata>
+  <!-- Use files to add things like xmlserializers dlls or atlantis.config.transform files-->
+  <files>
+  </files>
+</package>

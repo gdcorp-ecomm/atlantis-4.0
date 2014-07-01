@@ -11,11 +11,9 @@ namespace Atlantis.Framework.PremiumDNS.Test
     private const string _shopperId = "123415";  //test account provided by DNS group
 	
     [TestMethod]
-	  [DeploymentItem("atlantis.config")]
     public void PremiumDNSTestStatus()
     {
-     GetPremiumDNSStatusRequestData request = new GetPremiumDNSStatusRequestData(_shopperId, 
-       string.Empty, string.Empty, string.Empty, 0, 1);
+     GetPremiumDNSStatusRequestData request = new GetPremiumDNSStatusRequestData(_shopperId, 1);
      request.RequestTimeout = new TimeSpan(0, 0, 0, 2, 500);
       GetPremiumDNSStatusResponseData response
         = (GetPremiumDNSStatusResponseData)Engine.Engine.ProcessRequest(request, 288);
@@ -25,11 +23,9 @@ namespace Atlantis.Framework.PremiumDNS.Test
     }
 
     [TestMethod]
-    [DeploymentItem("atlantis.config")]
     public void PremiumDNSTestNameservers()
     {
-      GetPremiumDNSDefaultNameServersRequestData request = new GetPremiumDNSDefaultNameServersRequestData(_shopperId, 
-        string.Empty, string.Empty, string.Empty, 0, 1);
+      GetPremiumDNSDefaultNameServersRequestData request = new GetPremiumDNSDefaultNameServersRequestData(_shopperId, 1);
       request.RequestTimeout = new TimeSpan(0, 0, 0, 2, 500);
       GetPremiumDNSDefaultNameServersResponseData response
         = (GetPremiumDNSDefaultNameServersResponseData)Engine.Engine.ProcessRequest(request, 289);

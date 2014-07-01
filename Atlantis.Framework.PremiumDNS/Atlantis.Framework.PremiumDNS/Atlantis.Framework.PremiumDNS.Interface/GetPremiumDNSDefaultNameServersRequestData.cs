@@ -9,6 +9,14 @@ namespace Atlantis.Framework.PremiumDNS.Interface
 
     private TimeSpan _requestTimeout = TimeSpan.FromSeconds(3);
 
+    public GetPremiumDNSDefaultNameServersRequestData(string shopperId, int privateLabelId)
+    {
+      PrivateLabelId = privateLabelId;
+      RequestTimeout = _requestTimeout;
+      ShopperID = shopperId;
+    }
+
+    [Obsolete("Please use simple constructor")]
     public GetPremiumDNSDefaultNameServersRequestData(string shopperId, string sourceURL, string orderId, string pathway, int pageCount, int privateLabelId) : base(shopperId, sourceURL, orderId, pathway, pageCount)
     {
       PrivateLabelId = privateLabelId;

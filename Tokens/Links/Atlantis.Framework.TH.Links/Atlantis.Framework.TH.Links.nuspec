@@ -10,6 +10,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
     <releaseNotes>
+      14.6.30.1 : Added attribute includequery that allows the token pass query string paramerters that are not common.
       14.2.18.1 : Updated to force minification in test and production files. Plus added a query param to spoof the minified and nonminified versions
       14.2.19.1 : Added the localization provider find the market id and region site
     </releaseNotes>

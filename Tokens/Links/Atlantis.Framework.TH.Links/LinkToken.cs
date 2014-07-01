@@ -2,9 +2,11 @@
 using System.Collections.Specialized;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Web;
 using System.Xml.Linq;
 using Atlantis.Framework.Providers.Interface.Links;
 using Atlantis.Framework.Tokens.Interface;
+using System.Web.Configuration;
 
 namespace Atlantis.Framework.TH.Links
 {
@@ -21,6 +23,7 @@ namespace Atlantis.Framework.TH.Links
     public string NameMode { get; private set; }
     public bool? Secure { get; private set; }
     public NameValueCollection Params { get; private set; }
+    public bool? IncludeQueryStringParams { get; private set; }
 
     public LinkToken(string key, string data, string fullTokenString)
       : base(key, data, fullTokenString)
@@ -59,6 +62,26 @@ namespace Atlantis.Framework.TH.Links
             if (!string.IsNullOrEmpty(name) && value != null)
             {
               Params[name] = value;
+            }
+          }
+        }
+
+        IncludeQueryStringParams = TokenData.Attributes("includequery").Any() && GetAttributeBool("includequery", false);
+
+        if (IncludeQueryStringParams == true && ParamMode == QueryParamMode.CommonParameters)
+        {
+          NameValueCollection queryStrings = HttpContext.Current.Request.QueryString;
+
+          if (Params == null)
+          {
+            Params = new NameValueCollection();
+          }
+
+          foreach (string qsKey in queryStrings)
+          {
+            if ((qsKey != "ci") && (string.IsNullOrEmpty(Params[qsKey])))
+            {
+              Params[qsKey] = queryStrings[qsKey];
             }
           }
         }

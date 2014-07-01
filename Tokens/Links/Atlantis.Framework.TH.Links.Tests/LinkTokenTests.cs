@@ -1,6 +1,7 @@
 ﻿using System.Collections.Specialized;
 using System.Diagnostics;
 using System.Web;
+using System.Web.Configuration;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.Interface.Links;
 using Atlantis.Framework.Providers.Links;
@@ -27,6 +28,8 @@ namespace Atlantis.Framework.TH.Links.Tests
     private const string GoDaddyNonSecureSiteUrl = "http://www.godaddy.com?ci=1";
     private const string GoDaddySecureSiteUrl = "https://www.godaddy.com?ci=1";
 
+    private const string PrivateLabelUrlWithQueryStrings = "http://www.dev.securepaynet-net.ide/domains/search.apsx?ci=22222&prog_id=hunter&path=awesome";
+
     [TestInitialize]
     public void InitializeTests()
     {
@@ -43,13 +46,13 @@ namespace Atlantis.Framework.TH.Links.Tests
       {
         HttpContext.Current.Items[MockSiteContextSettings.PrivateLabelId] = privateLabelId;
       }
-      
+
       IProviderContainer result = new MockProviderContainer();
       result.RegisterProvider<ISiteContext, MockSiteContext>();
       result.RegisterProvider<IShopperContext, MockShopperContext>();
       result.RegisterProvider<IManagerContext, MockManagerContext>();
       result.RegisterProvider<ILinkProvider, LinkProvider>();
-      
+
       return result;
     }
 
@@ -404,6 +407,87 @@ namespace Atlantis.Framework.TH.Links.Tests
       TokenEvaluationResult result = TokenManager.ReplaceTokens(token, container, out outputText);
       Assert.AreEqual(TokenEvaluationResult.Errors, result);
       Assert.AreEqual(string.Empty, outputText);
+    }
+
+    [TestMethod]
+    public void IncludeQueryStringParams()
+    {
+      var container = SetBasicContextAndProviders(PrivateLabelUrlWithQueryStrings, "1724");
+      container.SetData(MockSiteContextSettings.PrivateLabelId, 1724);
+
+      string outputText;
+
+      string token = string.Format(TokenFormat, "<relative path='/hosting/website-builder.aspx' includequery='true' />");
+
+      TokenEvaluationResult result = TokenManager.ReplaceTokens(token, container, out outputText);
+      Assert.AreEqual(TokenEvaluationResult.Success, result);
+      Assert.IsTrue(!string.IsNullOrEmpty(outputText));
+      Assert.IsTrue(outputText.Contains("awesome"));
+    }
+
+    [TestMethod]
+    public void IncludeQueryStringbydefault()
+    {
+      var container = SetBasicContextAndProviders(PrivateLabelUrlWithQueryStrings, "1724");
+      container.SetData(MockSiteContextSettings.PrivateLabelId, 1724);
+
+      string outputText;
+
+      string token = string.Format(TokenFormat, "<relative path='/hosting/website-builder.aspx' includequery='true' />");
+
+      TokenEvaluationResult result = TokenManager.ReplaceTokens(token, container, out outputText);
+      Assert.AreEqual(TokenEvaluationResult.Success, result);
+      Assert.IsTrue(!string.IsNullOrEmpty(outputText));
+      Assert.IsTrue(outputText.Contains("awesome"));
+    }
+
+    [TestMethod]
+    public void ExcludeQueryString()
+    {
+      var container = SetBasicContextAndProviders(PrivateLabelUrlWithQueryStrings, "1724");
+      container.SetData(MockSiteContextSettings.PrivateLabelId, 1724);
+
+      string outputText;
+
+      string token = string.Format(TokenFormat, "<relative path='/hosting/website-builder.aspx' />");
+
+      TokenEvaluationResult result = TokenManager.ReplaceTokens(token, container, out outputText);
+      Assert.AreEqual(TokenEvaluationResult.Success, result);
+      Assert.IsTrue(!string.IsNullOrEmpty(outputText));
+      Assert.IsTrue(!outputText.Contains("awesome"));
+    }
+
+    [TestMethod]
+    public void UpdatedCiCode()
+    {
+      var container = SetBasicContextAndProviders(PrivateLabelUrlWithQueryStrings, "1724");
+      container.SetData(MockSiteContextSettings.PrivateLabelId, 1724);
+
+      string outputText;
+
+      string token = string.Format(TokenFormat, "<relative path='/hosting/website-builder.aspx' includequery='false' ><param name=\"ci\" value=\"654321\" /></relative>");
+
+      TokenEvaluationResult result = TokenManager.ReplaceTokens(token, container, out outputText);
+      Assert.AreEqual(TokenEvaluationResult.Success, result);
+      Assert.IsTrue(!string.IsNullOrEmpty(outputText));
+      Assert.IsTrue(!outputText.Contains("awesome"));
+      Assert.IsTrue(outputText.Contains("654321"));      
+    }
+
+    [TestMethod]
+    public void IncludeQueryStringExteranlUrl()
+    {
+      var container = SetBasicContextAndProviders(PrivateLabelUrlWithQueryStrings, "1724");
+      container.SetData(MockSiteContextSettings.PrivateLabelId, 1724);
+
+      string token = string.Format(TokenFormat, "<external linktype=\"CARTURL\" includequery='true' />");
+      string outputText;
+
+      TokenEvaluationResult result = TokenManager.ReplaceTokens(token, container, out outputText);
+
+      Assert.AreEqual(TokenEvaluationResult.Success, result);
+      Assert.IsTrue(!string.IsNullOrEmpty(outputText));
+      Assert.IsTrue(outputText.Contains("awesome"));
     }
   }
 }

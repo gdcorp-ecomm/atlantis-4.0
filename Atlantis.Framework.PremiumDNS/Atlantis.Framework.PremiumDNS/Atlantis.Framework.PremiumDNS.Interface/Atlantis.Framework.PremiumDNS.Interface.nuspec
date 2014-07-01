@@ -9,7 +9,7 @@
     <!-- projectUrl should be the GitHub repostory url. If TFS leave default confluence link -->
     <projectUrl>https://confluence.int.godaddy.com/display/ATLANTIS</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>$description$</description>
+    <description>Atlantis.Framework.PremiumDNS.Interface</description>
     <!-- update release notes with latest change information -->
     <releaseNotes>
       14.7.1.1: Adding Solution to Nuget

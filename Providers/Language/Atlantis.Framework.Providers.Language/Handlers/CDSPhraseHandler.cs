@@ -40,17 +40,22 @@ namespace Atlantis.Framework.Providers.Language.Handlers
 
     public bool TryGetLanguagePhrase(string dictionaryName, string phraseKey, out string phrase)
     {
+      return TryGetLanguagePhrase(dictionaryName, phraseKey, true, out phrase);
+    }
+
+    public bool TryGetLanguagePhrase(string dictionaryName, string phraseKey, bool doGlobalFallback, out string phrase)
+    {
       bool retVal;
-      
+
       dictionaryName = dictionaryName.Substring(4);
       var fullLanguage = _localization.Value.FullLanguage;
       var fullLanguageDictionary = GetLanguageResponse(dictionaryName, fullLanguage);
 
-      if (!(retVal = TryGetPhraseText(fullLanguageDictionary, phraseKey, fullLanguage, out phrase) && fullLanguage != _defaultLanguage))
+      if (!(retVal = TryGetPhraseText(fullLanguageDictionary, phraseKey, fullLanguage, out phrase)) && fullLanguage != _defaultLanguage)
       {
         var shortLanguage = _localization.Value.ShortLanguage;
         var shortLanguageDictionary = GetLanguageResponse(dictionaryName, shortLanguage);
-        if (!(retVal = TryGetPhraseText(shortLanguageDictionary, phraseKey, shortLanguage, out phrase) && shortLanguage != _defaultLanguage))
+        if (!(retVal = TryGetPhraseText(shortLanguageDictionary, phraseKey, shortLanguage, out phrase)) && doGlobalFallback && shortLanguage != _defaultLanguage)
         {
           var defaultLanguageDictionary = GetLanguageResponse(dictionaryName, _defaultLanguage);
           retVal = TryGetPhraseText(defaultLanguageDictionary, phraseKey, _defaultLanguage, out phrase);

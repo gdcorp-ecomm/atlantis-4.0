@@ -36,6 +36,11 @@ namespace Atlantis.Framework.Providers.Language.Handlers
       return false;
     }
 
+    public bool TryGetLanguagePhrase(string dictionaryName, string phraseKey, bool doGlobalFallback, out string phrase)
+    {
+      throw new NotSupportedException("The QaPs Phrase Handler does not support this overload.");
+    }
+
     private bool GetCDSOrFilePhrase(string dictionaryName, string phraseKey, out string phrase)
     {
       ILanguagePhraseHandler baseHandler = null;

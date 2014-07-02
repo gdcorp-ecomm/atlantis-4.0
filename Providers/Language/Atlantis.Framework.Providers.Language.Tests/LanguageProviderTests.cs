@@ -1,7 +1,11 @@
-﻿using System.Text.RegularExpressions;
+﻿using System;
+using System.Text.RegularExpressions;
 using Atlantis.Framework.Interface;
+using Atlantis.Framework.Language.Interface;
+using Atlantis.Framework.Parsers.LanguageFile;
 using Atlantis.Framework.Providers.Language.Interface;
 using Atlantis.Framework.Providers.Localization.Interface;
+using Atlantis.Framework.Testing.MockEngine;
 using Atlantis.Framework.Testing.MockLocalization;
 using Atlantis.Framework.Testing.MockProviders;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -35,6 +39,12 @@ namespace Atlantis.Framework.Providers.Language.Tests
       container.RegisterProvider<ILanguageProvider, LanguageProvider>();
 
       return container.Resolve<ILanguageProvider>();
+    }
+
+    [TestCleanup]
+    public void Cleanup()
+    {
+      EngineRequestMocking.ClearOverrides();
     }
 
     [TestMethod]
@@ -278,6 +288,75 @@ namespace Atlantis.Framework.Providers.Language.Tests
       ILanguageProvider language = NewLanguageProvider(1, "www", "en");
       string phrase = language.GetLanguagePhrase("cds.sales/integrationtests/hosting/web-hosting", "foo");
       Assert.IsTrue(string.IsNullOrWhiteSpace(phrase));
+    }
+
+    [TestMethod]
+    public void CdsFullLanguageDictionary()
+    {
+      var mockRequest = new Func<RequestData, ConfigElement, IResponseData>((data, config) =>
+      {
+        var requestData = (CDSLanguageRequestData)data;
+        return new CDSLanguageResponseData(MockCdsPhraseDictionary.GetPhraseDictionary(requestData.Language));
+      });
+
+      EngineRequestMocking.RegisterOverride(LanguageProviderEngineRequests.CDSLanguagePhrase, mockRequest);
+
+      ILanguageProvider language = NewLanguageProvider(1, "www", "fr-FR");
+      string phraseText = language.GetLanguagePhrase("cds.tes/general/general/html", "desk");
+
+      Assert.AreEqual("Un bureau fabriqué en France", phraseText);
+    }
+
+    [TestMethod]
+    public void CdsShortLanguageDictionary()
+    {
+      var mockRequest = new Func<RequestData, ConfigElement, IResponseData>((data, config) =>
+      {
+        var requestData = (CDSLanguageRequestData)data;
+        return new CDSLanguageResponseData(MockCdsPhraseDictionary.GetPhraseDictionary(requestData.Language));
+      });
+
+      EngineRequestMocking.RegisterOverride(LanguageProviderEngineRequests.CDSLanguagePhrase, mockRequest);
+
+      ILanguageProvider language = NewLanguageProvider(1, "www", "fr-FR");
+      string phraseText = language.GetLanguagePhrase("cds.tes/general/general/html", "chair");
+
+      Assert.AreEqual("Une chaise assez bleu", phraseText);
+    }
+
+    [TestMethod]
+    public void CdsDefaultLanguageDictionary()
+    {
+      var mockRequest = new Func<RequestData, ConfigElement, IResponseData>((data, config) =>
+      {
+        var requestData = (CDSLanguageRequestData)data;
+        return new CDSLanguageResponseData(MockCdsPhraseDictionary.GetPhraseDictionary(requestData.Language));
+      });
+
+      EngineRequestMocking.RegisterOverride(LanguageProviderEngineRequests.CDSLanguagePhrase, mockRequest);
+
+      ILanguageProvider language = NewLanguageProvider(1, "www", "fr-FR");
+      string phraseText = language.GetLanguagePhrase("cds.tes/general/general/html", "employee");
+
+      Assert.AreEqual("A Go Daddy employee", phraseText);
+
+    }
+
+    [TestMethod]
+    public void CdsInvalidDictionary()
+    {
+      var mockRequest = new Func<RequestData, ConfigElement, IResponseData>((data, config) =>
+      {
+        var requestData = (CDSLanguageRequestData)data;
+        return new CDSLanguageResponseData(MockCdsPhraseDictionary.GetPhraseDictionary(requestData.Language));
+      });
+
+      EngineRequestMocking.RegisterOverride(LanguageProviderEngineRequests.CDSLanguagePhrase, mockRequest);
+
+      ILanguageProvider language = NewLanguageProvider(1, "www", "fr-FR");
+      string phraseText = language.GetLanguagePhrase("tes/general/general/html", "employee");
+
+      Assert.IsTrue(string.IsNullOrEmpty(phraseText));
     }
   }
 }

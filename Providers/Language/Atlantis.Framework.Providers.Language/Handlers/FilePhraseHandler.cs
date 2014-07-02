@@ -25,5 +25,10 @@ namespace Atlantis.Framework.Providers.Language.Handlers
 
       return true;
     }
+
+    public bool TryGetLanguagePhrase(string dictionaryName, string phraseKey, bool doGlobalFallback, out string phrase)
+    {
+      throw new NotSupportedException("The File Phrase Handler does not support this overload.");
+    }
   }
 }

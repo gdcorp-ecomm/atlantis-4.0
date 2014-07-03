@@ -7,10 +7,10 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Atlantis.Framework.DotTypeForms.Impl")]
 #if DEBUG
 [assembly: AssemblyDescription("Debug Build")]
-[assembly: AssemblyConfiguration("Debug Build")]
+[assembly: AssemblyConfiguration("Debug")]
 #else
 [assembly: AssemblyDescription("Release Build")]
-[assembly: AssemblyConfiguration("Release Build")]
+[assembly: AssemblyConfiguration("Release")]
 #endif
 [assembly: AssemblyCompany("GoDaddy, Inc.")]
 [assembly: AssemblyProduct("Atlantis.Framework.DotTypeForms.Impl")]
@@ -38,5 +38,4 @@ using System.Runtime.InteropServices;
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("4.0.0.0")]
 [assembly: AssemblyFileVersion("4.0.0.0")]
-[assembly: AssemblyInformationalVersion("14.2.6.1")]
-
+[assembly: AssemblyInformationalVersion("14.7.3.1")]

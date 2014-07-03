@@ -9,7 +9,9 @@
     <projectUrl>https://confluence.int.godaddy.com/display/ATLANTIS</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes></releaseNotes>
+    <releaseNotes>
+      14.7.3.1 - FOS-23069: TUI updates for .NYC / added more tests
+    </releaseNotes>
     <copyright>$copyright$</copyright>
     <tags>Atlantis Framework DotTypeForms Impl</tags>
   </metadata>

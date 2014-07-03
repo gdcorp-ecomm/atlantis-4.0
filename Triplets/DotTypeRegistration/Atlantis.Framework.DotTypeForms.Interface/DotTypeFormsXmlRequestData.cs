@@ -71,9 +71,11 @@ namespace Atlantis.Framework.DotTypeForms.Interface
           jContactsPropertyList.Add(new JProperty("Address2", contact.Address2));
           jContactsPropertyList.Add(new JProperty("City", contact.City));
           jContactsPropertyList.Add(new JProperty("State", contact.State));
+          jContactsPropertyList.Add(new JProperty("Zip", contact.Zip));
           jContactsPropertyList.Add(new JProperty("CC", contact.CountryCode));
           jContactsPropertyList.Add(new JProperty("Phone", contact.Phone));
           jContactsPropertyList.Add(new JProperty("Fax", contact.Fax));
+          jContactsPropertyList.Add(new JProperty("Email", contact.Email));
 
           jObject.Add(jContactsPropertyList);
           jArray.Add(jObject);

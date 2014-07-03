@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Atlantis.Framework.DotTypeForms.Interface;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -9,13 +10,128 @@ namespace Atlantis.Framework.DotTypeForms.Tests
   [DeploymentItem("Atlantis.Framework.DotTypeForms.Impl.dll")]
   public class DotTypeFormsTests
   {
+    // https://tldml.dev.int.godaddy.com/groupsmanager
+    // https://tldml.test.int.godaddy.com/groupsmanager
+
     [TestMethod]
-    public void DotTypeFormsXmlGoodRequest()
+    public void DotTypeFormsXmlRequestForComDotPtEligibility()
     {
-      var request = new DotTypeFormsXmlRequestData("dpp", 59, "MOBILE", "GA", "EN-US", 1);
+      // TldId = 356 is .COM.PT
+      var request = new DotTypeFormsXmlRequestData("dpp", 356, "MOBILE", "GA", "EN-US", 1)
+      {
+        DotTypeFormContacts = new List<DotTypeFormContact>(4),
+        RequestTimeout = TimeSpan.FromSeconds(15)
+      };
+
+      request.DotTypeFormContacts.Add(GetGeneralContact(DotTypeFormContactTypes.Registrant));
+      request.DotTypeFormContacts.Add(GetGeneralContact(DotTypeFormContactTypes.Administrative));
+      request.DotTypeFormContacts.Add(GetGeneralContact(DotTypeFormContactTypes.Billing));
+      request.DotTypeFormContacts.Add(GetGeneralContact(DotTypeFormContactTypes.Technical));
+
       var response = (DotTypeFormsXmlResponseData)Engine.Engine.ProcessRequest(request, 689);
       Assert.AreEqual(true, response.IsSuccess);
-      Assert.AreEqual(true, !string.IsNullOrEmpty(response.ToXML()));
+      Assert.IsTrue(response.ToXML().Contains("validationrule name=\"RPTAdminVatIdVAT\""));
+    }
+
+    [TestMethod]
+    public void DotTypeFormsXmlRequestForPtEligibility()
+    {
+      // TldId = 193 is .PT
+      var request = new DotTypeFormsXmlRequestData("dpp", 193, "MOBILE", "GA", "EN-US", 1)
+      {
+        DotTypeFormContacts = new List<DotTypeFormContact>(4),
+        RequestTimeout = TimeSpan.FromSeconds(15)
+      };
+
+      request.DotTypeFormContacts.Add(GetGeneralContact(DotTypeFormContactTypes.Registrant));
+      request.DotTypeFormContacts.Add(GetGeneralContact(DotTypeFormContactTypes.Administrative));
+      request.DotTypeFormContacts.Add(GetGeneralContact(DotTypeFormContactTypes.Billing));
+      request.DotTypeFormContacts.Add(GetGeneralContact(DotTypeFormContactTypes.Technical));
+
+      var response = (DotTypeFormsXmlResponseData)Engine.Engine.ProcessRequest(request, 689);
+      Assert.AreEqual(true, response.IsSuccess);
+      Assert.IsTrue(response.ToXML().Contains("validationrule name=\"RPTAdminVatIdVAT\""));
+    }
+
+    [TestMethod]
+    public void DotTypeFormsXmlRequestForClEligibility()
+    {
+      // TldId = 59 is .CL
+      var request = new DotTypeFormsXmlRequestData("dpp", 59, "MOBILE", "GA", "EN-US", 1)
+      {
+        DotTypeFormContacts = new List<DotTypeFormContact>(4),
+        RequestTimeout = TimeSpan.FromSeconds(15)
+      };
+
+      request.DotTypeFormContacts.Add(GetGeneralContact(DotTypeFormContactTypes.Registrant));
+      request.DotTypeFormContacts.Add(GetGeneralContact(DotTypeFormContactTypes.Administrative));
+      request.DotTypeFormContacts.Add(GetGeneralContact(DotTypeFormContactTypes.Billing));
+      request.DotTypeFormContacts.Add(GetGeneralContact(DotTypeFormContactTypes.Technical));
+
+      var response = (DotTypeFormsXmlResponseData)Engine.Engine.ProcessRequest(request, 689);
+      Assert.AreEqual(true, response.IsSuccess);
+      Assert.IsTrue(response.ToXML().Contains("validationrule name=\"RClRutNumber\""));
+    }
+
+    [TestMethod]
+    public void DotTypeFormsXmlRequestForClTrustee()
+    {
+      // TldId = 59 is .CL
+      var request = new DotTypeFormsXmlRequestData("trustee", 59, "MOBILE", "GA", "EN-US", 1)
+      {
+        DotTypeFormContacts = new List<DotTypeFormContact>(4),
+        RequestTimeout = TimeSpan.FromSeconds(15)
+      };
+
+      request.DotTypeFormContacts.Add(GetGeneralContact(DotTypeFormContactTypes.Registrant));
+      request.DotTypeFormContacts.Add(GetGeneralContact(DotTypeFormContactTypes.Administrative));
+      request.DotTypeFormContacts.Add(GetGeneralContact(DotTypeFormContactTypes.Billing));
+      request.DotTypeFormContacts.Add(GetGeneralContact(DotTypeFormContactTypes.Technical));
+
+      var response = (DotTypeFormsXmlResponseData)Engine.Engine.ProcessRequest(request, 689);
+      Assert.AreEqual(true, response.IsSuccess);
+      Assert.IsTrue(response.ToXML().Contains("validationrule name=\"RClAcceptTrustee\""));
+    }
+
+    [TestMethod]
+    public void DotTypeFormsXmlRequestForDkEligibility()
+    {
+      // TldId = 71 is .DK
+      // dpp = eligibility
+      var request = new DotTypeFormsXmlRequestData("dpp", 71, "MOBILE", "GA", "EN-US", 1)
+      {
+        DotTypeFormContacts = new List<DotTypeFormContact>(4),
+        RequestTimeout = TimeSpan.FromSeconds(15)
+      };
+
+      request.DotTypeFormContacts.Add(GetGeneralContact(DotTypeFormContactTypes.Registrant));
+      request.DotTypeFormContacts.Add(GetGeneralContact(DotTypeFormContactTypes.Administrative));
+      request.DotTypeFormContacts.Add(GetGeneralContact(DotTypeFormContactTypes.Billing));
+      request.DotTypeFormContacts.Add(GetGeneralContact(DotTypeFormContactTypes.Technical));
+
+      var response = (DotTypeFormsXmlResponseData)Engine.Engine.ProcessRequest(request, 689);
+      Assert.AreEqual(true, response.IsSuccess);
+      Assert.IsTrue(!string.IsNullOrEmpty(response.ToXML()));
+    }
+
+    [TestMethod]
+    public void DotTypeFormsXmlPostGoodRequestForNycEligibility()
+    {
+      // TldId = 2021 is .NYC
+      var request = new DotTypeFormsXmlRequestData("dpp", 2021, "MOBILE", "GA", "EN-US", 1)
+      {
+        DotTypeFormContacts = new List<DotTypeFormContact>(4),
+        RequestTimeout = TimeSpan.FromSeconds(15)
+      };
+
+      request.DotTypeFormContacts.Add(GetNYCContact(DotTypeFormContactTypes.Registrant));
+      request.DotTypeFormContacts.Add(GetNYCContact(DotTypeFormContactTypes.Administrative));
+      request.DotTypeFormContacts.Add(GetNYCContact(DotTypeFormContactTypes.Billing));
+      request.DotTypeFormContacts.Add(GetNYCContact(DotTypeFormContactTypes.Technical));
+
+      var response = (DotTypeFormsXmlResponseData)Engine.Engine.ProcessRequest(request, 689);
+      Assert.AreEqual(true, response.IsSuccess);
+      Assert.IsTrue(response.ToXML().Contains("validationrule name=\"RNycExtContactType\""));
     }
 
     [TestMethod]
@@ -23,42 +139,7 @@ namespace Atlantis.Framework.DotTypeForms.Tests
     {
       var request = new DotTypeFormsXmlRequestData("dpp", -1, "name of placement", "GA", "EN-US", 1);
       var response = (DotTypeFormsXmlResponseData)Engine.Engine.ProcessRequest(request, 689);
-      Assert.AreEqual(false, response.IsSuccess);
-    }
-
-    [TestMethod]
-    public void DotTypeFormsXmlPostGoodRequest1()
-    {
-      var request = new DotTypeFormsXmlRequestData("dpp", 71, "MOBILE", "GA", "EN-US", 1)
-      {
-        DotTypeFormContacts = new List<DotTypeFormContact>(4)
-      };
-
-      var contact1 = new DotTypeFormContact(DotTypeFormContactTypes.Registrant, "Raj", "Vontela", "GoDaddy",
-                                            "123 Abc Rd", "Suite 45", "Scottsdale", "AZ", "85260", "US", "4805058800", "4805058800", "rvontela@gd.com");
-      var contact2 = new DotTypeFormContact(DotTypeFormContactTypes.Administrative, "Rajj", "Vontelaa", "GoDaddy",
-                                            "123 Abc Rdd", "Suite 455", "Scottsdalee", "AZ", "85261", "US", "4805058801", "4805058801", "rvontela@gdd.com");
-      var contact3 = new DotTypeFormContact(DotTypeFormContactTypes.Billing, "Rajjj", "Vontelaaa", "GoDaddy",
-                                            "123 Abc Rddd", "Suite 4555", "Scottsdaleee", "AZ", "85262", "US", "4805058802", "4805058802", "rvontela@gddd.com");
-      var contact4 = new DotTypeFormContact(DotTypeFormContactTypes.Technical, "Rajjjj", "Vontelaaaa", "GoDaddy",
-                                            "123 Abc Rdddd", "Suite 45555", "Scottsdaleeee", "AZ", "85263", "US", "4805058803", "4805058803", "rvontela@gdddd.com");
-      request.DotTypeFormContacts.Add(contact1);
-      request.DotTypeFormContacts.Add(contact2);
-      request.DotTypeFormContacts.Add(contact3);
-      request.DotTypeFormContacts.Add(contact4);
-
-      var response = (DotTypeFormsXmlResponseData)Engine.Engine.ProcessRequest(request, 689);
-      Assert.AreEqual(true, response.IsSuccess);
-      Assert.AreEqual(true, !string.IsNullOrEmpty(response.ToXML()));
-    }
-
-    [TestMethod]
-    public void DotTypeFormsXmlPostGoodRequest2()
-    {
-      var request = new DotTypeFormsXmlRequestData("dpp", 59, "MOBILE", "GA", "EN-US", 1);
-      var response = (DotTypeFormsXmlResponseData)Engine.Engine.ProcessRequest(request, 689);
-      Assert.AreEqual(true, response.IsSuccess);
-      Assert.AreEqual(true, !string.IsNullOrEmpty(response.ToXML()));
+      Assert.IsTrue(string.IsNullOrEmpty(response.ToXML()));
     }
 
     [TestMethod]
@@ -82,5 +163,23 @@ namespace Atlantis.Framework.DotTypeForms.Tests
       Assert.AreEqual(true, response.IsSuccess);
       Assert.AreEqual(true, !string.IsNullOrEmpty(response.ToXML()));
     }
+
+    #region Contact Info Builders
+
+    private DotTypeFormContact GetNYCContact(DotTypeFormContactTypes contactType)
+    {
+      var contact = new DotTypeFormContact(contactType, "Carina", "Shipley", "GoDaddy", "1 Parsons Drive", "",
+        "NYC", "NY", "10007", "US", "2122943900", "2122943900", "cshipley@godaddy.com");
+      return contact;
+    }
+
+    private DotTypeFormContact GetGeneralContact(DotTypeFormContactTypes contactType)
+    {
+      var contact = new DotTypeFormContact(contactType, "Raj", "Vontela", "GoDaddy", "123 Abc Rd", "Suite 45", 
+        "Scottsdale", "AZ", "85260", "US", "4805058800", "4805058800", "rvontela@gd.com");
+      return contact;
+    }
+
+    #endregion Contact Info Builders
   }
 }

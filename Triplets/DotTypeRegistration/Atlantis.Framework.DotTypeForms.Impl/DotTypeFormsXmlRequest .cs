@@ -30,7 +30,7 @@ namespace Atlantis.Framework.DotTypeForms.Impl
         if (!string.IsNullOrEmpty(wsUrl))
         {
           wsUrl = wsUrl.TrimEnd('/');
-          wsUrl = string.Format("{0}{1}", wsUrl, "/api/schema/FetchXml");
+          wsUrl = string.Format("{0}{1}", wsUrl, "/api/schema/FetchXml2");
         }
 
         var webRequest = WebRequest.Create(wsUrl) as HttpWebRequest;

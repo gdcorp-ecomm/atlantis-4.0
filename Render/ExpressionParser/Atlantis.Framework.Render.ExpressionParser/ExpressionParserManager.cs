@@ -5,7 +5,7 @@ using NCalc;
 
 namespace Atlantis.Framework.Render.ExpressionParser
 {
-  public class ExpressionParserManager
+  public class ExpressionParserManager : IExpressionParserManager
   {
     public delegate bool EvaluateFunctionDelegate(string functionName, IList<string> parameters, IProviderContainer providerContainer);
 

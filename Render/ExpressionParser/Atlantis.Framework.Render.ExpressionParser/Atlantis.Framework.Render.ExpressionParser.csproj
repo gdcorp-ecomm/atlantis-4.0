@@ -59,6 +59,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ExpressionParserManager.cs" />
+    <Compile Include="IExpressionParserManager.cs" />
     <Compile Include="NCalc\Domain\BinaryExpression.cs" />
     <Compile Include="NCalc\Domain\EvaluationVisitor.cs" />
     <Compile Include="NCalc\Domain\Function.cs" />

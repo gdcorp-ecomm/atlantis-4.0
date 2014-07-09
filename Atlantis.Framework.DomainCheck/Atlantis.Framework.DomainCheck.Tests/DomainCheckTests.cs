@@ -260,14 +260,14 @@ namespace Atlantis.Framework.DomainCheck.Tests
       Assert.IsTrue(!string.IsNullOrEmpty(requestXml));
       var response = (DomainCheckResponseData)Engine.Engine.ProcessRequest(request, 16);
       Assert.IsTrue(response.IsSuccess);
-      Assert.IsTrue(response.FirstDomain.Key.Equals("ДОМЕННОЕИМЯ.COM"));
+      Assert.IsTrue(response.FirstDomain.Key.Equals("доменноеимя.com"));
       Assert.IsTrue(response.FirstDomain.Value.WasTyped);
       Assert.IsTrue(response.FirstDomain.Value.InternalTierId < 0);
       Assert.IsTrue(response.FirstDomain.Value.SyntaxCode > -1);
       Assert.IsTrue(response.FirstDomain.Value.AvailableCode > -1);
-      Assert.IsTrue(response.FirstDomain.Value.PunyCode.Equals("XN--D1ACAMRDEAFE4Q.COM"));
-      Assert.IsTrue(response.FirstDomain.Value.IdnScript.Equals("ENG"));
-      Assert.IsTrue(response.FirstDomain.Value.LanguageId.Equals("35"));
+      Assert.IsTrue(response.FirstDomain.Value.PunyCode.Equals("xn--d1acamrdeafe4q.com"));
+      Assert.IsTrue(response.FirstDomain.Value.IdnScript.Equals("KUR"));
+      Assert.IsTrue(response.FirstDomain.Value.LanguageId.Equals("64"));
     }
   }
 }

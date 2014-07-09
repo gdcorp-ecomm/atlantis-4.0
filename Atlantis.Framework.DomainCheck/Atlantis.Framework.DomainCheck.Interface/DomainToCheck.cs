@@ -13,7 +13,7 @@
 
     public DomainToCheck(string domainName, bool wasTyped)
     {
-      _domainName = domainName.ToUpperInvariant();
+      _domainName = domainName;
       _wasTyped = wasTyped;
     }
 

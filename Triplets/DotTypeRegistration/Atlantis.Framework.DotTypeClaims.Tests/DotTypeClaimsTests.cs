@@ -12,7 +12,25 @@ namespace Atlantis.Framework.DotTypeClaims.Tests
     [TestMethod]
     public void DotTypeClaimsGoodRequest()
     {
-      var request = new DotTypeClaimsRequestData(1764, "MOBILE", "LR", "en-US", "validateandt9st.lrclaim");
+      var request = new DotTypeClaimsRequestData(1764, "fos", "lr", "en-US", "validateandt9st.lrclaim");
+      var response = (DotTypeClaimsResponseData)Engine.Engine.ProcessRequest(request, 710);
+      Assert.AreEqual(true, response.IsSuccess);
+      Assert.AreEqual(true, !string.IsNullOrEmpty(response.ToXML()));
+    }
+
+    [TestMethod]
+    public void DotTypeClaimsTrademarkGoodRequest()
+    {
+      var request = new DotTypeClaimsRequestData(1794, "fos", "ga", "en-US", "testandvalidate.foreverclaims");
+      var response = (DotTypeClaimsResponseData)Engine.Engine.ProcessRequest(request, 710);
+      Assert.AreEqual(true, response.IsSuccess);
+      Assert.AreEqual(true, !string.IsNullOrEmpty(response.ToXML()));
+    }
+
+    [TestMethod]
+    public void DotTypeClaimsTrademarkNycGoodRequest()
+    {
+      var request = new DotTypeClaimsRequestData(2021, "fos", "lr", "en-US", "testandvalidate.nyc");
       var response = (DotTypeClaimsResponseData)Engine.Engine.ProcessRequest(request, 710);
       Assert.AreEqual(true, response.IsSuccess);
       Assert.AreEqual(true, !string.IsNullOrEmpty(response.ToXML()));

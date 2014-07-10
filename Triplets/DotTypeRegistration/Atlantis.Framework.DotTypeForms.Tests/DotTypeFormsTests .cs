@@ -118,7 +118,7 @@ namespace Atlantis.Framework.DotTypeForms.Tests
     public void DotTypeFormsXmlPostGoodRequestForNycEligibility()
     {
       // TldId = 2021 is .NYC
-      var request = new DotTypeFormsXmlRequestData("dpp", 2021, "MOBILE", "GA", "EN-US", 1)
+      var request = new DotTypeFormsXmlRequestData("dpp", 2021, "fos", "GA", "EN-US", 1)
       {
         DotTypeFormContacts = new List<DotTypeFormContact>(4),
         RequestTimeout = TimeSpan.FromSeconds(15)
@@ -162,6 +162,31 @@ namespace Atlantis.Framework.DotTypeForms.Tests
       response = (DotTypeFormsHtmlResponseData)Engine.Engine.ProcessRequest(request, 709);
       Assert.AreEqual(true, response.IsSuccess);
       Assert.AreEqual(true, !string.IsNullOrEmpty(response.ToXML()));
+    }
+
+    [TestMethod]
+    public void DotTypeFormsToJsonContainsRequiredFlag()
+    {
+      // TldId = 2021 is .NYC
+      var request = new DotTypeFormsXmlRequestData("dpp", 2021, "fos", "GA", "EN-US", 1)
+        {
+          DotTypeFormContacts = new List<DotTypeFormContact>(4),
+          RequestTimeout = TimeSpan.FromSeconds(15)
+        };
+
+      request.DotTypeFormContacts.Add(GetNYCContact(DotTypeFormContactTypes.Registrant));
+      request.DotTypeFormContacts.Add(GetNYCContact(DotTypeFormContactTypes.Administrative));
+      request.DotTypeFormContacts.Add(GetNYCContact(DotTypeFormContactTypes.Billing));
+      request.DotTypeFormContacts.Add(GetNYCContact(DotTypeFormContactTypes.Technical));
+
+      var response = (DotTypeFormsXmlResponseData) Engine.Engine.ProcessRequest(request, 689);
+
+      var address1 = response.DotTypeFormsSchema.Form.FieldCollection[6];
+      var address2 = response.DotTypeFormsSchema.Form.FieldCollection[7];
+
+      Assert.AreEqual(true, response.IsSuccess);
+      Assert.IsTrue(address1.FieldRequired == "true");
+      Assert.IsTrue(address2.FieldRequired == "false");
     }
 
     #region Contact Info Builders

@@ -1,8 +1,7 @@
-﻿using System;
+﻿using Atlantis.Framework.Interface;
+using System;
 using System.Collections.Generic;
 using System.Xml.Linq;
-using Atlantis.Framework.Interface;
-using Atlantis.Framework.Providers.DotTypeRegistration.Interface;
 
 namespace Atlantis.Framework.DotTypeForms.Interface
 {
@@ -86,23 +85,22 @@ namespace Atlantis.Framework.DotTypeForms.Interface
 
     private IList<IDotTypeFormsField> ParseFieldCollection(XElement parent)
     {
-      IList<IDotTypeFormsField> fieldCollection = null;
-
       var fieldCollectionElements = parent.Descendants("fieldcollection");
 
-      fieldCollection = new List<IDotTypeFormsField>();
+      IList<IDotTypeFormsField> fieldCollection = new List<IDotTypeFormsField>();
       foreach (var field in fieldCollectionElements.Elements("field"))
       {
         var dotTypeFormsField = new DotTypeFormsField
-        {
-          FieldName = field.Attribute("name").Value,
-          FieldLabel = field.Attribute("label").Value,
-          FieldDescription = field.Attribute("description").Value,
-          FieldType = field.Attribute("type").Value,
-          DataSource = field.Attribute("datasource") != null ? field.Attribute("datasource").Value : string.Empty,
-          DataSourceMethod = field.Attribute("method") != null ? field.Attribute("method").Value : string.Empty,
-          ItemCollection = ParseItemCollection(field)
-        };
+          {
+            FieldName = field.Attribute("name").Value,
+            FieldLabel = field.Attribute("label").Value,
+            FieldDescription = field.Attribute("description").Value,
+            FieldType = field.Attribute("type").Value,
+            FieldRequired = field.Attribute("required") != null ? field.Attribute("required").Value : "true",
+            DataSource = field.Attribute("datasource") != null ? field.Attribute("datasource").Value : string.Empty,
+            DataSourceMethod = field.Attribute("method") != null ? field.Attribute("method").Value : string.Empty,
+            ItemCollection = ParseItemCollection(field)
+          };
 
         fieldCollection.Add(dotTypeFormsField);
       }

@@ -45,7 +45,7 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration.Handlers
       {
         var message = ex.Message + Environment.NewLine + ex.StackTrace;
         const string source = "RenderField - ClaimFieldTypeHandler";
-        var aex = new AtlantisException(source, "0", message, string.Empty, null, null);
+        var aex = new AtlantisException(source, 0, message, string.Empty);
         Engine.Engine.LogAtlantisException(aex);
 
         result = false;

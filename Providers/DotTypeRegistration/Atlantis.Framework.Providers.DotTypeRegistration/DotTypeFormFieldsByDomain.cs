@@ -26,7 +26,7 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration
       }
       catch (Exception ex)
       {
-        var aex = new AtlantisException("DotTypeFormFieldsByDomain.ConvertFormFieldsToJson", "0", ex.ToString(), FormFieldsByDomain.ToString(), null, null);
+        var aex = new AtlantisException("DotTypeFormFieldsByDomain.ConvertFormFieldsToJson", 0, ex.ToString(), FormFieldsByDomain.ToString());
         Engine.Engine.LogAtlantisException(aex);
       }
 

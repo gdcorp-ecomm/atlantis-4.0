@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Atlantis.Framework.DotTypeForms.Interface;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.DotTypeRegistration.Interface;
 using Atlantis.Framework.Providers.DotTypeRegistration.Interface.Handlers;
@@ -26,7 +27,7 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration.Handlers
       {
         var message = ex.Message + Environment.NewLine + ex.StackTrace;
         const string source = "RenderField - CheckboxFieldTypeHandler";
-        var aex = new AtlantisException(source, "0", message, string.Empty, null, null);
+        var aex = new AtlantisException(source, 0, message, string.Empty);
         Engine.Engine.LogAtlantisException(aex);
 
         result = false;

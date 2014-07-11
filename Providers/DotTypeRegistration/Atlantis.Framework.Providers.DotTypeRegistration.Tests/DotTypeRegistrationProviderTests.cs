@@ -38,7 +38,7 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration.Tests
         if (_providerContainer == null)
         {
           _providerContainer = new MockProviderContainer();
-          ((MockProviderContainer)_providerContainer).SetMockSetting(MockSiteContextSettings.IsRequestInternal, true);
+          ((MockProviderContainer)_providerContainer).SetData(MockSiteContextSettings.IsRequestInternal, true);
 
           _providerContainer.RegisterProvider<ISiteContext, MockSiteContext>();
           _providerContainer.RegisterProvider<IShopperContext, MockShopperContext>();
@@ -55,15 +55,7 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration.Tests
     private IDomainContactValidationProvider _domainContactProvider;
     private IDomainContactValidationProvider DomainContactProvider
     {
-      get
-      {
-        if (_domainContactProvider == null)
-        {
-          _domainContactProvider = ProviderContainer.Resolve<IDomainContactValidationProvider>();
-        }
-
-        return _domainContactProvider;
-      }
+      get { return _domainContactProvider ?? (_domainContactProvider = ProviderContainer.Resolve<IDomainContactValidationProvider>()); }
     }
 
     [TestMethod]
@@ -105,6 +97,37 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration.Tests
            "MumboJumbo", true,
           "101 N Street", "Suite 100", "Littleton", "CO",
           "80130", "US", "(303)-555-1213", "(303)-555-2213");
+      contactGroup.TrySetContact(DomainContactType.Administrative, adminContact);
+      lookup.DomainContactGroup = contactGroup;
+
+      bool isSuccess = provider.GetDotTypeFormSchemas(lookup, domains, out dotTypeFormFieldsByDomain);
+      Assert.AreEqual(true, isSuccess);
+      Assert.AreEqual(true, dotTypeFormFieldsByDomain != null && dotTypeFormFieldsByDomain.FormFieldsByDomain.Count > 0);
+    }
+
+    [TestMethod]
+    public void DotTypeFormsSchemaSuccessForNyc()
+    {
+      IDotTypeFormFieldsByDomain dotTypeFormFieldsByDomain;
+      string[] domains = { "asdfaeadgsadf234.nyc" };
+
+      var provider = ProviderContainer.Resolve<IDotTypeRegistrationProvider>();
+
+      var lookup = DotTypeFormSchemaLookup.Create("dpp", "nyc", "MOBILE", "GA");
+
+      var tlds = new List<string> { "NYC" };
+      var contactGroup = DomainContactProvider.DomainContactGroupInstance(tlds, 1);
+
+      var registrantContact = DomainContactProvider.DomainContactInstance(
+           "Raj", "Vontela", "rvontela@gd.com", "GoDaddy", true,
+          "123 Abc Rd", "Suite 45", "Scottsdale", "AZ",
+          "85260", "US", "4805058800", "4805058800");
+      contactGroup.TrySetContact(DomainContactType.Registrant, registrantContact);
+
+      var adminContact = DomainContactProvider.DomainContactInstance(
+           "Raj", "Vontela", "rvontela@gd.com", "GoDaddy", true,
+          "123 Abc Rd", "Suite 45", "Scottsdale", "AZ",
+          "85260", "US", "4805058800", "4805058800");
       contactGroup.TrySetContact(DomainContactType.Administrative, adminContact);
       lookup.DomainContactGroup = contactGroup;
 
@@ -159,7 +182,6 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration.Tests
     {
       var provider = ProviderContainer.Resolve<IDotTypeRegistrationProvider>();
 
-      IDotTypeFormFieldsByDomain dotTypeFormFieldsByDomain;
       const string domain = "validateandt9st.lrclaim";
       var lookup = DotTypeFormSchemaLookup.Create("claims", "lrclaim", "mobile", "lr");
 
@@ -172,7 +194,6 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration.Tests
     {
       var provider = ProviderContainer.Resolve<IDotTypeRegistrationProvider>();
 
-      IDotTypeFormFieldsByDomain dotTypeFormFieldsByDomain;
       const string domain = "jhkjshkdfsdtrr.lrclaim";
       var lookup = DotTypeFormSchemaLookup.Create("claims", "lrclaim", "mobile", "lr");
 

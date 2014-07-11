@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Atlantis.Framework.DotTypeForms.Interface;
 
 namespace Atlantis.Framework.Providers.DotTypeRegistration.Interface
 {

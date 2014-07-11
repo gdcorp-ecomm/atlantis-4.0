@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Atlantis.Framework.DotTypeForms.Interface;
 using Atlantis.Framework.Providers.DotTypeRegistration.Interface;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;

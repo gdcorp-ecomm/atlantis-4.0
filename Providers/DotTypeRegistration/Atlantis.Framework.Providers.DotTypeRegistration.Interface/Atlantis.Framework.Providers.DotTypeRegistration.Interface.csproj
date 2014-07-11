@@ -37,6 +37,9 @@
     <Reference Include="Atlantis.Framework.AppSettings.Interface">
       <HintPath>..\packages\Atlantis.Framework.AppSettings.Interface.4.0.0.0\lib\net40\Atlantis.Framework.AppSettings.Interface.dll</HintPath>
     </Reference>
+    <Reference Include="Atlantis.Framework.DotTypeForms.Interface">
+      <HintPath>..\packages\Atlantis.Framework.DotTypeForms.Interface.14.7.10.1\lib\net40\Atlantis.Framework.DotTypeForms.Interface.dll</HintPath>
+    </Reference>
     <Reference Include="Atlantis.Framework.DotTypeValidation.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Atlantis.Framework.DotTypeValidation.Interface.4.14.1.8\lib\net40\Atlantis.Framework.DotTypeValidation.Interface.dll</HintPath>
@@ -56,9 +59,9 @@
     <Reference Include="Atlantis.Framework.Providers.DomainContactValidation.Interface">
       <HintPath>..\packages\Atlantis.Framework.Providers.DomainContactValidation.Interface.4.13.12.22\lib\net40\Atlantis.Framework.Providers.DomainContactValidation.Interface.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.Providers.DotTypeRegistration.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.Providers.DotTypeRegistration.Interface.4.13.11.11\lib\net40\Atlantis.Framework.Providers.DotTypeRegistration.Interface.dll</HintPath>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.1\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -76,10 +79,6 @@
     <Compile Include="IDotTypeFormFieldsByDomain.cs" />
     <Compile Include="IDotTypeFormSchemaLookup.cs" />
     <Compile Include="IDotTypeFormLookup.cs" />
-    <Compile Include="IDotTypeFormsItem.cs" />
-    <Compile Include="IDotTypeFormsField.cs" />
-    <Compile Include="IDotTypeFormsForm.cs" />
-    <Compile Include="IDotTypeFormsSchema.cs" />
     <Compile Include="IDotTypeRegistrationProvider.cs" />
     <Compile Include="IFormField.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -1,4 +1,5 @@
 ﻿using System;
+using Atlantis.Framework.DotTypeForms.Interface;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.DotTypeRegistration.Interface;
 
@@ -95,7 +96,7 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration.Handlers
       }
       catch (Exception)
       {
-        var exception = new AtlantisException("TransformHandlerHelper.SetFieldTypeData", "0", "Invalid data passed: Field type - " + formFieldType.ToString("F"), null, null, null);
+        var exception = new AtlantisException("TransformHandlerHelper.SetFieldTypeData", 0, "Invalid data passed: Field type - " + formFieldType.ToString("F"), null);
         Engine.Engine.LogAtlantisException(exception);
 
         result = false;

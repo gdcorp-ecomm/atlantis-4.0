@@ -67,6 +67,8 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration.Handlers
             Name = string.Format("claimhtml-{0}-{1}", field.FieldName, domain),
             Value = claimResponse.HtmlData,
             DescriptionText = field.FieldDescription,
+            Required = field.FieldRequired,
+            DefaultValue = field.FieldDefaultValue,
             Type = FormFieldTypes.Label
           };
           result.Add(formField);

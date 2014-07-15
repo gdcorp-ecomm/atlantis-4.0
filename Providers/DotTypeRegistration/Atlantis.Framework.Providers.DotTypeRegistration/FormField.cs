@@ -23,6 +23,8 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration
     public string Value { get; set; }
     public string LabelText { get; set; }
     public string DescriptionText { get; set; }
+    public string Required { get; set; }
+    public string DefaultValue { get; set; }
     public IList<IDotTypeFormsItem> ItemCollection { get; set; }
   }
 }

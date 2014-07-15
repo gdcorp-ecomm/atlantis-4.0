@@ -61,9 +61,8 @@
       <HintPath>..\packages\Atlantis.Framework.DotTypeForms.Impl.14.7.3.1\lib\net40\Atlantis.Framework.DotTypeForms.Impl.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Atlantis.Framework.DotTypeForms.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.DotTypeForms.Interface.14.7.10.1\lib\net40\Atlantis.Framework.DotTypeForms.Interface.dll</HintPath>
+    <Reference Include="Atlantis.Framework.DotTypeForms.Interface">
+      <HintPath>..\packages\Atlantis.Framework.DotTypeForms.Interface.14.7.14.1\lib\net40\Atlantis.Framework.DotTypeForms.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.DotTypeValidation.Impl, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

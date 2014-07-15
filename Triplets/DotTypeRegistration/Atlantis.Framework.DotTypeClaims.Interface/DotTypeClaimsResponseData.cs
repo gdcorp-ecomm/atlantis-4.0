@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
+﻿using Atlantis.Framework.Interface;
+using System;
 using System.Xml.Linq;
-using Atlantis.Framework.Interface;
-using Atlantis.Framework.Providers.DotTypeRegistration.Interface;
 
 namespace Atlantis.Framework.DotTypeClaims.Interface
 {

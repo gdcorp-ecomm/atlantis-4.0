@@ -97,6 +97,7 @@ namespace Atlantis.Framework.DotTypeForms.Interface
             FieldDescription = field.Attribute("description").Value,
             FieldType = field.Attribute("type").Value,
             FieldRequired = field.Attribute("required") != null ? field.Attribute("required").Value : "true",
+            FieldDefaultValue = field.Attribute("default") != null ? field.Attribute("default").Value : string.Empty,
             DataSource = field.Attribute("datasource") != null ? field.Attribute("datasource").Value : string.Empty,
             DataSourceMethod = field.Attribute("method") != null ? field.Attribute("method").Value : string.Empty,
             ItemCollection = ParseItemCollection(field)

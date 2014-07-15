@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Web;
-using Atlantis.Framework.DotTypeValidation.Impl;
+﻿using Atlantis.Framework.DotTypeValidation.Impl;
 using Atlantis.Framework.DotTypeValidation.Interface;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using System.Collections.Generic;
 
 namespace Atlantis.Framework.DotTypeValidation.Tests
 {
@@ -56,7 +55,7 @@ namespace Atlantis.Framework.DotTypeValidation.Tests
       var fields = new Dictionary<string, IDotTypeValidationFieldValueData>();
       const string claimsHtml = @"<test></test>";
       fields["claims"] = DotTypeValidationFieldValueData.Create(claimsHtml);
-      fields["acceptedDate"] = DotTypeValidationFieldValueData.Create(DateTime.Now.ToUniversalTime().ToString("o"), false);
+      fields["acceptedDate"] = DotTypeValidationFieldValueData.Create(DateTime.Now.ToUniversalTime().ToString("o"));
 
       var request = new DotTypeValidationRequestData("dpp_absol", "d1wsdv", 1764, "LR", "apptoken", fields);
       var response = (DotTypeValidationResponseData)Engine.Engine.ProcessRequest(request, 695);

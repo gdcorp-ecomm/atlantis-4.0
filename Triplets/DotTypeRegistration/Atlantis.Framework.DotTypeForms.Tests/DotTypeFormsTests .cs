@@ -118,7 +118,7 @@ namespace Atlantis.Framework.DotTypeForms.Tests
     public void DotTypeFormsXmlPostGoodRequestForNycEligibility()
     {
       // TldId = 2021 is .NYC
-      var request = new DotTypeFormsXmlRequestData("dpp", 2021, "fos", "GA", "EN-US", 1)
+      var request = new DotTypeFormsXmlRequestData("dpp", 2021, "fos", "lr", "EN-US", 1)
       {
         DotTypeFormContacts = new List<DotTypeFormContact>(4),
         RequestTimeout = TimeSpan.FromSeconds(15)
@@ -189,12 +189,37 @@ namespace Atlantis.Framework.DotTypeForms.Tests
       Assert.IsTrue(address2.FieldRequired == "false");
     }
 
+    [TestMethod]
+    public void DotTypeFormsToJsonContainsDefaultValueFlag()
+    {
+      // TldId = 2021 is .NYC
+      var request = new DotTypeFormsXmlRequestData("dpp", 2021, "fos", "GA", "EN-US", 1)
+      {
+        DotTypeFormContacts = new List<DotTypeFormContact>(4),
+        RequestTimeout = TimeSpan.FromSeconds(15)
+      };
+
+      request.DotTypeFormContacts.Add(GetNYCContact(DotTypeFormContactTypes.Registrant));
+      request.DotTypeFormContacts.Add(GetNYCContact(DotTypeFormContactTypes.Administrative));
+      request.DotTypeFormContacts.Add(GetNYCContact(DotTypeFormContactTypes.Billing));
+      request.DotTypeFormContacts.Add(GetNYCContact(DotTypeFormContactTypes.Technical));
+
+      var response = (DotTypeFormsXmlResponseData)Engine.Engine.ProcessRequest(request, 689);
+
+      var address1 = response.DotTypeFormsSchema.Form.FieldCollection[6];
+      var address2 = response.DotTypeFormsSchema.Form.FieldCollection[7];
+
+      Assert.AreEqual(true, response.IsSuccess);
+      Assert.IsTrue(address1.FieldDefaultValue == "2 Broadway");
+      Assert.IsTrue(address2.FieldDefaultValue == "");
+    }
+
     #region Contact Info Builders
 
     private DotTypeFormContact GetNYCContact(DotTypeFormContactTypes contactType)
     {
-      var contact = new DotTypeFormContact(contactType, "Carina", "Shipley", "GoDaddy", "1 Parsons Drive", "",
-        "NYC", "NY", "10007", "US", "2122943900", "2122943900", "cshipley@godaddy.com");
+      var contact = new DotTypeFormContact(contactType, "Carina", "Shipley", "GoDaddy", "2 Broadway", "",
+        "New York", "NY", "10004", "US", "2122943900", "2122943900", "cshipley@godaddy.com");
       return contact;
     }
 

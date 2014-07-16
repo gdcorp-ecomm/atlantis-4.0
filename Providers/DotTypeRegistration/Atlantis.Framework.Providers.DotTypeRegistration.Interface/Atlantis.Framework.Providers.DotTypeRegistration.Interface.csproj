@@ -37,8 +37,9 @@
     <Reference Include="Atlantis.Framework.AppSettings.Interface">
       <HintPath>..\packages\Atlantis.Framework.AppSettings.Interface.4.0.0.0\lib\net40\Atlantis.Framework.AppSettings.Interface.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.DotTypeForms.Interface">
-      <HintPath>..\packages\Atlantis.Framework.DotTypeForms.Interface.14.7.10.1\lib\net40\Atlantis.Framework.DotTypeForms.Interface.dll</HintPath>
+    <Reference Include="Atlantis.Framework.DotTypeForms.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.DotTypeForms.Interface.14.7.14.1\lib\net40\Atlantis.Framework.DotTypeForms.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.DotTypeValidation.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

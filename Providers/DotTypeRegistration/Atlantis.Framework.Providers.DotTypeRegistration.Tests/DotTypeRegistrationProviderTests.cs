@@ -113,7 +113,7 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration.Tests
 
       var provider = ProviderContainer.Resolve<IDotTypeRegistrationProvider>();
 
-      var lookup = DotTypeFormSchemaLookup.Create("dpp", "nyc", "MOBILE", "GA");
+      var lookup = DotTypeFormSchemaLookup.Create("dpp", "nyc", "fos", "lr");
 
       var tlds = new List<string> { "NYC" };
       var contactGroup = DomainContactProvider.DomainContactGroupInstance(tlds, 1);
@@ -123,6 +123,18 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration.Tests
           "123 Abc Rd", "Suite 45", "Scottsdale", "AZ",
           "85260", "US", "4805058800", "4805058800");
       contactGroup.TrySetContact(DomainContactType.Registrant, registrantContact);
+
+      var techContact = DomainContactProvider.DomainContactInstance(
+           "Raj", "Vontela", "rvontela@gd.com", "GoDaddy", true,
+          "123 Abc Rd", "Suite 45", "Scottsdale", "AZ",
+          "85260", "US", "4805058800", "4805058800");
+      contactGroup.TrySetContact(DomainContactType.Technical, techContact);
+
+      var billingContact = DomainContactProvider.DomainContactInstance(
+           "Raj", "Vontela", "rvontela@gd.com", "GoDaddy", true,
+          "123 Abc Rd", "Suite 45", "Scottsdale", "AZ",
+          "85260", "US", "4805058800", "4805058800");
+      contactGroup.TrySetContact(DomainContactType.Billing, billingContact);
 
       var adminContact = DomainContactProvider.DomainContactInstance(
            "Raj", "Vontela", "rvontela@gd.com", "GoDaddy", true,

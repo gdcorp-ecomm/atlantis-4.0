@@ -37,6 +37,7 @@ namespace Atlantis.Framework.DotTypeForms.Interface
             if (formElementName.Equals("form"))
             {
               var formName = formElement.Attribute("name");
+              var formLabel = formElement.Attribute("label");
               var formDescription = formElement.Attribute("description");
               var formType = formElement.Attribute("type");
 
@@ -52,11 +53,14 @@ namespace Atlantis.Framework.DotTypeForms.Interface
               var dotTypeFormsForm = new DotTypeFormsForm
                 {
                   FormName = formName.Value,
+                  FormLabel = formLabel != null ? formLabel.Value : "",
                   FormDescription = formDescription.Value,
                   FormType = formType.Value
                 };
 
-              var fieldCollection = ParseFieldCollection(formElement);
+              dotTypeFormsForm.FormFieldCollection = ParseFormFieldCollection(formElement);
+
+              var fieldCollection = dotTypeFormsForm.FormFieldCollection.FieldCollection;
               if (fieldCollection != null && fieldCollection.Count > 0)
               {
                 dotTypeFormsForm.FieldCollection = fieldCollection;
@@ -81,6 +85,26 @@ namespace Atlantis.Framework.DotTypeForms.Interface
         var exception = new AtlantisException("DotTypeFormsSchemaResponseData.BuildModelFromXml", "0", ex.Message + ex.StackTrace, responseXml, null, null);
         Engine.Engine.LogAtlantisException(exception);
       }
+    }
+
+    private IFormFieldCollection ParseFormFieldCollection(XElement formElement)
+    {
+      var formFieldCollection = new FormFieldCollection();
+      var fieldCollectionElement = formElement.Element("fieldcollection");
+
+      if (fieldCollectionElement != null && fieldCollectionElement.Attribute("label") != null)
+      {
+        formFieldCollection = new FormFieldCollection
+        {
+          Label = fieldCollectionElement.Attribute("label").Value,
+          ToggleValue = fieldCollectionElement.Attribute("toggle").Value,
+          ToggleText = fieldCollectionElement.Attribute("toggletext").Value
+        };
+      }
+
+      formFieldCollection.FieldCollection = ParseFieldCollection(formElement);
+
+      return formFieldCollection;
     }
 
     private IList<IDotTypeFormsField> ParseFieldCollection(XElement parent)

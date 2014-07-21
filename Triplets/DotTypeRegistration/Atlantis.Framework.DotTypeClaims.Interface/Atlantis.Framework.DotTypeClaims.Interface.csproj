@@ -49,9 +49,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Atlantis.Framework.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Interface.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.Providers.DotTypeRegistration.Interface">
-      <HintPath>..\packages\Atlantis.Framework.Providers.DotTypeRegistration.Interface.4.13.11.11\lib\net40\Atlantis.Framework.Providers.DotTypeRegistration.Interface.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />

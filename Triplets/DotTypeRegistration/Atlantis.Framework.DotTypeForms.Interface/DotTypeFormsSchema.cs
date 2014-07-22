@@ -92,14 +92,14 @@ namespace Atlantis.Framework.DotTypeForms.Interface
       var formFieldCollection = new FormFieldCollection();
       var fieldCollectionElement = formElement.Element("fieldcollection");
 
-      if (fieldCollectionElement != null && fieldCollectionElement.Attribute("label") != null)
+      if (fieldCollectionElement != null)
       {
         formFieldCollection = new FormFieldCollection
-        {
-          Label = fieldCollectionElement.Attribute("label").Value,
-          ToggleValue = fieldCollectionElement.Attribute("toggle").Value,
-          ToggleText = fieldCollectionElement.Attribute("toggletext").Value
-        };
+          {
+            Label = fieldCollectionElement.Attribute("label") != null ? fieldCollectionElement.Attribute("label").Value : string.Empty,
+            ToggleValue = fieldCollectionElement.Attribute("toggle") != null ? fieldCollectionElement.Attribute("toggle").Value : string.Empty,
+            ToggleText = fieldCollectionElement.Attribute("toggletext") != null ? fieldCollectionElement.Attribute("toggletext").Value : string.Empty
+          };
       }
 
       formFieldCollection.FieldCollection = ParseFieldCollection(formElement);

@@ -181,8 +181,8 @@ namespace Atlantis.Framework.DotTypeForms.Tests
 
       var response = (DotTypeFormsXmlResponseData) Engine.Engine.ProcessRequest(request, 689);
 
-      var address1 = response.DotTypeFormsSchema.Form.FieldCollection[6];
-      var address2 = response.DotTypeFormsSchema.Form.FieldCollection[7];
+      var address1 = response.DotTypeFormsSchema.Form.FieldCollection[7];
+      var address2 = response.DotTypeFormsSchema.Form.FieldCollection[8];
 
       Assert.AreEqual(true, response.IsSuccess);
       Assert.IsTrue(address1.FieldRequired == "true");
@@ -206,8 +206,8 @@ namespace Atlantis.Framework.DotTypeForms.Tests
 
       var response = (DotTypeFormsXmlResponseData)Engine.Engine.ProcessRequest(request, 689);
 
-      var address1 = response.DotTypeFormsSchema.Form.FieldCollection[6];
-      var address2 = response.DotTypeFormsSchema.Form.FieldCollection[7];
+      var address1 = response.DotTypeFormsSchema.Form.FieldCollection[7];
+      var address2 = response.DotTypeFormsSchema.Form.FieldCollection[8];
 
       Assert.AreEqual(true, response.IsSuccess);
       Assert.IsTrue(address1.FieldDefaultValue == "2 Broadway");

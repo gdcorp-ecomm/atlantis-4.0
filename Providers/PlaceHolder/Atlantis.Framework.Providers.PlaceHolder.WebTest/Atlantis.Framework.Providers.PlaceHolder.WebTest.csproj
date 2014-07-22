@@ -76,11 +76,11 @@
     </Reference>
     <Reference Include="Atlantis.Framework.Engine, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.Engine.14.1.16.1\lib\net40\Atlantis.Framework.Engine.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.Engine.14.3.1.1\lib\net40\Atlantis.Framework.Engine.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Engine.XmlSerializers, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.Engine.14.1.16.1\lib\net40\Atlantis.Framework.Engine.XmlSerializers.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.Engine.14.3.1.1\lib\net40\Atlantis.Framework.Engine.XmlSerializers.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -88,7 +88,7 @@
     </Reference>
     <Reference Include="Atlantis.Framework.Personalization.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.Personalization.Interface.4.14.1.10\lib\net40\Atlantis.Framework.Personalization.Interface.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.Personalization.Interface.14.7.21.1\lib\net40\Atlantis.Framework.Personalization.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.PrivateLabel.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -121,13 +121,16 @@
     <Reference Include="Atlantis.Framework.Providers.Links.Interface">
       <HintPath>..\packages\Atlantis.Framework.Providers.Links.Interface.4.13.11.6\lib\net40\Atlantis.Framework.Providers.Links.Interface.dll</HintPath>
     </Reference>
+    <Reference Include="Atlantis.Framework.Providers.Localization.Interface">
+      <HintPath>..\packages\Atlantis.Framework.Providers.Localization.Interface.14.5.3.1\lib\net40\Atlantis.Framework.Providers.Localization.Interface.dll</HintPath>
+    </Reference>
     <Reference Include="Atlantis.Framework.Providers.Personalization, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.Providers.Personalization.14.1.21.1\lib\net40\Atlantis.Framework.Providers.Personalization.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.Providers.Personalization.14.7.21.1\lib\net40\Atlantis.Framework.Providers.Personalization.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Providers.Personalization.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.Providers.Personalization.Interface.4.14.1.10\lib\net40\Atlantis.Framework.Providers.Personalization.Interface.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.Providers.Personalization.Interface.14.7.21.1\lib\net40\Atlantis.Framework.Providers.Personalization.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Providers.RenderPipeline, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

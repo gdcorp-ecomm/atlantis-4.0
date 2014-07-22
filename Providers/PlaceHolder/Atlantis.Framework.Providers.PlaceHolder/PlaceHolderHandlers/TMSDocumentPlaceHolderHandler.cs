@@ -15,12 +15,9 @@ namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolderHandlers
   {
     private const string APP_NAME = "tms";
     private const string LOCATION_FORMAT = "{0}/default_template";
-    private const string AppSetting = "A.F.Prov.Personalization.TMS.On";
+    private const string EnablementAppSetting = "ATLANTIS_PERSONALIZATION_TRIPLET_TMS_ON";
 
-    internal TMSDocumentPlaceHolderHandler(IPlaceHolderHandlerContext context)
-      : base(context)
-    {
-    }
+    internal TMSDocumentPlaceHolderHandler(IPlaceHolderHandlerContext context) : base(context) { }
 
     protected override string GetContent()
     {
@@ -31,16 +28,16 @@ namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolderHandlers
         IPersonalizationProvider personalizationProvider;
         ICDSContentProvider cdsProvider;
 
-        if (Context.ProviderContainer.TryResolve<IPersonalizationProvider>(out personalizationProvider) && Context.ProviderContainer.TryResolve<ICDSContentProvider>(out cdsProvider))
+        if (Context.ProviderContainer.TryResolve(out personalizationProvider) && Context.ProviderContainer.TryResolve(out cdsProvider))
         {
           TMSPlaceHolderData placeHolderData = new TMSPlaceHolderData(Context.Data);
 
           string interactionPoint;
           if (placeHolderData.TryGetAttribute(PlaceHolderAttributes.InteractionPoint, out interactionPoint) &&
-              !string.IsNullOrEmpty(interactionPoint) &&
-              placeHolderData.MessageTags.Count > 0)
+              !string.IsNullOrEmpty(interactionPoint) && (placeHolderData.MessageTags.Count > 0))
           {
-            IConsumedMessage message = GetMessage(personalizationProvider, interactionPoint, placeHolderData.MessageTags);
+            IConsumedMessage message = GetMessage(interactionPoint, placeHolderData.MessageTags, personalizationProvider);
+            
             if (message != null)
             {
               personalizationProvider.AddToConsumedMessages(message);
@@ -53,11 +50,14 @@ namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolderHandlers
             else
             {
               bool isTMSOn = true;
-              IAppSettingsProvider appSettings;
-              if (Context.ProviderContainer.TryResolve<IAppSettingsProvider>(out appSettings))
+              IAppSettingsProvider appSettingsProvider;
+
+              if (Context.ProviderContainer.TryResolve(out appSettingsProvider))
               {
-                isTMSOn = appSettings.GetAppSetting(AppSetting).Equals("true", StringComparison.OrdinalIgnoreCase);
+                string enablementSetting = appSettingsProvider.GetAppSetting(EnablementAppSetting);
+                isTMSOn = (!String.IsNullOrWhiteSpace(enablementSetting) && enablementSetting.Equals("true", StringComparison.OrdinalIgnoreCase));
               }
+
               if (isTMSOn)
               {
                 throw new Exception(string.Format("None of the requested tags are found.  Tags: \"{0}\"", string.Join(", ", placeHolderData.MessageTags)));
@@ -83,9 +83,9 @@ namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolderHandlers
       return renderContent;
     }
 
-    private IConsumedMessage GetMessage(IPersonalizationProvider personalizationProvider, string interactionPoint, IList<string> messageTags)
+    private IConsumedMessage GetMessage(string interactionPoint, IList<string> placeHolderMessageTags, IPersonalizationProvider personalizationProvider)
     {
-      TargetedMessages targetedMessages = null;
+      TargetedMessages targetedMessages;
 
       try
       {
@@ -97,26 +97,62 @@ namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolderHandlers
         throw new Exception(errorMessage, ex);
       }
 
-      return FindTheFirstMessageThatMatches(personalizationProvider, targetedMessages, messageTags);
+      return FindMessageMatch(targetedMessages, placeHolderMessageTags, personalizationProvider);
     }
 
-    private IConsumedMessage FindTheFirstMessageThatMatches(IPersonalizationProvider personalizationProvider, TargetedMessages targetedMessages, IList<string> messageTags)
+    private IConsumedMessage FindMessageMatch(TargetedMessages targetedMessages, IList<string> placeHolderMessageTags, IPersonalizationProvider personalizationProvider)
     {
       IConsumedMessage message = null;
 
       if (targetedMessages != null && targetedMessages.Messages != null)
       {
-      
-        message = (from requestedTag in messageTags
-                   from sourceMessage in targetedMessages.Messages
-                   where sourceMessage.MessageTags != null
-                   from sourceTag in sourceMessage.MessageTags
-                   where string.Compare(sourceTag.Name, requestedTag, StringComparison.OrdinalIgnoreCase) == 0
-                   select new ConsumedMessage(sourceMessage.MessageId, sourceMessage.MessageName, requestedTag, sourceMessage.MessageTrackingId) as IConsumedMessage
-                  ).Except(personalizationProvider.ConsumedMessages).FirstOrDefault();
+        foreach (Message targetedMessage in targetedMessages.Messages)
+        {
+          if (IsMessageValid(targetedMessage, personalizationProvider))
+          {
+            if (TryGetMatch(targetedMessage, placeHolderMessageTags, out message))
+            {
+              break;
+            }
+          }
+        }
       }
       
       return message;
+    }
+
+    private bool IsMessageValid(Message targetedMessage, IPersonalizationProvider personalizationProvider)
+    {
+      bool isMessageValid = targetedMessage.MessageTags != null && targetedMessage.MessageTags.Count > 0;
+      
+      if (isMessageValid)
+      {
+        if (personalizationProvider.ConsumedMessages.Any(
+          consumedMessage => targetedMessage.MessageId == consumedMessage.MessageId))
+        {
+          isMessageValid = false;
+        }
+      }
+
+      return isMessageValid;
+    }
+
+    private bool TryGetMatch(Message targetedMessage, IList<string> placeHolderMessageTags, out IConsumedMessage consumedMessage)
+    {
+      bool match = false;
+      consumedMessage = null;
+
+      foreach (MessageTag messageTag in targetedMessage.MessageTags)
+      {
+        if (placeHolderMessageTags.Any(placeHolderMessageTag => messageTag.Name.Equals(placeHolderMessageTag, StringComparison.OrdinalIgnoreCase)))
+        {
+          match = true;
+          consumedMessage = new ConsumedMessage(targetedMessage.MessageId, targetedMessage.MessageName, messageTag.Name, targetedMessage.MessageTrackingId);
+          break;
+        }
+      }
+
+      return match;
     }
   }
 }

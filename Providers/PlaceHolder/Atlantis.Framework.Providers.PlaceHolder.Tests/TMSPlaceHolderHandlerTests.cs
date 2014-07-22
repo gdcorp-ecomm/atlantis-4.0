@@ -12,7 +12,6 @@ using Atlantis.Framework.Testing.MockEngine;
 using Atlantis.Framework.Testing.MockHttpContext;
 using Atlantis.Framework.Testing.MockProviders;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -24,8 +23,6 @@ namespace Atlantis.Framework.Providers.PlaceHolder.Tests
   [DeploymentItem("atlantis.config")]
   public class TMSPlaceHolderHandlerTests
   {
-    private const string AppSetting = "A.F.Prov.Personalization.TMS.On";
-
     public IProviderContainer InitializeProviderContainer()
     {
       IProviderContainer providerContainer = new MockProviderContainer();
@@ -77,7 +74,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder.Tests
       EngineLogging.EngineLogger = mockLogger;
       try
       {
-        IPlaceHolder placeHolder = new TMSDocumentPlaceHolder("ProductUpsell", new List<string>() { "duplicate" });
+        IPlaceHolder placeHolder = new TMSDocumentPlaceHolder("ProductUpsell", new List<string> { "duplicate" });
 
         IProviderContainer providerContainer = InitializeProviderContainer();
         IPlaceHolderProvider placeHolderProvider = providerContainer.Resolve<IPlaceHolderProvider>();
@@ -103,7 +100,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder.Tests
       EngineLogging.EngineLogger = mockLogger;
       try
       {
-        IPlaceHolder placeHolder = new TMSDocumentPlaceHolder("ProductUpsell", new List<string>() { "engmtactnewcustsurveywebdlp", "", "engmtactnewcustsurveymobiledlp", "EngmtCustServMobileAppMobileHP" });
+        IPlaceHolder placeHolder = new TMSDocumentPlaceHolder("ProductUpsell", new List<string> { "engmtactnewcustsurveywebdlp", "", "engmtactnewcustsurveymobiledlp", "EngmtCustServMobileAppMobileHP" });
 
         IProviderContainer providerContainer = InitializeProviderContainer();
         IPlaceHolderProvider placeHolderProvider = providerContainer.Resolve<IPlaceHolderProvider>();
@@ -129,7 +126,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder.Tests
       EngineLogging.EngineLogger = mockLogger;
       try
       {
-        IPlaceHolder placeHolder = new TMSDocumentPlaceHolder("ProductUpsell", new List<string>() { "this is not to be found", "this too", "stddomxsmobiledlp" });
+        IPlaceHolder placeHolder = new TMSDocumentPlaceHolder("ProductUpsell", new List<string> { "this is not to be found", "this too", "stddomxsmobiledlp" });
 
         IProviderContainer providerContainer = InitializeProviderContainer();
         IPlaceHolderProvider placeHolderProvider = providerContainer.Resolve<IPlaceHolderProvider>();
@@ -157,7 +154,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder.Tests
       {
         IProviderContainer providerContainer = InitializeProviderContainer();
 
-        IPlaceHolder placeHolder = new TMSDocumentPlaceHolder("ProductUpsell", new List<string>() { "this is not to be found", "this too" });
+        IPlaceHolder placeHolder = new TMSDocumentPlaceHolder("ProductUpsell", new List<string> { "this is not to be found", "this too" });
 
         IPlaceHolderProvider placeHolderProvider = providerContainer.Resolve<IPlaceHolderProvider>();
 
@@ -182,7 +179,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder.Tests
       EngineLogging.EngineLogger = mockLogger;
       try
       {
-        IPlaceHolder placeHolder = new TMSDocumentPlaceHolder("", new List<string>() { "this is not to be found", "this too", "stddomxsmobiledlp" });
+        IPlaceHolder placeHolder = new TMSDocumentPlaceHolder("", new List<string> { "this is not to be found", "this too", "stddomxsmobiledlp" });
 
         IProviderContainer providerContainer = InitializeProviderContainer();
         IPlaceHolderProvider placeHolderProvider = providerContainer.Resolve<IPlaceHolderProvider>();
@@ -232,7 +229,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder.Tests
       EngineLogging.EngineLogger = mockLogger;
       try
       {
-        IPlaceHolder placeHolder = new TMSDocumentPlaceHolder("explode", new List<string>() { "this doesn't matter"});
+        IPlaceHolder placeHolder = new TMSDocumentPlaceHolder("explode", new List<string> { "this doesn't matter"});
 
         IProviderContainer providerContainer = InitializeProviderContainer();
         IPlaceHolderProvider placeHolderProvider = providerContainer.Resolve<IPlaceHolderProvider>();
@@ -257,7 +254,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder.Tests
       EngineLogging.EngineLogger = mockLogger;
       try
       {
-        IPlaceHolder placeHolder = new TMSDocumentPlaceHolder("dosn't matter", new List<string>() { "doesn't matter" });
+        IPlaceHolder placeHolder = new TMSDocumentPlaceHolder("dosn't matter", new List<string> { "doesn't matter" });
 
         IProviderContainer providerContainer = Error_InitializeProviderContainer();
         IPlaceHolderProvider placeHolderProvider = providerContainer.Resolve<IPlaceHolderProvider>();
@@ -282,11 +279,11 @@ namespace Atlantis.Framework.Providers.PlaceHolder.Tests
       EngineLogging.EngineLogger = mockLogger;
       try
       {
-        IPlaceHolder placeHolder1 = new TMSDocumentPlaceHolder("ProductUpsell", new List<string>() { "duplicate" });
-        IPlaceHolder placeHolder2 = new TMSDocumentPlaceHolder("ProductUpsell", new List<string>() { "duplicate" });
-        IPlaceHolder placeHolder3 = new TMSDocumentPlaceHolder("ProductUpsell", new List<string>() { "duplicate" });
-        IPlaceHolder placeHolder4 = new TMSDocumentPlaceHolder("ProductUpsell", new List<string>() { "duplicate" });
-        IPlaceHolder placeHolder5 = new TMSDocumentPlaceHolder("ProductUpsell", new List<string>() { "duplicate" });
+        IPlaceHolder placeHolder1 = new TMSDocumentPlaceHolder("ProductUpsell", new List<string> { "duplicate" });
+        IPlaceHolder placeHolder2 = new TMSDocumentPlaceHolder("ProductUpsell", new List<string> { "duplicate" });
+        IPlaceHolder placeHolder3 = new TMSDocumentPlaceHolder("ProductUpsell", new List<string> { "duplicate" });
+        IPlaceHolder placeHolder4 = new TMSDocumentPlaceHolder("ProductUpsell", new List<string> { "duplicate" });
+        IPlaceHolder placeHolder5 = new TMSDocumentPlaceHolder("ProductUpsell", new List<string> { "duplicate" });
 
         IProviderContainer providerContainer2 = InitializeProviderContainer();
         IPlaceHolderProvider placeHolderProvider = providerContainer2.Resolve<IPlaceHolderProvider>();
@@ -333,7 +330,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder.Tests
         IAppSettingsProvider settings = providerContainer.Resolve<IAppSettingsProvider>();
         ((MockAppSettingsProvider)settings).ReturnValue = "false";
 
-        IPlaceHolder placeHolder = new TMSDocumentPlaceHolder("ProductUpsell", new List<string>() { "this is not to be found", "this too" });
+        IPlaceHolder placeHolder = new TMSDocumentPlaceHolder("ProductUpsell", new List<string> { "this is not to be found", "this too" });
 
         IPlaceHolderProvider placeHolderProvider = providerContainer.Resolve<IPlaceHolderProvider>();
 
@@ -359,9 +356,9 @@ namespace Atlantis.Framework.Providers.PlaceHolder.Tests
       EngineLogging.EngineLogger = mockLogger;
       try
       {
-        IPlaceHolder placeHolder1 = new TMSDocumentPlaceHolder("ProductUpsell", new List<string>() { "duplicate" });
-        IPlaceHolder placeHolder2 = new TMSDocumentPlaceHolder("ProductUpsell", new List<string>() { "engmtactnewcustsurveywebdlp", "", "engmtactnewcustsurveymobiledlp", "EngmtCustServMobileAppMobileHP" });
-        IPlaceHolder placeHolder3 = new TMSDocumentPlaceHolder("ProductUpsell", new List<string>() { "this is not to be found", "this too", "stddomxsmobiledlp" });
+        IPlaceHolder placeHolder1 = new TMSDocumentPlaceHolder("ProductUpsell", new List<string> { "duplicate" });
+        IPlaceHolder placeHolder2 = new TMSDocumentPlaceHolder("ProductUpsell", new List<string> { "engmtactnewcustsurveywebdlp", "", "engmtactnewcustsurveymobiledlp", "EngmtCustServMobileAppMobileHP" });
+        IPlaceHolder placeHolder3 = new TMSDocumentPlaceHolder("ProductUpsell", new List<string> { "this is not to be found", "this too", "stddomxsmobiledlp" });
         
         IProviderContainer providerContainer = InitializeProviderContainer();
         IPlaceHolderProvider placeHolderProvider = providerContainer.Resolve<IPlaceHolderProvider>();
@@ -375,14 +372,14 @@ namespace Atlantis.Framework.Providers.PlaceHolder.Tests
         Assert.AreEqual(renderedContent2, "Id1 engmtactnewcustsurveywebdlp engmtactnewcustsurvey 1");
         Assert.AreEqual(renderedContent3, "Id2 stddomxsmobiledlp stddomxsdom 2");
         
-        List<ConsumedMessage> requiredList = new List<ConsumedMessage>() { 
+        List<ConsumedMessage> requiredList = new List<ConsumedMessage> { 
           new ConsumedMessage("Id3", "duplicate1", "duplicate", "3"), 
           new ConsumedMessage("Id1",  "engmtactnewcustsurvey", "engmtactnewcustsurveywebdlp", "1"), 
           new ConsumedMessage("Id2",  "stddomxsdom", "stddomxsmobiledlp","2") };
 
         IPersonalizationProvider personalizationProvider = providerContainer.Resolve<IPersonalizationProvider>();
 
-        List<IConsumedMessage> actualList = personalizationProvider.ConsumedMessages.ToList<IConsumedMessage>();
+        List<IConsumedMessage> actualList = personalizationProvider.ConsumedMessages.ToList();
 
         Assert.AreEqual(requiredList.Count, actualList.Count());
 

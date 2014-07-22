@@ -147,7 +147,7 @@ namespace Atlantis.Framework.Providers.DomainSearch
       var slitId = splitTestInfo == null ? string.Empty : splitTestInfo.SplitTestid;
       var splitSide = splitTestInfo == null ? string.Empty : splitTestInfo.SplitTestSideName;
 
-      for (var i = 0; i < 3; i++)
+      for (var i = 1; i < 4; i++)
       {
         if (TryGetSearchResults(searchPhrase, sourceCode, tldsToSearch, sourceUrl, slitId, splitSide, i, out domainSearchResult))
         {
@@ -232,13 +232,13 @@ namespace Atlantis.Framework.Providers.DomainSearch
           }
         }
       }
-      catch (TimeoutException ex)
-      {
-        result = false;
-        LogException(searchPhrase, sourceCode, sourceUrl, splitTestId, splitTestSideName, attempt, ex.Message, ex.StackTrace);
-      }
       catch (Exception ex)
       {
+        if (ex.Message.StartsWith("The operation has timed out", StringComparison.OrdinalIgnoreCase))
+        {
+          result = false;
+        }
+
         LogException(searchPhrase, sourceCode, sourceUrl, splitTestId, splitTestSideName, attempt, ex.Message, ex.StackTrace);
       }
 
@@ -270,7 +270,7 @@ namespace Atlantis.Framework.Providers.DomainSearch
     private void LogException(string searchPhrase, string sourceCode, string sourceUrl, string splitTestId, string splitTestSideName, int attempt, string message, string stackTrace)
     {
       var errorMessage = message + Environment.NewLine + stackTrace;
-      var data = string.Format("SearchPhrase:{0}, SourceCode:{1}, SourceUrl:{2}, SplitTest:{3}{4}, Attempt:{5}", searchPhrase, sourceCode, sourceUrl, splitTestId, splitTestSideName, attempt);
+      var data = string.Format("SearchPhrase: {0}, SourceCode: {1}, SourceUrl: {2}, SplitTest: {3}{4}, Attempt: {5}", searchPhrase, sourceCode, sourceUrl, splitTestId, splitTestSideName, attempt);
       var aex = new AtlantisException("AF.Providers.DomainSearch.TryGetSearchResults", 0, errorMessage, data);
       Engine.Engine.LogAtlantisException(aex);
     }

@@ -52,7 +52,7 @@ namespace Atlantis.Framework.Providers.DomainContactValidation.Tests
         if (_providerContainer == null)
         {
           _providerContainer = new MockProviderContainer();
-          ((MockProviderContainer)_providerContainer).SetMockSetting(MockSiteContextSettings.IsRequestInternal, true);
+          ((MockProviderContainer)_providerContainer).SetData(MockSiteContextSettings.IsRequestInternal, true);
 
           _providerContainer.RegisterProvider<ISiteContext, MockSiteContext>();
           _providerContainer.RegisterProvider<IShopperContext, MockShopperContext>();
@@ -91,7 +91,7 @@ namespace Atlantis.Framework.Providers.DomainContactValidation.Tests
     public void TestDotCOMContact()
     {
       var tlds = new List<string> { ".COM" };
-      var domains = new List<string>() {"test.com"};
+      var domains = new List<string> {"test.com"};
       var contactGroup = DomainContactProvider.DomainContactGroupInstance(tlds, domains, 1);
 
 
@@ -106,7 +106,7 @@ namespace Atlantis.Framework.Providers.DomainContactValidation.Tests
     public void TestDotUKContactErrors()
     {
       var tlds = new List<string> { "uk" };
-      var domains = new List<string>() {"oberon-1api-de.uk"};
+      var domains = new List<string> {"oberon-1api-de.uk"};
 
       IDomainContactGroup domainContact = DomainContactProvider.DomainContactGroupInstance(tlds, domains, 1);
 
@@ -125,7 +125,7 @@ namespace Atlantis.Framework.Providers.DomainContactValidation.Tests
     public void TestDotJPContact()
     {
       var tlds = new List<string> { ".JP" };
-      var domains = new List<string>() { "test.jp" };
+      var domains = new List<string> { "test.jp" };
 
       var contactGroup = DomainContactProvider.DomainContactGroupInstance(tlds, domains, 1);
 
@@ -470,6 +470,9 @@ namespace Atlantis.Framework.Providers.DomainContactValidation.Tests
     [TestMethod]
     public void TestDotCLContactTuiFormInfo()
     {
+      var gaTlds = new Dictionary<string, LaunchPhases>();
+      gaTlds.Add("my", LaunchPhases.GeneralAvailability);
+
       var tlds = new List<string> { "my" };
       var domains = new List<string>() { "test.my" };
       var contactGroup = DomainContactProvider.DomainContactGroupInstance(tlds, domains, 1);
@@ -481,9 +484,10 @@ namespace Atlantis.Framework.Providers.DomainContactValidation.Tests
           "80130", "my", "(303)-555-1213", "(303)-555-2213");
 
       IDictionary<string, ITuiFormInfo> tuiFormInfo = new Dictionary<string, ITuiFormInfo>();
+      
       if (contactGroup.SetContact(registrantContact))
       {
-        tuiFormInfo = contactGroup.GetTuiFormInfo(tlds);
+        tuiFormInfo = contactGroup.GetTuiFormInfo(gaTlds);
       }
 
       Assert.AreEqual(true, tuiFormInfo != null && tuiFormInfo.Count > 0);

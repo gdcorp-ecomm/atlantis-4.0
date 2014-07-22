@@ -1,15 +1,14 @@
-﻿using System.Security.Cryptography;
-using Atlantis.Framework.DomainContactValidation.Interface;
+﻿using Atlantis.Framework.DomainContactValidation.Interface;
 using Atlantis.Framework.DomainsTrustee.Interface;
 using Atlantis.Framework.DotTypeCache.Interface;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.DomainContactValidation.Interface;
+using Atlantis.Framework.Providers.Localization.Interface;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Xml;
-using Atlantis.Framework.Providers.Localization.Interface;
 
 namespace Atlantis.Framework.Providers.DomainContactValidation
 {
@@ -44,12 +43,6 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
 
         return _skipValidation.Value;
       }
-    }
-
-    private IDotTypeProvider _dotTypeProvider;
-    private IDotTypeProvider GetDotTypeProvider
-    {
-      get { return _dotTypeProvider ?? (_dotTypeProvider = _container.Resolve<IDotTypeProvider>()); }
     }
 
     #region Constructors
@@ -122,7 +115,7 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
         foreach (XmlNode sTldNode in xmlTldNodes)
         {
           var sTld = sTldNode.InnerText;
-          _tlds = _tlds.Concat(new List<string>() { sTld });
+          _tlds = _tlds.Concat(new List<string> { sTld });
         }
       }
 
@@ -187,7 +180,7 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
         }
         catch (Exception ex)
         {
-          var aex = new AtlantisException("DomainContactGroup.GetTuiFormInfo", string.Empty, "0", "Error running domains trustee triplet", string.Join("|", tldArray), string.Empty, string.Empty, string.Empty, string.Empty, 0);
+          var aex = new AtlantisException("DomainContactGroup.GetTuiFormInfo", 0, "Error running domains trustee triplet | " + ex.Message + " | " + ex.Data, string.Join("|", tldArray));
           Engine.Engine.LogAtlantisException(aex);
           response = null;
         }
@@ -483,7 +476,7 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
                                                          DomainContactType.Technical,
                                                          DomainContactType.Administrative,
                                                          DomainContactType.Billing };
-        ValidateGroupForTlds(_tlds, DomainCheckType.Other, contactTypes, true);
+        ValidateGroupForTlds(DomainCheckType.Other, contactTypes, true);
       }
 
       if (domainContact.IsValid)
@@ -690,9 +683,7 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
       }
     }
 
-    private void ValidateGroupForTlds(
-      IEnumerable<string> tlds, 
-      DomainCheckType checkType,
+    private void ValidateGroupForTlds(DomainCheckType checkType,
       IEnumerable<DomainContactType> contactTypes,
       bool clearExistingErrors)
     {     
@@ -845,9 +836,7 @@ namespace Atlantis.Framework.Providers.DomainContactValidation
           clearExistingErrors = false;
         }
 
-        ValidateGroupForTlds(
-          validationTlds, 
-          DomainCheckType.Other, 
+        ValidateGroupForTlds(DomainCheckType.Other, 
           AllContactTypes,
           clearExistingErrors);
       }

@@ -72,11 +72,10 @@
       <HintPath>..\packages\Atlantis.Framework.DomainContactValidation.Interface.14.5.28.1\lib\net40\Atlantis.Framework.DomainContactValidation.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.DomainsTrustee.Impl">
-      <HintPath>..\packages\Atlantis.Framework.DomainsTrustee.Impl.4.13.12.16\lib\net40\Atlantis.Framework.DomainsTrustee.Impl.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.DomainsTrustee.Impl.14.7.17.1\lib\net40\Atlantis.Framework.DomainsTrustee.Impl.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.DomainsTrustee.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.DomainsTrustee.Interface.4.13.12.16\lib\net40\Atlantis.Framework.DomainsTrustee.Interface.dll</HintPath>
+    <Reference Include="Atlantis.Framework.DomainsTrustee.Interface">
+      <HintPath>..\packages\Atlantis.Framework.DomainsTrustee.Interface.14.7.17.1\lib\net40\Atlantis.Framework.DomainsTrustee.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.DotTypeCache, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

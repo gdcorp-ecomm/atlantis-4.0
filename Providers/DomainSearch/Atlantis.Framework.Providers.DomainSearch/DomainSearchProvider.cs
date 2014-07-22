@@ -144,7 +144,44 @@ namespace Atlantis.Framework.Providers.DomainSearch
     {
       IDomainSearchResult domainSearchResult = null;
 
+      var slitId = splitTestInfo == null ? string.Empty : splitTestInfo.SplitTestid;
+      var splitSide = splitTestInfo == null ? string.Empty : splitTestInfo.SplitTestSideName;
+
+      for (var i = 0; i < 3; i++)
+      {
+        if (TryGetSearchResults(searchPhrase, sourceCode, tldsToSearch, sourceUrl, slitId, splitSide, i, out domainSearchResult))
+        {
+          break;
+        }
+      }
+
+      return domainSearchResult;
+    }
+
+    private void LogSearchDomain(IFindResponseDomain domain)
+    {
+      if (_logDomainSearchResultsProvider.Value == null) return;
+
+      var domainName = string.Concat(domain.Domain.Sld, ".", domain.Domain.Tld);
+      var availability = DomainAvailability.NotAvailable;
+
+      if (domain.IsAvailable)
+      {
+        availability = DomainAvailability.Available;
+      }
+      else if (domain.IsBackOrderAvailable)
+      {
+        availability = DomainAvailability.Backorder;
+      }
+
+      _logDomainSearchResultsProvider.Value.SubmitLog(domainName, availability);
+    }
+
+    private bool TryGetSearchResults(string searchPhrase, string sourceCode, IList<string> tldsToSearch, string sourceUrl, string splitTestId, string splitTestSideName, int attempt, out IDomainSearchResult searchResult)
+    {
+      var result = true;
       var geoLocation = _geoProvider.Value.RequestGeoLocation;
+      searchResult = new DomainSearchResult(false, _emptyResponse);
 
       try
       {
@@ -165,8 +202,9 @@ namespace Atlantis.Framework.Providers.DomainSearch
           ClientIpCity = geoLocation == null ? string.Empty : geoLocation.City,
           ClientIpCountry = geoLocation == null ? string.Empty : geoLocation.CountryCode,
           ClientIpRegion = geoLocation == null ? string.Empty : geoLocation.GeoRegionName,
-          SplitTestId = splitTestInfo == null ? string.Empty : splitTestInfo.SplitTestid,
-          SplitTestSideName = splitTestInfo == null ? string.Empty : splitTestInfo.SplitTestSideName
+          SplitTestId = splitTestId,
+          SplitTestSideName = splitTestSideName,
+          RequestTimeout = SearchRequestTimeout
         };
 
         var requestType = RequestTypeLookUp.GetCurrentRequestType();
@@ -180,12 +218,12 @@ namespace Atlantis.Framework.Providers.DomainSearch
           if (exception == null)
           {
             var domainResult = GroupDomainResponse(response);
-            domainSearchResult = new DomainSearchResult(true, domainResult);
+            searchResult = new DomainSearchResult(true, domainResult);
 
             if (_siteContext.Value.IsRequestInternal)
             {
-              domainSearchResult.JsonRequest = request.ToJson();
-              domainSearchResult.JsonResponse = response.ToJson();
+              searchResult.JsonRequest = string.Empty;
+              searchResult.JsonResponse = response.ToJson();
             }
           }
           else
@@ -194,36 +232,47 @@ namespace Atlantis.Framework.Providers.DomainSearch
           }
         }
       }
+      catch (TimeoutException ex)
+      {
+        result = false;
+        LogException(searchPhrase, sourceCode, sourceUrl, splitTestId, splitTestSideName, attempt, ex.Message, ex.StackTrace);
+      }
       catch (Exception ex)
       {
-        domainSearchResult = null;
-
-        var message = ex.Message + Environment.NewLine + ex.StackTrace;
-        var data = string.Format("searchPhrase:{0}, sourceCode:{1}, sourceUrl:{2}", searchPhrase, sourceCode, sourceUrl);
-        var aex = new AtlantisException("Atlantis.Framework.Providers.DomainSearch.TrySearchDomain", 0, message, data);
-        Engine.Engine.LogAtlantisException(aex);
+        LogException(searchPhrase, sourceCode, sourceUrl, splitTestId, splitTestSideName, attempt, ex.Message, ex.StackTrace);
       }
 
-      return domainSearchResult ?? new DomainSearchResult(false, _emptyResponse);
+      return result;
     }
 
-    private void LogSearchDomain(IFindResponseDomain domain)
+    private TimeSpan? _searchRequestTimeout;
+    private TimeSpan SearchRequestTimeout
     {
-      if (_logDomainSearchResultsProvider.Value == null) return;
-
-      var domainName = string.Concat(domain.Domain.Sld, ".", domain.Domain.Tld);
-      var availability = DomainAvailability.NotAvailable;
-
-      if (domain.IsAvailable)
+      get
       {
-        availability = DomainAvailability.Available;
-      }
-      else if (domain.IsBackOrderAvailable)
-      {
-        availability = DomainAvailability.Backorder;
-      }
+        if (_searchRequestTimeout == null)
+        {
+          var appSettingValue = _appSettingsProvider.Value.GetAppSetting("ATLANTIS.SEARCHAPI.TIMEOUT");
+          var v = 0;
 
-      _logDomainSearchResultsProvider.Value.SubmitLog(domainName, availability);
+          if (!int.TryParse(appSettingValue, out v))
+          {
+            v = 5000;
+          }
+
+          _searchRequestTimeout = TimeSpan.FromMilliseconds(v);
+        }
+
+        return _searchRequestTimeout.Value;
+      }
+    }
+
+    private void LogException(string searchPhrase, string sourceCode, string sourceUrl, string splitTestId, string splitTestSideName, int attempt, string message, string stackTrace)
+    {
+      var errorMessage = message + Environment.NewLine + stackTrace;
+      var data = string.Format("SearchPhrase:{0}, SourceCode:{1}, SourceUrl:{2}, SplitTest:{3}{4}, Attempt:{5}", searchPhrase, sourceCode, sourceUrl, splitTestId, splitTestSideName, attempt);
+      var aex = new AtlantisException("AF.Providers.DomainSearch.TryGetSearchResults", 0, errorMessage, data);
+      Engine.Engine.LogAtlantisException(aex);
     }
   }
 

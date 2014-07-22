@@ -205,9 +205,7 @@
     <None Include="App.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="atlantis.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    <None Include="atlantis.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

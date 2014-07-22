@@ -91,14 +91,14 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration.Tests
          "Bill", "Registrant", "bregistrant@bongo.com",
            "MumboJumbo", true,
           "101 N Street", "Suite 100", "Littleton", "CO",
-          "80130", "US", "(303)-555-1213", "(303)-555-2213");
+          "80130", "DK", "(303)-555-1213", "(303)-555-2213");
       contactGroup.TrySetContact(DomainContactType.Registrant, registrantContact);
 
       var adminContact = DomainContactProvider.DomainContactInstance(
          "Bill", "Admin", "badmin@bongo.com",
            "MumboJumbo", true,
           "101 N Street", "Suite 100", "Littleton", "CO",
-          "80130", "US", "(303)-555-1213", "(303)-555-2213");
+          "80130", "DK", "(303)-555-1213", "(303)-555-2213");
       contactGroup.TrySetContact(DomainContactType.Administrative, adminContact);
       lookup.DomainContactGroup = contactGroup;
 

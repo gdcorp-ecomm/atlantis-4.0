@@ -7,11 +7,9 @@ using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.Containers;
 using Atlantis.Framework.Providers.DotTypeRegistration;
 using Atlantis.Framework.Providers.DotTypeRegistration.Interface;
-using Atlantis.Framework.Providers.DotTypeRegistrationValidationHandler;
 using Atlantis.Framework.Providers.Localization;
 using Atlantis.Framework.Providers.Localization.Interface;
 using Atlantis.Framework.Web.DynamicRouteHandler;
-using System.Reflection;
 
 namespace Atlantis.Framework.Web.DotTypeRegistrationValidationHandler.TestWeb
 {
@@ -19,10 +17,11 @@ namespace Atlantis.Framework.Web.DotTypeRegistrationValidationHandler.TestWeb
   {
     protected void Application_Start(object sender, EventArgs e)
     {
-      HttpProviderContainer.Instance.RegisterProvider<ILocalizationProvider, CountryCookieLocalizationProvider>();
+      HttpProviderContainer.Instance.RegisterProvider<ILocalizationProvider, CountrySubdomainLocalizationProvider>();
+      //HttpProviderContainer.Instance.RegisterProvider<ILocalizationProvider, CountryCookieLocalizationProvider>();
       HttpProviderContainer.Instance.RegisterProvider<IDotTypeRegistrationProvider, DotTypeRegistrationProvider>();
       HttpProviderContainer.Instance.RegisterProvider<ISiteContext, PrivateLabelAwareSiteContextProvider>();
-      HttpProviderContainer.Instance.RegisterProvider<IShopperContext, Atlantis.Framework.Providers.Shopper.ShopperContextProvider>();
+      HttpProviderContainer.Instance.RegisterProvider<IShopperContext, Providers.Shopper.ShopperContextProvider>();
       HttpProviderContainer.Instance.RegisterProvider<IManagerContext, GdgManagerContextProvider>();
 
       DynamicRouteHandlerRegistrationManager.AutoRegisterRouteHandlers(RouteTable.Routes, new List<string> { "Atlantis.Framework.Providers.DotTypeRegistrationValidationHandler*" }, null);

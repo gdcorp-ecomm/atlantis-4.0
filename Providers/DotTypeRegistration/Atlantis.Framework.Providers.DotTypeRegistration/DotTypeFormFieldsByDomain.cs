@@ -9,11 +9,13 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration
   public class DotTypeFormFieldsByDomain : IDotTypeFormFieldsByDomain
   {
     public IDictionary<string, IList<IList<IFormField>>> FormFieldsByDomain { get; set; }
+    public IDictionary<string, string> FormItems { get; set; }
     public string ToJson { get; set; }
 
-    public DotTypeFormFieldsByDomain(IDictionary<string, IList<IList<IFormField>>> formFieldsByDomain)
+    public DotTypeFormFieldsByDomain(IDictionary<string, IList<IList<IFormField>>> formFieldsByDomain, IDictionary<string, string> formItems)
     {
       FormFieldsByDomain = formFieldsByDomain;
+      FormItems = formItems;
       ToJson = ConvertFormFieldsToJson();
     }
 
@@ -22,7 +24,8 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration
       var result = string.Empty;
       try
       {
-        result = JsonConvert.SerializeObject(FormFieldsByDomain);
+        result = JsonConvert.SerializeObject(this);
+        result = result.Replace(",\"ToJson\":null", "");
       }
       catch (Exception ex)
       {

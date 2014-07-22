@@ -37,7 +37,7 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration
 
     private static ValidDotTypesResponseData LoadValidDotTypes()
     {
-      var request = new ValidDotTypesRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0);
+      var request = new ValidDotTypesRequestData();
       return (ValidDotTypesResponseData)DataCache.DataCache.GetProcessRequest(request, DotTypeRegistrationEngineRequests.ValidDotTypesRequest);
     }
 
@@ -103,7 +103,8 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration
         if (success && dotTypeFormSchema != null)
         {
           IDictionary<string, IList<IList<IFormField>>> formFieldsByDomain;
-          success = TransformFormSchemaToFormFields(domains, dotTypeFormSchema, tldId, placement, phase, language, out formFieldsByDomain);
+          IDictionary<string, string> formItems;
+          success = TransformFormSchemaToFormFields(domains, dotTypeFormSchema, tldId, placement, phase, language, out formFieldsByDomain, out formItems);
           if (success)
           {
             var addtlFormFieldsByDomain = AddAdditionalFormFields(domains, dotTypeFormSchemaLookup.Placement, dotTypeFormSchemaLookup.Tld, dotTypeFormSchemaLookup.Phase, dotTypeFormSchemaLookup.FormType);
@@ -122,7 +123,7 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration
               }
             }
 
-            dotTypeFormFieldsByDomain = new DotTypeFormFieldsByDomain(formFieldsByDomain);
+            dotTypeFormFieldsByDomain = new DotTypeFormFieldsByDomain(formFieldsByDomain, formItems);
           }
         }
       }
@@ -274,10 +275,11 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration
     }
 
     private bool TransformFormSchemaToFormFields(IEnumerable<string> domains, IDotTypeFormsSchema formSchema, int tldId, string placement, string phase, string language,
-                                                 out IDictionary<string, IList<IList<IFormField>>> formFieldsByDomain)
+                                                 out IDictionary<string, IList<IList<IFormField>>> formFieldsByDomain, out IDictionary<string, string> formItems)
     {
       bool success = false;
       formFieldsByDomain = new Dictionary<string, IList<IList<IFormField>>>(StringComparer.OrdinalIgnoreCase);
+      formItems = new Dictionary<string, string>();
 
       try
       {
@@ -317,6 +319,16 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration
               }
             }
             formFieldsByDomain[domain] = formFieldsListForDomain;
+
+            formItems["formDescription"] = form.FormDescription;
+            formItems["formName"] = form.FormName;
+            formItems["formType"] = form.FormType;
+            formItems["formLabel"] = form.FormLabel;
+
+            if (form.FormFieldCollection != null)
+            {
+              formItems["fieldsLabel"] = form.FormFieldCollection.Label;
+            }
           }
 
           if (formFieldsByDomain.Count > 0)

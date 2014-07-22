@@ -27,7 +27,7 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration.Tests
     public void InitializeTests()
     {
       var request = new MockHttpRequest("http://spoonymac.com/");
-      MockHttpContext.SetFromWorkerRequest(request);
+      MockHttpContext.CreateFromWorkerRequest(request);
     }
 
     private IProviderContainer _providerContainer;
@@ -63,10 +63,12 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration.Tests
     {
       IDotTypeFormFieldsByDomain dotTypeFormFieldsByDomain;
       string[] domains = { "domain1.n.borg", "claim1.example" };
+      var tlds = new List<string> { "n.borg" };
 
       var provider = ProviderContainer.Resolve<IDotTypeRegistrationProvider>();
 
       var lookup = DotTypeFormSchemaLookup.Create("dpp", "cl", "MOBILE", "GA");
+      lookup.DomainContactGroup = GetDomainContactGroup(tlds, domains);
       bool isSuccess = provider.GetDotTypeFormSchemas(lookup, domains, out dotTypeFormFieldsByDomain);
       Assert.AreEqual(true, isSuccess);
       Assert.AreEqual(true, dotTypeFormFieldsByDomain != null && dotTypeFormFieldsByDomain.FormFieldsByDomain.Count > 0);
@@ -83,7 +85,7 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration.Tests
       var lookup = DotTypeFormSchemaLookup.Create("dpp", "dk", "MOBILE", "GA");
 
       var tlds = new List<string> { "DK" };
-      var contactGroup = DomainContactProvider.DomainContactGroupInstance(tlds, 1);
+      var contactGroup = DomainContactProvider.DomainContactGroupInstance(tlds, domains, 1);
 
       var registrantContact = DomainContactProvider.DomainContactInstance(
          "Bill", "Registrant", "bregistrant@bongo.com",
@@ -113,35 +115,11 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration.Tests
 
       var provider = ProviderContainer.Resolve<IDotTypeRegistrationProvider>();
 
-      var lookup = DotTypeFormSchemaLookup.Create("dpp", "nyc", "fos", "lr");
+      var lookup = DotTypeFormSchemaLookup.Create("dpp", "nyc", "fos", "ga");
 
       var tlds = new List<string> { "NYC" };
-      var contactGroup = DomainContactProvider.DomainContactGroupInstance(tlds, 1);
-
-      var registrantContact = DomainContactProvider.DomainContactInstance(
-           "Raj", "Vontela", "rvontela@gd.com", "GoDaddy", true,
-          "123 Abc Rd", "Suite 45", "Scottsdale", "AZ",
-          "85260", "US", "4805058800", "4805058800");
-      contactGroup.TrySetContact(DomainContactType.Registrant, registrantContact);
-
-      var techContact = DomainContactProvider.DomainContactInstance(
-           "Raj", "Vontela", "rvontela@gd.com", "GoDaddy", true,
-          "123 Abc Rd", "Suite 45", "Scottsdale", "AZ",
-          "85260", "US", "4805058800", "4805058800");
-      contactGroup.TrySetContact(DomainContactType.Technical, techContact);
-
-      var billingContact = DomainContactProvider.DomainContactInstance(
-           "Raj", "Vontela", "rvontela@gd.com", "GoDaddy", true,
-          "123 Abc Rd", "Suite 45", "Scottsdale", "AZ",
-          "85260", "US", "4805058800", "4805058800");
-      contactGroup.TrySetContact(DomainContactType.Billing, billingContact);
-
-      var adminContact = DomainContactProvider.DomainContactInstance(
-           "Raj", "Vontela", "rvontela@gd.com", "GoDaddy", true,
-          "123 Abc Rd", "Suite 45", "Scottsdale", "AZ",
-          "85260", "US", "4805058800", "4805058800");
-      contactGroup.TrySetContact(DomainContactType.Administrative, adminContact);
-      lookup.DomainContactGroup = contactGroup;
+      
+      lookup.DomainContactGroup = GetDomainContactGroup(tlds, domains);
 
       bool isSuccess = provider.GetDotTypeFormSchemas(lookup, domains, out dotTypeFormFieldsByDomain);
       Assert.AreEqual(true, isSuccess);
@@ -181,12 +159,15 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration.Tests
       var provider = ProviderContainer.Resolve<IDotTypeRegistrationProvider>();
 
       IDotTypeFormFieldsByDomain dotTypeFormFieldsByDomain;
-      string[] domains = { "validateandt9st.lrclaim" };
-      var lookup = DotTypeFormSchemaLookup.Create("claims", "lrclaim", "mobile", "lr");
+      string[] domains = { "t9standvalidate.lrclaim" };
+      var tlds = new List<string> { "lrclaim" };
+      var lookup = DotTypeFormSchemaLookup.Create("claims", "lrclaim", "fos", "lr");
+      lookup.DomainContactGroup = GetDomainContactGroup(tlds, domains);
 
       bool isSuccess = provider.GetDotTypeFormSchemas(lookup, domains, out dotTypeFormFieldsByDomain);
       Assert.AreEqual(true, isSuccess);
-      Assert.AreEqual(true, dotTypeFormFieldsByDomain != null && dotTypeFormFieldsByDomain.FormFieldsByDomain.Count > 0);
+      Assert.AreEqual(true, dotTypeFormFieldsByDomain != null && dotTypeFormFieldsByDomain.FormFieldsByDomain != null 
+        && dotTypeFormFieldsByDomain.FormFieldsByDomain.Count > 0);
     }
 
     [TestMethod]
@@ -211,6 +192,37 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration.Tests
 
       bool isSuccess = provider.DotTypeClaimsExist(lookup, domain);
       Assert.AreEqual(false, isSuccess);
+    }
+
+    private IDomainContactGroup GetDomainContactGroup(IEnumerable<string> tlds, IEnumerable<string> domains)
+    {
+      var contactGroup = DomainContactProvider.DomainContactGroupInstance(tlds, domains, 1);
+
+      var registrantContact = DomainContactProvider.DomainContactInstance(
+           "Raj", "Vontela", "rvontela@gd.com", "GoDaddy", true,
+          "123 Abc Rd", "Suite 45", "Scottsdale", "AZ",
+          "85260", "US", "4805058800", "4805058800");
+      contactGroup.TrySetContact(DomainContactType.Registrant, registrantContact);
+
+      var techContact = DomainContactProvider.DomainContactInstance(
+           "Raj", "Vontela", "rvontela@gd.com", "GoDaddy", true,
+          "123 Abc Rd", "Suite 45", "Scottsdale", "AZ",
+          "85260", "US", "4805058800", "4805058800");
+      contactGroup.TrySetContact(DomainContactType.Technical, techContact);
+
+      var billingContact = DomainContactProvider.DomainContactInstance(
+           "Raj", "Vontela", "rvontela@gd.com", "GoDaddy", true,
+          "123 Abc Rd", "Suite 45", "Scottsdale", "AZ",
+          "85260", "US", "4805058800", "4805058800");
+      contactGroup.TrySetContact(DomainContactType.Billing, billingContact);
+
+      var adminContact = DomainContactProvider.DomainContactInstance(
+           "Raj", "Vontela", "rvontela@gd.com", "GoDaddy", true,
+          "123 Abc Rd", "Suite 45", "Scottsdale", "AZ",
+          "85260", "US", "4805058800", "4805058800");
+      contactGroup.TrySetContact(DomainContactType.Administrative, adminContact);
+
+      return contactGroup;
     }
 
   }

@@ -21,18 +21,6 @@ namespace Atlantis.Framework.Providers.DotTypeRegistrationValidationHandler
 
     private static readonly IProviderContainer _providerContainer = HttpProviderContainer.Instance;
 
-    private ISiteContext _siteContext;
-    private ISiteContext SiteContext
-    {
-      get { return _siteContext = _siteContext ?? _providerContainer.Resolve<ISiteContext>(); }
-    }
-
-    private IShopperContext _shopperContext;
-    private IShopperContext ShopperContext
-    {
-      get { return _shopperContext = _shopperContext ?? _providerContainer.Resolve<IShopperContext>(); }
-    }
-
     private IDotTypeRegistrationProvider _dotTypeRegProvider;
     private IDotTypeRegistrationProvider DotTypeRegistrationProvider
     {
@@ -148,7 +136,9 @@ namespace Atlantis.Framework.Providers.DotTypeRegistrationValidationHandler
       }
       catch (Exception ex)
       {
-        Engine.Engine.LogAtlantisException(new AtlantisException("Atlantis.Framework.Providers.DotTypeRegistrationValidationHandler.HandleRequest()", "0", ex.Message, ex.StackTrace, SiteContext, ShopperContext));
+        var description = string.Concat("A.F.Providers.DotTypeRegistrationValidationHandler.HandleRequest()", ex.Message, ex.StackTrace);
+        var data = string.Format("Tld: {0} | Phase: {1}", Tld, Phase);
+        Engine.Engine.LogAtlantisException(new AtlantisException("DotTypeRegistrationValidationHandler.HandleRequest", 0, description, data));
         statusCode = 500;
       }
 

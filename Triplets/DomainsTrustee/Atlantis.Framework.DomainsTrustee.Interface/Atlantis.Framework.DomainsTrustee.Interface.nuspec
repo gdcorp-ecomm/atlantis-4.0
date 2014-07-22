@@ -2,14 +2,16 @@
 <package >
   <metadata>
     <id>Atlantis.Framework.DomainsTrustee.Interface</id>
-    <version>4.13.12.16</version>
+    <version>$version$</version>
     <title>Atlantis Framework DomainsTrustee Interface</title>
     <authors>$author$</authors>
     <owners>$author$</owners>
     <projectUrl>https://confluence.int.godaddy.com/display/ATLANTIS</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes></releaseNotes>
+    <releaseNotes>
+      14.7.17.1 - updated Newtonsoft reference from 5.0.8 to 6.0.1
+    </releaseNotes>
     <copyright>$copyright$</copyright>
     <tags>Atlantis Framework DomainsTrustee Interface</tags>
   </metadata>

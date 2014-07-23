@@ -133,7 +133,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DotTypeFormByDomain.cs" />
     <Compile Include="DotTypeFormFieldsByDomain.cs" />
     <Compile Include="DotTypeFormSchemaLookup.cs" />
     <Compile Include="DotTypeFormLookup.cs" />

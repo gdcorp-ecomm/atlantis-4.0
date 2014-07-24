@@ -10,8 +10,9 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
     <releaseNotes>
-      14.2.20.1 Added call to LogDomainSearchResultsProvider to SearchDomain call
-      14.4.1.1 Adding GEO infomation to Domain Search request
+      14.7.24.1 : Added multiple calls to Find API based on timeout errors
+      14.2.20.1 : Added call to LogDomainSearchResultsProvider to SearchDomain call
+      14.4.1.1 : Adding GEO infomation to Domain Search request
       14.4.4.1 : Added Splittest Information to search request
     </releaseNotes>
     <copyright>$copyright$</copyright>

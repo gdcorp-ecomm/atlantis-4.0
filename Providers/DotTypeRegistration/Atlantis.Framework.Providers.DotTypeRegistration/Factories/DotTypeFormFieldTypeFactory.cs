@@ -42,6 +42,9 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration.Factories
         case DotTypeFormFieldTypes.Email:
           fieldTypeHandler = new EmailFieldTypeHandler();
           break;
+        case DotTypeFormFieldTypes.Hidden:
+          fieldTypeHandler = new HiddenFieldTypeHandler();
+          break;
       }
 
       return fieldTypeHandler;

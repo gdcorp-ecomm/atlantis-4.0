@@ -12,5 +12,6 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration.Handlers
     public const string DATETIME_DATA_KEY = "Atlantis.Framework.Providers.DotTypeRegistration.Handlers.DatetimeDataKey";
     public const string EMAIL_DATA_KEY = "Atlantis.Framework.Providers.DotTypeRegistration.Handlers.EmailDataKey";
     public const string PHONE_DATA_KEY = "Atlantis.Framework.Providers.DotTypeRegistration.Handlers.PhoneDataKey";
+    public const string HIDDEN_DATA_KEY = "Atlantis.Framework.Providers.DotTypeRegistration.Handlers.HiddenDataKey";
   }
 }

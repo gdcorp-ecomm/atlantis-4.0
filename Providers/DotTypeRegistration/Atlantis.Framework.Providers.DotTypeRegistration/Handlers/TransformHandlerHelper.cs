@@ -42,6 +42,9 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration.Handlers
         case "phone":
           formFieldType = DotTypeFormFieldTypes.Phone;
           break;
+        case "hidden":
+          formFieldType = DotTypeFormFieldTypes.Hidden;
+          break;
         default:
           formFieldType = DotTypeFormFieldTypes.None;
           break;
@@ -88,6 +91,9 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration.Handlers
             break;
           case DotTypeFormFieldTypes.Email:
             providerContainer.SetData(FieldTypeDataKeyConstants.EMAIL_DATA_KEY, field);
+            break;
+          case DotTypeFormFieldTypes.Hidden:
+            providerContainer.SetData(FieldTypeDataKeyConstants.HIDDEN_DATA_KEY, field);
             break;
           default:
             providerContainer.SetData(FieldTypeDataKeyConstants.CHECKBOX_DATA_KEY, field);

@@ -146,6 +146,7 @@
     <Compile Include="Handlers\DatetimeFieldTypeHandler.cs" />
     <Compile Include="Handlers\EmailFieldTypeHandler.cs" />
     <Compile Include="Handlers\FieldTypeDataKeyConstants.cs" />
+    <Compile Include="Handlers\HiddenFieldTypeHandler.cs" />
     <Compile Include="Handlers\NumberFieldTypeHandler.cs" />
     <Compile Include="Handlers\PhoneFieldTypeHandler.cs" />
     <Compile Include="Handlers\RadioFieldTypeHandler.cs" />

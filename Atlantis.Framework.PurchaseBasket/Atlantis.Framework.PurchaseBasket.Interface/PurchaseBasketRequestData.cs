@@ -13,6 +13,10 @@ namespace Atlantis.Framework.PurchaseBasket.Interface
     private List<PaymentElement> _paymentElements = new List<PaymentElement>();
     private Dictionary<string, string> _requestAttributes = new Dictionary<string, string>();
 
+    
+    private Dictionary<string, string> _instantAttributes = new Dictionary<string, string>();
+    private List<string> _instantItemElements = new List<string>();
+
     private string _purchaseXml = null;
 
     public PurchaseBasketRequestData(string sShopperID,
@@ -29,6 +33,22 @@ namespace Atlantis.Framework.PurchaseBasket.Interface
       get
       {
         return _requestAttributes;
+      }
+    }
+
+    public Dictionary<string, string> InstantPurchaseAttributes
+    {
+      get
+      {
+        return _instantAttributes;
+      }
+    }
+
+    public List<string> InstantItemElements
+    {
+      get
+      {
+        return _instantItemElements;
       }
     }
 
@@ -77,6 +97,22 @@ namespace Atlantis.Framework.PurchaseBasket.Interface
       }
     }
 
+    public void AddInstantPurchaseAttribute(string name, string value)
+    {
+      if (!string.IsNullOrEmpty(name))
+      {
+        _instantAttributes[name] = value;
+      }
+    }
+
+    public void AddInstantPurchaseItem(string itemXML)
+    {
+      if (_instantItemElements != null)
+      {
+        _instantItemElements.Add(itemXML);
+      }
+    }
+
     private List<PaymentElement> AllPaymentTypes()
     {
       List<PaymentElement> allElements = new List<PaymentElement>();
@@ -101,23 +137,41 @@ namespace Atlantis.Framework.PurchaseBasket.Interface
       XmlDocument purchaseDoc = new XmlDocument();
       purchaseDoc.LoadXml(purchaseXML);
       //Parse-process Purchase Nodes
-      XmlNode attributes = purchaseDoc.SelectSingleNode("/PaymentInformation");
+      XmlNode attributes = purchaseDoc.SelectSingleNode("//PaymentInformation");
       foreach (XmlAttribute xmlAttr in attributes.Attributes)
       {
         _requestAttributes[xmlAttr.Name] = xmlAttr.Value;
       }
 
-      XmlNode billingInfo = purchaseDoc.SelectSingleNode("/PaymentInformation/BillingInfo");
+      XmlNode instantAttributes = purchaseDoc.SelectSingleNode("//InstantPurchase");
+      if (instantAttributes != null && instantAttributes.Attributes != null)
+      {
+        foreach (XmlAttribute xmlAttr in instantAttributes.Attributes)
+        {
+          _instantAttributes[xmlAttr.Name] = xmlAttr.Value;
+        }
+      }
+
+      XmlNode items = purchaseDoc.SelectSingleNode("//InstantPurchase/itemRequest");
+      if (items != null && items.HasChildNodes)
+      {
+        foreach (XmlNode itemNode in items.ChildNodes)
+        {
+          _instantItemElements.Add(itemNode.OuterXml);
+        }
+      }
+
+      XmlNode billingInfo = purchaseDoc.SelectSingleNode("//PaymentInformation/BillingInfo");
       PurchaseBillingInfo oBilling = new PurchaseBillingInfo();
       oBilling.PopulateFromXML(billingInfo);
       _purchaseElements.Add(oBilling);
 
-      XmlNode purchaseInfo = purchaseDoc.SelectSingleNode("/PaymentInformation/PaymentOrigin");
+      XmlNode purchaseInfo = purchaseDoc.SelectSingleNode("//PaymentInformation/PaymentOrigin");
       PurchasePaymentOrigin origin = new PurchasePaymentOrigin();
       origin.PopulateFromXML(purchaseInfo);
       _purchaseElements.Add(origin);     
 
-      XmlNode payments = purchaseDoc.SelectSingleNode("/PaymentInformation/Payments");
+      XmlNode payments = purchaseDoc.SelectSingleNode("//PaymentInformation/Payments");
       List<PaymentElement> allPaymentTypes=AllPaymentTypes();
 
       foreach (XmlNode currentNode in payments.ChildNodes)
@@ -139,8 +193,15 @@ namespace Atlantis.Framework.PurchaseBasket.Interface
     private string GenerateXml()
     {
       StringBuilder result = new StringBuilder();
+      bool isInstantPurchase = (_instantItemElements != null && _instantItemElements.Count > 0);
+
       using (XmlTextWriter xmlWriter = new XmlTextWriter(new StringWriter(result)))
       {
+        if (isInstantPurchase)
+        {
+          xmlWriter.WriteStartElement("PurchaseBasketWithItems");
+        }
+
         xmlWriter.WriteStartElement("PaymentInformation");
         foreach (KeyValuePair<string, string> currentAttribute in _requestAttributes)
         {
@@ -161,10 +222,27 @@ namespace Atlantis.Framework.PurchaseBasket.Interface
             xmlWriter.WriteEndElement();
           }
         }
-        
-        ProcessPayments(xmlWriter, _paymentElements);        
-        
+
+        ProcessPayments(xmlWriter, _paymentElements);
         xmlWriter.WriteEndElement();
+
+        if (isInstantPurchase)
+        {
+          xmlWriter.WriteStartElement("InstantPurchase");
+          foreach (KeyValuePair<string, string> currentAttribute in _instantAttributes)
+          {
+            xmlWriter.WriteAttributeString(currentAttribute.Key, currentAttribute.Value);
+          }
+
+          xmlWriter.WriteStartElement("itemRequest");
+          foreach (string item in _instantItemElements)
+          {
+            xmlWriter.WriteRaw(item);
+          }
+          xmlWriter.WriteEndElement(); // itemRequest
+
+          xmlWriter.WriteEndElement(); // PurchaseBasketWithItems
+        }     
       }
 
       return result.ToString();

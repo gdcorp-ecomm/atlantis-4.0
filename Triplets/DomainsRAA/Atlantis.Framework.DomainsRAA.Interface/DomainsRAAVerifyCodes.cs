@@ -17,6 +17,7 @@
 
     ShopperVerified = 300,
     ShopperVerifyPending = 301,
-    ShopperVerifySuspended = 302
+    ShopperVerifySuspended = 302,
+    ShopperNeverVerifiedGrandfathered = 303
   }
 }

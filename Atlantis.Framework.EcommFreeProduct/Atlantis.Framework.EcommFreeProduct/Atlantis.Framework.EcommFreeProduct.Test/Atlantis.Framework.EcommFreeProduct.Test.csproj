@@ -42,13 +42,17 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Atlantis.Framework.Engine, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\Web Applications\MYA\MUI\Main\MUISite\Bin\Atlantis.Framework.Engine.dll</HintPath>
+    <Reference Include="Atlantis.Framework.Engine">
+      <HintPath>..\..\packages\Atlantis.Framework.Engine.14.3.1.1\lib\net40\Atlantis.Framework.Engine.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\Web Applications\MYA\MUI\Main\MUISite\Bin\Atlantis.Framework.Interface.dll</HintPath>
+    <Reference Include="Atlantis.Framework.Engine.XmlSerializers">
+      <HintPath>..\..\packages\Atlantis.Framework.Engine.14.3.1.1\lib\net40\Atlantis.Framework.Engine.XmlSerializers.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Interface">
+      <HintPath>..\..\packages\Atlantis.Framework.Interface.14.1.16.1\lib\net40\Atlantis.Framework.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Testing.MockHttpContext">
+      <HintPath>..\..\packages\Atlantis.Framework.Testing.MockHttpContext.14.6.5.1\lib\net40\Atlantis.Framework.Testing.MockHttpContext.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />
@@ -64,10 +68,6 @@
     <Content Include="AuthoringTests.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Atlantis.Framework.Testing\Atlantis.Framework.Testing.MockHttpContext\Atlantis.Framework.Testing.MockHttpContext.csproj">
-      <Project>{2f8983b4-801b-461a-9d76-26a58a496261}</Project>
-      <Name>Atlantis.Framework.Testing.MockHttpContext</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.EcommFreeProduct.Impl\Atlantis.Framework.EcommFreeProduct.Impl.csproj">
       <Project>{e6f29f7a-da09-4c50-91d8-a230d7f445c2}</Project>
       <Name>Atlantis.Framework.EcommFreeProduct.Impl</Name>
@@ -82,6 +82,7 @@
     <None Include="atlantis.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

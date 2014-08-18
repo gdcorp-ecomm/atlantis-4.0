@@ -1,6 +1,7 @@
 ﻿using Atlantis.Framework.Personalization.Interface;
 using Atlantis.Framework.Providers.AppSettings.Interface;
 using Atlantis.Framework.Providers.CDSContent.Interface;
+using Atlantis.Framework.Providers.Personalization;
 using Atlantis.Framework.Providers.Personalization.Interface;
 using Atlantis.Framework.Providers.PlaceHolder.Interface;
 using Atlantis.Framework.Providers.PlaceHolder.PlaceHolders;
@@ -40,7 +41,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolderHandlers
             
             if (message != null)
             {
-              personalizationProvider.AddToConsumedMessages(message);
+              personalizationProvider.AddConsumedMessage(message);
 
               string rawContent = cdsProvider.GetContent(APP_NAME, string.Format(LOCATION_FORMAT, message.TagName)).Content;
               
@@ -123,14 +124,17 @@ namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolderHandlers
 
     private bool IsMessageValid(Message targetedMessage, IPersonalizationProvider personalizationProvider)
     {
-      bool isMessageValid = targetedMessage.MessageTags != null && targetedMessage.MessageTags.Count > 0;
-      
+      bool isMessageValid = (targetedMessage != null) && targetedMessage.HasMessageTags();
+
       if (isMessageValid)
       {
-        if (personalizationProvider.ConsumedMessages.Any(
-          consumedMessage => targetedMessage.MessageId == consumedMessage.MessageId))
+        foreach (var consumedMessage in personalizationProvider.GetConsumedMessages())
         {
-          isMessageValid = false;
+          if (consumedMessage.MessageId.Equals(targetedMessage.MessageId, StringComparison.InvariantCultureIgnoreCase))
+          {
+            isMessageValid = false;
+            break;
+          }
         }
       }
 

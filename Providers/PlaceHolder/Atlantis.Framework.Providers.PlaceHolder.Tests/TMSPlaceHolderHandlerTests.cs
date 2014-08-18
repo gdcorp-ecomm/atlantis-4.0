@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using Atlantis.Framework.Engine;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.AppSettings.Interface;
 using Atlantis.Framework.Providers.CDSContent.Interface;
+using Atlantis.Framework.Providers.Personalization;
 using Atlantis.Framework.Providers.Personalization.Interface;
 using Atlantis.Framework.Providers.PlaceHolder.Interface;
 using Atlantis.Framework.Providers.PlaceHolder.PlaceHolders;
@@ -22,6 +24,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder.Tests
   [TestClass]
   [DeploymentItem("Atlantis.Framework.AppSettings.Impl.dll")]
   [DeploymentItem("atlantis.config")]
+  [ExcludeFromCodeCoverage]
   public class TMSPlaceHolderHandlerTests
   {
     public IProviderContainer InitializeProviderContainer()
@@ -380,7 +383,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder.Tests
 
         IPersonalizationProvider personalizationProvider = providerContainer.Resolve<IPersonalizationProvider>();
 
-        List<IConsumedMessage> actualList = personalizationProvider.ConsumedMessages.ToList();
+        List<IConsumedMessage> actualList = personalizationProvider.GetConsumedMessages().ToList();
 
         Assert.AreEqual(requiredList.Count, actualList.Count());
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Xml;
 using System.Xml.Linq;
@@ -16,7 +17,17 @@ namespace Atlantis.Framework.TH.Personalization.Tests
     {
     }
 
-    public TargetedMessages GetTargetedMessages(string appId, string interactionPoint)
+    public void AddConsumedMessage(IConsumedMessage message)
+    {
+      throw new NotImplementedException();
+    }
+
+    public IEnumerable<IConsumedMessage> GetConsumedMessages()
+    {
+      throw new NotImplementedException();
+    }
+
+    public TargetedMessages GetTargetedMessages(string interactionPoint)
     {
       TargetedMessages messages = null;
       string testXml =
@@ -50,5 +61,8 @@ namespace Atlantis.Framework.TH.Personalization.Tests
 
       return messages;
     }
+
+    public string TrackingData { get; private set; }
+    public IEnumerable<IConsumedMessage> ConsumedMessages { get; private set; }
   }
 }

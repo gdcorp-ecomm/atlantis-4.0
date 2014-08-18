@@ -43,7 +43,7 @@ namespace Atlantis.Framework.TH.Personalization
 
       if (token != null && !String.IsNullOrEmpty(token.RawTokenData))
       {
-        var targetMessages = _personalizationProvider.GetTargetedMessages(token.AppId, token.InteractionPoint);
+        var targetMessages = _personalizationProvider.GetTargetedMessages(token.InteractionPoint);
 
         if (targetMessages != null && targetMessages.ResultCode == 0)
         {

@@ -125,11 +125,11 @@
     </Reference>
     <Reference Include="Atlantis.Framework.Providers.Personalization, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.Providers.Personalization.14.8.18.4\lib\net40\Atlantis.Framework.Providers.Personalization.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.Providers.Personalization.14.8.18.6\lib\net40\Atlantis.Framework.Providers.Personalization.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Providers.Personalization.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.Providers.Personalization.Interface.14.8.18.4\lib\net40\Atlantis.Framework.Providers.Personalization.Interface.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.Providers.Personalization.Interface.14.8.18.6\lib\net40\Atlantis.Framework.Providers.Personalization.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Providers.RenderPipeline, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

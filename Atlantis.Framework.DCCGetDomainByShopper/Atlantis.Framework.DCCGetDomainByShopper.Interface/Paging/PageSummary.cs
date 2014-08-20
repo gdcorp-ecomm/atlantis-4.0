@@ -20,10 +20,6 @@ namespace Atlantis.Framework.DCCGetDomainByShopper.Interface.Paging
     [DataMember]
     public DateTime LastExpirationDate { get; set; }
 
-    public PageSummary()
-    {
-    }
-
     public override string ToString()
     {
       return string.Concat(FirstDomainName, DELIM, FirstExpirationDate, DELIM, LastDomainName, DELIM, LastExpirationDate);

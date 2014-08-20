@@ -1,9 +1,10 @@
-﻿using System;
+﻿using Atlantis.Framework.DCCGetDomainByShopper.Interface.Paging;
+using Atlantis.Framework.Interface;
+using System;
+using System.Globalization;
 using System.Security.Cryptography;
 using System.Text;
 using System.Xml;
-using Atlantis.Framework.DCCGetDomainByShopper.Interface.Paging;
-using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.DCCGetDomainByShopper.Interface
 {
@@ -13,9 +14,11 @@ namespace Atlantis.Framework.DCCGetDomainByShopper.Interface
     public enum DomainByProxyFilter
     {
       NoFilter = 0, //default 
-      DbpOnly, 
+      DbpOnly,
       NoDbpOnly,
     }
+
+    public string ShopperId { get; private set; }
 
     public string DccDomainUser { get; private set; }
 
@@ -25,15 +28,9 @@ namespace Atlantis.Framework.DCCGetDomainByShopper.Interface
 
     public DomainByProxyFilter DbpFilter { get; set; }
 
-    public DCCGetDomainByShopperRequestData(string shopperId,
-                                            string sourceUrl,
-                                            string orderId,
-                                            string pathway,
-                                            int pageCount,
-                                            IDomainPaging domainPaging,
-                                            string dccDomainUser)
-      : base(shopperId, sourceUrl, orderId, pathway, pageCount)
+    public DCCGetDomainByShopperRequestData(string shopperId, IDomainPaging domainPaging, string dccDomainUser)
     {
+      ShopperId = shopperId;
       Paging = domainPaging;
       DccDomainUser = dccDomainUser;
       RequestTimeout = TimeSpan.FromSeconds(20);
@@ -65,36 +62,36 @@ namespace Atlantis.Framework.DCCGetDomainByShopper.Interface
     {
       XmlDocument requestDoc = new XmlDocument();
       requestDoc.LoadXml("<getdccdomainlist/>");
-      
+
       XmlElement oRoot = requestDoc.DocumentElement;
 
-      XmlElement oUserName = (XmlElement)AddNode(oRoot, "username");
+      XmlElement oUserName = (XmlElement) AddNode(oRoot, "username");
       oUserName.InnerText = DccDomainUser;
 
-      XmlElement oSort = (XmlElement)AddNode(oRoot, "sort");
+      XmlElement oSort = (XmlElement) AddNode(oRoot, "sort");
       AddAttribute(oSort, "column", Paging.SortOrderField);
       AddAttribute(oSort, "direction", Paging.SortOrder == SortOrderType.Ascending ? "ASC" : "DESC");
 
-      XmlElement oShopper = (XmlElement)AddNode(oRoot, "shopper");
-      AddAttribute(oShopper, "shopperid", ShopperID);
-      
-      if(!string.IsNullOrEmpty(Paging.SearchTerm))
+      XmlElement oShopper = (XmlElement) AddNode(oRoot, "shopper");
+      AddAttribute(oShopper, "shopperid", ShopperId);
+
+      if (!string.IsNullOrEmpty(Paging.SearchTerm))
       {
         AddAttribute(oShopper, "search", Paging.SearchTerm.ToUpper());
       }
-      
-       AddAttribute(oShopper, "quantity", Paging.RowsPerPage.ToString());
+
+      AddAttribute(oShopper, "quantity", Paging.RowsPerPage.ToString(CultureInfo.InvariantCulture));
 
       if (Paging.ExpirationDays.HasValue)
       {
-        AddAttribute(oShopper, "expirationDays", Paging.ExpirationDays.Value.ToString());
+        AddAttribute(oShopper, "expirationDays", Paging.ExpirationDays.Value.ToString(CultureInfo.InvariantCulture));
       }
 
       XmlElement filterElement = null;
 
       if (Paging.SummaryOnly)
       {
-        filterElement = (XmlElement)AddNode(oRoot, "filter");
+        filterElement = (XmlElement) AddNode(oRoot, "filter");
         AddAttribute(filterElement, "showdomains", "0");
       }
 
@@ -102,16 +99,16 @@ namespace Atlantis.Framework.DCCGetDomainByShopper.Interface
       {
         if (filterElement == null)
         {
-          filterElement = (XmlElement)AddNode(oRoot, "filter");
+          filterElement = (XmlElement) AddNode(oRoot, "filter");
         }
-        AddAttribute(filterElement, "statustype", Paging.StatusType.Value.ToString());
+        AddAttribute(filterElement, "statustype", Paging.StatusType.Value.ToString(CultureInfo.InvariantCulture));
       }
 
       if (DbpFilter != DomainByProxyFilter.NoFilter)
       {
         if (filterElement == null)
         {
-          filterElement = (XmlElement)AddNode(oRoot, "filter");
+          filterElement = (XmlElement) AddNode(oRoot, "filter");
         }
         switch (DbpFilter)
         {
@@ -126,7 +123,7 @@ namespace Atlantis.Framework.DCCGetDomainByShopper.Interface
 
       if (!string.IsNullOrEmpty(Paging.BoundaryFieldValue))
       {
-        XmlElement oPaging = (XmlElement)AddNode(oRoot, "paging");
+        XmlElement oPaging = (XmlElement) AddNode(oRoot, "paging");
         AddAttribute(oPaging, Paging.BoundaryField, Paging.BoundaryFieldValue);
         if (!string.IsNullOrEmpty(Paging.BoundaryUniquifierField) && !string.IsNullOrEmpty(Paging.BoundaryUniquifierFieldValue))
         {
@@ -142,11 +139,11 @@ namespace Atlantis.Framework.DCCGetDomainByShopper.Interface
 
       if (Paging.TldIdList.Count > 0)
       {
-        XmlElement tldsElement = (XmlElement)AddNode(oRoot, "tlds");
+        XmlElement tldsElement = (XmlElement) AddNode(oRoot, "tlds");
         foreach (int tldid in Paging.TldIdList)
         {
-          XmlElement tldElement = (XmlElement)AddNode(tldsElement, "tld");
-          AddAttribute(tldElement, "id", tldid.ToString());
+          XmlElement tldElement = (XmlElement) AddNode(tldsElement, "tld");
+          AddAttribute(tldElement, "id", tldid.ToString(CultureInfo.InvariantCulture));
         }
       }
 

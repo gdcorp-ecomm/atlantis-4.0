@@ -16,10 +16,6 @@ namespace Atlantis.Framework.DCCGetDomainByShopper.Interface
     [DataMember]
     public string LastDomain { get; set; }
 
-    public FullSummary()
-    {
-    }
-
     public override string ToString()
     {
       return string.Concat(ResultCount, DELIM, FirstDomain, DELIM, LastDomain);

@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Atlantis.Framework.DCCGetDomainByShopper.Interface.Paging;
+using Atlantis.Framework.Interface;
+using Atlantis.Framework.SessionCache;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -6,9 +9,6 @@ using System.Runtime.Serialization;
 using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Xml;
-using Atlantis.Framework.DCCGetDomainByShopper.Interface.Paging;
-using Atlantis.Framework.Interface;
-using Atlantis.Framework.SessionCache;
 
 namespace Atlantis.Framework.DCCGetDomainByShopper.Interface
 {
@@ -54,10 +54,7 @@ namespace Atlantis.Framework.DCCGetDomainByShopper.Interface
     public DCCGetDomainByShopperResponseData(string responseXml, RequestData oRequestData, Exception ex)
     {
       ResponseXml = responseXml;
-      _exception = new AtlantisException(oRequestData,
-                                   "DCCGetDomainByShopperResponseData", 
-                                   ex.Message, 
-                                   oRequestData.ToXML());
+      _exception = new AtlantisException("DCCGetDomainByShopperResponseData", 1, ex.Message, oRequestData.ToXML());
       IsSuccess = false;
     }
 
@@ -134,11 +131,8 @@ namespace Atlantis.Framework.DCCGetDomainByShopper.Interface
         DateTime lastExpirationDate = UseMaxdateAsDefaultForExpirationDate ? DateTime.MaxValue : DateTime.MinValue;
 
         IDictionary<string, string> firstDomain = Domains.Values.First();
-        if (!firstDomain.TryGetValue("domainname", out firstDomainName))
-        {
-          firstDomainName = null;
-        }
-
+        firstDomain.TryGetValue("domainname", out firstDomainName);
+        
         if (firstDomain.TryGetValue("expirationdate", out firstExpirationDateString))
         {
           if (!DateTime.TryParse(firstExpirationDateString, out firstExpirationDate))
@@ -148,11 +142,8 @@ namespace Atlantis.Framework.DCCGetDomainByShopper.Interface
         }
 
         IDictionary<string, string> lastDomain = Domains.Values.Last();
-        if (!lastDomain.TryGetValue("domainname", out lastDomainName))
-        {
-          lastDomainName = null;
-        }
-
+        lastDomain.TryGetValue("domainname", out lastDomainName);
+        
         if (lastDomain.TryGetValue("expirationdate", out lastExpirationDateString))
         {
           if (!DateTime.TryParse(lastExpirationDateString, out lastExpirationDate))

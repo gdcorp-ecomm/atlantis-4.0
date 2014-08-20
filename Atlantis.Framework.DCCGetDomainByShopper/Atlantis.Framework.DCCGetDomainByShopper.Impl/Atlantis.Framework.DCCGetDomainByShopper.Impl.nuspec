@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>Atlantis.Framework.DCCGetDomainByShopper.Impl</id>
-    <version>4.11.12.15</version>
+    <version>$version$</version>
     <title>Atlantis Framework DCCGetDomainByShopper</title>
     <authors>$author$</authors>
     <owners>$author$</owners>

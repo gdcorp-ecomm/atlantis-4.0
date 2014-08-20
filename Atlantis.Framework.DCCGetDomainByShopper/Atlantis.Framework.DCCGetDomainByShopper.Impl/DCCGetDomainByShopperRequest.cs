@@ -1,6 +1,6 @@
-﻿using System;
-using Atlantis.Framework.DCCGetDomainByShopper.Interface;
+﻿using Atlantis.Framework.DCCGetDomainByShopper.Interface;
 using Atlantis.Framework.Interface;
+using System;
 
 namespace Atlantis.Framework.DCCGetDomainByShopper.Impl
 {
@@ -15,9 +15,9 @@ namespace Atlantis.Framework.DCCGetDomainByShopper.Impl
 
       try
       {
-        using (DsWeb.RegCheckDomainStatusWebSvcService oDsWeb = new DsWeb.RegCheckDomainStatusWebSvcService())
+        using (var oDsWeb = new DsWeb.RegCheckDomainStatusWebSvcService())
         {
-          DCCGetDomainByShopperRequestData oRequest = (DCCGetDomainByShopperRequestData)oRequestData;
+          var oRequest = (DCCGetDomainByShopperRequestData)oRequestData;
           oDsWeb.Url = ((WsConfigElement)oConfig).WSURL;
           oDsWeb.Timeout = (int)oRequest.RequestTimeout.TotalMilliseconds;
           responseXml = oDsWeb.GetDCCDomainList(oRequest.ToXML());

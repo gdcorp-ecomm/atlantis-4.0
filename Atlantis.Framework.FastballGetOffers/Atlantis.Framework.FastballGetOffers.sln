@@ -1,14 +1,8 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{B7B2A702-0CED-45D8-BFBB-A74464AEFDAA}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine", "..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj", "{D30157B2-C1B3-4073-BA5E-632E2337A997}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.SessionCache", "..\Atlantis.Framework.SessionCache\Atlantis.Framework.SessionCache\Atlantis.Framework.SessionCache.csproj", "{53BE1E8C-C474-4D2D-B2E3-DB00CBE1B5F9}"
-EndProject
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30723.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.FastballGetOffers.Interface", "Atlantis.Framework.FastballGetOffers.Interface\Atlantis.Framework.FastballGetOffers.Interface.csproj", "{AC667368-98DB-4B6C-BCE5-E2A093F98B76}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.FastballGetOffers.Impl", "Atlantis.Framework.FastballGetOffers.Impl\Atlantis.Framework.FastballGetOffers.Impl.csproj", "{C9514E55-A7F6-4669-B7AE-38EA5848D5C2}"
@@ -24,52 +18,25 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 7
+		SccNumberOfProjects = 4
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = http://tfs:8080/
+		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
 		SccLocalPath0 = .
-		SccProjectUniqueName1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
-		SccProjectTopLevelParentUniqueName1 = Atlantis.Framework.FastballGetOffers.sln
-		SccProjectName1 = ../Atlantis.Framework.Engine/Atlantis.Framework.Interface
-		SccLocalPath1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
-		SccProjectUniqueName2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
-		SccProjectTopLevelParentUniqueName2 = Atlantis.Framework.FastballGetOffers.sln
-		SccProjectName2 = ../Atlantis.Framework.Engine/Atlantis.Framework.Engine
-		SccLocalPath2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
-		SccProjectUniqueName3 = ..\\Atlantis.Framework.SessionCache\\Atlantis.Framework.SessionCache\\Atlantis.Framework.SessionCache.csproj
-		SccProjectTopLevelParentUniqueName3 = Atlantis.Framework.FastballGetOffers.sln
-		SccProjectName3 = ../Atlantis.Framework.SessionCache/Atlantis.Framework.SessionCache
-		SccLocalPath3 = ..\\Atlantis.Framework.SessionCache\\Atlantis.Framework.SessionCache
-		SccProjectUniqueName4 = Atlantis.Framework.FastballGetOffers.Interface\\Atlantis.Framework.FastballGetOffers.Interface.csproj
-		SccProjectName4 = Atlantis.Framework.FastballGetOffers.Interface
-		SccLocalPath4 = Atlantis.Framework.FastballGetOffers.Interface
-		SccProjectUniqueName5 = Atlantis.Framework.FastballGetOffers.Impl\\Atlantis.Framework.FastballGetOffers.Impl.csproj
-		SccProjectName5 = Atlantis.Framework.FastballGetOffers.Impl
-		SccLocalPath5 = Atlantis.Framework.FastballGetOffers.Impl
-		SccProjectUniqueName6 = Atlantis.Framework.FastballGetOffers.Tests\\Atlantis.Framework.FastballGetOffers.Tests.csproj
-		SccProjectName6 = Atlantis.Framework.FastballGetOffers.Tests
-		SccLocalPath6 = Atlantis.Framework.FastballGetOffers.Tests
-	EndGlobalSection
-	GlobalSection(TestCaseManagementSettings) = postSolution
-		CategoryFile = Atlantis.Framework.FastballGetOffers.vsmdi
+		SccProjectUniqueName1 = Atlantis.Framework.FastballGetOffers.Interface\\Atlantis.Framework.FastballGetOffers.Interface.csproj
+		SccProjectName1 = Atlantis.Framework.FastballGetOffers.Interface
+		SccLocalPath1 = Atlantis.Framework.FastballGetOffers.Interface
+		SccProjectUniqueName2 = Atlantis.Framework.FastballGetOffers.Impl\\Atlantis.Framework.FastballGetOffers.Impl.csproj
+		SccProjectName2 = Atlantis.Framework.FastballGetOffers.Impl
+		SccLocalPath2 = Atlantis.Framework.FastballGetOffers.Impl
+		SccProjectUniqueName3 = Atlantis.Framework.FastballGetOffers.Tests\\Atlantis.Framework.FastballGetOffers.Tests.csproj
+		SccProjectName3 = Atlantis.Framework.FastballGetOffers.Tests
+		SccLocalPath3 = Atlantis.Framework.FastballGetOffers.Tests
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.Build.0 = Release|Any CPU
-		{53BE1E8C-C474-4D2D-B2E3-DB00CBE1B5F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{53BE1E8C-C474-4D2D-B2E3-DB00CBE1B5F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{53BE1E8C-C474-4D2D-B2E3-DB00CBE1B5F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{53BE1E8C-C474-4D2D-B2E3-DB00CBE1B5F9}.Release|Any CPU.Build.0 = Release|Any CPU
 		{AC667368-98DB-4B6C-BCE5-E2A093F98B76}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{AC667368-98DB-4B6C-BCE5-E2A093F98B76}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AC667368-98DB-4B6C-BCE5-E2A093F98B76}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -86,9 +53,7 @@ Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {B7B2A702-0CED-45D8-BFBB-A74464AEFDAA}
-		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {B7B2A702-0CED-45D8-BFBB-A74464AEFDAA}
-		{53BE1E8C-C474-4D2D-B2E3-DB00CBE1B5F9} = {B7B2A702-0CED-45D8-BFBB-A74464AEFDAA}
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = Atlantis.Framework.FastballGetOffers.vsmdi
 	EndGlobalSection
 EndGlobal

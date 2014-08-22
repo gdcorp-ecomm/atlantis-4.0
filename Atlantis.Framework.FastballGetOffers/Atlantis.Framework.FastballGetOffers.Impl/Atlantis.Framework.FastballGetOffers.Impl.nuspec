@@ -1,0 +1,20 @@
+﻿<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Atlantis.Framework.FastballGetOffers.Impl</id>
+    <version>4.11.12.15</version>
+    <title>Atlantis Framework FastballGetOffers</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <projectUrl>https://confluence.int.godaddy.com/display/ATLANTIS</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes>4.14.8.22 Nugetize</releaseNotes>
+    <copyright>$copyright$</copyright>
+    <tags>Atlantis Framework FastballGetOffers</tags>
+    <dependencies />
+  </metadata>
+  <files>
+    <file src="bin\Release\Atlantis.Framework.FastballGetOffers.Impl.XmlSerializers.dll" target="lib\net40\Atlantis.Framework.FastballGetOffers.Impl.XmlSerializers.dll" />
+  </files>
+</package>

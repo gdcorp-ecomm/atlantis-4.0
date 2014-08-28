@@ -8,6 +8,7 @@ namespace Atlantis.Framework.ShopperValidator.Interface.ValidationRules.BaseRule
       : base(fieldName, textToValidate, RegexConstants.NumericOnly, false, culture)
     {
       base.ErrorMessage = string.Format(FetchResource.GetString("numericRule"), fieldName);
+      base.RuleName = "NumericRule";
     }
 
   }

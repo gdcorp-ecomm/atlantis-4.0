@@ -16,6 +16,7 @@ namespace Atlantis.Framework.ShopperValidator.Interface.ValidationRules.BaseRule
     {
       base.Validate();
       this.IsValid = base.IsValid;
+      base.RuleName = "InvalidCharactersRule";
     }
   }
 

@@ -9,6 +9,7 @@ namespace Atlantis.Framework.ShopperValidator.Interface.ValidationRules.BaseRule
     {
       base.ItemToValidate = textToValidate;
       base.ErrorMessage = string.Format(FetchResource.GetString("required"), fieldName);
+      base.RuleName = "RequiredRule";
     }
     
     public override void Validate()

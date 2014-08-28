@@ -29,6 +29,7 @@ namespace Atlantis.Framework.ShopperValidator.Interface.ValidationRules.BaseRule
     public override void Validate()
     {
       base.IsValid = false;
+      base.RuleName = "PhoneRule";
       if (base.ItemToValidate != null)
       {
         base.ItemToValidate = RegexConstants.SpecialCharacters.Replace(base.ItemToValidate, string.Empty);

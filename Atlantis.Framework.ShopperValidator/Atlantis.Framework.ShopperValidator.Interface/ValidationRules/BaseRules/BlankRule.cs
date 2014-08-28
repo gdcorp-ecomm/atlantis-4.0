@@ -8,6 +8,7 @@ namespace Atlantis.Framework.ShopperValidator.Interface.ValidationRules.BaseRule
       : base(culture)
     {
       base.IsValid = isValid;
+      base.RuleName = "BlankRule";
       if (string.IsNullOrEmpty(errorMessage))
       {
         base.ErrorMessage = FetchResource.GetString("invalidData");

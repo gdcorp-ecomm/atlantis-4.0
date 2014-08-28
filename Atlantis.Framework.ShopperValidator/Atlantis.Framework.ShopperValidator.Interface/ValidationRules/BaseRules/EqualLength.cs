@@ -28,6 +28,7 @@ namespace Atlantis.Framework.ShopperValidator.Interface.ValidationRules.BaseRule
     public override void Validate()
     {
       base.IsValid = false;
+      base.RuleName = "EqualLength";
       if (base.ItemToValidate != null)
       {
         base.IsValid = base.ItemToValidate.Length == ExactLength;

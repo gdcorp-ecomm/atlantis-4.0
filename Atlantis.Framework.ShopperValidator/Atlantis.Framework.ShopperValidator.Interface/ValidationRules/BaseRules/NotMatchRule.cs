@@ -24,6 +24,7 @@ namespace Atlantis.Framework.ShopperValidator.Interface.ValidationRules.BaseRule
     public override void Validate()
     {
       base.IsValid = false;
+      base.RuleName = "NotMatchRule";
       if (base.ItemToValidate != null && _compareText != null)
       {
         base.IsValid = !base.ItemToValidate.Equals(_compareText, _comparisonType);

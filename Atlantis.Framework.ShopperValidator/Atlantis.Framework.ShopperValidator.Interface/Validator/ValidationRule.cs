@@ -9,6 +9,7 @@ namespace Atlantis.Framework.ShopperValidator.Interface.Validator
     public string ErrorMessage { get; set; }
     public string ItemToValidate { get; set; }
     public string FieldName { get; set; }
+    public string RuleName { get; set; }
 
     private string _culture = "en";
     public string Culture
@@ -35,6 +36,7 @@ namespace Atlantis.Framework.ShopperValidator.Interface.Validator
       ErrorMessage = string.Empty;
       ItemToValidate = string.Empty;
       FieldName = string.Empty;
+      RuleName = string.Empty;
     }
 
     public ValidationRule(string culture)

@@ -24,6 +24,7 @@ namespace Atlantis.Framework.ShopperValidator.Interface.ValidationRules.BaseRule
     public override void Validate()
     {
       base.IsValid = false;
+      base.RuleName = "RegexRule";
       if (base.ItemToValidate != null && _regexPattern != null)
       {
         bool regexIsMatch = _regexPattern.IsMatch(base.ItemToValidate);

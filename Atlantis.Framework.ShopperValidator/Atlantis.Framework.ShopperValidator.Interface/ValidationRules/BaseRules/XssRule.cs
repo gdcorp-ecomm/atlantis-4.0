@@ -11,6 +11,7 @@ namespace Atlantis.Framework.ShopperValidator.Interface.ValidationRules.BaseRule
     {
       Culture = culture;
       base.ErrorMessage = string.Format(FetchResource.GetString("invalidCharacters"), fieldName);
+      base.RuleName = "XssRule";
     }
     
     public override void Validate()

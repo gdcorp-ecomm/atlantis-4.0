@@ -57,9 +57,209 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Atlantis.Framework.AppSettings.Interface">
+      <HintPath>..\packages\Atlantis.Framework.AppSettings.Interface.14.1.21.1\lib\net40\Atlantis.Framework.AppSettings.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Collections">
+      <HintPath>..\packages\Atlantis.Framework.Collections.4.0.0.0\lib\net40\Atlantis.Framework.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Currency.Impl">
+      <HintPath>..\packages\Atlantis.Framework.Currency.Impl.14.2.19.1\lib\net40\Atlantis.Framework.Currency.Impl.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Currency.Interface">
+      <HintPath>..\packages\Atlantis.Framework.Currency.Interface.14.2.19.1\lib\net40\Atlantis.Framework.Currency.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.DataCache">
+      <HintPath>..\packages\Atlantis.Framework.DataCache.14.2.19.1\lib\net40\Atlantis.Framework.DataCache.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.DataCacheGeneric.Interface">
+      <HintPath>..\packages\Atlantis.Framework.DataCacheGeneric.Interface.14.1.21.1\lib\net40\Atlantis.Framework.DataCacheGeneric.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.DataCacheService">
+      <HintPath>..\packages\Atlantis.Framework.DataCacheService.4.13.12.21\lib\net40\Atlantis.Framework.DataCacheService.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.DotNetExtensions">
+      <HintPath>..\packages\Atlantis.Framework.DotNetExtensions.4.0.0.0\lib\net40\Atlantis.Framework.DotNetExtensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.EcommPaymentProfile.Impl">
+      <HintPath>Obsolete\Atlantis.Framework.EcommPaymentProfile.Impl.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.EcommPaymentProfile.Impl.XmlSerializers">
+      <HintPath>Obsolete\Atlantis.Framework.EcommPaymentProfile.Impl.XmlSerializers.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.EcommPaymentProfile.Interface">
+      <HintPath>Obsolete\Atlantis.Framework.EcommPaymentProfile.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.EcommPricing.Interface">
+      <HintPath>..\packages\Atlantis.Framework.EcommPricing.Interface.14.1.22.1\lib\net40\Atlantis.Framework.EcommPricing.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Engine">
+      <HintPath>..\packages\Atlantis.Framework.Engine.14.3.1.1\lib\net40\Atlantis.Framework.Engine.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Engine.XmlSerializers">
+      <HintPath>..\packages\Atlantis.Framework.Engine.14.3.1.1\lib\net40\Atlantis.Framework.Engine.XmlSerializers.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.GetPaymentProfileAlternate.Impl">
+      <HintPath>..\packages\Atlantis.Framework.GetPaymentProfileAlternate.Impl.4.11.10.24\lib\net40\Atlantis.Framework.GetPaymentProfileAlternate.Impl.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.GetPaymentProfileAlternate.Interface">
+      <HintPath>..\packages\Atlantis.Framework.GetPaymentProfileAlternate.Impl.4.11.10.24\lib\net40\Atlantis.Framework.GetPaymentProfileAlternate.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.GetShopper.Impl">
+      <HintPath>Obsolete\Atlantis.Framework.GetShopper.Impl.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.GetShopper.Impl.XmlSerializers">
+      <HintPath>Obsolete\Atlantis.Framework.GetShopper.Impl.XmlSerializers.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.GetShopper.Interface">
+      <HintPath>Obsolete\Atlantis.Framework.GetShopper.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Interface">
+      <HintPath>..\packages\Atlantis.Framework.Interface.14.5.15.2\lib\net40\Atlantis.Framework.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.LinkInfo.Interface">
+      <HintPath>..\packages\Atlantis.Framework.LinkInfo.Interface.14.1.21.1\lib\net40\Atlantis.Framework.LinkInfo.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Links.Interface">
+      <HintPath>..\packages\Atlantis.Framework.Links.Interface.14.1.21.1\lib\net40\Atlantis.Framework.Links.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.MessagingProcess.Impl">
+      <HintPath>..\packages\Atlantis.Framework.MessagingProcess.4.11.8.5\lib\net40\Atlantis.Framework.MessagingProcess.Impl.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.MessagingProcess.Interface">
+      <HintPath>..\packages\Atlantis.Framework.MessagingProcess.4.11.8.5\lib\net40\Atlantis.Framework.MessagingProcess.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.MiniEncrypt">
+      <HintPath>..\packages\Atlantis.Framework.MiniEncrypt.4.0.0.0\lib\net40\Atlantis.Framework.MiniEncrypt.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.MyaMirageData.Impl">
+      <HintPath>Obsolete\Atlantis.Framework.MyaMirageData.Impl.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.MyaMirageData.Interface">
+      <HintPath>Obsolete\Atlantis.Framework.MyaMirageData.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.MyaMirageStatus.Impl">
+      <HintPath>Obsolete\Atlantis.Framework.MyaMirageStatus.Impl.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.MyaMirageStatus.Interface">
+      <HintPath>Obsolete\Atlantis.Framework.MyaMirageStatus.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.MyaProduct.Interface">
+      <HintPath>Obsolete\Atlantis.Framework.MyaProduct.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.MyaProductGetByRid.Impl">
+      <HintPath>Obsolete\Atlantis.Framework.MyaProductGetByRid.Impl.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.MyaProductGetByRid.Interface">
+      <HintPath>Obsolete\Atlantis.Framework.MyaProductGetByRid.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.MyaRecentNamespaces.Impl">
+      <HintPath>Obsolete\Atlantis.Framework.MyaRecentNamespaces.Impl.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.MyaRecentNamespaces.Interface">
+      <HintPath>Obsolete\Atlantis.Framework.MyaRecentNamespaces.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Nimitz">
+      <HintPath>..\packages\Atlantis.Framework.Nimitz.14.2.21.1\lib\net40\Atlantis.Framework.Nimitz.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.PaymentProfile.Interface">
+      <HintPath>Obsolete\Atlantis.Framework.PaymentProfile.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Pricing.Interface">
+      <HintPath>..\packages\Atlantis.Framework.Pricing.Interface.14.5.12.1\lib\net40\Atlantis.Framework.Pricing.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.PrivateLabel.Interface">
+      <HintPath>..\packages\Atlantis.Framework.PrivateLabel.Interface.14.1.21.1\lib\net40\Atlantis.Framework.PrivateLabel.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.ProductOffer.Interface">
+      <HintPath>..\packages\Atlantis.Framework.ProductOffer.Interface.4.11.7.28\lib\net40\Atlantis.Framework.ProductOffer.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Products.Interface">
+      <HintPath>..\packages\Atlantis.Framework.Products.Interface.14.2.19.1\lib\net40\Atlantis.Framework.Products.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Providers.AppSettings.Interface">
+      <HintPath>..\packages\Atlantis.Framework.Providers.AppSettings.Interface.14.1.23.1\lib\net40\Atlantis.Framework.Providers.AppSettings.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Providers.Containers">
+      <HintPath>..\packages\Atlantis.Framework.Providers.Containers.14.4.4.2\lib\net40\Atlantis.Framework.Providers.Containers.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Providers.Currency">
+      <HintPath>..\packages\Atlantis.Framework.Providers.Currency.14.7.7.1\lib\net40\Atlantis.Framework.Providers.Currency.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Providers.Currency.Interface">
+      <HintPath>..\packages\Atlantis.Framework.Providers.Currency.Interface.14.4.18.1\lib\net40\Atlantis.Framework.Providers.Currency.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Providers.Geo.Interface">
+      <HintPath>..\packages\Atlantis.Framework.Providers.Geo.Interface.14.1.24.1\lib\net40\Atlantis.Framework.Providers.Geo.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Providers.Interface">
+      <HintPath>..\packages\Atlantis.Framework.Providers.Interface.14.4.18.1\lib\net40\Atlantis.Framework.Providers.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Providers.Links">
+      <HintPath>..\packages\Atlantis.Framework.Providers.Links.14.7.9.1\lib\net40\Atlantis.Framework.Providers.Links.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Providers.Links.Interface">
+      <HintPath>..\packages\Atlantis.Framework.Providers.Links.Interface.14.4.30.1\lib\net40\Atlantis.Framework.Providers.Links.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Providers.Localization.Interface">
+      <HintPath>..\packages\Atlantis.Framework.Providers.Localization.Interface.14.5.3.1\lib\net40\Atlantis.Framework.Providers.Localization.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Providers.Preferences">
+      <HintPath>..\packages\Atlantis.Framework.Providers.Preferences.4.13.11.6\lib\net40\Atlantis.Framework.Providers.Preferences.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Providers.Preferences.Interface">
+      <HintPath>..\packages\Atlantis.Framework.Providers.Preferences.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Providers.Preferences.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Providers.Products">
+      <HintPath>..\packages\Atlantis.Framework.Providers.Products.14.4.15.1\lib\net40\Atlantis.Framework.Providers.Products.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Providers.Shopper.Interface">
+      <HintPath>..\packages\Atlantis.Framework.Providers.Shopper.Interface.14.4.3.1\lib\net40\Atlantis.Framework.Providers.Shopper.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Rest">
+      <HintPath>..\packages\Atlantis.Framework.Rest.14.1.2.1\lib\net40\Atlantis.Framework.Rest.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.SessionCache">
+      <HintPath>..\packages\Atlantis.Framework.SessionCache.4.13.10.22\lib\net40\Atlantis.Framework.SessionCache.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.ShopperFirstOrderGet.Impl">
+      <HintPath>..\packages\Atlantis.Framework.ShopperFirstOrderGet.Impl.4.13.01.08\lib\net40\Atlantis.Framework.ShopperFirstOrderGet.Impl.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.ShopperFirstOrderGet.Interface">
+      <HintPath>..\packages\Atlantis.Framework.ShopperFirstOrderGet.Impl.4.13.01.08\lib\net40\Atlantis.Framework.ShopperFirstOrderGet.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="netConnect">
+      <HintPath>..\packages\Atlantis.Framework.Nimitz.14.2.21.1\lib\net40\netConnect.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.2\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.IO">
+      <HintPath>..\packages\Microsoft.Bcl.1.1.8\lib\net40\System.IO.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http, Version=2.2.20.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.Net.Http.2.2.20\lib\net40\System.Net.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Extensions">
+      <HintPath>..\packages\Microsoft.Net.Http.2.2.20\lib\net40\System.Net.Http.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Primitives">
+      <HintPath>..\packages\Microsoft.Net.Http.2.2.20\lib\net40\System.Net.Http.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest, Version=2.2.20.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.Net.Http.2.2.20\lib\net40\System.Net.Http.WebRequest.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime">
+      <HintPath>..\packages\Microsoft.Bcl.1.1.8\lib\net40\System.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks">
+      <HintPath>..\packages\Microsoft.Bcl.1.1.8\lib\net40\System.Threading.Tasks.dll</HintPath>
     </Reference>
     <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq">
@@ -115,116 +315,6 @@
     <Compile Include="PurchaseEmailResponseData.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Atlantis.Framework.DataCache\Atlantis.Framework.DataCache\Atlantis.Framework.DataCache.csproj">
-      <Project>{8E4322D7-C6B3-4EE1-9FAD-7B848B38C834}</Project>
-      <Name>Atlantis.Framework.DataCache</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.EcommPaymentProfile\Atlantis.Framework.EcommPaymentProfile.Impl\Atlantis.Framework.EcommPaymentProfile.Impl.csproj">
-      <Project>{BFA829D2-AB95-4913-BCF3-CB0748AD3AB4}</Project>
-      <Name>Atlantis.Framework.EcommPaymentProfile.Impl</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.EcommPaymentProfile\Atlantis.Framework.EcommPaymentProfile.Interface\Atlantis.Framework.EcommPaymentProfile.Interface.csproj">
-      <Project>{0066A523-3B95-41DE-96CA-1AC529D1BAA2}</Project>
-      <Name>Atlantis.Framework.EcommPaymentProfile.Interface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj">
-      <Project>{092618E1-1F37-422C-82AF-17A1337B8986}</Project>
-      <Name>Atlantis.Framework.Engine</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj">
-      <Project>{2474F971-3E1D-4608-9D60-B0A9A1CA8D13}</Project>
-      <Name>Atlantis.Framework.Interface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.GetPaymentProfileAlternate\Atlantis.Framework.GetPaymentProfileAlternate.Impl\Atlantis.Framework.GetPaymentProfileAlternate.Impl.csproj">
-      <Project>{201B3981-164A-4563-8454-E8286E988FC6}</Project>
-      <Name>Atlantis.Framework.GetPaymentProfileAlternate.Impl</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.GetPaymentProfileAlternate\Atlantis.Framework.GetPaymentProfileAlternate.Interface\Atlantis.Framework.GetPaymentProfileAlternate.Interface.csproj">
-      <Project>{91B47589-8892-4643-B1A0-715E6A061879}</Project>
-      <Name>Atlantis.Framework.GetPaymentProfileAlternate.Interface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.GetShopper\Atlantis.Framework.GetShopper.Interface\Atlantis.Framework.GetShopper.Interface.csproj">
-      <Project>{4AEB3769-5282-49FC-941B-1AF979BBF39A}</Project>
-      <Name>Atlantis.Framework.GetShopper.Interface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.LinkInfo\Atlantis.Framework.LinkInfo.Interface\Atlantis.Framework.LinkInfo.Interface.csproj">
-      <Project>{9D0A85CB-22E2-4B25-99CC-2555D64AB8C9}</Project>
-      <Name>Atlantis.Framework.LinkInfo.Interface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.MessagingProcess\Atlantis.Framework.MessagingProcess.Interface\Atlantis.Framework.MessagingProcess.Interface.csproj">
-      <Project>{8D5F838D-A604-4CEF-9F86-FE9A6843584A}</Project>
-      <Name>Atlantis.Framework.MessagingProcess.Interface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.MyaMirageData\Atlantis.Framework.MyaMirageData.Interface\Atlantis.Framework.MyaMirageData.Interface.csproj">
-      <Project>{54fffe85-22b9-49f1-b244-cb3fe5591416}</Project>
-      <Name>Atlantis.Framework.MyaMirageData.Interface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.MyaMirageStatus\Atlantis.Framework.MyaMirageStatus.Interface\Atlantis.Framework.MyaMirageStatus.Interface.csproj">
-      <Project>{714d675d-326c-485f-b756-9ed2a931a2dc}</Project>
-      <Name>Atlantis.Framework.MyaMirageStatus.Interface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.MyaRecentNamespaces\Atlantis.Framework.MyaRecentNamespaces.Interface\Atlantis.Framework.MyaRecentNamespaces.Interface.csproj">
-      <Project>{7dbcb185-df3c-495b-bd0f-c33e75355006}</Project>
-      <Name>Atlantis.Framework.MyaRecentNamespaces.Interface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.PaymentProfile\Atlantis.Framework.PaymentProfile.Interface\Atlantis.Framework.PaymentProfile.Interface.csproj">
-      <Project>{8B540B38-34E0-4136-B409-1DC7B322AA63}</Project>
-      <Name>Atlantis.Framework.PaymentProfile.Interface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.ProductOffer\Atlantis.Framework.ProductOffer.Interface\Atlantis.Framework.ProductOffer.Interface.csproj">
-      <Project>{D7260EE7-F41C-4AC4-87FF-959BD107A4DE}</Project>
-      <Name>Atlantis.Framework.ProductOffer.Interface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.Providers.Containers\Atlantis.Framework.Providers.Containers\Atlantis.Framework.Providers.Containers.csproj">
-      <Project>{c333e679-494e-422d-ab5e-e4c0ec94acd5}</Project>
-      <Name>Atlantis.Framework.Providers.Containers</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.Providers.Currency\Atlantis.Framework.Providers.Currency\Atlantis.Framework.Providers.Currency.csproj">
-      <Project>{7EB0E12F-F1DB-49B0-B87D-918BD6950151}</Project>
-      <Name>Atlantis.Framework.Providers.Currency</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.Providers.Interface\Atlantis.Framework.Providers.Interface\Atlantis.Framework.Providers.Interface.csproj">
-      <Project>{CDB8B44E-47FC-4F39-96EF-207EB67772FF}</Project>
-      <Name>Atlantis.Framework.Providers.Interface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.Providers.Links\Atlantis.Framework.Providers.Links.Interface\Atlantis.Framework.Providers.Links.Interface.csproj">
-      <Project>{9972e990-31f1-4c30-9bb5-ac1f3bd4e600}</Project>
-      <Name>Atlantis.Framework.Providers.Links.Interface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.Providers.Links\Atlantis.Framework.Providers.Links\Atlantis.Framework.Providers.Links.csproj">
-      <Project>{6AD11637-3BFB-4FF3-B1A5-AADE45303928}</Project>
-      <Name>Atlantis.Framework.Providers.Links</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.Providers.Preferences\Atlantis.Framework.Providers.Preferences.Interface\Atlantis.Framework.Providers.Preferences.Interface.csproj">
-      <Project>{1a50e3b8-4a5c-4e48-bad4-17c5092f0dde}</Project>
-      <Name>Atlantis.Framework.Providers.Preferences.Interface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.Providers.Preferences\Atlantis.Framework.Providers.Preferences\Atlantis.Framework.Providers.Preferences.csproj">
-      <Project>{EC9CD880-2578-4B00-A629-A4AA916FB2BE}</Project>
-      <Name>Atlantis.Framework.Providers.Preferences</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.Providers.Products\Atlantis.Framework.Providers.Products\Atlantis.Framework.Providers.Products.csproj">
-      <Project>{F078F62F-8023-4E25-8834-973377000D57}</Project>
-      <Name>Atlantis.Framework.Providers.Products</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.SessionCache\Atlantis.Framework.SessionCache\Atlantis.Framework.SessionCache.csproj">
-      <Project>{53be1e8c-c474-4d2d-b2e3-db00cbe1b5f9}</Project>
-      <Name>Atlantis.Framework.SessionCache</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.ShopperFirstOrderGet\Atlantis.Framework.ShopperFirstOrderGet.Impl\Atlantis.Framework.ShopperFirstOrderGet.Impl.csproj">
-      <Project>{A97FE745-78C7-4184-91AE-89543CB8DE0D}</Project>
-      <Name>Atlantis.Framework.ShopperFirstOrderGet.Impl</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.ShopperFirstOrderGet\Atlantis.Framework.ShopperFirstOrderGet.Interface\Atlantis.Framework.ShopperFirstOrderGet.Interface.csproj">
-      <Project>{89210EF0-715A-4B27-ACB4-1F98C0EF773B}</Project>
-      <Name>Atlantis.Framework.ShopperFirstOrderGet.Interface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.ShopperPriceType\Atlantis.Framework.ShopperPriceType.Interface\Atlantis.Framework.ShopperPriceType.Interface.csproj">
-      <Project>{7B5DE027-416D-4D07-8177-4F80A5767FB8}</Project>
-      <Name>Atlantis.Framework.ShopperPriceType.Interface</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
       <Visible>False</Visible>
       <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
@@ -241,8 +331,36 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="atlantis.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
   <ItemGroup />
+  <ItemGroup>
+    <Content Include="Obsolete\Atlantis.Framework.EcommPaymentProfile.Impl.dll" />
+    <Content Include="Obsolete\Atlantis.Framework.EcommPaymentProfile.Impl.XmlSerializers.dll" />
+    <Content Include="Obsolete\Atlantis.Framework.EcommPaymentProfile.Interface.dll" />
+    <Content Include="Obsolete\Atlantis.Framework.GetShopper.Impl.dll" />
+    <Content Include="Obsolete\Atlantis.Framework.GetShopper.Impl.XmlSerializers.dll" />
+    <Content Include="Obsolete\Atlantis.Framework.GetShopper.Interface.dll" />
+    <Content Include="Obsolete\Atlantis.Framework.MyaMirageData.Impl.dll" />
+    <Content Include="Obsolete\Atlantis.Framework.MyaMirageData.Interface.dll" />
+    <Content Include="Obsolete\Atlantis.Framework.MyaMirageStatus.Impl.dll" />
+    <Content Include="Obsolete\Atlantis.Framework.MyaMirageStatus.Interface.dll" />
+    <Content Include="Obsolete\Atlantis.Framework.MyaProduct.Interface.dll" />
+    <Content Include="Obsolete\Atlantis.Framework.MyaProductGetByRid.Impl.dll" />
+    <Content Include="Obsolete\Atlantis.Framework.MyaProductGetByRid.Interface.dll" />
+    <Content Include="Obsolete\Atlantis.Framework.MyaRecentNamespaces.Impl.dll" />
+    <Content Include="Obsolete\Atlantis.Framework.MyaRecentNamespaces.Interface.dll" />
+    <Content Include="Obsolete\Atlantis.Framework.PaymentProfile.Interface.dll" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" />
+  <Target Name="EnsureBclBuildImported" BeforeTargets="BeforeBuild" Condition="'$(BclBuildImported)' == ''">
+    <Error Condition="!Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=317567." HelpKeyword="BCLBUILD2001" />
+    <Error Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="The build restored NuGet packages. Build the project again to include these packages in the build. For more information, see http://go.microsoft.com/fwlink/?LinkID=317568." HelpKeyword="BCLBUILD2002" />
+  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

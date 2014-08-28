@@ -32,6 +32,7 @@ namespace Atlantis.Framework.ShopperValidator.Interface.Validator
       {
         rule.Validate();
         ruleContainer.IsValid = rule.IsValid;
+        ruleContainer.RuleName = rule.RuleName;
         if (!ruleContainer.IsValid)
         {
           ruleContainer.ErrorMessage = rule.ErrorMessage;

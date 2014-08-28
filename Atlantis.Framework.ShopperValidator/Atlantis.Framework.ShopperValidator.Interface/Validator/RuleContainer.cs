@@ -9,6 +9,7 @@ namespace Atlantis.Framework.ShopperValidator.Interface.Validator
     public HashSet<ValidationRule> RulesToValidate {get;set;}
     public bool IsValid { get; set; }
     public string ErrorMessage { get; set; }
+    public string RuleName { get; set; }
 
     private string _value = string.Empty;
     public string Value { get { return _value; } set { _value = value; } }
@@ -48,6 +49,7 @@ namespace Atlantis.Framework.ShopperValidator.Interface.Validator
       Value = value;
       _culture = culture;
       ErrorMessage = string.Empty;
+      RuleName = string.Empty;
       RulesToValidate = new HashSet<ValidationRule>();
     }
 

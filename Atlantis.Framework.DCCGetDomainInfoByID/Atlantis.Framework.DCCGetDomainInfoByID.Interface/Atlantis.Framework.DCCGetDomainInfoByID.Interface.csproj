@@ -75,6 +75,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DCCGetDomainInfoByIDsRequestData.cs" />
     <Compile Include="DCCGetDomainInfoByIDRequestData.cs" />
     <Compile Include="DCCGetDomainInfoByIDResponseData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

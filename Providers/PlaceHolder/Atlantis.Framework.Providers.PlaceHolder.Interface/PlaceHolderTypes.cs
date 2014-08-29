@@ -7,5 +7,6 @@ namespace Atlantis.Framework.Providers.PlaceHolder.Interface
     public const string CDSDocument = "cdsdocument";
     public const string WebControl = "webcontrol";
     public const string TMSDocument = "tmsdocument";
+    public const string TMSContent = "tmscontent";
   }
 }

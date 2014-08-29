@@ -21,7 +21,10 @@ namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolderHandlers
           break;
         case PlaceHolderTypes.TMSDocument:
           placeHolderHandler = new TMSDocumentPlaceHolderHandler(context);
-          break; 
+          break;
+        case PlaceHolderTypes.TMSContent:
+          placeHolderHandler = new TMSContentPlaceHolderHandler(context);
+          break;
         default:
           placeHolderHandler = new NullPlaceHolderHandler(context);
           break;

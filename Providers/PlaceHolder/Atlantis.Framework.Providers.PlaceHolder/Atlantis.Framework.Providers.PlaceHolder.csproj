@@ -106,12 +106,20 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Atlantis.Framework.Providers.RenderPipeline.4.13.11.18\lib\net40\Atlantis.Framework.Providers.RenderPipeline.Interface.dll</HintPath>
     </Reference>
+    <Reference Include="Atlantis.Framework.Providers.TMSContent.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Providers.TMSContent.Interface.14.8.29.2\lib\net40\Atlantis.Framework.Providers.TMSContent.Interface.dll</HintPath>
+    </Reference>
     <Reference Include="Atlantis.Framework.Providers.Web.Interface">
       <HintPath>..\packages\Atlantis.Framework.Providers.Web.Interface.14.6.20.1\lib\net40\Atlantis.Framework.Providers.Web.Interface.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+    <Reference Include="Atlantis.Framework.TMSContent.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Newtonsoft.Json.5.0.8\lib\net40\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.TMSContent.Interface.14.8.29.2\lib\net40\Atlantis.Framework.TMSContent.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -130,10 +138,13 @@
     <Compile Include="ErrorLogger.cs" />
     <Compile Include="PlaceHolderHandlerContext.cs" />
     <Compile Include="PlaceHolderHandlerManager.cs" />
+    <Compile Include="PlaceHolderHandlers\TMSContentPlaceHolderHandler.cs" />
     <Compile Include="PlaceHolderHandlers\TMSDocumentPlaceHolderHandler.cs" />
     <Compile Include="PlaceHolderHandlers\WebControlPlaceHolderHandlerBase.cs" />
     <Compile Include="PlaceHolderRules.cs" />
+    <Compile Include="PlaceHolders\TMSContentPlaceHolder.cs" />
     <Compile Include="PlaceHolders\TMSDocumentPlaceHolder.cs" />
+    <Compile Include="PlaceHolders\TMSContentPlaceHolderData.cs" />
     <Compile Include="PlaceHolders\TMSPlaceHolderData.cs" />
     <Compile Include="WebControl\WebControlManager.cs" />
     <Compile Include="PlaceHolderHandlers\PlaceHolderHandlerHandlerFactory.cs" />

@@ -9,5 +9,6 @@ namespace Atlantis.Framework.Providers.PlaceHolder
     internal const string Type = "type";
     internal const string InteractionPoint = "interactionpoint";
     internal const string MessageTag = "messagetag";
+    internal const string AppProduct = "appproduct";
   }
 }

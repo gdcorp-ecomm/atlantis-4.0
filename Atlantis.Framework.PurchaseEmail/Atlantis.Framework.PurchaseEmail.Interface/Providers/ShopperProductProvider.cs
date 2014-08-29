@@ -3,9 +3,6 @@ using Atlantis.Framework.MyaMirageData.Interface;
 using Atlantis.Framework.MyaMirageStatus.Interface;
 using Atlantis.Framework.MyaRecentNamespaces.Interface;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Atlantis.Framework.PurchaseEmail.Interface.Providers
 {

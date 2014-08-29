@@ -1,29 +1,63 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Reflection;
 using System.Security.Cryptography;
+using System.Web;
 using Atlantis.Framework.DataProvider.Interface;
 using Atlantis.Framework.MessagingProcess.Interface;
+using Atlantis.Framework.Providers.AppSettings;
+using Atlantis.Framework.Providers.AppSettings.Interface;
+using Atlantis.Framework.Providers.Currency;
+using Atlantis.Framework.Providers.Interface.Currency;
+using Atlantis.Framework.Providers.Interface.Links;
+using Atlantis.Framework.Providers.Interface.Products;
+using Atlantis.Framework.Providers.Interface.ProviderContainer;
+using Atlantis.Framework.Providers.Links;
+using Atlantis.Framework.Providers.Products;
 using Atlantis.Framework.PurchaseEmail.Interface;
+using Atlantis.Framework.Testing.MockHttpContext;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Atlantis.Framework.PurchaseEmail.Tests
 {
   [TestClass]
+  [DeploymentItem("atlantis.config")]
+  [DeploymentItem("dataprovider.xml")]
+  [DeploymentItem("Atlantis.Framework.Currency.Impl.dll")]
+  [DeploymentItem("Atlantis.Framework.PurchaseEmail.Impl.dll")]
+  [DeploymentItem("Atlantis.Framework.MessagingProcess.Impl.dll")]
+  [DeploymentItem("Atlantis.Framework.DataProvider.Impl.dll")]
+  [DeploymentItem("Atlantis.Framework.GetShopper.Impl.dll")]
+  [DeploymentItem("Atlantis.Framework.ProductOffer.Impl.dll")]
+  [DeploymentItem("Atlantis.Framework.LinkInfo.Impl.dll")]
+  [DeploymentItem("Atlantis.Framework.AppSettings.Impl.dll")]
+  [DeploymentItem("Atlantis.Framework.DataCacheGeneric.Impl.dll")]
+  [DeploymentItem("Atlantis.Framework.Products.Impl.dll")]
+  [DeploymentItem("Atlantis.Framework.PrivateLabel.Impl.dll")]
+  [DeploymentItem("Atlantis.Framework.Links.Impl.dll")]
   public class UnitTest1
   {
+
+    [TestInitialize]
+    public void InitializeTests()
+    {
+      HttpContext.Current = null;
+      var request = new MockHttpRequest("http://purchaseemail.net/");
+      MockHttpContext.CreateFromWorkerRequest(request);
+
+      HttpProviderContainer.Instance.RegisterProvider<IAppSettingsProvider, AppSettingsProvider>();
+      HttpProviderContainer.Instance.RegisterProvider<ICurrencyProvider, CurrencyProvider>();
+      HttpProviderContainer.Instance.RegisterProvider<ILinkProvider, LinkProvider>();
+      HttpProviderContainer.Instance.RegisterProvider<IProductProvider, ProductProvider>();
+    }
+
     public TestContext TestContext { get; set; }
 
     [TestMethod]
-    [DeploymentItem("atlantis.config")]
-    [DeploymentItem("dataprovider.xml")]
-    [DeploymentItem("Atlantis.Framework.PurchaseEmail.Impl.dll")]
-    [DeploymentItem("Atlantis.Framework.MessagingProcess.Impl.dll")]
-    [DeploymentItem("Atlantis.Framework.DataProvider.Impl.dll")]
-    [DeploymentItem("Atlantis.Framework.GetShopper.Impl.dll")]
-    [DeploymentItem("Atlantis.Framework.ProductOffer.Impl.dll")]
-    [DeploymentItem("Atlantis.Framework.LinkInfo.Impl.dll")]
     public void ProcessTestOrder()
     {
+
       Engine.Engine.ReloadConfig();
 
       // DBP Misc Fee - e-mails tfemiani@godaddy.com
@@ -54,225 +88,132 @@ namespace Atlantis.Framework.PurchaseEmail.Tests
       }
     }
 
-    //private string LoadSampleOrderXml(string filename)
-    //{
-    //  string path = Assembly.GetExecutingAssembly().Location;
-    //  string fullpath = Path.Combine(Path.GetDirectoryName(path), filename);
-    //  string orderXml = File.ReadAllText(fullpath);
-    //  return orderXml;
-    //}
+    private string LoadSampleOrderXml(string filename)
+    {
+      string path = Assembly.GetExecutingAssembly().Location;
+      string fullpath = Path.Combine(Path.GetDirectoryName(path), filename);
+      string orderXml = File.ReadAllText(fullpath);
+      return orderXml;
+    }
+
+    [TestMethod]
+    [DeploymentItem("sampleorder1min.xml")]
+    public void PurchaseEmailBasicTest()
+    {
+      string orderXml = LoadSampleOrderXml("sampleorder1min.xml");
+      PurchaseEmailRequestData request =
+        new PurchaseEmailRequestData("832652", string.Empty, string.Empty, string.Empty, 0, orderXml, "ES");
+      request.AddOption("IsDevServer", "true");
+
+      PurchaseEmailResponseData response =
+        (PurchaseEmailResponseData)Engine.Engine.ProcessRequest(request, 83);
+
+      Assert.IsTrue(response.IsSuccess);
+    }
+
+    [TestMethod]
+    [DeploymentItem("HostingOrder.xml")]
+    public void PurchaseEmailHostingOrderTest()
+    {
+      string orderXml = LoadSampleOrderXml("HostingOrder.xml");
+      PurchaseEmailRequestData request =
+        new PurchaseEmailRequestData("861796", string.Empty, string.Empty, string.Empty, 0, orderXml, "ES");
+      request.AddOption("IsDevServer", "true");
+
+      PurchaseEmailResponseData response =
+        (PurchaseEmailResponseData)Engine.Engine.ProcessRequest(request, 83);
+
+      Assert.IsTrue(response.IsSuccess);
+    }
+
+    [TestMethod]
+    [DeploymentItem("HostingOrder2.xml")]
+    public void PurchaseEmailHostingOrderTest2()
+    {
+      string orderXml = LoadSampleOrderXml("HostingOrder2.xml");
+      PurchaseEmailRequestData request =
+        new PurchaseEmailRequestData("861796", string.Empty, string.Empty, string.Empty, 0, orderXml, "ES");
+      request.AddOption("IsDevServer", "true");
+
+      PurchaseEmailResponseData response =
+        (PurchaseEmailResponseData)Engine.Engine.ProcessRequest(request, 83);
+
+      Assert.IsTrue(response.IsSuccess);
+    }
+
+    [TestMethod]
+    [DeploymentItem("HostingDomainOrder.xml")]
+    public void PurchaseEmailHostingDomainOrderTest()
+    {
+      string orderXml = LoadSampleOrderXml("HostingDomainOrder.xml");
+      PurchaseEmailRequestData request =
+        new PurchaseEmailRequestData("861796", string.Empty, string.Empty, string.Empty, 0, orderXml, "ES");
+      request.AddOption("IsDevServer", "true");
+
+      PurchaseEmailResponseData response =
+        (PurchaseEmailResponseData)Engine.Engine.ProcessRequest(request, 83);
+
+      Assert.IsTrue(response.IsSuccess);
+    }
+
+    [TestMethod]
+    [DeploymentItem("HostingDomainOrder.xml")]
+    public void PurchaseEmailHostingDomainNewCustomerOrderTest()
+    {
+      string orderXml = LoadSampleOrderXml("HostingDomainOrder.xml");
+      PurchaseEmailRequestData request =
+        new PurchaseEmailRequestData("861796", string.Empty, string.Empty, string.Empty, 0, orderXml, "ES");
+      request.AddOption("IsDevServer", "true");
+      request.AddOption("IsNewShopper", "true");
+
+      PurchaseEmailResponseData response =
+        (PurchaseEmailResponseData)Engine.Engine.ProcessRequest(request, 83);
+
+      Assert.IsTrue(response.IsSuccess);
+    }
+
+    [TestMethod]
+    [DeploymentItem("DomainWithDBPOrder.xml")]
+    public void PurchaseEmailDBPOrderTest()
+    {
+      string orderXml = LoadSampleOrderXml("DomainWithDBPOrder.xml");
+      PurchaseEmailRequestData request =
+        new PurchaseEmailRequestData("861796", string.Empty, string.Empty, string.Empty, 0, orderXml, "ES");
+      request.AddOption("IsDevServer", "true");
+
+      PurchaseEmailResponseData response =
+        (PurchaseEmailResponseData)Engine.Engine.ProcessRequest(request, 83);
+
+      Assert.IsTrue(response.IsSuccess);
+    }
+
+    [TestMethod]
+    [DeploymentItem("samplebadshopperorder.xml")]
+    public void PurchaseEmailBasicTestErrorBuildingMessageRequest()
+    {
+      string orderXml = LoadSampleOrderXml("samplebadshopperorder.xml");
+      PurchaseEmailRequestData request =
+        new PurchaseEmailRequestData("nothere", string.Empty, string.Empty, string.Empty, 0, orderXml, "ES");
+      request.AddOption("IsDevServer", "true");
+
+      PurchaseEmailResponseData response =
+        (PurchaseEmailResponseData)Engine.Engine.ProcessRequest(request, 83);
+
+      Assert.IsFalse(response.IsSuccess);
+      Assert.AreEqual(1, response.Exceptions.Count);
+    }
 
 
-    //[TestMethod]
-    //[DeploymentItem("atlantis.config")]
-    //[DeploymentItem("dataprovider.xml")]
-    //[DeploymentItem("DomainWithNoAutoRenewViaAlipay.xml")]
-    //public void PurchaseEmailAlipayNoAutoRenewalNoBackupSourceTest()
-    //{
-    //  Engine.Engine.ReloadConfig();
-    //  string orderXml = LoadSampleOrderXml("DomainWithNoAutoRenewViaAlipay.xml");
-    //  PurchaseEmailRequestData request =
-    //    new PurchaseEmailRequestData("70364", string.Empty, string.Empty, string.Empty, 0, orderXml, "ES");
-    //  PurchaseEmailResponseData response =
-    //   (PurchaseEmailResponseData)Engine.Engine.ProcessRequest(request, 83);
-    //}
-
-
-    //[TestMethod]
-    //[DeploymentItem("atlantis.config")]
-    //[DeploymentItem("dataprovider.xml")]
-    //[DeploymentItem("DomainWithAutoRenewViaAlipay.xml")]
-    //public void PurchaseEmailAlipayAutoRenewalNoBackupSourceTest()
-    //{
-    //  Engine.Engine.ReloadConfig();
-    //  string orderXml = LoadSampleOrderXml("DomainWithAutoRenewViaAlipay.xml");
-    //  PurchaseEmailRequestData request =
-    //    new PurchaseEmailRequestData("70364", string.Empty, string.Empty, string.Empty, 0, orderXml, "ES");
-    //  PurchaseEmailResponseData response =
-    //   (PurchaseEmailResponseData)Engine.Engine.ProcessRequest(request, 83);
-    //}
-
-
-    //[TestMethod]
-    //[DeploymentItem("atlantis.config")]
-    //[DeploymentItem("dataprovider.xml")]
-    //[DeploymentItem("DomainWithAutoRenewViaAlipayWithVisaBackupSource.xml")]
-    //public void PurchaseEmailAlipayAutoRenewalWithBackupSourceTest()
-    //{
-    //  Engine.Engine.ReloadConfig();
-    //  string orderXml = LoadSampleOrderXml("DomainWithAutoRenewViaAlipayWithVisaBackupSource.xml");
-    //  PurchaseEmailRequestData request =
-    //    new PurchaseEmailRequestData("122508", string.Empty, string.Empty, string.Empty, 0, orderXml, "ES");
-    //  PurchaseEmailResponseData response =
-    //   (PurchaseEmailResponseData)Engine.Engine.ProcessRequest(request, 83);
-    //}
-
-
-    //[TestMethod]
-    //[DeploymentItem("GiftCard.xml")]
-    //[ExpectedException(typeof(ArgumentException))]
-    //public void GiftCardAdditionalInfo()
-    //{
-    //  Engine.Engine.ReloadConfig();
-    //  string orderXml = LoadSampleOrderXml("GiftCard.xml");
-    //  PurchaseEmailRequestData request =
-    //    new PurchaseEmailRequestData("832652", string.Empty, string.Empty, string.Empty, 0, orderXml, "ES");
-    //  PurchaseEmailResponseData response =
-    //   (PurchaseEmailResponseData)Engine.Engine.ProcessRequest(request, 83);
-    //}
-
-    //[TestMethod]
-    //[DeploymentItem("atlantis.config")]
-    //[DeploymentItem("dataprovider.xml")]
-    //[DeploymentItem("sampleorder1min.xml")]
-    //public void PurchaseEmailBasicTest()
-    //{
-    //  string orderXml = LoadSampleOrderXml("sampleorder1min.xml");
-    //  PurchaseEmailRequestData request =
-    //    new PurchaseEmailRequestData("832652", string.Empty, string.Empty, string.Empty, 0, orderXml, "ES");
-    //  request.AddOption("IsDevServer", "true");
-
-    //  PurchaseEmailResponseData response =
-    //    (PurchaseEmailResponseData)Engine.Engine.ProcessRequest(request, 83);
-
-    //  Assert.IsFalse(response.IsSuccess);
-    //}
-
-    //[TestMethod]
-    //[DeploymentItem("atlantis.config")]
-    //[DeploymentItem("dataprovider.xml")]
-    //[DeploymentItem("HostingOrder.xml")]
-    //public void PurchaseEmailHostingOrderTest()
-    //{
-    //    string orderXml = LoadSampleOrderXml("HostingOrder.xml");
-    //    PurchaseEmailRequestData request =
-    //      new PurchaseEmailRequestData("861796", string.Empty, string.Empty, string.Empty, 0, orderXml,"ES");
-    //    request.AddOption("IsDevServer", "true");
-
-    //    PurchaseEmailResponseData response =
-    //      (PurchaseEmailResponseData)Engine.Engine.ProcessRequest(request, 83);
-
-    //    Assert.IsTrue(response.IsSuccess);
-    //}
-
-    //[TestMethod]
-    //[DeploymentItem("atlantis.config")]
-    //[DeploymentItem("dataprovider.xml")]
-    //[DeploymentItem("HostingOrder2.xml")]
-    //public void PurchaseEmailHostingOrderTest2()
-    //{
-    //    string orderXml = LoadSampleOrderXml("HostingOrder2.xml");
-    //    PurchaseEmailRequestData request =
-    //      new PurchaseEmailRequestData("861796", string.Empty, string.Empty, string.Empty, 0, orderXml, "ES");
-    //    request.AddOption("IsDevServer", "true");
-
-    //    PurchaseEmailResponseData response =
-    //      (PurchaseEmailResponseData)Engine.Engine.ProcessRequest(request, 83);
-
-    //    Assert.IsTrue(response.IsSuccess);
-    //}
-
-    //[TestMethod]
-    //[DeploymentItem("atlantis.config")]
-    //[DeploymentItem("dataprovider.xml")]
-    //[DeploymentItem("HostingDomainOrder.xml")]
-    //public void PurchaseEmailHostingDomainOrderTest()
-    //{
-    //    string orderXml = LoadSampleOrderXml("HostingDomainOrder.xml");
-    //    PurchaseEmailRequestData request =
-    //      new PurchaseEmailRequestData("861796", string.Empty, string.Empty, string.Empty, 0, orderXml, "ES");
-    //    request.AddOption("IsDevServer", "true");
-
-    //    PurchaseEmailResponseData response =
-    //      (PurchaseEmailResponseData)Engine.Engine.ProcessRequest(request, 83);
-
-    //    Assert.IsTrue(response.IsSuccess);
-    //}
-
-    //[TestMethod]
-    //[DeploymentItem("atlantis.config")]
-    //[DeploymentItem("dataprovider.xml")]
-    //[DeploymentItem("HostingDomainOrder.xml")]
-    //public void PurchaseEmailHostingDomainNewCustomerOrderTest()
-    //{
-    //    string orderXml = LoadSampleOrderXml("HostingDomainOrder.xml");
-    //    PurchaseEmailRequestData request =
-    //      new PurchaseEmailRequestData("861796", string.Empty, string.Empty, string.Empty, 0, orderXml, "ES");
-    //    request.AddOption("IsDevServer", "true");
-    //    request.AddOption("IsNewShopper", "true");
-
-    //    PurchaseEmailResponseData response =
-    //      (PurchaseEmailResponseData)Engine.Engine.ProcessRequest(request, 83);
-
-    //    Assert.IsTrue(response.IsSuccess);
-    //}
-
-    //[TestMethod]
-    //[DeploymentItem("atlantis.config")]
-    //[DeploymentItem("dataprovider.xml")]
-    //[DeploymentItem("WSTOrder.xml")]
-    //public void PurchaseEmailWSTOrderTest()
-    //{
-    //    string orderXml = LoadSampleOrderXml("WSTOrder.xml");
-    //    PurchaseEmailRequestData request =
-    //      new PurchaseEmailRequestData("121079", string.Empty, string.Empty, string.Empty, 0, orderXml, "ES");
-    //    //request.AddOption("IsDevServer", "true");
-    //    //request.AddOption("IsNewShopper", "true");
-
-    //    PurchaseEmailResponseData response =
-    //      (PurchaseEmailResponseData)Engine.Engine.ProcessRequest(request, 83);
-
-    //    Assert.IsTrue(response.IsSuccess);
-    //}
-
-    //[TestMethod]
-    //[DeploymentItem("atlantis.config")]
-    //[DeploymentItem("dataprovider.xml")]
-    //[DeploymentItem("DomainWithDBPOrder.xml")]
-    //public void PurchaseEmailDBPOrderTest()
-    //{
-    //    string orderXml = LoadSampleOrderXml("DomainWithDBPOrder.xml");
-    //    PurchaseEmailRequestData request =
-    //      new PurchaseEmailRequestData("861796", string.Empty, string.Empty, string.Empty, 0, orderXml, "ES");
-    //    request.AddOption("IsDevServer", "true");
-    //    //request.AddOption("IsNewShopper", "true");
-
-    //    PurchaseEmailResponseData response =
-    //      (PurchaseEmailResponseData)Engine.Engine.ProcessRequest(request, 83);
-
-    //    Assert.IsTrue(response.IsSuccess);
-    //}
-
-
-
-    //[TestMethod]
-    //[DeploymentItem("atlantis.config")]
-    //[DeploymentItem("dataprovider.xml")]
-    //[DeploymentItem("samplebadshopperorder.xml")]
-    //public void PurchaseEmailBasicTestErrorBuildingMessageRequest()
-    //{
-    //  string orderXml = LoadSampleOrderXml("samplebadshopperorder.xml");
-    //  PurchaseEmailRequestData request =
-    //    new PurchaseEmailRequestData("nothere", string.Empty, string.Empty, string.Empty, 0, orderXml, "ES");
-    //  request.AddOption("IsDevServer", "true");
-
-    //  PurchaseEmailResponseData response =
-    //    (PurchaseEmailResponseData)Engine.Engine.ProcessRequest(request, 83);
-
-    //  Assert.IsTrue(response.IsSuccess);
-    //}
-
-
-    //[TestMethod]
-    //[DeploymentItem("sampleorder1min.xml")]
-    //[ExpectedException(typeof(ArgumentException))]
-    //public void PurchaseEmailInvalidOptionTest()
-    //{
-    //  string orderXml = LoadSampleOrderXml("sampleorder1min.xml");
-    //  PurchaseEmailRequestData request =
-    //    new PurchaseEmailRequestData("832652", string.Empty, string.Empty, string.Empty, 0, orderXml, "ES");
-    //  request.AddOption("CoolEmail", "true");
-    //}
+    [TestMethod]
+    [DeploymentItem("sampleorder1min.xml")]
+    [ExpectedException(typeof(ArgumentException))]
+    public void PurchaseEmailInvalidOptionTest()
+    {
+      string orderXml = LoadSampleOrderXml("sampleorder1min.xml");
+      PurchaseEmailRequestData request =
+        new PurchaseEmailRequestData("832652", string.Empty, string.Empty, string.Empty, 0, orderXml, "ES");
+      request.AddOption("CoolEmail", "true");
+    }
 
 
     private static string GetOrderXml(string orderId, string shopperId, int privateLabelID)

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
-using System.Web;
 using Atlantis.Framework.GetPaymentProfileAlternate.Interface;
 using Atlantis.Framework.EcommPaymentProfile.Interface;
 using Atlantis.Framework.Interface;
@@ -169,7 +168,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
 
         int hostingHeight = 104;
         int hostingWidth = 196;
-        string hostingImage = String.Empty;
+        string hostingImage;
         switch (EmailTemplate.Id)
         {
           case EmailTemplateType.GDWelcome:
@@ -214,7 +213,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
 
     private EmailTemplate DetermineFirstEmailTemplate()
     {
-      EmailTemplate temp = null;
+      EmailTemplate temp;
 
       if (Order.IsRefund)
       {

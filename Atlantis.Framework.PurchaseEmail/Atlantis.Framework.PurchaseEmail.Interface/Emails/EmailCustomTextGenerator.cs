@@ -16,7 +16,6 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
   {
     OrderData _orderData;
     ICurrencyProvider _currency;
-    DepartmentIds _departmentIds;
     ILinkProvider _links;
     IProductProvider _products;
 
@@ -24,7 +23,6 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
     {
       _orderData = orderData;
       _currency = currency;
-      _departmentIds = departmentIds;
       _links = links;
       _products = products;
     }
@@ -86,7 +84,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
 
           itemTextBuilder.Append("</td>");
 
-          int itemPrice = 0;
+          int itemPrice;
           int.TryParse(itemElement.GetAttribute("_oadjust_adjustedprice"), out itemPrice);
 
           ICurrencyPrice itemCurrencyPrice = _currency.NewCurrencyPrice(itemPrice, _currency.SelectedTransactionalCurrencyInfo, CurrencyPriceType.Transactional);
@@ -123,7 +121,6 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
     #region ItemText Functions - Private Label
     public string BuildPadStringFunction(string tagValue, int columnWidth, HorizontalAlign justification)
     {
-      string result = string.Empty;
       System.Text.StringBuilder functionBuilder = new StringBuilder(200);
       functionBuilder.Append("[%%FUNC.REQ.PAD.");
       functionBuilder.Append(columnWidth.ToString());
@@ -166,7 +163,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
       XmlNodeList itemNodes = _orderData.OrderXmlDoc.SelectNodes("/ORDER/ITEMS/ITEM");
       foreach (XmlElement itemElement in itemNodes)
       {
-        int itemPrice = 0;
+        int itemPrice;
         int.TryParse(itemElement.GetAttribute("_oadjust_adjustedprice"), out itemPrice);
 
         itemsTextBuilder.AppendLine(
@@ -237,7 +234,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
         bool shouldDisplay = isDisplayedInCart != "0";
         if (shouldDisplay)
         {
-          int itemPrice = 0;
+          int itemPrice;
           int.TryParse(itemElement.GetAttribute("_oadjust_adjustedprice"), out itemPrice);
 
           itemTextBuilder.Append(
@@ -633,7 +630,6 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
         if (eulaProvider.ConfiguredEULA.Contains(eulaProvider.GetEULAData(EULARuleType.GiftCard)))
         {
           EULAItem eulaData = eulaProvider.GetEULAData(EULARuleType.GiftCard);
-          string agreementURL = eulaData.LegalAgreementURL.Replace("%7bisc%7d", iscCode);
           if (eulaData != null)
           {
             itemsTextBuilder.Append("<tr><td colspan='3' class='bodyText'>");

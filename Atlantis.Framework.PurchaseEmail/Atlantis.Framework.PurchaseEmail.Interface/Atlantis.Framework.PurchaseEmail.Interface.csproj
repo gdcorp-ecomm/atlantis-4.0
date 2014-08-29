@@ -60,9 +60,6 @@
     <Reference Include="Atlantis.Framework.AppSettings.Interface">
       <HintPath>..\packages\Atlantis.Framework.AppSettings.Interface.14.1.21.1\lib\net40\Atlantis.Framework.AppSettings.Interface.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.Collections">
-      <HintPath>..\packages\Atlantis.Framework.Collections.4.0.0.0\lib\net40\Atlantis.Framework.Collections.dll</HintPath>
-    </Reference>
     <Reference Include="Atlantis.Framework.Currency.Impl">
       <HintPath>..\packages\Atlantis.Framework.Currency.Impl.14.2.19.1\lib\net40\Atlantis.Framework.Currency.Impl.dll</HintPath>
     </Reference>
@@ -120,8 +117,9 @@
     <Reference Include="Atlantis.Framework.LinkInfo.Interface">
       <HintPath>..\packages\Atlantis.Framework.LinkInfo.Interface.14.1.21.1\lib\net40\Atlantis.Framework.LinkInfo.Interface.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.Links.Interface">
-      <HintPath>..\packages\Atlantis.Framework.Links.Interface.14.1.21.1\lib\net40\Atlantis.Framework.Links.Interface.dll</HintPath>
+    <Reference Include="Atlantis.Framework.Links.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Links.Interface.14.7.9.1\lib\net40\Atlantis.Framework.Links.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.MessagingProcess.Impl">
       <HintPath>..\packages\Atlantis.Framework.MessagingProcess.4.11.8.5\lib\net40\Atlantis.Framework.MessagingProcess.Impl.dll</HintPath>
@@ -129,8 +127,9 @@
     <Reference Include="Atlantis.Framework.MessagingProcess.Interface">
       <HintPath>..\packages\Atlantis.Framework.MessagingProcess.4.11.8.5\lib\net40\Atlantis.Framework.MessagingProcess.Interface.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.MiniEncrypt">
-      <HintPath>..\packages\Atlantis.Framework.MiniEncrypt.4.0.0.0\lib\net40\Atlantis.Framework.MiniEncrypt.dll</HintPath>
+    <Reference Include="Atlantis.Framework.MiniEncrypt, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.MiniEncrypt.4.13.12.21\lib\net40\Atlantis.Framework.MiniEncrypt.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.MyaMirageData.Impl">
       <HintPath>Obsolete\Atlantis.Framework.MyaMirageData.Impl.dll</HintPath>
@@ -189,11 +188,13 @@
     <Reference Include="Atlantis.Framework.Providers.Currency.Interface">
       <HintPath>..\packages\Atlantis.Framework.Providers.Currency.Interface.14.4.18.1\lib\net40\Atlantis.Framework.Providers.Currency.Interface.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.Providers.Geo.Interface">
-      <HintPath>..\packages\Atlantis.Framework.Providers.Geo.Interface.14.1.24.1\lib\net40\Atlantis.Framework.Providers.Geo.Interface.dll</HintPath>
+    <Reference Include="Atlantis.Framework.Providers.Geo.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Providers.Geo.Interface.14.5.21.1\lib\net40\Atlantis.Framework.Providers.Geo.Interface.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.Providers.Interface">
-      <HintPath>..\packages\Atlantis.Framework.Providers.Interface.14.4.18.1\lib\net40\Atlantis.Framework.Providers.Interface.dll</HintPath>
+    <Reference Include="Atlantis.Framework.Providers.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Providers.Interface.14.6.19.1\lib\net40\Atlantis.Framework.Providers.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Providers.Links">
       <HintPath>..\packages\Atlantis.Framework.Providers.Links.14.7.9.1\lib\net40\Atlantis.Framework.Providers.Links.dll</HintPath>
@@ -213,11 +214,13 @@
     <Reference Include="Atlantis.Framework.Providers.Products">
       <HintPath>..\packages\Atlantis.Framework.Providers.Products.14.4.15.1\lib\net40\Atlantis.Framework.Providers.Products.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.Providers.Shopper.Interface">
-      <HintPath>..\packages\Atlantis.Framework.Providers.Shopper.Interface.14.4.3.1\lib\net40\Atlantis.Framework.Providers.Shopper.Interface.dll</HintPath>
+    <Reference Include="Atlantis.Framework.Providers.Shopper.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Providers.Shopper.Interface.14.6.17.1\lib\net40\Atlantis.Framework.Providers.Shopper.Interface.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.Rest">
-      <HintPath>..\packages\Atlantis.Framework.Rest.14.1.2.1\lib\net40\Atlantis.Framework.Rest.dll</HintPath>
+    <Reference Include="Atlantis.Framework.Rest, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Rest.14.7.31.1\lib\net40\Atlantis.Framework.Rest.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.SessionCache">
       <HintPath>..\packages\Atlantis.Framework.SessionCache.4.13.10.22\lib\net40\Atlantis.Framework.SessionCache.dll</HintPath>
@@ -231,35 +234,38 @@
     <Reference Include="netConnect">
       <HintPath>..\packages\Atlantis.Framework.Nimitz.14.2.21.1\lib\net40\netConnect.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.6.0.2\lib\net40\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.IO">
-      <HintPath>..\packages\Microsoft.Bcl.1.1.8\lib\net40\System.IO.dll</HintPath>
+      <HintPath>..\packages\Microsoft.Bcl.1.1.9\lib\net40\System.IO.dll</HintPath>
     </Reference>
-    <Reference Include="System.Net.Http, Version=2.2.20.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+    <Reference Include="System.Net.Http, Version=2.2.22.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Microsoft.Net.Http.2.2.20\lib\net40\System.Net.Http.dll</HintPath>
+      <HintPath>..\packages\Microsoft.Net.Http.2.2.22\lib\net40\System.Net.Http.dll</HintPath>
     </Reference>
-    <Reference Include="System.Net.Http.Extensions">
-      <HintPath>..\packages\Microsoft.Net.Http.2.2.20\lib\net40\System.Net.Http.Extensions.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Net.Http.Primitives">
-      <HintPath>..\packages\Microsoft.Net.Http.2.2.20\lib\net40\System.Net.Http.Primitives.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Net.Http.WebRequest, Version=2.2.20.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+    <Reference Include="System.Net.Http.Extensions, Version=2.2.22.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Microsoft.Net.Http.2.2.20\lib\net40\System.Net.Http.WebRequest.dll</HintPath>
+      <HintPath>..\packages\Microsoft.Net.Http.2.2.22\lib\net40\System.Net.Http.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Primitives, Version=2.2.22.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.Net.Http.2.2.22\lib\net40\System.Net.Http.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest, Version=2.2.22.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.Net.Http.2.2.22\lib\net40\System.Net.Http.WebRequest.dll</HintPath>
     </Reference>
     <Reference Include="System.Runtime">
-      <HintPath>..\packages\Microsoft.Bcl.1.1.8\lib\net40\System.Runtime.dll</HintPath>
+      <HintPath>..\packages\Microsoft.Bcl.1.1.9\lib\net40\System.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="System.Threading.Tasks">
-      <HintPath>..\packages\Microsoft.Bcl.1.1.8\lib\net40\System.Threading.Tasks.dll</HintPath>
+      <HintPath>..\packages\Microsoft.Bcl.1.1.9\lib\net40\System.Threading.Tasks.dll</HintPath>
     </Reference>
     <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq">

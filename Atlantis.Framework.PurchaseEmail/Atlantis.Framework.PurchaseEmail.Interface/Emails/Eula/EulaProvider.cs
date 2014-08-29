@@ -126,7 +126,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails.Eula
           {
             pagIdsUsed = new List<string>();
             _usedEulaItems = new List<EULAItem>();
-            string pageID = string.Empty;
+            string pageID;
             if (_orderData.PrivateLabelId != PrivateLabelIDs.DBP_PRIVATELABELID)
             {
               pageID = "UTOS";
@@ -163,7 +163,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails.Eula
       string[] uniquePFids = pfidList.Split(',');
       foreach (string uniquepfid in uniquePFids)
       {
-        int productId = 0;
+        int productId;
         int.TryParse(uniquepfid, out productId);
         XmlDocument agreements = GetEULAS(productId);
         XmlNodeList agreementList = agreements.SelectNodes("/data/item");
@@ -215,7 +215,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails.Eula
         bool shouldDisplay = isDisplayedInCart != "0";
         if (shouldDisplay)
         {
-          int productId = 0;
+          int productId;
           int.TryParse(itemElement.GetAttribute("_product_unifiedproductid"), out productId);
           XmlDocument agreements = GetEULAS(productId);
           XmlNodeList agreementList = agreements.SelectNodes("/data/item");
@@ -245,10 +245,10 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails.Eula
 
     private void BuildItemEulaCustomRules(ref List<EULAItem> eulaList, XmlElement itemElement)
     {
-      int productTypeId = 0;
+      int productTypeId;
       int.TryParse(itemElement.GetAttribute("gdshop_product_typeid"), out productTypeId);
 
-      int productId = 0;
+      int productId;
       int.TryParse(itemElement.GetAttribute("_product_unifiedproductid"), out productId);
 
       string departmentId = itemElement.GetAttribute("dept_id");
@@ -575,7 +575,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails.Eula
 
     private List<string> pagIdsUsed = new List<string>();
 
-    private bool AddUniqueEULAItem(ref List<EULAItem> eulaList, EULAItem currentItem, bool logCustomRule, int productPfid)
+    private void AddUniqueEULAItem(ref List<EULAItem> eulaList, EULAItem currentItem, bool logCustomRule, int productPfid)
     {
       bool added = AddUniqueEULAItem(ref eulaList, currentItem);
       if (logCustomRule && added)
@@ -591,7 +591,6 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails.Eula
           System.Diagnostics.Debug.WriteLine(message);
         }
       }
-      return added;
     }
 
     public EULAItem GetEULAData(string pageId)
@@ -616,7 +615,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails.Eula
 
     private string DetermineHelpURL(string relativepath, string pageid, QueryParamMode queryParamMode, bool isSecure, params string[] additionalQueryParameters)
     {
-      string helpLink = string.Empty;
+      string helpLink;
       if (_orderData.IsGodaddy)
       {
         if (!relativepath.Contains("help/"))

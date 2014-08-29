@@ -23,7 +23,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
         StringBuilder wrapResultBuilder = new StringBuilder(value.Length / wrapAfter + 10);
         do
         {
-          int substringLength = 0;
+          int substringLength;
           if ((value.Length - charCount) > wrapAfter)
           {
             if (value[charCount + wrapAfter] != SPACE)

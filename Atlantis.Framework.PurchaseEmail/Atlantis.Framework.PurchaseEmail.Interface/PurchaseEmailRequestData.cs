@@ -153,12 +153,31 @@ namespace Atlantis.Framework.PurchaseEmail.Interface
           }
         }
       }
-    }   
+    }
+
+    private IProviderContainer CreateObjectContainer()
+    {
+      IProviderContainerEx result = new ObjectProviderContainer();
+
+      var httpContainer = (IProviderContainerEx) HttpProviderContainer.Instance;
+
+      foreach (var registeredType in httpContainer.GetRegistrations())
+      {
+        if (registeredType.Key == typeof(ISiteContext) ||
+            registeredType.Key == typeof(IShopperContext))
+        {
+          continue;
+        }
+        result.RegisterProvider(registeredType.Key, registeredType.Value);
+      }
+
+      return (IProviderContainer)result;
+    }
 
     public List<MessagingProcessRequestData> AllPossibleMessageTypes()
     {
       List<MessagingProcessRequestData> result = new List<MessagingProcessRequestData>();
-      ObjectProviderContainer _objectContainer = new ObjectProviderContainer();
+      ObjectProviderContainer _objectContainer = (ObjectProviderContainer)CreateObjectContainer();
       OrderData orderData = new OrderData(_orderXml, IsNewShopper, IsFraudRefund, _objectContainer, _localizationCode);
       orderData.MarketID = MarketID;
       EmailRequired emailRequired = new EmailRequired(orderData);
@@ -197,7 +216,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface
     {
       exception = null;
       List<MessagingProcessRequestData> result = null;
-      ObjectProviderContainer _objectContainer = new ObjectProviderContainer();
+      ObjectProviderContainer _objectContainer = (ObjectProviderContainer)CreateObjectContainer();
 
       OrderData orderData = new OrderData(_orderXml, IsNewShopper, IsFraudRefund,_objectContainer,_localizationCode);
       orderData.MarketID = MarketID;
@@ -207,7 +226,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface
         if (itemNodes.Count > 0)
         {
           EmailRequired emailRequired = new EmailRequired(orderData);
-          PurchaseConfirmationEmailBase confirmationEmail = null;
+          PurchaseConfirmationEmailBase confirmationEmail;
 
           if (emailRequired.AdminFee && !emailRequired.ProcessFee)
           {

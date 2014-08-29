@@ -57,14 +57,30 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Atlantis.Framework.AppSettings.Interface">
-      <HintPath>..\packages\Atlantis.Framework.AppSettings.Interface.4.0.0.0\lib\net40\Atlantis.Framework.AppSettings.Interface.dll</HintPath>
+    <Reference Include="Atlantis.Framework.AppSettings.Impl">
+      <HintPath>..\packages\Atlantis.Framework.AppSettings.Impl.14.1.21.1\lib\net40\Atlantis.Framework.AppSettings.Impl.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.DataCache">
-      <HintPath>..\packages\Atlantis.Framework.DataCache.14.2.10.1\lib\net40\Atlantis.Framework.DataCache.dll</HintPath>
+    <Reference Include="Atlantis.Framework.AppSettings.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.AppSettings.Interface.14.1.21.1\lib\net40\Atlantis.Framework.AppSettings.Interface.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.DataCacheGeneric.Interface">
-      <HintPath>..\packages\Atlantis.Framework.DataCacheGeneric.Interface.4.0.0.0\lib\net40\Atlantis.Framework.DataCacheGeneric.Interface.dll</HintPath>
+    <Reference Include="Atlantis.Framework.Currency.Impl">
+      <HintPath>..\packages\Atlantis.Framework.Currency.Impl.14.2.19.1\lib\net40\Atlantis.Framework.Currency.Impl.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Currency.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Currency.Interface.14.2.19.1\lib\net40\Atlantis.Framework.Currency.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.DataCache, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.DataCache.14.2.19.1\lib\net40\Atlantis.Framework.DataCache.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.DataCacheGeneric.Impl">
+      <HintPath>..\packages\Atlantis.Framework.DataCacheGeneric.Impl.14.1.21.1\lib\net40\Atlantis.Framework.DataCacheGeneric.Impl.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.DataCacheGeneric.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.DataCacheGeneric.Interface.14.1.21.1\lib\net40\Atlantis.Framework.DataCacheGeneric.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.DataCacheService">
       <HintPath>..\packages\Atlantis.Framework.DataCacheService.4.13.12.21\lib\net40\Atlantis.Framework.DataCacheService.dll</HintPath>
@@ -74,6 +90,13 @@
     </Reference>
     <Reference Include="Atlantis.Framework.DataProvider.Interface">
       <HintPath>..\packages\Atlantis.Framework.DataProvider.Impl.14.2.7.1\lib\net40\Atlantis.Framework.DataProvider.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.DotNetExtensions">
+      <HintPath>..\packages\Atlantis.Framework.DotNetExtensions.4.0.0.0\lib\net40\Atlantis.Framework.DotNetExtensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.EcommPricing.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.EcommPricing.Interface.14.1.22.1\lib\net40\Atlantis.Framework.EcommPricing.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Engine">
       <HintPath>..\packages\Atlantis.Framework.Engine.14.3.1.1\lib\net40\Atlantis.Framework.Engine.dll</HintPath>
@@ -87,6 +110,13 @@
     <Reference Include="Atlantis.Framework.GetPaymentProfileAlternate.Interface">
       <HintPath>..\packages\Atlantis.Framework.GetPaymentProfileAlternate.Impl.4.11.10.24\lib\net40\Atlantis.Framework.GetPaymentProfileAlternate.Interface.dll</HintPath>
     </Reference>
+    <Reference Include="Atlantis.Framework.GetShopper.Impl">
+      <HintPath>..\Atlantis.Framework.PurchaseEmail.Interface\Obsolete\Atlantis.Framework.GetShopper.Impl.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.GetShopper.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Atlantis.Framework.PurchaseEmail.Interface\Obsolete\Atlantis.Framework.GetShopper.Interface.dll</HintPath>
+    </Reference>
     <Reference Include="Atlantis.Framework.Interface">
       <HintPath>..\packages\Atlantis.Framework.Interface.14.5.15.2\lib\net40\Atlantis.Framework.Interface.dll</HintPath>
     </Reference>
@@ -95,6 +125,13 @@
     </Reference>
     <Reference Include="Atlantis.Framework.LinkInfo.Interface">
       <HintPath>..\packages\Atlantis.Framework.LinkInfo.Interface.14.1.21.1\lib\net40\Atlantis.Framework.LinkInfo.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Links.Impl">
+      <HintPath>..\packages\Atlantis.Framework.Links.Impl.14.7.9.1\lib\net40\Atlantis.Framework.Links.Impl.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Links.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Links.Interface.14.7.9.1\lib\net40\Atlantis.Framework.Links.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.MessagingProcess.Impl">
       <HintPath>..\packages\Atlantis.Framework.MessagingProcess.4.11.8.5\lib\net40\Atlantis.Framework.MessagingProcess.Impl.dll</HintPath>
@@ -105,8 +142,16 @@
     <Reference Include="Atlantis.Framework.Nimitz">
       <HintPath>..\packages\Atlantis.Framework.Nimitz.14.2.21.1\lib\net40\Atlantis.Framework.Nimitz.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.PrivateLabel.Interface">
-      <HintPath>..\packages\Atlantis.Framework.PrivateLabel.Interface.4.0.0.0\lib\net40\Atlantis.Framework.PrivateLabel.Interface.dll</HintPath>
+    <Reference Include="Atlantis.Framework.Pricing.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Pricing.Interface.14.5.12.1\lib\net40\Atlantis.Framework.Pricing.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.PrivateLabel.Impl">
+      <HintPath>..\packages\Atlantis.Framework.PrivateLabel.Impl.14.1.21.1\lib\net40\Atlantis.Framework.PrivateLabel.Impl.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.PrivateLabel.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.PrivateLabel.Interface.14.1.21.1\lib\net40\Atlantis.Framework.PrivateLabel.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.ProductOffer.Impl">
       <HintPath>..\packages\Atlantis.Framework.ProductOffer.Impl.4.11.7.28\lib\net40\Atlantis.Framework.ProductOffer.Impl.dll</HintPath>
@@ -114,20 +159,107 @@
     <Reference Include="Atlantis.Framework.ProductOffer.Interface">
       <HintPath>..\packages\Atlantis.Framework.ProductOffer.Interface.4.11.7.28\lib\net40\Atlantis.Framework.ProductOffer.Interface.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.Products.Interface">
-      <HintPath>..\packages\Atlantis.Framework.Products.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Products.Interface.dll</HintPath>
+    <Reference Include="Atlantis.Framework.Products.Impl">
+      <HintPath>..\packages\Atlantis.Framework.Products.Impl.14.2.19.1\lib\net40\Atlantis.Framework.Products.Impl.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.Providers.Interface">
-      <HintPath>..\packages\Atlantis.Framework.Providers.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Providers.Interface.dll</HintPath>
+    <Reference Include="Atlantis.Framework.Products.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Products.Interface.14.2.19.1\lib\net40\Atlantis.Framework.Products.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Providers.AppSettings">
+      <HintPath>..\packages\Atlantis.Framework.Providers.AppSettings.14.1.23.1\lib\net40\Atlantis.Framework.Providers.AppSettings.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Providers.AppSettings.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Providers.AppSettings.Interface.14.1.23.1\lib\net40\Atlantis.Framework.Providers.AppSettings.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Providers.Containers, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Providers.Containers.14.4.4.2\lib\net40\Atlantis.Framework.Providers.Containers.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Providers.Currency, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Providers.Currency.14.7.7.1\lib\net40\Atlantis.Framework.Providers.Currency.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Providers.Currency.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Providers.Currency.Interface.14.4.18.1\lib\net40\Atlantis.Framework.Providers.Currency.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Providers.Geo.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Providers.Geo.Interface.14.5.21.1\lib\net40\Atlantis.Framework.Providers.Geo.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Providers.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Providers.Interface.14.6.19.1\lib\net40\Atlantis.Framework.Providers.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Providers.Links">
+      <HintPath>..\packages\Atlantis.Framework.Providers.Links.14.7.9.1\lib\net40\Atlantis.Framework.Providers.Links.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Providers.Links.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Providers.Links.Interface.14.4.30.1\lib\net40\Atlantis.Framework.Providers.Links.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Providers.Localization.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Providers.Localization.Interface.14.5.3.1\lib\net40\Atlantis.Framework.Providers.Localization.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Providers.Preferences.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Providers.Preferences.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Providers.Preferences.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Providers.Products">
+      <HintPath>..\packages\Atlantis.Framework.Providers.Products.14.4.15.1\lib\net40\Atlantis.Framework.Providers.Products.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Providers.Shopper.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Providers.Shopper.Interface.14.6.17.1\lib\net40\Atlantis.Framework.Providers.Shopper.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Rest, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Rest.14.7.31.1\lib\net40\Atlantis.Framework.Rest.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Testing.MockHttpContext">
+      <HintPath>..\packages\Atlantis.Framework.Testing.MockHttpContext.14.6.5.1\lib\net40\Atlantis.Framework.Testing.MockHttpContext.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="netConnect">
       <HintPath>..\packages\Atlantis.Framework.Nimitz.14.2.21.1\lib\net40\netConnect.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.IO">
+      <HintPath>..\packages\Microsoft.Bcl.1.1.9\lib\net40\System.IO.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http, Version=2.2.22.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.Net.Http.2.2.22\lib\net40\System.Net.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Extensions, Version=2.2.22.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.Net.Http.2.2.22\lib\net40\System.Net.Http.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Primitives, Version=2.2.22.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.Net.Http.2.2.22\lib\net40\System.Net.Http.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest, Version=2.2.22.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.Net.Http.2.2.22\lib\net40\System.Net.Http.WebRequest.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime">
+      <HintPath>..\packages\Microsoft.Bcl.1.1.9\lib\net40\System.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks">
+      <HintPath>..\packages\Microsoft.Bcl.1.1.9\lib\net40\System.Threading.Tasks.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -135,22 +267,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AuthoringTests.txt" />
-    <Content Include="DomainWithAutoRenewViaAlipayWithVisaBackupSource.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="DomainWithAutoRenewViaAlipay.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="DataProvider.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="DomainWithNoAutoRenewViaAlipay.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="DomainWithDBPOrder.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="GiftCard.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="HostingDomainOrder.xml">
@@ -170,9 +290,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="sampleorder1min.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="WSTOrder.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
@@ -219,6 +336,11 @@
     </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" />
+  <Target Name="EnsureBclBuildImported" BeforeTargets="BeforeBuild" Condition="'$(BclBuildImported)' == ''">
+    <Error Condition="!Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=317567." HelpKeyword="BCLBUILD2001" />
+    <Error Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="The build restored NuGet packages. Build the project again to include these packages in the build. For more information, see http://go.microsoft.com/fwlink/?LinkID=317568." HelpKeyword="BCLBUILD2002" />
+  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

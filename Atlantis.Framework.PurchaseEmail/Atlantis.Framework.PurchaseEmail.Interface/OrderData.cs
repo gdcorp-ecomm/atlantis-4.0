@@ -3,14 +3,9 @@ using System.Xml;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.Currency;
 using Atlantis.Framework.Providers.Interface.Currency;
-using Atlantis.Framework.Providers.Interface.Preferences;
-using Atlantis.Framework.Providers.Preferences;
 using Atlantis.Framework.Providers.Containers;
 using Atlantis.Framework.Providers.Interface.Links;
 using Atlantis.Framework.PurchaseEmail.Interface.Emails.Eula;
-using Atlantis.Framework.Providers.Links;
-using Atlantis.Framework.Providers.Interface.Products;
-using Atlantis.Framework.Providers.Products;
 using Atlantis.Framework.PurchaseEmail.Interface.Providers;
 
 namespace Atlantis.Framework.PurchaseEmail.Interface
@@ -19,7 +14,6 @@ namespace Atlantis.Framework.PurchaseEmail.Interface
   {
     private const int WWD_PLID = 1387;
     private ICurrencyProvider _currency;
-    private ISiteContext _siteContext;
     private XmlDocument _orderXmlDoc;
     private bool _isNewShopper;
     private bool _isFraudRefund;
@@ -34,17 +28,12 @@ namespace Atlantis.Framework.PurchaseEmail.Interface
       _isNewShopper = isNewShopper;
       _orderXmlDoc = new XmlDocument();
       _orderXmlDoc.LoadXml(orderXml);
-      providerContainer.RegisterProvider<IShopperPreferencesProvider, ShopperPreferencesProvider>(new ShopperPreferencesProvider(providerContainer));
-      providerContainer.RegisterProvider<ICurrencyProvider, CurrencyProvider>();
-      providerContainer.RegisterProvider<ILinkProvider, LinkProvider>();
-      providerContainer.RegisterProvider<IProductProvider, ProductProvider>();
       providerContainer.RegisterProvider<ShopperProductProvider, ShopperProductProvider>();
-
-      _currency = providerContainer.Resolve<ICurrencyProvider>();
       providerContainer.RegisterProvider<IShopperContext, OrderData>(this);
       providerContainer.RegisterProvider<ISiteContext, OrderData>(this);
+
+      _currency = providerContainer.Resolve<ICurrencyProvider>();
       _linkProvider = providerContainer.Resolve<ILinkProvider>();
-      _siteContext = providerContainer.Resolve<ISiteContext>();
       _localizationCode = localizationCode;
 
       ProcessOrderXml();
@@ -177,7 +166,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface
       get { return _orderXmlDoc; }
     }
 
-    private XmlElement _detailElement = null;
+    private XmlElement _detailElement;
     public XmlElement Detail
     {
       get { return _detailElement; }
@@ -218,7 +207,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface
     {
       get
       {
-        int subTotal = 0;
+        int subTotal;
         int.TryParse(Detail.GetAttribute("_oadjust_subtotal"), out subTotal);
         return new CurrencyPrice(subTotal, _currency.SelectedTransactionalCurrencyInfo, CurrencyPriceType.Transactional);
       }
@@ -228,7 +217,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface
     {
       get
       {
-        int totalTotal = 0;
+        int totalTotal;
         int.TryParse(Detail.GetAttribute("_total_total"), out totalTotal);
         return new CurrencyPrice(totalTotal, _currency.SelectedTransactionalCurrencyInfo, CurrencyPriceType.Transactional);
       }
@@ -238,7 +227,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface
     {
       get
       {
-        int taxTotal = 0;
+        int taxTotal;
         int.TryParse(Detail.GetAttribute("_tax_total"), out taxTotal);
         return new CurrencyPrice(taxTotal, _currency.SelectedTransactionalCurrencyInfo, CurrencyPriceType.Transactional);
       }
@@ -248,11 +237,11 @@ namespace Atlantis.Framework.PurchaseEmail.Interface
     {
       get
       {
-        int shippingTotal = 0;
+        int shippingTotal;
         int.TryParse(Detail.GetAttribute("_shipping_total"), out shippingTotal);
-        int thirdPartyShipping = 0;
+        int thirdPartyShipping;
         int.TryParse(Detail.GetAttribute("third_party_shipping_amount"), out thirdPartyShipping);
-        int handlingTotal = 0;
+        int handlingTotal;
         int.TryParse(Detail.GetAttribute("_handling_total"), out handlingTotal);
 
         int totalShipping = shippingTotal + thirdPartyShipping + handlingTotal;
@@ -264,7 +253,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface
     {
       get
       {
-        int orderDiscountAmount = 0;
+        int orderDiscountAmount;
         int.TryParse(Detail.GetAttribute("_oadjust_subtotal_discount"), out orderDiscountAmount);
         return new CurrencyPrice(orderDiscountAmount, _currency.SelectedTransactionalCurrencyInfo, CurrencyPriceType.Transactional);
       }
@@ -280,7 +269,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface
 
     #region ISiteContext Members
 
-    private int? _contextId = null;
+    private int? _contextId;
     public int ContextId
     {
       get
@@ -305,7 +294,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface
       }
     }
 
-    private string _styleId = null;
+    private string _styleId;
     public string StyleId
     {
       get
@@ -326,7 +315,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface
       }
     }
 
-    private int _privateLabelId = 0;
+    private int _privateLabelId;
     public int PrivateLabelId
     {
       get { return _privateLabelId; }
@@ -372,9 +361,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface
         return string.Empty;
       }
       set
-      {
-        return;
-      }
+      { }
     }
 
     public string ISC
@@ -446,18 +433,8 @@ namespace Atlantis.Framework.PurchaseEmail.Interface
 
     public int ShopperPriceType
     {
-      get { return ShopperPriceTypes.Standard; }
+      get { return 0; }
     }
-
-    private class ShopperPriceTypes
-    {
-      public const int Standard = 0;
-      public const int BlueRazorMember = 1;
-      public const int DiscountShopper = 2;
-      public const int PhoenixShopper = 4;
-      public const int GoDaddyMember = 8;
-    }
-
     #endregion
 
 

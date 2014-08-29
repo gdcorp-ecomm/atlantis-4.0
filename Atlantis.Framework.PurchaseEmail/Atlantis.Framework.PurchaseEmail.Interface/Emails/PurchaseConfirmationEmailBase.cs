@@ -6,14 +6,9 @@ using System.Xml;
 using Atlantis.Framework.GetShopper.Interface;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.MessagingProcess.Interface;
-using Atlantis.Framework.Providers.Currency;
 using Atlantis.Framework.Providers.Interface.Currency;
 using Atlantis.Framework.Providers.Interface.Links;
-using Atlantis.Framework.Providers.Interface.Preferences;
 using Atlantis.Framework.Providers.Interface.Products;
-using Atlantis.Framework.Providers.Links;
-using Atlantis.Framework.Providers.Preferences;
-using Atlantis.Framework.Providers.Products;
 using Atlantis.Framework.ShopperFirstOrderGet.Interface;
 using Atlantis.Framework.Providers.Containers;
 
@@ -37,8 +32,6 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
       _objectContainer = objectContainer;
       _objectContainer.RegisterProvider<ISiteContext, OrderData>(orderData);
       _objectContainer.RegisterProvider<IShopperContext, OrderData>(orderData);
-      _objectContainer.RegisterProvider<IShopperPreferencesProvider, ShopperPreferencesProvider>();
-      _objectContainer.RegisterProvider<ICurrencyProvider, CurrencyProvider>();
 
       _orderData = orderData;
       _shopperData = LoadShopper();
@@ -119,7 +112,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
 
     protected AttributeValue GetParam(string name)
     {
-      AttributeValue value = null;
+      AttributeValue value;
       _params.TryGetValue(name, out value);
       return value;
     }
@@ -170,7 +163,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
 
     protected virtual string ResourceId
     {
-      get { return _orderData.OrderId.ToString(); }
+      get { return _orderData.OrderId; }
     }
 
     protected OrderData Order
@@ -241,9 +234,8 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
         return ShopperData.GetField("loginName");
       }
     }
-
+    
     protected string OrderTime { get { return DateTime.Now.ToString("F"); } }
-
     protected string VATId
     {
       get
@@ -322,7 +314,6 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
 
       if (ShopperData != null)
       {
-        string emailAddress = ShopperData.GetField("email").ToLower();
         string debugPurchaseConfirmEmails = DataCache.DataCache.GetAppSetting("DEBUG_PURCHASE_CONFIRM_EMAILS");
 
         if (debugPurchaseConfirmEmails.Equals("true", StringComparison.OrdinalIgnoreCase))
@@ -365,20 +356,8 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
       return result;
     }
 
-    private string GetDBPText()
-    {
-      if (DomainsByProxyInOrder)
-      {
-        return "<br/><span style=\"font-weight:bold\">Because you just purchased Private Registration, watch for an email from "
-            + "<span style=\"text-decoration:underline\">Support@DomainsByProxy.com</span>. "
-            + "It contains important information about logging in to your Domains By Proxy account.</span>";
-      }
-      return String.Empty;
-    }
-
     protected string GetItemsText()
     {
-      string hostingConcierge = String.Empty;
       EmailCustomTextGenerator emailCustomTextProvider = new EmailCustomTextGenerator(_orderData, _currency, _departmentIds, _linkProvider, _products);
 
       StringBuilder itemsTextBuilder = new StringBuilder(1000);
@@ -394,7 +373,6 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
         if (IsHTMLEmail)
         {
           emailCustomTextProvider.BuildItemsText_GD_Html(itemsTextBuilder);
-          hostingConcierge = HostingConciergeHtmlGet();
         }
         else
           emailCustomTextProvider.BuildItemsText_GD_PlainText(itemsTextBuilder, false);
@@ -500,7 +478,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
 
     private string GetISC()
     {
-      string isc = null;
+      string isc;
       switch (_orderData.PrivateLabelId)
       {
         case 1:
@@ -538,7 +516,6 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
       }
       return conciergeHtml;
     }
-
     protected string HostingConciergeTextGet(bool boldPhoneNumbers, bool longText)
     {
       StringBuilder conciergeText = new StringBuilder();
@@ -578,7 +555,6 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
       }
       return conciergeText.ToString();
     }
-
     protected bool DomainsByProxyInOrder
     {
       get
@@ -750,6 +726,5 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
 
       return itemsTextBuilder.ToString();
     }
-
   }
 }

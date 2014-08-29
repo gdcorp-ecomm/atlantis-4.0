@@ -71,7 +71,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
 
           string deptId = itemElement.GetAttribute("dept_id");
           string productIdString = itemElement.GetAttribute("_product_unifiedproductid");
-          int productId = 0;
+          int productId;
           if (!int.TryParse(productIdString, out productId))
           {
             productId = 0;

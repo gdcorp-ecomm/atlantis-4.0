@@ -93,7 +93,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
     {
       get
       {
-        EmailTemplate temp = null;
+        EmailTemplate temp;
 
         if (Order.IsRefund)
         {

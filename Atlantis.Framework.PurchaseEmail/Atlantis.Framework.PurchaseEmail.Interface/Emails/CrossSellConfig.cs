@@ -52,7 +52,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
 
     private CrossSellConfigId GetCrossSellConfigId()
     {
-      CrossSellConfigId configId = CrossSellConfigId.ec_default;
+      CrossSellConfigId configId;
 
       int firstProductTypeId = 0;
       XmlElement firstItem = _orderData.OrderXmlDoc.SelectSingleNode("/ORDER/ITEMS/ITEM") as XmlElement;
@@ -223,7 +223,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
             string[] productsToShowParts = productsToShow.Split("|".ToCharArray());
             foreach (string strCrossSellProductId in productsToShowParts)
             {
-              int intCrossSellProductId = -1;
+              int intCrossSellProductId;
               if (!int.TryParse(strCrossSellProductId, out intCrossSellProductId))
               {
                 intCrossSellProductId = -1;

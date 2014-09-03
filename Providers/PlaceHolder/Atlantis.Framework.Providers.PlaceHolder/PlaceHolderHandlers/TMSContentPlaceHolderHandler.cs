@@ -103,14 +103,13 @@ namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolderHandlers
             {
               rawContent = cdsContentProvider.GetContent(placeHolderData.Default.Application, placeHolderData.Default.Location).Content;
             }
-
-            rawContent = GetWrappedContent(rawContent, messageVariant);
           }
           else
           {
             rawContent = cdsContentProvider.GetContent(placeHolderData.Default.Application, placeHolderData.Default.Location).Content;
           }
 
+          rawContent = GetWrappedContent(rawContent, messageVariant);
           return true;
         }
 

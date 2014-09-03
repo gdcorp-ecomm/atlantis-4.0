@@ -74,6 +74,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Atlantis.Framework.Interface.14.1.16.1\lib\net40\Atlantis.Framework.Interface.dll</HintPath>
     </Reference>
+    <Reference Include="Atlantis.Framework.Localization.Interface">
+      <HintPath>..\packages\Atlantis.Framework.Localization.Interface.14.5.3.1\lib\net40\Atlantis.Framework.Localization.Interface.dll</HintPath>
+    </Reference>
     <Reference Include="Atlantis.Framework.Personalization.Interface">
       <HintPath>..\packages\Atlantis.Framework.Personalization.Interface.14.8.18.4\lib\net40\Atlantis.Framework.Personalization.Interface.dll</HintPath>
     </Reference>
@@ -124,6 +127,12 @@
     <Reference Include="Atlantis.Framework.Providers.RenderPipeline.Interface">
       <HintPath>..\packages\Atlantis.Framework.Providers.RenderPipeline.4.13.11.18\lib\net40\Atlantis.Framework.Providers.RenderPipeline.Interface.dll</HintPath>
     </Reference>
+    <Reference Include="Atlantis.Framework.Providers.TMSContent">
+      <HintPath>..\packages\Atlantis.Framework.Providers.TMSContent.14.9.3.8\lib\net40\Atlantis.Framework.Providers.TMSContent.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Providers.TMSContent.Interface">
+      <HintPath>..\packages\Atlantis.Framework.Providers.TMSContent.Interface.14.9.3.8\lib\net40\Atlantis.Framework.Providers.TMSContent.Interface.dll</HintPath>
+    </Reference>
     <Reference Include="Atlantis.Framework.Providers.Web.Interface">
       <HintPath>..\packages\Atlantis.Framework.Providers.Web.Interface.14.6.20.1\lib\net40\Atlantis.Framework.Providers.Web.Interface.dll</HintPath>
     </Reference>
@@ -149,13 +158,19 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Atlantis.Framework.Testing.MockProviders.4.14.1.13\lib\net40\Atlantis.Framework.Testing.MockProviders.dll</HintPath>
     </Reference>
+    <Reference Include="Atlantis.Framework.TMSContent.Impl">
+      <HintPath>..\packages\Atlantis.Framework.TMSContent.Impl.14.9.3.6\lib\net40\Atlantis.Framework.TMSContent.Impl.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.TMSContent.Interface">
+      <HintPath>..\packages\Atlantis.Framework.TMSContent.Interface.14.9.3.6\lib\net40\Atlantis.Framework.TMSContent.Interface.dll</HintPath>
+    </Reference>
     <Reference Include="Atlantis.Framework.Tokens.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Atlantis.Framework.Tokens.Interface.4.13.11.18\lib\net40\Atlantis.Framework.Tokens.Interface.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Newtonsoft.Json.5.0.8\lib\net40\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
@@ -183,6 +198,7 @@
   <ItemGroup>
     <Compile Include="MockAppSettingsProvider.cs" />
     <Compile Include="MockCDSContentProvider.cs" />
+    <Compile Include="MockTMSContentProvider.cs" />
     <Compile Include="MockPersonalizationProvider.cs" />
     <Compile Include="MockRenderContent.cs" />
     <Compile Include="PlaceHolderProviderTests.cs" />
@@ -194,6 +210,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="RenderHandlers\AppendRenderHandler.cs" />
+    <Compile Include="TMSContentPlaceHolderHandlerTests.cs" />
     <Compile Include="TMSPlaceHolderHandlerTests.cs" />
     <Compile Include="WebControls\Child.cs" />
     <Compile Include="WebControls\Parent.cs" />

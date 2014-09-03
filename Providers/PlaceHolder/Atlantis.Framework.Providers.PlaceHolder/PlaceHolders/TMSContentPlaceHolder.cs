@@ -13,11 +13,11 @@ namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolders
 
     private readonly TMSContentPlaceHolderData _placeHolderData;
 
-    public TMSContentPlaceHolder(string appProduct, string interactionPoint, string defaultAppID, string defaultLocation)
+    public TMSContentPlaceHolder(string appProduct, string interactionName, string defaultAppID, string defaultLocation)
     {
       IList<KeyValuePair<string, string>> attributes = new List<KeyValuePair<string, string>>();
       attributes.Add(new KeyValuePair<string, string>(PlaceHolderAttributes.AppProduct, appProduct));
-      attributes.Add(new KeyValuePair<string, string>(PlaceHolderAttributes.InteractionPoint, interactionPoint));
+      attributes.Add(new KeyValuePair<string, string>(PlaceHolderAttributes.InteractionPoint, interactionName));
 
       TMSContentPlaceHolderData.DefaultData contentData = new TMSContentPlaceHolderData.DefaultData();
       contentData.Application = defaultAppID;

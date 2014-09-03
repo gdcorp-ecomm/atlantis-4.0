@@ -1,11 +1,11 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Linq;
 using Atlantis.Framework.Providers.CDSContent.Interface;
 using Atlantis.Framework.Providers.PlaceHolder.Interface;
 using Atlantis.Framework.Providers.PlaceHolder.PlaceHolders;
 using Atlantis.Framework.Providers.RenderPipeline.Interface;
 using Atlantis.Framework.Providers.TMSContent.Interface;
-using Atlantis.Framework.TMSContent.Interface;
 
 namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolderHandlers
 {
@@ -15,11 +15,12 @@ namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolderHandlers
     private const string LOCATION_FORMAT = "{0}/{1}/{2}/default_template";
     private const string TMS_CONTENT_FORMAT = "<div data-tms-msgid=\"{0}\" data-tms-tagname=\"{1}\" data-tms-messagename=\"{2}\" data-tms-trackingid=\"{3}\">\n{4}\n</div>";
 
-    internal TMSContentPlaceHolderHandler(IPlaceHolderHandlerContext context) : base(context) {}
+    internal TMSContentPlaceHolderHandler(IPlaceHolderHandlerContext context)
+      : base(context) {}
 
     protected override string GetContent()
     {
-      string renderContent = String.Empty;
+      string renderContent = string.Empty;
 
       try
       {
@@ -31,7 +32,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolderHandlers
           string rawContent;
           if (!TryGetMessageVariantContent(placeHolderData, cdsContentProvider, out rawContent))
           {
-            rawContent = cdsContentProvider.GetContent(placeHolderData.Default.Application, placeHolderData.Default.Location).Content;            
+            rawContent = cdsContentProvider.GetContent(placeHolderData.Default.Application, placeHolderData.Default.Location).Content;
           }
 
           IRenderPipelineProvider renderPipelineProvider = Context.ProviderContainer.Resolve<IRenderPipelineProvider>();
@@ -45,7 +46,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolderHandlers
       catch (Exception ex)
       {
         string errorMessage = string.Format("PlaceHolder render error. Type: {0}, Message: {1}", Context.Type, ex.Message);
-        LogError(errorMessage, "TMSDocumentPlaceHolderHandler.Render()");
+        LogError(errorMessage, "TMSContentPlaceHolderHandler.Render()");
       }
 
       return renderContent;
@@ -53,56 +54,24 @@ namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolderHandlers
 
     private string GetWrappedContent(string rawContent, MessageVariant messageVariant)
     {
-      return String.Format(TMS_CONTENT_FORMAT, messageVariant.ID, messageVariant.Tags,
-        messageVariant.Name, messageVariant.TrackingID, rawContent);
+      return string.Format(TMS_CONTENT_FORMAT, messageVariant.Id, messageVariant.Tags,
+        messageVariant.Name, messageVariant.TrackingId, rawContent);
     }
 
-    private bool TryGetMessageVariantContent(TMSContentPlaceHolderData placeHolderData, ICDSContentProvider cdsContentProvider, out string rawContent)
-    {
-      rawContent = String.Empty;
-
-      // Get TMS+ Content
-      string appProduct;
-      string interactionPoint;
-      if (placeHolderData.TryGetAttribute(PlaceHolderAttributes.AppProduct, out appProduct) && (!String.IsNullOrEmpty(appProduct)) &&
-          placeHolderData.TryGetAttribute(PlaceHolderAttributes.InteractionPoint, out interactionPoint) && (!String.IsNullOrEmpty(interactionPoint)))
-      {
-        MessageVariant messageVariant;
-        if (TryGetMessageVariant(appProduct, interactionPoint, out messageVariant) && messageVariant.HasContent)
-        {
-          rawContent = cdsContentProvider.GetContent(APP_NAME,
-            String.Format(LOCATION_FORMAT, appProduct, interactionPoint, messageVariant.Name)).Content;
-          if (String.IsNullOrEmpty(rawContent))
-          {
-            rawContent = cdsContentProvider.GetContent(placeHolderData.Default.Application, placeHolderData.Default.Location).Content;
-          }
-
-          rawContent = GetWrappedContent(rawContent, messageVariant);
-        }
-        else
-        {
-          rawContent = cdsContentProvider.GetContent(placeHolderData.Default.Application, placeHolderData.Default.Location).Content;
-        }
-
-        return true;
-      }
-
-      string errorMessage = String.Format("Attributes '{0}', and '{1}' are required.", PlaceHolderAttributes.AppProduct, PlaceHolderAttributes.InteractionPoint);
-      LogError(errorMessage, "TMSContentPlaceHolderHandler.Render()");
-      return false;
-    }
-
-    private bool TryGetMessageVariant(string appProduct, string interactionPoint, out MessageVariant messageVariant)
+    private bool TryGetMessageVariant(string appProduct, string interactionName, out MessageVariant messageVariant)
     {
       messageVariant = null;
 
       ITMSContentProvider tmsContentProvider;
       if (Context.ProviderContainer.TryResolve(out tmsContentProvider))
       {
-        messageVariant = tmsContentProvider.GetMessageVariant(appProduct, interactionPoint);
-        if (messageVariant != null)
+        if (tmsContentProvider.TryGetNextMessageVariant(appProduct, interactionName, out messageVariant))
         {
-          tmsContentProvider.ConsumeMessageVariant(appProduct, interactionPoint, messageVariant);
+          tmsContentProvider.ConsumeMessageVariant(appProduct, interactionName, messageVariant);
+          Context.ProviderContainer.SetData("TMSMessageId", messageVariant.Id);
+          Context.ProviderContainer.SetData("TMSMessageTag", messageVariant.Tags);
+          Context.ProviderContainer.SetData("TMSMessageName", messageVariant.Name);
+          Context.ProviderContainer.SetData("TMSMessageTrackingId", messageVariant.TrackingId);
         }
       }
       else
@@ -111,6 +80,50 @@ namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolderHandlers
       }
 
       return (messageVariant != null);
+    }
+
+    private bool TryGetMessageVariantContent(TMSContentPlaceHolderData placeHolderData, ICDSContentProvider cdsContentProvider, out string rawContent)
+    {
+      rawContent = string.Empty;
+
+      try
+      {
+        // Get TMS+ Content
+        string appProduct;
+        string interactionName;
+        if (placeHolderData.TryGetAttribute(PlaceHolderAttributes.AppProduct, out appProduct) && (!string.IsNullOrEmpty(appProduct)) &&
+            placeHolderData.TryGetAttribute(PlaceHolderAttributes.InteractionPoint, out interactionName) && (!string.IsNullOrEmpty(interactionName)))
+        {
+          MessageVariant messageVariant;
+          if (TryGetMessageVariant(appProduct, interactionName, out messageVariant) && messageVariant.HasContent)
+          {
+            rawContent = cdsContentProvider.GetContent(APP_NAME,
+              string.Format(LOCATION_FORMAT, appProduct, interactionName, messageVariant.Name)).Content;
+            if (string.IsNullOrEmpty(rawContent))
+            {
+              rawContent = cdsContentProvider.GetContent(placeHolderData.Default.Application, placeHolderData.Default.Location).Content;
+            }
+
+            rawContent = GetWrappedContent(rawContent, messageVariant);
+          }
+          else
+          {
+            rawContent = cdsContentProvider.GetContent(placeHolderData.Default.Application, placeHolderData.Default.Location).Content;
+          }
+
+          return true;
+        }
+
+        string errorMessage = string.Format("Attributes '{0}', and '{1}' are required.", PlaceHolderAttributes.AppProduct, PlaceHolderAttributes.InteractionPoint);
+        LogError(errorMessage, "TMSContentPlaceHolderHandler.Render()");
+      }
+      catch (Exception ex)
+      {
+        string errorMessage = string.Format("PlaceHolder render error attempting to load TMS Content. {0}", ex.Message);
+        LogError(errorMessage, "TMSContentPlaceHolderHandler.Render()");        
+      }
+
+      return false;
     }
   }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 using System.Xml;
@@ -15,6 +16,7 @@ using Atlantis.Framework.Providers.PlaceHolder.Tests.Properties;
 
 namespace Atlantis.Framework.Providers.PlaceHolder.Tests
 {
+  [ExcludeFromCodeCoverage]
   public class MockPersonalizationProvider : PersonalizationProvider
   {
     public MockPersonalizationProvider(IProviderContainer container)
@@ -22,10 +24,10 @@ namespace Atlantis.Framework.Providers.PlaceHolder.Tests
     {
     }
 
-    public override TargetedMessages GetTargetedMessages(string interactionPoint)
+    public override TargetedMessages GetTargetedMessages(string interactionName)
     {
 
-      if (interactionPoint == "explode")
+      if (interactionName == "explode")
       {
         throw new Exception("exploding");
       }

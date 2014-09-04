@@ -129,11 +129,11 @@
     </Reference>
     <Reference Include="Atlantis.Framework.Providers.TMSContent, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.Providers.TMSContent.14.9.3.9\lib\net40\Atlantis.Framework.Providers.TMSContent.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.Providers.TMSContent.14.9.4.2\lib\net40\Atlantis.Framework.Providers.TMSContent.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Providers.TMSContent.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.Providers.TMSContent.Interface.14.9.3.9\lib\net40\Atlantis.Framework.Providers.TMSContent.Interface.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.Providers.TMSContent.Interface.14.9.4.2\lib\net40\Atlantis.Framework.Providers.TMSContent.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Providers.Web.Interface">
       <HintPath>..\packages\Atlantis.Framework.Providers.Web.Interface.14.6.20.1\lib\net40\Atlantis.Framework.Providers.Web.Interface.dll</HintPath>
@@ -162,11 +162,11 @@
     </Reference>
     <Reference Include="Atlantis.Framework.TMSContent.Impl, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.TMSContent.Impl.14.9.3.7\lib\net40\Atlantis.Framework.TMSContent.Impl.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.TMSContent.Impl.14.9.4.2\lib\net40\Atlantis.Framework.TMSContent.Impl.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.TMSContent.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.TMSContent.Interface.14.9.3.7\lib\net40\Atlantis.Framework.TMSContent.Interface.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.TMSContent.Interface.14.9.4.2\lib\net40\Atlantis.Framework.TMSContent.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Tokens.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

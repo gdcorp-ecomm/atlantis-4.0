@@ -52,8 +52,11 @@ namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolderHandlers
       return renderContent;
     }
 
-    private string GetWrappedContent(string rawContent, MessageVariant messageVariant)
+    private string TryWrapContent(string rawContent, MessageVariant messageVariant)
     {
+      if (messageVariant == null)
+        return rawContent;
+
       return string.Format(TMS_CONTENT_FORMAT, messageVariant.Id, messageVariant.Tags,
         messageVariant.Name, messageVariant.TrackingId, rawContent);
     }
@@ -95,21 +98,17 @@ namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolderHandlers
             placeHolderData.TryGetAttribute(PlaceHolderAttributes.InteractionPoint, out interactionName) && (!string.IsNullOrEmpty(interactionName)))
         {
           MessageVariant messageVariant;
-          if (TryGetMessageVariant(appProduct, interactionName, out messageVariant) && messageVariant.HasContent)
+          if (TryGetMessageVariant(appProduct, interactionName, out messageVariant) && (messageVariant.HasContent))
           {
             rawContent = cdsContentProvider.GetContent(APP_NAME,
               string.Format(LOCATION_FORMAT, appProduct, interactionName, messageVariant.Name)).Content;
-            if (string.IsNullOrEmpty(rawContent))
-            {
-              rawContent = cdsContentProvider.GetContent(placeHolderData.Default.Application, placeHolderData.Default.Location).Content;
-            }
           }
           else
           {
             rawContent = cdsContentProvider.GetContent(placeHolderData.Default.Application, placeHolderData.Default.Location).Content;
           }
 
-          rawContent = GetWrappedContent(rawContent, messageVariant);
+          rawContent = TryWrapContent(rawContent, messageVariant);
           return true;
         }
 

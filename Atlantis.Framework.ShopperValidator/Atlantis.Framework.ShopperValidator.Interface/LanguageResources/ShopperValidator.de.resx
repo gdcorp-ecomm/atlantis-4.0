@@ -196,7 +196,7 @@
     <value>Geburtstag</value>
   </data>
   <data name="address1" xml:space="preserve">
-    <value>Adresszeile 1:</value>
+    <value>Adresszeile 1</value>
   </data>
   <data name="address2" xml:space="preserve">
     <value>Adresszeile 2:</value>

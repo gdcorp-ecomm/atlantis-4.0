@@ -1,5 +1,4 @@
 ﻿using System;
-using System.ComponentModel;
 using System.Linq;
 using Atlantis.Framework.Providers.CDSContent.Interface;
 using Atlantis.Framework.Providers.PlaceHolder.Interface;
@@ -52,15 +51,6 @@ namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolderHandlers
       return renderContent;
     }
 
-    private string TryWrapContent(string rawContent, MessageVariant messageVariant)
-    {
-      if (messageVariant == null)
-        return rawContent;
-
-      return string.Format(TMS_CONTENT_FORMAT, messageVariant.Id, messageVariant.Tags,
-        messageVariant.Name, messageVariant.TrackingId, rawContent);
-    }
-
     private bool TryGetMessageVariant(string appProduct, string interactionName, out MessageVariant messageVariant)
     {
       messageVariant = null;
@@ -98,17 +88,27 @@ namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolderHandlers
             placeHolderData.TryGetAttribute(PlaceHolderAttributes.InteractionPoint, out interactionName) && (!string.IsNullOrEmpty(interactionName)))
         {
           MessageVariant messageVariant;
-          if (TryGetMessageVariant(appProduct, interactionName, out messageVariant) && (messageVariant.HasContent))
+          if (TryGetMessageVariant(appProduct, interactionName, out messageVariant))
           {
-            rawContent = cdsContentProvider.GetContent(APP_NAME,
-              string.Format(LOCATION_FORMAT, appProduct, interactionName, messageVariant.Name)).Content;
+            if (messageVariant.HasContent)
+            {
+              rawContent = cdsContentProvider.GetContent(APP_NAME,
+                string.Format(LOCATION_FORMAT, appProduct, interactionName, messageVariant.Name)).Content;
+            }
+            else
+            {
+              rawContent = cdsContentProvider.GetContent(placeHolderData.Default.Application, placeHolderData.Default.Location).Content;
+            }
+
+            // Wrap content with tracking data
+            rawContent = string.Format(TMS_CONTENT_FORMAT, messageVariant.Id, messageVariant.Tags,
+              messageVariant.Name, messageVariant.TrackingId, rawContent);
           }
           else
           {
             rawContent = cdsContentProvider.GetContent(placeHolderData.Default.Application, placeHolderData.Default.Location).Content;
           }
 
-          rawContent = TryWrapContent(rawContent, messageVariant);
           return true;
         }
 
@@ -118,7 +118,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolderHandlers
       catch (Exception ex)
       {
         string errorMessage = string.Format("PlaceHolder render error attempting to load TMS Content. {0}", ex.Message);
-        LogError(errorMessage, "TMSContentPlaceHolderHandler.Render()");        
+        LogError(errorMessage, "TMSContentPlaceHolderHandler.Render()");
       }
 
       return false;

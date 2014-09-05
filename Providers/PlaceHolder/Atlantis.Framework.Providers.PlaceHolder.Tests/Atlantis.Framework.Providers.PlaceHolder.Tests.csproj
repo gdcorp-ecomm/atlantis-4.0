@@ -162,11 +162,11 @@
     </Reference>
     <Reference Include="Atlantis.Framework.TMSContent.Impl, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.TMSContent.Impl.14.9.4.5\lib\net40\Atlantis.Framework.TMSContent.Impl.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.TMSContent.Impl.14.9.4.6\lib\net40\Atlantis.Framework.TMSContent.Impl.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.TMSContent.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.TMSContent.Interface.14.9.4.5\lib\net40\Atlantis.Framework.TMSContent.Interface.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.TMSContent.Interface.14.9.4.6\lib\net40\Atlantis.Framework.TMSContent.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Tokens.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

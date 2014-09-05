@@ -90,12 +90,15 @@ namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolderHandlers
           MessageVariant messageVariant;
           if (TryGetMessageVariant(appProduct, interactionName, out messageVariant))
           {
+            // Get message variant content
             if (messageVariant.HasContent)
             {
               rawContent = cdsContentProvider.GetContent(APP_NAME,
                 string.Format(LOCATION_FORMAT, appProduct, interactionName, messageVariant.Name)).Content;
             }
-            else
+
+            // Use default content if message variant content doesn't exist or is missing
+            if (string.IsNullOrEmpty(rawContent))
             {
               rawContent = cdsContentProvider.GetContent(placeHolderData.Default.Application, placeHolderData.Default.Location).Content;
             }

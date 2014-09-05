@@ -13,5 +13,6 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration.Interface
     string Required { get; set; }
     string DefaultValue { get; set; }
     IList<IDotTypeFormsItem> ItemCollection { get; set; }
+    IList<IDependsCollection> DependsCollection { get; set; }
   }
 }

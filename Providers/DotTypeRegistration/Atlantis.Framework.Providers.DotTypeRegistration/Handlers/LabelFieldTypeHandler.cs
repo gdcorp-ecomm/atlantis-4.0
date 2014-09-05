@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using Atlantis.Framework.DotTypeForms.Interface;
+﻿using Atlantis.Framework.DotTypeForms.Interface;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.DotTypeRegistration.Interface;
 using Atlantis.Framework.Providers.DotTypeRegistration.Interface.Handlers;
+using System;
+using System.Collections.Generic;
 
 namespace Atlantis.Framework.Providers.DotTypeRegistration.Handlers
 {
-  public class RadioFieldTypeHandler : IDotTypeFormFieldTypeHandler
+  public class LabelFieldTypeHandler : IDotTypeFormFieldTypeHandler
   {
     public bool RenderDotTypeFormField(DotTypeFormFieldTypes fieldType, IProviderContainer providerContainer, out IList<IFormField> formFields)
     {
@@ -16,7 +16,7 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration.Handlers
 
       try
       {
-        var field = providerContainer.GetData<IDotTypeFormsField>(FieldTypeDataKeyConstants.RADIO_DATA_KEY, null);
+        var field = providerContainer.GetData<IDotTypeFormsField>(FieldTypeDataKeyConstants.LABEL_DATA_KEY, null);
         if (field != null)
         {
           formFields = ConvertToFormFields(field);
@@ -26,7 +26,7 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration.Handlers
       catch (Exception ex)
       {
         var message = ex.Message + Environment.NewLine + ex.StackTrace;
-        const string source = "RenderField - RadioFieldTypeHandler";
+        const string source = "RenderField - LabelFieldTypeHandler";
         var aex = new AtlantisException(source, 0, message, string.Empty);
         Engine.Engine.LogAtlantisException(aex);
 
@@ -42,38 +42,16 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration.Handlers
 
       var formField = new FormField
       {
-        Name = field.FieldName, 
+        Name = field.FieldName,
         LabelText = field.FieldLabel,
         DescriptionText = field.FieldDescription,
-        Required = field.FieldRequired,
-        DefaultValue = field.FieldDefaultValue,
-        Type = FormFieldTypes.Radio, 
-        ItemCollection = field.ItemCollection,
+        Type = FormFieldTypes.Label,
         DependsCollection = field.DependsCollection
       };
+
       result.Add(formField);
 
       return result;
     }
-
-    //private static string ConvertToHtml(IDotTypeFormsField field)
-    //{
-    //  var result = new StringBuilder();
-
-    //  if (field.ItemCollection.Count > 0)
-    //  {
-    //    result.Append("<div class='section-row groove orient-vert'>");
-    //    foreach (var item in field.ItemCollection)
-    //    {
-    //      result.Append("<div>");
-    //      result.Append("<input type='radio' name='" + field.FieldName + "' value='" + item.ItemId + ">'</input>");
-    //      result.Append("<label class='font-sm'>" + field.FieldLabel + "</label>");
-    //      result.Append("</div>");
-    //    }
-    //    result.Append("</div>");
-    //  }
-
-    //  return result.ToString();
-    //}
   }
 }

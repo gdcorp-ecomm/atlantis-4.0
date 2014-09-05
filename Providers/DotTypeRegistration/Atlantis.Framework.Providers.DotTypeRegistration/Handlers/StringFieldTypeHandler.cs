@@ -46,7 +46,8 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration.Handlers
         DescriptionText = field.FieldDescription,
         Required = field.FieldRequired,
         DefaultValue = field.FieldDefaultValue,
-        Type = FormFieldTypes.InputText
+        Type = FormFieldTypes.InputText,
+        DependsCollection = field.DependsCollection
       };
       result.Add(formField);
       return result;

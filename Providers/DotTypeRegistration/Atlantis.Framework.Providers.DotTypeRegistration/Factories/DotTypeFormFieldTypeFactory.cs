@@ -45,6 +45,9 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration.Factories
         case DotTypeFormFieldTypes.Hidden:
           fieldTypeHandler = new HiddenFieldTypeHandler();
           break;
+        case DotTypeFormFieldTypes.Label:
+          fieldTypeHandler = new LabelFieldTypeHandler();
+          break;
       }
 
       return fieldTypeHandler;

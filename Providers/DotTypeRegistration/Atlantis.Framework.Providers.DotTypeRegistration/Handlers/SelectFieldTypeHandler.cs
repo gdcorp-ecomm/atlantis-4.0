@@ -48,7 +48,8 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration.Handlers
         Required = field.FieldRequired,
         DefaultValue = field.FieldDefaultValue,
         Type = FormFieldTypes.Select, 
-        ItemCollection = field.ItemCollection
+        ItemCollection = field.ItemCollection,
+        DependsCollection = field.DependsCollection
       };
       result.Add(formField);
 

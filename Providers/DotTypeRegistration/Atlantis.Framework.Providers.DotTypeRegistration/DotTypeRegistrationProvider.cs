@@ -324,6 +324,7 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration
             formItems["formName"] = form.FormName;
             formItems["formType"] = form.FormType;
             formItems["formLabel"] = form.FormLabel;
+            formItems["validationLevel"] = form.ValidationLevel ?? "tld";
 
             if (form.FormFieldCollection != null)
             {

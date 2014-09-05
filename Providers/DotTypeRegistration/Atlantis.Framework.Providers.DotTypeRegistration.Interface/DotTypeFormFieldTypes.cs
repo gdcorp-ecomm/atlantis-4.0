@@ -13,6 +13,7 @@
     Datetime = 7,
     Email = 8,
     Phone = 9,
-    Hidden = 10
+    Hidden = 10,
+    Label = 11
   }
 }

@@ -17,7 +17,7 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration
     public string Name
     {
       get { return _name; }
-      set { _name = VALIDATE_FIELD_PREFIX + value; } 
+      set { _name = string.Concat(VALIDATE_FIELD_PREFIX, value); }
     }
 
     public string Value { get; set; }
@@ -26,5 +26,19 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration
     public string Required { get; set; }
     public string DefaultValue { get; set; }
     public IList<IDotTypeFormsItem> ItemCollection { get; set; }
+
+    private IList<IDependsCollection> _dependsCollection;
+    public IList<IDependsCollection> DependsCollection
+    {
+      get { return _dependsCollection; }
+      set
+      {
+        _dependsCollection = value;
+        foreach (var depend in _dependsCollection)
+        {
+          depend.FieldName = string.Concat(VALIDATE_FIELD_PREFIX, depend.FieldName);
+        }
+      } 
+    }
   }
 }

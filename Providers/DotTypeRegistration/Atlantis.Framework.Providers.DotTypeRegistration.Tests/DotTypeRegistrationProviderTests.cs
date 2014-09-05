@@ -127,6 +127,25 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration.Tests
     }
 
     [TestMethod]
+    public void DotTypeFormsSchemaSuccessForLawyer()
+    {
+      IDotTypeFormFieldsByDomain dotTypeFormFieldsByDomain;
+      string[] domains = { "asdfaeadgsadf234.lawyer" };
+
+      var provider = ProviderContainer.Resolve<IDotTypeRegistrationProvider>();
+
+      var lookup = DotTypeFormSchemaLookup.Create("dpp", "lawyer", "fos", "ga");
+
+      var tlds = new List<string> { "LAWYER" };
+
+      lookup.DomainContactGroup = GetDomainContactGroup(tlds, domains);
+
+      bool isSuccess = provider.GetDotTypeFormSchemas(lookup, domains, out dotTypeFormFieldsByDomain);
+      Assert.AreEqual(true, isSuccess);
+      Assert.AreEqual(true, dotTypeFormFieldsByDomain != null && dotTypeFormFieldsByDomain.FormFieldsByDomain.Count > 0);
+    }
+
+    [TestMethod]
     public void DotTypeFormsSchemaFailure()
     {
       var provider = ProviderContainer.Resolve<IDotTypeRegistrationProvider>();
@@ -177,6 +196,18 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration.Tests
 
       const string domain = "validateandt9st.lrclaim";
       var lookup = DotTypeFormSchemaLookup.Create("claims", "lrclaim", "mobile", "lr");
+
+      bool isSuccess = provider.DotTypeClaimsExist(lookup, domain);
+      Assert.AreEqual(true, isSuccess);
+    }
+
+    [TestMethod]
+    public void DotTypeClaimsExistForNyc()
+    {
+      var provider = ProviderContainer.Resolve<IDotTypeRegistrationProvider>();
+
+      const string domain = "testandvalidate.nyc";
+      var lookup = DotTypeFormSchemaLookup.Create("claims", "nyc", "fos", "ga");
 
       bool isSuccess = provider.DotTypeClaimsExist(lookup, domain);
       Assert.AreEqual(true, isSuccess);

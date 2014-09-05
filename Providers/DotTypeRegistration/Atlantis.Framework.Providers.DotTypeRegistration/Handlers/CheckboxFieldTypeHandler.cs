@@ -47,7 +47,8 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration.Handlers
         DescriptionText = field.FieldDescription,
         Required = field.FieldRequired,
         DefaultValue = field.FieldDefaultValue,
-        Type = FormFieldTypes.Checkbox
+        Type = FormFieldTypes.Checkbox,
+        DependsCollection = field.DependsCollection
       };
       result.Add(formField);
 	  

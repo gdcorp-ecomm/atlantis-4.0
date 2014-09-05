@@ -45,6 +45,9 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration.Handlers
         case "hidden":
           formFieldType = DotTypeFormFieldTypes.Hidden;
           break;
+        case "label":
+          formFieldType = DotTypeFormFieldTypes.Label;
+          break;
         default:
           formFieldType = DotTypeFormFieldTypes.None;
           break;
@@ -94,6 +97,9 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration.Handlers
             break;
           case DotTypeFormFieldTypes.Hidden:
             providerContainer.SetData(FieldTypeDataKeyConstants.HIDDEN_DATA_KEY, field);
+            break;
+          case DotTypeFormFieldTypes.Label:
+            providerContainer.SetData(FieldTypeDataKeyConstants.LABEL_DATA_KEY, field);
             break;
           default:
             providerContainer.SetData(FieldTypeDataKeyConstants.CHECKBOX_DATA_KEY, field);

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.DotTypeForms.Interface
@@ -9,11 +10,15 @@ namespace Atlantis.Framework.DotTypeForms.Interface
     private readonly AtlantisException _exception;
     private readonly bool _isSuccess;
     private readonly DotTypeFormsSchema _dotTypeFormsSchema;
+    private readonly HttpStatusCode _tuiResponseStatusCode;
+    private readonly string _tuiResponseStatusDescription;
 
-    public DotTypeFormsXmlResponseData(string responseXml)
+    public DotTypeFormsXmlResponseData(string responseXml, HttpStatusCode tuiStatusCode, string tuiStatusDescription)
     {
       _responseXml = responseXml;
       _exception = null;
+      _tuiResponseStatusCode = tuiStatusCode;
+      _tuiResponseStatusDescription = tuiStatusDescription;
 
       if (!string.IsNullOrEmpty(responseXml))
       {
@@ -46,6 +51,16 @@ namespace Atlantis.Framework.DotTypeForms.Interface
     public bool IsSuccess
     {
       get { return _isSuccess; }
+    }
+
+    public HttpStatusCode TuiResponseStatusCode
+    {
+      get { return _tuiResponseStatusCode; }
+    }
+
+    public string TuiResponseStatusDescription
+    {
+      get { return _tuiResponseStatusDescription; }
     }
 
     public AtlantisException GetException()

@@ -13,5 +13,6 @@ namespace Atlantis.Framework.DotTypeForms.Interface
     public string DataSource { get; set; }
     public string DataSourceMethod { get; set; }
     public IList<IDotTypeFormsItem> ItemCollection { get; set; }
+    public IList<IDependsCollection> DependsCollection { get; set; }
   }
 }

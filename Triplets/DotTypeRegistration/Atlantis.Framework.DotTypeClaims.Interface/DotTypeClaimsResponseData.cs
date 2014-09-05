@@ -26,12 +26,7 @@ namespace Atlantis.Framework.DotTypeClaims.Interface
 
     public static DotTypeClaimsResponseData FromResponseXml(string responseXml)
     {
-      if (!string.IsNullOrEmpty(responseXml))
-      {
-        return new DotTypeClaimsResponseData(responseXml);
-      }
-      
-      return Empty;
+      return !string.IsNullOrEmpty(responseXml) ? new DotTypeClaimsResponseData(responseXml) : Empty;
     }
 
     private DotTypeClaimsResponseData(string responseXml)
@@ -54,7 +49,7 @@ namespace Atlantis.Framework.DotTypeClaims.Interface
               _isSuccess = false;
 
               const string message = "Xml with invalid NoticeXml, HtmlData";
-              var xmlHeaderException = new AtlantisException("DotTypeClaimsResponseData", "0", message, responseXml, null, null);
+              var xmlHeaderException = new AtlantisException("DotTypeClaimsResponseData", 0, message, responseXml);
               throw xmlHeaderException;
             }
             else
@@ -78,7 +73,8 @@ namespace Atlantis.Framework.DotTypeClaims.Interface
       {
         _isSuccess = false;
 
-        var exception = new AtlantisException("DotTypeClaimsResponseData.FromResponseXml", "0", ex.Message + ex.StackTrace, responseXml, null, null);
+        var message = string.Format("{0} | {1}", ex.Message, ex.StackTrace);
+        var exception = new AtlantisException("DotTypeClaimsResponseData.FromResponseXml", 0, message, responseXml);
         Engine.Engine.LogAtlantisException(exception);
       }
     }

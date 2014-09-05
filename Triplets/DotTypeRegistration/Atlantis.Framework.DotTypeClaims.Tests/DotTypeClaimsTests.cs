@@ -41,5 +41,13 @@ namespace Atlantis.Framework.DotTypeClaims.Tests
         Assert.IsTrue(true);
       }
     }
+
+    [TestMethod]
+    public void DotTypeClaimsRequestData_ToXml()
+    {
+      var request = new DotTypeClaimsRequestData(1734, "FOS", "GA", "en-US", "123.lrclaim");
+      var xml = request.ToXML();
+      Assert.IsNotNull(xml);
+    }
   }
 }

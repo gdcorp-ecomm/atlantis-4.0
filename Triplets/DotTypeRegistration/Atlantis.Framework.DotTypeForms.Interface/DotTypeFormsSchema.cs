@@ -10,9 +10,7 @@ namespace Atlantis.Framework.DotTypeForms.Interface
     public IDotTypeFormsForm Form { get; set; }
     public bool IsSuccess { get; set; }
 
-    public DotTypeFormsSchema()
-    {
-    }
+    public DotTypeFormsSchema() {}
 
     public DotTypeFormsSchema(string responseXml)
     {
@@ -40,6 +38,7 @@ namespace Atlantis.Framework.DotTypeForms.Interface
               var formLabel = formElement.Attribute("label");
               var formDescription = formElement.Attribute("description");
               var formType = formElement.Attribute("type");
+              var validationLevel = formElement.Attribute("level");
 
               if (formName == null || formDescription == null || formType == null)
               {
@@ -55,7 +54,9 @@ namespace Atlantis.Framework.DotTypeForms.Interface
                   FormName = formName.Value,
                   FormLabel = formLabel != null ? formLabel.Value : "",
                   FormDescription = formDescription.Value,
-                  FormType = formType.Value
+                  FormType = formType.Value,
+                  ValidationLevel = validationLevel != null ? validationLevel.Value : "tld",
+                  FormFieldCollection = new FormFieldCollection()
                 };
 
               dotTypeFormsForm.FormFieldCollection = ParseFormFieldCollection(formElement);
@@ -68,8 +69,10 @@ namespace Atlantis.Framework.DotTypeForms.Interface
               else
               {
                 const string message = "Xml is missing FieldCollection";
+                
                 var xmlHeaderException = new AtlantisException("DotTypeFormsSchemaResponseData.BuildModelFromXml", "0",
                                                                 message, responseXml, null, null);
+
                 throw xmlHeaderException;
               }
               form = dotTypeFormsForm;
@@ -98,7 +101,8 @@ namespace Atlantis.Framework.DotTypeForms.Interface
           {
             Label = fieldCollectionElement.Attribute("label") != null ? fieldCollectionElement.Attribute("label").Value : string.Empty,
             ToggleValue = fieldCollectionElement.Attribute("toggle") != null ? fieldCollectionElement.Attribute("toggle").Value : string.Empty,
-            ToggleText = fieldCollectionElement.Attribute("toggletext") != null ? fieldCollectionElement.Attribute("toggletext").Value : string.Empty
+            ToggleText = fieldCollectionElement.Attribute("toggletext") != null ? fieldCollectionElement.Attribute("toggletext").Value : string.Empty,
+            FieldCollection = new List<IDotTypeFormsField>()
           };
       }
 
@@ -124,7 +128,8 @@ namespace Atlantis.Framework.DotTypeForms.Interface
             FieldDefaultValue = field.Attribute("default") != null ? field.Attribute("default").Value : string.Empty,
             DataSource = field.Attribute("datasource") != null ? field.Attribute("datasource").Value : string.Empty,
             DataSourceMethod = field.Attribute("method") != null ? field.Attribute("method").Value : string.Empty,
-            ItemCollection = ParseItemCollection(field)
+            ItemCollection = ParseItemCollection(field),
+            DependsCollection = ParseDependsCollection(field)
           };
 
         fieldCollection.Add(dotTypeFormsField);
@@ -132,6 +137,8 @@ namespace Atlantis.Framework.DotTypeForms.Interface
 
       return fieldCollection;
     }
+
+    #region Parse Collection Methods
 
     private IList<IDotTypeFormsItem> ParseItemCollection(XElement parent)
     {
@@ -154,5 +161,29 @@ namespace Atlantis.Framework.DotTypeForms.Interface
 
       return itemCollection;
     }
+
+    private IList<IDependsCollection> ParseDependsCollection(XElement parent)
+    {
+      IList<IDependsCollection> collection = null;
+
+      var collectionElement = parent.Element("dependscollection");
+      if (collectionElement != null)
+      {
+        collection = new List<IDependsCollection>();
+        foreach (XElement item in collectionElement.Elements("dependson"))
+        {
+          var dotTypeFormsItem = new DependsCollection
+          {
+            FieldName = item.Attribute("fieldname").Value,
+            FieldValue = item.Attribute("fieldvalue").Value
+          };
+          collection.Add(dotTypeFormsItem);
+        }
+      }
+
+      return collection;
+    }
+
+    #endregion Parse Collection Methods
   }
 }

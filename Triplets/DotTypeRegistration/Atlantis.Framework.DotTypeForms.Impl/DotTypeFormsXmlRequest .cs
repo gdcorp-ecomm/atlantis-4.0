@@ -14,6 +14,8 @@ namespace Atlantis.Framework.DotTypeForms.Impl
       DotTypeFormsXmlResponseData result;
       Stream post = null;
       string response = string.Empty;
+      HttpStatusCode tuiStatusCode = HttpStatusCode.NoContent;
+      string tuiStatusDescription = string.Empty;
 
       try
       {
@@ -56,6 +58,9 @@ namespace Atlantis.Framework.DotTypeForms.Impl
           var webResponse = webRequest.GetResponse() as HttpWebResponse;
           if (webResponse != null)
           {
+            tuiStatusCode = webResponse.StatusCode;
+            tuiStatusDescription = webResponse.StatusDescription;
+
             var webResponseData = webResponse.GetResponseStream();
             if (webResponseData != null)
             {
@@ -76,14 +81,14 @@ namespace Atlantis.Framework.DotTypeForms.Impl
           }
         }
 
-        result = new DotTypeFormsXmlResponseData(response);
+        result = new DotTypeFormsXmlResponseData(response, tuiStatusCode, tuiStatusDescription);
       }
       catch (WebException ex)
       {
         if (ex.Response is HttpWebResponse && ((HttpWebResponse)ex.Response).StatusCode == HttpStatusCode.NotFound)
         {
           //no error logging is required
-          result = new DotTypeFormsXmlResponseData(string.Empty);
+          result = new DotTypeFormsXmlResponseData(string.Empty, tuiStatusCode, tuiStatusDescription);
         }
         else
         {

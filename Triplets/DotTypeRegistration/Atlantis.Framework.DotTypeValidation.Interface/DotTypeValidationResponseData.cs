@@ -1,7 +1,7 @@
-﻿using System;
+﻿using Atlantis.Framework.Interface;
+using System;
 using System.Collections.Generic;
 using System.Xml.Linq;
-using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.DotTypeValidation.Interface
 {
@@ -30,7 +30,8 @@ namespace Atlantis.Framework.DotTypeValidation.Interface
     public DotTypeValidationResponseData(string responseXml, RequestData requestData, Exception ex)
     {
       _responseXml = responseXml;
-      _exception = new AtlantisException(requestData, "DotTypeFormsValidationResponseData", ex.Message, requestData.ToXML());
+      var message = string.Format("{0} | {1}", ex.Message, ex.StackTrace);
+      _exception = new AtlantisException("DotTypeFormsValidationResponseData", 0, message, requestData.ToXML());
     }
 
     public bool IsSuccess
@@ -96,7 +97,7 @@ namespace Atlantis.Framework.DotTypeValidation.Interface
       }
       catch (Exception ex)
       {
-        var exception = new AtlantisException("DotTypeFormsValidationResponseData.BuildFromXml", "0", ex.Message + ex.StackTrace, _responseXml, null, null);
+        var exception = new AtlantisException("DotTypeFormsValidationResponseData.BuildFromXml", 0, ex.Message + ex.StackTrace, _responseXml);
         Engine.Engine.LogAtlantisException(exception);
       }
     }

@@ -11,7 +11,7 @@ namespace Atlantis.Framework.DotTypeClaims.Impl
   {
     public IResponseData RequestHandler(RequestData requestData, ConfigElement config)
     {
-      DotTypeClaimsResponseData responseData = null;
+      DotTypeClaimsResponseData responseData;
       string responseXml = string.Empty;
 
       try

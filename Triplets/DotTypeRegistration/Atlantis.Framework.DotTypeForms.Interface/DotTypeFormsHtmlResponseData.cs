@@ -1,6 +1,6 @@
-﻿using System;
-using System.Web.Script.Serialization;
-using Atlantis.Framework.Interface;
+﻿using Atlantis.Framework.Interface;
+using Newtonsoft.Json;
+using System;
 
 namespace Atlantis.Framework.DotTypeForms.Interface
 {
@@ -18,13 +18,14 @@ namespace Atlantis.Framework.DotTypeForms.Interface
         bool isError = false;
         try
         {
-          var serializer = new JavaScriptSerializer();
-          var data = serializer.Deserialize<TuiResponse>(responseHtml);
-
+          var data = JsonConvert.DeserializeObject<TuiResponse>(responseHtml);
           isError = data.ResponseType.Equals("error");
         }
-        catch (Exception)
+        catch (Exception ex)
         {
+          var message = string.Format("{0} | {1}", ex.Message, ex.StackTrace);
+          var aex = new AtlantisException("DotTypeFormsHtmlResponseData", 0, message, responseHtml);
+          Engine.Engine.LogAtlantisException(aex);
         }
 
         _responseHtml = responseHtml;

@@ -40,7 +40,7 @@
     </Reference>
     <Reference Include="Atlantis.Framework.Engine, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.Engine.4.0.0.0\lib\net40\Atlantis.Framework.Engine.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.Engine.14.3.1.1\lib\net40\Atlantis.Framework.Engine.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Engine.XmlSerializers, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -65,6 +65,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DependsCollection.cs" />
     <Compile Include="DotTypeFormContact.cs" />
     <Compile Include="DotTypeFormContactTypes.cs" />
     <Compile Include="DotTypeFormsHtmlResponseData.cs" />
@@ -77,6 +78,7 @@
     <Compile Include="DotTypeFormsXmlResponseData.cs" />
     <Compile Include="DotTypeFormsXmlRequestData.cs" />
     <Compile Include="FormFieldCollection.cs" />
+    <Compile Include="IDependsCollection.cs" />
     <Compile Include="IDotTypeFormsField.cs" />
     <Compile Include="IDotTypeFormsForm.cs" />
     <Compile Include="IDotTypeFormsItem.cs" />

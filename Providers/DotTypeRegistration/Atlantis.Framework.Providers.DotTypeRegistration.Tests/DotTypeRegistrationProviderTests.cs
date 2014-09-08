@@ -59,6 +59,27 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration.Tests
     }
 
     [TestMethod]
+    public void DotTypeFormFieldsByDomain_ToJsonTest()
+    {
+      IDotTypeFormFieldsByDomain dotTypeFormFieldsByDomain;
+      string[] domains = { "asdfaeadgsadf234.lawyer" };
+
+      var provider = ProviderContainer.Resolve<IDotTypeRegistrationProvider>();
+
+      var lookup = DotTypeFormSchemaLookup.Create("dpp", "lawyer", "fos", "ga");
+
+      var tlds = new List<string> { "LAWYER" };
+
+      lookup.DomainContactGroup = GetDomainContactGroup(tlds, domains);
+      
+      provider.GetDotTypeFormSchemas(lookup, domains, out dotTypeFormFieldsByDomain);
+
+      var formFieldsByDomain = new DotTypeFormFieldsByDomain(dotTypeFormFieldsByDomain.FormFieldsByDomain, dotTypeFormFieldsByDomain.FormItems);
+      var json = formFieldsByDomain.ToJson;
+      Assert.IsTrue(json.Contains("Radio"));
+    }
+
+    [TestMethod]
     public void DotTypeFormsSchemaSuccess()
     {
       IDotTypeFormFieldsByDomain dotTypeFormFieldsByDomain;

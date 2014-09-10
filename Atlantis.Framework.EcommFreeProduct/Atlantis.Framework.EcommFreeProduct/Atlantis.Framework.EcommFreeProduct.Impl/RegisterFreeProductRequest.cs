@@ -24,7 +24,7 @@ namespace Atlantis.Framework.EcommFreeProduct.Impl
             svc.Url = wsConfig.WSURL;
             svc.Timeout = Convert.ToInt32(requestData.RequestTimeout.TotalMilliseconds);
             svc.ClientCertificates.Add(wsConfig.GetClientCertificate("CertificateName"));
-            returnValue = new RegisterFreeProductResponseData(svc.ProcessFreeItems(requestData.ShopperID, requestData.ToXML()));
+            returnValue = new RegisterFreeProductResponseData(svc.ProcessFreeItemsAndGetFullResponse(requestData.ShopperID, requestData.ToXML()));
           }
           if (XDocument.Parse(requestData.ToXML()).Elements("error").Any())
           {

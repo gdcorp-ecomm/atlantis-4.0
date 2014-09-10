@@ -11,6 +11,8 @@ namespace Atlantis.Framework.RegFreeProduct.Test
   /// Summary description for UnitTest1
   /// </summary>
   [TestClass]
+  [DeploymentItem("atlantis.config")]
+  [DeploymentItem("Atlantis.Framework.EcommFreeProduct.Impl.dll")]
   public class GetRegFreeProductTests
   {
 
@@ -64,22 +66,21 @@ namespace Atlantis.Framework.RegFreeProduct.Test
     //
     #endregion
 
-    //[TestMethod]
-    //[DeploymentItem("atlantis.config")]
-    //[DeploymentItem("Atlantis.Framework.EcommFreeProduct.Impl.dll")]
-    //public void RegFreeProductTest()
-    //{
-    //  MockHttpContext.SetMockHttpContext(string.Empty, "http://localhost", string.Empty);
+    [TestMethod]
+    public void RegFreeProductTest()
+    {
+      MockHttpContext.SetMockHttpContext(string.Empty, "http://localhost", string.Empty);
 
-    //  var request = new RegisterFreeProductRequestData(_shopperId, string.Empty);
-    //  request.AddItem("2701", "1");
+      var request = new RegisterFreeProductRequestData(_shopperId, string.Empty);
+      request.AddItem("2701", "1");
 
-    //  var _requestType = 679;
-    //  var response = (RegisterFreeProductResponseData)Engine.Engine.ProcessRequest(request, _requestType);
+      var _requestType = 679;
+      var response = (RegisterFreeProductResponseData)Engine.Engine.ProcessRequest(request, _requestType);
 
-    //  Debug.WriteLine(response.ToXML());
-    //  Assert.IsTrue(response.IsSuccess);
-    //}
+      Debug.WriteLine(response.ToXML());
+      Assert.IsTrue(response.IsSuccess);
+      Assert.IsNotNull(response.Items);
+    }
 
     //[TestMethod]
     //[DeploymentItem("atlantis.config")]
@@ -100,8 +101,6 @@ namespace Atlantis.Framework.RegFreeProduct.Test
 
 
     [TestMethod]
-    [DeploymentItem("atlantis.config")]
-    [DeploymentItem("Atlantis.Framework.EcommFreeProduct.Impl.dll")]
     public void RegFreeTrialProductXMLTest()
     {
       MockHttpContext.SetMockHttpContext(string.Empty, "http://localhost", string.Empty);

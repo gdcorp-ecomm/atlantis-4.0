@@ -80,6 +80,29 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration.Tests
     }
 
     [TestMethod]
+    public void GetDotTypeFormSchemas_CheckValidationLevel()
+    {
+      IDotTypeFormFieldsByDomain dotTypeFormFieldsByDomain;
+      string[] domains = { "carinaoweijeowiejf.eaplawyer" };
+      var tlds = new List<string> { "eaplawyer" };
+
+      var provider = ProviderContainer.Resolve<IDotTypeRegistrationProvider>();
+
+      var lookup = DotTypeFormSchemaLookup.Create("dpp", "eaplawyer", "FOS", "GA");
+      lookup.DomainContactGroup = GetDomainContactGroup(tlds, domains);
+      provider.GetDotTypeFormSchemas(lookup, domains, out dotTypeFormFieldsByDomain);
+
+      if (dotTypeFormFieldsByDomain != null)
+      {
+        Assert.AreEqual(dotTypeFormFieldsByDomain.FormItems.ValidationLevel, "domain");
+      }
+      else
+      {
+        Assert.Fail();
+      }
+    }
+    
+    [TestMethod]
     public void DotTypeFormsSchemaSuccess()
     {
       IDotTypeFormFieldsByDomain dotTypeFormFieldsByDomain;

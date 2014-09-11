@@ -9,10 +9,10 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration
   public class DotTypeFormFieldsByDomain : IDotTypeFormFieldsByDomain
   {
     public IDictionary<string, IList<IList<IFormField>>> FormFieldsByDomain { get; set; }
-    public IDictionary<string, string> FormItems { get; set; }
+    public IFormItems FormItems { get; set; }
     public string ToJson { get; set; }
 
-    public DotTypeFormFieldsByDomain(IDictionary<string, IList<IList<IFormField>>> formFieldsByDomain, IDictionary<string, string> formItems)
+    public DotTypeFormFieldsByDomain(IDictionary<string, IList<IList<IFormField>>> formFieldsByDomain, IFormItems formItems)
     {
       FormFieldsByDomain = formFieldsByDomain;
       FormItems = formItems;

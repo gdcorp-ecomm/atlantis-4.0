@@ -1,4 +1,7 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Xml.Linq;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Diagnostics;
 using Atlantis.Framework.EcommFreeProduct.Impl;
 using Atlantis.Framework.EcommFreeProduct.Interface;
@@ -80,6 +83,10 @@ namespace Atlantis.Framework.RegFreeProduct.Test
       Debug.WriteLine(response.ToXML());
       Assert.IsTrue(response.IsSuccess);
       Assert.IsNotNull(response.Items);
+      Assert.AreEqual(1, response.Items.Count());
+      List<XElement> nodes = response.Items.ToList();
+      Assert.AreEqual("1", nodes[0].Attribute("quantity").Value);
+      Assert.AreEqual("2701", nodes[0].Attribute("pf_id").Value);
     }
 
     //[TestMethod]

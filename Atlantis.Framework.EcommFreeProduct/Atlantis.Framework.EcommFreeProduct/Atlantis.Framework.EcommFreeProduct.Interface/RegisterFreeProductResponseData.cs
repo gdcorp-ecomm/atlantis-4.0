@@ -54,7 +54,7 @@ namespace Atlantis.Framework.EcommFreeProduct.Interface
       }
     }
 
-    public IEnumerable<XNode> Items
+    public IEnumerable<XElement> Items
     {
       get
       {

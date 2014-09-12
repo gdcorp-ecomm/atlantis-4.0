@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using Atlantis.Framework.Interface;
-using Atlantis.Framework.Providers.RenderPipeline.Interface;
 
 namespace Atlantis.Framework.Providers.PlaceHolder.Interface
 {
@@ -11,8 +10,6 @@ namespace Atlantis.Framework.Providers.PlaceHolder.Interface
     string Markup { get; }
 
     string Data { get; }
-
-    IList<IRenderHandler> RenderHandlers { get; }
 
     ICollection<string> DebugContextErrors { get; }
 

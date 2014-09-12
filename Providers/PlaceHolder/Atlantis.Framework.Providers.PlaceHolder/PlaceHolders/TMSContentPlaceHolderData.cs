@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Xml;
 using System.Xml.Linq;
-using System.Xml.Serialization;
 
 namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolders
 {
@@ -17,20 +13,67 @@ namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolders
 
     private IDictionary<string, string> _attributesDictionary;
 
-    internal DefaultData Default { get; private set; }
-
     internal TMSContentPlaceHolderData(string dataXml)
     {
       Deserialize(dataXml);
     }
 
-    internal TMSContentPlaceHolderData(IList<KeyValuePair<string, string>> attributes, DefaultData defaultData)
+    internal TMSContentPlaceHolderData(IList<KeyValuePair<string, string>> attributes, string defaultApplication, string defaultLocation)
     {
       BuildAttributesDictionary(attributes);
-      Default = defaultData;
+      DefaultApplication = defaultApplication;
+      DefaultLocation = defaultLocation;
     }
 
-    public string Serialize()
+    private string _appProduct;
+    internal string AppProduct
+    {
+      get
+      {
+        if (_appProduct == null)
+        {
+          string appProduct;
+          if (TryGetAttribute(PlaceHolderAttributes.AppProduct, out appProduct))
+          {
+            _appProduct = appProduct;
+          }
+          else
+          {
+            _appProduct = string.Empty;
+          }
+        }
+
+        return _appProduct;
+      }
+    }
+
+    private string _interactionName;
+    internal string InteractionName
+    {
+      get
+      {
+        if (_interactionName == null)
+        {
+          string interactionName;
+          if (TryGetAttribute(PlaceHolderAttributes.InteractionPoint, out interactionName))
+          {
+            _interactionName = interactionName;
+          }
+          else
+          {
+            _interactionName = string.Empty;
+          }
+        }
+
+        return _interactionName;
+      }
+    }
+
+    internal string DefaultApplication { get; private set; }
+
+    internal string DefaultLocation { get; private set; }
+
+    internal string Serialize()
     {
       string xml;
 
@@ -38,18 +81,17 @@ namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolders
       {
         XElement dataElement = new XElement(DATA_ELEMENT_NAME);
 
-        // Write Attributes
         foreach (KeyValuePair<string, string> item in _attributesDictionary)
         {
           dataElement.Add(new XAttribute(item.Key, item.Value));
         }
 
-        // Write Default Parameter
-        if (Default != null)
+        if (DefaultApplication != null && DefaultLocation != null)
         {
           XElement defaultElement = new XElement(DEFAULT_ELEMENT_NAME,
-            new XAttribute(DEFAULT_ELEMENT_APP, Default.Application),
-            new XAttribute(DEFAULT_ELEMENT_LOCATION, Default.Location));
+                                      new XAttribute(DEFAULT_ELEMENT_APP, DefaultApplication),
+                                      new XAttribute(DEFAULT_ELEMENT_LOCATION, DefaultLocation));
+          
           dataElement.Add(defaultElement);
         }
 
@@ -96,20 +138,17 @@ namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolders
       {
         XElement dataElement = XElement.Parse(dataXml, LoadOptions.None);
 
-        // Read Attributes
         _attributesDictionary = new Dictionary<string, string>(16);
         foreach (XAttribute item in dataElement.Attributes())
         {
           _attributesDictionary[item.Name.ToString()] = item.Value;
         }
 
-        // Read DefaultContent Parameter
         XElement defaultElement = dataElement.Element(DEFAULT_ELEMENT_NAME);
         if (defaultElement != null)
         {
-          Default = new DefaultData();
-          Default.Application = defaultElement.Attribute(DEFAULT_ELEMENT_APP).Value;
-          Default.Location = defaultElement.Attribute(DEFAULT_ELEMENT_LOCATION).Value;
+          DefaultApplication = defaultElement.Attribute(DEFAULT_ELEMENT_APP).Value;
+          DefaultLocation = defaultElement.Attribute(DEFAULT_ELEMENT_LOCATION).Value;
         }
         else
         {
@@ -121,13 +160,6 @@ namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolders
         _attributesDictionary = new Dictionary<string, string>(0);
         ErrorLogger.LogException(ex.Message, "TMSContentPlaceHolderData.Deserialize()", ex.StackTrace);
       }
-    }
-
-    public class DefaultData
-    {
-      public string Application { get; set; }
-
-      public string Location { get; set; }
     }
   }
 }

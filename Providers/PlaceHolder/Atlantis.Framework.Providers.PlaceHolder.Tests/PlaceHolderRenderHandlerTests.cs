@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Reflection;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.CDSContent;
@@ -58,26 +57,10 @@ namespace Atlantis.Framework.Providers.PlaceHolder.Tests
       IProviderContainer providerContainer = InitializeProviderContainer();
 
       IRenderPipelineProvider renderPipelineProvider = providerContainer.Resolve<IRenderPipelineProvider>();
-      string renderedContent = renderPipelineProvider.RenderContent(placeHolder.ToMarkup(), new List<IRenderHandler> { new PlaceHolderRenderHandler(null) });
+      string renderedContent = renderPipelineProvider.RenderContent(placeHolder.ToMarkup(), new List<IRenderHandler> { new PlaceHolderRenderHandler() });
 
       WriteOutput(renderedContent);
       Assert.IsTrue(renderedContent.Equals("Web Control One!" + "Init event fired!!!" + "Load event fired!!!" + "PreRender event fired!!!"));
-    }
-
-    [TestMethod]
-    public void RenderWebControlPlaceHolderValidAppendRenderContent()
-    {
-      IPlaceHolder placeHolder = new WebControlPlaceHolder(Assembly.GetExecutingAssembly().FullName,
-                                                           "Atlantis.Framework.Providers.PlaceHolder.Tests.WebControls.WebControlOne",
-                                                           new List<KeyValuePair<string, string>>(0));
-
-      IProviderContainer providerContainer = InitializeProviderContainer();
-
-      IRenderPipelineProvider renderPipelineProvider = providerContainer.Resolve<IRenderPipelineProvider>();
-      string renderedContent = renderPipelineProvider.RenderContent(placeHolder.ToMarkup(), new List<IRenderHandler> { new PlaceHolderRenderHandler(new List<IRenderHandler> { new AppendRenderHandler("APPENDED RENDER HANDLER CONTENT!!!") }) });
-
-      WriteOutput(renderedContent);
-      Assert.IsTrue(renderedContent.Equals("Web Control One!" + "Init event fired!!!" + "Load event fired!!!" + "PreRender event fired!!!" + "APPENDED RENDER HANDLER CONTENT!!!"));
     }
 
     [TestMethod]
@@ -86,7 +69,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder.Tests
       IProviderContainer providerContainer = InitializeProviderContainer();
 
       IRenderPipelineProvider renderPipelineProvider = providerContainer.Resolve<IRenderPipelineProvider>();
-      string renderedContent = renderPipelineProvider.RenderContent(null, new List<IRenderHandler> { new PlaceHolderRenderHandler(null) });
+      string renderedContent = renderPipelineProvider.RenderContent(null, new List<IRenderHandler> { new PlaceHolderRenderHandler() });
 
       WriteOutput(renderedContent);
       Assert.IsTrue(renderedContent == null);
@@ -98,7 +81,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder.Tests
       IProviderContainer providerContainer = InitializeProviderContainer();
 
       IRenderPipelineProvider renderPipelineProvider = providerContainer.Resolve<IRenderPipelineProvider>();
-      string renderedContent = renderPipelineProvider.RenderContent(string.Empty, new List<IRenderHandler> { new PlaceHolderRenderHandler(null) });
+      string renderedContent = renderPipelineProvider.RenderContent(string.Empty, new List<IRenderHandler> { new PlaceHolderRenderHandler() });
 
       WriteOutput(renderedContent);
       Assert.IsTrue(renderedContent == string.Empty);

@@ -3,7 +3,6 @@ using System.Collections.ObjectModel;
 using System.Text;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.PlaceHolder.Interface;
-using Atlantis.Framework.Providers.RenderPipeline.Interface;
 
 namespace Atlantis.Framework.Providers.PlaceHolder
 {
@@ -15,23 +14,23 @@ namespace Atlantis.Framework.Providers.PlaceHolder
     {
     }
 
-    public string ReplacePlaceHolders(string content, IList<IRenderHandler> placeHolderRenderHandlers)
+    public string ReplacePlaceHolders(string content)
     {
       string originalContent = content ?? string.Empty;
       string finalContent = string.Empty;
 
       if (originalContent != string.Empty)
       {
-        finalContent = ProcessPlaceHolderMatches(originalContent, placeHolderRenderHandlers);
+        finalContent = ProcessPlaceHolderMatches(originalContent);
       }
 
       return finalContent;
     }
 
-    private string ProcessPlaceHolderMatches(string originalContent, IList<IRenderHandler> renderHandlers)
+    private string ProcessPlaceHolderMatches(string originalContent)
     {
       string finalContent = originalContent;
-      IList<IPlaceHolderHandler> placeHolderHandlers = PlaceHolderHandlerManager.GetPlaceHolderHandlers(originalContent, renderHandlers, _debugContextErrors, Container);
+      IList<IPlaceHolderHandler> placeHolderHandlers = PlaceHolderHandlerManager.GetPlaceHolderHandlers(originalContent, _debugContextErrors, Container);
 
       if (placeHolderHandlers.Count > 0)
       {
@@ -58,11 +57,6 @@ namespace Atlantis.Framework.Providers.PlaceHolder
       foreach (IPlaceHolderHandler placeHolderHandler in placeHolderHandlers)
       {
         placeHolderHandler.Initialize();
-
-        if (placeHolderHandler.Children.Count > 0)
-        {
-          Initialize(placeHolderHandler.Children);
-        }
       }
     }
 
@@ -71,11 +65,6 @@ namespace Atlantis.Framework.Providers.PlaceHolder
       foreach (IPlaceHolderHandler placeHolderHandler in placeHolderHandlers)
       {
         placeHolderHandler.RaiseInitEvent();
-
-        if (placeHolderHandler.Children.Count > 0)
-        {
-          RaiseInitEvent(placeHolderHandler.Children);
-        }
       }
     }
 
@@ -84,11 +73,6 @@ namespace Atlantis.Framework.Providers.PlaceHolder
       foreach (IPlaceHolderHandler placeHolderHandler in placeHolderHandlers)
       {
         placeHolderHandler.RaiseLoadEvent();
-
-        if (placeHolderHandler.Children.Count > 0)
-        {
-          RaiseLoadEvent(placeHolderHandler.Children);
-        }
       }
     }
 
@@ -97,11 +81,6 @@ namespace Atlantis.Framework.Providers.PlaceHolder
       foreach (IPlaceHolderHandler placeHolderHandler in placeHolderHandlers)
       {
         placeHolderHandler.RaisePreRenderEvent();
-
-        if (placeHolderHandler.Children.Count > 0)
-        {
-          RaisePreInitEvent(placeHolderHandler.Children);
-        }
       }
     }
 
@@ -112,10 +91,6 @@ namespace Atlantis.Framework.Providers.PlaceHolder
       foreach (IPlaceHolderHandler placeHolderHandler in placeHolderHandlers)
       {
         string renderedContent = placeHolderHandler.Render();
-        if (placeHolderHandler.Children.Count > 0)
-        {
-          renderedContent = RenderPlaceHolders(placeHolderHandler.Children, renderedContent);
-        }
 
         contentBuilder.Replace(placeHolderHandler.Markup, renderedContent);
       }

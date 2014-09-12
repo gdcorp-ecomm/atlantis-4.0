@@ -1,9 +1,9 @@
-﻿using System.Threading;
-using Atlantis.Framework.Providers.PlaceHolder.Interface;
-using System;
+﻿using System;
+using System.Threading;
 using System.Web.UI;
+using Atlantis.Framework.Providers.PlaceHolder.Interface;
 
-namespace Atlantis.Framework.Providers.PlaceHolder
+namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolderHandlers
 {
   internal class WebControlPaceHolderHandler : WebControlPlaceHolderHandlerBase
   {

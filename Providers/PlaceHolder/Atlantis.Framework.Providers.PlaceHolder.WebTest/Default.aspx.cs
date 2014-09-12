@@ -9,7 +9,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder.WebTest
     {
       base.OnInit(e);
 
-      AddRenderHandlers(new PlaceHolderRenderHandler(null));
+      AddRenderHandlers(new PlaceHolderRenderHandler());
     }
   }
 }

@@ -5,10 +5,11 @@ using Atlantis.Framework.Providers.Personalization;
 using Atlantis.Framework.Providers.Personalization.Interface;
 using Atlantis.Framework.Providers.PlaceHolder.Interface;
 using Atlantis.Framework.Providers.PlaceHolder.PlaceHolders;
-using Atlantis.Framework.Providers.RenderPipeline.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Atlantis.Framework.Providers.RenderPipeline.Interface;
+using Atlantis.Framework.Render.Containers;
 
 namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolderHandlers
 {
@@ -43,23 +44,23 @@ namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolderHandlers
             {
               personalizationProvider.AddConsumedMessage(message);
 
-              string rawContent = cdsProvider.GetContent(APP_NAME, string.Format(LOCATION_FORMAT, message.TagName)).Content;
+              renderContent = cdsProvider.GetContent(APP_NAME, string.Format(LOCATION_FORMAT, message.TagName)).Content;
               
               IRenderPipelineProvider renderPipelineProvider = Context.ProviderContainer.Resolve<IRenderPipelineProvider>();
-              renderContent = renderPipelineProvider.RenderContent(rawContent, Context.RenderHandlers);
+              renderContent = renderPipelineProvider.RenderContent(renderContent, new[] { new ProviderContainerDataTokenRenderHandler() });
             }
             else
             {
-              bool isTMSOn = true;
+              bool isTmsOn = true;
               IAppSettingsProvider appSettingsProvider;
 
               if (Context.ProviderContainer.TryResolve(out appSettingsProvider))
               {
                 string enablementSetting = appSettingsProvider.GetAppSetting(EnablementAppSetting);
-                isTMSOn = (!String.IsNullOrWhiteSpace(enablementSetting) && enablementSetting.Equals("true", StringComparison.OrdinalIgnoreCase));
+                isTmsOn = (!String.IsNullOrWhiteSpace(enablementSetting) && enablementSetting.Equals("true", StringComparison.OrdinalIgnoreCase));
               }
 
-              if (isTMSOn)
+              if (isTmsOn)
               {
                 throw new Exception(string.Format("None of the requested tags are found.  Tags: \"{0}\"", string.Join(", ", placeHolderData.MessageTags)));
               }

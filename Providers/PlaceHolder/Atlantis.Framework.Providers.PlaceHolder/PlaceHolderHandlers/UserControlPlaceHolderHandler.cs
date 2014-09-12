@@ -3,7 +3,7 @@ using System.Threading;
 using System.Web.UI;
 using Atlantis.Framework.Providers.PlaceHolder.Interface;
 
-namespace Atlantis.Framework.Providers.PlaceHolder
+namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolderHandlers
 {
   internal class UserControlPlaceHolderHandler : WebControlPlaceHolderHandlerBase
   {

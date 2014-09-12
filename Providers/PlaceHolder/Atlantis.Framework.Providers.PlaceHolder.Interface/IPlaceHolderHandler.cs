@@ -1,12 +1,9 @@
-﻿using System.Collections.Generic;
-
+﻿
 namespace Atlantis.Framework.Providers.PlaceHolder.Interface
 {
   public interface IPlaceHolderHandler
   {
     string Markup { get; }
-
-    IList<IPlaceHolderHandler> Children { get; }
 
     void Initialize();
 

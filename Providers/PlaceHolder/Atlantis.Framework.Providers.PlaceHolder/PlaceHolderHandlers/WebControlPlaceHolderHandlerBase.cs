@@ -5,12 +5,10 @@ using System.Web.UI;
 using Atlantis.Framework.Providers.PlaceHolder.Interface;
 using Atlantis.Framework.Providers.RenderPipeline.Interface;
 
-namespace Atlantis.Framework.Providers.PlaceHolder
+namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolderHandlers
 {
   internal abstract class WebControlPlaceHolderHandlerBase : IPlaceHolderHandler
   {
-    private static readonly IList<IPlaceHolderHandler> _emptyChildrenList = new List<IPlaceHolderHandler>(0);
-
     private Control _control;
     private readonly IPlaceHolderHandlerContext _context;
 
@@ -30,8 +28,6 @@ namespace Atlantis.Framework.Providers.PlaceHolder
     }
 
     public string Markup { get { return _context.Markup; } }
-
-    public IList<IPlaceHolderHandler> Children { get { return _emptyChildrenList; } }
 
     private void RaiseEvent(string eventName)
     {
@@ -93,10 +89,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder
 
       try
       {
-        string renderedContent = WebControlManager.Render(_control);
-
-        IRenderPipelineProvider renderPipelineProvider = _context.ProviderContainer.Resolve<IRenderPipelineProvider>();
-        finalContent = renderPipelineProvider.RenderContent(renderedContent, _context.RenderHandlers);
+        finalContent = WebControlManager.Render(_control);
       }
       catch (ThreadAbortException)
       {

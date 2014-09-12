@@ -1,12 +1,9 @@
-﻿using System.Collections.Generic;
-using Atlantis.Framework.Providers.PlaceHolder.Interface;
+﻿using Atlantis.Framework.Providers.PlaceHolder.Interface;
 
-namespace Atlantis.Framework.Providers.PlaceHolder
+namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolderHandlers
 {
   public class NullPlaceHolderHandler : IPlaceHolderHandler
   {
-    private static readonly IList<IPlaceHolderHandler> _emptyChildrenList = new List<IPlaceHolderHandler>(0);
-
     internal NullPlaceHolderHandler(IPlaceHolderHandlerContext context)
     {
       Markup = context.Markup;
@@ -18,8 +15,6 @@ namespace Atlantis.Framework.Providers.PlaceHolder
     }
 
     public string Markup { get; private set; }
-
-    public IList<IPlaceHolderHandler> Children { get { return _emptyChildrenList; } }
 
     public void Initialize()
     {

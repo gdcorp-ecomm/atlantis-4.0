@@ -5,12 +5,9 @@ using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.CDSContent;
 using Atlantis.Framework.Providers.CDSContent.Interface;
 using Atlantis.Framework.Providers.PlaceHolder.Interface;
-using Atlantis.Framework.Providers.RenderPipeline;
-using Atlantis.Framework.Providers.RenderPipeline.Interface;
 using Atlantis.Framework.Testing.MockHttpContext;
 using Atlantis.Framework.Testing.MockProviders;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Diagnostics;
 
 namespace Atlantis.Framework.Providers.PlaceHolder.Tests
 {
@@ -27,8 +24,6 @@ namespace Atlantis.Framework.Providers.PlaceHolder.Tests
       providerContainer.RegisterProvider<IManagerContext, MockManagerContext>();
       providerContainer.RegisterProvider<IPlaceHolderProvider, PlaceHolderProvider>();
       providerContainer.RegisterProvider<ICDSContentProvider, CDSContentProvider>();
-      providerContainer.RegisterProvider<IRenderPipelineProvider, RenderPipelineProvider>();
-
 
       return providerContainer;
     }
@@ -59,7 +54,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder.Tests
       IProviderContainer providerContainer = InitializeProviderContainer();
       IPlaceHolderProvider placeHolderProvider = providerContainer.Resolve<IPlaceHolderProvider>();
 
-      string finalContent = placeHolderProvider.ReplacePlaceHolders(content, null);
+      string finalContent = placeHolderProvider.ReplacePlaceHolders(content);
 
       WriteOutput(finalContent);
       Assert.IsFalse(finalContent.Contains("[@P[") || finalContent.Contains("]@P]"));
@@ -75,7 +70,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder.Tests
       IProviderContainer providerContainer = InitializeProviderContainer();
       IPlaceHolderProvider placeHolderProvider = providerContainer.Resolve<IPlaceHolderProvider>();
       
-      placeHolderProvider.ReplacePlaceHolders(content, null);
+      placeHolderProvider.ReplacePlaceHolders(content);
     }
 
     [TestMethod]
@@ -88,7 +83,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder.Tests
       IProviderContainer providerContainer = InitializeProviderContainer();
       IPlaceHolderProvider placeHolderProvider = providerContainer.Resolve<IPlaceHolderProvider>();
       
-      string finalContent = placeHolderProvider.ReplacePlaceHolders(content, null);
+      string finalContent = placeHolderProvider.ReplacePlaceHolders(content);
 
       WriteOutput(finalContent);
       Assert.IsTrue(finalContent.Contains("Hello World"));
@@ -102,7 +97,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder.Tests
       IProviderContainer providerContainer = InitializeProviderContainer();
       IPlaceHolderProvider placeHolderProvider = providerContainer.Resolve<IPlaceHolderProvider>();
       
-      string finalContent = placeHolderProvider.ReplacePlaceHolders(content, null);
+      string finalContent = placeHolderProvider.ReplacePlaceHolders(content);
 
       WriteOutput(finalContent);
       Assert.IsTrue(finalContent.Equals(string.Empty));
@@ -198,7 +193,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder.Tests
       IProviderContainer providerContainer = InitializeProviderContainer();
       IPlaceHolderProvider placeHolderProvider = providerContainer.Resolve<IPlaceHolderProvider>();
       
-      string renderedContent = placeHolderProvider.ReplacePlaceHolders(placeHolder.ToMarkup(), null);
+      string renderedContent = placeHolderProvider.ReplacePlaceHolders(placeHolder.ToMarkup());
       
       WriteOutput(renderedContent);
       Assert.IsTrue(renderedContent.Equals("Web Control One!" + "Init event fired!!!" + "Load event fired!!!" + "PreRender event fired!!!"));
@@ -214,7 +209,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder.Tests
       IProviderContainer providerContainer = InitializeProviderContainer();
       IPlaceHolderProvider placeHolderProvider = providerContainer.Resolve<IPlaceHolderProvider>();
 
-      string renderedContent = placeHolderProvider.ReplacePlaceHolders(placeHolder.ToMarkup(), null);
+      string renderedContent = placeHolderProvider.ReplacePlaceHolders(placeHolder.ToMarkup());
 
       WriteOutput(renderedContent);
       Assert.IsTrue(renderedContent.Equals(string.Empty));
@@ -230,7 +225,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder.Tests
       IProviderContainer providerContainer = InitializeProviderContainer();
       IPlaceHolderProvider placeHolderProvider = providerContainer.Resolve<IPlaceHolderProvider>();
       
-      string renderedContent = placeHolderProvider.ReplacePlaceHolders(placeHolder.ToMarkup(), null);
+      string renderedContent = placeHolderProvider.ReplacePlaceHolders(placeHolder.ToMarkup());
 
       WriteOutput(renderedContent);
       Assert.IsTrue(renderedContent.Equals("<div>Child Control</div>"));
@@ -255,7 +250,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder.Tests
       IProviderContainer providerContainer = InitializeProviderContainer();
       IPlaceHolderProvider placeHolderProvider = providerContainer.Resolve<IPlaceHolderProvider>();
       
-      string renderedContent = placeHolderProvider.ReplacePlaceHolders(placeHolder.ToMarkup(), null);
+      string renderedContent = placeHolderProvider.ReplacePlaceHolders(placeHolder.ToMarkup());
 
       WriteOutput(renderedContent);
       Assert.IsTrue(renderedContent.Equals("Web Control One!" + "Hello World!" + "My Name Is Timbo" + "int value is 1!" + "bool value is True!" + "datetime value is 8/27/2013 12:00:00 AM!" + "Init event fired!!!" + "Load event fired!!!" + "PreRender event fired!!!"));
@@ -271,7 +266,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder.Tests
       IProviderContainer providerContainer = InitializeProviderContainer();
       IPlaceHolderProvider placeHolderProvider = providerContainer.Resolve<IPlaceHolderProvider>();
       
-      string renderedContent = placeHolderProvider.ReplacePlaceHolders(placeHolder.ToMarkup() + Environment.NewLine + placeHolder.ToMarkup(), null);
+      string renderedContent = placeHolderProvider.ReplacePlaceHolders(placeHolder.ToMarkup() + Environment.NewLine + placeHolder.ToMarkup());
 
       WriteOutput(renderedContent);
       Assert.IsTrue(renderedContent.Equals("Web Control One!" + "Init event fired!!!" + "Load event fired!!!" + "PreRender event fired!!!" + Environment.NewLine + "Web Control One!" + "Init event fired!!!" + "Load event fired!!!" + "PreRender event fired!!!"));
@@ -298,44 +293,12 @@ namespace Atlantis.Framework.Providers.PlaceHolder.Tests
       IProviderContainer providerContainer = InitializeProviderContainer();
       IPlaceHolderProvider placeHolderProvider = providerContainer.Resolve<IPlaceHolderProvider>();
       
-      string renderedContent = placeHolderProvider.ReplacePlaceHolders(placeHolder.ToMarkup(), null);
+      string renderedContent = placeHolderProvider.ReplacePlaceHolders(placeHolder.ToMarkup());
 
       WriteOutput(renderedContent);
 
       Assert.IsTrue(!string.IsNullOrEmpty(renderedContent), "Empty document returned!");
       Assert.IsTrue(renderedContent.StartsWith("<!DOCTYPE html>"), "Document did not start with doctype declaration");
-    }
-
-    [TestMethod]
-    public void RenderCDSDocumentOneNestedPlaceHolder()
-    {
-      IPlaceHolder placeHolder = new CDSDocumentPlaceHolder("atlantis",
-                                                            "_global/nesteddocument");
-
-      IProviderContainer providerContainer = InitializeProviderContainer();
-      IPlaceHolderProvider placeHolderProvider = providerContainer.Resolve<IPlaceHolderProvider>();
-      
-      string renderedContent = placeHolderProvider.ReplacePlaceHolders(placeHolder.ToMarkup(), null);
-
-      WriteOutput(renderedContent);
-
-      Assert.IsFalse(renderedContent.Contains("[@P["), "Nested CDS Document placeholder not rendered");
-    }
-
-    [TestMethod]
-    public void RenderCDSDocumentCircularReference()
-    {
-      IPlaceHolder placeHolder = new CDSDocumentPlaceHolder("atlantis",
-                                                            "_global/circularreference");
-
-      IProviderContainer providerContainer = InitializeProviderContainer();
-      IPlaceHolderProvider placeHolderProvider = providerContainer.Resolve<IPlaceHolderProvider>();
-      
-      string renderedContent = placeHolderProvider.ReplacePlaceHolders(placeHolder.ToMarkup(), null);
-
-      WriteOutput(renderedContent);
-
-      Assert.IsTrue(renderedContent == string.Empty);
     }
 
     [TestMethod]
@@ -347,7 +310,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder.Tests
       IProviderContainer providerContainer = InitializeProviderContainer();
       IPlaceHolderProvider placeHolderProvider = providerContainer.Resolve<IPlaceHolderProvider>();
       
-      string renderedContent = placeHolderProvider.ReplacePlaceHolders(placeHolder.ToMarkup(), null);
+      string renderedContent = placeHolderProvider.ReplacePlaceHolders(placeHolder.ToMarkup());
 
       WriteOutput(renderedContent);
 
@@ -363,62 +326,11 @@ namespace Atlantis.Framework.Providers.PlaceHolder.Tests
       IProviderContainer providerContainer = InitializeProviderContainer();
       IPlaceHolderProvider placeHolderProvider = providerContainer.Resolve<IPlaceHolderProvider>();
       
-      string renderedContent = placeHolderProvider.ReplacePlaceHolders(placeHolder.ToMarkup(), null);
+      string renderedContent = placeHolderProvider.ReplacePlaceHolders(placeHolder.ToMarkup());
 
       WriteOutput(renderedContent);
 
       Assert.IsTrue(renderedContent == string.Empty, "Document should return as a string.Empty");
     }
-
-    [TestMethod]
-    public void RenderWebControlPlaceHolderValidAppendRenderHandler()
-    {
-      IPlaceHolder placeHolder = new WebControlPlaceHolder(Assembly.GetExecutingAssembly().FullName,
-                                                           "Atlantis.Framework.Providers.PlaceHolder.Tests.WebControls.WebControlOne",
-                                                           new List<KeyValuePair<string, string>>(0));
-
-      IProviderContainer providerContainer = InitializeProviderContainer();
-      IPlaceHolderProvider placeHolderProvider = providerContainer.Resolve<IPlaceHolderProvider>();
-      
-      string renderedContent = placeHolderProvider.ReplacePlaceHolders(placeHolder.ToMarkup(), new List<IRenderHandler> { new AppendRenderHandler("APPENDED RENDER HANDLER CONTENT!!!") });
-
-      WriteOutput(renderedContent);
-      Assert.IsTrue(renderedContent.Equals("Web Control One!" + "Init event fired!!!" + "Load event fired!!!" + "PreRender event fired!!!" + "APPENDED RENDER HANDLER CONTENT!!!"));
-    }
-
-    [TestMethod]
-    public void RenderCDSDocumentValidAppendRenderHandler()
-    {
-      IPlaceHolder placeHolder = new CDSDocumentPlaceHolder("atlantis",
-                                                            "home");
-
-      IProviderContainer providerContainer = InitializeProviderContainer();
-      IPlaceHolderProvider placeHolderProvider = providerContainer.Resolve<IPlaceHolderProvider>();
-      
-      string renderedContent = placeHolderProvider.ReplacePlaceHolders(placeHolder.ToMarkup(), new List<IRenderHandler> { new AppendRenderHandler("APPENDED RENDER HANDLER CONTENT!!!") });
-
-      WriteOutput(renderedContent);
-
-      Assert.IsTrue(!string.IsNullOrEmpty(renderedContent), "Empty document returned!");
-      Assert.IsTrue(renderedContent.EndsWith("APPENDED RENDER HANDLER CONTENT!!!"), "Document did not end with \"APPENDED RENDER HANDLER CONTENT!!!\"");
-    }
-
-    [TestMethod]
-    public void RenderCDSDocumentOneNestedPlaceHolderAppendRenderHandler()
-    {
-      IPlaceHolder placeHolder = new CDSDocumentPlaceHolder("atlantis",
-                                                            "_global/nesteddocument");
-
-      IProviderContainer providerContainer = InitializeProviderContainer();
-      IPlaceHolderProvider placeHolderProvider = providerContainer.Resolve<IPlaceHolderProvider>();
-      
-      string renderedContent = placeHolderProvider.ReplacePlaceHolders(placeHolder.ToMarkup(), new List<IRenderHandler> { new AppendRenderHandler("APPENDED RENDER HANDLER CONTENT!!!") });
-
-      WriteOutput(renderedContent);
-
-      Assert.IsFalse(renderedContent.Contains("[@P["), "Nested CDS Document placeholder not rendered");
-      Assert.IsTrue(renderedContent.Contains("/>APPENDED RENDER HANDLER CONTENT!!!APPENDED RENDER HANDLER CONTENT!!!"));
-    }
-
   }
 }

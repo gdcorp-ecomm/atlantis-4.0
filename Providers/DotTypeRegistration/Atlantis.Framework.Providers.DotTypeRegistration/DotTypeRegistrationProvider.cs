@@ -288,6 +288,7 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration
           var form = formSchema.Form;
           var fields = form.FieldCollection;
 
+
           foreach (var domain in domains)
           {
             var formFieldsListForDomain = new List<IList<IFormField>>();
@@ -320,7 +321,7 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration
             }
             formFieldsByDomain[domain] = formFieldsListForDomain;
 
-            formItems.FormDescription  = form.FormDescription; 
+            formItems.FormDescription = form.FormDescription;
             formItems.FormName = form.FormName;
             formItems.FormType = form.FormType;
             formItems.FormLabel = form.FormLabel;
@@ -328,7 +329,7 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration
 
             if (form.FormFieldCollection != null)
             {
-              formItems.FormLabel = form.FormFieldCollection.Label;
+              formItems.FieldCollectionLabel = form.FormFieldCollection.Label;
             }
           }
 
@@ -345,7 +346,7 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration
 
       return success;
     }
-
+    
     private static Dictionary<string, IList<IList<IFormField>>> AddAdditionalFormFields(IEnumerable<string> domains, string clientApp, string tld, string phase, string formType, string validationLevel)
     {
       var result = new Dictionary<string, IList<IList<IFormField>>>(StringComparer.OrdinalIgnoreCase);
@@ -359,7 +360,6 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration
             GetHiddenFormField("phase", phase),
             GetHiddenFormField("formtype", formType),
             GetHiddenFormField("validationlevel", validationLevel)
-
           };
 
         result[domain] = lst;

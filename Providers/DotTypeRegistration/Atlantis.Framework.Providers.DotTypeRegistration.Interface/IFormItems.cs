@@ -8,5 +8,6 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration.Interface
     string FormName { get; set; }
     string FormType { get; set; }
     string ValidationLevel { get; set; }
+    string FieldCollectionLabel { get; set; }
   }
 }

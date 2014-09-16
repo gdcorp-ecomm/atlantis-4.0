@@ -44,7 +44,7 @@
     </Reference>
     <Reference Include="Atlantis.Framework.DotTypeForms.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.DotTypeForms.Interface.14.9.2.1\lib\net40\Atlantis.Framework.DotTypeForms.Interface.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.DotTypeForms.Interface.14.9.3.1\lib\net40\Atlantis.Framework.DotTypeForms.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.DotTypeValidation.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -82,6 +82,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FieldCollection.cs" />
     <Compile Include="FormFieldTypes.cs" />
     <Compile Include="DotTypeFormFieldTypes.cs" />
     <Compile Include="FormItems.cs" />
@@ -91,6 +92,7 @@
     <Compile Include="IDotTypeFormSchemaLookup.cs" />
     <Compile Include="IDotTypeFormLookup.cs" />
     <Compile Include="IDotTypeRegistrationProvider.cs" />
+    <Compile Include="IFieldCollection.cs" />
     <Compile Include="IFormField.cs" />
     <Compile Include="IFormItems.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

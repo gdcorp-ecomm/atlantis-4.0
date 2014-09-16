@@ -1,5 +1,4 @@
-﻿using System.Runtime.Serialization;
-
+﻿
 namespace Atlantis.Framework.Providers.DotTypeRegistration.Interface
 {
   public class FormItems : IFormItems
@@ -9,5 +8,6 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration.Interface
     public string FormName { get; set; }
     public string FormType { get; set; }
     public string ValidationLevel { get; set; }
+    public string FieldCollectionLabel { get; set; }
   }
 }

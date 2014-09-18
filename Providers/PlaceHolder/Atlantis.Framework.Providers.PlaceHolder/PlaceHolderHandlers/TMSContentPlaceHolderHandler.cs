@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Atlantis.Framework.Providers.CDSContent.Interface;
 using Atlantis.Framework.Providers.PlaceHolder.Interface;
 using Atlantis.Framework.Providers.PlaceHolder.PlaceHolders;
@@ -10,13 +12,12 @@ namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolderHandlers
 {
   internal class TMSContentPlaceHolderHandler : CDSDocumentPlaceHolderHandler
   {
-    private const string TMS_CDS_APP_NAME = "tms";
     private const string LOCATION_FORMAT = "{0}/{1}/{2}/default_template";
+    private const string TMS_CDS_APP_NAME = "tms";
     private const string TMS_TRACKING_DIV_FORMAT = "<div data-tms-msgid=\"{0}\" data-tms-tagname=\"{1}\" data-tms-messagename=\"{2}\" data-tms-trackingid=\"{3}\">\n{4}\n</div>";
 
-    internal TMSContentPlaceHolderHandler(IPlaceHolderHandlerContext context) : base(context)
-    {
-    }
+    internal TMSContentPlaceHolderHandler(IPlaceHolderHandlerContext context)
+      : base(context) {}
 
     protected override string GetContent()
     {
@@ -45,28 +46,20 @@ namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolderHandlers
       return renderedContent ?? string.Empty;
     }
 
-    private bool TryGetMessageVariant(string appProduct, string interactionName, out MessageVariant messageVariant)
+    private string AddTrackingDataToContent(string content, MessageVariant messageVariant)
     {
-      messageVariant = null;
+      string finalContent;
 
-      ITMSContentProvider tmsContentProvider;
-      if (Context.ProviderContainer.TryResolve(out tmsContentProvider))
+      if (messageVariant != null)
       {
-        if (tmsContentProvider.TryGetNextMessageVariant(appProduct, interactionName, out messageVariant))
-        {
-          tmsContentProvider.ConsumeMessageVariant(appProduct, interactionName, messageVariant);
-          Context.ProviderContainer.SetData("TMSMessageId", messageVariant.Id);
-          Context.ProviderContainer.SetData("TMSMessageTag", messageVariant.Tags);
-          Context.ProviderContainer.SetData("TMSMessageName", messageVariant.Name);
-          Context.ProviderContainer.SetData("TMSMessageTrackingId", messageVariant.TrackingId);
-        }
+        finalContent = string.Format(TMS_TRACKING_DIV_FORMAT, messageVariant.Id, messageVariant.Tag, messageVariant.Name, messageVariant.TrackingId, content);
       }
       else
       {
-        throw new ApplicationException("Could not resolve the required providers. TMSContentProvider is required.");
+        finalContent = content;
       }
 
-      return (messageVariant != null);
+      return finalContent;
     }
 
     private string GetMessageVariantContent(TMSContentPlaceHolderData placeHolderData, ICDSContentProvider cdsContentProvider)
@@ -114,23 +107,42 @@ namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolderHandlers
     private string ReplaceDataTokens(string rawContent)
     {
       IRenderPipelineProvider renderPipelineProvider = Context.ProviderContainer.Resolve<IRenderPipelineProvider>();
-      return renderPipelineProvider.RenderContent(rawContent, new[] { new ProviderContainerDataTokenRenderHandler() });
+      return renderPipelineProvider.RenderContent(rawContent, new[] {new ProviderContainerDataTokenRenderHandler()});
     }
 
-    private string AddTrackingDataToContent(string content, MessageVariant messageVariant)
+    private bool TryGetMessageVariant(string appProduct, string interactionName, out MessageVariant messageVariant)
     {
-      string finalContent;
+      messageVariant = null;
 
-      if (messageVariant != null)
+      ITMSContentProvider tmsContentProvider;
+      if (Context.ProviderContainer.TryResolve(out tmsContentProvider))
       {
-        finalContent = string.Format(TMS_TRACKING_DIV_FORMAT, messageVariant.Id, messageVariant.Tags, messageVariant.Name, messageVariant.TrackingId, content);
+        if (tmsContentProvider.TryGetNextMessageVariant(appProduct, interactionName, out messageVariant))
+        {
+          tmsContentProvider.ConsumeMessageVariant(appProduct, interactionName, messageVariant);
+          Context.ProviderContainer.SetData("TMSMessageId", messageVariant.Id);
+          Context.ProviderContainer.SetData("TMSMessageTag", messageVariant.Tag);
+          Context.ProviderContainer.SetData("TMSMessageName", messageVariant.Name);
+          Context.ProviderContainer.SetData("TMSMessageTrackingId", messageVariant.TrackingId);
+          IEnumerable<KeyValuePair<string, string>> messageData;
+          if ((messageData = messageVariant.Data) != null)
+          {
+            foreach (KeyValuePair<string, string> item in messageData)
+            {
+              if (!string.IsNullOrEmpty(item.Key))
+              {
+                Context.ProviderContainer.SetData(string.Format("TMSMessageData.{0}", item.Key), item.Value);
+              }
+            }
+          }
+        }
       }
       else
       {
-        finalContent = content;
+        throw new ApplicationException("Could not resolve the required providers. TMSContentProvider is required.");
       }
 
-      return finalContent;
+      return (messageVariant != null);
     }
   }
 }

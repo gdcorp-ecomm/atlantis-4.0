@@ -31,8 +31,8 @@ namespace Atlantis.Framework.Providers.PlaceHolder.Tests
         messageVariant = new MessageVariant
         {
           Id = "ID1",
+          Tag = "FirstTag",
           Name = "First",
-          Tags = "FirstTags",
           TrackingId = "1",
           HasContent = true
         };
@@ -43,8 +43,8 @@ namespace Atlantis.Framework.Providers.PlaceHolder.Tests
         messageVariant = new MessageVariant
         {
           Id = "ID2",
+          Tag = "SecondTag",
           Name = "Second",
-          Tags = "SecondTags",
           TrackingId = "2",
           HasContent = true
         };
@@ -55,8 +55,8 @@ namespace Atlantis.Framework.Providers.PlaceHolder.Tests
         messageVariant = new MessageVariant
         {
           Id = "ID1",
+          Tag = "NoContentTag",
           Name = "NoContent",
-          Tags = "NoContentTags",
           TrackingId = "1",
           HasContent = false
         };

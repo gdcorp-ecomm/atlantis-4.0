@@ -128,11 +128,13 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Atlantis.Framework.Providers.RenderPipeline.14.2.21.1\lib\net40\Atlantis.Framework.Providers.RenderPipeline.Interface.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.Providers.TMSContent">
-      <HintPath>..\packages\Atlantis.Framework.Providers.TMSContent.14.9.29.1\lib\net40\Atlantis.Framework.Providers.TMSContent.dll</HintPath>
+    <Reference Include="Atlantis.Framework.Providers.TMSContent, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Providers.TMSContent.14.9.30.1\lib\net40\Atlantis.Framework.Providers.TMSContent.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.Providers.TMSContent.Interface">
-      <HintPath>..\packages\Atlantis.Framework.Providers.TMSContent.Interface.14.9.29.1\lib\net40\Atlantis.Framework.Providers.TMSContent.Interface.dll</HintPath>
+    <Reference Include="Atlantis.Framework.Providers.TMSContent.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Providers.TMSContent.Interface.14.9.30.1\lib\net40\Atlantis.Framework.Providers.TMSContent.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Providers.Web.Interface">
       <HintPath>..\packages\Atlantis.Framework.Providers.Web.Interface.14.6.20.1\lib\net40\Atlantis.Framework.Providers.Web.Interface.dll</HintPath>

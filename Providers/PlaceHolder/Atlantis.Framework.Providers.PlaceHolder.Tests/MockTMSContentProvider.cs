@@ -17,6 +17,8 @@ namespace Atlantis.Framework.Providers.PlaceHolder.Tests
 
     public void ConsumeMessageVariant(string appProduct, string interactionPoint, MessageVariant message) { }
 
+    public string GetTrackingData() { return null; }
+
     public bool TryGetNextMessageVariant(string appProduct, string interactionName, out MessageVariant messageVariant)
     {
       messageVariant = null;

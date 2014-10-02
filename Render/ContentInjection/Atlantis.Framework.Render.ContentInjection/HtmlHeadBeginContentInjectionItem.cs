@@ -1,11 +1,10 @@
-﻿
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 
 namespace Atlantis.Framework.Render.ContentInjection.RenderHandlers
 {
   public class HtmlHeadBeginContentInjectionItem : IContentInjectionItem
   {
-    private static readonly Regex _placeHolderRegex = new Regex(@"<head\s*[\w\s""=:;#-]*>", RegexOptions.Compiled | RegexOptions.Singleline);
+    private static readonly Regex _placeHolderRegex = new Regex(@"<body[\w""=:;# -]*>", RegexOptions.Compiled | RegexOptions.Singleline);
 
     public Regex PlaceHolderRegex
     {

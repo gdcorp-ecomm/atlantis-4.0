@@ -12,9 +12,9 @@ namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolderHandlers
 {
   internal class TMSContentPlaceHolderHandler : CDSDocumentPlaceHolderHandler
   {
-    private const string LOCATION_FORMAT = "{0}/{1}/{2}/default_template";
-    private const string TMS_CDS_APP_NAME = "tms";
-    private const string TMS_TRACKING_DIV_FORMAT = "<div data-tms-msgid=\"{0}\" data-tms-tagname=\"{1}\" data-tms-messagename=\"{2}\" data-tms-trackingid=\"{3}\">\n{4}\n</div>";
+    private const string APPLICATION_NAME = "tms";
+    private const string CONTENT_DOC_NAME = "default_template";
+    private const string TRACKING_DIV_FORMAT = "<div data-tms-trackingid=\"{0}\">\n{1}\n</div>";
 
     internal TMSContentPlaceHolderHandler(IPlaceHolderHandlerContext context)
       : base(context) {}
@@ -50,14 +50,8 @@ namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolderHandlers
     {
       string finalContent;
 
-      if (messageVariant != null)
-      {
-        finalContent = string.Format(TMS_TRACKING_DIV_FORMAT, messageVariant.Id, messageVariant.Tag, messageVariant.Name, messageVariant.TrackingId, content);
-      }
-      else
-      {
-        finalContent = content;
-      }
+      finalContent = (messageVariant != null) ? 
+        string.Format(TRACKING_DIV_FORMAT, messageVariant.TrackingId, content) : content;
 
       return finalContent;
     }
@@ -74,22 +68,31 @@ namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolderHandlers
           LogError(errorMessage, "TMSContentPlaceHolderHandler.Render()");
         }
 
-        string applicationName = placeHolderData.DefaultApplication;
-        string relativePath = placeHolderData.DefaultLocation;
+        string applName = placeHolderData.DefaultElement.App;
+        string relativePath = placeHolderData.DefaultElement.Location;
 
         MessageVariant messageVariant;
-
         if (TryGetMessageVariant(placeHolderData.AppProduct, placeHolderData.InteractionName, out messageVariant) && messageVariant.HasContent)
         {
-          applicationName = TMS_CDS_APP_NAME;
-          relativePath = string.Format(LOCATION_FORMAT, placeHolderData.AppProduct, placeHolderData.InteractionName, messageVariant.Name);
+          if ((placeHolderData.ContentElement != null) && (placeHolderData.ContentElement.IsValid()))
+          {
+            applName = placeHolderData.ContentElement.App;
+            relativePath = string.Format("{0}/{1}{2}", 
+              placeHolderData.ContentElement.Location, messageVariant.Name,
+              (placeHolderData.ContentElement.OverrideDocumentName) ? string.Empty : string.Format("/{0}", CONTENT_DOC_NAME));
+          }
+          else {
+            applName = APPLICATION_NAME;
+            relativePath = string.Format("{0}/{1}/{2}/{3}", 
+              placeHolderData.AppProduct, placeHolderData.InteractionName, messageVariant.Name, CONTENT_DOC_NAME);
+          }
         }
 
-        content = cdsContentProvider.GetContent(applicationName, relativePath).Content;
+        content = cdsContentProvider.GetContent(applName, relativePath).Content;
 
         if (string.IsNullOrEmpty(content))
         {
-          content = cdsContentProvider.GetContent(placeHolderData.DefaultApplication, placeHolderData.DefaultLocation).Content;
+          content = cdsContentProvider.GetContent(placeHolderData.DefaultElement.App, placeHolderData.DefaultElement.Location).Content;
         }
 
         content = ReplaceDataTokens(content);
@@ -107,7 +110,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolderHandlers
     private string ReplaceDataTokens(string rawContent)
     {
       IRenderPipelineProvider renderPipelineProvider = Context.ProviderContainer.Resolve<IRenderPipelineProvider>();
-      return renderPipelineProvider.RenderContent(rawContent, new[] {new ProviderContainerDataTokenRenderHandler()});
+      return renderPipelineProvider.RenderContent(rawContent, new IRenderHandler[] {new ProviderContainerDataTokenRenderHandler()});
     }
 
     private bool TryGetMessageVariant(string appProduct, string interactionName, out MessageVariant messageVariant)

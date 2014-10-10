@@ -1,31 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Xml.Linq;
 
 namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolders
 {
   internal class TMSContentPlaceHolderData
   {
+    private const string CONTENT_ELEMENT_NAME = "content";
     private const string DATA_ELEMENT_NAME = "Data";
     private const string DEFAULT_ELEMENT_NAME = "default";
-    private const string DEFAULT_ELEMENT_APP = "app";
-    private const string DEFAULT_ELEMENT_LOCATION = "location";
-
-    private IDictionary<string, string> _attributesDictionary;
-
-    internal TMSContentPlaceHolderData(string dataXml)
-    {
-      Deserialize(dataXml);
-    }
-
-    internal TMSContentPlaceHolderData(IList<KeyValuePair<string, string>> attributes, string defaultApplication, string defaultLocation)
-    {
-      BuildAttributesDictionary(attributes);
-      DefaultApplication = defaultApplication;
-      DefaultLocation = defaultLocation;
-    }
 
     private string _appProduct;
+    private IDictionary<string, string> _attributesDictionary;
+
+    private string _interactionName;
+
     internal string AppProduct
     {
       get
@@ -33,21 +23,14 @@ namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolders
         if (_appProduct == null)
         {
           string appProduct;
-          if (TryGetAttribute(PlaceHolderAttributes.AppProduct, out appProduct))
-          {
-            _appProduct = appProduct;
-          }
-          else
-          {
-            _appProduct = string.Empty;
-          }
+          _appProduct = TryGetAttribute(PlaceHolderAttributes.AppProduct, out appProduct)
+            ? appProduct : string.Empty;
         }
 
         return _appProduct;
       }
     }
 
-    private string _interactionName;
     internal string InteractionName
     {
       get
@@ -55,23 +38,42 @@ namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolders
         if (_interactionName == null)
         {
           string interactionName;
-          if (TryGetAttribute(PlaceHolderAttributes.InteractionPoint, out interactionName))
-          {
-            _interactionName = interactionName;
-          }
-          else
-          {
-            _interactionName = string.Empty;
-          }
+          _interactionName = TryGetAttribute(PlaceHolderAttributes.InteractionPoint, out interactionName)
+            ? interactionName : string.Empty;
         }
 
         return _interactionName;
       }
     }
 
-    internal string DefaultApplication { get; private set; }
+    internal ContentElementData ContentElement { get; private set; }
 
-    internal string DefaultLocation { get; private set; }
+    internal DefaultElementData DefaultElement { get; private set; }
+
+    internal TMSContentPlaceHolderData(string dataXml)
+    {
+      Deserialize(dataXml);
+    }
+
+    internal TMSContentPlaceHolderData(IList<KeyValuePair<string, string>> attributes,
+      DefaultElementData defaultElement, ContentElementData contentElement = null)
+    {
+      BuildAttributesDictionary(attributes);
+
+      // DefaultElement (Required)
+      if ((defaultElement == null) || (!defaultElement.IsValid()))
+      {
+        throw new ApplicationException(String.Format("TMSContent placeholder element, \"<default>\" must be defined."));
+      }
+
+      // ContentElement (Optional)
+      ContentElement = ((contentElement == null) || (!contentElement.IsValid())) ? contentElement : null;
+    }
+
+    public override string ToString()
+    {
+      return Serialize();
+    }
 
     internal string Serialize()
     {
@@ -86,13 +88,20 @@ namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolders
           dataElement.Add(new XAttribute(item.Key, item.Value));
         }
 
-        if (DefaultApplication != null && DefaultLocation != null)
+        // DefaultElement (Required)
+        XElement defaultElement = new XElement(DEFAULT_ELEMENT_NAME,
+          new XAttribute(PlaceHolderAttributes.Application, DefaultElement.App),
+          new XAttribute(PlaceHolderAttributes.Location, DefaultElement.Location));
+        dataElement.Add(defaultElement);
+
+        // ContentElement (Optional)
+        if (ContentElement != null)
         {
-          XElement defaultElement = new XElement(DEFAULT_ELEMENT_NAME,
-                                      new XAttribute(DEFAULT_ELEMENT_APP, DefaultApplication),
-                                      new XAttribute(DEFAULT_ELEMENT_LOCATION, DefaultLocation));
-          
-          dataElement.Add(defaultElement);
+          XElement contentElement = new XElement(DEFAULT_ELEMENT_NAME,
+            new XAttribute(PlaceHolderAttributes.Application, ContentElement.App),
+            new XAttribute(PlaceHolderAttributes.Location, ContentElement.Location));
+
+          dataElement.Add(contentElement);
         }
 
         xml = dataElement.ToString(SaveOptions.DisableFormatting);
@@ -104,11 +113,6 @@ namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolders
       }
 
       return xml;
-    }
-
-    public override string ToString()
-    {
-      return Serialize();
     }
 
     internal bool TryGetAttribute(string name, out string value)
@@ -144,15 +148,26 @@ namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolders
           _attributesDictionary[item.Name.ToString()] = item.Value;
         }
 
+        // DefaultElement (Required)
         XElement defaultElement = dataElement.Element(DEFAULT_ELEMENT_NAME);
         if (defaultElement != null)
         {
-          DefaultApplication = defaultElement.Attribute(DEFAULT_ELEMENT_APP).Value;
-          DefaultLocation = defaultElement.Attribute(DEFAULT_ELEMENT_LOCATION).Value;
+          DefaultElement = new DefaultElementData(
+            defaultElement.Attribute(PlaceHolderAttributes.Application).Value,
+            defaultElement.Attribute(PlaceHolderAttributes.Location).Value);
         }
         else
         {
           throw new ApplicationException(String.Format("TMSContent placeholder element, \"<default>\" must be defined. {0}", dataXml));
+        }
+
+        // ContentElement (Optional)
+        XElement contentElement = dataElement.Element(CONTENT_ELEMENT_NAME);
+        if (contentElement != null)
+        {
+          ContentElement = new ContentElementData(
+            contentElement.Attribute(PlaceHolderAttributes.Application).Value,
+            contentElement.Attribute(PlaceHolderAttributes.Location).Value);
         }
       }
       catch (Exception ex)
@@ -161,5 +176,49 @@ namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolders
         ErrorLogger.LogException(ex.Message, "TMSContentPlaceHolderData.Deserialize()", ex.StackTrace);
       }
     }
+
+    #region Nested type: ContentElementData
+
+    public class ContentElementData
+    {
+      public string App { get; set; }
+      public string Location { get; set; }
+      public bool OverrideDocumentName { get; set; }
+
+      public ContentElementData(string app, string location, bool overrideDocumentName = false)
+      {
+        App = app;
+        Location = location;
+        OverrideDocumentName = overrideDocumentName;
+      }
+
+      public bool IsValid()
+      {
+        return (!string.IsNullOrEmpty(App) && !string.IsNullOrEmpty(Location));
+      }
+    }
+
+    #endregion
+
+    #region Nested type: DefaultElementData
+
+    public class DefaultElementData
+    {
+      public string App { get; set; }
+      public string Location { get; set; }
+
+      public DefaultElementData(string app, string location)
+      {
+        App = app;
+        Location = location;
+      }
+
+      public bool IsValid()
+      {
+        return (!string.IsNullOrEmpty(App) && !string.IsNullOrEmpty(Location));
+      }
+    }
+
+    #endregion
   }
 }

@@ -99,7 +99,8 @@ namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolders
         {
           XElement contentElement = new XElement(DEFAULT_ELEMENT_NAME,
             new XAttribute(PlaceHolderAttributes.Application, ContentElement.App),
-            new XAttribute(PlaceHolderAttributes.Location, ContentElement.Location));
+            new XAttribute(PlaceHolderAttributes.Location, ContentElement.Location),
+            new XAttribute(PlaceHolderAttributes.OverrideDocumentName, ContentElement.OverrideDocumentName));
 
           dataElement.Add(contentElement);
         }
@@ -168,6 +169,14 @@ namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolders
           ContentElement = new ContentElementData(
             contentElement.Attribute(PlaceHolderAttributes.Application).Value,
             contentElement.Attribute(PlaceHolderAttributes.Location).Value);
+
+          XAttribute attribute;
+          if ((attribute = contentElement.Attribute(PlaceHolderAttributes.OverrideDocumentName)) != null)
+          {
+            bool overrideDocumentName;
+            if (bool.TryParse(attribute.Value, out overrideDocumentName))
+              ContentElement.OverrideDocumentName = overrideDocumentName;
+          }
         }
       }
       catch (Exception ex)

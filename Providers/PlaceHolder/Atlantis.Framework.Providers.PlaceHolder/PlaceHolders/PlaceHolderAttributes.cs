@@ -11,7 +11,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder
     // TMSContent Data
     internal const string AppProduct = "appproduct";
     internal const string InteractionPoint = "interactionpoint";
-    internal const string ContentFolder = "contentfolder";
+    internal const string OverrideDocumentName = "overridedocumentname";
 
     // Obsolete
     internal const string MessageTag = "messagetag";

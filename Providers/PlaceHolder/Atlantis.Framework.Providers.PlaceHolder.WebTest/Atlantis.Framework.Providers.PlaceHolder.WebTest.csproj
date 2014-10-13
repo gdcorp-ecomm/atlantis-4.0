@@ -86,8 +86,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Atlantis.Framework.Interface.14.1.16.1\lib\net40\Atlantis.Framework.Interface.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.Personalization.Interface">
-      <HintPath>..\packages\Atlantis.Framework.Personalization.Interface.14.8.18.4\lib\net40\Atlantis.Framework.Personalization.Interface.dll</HintPath>
+    <Reference Include="Atlantis.Framework.Personalization.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Personalization.Interface.14.10.13.1\lib\net40\Atlantis.Framework.Personalization.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.PrivateLabel.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -125,11 +126,11 @@
     </Reference>
     <Reference Include="Atlantis.Framework.Providers.Personalization, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.Providers.Personalization.14.8.18.6\lib\net40\Atlantis.Framework.Providers.Personalization.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.Providers.Personalization.14.10.13.1\lib\net40\Atlantis.Framework.Providers.Personalization.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Providers.Personalization.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.Providers.Personalization.Interface.14.8.18.6\lib\net40\Atlantis.Framework.Providers.Personalization.Interface.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.Providers.Personalization.Interface.14.10.13.1\lib\net40\Atlantis.Framework.Providers.Personalization.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Providers.RenderPipeline, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -152,6 +153,9 @@
     <Reference Include="Atlantis.Framework.Render.MarkupParser, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Atlantis.Framework.Render.MarkupParser.4.0.0.0\lib\net40\Atlantis.Framework.Render.MarkupParser.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Resilience">
+      <HintPath>..\packages\Atlantis.Framework.Resilience.14.9.24.1\lib\net40\Atlantis.Framework.Resilience.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Testing.MockEngine, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

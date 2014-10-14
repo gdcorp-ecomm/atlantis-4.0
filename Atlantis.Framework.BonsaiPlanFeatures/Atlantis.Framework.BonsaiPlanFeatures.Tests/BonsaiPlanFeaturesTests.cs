@@ -8,6 +8,7 @@ using Atlantis.Framework.BonsaiPlanFeatures.Interface.Types;
 namespace Atlantis.Framework.BonsaiPlanFeatures.Tests
 {
   [TestClass]
+  [DeploymentItem("Atlantis.Framework.BonsaiPlanFeatures.Impl.dll")]
   public class BonsaiPlanFeaturesTests
   {
     /*

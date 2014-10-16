@@ -6,6 +6,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Atlantis.Framework.GetAccountXML.Tests
 {
   [TestClass]
+  [DeploymentItem("Atlantis.Framework.GetAccountXML.Impl.dll")]
   public class GetAccountXMLTests
   {
     [TestMethod]

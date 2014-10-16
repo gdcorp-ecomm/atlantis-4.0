@@ -1,11 +1,9 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30723.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{1483C088-C49E-43A4-BF40-B43E99B7DB79}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine", "..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj", "{D30157B2-C1B3-4073-BA5E-632E2337A997}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.BonsaiGetPlanOptions.Interface", "Atlantis.Framework.BonsaiGetPlanOptions.Interface\Atlantis.Framework.BonsaiGetPlanOptions.Interface.csproj", "{A6AAB94D-1BDD-4239-A559-F4A20F97B107}"
 EndProject
@@ -26,52 +24,33 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 8
+		SccNumberOfProjects = 6
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = http://tfs:8080/
+		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
 		SccLocalPath0 = .
-		SccProjectUniqueName1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
-		SccProjectTopLevelParentUniqueName1 = Atlantis.Framework.BonsaiGetPlanOptions.sln
-		SccProjectName1 = ../Atlantis.Framework.Engine/Atlantis.Framework.Engine
-		SccLocalPath1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
-		SccProjectUniqueName2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
-		SccProjectTopLevelParentUniqueName2 = Atlantis.Framework.BonsaiGetPlanOptions.sln
-		SccProjectName2 = ../Atlantis.Framework.Engine/Atlantis.Framework.Interface
-		SccLocalPath2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
-		SccProjectUniqueName3 = Atlantis.Framework.BonsaiGetPlanOptions.Interface\\Atlantis.Framework.BonsaiGetPlanOptions.Interface.csproj
-		SccProjectName3 = Atlantis.Framework.BonsaiGetPlanOptions.Interface
-		SccLocalPath3 = Atlantis.Framework.BonsaiGetPlanOptions.Interface
-		SccProjectUniqueName4 = Atlantis.Framework.BonsaiGetPlanOptions.Impl\\Atlantis.Framework.BonsaiGetPlanOptions.Impl.csproj
-		SccProjectName4 = Atlantis.Framework.BonsaiGetPlanOptions.Impl
-		SccLocalPath4 = Atlantis.Framework.BonsaiGetPlanOptions.Impl
-		SccProjectUniqueName5 = ..\\Atlantis.Framework.GetAccountXML\\Atlantis.Framework.GetAccountXML.Interface\\Atlantis.Framework.GetAccountXML.Interface.csproj
-		SccProjectTopLevelParentUniqueName5 = Atlantis.Framework.BonsaiGetPlanOptions.sln
-		SccProjectName5 = ../Atlantis.Framework.GetAccountXML/Atlantis.Framework.GetAccountXML.Interface
-		SccLocalPath5 = ..\\Atlantis.Framework.GetAccountXML\\Atlantis.Framework.GetAccountXML.Interface
-		SccProjectUniqueName6 = ..\\Atlantis.Framework.GetAccountXML\\Atlantis.Framework.GetAccountXML.Impl\\Atlantis.Framework.GetAccountXML.Impl.csproj
-		SccProjectTopLevelParentUniqueName6 = Atlantis.Framework.BonsaiGetPlanOptions.sln
-		SccProjectName6 = ../Atlantis.Framework.GetAccountXML/Atlantis.Framework.GetAccountXML.Impl
-		SccLocalPath6 = ..\\Atlantis.Framework.GetAccountXML\\Atlantis.Framework.GetAccountXML.Impl
-		SccProjectUniqueName7 = Atlantis.Framework.BonsaiGetPlanOptions.Tests\\Atlantis.Framework.BonsaiGetPlanOptions.Tests.csproj
-		SccProjectName7 = Atlantis.Framework.BonsaiGetPlanOptions.Tests
-		SccLocalPath7 = Atlantis.Framework.BonsaiGetPlanOptions.Tests
-	EndGlobalSection
-	GlobalSection(TestCaseManagementSettings) = postSolution
-		CategoryFile = Atlantis.Framework.BonsaiGetPlanOptions.vsmdi
+		SccProjectUniqueName1 = Atlantis.Framework.BonsaiGetPlanOptions.Interface\\Atlantis.Framework.BonsaiGetPlanOptions.Interface.csproj
+		SccProjectName1 = Atlantis.Framework.BonsaiGetPlanOptions.Interface
+		SccLocalPath1 = Atlantis.Framework.BonsaiGetPlanOptions.Interface
+		SccProjectUniqueName2 = Atlantis.Framework.BonsaiGetPlanOptions.Impl\\Atlantis.Framework.BonsaiGetPlanOptions.Impl.csproj
+		SccProjectName2 = Atlantis.Framework.BonsaiGetPlanOptions.Impl
+		SccLocalPath2 = Atlantis.Framework.BonsaiGetPlanOptions.Impl
+		SccProjectUniqueName3 = ..\\Atlantis.Framework.GetAccountXML\\Atlantis.Framework.GetAccountXML.Interface\\Atlantis.Framework.GetAccountXML.Interface.csproj
+		SccProjectTopLevelParentUniqueName3 = Atlantis.Framework.BonsaiGetPlanOptions.sln
+		SccProjectName3 = ../Atlantis.Framework.GetAccountXML/Atlantis.Framework.GetAccountXML.Interface
+		SccLocalPath3 = ..\\Atlantis.Framework.GetAccountXML\\Atlantis.Framework.GetAccountXML.Interface
+		SccProjectUniqueName4 = ..\\Atlantis.Framework.GetAccountXML\\Atlantis.Framework.GetAccountXML.Impl\\Atlantis.Framework.GetAccountXML.Impl.csproj
+		SccProjectTopLevelParentUniqueName4 = Atlantis.Framework.BonsaiGetPlanOptions.sln
+		SccProjectName4 = ../Atlantis.Framework.GetAccountXML/Atlantis.Framework.GetAccountXML.Impl
+		SccLocalPath4 = ..\\Atlantis.Framework.GetAccountXML\\Atlantis.Framework.GetAccountXML.Impl
+		SccProjectUniqueName5 = Atlantis.Framework.BonsaiGetPlanOptions.Tests\\Atlantis.Framework.BonsaiGetPlanOptions.Tests.csproj
+		SccProjectName5 = Atlantis.Framework.BonsaiGetPlanOptions.Tests
+		SccLocalPath5 = Atlantis.Framework.BonsaiGetPlanOptions.Tests
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A6AAB94D-1BDD-4239-A559-F4A20F97B107}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A6AAB94D-1BDD-4239-A559-F4A20F97B107}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A6AAB94D-1BDD-4239-A559-F4A20F97B107}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -97,9 +76,10 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {1483C088-C49E-43A4-BF40-B43E99B7DB79}
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {1483C088-C49E-43A4-BF40-B43E99B7DB79}
 		{52E6F301-F8E4-49B6-9431-20105BF78C8A} = {1483C088-C49E-43A4-BF40-B43E99B7DB79}
 		{F68E7755-B1B9-464B-89F3-57699F3DDBC5} = {1483C088-C49E-43A4-BF40-B43E99B7DB79}
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = Atlantis.Framework.BonsaiGetPlanOptions.vsmdi
 	EndGlobalSection
 EndGlobal

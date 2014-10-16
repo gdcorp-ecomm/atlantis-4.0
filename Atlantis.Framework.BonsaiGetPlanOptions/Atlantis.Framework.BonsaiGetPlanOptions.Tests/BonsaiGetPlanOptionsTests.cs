@@ -11,6 +11,7 @@ using Atlantis.Framework.BonsaiGetPlanOptions.Interface.Types;
 namespace Atlantis.Framework.BonsaiGetPlanOptions.Tests
 {
   [TestClass]
+  [DeploymentItem("Atlantis.Framework.BonsaiGetPlanOptions.Impl.dll")]
   public class BonsaiGetPlanOptionsTests
   {
     public TestContext TestContext { get; set; }

@@ -150,7 +150,7 @@
     <comment>These values should be handled as separate values. Split by the pipe |</comment>
   </data>
   <data name="myaNssslcert" xml:space="preserve">
-    <value>Certificado SLL|anydomainname.com|Un nombre de dominio asociado con un certificado SLL cuando se emitió el certificado.</value>
+    <value>Certificado SSL|anydomainname.com|Un nombre de dominio asociado con un certificado SSL cuando se emitió el certificado.</value>
     <comment>These values should be handled as separate values. Split by the pipe |</comment>
   </data>
   <data name="myaNstrafblazer" xml:space="preserve">

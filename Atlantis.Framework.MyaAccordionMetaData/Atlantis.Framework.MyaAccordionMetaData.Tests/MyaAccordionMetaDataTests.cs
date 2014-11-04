@@ -52,6 +52,7 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Tests
     [TestMethod]
     [DeploymentItem("atlantis.config")]
     [DeploymentItem("Atlantis.Framework.MyaAccordionMetaData.Impl.dll")]
+    [DeploymentItem("Atlantis.Framework.DataCacheGeneric.Impl.dll")]
     public void MyaAccordionMetaDataTest()
     {
 

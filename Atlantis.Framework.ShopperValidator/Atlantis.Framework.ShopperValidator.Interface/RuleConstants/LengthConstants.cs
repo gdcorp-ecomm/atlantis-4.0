@@ -16,7 +16,7 @@ namespace Atlantis.Framework.ShopperValidator.Interface.RuleConstants
     public const int PhoneInternationalMaxLengh = 17;
     public const int PhoneExtMaxLength = 10;
 
-    public const int UsernameMaxLength = 30;
+    public const int UsernameMaxLength = 256;
     public const int UsernameMinLength = 5;
     public const int PasswordMaxLength = 255;
     public const int PasswordMinLength = 9;

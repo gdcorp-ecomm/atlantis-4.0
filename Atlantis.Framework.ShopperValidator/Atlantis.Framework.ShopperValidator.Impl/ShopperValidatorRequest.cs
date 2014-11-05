@@ -15,6 +15,7 @@ using Atlantis.Framework.ShopperValidator.Interface.RuleConstants;
 using Atlantis.Framework.ShopperValidator.Interface.ShopperValidation;
 using Atlantis.Framework.ShopperValidator.Interface.ValidationRules;
 using Atlantis.Framework.ShopperValidator.Interface.Validator;
+using Atlantis.Framework.Engine;
 
 namespace Atlantis.Framework.ShopperValidator.Impl
 {

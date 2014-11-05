@@ -48,27 +48,25 @@
     <Reference Include="Atlantis.Framework.AuthValidatePassword.Interface">
       <HintPath>..\packages\Atlantis.Framework.AuthValidatePassword.Impl.4.12.4.11\lib\net40\Atlantis.Framework.AuthValidatePassword.Interface.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.DataCache">
-      <HintPath>..\packages\Atlantis.Framework.DataCache.14.2.19.1\lib\net40\Atlantis.Framework.DataCache.dll</HintPath>
+    <Reference Include="Atlantis.Framework.DataCache, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.DataCache.14.9.24.1\lib\net40\Atlantis.Framework.DataCache.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.DataCacheGeneric.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Atlantis.Framework.DataCacheGeneric.Interface.14.1.21.1\lib\net40\Atlantis.Framework.DataCacheGeneric.Interface.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.DataCacheService">
-      <HintPath>..\packages\Atlantis.Framework.DataCacheService.4.13.12.21\lib\net40\Atlantis.Framework.DataCacheService.dll</HintPath>
+    <Reference Include="Atlantis.Framework.Engine, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Engine.14.9.9.1\lib\net40\Atlantis.Framework.Engine.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.Engine">
-      <HintPath>..\packages\Atlantis.Framework.Engine.14.1.16.1\lib\net40\Atlantis.Framework.Engine.dll</HintPath>
+    <Reference Include="Atlantis.Framework.Engine.XmlSerializers, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Engine.14.9.9.1\lib\net40\Atlantis.Framework.Engine.XmlSerializers.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.Engine.XmlSerializers">
-      <HintPath>..\packages\Atlantis.Framework.Engine.14.1.16.1\lib\net40\Atlantis.Framework.Engine.XmlSerializers.dll</HintPath>
-    </Reference>
-    <Reference Include="Atlantis.Framework.Interface">
-      <HintPath>..\packages\Atlantis.Framework.Interface.14.1.16.1\lib\net40\Atlantis.Framework.Interface.dll</HintPath>
-    </Reference>
-    <Reference Include="Atlantis.Framework.Nimitz">
-      <HintPath>..\packages\Atlantis.Framework.Nimitz.4.0.0.0\lib\net40\Atlantis.Framework.Nimitz.dll</HintPath>
+    <Reference Include="Atlantis.Framework.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Interface.14.5.15.2\lib\net40\Atlantis.Framework.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.PrivateLabel.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -77,34 +75,20 @@
     <Reference Include="Atlantis.Framework.Products.Interface">
       <HintPath>..\packages\Atlantis.Framework.Products.Interface.14.2.19.1\lib\net40\Atlantis.Framework.Products.Interface.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.Providers.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.Providers.Interface.4.13.12.2\lib\net40\Atlantis.Framework.Providers.Interface.dll</HintPath>
-    </Reference>
     <Reference Include="Atlantis.Framework.RuleEngine">
       <HintPath>..\packages\Atlantis.Framework.RuleEngine.4.0.0.0\lib\net40\Atlantis.Framework.RuleEngine.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.Shopper.Impl">
-      <HintPath>..\packages\Atlantis.Framework.Shopper.Impl.14.1.22.1\lib\net40\Atlantis.Framework.Shopper.Impl.dll</HintPath>
-    </Reference>
-    <Reference Include="Atlantis.Framework.Shopper.Impl.XmlSerializers">
-      <HintPath>..\packages\Atlantis.Framework.Shopper.Impl.14.1.22.1\lib\net40\Atlantis.Framework.Shopper.Impl.XmlSerializers.dll</HintPath>
-    </Reference>
-    <Reference Include="Atlantis.Framework.Shopper.Interface">
-      <HintPath>..\packages\Atlantis.Framework.Shopper.Interface.14.1.22.1\lib\net40\Atlantis.Framework.Shopper.Interface.dll</HintPath>
-    </Reference>
-    <Reference Include="Atlantis.Framework.ValidateField.Impl">
-      <HintPath>..\packages\Atlantis.Framework.ValidateField.Impl.4.13.7.15\lib\net40\Atlantis.Framework.ValidateField.Impl.dll</HintPath>
+    <Reference Include="Atlantis.Framework.Shopper.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Shopper.Interface.14.6.2.1\lib\net40\Atlantis.Framework.Shopper.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.ValidateField.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Atlantis.Framework.ValidateField.Interface.4.14.4.1\lib\net40\Atlantis.Framework.ValidateField.Interface.dll</HintPath>
     </Reference>
-    <Reference Include="netConnect">
-      <HintPath>..\packages\Atlantis.Framework.Nimitz.4.0.0.0\lib\net40\netConnect.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.5.0.8\lib\net40\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.5\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

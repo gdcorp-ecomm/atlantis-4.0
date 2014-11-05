@@ -44,35 +44,20 @@
     <Reference Include="Atlantis.Framework.AuthValidatePassword.Interface">
       <HintPath>..\packages\Atlantis.Framework.AuthValidatePassword.Impl.4.12.4.11\lib\net40\Atlantis.Framework.AuthValidatePassword.Interface.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.DataCacheService">
-      <HintPath>..\packages\Atlantis.Framework.DataCacheService.4.13.12.21\lib\net40\Atlantis.Framework.DataCacheService.dll</HintPath>
-    </Reference>
     <Reference Include="Atlantis.Framework.Engine">
-      <HintPath>..\packages\Atlantis.Framework.Engine.14.1.16.1\lib\net40\Atlantis.Framework.Engine.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.Engine.14.9.9.1\lib\net40\Atlantis.Framework.Engine.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Engine.XmlSerializers">
-      <HintPath>..\packages\Atlantis.Framework.Engine.14.1.16.1\lib\net40\Atlantis.Framework.Engine.XmlSerializers.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.Engine.14.9.9.1\lib\net40\Atlantis.Framework.Engine.XmlSerializers.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Interface">
-      <HintPath>..\packages\Atlantis.Framework.Interface.14.1.16.1\lib\net40\Atlantis.Framework.Interface.dll</HintPath>
-    </Reference>
-    <Reference Include="Atlantis.Framework.Nimitz">
-      <HintPath>..\packages\Atlantis.Framework.Nimitz.4.0.0.0\lib\net40\Atlantis.Framework.Nimitz.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.Interface.14.5.15.2\lib\net40\Atlantis.Framework.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.RuleEngine">
       <HintPath>..\packages\Atlantis.Framework.RuleEngine.4.0.0.0\lib\net40\Atlantis.Framework.RuleEngine.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.Shopper.Impl">
-      <HintPath>..\packages\Atlantis.Framework.Shopper.Impl.14.1.22.1\lib\net40\Atlantis.Framework.Shopper.Impl.dll</HintPath>
-    </Reference>
-    <Reference Include="Atlantis.Framework.Shopper.Impl.XmlSerializers">
-      <HintPath>..\packages\Atlantis.Framework.Shopper.Impl.14.1.22.1\lib\net40\Atlantis.Framework.Shopper.Impl.XmlSerializers.dll</HintPath>
-    </Reference>
     <Reference Include="Atlantis.Framework.Shopper.Interface">
-      <HintPath>..\packages\Atlantis.Framework.Shopper.Interface.14.1.22.1\lib\net40\Atlantis.Framework.Shopper.Interface.dll</HintPath>
-    </Reference>
-    <Reference Include="netConnect">
-      <HintPath>..\packages\Atlantis.Framework.Nimitz.4.0.0.0\lib\net40\netConnect.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.Shopper.Interface.14.6.2.1\lib\net40\Atlantis.Framework.Shopper.Interface.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -101,7 +86,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="atlantis.config" />
-    <None Include="atlantis.config.transform" />
     <None Include="Atlantis.Framework.ShopperValidator.Impl.nuget.bat" />
     <None Include="Atlantis.Framework.ShopperValidator.Impl.nuspec" />
     <None Include="packages.config" />

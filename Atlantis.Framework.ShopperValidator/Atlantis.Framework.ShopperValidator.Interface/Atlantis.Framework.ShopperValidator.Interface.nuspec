@@ -8,7 +8,9 @@
     <owners>$author$</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes></releaseNotes>
+    <releaseNotes>
+      14.11.4.1: increased username character limit to 256
+    </releaseNotes>
     <copyright>$copyright$</copyright>
     <tags>Atlantis.Framework.ShopperValidator.Interface</tags>
   </metadata>

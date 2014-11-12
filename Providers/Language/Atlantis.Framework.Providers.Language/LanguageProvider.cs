@@ -18,19 +18,31 @@ namespace Atlantis.Framework.Providers.Language
     private readonly Lazy<QaPzPhraseHandler> _qaPZPhraseHandler;
 
     private readonly Lazy<CDSPhraseHandler> _cdsPhraseHandler;
-    private readonly Lazy<FilePhraseHandler> _filePhraseHandler; 
+    private readonly Lazy<FilePhraseHandler> _filePhraseHandler;
+
+    private readonly Lazy<ILocalizationProvider> _localization;
 
     public LanguageProvider(IProviderContainer container)
       :base(container)
     {
       _qaPhraseHandler = new Lazy<QAPhraseHandler>(() => new QAPhraseHandler());
-      _qaPSPhraseHandler = new Lazy<QaPsPhraseHandler>(() => new QaPsPhraseHandler(Container));
-      _qaPZPhraseHandler = new Lazy<QaPzPhraseHandler>(() => new QaPzPhraseHandler(Container));
-      _cdsPhraseHandler = new Lazy<CDSPhraseHandler>(() => new CDSPhraseHandler(Container));
-      _filePhraseHandler = new Lazy<FilePhraseHandler>(() => new FilePhraseHandler(Container));
+      _qaPSPhraseHandler = new Lazy<QaPsPhraseHandler>(() => new QaPsPhraseHandler(Container, FullLanguage, ShortLanguage));
+      _qaPZPhraseHandler = new Lazy<QaPzPhraseHandler>(() => new QaPzPhraseHandler(Container, FullLanguage, ShortLanguage));
+      _cdsPhraseHandler = new Lazy<CDSPhraseHandler>(() => new CDSPhraseHandler(Container, FullLanguage, ShortLanguage));
+      _filePhraseHandler = new Lazy<FilePhraseHandler>(() => new FilePhraseHandler(Container, FullLanguage));
       _siteContext = new Lazy<ISiteContext>(() => Container.Resolve<ISiteContext>());
+      _localization = new Lazy<ILocalizationProvider>(container.Resolve<ILocalizationProvider>);
     }
 
+    protected virtual string FullLanguage
+    {
+        get { return _localization.Value.FullLanguage; } 
+    }
+
+    protected virtual string ShortLanguage
+    {
+      get { return _localization.Value.ShortLanguage; } 
+    }
 
     public string GetLanguagePhrase(string dictionaryName, string phraseKey)
     {

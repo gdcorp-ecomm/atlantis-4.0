@@ -1,12 +1,7 @@
 ﻿using Atlantis.Framework.Interface;
-using Atlantis.Framework.Language.Interface;
-using Atlantis.Framework.Providers.Localization.Interface;
 using System;
 using System.Web;
-using System.Linq;
 using System.Text.RegularExpressions;
-using System.Collections.Specialized;
-using System.Collections.Generic;
 using System.Xml.Linq;
 
 namespace Atlantis.Framework.Providers.Language.Handlers
@@ -17,10 +12,10 @@ namespace Atlantis.Framework.Providers.Language.Handlers
     private readonly Lazy<FilePhraseHandler> _filePhraseHandler;
     private readonly Lazy<ISiteContext> _siteContext;
 
-    public QaPsPhraseHandler(IProviderContainer container)
+    public QaPsPhraseHandler(IProviderContainer container, string fullLanguage, string shortLanguage)
     {
-      _cdsPhraseHandler = new Lazy<CDSPhraseHandler>(() => new CDSPhraseHandler(container));
-      _filePhraseHandler = new Lazy<FilePhraseHandler>(() => new FilePhraseHandler(container));
+      _cdsPhraseHandler = new Lazy<CDSPhraseHandler>(() => new CDSPhraseHandler(container, fullLanguage, shortLanguage));
+      _filePhraseHandler = new Lazy<FilePhraseHandler>(() => new FilePhraseHandler(container, fullLanguage));
       _siteContext = new Lazy<ISiteContext>(() => container.Resolve<ISiteContext>());
     }
 

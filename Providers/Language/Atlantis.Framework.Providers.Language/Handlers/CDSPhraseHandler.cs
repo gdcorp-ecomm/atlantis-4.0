@@ -1,5 +1,6 @@
 ﻿using Atlantis.Framework.Interface;
 using Atlantis.Framework.Language.Interface;
+using Atlantis.Framework.Providers.Language.Interface;
 using Atlantis.Framework.Providers.Localization.Interface;
 using System;
 using System.Web;
@@ -27,11 +28,18 @@ namespace Atlantis.Framework.Providers.Language.Handlers
     private readonly Lazy<IDebugContext> _debugContext;
     private const string _defaultLanguage = "en";
 
-    public CDSPhraseHandler(IProviderContainer container)
+    private readonly string _fullLanguage;
+    private readonly string _shortLanguage;
+
+    public CDSPhraseHandler(IProviderContainer container, string fullLanguage, string shortLanguage)
     {
       _container = container;
       _siteContext = new Lazy<ISiteContext>(container.Resolve<ISiteContext>);
       _localization = new Lazy<ILocalizationProvider>(container.Resolve<ILocalizationProvider>);
+
+      _fullLanguage = fullLanguage;
+      _shortLanguage = shortLanguage;
+
       if (_siteContext.Value.IsRequestInternal)
       {
         _debugContext = new Lazy<IDebugContext>(container.Resolve<IDebugContext>);
@@ -48,12 +56,12 @@ namespace Atlantis.Framework.Providers.Language.Handlers
       bool retVal;
 
       dictionaryName = dictionaryName.Substring(4);
-      var fullLanguage = _localization.Value.FullLanguage;
+      var fullLanguage = _fullLanguage;
       var fullLanguageDictionary = GetLanguageResponse(dictionaryName, fullLanguage);
 
       if (!(retVal = TryGetPhraseText(fullLanguageDictionary, phraseKey, fullLanguage, out phrase)) && fullLanguage != _defaultLanguage)
       {
-        var shortLanguage = _localization.Value.ShortLanguage;
+        var shortLanguage = _shortLanguage;
         var shortLanguageDictionary = GetLanguageResponse(dictionaryName, shortLanguage);
         if (!(retVal = TryGetPhraseText(shortLanguageDictionary, phraseKey, shortLanguage, out phrase)) && doGlobalFallback && shortLanguage != _defaultLanguage)
         {

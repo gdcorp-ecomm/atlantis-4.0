@@ -2,6 +2,7 @@
 using Atlantis.Framework.Providers.Language.Handlers;
 using Atlantis.Framework.Providers.Language.Interface;
 using System;
+using Atlantis.Framework.Providers.Localization.Interface;
 
 namespace Atlantis.Framework.Providers.Language
 {
@@ -9,10 +10,23 @@ namespace Atlantis.Framework.Providers.Language
   {
     private readonly Lazy<CDSPhraseHandler> _cdsPhraseHandler;
 
+    private readonly Lazy<ILocalizationProvider> _localization;
+
     public CdsNoEnglishFallbackLanguageProvider(IProviderContainer container)
       :base(container)
     {
-      _cdsPhraseHandler = new Lazy<CDSPhraseHandler>(() => new CDSPhraseHandler(Container));
+      _cdsPhraseHandler = new Lazy<CDSPhraseHandler>(() => new CDSPhraseHandler(Container, FullLanguage, ShortLanguage));
+      _localization = new Lazy<ILocalizationProvider>(container.Resolve<ILocalizationProvider>);
+    }
+
+    protected virtual string FullLanguage
+    {
+        get { return _localization.Value.FullLanguage; }
+    }
+
+    protected virtual string ShortLanguage
+    {
+        get { return _localization.Value.ShortLanguage; }
     }
 
     public string GetLanguagePhrase(string dictionaryName, string phraseKey)

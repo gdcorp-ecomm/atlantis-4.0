@@ -108,6 +108,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CDSContentProvider.cs" />
+    <Compile Include="CdsContentProviderGlobalSettings.cs" />
     <Compile Include="CDSDocument.cs" />
     <Compile Include="ContentDocument.cs" />
     <Compile Include="RulesDocument.cs" />

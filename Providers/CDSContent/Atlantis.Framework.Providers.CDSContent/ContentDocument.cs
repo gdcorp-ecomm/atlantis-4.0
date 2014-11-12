@@ -11,13 +11,6 @@ namespace Atlantis.Framework.Providers.CDSContent
     public const int ContentVersionRequestType = 687;
     public static readonly IRenderContent NullRenderContent = new ContentVersionResponseData(null);
 
-    public static bool AllowEmptyContent { get; set; }
-
-    static ContentDocument()
-    {
-      AllowEmptyContent = false;
-    }
-
     public ContentDocument(IProviderContainer container, string defaultContentPath)
     {
       Container = container;
@@ -34,7 +27,7 @@ namespace Atlantis.Framework.Providers.CDSContent
         var requestData = new CDSRequestData(ContentPath);
         ContentVersionResponseData responseData = ByPassDataCache ? (ContentVersionResponseData)Engine.Engine.ProcessRequest(requestData, ContentVersionRequestType) : (ContentVersionResponseData)DataCache.DataCache.GetProcessRequest(requestData, ContentVersionRequestType);
 
-        if (responseData.IsSuccess && (!string.IsNullOrEmpty(responseData.Content) || AllowEmptyContent))
+        if (responseData.IsSuccess && (!string.IsNullOrEmpty(responseData.Content) || CdsContentProviderGlobalSettings.AllowEmptyContent))
         {
           contentVersion = responseData;
           LogCDSDebugInfo(responseData);

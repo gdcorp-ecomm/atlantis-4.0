@@ -51,7 +51,7 @@ namespace Atlantis.Framework.Providers.CDSContent.Tests
     [TestCleanup]
     public void Cleanup()
     {
-      ContentDocument.AllowEmptyContent = false;
+      CdsContentProviderGlobalSettings.AllowEmptyContent = false;
     }
 
     [TestMethod]
@@ -74,7 +74,7 @@ namespace Atlantis.Framework.Providers.CDSContent.Tests
     [TestMethod]
     public void CDT_PublishedDocFoundEmpty()
     {
-      ContentDocument.AllowEmptyContent = true;
+      CdsContentProviderGlobalSettings.AllowEmptyContent = true;
       string rawPath = "content/sales/unittest/defaultcontentpath_emptyfile";
       ContentDocument contentDoc = new ContentDocument(ObjectProviderContainer, rawPath);
       ContentVersionResponseData responseData = contentDoc.GetContent() as ContentVersionResponseData;

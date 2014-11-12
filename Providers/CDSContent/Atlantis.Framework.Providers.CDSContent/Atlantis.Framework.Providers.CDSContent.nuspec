@@ -9,7 +9,9 @@
     <projectUrl>https://confluence.int.godaddy.com/display/CDS</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes></releaseNotes>
+    <releaseNotes>
+        14.11.12.1 : (GCE-31021) Added AllowEmptyContent property to ContentDocument class; fixed NuGet dependencies.
+    </releaseNotes>
     <copyright>$copyright$</copyright>
     <tags>Atlantis.Framework.Providers.CDSContent</tags>
     <dependencies></dependencies>

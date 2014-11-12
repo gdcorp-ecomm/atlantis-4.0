@@ -48,6 +48,12 @@ namespace Atlantis.Framework.Providers.CDSContent.Tests
       ApplicationStart();
     }
 
+    [TestCleanup]
+    public void Cleanup()
+    {
+      ContentDocument.AllowEmptyContent = false;
+    }
+
     [TestMethod]
     public void CDT_PublishedDocNotFound()
     {
@@ -63,6 +69,20 @@ namespace Atlantis.Framework.Providers.CDSContent.Tests
       ContentDocument contentDoc = new ContentDocument(ObjectProviderContainer, rawPath);
       IRenderContent renderContent = contentDoc.GetContent();
       Assert.IsTrue(renderContent.Content.Contains("Current DataCenter:"));
+    }
+
+    [TestMethod]
+    public void CDT_PublishedDocFoundEmpty()
+    {
+      ContentDocument.AllowEmptyContent = true;
+      string rawPath = "content/sales/unittest/defaultcontentpath_emptyfile";
+      ContentDocument contentDoc = new ContentDocument(ObjectProviderContainer, rawPath);
+      ContentVersionResponseData responseData = contentDoc.GetContent() as ContentVersionResponseData;
+
+      Assert.IsNotNull(responseData);
+      Assert.IsNotNull(responseData._id);
+      Assert.IsTrue(!string.IsNullOrEmpty(responseData._id.oid));
+      Assert.IsTrue(string.IsNullOrEmpty(responseData.Content));
     }
 
     [TestMethod]

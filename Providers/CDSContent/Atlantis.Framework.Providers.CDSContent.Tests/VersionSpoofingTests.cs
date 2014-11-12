@@ -90,7 +90,7 @@ namespace Atlantis.Framework.Providers.CDSContent.Tests
 
       IPlaceHolderProvider placeHolderProvider = ProviderContainer.Resolve<IPlaceHolderProvider>();
 
-      string finalContent = placeHolderProvider.ReplacePlaceHolders(result.Content, null);
+      string finalContent = placeHolderProvider.ReplacePlaceHolders(result.Content);
 
       Assert.IsTrue(finalContent.Contains("blah blah blah blah"));
       Assert.IsTrue(finalContent.Contains("zoom zoom zoom zoom"));

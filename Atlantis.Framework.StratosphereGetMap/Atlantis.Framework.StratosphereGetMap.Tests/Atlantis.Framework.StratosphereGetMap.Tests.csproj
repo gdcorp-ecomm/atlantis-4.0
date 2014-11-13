@@ -57,6 +57,15 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Atlantis.Framework.Engine">
+      <HintPath>..\packages\Atlantis.Framework.Engine.14.9.9.1\lib\net40\Atlantis.Framework.Engine.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Engine.XmlSerializers">
+      <HintPath>..\packages\Atlantis.Framework.Engine.14.9.9.1\lib\net40\Atlantis.Framework.Engine.XmlSerializers.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Interface">
+      <HintPath>..\packages\Atlantis.Framework.Interface.14.5.15.2\lib\net40\Atlantis.Framework.Interface.dll</HintPath>
+    </Reference>
     <Reference Include="Atlantis.Framework.Testing.MockHttpContext">
       <HintPath>..\..\Atlantis.Framework.Testing\Atlantis.Framework.Testing.MockHttpContext\bin\Debug\Atlantis.Framework.Testing.MockHttpContext.dll</HintPath>
     </Reference>
@@ -78,6 +87,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </None>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0">
@@ -102,14 +112,6 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj">
-      <Project>{092618E1-1F37-422C-82AF-17A1337B8986}</Project>
-      <Name>Atlantis.Framework.Engine</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj">
-      <Project>{2474F971-3E1D-4608-9D60-B0A9A1CA8D13}</Project>
-      <Name>Atlantis.Framework.Interface</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Atlantis.Framework.SessionCache\Atlantis.Framework.SessionCache\Atlantis.Framework.SessionCache.csproj">
       <Project>{8B9AA4D9-B932-40EB-9F36-52C55F2D3D09}</Project>
       <Name>Atlantis.Framework.SessionCache</Name>

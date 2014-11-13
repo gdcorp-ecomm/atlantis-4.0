@@ -11,10 +11,13 @@ namespace Atlantis.Framework.StratosphereGetMap.Tests
   /// Summary description for UnitTest1
   /// </summary>
   [TestClass]
+  [DeploymentItem("Atlantis.Framework.StratosphereGetMap.Impl.dll")]
+  [DeploymentItem("Atlantis.Framework.StratosphereGetMapUrl.Impl.dll")]
+  
   public class GetStratosphereGetMapTests
   {
 
-    private const string _shopperId = "83439";  //DEV: 856907  TEST: 83439
+    private const string _shopperId = "856907";  //DEV: 856907  TEST: 83439
     private const int _requestType = 237;
     private const int _asyncRequestType = 241;
 
@@ -86,7 +89,7 @@ namespace Atlantis.Framework.StratosphereGetMap.Tests
          , string.Empty
          , 0
          , "domain"
-         , "intrepidkjs.com"
+         , "oosjjejsjje.com"
          , null);
 
       StratosphereGetMapResponseData response = SessionCache.SessionCache.GetProcessRequest<StratosphereGetMapResponseData>(request, _requestType);

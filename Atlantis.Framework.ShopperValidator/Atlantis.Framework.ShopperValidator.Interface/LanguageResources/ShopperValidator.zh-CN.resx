@@ -172,13 +172,13 @@
     <value>{0} cannot include a common word or phrase.</value>
   </data>
   <data name="lastFive" xml:space="preserve">
-    <value>Cannot reuse the last 5 passwords.</value>
+    <value>不能重新使用最近用过的 5 个密码。</value>
   </data>
   <data name="matchesHint" xml:space="preserve">
     <value>{0} cannot be equal to Password Hint.</value>
   </data>
   <data name="samePassword" xml:space="preserve">
-    <value>Cannot use the same password within 30 days.</value>
+    <value>在 30 天之内不能重复使用同一个密码。</value>
   </data>
   <data name="isInvalidStatusCode" xml:space="preserve">
     <value>{0} is invalid. Status Code: {1}</value>
@@ -190,43 +190,43 @@
     <value>Username already exists</value>
   </data>
   <data name="username" xml:space="preserve">
-    <value>Username</value>
+    <value>用户名</value>
   </data>
   <data name="birthday" xml:space="preserve">
-    <value>Birthday</value>
+    <value>生日</value>
   </data>
   <data name="address1" xml:space="preserve">
-    <value>Address 1</value>
+    <value>地址 1</value>
   </data>
   <data name="address2" xml:space="preserve">
-    <value>Address 2</value>
+    <value>地址 2</value>
   </data>
   <data name="phone" xml:space="preserve">
-    <value>Phone</value>
+    <value>电话</value>
   </data>
   <data name="callInPin" xml:space="preserve">
     <value>Call-in PIN</value>
   </data>
   <data name="city" xml:space="preserve">
-    <value>City</value>
+    <value>城市</value>
   </data>
   <data name="country" xml:space="preserve">
-    <value>Country</value>
+    <value>国家/地区</value>
   </data>
   <data name="email" xml:space="preserve">
-    <value>Email</value>
+    <value>电子邮件</value>
   </data>
   <data name="firstName" xml:space="preserve">
-    <value>First name</value>
+    <value>名字</value>
   </data>
   <data name="lastName" xml:space="preserve">
-    <value>Last name</value>
+    <value>姓氏</value>
   </data>
   <data name="password" xml:space="preserve">
-    <value>Password</value>
+    <value>密码</value>
   </data>
   <data name="confirmPassword" xml:space="preserve">
-    <value>Confirm password</value>
+    <value>确认密码</value>
   </data>
   <data name="passwordHint" xml:space="preserve">
     <value>Password hint</value>

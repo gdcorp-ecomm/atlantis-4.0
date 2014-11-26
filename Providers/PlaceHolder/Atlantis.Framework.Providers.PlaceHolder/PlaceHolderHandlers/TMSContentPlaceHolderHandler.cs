@@ -22,7 +22,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolderHandlers
     private const string TRACKING_DIV_FORMAT = "<div data-tms-trackingid=\"{0}\">\n{1}\n</div>";
 
     internal TMSContentPlaceHolderHandler(IPlaceHolderHandlerContext context)
-      : base(context) {}
+      : base(context) { }
 
     protected override string GetContent()
     {
@@ -114,7 +114,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolderHandlers
     private string ReplaceDataTokens(string rawContent)
     {
       IRenderPipelineProvider renderPipelineProvider = Context.ProviderContainer.Resolve<IRenderPipelineProvider>();
-      return renderPipelineProvider.RenderContent(rawContent, new IRenderHandler[] {new ProviderContainerDataTokenRenderHandler()});
+      return renderPipelineProvider.RenderContent(rawContent, new IRenderHandler[] { new ProviderContainerDataTokenRenderHandler() });
     }
 
     private bool TryGetMessageVariant(string appProduct, string interactionName, out MessageVariant messageVariant)
@@ -175,7 +175,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolderHandlers
           {
             // Format: {appProduct}/{interactioName}|name=abc,tag=abc_tag,etc...|dataItem1=value1,dataItem2=value2,etc...
             // DataItem(s) are optional. 
-            string[] values = spoofValue.Split(new[] {TMS_SPOOF_DELIM}, StringSplitOptions.RemoveEmptyEntries);
+            string[] values = spoofValue.Split(new[] { TMS_SPOOF_DELIM }, StringSplitOptions.RemoveEmptyEntries);
             if (values.Length >= 2)
             {
               // Format: {appProduct}/{interactionName}
@@ -188,9 +188,9 @@ namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolderHandlers
               // Format: name=abc,tag=abc_tag,etc...
               Dictionary<string, string> messageVariantInfo = new Dictionary<string, string>();
               string infoValues = values[1].ToLowerInvariant();
-              foreach (string infoValue in infoValues.Split(new[] {','}, StringSplitOptions.RemoveEmptyEntries))
+              foreach (string infoValue in infoValues.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
               {
-                string[] infoSplit = infoValue.Split(new[] {'='}, StringSplitOptions.RemoveEmptyEntries);
+                string[] infoSplit = infoValue.Split(new[] { '=' }, StringSplitOptions.RemoveEmptyEntries);
                 if (infoSplit.Length == 2)
                 {
                   messageVariantInfo.Add(infoSplit[0], infoSplit[1]);
@@ -203,9 +203,9 @@ namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolderHandlers
               if (values.Length > 2)
               {
                 string dataValues = values[2].ToLowerInvariant();
-                foreach (string dataValue in dataValues.Split(new[] {','}, StringSplitOptions.RemoveEmptyEntries))
+                foreach (string dataValue in dataValues.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
                 {
-                  string[] dataSplit = dataValue.Split(new[] {'='}, StringSplitOptions.RemoveEmptyEntries);
+                  string[] dataSplit = dataValue.Split(new[] { '=' }, StringSplitOptions.RemoveEmptyEntries);
                   if (dataSplit.Length == 2)
                   {
                     messageVariantData.Add(new KeyValuePair<string, string>(dataSplit[0], dataSplit[1]));

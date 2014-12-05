@@ -1,0 +1,312 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="maxLengthError" xml:space="preserve">
+    <value>{0}은(는) {1}자 미만이어야 합니다.</value>
+  </data>
+  <data name="minLengthError" xml:space="preserve">
+    <value>{0}은(는) {1}자보다 커야 합니다.</value>
+  </data>
+  <data name="invalidData" xml:space="preserve">
+    <value>잘못된 데이터</value>
+  </data>
+  <data name="equalLengthAlpha" xml:space="preserve">
+    <value>{0}은(는) {1}자여야 합니다.</value>
+  </data>
+  <data name="equalLengthNumeric" xml:space="preserve">
+    <value>{0}은(는) {1}자리여야 합니다.</value>
+  </data>
+  <data name="invalidCharacters" xml:space="preserve">
+    <value>{0}에 잘못된 문자가 포함되어 있습니다.</value>
+  </data>
+  <data name="match" xml:space="preserve">
+    <value>{0}은(는) {1}과(와) 같아야 합니다.</value>
+  </data>
+  <data name="notMatch" xml:space="preserve">
+    <value>{0}은(는) {1}과(와) 같지 않아야 합니다.</value>
+  </data>
+  <data name="numericRule" xml:space="preserve">
+    <value>{0}에는 숫자만 사용할 수 있습니다.</value>
+  </data>
+  <data name="isInvalid" xml:space="preserve">
+    <value>{0}이(가) 잘못되었습니다.</value>
+  </data>
+  <data name="phoneMustStartAndContain" xml:space="preserve">
+    <value>{0}은(는) 0 또는 1로 시작하지 않아야 합니다. {1}자여야 합니다. </value>
+  </data>
+  <data name="phoneMustContainCharacters" xml:space="preserve">
+    <value>{0}은(는) {1}자여야 합니다.</value>
+  </data>
+  <data name="mustBeNumeric" xml:space="preserve">
+    <value>{0}은(는) 숫자여야 합니다.</value>
+  </data>
+  <data name="invalidFormat" xml:space="preserve">
+    <value>{0}의 형식이 잘못되었습니다.</value>
+  </data>
+  <data name="required" xml:space="preserve">
+    <value>{0}은(는) 필수입니다.</value>
+  </data>
+  <data name="birthdayValid" xml:space="preserve">
+    <value>생년월일을 제공할 경우 유효한 값을 제공해야 합니다.</value>
+  </data>
+  <data name="straightNumerical" xml:space="preserve">
+    <value>{0}은(는) 연속된 숫자일 수 없습니다.</value>
+  </data>
+  <data name="commonPhrase" xml:space="preserve">
+    <value>{0}은(는) 일반 단어 또는 문구를 포함할 수 없습니다.</value>
+  </data>
+  <data name="lastFive" xml:space="preserve">
+    <value>마지막 5개 암호를 다시 사용할 수 없습니다.</value>
+  </data>
+  <data name="matchesHint" xml:space="preserve">
+    <value>{0}은(는) 암호 힌트와 같을 수 없습니다.</value>
+  </data>
+  <data name="samePassword" xml:space="preserve">
+    <value>30일 이내에 동일한 암호를 사용할 수 없습니다.</value>
+  </data>
+  <data name="isInvalidStatusCode" xml:space="preserve">
+    <value>{0}이(가) 잘못되었습니다. 상태 코드: {1}</value>
+  </data>
+  <data name="passwordConfirm" xml:space="preserve">
+    <value>{0}은(는) {1}자보다 클 수 없습니다.  상태 검사기에 제공하기 전에 {0}을(를) 자릅니다.</value>
+  </data>
+  <data name="usernameExists" xml:space="preserve">
+    <value>사용자 이름이 이미 있습니다.</value>
+  </data>
+  <data name="username" xml:space="preserve">
+    <value>사용자 이름</value>
+  </data>
+  <data name="birthday" xml:space="preserve">
+    <value>생일</value>
+  </data>
+  <data name="address1" xml:space="preserve">
+    <value>주소 1</value>
+  </data>
+  <data name="address2" xml:space="preserve">
+    <value>주소 2</value>
+  </data>
+  <data name="phone" xml:space="preserve">
+    <value>전화</value>
+  </data>
+  <data name="callInPin" xml:space="preserve">
+    <value>전화 걸기 PIN</value>
+  </data>
+  <data name="city" xml:space="preserve">
+    <value>시</value>
+  </data>
+  <data name="country" xml:space="preserve">
+    <value>국가</value>
+  </data>
+  <data name="email" xml:space="preserve">
+    <value>이메일</value>
+  </data>
+  <data name="firstName" xml:space="preserve">
+    <value>이름</value>
+  </data>
+  <data name="lastName" xml:space="preserve">
+    <value>성</value>
+  </data>
+  <data name="password" xml:space="preserve">
+    <value>암호</value>
+  </data>
+  <data name="confirmPassword" xml:space="preserve">
+    <value>암호 확인</value>
+  </data>
+  <data name="passwordHint" xml:space="preserve">
+    <value>암호 힌트</value>
+  </data>
+  <data name="ext" xml:space="preserve">
+    <value>내선</value>
+  </data>
+  <data name="state" xml:space="preserve">
+    <value>시/도</value>
+  </data>
+  <data name="zip" xml:space="preserve">
+    <value>우편 번호</value>
+  </data>
+  <data name="alreadyExists" xml:space="preserve">
+    <value>{0}이(가) 이미 있습니다.</value>
+  </data>
+  <data name="cannotBeNumeric" xml:space="preserve">
+    <value>{0}에는 숫자만 사용할 수 없습니다.</value>
+  </data>
+  <data name="pinOneDigit" xml:space="preserve">
+    <value>PIN은 두 개 이상의 숫자를 포함해야 합니다.</value>
+  </data>
+  <data name="errorEmailInvalidFormat" xml:space="preserve">
+    <value>이메일의 형식이 잘못되었습니다.</value>
+  </data>
+  <data name="errorEmailMaxLength" xml:space="preserve">
+    <value>이메일은 {0}자를 초과할 수 없습니다.</value>
+    <comment>{0} replaced with the max email length</comment>
+  </data>
+  <data name="errorEmailRequired" xml:space="preserve">
+    <value>이메일은 필수입니다.</value>
+  </data>
+  <data name="errorPassword2Required" xml:space="preserve">
+    <value>암호 확인은 필수입니다.</value>
+  </data>
+  <data name="errorPasswordInvalidFormat" xml:space="preserve">
+    <value>암호는 1자 이상의 대문자와 숫자 하나를 포함해야 하며, 공백으로 시작하거나 끝날 수 없습니다.</value>
+  </data>
+  <data name="errorPasswordMaxLength" xml:space="preserve">
+    <value>암호는 {0}자를 초과할 수 없습니다.</value>
+    <comment>{0} replaced with the max password length</comment>
+  </data>
+  <data name="errorPasswordMinLength" xml:space="preserve">
+    <value>암호는 {0}자 이상이어야 합니다.</value>
+    <comment>{0} replaced with the min password length</comment>
+  </data>
+  <data name="errorPasswordMismatch" xml:space="preserve">
+    <value>암호가 일치해야 합니다.</value>
+  </data>
+  <data name="errorPasswordRequired" xml:space="preserve">
+    <value>암호는 필수입니다.</value>
+  </data>
+  <data name="errorPinMaxLength" xml:space="preserve">
+    <value>PIN은 {0}자를 초과할 수 없습니다.</value>
+    <comment>{0} replaced with the max PIN length</comment>
+  </data>
+  <data name="errorPinMinLength" xml:space="preserve">
+    <value>PIN은 {0}자 이상이어야 합니다.</value>
+    <comment>{0} replaced with the min PIN length</comment>
+  </data>
+  <data name="errorPinNumeric" xml:space="preserve">
+    <value>PIN에는 숫자만 사용할 수 있습니다.</value>
+  </data>
+  <data name="errorPinRequired" xml:space="preserve">
+    <value>PIN은 필수입니다.</value>
+  </data>
+  <data name="errorPinSequential" xml:space="preserve">
+    <value>PIN은 연속하는 숫자일 수 없습니다.</value>
+  </data>
+  <data name="errorUsernameInvalidCharacters" xml:space="preserve">
+    <value>사용자 이름에 잘못된 문자가 포함되어 있습니다.</value>
+  </data>
+  <data name="errorUsernameMaxLength" xml:space="preserve">
+    <value>사용자 이름은 {0}자를 초과할 수 없습니다.</value>
+    <comment>{0} replaced with the max username length</comment>
+  </data>
+  <data name="errorUsernameNumericOnly" xml:space="preserve">
+    <value>사용자 이름에는 숫자만 사용할 수 없습니다.</value>
+  </data>
+  <data name="errorUsernameRequired" xml:space="preserve">
+    <value>사용자 이름은 필수입니다.</value>
+  </data>
+</root>

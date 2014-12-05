@@ -1,0 +1,312 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="maxLengthError" xml:space="preserve">
+    <value>Ang {0} ay dapat mas kaunti sa {1} (na) character.</value>
+  </data>
+  <data name="minLengthError" xml:space="preserve">
+    <value>Ang {0} ay dapat mas marami sa {1} (na) character.</value>
+  </data>
+  <data name="invalidData" xml:space="preserve">
+    <value>Hindi wastong Data</value>
+  </data>
+  <data name="equalLengthAlpha" xml:space="preserve">
+    <value>Ang {0} ay dapat na {1} (na) character.</value>
+  </data>
+  <data name="equalLengthNumeric" xml:space="preserve">
+    <value>Ang {0} ay dapat na {1} (na) digit.</value>
+  </data>
+  <data name="invalidCharacters" xml:space="preserve">
+    <value>Ang {0} ay naglalaman ng mga hindi wastong character</value>
+  </data>
+  <data name="match" xml:space="preserve">
+    <value>Ang {0} ay dapat pantay sa {1}</value>
+  </data>
+  <data name="notMatch" xml:space="preserve">
+    <value>Ang {0} ay hindi maaaring pantay sa {1}</value>
+  </data>
+  <data name="numericRule" xml:space="preserve">
+    <value>Ang {0} ay dapat maglaman lamang ng mga numero.</value>
+  </data>
+  <data name="isInvalid" xml:space="preserve">
+    <value>Ang {0} ay hindi wasto;</value>
+  </data>
+  <data name="phoneMustStartAndContain" xml:space="preserve">
+    <value>Ang {0} ay hindi dapat magsimula sa isang 0 o 1.  Dapat maglaman ng {1} (na) character </value>
+  </data>
+  <data name="phoneMustContainCharacters" xml:space="preserve">
+    <value>Ang {0} ay dapat maglaman ng {1} (na) character</value>
+  </data>
+  <data name="mustBeNumeric" xml:space="preserve">
+    <value>Ang {0} ay dapat na numeriko</value>
+  </data>
+  <data name="invalidFormat" xml:space="preserve">
+    <value>Ang {0} ay isang hindi wastong format.</value>
+  </data>
+  <data name="required" xml:space="preserve">
+    <value>Ang {0} ay kailangan</value>
+  </data>
+  <data name="birthdayValid" xml:space="preserve">
+    <value>Kung mabibigay ng kaarawan dapat kang magbigay nang mga wastong value</value>
+  </data>
+  <data name="straightNumerical" xml:space="preserve">
+    <value>Ang {0} ay hindi maaaring maging anumang diretsong numerical sequence ng mga digit.</value>
+  </data>
+  <data name="commonPhrase" xml:space="preserve">
+    <value>Hindi maaaring isama ng {0} ang isang karaniwang salita o parirala.</value>
+  </data>
+  <data name="lastFive" xml:space="preserve">
+    <value>Hindi magagamit muli ang huling 5 password.</value>
+  </data>
+  <data name="matchesHint" xml:space="preserve">
+    <value>Ang {0} ay hindi maaaring kapareho sa Pahiwatig ng Password.</value>
+  </data>
+  <data name="samePassword" xml:space="preserve">
+    <value>Hindi magagamit ang parehong password sa loob ng 30 araw.</value>
+  </data>
+  <data name="isInvalidStatusCode" xml:space="preserve">
+    <value>Ang {0} ay hindi wasto. Status Code: {1}</value>
+  </data>
+  <data name="passwordConfirm" xml:space="preserve">
+    <value>Ang {0} ay hindi maaaring mas marami kaysa {1} (na) character.  I-trim ang {0} bago i-supply ito sa validator.</value>
+  </data>
+  <data name="usernameExists" xml:space="preserve">
+    <value>Umiiral na ang username</value>
+  </data>
+  <data name="username" xml:space="preserve">
+    <value>Username</value>
+  </data>
+  <data name="birthday" xml:space="preserve">
+    <value>Kaarawan</value>
+  </data>
+  <data name="address1" xml:space="preserve">
+    <value>Address 1</value>
+  </data>
+  <data name="address2" xml:space="preserve">
+    <value>Address 2</value>
+  </data>
+  <data name="phone" xml:space="preserve">
+    <value>Telepono</value>
+  </data>
+  <data name="callInPin" xml:space="preserve">
+    <value>Call-in PIN</value>
+  </data>
+  <data name="city" xml:space="preserve">
+    <value>Lungsod</value>
+  </data>
+  <data name="country" xml:space="preserve">
+    <value>Bansa</value>
+  </data>
+  <data name="email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="firstName" xml:space="preserve">
+    <value>Pangalan</value>
+  </data>
+  <data name="lastName" xml:space="preserve">
+    <value>Apelyido</value>
+  </data>
+  <data name="password" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="confirmPassword" xml:space="preserve">
+    <value>Kumpirmahin ang password</value>
+  </data>
+  <data name="passwordHint" xml:space="preserve">
+    <value>Pahiwatig ng password</value>
+  </data>
+  <data name="ext" xml:space="preserve">
+    <value>Ext</value>
+  </data>
+  <data name="state" xml:space="preserve">
+    <value>Estado / Probinsya</value>
+  </data>
+  <data name="zip" xml:space="preserve">
+    <value>Zip / Postal code</value>
+  </data>
+  <data name="alreadyExists" xml:space="preserve">
+    <value>Umiiral na ang {0}</value>
+  </data>
+  <data name="cannotBeNumeric" xml:space="preserve">
+    <value>Hindi maaaring mga numero lang ang {0}</value>
+  </data>
+  <data name="pinOneDigit" xml:space="preserve">
+    <value>Dapat maglaman ang PIN nang higit sa isang digit</value>
+  </data>
+  <data name="errorEmailInvalidFormat" xml:space="preserve">
+    <value>Hindi wastong format ang email.</value>
+  </data>
+  <data name="errorEmailMaxLength" xml:space="preserve">
+    <value>Ang email ay hindi maaaring mas mahaba kaysa {0} (na) character.</value>
+    <comment>{0} replaced with the max email length</comment>
+  </data>
+  <data name="errorEmailRequired" xml:space="preserve">
+    <value>Kailangan ang email.</value>
+  </data>
+  <data name="errorPassword2Required" xml:space="preserve">
+    <value>Kailangan ang pagkumpirma ng password.</value>
+  </data>
+  <data name="errorPasswordInvalidFormat" xml:space="preserve">
+    <value>Dapat maglaman ang password nang kahit 1 malking titik, 1 numero at hindi maaaring mag-umpisa o magtapos nang may espasyo.</value>
+  </data>
+  <data name="errorPasswordMaxLength" xml:space="preserve">
+    <value>Hindi maaaring mas mahaba ang password kaysa {0} (na) character ang haba.</value>
+    <comment>{0} replaced with the max password length</comment>
+  </data>
+  <data name="errorPasswordMinLength" xml:space="preserve">
+    <value>Ang password ay kailangang hindi bababa sa {0} (na) character ang haba.</value>
+    <comment>{0} replaced with the min password length</comment>
+  </data>
+  <data name="errorPasswordMismatch" xml:space="preserve">
+    <value>Dapat tumugma ang mga password.</value>
+  </data>
+  <data name="errorPasswordRequired" xml:space="preserve">
+    <value>Kailangan ang password.</value>
+  </data>
+  <data name="errorPinMaxLength" xml:space="preserve">
+    <value>Hindi maaaring maging mas mahaba ang PIN kaysa sa {0} (na) character ang haba.</value>
+    <comment>{0} replaced with the max PIN length</comment>
+  </data>
+  <data name="errorPinMinLength" xml:space="preserve">
+    <value>Ang PIN ay dapat hindi bababa sa {0} (na) character ang haba.</value>
+    <comment>{0} replaced with the min PIN length</comment>
+  </data>
+  <data name="errorPinNumeric" xml:space="preserve">
+    <value>Dapat lamang maglaman ng mga numero ang PIN.</value>
+  </data>
+  <data name="errorPinRequired" xml:space="preserve">
+    <value>Kailangan ang PIN.</value>
+  </data>
+  <data name="errorPinSequential" xml:space="preserve">
+    <value>Hindi maaaring anumang diretsong numerical sequence ng mga digit ang PIN.</value>
+  </data>
+  <data name="errorUsernameInvalidCharacters" xml:space="preserve">
+    <value>Naglalaman ng mga hindi wastong character ang username.</value>
+  </data>
+  <data name="errorUsernameMaxLength" xml:space="preserve">
+    <value>Hindi maaaring mas mahaba ang username kaysa sa {0} (na) character ang haba.</value>
+    <comment>{0} replaced with the max username length</comment>
+  </data>
+  <data name="errorUsernameNumericOnly" xml:space="preserve">
+    <value>Hindi maaaring mga numero lang ang username.</value>
+  </data>
+  <data name="errorUsernameRequired" xml:space="preserve">
+    <value>Kailangan ang username.</value>
+  </data>
+</root>

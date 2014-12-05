@@ -1,0 +1,168 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="myaNsdomain" xml:space="preserve">
+    <value>도메인 이름|mydomainname.com|이 계정으로 등록된 도메인 이름입니다.</value>
+    <comment>These values should be handled as separate values. Split by the pipe |</comment>
+  </data>
+  <data name="myaNsemail" xml:space="preserve">
+    <value>이메일 주소|name@email.server.net|이 계정으로 구입한 이메일 계정 크레딧을 사용하여 설정한 이메일 주소입니다.</value>
+    <comment>These values should be handled as separate values. Split by the pipe |</comment>
+  </data>
+  <data name="myaNsemailfwd" xml:space="preserve">
+    <value>전달된 이메일 주소|forwardedname@email.server.net|이 계정으로 구입한 이메일 계정 크레딧을 사용하여 설정하고, 대체 이메일 주소로 전달하도록 설정된 이메일 주소입니다.</value>
+    <comment>These values should be handled as separate values. Split by the pipe |</comment>
+  </data>
+  <data name="myaNsforwarding" xml:space="preserve">
+    <value>전달된 도메인 이름|myforwarededomainname.com|이 계정으로 등록되고 대체 URL로 전달되는 도메인 이름입니다.</value>
+    <comment>These values should be handled as separate values. Split by the pipe |</comment>
+  </data>
+  <data name="myaNshosting" xml:space="preserve">
+    <value>호스트된 도메인 이름|anydomainname.com|이 계정으로 설정한 호스팅 계정과 연결된 도메인 이름(이 계정으로 등록되지 않아도 됨)입니다.</value>
+    <comment>These values should be handled as separate values. Split by the pipe |</comment>
+  </data>
+  <data name="myaNsparking" xml:space="preserve">
+    <value>판매용/1페이지 웹사이트|my4saledomainname.com|판매용 페이지 또는 1페이지 웹사이트로 설정되는 도메인 이름입니다.</value>
+    <comment>These values should be handled as separate values. Split by the pipe |</comment>
+  </data>
+  <data name="myaNsqsc" xml:space="preserve">
+    <value>빠른 쇼핑카트|anydomainname.com|이 계정으로 설정한 빠른 쇼핑카트 계정과 연결된 도메인 이름(이 계정으로 등록되지 않아도 됨)입니다.</value>
+    <comment>These values should be handled as separate values. Split by the pipe |</comment>
+  </data>
+  <data name="myaNsreseller" xml:space="preserve">
+    <value>리셀러|myprogid|리셀러 계정에 로그인하는 데 사용하는 ID입니다.</value>
+    <comment>These values should be handled as separate values. Split by the pipe |</comment>
+  </data>
+  <data name="myaNssslcert" xml:space="preserve">
+    <value>SSL 인증서|anydomainname.com|인증서를 발급한 시점에 SSL 인증서와 연결된 도메인 이름입니다.</value>
+    <comment>These values should be handled as separate values. Split by the pipe |</comment>
+  </data>
+  <data name="myaNstrafblazer" xml:space="preserve">
+    <value>검색 엔진 가시도|http://www.domain.com/anypage.asp|이 계정으로 구입한 검색 엔진 가시도 크레딧을 사용하여 엔진을 검색하기 위해 제출한 웹사이트 URL입니다.</value>
+    <comment>These values should be handled as separate values. Split by the pipe |</comment>
+  </data>
+  <data name="myaNsweblog" xml:space="preserve">
+    <value>빠른 블로그캐스트|anydomainname.com|이 계정으로 설정한 웹 블로그 계정과 연결된 도메인 이름(이 계정으로 등록되지 않아도 됨)입니다.</value>
+    <comment>These values should be handled as separate values. Split by the pipe |</comment>
+  </data>
+  <data name="myaNswst" xml:space="preserve">
+    <value>웹사이트 빌더|anydomainname.com|이 계정으로 설정한 웹사이트 빌더 계정과 연결된 도메인 이름(이 계정으로 등록되지 않아도 됨)입니다.</value>
+    <comment>These values should be handled as separate values. Split by the pipe |</comment>
+  </data>
+</root>

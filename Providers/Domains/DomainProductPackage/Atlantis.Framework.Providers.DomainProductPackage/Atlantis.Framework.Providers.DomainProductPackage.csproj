@@ -62,7 +62,7 @@
     </Reference>
     <Reference Include="Atlantis.Framework.Domains.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.Domains.Interface.14.3.18.1\lib\net40\Atlantis.Framework.Domains.Interface.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.Domains.Interface.14.12.19.2\lib\net40\Atlantis.Framework.Domains.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.DotTypeCache, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

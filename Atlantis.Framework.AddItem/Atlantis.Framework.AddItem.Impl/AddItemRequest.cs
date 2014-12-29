@@ -19,7 +19,7 @@ namespace Atlantis.Framework.AddItem.Impl
       try
       {
         var addItemRequestData = (AddItemRequestData)oRequestData;
-        using (var basketWs = new WSCgdBasket.WscgdBasketService())
+        using (var basketWs = new WscgdBasketServiceWithAuthToken(addItemRequestData.AuthToken))
         {
           basketWs.Url = ((WsConfigElement) oConfig).WSURL;
           basketWs.Timeout = (int) addItemRequestData.RequestTimeout.TotalMilliseconds;

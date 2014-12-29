@@ -45,15 +45,17 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Atlantis.Framework.Engine">
-      <HintPath>..\packages\Atlantis.Framework.Engine.4.0.0.0\lib\net40\Atlantis.Framework.Engine.dll</HintPath>
+    <Reference Include="Atlantis.Framework.Engine, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Engine.14.9.9.1\lib\net40\Atlantis.Framework.Engine.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.Engine.XmlSerializers">
-      <HintPath>..\packages\Atlantis.Framework.Engine.4.0.0.0\lib\net40\Atlantis.Framework.Engine.XmlSerializers.dll</HintPath>
+    <Reference Include="Atlantis.Framework.Engine.XmlSerializers, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Atlantis.Framework.Engine.14.9.9.1\lib\net40\Atlantis.Framework.Engine.XmlSerializers.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.Interface.4.0.0.0\lib\net40\Atlantis.Framework.Interface.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.Interface.14.5.15.2\lib\net40\Atlantis.Framework.Interface.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
@@ -61,6 +63,8 @@
     </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml" />
   </ItemGroup>
@@ -72,11 +76,13 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="Web References\WSCgdBasket\Reference.cs">
+    <Compile Include="Web References\GdBasketService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
+    <Compile Include="WebReferenceExtensions\WscgdBasketService.cs" />
+    <Compile Include="WebReferenceExtensions\WscgdBasketServiceWithAuthToken.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Atlantis.Framework.AddItem.Interface\Atlantis.Framework.AddItem.Interface.csproj">
@@ -88,21 +94,7 @@
     <WebReferences Include="Web References\" />
   </ItemGroup>
   <ItemGroup>
-    <WebReferenceUrl Include="http://devgdcomm02/WscgdBasket/WscgdBasket.dll%3fHandler=GenWscgdBasketWSDL">
-      <UrlBehavior>Dynamic</UrlBehavior>
-      <RelPath>Web References\WSCgdBasket\</RelPath>
-      <UpdateFromURL>http://devgdcomm02/WscgdBasket/WscgdBasket.dll%3fHandler=GenWscgdBasketWSDL</UpdateFromURL>
-      <ServiceLocationURL>
-      </ServiceLocationURL>
-      <CachedDynamicPropName>
-      </CachedDynamicPropName>
-      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
-      <CachedSettingsPropName>Atlantis_Framework_AddItem_Impl_WSCgdBasket_WscgdBasketService</CachedSettingsPropName>
-    </WebReferenceUrl>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="app.config" />
-    <None Include="atlantis.config" />
     <None Include="Atlantis.Framework.AddItem.Impl.nuget.bat" />
     <None Include="Atlantis.Framework.AddItem.Impl.nuspec" />
     <None Include="packages.config" />
@@ -110,11 +102,27 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Web References\WSCgdBasket\Reference.map">
+    <None Include="Web References\GdBasketService\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <None Include="Web References\WSCgdBasket\WscgdBasket.wsdl" />
+    <None Include="Web References\GdBasketService\WscgdBasket.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferenceUrl Include="http://gdcomm.dev.glbt1.gdg/WscgdBasket/WscgdBasket.dll%3fHandler=GenWscgdBasketWSDL">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\GdBasketService\</RelPath>
+      <UpdateFromURL>http://gdcomm.dev.glbt1.gdg/WscgdBasket/WscgdBasket.dll%3fHandler=GenWscgdBasketWSDL</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>Atlantis_Framework_AddItem_Impl_GdBasketService_WscgdBasketService</CachedSettingsPropName>
+    </WebReferenceUrl>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

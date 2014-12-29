@@ -14,8 +14,9 @@ namespace Atlantis.Framework.AddItem.Tests
     [TestMethod]
     public void BasicAddItem()
     {
-      AddItemRequestData request = new AddItemRequestData("832652", string.Empty, string.Empty, string.Empty, 0, "127.0.0.2");
+      AddItemRequestData request = new AddItemRequestData("852816", string.Empty, string.Empty, string.Empty, 0, "172.17.123.179");
       request.AddItem("58", "1");
+      request.AuthToken ="eyJhbGciOiAiUlMyNTYiLCAia2lkIjogIjRyLTcwZjJzZncifQ.eyJmaXJzdG5hbWUiOiAiQW51cGFtYSIsICJmYWN0b3JzIjogeyJrX3B3IjogMTQxOTYwNjY0N30sICJsYXN0bmFtZSI6ICJSYW11IiwgInNob3BwZXJJZCI6ICI4NTI4MTYiLCAianRpIjogIjVyY280M3MxZ1o4cXBwcWI5cEt5TWciLCAiZXhwIjogMTQxOTY0OTg0NywgInBsaWQiOiAiMSIsICJpYXQiOiAxNDE5NjA2NjQ3LCAidHlwIjogImlkcCJ9.Iwdt8H1YuEEBnMQP0gyh3HsVYqKQ97GdFZbPkMbuAXnRDwRuPRE229-Aexzc9DqJv0khC7ODuvze2teuE7OfZW2NMiOAxIFrvb0_mtLZeizRdZVEFq-LO9aYm4ssoQkBf95WQg670-mhLR6lDBgVr-MmcyfWvvj2a8B76086-2o";
 
       AddItemResponseData response = (AddItemResponseData)Engine.Engine.ProcessRequest(request, 4);
       Assert.IsTrue(response.IsSuccess);

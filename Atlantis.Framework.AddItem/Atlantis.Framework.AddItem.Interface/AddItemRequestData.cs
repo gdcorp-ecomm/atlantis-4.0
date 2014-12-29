@@ -11,6 +11,7 @@ namespace Atlantis.Framework.AddItem.Interface
   {
     private readonly XDocument _requestDoc = new XDocument();
     private readonly XElement _itemRequestElement;
+    public string AuthToken { get; set; }
 
     public AddItemRequestData(string shopperId, string sourceUrl, string orderId, string pathway, int pageCount, string clientIP)
       : base(shopperId, sourceUrl, orderId, pathway, pageCount)

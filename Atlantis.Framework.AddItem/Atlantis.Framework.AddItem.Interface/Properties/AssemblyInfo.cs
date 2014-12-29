@@ -11,9 +11,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyDescription("Release Build")]
 #endif
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("GoDaddy.com")]
+[assembly: AssemblyCompany("GoDaddy")]
 [assembly: AssemblyProduct("Atlantis.Framework.AddItem.Interface")]
-[assembly: AssemblyCopyright("Copyright © GoDaddy.com 2008-2012")]
+[assembly: AssemblyCopyright("Copyright © GoDaddy, 2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -35,4 +35,5 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Revision and Build Numbers 
 // by using the '*' as shown below:
 [assembly: AssemblyVersion("4.0.0.0")]
-[assembly: AssemblyFileVersion("4.13.12.23")]
+[assembly: AssemblyFileVersion("4.0.0.0")]
+[assembly: AssemblyInformationalVersion("14.12.30.1")]

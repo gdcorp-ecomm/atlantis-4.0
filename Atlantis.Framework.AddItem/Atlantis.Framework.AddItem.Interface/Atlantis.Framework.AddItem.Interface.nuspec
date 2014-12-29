@@ -1,23 +1,19 @@
 ﻿<?xml version="1.0"?>
-<package >
+<package>
   <metadata>
     <id>Atlantis.Framework.AddItem.Interface</id>
-    <!-- version should match the assembly FILE version -->
-    <version>4.13.12.23</version>
-    <!-- change word Title to match your project name with spaces instead of dots -->
-    <title>Atlantis Framework AddItem Interface</title>
+    <version>$version$</version>
+    <title>
+      Atlantis.Framework.AddItem.Interface</title>
     <authors>$author$</authors>
     <owners>$author$</owners>
     <projectUrl>https://confluence.int.godaddy.com/display/ATLANTIS</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <!-- update release notes with latest change information -->
-    <releaseNotes></releaseNotes>
+    <releaseNotes>
+      14.12.26.1 : Changes related to adding Auth Token
+    </releaseNotes>
     <copyright>$copyright$</copyright>
-    <!-- Make tags the same as title element -->
-    <tags>Atlantis Framework AddItem Interface</tags>
-    <dependencies />
+    <tags>Atlantis.Framework.AddItem.Interface</tags>
   </metadata>
-  <files>
-  </files>
 </package>

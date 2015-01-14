@@ -9,11 +9,13 @@ namespace Atlantis.Framework.Providers.PlaceHolder
     internal const string Type = "type";
     
     // TMSContent Data
-    internal const string AppProduct = "appproduct";
-    internal const string InteractionPoint = "interactionpoint";
-    internal const string OverrideDocumentName = "overridedocumentname";
+    internal const string TMS_Product = "appproduct";
+    internal const string TMS_Interaction = "interactionpoint";
+    internal const string TMS_Channel = "channel";
+    internal const string TMS_Template = "template";
+    internal const string TMS_Rank = "rank";
 
     // Obsolete
-    internal const string MessageTag = "messagetag";
+    internal const string TMS_Tag = "messagetag";
   }
 }

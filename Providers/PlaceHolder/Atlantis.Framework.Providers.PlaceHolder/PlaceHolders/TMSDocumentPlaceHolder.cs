@@ -14,7 +14,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolders
     public TMSDocumentPlaceHolder(string interactionPoint, IList<string> messageTags)
     {
       IList<KeyValuePair<string, string>> attributes = new List<KeyValuePair<string, string>>(2);
-      attributes.Add(new KeyValuePair<string, string>(PlaceHolderAttributes.InteractionPoint, interactionPoint));
+      attributes.Add(new KeyValuePair<string, string>(PlaceHolderAttributes.TMS_Interaction, interactionPoint));
       
       _placeHolderData = new TMSPlaceHolderData(attributes, messageTags);
     }

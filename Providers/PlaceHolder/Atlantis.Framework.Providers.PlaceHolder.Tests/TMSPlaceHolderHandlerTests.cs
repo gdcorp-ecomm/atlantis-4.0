@@ -110,7 +110,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder.Tests
         WriteOutput(renderedContent);
 
         Assert.IsTrue(mockLogger.Exceptions.Count == 0);
-        Assert.AreEqual(renderedContent, "Id1 engmtactnewcustsurveywebdlp engmtactnewcustsurvey 1");
+        Assert.AreEqual(renderedContent, "ID1 engmtactnewcustsurveywebdlp engmtactnewcustsurvey 1");
       }
       finally
       {
@@ -188,7 +188,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder.Tests
 
         Assert.IsTrue(string.IsNullOrEmpty(renderedContent));
         Assert.IsTrue(mockLogger.Exceptions.Count == 1);
-        Assert.IsTrue(mockLogger.Exceptions[0].ErrorDescription.Contains(string.Format("Attributes {0} is required and at least one message tag is required", PlaceHolderAttributes.InteractionPoint)));
+        Assert.IsTrue(mockLogger.Exceptions[0].ErrorDescription.Contains(string.Format("Attributes {0} is required and at least one message tag is required", PlaceHolderAttributes.TMS_Interaction)));
       }
       finally
       {
@@ -213,7 +213,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder.Tests
 
         Assert.IsTrue(string.IsNullOrEmpty(renderedContent));
         Assert.IsTrue(mockLogger.Exceptions.Count == 1);
-        Assert.IsTrue(mockLogger.Exceptions[0].ErrorDescription.Contains(string.Format("Attributes {0} is required and at least one message tag is required", PlaceHolderAttributes.InteractionPoint)));
+        Assert.IsTrue(mockLogger.Exceptions[0].ErrorDescription.Contains(string.Format("Attributes {0} is required and at least one message tag is required", PlaceHolderAttributes.TMS_Interaction)));
       }
       finally
       {

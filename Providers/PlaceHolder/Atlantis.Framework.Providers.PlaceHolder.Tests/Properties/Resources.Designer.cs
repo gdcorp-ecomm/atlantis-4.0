@@ -65,7 +65,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder.Tests.Properties {
         ///  &lt;Messages&gt;
         ///
         ///    &lt;Message&gt;
-        ///      &lt;MessageID&gt;Id1&lt;/MessageID&gt;
+        ///      &lt;MessageID&gt;ID1&lt;/MessageID&gt;
         ///      &lt;MessageName&gt;engmtactnewcustsurvey&lt;/MessageName&gt;
         ///      &lt;MessageSequence&gt;0&lt;/MessageSequence&gt;
         ///      &lt;MessageTags&gt;

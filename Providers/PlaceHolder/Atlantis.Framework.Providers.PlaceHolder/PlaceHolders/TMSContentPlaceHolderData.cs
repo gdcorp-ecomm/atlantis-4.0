@@ -7,227 +7,182 @@ namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolders
 {
   internal class TMSContentPlaceHolderData
   {
-    private const string CONTENT_ELEMENT_NAME = "content";
-    private const string DATA_ELEMENT_NAME = "Data";
-    private const string DEFAULT_ELEMENT_NAME = "default";
+    public const string XML_ELEMNAME_DATA = "data";
+    private const string DEFAULT_VALUE_ATTRIBUTE_APP = "tms";
+    private const string DEFAULT_VALUE_ATTRIBUTE_LOCATION = "content";
+    private const string DEFAULT_VALUE_ATTRIBUTE_CHANNEL = null;
+    private const string DEFAULT_VALUE_ATTRIBUTE_TEMPLATE = "default_template";
 
-    private string _appProduct;
-    private IDictionary<string, string> _attributesDictionary;
+    private readonly IDictionary<string, string> _attributesDictionary =
+      new Dictionary<string, string>(5, StringComparer.OrdinalIgnoreCase);
 
-    private string _interactionName;
-
-    internal string AppProduct
+    public string App
     {
       get
       {
-        if (_appProduct == null)
+        string value;
+        if (TryGetAttribute(PlaceHolderAttributes.Application, out value))
         {
-          string appProduct;
-          _appProduct = TryGetAttribute(PlaceHolderAttributes.AppProduct, out appProduct)
-            ? appProduct : string.Empty;
+          return value;
         }
 
-        return _appProduct;
+        // Optional Attribute
+        return DEFAULT_VALUE_ATTRIBUTE_APP;
       }
     }
 
-    internal string InteractionName
+    public string Location
     {
       get
       {
-        if (_interactionName == null)
+        string value;
+        if (TryGetAttribute(PlaceHolderAttributes.Location, out value))
         {
-          string interactionName;
-          _interactionName = TryGetAttribute(PlaceHolderAttributes.InteractionPoint, out interactionName)
-            ? interactionName : string.Empty;
+          return value;
         }
 
-        return _interactionName;
+        // Optional Attribute
+        return DEFAULT_VALUE_ATTRIBUTE_LOCATION;
       }
     }
 
-    internal ContentElementData ContentElement { get; private set; }
-
-    internal DefaultElementData DefaultElement { get; private set; }
-
-    internal TMSContentPlaceHolderData(string dataXml)
+    public string Product
     {
-      Deserialize(dataXml);
-    }
-
-    internal TMSContentPlaceHolderData(IList<KeyValuePair<string, string>> attributes,
-      DefaultElementData defaultElement, ContentElementData contentElement = null)
-    {
-      BuildAttributesDictionary(attributes);
-
-      // DefaultElement (Required)
-      if ((defaultElement == null) || (!defaultElement.IsValid()))
+      get
       {
-        throw new ApplicationException(String.Format("TMSContent placeholder element, \"<default>\" must be defined."));
+        string value;
+        if (TryGetAttribute(PlaceHolderAttributes.TMS_Product, out value))
+        {
+          return value;
+        }
+
+        // Required Attribute
+        throw new ArgumentException(string.Format("TMSContent placeholder definition is missing required attribute '{0}'.",
+          Enum.GetName(typeof (PlaceHolderAttributes), PlaceHolderAttributes.TMS_Product)));
+      }
+    }
+
+    public string Interaction
+    {
+      get
+      {
+        string value;
+        if (TryGetAttribute(PlaceHolderAttributes.TMS_Interaction, out value))
+        {
+          return value;
+        }
+
+        // Required Attribute
+        throw new ArgumentException(string.Format("TMSContent placeholder definition is missing required attribute '{0}'.",
+          Enum.GetName(typeof (PlaceHolderAttributes), PlaceHolderAttributes.TMS_Interaction)));
+      }
+    }
+
+    public string Channel
+    {
+      get
+      {
+        string value;
+        if (TryGetAttribute(PlaceHolderAttributes.TMS_Channel, out value))
+        {
+          return value;
+        }
+
+        // Optional Attribute
+        return DEFAULT_VALUE_ATTRIBUTE_CHANNEL;
+      }
+    }
+
+    public string Template
+    {
+      get
+      {
+        string value;
+        if (TryGetAttribute(PlaceHolderAttributes.TMS_Template, out value))
+        {
+          return value;
+        }
+
+        // Optional Attribute
+        return DEFAULT_VALUE_ATTRIBUTE_TEMPLATE;
+      }
+    }
+
+    public int? Rank
+    {
+      get
+      {
+        int iValue;
+        string value;
+        if ((TryGetAttribute(PlaceHolderAttributes.TMS_Rank, out value)) &&
+            (int.TryParse(value, out iValue)))
+        {
+          return iValue;
+        }
+
+        // Optional Attribute
+        return null;
+      }
+    }
+
+    public TMSContentPlaceHolderData(string dataXml)
+    {
+      Deserialize(this, dataXml);
+    }
+
+    internal TMSContentPlaceHolderData(IEnumerable<KeyValuePair<string, string>> attributes)
+    {
+      // Initialize Attribute(s)
+      if (attributes != null)
+      {
+        foreach (KeyValuePair<string, string> attribute in attributes)
+        {
+          if ((attribute.Key != null) && !string.IsNullOrEmpty(attribute.Value))
+          {
+            _attributesDictionary[attribute.Key] = attribute.Value;
+          }
+        }
+      }
+    }
+
+    private void Deserialize(TMSContentPlaceHolderData obj, string dataXml)
+    {
+      XElement xElementData = XElement.Parse(dataXml, LoadOptions.None);
+
+      // Deserialize Attribute(s)
+      foreach (XAttribute item in xElementData.Attributes())
+      {
+        if (!string.IsNullOrEmpty(item.Value))
+        {
+          obj._attributesDictionary[item.Name.ToString()] = item.Value;
+        }
+      }
+    }
+
+    internal XElement Serialize()
+    {
+      XElement xElementData = new XElement(XML_ELEMNAME_DATA);
+
+      // Serialize Attribute(s)
+      foreach (KeyValuePair<string, string> item in _attributesDictionary)
+      {
+        if (!string.IsNullOrEmpty(item.Value))
+        {
+          xElementData.Add(new XAttribute(item.Key, item.Value));
+        }
       }
 
-      // ContentElement (Optional)
-      ContentElement = ((contentElement == null) || (!contentElement.IsValid())) ? contentElement : null;
+      return xElementData;
     }
 
     public override string ToString()
     {
-      return Serialize();
+      return Serialize().ToString(SaveOptions.DisableFormatting);
     }
 
-    internal string Serialize()
+    private bool TryGetAttribute(string name, out string value)
     {
-      string xml;
-
-      try
-      {
-        XElement dataElement = new XElement(DATA_ELEMENT_NAME);
-
-        foreach (KeyValuePair<string, string> item in _attributesDictionary)
-        {
-          dataElement.Add(new XAttribute(item.Key, item.Value));
-        }
-
-        // DefaultElement (Required)
-        XElement defaultElement = new XElement(DEFAULT_ELEMENT_NAME,
-          new XAttribute(PlaceHolderAttributes.Application, DefaultElement.App),
-          new XAttribute(PlaceHolderAttributes.Location, DefaultElement.Location));
-        dataElement.Add(defaultElement);
-
-        // ContentElement (Optional)
-        if (ContentElement != null)
-        {
-          XElement contentElement = new XElement(DEFAULT_ELEMENT_NAME,
-            new XAttribute(PlaceHolderAttributes.Application, ContentElement.App),
-            new XAttribute(PlaceHolderAttributes.Location, ContentElement.Location),
-            new XAttribute(PlaceHolderAttributes.OverrideDocumentName, ContentElement.OverrideDocumentName));
-
-          dataElement.Add(contentElement);
-        }
-
-        xml = dataElement.ToString(SaveOptions.DisableFormatting);
-      }
-      catch (Exception ex)
-      {
-        xml = String.Empty;
-        ErrorLogger.LogException(ex.Message, "TMSContentPlaceHolderData.Serialize()", ex.StackTrace);
-      }
-
-      return xml;
+      return _attributesDictionary.TryGetValue(name, out value) && !string.IsNullOrEmpty(value);
     }
-
-    internal bool TryGetAttribute(string name, out string value)
-    {
-      return _attributesDictionary.TryGetValue(name, out value);
-    }
-
-    private void BuildAttributesDictionary(IList<KeyValuePair<string, string>> attributes)
-    {
-      _attributesDictionary = new Dictionary<string, string>(attributes != null ? attributes.Count : 0);
-
-      if (attributes != null)
-      {
-        foreach (KeyValuePair<string, string> keyValuePair in attributes)
-        {
-          if (keyValuePair.Key != null && keyValuePair.Value != null)
-          {
-            _attributesDictionary[keyValuePair.Key] = keyValuePair.Value;
-          }
-        }
-      }
-    }
-
-    private void Deserialize(string dataXml)
-    {
-      try
-      {
-        XElement dataElement = XElement.Parse(dataXml, LoadOptions.None);
-
-        _attributesDictionary = new Dictionary<string, string>(16);
-        foreach (XAttribute item in dataElement.Attributes())
-        {
-          _attributesDictionary[item.Name.ToString()] = item.Value;
-        }
-
-        // DefaultElement (Required)
-        XElement defaultElement = dataElement.Element(DEFAULT_ELEMENT_NAME);
-        if (defaultElement != null)
-        {
-          DefaultElement = new DefaultElementData(
-            defaultElement.Attribute(PlaceHolderAttributes.Application).Value,
-            defaultElement.Attribute(PlaceHolderAttributes.Location).Value);
-        }
-        else
-        {
-          throw new ApplicationException(String.Format("TMSContent placeholder element, \"<default>\" must be defined. {0}", dataXml));
-        }
-
-        // ContentElement (Optional)
-        XElement contentElement = dataElement.Element(CONTENT_ELEMENT_NAME);
-        if (contentElement != null)
-        {
-          ContentElement = new ContentElementData(
-            contentElement.Attribute(PlaceHolderAttributes.Application).Value,
-            contentElement.Attribute(PlaceHolderAttributes.Location).Value);
-
-          XAttribute attribute;
-          if ((attribute = contentElement.Attribute(PlaceHolderAttributes.OverrideDocumentName)) != null)
-          {
-            bool overrideDocumentName;
-            if (bool.TryParse(attribute.Value, out overrideDocumentName))
-              ContentElement.OverrideDocumentName = overrideDocumentName;
-          }
-        }
-      }
-      catch (Exception ex)
-      {
-        _attributesDictionary = new Dictionary<string, string>(0);
-        ErrorLogger.LogException(ex.Message, "TMSContentPlaceHolderData.Deserialize()", ex.StackTrace);
-      }
-    }
-
-    #region Nested type: ContentElementData
-
-    public class ContentElementData
-    {
-      public string App { get; set; }
-      public string Location { get; set; }
-      public bool OverrideDocumentName { get; set; }
-
-      public ContentElementData(string app, string location, bool overrideDocumentName = false)
-      {
-        App = app;
-        Location = location;
-        OverrideDocumentName = overrideDocumentName;
-      }
-
-      public bool IsValid()
-      {
-        return (!string.IsNullOrEmpty(App) && !string.IsNullOrEmpty(Location));
-      }
-    }
-
-    #endregion
-
-    #region Nested type: DefaultElementData
-
-    public class DefaultElementData
-    {
-      public string App { get; set; }
-      public string Location { get; set; }
-
-      public DefaultElementData(string app, string location)
-      {
-        App = app;
-        Location = location;
-      }
-
-      public bool IsValid()
-      {
-        return (!string.IsNullOrEmpty(App) && !string.IsNullOrEmpty(Location));
-      }
-    }
-
-    #endregion
   }
 }

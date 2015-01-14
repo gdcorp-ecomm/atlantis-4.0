@@ -1,22 +1,24 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using Atlantis.Framework.Engine;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.AppSettings.Interface;
+using Atlantis.Framework.Providers.CDSContent;
 using Atlantis.Framework.Providers.CDSContent.Interface;
 using Atlantis.Framework.Providers.PlaceHolder.Interface;
 using Atlantis.Framework.Providers.PlaceHolder.PlaceHolders;
 using Atlantis.Framework.Providers.RenderPipeline;
 using Atlantis.Framework.Providers.RenderPipeline.Interface;
+using Atlantis.Framework.Providers.TMSContent;
 using Atlantis.Framework.Providers.TMSContent.Interface;
+using Atlantis.Framework.Providers.TMSContentData.Interface;
 using Atlantis.Framework.Render.Containers;
 using Atlantis.Framework.Testing.MockEngine;
 using Atlantis.Framework.Testing.MockHttpContext;
 using Atlantis.Framework.Testing.MockProviders;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Atlantis.Framework.Providers.PlaceHolder.Tests
 {
@@ -26,19 +28,10 @@ namespace Atlantis.Framework.Providers.PlaceHolder.Tests
   [ExcludeFromCodeCoverage]
   public class TMSContentPlaceHolderHandlerTests
   {
-    public IProviderContainer InitializeProviderContainer()
+    [ClassInitialize()]
+    public static void ClassInit(TestContext context)
     {
-      IProviderContainer providerContainer = new MockProviderContainer();
-      providerContainer.RegisterProvider<ISiteContext, MockSiteContext>();
-      providerContainer.RegisterProvider<IShopperContext, MockShopperContext>();
-      providerContainer.RegisterProvider<IManagerContext, MockManagerContext>();
-      providerContainer.RegisterProvider<IPlaceHolderProvider, PlaceHolderProvider>();
-      providerContainer.RegisterProvider<ICDSContentProvider, MockCDSContentProvider>();
-      providerContainer.RegisterProvider<IRenderPipelineProvider, RenderPipelineProvider>();
-      providerContainer.RegisterProvider<ITMSContentProvider, MockTMSContentProvider>();
-      providerContainer.RegisterProvider<IAppSettingsProvider, MockAppSettingsProvider>();
-
-      return providerContainer;
+      TMSContentConfig.AppID = "FOS";
     }
 
     public IProviderContainer Error_InitializeProviderContainer()
@@ -53,13 +46,115 @@ namespace Atlantis.Framework.Providers.PlaceHolder.Tests
       return providerContainer;
     }
 
-    private void WriteOutput(string message)
+    [TestMethod]
+    public void TestGetContent()
     {
-#if (DEBUG)
-      Debug.WriteLine(message);
-#else
-      Console.WriteLine(message);
-#endif
+      IErrorLogger oldLogger = EngineLogging.EngineLogger;
+      MockErrorLogger mockLogger = new MockErrorLogger();
+      EngineLogging.EngineLogger = mockLogger;
+
+      try
+      {
+        IPlaceHolder placeHolder = new TMSContentPlaceHolder("tms", "dev", "FOS", "First", "test", "home");
+
+        IProviderContainer providerContainer = InitializeProviderContainer();
+        IPlaceHolderProvider placeHolderProvider = providerContainer.Resolve<IPlaceHolderProvider>();
+
+        string renderedContent = placeHolderProvider.ReplacePlaceHolders(placeHolder.ToMarkup());
+
+        WriteOutput(renderedContent);
+
+        Assert.IsTrue(mockLogger.Exceptions.Count == 0);
+        Assert.IsTrue(renderedContent.Contains("dev/test/message1/home"));
+      }                                                      
+      finally
+      {
+        EngineLogging.EngineLogger = oldLogger;
+      }
+    }
+
+    [TestMethod]
+    public void TestGetContentNoMessages()
+    {
+      IErrorLogger oldLogger = EngineLogging.EngineLogger;
+      MockErrorLogger mockLogger = new MockErrorLogger();
+      EngineLogging.EngineLogger = mockLogger;
+
+      try
+      {
+        IPlaceHolder placeHolder = new TMSContentPlaceHolder("tms", "dev", "FOS", "FailGetMessages", "test", "home");
+
+        IProviderContainer providerContainer = InitializeProviderContainer();
+        IPlaceHolderProvider placeHolderProvider = providerContainer.Resolve<IPlaceHolderProvider>();
+
+        string renderedContent = placeHolderProvider.ReplacePlaceHolders(placeHolder.ToMarkup());
+
+        WriteOutput(renderedContent);
+
+        Assert.IsTrue(mockLogger.Exceptions.Count == 0);
+        Assert.IsTrue(renderedContent.Contains("dev/test/home"));
+        Assert.IsTrue(renderedContent.Contains("ID: [@D[tms.message.message_id]@D]"));
+      }
+      finally
+      {
+        EngineLogging.EngineLogger = oldLogger;
+      }
+    }
+
+    [TestMethod]
+    public void TestGetContentMissingTemplate()
+    {
+      IErrorLogger oldLogger = EngineLogging.EngineLogger;
+      MockErrorLogger mockLogger = new MockErrorLogger();
+      EngineLogging.EngineLogger = mockLogger;
+
+      try
+      {
+        IPlaceHolder placeHolder = new TMSContentPlaceHolder("tms", "dev", "FOS", "First", "test", "home-missing");
+
+        IProviderContainer providerContainer = InitializeProviderContainer();
+        IPlaceHolderProvider placeHolderProvider = providerContainer.Resolve<IPlaceHolderProvider>();
+
+        string renderedContent = placeHolderProvider.ReplacePlaceHolders(placeHolder.ToMarkup());
+
+        WriteOutput(renderedContent);
+
+        Assert.IsTrue(mockLogger.Exceptions.Count == 0);
+        Assert.IsTrue(renderedContent.Contains("dev/test/home-missing"));
+        Assert.IsTrue(renderedContent.Contains("ID: [@D[tms.message.message_id]@D]"));
+      }
+      finally
+      {
+        EngineLogging.EngineLogger = oldLogger;
+      }
+    }
+
+    [TestMethod]
+    public void TestGetContentWithRank()
+    {
+      IErrorLogger oldLogger = EngineLogging.EngineLogger;
+      MockErrorLogger mockLogger = new MockErrorLogger();
+      EngineLogging.EngineLogger = mockLogger;
+
+      try
+      {
+        IPlaceHolder placeHolder = new TMSContentPlaceHolder("tms", "dev", "FOS", "Multiple", "test", "home", 1);
+
+        IProviderContainer providerContainer = InitializeProviderContainer();
+        IPlaceHolderProvider placeHolderProvider = providerContainer.Resolve<IPlaceHolderProvider>();
+
+        string renderedContent = placeHolderProvider.ReplacePlaceHolders(placeHolder.ToMarkup());
+
+        WriteOutput(renderedContent);
+
+        Assert.IsTrue(mockLogger.Exceptions.Count == 0);
+        Assert.IsTrue(renderedContent.Contains("dev/test/message2/home"));
+        Assert.IsTrue(renderedContent.Contains("ID: ID2"));
+      }
+      finally
+      {
+        EngineLogging.EngineLogger = oldLogger;
+      }
     }
 
     [TestInitialize]
@@ -69,85 +164,30 @@ namespace Atlantis.Framework.Providers.PlaceHolder.Tests
       MockHttpContext.SetFromWorkerRequest(mockHttpRequest);
     }
 
-    [TestMethod]
-    public void GetContent()
+    public IProviderContainer InitializeProviderContainer()
     {
-      IErrorLogger oldLogger = EngineLogging.EngineLogger;
-      var mockLogger = new MockErrorLogger();
-      EngineLogging.EngineLogger = mockLogger;
+      IProviderContainer providerContainer = new MockProviderContainer();
+      providerContainer.RegisterProvider<ISiteContext, MockSiteContext>();
+      providerContainer.RegisterProvider<IShopperContext, MockShopperContext>();
+      providerContainer.RegisterProvider<IManagerContext, MockManagerContext>();
+      providerContainer.RegisterProvider<IPlaceHolderProvider, PlaceHolderProvider>();
+      providerContainer.RegisterProvider<ICDSContentProvider, MockCDSContentProvider>();
+      providerContainer.RegisterProvider<IRenderPipelineProvider, RenderPipelineProvider>();
+      providerContainer.RegisterProvider<IAppSettingsProvider, MockAppSettingsProvider>();
 
-      try
-      {
-        IPlaceHolder placeHolder = new TMSContentPlaceHolder("HP", "First", "Atlantis", "home");
+      providerContainer.RegisterProvider<ITMSContentDataProvider, MockTMSContentDataProvider>();
+      providerContainer.RegisterProvider<ITMSContentProvider, MockTMSContentProvider>();
 
-        IProviderContainer providerContainer = InitializeProviderContainer();
-        IPlaceHolderProvider placeHolderProvider = providerContainer.Resolve<IPlaceHolderProvider>();
-
-        string renderedContent = placeHolderProvider.ReplacePlaceHolders(placeHolder.ToMarkup(), new List<IRenderHandler> { new ProviderContainerDataTokenRenderHandler() });
-
-        WriteOutput(renderedContent);
-
-        Assert.IsTrue(mockLogger.Exceptions.Count == 0);
-        Assert.IsTrue(renderedContent.Contains(string.Format("data-tms-msgid=\"{0}\"", "ID1")));
-      }
-      finally
-      {
-        EngineLogging.EngineLogger = oldLogger;
-      }
+      return providerContainer;
     }
 
-    [TestMethod]
-    public void GetContentNoContent()
+    private void WriteOutput(string message)
     {
-      IErrorLogger oldLogger = EngineLogging.EngineLogger;
-      var mockLogger = new MockErrorLogger();
-      EngineLogging.EngineLogger = mockLogger;
-
-      try
-      {
-        IPlaceHolder placeHolder = new TMSContentPlaceHolder("HP", "NoContent", "Atlantis", "home");
-
-        IProviderContainer providerContainer = InitializeProviderContainer();
-        IPlaceHolderProvider placeHolderProvider = providerContainer.Resolve<IPlaceHolderProvider>();
-
-        string renderedContent = placeHolderProvider.ReplacePlaceHolders(placeHolder.ToMarkup(), new List<IRenderHandler> { new ProviderContainerDataTokenRenderHandler() });
-
-        WriteOutput(renderedContent);
-
-        Assert.IsTrue(mockLogger.Exceptions.Count == 0);
-        Assert.IsTrue(renderedContent.Contains("ID1 NoContentTags NoContent 1"));
-      }
-      finally
-      {
-        EngineLogging.EngineLogger = oldLogger;
-      }
-    }
-
-    [TestMethod]
-    public void GetContentUnknownInteraction()
-    {
-      IErrorLogger oldLogger = EngineLogging.EngineLogger;
-      var mockLogger = new MockErrorLogger();
-      EngineLogging.EngineLogger = mockLogger;
-
-      try
-      {
-        IPlaceHolder placeHolder = new TMSContentPlaceHolder("HP", "UNKNOWN", "Atlantis", "home");
-
-        IProviderContainer providerContainer = InitializeProviderContainer();
-        IPlaceHolderProvider placeHolderProvider = providerContainer.Resolve<IPlaceHolderProvider>();
-
-        string renderedContent = placeHolderProvider.ReplacePlaceHolders(placeHolder.ToMarkup(), new List<IRenderHandler> { new ProviderContainerDataTokenRenderHandler() });
-
-        WriteOutput(renderedContent);
-
-        Assert.IsTrue(mockLogger.Exceptions.Count == 4);
-        Assert.IsTrue(renderedContent.Equals("   "));
-      }
-      finally
-      {
-        EngineLogging.EngineLogger = oldLogger;
-      }
+#if (DEBUG)
+      Debug.WriteLine(message);
+#else
+      Console.WriteLine(message);
+#endif
     }
   }
 }

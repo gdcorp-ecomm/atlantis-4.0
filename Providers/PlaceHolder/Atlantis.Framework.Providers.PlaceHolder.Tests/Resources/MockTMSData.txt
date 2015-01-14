@@ -2,7 +2,7 @@
   <Messages>
 
     <Message>
-      <MessageID>Id1</MessageID>
+      <MessageID>ID1</MessageID>
       <MessageName>engmtactnewcustsurvey</MessageName>
       <MessageSequence>0</MessageSequence>
       <MessageTags>

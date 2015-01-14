@@ -35,7 +35,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolderHandlers
           TMSPlaceHolderData placeHolderData = new TMSPlaceHolderData(Context.Data);
 
           string interactionPoint;
-          if (placeHolderData.TryGetAttribute(PlaceHolderAttributes.InteractionPoint, out interactionPoint) &&
+          if (placeHolderData.TryGetAttribute(PlaceHolderAttributes.TMS_Interaction, out interactionPoint) &&
               !string.IsNullOrEmpty(interactionPoint) && (placeHolderData.MessageTags.Count > 0))
           {
             IConsumedMessage message = GetMessage(interactionPoint, placeHolderData.MessageTags, personalizationProvider);
@@ -68,7 +68,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolderHandlers
           }
           else
           {
-            throw new Exception(string.Format("Attributes {0} is required and at least one message tag is required", PlaceHolderAttributes.InteractionPoint));
+            throw new Exception(string.Format("Attributes {0} is required and at least one message tag is required", PlaceHolderAttributes.TMS_Interaction));
           }
         }
         else

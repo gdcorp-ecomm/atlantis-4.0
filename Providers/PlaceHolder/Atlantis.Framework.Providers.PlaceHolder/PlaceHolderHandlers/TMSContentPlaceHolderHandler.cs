@@ -16,6 +16,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolderHandlers
   internal class TMSContentPlaceHolderHandler : CDSDocumentPlaceHolderHandler
   {
     private const string CONTEXT_DATA_PREFIX = "tms.message";
+
     private const string TRACKING_DIV_FORMAT = "<div data-tms-name='[@D[tms.message.name]@D]' " +
                                                "data-tms-strategy='[@D[tms.message.strategy]@D]' " +
                                                "data-tms-trackingid='[@D[tms.message.tracking_id]@D]'>\n{0}\n</div>";
@@ -50,18 +51,18 @@ namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolderHandlers
           if (_tmsContentProvider.Value.TryGetMessages(shopper_id, placeHolderData.Product, placeHolderData.Interaction,
             placeHolderData.Channel, postData, out messages, message => !message.IsConsumed))
           {
-            foreach (IMessageVariant message in messages)
+            IMessageVariant message = messages.FirstOrDefault();
+            if ((message != null) && (message.IsControl ?
+              TryGetMessageContent(placeHolderData, out content) :
+              TryGetMessageContent(placeHolderData, out content, message)))
             {
-              if (TryGetMessageContent(placeHolderData, message, out content))
-              {
-                _tmsContentProvider.Value.ConsumeMessage(placeHolderData.Product, placeHolderData.Interaction,
-                  placeHolderData.Channel, message);
-                SetContextData(message.ToJson(), CONTEXT_DATA_PREFIX);
-                content = string.Format(TRACKING_DIV_FORMAT, content);
-                content = _renderPipelineProvider.Value.RenderContent(content,
-                  new IRenderHandler[] {new ProviderContainerDataTokenRenderHandler()});
-                return content;
-              }
+              _tmsContentProvider.Value.ConsumeMessage(placeHolderData.Product, placeHolderData.Interaction,
+                placeHolderData.Channel, message);
+              SetContextData(message, CONTEXT_DATA_PREFIX);
+              content = string.Format(TRACKING_DIV_FORMAT, content);
+              content = _renderPipelineProvider.Value.RenderContent(content,
+                new IRenderHandler[] {new ProviderContainerDataTokenRenderHandler()});
+              return content;
             }
           }
         }
@@ -72,11 +73,13 @@ namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolderHandlers
             placeHolderData.Channel, postData, out messages))
           {
             IMessageVariant message = messages.ElementAtOrDefault(placeHolderData.Rank.Value);
-            if ((message != null) && (TryGetMessageContent(placeHolderData, message, out content)))
+            if ((message != null) && (message.IsControl ?
+              TryGetMessageContent(placeHolderData, out content) :
+              TryGetMessageContent(placeHolderData, out content, message)))
             {
               _tmsContentProvider.Value.ConsumeMessage(placeHolderData.Product, placeHolderData.Interaction,
                 placeHolderData.Channel, message);
-              SetContextData(message.ToJson(), CONTEXT_DATA_PREFIX);
+              SetContextData(message, CONTEXT_DATA_PREFIX);
               content = string.Format(TRACKING_DIV_FORMAT, content);
               content = _renderPipelineProvider.Value.RenderContent(content,
                 new IRenderHandler[] {new ProviderContainerDataTokenRenderHandler()});
@@ -86,13 +89,13 @@ namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolderHandlers
         }
 
         // Default Content
-        if (TryGetMessageContent(placeHolderData, null, out content))
+        if (TryGetMessageContent(placeHolderData, out content))
         {
           return content;
         }
 
         throw new SystemException(
-          string.Format("Failed to load any content for using placeholder data '{0}'", placeHolderData.Serialize()));
+          string.Format("Failed to load any content for placeholder. '{0}'", placeHolderData.Serialize()));
       }
       catch (Exception ex)
       {
@@ -100,6 +103,11 @@ namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolderHandlers
         LogError(errorMessage, "TMSContentPlaceHolderHandler.GetContent()");
         return string.Empty;
       }
+    }
+
+    private void SetContextData(IMessageVariant message, string prefix)
+    {
+      SetContextData(message.ToJson(), prefix);
     }
 
     private void SetContextData(JObject jObject, string prefix)
@@ -126,34 +134,34 @@ namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolderHandlers
       }
     }
 
-    private bool TryGetMessageContent(TMSContentPlaceHolderData placeHolderData, IMessageVariant message, out string content)
+    private bool TryGetMessageContent(TMSContentPlaceHolderData placeHolderData, out string content, IMessageVariant message = null)
     {
-      StringBuilder path = new StringBuilder(256);
-
       // Default Path: {Location}/{Channel}/{Template||Interaction}
       // Message Path: {Location}/{Channel}/{Message}/{Template||Interaction}
+      StringBuilder path = new StringBuilder(256);
 
-      // {Location}
+      // Set {Location}
       if (!string.IsNullOrEmpty(placeHolderData.Location))
       {
         path.Append(placeHolderData.Location + "/");
       }
 
-      // Path: {Channel}
+      // Set {Channel}
       if (!string.IsNullOrEmpty(placeHolderData.Channel))
       {
         path.Append(placeHolderData.Channel + "/");
       }
 
-      // Path: {Message}
+      // Set {Message}
       if (message != null)
       {
         path.Append(message.Name + "/");
       }
 
-      // Path: {Template||Interaction}
+      // Set {Template||Interaction}
       path.Append(!string.IsNullOrEmpty(placeHolderData.Template) ? placeHolderData.Template : placeHolderData.Interaction);
 
+      // Get Content
       content = _cdsContentProvider.Value.GetContent(placeHolderData.App, path.ToString()).Content;
       return (!string.IsNullOrEmpty(content));
     }

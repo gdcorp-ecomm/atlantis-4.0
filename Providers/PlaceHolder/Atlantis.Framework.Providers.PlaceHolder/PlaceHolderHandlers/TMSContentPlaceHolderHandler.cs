@@ -16,7 +16,9 @@ namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolderHandlers
   internal class TMSContentPlaceHolderHandler : CDSDocumentPlaceHolderHandler
   {
     private const string CONTEXT_DATA_PREFIX = "tms.message";
-    private const string TRACKING_DIV_FORMAT = "<div data-tms-trackingid=\"[@D[tms.message.tracking_id]@D]\">\n{0}\n</div>";
+    private const string TRACKING_DIV_FORMAT = "<div data-tms-name='[@D[tms.message.name]@D]' " +
+                                               "data-tms-strategy='[@D[tms.message.strategy]@D]' " +
+                                               "data-tms-trackingid='[@D[tms.message.tracking_id]@D]'>\n{0}\n</div>";
 
     private readonly Lazy<ICDSContentProvider> _cdsContentProvider;
     private readonly Lazy<IRenderPipelineProvider> _renderPipelineProvider;

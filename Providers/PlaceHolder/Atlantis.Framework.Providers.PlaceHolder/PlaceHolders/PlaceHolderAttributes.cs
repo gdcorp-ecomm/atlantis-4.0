@@ -9,8 +9,8 @@ namespace Atlantis.Framework.Providers.PlaceHolder
     internal const string Type = "type";
     
     // TMSContent Data
-    internal const string TMS_Product = "appproduct";
-    internal const string TMS_Interaction = "interactionpoint";
+    internal const string TMS_Product = "product";
+    internal const string TMS_Interaction = "interaction";
     internal const string TMS_Channel = "channel";
     internal const string TMS_Template = "template";
     internal const string TMS_Rank = "rank";

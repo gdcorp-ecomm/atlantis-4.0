@@ -1,13 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
+using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.CDSContent.Interface;
 using Atlantis.Framework.Providers.PlaceHolder.Interface;
 using Atlantis.Framework.Providers.PlaceHolder.PlaceHolders;
 using Atlantis.Framework.Providers.RenderPipeline.Interface;
 using Atlantis.Framework.Providers.TMSContent.Interface;
 using Atlantis.Framework.Providers.TMSContentData.Interface;
+using Atlantis.Framework.Providers.Web.Interface;
 using Atlantis.Framework.Render.Containers;
 using Newtonsoft.Json.Linq;
 
@@ -20,11 +24,16 @@ namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolderHandlers
     private const string TRACKING_DIV_FORMAT = "<div data-tms-name='[@D[tms.message.name]@D]' " +
                                                "data-tms-strategy='[@D[tms.message.strategy]@D]' " +
                                                "data-tms-trackingid='[@D[tms.message.tracking_id]@D]'>\n{0}\n</div>";
+    private const string TMS_SPOOF_DELIM = ",";
+    private const string TMS_SPOOF_KEY = "tmsPlaceholderSpoof";
 
     private readonly Lazy<ICDSContentProvider> _cdsContentProvider;
+    private readonly Lazy<IDebugContext> _debugContextProvider;
     private readonly Lazy<IRenderPipelineProvider> _renderPipelineProvider;
     private readonly Lazy<ITMSContentDataProvider> _tmsContentDataProvider;
     private readonly Lazy<ITMSContentProvider> _tmsContentProvider;
+    private readonly Lazy<ISiteContext> _siteContextProvider;
+    private readonly Lazy<IWebContext> _webContextProvider;
 
     internal TMSContentPlaceHolderHandler(IPlaceHolderHandlerContext context)
       : base(context)
@@ -33,6 +42,25 @@ namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolderHandlers
       _renderPipelineProvider = new Lazy<IRenderPipelineProvider>(() => context.ProviderContainer.Resolve<IRenderPipelineProvider>());
       _tmsContentProvider = new Lazy<ITMSContentProvider>(() => context.ProviderContainer.Resolve<ITMSContentProvider>());
       _tmsContentDataProvider = new Lazy<ITMSContentDataProvider>(() => context.ProviderContainer.Resolve<ITMSContentDataProvider>());
+
+      // Optional Provider(s)
+      _debugContextProvider = new Lazy<IDebugContext>(() =>
+      {
+        IDebugContext value;
+        return context.ProviderContainer.TryResolve(out value) ? value : null;
+      });
+
+      _siteContextProvider = new Lazy<ISiteContext>(() =>
+      {
+        ISiteContext value;
+        return context.ProviderContainer.TryResolve(out value) ? value : null;
+      });
+
+      _webContextProvider = new Lazy<IWebContext>(() =>
+      {
+        IWebContext value;
+        return context.ProviderContainer.TryResolve(out value) ? value : null;
+      });
     }
 
     protected override string GetContent()
@@ -44,6 +72,13 @@ namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolderHandlers
         JObject postData = _tmsContentDataProvider.Value.GetPostData();
         string content;
 
+        // Spoof Content
+        if (TryGetSpoofMessageContent(placeHolderData, out content))
+        {
+          return content;
+        }
+
+        // TMS Content
         IList<IMessageVariant> messages;
         if (placeHolderData.Rank == null)
         {
@@ -112,9 +147,6 @@ namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolderHandlers
 
     private void SetContextData(JObject jObject, string prefix)
     {
-      // TODO
-      // Clear all previous context data
-
       foreach (JProperty property in jObject.Properties())
       {
         string contextKey = prefix + "." + property.Name;
@@ -164,6 +196,86 @@ namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolderHandlers
       // Get Content
       content = _cdsContentProvider.Value.GetContent(placeHolderData.App, path.ToString()).Content;
       return (!string.IsNullOrEmpty(content));
+    }
+
+    [ExcludeFromCodeCoverage]
+    private bool TryGetSpoofMessageContent(TMSContentPlaceHolderData placeHolderData, out string content)
+    {
+      content = null;
+
+      if ((_webContextProvider.Value != null) && _webContextProvider.Value.HasContext &&
+          (_webContextProvider.Value.ContextBase != null) &&
+          (_webContextProvider.Value.ContextBase.Request != null) &&
+          (_webContextProvider.Value.ContextBase.Request.QueryString != null) &&
+          (_siteContextProvider.Value != null) && _siteContextProvider.Value.IsRequestInternal)
+      {
+        string[] spoofValuesList = _webContextProvider.Value.ContextBase.Request.QueryString.GetValues(TMS_SPOOF_KEY);
+        if (spoofValuesList != null)
+        {
+          foreach (string spoofValue in spoofValuesList)
+          {
+            List<KeyValuePair<string, string>> attributes = new List<KeyValuePair<string, string>>(12);
+            // Format: spoofPlaceholderContent=app:tms,location:,product:hp,interaction:marquee,channel:homepage,template:marquee,rank:0
+            // Required Parameter(s): product, interaction
+            // Optional Parameter(s): channel, template, rank
+            string[] values = spoofValue.Split(new[] {TMS_SPOOF_DELIM}, StringSplitOptions.RemoveEmptyEntries);
+            foreach (var value in values)
+            {
+              Match match = Regex.Match(value, @"(?<key>[^:]+):(?<value>[^:]+)");
+              if (match.Success)
+              {
+                attributes.Add(new KeyValuePair<string, string>(match.Groups["key"].Value, match.Groups["value"].Value));
+              }
+            }
+
+            TMSContentPlaceHolderData spoofData = new TMSContentPlaceHolderData(attributes);
+            if ((placeHolderData.Product.Equals(spoofData.Product, StringComparison.OrdinalIgnoreCase)) &&
+                (placeHolderData.Interaction.Equals(spoofData.Interaction, StringComparison.OrdinalIgnoreCase)) &&
+                (string.Equals(placeHolderData.Channel, spoofData.Channel, StringComparison.OrdinalIgnoreCase)) &&
+                (string.Equals(placeHolderData.Template, spoofData.Template, StringComparison.OrdinalIgnoreCase)) &&
+                (placeHolderData.Rank == spoofData.Rank))
+            {
+              // Spoof Path: {Location}/{Template||Interaction}
+              StringBuilder path = new StringBuilder(256);
+
+              // Set {Location}
+              if (!string.IsNullOrEmpty(spoofData.Location))
+              {
+                path.Append(spoofData.Location + "/");
+              }
+
+              // Set {Template||Interaction}
+              path.Append(!string.IsNullOrEmpty(spoofData.Template) ? spoofData.Template : spoofData.Interaction);
+
+              // Get Content
+              TryLogSpoofMessageContent(spoofData, path.ToString());
+              content = _cdsContentProvider.Value.GetContent(spoofData.App, path.ToString()).Content;
+              return (!string.IsNullOrEmpty(content));
+            }
+          }
+        }
+      }
+      return false;
+    }
+
+    [ExcludeFromCodeCoverage]
+    private void TryLogSpoofMessageContent(TMSContentPlaceHolderData spoofData, string path)
+    {
+      if ((_siteContextProvider.Value != null) && _siteContextProvider.Value.IsRequestInternal)
+      {
+        TryLogDebugMessage(string.Format("TMS Placeholder Spoof ({0}/{1}/{2}){{{3}}}",
+          spoofData.App, spoofData.Product, spoofData.Interaction, spoofData.Channel), path);
+      }
+    }
+
+    [ExcludeFromCodeCoverage]
+    private void TryLogDebugMessage(string key, string value)
+    {
+      if ((_siteContextProvider.Value != null) && _siteContextProvider.Value.IsRequestInternal &&
+          (_debugContextProvider.Value != null))
+      {
+        _debugContextProvider.Value.LogDebugTrackingData(key, value);
+      }
     }
   }
 }

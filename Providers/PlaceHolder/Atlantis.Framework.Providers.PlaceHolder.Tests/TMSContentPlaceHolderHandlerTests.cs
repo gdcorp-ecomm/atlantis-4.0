@@ -31,7 +31,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder.Tests
     [ClassInitialize()]
     public static void ClassInit(TestContext context)
     {
-      TMSContentConfig.App = "TMS";
+      TMSContentConfig.Application = "TMS";
       TMSContentConfig.Location = "dev";
       TMSMessageConfig.AppID = "FOS";
     }

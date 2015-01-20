@@ -8,43 +8,9 @@ namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolders
   internal class TMSContentPlaceHolderData
   {
     public const string XML_ELEMNAME_DATA = "data";
-    private const string DEFAULT_VALUE_ATTRIBUTE_APP = "tms";
-    private const string DEFAULT_VALUE_ATTRIBUTE_LOCATION = "content";
-    private const string DEFAULT_VALUE_ATTRIBUTE_CHANNEL = null;
-    private const string DEFAULT_VALUE_ATTRIBUTE_TEMPLATE = "default_template";
 
     private readonly IDictionary<string, string> _attributesDictionary =
       new Dictionary<string, string>(5, StringComparer.OrdinalIgnoreCase);
-
-    public string App
-    {
-      get
-      {
-        string value;
-        if (TryGetAttribute(PlaceHolderAttributes.Application, out value))
-        {
-          return value;
-        }
-
-        // Optional Attribute
-        return DEFAULT_VALUE_ATTRIBUTE_APP;
-      }
-    }
-
-    public string Location
-    {
-      get
-      {
-        string value;
-        if (TryGetAttribute(PlaceHolderAttributes.Location, out value))
-        {
-          return value;
-        }
-
-        // Optional Attribute
-        return DEFAULT_VALUE_ATTRIBUTE_LOCATION;
-      }
-    }
 
     public string Product
     {
@@ -88,8 +54,9 @@ namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolders
           return value;
         }
 
-        // Optional Attribute
-        return DEFAULT_VALUE_ATTRIBUTE_CHANNEL;
+        // Required Attribute
+        throw new ArgumentException(string.Format("TMSContent placeholder definition is missing required attribute '{0}'.",
+          Enum.GetName(typeof(PlaceHolderAttributes), PlaceHolderAttributes.TMS_Channel)));
       }
     }
 
@@ -103,8 +70,9 @@ namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolders
           return value;
         }
 
-        // Optional Attribute
-        return DEFAULT_VALUE_ATTRIBUTE_TEMPLATE;
+        // Required Attribute
+        throw new ArgumentException(string.Format("TMSContent placeholder definition is missing required attribute '{0}'.",
+          Enum.GetName(typeof(PlaceHolderAttributes), PlaceHolderAttributes.TMS_Template)));
       }
     }
 

@@ -26,6 +26,82 @@ namespace Atlantis.Framework.Providers.PlaceHolder.Tests
       return null;
     }
 
+    public bool TryGetContent(string template, string channel, out string content)
+    {
+      content = string.Empty;
+      if (template.ToLower() == "home")
+      {
+        content = "<div>" +
+                  "<h1>test/home</h1>" +
+                  "<ul>" +
+                  "<li>ID: [@D[tms.message.message_id]@D]</li>" +
+                  "<li>Tag: [@D[tms.message.tag]@D]</li>" +
+                  "<li>Name: [@D[tms.message.name]@D]</li>" +
+                  "<li>Strategy: [@D[tms.message.strategy]@D]</li>" +
+                  "<li>TrackingID: [@D[tms.message.tracking_id]@D]</li>" +
+                  "<li>Data[1]: [@D[tms.message.data.key1]@D]</li>" +
+                  "<li>Data[2]: [@D[tms.message.data.key2]@D]</li>" +
+                  "</ul>" +
+                  "</div>";
+        return true;
+      }
+      if (template.ToLower() == "home-missing")
+      {
+        content = "<div>" +
+                  "<h1>test/home-missing</h1>" +
+                  "<ul>" +
+                  "<li>ID: [@D[tms.message.message_id]@D]</li>" +
+                  "<li>Tag: [@D[tms.message.tag]@D]</li>" +
+                  "<li>Name: [@D[tms.message.name]@D]</li>" +
+                  "<li>Strategy: [@D[tms.message.strategy]@D]</li>" +
+                  "<li>TrackingID: [@D[tms.message.tracking_id]@D]</li>" +
+                  "<li>Data[1]: [@D[tms.message.data.key1]@D]</li>" +
+                  "<li>Data[2]: [@D[tms.message.data.key2]@D]</li>" +
+                  "</ul>" +
+                  "</div>";
+        return true;
+      }
+      return false;
+    }
+
+    public bool TryGetContent(string template, IMessageVariant message, out string content)
+    {
+      content = string.Empty;
+      if ((message.Name.ToLower() == "message1") && (template.ToLower() == "home"))
+      {
+        content = "<div>" +
+                  "<h1>test/message1/home</h1>" +
+                  "<ul>" +
+                  "<li>ID: [@D[tms.message.message_id]@D]</li>" +
+                  "<li>Tag: [@D[tms.message.tag]@D]</li>" +
+                  "<li>Name: [@D[tms.message.name]@D]</li>" +
+                  "<li>Strategy: [@D[tms.message.strategy]@D]</li>" +
+                  "<li>TrackingID: [@D[tms.message.tracking_id]@D]</li>" +
+                  "<li>Data[1]: [@D[tms.message.data.key1]@D]</li>" +
+                  "<li>Data[2]: [@D[tms.message.data.key2]@D]</li>" +
+                  "</ul>" +
+                  "</div>";
+        return true;
+      }
+      if ((message.Name.ToLower() == "message2") && (template.ToLower() == "home"))
+      {
+        content = "<div>" +
+                  "<h1>test/message2/home</h1>" +
+                  "<ul>" +
+                  "<li>ID: [@D[tms.message.message_id]@D]</li>" +
+                  "<li>Tag: [@D[tms.message.tag]@D]</li>" +
+                  "<li>Name: [@D[tms.message.name]@D]</li>" +
+                  "<li>Strategy: [@D[tms.message.strategy]@D]</li>" +
+                  "<li>TrackingID: [@D[tms.message.tracking_id]@D]</li>" +
+                  "<li>Data[1]: [@D[tms.message.data.key1]@D]</li>" +
+                  "<li>Data[2]: [@D[tms.message.data.key2]@D]</li>" +
+                  "</ul>" +
+                  "</div>";
+        return true;
+      }
+      return false;
+    }
+
     public bool TryGetMessages(string shopper_id, string appProduct, string interactionName, string channel,
       JObject postData, out IList<IMessageVariant> messageVariants, Func<IMessageVariant, bool> predicate)
     {
@@ -51,7 +127,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder.Tests
         }");
         messageVariants = new List<IMessageVariant>
         {
-          new MessageVariant(TMSContentConfig.AppID, appProduct, interactionName, channel, jObject)
+          new MessageVariant(TMSMessageConfig.AppID, appProduct, interactionName, channel, jObject)
         };
         return true;
       }
@@ -72,7 +148,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder.Tests
         }");
         messageVariants = new List<IMessageVariant>
         {
-          new MessageVariant(TMSContentConfig.AppID, appProduct, interactionName, channel, jObject)
+          new MessageVariant(TMSMessageConfig.AppID, appProduct, interactionName, channel, jObject)
         };
         return true;
       }
@@ -93,7 +169,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder.Tests
         }");
         messageVariants = new List<IMessageVariant>
         {
-          new MessageVariant(TMSContentConfig.AppID, appProduct, interactionName, channel, jObject)
+          new MessageVariant(TMSMessageConfig.AppID, appProduct, interactionName, channel, jObject)
         };
         return true;
       }
@@ -127,8 +203,8 @@ namespace Atlantis.Framework.Providers.PlaceHolder.Tests
         }");
         messageVariants = new List<IMessageVariant>
         {
-          new MessageVariant(TMSContentConfig.AppID, appProduct, interactionName, channel, jObject1),
-          new MessageVariant(TMSContentConfig.AppID, appProduct, interactionName, channel, jObject2)
+          new MessageVariant(TMSMessageConfig.AppID, appProduct, interactionName, channel, jObject1),
+          new MessageVariant(TMSMessageConfig.AppID, appProduct, interactionName, channel, jObject2)
         };
         return true;
       }

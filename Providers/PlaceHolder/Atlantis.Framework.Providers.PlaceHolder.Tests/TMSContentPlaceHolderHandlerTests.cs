@@ -31,7 +31,9 @@ namespace Atlantis.Framework.Providers.PlaceHolder.Tests
     [ClassInitialize()]
     public static void ClassInit(TestContext context)
     {
-      TMSContentConfig.AppID = "FOS";
+      TMSContentConfig.App = "TMS";
+      TMSContentConfig.Location = "dev";
+      TMSMessageConfig.AppID = "FOS";
     }
 
     public IProviderContainer Error_InitializeProviderContainer()
@@ -55,7 +57,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder.Tests
 
       try
       {
-        IPlaceHolder placeHolder = new TMSContentPlaceHolder("tms", "dev", "FOS", "First", "test", "home");
+        IPlaceHolder placeHolder = new TMSContentPlaceHolder("FOS", "First", "test", "home");
 
         IProviderContainer providerContainer = InitializeProviderContainer();
         IPlaceHolderProvider placeHolderProvider = providerContainer.Resolve<IPlaceHolderProvider>();
@@ -65,7 +67,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder.Tests
         WriteOutput(renderedContent);
 
         Assert.IsTrue(mockLogger.Exceptions.Count == 0);
-        Assert.IsTrue(renderedContent.Contains("dev/test/message1/home"));
+        Assert.IsTrue(renderedContent.Contains("test/message1/home"));
       }                                                      
       finally
       {
@@ -82,7 +84,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder.Tests
 
       try
       {
-        IPlaceHolder placeHolder = new TMSContentPlaceHolder("tms", "dev", "FOS", "FailGetMessages", "test", "home");
+        IPlaceHolder placeHolder = new TMSContentPlaceHolder("FOS", "FailGetMessages", "test", "home");
 
         IProviderContainer providerContainer = InitializeProviderContainer();
         IPlaceHolderProvider placeHolderProvider = providerContainer.Resolve<IPlaceHolderProvider>();
@@ -92,7 +94,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder.Tests
         WriteOutput(renderedContent);
 
         Assert.IsTrue(mockLogger.Exceptions.Count == 0);
-        Assert.IsTrue(renderedContent.Contains("dev/test/home"));
+        Assert.IsTrue(renderedContent.Contains("test/home"));
         Assert.IsTrue(renderedContent.Contains("ID: [@D[tms.message.message_id]@D]"));
       }
       finally
@@ -110,7 +112,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder.Tests
 
       try
       {
-        IPlaceHolder placeHolder = new TMSContentPlaceHolder("tms", "dev", "FOS", "First", "test", "home-missing");
+        IPlaceHolder placeHolder = new TMSContentPlaceHolder("FOS", "First", "test", "home-missing");
 
         IProviderContainer providerContainer = InitializeProviderContainer();
         IPlaceHolderProvider placeHolderProvider = providerContainer.Resolve<IPlaceHolderProvider>();
@@ -120,7 +122,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder.Tests
         WriteOutput(renderedContent);
 
         Assert.IsTrue(mockLogger.Exceptions.Count == 0);
-        Assert.IsTrue(renderedContent.Contains("dev/test/home-missing"));
+        Assert.IsTrue(renderedContent.Contains("test/home-missing"));
         Assert.IsTrue(renderedContent.Contains("ID: [@D[tms.message.message_id]@D]"));
       }
       finally
@@ -138,7 +140,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder.Tests
 
       try
       {
-        IPlaceHolder placeHolder = new TMSContentPlaceHolder("tms", "dev", "FOS", "Multiple", "test", "home", 1);
+        IPlaceHolder placeHolder = new TMSContentPlaceHolder("FOS", "Multiple", "test", "home", 1);
 
         IProviderContainer providerContainer = InitializeProviderContainer();
         IPlaceHolderProvider placeHolderProvider = providerContainer.Resolve<IPlaceHolderProvider>();
@@ -148,7 +150,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder.Tests
         WriteOutput(renderedContent);
 
         Assert.IsTrue(mockLogger.Exceptions.Count == 0);
-        Assert.IsTrue(renderedContent.Contains("dev/test/message2/home"));
+        Assert.IsTrue(renderedContent.Contains("test/message2/home"));
         Assert.IsTrue(renderedContent.Contains("ID: ID2"));
       }
       finally

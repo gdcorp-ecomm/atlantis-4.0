@@ -21,18 +21,19 @@ namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolderHandlers
   {
     private const string CONTEXT_DATA_PREFIX = "tms.message";
 
-    private const string TRACKING_DIV_FORMAT = "<div data-tms-name='[@D[tms.message.name]@D]' " +
-                                               "data-tms-strategy='[@D[tms.message.strategy]@D]' " +
-                                               "data-tms-trackingid='[@D[tms.message.tracking_id]@D]'>\n{0}\n</div>";
+    private const string TRACKING_DIV_FORMAT_NAME = "data-tms-name='{0}'";
+    private const string TRACKING_DIV_FORMAT_STRATEGY = "data-tms-strategy='{0}'";
+    private const string TRACKING_DIV_FORMAT_TRACKING_ID = "data-tms-trackingid='{0}'";
+
     private const string TMS_SPOOF_DELIM = ",";
     private const string TMS_SPOOF_KEY = "tmsPlaceholderSpoof";
 
     private readonly Lazy<ICDSContentProvider> _cdsContentProvider;
     private readonly Lazy<IDebugContext> _debugContextProvider;
     private readonly Lazy<IRenderPipelineProvider> _renderPipelineProvider;
+    private readonly Lazy<ISiteContext> _siteContextProvider;
     private readonly Lazy<ITMSContentDataProvider> _tmsContentDataProvider;
     private readonly Lazy<ITMSContentProvider> _tmsContentProvider;
-    private readonly Lazy<ISiteContext> _siteContextProvider;
     private readonly Lazy<IWebContext> _webContextProvider;
 
     internal TMSContentPlaceHolderHandler(IPlaceHolderHandlerContext context)
@@ -88,13 +89,13 @@ namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolderHandlers
           {
             IMessageVariant message = messages.FirstOrDefault();
             if ((message != null) && (message.IsControl ?
-              TryGetMessageContent(placeHolderData, out content) :
-              TryGetMessageContent(placeHolderData, out content, message)))
+              _tmsContentProvider.Value.TryGetContent(placeHolderData.Template, placeHolderData.Channel, out content) :
+              _tmsContentProvider.Value.TryGetContent(placeHolderData.Template, message, out content)))
             {
               _tmsContentProvider.Value.ConsumeMessage(placeHolderData.Product, placeHolderData.Interaction,
                 placeHolderData.Channel, message);
               SetContextData(message, CONTEXT_DATA_PREFIX);
-              content = string.Format(TRACKING_DIV_FORMAT, content);
+              SetTrackingData(message, ref content);
               content = _renderPipelineProvider.Value.RenderContent(content,
                 new IRenderHandler[] {new ProviderContainerDataTokenRenderHandler()});
               return content;
@@ -109,13 +110,13 @@ namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolderHandlers
           {
             IMessageVariant message = messages.ElementAtOrDefault(placeHolderData.Rank.Value);
             if ((message != null) && (message.IsControl ?
-              TryGetMessageContent(placeHolderData, out content) :
-              TryGetMessageContent(placeHolderData, out content, message)))
+              _tmsContentProvider.Value.TryGetContent(placeHolderData.Template, placeHolderData.Channel, out content) :
+              _tmsContentProvider.Value.TryGetContent(placeHolderData.Template, message, out content)))
             {
               _tmsContentProvider.Value.ConsumeMessage(placeHolderData.Product, placeHolderData.Interaction,
                 placeHolderData.Channel, message);
               SetContextData(message, CONTEXT_DATA_PREFIX);
-              content = string.Format(TRACKING_DIV_FORMAT, content);
+              SetTrackingData(message, ref content);
               content = _renderPipelineProvider.Value.RenderContent(content,
                 new IRenderHandler[] {new ProviderContainerDataTokenRenderHandler()});
               return content;
@@ -124,7 +125,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolderHandlers
         }
 
         // Default Content
-        if (TryGetMessageContent(placeHolderData, out content))
+        if (_tmsContentProvider.Value.TryGetContent(placeHolderData.Template, placeHolderData.Channel, out content))
         {
           return content;
         }
@@ -166,36 +167,12 @@ namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolderHandlers
       }
     }
 
-    private bool TryGetMessageContent(TMSContentPlaceHolderData placeHolderData, out string content, IMessageVariant message = null)
+    private void SetTrackingData(IMessageVariant message, ref string content)
     {
-      // Default Path: {Location}/{Channel}/{Template||Interaction}
-      // Message Path: {Location}/{Channel}/{Message}/{Template||Interaction}
-      StringBuilder path = new StringBuilder(256);
-
-      // Set {Location}
-      if (!string.IsNullOrEmpty(placeHolderData.Location))
-      {
-        path.Append(placeHolderData.Location + "/");
-      }
-
-      // Set {Channel}
-      if (!string.IsNullOrEmpty(placeHolderData.Channel))
-      {
-        path.Append(placeHolderData.Channel + "/");
-      }
-
-      // Set {Message}
-      if (message != null)
-      {
-        path.Append(message.Name + "/");
-      }
-
-      // Set {Template||Interaction}
-      path.Append(!string.IsNullOrEmpty(placeHolderData.Template) ? placeHolderData.Template : placeHolderData.Interaction);
-
-      // Get Content
-      content = _cdsContentProvider.Value.GetContent(placeHolderData.App, path.ToString()).Content;
-      return (!string.IsNullOrEmpty(content));
+      content = string.Join(" ", "<div",
+        string.Format(TRACKING_DIV_FORMAT_NAME, message.IsControl ? message.Control_Name : message.Name),
+        string.Format(TRACKING_DIV_FORMAT_STRATEGY, message.Strategy),
+        string.Format(TRACKING_DIV_FORMAT_TRACKING_ID, message.TrackingID), ">", content ?? string.Empty, "</div>");
     }
 
     [ExcludeFromCodeCoverage]
@@ -214,58 +191,57 @@ namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolderHandlers
         {
           foreach (string spoofValue in spoofValuesList)
           {
-            List<KeyValuePair<string, string>> attributes = new List<KeyValuePair<string, string>>(12);
+            IDictionary<string, string> attributes = new Dictionary<string, string>(12);
             // Format: spoofPlaceholderContent=app:tms,location:,product:hp,interaction:marquee,channel:homepage,template:marquee,rank:0
             // Required Parameter(s): product, interaction
             // Optional Parameter(s): channel, template, rank
             string[] values = spoofValue.Split(new[] {TMS_SPOOF_DELIM}, StringSplitOptions.RemoveEmptyEntries);
-            foreach (var value in values)
+            foreach (string value in values)
             {
               Match match = Regex.Match(value, @"(?<key>[^:]+):(?<value>[^:]+)");
               if (match.Success)
               {
-                attributes.Add(new KeyValuePair<string, string>(match.Groups["key"].Value, match.Groups["value"].Value));
+                attributes[match.Groups["key"].Value.Trim()] = match.Groups["value"].Value.Trim();
               }
             }
 
-            TMSContentPlaceHolderData spoofData = new TMSContentPlaceHolderData(attributes);
-            if ((placeHolderData.Product.Equals(spoofData.Product, StringComparison.OrdinalIgnoreCase)) &&
-                (placeHolderData.Interaction.Equals(spoofData.Interaction, StringComparison.OrdinalIgnoreCase)) &&
-                (string.Equals(placeHolderData.Channel, spoofData.Channel, StringComparison.OrdinalIgnoreCase)) &&
-                (string.Equals(placeHolderData.Template, spoofData.Template, StringComparison.OrdinalIgnoreCase)) &&
-                (placeHolderData.Rank == spoofData.Rank))
+            string app = attributes.ContainsKey("app") ? attributes["app"] : string.Empty;
+            string location = attributes.ContainsKey("location") ? attributes["location"] : string.Empty;
+            string product = attributes.ContainsKey("product") ? attributes["product"] : string.Empty;
+            string interaction = attributes.ContainsKey("interaction") ? attributes["interaction"] : string.Empty;
+            string channel = attributes.ContainsKey("channel") ? attributes["channel"] : string.Empty;
+            string template = attributes.ContainsKey("template") ? attributes["template"] : string.Empty;
+
+            int nValue;
+            int? rank = (attributes.ContainsKey("rank") && int.TryParse(attributes["rank"], out nValue)) ? (int?)nValue : null;
+
+            if (!string.Equals(placeHolderData.Product, product, StringComparison.OrdinalIgnoreCase) ||
+                !string.Equals(placeHolderData.Interaction, interaction, StringComparison.OrdinalIgnoreCase) ||
+                !string.Equals(placeHolderData.Channel, channel, StringComparison.OrdinalIgnoreCase) ||
+                !string.Equals(placeHolderData.Template, template, StringComparison.OrdinalIgnoreCase) ||
+                (placeHolderData.Rank != rank))
             {
-              // Spoof Path: {Location}/{Template||Interaction}
-              StringBuilder path = new StringBuilder(256);
-
-              // Set {Location}
-              if (!string.IsNullOrEmpty(spoofData.Location))
-              {
-                path.Append(spoofData.Location + "/");
-              }
-
-              // Set {Template||Interaction}
-              path.Append(!string.IsNullOrEmpty(spoofData.Template) ? spoofData.Template : spoofData.Interaction);
-
-              // Get Content
-              TryLogSpoofMessageContent(spoofData, path.ToString());
-              content = _cdsContentProvider.Value.GetContent(spoofData.App, path.ToString()).Content;
-              return (!string.IsNullOrEmpty(content));
+              return false;
             }
+
+            // Spoof Path: {Location}/{Template||Interaction}
+            StringBuilder path = new StringBuilder(256);
+
+            // Set {Location}
+            path.Append(location + "/");
+
+            // Set {Template}
+            path.Append(template);
+
+            // Get Content
+            TryLogDebugMessage(string.Format("TMS Placeholder Spoof ({0}/{1}/{2}){{{3}}}",
+              app, product, interaction, channel), path.ToString());
+            content = _cdsContentProvider.Value.GetContent(app, path.ToString()).Content;
+            return (!string.IsNullOrEmpty(content));
           }
         }
       }
       return false;
-    }
-
-    [ExcludeFromCodeCoverage]
-    private void TryLogSpoofMessageContent(TMSContentPlaceHolderData spoofData, string path)
-    {
-      if ((_siteContextProvider.Value != null) && _siteContextProvider.Value.IsRequestInternal)
-      {
-        TryLogDebugMessage(string.Format("TMS Placeholder Spoof ({0}/{1}/{2}){{{3}}}",
-          spoofData.App, spoofData.Product, spoofData.Interaction, spoofData.Channel), path);
-      }
     }
 
     [ExcludeFromCodeCoverage]

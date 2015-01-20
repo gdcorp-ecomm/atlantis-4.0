@@ -146,11 +146,11 @@
     </Reference>
     <Reference Include="Atlantis.Framework.Providers.TMSContentData, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.Providers.TMSContentData.15.1.16.1\lib\net40\Atlantis.Framework.Providers.TMSContentData.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.Providers.TMSContentData.15.1.20.1\lib\net40\Atlantis.Framework.Providers.TMSContentData.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Providers.TMSContentData.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.Providers.TMSContentData.Interface.15.1.16.1\lib\net40\Atlantis.Framework.Providers.TMSContentData.Interface.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.Providers.TMSContentData.Interface.15.1.20.1\lib\net40\Atlantis.Framework.Providers.TMSContentData.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Providers.Web.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

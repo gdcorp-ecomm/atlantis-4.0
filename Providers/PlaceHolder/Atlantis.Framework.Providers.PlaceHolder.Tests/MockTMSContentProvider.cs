@@ -26,7 +26,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder.Tests
       return null;
     }
 
-    public bool TryGetContent(string template, string channel, out string content)
+    public bool TryGetContent(string template, string channel, out string content, bool bypassCache = false)
     {
       content = string.Empty;
       if (template.ToLower() == "home")
@@ -64,7 +64,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder.Tests
       return false;
     }
 
-    public bool TryGetContent(string template, IMessageVariant message, out string content)
+    public bool TryGetContent(string template, IMessageVariant message, out string content, bool bypassCache = false)
     {
       content = string.Empty;
       if ((message.Name.ToLower() == "message1") && (template.ToLower() == "home"))

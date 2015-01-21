@@ -22,10 +22,13 @@ namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolderHandlers
     private const string CONTEXT_DATA_PREFIX = "tms.message";
 
     private const string TRACKING_DIV_FORMAT_NAME = "data-tms-name='{0}'";
+    private const string TRACKING_DIV_FORMAT_RANK = "data-tms-rank='{0}'";
+    private const string TRACKING_DIV_FORMAT_CHANNEL = "data-tms-channel='{0}'";
     private const string TRACKING_DIV_FORMAT_STRATEGY = "data-tms-strategy='{0}'";
+    private const string TRACKING_DIV_FORMAT_TEMPLATE = "data-tms-template='{0}'";
     private const string TRACKING_DIV_FORMAT_TRACKING_ID = "data-tms-trackingid='{0}'";
 
-    private const string TMS_SPOOF_DELIM = ",";
+    private const string TMS_SPOOF_DELIM = ";";
     private const string TMS_SPOOF_KEY = "tmsPlaceholderSpoof";
 
     private readonly Lazy<ICDSContentProvider> _cdsContentProvider;
@@ -76,6 +79,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolderHandlers
         // Spoof Content
         if (TryGetSpoofMessageContent(placeHolderData, out content))
         {
+          SetTrackingData(placeHolderData, null, ref content);
           return content;
         }
 
@@ -95,7 +99,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolderHandlers
               _tmsContentProvider.Value.ConsumeMessage(placeHolderData.Product, placeHolderData.Interaction,
                 placeHolderData.Channel, message);
               SetContextData(message, CONTEXT_DATA_PREFIX);
-              SetTrackingData(message, ref content);
+              SetTrackingData(placeHolderData, message, ref content);
               content = _renderPipelineProvider.Value.RenderContent(content,
                 new IRenderHandler[] {new ProviderContainerDataTokenRenderHandler()});
               return content;
@@ -116,7 +120,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolderHandlers
               _tmsContentProvider.Value.ConsumeMessage(placeHolderData.Product, placeHolderData.Interaction,
                 placeHolderData.Channel, message);
               SetContextData(message, CONTEXT_DATA_PREFIX);
-              SetTrackingData(message, ref content);
+              SetTrackingData(placeHolderData, message, ref content);
               content = _renderPipelineProvider.Value.RenderContent(content,
                 new IRenderHandler[] {new ProviderContainerDataTokenRenderHandler()});
               return content;
@@ -124,9 +128,11 @@ namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolderHandlers
           }
         }
 
-        // Default Content
-        if (_tmsContentProvider.Value.TryGetContent(placeHolderData.Template, placeHolderData.Channel, out content))
+        // Default Content; Try a second time in case the item is not within the cache before finally giving up.
+        if (_tmsContentProvider.Value.TryGetContent(placeHolderData.Template, placeHolderData.Channel, out content) &&
+            _tmsContentProvider.Value.TryGetContent(placeHolderData.Template, placeHolderData.Channel, out content, true))
         {
+          SetTrackingData(placeHolderData, null, ref content);
           return content;
         }
 
@@ -167,12 +173,15 @@ namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolderHandlers
       }
     }
 
-    private void SetTrackingData(IMessageVariant message, ref string content)
+    private void SetTrackingData(TMSContentPlaceHolderData placeHolderData, IMessageVariant message, ref string content)
     {
       content = string.Join(" ", "<div",
-        string.Format(TRACKING_DIV_FORMAT_NAME, message.IsControl ? message.Control_Name : message.Name),
-        string.Format(TRACKING_DIV_FORMAT_STRATEGY, message.Strategy),
-        string.Format(TRACKING_DIV_FORMAT_TRACKING_ID, message.TrackingID), ">", content ?? string.Empty, "</div>");
+        (message != null) ? string.Format(TRACKING_DIV_FORMAT_NAME, message.IsControl ? message.Control_Name : message.Name) : string.Empty,
+        (message != null) ? string.Format(TRACKING_DIV_FORMAT_STRATEGY, message.Strategy) : string.Empty,
+        (message != null) ? string.Format(TRACKING_DIV_FORMAT_TRACKING_ID, message.TrackingID) : string.Empty,
+        string.Format(TRACKING_DIV_FORMAT_CHANNEL, placeHolderData.Channel),
+        string.Format(TRACKING_DIV_FORMAT_TEMPLATE, placeHolderData.Template),
+        string.Format(TRACKING_DIV_FORMAT_RANK, placeHolderData.Rank), ">", content ?? string.Empty, "</div>");
     }
 
     [ExcludeFromCodeCoverage]
@@ -189,19 +198,21 @@ namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolderHandlers
         string[] spoofValuesList = _webContextProvider.Value.ContextBase.Request.QueryString.GetValues(TMS_SPOOF_KEY);
         if (spoofValuesList != null)
         {
-          foreach (string spoofValue in spoofValuesList)
+          foreach (string spoofValues in spoofValuesList)
           {
             IDictionary<string, string> attributes = new Dictionary<string, string>(12);
             // Format: spoofPlaceholderContent=app:tms,location:,product:hp,interaction:marquee,channel:homepage,template:marquee,rank:0
             // Required Parameter(s): product, interaction
             // Optional Parameter(s): channel, template, rank
-            string[] values = spoofValue.Split(new[] {TMS_SPOOF_DELIM}, StringSplitOptions.RemoveEmptyEntries);
+            string[] values = spoofValues.Split(new[] {TMS_SPOOF_DELIM}, StringSplitOptions.RemoveEmptyEntries);
             foreach (string value in values)
             {
-              Match match = Regex.Match(value, @"(?<key>[^:]+):(?<value>[^:]+)");
+              Match match = Regex.Match(value, @"(?<key>app|location|product|interaction|channel|template)\|(?<value>[^\|]+)");
               if (match.Success)
               {
-                attributes[match.Groups["key"].Value.Trim()] = match.Groups["value"].Value.Trim();
+                string spoofKey = match.Groups["key"].Value.Trim();
+                string spoofValue = match.Groups["value"].Value.Trim();
+                attributes[spoofKey] = spoofValue;
               }
             }
 
@@ -213,7 +224,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolderHandlers
             string template = attributes.ContainsKey("template") ? attributes["template"] : string.Empty;
 
             int nValue;
-            int? rank = (attributes.ContainsKey("rank") && int.TryParse(attributes["rank"], out nValue)) ? (int?)nValue : null;
+            int? rank = (attributes.ContainsKey("rank") && int.TryParse(attributes["rank"], out nValue)) ? (int?) nValue : null;
 
             if (!string.Equals(placeHolderData.Product, product, StringComparison.OrdinalIgnoreCase) ||
                 !string.Equals(placeHolderData.Interaction, interaction, StringComparison.OrdinalIgnoreCase) ||

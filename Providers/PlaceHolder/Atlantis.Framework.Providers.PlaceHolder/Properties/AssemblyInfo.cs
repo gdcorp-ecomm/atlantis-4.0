@@ -39,5 +39,5 @@ using System.Runtime.InteropServices;
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("4.0.0.0")]
 [assembly: AssemblyFileVersion("4.0.0.0")]
-[assembly: AssemblyInformationalVersion("15.1.21.3")]
+[assembly: AssemblyInformationalVersion("15.1.22.1")]
 [assembly: InternalsVisibleTo("Atlantis.Framework.Providers.PlaceHolder.Tests")]

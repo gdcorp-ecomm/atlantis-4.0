@@ -207,7 +207,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolderHandlers
             string[] values = spoofValues.Split(new[] {TMS_SPOOF_DELIM}, StringSplitOptions.RemoveEmptyEntries);
             foreach (string value in values)
             {
-              Match match = Regex.Match(value, @"(?<key>app|location|product|interaction|channel|template)\|(?<value>[^\|]+)");
+              Match match = Regex.Match(value, @"(?<key>[_a-zA-Z0-9\-]+)\|(?<value>[^\|]+)");
               if (match.Success)
               {
                 string spoofKey = match.Groups["key"].Value.Trim();

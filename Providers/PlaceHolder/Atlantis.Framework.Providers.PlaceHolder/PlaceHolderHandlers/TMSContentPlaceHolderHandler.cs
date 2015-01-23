@@ -129,8 +129,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolderHandlers
         }
 
         // Default Content; Try a second time in case the item is not within the cache before finally giving up.
-        if (_tmsContentProvider.Value.TryGetContent(placeHolderData.Template, placeHolderData.Channel, out content) ||
-            _tmsContentProvider.Value.TryGetContent(placeHolderData.Template, placeHolderData.Channel, out content, true))
+        if (_tmsContentProvider.Value.TryGetContent(placeHolderData.Template, placeHolderData.Channel, out content))
         {
           SetTrackingData(placeHolderData, null, ref content);
           return content;
@@ -207,11 +206,11 @@ namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolderHandlers
             string[] values = spoofValues.Split(new[] {TMS_SPOOF_DELIM}, StringSplitOptions.RemoveEmptyEntries);
             foreach (string value in values)
             {
-              Match match = Regex.Match(value, @"(?<key>[_a-zA-Z0-9\-]+)\|(?<value>[^\|]+)");
+              Match match = Regex.Match(value, @"(?<key>[_a-zA-Z0-9\-\.]+)\|(?<value>[^\|]+)");
               if (match.Success)
               {
-                string spoofKey = match.Groups["key"].Value.Trim();
-                string spoofValue = match.Groups["value"].Value.Trim();
+                string spoofKey = match.Groups["key"].Value.Trim().ToLower();
+                string spoofValue = match.Groups["value"].Value.Trim().ToLower();
                 attributes[spoofKey] = spoofValue;
               }
             }

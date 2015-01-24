@@ -128,8 +128,8 @@ namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolderHandlers
           }
         }
 
-        // Default Content; Try a second time in case the item is not within the cache before finally giving up.
-        if (_tmsContentProvider.Value.TryGetContent(placeHolderData.Template, placeHolderData.Channel, out content))
+        // Default Content; Force a retry if not found in cache.
+        if (_tmsContentProvider.Value.TryGetContent(placeHolderData.Template, placeHolderData.Channel, out content, true))
         {
           SetTrackingData(placeHolderData, null, ref content);
           return content;

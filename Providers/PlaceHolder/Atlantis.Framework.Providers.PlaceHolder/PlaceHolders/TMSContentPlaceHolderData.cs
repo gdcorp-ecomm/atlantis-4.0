@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Xml.Linq;
 
 namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolders
@@ -8,6 +9,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolders
   internal class TMSContentPlaceHolderData
   {
     public const string XML_ELEMNAME_DATA = "data";
+    private const string VALID_DEFAULT_ATTRIBUTE_VALUE_EXP = @"[_a-zA-Z0-9\-]";
 
     private readonly IDictionary<string, string> _attributesDictionary =
       new Dictionary<string, string>(5, StringComparer.OrdinalIgnoreCase);
@@ -19,6 +21,12 @@ namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolders
         string value;
         if (TryGetAttribute(PlaceHolderAttributes.TMS_Product, out value))
         {
+          Match match = Regex.Match(value, VALID_DEFAULT_ATTRIBUTE_VALUE_EXP);
+          if (!match.Success)
+          {
+            throw new ArgumentException(string.Format("TMSContent placeholder contains invalid value for required attribute '{0}'.",
+              Enum.GetName(typeof(PlaceHolderAttributes), PlaceHolderAttributes.TMS_Product)));
+          }
           return value;
         }
 
@@ -35,6 +43,12 @@ namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolders
         string value;
         if (TryGetAttribute(PlaceHolderAttributes.TMS_Interaction, out value))
         {
+          Match match = Regex.Match(value, VALID_DEFAULT_ATTRIBUTE_VALUE_EXP);
+          if (!match.Success)
+          {
+            throw new ArgumentException(string.Format("TMSContent placeholder contains invalid value for required attribute '{0}'.",
+              Enum.GetName(typeof(PlaceHolderAttributes), PlaceHolderAttributes.TMS_Interaction)));
+          }
           return value;
         }
 
@@ -51,6 +65,12 @@ namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolders
         string value;
         if (TryGetAttribute(PlaceHolderAttributes.TMS_Channel, out value))
         {
+          Match match = Regex.Match(value, VALID_DEFAULT_ATTRIBUTE_VALUE_EXP);
+          if (!match.Success)
+          {
+            throw new ArgumentException(string.Format("TMSContent placeholder contains invalid value for required attribute '{0}'.",
+              Enum.GetName(typeof(PlaceHolderAttributes), PlaceHolderAttributes.TMS_Channel)));
+          }
           return value;
         }
 
@@ -67,6 +87,12 @@ namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolders
         string value;
         if (TryGetAttribute(PlaceHolderAttributes.TMS_Template, out value))
         {
+          Match match = Regex.Match(value, VALID_DEFAULT_ATTRIBUTE_VALUE_EXP);
+          if (!match.Success)
+          {
+            throw new ArgumentException(string.Format("TMSContent placeholder contains invalid value for required attribute '{0}'.",
+              Enum.GetName(typeof(PlaceHolderAttributes), PlaceHolderAttributes.TMS_Template)));
+          }
           return value;
         }
 
@@ -82,8 +108,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolders
       {
         int iValue;
         string value;
-        if ((TryGetAttribute(PlaceHolderAttributes.TMS_Rank, out value)) &&
-            (int.TryParse(value, out iValue)))
+        if (TryGetAttribute(PlaceHolderAttributes.TMS_Rank, out value) && int.TryParse(value, out iValue))
         {
           return iValue;
         }

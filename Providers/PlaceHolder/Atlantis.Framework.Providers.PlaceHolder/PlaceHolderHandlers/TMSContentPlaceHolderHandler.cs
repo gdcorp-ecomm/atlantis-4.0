@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Web;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.CDSContent.Interface;
+using Atlantis.Framework.Providers.Interface.Links;
 using Atlantis.Framework.Providers.PlaceHolder.Interface;
 using Atlantis.Framework.Providers.PlaceHolder.PlaceHolders;
 using Atlantis.Framework.Providers.RenderPipeline.Interface;
@@ -20,6 +23,8 @@ namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolderHandlers
   internal class TMSContentPlaceHolderHandler : CDSDocumentPlaceHolderHandler
   {
     private const string CONTEXT_DATA_PREFIX = "tms.message";
+    private const string CONTENT_DEBUG_RELATIVE_PATH = "cds/ide#{0}";
+    private const string SITE_ADMIN_URL_KEY = "SITEADMINURL";
 
     private const string TRACKING_DIV_FORMAT_NAME = "data-tms-name='{0}'";
     private const string TRACKING_DIV_FORMAT_RANK = "data-tms-rank='{0}'";
@@ -33,6 +38,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolderHandlers
 
     private readonly Lazy<ICDSContentProvider> _cdsContentProvider;
     private readonly Lazy<IDebugContext> _debugContextProvider;
+    private readonly Lazy<ILinkProvider> _linkProvider;
     private readonly Lazy<IRenderPipelineProvider> _renderPipelineProvider;
     private readonly Lazy<ISiteContext> _siteContextProvider;
     private readonly Lazy<ITMSContentDataProvider> _tmsContentDataProvider;
@@ -51,6 +57,12 @@ namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolderHandlers
       _debugContextProvider = new Lazy<IDebugContext>(() =>
       {
         IDebugContext value;
+        return context.ProviderContainer.TryResolve(out value) ? value : null;
+      });
+
+      _linkProvider = new Lazy<ILinkProvider>(() =>
+      {
+        ILinkProvider value;
         return context.ProviderContainer.TryResolve(out value) ? value : null;
       });
 
@@ -93,8 +105,8 @@ namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolderHandlers
           {
             IMessageVariant message = messages.FirstOrDefault();
             if ((message != null) && (message.IsControl ?
-              _tmsContentProvider.Value.TryGetContent(placeHolderData.Template, placeHolderData.Channel, out content) :
-              _tmsContentProvider.Value.TryGetContent(placeHolderData.Template, message, out content)))
+              _tmsContentProvider.Value.TryGetDefaultContent(placeHolderData.Template, placeHolderData.Channel, out content) :
+              _tmsContentProvider.Value.TryGetMessageContent(placeHolderData.Template, message, out content)))
             {
               _tmsContentProvider.Value.ConsumeMessage(placeHolderData.Product, placeHolderData.Interaction,
                 placeHolderData.Channel, message);
@@ -114,8 +126,8 @@ namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolderHandlers
           {
             IMessageVariant message = messages.ElementAtOrDefault(placeHolderData.Rank.Value);
             if ((message != null) && (message.IsControl ?
-              _tmsContentProvider.Value.TryGetContent(placeHolderData.Template, placeHolderData.Channel, out content) :
-              _tmsContentProvider.Value.TryGetContent(placeHolderData.Template, message, out content)))
+              _tmsContentProvider.Value.TryGetDefaultContent(placeHolderData.Template, placeHolderData.Channel, out content) :
+              _tmsContentProvider.Value.TryGetMessageContent(placeHolderData.Template, message, out content)))
             {
               _tmsContentProvider.Value.ConsumeMessage(placeHolderData.Product, placeHolderData.Interaction,
                 placeHolderData.Channel, message);
@@ -128,8 +140,8 @@ namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolderHandlers
           }
         }
 
-        // Default Content; Force a retry if not found in cache.
-        if (_tmsContentProvider.Value.TryGetContent(placeHolderData.Template, placeHolderData.Channel, out content, true))
+        // Default Content
+        if (_tmsContentProvider.Value.TryGetDefaultContent(placeHolderData.Template, placeHolderData.Channel, out content))
         {
           SetTrackingData(placeHolderData, null, ref content);
           return content;
@@ -200,11 +212,10 @@ namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolderHandlers
           foreach (string spoofValues in spoofValuesList)
           {
             IDictionary<string, string> attributes = new Dictionary<string, string>(12);
-            // Format: spoofPlaceholderContent=app:tms,location:,product:hp,interaction:marquee,channel:homepage,template:marquee,rank:0
-            // Required Parameter(s): product, interaction
-            // Optional Parameter(s): channel, template, rank
+
+            // Format: spoofPlaceholderContent=app|tmsv2;location|content/homepage/499com;product|hp;interaction|marquee;channel|homepage;template|hero;rank|0
             string[] values = spoofValues.Split(new[] {TMS_SPOOF_DELIM}, StringSplitOptions.RemoveEmptyEntries);
-            foreach (string value in values)
+            foreach (string value in values.Select(HttpUtility.UrlDecode))
             {
               Match match = Regex.Match(value, @"(?<key>[_a-zA-Z0-9\-\.]+)\|(?<value>[^\|]+)");
               if (match.Success)
@@ -229,7 +240,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolderHandlers
                 !string.Equals(placeHolderData.Interaction, interaction, StringComparison.OrdinalIgnoreCase) ||
                 !string.Equals(placeHolderData.Channel, channel, StringComparison.OrdinalIgnoreCase) ||
                 !string.Equals(placeHolderData.Template, template, StringComparison.OrdinalIgnoreCase) ||
-                (placeHolderData.Rank != rank))
+                !(placeHolderData.Rank.HasValue && (placeHolderData.Rank == rank)))
             {
               return false;
             }
@@ -238,16 +249,25 @@ namespace Atlantis.Framework.Providers.PlaceHolder.PlaceHolderHandlers
             StringBuilder path = new StringBuilder(256);
 
             // Set {Location}
-            path.Append(location + "/");
+            path.Append(location.Replace('\\', '/') + "/");
 
             // Set {Template}
             path.Append(template);
 
             // Get Content
-            TryLogDebugMessage(string.Format("TMS Placeholder Spoof ({0}/{1}/{2}){{{3}}}",
-              app, product, interaction, channel), path.ToString());
             content = _cdsContentProvider.Value.GetContent(app, path.ToString()).Content;
-            return (!string.IsNullOrEmpty(content));
+            if (string.IsNullOrEmpty(content))
+            {
+              TryLogDebugMessage(
+                string.Format("TMS Spoof ({0}/{1}){{{2}}}", product, interaction, channel),
+                string.Format("{0}; {1}/{2}", (int) HttpStatusCode.NotFound, app, path));
+              return false;
+            }
+
+            TryLogDebugMessage(
+              string.Format("TMS Spoof ({0}/{1}){{{2}}}", product, interaction, channel),
+              string.Format("{0}; {1}/{2}", (int)HttpStatusCode.OK, app, path));
+            return true;
           }
         }
       }

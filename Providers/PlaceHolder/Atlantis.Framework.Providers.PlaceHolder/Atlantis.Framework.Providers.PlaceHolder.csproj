@@ -44,7 +44,7 @@
     </Reference>
     <Reference Include="Atlantis.Framework.DataCache, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.DataCache.14.9.24.1\lib\net40\Atlantis.Framework.DataCache.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.DataCache.15.1.28.1\lib\net40\Atlantis.Framework.DataCache.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.DataCacheGeneric.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -108,7 +108,7 @@
     </Reference>
     <Reference Include="Atlantis.Framework.Providers.TMSContent.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Atlantis.Framework.Providers.TMSContent.Interface.15.1.27.1\lib\net40\Atlantis.Framework.Providers.TMSContent.Interface.dll</HintPath>
+      <HintPath>..\packages\Atlantis.Framework.Providers.TMSContent.Interface.15.1.28.1\lib\net40\Atlantis.Framework.Providers.TMSContent.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Providers.TMSContentData, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

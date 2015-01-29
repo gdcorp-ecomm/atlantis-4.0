@@ -4,6 +4,7 @@ using System.Xml;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.MessagingProcess.Interface;
 using Atlantis.Framework.Providers.Containers;
+using Atlantis.Framework.Providers.Currency.Interface;
 using Atlantis.Framework.PurchaseEmail.Interface.Emails;
 
 namespace Atlantis.Framework.PurchaseEmail.Interface
@@ -164,7 +165,8 @@ namespace Atlantis.Framework.PurchaseEmail.Interface
       foreach (var registeredType in httpContainer.GetRegistrations())
       {
         if (registeredType.Key == typeof(ISiteContext) ||
-            registeredType.Key == typeof(IShopperContext))
+            registeredType.Key == typeof(IShopperContext) ||
+            registeredType.Key == typeof(ICurrencyPreferenceProvider))
         {
           continue;
         }

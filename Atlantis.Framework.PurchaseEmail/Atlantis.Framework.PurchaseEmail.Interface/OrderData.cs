@@ -2,6 +2,7 @@
 using System.Xml;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.Currency;
+using Atlantis.Framework.Providers.Currency.Interface;
 using Atlantis.Framework.Providers.Interface.Currency;
 using Atlantis.Framework.Providers.Containers;
 using Atlantis.Framework.Providers.Interface.Links;
@@ -10,7 +11,7 @@ using Atlantis.Framework.PurchaseEmail.Interface.Providers;
 
 namespace Atlantis.Framework.PurchaseEmail.Interface
 {
-  public class OrderData : ProviderBase, ISiteContext, IShopperContext, IManagerContext
+  public class OrderData : ProviderBase, ISiteContext, IShopperContext, IManagerContext, ICurrencyPreferenceProvider
   {
     private const int WWD_PLID = 1387;
     private ICurrencyProvider _currency;
@@ -31,6 +32,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface
       providerContainer.RegisterProvider<ShopperProductProvider, ShopperProductProvider>();
       providerContainer.RegisterProvider<IShopperContext, OrderData>(this);
       providerContainer.RegisterProvider<ISiteContext, OrderData>(this);
+      providerContainer.RegisterProvider<ICurrencyPreferenceProvider, OrderData>(this);
 
       _currency = providerContainer.Resolve<ICurrencyProvider>();
       _linkProvider = providerContainer.Resolve<ILinkProvider>();
@@ -92,6 +94,8 @@ namespace Atlantis.Framework.PurchaseEmail.Interface
       }
     }
 
+    private string _currencyPreference;
+
     private void ProcessOrderXml()
     {
       /// We do some initial processing of the order xml to ensure 
@@ -111,31 +115,15 @@ namespace Atlantis.Framework.PurchaseEmail.Interface
 
       _shopperId = LoadRequiredDetailAttribute("shopper_id");
       _orderId = LoadRequiredDetailAttribute("order_id");
-      string displayCurrency = LoadRequiredDetailAttribute("currencydisplay");
-      string transactionCurrency = Detail.GetAttribute("transactioncurrency");
-      //Set transactionCurrency first 
-      //Then set display currency... sometimes it doesn't take - do it twice
 
       if (IsRefund)
       {
-        _currency.SelectedDisplayCurrencyType = transactionCurrency;
+        _currencyPreference = Detail.GetAttribute("transactioncurrency");
       }
       else
       {
-        _currency.SelectedDisplayCurrencyType = displayCurrency;
+        _currencyPreference = LoadRequiredDetailAttribute("currencydisplay");
       }
-      //Log status...
-
-      if (_currency.SelectedTransactionalCurrencyType != "USD" && (ServerLocation == ServerLocationType.Test || ServerLocation == ServerLocationType.Dev))
-      {
-        //Log status
-        AtlantisException aex = new AtlantisException(
-            "PurchaseEmail", string.Empty,
-            "123", "SelectedTransactionCurrency:" + _currency.SelectedTransactionalCurrencyType, "SelectedDisplayCurrency:" + _currency.SelectedDisplayCurrencyType, _shopperId, OrderId,
-            string.Empty, Pathway, PageCount);
-        Engine.Engine.LogAtlantisException(aex);
-      }
-
     }
 
     private string LoadRequiredDetailAttribute(string attributeName)
@@ -482,6 +470,11 @@ namespace Atlantis.Framework.PurchaseEmail.Interface
     public int ManagerContextId
     {
       get { return this.ContextId; }
+    }
+
+    public string CurrencyPreference {
+      get { return _currencyPreference; }
+      set { return; }
     }
   }
 }

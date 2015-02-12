@@ -12,7 +12,7 @@
     <releaseNotes>
       14.11.12.2 : (GCE-31021) Moved AllowEmptyContent property into a public static class - CdsContentProviderGlobalSettings.
       14.11.12.1 : (GCE-31021) Added AllowEmptyContent property to ContentDocument class; fixed NuGet dependencies.
-      15.2.11.1 : Corrected calculation of spoof version path, updated dependencies.
+      15.2.11.1 : (PERSONALIZ-728) Corrected calculation of spoof version path, updated dependencies.
     </releaseNotes>
     <copyright>$copyright$</copyright>
     <tags>Atlantis.Framework.Providers.CDSContent</tags>

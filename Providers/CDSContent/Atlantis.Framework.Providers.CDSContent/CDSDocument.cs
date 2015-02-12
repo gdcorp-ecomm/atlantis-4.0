@@ -32,7 +32,8 @@ namespace Atlantis.Framework.Providers.CDSContent
       if (siteContext.IsRequestInternal && HttpContext.Current != null)
       {
         string list = HttpContext.Current.Request.Params[CLIENT_SPOOF_PARAM_NAME];
-        string rawPathWithoutPrefix = DefaultContentPath.Replace(PATH_PREFIX, string.Empty);
+        string rawPathWithoutPrefix = DefaultContentPath.StartsWith(PATH_PREFIX) ?
+          DefaultContentPath.Remove(0, PATH_PREFIX.Length) : DefaultContentPath;
         string versionId = GetSpoofedVersionId(rawPathWithoutPrefix, list);
         if (IsValidContentId(versionId))
         {

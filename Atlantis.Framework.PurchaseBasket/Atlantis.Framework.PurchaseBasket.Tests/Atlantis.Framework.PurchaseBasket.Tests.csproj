@@ -68,6 +68,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ExamplePurchase2.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="ExamplePurchase.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

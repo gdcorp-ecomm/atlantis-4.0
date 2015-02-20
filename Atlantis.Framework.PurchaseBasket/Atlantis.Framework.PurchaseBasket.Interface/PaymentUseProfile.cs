@@ -19,5 +19,17 @@ namespace Atlantis.Framework.PurchaseBasket.Interface
       get { return GetIntProperty("amount", 0); }
       set { this["amount"] = value.ToString(); }
     }
+
+    public string Cvv
+    {
+      get { return GetStringProperty("cvv", string.Empty); }
+      set { this["cvv"] = value; }
+    }
+
+    public string TaxId
+    {
+      get { return GetStringProperty("tax_id", string.Empty); }
+      set { this["tax_id"] = value; }
+    }
   }
 }

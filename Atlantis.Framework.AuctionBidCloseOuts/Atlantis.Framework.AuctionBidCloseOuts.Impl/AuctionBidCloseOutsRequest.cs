@@ -21,7 +21,7 @@ namespace Atlantis.Framework.AuctionBidCloseOuts.Impl
           = (AuctionBidCloseOutsRequestData)auctionBidCloseOutsRequestData;
 
         string responseXML = string.Empty;
-        using (GdAuctionsBiddingWS auctionsBidding = new GdAuctionsBiddingWS())
+        using (var auctionsBidding = new trpBiddingService())
         {
           auctionsBidding.Url = ((WsConfigElement)configElement).WSURL;
 

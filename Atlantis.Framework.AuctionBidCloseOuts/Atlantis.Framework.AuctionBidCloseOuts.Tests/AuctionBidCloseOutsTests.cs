@@ -8,6 +8,7 @@ namespace Atlantis.Framework.AuctionBidCloseOuts.Tests
   /// Summary description for UnitTest1
   /// </summary>
   [TestClass]
+  [DeploymentItem("Atlantis.Framework.AuctionBidCloseOuts.Impl.dll")]
   public class AuctionBidCloseOutsTests
   {
     public AuctionBidCloseOutsTests()

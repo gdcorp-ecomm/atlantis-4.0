@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="Atlantis_Framework_AuctionBidCloseOuts_Impl_GdAuctionsBiddingWS_GdAuctionsBiddingWS" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">http://auctions.test.godaddy-com.ide/gdAuctionsWS/GdAuctionsBiddingWS.asmx</Value>
+      <Value Profile="(Default)">http://tdnam.test.intranet.gdg/trpAdminUtilsService/trpBiddingService.asmx</Value>
     </Setting>
   </Settings>
 </SettingsFile>

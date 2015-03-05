@@ -75,9 +75,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BillingInfo.cs" />
+    <Compile Include="CCPayment.cs" />
     <Compile Include="EcommDelayedPaymentRequestData.cs" />
     <Compile Include="EcommDelayedPaymentResponseData.cs" />
     <Compile Include="PaymentInfo.cs" />
+    <Compile Include="Payments.cs" />
+    <Compile Include="Profile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

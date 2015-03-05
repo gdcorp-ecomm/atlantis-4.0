@@ -71,6 +71,19 @@ namespace Atlantis.Framework.EcommDelayedPayment.Test
     {
       EcommDelayedPaymentRequestData request = new EcommDelayedPaymentRequestData("75866", string.Empty, "443734", string.Empty, 0, "https://cart.test.godaddy-com.ide/NetGiroPaymentReturn.aspx", "AliPay");
       EcommDelayedPaymentResponseData response = (EcommDelayedPaymentResponseData)Engine.Engine.ProcessRequest(request, 432);
+
+      request.Payments.CurrentCCPayment.AccountName = "srdttt";
+      request.Payments.CurrentCCPayment.Amount = "5600";
+      request.Payments.CurrentCCPayment.AccountNumber = "5105105105105100";
+      request.Payments.CurrentCCPayment.CCType = "MasterCard";
+      request.Payments.CurrentCCPayment.Cvv = string.Empty;
+      request.Payments.CurrentCCPayment.IssuerId = "24";
+      request.Payments.CurrentCCPayment.ExpMonth = "06";
+      request.Payments.CurrentCCPayment.ExpYear = "2016";
+      request.Payments.CurrentCCPayment.PredictedMerchantCountry = "US";
+      request.Payments.CurrentCCPayment.CardSpecificGateWayId = "1";
+      request.Payments.CurrentCCPayment.RequireCvv = "0";
+
       System.Diagnostics.Debug.WriteLine(response.InvoiceID);
       System.Diagnostics.Debug.WriteLine(response.RedirectURL);
       // Cache call
@@ -83,5 +96,59 @@ namespace Atlantis.Framework.EcommDelayedPayment.Test
       Debug.WriteLine(response.ToXML());
       Assert.IsTrue(response.IsSuccess);
     }
+
+    //[TestMethod]
+    //[DeploymentItem("atlantis.config")]
+    //[DeploymentItem("Atlantis.Framework.EcommDelayedPayment.Interface.dll")]
+    //[DeploymentItem("Atlantis.Framework.EcommDelayedPayment.Impl.dll")]
+    //public void EcommDelayedPaymentIndiaTest()
+    //{
+    //  EcommDelayedPaymentRequestData request = new EcommDelayedPaymentRequestData("850774", string.Empty, "1548535", string.Empty, 0, "https://cart.dev-godaddy.com/Actions/DelayedPaymentReturn.aspx", "CCAvenue", "en-US");
+
+
+    //  request.Payment.Order_Billing = "foreign";
+    //  request.Payment.Order_Source = "Online";
+    //  request.Payment.Remote_Addr = "127.0.0.1";
+    //  request.Payment.Remote_Host = "127.0.0.1";
+    //  request.Payment.Pathway = "df53a795-2fd6-4917-97e8-bc0c43295455";
+    //  request.Payment.TranslationLanguage = "en";
+    //  request.Payment.CurrencyDisplay = "INR";
+    //  request.Payment.ReqISCAmount = "0";
+
+    //  request.Billing.City = "abc";
+    //  request.Billing.Company = " ";
+    //  request.Billing.Country = "in";
+    //  request.Billing.Email = "sthota@godaddy.com";
+    //  request.Billing.First_Name = "sss";
+    //  request.Billing.Last_Name = "ttt";
+    //  request.Billing.Phone2 = "+91.2354584524";
+    //  request.Billing.State = "AN";
+    //  request.Billing.Street1 = "abc lane";
+    //  request.Billing.Zip = "56776";
+
+    //  request.Payments.CurrentCCPayment.AccountName = "srdttt";
+    //  request.Payments.CurrentCCPayment.Amount = "5600";
+    //  request.Payments.CurrentCCPayment.AccountNumber = "5105105105105100";
+    //  request.Payments.CurrentCCPayment.CCType = "MasterCard";
+    //  request.Payments.CurrentCCPayment.Cvv = string.Empty;
+    //  request.Payments.CurrentCCPayment.ExpMonth = "06";
+    //  request.Payments.CurrentCCPayment.ExpYear = "2016";
+    //  request.Payments.CurrentCCPayment.PredictedMerchantCountry = "US";
+    //  request.Payments.CurrentCCPayment.RequireCvv = "0";
+
+
+    //  EcommDelayedPaymentResponseData response = (EcommDelayedPaymentResponseData)Engine.Engine.ProcessRequest(request, 432);
+    //  System.Diagnostics.Debug.WriteLine(response.InvoiceID);
+    //  System.Diagnostics.Debug.WriteLine(response.RedirectURL);
+    //  // Cache call
+    //  //EcommDelayedPaymentResponseData response = (EcommDelayedPaymentResponseData)DataCache.DataCache.GetProcessRequest(request, _requestType);
+
+    //  //
+    //  // TODO: Add test logic here
+    //  //
+
+    //  Debug.WriteLine(response.ToXML());
+    //  Assert.IsTrue(response.IsSuccess);
+    //}
   }
 }

@@ -15,6 +15,7 @@ namespace Atlantis.Framework.EcommDelayedPayment.Interface
     public string RequestType { get; set; }
     public BillingInfo Billing{get;set;}
     public PaymentInfo Payment { get; set; }
+    public Payments Payments { get; set; }
     public string MarketID { get; set; }
 
     public EcommDelayedPaymentRequestData(string shopperId,
@@ -30,6 +31,7 @@ namespace Atlantis.Framework.EcommDelayedPayment.Interface
       RequestType = requestType;
       Billing = new BillingInfo();
       Payment = new PaymentInfo();
+      Payments = new Payments();
       MarketID = string.Empty;
     }
 
@@ -46,6 +48,7 @@ namespace Atlantis.Framework.EcommDelayedPayment.Interface
       RequestType = requestType;
       Billing = new BillingInfo();
       Payment = new PaymentInfo();
+      Payments = new Payments();
       MarketID = marketID;
     }
 
@@ -70,6 +73,7 @@ namespace Atlantis.Framework.EcommDelayedPayment.Interface
       }
       Payment.ToXML(xtwRequest);
       Billing.ToXML(xtwRequest);
+      Payments.ToXML(xtwRequest);
       xtwRequest.WriteEndElement();
       System.Diagnostics.Debug.WriteLine(sbRequest.ToString());
       return sbRequest.ToString();

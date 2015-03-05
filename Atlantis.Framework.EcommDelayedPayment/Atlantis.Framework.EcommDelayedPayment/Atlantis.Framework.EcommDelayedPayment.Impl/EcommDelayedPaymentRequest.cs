@@ -23,7 +23,8 @@ namespace Atlantis.Framework.EcommDelayedPayment.Impl
           string invoiceID = string.Empty;
           string redirectDataXML = string.Empty;
           string errorXML = string.Empty;
-          oSvc.RequestDelayedPurchase(ecomRequest.ToXML(), out invoiceID, out redirectDataXML, out errorXML);
+          string delayedPurchaseXml = ecomRequest.ToXML();
+          oSvc.RequestDelayedPurchase(delayedPurchaseXml, out invoiceID, out redirectDataXML, out errorXML);
           System.Diagnostics.Debug.WriteLine(errorXML);
           System.Diagnostics.Debug.WriteLine(redirectDataXML);
           responseData = new EcommDelayedPaymentResponseData(requestData, redirectDataXML, errorXML, invoiceID);

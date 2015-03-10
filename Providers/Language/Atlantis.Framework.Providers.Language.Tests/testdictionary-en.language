@@ -45,3 +45,11 @@ NOTICE...&nbsp;
 Customer already owns [@T[productline:<Auctions contextid="1" />]@T] membership.
 <phrase key="textkeywithquotes"/>
 It might sound complex, but it's really not. Click "Add to Cart" for more.
+<phrase key="AboutLeadGeneration3" />
+Para indicar que estás interesado en comprar este nombre de dominio, simplemente haz clic en "Obtener este dominio" y completa el formulario.
+<phrase key="WhatIsAuctionDescription1" language="es" />
+Dawg ipsum dolizzle pimpin' mammasay mammasa mamma oo sa, we gonna chung adipiscing elit.
+<phrase key="PreRegPricingDetailToolTipText" />
+Anyone may pre-register a <span data-bind="html: '.' + $parent.TLD()">&nbsp;</span> domain during this phase. Multiple applications for the same domain will go to auction. If you are not awarded the domain, you will receive a full refund.
+<phrase key="AboutLeadGeneration1" />
+[@T[companyname:name]@T] does not own this domain name - you will be negotiating the potential sale directly with the domain owner.

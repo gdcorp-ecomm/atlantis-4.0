@@ -144,6 +144,19 @@ namespace Atlantis.Framework.Providers.Language.Tests
     }
 
     [TestMethod]
+    public void ValidLanaguagePhraseReplacementEmbeddedTokens()
+    {
+      IProviderContainer container = NewLanguageProviderContainer(1, "www", "en");
+
+      IRenderPipelineProvider renderPipelineProvider = container.Resolve<IRenderPipelineProvider>();
+
+      string content = "<div>[@L[testdictionary:AboutLeadGeneration1]@L]</div>";
+      string output = renderPipelineProvider.RenderContent(content, new List<IRenderHandler> { new LanguageRenderHandler() });
+
+      Assert.AreEqual("<div>[@T[companyname:name]@T] does not own this domain name - you will be negotiating the potential sale directly with the domain owner.</div>", output);
+    }
+
+    [TestMethod]
     public void ValidLanguagePhraseReplacementCDS()
     {
       IProviderContainer container = NewLanguageProviderContainer(1, "www", "en");
@@ -327,6 +340,24 @@ namespace Atlantis.Framework.Providers.Language.Tests
 
       string content = "<div>[@L[foo:testkey]@L]</div>";
       string output = renderPipelineProvider.RenderContent(content, new List<IRenderHandler> { new LanguageRenderHandler() });
+
+      IRenderPipelineStatusProvider statusProvider = container.Resolve<IRenderPipelineStatusProvider>();
+
+      Assert.IsNotNull(statusProvider);
+      Assert.AreEqual(statusProvider.Status, RenderPipelineResult.Success);
+      Assert.AreEqual("<div></div>", output);
+    }
+
+    [TestMethod]
+    public void RenderPipelineStatus_FilePhraseHandler_MissingDictionaryEL()
+    {
+      IProviderContainer container = NewLanguageProviderContainer(1, "uk", "en");
+      container.RegisterProvider<IRenderPipelineStatusProvider, RenderPipelineStatusProvider>();
+
+      IRenderPipelineProvider renderPipelineProvider = container.Resolve<IRenderPipelineProvider>();
+
+      string content = "<div>[@EL[foo:testkey]@EL]</div>";
+      string output = renderPipelineProvider.RenderContent(content, new List<IRenderHandler> { new EncodedLanguageRenderHandler() });
 
       IRenderPipelineStatusProvider statusProvider = container.Resolve<IRenderPipelineStatusProvider>();
 

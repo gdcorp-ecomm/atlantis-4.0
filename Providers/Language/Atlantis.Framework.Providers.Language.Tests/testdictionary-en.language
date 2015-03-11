@@ -53,3 +53,5 @@ Dawg ipsum dolizzle pimpin' mammasay mammasa mamma oo sa, we gonna chung adipisc
 Anyone may pre-register a <span data-bind="html: '.' + $parent.TLD()">&nbsp;</span> domain during this phase. Multiple applications for the same domain will go to auction. If you are not awarded the domain, you will receive a full refund.
 <phrase key="AboutLeadGeneration1" />
 [@T[companyname:name]@T] does not own this domain name - you will be negotiating the potential sale directly with the domain owner.
+<phrase key="AboutLeadGeneration" />
+To indicate your interest in buying this domain name, just click "Get it" and complete the form.

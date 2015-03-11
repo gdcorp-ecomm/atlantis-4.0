@@ -90,7 +90,7 @@ namespace Atlantis.Framework.Providers.Language.Tests
       const string content = "<div>[@QL[testdictionary:AboutLeadGeneration3]@QL]</div>";
       string output = renderPipelineProvider.RenderContent(content, new List<IRenderHandler> { new QuoteLanguageRenderHandler() });
 
-      Assert.AreEqual("<div>Para indicar que estás interesado en comprar este nombre de dominio, simplemente haz clic en \"Obtener este dominio\" y completa el formulario.</div>", output);
+      Assert.AreEqual("<div>Para indicar que estás interesado en comprar este nombre de dominio, simplemente haz clic en \\\"Obtener este dominio\\\" y completa el formulario.</div>", output);
     }
 
     [TestMethod]
@@ -103,7 +103,7 @@ namespace Atlantis.Framework.Providers.Language.Tests
       const string content = "<div id=\"divId\">[@QL[testdictionary:PreRegPricingDetailToolTipText]@QL]</div>";
       string output = renderPipelineProvider.RenderContent(content, new List<IRenderHandler> { new QuoteLanguageRenderHandler() });
 
-      Assert.AreEqual("<div id=\"divId\">Anyone may pre-register a <span data-bind=\"html: '.' + $parent.TLD()\">&nbsp;</span> domain during this phase. Multiple applications for the same domain will go to auction. If you are not awarded the domain, you will receive a full refund.</div>", output);
+      Assert.AreEqual("<div id=\"divId\">Anyone may pre-register a <span data-bind=\\\"html: '.' + $parent.TLD()\\\">&nbsp;</span> domain during this phase. Multiple applications for the same domain will go to auction. If you are not awarded the domain, you will receive a full refund.</div>", output);
     }
 
     [TestMethod]

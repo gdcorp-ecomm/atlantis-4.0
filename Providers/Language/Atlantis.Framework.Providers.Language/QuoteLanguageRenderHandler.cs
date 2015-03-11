@@ -26,8 +26,8 @@ namespace Atlantis.Framework.Providers.Language
       }
 
       const string doubleQuoteRegex = @"""";
-      var modifiedContent = _languagePhraseTokenPattern.Replace(processRenderContent.Content, match => Regex.Replace(PhraseMatchEvaluator(match, languageProvider, languageRenderStatus), doubleQuoteRegex, "\""));
-
+      var modifiedContent = _languagePhraseTokenPattern.Replace(processRenderContent.Content, match => Regex.Replace(PhraseMatchEvaluator(match, languageProvider, languageRenderStatus), doubleQuoteRegex, "\\\""));
+      
       if (languageRenderStatus != null)
       {
         statusProvider.Add(languageRenderStatus);

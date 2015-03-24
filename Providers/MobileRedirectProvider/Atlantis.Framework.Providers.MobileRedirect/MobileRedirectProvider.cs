@@ -55,30 +55,6 @@ namespace Atlantis.Framework.Providers.MobileRedirect
       }
     }
 
-    private bool? _showFullSiteFromQueryString;
-    private bool ShowFullSiteFromQueryString
-    {
-      get
-      {
-        if (!_showFullSiteFromQueryString.HasValue)
-        {
-          _showFullSiteFromQueryString = false;
-
-          string showFullSiteQueryStringValue = HttpContext.Current.Request.QueryString[QueryStringParameters.FullSite];
-
-          if (showFullSiteQueryStringValue != null)
-          {
-            if (showFullSiteQueryStringValue == "1" || showFullSiteQueryStringValue.ToLower() == "true")
-            {
-              _showFullSiteFromQueryString = true;
-            }
-          }
-        }
-
-        return _showFullSiteFromQueryString.Value;
-      }
-    }
-
     private bool IsNoRedirectBrowser
     {
       get { return UserAgentDetectionProvider.IsNoRedirectBrowser(HttpContext.Current.Request.UserAgent); }
@@ -99,62 +75,50 @@ namespace Atlantis.Framework.Providers.MobileRedirect
       get { return UserAgentDetectionProvider.IsSearchEngineBot(HttpContext.Current.Request.UserAgent); }
     }
 
-    private bool HasUserAgentBeenChecked
+    private bool? GetFullSiteQueryStringValue()
     {
-      get { return RedirectBrowserCookie != null; }
-    }
+      bool? fullSiteValue = null;
 
-    private HttpCookie _redirectBrowserCookie;
-    private HttpCookie RedirectBrowserCookie
-    {
-      get { return _redirectBrowserCookie ?? (_redirectBrowserCookie = HttpContext.Current.Request.Cookies[CookieNames.MobileRedirectBrowser]); }
-      set { _redirectBrowserCookie = value; }
-    }
+      string showFullSiteQueryStringValue = HttpContext.Current.Request.QueryString[QueryStringParameters.FullSite];
 
-    private bool IsRedirectBrowserFromCookie()
-    {
-      bool isRedirectBrowserFromCookie = false;
-
-      if (RedirectBrowserCookie != null)
+      if (!string.IsNullOrEmpty(showFullSiteQueryStringValue))
       {
-        isRedirectBrowserFromCookie = RedirectBrowserCookie.Value == "1";
+        if (showFullSiteQueryStringValue == "1" || showFullSiteQueryStringValue.Equals("true", StringComparison.OrdinalIgnoreCase))
+        {
+          fullSiteValue = true;
+        }
+        else
+        {
+          fullSiteValue = false;
+        }
       }
 
-      return isRedirectBrowserFromCookie;
+      return fullSiteValue;
     }
 
-    private void SetIsRedirectBrowserCookie(bool isRedirectUserAgent)
+    private void SetRedirectBrowserCookie(bool redirectBrowser)
     {
       bool didCookieChange;
-      string cookieSetValue = isRedirectUserAgent ? "1" : "0";
+      string cookieSetValue = redirectBrowser ? "1" : "0";
 
-      if (RedirectBrowserCookie == null)
+      HttpCookie redirectBrowsreCookieFromRequest = HttpContext.Current.Request.Cookies[CookieNames.MobileRedirectBrowser];
+
+      if (redirectBrowsreCookieFromRequest == null)
       {
-        RedirectBrowserCookie = SiteContext.NewCrossDomainMemCookie(CookieNames.MobileRedirectBrowser);
         didCookieChange = true;
       }
       else
       {
-        didCookieChange = RedirectBrowserCookie.Value != cookieSetValue;
+        didCookieChange = redirectBrowsreCookieFromRequest.Value != cookieSetValue;
       }
 
       if (didCookieChange)
       {
-        RedirectBrowserCookie.Value = cookieSetValue;
+        HttpCookie responseCookie = SiteContext.NewCrossDomainMemCookie(CookieNames.MobileRedirectBrowser);
 
-        HttpCookie responseCookie = HttpContext.Current.Response.Cookies.Get(CookieNames.MobileRedirectBrowser) ?? SiteContext.NewCrossDomainMemCookie(CookieNames.MobileRedirectBrowser);
-
-        responseCookie.Value = RedirectBrowserCookie.Value;
+        responseCookie.Value = cookieSetValue;
 
         HttpContext.Current.Response.Cookies.Set(responseCookie);
-      }
-    }
-
-    private void CheckForFullSiteRequest()
-    {
-      if (ShowFullSiteFromQueryString)
-      {
-        SetIsRedirectBrowserCookie(false);
       }
     }
 
@@ -178,13 +142,25 @@ namespace Atlantis.Framework.Providers.MobileRedirect
       return affilatePublisherHash;
     }
 
-    private void CheckUserAgent()
+    private bool ShouldRedirectUserAgent()
     {
-      if (!HasUserAgentBeenChecked)
+      bool shouldRedirect;
+
+      HttpCookie redirectBrowserCookie = HttpContext.Current.Request.Cookies[CookieNames.MobileRedirectBrowser];
+
+      if (redirectBrowserCookie == null)
       {
-        bool isRedirectUserAgent = IsMobileSiteEnabled && !IsNoRedirectBrowser && !IsSearchEngineBot && (IsMobileDevice || IsOutDatedBrowser);
-        SetIsRedirectBrowserCookie(isRedirectUserAgent);
+        bool redirectBrowser = IsMobileSiteEnabled && !IsNoRedirectBrowser && !IsSearchEngineBot && (IsMobileDevice || IsOutDatedBrowser);
+        SetRedirectBrowserCookie(redirectBrowser);
+        
+        shouldRedirect = redirectBrowser;
       }
+      else
+      {
+        shouldRedirect = redirectBrowserCookie.Value == "1";
+      }
+
+      return shouldRedirect;
     }
 
     private bool TryGetPublisherHash(out string publisherHashAndDate)
@@ -243,10 +219,19 @@ namespace Atlantis.Framework.Providers.MobileRedirect
 
     public bool IsRedirectRequired()
     {
-      CheckForFullSiteRequest();
-      CheckUserAgent();
+      bool redirectRequired;
 
-      bool redirectRequired = IsRedirectBrowserFromCookie();
+      bool? fullSiteQueryStringValue = GetFullSiteQueryStringValue();
+
+      if (fullSiteQueryStringValue.HasValue)
+      {
+        SetRedirectBrowserCookie(!fullSiteQueryStringValue.Value);
+        redirectRequired = !fullSiteQueryStringValue.Value;
+      }
+      else
+      {
+        redirectRequired = ShouldRedirectUserAgent();
+      }
 
       return redirectRequired;
     }

@@ -9,7 +9,9 @@
     <projectUrl>https://confluence.int.godaddy.com/display/ATLANTIS</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes></releaseNotes>
+    <releaseNotes>
+      15.3.23.1: Fix for cookie not being cross domain
+    </releaseNotes>
     <copyright>$copyright$</copyright>
     <tags>Atlantis Framework Providers MobileRedirect</tags>
     <dependencies />

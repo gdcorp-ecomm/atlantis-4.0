@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="myaNsdomain" xml:space="preserve">
-    <value>Όνομα τομέα|mydomainname.com|Ένα όνομα τομέα που έχει κατοχυρωθεί με αυτό τον λογαριασμό.</value>
+    <value>Όνομα domain|mydomainname.com|Ένα όνομα domain που έχει κατοχυρωθεί με αυτό τον λογαριασμό.</value>
     <comment>These values should be handled as separate values. Split by the pipe |</comment>
   </data>
   <data name="myaNsemail" xml:space="preserve">
@@ -130,19 +130,19 @@
     <comment>These values should be handled as separate values. Split by the pipe |</comment>
   </data>
   <data name="myaNsforwarding" xml:space="preserve">
-    <value>Όνομα τομέα ανακατεύθυνσης|myforwarededomainname.com|Ένα όνομα τομέα που έχει κατοχυρωθεί με αυτό τον λογαριασμό και ανακατευθύνεται σε μια διαφορετική διεύθυνση URL.</value>
+    <value>Όνομα domain ανακατεύθυνσης|myforwarededomainname.com|Ένα όνομα domain που έχει κατοχυρωθεί με αυτό τον λογαριασμό και ανακατευθύνεται σε μια διαφορετική διεύθυνση URL.</value>
     <comment>These values should be handled as separate values. Split by the pipe |</comment>
   </data>
   <data name="myaNshosting" xml:space="preserve">
-    <value>Φιλοξενούμενο όνομα τομέα|anydomainname.com|Ένα όνομα τομέα (όχι απαραίτητα κατοχυρωμένο με αυτό τον λογαριασμό) που συνδέεται με ένα λογαριασμό φιλοξενίας που έχει ρυθμιστεί με αυτό τον λογαριασμό.</value>
+    <value>Φιλοξενούμενο όνομα domain|anydomainname.com|Ένα όνομα domain (όχι απαραίτητα κατοχυρωμένο με αυτό τον λογαριασμό) που συνδέεται με ένα λογαριασμό φιλοξενίας που έχει ρυθμιστεί με αυτό τον λογαριασμό.</value>
     <comment>These values should be handled as separate values. Split by the pipe |</comment>
   </data>
   <data name="myaNsparking" xml:space="preserve">
-    <value>Για πώληση/Ιστότοπος μίας σελίδας|my4saledomainname.com|Ένα όνομα τομέα που έχει ρυθμιστεί ως σελίδα προς πώληση ή ως ιστότοπος μίας σελίδας.</value>
+    <value>Για πώληση/Ιστότοπος μίας σελίδας|my4saledomainname.com|Ένα όνομα domain που έχει ρυθμιστεί ως σελίδα προς πώληση ή ως ιστότοπος μίας σελίδας.</value>
     <comment>These values should be handled as separate values. Split by the pipe |</comment>
   </data>
   <data name="myaNsqsc" xml:space="preserve">
-    <value>Γρήγορο καρότσι αγορών|anydomainname.com|Ένα όνομα τομέα (όχι απαραίτητα κατοχυρωμένο με αυτό τον λογαριασμό) που συνδέεται με ένα λογαριασμό Γρήγορου καροτσιού αγορών που έχει ρυθμιστεί με αυτό τον λογαριασμό.</value>
+    <value>Γρήγορο καλάθι αγορών|anydomainname.com|Ένα όνομα domain (όχι απαραίτητα κατοχυρωμένο με αυτό τον λογαριασμό) που συνδέεται με ένα λογαριασμό Γρήγορου καλαθιού αγορών που έχει ρυθμιστεί με αυτό τον λογαριασμό.</value>
     <comment>These values should be handled as separate values. Split by the pipe |</comment>
   </data>
   <data name="myaNsreseller" xml:space="preserve">
@@ -150,7 +150,7 @@
     <comment>These values should be handled as separate values. Split by the pipe |</comment>
   </data>
   <data name="myaNssslcert" xml:space="preserve">
-    <value>Πιστοποιητικό SSL|anydomainname.com|Ένα όνομα τομέα που συνδέθηκε με ένα πιστοποιητικό SSL όταν εκδόθηκε το πιστοποιητικό.</value>
+    <value>Πιστοποιητικό SSL|anydomainname.com|Ένα όνομα domain που συνδέθηκε με ένα πιστοποιητικό SSL όταν εκδόθηκε το πιστοποιητικό.</value>
     <comment>These values should be handled as separate values. Split by the pipe |</comment>
   </data>
   <data name="myaNstrafblazer" xml:space="preserve">
@@ -158,11 +158,11 @@
     <comment>These values should be handled as separate values. Split by the pipe |</comment>
   </data>
   <data name="myaNsweblog" xml:space="preserve">
-    <value>Γρήγορο Blogcast|anydomainname.com|Ένα όνομα τομέα (όχι απαραίτητα κατοχυρωμένο με αυτό τον λογαριασμό) που συνδέεται με έναν λογαριασμό Web Blog που έχει ρυθμιστεί με αυτό τον λογαριασμό.</value>
+    <value>Γρήγορο Blogcast|anydomainname.com|Ένα όνομα domain (όχι απαραίτητα κατοχυρωμένο με αυτό τον λογαριασμό) που συνδέεται με έναν λογαριασμό Web Blog που έχει ρυθμιστεί με αυτό τον λογαριασμό.</value>
     <comment>These values should be handled as separate values. Split by the pipe |</comment>
   </data>
   <data name="myaNswst" xml:space="preserve">
-    <value>Κατασκευή ιστότοπων|anydomainname.com|Ένα όνομα τομέα (όχι απαραίτητα κατοχυρωμένο με αυτό τον λογαριασμό) που συνδέεται με ένα λογαριασμό Κατασκευής ιστότοπων που έχει ρυθμιστεί με αυτό τον λογαριασμό.</value>
+    <value>Κατασκευή ιστότοπων|anydomainname.com|Ένα όνομα domain (όχι απαραίτητα κατοχυρωμένο με αυτό τον λογαριασμό) που συνδέεται με ένα λογαριασμό Κατασκευής ιστότοπων που έχει ρυθμιστεί με αυτό τον λογαριασμό.</value>
     <comment>These values should be handled as separate values. Split by the pipe |</comment>
   </data>
 </root>

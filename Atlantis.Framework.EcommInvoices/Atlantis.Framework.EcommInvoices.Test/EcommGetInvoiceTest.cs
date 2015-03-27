@@ -11,7 +11,7 @@ namespace Atlantis.Framework.EcommInvoices.Test
     public void GetAllInvoicesForShopperTest()
     {
       RetrievalAttributes retAttr = new RetrievalAttributes();
-      EcommInvoicesRequestData request = new EcommInvoicesRequestData("856907", retAttr);
+      EcommInvoicesRequestData request = new EcommInvoicesRequestData("872660", retAttr);
       EcommInvoicesResponseData response = (EcommInvoicesResponseData)Engine.Engine.ProcessRequest(request, 439);
 
       Assert.IsTrue(response.IsSuccess);

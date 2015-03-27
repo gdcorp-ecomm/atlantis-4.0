@@ -81,7 +81,7 @@ namespace Atlantis.Framework.EcommInvoices.Impl
 
     private Invoice CreateInvoice(XElement element)
     {
-      DateTime expdate = element.Attribute(InvoiceFieldNames.ExpirationDate) == null || string.IsNullOrEmpty(element.Attribute(InvoiceFieldNames.ExpirationDate).Value)
+      DateTime expdate = string.IsNullOrEmpty(element.Attribute(InvoiceFieldNames.ExpirationDate).Value)
                            ? DateTime.MinValue
                            : Convert.ToDateTime(element.Attribute(InvoiceFieldNames.ExpirationDate).Value);
       Invoice invoice = new Invoice(

@@ -8,8 +8,8 @@ namespace Atlantis.Framework.RegDotTypeRegistry.Interface
   {
     XElement _responseXml;
     AtlantisException _exception;
-    RegistryApi _transferApi = null;
-    RegistryApi _regsitrationApi = null;
+    RegistryApi _transferApi;
+    RegistryApi _regsitrationApi;
 
     private RegDotTypeRegistryResponseData(AtlantisException exception)
     {

@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>Atlantis.Framework.RegDotTypeRegistry.Interface</id>
-    <version>4.13.1.7</version>
+    <version>$version$</version>
     <title>Atlantis Framework RegDotTypeRegistry Interface</title>
     <authors>$author$</authors>
     <owners>$author$</owners>

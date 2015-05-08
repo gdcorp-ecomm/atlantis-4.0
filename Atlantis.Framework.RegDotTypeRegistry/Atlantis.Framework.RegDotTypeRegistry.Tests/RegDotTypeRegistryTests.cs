@@ -1,14 +1,16 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Atlantis.Framework.RegDotTypeRegistry.Interface;
-using System.Xml.Linq;
-using System.Reflection;
-using System.IO;
-using System.Xml.Schema;
+﻿using Atlantis.Framework.RegDotTypeRegistry.Interface;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Diagnostics.CodeAnalysis;
+using System.IO;
+using System.Reflection;
+using System.Xml.Linq;
+using System.Xml.Schema;
 
 namespace Atlantis.Framework.RegDotTypeRegistry.Tests
 {
   [TestClass]
+  [ExcludeFromCodeCoverage]
   [DeploymentItem("atlantis.config")]
   [DeploymentItem("Atlantis.Framework.RegDotTypeRegistry.Impl.dll")]
   public class RegDotTypeRegistryTests
@@ -16,7 +18,7 @@ namespace Atlantis.Framework.RegDotTypeRegistry.Tests
     private RegDotTypeRegistryResponseData GetRegistryData(string dotType)
     {
       RegDotTypeRegistryRequestData request = new RegDotTypeRegistryRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, dotType);
-      RegDotTypeRegistryResponseData response = (RegDotTypeRegistryResponseData)DataCache.DataCache.GetProcessRequest(request, 639);
+      RegDotTypeRegistryResponseData response = (RegDotTypeRegistryResponseData) DataCache.DataCache.GetProcessRequest(request, 639);
       return response;
     }
 
@@ -35,6 +37,34 @@ namespace Atlantis.Framework.RegDotTypeRegistry.Tests
     }
 
     [TestMethod]
+    public void GetRegistryDataCoUkMixedCase()
+    {
+      RegDotTypeRegistryResponseData comAU = GetRegistryData("cO.uK");
+      Assert.IsNotNull(comAU);
+    }
+
+    [TestMethod]
+    public void GetRegistryDataChineseMobileUnicode()
+    {
+      RegDotTypeRegistryResponseData result = GetRegistryData("移动");
+      Assert.IsNotNull(result);
+    }
+
+    [TestMethod]
+    public void GetRegistryDataChineseMobilePunycode()
+    {
+      RegDotTypeRegistryResponseData result = GetRegistryData("xn--6frz82g");
+      Assert.IsNotNull(result);
+    }
+
+    [TestMethod]
+    public void GetRegistryDataChineseMobilePunycodeUppercase()
+    {
+      RegDotTypeRegistryResponseData result = GetRegistryData("XN--6FRZ82G");
+      Assert.IsNotNull(result);
+    }
+
+    [TestMethod]
     public void HasRegistrationRegistryId()
     {
       RegDotTypeRegistryResponseData com = GetRegistryData("com");
@@ -48,6 +78,14 @@ namespace Atlantis.Framework.RegDotTypeRegistry.Tests
       Assert.IsNotNull(com.TransferAPI.Id);
     }
 
+
+    [TestMethod]
+    public void GetResponseXml()
+    {
+      RegDotTypeRegistryResponseData com = GetRegistryData("com");
+      Assert.IsTrue(com.ToXML().Contains("<response processing=\"success\">"));
+    }
+
     [TestMethod]
     public void DefaultTimeout()
     {
@@ -56,14 +94,14 @@ namespace Atlantis.Framework.RegDotTypeRegistry.Tests
     }
 
     [TestMethod]
-    [ExpectedException(typeof(ArgumentException))]
+    [ExpectedException(typeof (ArgumentException))]
     public void NullDotType()
     {
       var request = new RegDotTypeRegistryRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, null);
     }
 
     [TestMethod]
-    [ExpectedException(typeof(ArgumentException))]
+    [ExpectedException(typeof (ArgumentException))]
     public void EmptyDotType()
     {
       var request = new RegDotTypeRegistryRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, string.Empty);

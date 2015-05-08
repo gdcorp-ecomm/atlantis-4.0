@@ -16,7 +16,7 @@ namespace Atlantis.Framework.RegDotTypeRegistry.Interface
         throw new ArgumentException("DotType cannot be null or empty.");
       }
 
-      _dotType = dotType.ToUpperInvariant();
+      _dotType = dotType.ToLowerInvariant();
       RequestTimeout = TimeSpan.FromSeconds(10);
     }
 

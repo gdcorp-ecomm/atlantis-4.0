@@ -9,7 +9,7 @@ namespace Atlantis.Framework.RegDotTypeRegistry.Impl
   {
     public IResponseData RequestHandler(RequestData requestData, ConfigElement config)
     {
-      IResponseData result = null;
+      IResponseData result;
       string responseXml = null;
 
       try

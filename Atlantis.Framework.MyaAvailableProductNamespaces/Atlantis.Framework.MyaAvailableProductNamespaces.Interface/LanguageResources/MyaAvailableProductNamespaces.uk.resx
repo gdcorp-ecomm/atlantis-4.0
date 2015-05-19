@@ -158,7 +158,7 @@
     <comment>These values should be handled as separate values. Split by the pipe |</comment>
   </data>
   <data name="myaNsweblog" xml:space="preserve">
-    <value>Швидкий блоґкаст|будь-яке_доменне_ім’я.com|Доменне ім’я (не обов’язково має бути зареєстроване в цьому обліковому записі), що в поточному обліковому записі пов’язане з настроюванням веб-блоґу.</value>
+    <value>Швидкий блогкаст|будь-яке_доменне_ім’я.com|Доменне ім’я (не обов’язково має бути зареєстроване в цьому обліковому записі), що в поточному обліковому записі пов’язане з настроюванням веб-блоґу.</value>
     <comment>These values should be handled as separate values. Split by the pipe |</comment>
   </data>
   <data name="myaNswst" xml:space="preserve">

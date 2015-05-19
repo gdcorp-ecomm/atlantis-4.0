@@ -162,7 +162,7 @@
     <comment>These values should be handled as separate values. Split by the pipe |</comment>
   </data>
   <data name="myaNswst" xml:space="preserve">
-    <value>Строитель веб-сайтов|любое_доменное_имя.com|Доменное имя (не обязательно зарегистрированное с этим аккаунтом), связанное с настройкой аккаунта для строителя веб-сайтов для этого аккаунта.</value>
+    <value>Конструктор веб-сайтов|любое_доменное_имя.com|Доменное имя (не обязательно зарегистрированное с этим аккаунтом), связанное с настройкой аккаунта для строителя веб-сайтов для этого аккаунта.</value>
     <comment>These values should be handled as separate values. Split by the pipe |</comment>
   </data>
 </root>

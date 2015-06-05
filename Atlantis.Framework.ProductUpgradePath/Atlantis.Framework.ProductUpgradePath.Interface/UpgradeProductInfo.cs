@@ -32,7 +32,7 @@ namespace Atlantis.Framework.ProductUpgradePath.Interface
       this[UNIFIED_PRODUCT_ID] = FieldReader.ReadField<int>(currentProduct, UNIFIED_PRODUCT_ID, -1);
       this[PERIOD_COUNT] = FieldReader.ReadField<int>(currentProduct, PERIOD_COUNT, -1);
       this[DEFAULT_DURATION_TYPE_ID] = FieldReader.ReadField<int>(currentProduct, DEFAULT_DURATION_TYPE_ID, -1);
-      this[DEFAULT_DURATION] = FieldReader.ReadField<int>(currentProduct, DEFAULT_DURATION, -1);
+      this[DEFAULT_DURATION] = FieldReader.ReadField<int>(currentProduct, DEFAULT_DURATION, 1);
       this[DEFAULT_QUANTITY_TYPE_ID] = FieldReader.ReadField<int>(currentProduct, DEFAULT_QUANTITY_TYPE_ID, -1);
       this[DEFAULT_QUANTITY] = FieldReader.ReadField<int>(currentProduct, DEFAULT_QUANTITY, 1);
       _recurringMethod = FieldReader.ReadField<string>(currentProduct, RECURRING_PAYMENT, string.Empty);

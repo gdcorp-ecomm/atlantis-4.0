@@ -15,6 +15,19 @@ namespace Atlantis.Framework.Tokens.Tests
   [TestClass]
   public class TokenTests
   {
+    private TokenEvaluationResult _result;
+
+    [TestInitialize]
+    public void SetupTokenReplacedEvent()
+    {
+      _result = TokenEvaluationResult.Errors;
+
+      TokenManager.TokenReplaced += (tokenKey, tokenData, result) =>
+      {
+        _result = result;
+      };
+    }
+
     [TestMethod]
     public void TokenParsing()
     {
@@ -50,10 +63,10 @@ namespace Atlantis.Framework.Tokens.Tests
       container.RegisterProvider<IDebugContext, MockDebug>();
 
       string outputText;
-      TokenEvaluationResult result = TokenManager.ReplaceTokens(inputText, container, out outputText);
+      TokenManager.ReplaceTokens(inputText, container, out outputText);
 
       //because we do not have a samplejson handler, we should have errors
-      Assert.AreEqual(TokenEvaluationResult.Errors, result);
+      Assert.AreEqual(TokenEvaluationResult.Errors, _result);
 
       //no more tokens should exist
       List<Match> matches = TokenManager.ParseTokenStrings(outputText);
@@ -75,10 +88,10 @@ namespace Atlantis.Framework.Tokens.Tests
       container.RegisterProvider<IDebugContext, MockDebug>();
 
       string outputText;
-      TokenEvaluationResult result = TokenManager.ReplaceTokens(inputText, container, out outputText);
+      TokenManager.ReplaceTokens(inputText, container, out outputText);
 
       //because we do not have a samplejson handler, we should have errors
-      Assert.AreEqual(TokenEvaluationResult.Errors, result);
+      Assert.AreEqual(TokenEvaluationResult.Errors, _result);
 
       IDebugContext debug = container.Resolve<IDebugContext>();
       Assert.IsTrue(debug.GetDebugTrackingData().Count > 0);
@@ -98,7 +111,7 @@ namespace Atlantis.Framework.Tokens.Tests
       ITokenEncoding tokenEncoding = new QuoteEncoding();
 
       string outputText;
-      TokenEvaluationResult result = TokenManager.ReplaceTokens(inputText, container, tokenEncoding, out outputText);
+      TokenManager.ReplaceTokens(inputText, container, tokenEncoding, out outputText);
 
       // output should contain encoded string 
       Assert.AreEqual("\\\"Success!\\\"", outputText);

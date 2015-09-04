@@ -127,13 +127,13 @@
     <value>Referred by someone/Friend</value>
   </data>
   <data name="surveySE" xml:space="preserve">
-    <value>Search Engine</value>
+    <value>搜索引擎</value>
   </data>
   <data name="surveyPA" xml:space="preserve">
-    <value>Print Ad (magazine, etc)</value>
+    <value>纸媒广告（杂志等）</value>
   </data>
   <data name="surveyAlreadyCust" xml:space="preserve">
-    <value>I am already a current customer</value>
+    <value>我目前已经是客户</value>
   </data>
   <data name="surveyOther" xml:space="preserve">
     <value>其他</value>
@@ -166,7 +166,7 @@
     <value>TV - NBA</value>
   </data>
   <data name="surveyMNS" xml:space="preserve">
-    <value>Media/News Story</value>
+    <value>媒体/新闻故事</value>
   </data>
   <data name="surveyTvMMA" xml:space="preserve">
     <value>TV - Mixed Martial Arts</value>
@@ -175,7 +175,7 @@
     <value>TV - Soccer/European Football</value>
   </data>
   <data name="surveySM" xml:space="preserve">
-    <value>Twitter, Facebook, LinkedIn</value>
+    <value>Twitter、Facebook、LinkedIn</value>
   </data>
   <data name="surveyTvBoxing" xml:space="preserve">
     <value>TV - Boxing</value>
@@ -184,7 +184,7 @@
     <value>TV - Tennis</value>
   </data>
   <data name="surveyBillboard" xml:space="preserve">
-    <value>Billboard</value>
+    <value>广告牌</value>
   </data>
   <data name="surveyTvHockey" xml:space="preserve">
     <value>TV - Hockey</value>
@@ -241,6 +241,6 @@
     <value>Tradeshow/Expo</value>
   </data>
   <data name="surveyEventWorkshop" xml:space="preserve">
-    <value>Workshop</value>
+    <value>研讨会</value>
   </data>
 </root>

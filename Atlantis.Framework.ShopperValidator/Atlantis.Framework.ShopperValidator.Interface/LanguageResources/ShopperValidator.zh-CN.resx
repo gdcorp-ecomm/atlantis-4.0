@@ -118,73 +118,73 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="maxLengthError" xml:space="preserve">
-    <value>{0} must be less than {1} characters.</value>
+    <value>{0} 不得超过 {1} 个字符。</value>
   </data>
   <data name="minLengthError" xml:space="preserve">
-    <value>{0} must be greater than {1} characters.</value>
+    <value>{0} 不得小于 {1} 个字符。</value>
   </data>
   <data name="invalidData" xml:space="preserve">
-    <value>Invalid Data</value>
+    <value>数据无效</value>
   </data>
   <data name="equalLengthAlpha" xml:space="preserve">
-    <value>{0} must be {1} characters.</value>
+    <value>{0} 必须为 {1} 个字符。</value>
   </data>
   <data name="equalLengthNumeric" xml:space="preserve">
-    <value>{0} must be {1} digits.</value>
+    <value>{0} 必须为 {1} 个数字。</value>
   </data>
   <data name="invalidCharacters" xml:space="preserve">
-    <value>{0} contains invalid characters</value>
+    <value>{0} 包含无效字符</value>
   </data>
   <data name="match" xml:space="preserve">
-    <value>{0} must be equal to {1}</value>
+    <value>{0} 必须等于 {1}</value>
   </data>
   <data name="notMatch" xml:space="preserve">
-    <value>{0} cannot be equal to {1}</value>
+    <value>{0} 不可等于 {1}</value>
   </data>
   <data name="numericRule" xml:space="preserve">
-    <value>{0} must contain only numbers.</value>
+    <value>{0} 只可包含数字。</value>
   </data>
   <data name="isInvalid" xml:space="preserve">
-    <value>{0} is invalid;</value>
+    <value>{0} 无效；</value>
   </data>
   <data name="phoneMustStartAndContain" xml:space="preserve">
-    <value>{0} must not start with a 0 or 1.  Must contain {1} characters </value>
+    <value>{0} 不可以 0 或 1 开头。必须包含 {1} 个字符 </value>
   </data>
   <data name="phoneMustContainCharacters" xml:space="preserve">
-    <value>{0} must contain {1} characters</value>
+    <value>{0} 必须包含 {1} 个字符</value>
   </data>
   <data name="mustBeNumeric" xml:space="preserve">
-    <value>{0} must be numeric</value>
+    <value>{0} 必须为数字</value>
   </data>
   <data name="invalidFormat" xml:space="preserve">
-    <value>{0} is an invalid format.</value>
+    <value>{0} 格式无效。</value>
   </data>
   <data name="required" xml:space="preserve">
-    <value>{0} is required</value>
+    <value>{0} 必填</value>
   </data>
   <data name="birthdayValid" xml:space="preserve">
-    <value>If providing a birthday you must provide valid values</value>
+    <value>如提供生日，则必须提供有效值</value>
   </data>
   <data name="straightNumerical" xml:space="preserve">
-    <value>{0} cannot be any straight numerical sequence of digits.</value>
+    <value>{0} 不可为连续数字顺序。</value>
   </data>
   <data name="commonPhrase" xml:space="preserve">
-    <value>{0} cannot include a common word or phrase.</value>
+    <value>{0} 不可包含通用字词或短语。</value>
   </data>
   <data name="lastFive" xml:space="preserve">
     <value>不能重新使用最近用过的 5 个密码。</value>
   </data>
   <data name="matchesHint" xml:space="preserve">
-    <value>{0} cannot be equal to Password Hint.</value>
+    <value>{0} 不可与密码提示相同。</value>
   </data>
   <data name="samePassword" xml:space="preserve">
     <value>在 30 天之内不能重复使用同一个密码。</value>
   </data>
   <data name="isInvalidStatusCode" xml:space="preserve">
-    <value>{0} is invalid. Status Code: {1}</value>
+    <value>{0} 无效。状况代码：{1}</value>
   </data>
   <data name="passwordConfirm" xml:space="preserve">
-    <value>{0} cannot be greater than {1} characters.  Trim {0} before supplying it to the validator.</value>
+    <value>{0} 不可超过 {1} 个字符。向验证器提交前修改 {0}。</value>
   </data>
   <data name="usernameExists" xml:space="preserve">
     <value>用户名已存在</value>
@@ -205,7 +205,7 @@
     <value>电话</value>
   </data>
   <data name="callInPin" xml:space="preserve">
-    <value>Call-in PIN</value>
+    <value>客服识别码</value>
   </data>
   <data name="city" xml:space="preserve">
     <value>城市</value>
@@ -229,10 +229,10 @@
     <value>确认密码</value>
   </data>
   <data name="passwordHint" xml:space="preserve">
-    <value>Password hint</value>
+    <value>密码提示</value>
   </data>
   <data name="ext" xml:space="preserve">
-    <value>Ext</value>
+    <value>分机号</value>
   </data>
   <data name="state" xml:space="preserve">
     <value>省/市/自治区</value>
@@ -241,72 +241,72 @@
     <value>邮政编码</value>
   </data>
   <data name="alreadyExists" xml:space="preserve">
-    <value>{0} already exists</value>
+    <value>{0} 已存在</value>
   </data>
   <data name="cannotBeNumeric" xml:space="preserve">
-    <value>{0} cannot be only numbers</value>
+    <value>{0} 不可只包含数字</value>
   </data>
   <data name="pinOneDigit" xml:space="preserve">
-    <value>PIN must contain more than one digit</value>
+    <value>PIN 必须包含超过一位数</value>
   </data>
   <data name="errorEmailInvalidFormat" xml:space="preserve">
-    <value>Email is an invalid format.</value>
+    <value>电子邮件格式无效。</value>
   </data>
   <data name="errorEmailMaxLength" xml:space="preserve">
-    <value>Email cannot be longer than {0} characters long.</value>
+    <value>电子邮件长度不得超过 {0} 个字符。</value>
     <comment>{0} replaced with the max email length</comment>
   </data>
   <data name="errorEmailRequired" xml:space="preserve">
-    <value>Email is required.</value>
+    <value>电子邮件为必填项。</value>
   </data>
   <data name="errorPassword2Required" xml:space="preserve">
-    <value>Confirm Password is required.</value>
+    <value>确认密码为必填项。</value>
   </data>
   <data name="errorPasswordInvalidFormat" xml:space="preserve">
-    <value>Password must contain at least 1 uppercase letter, 1 number, and cannot begin or end with a space.</value>
+    <value>密码必须包含至少一个大写字母、一个数字，并且不能以空格开头或结尾。</value>
   </data>
   <data name="errorPasswordMaxLength" xml:space="preserve">
-    <value>Password cannot be longer than {0} characters long.</value>
+    <value>密码长度不得超过 {0} 个字符。</value>
     <comment>{0} replaced with the max password length</comment>
   </data>
   <data name="errorPasswordMinLength" xml:space="preserve">
-    <value>Password must be at least {0} characters long.</value>
+    <value>密码长度不得少于 {0} 个字符。</value>
     <comment>{0} replaced with the min password length</comment>
   </data>
   <data name="errorPasswordMismatch" xml:space="preserve">
-    <value>Passwords must match.</value>
+    <value>密码必须匹配。</value>
   </data>
   <data name="errorPasswordRequired" xml:space="preserve">
-    <value>Password is required.</value>
+    <value>密码为必填项。</value>
   </data>
   <data name="errorPinMaxLength" xml:space="preserve">
-    <value>PIN cannot be longer than {0} characters long.</value>
+    <value>PIN 长度不得超过 {0} 个字符。</value>
     <comment>{0} replaced with the max PIN length</comment>
   </data>
   <data name="errorPinMinLength" xml:space="preserve">
-    <value>PIN must be at least {0} characters long.</value>
+    <value>PIN 长度不得少于 {0} 个字符。</value>
     <comment>{0} replaced with the min PIN length</comment>
   </data>
   <data name="errorPinNumeric" xml:space="preserve">
-    <value>PIN must contain only numbers.</value>
+    <value>PIN 只可包含数字。</value>
   </data>
   <data name="errorPinRequired" xml:space="preserve">
-    <value>PIN is required.</value>
+    <value>PIN 为必填项。</value>
   </data>
   <data name="errorPinSequential" xml:space="preserve">
-    <value>PIN cannot be any straight numerical sequence of digits.</value>
+    <value>PIN 不可为连续数字顺序。</value>
   </data>
   <data name="errorUsernameInvalidCharacters" xml:space="preserve">
-    <value>Username contains invalid characters.</value>
+    <value>用户名包含无效字符。</value>
   </data>
   <data name="errorUsernameMaxLength" xml:space="preserve">
-    <value>Username cannot be longer than {0} characters long.</value>
+    <value>用户名长度不可超过 {0} 个字符。</value>
     <comment>{0} replaced with the max username length</comment>
   </data>
   <data name="errorUsernameNumericOnly" xml:space="preserve">
-    <value>Username cannot be only numbers.</value>
+    <value>用户名不可只包含数字。</value>
   </data>
   <data name="errorUsernameRequired" xml:space="preserve">
-    <value>Username is required.</value>
+    <value>用户名为必填项。</value>
   </data>
 </root>

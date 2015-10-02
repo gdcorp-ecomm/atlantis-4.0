@@ -121,10 +121,10 @@
     <value>选择一个……</value>
   </data>
   <data name="surveyTvOther" xml:space="preserve">
-    <value>TV - Other</value>
+    <value>电视 - 其他节目</value>
   </data>
   <data name="surveyRBy" xml:space="preserve">
-    <value>Referred by someone/Friend</value>
+    <value>通过他人/朋友推荐</value>
   </data>
   <data name="surveySE" xml:space="preserve">
     <value>搜索引擎</value>
@@ -139,106 +139,106 @@
     <value>其他</value>
   </data>
   <data name="surveyTvSB" xml:space="preserve">
-    <value>TV - Super Bowl</value>
+    <value>电视 - 美国橄榄球超级杯大赛</value>
   </data>
   <data name="surveyTvIndy" xml:space="preserve">
-    <value>TV - Indy Racing</value>
+    <value>电视 - 印地赛车</value>
   </data>
   <data name="surveyTvNC" xml:space="preserve">
-    <value>TV - NASCAR</value>
+    <value>电视 - NASCAR</value>
   </data>
   <data name="surveyTvMLB" xml:space="preserve">
-    <value>TV - Major League Baseball</value>
+    <value>电视 - 美国职业棒球大联盟</value>
   </data>
   <data name="surveyTvCBB" xml:space="preserve">
-    <value>TV - College Basketball</value>
+    <value>电视 - 美国大学篮球联赛</value>
   </data>
   <data name="surveyTvFB" xml:space="preserve">
-    <value>TV - Football</value>
+    <value>电视 - 橄榄球</value>
   </data>
   <data name="surveyTvCF" xml:space="preserve">
-    <value>TV - College Football</value>
+    <value>电视 - 美国大学橄榄球赛</value>
   </data>
   <data name="surveyTvBB" xml:space="preserve">
-    <value>TV - Basketball</value>
+    <value>电视 - 篮球</value>
   </data>
   <data name="surveyTvNBA" xml:space="preserve">
-    <value>TV - NBA</value>
+    <value>电视 - NBA</value>
   </data>
   <data name="surveyMNS" xml:space="preserve">
     <value>媒体/新闻故事</value>
   </data>
   <data name="surveyTvMMA" xml:space="preserve">
-    <value>TV - Mixed Martial Arts</value>
+    <value>电视 - 综合格斗</value>
   </data>
   <data name="surveyTvSEF" xml:space="preserve">
-    <value>TV - Soccer/European Football</value>
+    <value>电视 - 足球赛/欧洲足球</value>
   </data>
   <data name="surveySM" xml:space="preserve">
     <value>Twitter、Facebook、LinkedIn</value>
   </data>
   <data name="surveyTvBoxing" xml:space="preserve">
-    <value>TV - Boxing</value>
+    <value>电视 - 拳击</value>
   </data>
   <data name="surveyTvTennis" xml:space="preserve">
-    <value>TV - Tennis</value>
+    <value>电视 - 网球</value>
   </data>
   <data name="surveyBillboard" xml:space="preserve">
     <value>广告牌</value>
   </data>
   <data name="surveyTvHockey" xml:space="preserve">
-    <value>TV - Hockey</value>
+    <value>电视 - 曲棍球</value>
   </data>
   <data name="surveyTvRugby" xml:space="preserve">
-    <value>TV - Rugby</value>
+    <value>电视 - 英式橄榄球</value>
   </data>
   <data name="surveyTvNFL" xml:space="preserve">
-    <value>TV - NFL</value>
+    <value>电视 - NFL</value>
   </data>
   <data name="surveyTvDewTour" xml:space="preserve">
-    <value>TV - The Dew Tour</value>
+    <value>电视 - Dew Tour</value>
   </data>
   <data name="surveyTvGDB" xml:space="preserve">
-    <value>TV - Go Daddy Bowl</value>
+    <value>电视 - Go Daddy 杯</value>
   </data>
   <data name="surveyTvCricket" xml:space="preserve">
-    <value>TV - Cricket</value>
+    <value>电视 - 板球</value>
   </data>
   <data name="surveyTvAFL" xml:space="preserve">
-    <value>TV - AFL</value>
+    <value>电视 - AFL</value>
   </data>
   <data name="surveyTvSoccer" xml:space="preserve">
-    <value>TV - Soccer</value>
+    <value>电视 - 英式足球</value>
   </data>
   <data name="surveyTvFutbol" xml:space="preserve">
-    <value>TV - Futbol</value>
+    <value>电视 - 足球</value>
   </data>
   <data name="surveyTvFO" xml:space="preserve">
-    <value>TV - Formula One</value>
+    <value>电视 - 方程式赛车</value>
   </data>
   <data name="surveyTvV8" xml:space="preserve">
-    <value>TV - V8 Racing</value>
+    <value>电视 - V8 赛车</value>
   </data>
   <data name="surveyTvFooty" xml:space="preserve">
-    <value>TV - Footy</value>
+    <value>电视 - 澳式足球</value>
   </data>
   <data name="surveyTvSLTV" xml:space="preserve">
-    <value>TV - Spanish language TV</value>
+    <value>电视 - 西班牙语电视节目</value>
   </data>
   <data name="surveyTvTTS" xml:space="preserve">
-    <value>TV - The Today Show</value>
+    <value>电视 -《今日秀》</value>
   </data>
   <data name="surveyTvYT" xml:space="preserve">
     <value>YouTube</value>
   </data>
   <data name="surveyTvDD" xml:space="preserve">
-    <value>TV - Dragon's Den</value>
+    <value>电视 -《龙之穴创业投资》</value>
   </data>
   <data name="surveyEventOnlineTraining" xml:space="preserve">
-    <value>Online Training</value>
+    <value>在线培训</value>
   </data>
   <data name="surveyEventTradeshowExpo" xml:space="preserve">
-    <value>Tradeshow/Expo</value>
+    <value>贸易展/博览会</value>
   </data>
   <data name="surveyEventWorkshop" xml:space="preserve">
     <value>研讨会</value>

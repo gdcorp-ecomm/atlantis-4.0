@@ -118,12 +118,12 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="passwordMinimum" xml:space="preserve">
-    <value>{0} must be minimum of 9 characters.</value>
+    <value>{0} 必须最少为 9 个字符。</value>
   </data>
   <data name="passwordUcNumSpace" xml:space="preserve">
-    <value>{0} must contain at least 1 uppercase letter, 1 number, and cannot begin or end with a space.</value>
+    <value>{0} 必须包含至少一个大写字母、一个数字，并且不能以空格开头或结尾。</value>
   </data>
   <data name="unknownFailure" xml:space="preserve">
-    <value>Unknown failure.</value>
+    <value>未知故障。</value>
   </data>
 </root>

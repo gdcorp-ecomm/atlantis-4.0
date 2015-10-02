@@ -118,51 +118,51 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="myaNsdomain" xml:space="preserve">
-    <value>Domain Name|mydomainname.com|A domain name registered under this account.</value>
+    <value>域名|mydomainname.com|在此账户下注册的域名。</value>
     <comment>These values should be handled as separate values. Split by the pipe |</comment>
   </data>
   <data name="myaNsemail" xml:space="preserve">
-    <value>Email Address|name@email.server.net|An email address set up using Email account credits purchased under this account.</value>
+    <value>电子邮件地址|name@email.server.net|此账户使用云邮账户积分购买的电子邮件地址设置。</value>
     <comment>These values should be handled as separate values. Split by the pipe |</comment>
   </data>
   <data name="myaNsemailfwd" xml:space="preserve">
-    <value>Forwarded Email Address|forwardedname@email.server.net|An email address set up using Email account credits purchased under this account that is set up to forward to an alternate email address.</value>
+    <value>转发电子邮件地址|forwardedname@email.server.net|使用云邮账户积分购买的电子邮件地址，被设置用来转发至备用邮件地址。</value>
     <comment>These values should be handled as separate values. Split by the pipe |</comment>
   </data>
   <data name="myaNsforwarding" xml:space="preserve">
-    <value>Forwarded Domain Name|myforwarededomainname.com|A domain name registered under this account that is forwarded to an alternate URL.</value>
+    <value>转发域名|myforwarededomainname.com|此账户注册下的用于转发至备用 URL 的域名。</value>
     <comment>These values should be handled as separate values. Split by the pipe |</comment>
   </data>
   <data name="myaNshosting" xml:space="preserve">
-    <value>Hosted Domain Name|anydomainname.com|A domain name (not necessarily registered under this account) associated with a hosting account setup under this account.</value>
+    <value>托管域名|anydomainname.com|此账户下设置的与主机账户关联的（不一定是注册在此账户下的）域名。</value>
     <comment>These values should be handled as separate values. Split by the pipe |</comment>
   </data>
   <data name="myaNsparking" xml:space="preserve">
-    <value>For Sale/One Page Website|my4saledomainname.com|A domain name that is set up as a for sale page or as a one-page Web site.</value>
+    <value>促销/单页网站|my4saledomainname.com|设置用于促销页面或者单页网站的域名。</value>
     <comment>These values should be handled as separate values. Split by the pipe |</comment>
   </data>
   <data name="myaNsqsc" xml:space="preserve">
-    <value>Quick Shopping Cart|anydomainname.com|A domain name (not necessarily registered under this account) associated with a Quick Shopping Cart account setup under this account.</value>
+    <value>快速购物车|anydomainname.com|此账户设置下的与快速购物车关联的（不一定是注册在此账户下的）域名。</value>
     <comment>These values should be handled as separate values. Split by the pipe |</comment>
   </data>
   <data name="myaNsreseller" xml:space="preserve">
-    <value>Reseller|myprogid|The id used to log into a reseller account.</value>
+    <value>经销商|myprogid|该用户名用于登录经销商账户。</value>
     <comment>These values should be handled as separate values. Split by the pipe |</comment>
   </data>
   <data name="myaNssslcert" xml:space="preserve">
-    <value>SSL Certificate|anydomainname.com|A domain name associated with an SSL certificate when the certificate was issued.</value>
+    <value>SSL 证书|anydomainname.com|发放 SSL 证书时与 SSL 证书关联的域名。</value>
     <comment>These values should be handled as separate values. Split by the pipe |</comment>
   </data>
   <data name="myaNstrafblazer" xml:space="preserve">
-    <value>Search Engine Visibility|http://www.domain.com/anypage.asp|Web site URL submitted to search engines using Search Engine Visibility credits purchased with this account.</value>
+    <value>搜索引擎推手|http://www.domain.com/anypage.asp|使用此账户搜索引擎推手积分购买的提交至搜索引擎的网站 URL。</value>
     <comment>These values should be handled as separate values. Split by the pipe |</comment>
   </data>
   <data name="myaNsweblog" xml:space="preserve">
-    <value>Quick Blogcast|anydomainname.com|A domain name (not necessarily registered under this account) associated with a Web Blog account setup under this account.</value>
+    <value>快速 Blogcast|anydomainname.com|此账户下设置的与网站博客账户相关联的（不一定是注册在此账户下的）域名。</value>
     <comment>These values should be handled as separate values. Split by the pipe |</comment>
   </data>
   <data name="myaNswst" xml:space="preserve">
-    <value>Website Builder|anydomainname.com|A domain name (not necessarily registered under this account) associated with a Website Builder account setup under this account.</value>
+    <value>建站达人|anydomainname.com|此账户下设置的与建站达人账户相关联的（不一定是注册在此账户下的）域名</value>
     <comment>These values should be handled as separate values. Split by the pipe |</comment>
   </data>
 </root>

@@ -19,7 +19,16 @@ namespace Atlantis.Framework.Providers.CDSContent
     private const string ContentPathFormat = "content/{0}";
 
     private static readonly IRedirectResult _nullRedirectResult = new RedirectResult(false, null);
-    
+
+    private TokenProvider TokenProvider
+    {
+      get
+      {
+        return new TokenProvider(Container);
+      }
+    }
+
+
     private ExpressionParserManager _expressionParserManager;
     private ExpressionParserManager ExpressionParserManager
     {
@@ -65,7 +74,7 @@ namespace Atlantis.Framework.Providers.CDSContent
             if (!string.IsNullOrEmpty(rawRedirectData.Location))
             {
               string resultText;
-              TokenManager.ReplaceTokens(ProviderContainerDataTokenManager.ReplaceDataTokens(rawRedirectData.Location, Container), Container, out resultText);
+              TokenProvider.ReplaceTokens(ProviderContainerDataTokenManager.ReplaceDataTokens(rawRedirectData.Location, Container), out resultText);
 
               redirectResult = new RedirectResult(true, new RedirectData(rawRedirectData.Type, resultText));
             }

@@ -51,7 +51,7 @@ namespace Atlantis.Framework.Providers.CDSContent.Tests
 
     private void RegisterTokens()
     {
-      TokenManager.RegisterTokenHandler(new DataCenterToken());
+      TokenProvider.RegisterTokenHandler(new DataCenterToken());
     }
 
 

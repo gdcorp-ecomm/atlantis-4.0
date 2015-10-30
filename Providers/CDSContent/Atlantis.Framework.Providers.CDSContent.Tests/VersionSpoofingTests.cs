@@ -2,6 +2,7 @@
 using Atlantis.Framework.Providers.CDSContent.Interface;
 using Atlantis.Framework.Providers.PlaceHolder;
 using Atlantis.Framework.Providers.PlaceHolder.Interface;
+using Atlantis.Framework.Providers.RenderPipeline;
 using Atlantis.Framework.Providers.RenderPipeline.Interface;
 using Atlantis.Framework.Testing.MockHttpContext;
 using Atlantis.Framework.Testing.MockProviders;
@@ -29,7 +30,7 @@ namespace Atlantis.Framework.Providers.CDSContent.Tests
         providerContainer.RegisterProvider<IManagerContext, MockManagerContext>();
         providerContainer.RegisterProvider<ICDSContentProvider, CDSContentProvider>();
         providerContainer.RegisterProvider<IPlaceHolderProvider, PlaceHolderProvider>();
-        providerContainer.RegisterProvider<IRenderPipelineProvider, RenderPipeline.RenderPipelineProvider>();
+        providerContainer.RegisterProvider<IRenderPipelineProvider, RenderPipelineProvider>();
 
         return providerContainer;
       }

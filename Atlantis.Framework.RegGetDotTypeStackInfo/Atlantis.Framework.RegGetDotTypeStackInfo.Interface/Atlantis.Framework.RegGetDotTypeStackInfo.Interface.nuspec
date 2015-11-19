@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0"?>
 <package >
   <metadata>
-    <id>Atlantis.Framework.RegGetDotTypeStackInfo.Impl</id>
+    <id>Atlantis.Framework.RegGetDotTypeStackInfo.Interface</id>
     <version>$version$</version>
     <title>Atlantis Framework RegGetDotTypeStackInfo</title>
     <authors>$author$</authors>

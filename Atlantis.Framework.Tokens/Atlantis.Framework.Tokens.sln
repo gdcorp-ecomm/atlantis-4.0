@@ -1,5 +1,7 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30501.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Tokens.Interface", "Atlantis.Framework.Tokens.Interface\Atlantis.Framework.Tokens.Interface.csproj", "{79189505-C1C8-4282-83E2-0140A2635624}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Tokens.Tests", "Atlantis.Framework.Tokens.Tests\Atlantis.Framework.Tokens.Tests.csproj", "{F28F1870-129D-4A58-B13A-8799D41249D4}"
@@ -8,11 +10,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.TH.TestD
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Tokens.Monitor", "Atlantis.Framework.Tokens.Monitor\Atlantis.Framework.Tokens.Monitor.csproj", "{0F8125B9-F876-4072-AE1C-C8D6D52522BC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Tokens.Monitor.WebTest", "Atlantis.Framework.Tokens.Monitor.WebTest\Atlantis.Framework.Tokens.Monitor.WebTest.csproj", "{78C28940-1668-4B18-A37A-43BED1B2BB67}"
-EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 6
+		SccNumberOfProjects = 5
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
 		SccLocalPath0 = .
@@ -28,9 +28,6 @@ Global
 		SccProjectUniqueName4 = Atlantis.Framework.Tokens.Monitor\\Atlantis.Framework.Tokens.Monitor.csproj
 		SccProjectName4 = Atlantis.Framework.Tokens.Monitor
 		SccLocalPath4 = Atlantis.Framework.Tokens.Monitor
-		SccProjectUniqueName5 = Atlantis.Framework.Tokens.Monitor.WebTest\\Atlantis.Framework.Tokens.Monitor.WebTest.csproj
-		SccProjectName5 = Atlantis.Framework.Tokens.Monitor.WebTest
-		SccLocalPath5 = Atlantis.Framework.Tokens.Monitor.WebTest
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,10 +50,6 @@ Global
 		{0F8125B9-F876-4072-AE1C-C8D6D52522BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0F8125B9-F876-4072-AE1C-C8D6D52522BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0F8125B9-F876-4072-AE1C-C8D6D52522BC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{78C28940-1668-4B18-A37A-43BED1B2BB67}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{78C28940-1668-4B18-A37A-43BED1B2BB67}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{78C28940-1668-4B18-A37A-43BED1B2BB67}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{78C28940-1668-4B18-A37A-43BED1B2BB67}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

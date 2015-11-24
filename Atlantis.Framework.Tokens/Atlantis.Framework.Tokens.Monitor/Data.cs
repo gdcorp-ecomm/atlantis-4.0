@@ -23,7 +23,7 @@ namespace Atlantis.Framework.Tokens.Monitor
       root.Add(GetMachineName(), GetProcessId(), GetInterfaceVersion());
       result.Add(root);
 
-      var fieldInfo = typeof(TokenManager).GetField("_tokenHandlers", BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Instance);
+      var fieldInfo = typeof(TokenProvider).GetField("_tokenHandlers", BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Instance);
       if (fieldInfo != null)
       {
         var tokenHandlers = (Dictionary<string, ITokenHandler>)fieldInfo.GetValue(null);
@@ -37,7 +37,7 @@ namespace Atlantis.Framework.Tokens.Monitor
           tokenHandlerElement.Add(new XAttribute("description", GetHandlerAssemblyDescription(tokenHandler.Value)));
           tokenHandlerElement.Add(new XAttribute("version", GetHandlerAssemblyVersion(tokenHandler.Value)));
 
-          var statsFieldInfo = typeof(TokenManager).GetField("_tokenHandlersStats", BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Instance);
+          var statsFieldInfo = typeof(TokenProvider).GetField("_tokenHandlersStats", BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Instance);
           if (statsFieldInfo != null)
           {
             var conditionHandlersStats = (Dictionary<string, TokenHandlerStats>)statsFieldInfo.GetValue(null);
@@ -74,7 +74,7 @@ namespace Atlantis.Framework.Tokens.Monitor
     {
       var interfaceVersion = string.Empty;
 
-      Type tokenManagerType = typeof(TokenManager);
+      Type tokenManagerType = typeof(TokenProvider);
       object[] interfaceFileVersions = tokenManagerType.Assembly.GetCustomAttributes(typeof(AssemblyFileVersionAttribute), false);
       if (interfaceFileVersions.Length > 0)
       {

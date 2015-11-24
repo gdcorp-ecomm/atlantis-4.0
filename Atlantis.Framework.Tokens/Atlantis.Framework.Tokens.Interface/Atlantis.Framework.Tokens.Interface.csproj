@@ -46,6 +46,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Atlantis.Framework.Interface.14.5.15.2\lib\net40\Atlantis.Framework.Interface.dll</HintPath>
     </Reference>
+    <Reference Include="Atlantis.Framework.Providers.Containers">
+      <HintPath>..\packages\Atlantis.Framework.Providers.Containers.14.10.18.1\lib\net40\Atlantis.Framework.Providers.Containers.dll</HintPath>
+    </Reference>
     <Reference Include="Atlantis.Framework.Providers.RenderPipeline.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Atlantis.Framework.Providers.RenderPipeline.Interface.14.2.21.1\lib\net40\Atlantis.Framework.Providers.RenderPipeline.Interface.dll</HintPath>
@@ -62,6 +65,7 @@
   <ItemGroup>
     <Compile Include="DynamicTokenHandlerLoader.cs" />
     <Compile Include="ErrorLogHelper.cs" />
+    <Compile Include="ITokenProvider.cs" />
     <Compile Include="TokenHandlerManager.cs" />
     <Compile Include="IToken.cs" />
     <Compile Include="ITokenEncoding.cs" />
@@ -72,8 +76,9 @@
     <Compile Include="TokenBase.cs" />
     <Compile Include="TokenEvaluationResult.cs" />
     <Compile Include="TokenHandlerStats.cs" />
-    <Compile Include="TokenManager.cs" />
+    <Compile Include="TokenProvider.cs" />
     <Compile Include="TokenRenderHandler.cs" />
+    <Compile Include="TokenReplacedEventHandler.cs" />
     <Compile Include="XmlToken.cs" />
     <Compile Include="XmlTokenHandlerBase.cs" />
   </ItemGroup>

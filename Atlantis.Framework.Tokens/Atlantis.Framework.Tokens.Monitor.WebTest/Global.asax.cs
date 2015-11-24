@@ -14,7 +14,7 @@ namespace Atlantis.Framework.Tokens.Monitor.WebTest
     {
       HttpProviderContainer.Instance.RegisterProvider<ISiteContext, SiteContext>();
 
-      TokenManager.AutoRegisterTokenHandlers(Assembly.GetExecutingAssembly());
+      TokenProvider.AutoRegisterTokenHandlers(Assembly.GetExecutingAssembly());
       System.Web.Routing.RouteTable.Routes.MapTokensMonitorHandler();
     }
 

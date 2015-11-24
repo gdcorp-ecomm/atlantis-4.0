@@ -19,11 +19,11 @@ namespace Atlantis.Framework.Tokens.Monitor.WebTest
       container.RegisterProvider<IDebugContext, MockDebug>();
 
       string outputText1;
-      TokenManager.ReplaceTokens(inputText1, container, null, out outputText1);
+      TokenProvider.ReplaceTokens(inputText1, null, out outputText1);
 
       ITokenEncoding tokenEncoding = new QuoteEncoding();
       string outputText2;
-      TokenManager.ReplaceTokens(inputText2, container, tokenEncoding, out outputText2);
+      TokenProvider.ReplaceTokens(inputText2, tokenEncoding, out outputText2);
     }
 
     public static string GetTextDataResource(string dataName)

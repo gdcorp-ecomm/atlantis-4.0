@@ -1,8 +1,5 @@
 ﻿using Atlantis.Framework.Interface;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Atlantis.Framework.Tokens.Tests
 {
@@ -10,8 +7,7 @@ namespace Atlantis.Framework.Tokens.Tests
   {
     List<KeyValuePair<string, string>> _data;
 
-    public MockDebug(IProviderContainer container)
-      : base(container) 
+    public MockDebug(IProviderContainer container) : base(container) 
     {
       _data = new List<KeyValuePair<string, string>>();
     }

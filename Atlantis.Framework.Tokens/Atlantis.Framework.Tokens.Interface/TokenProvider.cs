@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 
 namespace Atlantis.Framework.Tokens.Interface
 {
-  public static class TokenManager
+  public class TokenProvider : ProviderBase, ITokenProvider
   {
     private const string TOKEN_KEY_GROUP = "tokenkey";
     private const string TOKEN_DATA_GROUP = "tokendata";
@@ -17,11 +17,9 @@ namespace Atlantis.Framework.Tokens.Interface
     private static readonly Dictionary<string, TokenHandlerStats> _tokenHandlersStats;
     private static readonly List<Regex> _tokenExpressions;
 
-    public delegate void TokenReplacedEventHandler(string tokenKey, string tokenData, TokenEvaluationResult result);
+    public event TokenReplacedEventHandler TokenReplaced;
 
-    public static event TokenReplacedEventHandler TokenReplaced;
-
-    static TokenManager()
+    static TokenProvider()
     {
       _tokenHandlers = new Dictionary<string, ITokenHandler>(StringComparer.OrdinalIgnoreCase);
       _tokenHandlersStats = new Dictionary<string, TokenHandlerStats>(StringComparer.OrdinalIgnoreCase);
@@ -30,6 +28,10 @@ namespace Atlantis.Framework.Tokens.Interface
 
       Regex defaultTokenEx = new Regex(DEFAULT_TOKEN_PATTERN, RegexOptions.Singleline | RegexOptions.Compiled);
       _tokenExpressions.Add(defaultTokenEx);
+    }
+
+    public TokenProvider(IProviderContainer container) : base(container)
+    {
     }
 
     public static void AutoRegisterTokenHandlers()
@@ -143,22 +145,22 @@ namespace Atlantis.Framework.Tokens.Interface
       return handlers.AsReadOnly();
     }
 
-    public static void ReplaceTokens(string inputText, IProviderContainer container, out string resultText)
+    public void ReplaceTokens(string inputText, out string resultText)
     {
-      ReplaceTokens(inputText, container, null, out resultText);
+      ReplaceTokens(inputText, null, out resultText);
     }
 
-    public static void ReplaceTokens(string inputText, IProviderContainer container, ITokenEncoding tokenDataEncoding, out string resultText)
+    public void ReplaceTokens(string inputText, ITokenEncoding tokenDataEncoding, out string resultText)
     {
       resultText = inputText;
 
       foreach (Regex expression in _tokenExpressions)
       {
-        resultText = expression.Replace(resultText, match => ProcessTokenMatch(match, container, tokenDataEncoding));
+        resultText = expression.Replace(resultText, match => ProcessTokenMatch(match, tokenDataEncoding));
       }
     }
 
-    private static string ProcessTokenMatch(Match tokenMatch, IProviderContainer container, ITokenEncoding tokenEncoding)
+    private string ProcessTokenMatch(Match tokenMatch, ITokenEncoding tokenEncoding)
     {
       string replacementValue;
 
@@ -181,7 +183,7 @@ namespace Atlantis.Framework.Tokens.Interface
 
         TokenHandlerManager tokenHandlerManager = new TokenHandlerManager(tokenKey, tokenData, matchValue, tokenHandler, tokenHandlerStats);
 
-        TokenEvaluationResult result = tokenHandlerManager.EvaluateToken(container);
+        TokenEvaluationResult result = tokenHandlerManager.EvaluateToken(Container);
         if (result == TokenEvaluationResult.Errors)
         {
           replacementValue = string.Empty;
@@ -205,7 +207,7 @@ namespace Atlantis.Framework.Tokens.Interface
                                   "Malformed token data in XmlToken: "+tokenMatch.Value,
                                   "TokenHandlerManager.EvaluateToken()",
                                   tokenMatch.Groups[TOKEN_DATA_GROUP].Captures[0].Value,
-                                  container);
+                                  Container);
       }
       catch (Exception ex)
       {
@@ -219,13 +221,13 @@ namespace Atlantis.Framework.Tokens.Interface
                                   ex.Message,
                                   "TokenHandlerManager.EvaluateToken()",
                                   tokenMatch.Value,
-                                  container);
+                                  Container);
       }
 
       return replacementValue;
     }
 
-    private static void BubbleTokenReplacedEvent(string tokenKey, string tokenData, TokenEvaluationResult result)
+    private void BubbleTokenReplacedEvent(string tokenKey, string tokenData, TokenEvaluationResult result)
     {
       if (TokenReplaced != null)
       {

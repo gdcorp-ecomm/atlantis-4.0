@@ -5,7 +5,7 @@ namespace Atlantis.Framework.Tokens.Interface
 {
   public class TokenRenderHandler : IRenderHandler
   {
-    private ITokenEncoding _tokenEncoding;
+    private readonly ITokenEncoding _tokenEncoding;
 
     public TokenRenderHandler() : this(null)
     {
@@ -19,7 +19,7 @@ namespace Atlantis.Framework.Tokens.Interface
     public void ProcessContent(IProcessedRenderContent processRenderContent, IProviderContainer providerContainer)
     {
       string modifiedContent;
-      TokenManager.ReplaceTokens(processRenderContent.Content, providerContainer, _tokenEncoding, out modifiedContent);
+      providerContainer.Resolve<ITokenProvider>().ReplaceTokens(processRenderContent.Content, _tokenEncoding, out modifiedContent);
 
       processRenderContent.OverWriteContent(modifiedContent);
     }

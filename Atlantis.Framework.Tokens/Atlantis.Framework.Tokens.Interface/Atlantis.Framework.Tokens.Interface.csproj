@@ -76,6 +76,7 @@
     <Compile Include="TokenBase.cs" />
     <Compile Include="TokenEvaluationResult.cs" />
     <Compile Include="TokenHandlerStats.cs" />
+    <Compile Include="TokenManager.cs" />
     <Compile Include="TokenProvider.cs" />
     <Compile Include="TokenRenderHandler.cs" />
     <Compile Include="TokenReplacedEventHandler.cs" />

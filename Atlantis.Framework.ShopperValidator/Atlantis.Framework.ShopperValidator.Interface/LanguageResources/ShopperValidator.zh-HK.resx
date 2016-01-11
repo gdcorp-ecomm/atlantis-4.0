@@ -118,195 +118,195 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="maxLengthError" xml:space="preserve">
-    <value>{0} จะต้องน้อยกว่า {1} ตัวอักษร</value>
+    <value>{0} 必須少於 {1} 個字元。</value>
   </data>
   <data name="minLengthError" xml:space="preserve">
-    <value>{0} จะต้องมากกว่า {1} ตัวอักษร</value>
+    <value>{0} 必須大於 {1} 個字元。</value>
   </data>
   <data name="invalidData" xml:space="preserve">
-    <value>ข้อมูลไม่ถูกต้อง</value>
+    <value>無效的資料</value>
   </data>
   <data name="equalLengthAlpha" xml:space="preserve">
-    <value>{0} ต้องเป็น {1} ตัวอักษร</value>
+    <value>{0} 必須是 {1} 個字元。</value>
   </data>
   <data name="equalLengthNumeric" xml:space="preserve">
-    <value>{0} ต้องมีเลข {1} หลัก</value>
+    <value>{0} 必須是 {1} 位數。</value>
   </data>
   <data name="invalidCharacters" xml:space="preserve">
-    <value>{0} มีตัวอักษรที่ไม่ถูกต้อง</value>
+    <value>{0} 包含無效的字元</value>
   </data>
   <data name="match" xml:space="preserve">
-    <value>{0} จะต้องเท่ากับ {1}</value>
+    <value>{0} 必須等於 {1}</value>
   </data>
   <data name="notMatch" xml:space="preserve">
-    <value>{0} ไม่สามารถเท่ากับ {1}</value>
+    <value>{0} 不能等於 {1}</value>
   </data>
   <data name="numericRule" xml:space="preserve">
-    <value>{0} ต้องมีแค่ตัวเลขเท่านั้น</value>
+    <value>{0} 只能包含數字。</value>
   </data>
   <data name="isInvalid" xml:space="preserve">
-    <value>{0} ไม่ถูกต้อง</value>
+    <value>{0} 無效;</value>
   </data>
   <data name="phoneMustStartAndContain" xml:space="preserve">
-    <value>{0} ต้องไม่เริ่มด้วย 0 หรือ 1  ต้องมี {1} ตัวอักษร </value>
+    <value>{0} 開頭不能是 0 或 1。必須包含 {1} 個字元 </value>
   </data>
   <data name="phoneMustContainCharacters" xml:space="preserve">
-    <value>{0} ต้องมี {1} ตัวอักษร</value>
+    <value>{0} 必須包含 {1} 個字元</value>
   </data>
   <data name="mustBeNumeric" xml:space="preserve">
-    <value>{0} ต้องเป็นตัวเลข</value>
+    <value>{0} 必須是數值</value>
   </data>
   <data name="invalidFormat" xml:space="preserve">
-    <value>{0} เป็นรูปแบบที่ไม่ถูกต้อง</value>
+    <value>{0} 是無效的格式。</value>
   </data>
   <data name="required" xml:space="preserve">
-    <value>{0} จำเป็นต้องมี</value>
+    <value>必須有 {0}</value>
   </data>
   <data name="birthdayValid" xml:space="preserve">
-    <value>หากระบุวันเดือนปีเกิด จะองระบุค่าที่ถูกต้อง</value>
+    <value>如果提供生日，則必須提供有效值</value>
   </data>
   <data name="straightNumerical" xml:space="preserve">
-    <value>{0} ห้ามใช้เลขเรียงต่อกัน</value>
+    <value>{0} 不能是連續的數字序列。</value>
   </data>
   <data name="commonPhrase" xml:space="preserve">
-    <value>{0} ห้ามใช้คำหรือวลีทั่วไป</value>
+    <value>{0} 不能包含常見的單字或詞組。</value>
   </data>
   <data name="lastFive" xml:space="preserve">
-    <value>ไม่สามารถใช้รหัสผ่านของ 5 ครั้งที่ผ่านมาได้</value>
+    <value>不能重複使用最後 5 個密碼。</value>
   </data>
   <data name="matchesHint" xml:space="preserve">
-    <value>{0} ไม่สามารถตรงกับคำใบ้รหัสผ่าน</value>
+    <value>{0} 不能等於「密碼提示」。</value>
   </data>
   <data name="samePassword" xml:space="preserve">
-    <value>ไม่สามารถใช้รหัสผ่านเดิมได้ใน 30 วัน</value>
+    <value>30 天內不能使用相同密碼。</value>
   </data>
   <data name="isInvalidStatusCode" xml:space="preserve">
-    <value>{0} ไม่ถูกต้อง รหัสสถานะ: {1}</value>
+    <value>{0} 無效。狀態碼: {1}</value>
   </data>
   <data name="passwordConfirm" xml:space="preserve">
-    <value>{0} ไม่สามารถมีมากกว่า {1} ตัวอักษร  ตัดออก {0} ก่อนส่งยืนยัน</value>
+    <value>{0} 不能大於 {1} 個字元。請先修剪 {0} 再將其提供給驗證程式。</value>
   </data>
   <data name="usernameExists" xml:space="preserve">
-    <value>ชื่อผู้ใช้ที่ระบุมีอยู่แล้ว</value>
+    <value>用戶名已存在</value>
   </data>
   <data name="username" xml:space="preserve">
-    <value>ชื่อผู้ใช้งาน</value>
+    <value>用戶名</value>
   </data>
   <data name="birthday" xml:space="preserve">
-    <value>วันเดือนปีเกิด</value>
+    <value>生日</value>
   </data>
   <data name="address1" xml:space="preserve">
-    <value>ที่อยู่ 1</value>
+    <value>地址 1</value>
   </data>
   <data name="address2" xml:space="preserve">
-    <value>ที่อยู่ 2</value>
+    <value>地址 2</value>
   </data>
   <data name="phone" xml:space="preserve">
-    <value>โทรศัพท์</value>
+    <value>電話</value>
   </data>
   <data name="callInPin" xml:space="preserve">
-    <value>รหัส PIN โทรเข้า</value>
+    <value>識別 PIN</value>
   </data>
   <data name="city" xml:space="preserve">
-    <value>เขต/อำเภอ/เมือง</value>
+    <value>城市</value>
   </data>
   <data name="country" xml:space="preserve">
-    <value>ประเทศ</value>
+    <value>國家/地區</value>
   </data>
   <data name="email" xml:space="preserve">
-    <value>อีเมล</value>
+    <value>電子郵件</value>
   </data>
   <data name="firstName" xml:space="preserve">
-    <value>ชื่อ</value>
+    <value>名字</value>
   </data>
   <data name="lastName" xml:space="preserve">
-    <value>นามสกุล</value>
+    <value>姓氏</value>
   </data>
   <data name="password" xml:space="preserve">
-    <value>รหัสผ่าน</value>
+    <value>密碼</value>
   </data>
   <data name="confirmPassword" xml:space="preserve">
-    <value>ยืนยันรหัสผ่าน</value>
+    <value>確認密碼</value>
   </data>
   <data name="passwordHint" xml:space="preserve">
-    <value>คำใบ้รหัสผ่าน</value>
+    <value>密碼提示</value>
   </data>
   <data name="ext" xml:space="preserve">
-    <value>หมายเลขภายใน</value>
+    <value>分機</value>
   </data>
   <data name="state" xml:space="preserve">
-    <value>รัฐ / จังหวัด</value>
+    <value>州/省</value>
   </data>
   <data name="zip" xml:space="preserve">
-    <value>รหัสไปรษณีย์</value>
+    <value>郵遞區號</value>
   </data>
   <data name="alreadyExists" xml:space="preserve">
-    <value>{0} มีอยู่แล้ว</value>
+    <value>{0} 已存在</value>
   </data>
   <data name="cannotBeNumeric" xml:space="preserve">
-    <value>{0} ไม่สามารถเป็นตัวเลขได้</value>
+    <value>{0} 不能只有數字</value>
   </data>
   <data name="pinOneDigit" xml:space="preserve">
-    <value>รหัส PIN จะต้องมีมากกว่าหน่งหลัก</value>
+    <value>PIN 必須包含超過一個數字</value>
   </data>
   <data name="errorEmailInvalidFormat" xml:space="preserve">
-    <value>อีเมลเป็นรูปแบบที่ไม่ถูกต้อง</value>
+    <value>電子郵件的格式無效。</value>
   </data>
   <data name="errorEmailMaxLength" xml:space="preserve">
-    <value>อีเมลไม่สามารถยาวเกิน {0} ตัวอักษร</value>
+    <value>電子郵件的長度不可超過 {0} 個字元。</value>
     <comment>{0} replaced with the max email length</comment>
   </data>
   <data name="errorEmailRequired" xml:space="preserve">
-    <value>จำเป็นต้องใช้อีเมล</value>
+    <value>必須有電子郵件。</value>
   </data>
   <data name="errorPassword2Required" xml:space="preserve">
-    <value>จำเป็นต้องยืนยันรหัสผ่าน</value>
+    <value>必須有確認密碼。</value>
   </data>
   <data name="errorPasswordInvalidFormat" xml:space="preserve">
-    <value>รหัสผ่านจะต้องมีอย่างน้อย 1 ตัวพิมพ์ใหญ่ 1 ตัวเลข และต้องไม่เริ่มและจบด้วยการเว้นวรรค</value>
+    <value>密碼必須包含至少 1 個大寫字母、1 個數字，開頭和結尾不能是空格。</value>
   </data>
   <data name="errorPasswordMaxLength" xml:space="preserve">
-    <value>รหัสผ่านไม่สามารถยาวเกิน {0} ตัวอักษร</value>
+    <value>密碼的長度不可超過 {0} 個字元。</value>
     <comment>{0} replaced with the max password length</comment>
   </data>
   <data name="errorPasswordMinLength" xml:space="preserve">
-    <value>รหัสผ่านจะต้องยาว {0} ตัวอักษรเป็นอย่างต่ำ</value>
+    <value>密碼的長度至少必須有 {0} 個字元。</value>
     <comment>{0} replaced with the min password length</comment>
   </data>
   <data name="errorPasswordMismatch" xml:space="preserve">
-    <value>รหัสผ่านต้องตรงกัน</value>
+    <value>密碼必須符合。</value>
   </data>
   <data name="errorPasswordRequired" xml:space="preserve">
-    <value>จำเป็นต้องมีรหัสผ่าน</value>
+    <value>必須有密碼。</value>
   </data>
   <data name="errorPinMaxLength" xml:space="preserve">
-    <value>รหัส PIN ไม่สามารถยาวเกิน {0} ตัวอักษร</value>
+    <value>PIN 的長度不可超過 {0} 個字元。</value>
     <comment>{0} replaced with the max PIN length</comment>
   </data>
   <data name="errorPinMinLength" xml:space="preserve">
-    <value>รหัส PIN จะต้องยาว {0} ตัวอักษรเป็นอย่างต่ำ</value>
+    <value>PIN 的長度至少必須有 {0} 個字元。</value>
     <comment>{0} replaced with the min PIN length</comment>
   </data>
   <data name="errorPinNumeric" xml:space="preserve">
-    <value>รหัส PIN ต้องมีแค่ตัวเลขเท่านั้น</value>
+    <value>PIN 只能包含數字。</value>
   </data>
   <data name="errorPinRequired" xml:space="preserve">
-    <value>ต้องมีรหัส PIN</value>
+    <value>必須有 PIN。</value>
   </data>
   <data name="errorPinSequential" xml:space="preserve">
-    <value>รหัส PIN ต้องไม่เป็นเลขเรียงต่อกัน</value>
+    <value>PIN 不能是連續的數字序列。</value>
   </data>
   <data name="errorUsernameInvalidCharacters" xml:space="preserve">
-    <value>ชื่อผู้ใช้มีตัวอักษรที่ไม่ถูกต้อง</value>
+    <value>用戶名包含無效的字元。</value>
   </data>
   <data name="errorUsernameMaxLength" xml:space="preserve">
-    <value>ชื่อผู้ใช้ไม่สามารถยาวเกิน {0} ตัวอักษร</value>
+    <value>用戶名的長度不可超過 {0} 個字元。</value>
     <comment>{0} replaced with the max username length</comment>
   </data>
   <data name="errorUsernameNumericOnly" xml:space="preserve">
-    <value>ชื่อผู้ไม่สามารถเป็นตัวเลขล้วนๆ ได้</value>
+    <value>用戶名不能只有數字。</value>
   </data>
   <data name="errorUsernameRequired" xml:space="preserve">
-    <value>ต้องมีชื่อผู้ใช้</value>
+    <value>必須有用戶名。</value>
   </data>
 </root>

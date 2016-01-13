@@ -153,8 +153,13 @@
     <EmbeddedResource Include="LanguageResources\ShopperValidator.en.resx" />
     <EmbeddedResource Include="LanguageResources\ShopperValidator.es.resx" />
     <EmbeddedResource Include="LanguageResources\ShopperValidator.fi.resx" />
+    <EmbeddedResource Include="LanguageResources\ShopperValidator.fil.resx" />
     <EmbeddedResource Include="LanguageResources\ShopperValidator.fr.resx" />
+    <EmbeddedResource Include="LanguageResources\ShopperValidator.id.resx" />
     <EmbeddedResource Include="LanguageResources\ShopperValidator.it.resx" />
+    <EmbeddedResource Include="LanguageResources\ShopperValidator.ja.resx" />
+    <EmbeddedResource Include="LanguageResources\ShopperValidator.ko.resx" />
+    <EmbeddedResource Include="LanguageResources\ShopperValidator.ms.resx" />
     <EmbeddedResource Include="LanguageResources\ShopperValidator.nb.resx" />
     <EmbeddedResource Include="LanguageResources\ShopperValidator.nl.resx" />
     <EmbeddedResource Include="LanguageResources\ShopperValidator.pl.resx" />
@@ -162,8 +167,14 @@
     <EmbeddedResource Include="LanguageResources\ShopperValidator.pt-PT.resx" />
     <EmbeddedResource Include="LanguageResources\ShopperValidator.ru.resx" />
     <EmbeddedResource Include="LanguageResources\ShopperValidator.sv.resx" />
+    <EmbeddedResource Include="LanguageResources\ShopperValidator.th.resx" />
     <EmbeddedResource Include="LanguageResources\ShopperValidator.tr.resx" />
     <EmbeddedResource Include="LanguageResources\ShopperValidator.uk.resx" />
+    <EmbeddedResource Include="LanguageResources\ShopperValidator.vi.resx" />
+    <EmbeddedResource Include="LanguageResources\ShopperValidator.zh-CN.resx" />
+    <EmbeddedResource Include="LanguageResources\ShopperValidator.zh-HK.resx" />
+    <EmbeddedResource Include="LanguageResources\ShopperValidator.zh-SG.resx" />
+    <EmbeddedResource Include="LanguageResources\ShopperValidator.zh-TW.resx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="atlantis.config" />

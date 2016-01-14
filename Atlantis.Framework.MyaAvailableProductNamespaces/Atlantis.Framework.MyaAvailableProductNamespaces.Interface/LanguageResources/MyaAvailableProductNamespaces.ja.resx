@@ -154,7 +154,7 @@
     <comment>These values should be handled as separate values. Split by the pipe |</comment>
   </data>
   <data name="myaNstrafblazer" xml:space="preserve">
-    <value>検索エンジンの可視性|http://www.domain.com/anypage.asp|このアカウントで購入された検索エンジンの可視性クレジットを使用して検索エンジンに送信する送信先WebサイトのURL。</value>
+    <value>検索エンジンの最適化|http://www.domain.com/anypage.asp|このアカウントで購入された検索エンジンの最適化クレジットを使用して検索エンジンに送信する送信先WebサイトのURL。</value>
     <comment>These values should be handled as separate values. Split by the pipe |</comment>
   </data>
   <data name="myaNsweblog" xml:space="preserve">

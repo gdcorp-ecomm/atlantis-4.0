@@ -26,7 +26,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
         using (var ms = new MemoryStream())
         {
           Order.OrderXmlDoc.Save(ms);
-          xmlParam = String.Concat("<?xml version=\"1.0\" encoding=\"utf-16\"?>", Encoding.Default.GetString(ms.ToArray()));
+          xmlParam = String.Concat("<?xml version=\"1.0\" encoding=\"utf-8\"?>", Encoding.UTF8.GetString(ms.ToArray()));
           ms.Close();
         }
 

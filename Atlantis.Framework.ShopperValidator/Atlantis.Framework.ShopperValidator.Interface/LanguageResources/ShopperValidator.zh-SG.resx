@@ -235,7 +235,7 @@
     <value>分机号</value>
   </data>
   <data name="state" xml:space="preserve">
-    <value>省/直辖市/自治区</value>
+    <value>省/市/自治区</value>
   </data>
   <data name="zip" xml:space="preserve">
     <value>邮政编码</value>

@@ -44,9 +44,10 @@ namespace Atlantis.Framework.PromoPackageInfo.Impl
                   int packageGroupDescriptionOrdinal = reader.GetOrdinal("packageGroupDescription");
                   int groupQuantityAllowedOrdinal = reader.GetOrdinal("groupQuantityAllowed");
                   int groupDisplayOrderOrdinal = reader.GetOrdinal("groupDisplayOrder");
-                  int pfIdOrdinal = reader.GetOrdinal("catalog_productUnifiedProductID");
+                  int productIdOrdinal = reader.GetOrdinal("catalog_productUnifiedProductID");
                   int quantityOrdinal = reader.GetOrdinal("quantity");
                   int durationOrdinal = reader.GetOrdinal("duration");
+                  int configurationJsonOrdinal = reader.GetOrdinal("configurationJson");
 
                   while (reader.Read())
                   {
@@ -58,9 +59,10 @@ namespace Atlantis.Framework.PromoPackageInfo.Impl
                       !reader.IsDBNull(packageGroupDescriptionOrdinal) ? reader.GetString(packageGroupDescriptionOrdinal) : string.Empty,
                       !reader.IsDBNull(groupQuantityAllowedOrdinal) ? reader.GetInt32(groupQuantityAllowedOrdinal) : 0,
                       !reader.IsDBNull(groupDisplayOrderOrdinal) ? reader.GetInt32(groupDisplayOrderOrdinal) : 0,
-                      !reader.IsDBNull(pfIdOrdinal) ? reader.GetInt32(pfIdOrdinal) : 0,
+                      !reader.IsDBNull(productIdOrdinal) ? reader.GetInt32(productIdOrdinal) : 0,
                       !reader.IsDBNull(quantityOrdinal) ? reader.GetInt32(quantityOrdinal) : 0,
-                      !reader.IsDBNull(durationOrdinal) ? reader.GetDecimal(durationOrdinal) : 1
+                      !reader.IsDBNull(durationOrdinal) ? reader.GetDecimal(durationOrdinal) : 1,
+                      !reader.IsDBNull(configurationJsonOrdinal) ? reader.GetString(configurationJsonOrdinal) : string.Empty
                       );
                     products.Add(product);
                   }

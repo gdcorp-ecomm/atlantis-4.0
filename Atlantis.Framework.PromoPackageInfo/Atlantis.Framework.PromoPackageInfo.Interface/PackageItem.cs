@@ -9,9 +9,10 @@
                        string packageGroupDescription,
                        int groupQuantityAllowed,
                        int groupDisplayOrder,
-                       int pf_id,
+                       int productId,
                        int quantity,
-                       decimal duration)
+                       decimal duration,
+                       string configurationJson)
     {
       PackageDescription = packageDescription;
       InjectedAmount = injectedAmount;
@@ -20,9 +21,10 @@
       PackageGroupDescription = packageGroupDescription;
       GroupQuantityAllowed = groupQuantityAllowed;
       GroupDisplayOrder = groupDisplayOrder;
-      PfId = pf_id;
+      ProductId = productId;
       Quantity = quantity;
       Duration = duration;
+      ConfigurationJson = configurationJson;
     }
 
     public string PackageDescription { get; private set; }
@@ -32,8 +34,9 @@
     public string PackageGroupDescription { get; private set; }
     public int GroupQuantityAllowed { get; private set; }
     public int GroupDisplayOrder { get; private set; }
-    public int PfId { get; private set; }
+    public int ProductId { get; private set; }
     public int Quantity { get; private set; }
     public decimal Duration { get; private set; }
+    public string ConfigurationJson { get; private set; }
   }
 }

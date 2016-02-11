@@ -1,16 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{3FEF93BA-31C1-4C65-9296-F2091C2B1E82}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.DataCache", "..\Atlantis.Framework.DataCache\Atlantis.Framework.DataCache\Atlantis.Framework.DataCache.csproj", "{7F2738F8-683C-49E7-88CD-E986C70F0321}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine", "..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj", "{D30157B2-C1B3-4073-BA5E-632E2337A997}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Nimitz", "..\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz.csproj", "{3213E6DB-F026-4F17-A46A-7127F79F6620}"
-EndProject
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.PromoPackageInfo.Impl", "Atlantis.Framework.PromoPackageInfo.Impl\Atlantis.Framework.PromoPackageInfo.Impl.csproj", "{A2752FBA-EE47-49F0-A762-8DC732E020A8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.PromoPackageInfo.Interface", "Atlantis.Framework.PromoPackageInfo.Interface\Atlantis.Framework.PromoPackageInfo.Interface.csproj", "{B96D5358-11F7-4492-9638-1BC725DC4BE3}"
@@ -18,58 +10,11 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.PromoPackageInfo.Tests", "Atlantis.Framework.PromoPackageInfo.Tests\Atlantis.Framework.PromoPackageInfo.Tests.csproj", "{1C80C8B8-6211-4FAA-B79B-424CF9886C8A}"
 EndProject
 Global
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 8
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = ..\\Atlantis.Framework.DataCache\\Atlantis.Framework.DataCache\\Atlantis.Framework.DataCache.csproj
-		SccProjectTopLevelParentUniqueName1 = Atlantis.Framework.PromoPackageInfo.sln
-		SccProjectName1 = ../Atlantis.Framework.DataCache/Atlantis.Framework.DataCache
-		SccLocalPath1 = ..\\Atlantis.Framework.DataCache\\Atlantis.Framework.DataCache
-		SccProjectUniqueName2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
-		SccProjectTopLevelParentUniqueName2 = Atlantis.Framework.PromoPackageInfo.sln
-		SccProjectName2 = ../Atlantis.Framework.Engine/Atlantis.Framework.Engine
-		SccLocalPath2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
-		SccProjectUniqueName3 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
-		SccProjectTopLevelParentUniqueName3 = Atlantis.Framework.PromoPackageInfo.sln
-		SccProjectName3 = ../Atlantis.Framework.Engine/Atlantis.Framework.Interface
-		SccLocalPath3 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
-		SccProjectUniqueName4 = ..\\Atlantis.Framework.Nimitz\\Atlantis.Framework.Nimitz\\Atlantis.Framework.Nimitz.csproj
-		SccProjectTopLevelParentUniqueName4 = Atlantis.Framework.PromoPackageInfo.sln
-		SccProjectName4 = ../Atlantis.Framework.Nimitz/Atlantis.Framework.Nimitz
-		SccLocalPath4 = ..\\Atlantis.Framework.Nimitz\\Atlantis.Framework.Nimitz
-		SccProjectUniqueName5 = Atlantis.Framework.PromoPackageInfo.Impl\\Atlantis.Framework.PromoPackageInfo.Impl.csproj
-		SccProjectName5 = Atlantis.Framework.PromoPackageInfo.Impl
-		SccLocalPath5 = Atlantis.Framework.PromoPackageInfo.Impl
-		SccProjectUniqueName6 = Atlantis.Framework.PromoPackageInfo.Interface\\Atlantis.Framework.PromoPackageInfo.Interface.csproj
-		SccProjectName6 = Atlantis.Framework.PromoPackageInfo.Interface
-		SccLocalPath6 = Atlantis.Framework.PromoPackageInfo.Interface
-		SccProjectUniqueName7 = Atlantis.Framework.PromoPackageInfo.Tests\\Atlantis.Framework.PromoPackageInfo.Tests.csproj
-		SccProjectName7 = Atlantis.Framework.PromoPackageInfo.Tests
-		SccLocalPath7 = Atlantis.Framework.PromoPackageInfo.Tests
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{7F2738F8-683C-49E7-88CD-E986C70F0321}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7F2738F8-683C-49E7-88CD-E986C70F0321}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7F2738F8-683C-49E7-88CD-E986C70F0321}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7F2738F8-683C-49E7-88CD-E986C70F0321}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A2752FBA-EE47-49F0-A762-8DC732E020A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A2752FBA-EE47-49F0-A762-8DC732E020A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A2752FBA-EE47-49F0-A762-8DC732E020A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -86,10 +31,19 @@ Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{7F2738F8-683C-49E7-88CD-E986C70F0321} = {3FEF93BA-31C1-4C65-9296-F2091C2B1E82}
-		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {3FEF93BA-31C1-4C65-9296-F2091C2B1E82}
-		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {3FEF93BA-31C1-4C65-9296-F2091C2B1E82}
-		{3213E6DB-F026-4F17-A46A-7127F79F6620} = {3FEF93BA-31C1-4C65-9296-F2091C2B1E82}
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 4
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Atlantis.Framework.PromoPackageInfo.Impl\\Atlantis.Framework.PromoPackageInfo.Impl.csproj
+		SccProjectName1 = Atlantis.Framework.PromoPackageInfo.Impl
+		SccLocalPath1 = Atlantis.Framework.PromoPackageInfo.Impl
+		SccProjectUniqueName2 = Atlantis.Framework.PromoPackageInfo.Interface\\Atlantis.Framework.PromoPackageInfo.Interface.csproj
+		SccProjectName2 = Atlantis.Framework.PromoPackageInfo.Interface
+		SccLocalPath2 = Atlantis.Framework.PromoPackageInfo.Interface
+		SccProjectUniqueName3 = Atlantis.Framework.PromoPackageInfo.Tests\\Atlantis.Framework.PromoPackageInfo.Tests.csproj
+		SccProjectName3 = Atlantis.Framework.PromoPackageInfo.Tests
+		SccLocalPath3 = Atlantis.Framework.PromoPackageInfo.Tests
 	EndGlobalSection
 EndGlobal

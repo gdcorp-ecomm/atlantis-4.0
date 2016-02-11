@@ -34,6 +34,26 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Atlantis.Framework.Engine, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Atlantis.Framework.Engine.14.9.9.1\lib\net40\Atlantis.Framework.Engine.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Engine.XmlSerializers, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Atlantis.Framework.Engine.14.9.9.1\lib\net40\Atlantis.Framework.Engine.XmlSerializers.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Interface, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Atlantis.Framework.Interface.14.5.15.2\lib\net40\Atlantis.Framework.Interface.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Nimitz, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Atlantis.Framework.Nimitz.15.12.15.1\lib\net40\Atlantis.Framework.Nimitz.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="netConnect, Version=1.13.0.0, Culture=neutral, PublicKeyToken=6bd9b754bfae49c9, processorArchitecture=MSIL">
+      <HintPath>..\packages\netConnect.1.13.0.0\lib\net20\netConnect.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
@@ -43,18 +63,16 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj">
-      <Project>{a083a52e-c3c3-42e0-8dfd-54719e4c3b25}</Project>
-      <Name>Atlantis.Framework.Interface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz.csproj">
-      <Project>{3213e6db-f026-4f17-a46a-7127f79f6620}</Project>
-      <Name>Atlantis.Framework.Nimitz</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.PromoPackageInfo.Interface\Atlantis.Framework.PromoPackageInfo.Interface.csproj">
       <Project>{b96d5358-11f7-4492-9638-1bc725dc4be3}</Project>
       <Name>Atlantis.Framework.PromoPackageInfo.Interface</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="dotfuscatorsettings.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

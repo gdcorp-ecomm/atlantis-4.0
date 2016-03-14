@@ -1,0 +1,312 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="maxLengthError" xml:space="preserve">
+    <value>{0} {1} से कम वर्णों से बना होना चाहिए।</value>
+  </data>
+  <data name="minLengthError" xml:space="preserve">
+    <value>{0} {1} वर्णों से बड़ा होना चाहिए।</value>
+  </data>
+  <data name="invalidData" xml:space="preserve">
+    <value>अमान्य डेटा</value>
+  </data>
+  <data name="equalLengthAlpha" xml:space="preserve">
+    <value>{0} {1} वर्णों से मिलकर बना होना चाहिए।</value>
+  </data>
+  <data name="equalLengthNumeric" xml:space="preserve">
+    <value>{0} {1} अंकों वाला होना चाहिए।</value>
+  </data>
+  <data name="invalidCharacters" xml:space="preserve">
+    <value>{0} में अमान्य वर्ण शामिल हैं</value>
+  </data>
+  <data name="match" xml:space="preserve">
+    <value>{0} {1} के बराबर होना आवश्यक है</value>
+  </data>
+  <data name="notMatch" xml:space="preserve">
+    <value>{0} {1} के बराबर नहीं हो सकता</value>
+  </data>
+  <data name="numericRule" xml:space="preserve">
+    <value>{0} में केवल संख्याएं शामिल हो सकती हैं।</value>
+  </data>
+  <data name="isInvalid" xml:space="preserve">
+    <value>{0} अमान्य है;</value>
+  </data>
+  <data name="phoneMustStartAndContain" xml:space="preserve">
+    <value>{0} 0 या 1 से शुरु नहीं होना चाहिए।  इसमें {1} वर्ण अवश्य होने चाहिए </value>
+  </data>
+  <data name="phoneMustContainCharacters" xml:space="preserve">
+    <value>{0} में {1} वर्ण अवश्य होने चाहिए</value>
+  </data>
+  <data name="mustBeNumeric" xml:space="preserve">
+    <value>{0} संख्यात्मक होना चाहिए</value>
+  </data>
+  <data name="invalidFormat" xml:space="preserve">
+    <value>{0} एक अमान्य प्रारूप है।</value>
+  </data>
+  <data name="required" xml:space="preserve">
+    <value>{0} आवश्यक है</value>
+  </data>
+  <data name="birthdayValid" xml:space="preserve">
+    <value>यदि जन्मदिन की जानकारी दे रहे हैं, तो आपको वैध मान अवश्य प्रदान करने चाहिए</value>
+  </data>
+  <data name="straightNumerical" xml:space="preserve">
+    <value>{0}, अंकों के सीधे संख्यात्मक अनुक्रम से बना हुआ नहीं हो सकता।</value>
+  </data>
+  <data name="commonPhrase" xml:space="preserve">
+    <value>{0} में सामान्य शब्द या वाक्यांश शामिल नहीं हो सकते।</value>
+  </data>
+  <data name="lastFive" xml:space="preserve">
+    <value>अंतिम 5 पासवर्ड का पुनः उपयोग नहीं किया जा सकता।</value>
+  </data>
+  <data name="matchesHint" xml:space="preserve">
+    <value>{0} पासवर्ड संकेत के बराबर नहीं हो सकता।</value>
+  </data>
+  <data name="samePassword" xml:space="preserve">
+    <value>30 दिनों के अंदर एक ही पासवर्ड का पुनः उपयोग नहीं किया जा सकता है।</value>
+  </data>
+  <data name="isInvalidStatusCode" xml:space="preserve">
+    <value>{0} अमान्य है। स्थिति कोड: {1}</value>
+  </data>
+  <data name="passwordConfirm" xml:space="preserve">
+    <value>{0} {1} वर्णों से बड़ा नहीं हो सकता।  सत्यापनकर्ता को आपूर्ति करने से पहले {0} को ट्रिम करें।</value>
+  </data>
+  <data name="usernameExists" xml:space="preserve">
+    <value>उपयोगकर्ता नाम पहले से मौजूद है</value>
+  </data>
+  <data name="username" xml:space="preserve">
+    <value>उपयोगकर्ता नाम</value>
+  </data>
+  <data name="birthday" xml:space="preserve">
+    <value>जन्मदिन</value>
+  </data>
+  <data name="address1" xml:space="preserve">
+    <value>पता 1</value>
+  </data>
+  <data name="address2" xml:space="preserve">
+    <value>पता 2</value>
+  </data>
+  <data name="phone" xml:space="preserve">
+    <value>फ़ोन</value>
+  </data>
+  <data name="callInPin" xml:space="preserve">
+    <value>कॉल-इन PIN</value>
+  </data>
+  <data name="city" xml:space="preserve">
+    <value>शहर</value>
+  </data>
+  <data name="country" xml:space="preserve">
+    <value>देश</value>
+  </data>
+  <data name="email" xml:space="preserve">
+    <value>ईमेल</value>
+  </data>
+  <data name="firstName" xml:space="preserve">
+    <value>पहला नाम</value>
+  </data>
+  <data name="lastName" xml:space="preserve">
+    <value>अंतिम नाम</value>
+  </data>
+  <data name="password" xml:space="preserve">
+    <value>पासवर्ड</value>
+  </data>
+  <data name="confirmPassword" xml:space="preserve">
+    <value>पासवर्ड की पुष्टि करें</value>
+  </data>
+  <data name="passwordHint" xml:space="preserve">
+    <value>पासवर्ड संकेत</value>
+  </data>
+  <data name="ext" xml:space="preserve">
+    <value>एक्सटेंशन</value>
+  </data>
+  <data name="state" xml:space="preserve">
+    <value>राज्य / प्रांत</value>
+  </data>
+  <data name="zip" xml:space="preserve">
+    <value>ज़िप / पोस्टल कोड</value>
+  </data>
+  <data name="alreadyExists" xml:space="preserve">
+    <value>{0} पहले से मौजूद है</value>
+  </data>
+  <data name="cannotBeNumeric" xml:space="preserve">
+    <value>{0} केवल संख्याएं नहीं हो सकती</value>
+  </data>
+  <data name="pinOneDigit" xml:space="preserve">
+    <value>PIN में एक से अधिक अंक होने चाहिए</value>
+  </data>
+  <data name="errorEmailInvalidFormat" xml:space="preserve">
+    <value>ईमेल एक अमान्य प्रारूप है।</value>
+  </data>
+  <data name="errorEmailMaxLength" xml:space="preserve">
+    <value>ईमेल {0} वर्णों से अधिक लंबा नहीं हो सकता।</value>
+    <comment>{0} replaced with the max email length</comment>
+  </data>
+  <data name="errorEmailRequired" xml:space="preserve">
+    <value>ईमेल आवश्यक है।</value>
+  </data>
+  <data name="errorPassword2Required" xml:space="preserve">
+    <value>पुष्टिकृत पासवर्ड आवश्यक है।</value>
+  </data>
+  <data name="errorPasswordInvalidFormat" xml:space="preserve">
+    <value>पासवर्ड में कम से कम 1 अपरकेस वर्ण और 1 संख्या अवश्य होनी चाहिए और यह स्पेस के साथ शुरू या समाप्त नहीं हो सकता है।</value>
+  </data>
+  <data name="errorPasswordMaxLength" xml:space="preserve">
+    <value>पासवर्ड {0} वर्णों से अधिक लंबा नहीं हो सकता।</value>
+    <comment>{0} replaced with the max password length</comment>
+  </data>
+  <data name="errorPasswordMinLength" xml:space="preserve">
+    <value>पासवर्ड कम से कम {0} वर्ण लंबा होना चाहिए।</value>
+    <comment>{0} replaced with the min password length</comment>
+  </data>
+  <data name="errorPasswordMismatch" xml:space="preserve">
+    <value>पासवर्ड मैच होना चाहिए।</value>
+  </data>
+  <data name="errorPasswordRequired" xml:space="preserve">
+    <value>पासवर्ड आवश्यक है।</value>
+  </data>
+  <data name="errorPinMaxLength" xml:space="preserve">
+    <value>PIN {0} वर्णों से अधिक लंबा नहीं हो सकता।</value>
+    <comment>{0} replaced with the max PIN length</comment>
+  </data>
+  <data name="errorPinMinLength" xml:space="preserve">
+    <value>PIN की लंबाई कम से कम {0} वर्ण होनी चाहिए।</value>
+    <comment>{0} replaced with the min PIN length</comment>
+  </data>
+  <data name="errorPinNumeric" xml:space="preserve">
+    <value>PIN में केवल संख्याएं शामिल हो सकती हैं।</value>
+  </data>
+  <data name="errorPinRequired" xml:space="preserve">
+    <value>PIN आवश्यक है।</value>
+  </data>
+  <data name="errorPinSequential" xml:space="preserve">
+    <value>PIN, अंकों के सीधे संख्यात्मक अनुक्रम से बना हुआ नहीं हो सकता।</value>
+  </data>
+  <data name="errorUsernameInvalidCharacters" xml:space="preserve">
+    <value>उपयोगकर्ता में अमान्य वर्ण शामिल हैं।</value>
+  </data>
+  <data name="errorUsernameMaxLength" xml:space="preserve">
+    <value>उपयोगकर्ता नाम {0} वर्णों से अधिक लंबा नहीं हो सकता।</value>
+    <comment>{0} replaced with the max username length</comment>
+  </data>
+  <data name="errorUsernameNumericOnly" xml:space="preserve">
+    <value>उपयोगकर्ता नाम में केवल संख्याएं नहीं हो सकती हैं।</value>
+  </data>
+  <data name="errorUsernameRequired" xml:space="preserve">
+    <value>उपयोगकर्ता नाम आवश्यक है।</value>
+  </data>
+</root>

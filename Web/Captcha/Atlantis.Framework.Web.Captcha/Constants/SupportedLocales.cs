@@ -52,6 +52,7 @@ namespace Atlantis.Framework.Web.CaptchaCtl.Constants
       return returnLocale;
     }
 
+    // EP-10631 - Japanese wants ASCII, removing "ja"
     private static HashSet<string> _supportedLocales = new HashSet<string> {
       "en-US",
       "en-CA",
@@ -90,7 +91,6 @@ namespace Atlantis.Framework.Web.CaptchaCtl.Constants
       "ar-AE",
       "he",
       "hi",
-      "ja",
       "ko",
       "ru",
       "tr",

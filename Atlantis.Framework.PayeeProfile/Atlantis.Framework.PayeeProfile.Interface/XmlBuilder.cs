@@ -13,6 +13,7 @@ namespace Atlantis.Framework.PayeeProfileClass.Interface
       bool isExternalPayee = false;
       switch (payee.PaymentMethodTypeID)
       {
+        case PayeePaymentTypeId.SendACheckPaymentType:
         case PayeePaymentTypeId.CheckingPaymentType:
         case PayeePaymentTypeId.GagPaymentType:
         case PayeePaymentTypeId.PayPalPaymentType:

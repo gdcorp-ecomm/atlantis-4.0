@@ -2,6 +2,7 @@
 {
   public static class PayeePaymentTypeId
   {
+    public const string SendACheckPaymentType = "1";
     public const string CheckingPaymentType = "2";
     public const string GagPaymentType = "3";
     public const string PayPalPaymentType = "4";

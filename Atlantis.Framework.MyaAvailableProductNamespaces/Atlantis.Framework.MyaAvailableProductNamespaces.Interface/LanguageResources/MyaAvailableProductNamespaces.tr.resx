@@ -134,7 +134,7 @@
     <comment>These values should be handled as separate values. Split by the pipe |</comment>
   </data>
   <data name="myaNshosting" xml:space="preserve">
-    <value>Barındırılan Alan Adı|biralanadi.com|Bu hesaba bağlı bir barındırma hesabıyla ilişkilendirilmiş olan alan adı (bu hesaba kayıtlı olmayabilir).</value>
+    <value>Barındırılan Alan Adı|biralanadi.com|Bu hesaba bağlı bir hosting hesabıyla ilişkilendirilmiş olan alan adı (bu hesaba kayıtlı olmayabilir).</value>
     <comment>These values should be handled as separate values. Split by the pipe |</comment>
   </data>
   <data name="myaNsparking" xml:space="preserve">

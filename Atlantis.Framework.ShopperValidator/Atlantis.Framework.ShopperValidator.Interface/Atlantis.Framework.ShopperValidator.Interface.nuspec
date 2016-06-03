@@ -9,6 +9,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
     <releaseNotes>
+      16.6.3.1:  add India language files
       16.1.12.1: add wave 4 market language files
       14.11.4.1: increased username character limit to 256
     </releaseNotes>
@@ -23,11 +24,14 @@
     <file src="bin\Release\es\Atlantis.Framework.ShopperValidator.Interface.resources.dll" target="lib\net40\es\Atlantis.Framework.ShopperValidator.Interface.resources.dll" />
     <file src="bin\Release\fi\Atlantis.Framework.ShopperValidator.Interface.resources.dll" target="lib\net40\fi\Atlantis.Framework.ShopperValidator.Interface.resources.dll" />
     <file src="bin\Release\fil\Atlantis.Framework.ShopperValidator.Interface.resources.dll" target="lib\net40\fil\Atlantis.Framework.ShopperValidator.Interface.resources.dll" />
+    <file src="bin\Release\fr-CA\Atlantis.Framework.ShopperValidator.Interface.resources.dll" target="lib\net40\fr-CA\Atlantis.Framework.ShopperValidator.Interface.resources.dll" />
     <file src="bin\Release\fr\Atlantis.Framework.ShopperValidator.Interface.resources.dll" target="lib\net40\fr\Atlantis.Framework.ShopperValidator.Interface.resources.dll" />
+    <file src="bin\Release\hi\Atlantis.Framework.ShopperValidator.Interface.resources.dll" target="lib\net40\hi\Atlantis.Framework.ShopperValidator.Interface.resources.dll" />
     <file src="bin\Release\id\Atlantis.Framework.ShopperValidator.Interface.resources.dll" target="lib\net40\id\Atlantis.Framework.ShopperValidator.Interface.resources.dll" />
     <file src="bin\Release\it\Atlantis.Framework.ShopperValidator.Interface.resources.dll" target="lib\net40\it\Atlantis.Framework.ShopperValidator.Interface.resources.dll" />
     <file src="bin\Release\ja\Atlantis.Framework.ShopperValidator.Interface.resources.dll" target="lib\net40\ja\Atlantis.Framework.ShopperValidator.Interface.resources.dll" />
     <file src="bin\Release\ko\Atlantis.Framework.ShopperValidator.Interface.resources.dll" target="lib\net40\ko\Atlantis.Framework.ShopperValidator.Interface.resources.dll" />
+    <file src="bin\Release\mr\Atlantis.Framework.ShopperValidator.Interface.resources.dll" target="lib\net40\mr\Atlantis.Framework.ShopperValidator.Interface.resources.dll" />
     <file src="bin\Release\ms\Atlantis.Framework.ShopperValidator.Interface.resources.dll" target="lib\net40\ms\Atlantis.Framework.ShopperValidator.Interface.resources.dll" />
     <file src="bin\Release\nb\Atlantis.Framework.ShopperValidator.Interface.resources.dll" target="lib\net40\nb\Atlantis.Framework.ShopperValidator.Interface.resources.dll" />
     <file src="bin\Release\nl\Atlantis.Framework.ShopperValidator.Interface.resources.dll" target="lib\net40\nl\Atlantis.Framework.ShopperValidator.Interface.resources.dll" />
@@ -36,6 +40,7 @@
     <file src="bin\Release\pt-PT\Atlantis.Framework.ShopperValidator.Interface.resources.dll" target="lib\net40\pt-PT\Atlantis.Framework.ShopperValidator.Interface.resources.dll" />
     <file src="bin\Release\ru\Atlantis.Framework.ShopperValidator.Interface.resources.dll" target="lib\net40\ru\Atlantis.Framework.ShopperValidator.Interface.resources.dll" />
     <file src="bin\Release\sv\Atlantis.Framework.ShopperValidator.Interface.resources.dll" target="lib\net40\sv\Atlantis.Framework.ShopperValidator.Interface.resources.dll" />
+    <file src="bin\Release\ta\Atlantis.Framework.ShopperValidator.Interface.resources.dll" target="lib\net40\ta\Atlantis.Framework.ShopperValidator.Interface.resources.dll" />
     <file src="bin\Release\th\Atlantis.Framework.ShopperValidator.Interface.resources.dll" target="lib\net40\th\Atlantis.Framework.ShopperValidator.Interface.resources.dll" />
     <file src="bin\Release\tr\Atlantis.Framework.ShopperValidator.Interface.resources.dll" target="lib\net40\tr\Atlantis.Framework.ShopperValidator.Interface.resources.dll" />
     <file src="bin\Release\uk\Atlantis.Framework.ShopperValidator.Interface.resources.dll" target="lib\net40\uk\Atlantis.Framework.ShopperValidator.Interface.resources.dll" />

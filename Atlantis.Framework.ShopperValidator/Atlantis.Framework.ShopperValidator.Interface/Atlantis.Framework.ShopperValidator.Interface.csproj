@@ -154,11 +154,14 @@
     <EmbeddedResource Include="LanguageResources\ShopperValidator.es.resx" />
     <EmbeddedResource Include="LanguageResources\ShopperValidator.fi.resx" />
     <EmbeddedResource Include="LanguageResources\ShopperValidator.fil.resx" />
+    <EmbeddedResource Include="LanguageResources\ShopperValidator.fr-CA.resx" />
     <EmbeddedResource Include="LanguageResources\ShopperValidator.fr.resx" />
+    <EmbeddedResource Include="LanguageResources\ShopperValidator.hi.resx" />
     <EmbeddedResource Include="LanguageResources\ShopperValidator.id.resx" />
     <EmbeddedResource Include="LanguageResources\ShopperValidator.it.resx" />
     <EmbeddedResource Include="LanguageResources\ShopperValidator.ja.resx" />
     <EmbeddedResource Include="LanguageResources\ShopperValidator.ko.resx" />
+    <EmbeddedResource Include="LanguageResources\ShopperValidator.mr.resx" />
     <EmbeddedResource Include="LanguageResources\ShopperValidator.ms.resx" />
     <EmbeddedResource Include="LanguageResources\ShopperValidator.nb.resx" />
     <EmbeddedResource Include="LanguageResources\ShopperValidator.nl.resx" />
@@ -167,6 +170,7 @@
     <EmbeddedResource Include="LanguageResources\ShopperValidator.pt-PT.resx" />
     <EmbeddedResource Include="LanguageResources\ShopperValidator.ru.resx" />
     <EmbeddedResource Include="LanguageResources\ShopperValidator.sv.resx" />
+    <EmbeddedResource Include="LanguageResources\ShopperValidator.ta.resx" />
     <EmbeddedResource Include="LanguageResources\ShopperValidator.th.resx" />
     <EmbeddedResource Include="LanguageResources\ShopperValidator.tr.resx" />
     <EmbeddedResource Include="LanguageResources\ShopperValidator.uk.resx" />

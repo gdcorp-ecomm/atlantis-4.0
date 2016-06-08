@@ -90,7 +90,6 @@ namespace Atlantis.Framework.Web.CaptchaCtl.Constants
       "uk",
       "ar-AE",
       "he",
-      "hi",
       "ko",
       "ru",
       "tr",

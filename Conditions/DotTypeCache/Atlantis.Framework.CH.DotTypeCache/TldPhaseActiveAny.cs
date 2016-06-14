@@ -24,7 +24,7 @@ namespace Atlantis.Framework.CH.DotTypeCache
 
           if (!(dotType is InvalidDotType))
           {
-            ITLDLaunchPhaseGroupCollection launchPhaseGroupCollection = dotType.GetAllLaunchPhaseGroups();
+            ITLDLaunchPhaseGroupCollection launchPhaseGroupCollection = dotType.GetAllLaunchPhaseGroups(false);
 
             for (int i = 1; i < parameters.Count; i++)
             {

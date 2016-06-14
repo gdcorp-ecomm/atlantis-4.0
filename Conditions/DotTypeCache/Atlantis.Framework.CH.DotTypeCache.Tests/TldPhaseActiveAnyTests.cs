@@ -3,6 +3,8 @@ using Atlantis.Framework.Conditions.Interface;
 using Atlantis.Framework.DotTypeCache;
 using Atlantis.Framework.DotTypeCache.Interface;
 using Atlantis.Framework.Interface;
+using Atlantis.Framework.Providers.TLDDataCache;
+using Atlantis.Framework.Providers.TLDDataCache.Interface;
 using Atlantis.Framework.Render.ExpressionParser;
 using Atlantis.Framework.Testing.MockProviders;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -40,11 +42,14 @@ namespace Atlantis.Framework.CH.DotTypeCache.Tests
       return expressionParserManager;
     }
 
+
+
     private ExpressionParserManager MockContainerExpressionParserManager()
     {
       var container = new MockProviderContainer();
       container.RegisterProvider<IDotTypeProvider, DotTypeProvider>();
       container.RegisterProvider<ISiteContext, MockSiteContext>();
+      container.RegisterProvider<ITLDDataCacheProvider, TLDDataCacheProvider>();
 
       var expressionParserManager = GetExpressionParserManager(container);
       return expressionParserManager;
@@ -54,6 +59,7 @@ namespace Atlantis.Framework.CH.DotTypeCache.Tests
     public void Initialize()
     {
       ConditionHandlerManager.AutoRegisterConditionHandlers(Assembly.GetExecutingAssembly());
+     
     }
 
     [TestMethod]
@@ -105,7 +111,7 @@ namespace Atlantis.Framework.CH.DotTypeCache.Tests
     {
       var expressionParserManager = MockContainerExpressionParserManager();
 
-      const string expression = "tldPhaseActiveAny([K.BORG], LR)";
+      const string expression = "tldPhaseActiveAny([k.borg], LR)";
       bool result = expressionParserManager.EvaluateExpression(expression);
 
       Assert.IsTrue(result);

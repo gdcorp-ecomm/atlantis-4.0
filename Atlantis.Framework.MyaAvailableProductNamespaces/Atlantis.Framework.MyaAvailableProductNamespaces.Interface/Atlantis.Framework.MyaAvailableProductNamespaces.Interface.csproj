@@ -62,8 +62,16 @@
     <EmbeddedResource Include="LanguageResources\MyaAvailableProductNamespaces.en.resx" />
     <EmbeddedResource Include="LanguageResources\MyaAvailableProductNamespaces.es.resx" />
     <EmbeddedResource Include="LanguageResources\MyaAvailableProductNamespaces.fi.resx" />
+    <EmbeddedResource Include="LanguageResources\MyaAvailableProductNamespaces.fil.resx" />
     <EmbeddedResource Include="LanguageResources\MyaAvailableProductNamespaces.fr.resx" />
+    <EmbeddedResource Include="LanguageResources\MyaAvailableProductNamespaces.fr-CA.resx" />
+    <EmbeddedResource Include="LanguageResources\MyaAvailableProductNamespaces.hi.resx" />
+    <EmbeddedResource Include="LanguageResources\MyaAvailableProductNamespaces.id.resx" />
     <EmbeddedResource Include="LanguageResources\MyaAvailableProductNamespaces.it.resx" />
+    <EmbeddedResource Include="LanguageResources\MyaAvailableProductNamespaces.ja.resx" />
+    <EmbeddedResource Include="LanguageResources\MyaAvailableProductNamespaces.ko.resx" />
+    <EmbeddedResource Include="LanguageResources\MyaAvailableProductNamespaces.mr.resx" />
+    <EmbeddedResource Include="LanguageResources\MyaAvailableProductNamespaces.ms.resx" />
     <EmbeddedResource Include="LanguageResources\MyaAvailableProductNamespaces.nb.resx" />
     <EmbeddedResource Include="LanguageResources\MyaAvailableProductNamespaces.nl.resx" />
     <EmbeddedResource Include="LanguageResources\MyaAvailableProductNamespaces.pl.resx" />
@@ -71,8 +79,15 @@
     <EmbeddedResource Include="LanguageResources\MyaAvailableProductNamespaces.pt-PT.resx" />
     <EmbeddedResource Include="LanguageResources\MyaAvailableProductNamespaces.ru.resx" />
     <EmbeddedResource Include="LanguageResources\MyaAvailableProductNamespaces.sv.resx" />
+    <EmbeddedResource Include="LanguageResources\MyaAvailableProductNamespaces.ta.resx" />
+    <EmbeddedResource Include="LanguageResources\MyaAvailableProductNamespaces.th.resx" />
     <EmbeddedResource Include="LanguageResources\MyaAvailableProductNamespaces.tr.resx" />
     <EmbeddedResource Include="LanguageResources\MyaAvailableProductNamespaces.uk.resx" />
+    <EmbeddedResource Include="LanguageResources\MyaAvailableProductNamespaces.vi.resx" />
+    <EmbeddedResource Include="LanguageResources\MyaAvailableProductNamespaces.zh-CN.resx" />
+    <EmbeddedResource Include="LanguageResources\MyaAvailableProductNamespaces.zh-HK.resx" />
+    <EmbeddedResource Include="LanguageResources\MyaAvailableProductNamespaces.zh-SG.resx" />
+    <EmbeddedResource Include="LanguageResources\MyaAvailableProductNamespaces.zh-TW.resx" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

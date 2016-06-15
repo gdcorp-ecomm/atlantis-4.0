@@ -70,8 +70,16 @@
     <EmbeddedResource Include="LanguageResources\ValidateField.en.resx" />
     <EmbeddedResource Include="LanguageResources\ValidateField.es.resx" />
     <EmbeddedResource Include="LanguageResources\ValidateField.fi.resx" />
+    <EmbeddedResource Include="LanguageResources\ValidateField.fil.resx" />
     <EmbeddedResource Include="LanguageResources\ValidateField.fr.resx" />
+    <EmbeddedResource Include="LanguageResources\ValidateField.fr-CA.resx" />
+    <EmbeddedResource Include="LanguageResources\ValidateField.hi.resx" />
+    <EmbeddedResource Include="LanguageResources\ValidateField.id.resx" />
     <EmbeddedResource Include="LanguageResources\ValidateField.it.resx" />
+    <EmbeddedResource Include="LanguageResources\ValidateField.ja.resx" />
+    <EmbeddedResource Include="LanguageResources\ValidateField.ko.resx" />
+    <EmbeddedResource Include="LanguageResources\ValidateField.mr.resx" />
+    <EmbeddedResource Include="LanguageResources\ValidateField.ms.resx" />
     <EmbeddedResource Include="LanguageResources\ValidateField.nb.resx" />
     <EmbeddedResource Include="LanguageResources\ValidateField.nl.resx" />
     <EmbeddedResource Include="LanguageResources\ValidateField.pl.resx" />
@@ -79,8 +87,15 @@
     <EmbeddedResource Include="LanguageResources\ValidateField.pt-PT.resx" />
     <EmbeddedResource Include="LanguageResources\ValidateField.ru.resx" />
     <EmbeddedResource Include="LanguageResources\ValidateField.sv.resx" />
+    <EmbeddedResource Include="LanguageResources\ValidateField.ta.resx" />
+    <EmbeddedResource Include="LanguageResources\ValidateField.th.resx" />
     <EmbeddedResource Include="LanguageResources\ValidateField.tr.resx" />
     <EmbeddedResource Include="LanguageResources\ValidateField.uk.resx" />
+    <EmbeddedResource Include="LanguageResources\ValidateField.vi.resx" />
+    <EmbeddedResource Include="LanguageResources\ValidateField.zh-CN.resx" />
+    <EmbeddedResource Include="LanguageResources\ValidateField.zh-HK.resx" />
+    <EmbeddedResource Include="LanguageResources\ValidateField.zh-SG.resx" />
+    <EmbeddedResource Include="LanguageResources\ValidateField.zh-TW.resx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Atlantis.Framework.ValidateField.Interface.nuget.bat" />

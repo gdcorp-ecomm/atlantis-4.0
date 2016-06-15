@@ -88,8 +88,16 @@
     </EmbeddedResource>
     <EmbeddedResource Include="LanguageResources\ReceiptSurveyTypes.es.resx" />
     <EmbeddedResource Include="LanguageResources\ReceiptSurveyTypes.fi.resx" />
+    <EmbeddedResource Include="LanguageResources\ReceiptSurveyTypes.fil.resx" />
     <EmbeddedResource Include="LanguageResources\ReceiptSurveyTypes.fr.resx" />
+    <EmbeddedResource Include="LanguageResources\ReceiptSurveyTypes.fr-CA.resx" />
+    <EmbeddedResource Include="LanguageResources\ReceiptSurveyTypes.hi.resx" />
+    <EmbeddedResource Include="LanguageResources\ReceiptSurveyTypes.id.resx" />
     <EmbeddedResource Include="LanguageResources\ReceiptSurveyTypes.it.resx" />
+    <EmbeddedResource Include="LanguageResources\ReceiptSurveyTypes.ja.resx" />
+    <EmbeddedResource Include="LanguageResources\ReceiptSurveyTypes.ko.resx" />
+    <EmbeddedResource Include="LanguageResources\ReceiptSurveyTypes.mr.resx" />
+    <EmbeddedResource Include="LanguageResources\ReceiptSurveyTypes.ms.resx" />
     <EmbeddedResource Include="LanguageResources\ReceiptSurveyTypes.nb.resx" />
     <EmbeddedResource Include="LanguageResources\ReceiptSurveyTypes.nl.resx" />
     <EmbeddedResource Include="LanguageResources\ReceiptSurveyTypes.pl.resx" />
@@ -97,8 +105,15 @@
     <EmbeddedResource Include="LanguageResources\ReceiptSurveyTypes.pt-PT.resx" />
     <EmbeddedResource Include="LanguageResources\ReceiptSurveyTypes.ru.resx" />
     <EmbeddedResource Include="LanguageResources\ReceiptSurveyTypes.sv.resx" />
+    <EmbeddedResource Include="LanguageResources\ReceiptSurveyTypes.ta.resx" />
+    <EmbeddedResource Include="LanguageResources\ReceiptSurveyTypes.th.resx" />
     <EmbeddedResource Include="LanguageResources\ReceiptSurveyTypes.tr.resx" />
     <EmbeddedResource Include="LanguageResources\ReceiptSurveyTypes.uk.resx" />
+    <EmbeddedResource Include="LanguageResources\ReceiptSurveyTypes.vi.resx" />
+    <EmbeddedResource Include="LanguageResources\ReceiptSurveyTypes.zh-CN.resx" />
+    <EmbeddedResource Include="LanguageResources\ReceiptSurveyTypes.zh-HK.resx" />
+    <EmbeddedResource Include="LanguageResources\ReceiptSurveyTypes.zh-SG.resx" />
+    <EmbeddedResource Include="LanguageResources\ReceiptSurveyTypes.zh-TW.resx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="atlantis.config" />

@@ -162,7 +162,7 @@
     <comment>These values should be handled as separate values. Split by the pipe |</comment>
   </data>
   <data name="myaNswst" xml:space="preserve">
-    <value>建站达人|anydomainname.com|此账户下设置的与建站达人账户相关联的（不一定是注册在此账户下的）域名</value>
+    <value>建站神器|anydomainname.com|此账户下设置的与建站神器账户相关联的（不一定是注册在此账户下的）域名</value>
     <comment>These values should be handled as separate values. Split by the pipe |</comment>
   </data>
 </root>

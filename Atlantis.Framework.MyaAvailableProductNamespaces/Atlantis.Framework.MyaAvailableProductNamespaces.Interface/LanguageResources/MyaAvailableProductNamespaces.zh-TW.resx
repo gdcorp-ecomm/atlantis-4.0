@@ -162,7 +162,7 @@
     <comment>These values should be handled as separate values. Split by the pipe |</comment>
   </data>
   <data name="myaNswst" xml:space="preserve">
-    <value>網站架設大師|anydomainname.com|在此帳戶下設定之網站架設大師帳戶的相關網域名稱 (不一定要註冊在此帳戶下)。</value>
+    <value>建站神器|anydomainname.com|在此帳戶下設定之建站神器帳戶的相關網域名稱 (不一定要註冊在此帳戶下)。</value>
     <comment>These values should be handled as separate values. Split by the pipe |</comment>
   </data>
 </root>

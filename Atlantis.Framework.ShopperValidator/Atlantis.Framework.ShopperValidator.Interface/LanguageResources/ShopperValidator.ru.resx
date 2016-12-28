@@ -205,7 +205,7 @@
     <value>Телефон</value>
   </data>
   <data name="callInPin" xml:space="preserve">
-    <value>ПИН-код</value>
+    <value>PIN-код</value>
   </data>
   <data name="city" xml:space="preserve">
     <value>Город</value>

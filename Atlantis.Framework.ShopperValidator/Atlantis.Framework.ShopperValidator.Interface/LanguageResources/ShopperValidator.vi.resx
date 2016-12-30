@@ -205,7 +205,7 @@
     <value>Điện thoại</value>
   </data>
   <data name="callInPin" xml:space="preserve">
-    <value>Mã PIN liên hệ</value>
+    <value>Mã PIN gọi đến</value>
   </data>
   <data name="city" xml:space="preserve">
     <value>Thành phố</value>

@@ -4,17 +4,15 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Atlantis.Framework.EcommCreditCardReqs.Test
 {
-    
-    
-    /// <summary>
-    ///This is a test class for EcommCreditCardReqsRequestTest and is intended
-    ///to contain all EcommCreditCardReqsRequestTest Unit Tests
-    ///</summary>
+
+
+  /// <summary>
+  ///This is a test class for EcommCreditCardReqsRequestTest and is intended
+  ///to contain all EcommCreditCardReqsRequestTest Unit Tests
+  ///</summary>
   [TestClass()]
   public class EcommCreditCardReqsRequestTest
   {
-
-
     private TestContext testContextInstance;
 
     /// <summary>
@@ -70,7 +68,7 @@ namespace Atlantis.Framework.EcommCreditCardReqs.Test
     {
       EcommCreditCardReqsRequestData request = new EcommCreditCardReqsRequestData("850774", string.Empty, string.Empty,
                                                                                   string.Empty,
-                                                                                  0, "4173180000000003", 0, 1, String.Empty);
+                                                                                  0, "4173180000000003", 0, 1, String.Empty, String.Empty);
       EcommCreditCardReqsResponseData response = (EcommCreditCardReqsResponseData)Engine.Engine.ProcessRequest(request, 246);
       Assert.IsTrue(response.IsSuccess);
       if (response.IsSuccess)
@@ -88,7 +86,7 @@ namespace Atlantis.Framework.EcommCreditCardReqs.Test
     {
       EcommCreditCardReqsRequestData request = new EcommCreditCardReqsRequestData("859012", string.Empty, string.Empty,
                                                                                   string.Empty,
-                                                                                  0, string.Empty, 60184, 1, String.Empty);
+                                                                                  0, string.Empty, 65764, 1, "MXN", "mx");
       EcommCreditCardReqsResponseData response = (EcommCreditCardReqsResponseData)Engine.Engine.ProcessRequest(request, 246);
       Assert.IsTrue(response != null);
     }
@@ -99,7 +97,7 @@ namespace Atlantis.Framework.EcommCreditCardReqs.Test
     {
       EcommCreditCardReqsRequestData request = new EcommCreditCardReqsRequestData("850774", string.Empty, string.Empty,
                                                                                   string.Empty,
-                                                                                  0, "555", 0, 1, String.Empty);
+                                                                                  0, "555", 0, 1, String.Empty, String.Empty);
       EcommCreditCardReqsResponseData response = (EcommCreditCardReqsResponseData)Engine.Engine.ProcessRequest(request, 246);
       Assert.IsFalse(response.IsSuccess);
     }

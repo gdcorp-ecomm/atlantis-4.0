@@ -12,11 +12,13 @@ namespace Atlantis.Framework.EcommCreditCardReqs.Interface
 
     public string Currency { get; set; }
 
+    public string Country { get; set; }
+
     public int ProfileId { get; set; }
-    
+
     public EcommCreditCardReqsRequestData(
       string shopperId, string sourceUrl, string orderId, string pathway, int pageCount,
-      string creditCardNumber, int profileId, int privateLabelId, string currency)
+      string creditCardNumber, int profileId, int privateLabelId, string currency, string country)
       : base(shopperId, sourceUrl, orderId, pathway, pageCount)
     {
       RequestTimeout = TimeSpan.FromSeconds(4);
@@ -24,6 +26,7 @@ namespace Atlantis.Framework.EcommCreditCardReqs.Interface
       ProfileId = profileId;
       PrivateLabelId = privateLabelId;
       Currency = currency;
+      Country = country;
     }
 
     public override string GetCacheMD5()
@@ -31,9 +34,9 @@ namespace Atlantis.Framework.EcommCreditCardReqs.Interface
       MD5 oMD5 = new MD5CryptoServiceProvider();
       oMD5.Initialize();
       char delimiter = '|';
-      byte[] stringBytes = System.Text.ASCIIEncoding.ASCII.GetBytes(CreditCardNumber +  delimiter +
-          ProfileId + delimiter + ShopperID + delimiter + PrivateLabelId + 
-          delimiter + Currency);
+      byte[] stringBytes = System.Text.ASCIIEncoding.ASCII.GetBytes(CreditCardNumber + delimiter +
+          ProfileId + delimiter + ShopperID + delimiter + PrivateLabelId +
+          delimiter + Currency + Country);
       byte[] md5Bytes = oMD5.ComputeHash(stringBytes);
       string sValue = BitConverter.ToString(md5Bytes, 0);
       return sValue.Replace("-", "");

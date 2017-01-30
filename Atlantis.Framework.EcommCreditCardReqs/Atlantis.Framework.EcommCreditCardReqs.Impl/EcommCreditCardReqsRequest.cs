@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Xml;
 using Atlantis.Framework.EcommCreditCardReqs.Impl.WSgdCreditCardRequirements;
@@ -21,32 +22,33 @@ namespace Atlantis.Framework.EcommCreditCardReqs.Impl
         EcommCreditCardReqsRequestData mktgRequest = (EcommCreditCardReqsRequestData)oRequestData;
 
         CardRequirements service = new CardRequirements
-                                     {
-                                       Url = ((WsConfigElement) oConfig).WSURL,
-                                       Timeout = (int) mktgRequest.RequestTimeout.TotalMilliseconds
-                                     };
-        string responseText;
-        bool success;
-        if (!String.IsNullOrEmpty(mktgRequest.CreditCardNumber))
         {
-          XmlDocument xmlDoc = new XmlDocument();
-          XmlElement rootNode = xmlDoc.CreateElement("Card");
+          Url = ((WsConfigElement)oConfig).WSURL,
+          Timeout = (int)mktgRequest.RequestTimeout.TotalMilliseconds
+        };
+
+        string responseText;
+        var xmlDoc = new XmlDocument();
+        var rootNode = xmlDoc.CreateElement("Card");
+        if (!string.IsNullOrEmpty(mktgRequest.CreditCardNumber))
+        {
           rootNode.SetAttribute("xCardNo", mktgRequest.CreditCardNumber);
-          rootNode.SetAttribute("privateLabelID", mktgRequest.PrivateLabelId.ToString());
-          rootNode.SetAttribute("basket_type", "gdshop");
-          rootNode.SetAttribute("currency", mktgRequest.Currency);
-          xmlDoc.AppendChild(rootNode);
-          StringWriter sw = new StringWriter();
-          XmlTextWriter xw = new XmlTextWriter(sw);
-          xmlDoc.WriteTo(xw);
-          string cardXml = sw.ToString();
-          
-          success = service.GetRequirementsEx(cardXml, out responseText);
         }
         else
         {
-          success = service.GetRequirementsByProfileEx(mktgRequest.ShopperID, mktgRequest.ProfileId,mktgRequest.Currency, out responseText);
+          rootNode.SetAttribute("profileID", mktgRequest.ProfileId.ToString());
         }
+        rootNode.SetAttribute("privateLabelID", mktgRequest.PrivateLabelId.ToString());
+        rootNode.SetAttribute("shopperID", mktgRequest.ShopperID);
+        rootNode.SetAttribute("basket_type", "gdshop");
+        rootNode.SetAttribute("currency", mktgRequest.Currency);
+        rootNode.SetAttribute("country", mktgRequest.Country);
+        xmlDoc.AppendChild(rootNode);
+        var sw = new StringWriter();
+        var xw = new XmlTextWriter(sw);
+        xmlDoc.WriteTo(xw);
+        var cardXml = sw.ToString();
+        var success = service.GetRequirementsEx(cardXml, out responseText);
         result = new EcommCreditCardReqsResponseData(responseText, success);
       }
       catch (AtlantisException aex)

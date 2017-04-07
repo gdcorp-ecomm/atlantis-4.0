@@ -104,6 +104,15 @@ namespace Atlantis.Framework.DCCGetDomainByShopper.Interface
         AddAttribute(filterElement, "statustype", Paging.StatusType.Value.ToString(CultureInfo.InvariantCulture));
       }
 
+      if (Paging.AutoRenewFilter.HasValue)
+      {
+        if (filterElement == null)
+        {
+          filterElement = (XmlElement)AddNode(oRoot, "filter");
+        }
+        AddAttribute(filterElement, "autorenew", Paging.AutoRenewFilter.Value.ToString(CultureInfo.InvariantCulture));
+      }
+
       if (DbpFilter != DomainByProxyFilter.NoFilter)
       {
         if (filterElement == null)

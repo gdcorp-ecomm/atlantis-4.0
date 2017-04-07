@@ -31,5 +31,7 @@ namespace Atlantis.Framework.DCCGetDomainByShopper.Interface.Paging
     List<int> TldIdList { get; set; }
 
     bool SummaryOnly { get; set; }
+
+    int? AutoRenewFilter { get; set; }
   }
 }

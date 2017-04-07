@@ -44,6 +44,7 @@ namespace Atlantis.Framework.DCCGetDomainByShopper.Interface.Paging
 
     public bool SummaryOnly { get; set; }
 
+    public int? AutoRenewFilter { get; set; }
 
     public DomainNamePaging()
     {

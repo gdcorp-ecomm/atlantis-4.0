@@ -115,6 +115,14 @@ namespace Atlantis.Framework.DCCGetDomainByShopper.Interface.Paging
         throw new NotImplementedException();
       }
     }
+    public int? AutoRenewFilter
+    {
+      get { return null; }
+      set
+      {
+        throw new NotImplementedException();
+      }
+    }
 
     public bool SummaryOnly
     {

@@ -106,7 +106,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="atlantis.config" />
     <None Include="Atlantis.Framework.DCCGetDomainByShopper.Impl.nuget.bat" />
     <None Include="Atlantis.Framework.DCCGetDomainByShopper.Impl.nuspec" />
     <None Include="packages.config" />

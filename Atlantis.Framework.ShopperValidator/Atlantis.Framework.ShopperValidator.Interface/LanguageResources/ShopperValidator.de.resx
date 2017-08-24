@@ -184,7 +184,7 @@
     <value>{0} ist ungültig. Statuscode: {1}</value>
   </data>
   <data name="passwordConfirm" xml:space="preserve">
-    <value>{0} kann nicht mehr als {1} Zeichen haben.  Kürzen Sie {0} vor der Übergabe an den Validierer.</value>
+    <value>{0} kann nicht mehr als {1} Zeichen haben.  Kürze {0} vor der Übergabe an den Validierer.</value>
   </data>
   <data name="usernameExists" xml:space="preserve">
     <value>Benutzername ist bereits vorhanden</value>

@@ -95,6 +95,7 @@ namespace Atlantis.Framework.BonsaiGetPlanOptions.Impl
       const string TREEID_ATTR = "TreeID";
       const string UNIFIED_PRODUCTID_ATTR = "UnifiedProductID";
       const string ISFREE_ATTR = "IsFree";
+      const string TREETYPEID_ATTR = "TreeTypeID";
 
       if (currentTreeXml == null)
       {
@@ -102,19 +103,23 @@ namespace Atlantis.Framework.BonsaiGetPlanOptions.Impl
       }
 
       string treeId = currentTreeXml.Attribute(TREEID_ATTR).Value;
+      string treeTypeId;
+      treeTypeId = currentTreeXml.Attribute(TREETYPEID_ATTR) != null ? currentTreeXml.Attribute(TREETYPEID_ATTR).Value : string.Empty;
       string productId = currentTreeXml.Attribute(UNIFIED_PRODUCTID_ATTR).Value;
       bool isFree;
       bool.TryParse((currentTreeXml.Attribute(ISFREE_ATTR) ?? new XAttribute(ISFREE_ATTR, "False")).Value, out isFree);
 
-      var plans = new List<ProductPlan> {new ProductPlan(treeId, productId, isFree, isCurrent:true)};
+      var plans = new List<ProductPlan> {new ProductPlan(treeId, treeTypeId, productId, isFree, isCurrent:true)};
 
       var transitions = currentTreeXml.Elements("Transition");
       foreach (var transition in transitions)
       {
         bool isFreeTransition;
         bool.TryParse((transition.Attribute(ISFREE_ATTR) ?? new XAttribute(ISFREE_ATTR, "False")).Value, out isFreeTransition);
+        string transitionTreeTypeId;
+        transitionTreeTypeId = transition.Attribute(TREETYPEID_ATTR) != null ? transition.Attribute(TREETYPEID_ATTR).Value : string.Empty;
 
-        plans.Add(new ProductPlan(transition.Attribute(TREEID_ATTR).Value, transition.Attribute(UNIFIED_PRODUCTID_ATTR).Value, isFreeTransition, isCurrent:false));
+        plans.Add(new ProductPlan(transition.Attribute(TREEID_ATTR).Value, transitionTreeTypeId, transition.Attribute(UNIFIED_PRODUCTID_ATTR).Value, isFreeTransition, isCurrent:false));
       }
 
       return plans;
@@ -135,6 +140,8 @@ namespace Atlantis.Framework.BonsaiGetPlanOptions.Impl
         foreach (var filteredTransition in filteredTransitions)
         {
           string treeId = filteredTransition.Attribute("TreeID").Value;
+          string treeTypeId;
+          treeTypeId = filteredTransition.Attribute("TreeTypeId") != null ? filteredTransition.Attribute("TreeTypeId").Value : string.Empty;
           string productId = filteredTransition.Attribute("UnifiedProductID").Value;
           bool isFree;
           bool.TryParse((filteredTransition.Attribute("IsFree") ?? new XAttribute("IsFree", "False")).Value, out isFree);
@@ -143,7 +150,7 @@ namespace Atlantis.Framework.BonsaiGetPlanOptions.Impl
           int reasonCode = int.Parse(reason.Attribute("MessageCode").Value);
           string reasonMessage = reason.Attribute("Message").Value;
 
-          filteredPlans.Add(new FilteredProductPlan(treeId, productId, reasonCode, reasonMessage, isFree));
+          filteredPlans.Add(new FilteredProductPlan(treeId, treeTypeId, productId, reasonCode, reasonMessage, isFree));
         }
       }
       return filteredPlans;

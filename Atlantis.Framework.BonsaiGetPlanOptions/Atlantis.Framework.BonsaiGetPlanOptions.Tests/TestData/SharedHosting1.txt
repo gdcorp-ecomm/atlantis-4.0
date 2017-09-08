@@ -1,13 +1,13 @@
 ﻿<Bonsai xmlns="#Bonsai">
   <Bonsai PrivateLabelID="1" ResourceID="17c5c91d-49b3-11df-b65b-005056956427" IsPastDue="False" IsFree="False" CurrentTreeID="457" CurrentUnifiedProductID="42114" xmlns="">
-    <Tree TreeID="457" NodeID="457" UnifiedProductID="42114">
-      <Transition NodeName="US-Linux Grid Hosting - Economy - 3 years" UnifiedProductID="42004" TreeID="415" IsFree="False" NodeID="415" />
-      <Transition NodeName="US-Linux Grid Hosting - Deluxe - 3 years" UnifiedProductID="42014" TreeID="421" IsFree="False" NodeID="421" />
-      <Transition NodeName="US-Linux Grid Hosting - Unlimited - 3 years" UnifiedProductID="42024" TreeID="427" IsFree="False" NodeID="427" />
-      <Transition NodeName="US-Windows Grid Hosting - Economy - 3 years" UnifiedProductID="42104" TreeID="451" IsFree="False" NodeID="451" />
-      <Transition NodeName="US-Windows Grid Hosting - Unlimited - 3 years" UnifiedProductID="42124" TreeID="463" IsFree="False" NodeID="463" />
-      <Transition NodeName="US-Linux 4GH Hosting - Unlimited - 3 years" UnifiedProductID="7604" TreeID="1297" IsFree="False" NodeID="1297" />
-      <Transition NodeName="US-Windows 4GH Hosting - Unlimited - 3 years" UnifiedProductID="7616" TreeID="1309" IsFree="False" NodeID="1309" />
+    <Tree TreeID="457" NodeID="457" UnifiedProductID="42114" TreeTypeID="2">
+      <Transition NodeName="US-Linux Grid Hosting - Economy - 3 years" UnifiedProductID="42004" TreeID="415" IsFree="False" TreeTypeID="2" NodeID="415" />
+      <Transition NodeName="US-Linux Grid Hosting - Deluxe - 3 years" UnifiedProductID="42014" TreeID="421" IsFree="False" TreeTypeID="2" NodeID="421" />
+      <Transition NodeName="US-Linux Grid Hosting - Unlimited - 3 years" UnifiedProductID="42024" TreeID="427" IsFree="False" TreeTypeID="0" NodeID="427" />
+      <Transition NodeName="US-Windows Grid Hosting - Economy - 3 years" UnifiedProductID="42104" TreeID="451" IsFree="False" TreeTypeID="0" NodeID="451" />
+      <Transition NodeName="US-Windows Grid Hosting - Unlimited - 3 years" UnifiedProductID="42124" TreeID="463" IsFree="False" TreeTypeID="0" NodeID="463" />
+      <Transition NodeName="US-Linux 4GH Hosting - Unlimited - 3 years" UnifiedProductID="7604" TreeID="1297" IsFree="False" TreeTypeID="2" NodeID="1297" />
+      <Transition NodeName="US-Windows 4GH Hosting - Unlimited - 3 years" UnifiedProductID="7616" TreeID="1309" IsFree="False" TreeTypeID="2" NodeID="1309" />
       <FilteredTransitions />
       <Branch BranchID="9" Index="0" PriorIndex="0">
         <Node NodeID="0-25" NodeName="Add Additional Disk Space" CategoryName="Add Additional Disk Space" CategoryID="14" MinQty="1" MaxQty="-1" Path="True" CurrentQty="1" MinDuration="1" MaxDuration="-1" IsQuantityBased="False" Increment="1" Final="False" Start="False" Default="False" UnifiedProductID="">

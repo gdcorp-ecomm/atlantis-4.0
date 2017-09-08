@@ -40,6 +40,7 @@ namespace Atlantis.Framework.BonsaiGetPlanOptions.Tests
 
     [TestMethod]
     [DeploymentItem("atlantis.config")]
+    [DeploymentItem("TestData/SharedHosting1.txt")]
     public void GetPlanOptionsSharedHosting()
     {
       var request = new BonsaiGetPlanOptionsRequestData("847235", "http://localhost", string.Empty, string.Empty,
@@ -58,6 +59,15 @@ namespace Atlantis.Framework.BonsaiGetPlanOptions.Tests
       Assert.IsTrue(response.ProductPlans.FindIndex(plan => plan.UnifiedProductId == "42124") != -1, "ProductPlans 42124 failed");
       Assert.IsTrue(response.ProductPlans.FindIndex(plan => plan.UnifiedProductId == "7604") != -1, "ProductPlans 7604 failed");
       Assert.IsTrue(response.ProductPlans.FindIndex(plan => plan.UnifiedProductId == "7616") != -1, "ProductPlans 7616 failed");
+
+      Assert.IsTrue(response.ProductPlans[response.ProductPlans.FindIndex(plan => plan.UnifiedProductId == "42114" && plan.IsCurrent)].TreeTypeId.Equals("2"));
+      Assert.IsTrue(response.ProductPlans[response.ProductPlans.FindIndex(plan => plan.UnifiedProductId == "42004")].TreeTypeId.Equals("2"));
+      Assert.IsTrue(response.ProductPlans[response.ProductPlans.FindIndex(plan => plan.UnifiedProductId == "42014")].TreeTypeId.Equals("2"));
+      Assert.IsTrue(response.ProductPlans[response.ProductPlans.FindIndex(plan => plan.UnifiedProductId == "42024")].TreeTypeId.Equals("0"));
+      Assert.IsTrue(response.ProductPlans[response.ProductPlans.FindIndex(plan => plan.UnifiedProductId == "42104")].TreeTypeId.Equals("0"));
+      Assert.IsTrue(response.ProductPlans[response.ProductPlans.FindIndex(plan => plan.UnifiedProductId == "42124")].TreeTypeId.Equals("0"));
+      Assert.IsTrue(response.ProductPlans[response.ProductPlans.FindIndex(plan => plan.UnifiedProductId == "7604")].TreeTypeId.Equals("2"));
+      Assert.IsTrue(response.ProductPlans[response.ProductPlans.FindIndex(plan => plan.UnifiedProductId == "7616")].TreeTypeId.Equals("2"));
 
       Assert.IsTrue(response.FilteredProductPlans.Count == 0, "Filter plan count failed");
 
@@ -83,6 +93,7 @@ namespace Atlantis.Framework.BonsaiGetPlanOptions.Tests
 
     [TestMethod]
     [DeploymentItem("atlantis.config")]
+    [DeploymentItem("TestData/SharedHostingFiltered1.txt")]
     public void GetPlanOptionsSharedHostingFiltered()
     {
       var request = new BonsaiGetPlanOptionsRequestData("847235", "http://localhost", string.Empty, string.Empty,
@@ -101,6 +112,7 @@ namespace Atlantis.Framework.BonsaiGetPlanOptions.Tests
 
     [TestMethod]
     [DeploymentItem("atlantis.config")]
+    [DeploymentItem("TestData/LegacyVph1.txt")]
     public void GetPlanOptionsVdedLegacy()
     {
       var request = new BonsaiGetPlanOptionsRequestData("857527", "http://localhost", string.Empty, string.Empty,
@@ -178,6 +190,7 @@ namespace Atlantis.Framework.BonsaiGetPlanOptions.Tests
 
     [TestMethod]
     [DeploymentItem("atlantis.config")]
+    [DeploymentItem("TestData/LegacyVph2.txt")]
     public void GetPlanOptionsVdedLegacyLarge()
     {
       var request = new BonsaiGetPlanOptionsRequestData("857527", "http://localhost", string.Empty, string.Empty,
@@ -203,6 +216,7 @@ namespace Atlantis.Framework.BonsaiGetPlanOptions.Tests
 
     [TestMethod]
     [DeploymentItem("atlantis.config")]
+    [DeploymentItem("TestData/LegacyVphEU1.txt")]
     public void GetPlanOptionsVdedLegacyEu()
     {
       var request = new BonsaiGetPlanOptionsRequestData("857527", "http://localhost", string.Empty, string.Empty,
@@ -271,6 +285,7 @@ namespace Atlantis.Framework.BonsaiGetPlanOptions.Tests
 
     [TestMethod]
     [DeploymentItem("atlantis.config")]
+    [DeploymentItem("TestData/VphPackage1.txt")]
     public void GetPlanOptionsVdedPackage()
     {
       var request = new BonsaiGetPlanOptionsRequestData("857527", "http://localhost", string.Empty, string.Empty,
@@ -289,6 +304,7 @@ namespace Atlantis.Framework.BonsaiGetPlanOptions.Tests
 
     [TestMethod]
     [DeploymentItem("atlantis.config")]
+    [DeploymentItem("TestData/LegacyDhs1.txt")]
     public void GetPlanOptionsDedLegacy()
     {
       var request = new BonsaiGetPlanOptionsRequestData("847235", "http://localhost", string.Empty, string.Empty,
@@ -319,6 +335,7 @@ namespace Atlantis.Framework.BonsaiGetPlanOptions.Tests
 
     [TestMethod]
     [DeploymentItem("atlantis.config")]
+    [DeploymentItem("TestData/DhsPackage1.txt")]
     public void GetPlanOptionsDedPkg()
     {
       var request = new BonsaiGetPlanOptionsRequestData("847235", "http://localhost", string.Empty, string.Empty,
@@ -335,6 +352,7 @@ namespace Atlantis.Framework.BonsaiGetPlanOptions.Tests
 
     [TestMethod]
     [DeploymentItem("atlantis.config")]
+    [DeploymentItem("TestData/LegacyVph1JSON.txt")]
     public void GetPlanOptionsAddonsJson()
     {
       string actual;
@@ -361,6 +379,7 @@ namespace Atlantis.Framework.BonsaiGetPlanOptions.Tests
 
     [TestMethod]
     [DeploymentItem("atlantis.config")]
+    [DeploymentItem("TestData/CashParking1.txt")]
     public void GetPlanOptionsCashParking1()
     {
       var request = new BonsaiGetPlanOptionsRequestData("847235", "http://localhost", string.Empty, string.Empty,
@@ -377,6 +396,7 @@ namespace Atlantis.Framework.BonsaiGetPlanOptions.Tests
 
     [TestMethod]
     [DeploymentItem("atlantis.config")]
+    [DeploymentItem("TestData/OFF1.txt")]
     public void GetPlanOptionsOFF1()
     {
       var request = new BonsaiGetPlanOptionsRequestData("17874", "http://localhost", string.Empty, string.Empty,
@@ -394,6 +414,7 @@ namespace Atlantis.Framework.BonsaiGetPlanOptions.Tests
 
     [TestMethod]
     [DeploymentItem("atlantis.config")]
+    [DeploymentItem("TestData/Email1.txt")]
     public void GetPlanOptionsEmail1()
     {
       var request = new BonsaiGetPlanOptionsRequestData("64j", "http://localhost", string.Empty, string.Empty,
@@ -402,7 +423,7 @@ namespace Atlantis.Framework.BonsaiGetPlanOptions.Tests
       var response = Engine.Engine.ProcessRequest(request, 357) as BonsaiGetPlanOptionsResponseData;
 
       Assert.IsTrue(response != null && response.AtlantisException == null, "Request failed");
-      Assert.IsTrue(response.ProductPlans != null && response.ProductPlans.Count == 2, "ProductPlans count failed");
+      Assert.IsTrue(response.ProductPlans != null && response.ProductPlans.Count == 9, "ProductPlans count failed");
 
     }
   

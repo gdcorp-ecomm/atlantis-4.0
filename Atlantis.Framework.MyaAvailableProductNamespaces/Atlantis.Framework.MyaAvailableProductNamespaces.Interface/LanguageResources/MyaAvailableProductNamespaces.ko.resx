@@ -142,7 +142,7 @@
     <comment>These values should be handled as separate values. Split by the pipe |</comment>
   </data>
   <data name="myaNsqsc" xml:space="preserve">
-    <value>빠른 쇼핑카트|anydomainname.com|이 계정으로 설정한 빠른 쇼핑카트 계정과 연결된 도메인 이름(이 계정으로 등록되지 않아도 됨)입니다.</value>
+    <value>간편 쇼핑카트|anydomainname.com|이 계정으로 설정한 간편 쇼핑카트 계정과 연결된 도메인 이름(이 계정으로 등록되지 않아도 됨)입니다.</value>
     <comment>These values should be handled as separate values. Split by the pipe |</comment>
   </data>
   <data name="myaNsreseller" xml:space="preserve">

@@ -142,7 +142,7 @@
     <comment>These values should be handled as separate values. Split by the pipe |</comment>
   </data>
   <data name="myaNsqsc" xml:space="preserve">
-    <value>Express-Einkaufswagen|anydomainname.com|Domainname (nicht unbedingt unter diesem Konto registriert), der einem Express-Einkaufswagen-Konto zugeordnet ist, das unter diesem Konto eingerichtet wurde.</value>
+    <value>Express-Warenkorb|anydomainname.com|Domainname (nicht unbedingt unter diesem Konto registriert), der einem Express-Warenkorb-Konto zugeordnet ist, das unter diesem Konto eingerichtet wurde.</value>
     <comment>These values should be handled as separate values. Split by the pipe |</comment>
   </data>
   <data name="myaNsreseller" xml:space="preserve">

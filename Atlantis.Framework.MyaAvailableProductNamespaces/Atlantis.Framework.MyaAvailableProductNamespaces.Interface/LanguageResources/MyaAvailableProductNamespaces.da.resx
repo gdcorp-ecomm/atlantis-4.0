@@ -162,7 +162,7 @@
     <comment>These values should be handled as separate values. Split by the pipe |</comment>
   </data>
   <data name="myaNswst" xml:space="preserve">
-    <value>Websiteopbygning|etdomænenavn.com|Et domænenavn (ikke nødvendigvis registreret under denne konto), der er knyttet til opsætning af en Websiteopbygning-konto under denne konto.</value>
+    <value>Hjemmesideprogram|etdomænenavn.com|Et domænenavn (ikke nødvendigvis registreret under denne konto), der er knyttet til opsætning af en Hjemmesideprogram-konto under denne konto.</value>
     <comment>These values should be handled as separate values. Split by the pipe |</comment>
   </data>
 </root>

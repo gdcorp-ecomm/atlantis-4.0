@@ -208,7 +208,7 @@
     <value>連絡PIN</value>
   </data>
   <data name="city" xml:space="preserve">
-    <value>都市</value>
+    <value>市区町村</value>
   </data>
   <data name="country" xml:space="preserve">
     <value>国</value>

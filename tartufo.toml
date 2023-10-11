@@ -1,0 +1,66 @@
+[tool.tartufo]
+repo-path = "."
+json = false
+regex = true
+entropy = true
+
+exclude-entropy-patterns = [
+  {path-pattern='.*', pattern='http[s]?://confluence\.godaddy\.com/[\w\/]*', reason="confluence URL"},
+  {path-pattern='.*', pattern='http[s]?://confluence\.int\.godaddy\.com/[\w\/]*', reason="confluence URL"},
+  {path-pattern='.*', pattern='http[s]?://godaddy\.com/[\w\/]*', reason="GoDaddy URL"},
+  {path-pattern='.*', pattern='/v1/.*', reason="uris"},
+  {path-pattern='.*', pattern='/v2/.*', reason="uris"},
+
+  {path-pattern='.*', pattern='PublicKeyToken=[a-fA-F0-9]+?', reason = 'PublicKeyToken'},
+  {path-pattern='.*', pattern='TEST_METHOD\([\w\d_]+\)', reason='Test method name'},
+
+
+  {path-pattern='.*', pattern='http[s]?:[\w_\/\%\=]+?', reason = 'service url'},
+  {path-pattern='.*', pattern='RegEOIWebSvc/[\w]+?', reason = 'service url'},
+  {path-pattern='.*', pattern='Atlantis_[\w_]+?', reason = 'service name'},
+  {path-pattern='.*', pattern='Atlantis_[\w_\/\.]+?\.csproj', reason = 'service name'},
+  {path-pattern='.*', pattern='Get[\w]+?Args', reason = 'service name'},
+  {path-pattern='.*', pattern='Get[\w]+?Async', reason = 'service name'},
+  {path-pattern='.*', pattern='Get[\w]+?Enabled', reason = 'service name'},
+  {path-pattern='.*', pattern='Get[\w]+?Handler', reason = 'service name'},
+  {path-pattern='.*', pattern='Get[\w]+?In', reason = 'service name'},
+  {path-pattern='.*', pattern='Confirm[\w]+?Args', reason = 'service name'},
+  {path-pattern='.*', pattern='Validate[\w]+?Args', reason = 'service name'},
+  {path-pattern='.*', pattern='Update[\w]+?Args', reason = 'service name'},
+  {path-pattern='.*', pattern='IReg[\w_]+?Message', reason = 'service name'},
+  {path-pattern='.*', pattern='PromoToolDomainServiceSOAP_[\w_]+?Message', reason = 'service name'},
+  {path-pattern='.*', pattern='Impl[\w_\/]+?Request', reason = 'service name'},
+  {path-pattern='.*', pattern='HDVDUpdFTPBackupInfo/Atlantis', reason = 'service name'},
+  {path-pattern='.*', pattern='/ORDER/ITEMS/[\w_\/]*', reason = 'service name'},
+
+  {path-pattern='.*', pattern='gd[\w_]+?_sp', reason = 'stored procedure name'},
+  {path-pattern='.*', pattern='MockAppSettingRequest_[\w]+?', reason = 'Mock application settings request'},  
+  {path-pattern='.*', pattern='httpsBinding_[\w]+?', reason = 'Service name'},  
+  {path-pattern='.*', pattern='IgdValidationRuleWebSvc_[\w]+?', reason = 'Service name'},  
+  {path-pattern='.*', pattern='EngmtActNewCustSurveyMobileDLP', reason = 'Service name'},
+  
+  {path-pattern='.*', pattern='google-site-verification=[\w]', reason = 'google site verification id'},
+  
+]
+
+exclude-path-patterns = [
+  {path-pattern='^tartufo\.toml$', reason='Tartufo config files'},
+  {path-pattern='.*Tests\.cs$', reason='Test files'},
+  {path-pattern='.*\.Test[s]?\/.*\.cs$', reason='Test files'},
+  {path-pattern='.*\Data\/.*\.html$', reason='Test data files'},
+  {path-pattern='.*SampleResponse.xml$', reason='Response sample file'},  
+  {path-pattern='.*LocalTestRun.testrunconfig$', reason='Local tests configuration file'},  
+  {path-pattern='.*Tests\/Resources\/.*\.txt$', reason='Test data files'},
+  {path-pattern='.*Tests\/Properties\/.*\.resx$', reason='Test data in resource files'},
+  {path-pattern='.*Tests\/atlantis.config$', reason='Test configuration files'},
+  {path-pattern='.*WavPcm8bit8kHzMonoConverter.cs$', reason='Audio files testing'},
+  {path-pattern='.*WavPcm16bit8kHzMonoConverter.cs$', reason='Audio files testing'},
+]
+
+exclude-signatures = [
+  {signature='a1c89dceefd3234bea18f42737701b55ba0377c4c1131d721781173296efe653', reason = 'ConfigValue key="ApiKey" value'},  
+  {signature='525a0908589994a346bf6b85787f2694806e99f9ec34fc530443cb0b08365de9', reason = 'Impl/WebReferenceExtensions/WscgdBasketServiceWithAuthToken'},  
+  {signature='11ceb35572cb1387a135bd4ecfe305a510a661523caeb104aa8b60fdd54c24eb', reason = 'Interface/PixelObjects/Triggers/GlobalTriggerChecks/FirstTimeOnlyShopperCheck'},  
+  {signature='13faf99df40d2824de0495cca5d1c6ca40045f2167373850dbaca8908bd86c66', reason = 'References/QSCMobileAPI/getOrderCountByStatusResponseDetail1'},
+]
+

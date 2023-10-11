@@ -12,8 +12,8 @@ namespace Atlantis.Framework.InstantStoreSetup.Impl
 {
   public class InstantStoreSetupRequest : IRequest
   {
-    //username: ssdev_internal
-    //password: ***REMOVED***
+    //username: ****REMOVED*****
+    //password: ****REMOVED*****
     public IResponseData RequestHandler(RequestData requestData, ConfigElement config)
     {
       InstantStoreSetupRequestData stupAccount = (InstantStoreSetupRequestData)requestData;
